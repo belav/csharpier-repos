@@ -24,13 +24,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         {
             Assert.Equal(
                 RelationalStrings.FromSqlNonComposable,
-                Assert.Throws<InvalidOperationException>(
-                    () => CreateDummyQuerySqlGenerator().CheckComposableSql(sql)).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => CreateDummyQuerySqlGenerator().CheckComposableSql(sql)
+                    )
+                    .Message
+            );
 
             Assert.Equal(
                 RelationalStrings.FromSqlNonComposable,
-                Assert.Throws<InvalidOperationException>(
-                    () => CreateDummyQuerySqlGenerator().CheckComposableSql(sql.Replace("SELECT", "WITH"))).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            CreateDummyQuerySqlGenerator()
+                                .CheckComposableSql(sql.Replace("SELECT", "WITH"))
+                    )
+                    .Message
+            );
         }
 
         [Theory]
@@ -49,26 +59,29 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             CreateDummyQuerySqlGenerator().CheckComposableSql(sql.Replace("SELECT", "WITH"));
         }
 
-        private DummyQuerySqlGenerator CreateDummyQuerySqlGenerator()
-            => new(
+        private DummyQuerySqlGenerator CreateDummyQuerySqlGenerator() =>
+            new(
                 new QuerySqlGeneratorDependencies(
                     new RelationalCommandBuilderFactory(
                         new RelationalCommandBuilderDependencies(
                             new TestRelationalTypeMappingSource(
                                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()))),
+                                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                            )
+                        )
+                    ),
                     new RelationalSqlGenerationHelper(
-                        new RelationalSqlGenerationHelperDependencies())));
+                        new RelationalSqlGenerationHelperDependencies()
+                    )
+                )
+            );
 
         private class DummyQuerySqlGenerator : QuerySqlGenerator
         {
             public DummyQuerySqlGenerator(QuerySqlGeneratorDependencies dependencies)
-                : base(dependencies)
-            {
-            }
+                : base(dependencies) { }
 
-            public new void CheckComposableSql(string sql)
-                => base.CheckComposableSql(sql);
+            public new void CheckComposableSql(string sql) => base.CheckComposableSql(sql);
         }
     }
 }

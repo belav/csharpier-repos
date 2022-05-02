@@ -12,7 +12,9 @@ using System.Threading.Tasks;
 
 namespace System.Text.Json
 {
-    [DebuggerDisplay("Path:{PropertyPath()} Current: ConverterStrategy.{ConverterStrategy.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {Current.JsonTypeInfo.Type.Name}")]
+    [DebuggerDisplay(
+        "Path:{PropertyPath()} Current: ConverterStrategy.{ConverterStrategy.JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy}, {Current.JsonTypeInfo.Type.Name}"
+    )]
     internal struct WriteStack
     {
         /// <summary>
@@ -96,7 +98,11 @@ namespace System.Text.Json
         /// <summary>
         /// Initialize the state without delayed initialization of the JsonTypeInfo.
         /// </summary>
-        public JsonConverter Initialize(Type type, JsonSerializerOptions options, bool supportContinuation)
+        public JsonConverter Initialize(
+            Type type,
+            JsonSerializerOptions options,
+            bool supportContinuation
+        )
         {
             JsonTypeInfo jsonTypeInfo = options.GetOrAddClassForRootType(type);
             Debug.Assert(options == jsonTypeInfo.Options);
@@ -132,7 +138,9 @@ namespace System.Text.Json
                 }
                 else
                 {
-                    JsonTypeInfo jsonTypeInfo = Current.GetPolymorphicJsonPropertyInfo().RuntimeTypeInfo;
+                    JsonTypeInfo jsonTypeInfo = Current
+                        .GetPolymorphicJsonPropertyInfo()
+                        .RuntimeTypeInfo;
                     JsonNumberHandling? numberHandling = Current.NumberHandling;
 
                     EnsurePushCapacity();
@@ -143,7 +151,8 @@ namespace System.Text.Json
                     Current.JsonTypeInfo = jsonTypeInfo;
                     Current.DeclaredJsonPropertyInfo = jsonTypeInfo.PropertyInfoForTypeInfo;
                     // Allow number handling on property to win over handling on type.
-                    Current.NumberHandling = numberHandling ?? Current.DeclaredJsonPropertyInfo.NumberHandling;
+                    Current.NumberHandling =
+                        numberHandling ?? Current.DeclaredJsonPropertyInfo.NumberHandling;
                 }
             }
             else
@@ -209,8 +218,8 @@ namespace System.Text.Json
             }
         }
 
-        public void AddCompletedAsyncDisposable(IAsyncDisposable asyncDisposable)
-            => (CompletedAsyncDisposables ??= new List<IAsyncDisposable>()).Add(asyncDisposable);
+        public void AddCompletedAsyncDisposable(IAsyncDisposable asyncDisposable) =>
+            (CompletedAsyncDisposables ??= new List<IAsyncDisposable>()).Add(asyncDisposable);
 
         // Asynchronously dispose of any AsyncDisposables that have been scheduled for disposal
         public async ValueTask DisposeCompletedAsyncDisposables()
@@ -285,12 +294,22 @@ namespace System.Text.Json
         {
             Exception? exception = null;
 
-            exception = await DisposeFrame(Current.CollectionEnumerator, Current.AsyncDisposable, exception).ConfigureAwait(false);
+            exception = await DisposeFrame(
+                    Current.CollectionEnumerator,
+                    Current.AsyncDisposable,
+                    exception
+                )
+                .ConfigureAwait(false);
 
             int stackSize = Math.Max(_count, _continuationCount);
             for (int i = 0; i < stackSize - 1; i++)
             {
-                exception = await DisposeFrame(_stack[i].CollectionEnumerator, _stack[i].AsyncDisposable, exception).ConfigureAwait(false);
+                exception = await DisposeFrame(
+                        _stack[i].CollectionEnumerator,
+                        _stack[i].AsyncDisposable,
+                        exception
+                    )
+                    .ConfigureAwait(false);
             }
 
             if (exception is not null)
@@ -298,7 +317,11 @@ namespace System.Text.Json
                 ExceptionDispatchInfo.Capture(exception).Throw();
             }
 
-            static async ValueTask<Exception?> DisposeFrame(IEnumerator? collectionEnumerator, IAsyncDisposable? asyncDisposable, Exception? exception)
+            static async ValueTask<Exception?> DisposeFrame(
+                IEnumerator? collectionEnumerator,
+                IAsyncDisposable? asyncDisposable,
+                Exception? exception
+            )
             {
                 Debug.Assert(!(collectionEnumerator is not null && asyncDisposable is not null));
 

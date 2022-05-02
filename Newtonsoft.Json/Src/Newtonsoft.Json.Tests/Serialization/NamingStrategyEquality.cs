@@ -35,7 +35,7 @@ using NUnit.Framework;
 namespace Newtonsoft.Json.Tests.Serialization
 {
     [TestFixture]
-    public class NamingStrategyEquality: TestFixtureBase
+    public class NamingStrategyEquality : TestFixtureBase
     {
         [Test]
         public void CamelCaseNamingStrategyEquality()
@@ -126,8 +126,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.IsFalse(s1.GetHashCode() == s2.GetHashCode());
         }
 
-        private void CheckInequality<T>(bool overrideSpecifiedNames, bool processDictionaryKeys, bool processExtensionDataNames)
-            where T : NamingStrategy, new()
+        private void CheckInequality<T>(
+            bool overrideSpecifiedNames,
+            bool processDictionaryKeys,
+            bool processExtensionDataNames
+        ) where T : NamingStrategy, new()
         {
             var s1 = new T
             {

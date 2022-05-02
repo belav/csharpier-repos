@@ -13,11 +13,13 @@ namespace MS.Internal.Xml.XPath
         private readonly List<XPathNavigator> _parentStk;
         private XPathNavigator? _nextInput;
 
-        public FollSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType type) : base(qyInput, name, prefix, type)
+        public FollSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType type)
+            : base(qyInput, name, prefix, type)
         {
             _elementStk = new StackNav();
             _parentStk = new List<XPathNavigator>();
         }
+
         private FollSiblingQuery(FollSiblingQuery other) : base(other)
         {
             _elementStk = other._elementStk.Clone();
@@ -110,6 +112,9 @@ namespace MS.Internal.Xml.XPath
             }
         } // Advance
 
-        public override XPathNodeIterator Clone() { return new FollSiblingQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new FollSiblingQuery(this);
+        }
     }
 }

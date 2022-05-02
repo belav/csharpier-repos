@@ -22,53 +22,86 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
     [Export(typeof(IIntentSourceProvider)), Shared]
     internal class IntentSourceProvider : IIntentSourceProvider
     {
-        private readonly ImmutableDictionary<(string LanguageName, string IntentName), Lazy<IIntentProvider, IIntentProviderMetadata>> _lazyIntentProviders;
+        private readonly ImmutableDictionary<
+            (string LanguageName, string IntentName),
+            Lazy<IIntentProvider, IIntentProviderMetadata>
+        > _lazyIntentProviders;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public IntentSourceProvider([ImportMany] IEnumerable<Lazy<IIntentProvider, IIntentProviderMetadata>> lazyIntentProviders)
+        public IntentSourceProvider(
+            [ImportMany]
+                IEnumerable<Lazy<IIntentProvider, IIntentProviderMetadata>> lazyIntentProviders
+        )
         {
             _lazyIntentProviders = CreateProviderMap(lazyIntentProviders);
         }
 
-        private static ImmutableDictionary<(string LanguageName, string IntentName), Lazy<IIntentProvider, IIntentProviderMetadata>> CreateProviderMap(
-            IEnumerable<Lazy<IIntentProvider, IIntentProviderMetadata>> lazyIntentProviders)
+        private static ImmutableDictionary<
+            (string LanguageName, string IntentName),
+            Lazy<IIntentProvider, IIntentProviderMetadata>
+        > CreateProviderMap(
+            IEnumerable<Lazy<IIntentProvider, IIntentProviderMetadata>> lazyIntentProviders
+        )
         {
             return lazyIntentProviders.ToImmutableDictionary(
                 provider => (provider.Metadata.LanguageName, provider.Metadata.IntentName),
-                provider => provider);
+                provider => provider
+            );
         }
 
-        public async Task<ImmutableArray<IntentSource>> ComputeIntentsAsync(IntentRequestContext intentRequestContext, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<IntentSource>> ComputeIntentsAsync(
+            IntentRequestContext intentRequestContext,
+            CancellationToken cancellationToken
+        )
         {
-            var currentDocument = intentRequestContext.CurrentSnapshotSpan.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var currentDocument =
+                intentRequestContext.CurrentSnapshotSpan.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (currentDocument == null)
             {
                 throw new ArgumentException("could not retrieve document for request snapshot");
             }
 
             var languageName = currentDocument.Project.Language;
-            if (!_lazyIntentProviders.TryGetValue((LanguageName: languageName, IntentName: intentRequestContext.IntentName), out var provider))
+            if (
+                !_lazyIntentProviders.TryGetValue(
+                    (LanguageName: languageName, IntentName: intentRequestContext.IntentName),
+                    out var provider
+                )
+            )
             {
-                Logger.Log(FunctionId.Intellicode_UnknownIntent, KeyValueLogMessage.Create(LogType.UserAction, m =>
-                {
-                    m["intent"] = intentRequestContext.IntentName;
-                    m["language"] = languageName;
-                }));
+                Logger.Log(
+                    FunctionId.Intellicode_UnknownIntent,
+                    KeyValueLogMessage.Create(
+                        LogType.UserAction,
+                        m =>
+                        {
+                            m["intent"] = intentRequestContext.IntentName;
+                            m["language"] = languageName;
+                        }
+                    )
+                );
 
                 return ImmutableArray<IntentSource>.Empty;
             }
 
-            var currentText = await currentDocument.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var originalDocument = currentDocument.WithText(currentText.WithChanges(intentRequestContext.PriorTextEdits));
+            var currentText = await currentDocument
+                .GetTextAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var originalDocument = currentDocument.WithText(
+                currentText.WithChanges(intentRequestContext.PriorTextEdits)
+            );
 
             var selectionTextSpan = intentRequestContext.PriorSelection;
-            var results = await provider.Value.ComputeIntentAsync(
-                originalDocument,
-                selectionTextSpan,
-                currentDocument,
-                intentRequestContext.IntentData,
-                cancellationToken).ConfigureAwait(false);
+            var results = await provider.Value
+                .ComputeIntentAsync(
+                    originalDocument,
+                    selectionTextSpan,
+                    currentDocument,
+                    intentRequestContext.IntentData,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (results.IsDefaultOrEmpty)
             {
                 return ImmutableArray<IntentSource>.Empty;
@@ -77,7 +110,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             using var _ = ArrayBuilder<IntentSource>.GetInstance(out var convertedResults);
             foreach (var result in results)
             {
-                var convertedIntent = await ConvertToIntelliCodeResultAsync(result, originalDocument, currentDocument, cancellationToken).ConfigureAwait(false);
+                var convertedIntent = await ConvertToIntelliCodeResultAsync(
+                        result,
+                        originalDocument,
+                        currentDocument,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 convertedResults.AddIfNotNull(convertedIntent);
             }
 
@@ -88,19 +127,28 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode
             IntentProcessorResult processorResult,
             Document originalDocument,
             Document currentDocument,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var newSolution = processorResult.Solution;
 
             // Merge linked file changes so all linked files have the same text changes.
-            newSolution = await newSolution.WithMergedLinkedFileChangesAsync(originalDocument.Project.Solution, cancellationToken: cancellationToken).ConfigureAwait(false);
+            newSolution = await newSolution
+                .WithMergedLinkedFileChangesAsync(
+                    originalDocument.Project.Solution,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // For now we only support changes to the current document.  Everything else is dropped.
             var changedDocument = newSolution.GetRequiredDocument(currentDocument.Id);
 
-            var textDiffService = newSolution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
+            var textDiffService =
+                newSolution.Workspace.Services.GetRequiredService<IDocumentTextDifferencingService>();
             // Compute changes against the current version of the document.
-            var textDiffs = await textDiffService.GetTextChangesAsync(currentDocument, changedDocument, cancellationToken).ConfigureAwait(false);
+            var textDiffs = await textDiffService
+                .GetTextChangesAsync(currentDocument, changedDocument, cancellationToken)
+                .ConfigureAwait(false);
             if (textDiffs.IsEmpty)
             {
                 return null;

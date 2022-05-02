@@ -11,22 +11,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     {
         private readonly List<(LogLevel, string)> _messages = new();
 
-        public IReadOnlyList<(LogLevel Level, string Message)> Messages
-            => _messages;
+        public IReadOnlyList<(LogLevel Level, string Message)> Messages => _messages;
 
-        public void Clear()
-            => _messages.Clear();
+        public void Clear() => _messages.Clear();
 
-        public void WriteInformation(string message)
-            => _messages.Add((LogLevel.Information, message));
+        public void WriteInformation(string message) =>
+            _messages.Add((LogLevel.Information, message));
 
-        public void WriteVerbose(string message)
-            => _messages.Add((LogLevel.Debug, message));
+        public void WriteVerbose(string message) => _messages.Add((LogLevel.Debug, message));
 
-        public void WriteWarning(string message)
-            => _messages.Add((LogLevel.Warning, message));
+        public void WriteWarning(string message) => _messages.Add((LogLevel.Warning, message));
 
-        public void WriteError(string message)
-            => _messages.Add((LogLevel.Error, message));
+        public void WriteError(string message) => _messages.Add((LogLevel.Error, message));
     }
 }

@@ -19,9 +19,17 @@ namespace Microsoft.CodeAnalysis.MSBuild
     {
         public abstract string Language { get; }
 
-        protected abstract ProjectFile CreateProjectFile(MSB.Evaluation.Project? project, ProjectBuildManager buildManager, DiagnosticLog log);
+        protected abstract ProjectFile CreateProjectFile(
+            MSB.Evaluation.Project? project,
+            ProjectBuildManager buildManager,
+            DiagnosticLog log
+        );
 
-        public async Task<IProjectFile> LoadProjectFileAsync(string path, ProjectBuildManager buildManager, CancellationToken cancellationToken)
+        public async Task<IProjectFile> LoadProjectFileAsync(
+            string path,
+            ProjectBuildManager buildManager,
+            CancellationToken cancellationToken
+        )
         {
             if (path == null)
             {
@@ -29,15 +37,26 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
 
             // load project file async
-            var (project, log) = await buildManager.LoadProjectAsync(path, cancellationToken).ConfigureAwait(false);
+            var (project, log) = await buildManager
+                .LoadProjectAsync(path, cancellationToken)
+                .ConfigureAwait(false);
 
             return this.CreateProjectFile(project, buildManager, log);
         }
 
-        public static IProjectFileLoader GetLoaderForProjectFileExtension(HostWorkspaceServices workspaceServices, string extension)
+        public static IProjectFileLoader GetLoaderForProjectFileExtension(
+            HostWorkspaceServices workspaceServices,
+            string extension
+        )
         {
-            return workspaceServices.FindLanguageServices<IProjectFileLoader>(
-                d => d.GetEnumerableMetadata<string>("ProjectFileExtension").Any(e => string.Equals(e, extension, StringComparison.OrdinalIgnoreCase)))
+            return workspaceServices
+                .FindLanguageServices<IProjectFileLoader>(
+                    d =>
+                        d.GetEnumerableMetadata<string>("ProjectFileExtension")
+                            .Any(
+                                e => string.Equals(e, extension, StringComparison.OrdinalIgnoreCase)
+                            )
+                )
                 .FirstOrDefault();
         }
     }

@@ -31,9 +31,13 @@ namespace Microsoft.Interop.Analyzers
                 Category,
                 DiagnosticSeverity.Info,
                 isEnabledByDefault: false,
-                description: GetResourceString(nameof(Resources.ConvertToGeneratedDllImportDescription)));
+                description: GetResourceString(
+                    nameof(Resources.ConvertToGeneratedDllImportDescription)
+                )
+            );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(ConvertToGeneratedDllImport);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(ConvertToGeneratedDllImport);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -44,25 +48,38 @@ namespace Microsoft.Interop.Analyzers
                 compilationContext =>
                 {
                     // Nothing to do if the GeneratedDllImportAttribute is not in the compilation
-                    INamedTypeSymbol? generatedDllImportAttrType = compilationContext.Compilation.GetTypeByMetadataName(TypeNames.GeneratedDllImportAttribute);
+                    INamedTypeSymbol? generatedDllImportAttrType =
+                        compilationContext.Compilation.GetTypeByMetadataName(
+                            TypeNames.GeneratedDllImportAttribute
+                        );
                     if (generatedDllImportAttrType == null)
                         return;
 
-                    var knownUnsupportedTypes = new List<ITypeSymbol>(s_unsupportedTypeNames.Length);
+                    var knownUnsupportedTypes = new List<ITypeSymbol>(
+                        s_unsupportedTypeNames.Length
+                    );
                     foreach (string typeName in s_unsupportedTypeNames)
                     {
-                        INamedTypeSymbol? unsupportedType = compilationContext.Compilation.GetTypeByMetadataName(typeName);
+                        INamedTypeSymbol? unsupportedType =
+                            compilationContext.Compilation.GetTypeByMetadataName(typeName);
                         if (unsupportedType != null)
                         {
                             knownUnsupportedTypes.Add(unsupportedType);
                         }
                     }
 
-                    compilationContext.RegisterSymbolAction(symbolContext => AnalyzeSymbol(symbolContext, knownUnsupportedTypes), SymbolKind.Method);
-                });
+                    compilationContext.RegisterSymbolAction(
+                        symbolContext => AnalyzeSymbol(symbolContext, knownUnsupportedTypes),
+                        SymbolKind.Method
+                    );
+                }
+            );
         }
 
-        private static void AnalyzeSymbol(SymbolAnalysisContext context, List<ITypeSymbol> knownUnsupportedTypes)
+        private static void AnalyzeSymbol(
+            SymbolAnalysisContext context,
+            List<ITypeSymbol> knownUnsupportedTypes
+        )
         {
             var method = (IMethodSymbol)context.Symbol;
 
@@ -95,10 +112,16 @@ namespace Microsoft.Interop.Analyzers
             }
 
             // Ignore methods with unsupported returns
-            if (method.ReturnsByRef || method.ReturnsByRefReadonly || knownUnsupportedTypes.Contains(method.ReturnType))
+            if (
+                method.ReturnsByRef
+                || method.ReturnsByRefReadonly
+                || knownUnsupportedTypes.Contains(method.ReturnType)
+            )
                 return;
 
-            context.ReportDiagnostic(method.CreateDiagnostic(ConvertToGeneratedDllImport, method.Name));
+            context.ReportDiagnostic(
+                method.CreateDiagnostic(ConvertToGeneratedDllImport, method.Name)
+            );
         }
     }
 }

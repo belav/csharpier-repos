@@ -25,5 +25,9 @@ public interface IPasswordHasher<TUser> where TUser : class
     /// <param name="providedPassword">The password supplied for comparison.</param>
     /// <returns>A <see cref="PasswordVerificationResult"/> indicating the result of a password hash comparison.</returns>
     /// <remarks>Implementations of this method should be time consistent.</remarks>
-    PasswordVerificationResult VerifyHashedPassword(TUser user, string hashedPassword, string providedPassword);
+    PasswordVerificationResult VerifyHashedPassword(
+        TUser user,
+        string hashedPassword,
+        string providedPassword
+    );
 }

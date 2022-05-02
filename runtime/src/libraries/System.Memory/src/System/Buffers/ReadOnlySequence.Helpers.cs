@@ -12,7 +12,11 @@ namespace System.Buffers
     public readonly partial struct ReadOnlySequence<T>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal bool TryGetBuffer(in SequencePosition position, out ReadOnlyMemory<T> memory, out SequencePosition next)
+        internal bool TryGetBuffer(
+            in SequencePosition position,
+            out ReadOnlyMemory<T> memory,
+            out SequencePosition next
+        )
         {
             object? positionObject = position.GetObject();
             next = default;
@@ -32,7 +36,8 @@ namespace System.Buffers
             {
                 Debug.Assert(positionObject is ReadOnlySequenceSegment<T>);
 
-                ReadOnlySequenceSegment<T> startSegment = (ReadOnlySequenceSegment<T>)positionObject;
+                ReadOnlySequenceSegment<T> startSegment =
+                    (ReadOnlySequenceSegment<T>)positionObject;
 
                 if (startSegment != endObject)
                 {
@@ -58,20 +63,33 @@ namespace System.Buffers
                 {
                     Debug.Assert(positionObject is T[]);
 
-                    memory = new ReadOnlyMemory<T>((T[])positionObject, startIndex, endIndex - startIndex);
+                    memory = new ReadOnlyMemory<T>(
+                        (T[])positionObject,
+                        startIndex,
+                        endIndex - startIndex
+                    );
                 }
                 else if (typeof(T) == typeof(char) && type == SequenceType.String)
                 {
                     Debug.Assert(positionObject is string);
 
-                    memory = (ReadOnlyMemory<T>)(object)((string)positionObject).AsMemory(startIndex, endIndex - startIndex);
+                    memory =
+                        (ReadOnlyMemory<T>)
+                            (object)
+                                ((string)positionObject).AsMemory(
+                                    startIndex,
+                                    endIndex - startIndex
+                                );
                 }
                 else // type == SequenceType.MemoryManager
                 {
                     Debug.Assert(type == SequenceType.MemoryManager);
                     Debug.Assert(positionObject is MemoryManager<T>);
 
-                    memory = ((MemoryManager<T>)positionObject).Memory.Slice(startIndex, endIndex - startIndex);
+                    memory = ((MemoryManager<T>)positionObject).Memory.Slice(
+                        startIndex,
+                        endIndex - startIndex
+                    );
                 }
             }
 
@@ -134,7 +152,11 @@ namespace System.Buffers
             if (startIndex >= 0)
             {
                 Debug.Assert(endIndex < 0);
-                return new ReadOnlyMemory<T>((T[])startObject, startIndex, (endIndex & ReadOnlySequence.IndexBitMask) - startIndex);
+                return new ReadOnlyMemory<T>(
+                    (T[])startObject,
+                    startIndex,
+                    (endIndex & ReadOnlySequence.IndexBitMask) - startIndex
+                );
             }
             else
             {
@@ -144,12 +166,20 @@ namespace System.Buffers
                 if (typeof(T) == typeof(char) && endIndex < 0)
                 {
                     // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex & ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
-                    return (ReadOnlyMemory<T>)(object)((string)startObject).AsMemory(startIndex & ReadOnlySequence.IndexBitMask, endIndex - startIndex);
+                    return (ReadOnlyMemory<T>)
+                        (object)
+                            ((string)startObject).AsMemory(
+                                startIndex & ReadOnlySequence.IndexBitMask,
+                                endIndex - startIndex
+                            );
                 }
                 else // endIndex >= 0, A == 1 && B == 0 means SequenceType.MemoryManager
                 {
                     startIndex &= ReadOnlySequence.IndexBitMask;
-                    return ((MemoryManager<T>)startObject).Memory.Slice(startIndex, endIndex - startIndex);
+                    return ((MemoryManager<T>)startObject).Memory.Slice(
+                        startIndex,
+                        endIndex - startIndex
+                    );
                 }
             }
         }
@@ -211,7 +241,10 @@ namespace System.Buffers
             {
                 Debug.Assert(endIndex < 0);
                 ReadOnlySpan<T> span = (T[])startObject;
-                return span.Slice(startIndex, (endIndex & ReadOnlySequence.IndexBitMask) - startIndex);
+                return span.Slice(
+                    startIndex,
+                    (endIndex & ReadOnlySequence.IndexBitMask) - startIndex
+                );
             }
             else
             {
@@ -222,18 +255,27 @@ namespace System.Buffers
                 {
                     var memory = (ReadOnlyMemory<T>)(object)((string)startObject).AsMemory();
                     // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex & ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
-                    return memory.Span.Slice(startIndex & ReadOnlySequence.IndexBitMask, endIndex - startIndex);
+                    return memory.Span.Slice(
+                        startIndex & ReadOnlySequence.IndexBitMask,
+                        endIndex - startIndex
+                    );
                 }
                 else // endIndex >= 0, A == 1 && B == 0 means SequenceType.MemoryManager
                 {
                     startIndex &= ReadOnlySequence.IndexBitMask;
-                    return ((MemoryManager<T>)startObject).Memory.Span.Slice(startIndex, endIndex - startIndex);
+                    return ((MemoryManager<T>)startObject).Memory.Span.Slice(
+                        startIndex,
+                        endIndex - startIndex
+                    );
                 }
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal SequencePosition Seek(long offset, ExceptionArgument exceptionArgument = ExceptionArgument.offset)
+        internal SequencePosition Seek(
+            long offset,
+            ExceptionArgument exceptionArgument = ExceptionArgument.offset
+        )
         {
             object? startObject = _startObject;
             object? endObject = _endObject;
@@ -255,7 +297,13 @@ namespace System.Buffers
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
 
                 // End of segment. Move to start of next.
-                return SeekMultiSegment(startSegment.Next!, endObject!, endIndex, offset - currentLength, exceptionArgument);
+                return SeekMultiSegment(
+                    startSegment.Next!,
+                    endObject!,
+                    endIndex,
+                    offset - currentLength,
+                    exceptionArgument
+                );
             }
 
             Debug.Assert(startObject == endObject);
@@ -263,8 +311,8 @@ namespace System.Buffers
             if (endIndex - startIndex < offset)
                 ThrowHelper.ThrowArgumentOutOfRangeException(exceptionArgument);
 
-        // Single segment Seek
-        IsSingleSegment:
+            // Single segment Seek
+            IsSingleSegment:
             return new SequencePosition(startObject, startIndex + (int)offset);
         }
 
@@ -291,7 +339,13 @@ namespace System.Buffers
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
 
                 // End of segment. Move to start of next.
-                return SeekMultiSegment(startSegment.Next!, endObject!, endIndex, offset - currentLength, ExceptionArgument.offset);
+                return SeekMultiSegment(
+                    startSegment.Next!,
+                    endObject!,
+                    endIndex,
+                    offset - currentLength,
+                    ExceptionArgument.offset
+                );
             }
 
             Debug.Assert(startObject == endObject);
@@ -299,13 +353,19 @@ namespace System.Buffers
             if (endIndex - startIndex < offset)
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.offset);
 
-        // Single segment Seek
-        IsSingleSegment:
+            // Single segment Seek
+            IsSingleSegment:
             return new SequencePosition(startObject, startIndex + (int)offset);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static SequencePosition SeekMultiSegment(ReadOnlySequenceSegment<T>? currentSegment, object endObject, int endIndex, long offset, ExceptionArgument argument)
+        private static SequencePosition SeekMultiSegment(
+            ReadOnlySequenceSegment<T>? currentSegment,
+            object endObject,
+            int endIndex,
+            long offset,
+            ExceptionArgument argument
+        )
         {
             Debug.Assert(currentSegment != null); // currentSegment parameter is marked as nullable as the parameter is reused/reassigned in the body
             Debug.Assert(offset >= 0);
@@ -327,7 +387,7 @@ namespace System.Buffers
             if (currentSegment == null || endIndex < offset)
                 ThrowHelper.ThrowArgumentOutOfRangeException(argument);
 
-        FoundSegment:
+            FoundSegment:
             return new SequencePosition(currentSegment, (int)offset);
         }
 
@@ -353,7 +413,9 @@ namespace System.Buffers
             {
                 // Multi-Segment Sequence
                 // Storing this in a local since it is used twice within InRange()
-                ulong startRange = (ulong)(((ReadOnlySequenceSegment<T>)startObject!).RunningIndex + startIndex);
+                ulong startRange = (ulong)(
+                    ((ReadOnlySequenceSegment<T>)startObject!).RunningIndex + startIndex
+                );
                 long runningIndex = 0;
                 if (positionIsNotNull)
                 {
@@ -361,17 +423,25 @@ namespace System.Buffers
                     runningIndex = ((ReadOnlySequenceSegment<T>)position.GetObject()!).RunningIndex;
                 }
 
-                if (!InRange(
-                    (ulong)(runningIndex + sliceStartIndex),
-                    startRange,
-                    (ulong)(((ReadOnlySequenceSegment<T>)endObject!).RunningIndex + endIndex)))
+                if (
+                    !InRange(
+                        (ulong)(runningIndex + sliceStartIndex),
+                        startRange,
+                        (ulong)(((ReadOnlySequenceSegment<T>)endObject!).RunningIndex + endIndex)
+                    )
+                )
                 {
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
                 }
             }
         }
 
-        private void BoundsCheck(uint sliceStartIndex, object? sliceStartObject, uint sliceEndIndex, object? sliceEndObject)
+        private void BoundsCheck(
+            uint sliceStartIndex,
+            object? sliceStartObject,
+            uint sliceEndIndex,
+            object? sliceEndObject
+        )
         {
             object? startObject = _startObject;
             object? endObject = _endObject;
@@ -382,11 +452,13 @@ namespace System.Buffers
             // Single-Segment Sequence
             if (startObject == endObject)
             {
-                if (sliceStartObject != sliceEndObject ||
-                    sliceStartObject != startObject ||
-                    sliceStartIndex > sliceEndIndex ||
-                    sliceStartIndex < startIndex ||
-                    sliceEndIndex > endIndex)
+                if (
+                    sliceStartObject != sliceEndObject
+                    || sliceStartObject != startObject
+                    || sliceStartIndex > sliceEndIndex
+                    || sliceStartIndex < startIndex
+                    || sliceEndIndex > endIndex
+                )
                 {
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
                 }
@@ -402,26 +474,41 @@ namespace System.Buffers
 
                 if (sliceStartObject != null)
                 {
-                    sliceStartRange += (ulong)((ReadOnlySequenceSegment<T>)sliceStartObject).RunningIndex;
+                    sliceStartRange += (ulong)
+                        ((ReadOnlySequenceSegment<T>)sliceStartObject).RunningIndex;
                 }
 
                 if (sliceEndObject != null)
                 {
-                    sliceEndRange += (ulong)((ReadOnlySequenceSegment<T>)sliceEndObject).RunningIndex;
+                    sliceEndRange += (ulong)
+                        ((ReadOnlySequenceSegment<T>)sliceEndObject).RunningIndex;
                 }
 
                 if (sliceStartRange > sliceEndRange)
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
 
-                if (sliceStartRange < (ulong)(((ReadOnlySequenceSegment<T>)startObject!).RunningIndex + startIndex)
-                    || sliceEndRange > (ulong)(((ReadOnlySequenceSegment<T>)endObject!).RunningIndex + endIndex))
+                if (
+                    sliceStartRange
+                        < (ulong)(
+                            ((ReadOnlySequenceSegment<T>)startObject!).RunningIndex + startIndex
+                        )
+                    || sliceEndRange
+                        > (ulong)(((ReadOnlySequenceSegment<T>)endObject!).RunningIndex + endIndex)
+                )
                 {
                     ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
                 }
             }
         }
 
-        private static SequencePosition GetEndPosition(ReadOnlySequenceSegment<T> startSegment, object startObject, int startIndex, object endObject, int endIndex, long length)
+        private static SequencePosition GetEndPosition(
+            ReadOnlySequenceSegment<T> startSegment,
+            object startObject,
+            int startIndex,
+            object endObject,
+            int endIndex,
+            long length
+        )
         {
             int currentLength = startSegment.Memory.Length - startIndex;
 
@@ -433,7 +520,13 @@ namespace System.Buffers
             if (currentLength < 0)
                 ThrowHelper.ThrowArgumentOutOfRangeException_PositionOutOfRange();
 
-            return SeekMultiSegment(startSegment.Next, endObject, endIndex, length - currentLength, ExceptionArgument.length);
+            return SeekMultiSegment(
+                startSegment.Next,
+                endObject,
+                endIndex,
+                length - currentLength,
+                ExceptionArgument.length
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -507,14 +600,20 @@ namespace System.Buffers
                 var startSegment = (ReadOnlySequenceSegment<T>)startObject!;
                 var endSegment = (ReadOnlySequenceSegment<T>)endObject!;
                 // (End offset) - (start offset)
-                return (endSegment.RunningIndex + endIndex) - (startSegment.RunningIndex + startIndex);
+                return (endSegment.RunningIndex + endIndex)
+                    - (startSegment.RunningIndex + startIndex);
             }
 
             // Single segment length
             return endIndex - startIndex;
         }
 
-        internal bool TryGetReadOnlySequenceSegment([NotNullWhen(true)] out ReadOnlySequenceSegment<T>? startSegment, out int startIndex, [NotNullWhen(true)] out ReadOnlySequenceSegment<T>? endSegment, out int endIndex)
+        internal bool TryGetReadOnlySequenceSegment(
+            [NotNullWhen(true)] out ReadOnlySequenceSegment<T>? startSegment,
+            out int startIndex,
+            [NotNullWhen(true)] out ReadOnlySequenceSegment<T>? endSegment,
+            out int endIndex
+        )
         {
             object? startObject = _startObject;
 
@@ -548,11 +647,19 @@ namespace System.Buffers
             Debug.Assert(_startObject != null);
 
             int startIndex = GetIndex(_startInteger);
-            segment = new ArraySegment<T>((T[])_startObject, startIndex, GetIndex(_endInteger) - startIndex);
+            segment = new ArraySegment<T>(
+                (T[])_startObject,
+                startIndex,
+                GetIndex(_endInteger) - startIndex
+            );
             return true;
         }
 
-        internal bool TryGetString([NotNullWhen(true)] out string? text, out int start, out int length)
+        internal bool TryGetString(
+            [NotNullWhen(true)] out string? text,
+            out int start,
+            out int length
+        )
         {
             if (typeof(T) != typeof(char) || GetSequenceType() != SequenceType.String)
             {
@@ -645,7 +752,8 @@ namespace System.Buffers
                     if (endIndex >= 0)
                     {
                         // Positive start and end index == ReadOnlySequenceSegment<T>
-                        ReadOnlySequenceSegment<T> segment = (ReadOnlySequenceSegment<T>)startObject;
+                        ReadOnlySequenceSegment<T> segment =
+                            (ReadOnlySequenceSegment<T>)startObject;
                         first = segment.Memory.Span;
                         if (hasMultipleSegments)
                         {
@@ -663,18 +771,32 @@ namespace System.Buffers
                         if (hasMultipleSegments)
                             ThrowHelper.ThrowInvalidOperationException_EndPositionNotReached();
 
-                        first = new ReadOnlySpan<T>((T[])startObject, startIndex, (endIndex & ReadOnlySequence.IndexBitMask) - startIndex);
+                        first = new ReadOnlySpan<T>(
+                            (T[])startObject,
+                            startIndex,
+                            (endIndex & ReadOnlySequence.IndexBitMask) - startIndex
+                        );
                     }
                 }
                 else
                 {
-                    first = GetFirstSpanSlow(startObject, startIndex, endIndex, hasMultipleSegments);
+                    first = GetFirstSpanSlow(
+                        startObject,
+                        startIndex,
+                        endIndex,
+                        hasMultipleSegments
+                    );
                 }
             }
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static ReadOnlySpan<T> GetFirstSpanSlow(object startObject, int startIndex, int endIndex, bool hasMultipleSegments)
+        private static ReadOnlySpan<T> GetFirstSpanSlow(
+            object startObject,
+            int startIndex,
+            int endIndex,
+            bool hasMultipleSegments
+        )
         {
             Debug.Assert(startIndex < 0);
             if (hasMultipleSegments)
@@ -685,14 +807,23 @@ namespace System.Buffers
             if (typeof(T) == typeof(char) && endIndex < 0)
             {
                 // Negative start and negative end index == string
-                ReadOnlySpan<char> spanOfChar = ((string)startObject).AsSpan(startIndex & ReadOnlySequence.IndexBitMask, endIndex - startIndex);
-                return MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<char, T>(ref MemoryMarshal.GetReference(spanOfChar)), spanOfChar.Length);
+                ReadOnlySpan<char> spanOfChar = ((string)startObject).AsSpan(
+                    startIndex & ReadOnlySequence.IndexBitMask,
+                    endIndex - startIndex
+                );
+                return MemoryMarshal.CreateReadOnlySpan(
+                    ref Unsafe.As<char, T>(ref MemoryMarshal.GetReference(spanOfChar)),
+                    spanOfChar.Length
+                );
             }
             else
             {
                 // Negative start and positive end index == MemoryManager<T>
                 startIndex &= ReadOnlySequence.IndexBitMask;
-                return ((MemoryManager<T>)startObject).Memory.Span.Slice(startIndex, endIndex - startIndex);
+                return ((MemoryManager<T>)startObject).Memory.Span.Slice(
+                    startIndex,
+                    endIndex - startIndex
+                );
             }
         }
     }

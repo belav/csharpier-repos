@@ -70,40 +70,22 @@ namespace System.CommandLine.Parsing
             }
         }
 
-        protected virtual void VisitCommandArgumentNode(CommandArgumentNode argumentNode)
-        {
-        }
+        protected virtual void VisitCommandArgumentNode(CommandArgumentNode argumentNode) { }
 
-        protected virtual void VisitOptionArgumentNode(OptionArgumentNode argumentNode)
-        {
-        }
+        protected virtual void VisitOptionArgumentNode(OptionArgumentNode argumentNode) { }
 
-        protected virtual void VisitOptionNode(OptionNode optionNode)
-        {
-        }
+        protected virtual void VisitOptionNode(OptionNode optionNode) { }
 
-        protected virtual void VisitRootCommandNode(RootCommandNode rootCommandNode)
-        {
-        }
+        protected virtual void VisitRootCommandNode(RootCommandNode rootCommandNode) { }
 
-        protected virtual void VisitCommandNode(CommandNode commandNode)
-        {
-        }
+        protected virtual void VisitCommandNode(CommandNode commandNode) { }
 
-        protected virtual void VisitDirectiveNode(DirectiveNode directiveNode)
-        {
-        }
+        protected virtual void VisitDirectiveNode(DirectiveNode directiveNode) { }
 
-        protected virtual void Start(SyntaxNode node)
-        {
-        }
+        protected virtual void Start(SyntaxNode node) { }
 
-        protected virtual void Stop(SyntaxNode node)
-        {
-        }
+        protected virtual void Stop(SyntaxNode node) { }
 
-        protected virtual void VisitUnknownNode(SyntaxNode node)
-        {
-        }
+        protected virtual void VisitUnknownNode(SyntaxNode node) { }
     }
 }

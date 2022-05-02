@@ -22,8 +22,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.ChangeSignature
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpChangeSignatureCommandHandler(IThreadingContext threadingContext)
-            : base(threadingContext)
-        {
-        }
+            : base(threadingContext) { }
     }
 }

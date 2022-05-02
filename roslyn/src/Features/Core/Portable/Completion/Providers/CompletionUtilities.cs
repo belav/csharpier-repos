@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal static class CompletionUtilities
     {
-        public static bool IsTypeImplicitlyConvertible(Compilation compilation, ITypeSymbol sourceType, ImmutableArray<ITypeSymbol> targetTypes)
+        public static bool IsTypeImplicitlyConvertible(
+            Compilation compilation,
+            ITypeSymbol sourceType,
+            ImmutableArray<ITypeSymbol> targetTypes
+        )
         {
             foreach (var targetType in targetTypes)
             {

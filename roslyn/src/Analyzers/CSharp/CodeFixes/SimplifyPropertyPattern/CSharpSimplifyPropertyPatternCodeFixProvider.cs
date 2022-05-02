@@ -22,14 +22,18 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 {
     using static SyntaxFactory;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.SimplifyPropertyPattern), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.SimplifyPropertyPattern
+        ),
+        Shared
+    ]
     internal class CSharpSimplifyPropertyPatternCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSimplifyPropertyPatternCodeFixProvider()
-        {
-        }
+        public CSharpSimplifyPropertyPatternCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.SimplifyPropertyPatternDiagnosticId);
@@ -38,22 +42,27 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             // Process subpatterns in reverse order so we rewrite from inside-to-outside with nested
             // patterns.
-            var subpatterns = diagnostics.Select(d => (SubpatternSyntax)d.AdditionalLocations[0].FindNode(cancellationToken))
-                                         .OrderByDescending(s => s.SpanStart)
-                                         .ToImmutableArray();
+            var subpatterns = diagnostics
+                .Select(d => (SubpatternSyntax)d.AdditionalLocations[0].FindNode(cancellationToken))
+                .OrderByDescending(s => s.SpanStart)
+                .ToImmutableArray();
 
             foreach (var subpattern in subpatterns)
             {
@@ -64,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
                         var currentSubpattern = (SubpatternSyntax)current;
                         var simplified = TrySimplify(currentSubpattern);
                         return simplified ?? currentSubpattern;
-                    });
+                    }
+                );
             }
 
             return Task.CompletedTask;
@@ -72,7 +82,13 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 
         private static SubpatternSyntax? TrySimplify(SubpatternSyntax currentSubpattern)
         {
-            if (!SimplifyPropertyPatternHelpers.IsSimplifiable(currentSubpattern, out var innerSubpattern, out var outerExpressionColon))
+            if (
+                !SimplifyPropertyPatternHelpers.IsSimplifiable(
+                    currentSubpattern,
+                    out var innerSubpattern,
+                    out var outerExpressionColon
+                )
+            )
                 return null;
 
             // attempt to simplify the inner pattern we're pointing at as well (that way if the user
@@ -81,8 +97,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 
             var innerExpressionColon = innerSubpattern.ExpressionColon;
 
-            if (!SimplifyPropertyPatternHelpers.IsMergable(outerExpressionColon.Expression) ||
-                !SimplifyPropertyPatternHelpers.IsMergable(innerExpressionColon?.Expression))
+            if (
+                !SimplifyPropertyPatternHelpers.IsMergable(outerExpressionColon.Expression)
+                || !SimplifyPropertyPatternHelpers.IsMergable(innerExpressionColon?.Expression)
+            )
             {
                 return null;
             }
@@ -91,12 +109,16 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
             if (merged == null)
                 return null;
 
-            return currentSubpattern.WithExpressionColon(merged)
-                                    .WithPattern(innerSubpattern.Pattern)
-                                    .WithAdditionalAnnotations(Formatter.Annotation);
+            return currentSubpattern
+                .WithExpressionColon(merged)
+                .WithPattern(innerSubpattern.Pattern)
+                .WithAdditionalAnnotations(Formatter.Annotation);
         }
 
-        private static BaseExpressionColonSyntax? Merge(BaseExpressionColonSyntax outerExpressionColon, BaseExpressionColonSyntax innerExpressionColon)
+        private static BaseExpressionColonSyntax? Merge(
+            BaseExpressionColonSyntax outerExpressionColon,
+            BaseExpressionColonSyntax innerExpressionColon
+        )
         {
             var merged = Merge(outerExpressionColon.Expression, innerExpressionColon.Expression);
             if (merged == null)
@@ -105,7 +127,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
             return outerExpressionColon.WithExpression(merged);
         }
 
-        private static MemberAccessExpressionSyntax? Merge(ExpressionSyntax? outerExpression, ExpressionSyntax? innerExpression)
+        private static MemberAccessExpressionSyntax? Merge(
+            ExpressionSyntax? outerExpression,
+            ExpressionSyntax? innerExpression
+        )
         {
             if (outerExpression == null || innerExpression == null)
                 return null;
@@ -113,22 +138,31 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
             // if the inner name is simple (i.e. just 'X') we can trivially form the final member
             // access by joining the two names together.
             if (innerExpression is SimpleNameSyntax innerName)
-                return MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, outerExpression, innerName);
+                return MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    outerExpression,
+                    innerName
+                );
 
             if (innerExpression is not MemberAccessExpressionSyntax innerMemberAccess)
                 return null;
 
             // otherwise, attempt to decompose the inner expression, joining that with the outer until we get
             // the result.
-            return Merge(Merge(outerExpression, innerMemberAccess.Expression), innerMemberAccess.Name);
+            return Merge(
+                Merge(outerExpression, innerMemberAccess.Expression),
+                innerMemberAccess.Name
+            );
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Simplify_property_pattern, createChangedDocument, nameof(CSharpAnalyzersResources.Simplify_property_pattern))
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Simplify_property_pattern,
+                    createChangedDocument,
+                    nameof(CSharpAnalyzersResources.Simplify_property_pattern)
+                ) { }
         }
     }
 }

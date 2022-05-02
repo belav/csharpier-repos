@@ -154,7 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     The name for the annotation determining whether the table is excluded from migrations.
         /// </summary>
-        public const string IsTableExcludedFromMigrations = Prefix + "IsTableExcludedFromMigrations";
+        public const string IsTableExcludedFromMigrations =
+            Prefix + "IsTableExcludedFromMigrations";
 
         /// <summary>
         ///     The name for database model annotation.

@@ -31,13 +31,21 @@ namespace System.Net
             if (command.Command == EventCommand.Enable)
             {
                 // The cumulative number of name resolution requests started since events were enabled
-                _lookupsRequestedCounter ??= new PollingCounter("dns-lookups-requested", this, () => Interlocked.Read(ref _lookupsRequested))
+                _lookupsRequestedCounter ??= new PollingCounter(
+                    "dns-lookups-requested",
+                    this,
+                    () => Interlocked.Read(ref _lookupsRequested)
+                )
                 {
                     DisplayName = "DNS Lookups Requested"
                 };
 
                 // Current number of DNS requests pending
-                _currentLookupsCounter ??= new PollingCounter("current-dns-lookups", this, () => Interlocked.Read(ref _currentLookups))
+                _currentLookupsCounter ??= new PollingCounter(
+                    "current-dns-lookups",
+                    this,
+                    () => Interlocked.Read(ref _currentLookups)
+                )
                 {
                     DisplayName = "Current DNS Lookups"
                 };
@@ -51,7 +59,8 @@ namespace System.Net
         }
 
         [Event(ResolutionStartEventId, Level = EventLevel.Informational)]
-        private void ResolutionStart(string hostNameOrAddress) => WriteEvent(ResolutionStartEventId, hostNameOrAddress);
+        private void ResolutionStart(string hostNameOrAddress) =>
+            WriteEvent(ResolutionStartEventId, hostNameOrAddress);
 
         [Event(ResolutionStopEventId, Level = EventLevel.Informational)]
         private void ResolutionStop() => WriteEvent(ResolutionStopEventId);
@@ -59,17 +68,17 @@ namespace System.Net
         [Event(ResolutionFailedEventId, Level = EventLevel.Informational)]
         private void ResolutionFailed() => WriteEvent(ResolutionFailedEventId);
 
-
         [NonEvent]
         public ValueStopwatch BeforeResolution(object hostNameOrAddress)
         {
             Debug.Assert(hostNameOrAddress != null);
             Debug.Assert(
-                hostNameOrAddress is string ||
-                hostNameOrAddress is IPAddress ||
-                hostNameOrAddress is KeyValuePair<string, AddressFamily> ||
-                hostNameOrAddress is KeyValuePair<IPAddress, AddressFamily>,
-                $"Unknown hostNameOrAddress type: {hostNameOrAddress.GetType().Name}");
+                hostNameOrAddress is string
+                    || hostNameOrAddress is IPAddress
+                    || hostNameOrAddress is KeyValuePair<string, AddressFamily>
+                    || hostNameOrAddress is KeyValuePair<IPAddress, AddressFamily>,
+                $"Unknown hostNameOrAddress type: {hostNameOrAddress.GetType().Name}"
+            );
 
             if (IsEnabled())
             {

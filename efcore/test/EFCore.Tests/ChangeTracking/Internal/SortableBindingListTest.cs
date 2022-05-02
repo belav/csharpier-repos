@@ -13,34 +13,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
     {
         private void SortTest(string property, ListSortDirection direction)
         {
-            var list = new List<ListElement>
-            {
-                3,
-                1,
-                4,
-                1,
-                5,
-                9
-            };
-            var sortedList = direction == ListSortDirection.Ascending
-                ? new List<ListElement>
-                {
-                    1,
-                    1,
-                    3,
-                    4,
-                    5,
-                    9
-                }
-                : new List<ListElement>
-                {
-                    9,
-                    5,
-                    4,
-                    3,
-                    1,
-                    1
-                };
+            var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+            var sortedList =
+                direction == ListSortDirection.Ascending
+                    ? new List<ListElement> { 1, 1, 3, 4, 5, 9 }
+                    : new List<ListElement> { 9, 5, 4, 3, 1, 1 };
 
             var bindingList = new SortableBindingList<ListElement>(list);
 
@@ -88,27 +65,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void SortableBindingList_does_not_sort_for_non_XNode_that_does_not_implement_IComparable()
         {
-            var list = new List<ListElement>
-            {
-                3,
-                1,
-                4,
-                1,
-                5,
-                9
-            };
-            var unsortedList = new List<ListElement>
-            {
-                3,
-                1,
-                4,
-                1,
-                5,
-                9
-            };
+            var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+            var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
             var bindingList = new SortableBindingList<ListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(ListElement.Property("Random"), ListSortDirection.Ascending);
+            ((IBindingList)bindingList).ApplySort(
+                ListElement.Property("Random"),
+                ListSortDirection.Ascending
+            );
 
             Assert.True(list.SequenceEqual(unsortedList, new ListElementComparer()));
         }
@@ -116,27 +80,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void SortableBindingList_does_not_sort_for_byte_arrays()
         {
-            var list = new List<ListElement>
-            {
-                3,
-                1,
-                4,
-                1,
-                5,
-                9
-            };
-            var unsortedList = new List<ListElement>
-            {
-                3,
-                1,
-                4,
-                1,
-                5,
-                9
-            };
+            var list = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
+            var unsortedList = new List<ListElement> { 3, 1, 4, 1, 5, 9 };
             var bindingList = new SortableBindingList<ListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(ListElement.Property("ByteArray"), ListSortDirection.Descending);
+            ((IBindingList)bindingList).ApplySort(
+                ListElement.Property("ByteArray"),
+                ListSortDirection.Descending
+            );
 
             Assert.True(list.SequenceEqual(unsortedList, new ListElementComparer()));
         }
@@ -159,7 +110,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             var bindingList = new SortableBindingList<ListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(ListElement.Property("Int"), ListSortDirection.Ascending);
+            ((IBindingList)bindingList).ApplySort(
+                ListElement.Property("Int"),
+                ListSortDirection.Ascending
+            );
 
             Assert.True(list.SequenceEqual(sortedList, new ListElementComparer()));
         }
@@ -167,31 +121,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         [ConditionalFact]
         public void SortableBindingList_can_sort_when_list_is_of_derived_type()
         {
-            var list = new List<DerivedListElement>
-            {
-                new(3),
-                new(1),
-                new(4)
-            };
-            var sortedList = new List<DerivedListElement>
-            {
-                new(1),
-                new(3),
-                new(4)
-            };
+            var list = new List<DerivedListElement> { new(3), new(1), new(4) };
+            var sortedList = new List<DerivedListElement> { new(1), new(3), new(4) };
 
             var bindingList = new SortableBindingList<DerivedListElement>(list);
 
-            ((IBindingList)bindingList).ApplySort(ListElement.Property("Int"), ListSortDirection.Ascending);
+            ((IBindingList)bindingList).ApplySort(
+                ListElement.Property("Int"),
+                ListSortDirection.Ascending
+            );
 
             Assert.True(list.SequenceEqual(sortedList, new ListElementComparer()));
         }
 
         private class ListElement
         {
-            public ListElement()
-            {
-            }
+            public ListElement() { }
 
             public ListElement(int i)
             {
@@ -202,8 +147,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 ByteArray = new[] { (byte)i, (byte)i, (byte)i, (byte)i };
             }
 
-            public static implicit operator ListElement(int i)
-                => new(i);
+            public static implicit operator ListElement(int i) => new(i);
 
             public int Int { get; }
             public int? NullableInt { get; }
@@ -211,29 +155,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             public Random Random { get; }
             public byte[] ByteArray { get; }
 
-            public static PropertyDescriptor Property(string name)
-                => TypeDescriptor.GetProperties(typeof(ListElement))[name];
+            public static PropertyDescriptor Property(string name) =>
+                TypeDescriptor.GetProperties(typeof(ListElement))[name];
         }
 
         private class DerivedListElement : ListElement
         {
-            public DerivedListElement()
-            {
-            }
+            public DerivedListElement() { }
 
-            public DerivedListElement(int i)
-                : base(i)
-            {
-            }
+            public DerivedListElement(int i) : base(i) { }
         }
 
         private class ListElementComparer : IEqualityComparer<ListElement>
         {
-            public bool Equals(ListElement x, ListElement y)
-                => x.Int == y.Int;
+            public bool Equals(ListElement x, ListElement y) => x.Int == y.Int;
 
-            public int GetHashCode(ListElement obj)
-                => obj.Int;
+            public int GetHashCode(ListElement obj) => obj.Int;
         }
     }
 }

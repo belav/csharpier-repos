@@ -21,9 +21,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SingleResultShaperExpression(
-            Expression projection,
-            Expression innerShaper)
+        public SingleResultShaperExpression(Expression projection, Expression innerShaper)
         {
             Projection = projection;
             InnerShaper = innerShaper;
@@ -50,8 +48,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SingleResultShaperExpression Update(Expression projection, Expression innerShaper)
-            => projection != Projection || innerShaper != InnerShaper
+        public virtual SingleResultShaperExpression Update(
+            Expression projection,
+            Expression innerShaper
+        ) =>
+            projection != Projection || innerShaper != InnerShaper
                 ? new SingleResultShaperExpression(projection, innerShaper)
                 : this;
 
@@ -61,8 +62,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

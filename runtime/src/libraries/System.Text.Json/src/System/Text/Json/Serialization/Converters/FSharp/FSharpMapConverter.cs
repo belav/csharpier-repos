@@ -8,7 +8,8 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     // Converter for F# maps: https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-fsharpmap-2.html
-    internal sealed class FSharpMapConverter<TMap, TKey, TValue> : DictionaryDefaultConverter<TMap, TKey, TValue>
+    internal sealed class FSharpMapConverter<TMap, TKey, TValue>
+        : DictionaryDefaultConverter<TMap, TKey, TValue>
         where TMap : IEnumerable<KeyValuePair<TKey, TValue>>
         where TKey : notnull
     {
@@ -17,12 +18,23 @@ namespace System.Text.Json.Serialization.Converters
         [RequiresUnreferencedCode(FSharpCoreReflectionProxy.FSharpCoreUnreferencedCodeMessage)]
         public FSharpMapConverter()
         {
-            _mapConstructor = FSharpCoreReflectionProxy.Instance.CreateFSharpMapConstructor<TMap, TKey, TValue>();
+            _mapConstructor = FSharpCoreReflectionProxy.Instance.CreateFSharpMapConstructor<
+                TMap,
+                TKey,
+                TValue
+            >();
         }
 
-        protected override void Add(TKey key, in TValue value, JsonSerializerOptions options, ref ReadStack state)
+        protected override void Add(
+            TKey key,
+            in TValue value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
-            ((List<Tuple<TKey, TValue>>)state.Current.ReturnValue!).Add (new Tuple<TKey, TValue>(key, value));
+            ((List<Tuple<TKey, TValue>>)state.Current.ReturnValue!).Add(
+                new Tuple<TKey, TValue>(key, value)
+            );
         }
 
         internal override bool CanHaveIdMetadata => false;
@@ -32,9 +44,14 @@ namespace System.Text.Json.Serialization.Converters
             state.Current.ReturnValue = new List<Tuple<TKey, TValue>>();
         }
 
-        protected override void ConvertCollection(ref ReadStack state, JsonSerializerOptions options)
+        protected override void ConvertCollection(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
-            state.Current.ReturnValue = _mapConstructor((List<Tuple<TKey, TValue>>)state.Current.ReturnValue!);
+            state.Current.ReturnValue = _mapConstructor(
+                (List<Tuple<TKey, TValue>>)state.Current.ReturnValue!
+            );
         }
     }
 }

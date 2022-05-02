@@ -29,7 +29,8 @@ internal class AntiforgeryOptionsSetup : IConfigureOptions<AntiforgeryOptions>
         if (options.Cookie.Name == null)
         {
             var applicationId = _dataProtectionOptions.ApplicationDiscriminator ?? string.Empty;
-            options.Cookie.Name = AntiforgeryOptions.DefaultCookiePrefix + ComputeCookieName(applicationId);
+            options.Cookie.Name =
+                AntiforgeryOptions.DefaultCookiePrefix + ComputeCookieName(applicationId);
         }
     }
 

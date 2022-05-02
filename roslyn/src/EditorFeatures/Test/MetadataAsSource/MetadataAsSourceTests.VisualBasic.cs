@@ -17,10 +17,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
     {
         public class VisualBasic : AbstractMetadataAsSourceTests
         {
-            [Theory, CombinatorialData, WorkItem(530123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530123"), Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
+            [
+                Theory,
+                CombinatorialData,
+                WorkItem(530123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530123"),
+                Trait(Traits.Feature, Traits.Features.MetadataAsSource)
+            ]
             public async Task TestGenerateTypeInModule(bool signaturesOnly)
             {
-                var metadataSource = @"
+                var metadataSource =
+                    @"
 Module M
     Public Class D
     End Class
@@ -28,7 +34,8 @@ End Module";
 
                 var expected = signaturesOnly switch
                 {
-                    true => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    true
+                      => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -37,7 +44,8 @@ Friend Module M
         Public Sub New()
     End Class
 End Module",
-                    false => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    false
+                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -64,10 +72,16 @@ internal sealed class M
 #endif",
                 };
 
-                await GenerateAndVerifySourceAsync(metadataSource, "M+D", LanguageNames.VisualBasic, expected, signaturesOnly: signaturesOnly);
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    "M+D",
+                    LanguageNames.VisualBasic,
+                    expected,
+                    signaturesOnly: signaturesOnly
+                );
             }
 
-            // This test depends on the version of mscorlib used by the TestWorkspace and may 
+            // This test depends on the version of mscorlib used by the TestWorkspace and may
             // change in the future
             [WorkItem(530526, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530526")]
             [Theory, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
@@ -77,7 +91,8 @@ internal sealed class M
             {
                 var expected = signaturesOnly switch
                 {
-                    true => $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
+                    true
+                      => $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
 ' mscorlib.v4_6_1038_0.dll
 #End Region
 
@@ -96,7 +111,8 @@ Namespace System
         Public ReadOnly Property IsError As Boolean
     End Class
 End Namespace",
-                    false => $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+                    false
+                      => $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -206,33 +222,47 @@ namespace System
                 };
 
                 using var context = TestContext.Create(LanguageNames.VisualBasic);
-                await context.GenerateAndVerifySourceAsync("System.ObsoleteAttribute", expected, signaturesOnly: signaturesOnly);
+                await context.GenerateAndVerifySourceAsync(
+                    "System.ObsoleteAttribute",
+                    expected,
+                    signaturesOnly: signaturesOnly
+                );
             }
 
             [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
             public void ExtractXMLFromDocComment()
             {
-                var docCommentText = @"''' <summary>
+                var docCommentText =
+                    @"''' <summary>
 ''' I am the very model of a modern major general.
 ''' </summary>";
 
-                var expectedXMLFragment = @" <summary>
+                var expectedXMLFragment =
+                    @" <summary>
  I am the very model of a modern major general.
  </summary>";
 
-                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(docCommentText, "'''");
+                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(
+                    docCommentText,
+                    "'''"
+                );
 
                 Assert.Equal(expectedXMLFragment, extractedXMLFragment);
             }
 
-            [Theory, CombinatorialData, WorkItem(26605, "https://github.com/dotnet/roslyn/issues/26605")]
+            [
+                Theory,
+                CombinatorialData,
+                WorkItem(26605, "https://github.com/dotnet/roslyn/issues/26605")
+            ]
             public async Task TestValueTuple(bool signaturesOnly)
             {
                 using var context = TestContext.Create(LanguageNames.VisualBasic);
 
                 var expected = signaturesOnly switch
                 {
-                    true => $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
+                    true
+                      => $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
 ' System.ValueTuple.dll
 #End Region
 
@@ -258,7 +288,8 @@ Namespace System
         Public Overrides Function ToString() As String
     End Structure
 End Namespace",
-                    false => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+                    false
+                      => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -460,7 +491,11 @@ namespace System
 #endif",
                 };
 
-                await context.GenerateAndVerifySourceAsync("System.ValueTuple", expected, signaturesOnly: signaturesOnly);
+                await context.GenerateAndVerifySourceAsync(
+                    "System.ValueTuple",
+                    expected,
+                    signaturesOnly: signaturesOnly
+                );
             }
         }
     }

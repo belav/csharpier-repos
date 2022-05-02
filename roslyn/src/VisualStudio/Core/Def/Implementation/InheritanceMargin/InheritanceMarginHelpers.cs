@@ -16,26 +16,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 {
     internal static class InheritanceMarginHelpers
     {
-        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_I_Up_Arrow
-            = ImmutableArray.Create(
+        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_I_Up_Arrow =
+            ImmutableArray.Create(
                 InheritanceRelationship.ImplementedInterface,
                 InheritanceRelationship.InheritedInterface,
-                InheritanceRelationship.ImplementedMember);
+                InheritanceRelationship.ImplementedMember
+            );
 
-        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_I_Down_Arrow
-            = ImmutableArray.Create(
+        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_I_Down_Arrow =
+            ImmutableArray.Create(
                 InheritanceRelationship.ImplementingType,
-                InheritanceRelationship.ImplementingMember);
+                InheritanceRelationship.ImplementingMember
+            );
 
-        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_O_Up_Arrow
-            = ImmutableArray.Create(
+        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_O_Up_Arrow =
+            ImmutableArray.Create(
                 InheritanceRelationship.BaseType,
-                InheritanceRelationship.OverriddenMember);
+                InheritanceRelationship.OverriddenMember
+            );
 
-        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_O_Down_Arrow
-            = ImmutableArray.Create(
+        private static readonly ImmutableArray<InheritanceRelationship> s_relationships_Shown_As_O_Down_Arrow =
+            ImmutableArray.Create(
                 InheritanceRelationship.DerivedType,
-                InheritanceRelationship.OverridingMember);
+                InheritanceRelationship.OverridingMember
+            );
 
         /// <summary>
         /// Decide which moniker should be shown.
@@ -43,47 +47,87 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         public static ImageMoniker GetMoniker(InheritanceRelationship inheritanceRelationship)
         {
             //  If there are multiple targets and we have the corresponding compound image, use it
-            if (s_relationships_Shown_As_I_Up_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag))
-                && s_relationships_Shown_As_O_Down_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_I_Up_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+                && s_relationships_Shown_As_O_Down_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.ImplementingOverridden;
             }
 
-            if (s_relationships_Shown_As_I_Up_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag))
-                && s_relationships_Shown_As_O_Up_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_I_Up_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+                && s_relationships_Shown_As_O_Up_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.ImplementingOverriding;
             }
 
-            if (s_relationships_Shown_As_I_Up_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag))
-                && s_relationships_Shown_As_I_Down_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_I_Up_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+                && s_relationships_Shown_As_I_Down_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.ImplementingImplemented;
             }
 
-            if (s_relationships_Shown_As_O_Up_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag))
-                && s_relationships_Shown_As_O_Down_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_O_Up_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+                && s_relationships_Shown_As_O_Down_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.OverridingOverridden;
             }
 
             // Otherwise, show the image based on this preference
-            if (s_relationships_Shown_As_I_Up_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_I_Up_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.Implementing;
             }
 
-            if (s_relationships_Shown_As_I_Down_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_I_Down_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.Implemented;
             }
 
-            if (s_relationships_Shown_As_O_Up_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_O_Up_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.Overriding;
             }
 
-            if (s_relationships_Shown_As_O_Down_Arrow.Any(flag => inheritanceRelationship.HasFlag(flag)))
+            if (
+                s_relationships_Shown_As_O_Down_Arrow.Any(
+                    flag => inheritanceRelationship.HasFlag(flag)
+                )
+            )
             {
                 return KnownMonikers.Overridden;
             }
@@ -92,8 +136,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             throw ExceptionUtilities.UnexpectedValue(inheritanceRelationship);
         }
 
-        public static ImmutableArray<MenuItemViewModel> CreateMenuItemViewModelsForSingleMember(ImmutableArray<InheritanceTargetItem> targets)
-            => targets.OrderBy(target => target.DisplayName)
+        public static ImmutableArray<MenuItemViewModel> CreateMenuItemViewModelsForSingleMember(
+            ImmutableArray<InheritanceTargetItem> targets
+        ) =>
+            targets
+                .OrderBy(target => target.DisplayName)
                 .GroupBy(target => target.RelationToMember)
                 .SelectMany(grouping => CreateMenuItemsWithHeader(grouping.Key, grouping))
                 .ToImmutableArray();
@@ -110,35 +157,50 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         ///                     HeaderViewModel
         ///                     Target5ViewModel
         /// </summary>
-        public static ImmutableArray<MenuItemViewModel> CreateMenuItemViewModelsForMultipleMembers(ImmutableArray<InheritanceMarginItem> members)
+        public static ImmutableArray<MenuItemViewModel> CreateMenuItemViewModelsForMultipleMembers(
+            ImmutableArray<InheritanceMarginItem> members
+        )
         {
             Contract.ThrowIfTrue(members.Length <= 1);
             // For multiple members, check if all the targets have the same inheritance relationship.
             // If so, then don't add the header, because it is already indicated by the margin.
             // Otherwise, add the Header.
-            return members.SelectAsArray(MemberMenuItemViewModel.CreateWithHeaderInTargets).CastArray<MenuItemViewModel>();
+            return members
+                .SelectAsArray(MemberMenuItemViewModel.CreateWithHeaderInTargets)
+                .CastArray<MenuItemViewModel>();
         }
 
         public static ImmutableArray<MenuItemViewModel> CreateMenuItemsWithHeader(
             InheritanceRelationship relationship,
-            IEnumerable<InheritanceTargetItem> targets)
+            IEnumerable<InheritanceTargetItem> targets
+        )
         {
-            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<MenuItemViewModel>.GetInstance(out var builder);
+            using var _ = CodeAnalysis.PooledObjects.ArrayBuilder<MenuItemViewModel>.GetInstance(
+                out var builder
+            );
             var displayContent = relationship switch
             {
-                InheritanceRelationship.ImplementedInterface => ServicesVSResources.Implemented_interfaces,
+                InheritanceRelationship.ImplementedInterface
+                  => ServicesVSResources.Implemented_interfaces,
                 InheritanceRelationship.BaseType => ServicesVSResources.Base_Types,
                 InheritanceRelationship.DerivedType => ServicesVSResources.Derived_types,
-                InheritanceRelationship.InheritedInterface => ServicesVSResources.Inherited_interfaces,
+                InheritanceRelationship.InheritedInterface
+                  => ServicesVSResources.Inherited_interfaces,
                 InheritanceRelationship.ImplementingType => ServicesVSResources.Implementing_types,
-                InheritanceRelationship.ImplementedMember => ServicesVSResources.Implemented_members,
+                InheritanceRelationship.ImplementedMember
+                  => ServicesVSResources.Implemented_members,
                 InheritanceRelationship.OverriddenMember => ServicesVSResources.Overridden_members,
                 InheritanceRelationship.OverridingMember => ServicesVSResources.Overriding_members,
-                InheritanceRelationship.ImplementingMember => ServicesVSResources.Implementing_members,
+                InheritanceRelationship.ImplementingMember
+                  => ServicesVSResources.Implementing_members,
                 _ => throw ExceptionUtilities.UnexpectedValue(relationship)
             };
 
-            var headerViewModel = new HeaderMenuItemViewModel(displayContent, GetMoniker(relationship), displayContent);
+            var headerViewModel = new HeaderMenuItemViewModel(
+                displayContent,
+                GetMoniker(relationship),
+                displayContent
+            );
             builder.Add(headerViewModel);
             foreach (var targetItem in targets)
             {

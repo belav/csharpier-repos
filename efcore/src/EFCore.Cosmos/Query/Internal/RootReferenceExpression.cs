@@ -35,8 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,8 +43,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Type Type
-            => EntityType.ClrType;
+        public override Type Type => EntityType.ClrType;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,8 +67,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        string IAccessExpression.Name
-            => Alias;
+        string IAccessExpression.Name => Alias;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -78,8 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => this;
+        protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -87,8 +83,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => Alias;
+        public override string ToString() => Alias;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -96,15 +91,17 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is RootReferenceExpression rootReferenceExpression
-                    && Equals(rootReferenceExpression));
+        public override bool Equals(object obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is RootReferenceExpression rootReferenceExpression
+                    && Equals(rootReferenceExpression)
+            );
 
-        private bool Equals(RootReferenceExpression rootReferenceExpression)
-            => Alias == rootReferenceExpression.Alias
-                && EntityType.Equals(rootReferenceExpression.EntityType);
+        private bool Equals(RootReferenceExpression rootReferenceExpression) =>
+            Alias == rootReferenceExpression.Alias
+            && EntityType.Equals(rootReferenceExpression.EntityType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,7 +109,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override int GetHashCode()
-            => HashCode.Combine(Alias, EntityType);
+        public override int GetHashCode() => HashCode.Combine(Alias, EntityType);
     }
 }

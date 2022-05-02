@@ -12,5 +12,6 @@ namespace System.CommandLine.Invocation
     /// <param name="next">A continuation. Passing the incoming <see cref="InvocationContext"/> to it will execute the next middleware in the pipeline and, at the end of the pipeline, the command handler. Middleware can short circuit the invocation by not calling this continuation.</param>
     public delegate Task InvocationMiddleware(
         InvocationContext context,
-        Func<InvocationContext, Task> next);
+        Func<InvocationContext, Task> next
+    );
 }

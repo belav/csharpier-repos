@@ -10,34 +10,30 @@ namespace DefaultNamespace
     {
         public static int Main(String[] args)
         {
-
             try
             {
                 throw new Exception();
             }
-            catch (Exception /*e1*/)
+            catch (Exception /*e1*/
+            )
             {
                 try
                 {
                     throw new Exception();
                 }
-                catch (Exception /*e2*/)
-                {
-                }
+                catch (Exception /*e2*/
+                ) { }
                 finally
                 {
                     try
                     {
                         throw new Exception();
                     }
-                    catch (Exception /*e3*/)
-                    {
-                    }
-
+                    catch (Exception /*e3*/
+                    ) { }
                 }
                 return 100;
             }
         }
     };
 };
-

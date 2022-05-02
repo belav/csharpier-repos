@@ -39,22 +39,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         }
 
         /// <inheritdoc/>
-        public bool HasMainThread
-        {
-            get;
-        }
+        public bool HasMainThread { get; }
 
         /// <inheritdoc/>
-        public JoinableTaskContext JoinableTaskContext
-        {
-            get;
-        }
+        public JoinableTaskContext JoinableTaskContext { get; }
 
         /// <inheritdoc/>
-        public JoinableTaskFactory JoinableTaskFactory
-        {
-            get;
-        }
+        public JoinableTaskFactory JoinableTaskFactory { get; }
 
         public JoinableTaskCollection ShutdownBlockingTasks { get; }
 
@@ -64,11 +55,13 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
 
         public JoinableTask RunWithShutdownBlockAsync(Func<CancellationToken, Task> func)
         {
-            return ShutdownBlockingTaskFactory.RunAsync(() =>
-            {
-                DisposalToken.ThrowIfCancellationRequested();
-                return func(DisposalToken);
-            });
+            return ShutdownBlockingTaskFactory.RunAsync(
+                () =>
+                {
+                    DisposalToken.ThrowIfCancellationRequested();
+                    return func(DisposalToken);
+                }
+            );
         }
 
         public void Dispose()

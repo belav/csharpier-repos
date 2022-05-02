@@ -14,10 +14,7 @@ public class OperationBase
     [JsonIgnore]
     public OperationType OperationType
     {
-        get
-        {
-            return _operationType;
-        }
+        get { return _operationType; }
     }
 
     [JsonProperty("path")]
@@ -26,10 +23,7 @@ public class OperationBase
     [JsonProperty("op")]
     public string op
     {
-        get
-        {
-            return _op;
-        }
+        get { return _op; }
         set
         {
             OperationType result;
@@ -45,10 +39,7 @@ public class OperationBase
     [JsonProperty("from")]
     public string from { get; set; }
 
-    public OperationBase()
-    {
-
-    }
+    public OperationBase() { }
 
     public OperationBase(string op, string path, string from)
     {
@@ -69,7 +60,6 @@ public class OperationBase
 
     public bool ShouldSerializefrom()
     {
-        return (OperationType == OperationType.Move
-            || OperationType == OperationType.Copy);
+        return (OperationType == OperationType.Move || OperationType == OperationType.Copy);
     }
 }

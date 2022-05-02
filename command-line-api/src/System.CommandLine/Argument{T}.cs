@@ -14,18 +14,14 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        public Argument()
-        {
-        }
+        public Argument() { }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
         /// <param name="name">The name of the argument.</param>
         /// <param name="description">The description of the argument, shown in help.</param>
-        public Argument(
-            string name, 
-            string? description = null) : base(name)
+        public Argument(string name, string? description = null) : base(name)
         {
             Description = description;
         }
@@ -37,10 +33,8 @@ namespace System.CommandLine
         /// <param name="getDefaultValue">The delegate to invoke to return the default value.</param>
         /// <param name="description">The description of the argument, shown in help.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="getDefaultValue"/> is null.</exception>
-        public Argument(
-            string name, 
-            Func<T> getDefaultValue, 
-            string? description = null) : this(name)
+        public Argument(string name, Func<T> getDefaultValue, string? description = null)
+            : this(name)
         {
             if (getDefaultValue is null)
             {
@@ -77,9 +71,10 @@ namespace System.CommandLine
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="parse"/> is null.</exception>
         public Argument(
             string? name,
-            ParseArgument<T> parse, 
+            ParseArgument<T> parse,
             bool isDefault = false,
-            string? description = null) : this()
+            string? description = null
+        ) : this()
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -122,9 +117,8 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="parse">A custom argument parser.</param>
         /// <param name="isDefault"><see langword="true"/> to use the <paramref name="parse"/> result as default value.</param>
-        public Argument(ParseArgument<T> parse, bool isDefault = false) : this(null, parse, isDefault)
-        {
-        }
+        public Argument(ParseArgument<T> parse, bool isDefault = false)
+            : this(null, parse, isDefault) { }
 
         internal override bool HasCustomParser => _hasCustomParser;
 

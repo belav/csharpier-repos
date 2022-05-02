@@ -19,11 +19,12 @@ namespace Test
             {
                 throw new Exception();
             }
-        EOM:
+            EOM:
             if (new Queue(10).Clone() == null)
                 return 1;
             return 0;
         }
+
         public static int Main()
         {
             try

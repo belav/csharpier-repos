@@ -17,14 +17,18 @@ namespace Microsoft.EntityFrameworkCore
                 .UseInternalServiceProvider(
                     new ServiceCollection()
                         .AddEntityFrameworkInMemoryDatabase()
-                        .BuildServiceProvider(validateScopes: true))
+                        .BuildServiceProvider(validateScopes: true)
+                )
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(() => context.Database.GetDbConnection()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
+            );
         }
 
         [ConditionalFact]
@@ -33,7 +37,10 @@ namespace Microsoft.EntityFrameworkCore
             var appServiceProvider = new ServiceCollection()
                 .AddEntityFrameworkInMemoryDatabase()
                 .AddDbContext<ConstructorTestContext1A>(
-                    (p, b) => b.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalServiceProvider(p))
+                    (p, b) =>
+                        b.UseInMemoryDatabase(Guid.NewGuid().ToString())
+                            .UseInternalServiceProvider(p)
+                )
                 .BuildServiceProvider(validateScopes: true);
 
             using var serviceScope = appServiceProvider
@@ -43,15 +50,15 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 RelationalStrings.RelationalNotInUse,
-                Assert.Throws<InvalidOperationException>(() => context.Database.GetDbConnection()).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() => context.Database.GetDbConnection())
+                    .Message
+            );
         }
 
         private class ConstructorTestContext1A : DbContext
         {
-            public ConstructorTestContext1A(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ConstructorTestContext1A(DbContextOptions options) : base(options) { }
         }
     }
 }

@@ -9,20 +9,17 @@ namespace Microsoft.EntityFrameworkCore
         : AspNetIdentityIntKeyTestBase<AspNetIdentityIntKeySqlServerTest.AspNetIdentityIntKeySqlServerFixture>
     {
         public AspNetIdentityIntKeySqlServerTest(AspNetIdentityIntKeySqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class AspNetIdentityIntKeySqlServerFixture : AspNetIdentityFixtureBase
         {
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
-            protected override string StoreName
-                => "AspNetIntKeyIdentity";
+            protected override string StoreName => "AspNetIntKeyIdentity";
         }
     }
 }

@@ -34,11 +34,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="matchExpression">The string that is to be matched.</param>
         /// <param name="pattern">The pattern which may involve wildcards <c>%,_,[,],^</c>.</param>
         /// <returns><see langword="true" /> if there is a match.</returns>
-        public static bool Like(
-            this DbFunctions _,
-            string matchExpression,
-            string pattern)
-            => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Like)));
+        public static bool Like(this DbFunctions _, string matchExpression, string pattern) =>
+            throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Like)));
 
         /// <summary>
         ///     An implementation of the SQL LIKE operation. On relational databases this is usually directly
@@ -66,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore
             this DbFunctions _,
             string matchExpression,
             string pattern,
-            string escapeCharacter)
-            => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Like)));
+            string escapeCharacter
+        ) => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Like)));
 
         /// <summary>
         ///     A random double number generator which generates a number between 0 and 1, exclusive.
@@ -78,7 +75,7 @@ namespace Microsoft.EntityFrameworkCore
         /// </remarks>
         /// <param name="_">The <see cref="DbFunctions" /> instance.</param>
         /// <returns>A random double number between 0 and 1, exclusive.</returns>
-        public static double Random(this DbFunctions _)
-            => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Random)));
+        public static double Random(this DbFunctions _) =>
+            throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Random)));
     }
 }

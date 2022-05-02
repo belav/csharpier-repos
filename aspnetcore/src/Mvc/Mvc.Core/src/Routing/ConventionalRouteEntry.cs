@@ -26,7 +26,8 @@ internal readonly struct ConventionalRouteEntry
         IDictionary<string, object?>? constraints,
         RouteValueDictionary? dataTokens,
         int order,
-        List<Action<EndpointBuilder>> conventions)
+        List<Action<EndpointBuilder>> conventions
+    )
     {
         RouteName = routeName;
         DataTokens = dataTokens;
@@ -41,11 +42,15 @@ internal readonly struct ConventionalRouteEntry
         }
         catch (Exception exception)
         {
-            throw new RouteCreationException(string.Format(
-                CultureInfo.CurrentCulture,
-                "An error occurred while creating the route with name '{0}' and pattern '{1}'.",
-                routeName,
-                pattern), exception);
+            throw new RouteCreationException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "An error occurred while creating the route with name '{0}' and pattern '{1}'.",
+                    routeName,
+                    pattern
+                ),
+                exception
+            );
         }
     }
 }

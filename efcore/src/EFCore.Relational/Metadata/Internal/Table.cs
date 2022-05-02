@@ -24,8 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public Table(string name, string? schema, RelationalModel model)
-            : base(name, schema, model)
+        public Table(string name, string? schema, RelationalModel model) : base(name, schema, model)
         {
             Columns = new SortedDictionary<string, ColumnBase>(new ColumnNameComparer(this));
         }
@@ -36,8 +35,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SortedDictionary<string, ForeignKeyConstraint> ForeignKeyConstraints { get; }
-            = new();
+        public virtual SortedDictionary<
+            string,
+            ForeignKeyConstraint
+        > ForeignKeyConstraints { get; } = new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -93,8 +94,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SortedDictionary<string, UniqueConstraint> UniqueConstraints { get; }
-            = new();
+        public virtual SortedDictionary<string, UniqueConstraint> UniqueConstraints { get; } =
+            new();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -102,8 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual UniqueConstraint? FindUniqueConstraint(string name)
-            => PrimaryKey != null && PrimaryKey.Name == name
+        public virtual UniqueConstraint? FindUniqueConstraint(string name) =>
+            PrimaryKey != null && PrimaryKey.Name == name
                 ? PrimaryKey
                 : UniqueConstraints.TryGetValue(name, out var constraint)
                     ? constraint
@@ -115,16 +116,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual SortedDictionary<string, TableIndex> Indexes { get; }
-            = new();
+        public virtual SortedDictionary<string, TableIndex> Indexes { get; } = new();
 
         /// <inheritdoc />
-        public virtual bool IsExcludedFromMigrations
-            => EntityTypeMappings.First().EntityType.IsTableExcludedFromMigrations();
+        public virtual bool IsExcludedFromMigrations =>
+            EntityTypeMappings.First().EntityType.IsTableExcludedFromMigrations();
 
         /// <inheritdoc />
-        public override IColumnBase? FindColumn(IProperty property)
-            => property.GetTableColumnMappings()
+        public override IColumnBase? FindColumn(IProperty property) =>
+            property
+                .GetTableColumnMappings()
                 .FirstOrDefault(cm => cm.TableMapping.Table == this)
                 ?.Column;
 
@@ -134,8 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((ITable)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((ITable)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <inheritdoc />
         IEnumerable<ITableMapping> ITable.EntityTypeMappings
@@ -181,12 +182,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IColumn? ITable.FindColumn(string name)
-            => (IColumn?)base.FindColumn(name);
+        IColumn? ITable.FindColumn(string name) => (IColumn?)base.FindColumn(name);
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IColumn? ITable.FindColumn(IProperty property)
-            => (IColumn?)FindColumn(property);
+        IColumn? ITable.FindColumn(IProperty property) => (IColumn?)FindColumn(property);
     }
 }

@@ -21,7 +21,10 @@ namespace Microsoft.Extensions.RazorViews;
 /// </summary>
 internal abstract class BaseView
 {
-    private static readonly Encoding UTF8NoBOM = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+    private static readonly Encoding UTF8NoBOM = new UTF8Encoding(
+        encoderShouldEmitUTF8Identifier: false,
+        throwOnInvalidBytes: true
+    );
     private static readonly char[] NewLineChars = new[] { '\r', '\n' };
     private readonly Stack<TextWriter> _textWriterStack = new Stack<TextWriter>();
 
@@ -59,7 +62,6 @@ internal abstract class BaseView
     /// JavaScript encoder used to encode content.
     /// </summary>
     protected JavaScriptEncoder JavaScriptEncoder { get; set; } = JavaScriptEncoder.Default;
-
 
     /// <summary>
     /// Execute an individual request
@@ -140,7 +142,14 @@ internal abstract class BaseView
 
     private List<string>? AttributeValues { get; set; }
 
-    protected void WriteAttributeValue(string thingy, int startPostion, object value, int endValue, int dealyo, bool yesno)
+    protected void WriteAttributeValue(
+        string thingy,
+        int startPostion,
+        object value,
+        int endValue,
+        int dealyo,
+        bool yesno
+    )
     {
         if (AttributeValues == null)
         {
@@ -152,7 +161,14 @@ internal abstract class BaseView
 
     private string? AttributeEnding { get; set; }
 
-    protected void BeginWriteAttribute(string name, string beginning, int startPosition, string ending, int endPosition, int thingy)
+    protected void BeginWriteAttribute(
+        string name,
+        string beginning,
+        int startPosition,
+        string ending,
+        int endPosition,
+        int thingy
+    )
     {
         Debug.Assert(string.IsNullOrEmpty(AttributeEnding));
 
@@ -184,7 +200,8 @@ internal abstract class BaseView
         string name,
         string leader,
         string trailer,
-        params AttributeValue[] values)
+        params AttributeValue[] values
+    )
     {
         if (name == null)
         {
@@ -298,9 +315,12 @@ internal abstract class BaseView
         }
 
         // Split on line breaks before passing it through the encoder.
-        return string.Join("<br />" + Environment.NewLine,
-            input.Split("\r\n", StringSplitOptions.None)
-            .SelectMany(s => s.Split(NewLineChars, StringSplitOptions.None))
-            .Select(HtmlEncoder.Encode));
+        return string.Join(
+            "<br />" + Environment.NewLine,
+            input
+                .Split("\r\n", StringSplitOptions.None)
+                .SelectMany(s => s.Split(NewLineChars, StringSplitOptions.None))
+                .Select(HtmlEncoder.Encode)
+        );
     }
 }

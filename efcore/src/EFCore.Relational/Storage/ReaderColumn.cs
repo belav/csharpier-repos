@@ -77,11 +77,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool nullable,
             string? columnName,
             IPropertyBase? property,
-            object readFunc)
-            => (ReaderColumn)GetConstructor(type).Invoke(new[] { nullable, columnName, property, readFunc });
+            object readFunc
+        ) =>
+            (ReaderColumn)
+                GetConstructor(type).Invoke(new[] { nullable, columnName, property, readFunc });
 
-        private static ConstructorInfo GetConstructor(Type type)
-            => _constructors.GetOrAdd(
-                type, t => typeof(ReaderColumn<>).MakeGenericType(t).GetConstructors().First(ci => ci.GetParameters().Length == 4));
+        private static ConstructorInfo GetConstructor(Type type) =>
+            _constructors.GetOrAdd(
+                type,
+                t =>
+                    typeof(ReaderColumn<>)
+                        .MakeGenericType(t)
+                        .GetConstructors()
+                        .First(ci => ci.GetParameters().Length == 4)
+            );
     }
 }

@@ -25,24 +25,29 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
 
             WireUp(Animals, Countries);
 
-            AnimalQueries = Animals.Select(
-                a => a is Eagle
-                    ? (AnimalQuery)new EagleQuery
-                    {
-                        Name = a.Name,
-                        CountryId = a.CountryId,
-                        EagleId = ((Bird)a).EagleId,
-                        IsFlightless = ((Bird)a).IsFlightless,
-                        Group = ((Eagle)a).Group,
-                    }
-                    : new KiwiQuery
-                    {
-                        Name = a.Name,
-                        CountryId = a.CountryId,
-                        EagleId = ((Bird)a).EagleId,
-                        IsFlightless = ((Bird)a).IsFlightless,
-                        FoundOn = ((Kiwi)a).FoundOn,
-                    }).ToList();
+            AnimalQueries = Animals
+                .Select(
+                    a =>
+                        a is Eagle
+                            ? (AnimalQuery)
+                                  new EagleQuery
+                                  {
+                                      Name = a.Name,
+                                      CountryId = a.CountryId,
+                                      EagleId = ((Bird)a).EagleId,
+                                      IsFlightless = ((Bird)a).IsFlightless,
+                                      Group = ((Eagle)a).Group,
+                                  }
+                            : new KiwiQuery
+                              {
+                                  Name = a.Name,
+                                  CountryId = a.CountryId,
+                                  EagleId = ((Bird)a).EagleId,
+                                  IsFlightless = ((Bird)a).IsFlightless,
+                                  FoundOn = ((Kiwi)a).FoundOn,
+                              }
+                )
+                .ToList();
         }
 
         public InheritanceData(
@@ -50,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
             IReadOnlyList<AnimalQuery> animalQueries,
             IReadOnlyList<Country> countries,
             IReadOnlyList<Drink> drinks,
-            IReadOnlyList<Plant> plants)
+            IReadOnlyList<Plant> plants
+        )
         {
             Animals = animals;
             AnimalQueries = animalQueries;
@@ -59,8 +65,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
             Plants = plants;
         }
 
-        public virtual IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class
+        public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
         {
             if (typeof(TEntity) == typeof(Animal))
             {
@@ -150,8 +155,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
             throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
         }
 
-        public static IReadOnlyList<Animal> CreateAnimals()
-            => new List<Animal>
+        public static IReadOnlyList<Animal> CreateAnimals() =>
+            new List<Animal>
             {
                 new Kiwi
                 {
@@ -168,14 +173,15 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
                 },
             };
 
-        public static IReadOnlyList<Country> CreateCountries()
-            => new List<Country>
+        public static IReadOnlyList<Country> CreateCountries() =>
+            new List<Country>
             {
-                new() { Id = 1, Name = "New Zealand" }, new() { Id = 2, Name = "USA" },
+                new() { Id = 1, Name = "New Zealand" },
+                new() { Id = 2, Name = "USA" },
             };
 
-        public static IReadOnlyList<Drink> CreateDrinks()
-            => new List<Drink>
+        public static IReadOnlyList<Drink> CreateDrinks() =>
+            new List<Drink>
             {
                 new Tea
                 {
@@ -198,8 +204,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
                 },
             };
 
-        public static IReadOnlyList<Plant> CreatePlants()
-            => new List<Plant>
+        public static IReadOnlyList<Plant> CreatePlants() =>
+            new List<Plant>
             {
                 new Rose
                 {
@@ -216,9 +222,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.InheritanceModel
                 },
             };
 
-        public static void WireUp(
-            IReadOnlyList<Animal> animals,
-            IReadOnlyList<Country> countries)
+        public static void WireUp(IReadOnlyList<Animal> animals, IReadOnlyList<Country> countries)
         {
             ((Eagle)animals[1]).Prey.Add((Bird)animals[0]);
             ((Bird)animals[0]).EagleId = animals[1].Species;

@@ -13,7 +13,9 @@ namespace System.Net.Security
     internal sealed class SafeChannelBindingHandle : ChannelBinding
     {
         private const int CertHashMaxSize = 128;
-        private static readonly byte[] s_tlsServerEndPointByteArray = Encoding.UTF8.GetBytes("tls-server-end-point:");
+        private static readonly byte[] s_tlsServerEndPointByteArray = Encoding.UTF8.GetBytes(
+            "tls-server-end-point:"
+        );
         private static readonly byte[] s_tlsUniqueByteArray = Encoding.UTF8.GetBytes("tls-unique:");
         private static readonly int s_secChannelBindingSize = Marshal.SizeOf<SecChannelBindings>();
 
@@ -36,15 +38,17 @@ namespace System.Net.Security
         {
             Debug.Assert(kind == ChannelBindingKind.Endpoint || kind == ChannelBindingKind.Unique);
             return kind == ChannelBindingKind.Endpoint
-                ? s_tlsServerEndPointByteArray
-                : s_tlsUniqueByteArray;
+              ? s_tlsServerEndPointByteArray
+              : s_tlsUniqueByteArray;
         }
 
         internal SafeChannelBindingHandle(ChannelBindingKind kind)
         {
             byte[] cbtPrefix = GetPrefixBytes(kind);
             _cbtPrefixByteArraySize = cbtPrefix.Length;
-            handle = Marshal.AllocHGlobal(s_secChannelBindingSize + _cbtPrefixByteArraySize + CertHashMaxSize);
+            handle = Marshal.AllocHGlobal(
+                s_secChannelBindingSize + _cbtPrefixByteArraySize + CertHashMaxSize
+            );
             IntPtr cbtPrefixPtr = handle + s_secChannelBindingSize;
             Marshal.Copy(cbtPrefix, 0, cbtPrefixPtr, _cbtPrefixByteArraySize);
             CertHashPtr = cbtPrefixPtr + _cbtPrefixByteArraySize;

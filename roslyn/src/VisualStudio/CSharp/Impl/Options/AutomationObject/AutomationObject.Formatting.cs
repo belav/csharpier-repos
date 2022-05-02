@@ -29,8 +29,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int Indent_CaseContentsWhenBlock
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.IndentSwitchCaseSectionWhenBlock); }
-            set { SetBooleanOption(CSharpFormattingOptions2.IndentSwitchCaseSectionWhenBlock, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.IndentSwitchCaseSectionWhenBlock);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.IndentSwitchCaseSectionWhenBlock, value);
+            }
         }
 
         public int Indent_CaseLabels
@@ -42,43 +48,89 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public int Indent_FlushLabelsLeft
         {
             get { return (int)GetOption(CSharpFormattingOptions2.LabelPositioning); }
-            set { SetOption(CSharpFormattingOptions2.LabelPositioning, (LabelPositionOptions)value); }
+            set
+            {
+                SetOption(CSharpFormattingOptions2.LabelPositioning, (LabelPositionOptions)value);
+            }
         }
 
         public int Indent_UnindentLabels
         {
             get { return (int)GetOption(CSharpFormattingOptions2.LabelPositioning); }
-            set { SetOption(CSharpFormattingOptions2.LabelPositioning, (LabelPositionOptions)value); }
+            set
+            {
+                SetOption(CSharpFormattingOptions2.LabelPositioning, (LabelPositionOptions)value);
+            }
         }
 
         public int NewLines_AnonymousTypeInitializer_EachMember
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes); }
-            set { SetBooleanOption(CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes, value);
+            }
         }
 
         public int NewLines_Braces_AnonymousMethod
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInAnonymousMethods); }
-            set { SetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInAnonymousMethods, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.NewLinesForBracesInAnonymousMethods
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.NewLinesForBracesInAnonymousMethods,
+                    value
+                );
+            }
         }
 
         public int NewLines_Braces_AnonymousTypeInitializer
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInAnonymousTypes); }
-            set { SetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInAnonymousTypes, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInAnonymousTypes);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInAnonymousTypes, value);
+            }
         }
 
         public int NewLines_Braces_ControlFlow
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInControlBlocks); }
-            set { SetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInControlBlocks, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInControlBlocks);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInControlBlocks, value);
+            }
         }
 
         public int NewLines_Braces_LambdaExpressionBody
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInLambdaExpressionBody); }
-            set { SetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInLambdaExpressionBody, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.NewLinesForBracesInLambdaExpressionBody
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.NewLinesForBracesInLambdaExpressionBody,
+                    value
+                );
+            }
         }
 
         public int NewLines_Braces_Method
@@ -101,8 +153,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int NewLines_Braces_ObjectInitializer
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers); }
-            set { SetBooleanOption(CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.NewLinesForBracesInObjectCollectionArrayInitializers,
+                    value
+                );
+            }
         }
 
         public int NewLines_Braces_Type
@@ -143,8 +206,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int Space_AfterBasesColon
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceAfterColonInBaseTypeDeclaration); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceAfterColonInBaseTypeDeclaration, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceAfterColonInBaseTypeDeclaration
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceAfterColonInBaseTypeDeclaration,
+                    value
+                );
+            }
         }
 
         public int Space_AfterCast
@@ -173,26 +247,60 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int Space_AfterMethodDeclarationName
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpacingAfterMethodDeclarationName); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpacingAfterMethodDeclarationName, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.SpacingAfterMethodDeclarationName);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.SpacingAfterMethodDeclarationName, value);
+            }
         }
 
         public int Space_AfterSemicolonsInForStatement
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceAfterSemicolonsInForStatement); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceAfterSemicolonsInForStatement, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceAfterSemicolonsInForStatement
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceAfterSemicolonsInForStatement,
+                    value
+                );
+            }
         }
 
         public int Space_AroundBinaryOperator
         {
             get { return (int)GetOption(CSharpFormattingOptions2.SpacingAroundBinaryOperator); }
-            set { SetOption(CSharpFormattingOptions2.SpacingAroundBinaryOperator, (BinaryOperatorSpacingOptions)value); }
+            set
+            {
+                SetOption(
+                    CSharpFormattingOptions2.SpacingAroundBinaryOperator,
+                    (BinaryOperatorSpacingOptions)value
+                );
+            }
         }
 
         public int Space_BeforeBasesColon
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceBeforeColonInBaseTypeDeclaration); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceBeforeColonInBaseTypeDeclaration, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBeforeColonInBaseTypeDeclaration
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBeforeColonInBaseTypeDeclaration,
+                    value
+                );
+            }
         }
 
         public int Space_BeforeComma
@@ -215,32 +323,82 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int Space_BeforeSemicolonsInForStatement
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceBeforeSemicolonsInForStatement); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceBeforeSemicolonsInForStatement, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBeforeSemicolonsInForStatement
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBeforeSemicolonsInForStatement,
+                    value
+                );
+            }
         }
 
         public int Space_BetweenEmptyMethodCallParentheses
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses,
+                    value
+                );
+            }
         }
 
         public int Space_BetweenEmptyMethodDeclarationParentheses
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptyMethodDeclarationParentheses); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptyMethodDeclarationParentheses, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBetweenEmptyMethodDeclarationParentheses
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceBetweenEmptyMethodDeclarationParentheses,
+                    value
+                );
+            }
         }
 
         public int Space_BetweenEmptySquares
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptySquareBrackets); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptySquareBrackets, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptySquareBrackets);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.SpaceBetweenEmptySquareBrackets, value);
+            }
         }
 
         public int Space_InControlFlowConstruct
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceAfterControlFlowStatementKeyword); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceAfterControlFlowStatementKeyword, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceAfterControlFlowStatementKeyword
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceAfterControlFlowStatementKeyword,
+                    value
+                );
+            }
         }
 
         public int Space_WithinCastParentheses
@@ -251,20 +409,43 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public int Space_WithinExpressionParentheses
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceWithinExpressionParentheses); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceWithinExpressionParentheses, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.SpaceWithinExpressionParentheses);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.SpaceWithinExpressionParentheses, value);
+            }
         }
 
         public int Space_WithinMethodCallParentheses
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceWithinMethodCallParentheses); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceWithinMethodCallParentheses, value); }
+            get
+            {
+                return GetBooleanOption(CSharpFormattingOptions2.SpaceWithinMethodCallParentheses);
+            }
+            set
+            {
+                SetBooleanOption(CSharpFormattingOptions2.SpaceWithinMethodCallParentheses, value);
+            }
         }
 
         public int Space_WithinMethodDeclarationParentheses
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpaceWithinMethodDeclarationParenthesis); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpaceWithinMethodDeclarationParenthesis, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpaceWithinMethodDeclarationParenthesis
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpaceWithinMethodDeclarationParenthesis,
+                    value
+                );
+            }
         }
 
         public int Space_WithinOtherParentheses
@@ -282,19 +463,47 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         public int Wrapping_IgnoreSpacesAroundBinaryOperators
         {
             get { return (int)GetOption(CSharpFormattingOptions2.SpacingAroundBinaryOperator); }
-            set { SetOption(CSharpFormattingOptions2.SpacingAroundBinaryOperator, (BinaryOperatorSpacingOptions)value); }
+            set
+            {
+                SetOption(
+                    CSharpFormattingOptions2.SpacingAroundBinaryOperator,
+                    (BinaryOperatorSpacingOptions)value
+                );
+            }
         }
 
         public int Wrapping_IgnoreSpacesAroundVariableDeclaration
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration); }
-            set { SetBooleanOption(CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration,
+                    value
+                );
+            }
         }
 
         public int Wrapping_KeepStatementsOnSingleLine
         {
-            get { return GetBooleanOption(CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine); }
-            set { SetBooleanOption(CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, value); }
+            get
+            {
+                return GetBooleanOption(
+                    CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine
+                );
+            }
+            set
+            {
+                SetBooleanOption(
+                    CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine,
+                    value
+                );
+            }
         }
 
         public int Wrapping_PreserveSingleLine

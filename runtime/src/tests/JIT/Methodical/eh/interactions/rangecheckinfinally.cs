@@ -22,15 +22,14 @@ namespace hello
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         static public int Main(string[] args)
         {
             int[] a;
             //Start recording
             testLog.StartRecording();
             a = new int[2];
-            try
-            {
-            }
+            try { }
             finally
             {
                 a[0] = 1234;
@@ -46,4 +45,3 @@ namespace hello
         }
     }
 }
-

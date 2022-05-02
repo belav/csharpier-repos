@@ -43,13 +43,17 @@ namespace System.Net.Security
             get { return _policy; }
         }
 
-        public SafeFreeSslCredentials(SslStreamCertificateContext? context, SslProtocols protocols, EncryptionPolicy policy, bool isServer)
-            : base(IntPtr.Zero, true)
+        public SafeFreeSslCredentials(
+            SslStreamCertificateContext? context,
+            SslProtocols protocols,
+            EncryptionPolicy policy,
+            bool isServer
+        ) : base(IntPtr.Zero, true)
         {
-
             Debug.Assert(
                 context == null || context.Certificate is X509Certificate2,
-                "Only X509Certificate2 certificates are supported at this time");
+                "Only X509Certificate2 certificates are supported at this time"
+            );
 
             X509Certificate2? cert = context?.Certificate;
 

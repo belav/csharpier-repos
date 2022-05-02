@@ -70,7 +70,8 @@ namespace System.CommandLine.Tests
         public void Directives_can_have_a_value_which_is_everything_after_the_first_colon(
             string directive,
             string expectedKey,
-            string expectedValue)
+            string expectedValue
+        )
         {
             var option = new Option("-y");
 
@@ -143,20 +144,15 @@ namespace System.CommandLine.Tests
         {
             var parser = new Parser(
                 new CommandLineConfiguration(
-                    new RootCommand
-                    {
-                        new Argument<List<string>>()
-                    },
-                    enableDirectives: false));
+                    new RootCommand { new Argument<List<string>>() },
+                    enableDirectives: false
+                )
+            );
 
             var result = parser.Parse("[hello]");
 
             result.Directives.Count().Should().Be(0);
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("[hello]");
+            result.CommandResult.Tokens.Select(t => t.Value).Should().BeEquivalentTo("[hello]");
         }
     }
 }

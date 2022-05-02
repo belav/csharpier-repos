@@ -15,10 +15,7 @@ namespace System.Web.WebPages
         /// <summary>
         /// Creates the BrowserOverrideStore setting any browser override cookie to expire in 7 days.
         /// </summary>
-        public CookieBrowserOverrideStore()
-            : this(daysToExpire: 7)
-        {
-        }
+        public CookieBrowserOverrideStore() : this(daysToExpire: 7) { }
 
         /// <summary>
         /// Constructor to control the expiration of the browser override cookie.
@@ -43,9 +40,17 @@ namespace System.Web.WebPages
             for (int i = 0; i < cookieNames.Length; i++)
             {
                 // HttpCookieCollection uses OrdinalIgnoreCase comparison for its keys
-                if (String.Equals(cookieNames[i], BrowserOverrideCookieName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    String.Equals(
+                        cookieNames[i],
+                        BrowserOverrideCookieName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    HttpCookie currentOverriddenBrowserCookie = responseCookies[BrowserOverrideCookieName];
+                    HttpCookie currentOverriddenBrowserCookie = responseCookies[
+                        BrowserOverrideCookieName
+                    ];
 
                     if (currentOverriddenBrowserCookie.Value != null)
                     {
@@ -76,7 +81,10 @@ namespace System.Web.WebPages
         /// </summary>
         public override void SetOverriddenUserAgent(HttpContextBase httpContext, string userAgent)
         {
-            HttpCookie browserOverrideCookie = new HttpCookie(BrowserOverrideCookieName, HttpUtility.UrlEncode(userAgent));
+            HttpCookie browserOverrideCookie = new HttpCookie(
+                BrowserOverrideCookieName,
+                HttpUtility.UrlEncode(userAgent)
+            );
 
             if (userAgent == null)
             {

@@ -22,7 +22,8 @@ public class RolesController : Controller
     public RolesController(
         UserManager<ApplicationUser> userManager,
         RoleManager<IdentityRole> roleManager,
-        IOptions<IdentityOptions> options)
+        IOptions<IdentityOptions> options
+    )
     {
         _userManager = userManager;
         _roleManager = roleManager;

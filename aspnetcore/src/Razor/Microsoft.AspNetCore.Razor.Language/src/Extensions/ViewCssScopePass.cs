@@ -11,7 +11,10 @@ internal class ViewCssScopePass : IntermediateNodePassBase, IRazorOptimizationPa
     // Runs after taghelpers are bound
     public override int Order => 110;
 
-    protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         var cssScope = codeDocument.GetCssScope();
         if (string.IsNullOrEmpty(cssScope))
@@ -19,8 +22,14 @@ internal class ViewCssScopePass : IntermediateNodePassBase, IRazorOptimizationPa
             return;
         }
 
-        if (!string.Equals(documentNode.DocumentKind, "mvc.1.0.view", StringComparison.Ordinal) &&
-            !string.Equals(documentNode.DocumentKind, "mvc.1.0.razor-page", StringComparison.Ordinal))
+        if (
+            !string.Equals(documentNode.DocumentKind, "mvc.1.0.view", StringComparison.Ordinal)
+            && !string.Equals(
+                documentNode.DocumentKind,
+                "mvc.1.0.razor-page",
+                StringComparison.Ordinal
+            )
+        )
         {
             return;
         }
@@ -43,12 +52,15 @@ internal class ViewCssScopePass : IntermediateNodePassBase, IRazorOptimizationPa
             {
                 if (IsValidElement(token))
                 {
-                    node.Children.Insert(i + 1, new IntermediateToken()
-                    {
-                        Content = cssScope,
-                        Kind = TokenKind.Html,
-                        Source = null
-                    });
+                    node.Children.Insert(
+                        i + 1,
+                        new IntermediateToken()
+                        {
+                            Content = cssScope,
+                            Kind = TokenKind.Html,
+                            Source = null
+                        }
+                    );
                     i++;
                 }
             }
@@ -57,7 +69,8 @@ internal class ViewCssScopePass : IntermediateNodePassBase, IRazorOptimizationPa
         bool IsValidElement(IntermediateToken token)
         {
             var content = token.Content;
-            var isValidToken = content.StartsWith("<", StringComparison.Ordinal)
+            var isValidToken =
+                content.StartsWith("<", StringComparison.Ordinal)
                 && !content.StartsWith("</", StringComparison.Ordinal)
                 && !content.StartsWith("<!", StringComparison.Ordinal);
             /// <remarks>
@@ -68,7 +81,8 @@ internal class ViewCssScopePass : IntermediateNodePassBase, IRazorOptimizationPa
             /// is valid this way. Instead, we go for a straight-forward check on the tag
             /// name that we are currently inspecting.
             /// </remarks>
-            var isInvalidTag = content.IndexOf("head", StringComparison.OrdinalIgnoreCase) >= 0
+            var isInvalidTag =
+                content.IndexOf("head", StringComparison.OrdinalIgnoreCase) >= 0
                 || content.IndexOf("meta", StringComparison.OrdinalIgnoreCase) >= 0
                 || content.IndexOf("title", StringComparison.OrdinalIgnoreCase) >= 0
                 || content.IndexOf("link", StringComparison.OrdinalIgnoreCase) >= 0

@@ -33,27 +33,35 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             ByteUtils.HexToByteArray("6f630fad67cda0ee1fb1f562db3aa53e"),
         };
 
-        public HmacMD5Tests()
-            : base(s_testKeys2202, s_testMacs2202)
-        {
-        }
+        public HmacMD5Tests() : base(s_testKeys2202, s_testMacs2202) { }
 
         protected override int BlockSize => 64;
         protected override int MacSize => 16;
 
         protected override HMAC Create() => new HMACMD5();
+
         protected override HashAlgorithm CreateHashAlgorithm() => MD5.Create();
+
         protected override byte[] HashDataOneShot(byte[] key, byte[] source) =>
             HMACMD5.HashData(key, source);
 
-        protected override byte[] HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source) =>
-            HMACMD5.HashData(key, source);
+        protected override byte[] HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source
+        ) => HMACMD5.HashData(key, source);
 
-        protected override int HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination) =>
-            HMACMD5.HashData(key, source, destination);
+        protected override int HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        ) => HMACMD5.HashData(key, source, destination);
 
-        protected override bool TryHashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination, out int written) =>
-            HMACMD5.TryHashData(key, source, destination, out written);
+        protected override bool TryHashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int written
+        ) => HMACMD5.TryHashData(key, source, destination, out written);
 
         [Fact]
         public void HmacMD5_Rfc2202_1()

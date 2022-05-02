@@ -48,7 +48,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             #region Usage
             List<string> errors = new List<string>();
 
-            List<DateTime> c = JsonConvert.DeserializeObject<List<DateTime>>(@"[
+            List<DateTime> c = JsonConvert.DeserializeObject<List<DateTime>>(
+                @"[
               '2009-09-09T00:00:00Z',
               'I am not a date and will error!',
               [
@@ -66,7 +67,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                         args.ErrorContext.Handled = true;
                     },
                     Converters = { new IsoDateTimeConverter() }
-                });
+                }
+            );
 
             // 2009-09-09T00:00:00Z
             // 1977-02-20T00:00:00Z

@@ -24,7 +24,13 @@ class Program
                 MethodInfo declMethod = map.InterfaceMethods[i];
                 MethodInfo implMethod = map.TargetMethods[i];
 
-                Console.Write("{0} ({1}) - {2} ({3}) - ", declMethod, declMethod.DeclaringType, implMethod, implMethod.DeclaringType);
+                Console.Write(
+                    "{0} ({1}) - {2} ({3}) - ",
+                    declMethod,
+                    declMethod.DeclaringType,
+                    implMethod,
+                    implMethod.DeclaringType
+                );
 
                 if (declMethod.Equals(ifooDefaultMethod))
                 {
@@ -61,7 +67,13 @@ class Program
                 MethodInfo declMethod = map.InterfaceMethods[i];
                 MethodInfo implMethod = map.TargetMethods[i];
 
-                Console.Write("{0} ({1}) - {2} ({3}) - ", declMethod, declMethod.DeclaringType, implMethod, implMethod.DeclaringType);
+                Console.Write(
+                    "{0} ({1}) - {2} ({3}) - ",
+                    declMethod,
+                    declMethod.DeclaringType,
+                    implMethod,
+                    implMethod.DeclaringType
+                );
 
                 if (declMethod.Equals(ifooDefaultMethod))
                 {
@@ -84,7 +96,6 @@ class Program
                 return 10;
         }
 
-
         {
             var map = typeof(Reabstractor).GetInterfaceMap(typeof(IFoo));
 
@@ -98,7 +109,13 @@ class Program
                 MethodInfo declMethod = map.InterfaceMethods[i];
                 MethodInfo implMethod = map.TargetMethods[i];
 
-                Console.Write("{0} ({1}) - {2} ({3}) - ", declMethod, declMethod.DeclaringType, implMethod, implMethod?.DeclaringType);
+                Console.Write(
+                    "{0} ({1}) - {2} ({3}) - ",
+                    declMethod,
+                    declMethod.DeclaringType,
+                    implMethod,
+                    implMethod?.DeclaringType
+                );
 
                 if (declMethod.Equals(ifooDefaultMethod))
                 {
@@ -134,7 +151,13 @@ class Program
                 MethodInfo declMethod = map.InterfaceMethods[i];
                 MethodInfo implMethod = map.TargetMethods[i];
 
-                Console.Write("{0} ({1}) - {2} ({3}) - ", declMethod, declMethod.DeclaringType, implMethod, implMethod?.DeclaringType);
+                Console.Write(
+                    "{0} ({1}) - {2} ({3}) - ",
+                    declMethod,
+                    declMethod.DeclaringType,
+                    implMethod,
+                    implMethod?.DeclaringType
+                );
 
                 if (declMethod.Equals(ifooDefaultMethod))
                 {
@@ -156,7 +179,6 @@ class Program
             if (foundMatchMask != 3)
                 return 10;
         }
-
 
         return failed ? -1 : 100;
     }

@@ -10,61 +10,65 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTokenizer>
 {
-    private static readonly Dictionary<SyntaxKind, string> _tokenSamples = new Dictionary<SyntaxKind, string>()
-        {
-            { SyntaxKind.Arrow, "->" },
-            { SyntaxKind.Minus, "-" },
-            { SyntaxKind.Decrement, "--" },
-            { SyntaxKind.MinusAssign, "-=" },
-            { SyntaxKind.NotEqual, "!=" },
-            { SyntaxKind.Not, "!" },
-            { SyntaxKind.Modulo, "%" },
-            { SyntaxKind.ModuloAssign, "%=" },
-            { SyntaxKind.AndAssign, "&=" },
-            { SyntaxKind.And, "&" },
-            { SyntaxKind.DoubleAnd, "&&" },
-            { SyntaxKind.LeftParenthesis, "(" },
-            { SyntaxKind.RightParenthesis, ")" },
-            { SyntaxKind.Star, "*" },
-            { SyntaxKind.MultiplyAssign, "*=" },
-            { SyntaxKind.Comma, "," },
-            { SyntaxKind.Dot, "." },
-            { SyntaxKind.Slash, "/" },
-            { SyntaxKind.DivideAssign, "/=" },
-            { SyntaxKind.DoubleColon, "::" },
-            { SyntaxKind.Colon, ":" },
-            { SyntaxKind.Semicolon, ";" },
-            { SyntaxKind.QuestionMark, "?" },
-            { SyntaxKind.NullCoalesce, "??" },
-            { SyntaxKind.RightBracket, "]" },
-            { SyntaxKind.LeftBracket, "[" },
-            { SyntaxKind.XorAssign, "^=" },
-            { SyntaxKind.Xor, "^" },
-            { SyntaxKind.LeftBrace, "{" },
-            { SyntaxKind.OrAssign, "|=" },
-            { SyntaxKind.DoubleOr, "||" },
-            { SyntaxKind.Or, "|" },
-            { SyntaxKind.RightBrace, "}" },
-            { SyntaxKind.Tilde, "~" },
-            { SyntaxKind.Plus, "+" },
-            { SyntaxKind.PlusAssign, "+=" },
-            { SyntaxKind.Increment, "++" },
-            { SyntaxKind.LessThan, "<" },
-            { SyntaxKind.LessThanEqual, "<=" },
-            { SyntaxKind.LeftShift, "<<" },
-            { SyntaxKind.LeftShiftAssign, "<<=" },
-            { SyntaxKind.Assign, "=" },
-            { SyntaxKind.Equals, "==" },
-            { SyntaxKind.GreaterThan, ">" },
-            { SyntaxKind.GreaterThanEqual, ">=" },
-            { SyntaxKind.RightShift, ">>" },
-            { SyntaxKind.RightShiftAssign, ">>=" },
-            { SyntaxKind.Hash, "#" },
-            { SyntaxKind.Transition, "@" },
-        };
+    private static readonly Dictionary<SyntaxKind, string> _tokenSamples = new Dictionary<
+        SyntaxKind,
+        string
+    >()
+    {
+        { SyntaxKind.Arrow, "->" },
+        { SyntaxKind.Minus, "-" },
+        { SyntaxKind.Decrement, "--" },
+        { SyntaxKind.MinusAssign, "-=" },
+        { SyntaxKind.NotEqual, "!=" },
+        { SyntaxKind.Not, "!" },
+        { SyntaxKind.Modulo, "%" },
+        { SyntaxKind.ModuloAssign, "%=" },
+        { SyntaxKind.AndAssign, "&=" },
+        { SyntaxKind.And, "&" },
+        { SyntaxKind.DoubleAnd, "&&" },
+        { SyntaxKind.LeftParenthesis, "(" },
+        { SyntaxKind.RightParenthesis, ")" },
+        { SyntaxKind.Star, "*" },
+        { SyntaxKind.MultiplyAssign, "*=" },
+        { SyntaxKind.Comma, "," },
+        { SyntaxKind.Dot, "." },
+        { SyntaxKind.Slash, "/" },
+        { SyntaxKind.DivideAssign, "/=" },
+        { SyntaxKind.DoubleColon, "::" },
+        { SyntaxKind.Colon, ":" },
+        { SyntaxKind.Semicolon, ";" },
+        { SyntaxKind.QuestionMark, "?" },
+        { SyntaxKind.NullCoalesce, "??" },
+        { SyntaxKind.RightBracket, "]" },
+        { SyntaxKind.LeftBracket, "[" },
+        { SyntaxKind.XorAssign, "^=" },
+        { SyntaxKind.Xor, "^" },
+        { SyntaxKind.LeftBrace, "{" },
+        { SyntaxKind.OrAssign, "|=" },
+        { SyntaxKind.DoubleOr, "||" },
+        { SyntaxKind.Or, "|" },
+        { SyntaxKind.RightBrace, "}" },
+        { SyntaxKind.Tilde, "~" },
+        { SyntaxKind.Plus, "+" },
+        { SyntaxKind.PlusAssign, "+=" },
+        { SyntaxKind.Increment, "++" },
+        { SyntaxKind.LessThan, "<" },
+        { SyntaxKind.LessThanEqual, "<=" },
+        { SyntaxKind.LeftShift, "<<" },
+        { SyntaxKind.LeftShiftAssign, "<<=" },
+        { SyntaxKind.Assign, "=" },
+        { SyntaxKind.Equals, "==" },
+        { SyntaxKind.GreaterThan, ">" },
+        { SyntaxKind.GreaterThanEqual, ">=" },
+        { SyntaxKind.RightShift, ">>" },
+        { SyntaxKind.RightShiftAssign, ">>=" },
+        { SyntaxKind.Hash, "#" },
+        { SyntaxKind.Transition, "@" },
+    };
 
     // Allows performance optimization of GetKeyword such that it need not do Enum.ToString
-    private static readonly IReadOnlyDictionary<CSharpKeyword, string> _keywordNames = new Dictionary<CSharpKeyword, string>()
+    private static readonly IReadOnlyDictionary<CSharpKeyword, string> _keywordNames =
+        new Dictionary<CSharpKeyword, string>()
         {
             { CSharpKeyword.Await, "await" },
             { CSharpKeyword.Abstract, "abstract" },
@@ -144,18 +148,22 @@ internal class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTok
             { CSharpKeyword.Break, "break" },
             { CSharpKeyword.Checked, "checked" },
             { CSharpKeyword.Namespace, "namespace" },
-            { CSharpKeyword.When,  "when" },
-            { CSharpKeyword.Where,  "where" },
+            { CSharpKeyword.When, "when" },
+            { CSharpKeyword.Where, "where" },
         };
 
-    private static readonly CSharpLanguageCharacteristics _instance = new CSharpLanguageCharacteristics();
+    private static readonly CSharpLanguageCharacteristics _instance =
+        new CSharpLanguageCharacteristics();
 
     protected CSharpLanguageCharacteristics()
     {
 #if DEBUG
         var values = Enum.GetValues(typeof(CSharpKeyword));
 
-        Debug.Assert(values.Length == _keywordNames.Count, "_keywordNames and CSharpKeyword are out of sync");
+        Debug.Assert(
+            values.Length == _keywordNames.Count,
+            "_keywordNames and CSharpKeyword are out of sync"
+        );
         for (var i = 0; i < values.Length; i++)
         {
             var keyword = (CSharpKeyword)values.GetValue(i);
@@ -163,7 +171,10 @@ internal class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTok
             var expectedValue = keyword.ToString().ToLowerInvariant();
             var actualValue = _keywordNames[keyword];
 
-            Debug.Assert(expectedValue == actualValue, "_keywordNames and CSharpKeyword are out of sync for " + expectedValue);
+            Debug.Assert(
+                expectedValue == actualValue,
+                "_keywordNames and CSharpKeyword are out of sync for " + expectedValue
+            );
         }
 #endif
     }
@@ -175,7 +186,11 @@ internal class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTok
         return new CSharpTokenizer(source);
     }
 
-    protected override SyntaxToken CreateToken(string content, SyntaxKind kind, RazorDiagnostic[] errors)
+    protected override SyntaxToken CreateToken(
+        string content,
+        SyntaxKind kind,
+        RazorDiagnostic[] errors
+    )
     {
         return SyntaxFactory.Token(kind, content, errors);
     }

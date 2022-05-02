@@ -28,14 +28,17 @@ namespace Tracing.Tests.PauseOnStartValidation
             var server = new ReverseServer(serverName);
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                },
                 duringExecution: async (_) =>
                 {
                     Stream stream = await server.AcceptAsync();
                     IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                     Logger.logger.Log(advertise.ToString());
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -56,7 +59,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -66,17 +72,29 @@ namespace Tracing.Tests.PauseOnStartValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
-                            new Provider("Microsoft-Windows-DotNETRuntimePrivate", 0x80000000, EventLevel.Verbose)
-                        });
+                        providers: new List<Provider>
+                        {
+                            new Provider(
+                                "Microsoft-Windows-DotNETRuntimePrivate",
+                                0x80000000,
+                                EventLevel.Verbose
+                            )
+                        }
+                    );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream = EventPipeClient.CollectTracing(pid, config, out var sessionId);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}");
+                    using Stream eventStream = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                    );
                     Task readerTask = eventStream.CopyToAsync(memoryStream);
-                    
+
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -94,7 +112,7 @@ namespace Tracing.Tests.PauseOnStartValidation
             memoryStream.Seek(0, SeekOrigin.Begin);
             using var source = new EventPipeEventSource(memoryStream);
             var parser = new ClrPrivateTraceEventParser(source);
-            bool isStartupEventPresent= false;
+            bool isStartupEventPresent = false;
             parser.StartupEEStartupStart += (eventData) => isStartupEventPresent = true;
             source.Process();
 
@@ -114,7 +132,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream3 = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -124,29 +145,52 @@ namespace Tracing.Tests.PauseOnStartValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
-                            new Provider("Microsoft-Windows-DotNETRuntimePrivate", 0x80000000, EventLevel.Verbose)
-                        });
+                        providers: new List<Provider>
+                        {
+                            new Provider(
+                                "Microsoft-Windows-DotNETRuntimePrivate",
+                                0x80000000,
+                                EventLevel.Verbose
+                            )
+                        }
+                    );
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream1 = EventPipeClient.CollectTracing(pid, config, out var sessionId1);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}");
+                    using Stream eventStream1 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId1
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
+                    );
                     Task readerTask1 = eventStream1.CopyToAsync(memoryStream1);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream2 = EventPipeClient.CollectTracing(pid, config, out var sessionId2);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}");
+                    using Stream eventStream2 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId2
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
+                    );
                     Task readerTask2 = eventStream2.CopyToAsync(memoryStream2);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream3 = EventPipeClient.CollectTracing(pid, config, out var sessionId3);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}");
+                    using Stream eventStream3 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId3
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
+                    );
                     Task readerTask3 = eventStream3.CopyToAsync(memoryStream3);
 
-                    
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -207,7 +251,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream3 = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -217,23 +264,47 @@ namespace Tracing.Tests.PauseOnStartValidation
                     var config = new SessionConfiguration(
                         circularBufferSizeMB: 1000,
                         format: EventPipeSerializationFormat.NetTrace,
-                        providers: new List<Provider> { 
-                            new Provider("Microsoft-Windows-DotNETRuntime", UInt64.MaxValue, EventLevel.Verbose)
-                        });
+                        providers: new List<Provider>
+                        {
+                            new Provider(
+                                "Microsoft-Windows-DotNETRuntime",
+                                UInt64.MaxValue,
+                                EventLevel.Verbose
+                            )
+                        }
+                    );
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream1 = EventPipeClient.CollectTracing(pid, config, out var sessionId1);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}");
+                    using Stream eventStream1 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId1
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId1:x}"
+                    );
                     Task readerTask1 = eventStream1.CopyToAsync(memoryStream1);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream2 = EventPipeClient.CollectTracing(pid, config, out var sessionId2);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}");
+                    using Stream eventStream2 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId2
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId2:x}"
+                    );
                     Task readerTask2 = eventStream2.CopyToAsync(memoryStream2);
 
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
-                    using Stream eventStream3 = EventPipeClient.CollectTracing(pid, config, out var sessionId3);
-                    Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}");
+                    using Stream eventStream3 = EventPipeClient.CollectTracing(
+                        pid,
+                        config,
+                        out var sessionId3
+                    );
+                    Logger.logger.Log(
+                        $"Started EventPipeSession over standard connection with session id: 0x{sessionId3:x}"
+                    );
                     Task readerTask3 = eventStream3.CopyToAsync(memoryStream3);
 
                     await Task.Delay(TimeSpan.FromSeconds(1));
@@ -245,10 +316,10 @@ namespace Tracing.Tests.PauseOnStartValidation
                     await readerTask2;
                     await readerTask3;
                     Logger.logger.Log("Stopped EventPipeSession over standard connection");
-                    
+
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    var message = new IpcMessage(0x04,0x01);
+                    var message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -271,7 +342,10 @@ namespace Tracing.Tests.PauseOnStartValidation
             using var memoryStream3 = new MemoryStream();
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> { { Utils.DiagnosticPortsEnvKey, $"{serverName}" } },
+                environment: new Dictionary<string, string>
+                {
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                },
                 duringExecution: async (pid) =>
                 {
                     Stream stream = await server.AcceptAsync();
@@ -280,7 +354,7 @@ namespace Tracing.Tests.PauseOnStartValidation
 
                     Logger.logger.Log($"Send profiler attach Diagnostics IPC Command");
                     // send profiler attach command (0x03=ProfilerCommandId, 0x01=attach commandid)
-                    var message = new IpcMessage(0x03,0x01);
+                    var message = new IpcMessage(0x03, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     IpcMessage response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -293,7 +367,7 @@ namespace Tracing.Tests.PauseOnStartValidation
 
                     Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                     // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                    message = new IpcMessage(0x04,0x01);
+                    message = new IpcMessage(0x04, 0x01);
                     Logger.logger.Log($"Sent: {message.ToString()}");
                     response = IpcClient.SendMessage(stream, message);
                     Logger.logger.Log($"received: {response.ToString()}");
@@ -318,14 +392,16 @@ namespace Tracing.Tests.PauseOnStartValidation
             bool fSuccess = true;
             if (!IpcTraceTest.EnsureCleanEnvironment())
                 return -1;
-            IEnumerable<MethodInfo> tests = typeof(PauseOnStartValidation).GetMethods().Where(mi => mi.Name.StartsWith("TEST_"));
+            IEnumerable<MethodInfo> tests = typeof(PauseOnStartValidation)
+                .GetMethods()
+                .Where(mi => mi.Name.StartsWith("TEST_"));
             foreach (var test in tests)
             {
                 Logger.logger.Log($"::== Running test: {test.Name}");
                 bool result = true;
                 try
                 {
-                    result = await (Task<bool>)test.Invoke(null, new object[] {});
+                    result = await (Task<bool>)test.Invoke(null, new object[] { });
                 }
                 catch (Exception e)
                 {
@@ -335,7 +411,6 @@ namespace Tracing.Tests.PauseOnStartValidation
                 fSuccess &= result;
                 Logger.logger.Log($"Test passed: {result}");
                 Logger.logger.Log($"");
-
             }
             return fSuccess ? 100 : -1;
         }

@@ -12,9 +12,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 internal class LocationTagged<TValue> : IFormattable
 {
     public LocationTagged(TValue value, int absoluteIndex, int lineIndex, int characterIndex)
-        : this(value, new SourceLocation(absoluteIndex, lineIndex, characterIndex))
-    {
-    }
+        : this(value, new SourceLocation(absoluteIndex, lineIndex, characterIndex)) { }
 
     public LocationTagged(TValue value, SourceLocation location)
     {
@@ -39,8 +37,7 @@ internal class LocationTagged<TValue> : IFormattable
             return false;
         }
 
-        return Equals(other.Location, Location) &&
-            Equals(other.Value, Value);
+        return Equals(other.Location, Location) && Equals(other.Value, Value);
     }
 
     public override int GetHashCode()

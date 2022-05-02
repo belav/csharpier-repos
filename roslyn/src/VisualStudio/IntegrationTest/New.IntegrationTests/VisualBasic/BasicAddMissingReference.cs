@@ -14,7 +14,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 {
     public class BasicAddMissingReference : AbstractEditorTest
     {
-        private const string FileInLibraryProject1 = @"Public Class Class1
+        private const string FileInLibraryProject1 =
+            @"Public Class Class1
     Inherits System.Windows.Forms.Form
     Public Sub goo()
 
@@ -50,7 +51,8 @@ Public Class class3
     End Sub
 End Class
 ";
-        private const string FileInLibraryProject2 = @"Public Class Class1
+        private const string FileInLibraryProject2 =
+            @"Public Class Class1
     Inherits System.Xml.XmlAttribute
     Sub New()
         MyBase.New(Nothing, Nothing, Nothing, Nothing)
@@ -61,7 +63,8 @@ End Class
     Public bar As ClassLibrary3.Class1
 End Class
 ";
-        private const string FileInLibraryProject3 = @"Public Class Class1
+        private const string FileInLibraryProject3 =
+            @"Public Class Class1
     Public Enum E
         E1
         E2
@@ -75,7 +78,8 @@ End Class
 
 End Class
 ";
-        private const string FileInConsoleProject1 = @"Imports System.Data.XLinq
+        private const string FileInConsoleProject1 =
+            @"Imports System.Data.XLinq
 
 Module Module1
 
@@ -114,55 +118,82 @@ End Module
         {
             await base.InitializeAsync().ConfigureAwait(true);
 
-            await TestServices.SolutionExplorer.CreateSolutionAsync("ReferenceErrors", solutionElement: XElement.Parse(
-                "<Solution>" +
-               $"   <Project ProjectName=\"{ClassLibrary1Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.WinFormsApplication}\" Language=\"{LanguageNames.VisualBasic}\">" +
-                "       <Document FileName=\"Class1.vb\"><![CDATA[" +
-                FileInLibraryProject1 +
-                "]]>" +
-                "       </Document>" +
-                "   </Project>" +
-               $"   <Project ProjectName=\"{ClassLibrary2Name}\" ProjectReferences=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">" +
-                "       <Document FileName=\"Class1.vb\"><![CDATA[" +
-               FileInLibraryProject2 +
-                "]]>" +
-                "       </Document>" +
-                "   </Project>" +
-               $"   <Project ProjectName=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">" +
-                "       <Document FileName=\"Class1.vb\"><![CDATA[" +
-               FileInLibraryProject3 +
-                "]]>" +
-                "       </Document>" +
-                "   </Project>" +
-               $"   <Project ProjectName=\"{ConsoleProjectName}\" ProjectReferences=\"{ClassLibrary1Name};{ClassLibrary2Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ConsoleApplication}\" Language=\"{LanguageNames.VisualBasic}\">" +
-                "       <Document FileName=\"Module1.vb\"><![CDATA[" +
-               FileInConsoleProject1 +
-                "]]>" +
-                "       </Document>" +
-               "   </Project>" +
-                "</Solution>"), HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.CreateSolutionAsync(
+                "ReferenceErrors",
+                solutionElement: XElement.Parse(
+                    "<Solution>"
+                        + $"   <Project ProjectName=\"{ClassLibrary1Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.WinFormsApplication}\" Language=\"{LanguageNames.VisualBasic}\">"
+                        + "       <Document FileName=\"Class1.vb\"><![CDATA["
+                        + FileInLibraryProject1
+                        + "]]>"
+                        + "       </Document>"
+                        + "   </Project>"
+                        + $"   <Project ProjectName=\"{ClassLibrary2Name}\" ProjectReferences=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">"
+                        + "       <Document FileName=\"Class1.vb\"><![CDATA["
+                        + FileInLibraryProject2
+                        + "]]>"
+                        + "       </Document>"
+                        + "   </Project>"
+                        + $"   <Project ProjectName=\"{ClassLibrary3Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ClassLibrary}\" Language=\"{LanguageNames.VisualBasic}\">"
+                        + "       <Document FileName=\"Class1.vb\"><![CDATA["
+                        + FileInLibraryProject3
+                        + "]]>"
+                        + "       </Document>"
+                        + "   </Project>"
+                        + $"   <Project ProjectName=\"{ConsoleProjectName}\" ProjectReferences=\"{ClassLibrary1Name};{ClassLibrary2Name}\" ProjectTemplate=\"{WellKnownProjectTemplates.ConsoleApplication}\" Language=\"{LanguageNames.VisualBasic}\">"
+                        + "       <Document FileName=\"Module1.vb\"><![CDATA["
+                        + FileInConsoleProject1
+                        + "]]>"
+                        + "       </Document>"
+                        + "   </Project>"
+                        + "</Solution>"
+                ),
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.AddMissingReference)]
         public async Task InvokeSomeFixesInVisualBasicThenVerifyReferences()
         {
-            await TestServices.SolutionExplorer.OpenFileAsync(ConsoleProjectName, "Module1.vb", HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync("y.goo", charsOffset: 1, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                ConsoleProjectName,
+                "Module1.vb",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Editor.PlaceCaretAsync(
+                "y.goo",
+                charsOffset: 1,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.", applyFix: true, cancellationToken: HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Add reference to 'System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.",
+                applyFix: true,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.SolutionVerifier.AssemblyReferencePresentAsync(
-               projectName: ConsoleProjectName,
-               assemblyName: "System.Windows.Forms",
-               assemblyVersion: "4.0.0.0",
-               assemblyPublicKeyToken: "b77a5c561934e089",
-               HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync("a.bar", charsOffset: 1, HangMitigatingCancellationToken);
+                projectName: ConsoleProjectName,
+                assemblyName: "System.Windows.Forms",
+                assemblyVersion: "4.0.0.0",
+                assemblyPublicKeyToken: "b77a5c561934e089",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Editor.PlaceCaretAsync(
+                "a.bar",
+                charsOffset: 1,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Add project reference to 'ClassLibrary3'.", applyFix: true, cancellationToken: HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Add project reference to 'ClassLibrary3'.",
+                applyFix: true,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.SolutionVerifier.ProjectReferencePresent(
-               projectName: ConsoleProjectName,
-               referencedProjectName: ClassLibrary3Name,
-               HangMitigatingCancellationToken);
+                projectName: ConsoleProjectName,
+                referencedProjectName: ClassLibrary3Name,
+                HangMitigatingCancellationToken
+            );
         }
     }
 }

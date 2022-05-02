@@ -10,14 +10,16 @@ namespace Internal.TypeSystem.Interop
 {
     public static partial class MarshalHelpers
     {
-        internal static TypeDesc GetNativeTypeFromMarshallerKind(TypeDesc type,
-                MarshallerKind kind,
-                MarshallerKind elementMarshallerKind,
+        internal static TypeDesc GetNativeTypeFromMarshallerKind(
+            TypeDesc type,
+            MarshallerKind kind,
+            MarshallerKind elementMarshallerKind,
 #if !READYTORUN
-                InteropStateManager interopStateManager,
+            InteropStateManager interopStateManager,
 #endif
-                MarshalAsDescriptor marshalAs,
-                bool isArrayElement = false)
+            MarshalAsDescriptor marshalAs,
+            bool isArrayElement = false
+        )
         {
             TypeSystemContext context = type.Context;
             NativeTypeKind nativeType = NativeTypeKind.Default;
@@ -29,39 +31,39 @@ namespace Internal.TypeSystem.Interop
             switch (kind)
             {
                 case MarshallerKind.BlittableValue:
+                {
+                    switch (nativeType)
                     {
-                        switch (nativeType)
-                        {
-                            case NativeTypeKind.I1:
-                                return context.GetWellKnownType(WellKnownType.SByte);
-                            case NativeTypeKind.U1:
-                                return context.GetWellKnownType(WellKnownType.Byte);
-                            case NativeTypeKind.I2:
-                                return context.GetWellKnownType(WellKnownType.Int16);
-                            case NativeTypeKind.U2:
-                                return context.GetWellKnownType(WellKnownType.UInt16);
-                            case NativeTypeKind.I4:
-                                return context.GetWellKnownType(WellKnownType.Int32);
-                            case NativeTypeKind.U4:
-                                return context.GetWellKnownType(WellKnownType.UInt32);
-                            case NativeTypeKind.I8:
-                                return context.GetWellKnownType(WellKnownType.Int64);
-                            case NativeTypeKind.U8:
-                                return context.GetWellKnownType(WellKnownType.UInt64);
-                            case NativeTypeKind.R4:
-                                return context.GetWellKnownType(WellKnownType.Single);
-                            case NativeTypeKind.R8:
-                                return context.GetWellKnownType(WellKnownType.Double);
-                            default:
-                                return type.UnderlyingType;
-                        }
+                        case NativeTypeKind.I1:
+                            return context.GetWellKnownType(WellKnownType.SByte);
+                        case NativeTypeKind.U1:
+                            return context.GetWellKnownType(WellKnownType.Byte);
+                        case NativeTypeKind.I2:
+                            return context.GetWellKnownType(WellKnownType.Int16);
+                        case NativeTypeKind.U2:
+                            return context.GetWellKnownType(WellKnownType.UInt16);
+                        case NativeTypeKind.I4:
+                            return context.GetWellKnownType(WellKnownType.Int32);
+                        case NativeTypeKind.U4:
+                            return context.GetWellKnownType(WellKnownType.UInt32);
+                        case NativeTypeKind.I8:
+                            return context.GetWellKnownType(WellKnownType.Int64);
+                        case NativeTypeKind.U8:
+                            return context.GetWellKnownType(WellKnownType.UInt64);
+                        case NativeTypeKind.R4:
+                            return context.GetWellKnownType(WellKnownType.Single);
+                        case NativeTypeKind.R8:
+                            return context.GetWellKnownType(WellKnownType.Double);
+                        default:
+                            return type.UnderlyingType;
                     }
+                }
 
                 case MarshallerKind.Bool:
                     return context.GetWellKnownType(WellKnownType.Int32);
 
                 case MarshallerKind.CBool:
-                        return context.GetWellKnownType(WellKnownType.Byte);
+                    return context.GetWellKnownType(WellKnownType.Byte);
 
                 case MarshallerKind.VariantBool:
                     return context.GetWellKnownType(WellKnownType.Int16);
@@ -111,25 +113,26 @@ namespace Internal.TypeSystem.Interop
                 case MarshallerKind.BlittableArray:
                 case MarshallerKind.Array:
                 case MarshallerKind.AnsiCharArray:
-                    {
-                        ArrayType arrayType = type as ArrayType;
-                        Debug.Assert(arrayType != null, "Expecting array");
+                {
+                    ArrayType arrayType = type as ArrayType;
+                    Debug.Assert(arrayType != null, "Expecting array");
 
-                        //
-                        // We need to construct the unsafe array from the right unsafe array element type
-                        //
-                        TypeDesc elementNativeType = GetNativeTypeFromMarshallerKind(
-                            arrayType.ElementType,
-                            elementMarshallerKind,
-                            MarshallerKind.Unknown,
+                    //
+                    // We need to construct the unsafe array from the right unsafe array element type
+                    //
+                    TypeDesc elementNativeType = GetNativeTypeFromMarshallerKind(
+                        arrayType.ElementType,
+                        elementMarshallerKind,
+                        MarshallerKind.Unknown,
 #if !READYTORUN
-                            interopStateManager,
+                        interopStateManager,
 #endif
-                            marshalAs,
-                            isArrayElement: true);
+                        marshalAs,
+                        isArrayElement: true
+                    );
 
-                        return elementNativeType.MakePointerType();
-                    }
+                    return elementNativeType.MakePointerType();
+                }
 
                 case MarshallerKind.AnsiChar:
                     return context.GetWellKnownType(WellKnownType.Byte);
@@ -140,21 +143,31 @@ namespace Internal.TypeSystem.Interop
 #if !READYTORUN
                 case MarshallerKind.ByValUnicodeString:
                 case MarshallerKind.ByValAnsiString:
-                    {
-                        var inlineArrayCandidate = GetInlineArrayCandidate(context.GetWellKnownType(WellKnownType.Char), elementMarshallerKind, interopStateManager, marshalAs);
-                        return interopStateManager.GetInlineArrayType(inlineArrayCandidate);
-                    }
+                {
+                    var inlineArrayCandidate = GetInlineArrayCandidate(
+                        context.GetWellKnownType(WellKnownType.Char),
+                        elementMarshallerKind,
+                        interopStateManager,
+                        marshalAs
+                    );
+                    return interopStateManager.GetInlineArrayType(inlineArrayCandidate);
+                }
 
                 case MarshallerKind.ByValAnsiCharArray:
                 case MarshallerKind.ByValArray:
-                    {
-                        ArrayType arrayType = type as ArrayType;
-                        Debug.Assert(arrayType != null, "Expecting array");
+                {
+                    ArrayType arrayType = type as ArrayType;
+                    Debug.Assert(arrayType != null, "Expecting array");
 
-                        var inlineArrayCandidate = GetInlineArrayCandidate(arrayType.ElementType, elementMarshallerKind, interopStateManager, marshalAs);
+                    var inlineArrayCandidate = GetInlineArrayCandidate(
+                        arrayType.ElementType,
+                        elementMarshallerKind,
+                        interopStateManager,
+                        marshalAs
+                    );
 
-                        return interopStateManager.GetInlineArrayType(inlineArrayCandidate);
-                    }
+                    return interopStateManager.GetInlineArrayType(inlineArrayCandidate);
+                }
 #endif
 
                 case MarshallerKind.LayoutClassPtr:
@@ -179,13 +192,18 @@ namespace Internal.TypeSystem.Interop
             }
         }
 
-        private static bool HasCopyConstructorCustomModifier(int? parameterIndex,
-            EmbeddedSignatureData[] customModifierData)
+        private static bool HasCopyConstructorCustomModifier(
+            int? parameterIndex,
+            EmbeddedSignatureData[] customModifierData
+        )
         {
             if (!parameterIndex.HasValue || customModifierData == null)
                 return false;
 
-            string customModifierIndex = MethodSignature.GetIndexOfCustomModifierOnPointedAtTypeByParameterIndex(parameterIndex.Value);
+            string customModifierIndex =
+                MethodSignature.GetIndexOfCustomModifierOnPointedAtTypeByParameterIndex(
+                    parameterIndex.Value
+                );
             foreach (var customModifier in customModifierData)
             {
                 if (customModifier.kind != EmbeddedSignatureDataKind.RequiredCustomModifier)
@@ -198,8 +216,16 @@ namespace Internal.TypeSystem.Interop
                 if (customModifierType == null)
                     continue;
 
-                if ((customModifierType.Namespace == "System.Runtime.CompilerServices" && customModifierType.Name == "IsCopyConstructed") ||
-                    (customModifierType.Namespace == "Microsoft.VisualC" && customModifierType.Name == "NeedsCopyConstructorModifier"))
+                if (
+                    (
+                        customModifierType.Namespace == "System.Runtime.CompilerServices"
+                        && customModifierType.Name == "IsCopyConstructed"
+                    )
+                    || (
+                        customModifierType.Namespace == "Microsoft.VisualC"
+                        && customModifierType.Name == "NeedsCopyConstructorModifier"
+                    )
+                )
                 {
                     return true;
                 }
@@ -216,7 +242,8 @@ namespace Internal.TypeSystem.Interop
             bool isReturn,
             bool isAnsi,
             MarshallerType marshallerType,
-            out MarshallerKind elementMarshallerKind)
+            out MarshallerKind elementMarshallerKind
+        )
         {
             elementMarshallerKind = MarshallerKind.Invalid;
 
@@ -227,8 +254,12 @@ namespace Internal.TypeSystem.Interop
 
                 type = type.GetParameterType();
 
-                if (!type.IsPrimitive && type.IsValueType && marshallerType != MarshallerType.Field
-                    && HasCopyConstructorCustomModifier(parameterIndex, customModifierData))
+                if (
+                    !type.IsPrimitive
+                    && type.IsValueType
+                    && marshallerType != MarshallerType.Field
+                    && HasCopyConstructorCustomModifier(parameterIndex, customModifierData)
+                )
                 {
                     return MarshallerKind.BlittableValueClassWithCopyCtor;
                 }
@@ -297,35 +328,55 @@ namespace Internal.TypeSystem.Interop
 
                     case TypeFlags.SByte:
                     case TypeFlags.Byte:
-                        if (nativeType == NativeTypeKind.I1 || nativeType == NativeTypeKind.U1 || nativeType == NativeTypeKind.Default)
+                        if (
+                            nativeType == NativeTypeKind.I1
+                            || nativeType == NativeTypeKind.U1
+                            || nativeType == NativeTypeKind.Default
+                        )
                             return MarshallerKind.BlittableValue;
                         else
                             return MarshallerKind.Invalid;
 
                     case TypeFlags.Int16:
                     case TypeFlags.UInt16:
-                        if (nativeType == NativeTypeKind.I2 || nativeType == NativeTypeKind.U2 || nativeType == NativeTypeKind.Default)
+                        if (
+                            nativeType == NativeTypeKind.I2
+                            || nativeType == NativeTypeKind.U2
+                            || nativeType == NativeTypeKind.Default
+                        )
                             return MarshallerKind.BlittableValue;
                         else
                             return MarshallerKind.Invalid;
 
                     case TypeFlags.Int32:
                     case TypeFlags.UInt32:
-                        if (nativeType == NativeTypeKind.I4 || nativeType == NativeTypeKind.U4 || nativeType == NativeTypeKind.Default)
+                        if (
+                            nativeType == NativeTypeKind.I4
+                            || nativeType == NativeTypeKind.U4
+                            || nativeType == NativeTypeKind.Default
+                        )
                             return MarshallerKind.BlittableValue;
                         else
                             return MarshallerKind.Invalid;
 
                     case TypeFlags.Int64:
                     case TypeFlags.UInt64:
-                        if (nativeType == NativeTypeKind.I8 || nativeType == NativeTypeKind.U8 || nativeType == NativeTypeKind.Default)
+                        if (
+                            nativeType == NativeTypeKind.I8
+                            || nativeType == NativeTypeKind.U8
+                            || nativeType == NativeTypeKind.Default
+                        )
                             return MarshallerKind.BlittableValue;
                         else
                             return MarshallerKind.Invalid;
 
                     case TypeFlags.IntPtr:
                     case TypeFlags.UIntPtr:
-                        if (nativeType == NativeTypeKind.SysInt || nativeType == NativeTypeKind.SysUInt || nativeType == NativeTypeKind.Default)
+                        if (
+                            nativeType == NativeTypeKind.SysInt
+                            || nativeType == NativeTypeKind.SysUInt
+                            || nativeType == NativeTypeKind.Default
+                        )
                             return MarshallerKind.BlittableValue;
                         else
                             return MarshallerKind.Invalid;
@@ -353,8 +404,7 @@ namespace Internal.TypeSystem.Interop
 
                 if (InteropTypes.IsSystemDateTime(context, type))
                 {
-                    if (nativeType == NativeTypeKind.Default ||
-                        nativeType == NativeTypeKind.Struct)
+                    if (nativeType == NativeTypeKind.Default || nativeType == NativeTypeKind.Struct)
                         return MarshallerKind.OleDateTime;
                     else
                         return MarshallerKind.Invalid;
@@ -403,15 +453,21 @@ namespace Internal.TypeSystem.Interop
                 // * Vector<T>: Has a variable size (either __m128 or __m256) and isn't readily usable for interop scenarios
                 // We can't block these types for field scenarios for back-compat reasons.
 
-                if (type.HasInstantiation && !isField && (!isBlittable
-                    || InteropTypes.IsSystemByReference(context, type)
-                    || InteropTypes.IsSystemSpan(context, type)
-                    || InteropTypes.IsSystemReadOnlySpan(context, type)
-                    || InteropTypes.IsSystemNullable(context, type)
-                    || InteropTypes.IsSystemRuntimeIntrinsicsVector64T(context, type)
-                    || InteropTypes.IsSystemRuntimeIntrinsicsVector128T(context, type)
-                    || InteropTypes.IsSystemRuntimeIntrinsicsVector256T(context, type)
-                    || InteropTypes.IsSystemNumericsVectorT(context, type)))
+                if (
+                    type.HasInstantiation
+                    && !isField
+                    && (
+                        !isBlittable
+                        || InteropTypes.IsSystemByReference(context, type)
+                        || InteropTypes.IsSystemSpan(context, type)
+                        || InteropTypes.IsSystemReadOnlySpan(context, type)
+                        || InteropTypes.IsSystemNullable(context, type)
+                        || InteropTypes.IsSystemRuntimeIntrinsicsVector64T(context, type)
+                        || InteropTypes.IsSystemRuntimeIntrinsicsVector128T(context, type)
+                        || InteropTypes.IsSystemRuntimeIntrinsicsVector256T(context, type)
+                        || InteropTypes.IsSystemNumericsVectorT(context, type)
+                    )
+                )
                 {
                     // Generic types cannot be marshaled.
                     return MarshallerKind.Invalid;
@@ -452,48 +508,52 @@ namespace Internal.TypeSystem.Interop
                 switch (nativeType)
                 {
                     case NativeTypeKind.Array:
-                        {
-                            if (isField)
-                                return MarshallerKind.Invalid;
+                    {
+                        if (isField)
+                            return MarshallerKind.Invalid;
 
-                            var arrayType = (ArrayType)type;
+                        var arrayType = (ArrayType)type;
 
-                            elementMarshallerKind = GetArrayElementMarshallerKind(
-                                arrayType,
-                                marshalAs,
-                                isAnsi);
+                        elementMarshallerKind = GetArrayElementMarshallerKind(
+                            arrayType,
+                            marshalAs,
+                            isAnsi
+                        );
 
-                            // If element is invalid type, the array itself is invalid
-                            if (elementMarshallerKind == MarshallerKind.Invalid)
-                                return MarshallerKind.Invalid;
+                        // If element is invalid type, the array itself is invalid
+                        if (elementMarshallerKind == MarshallerKind.Invalid)
+                            return MarshallerKind.Invalid;
 
-                            if (elementMarshallerKind == MarshallerKind.AnsiChar)
-                                return MarshallerKind.AnsiCharArray;
-                            else if (elementMarshallerKind == MarshallerKind.UnicodeChar    // Arrays of unicode char should be marshalled as blittable arrays
-                                || elementMarshallerKind == MarshallerKind.Enum
-                                || elementMarshallerKind == MarshallerKind.BlittableValue)
-                                return MarshallerKind.BlittableArray;
-                            else
-                                return MarshallerKind.Array;
-                        }
+                        if (elementMarshallerKind == MarshallerKind.AnsiChar)
+                            return MarshallerKind.AnsiCharArray;
+                        else if (
+                            elementMarshallerKind == MarshallerKind.UnicodeChar // Arrays of unicode char should be marshalled as blittable arrays
+                            || elementMarshallerKind == MarshallerKind.Enum
+                            || elementMarshallerKind == MarshallerKind.BlittableValue
+                        )
+                            return MarshallerKind.BlittableArray;
+                        else
+                            return MarshallerKind.Array;
+                    }
 
-                    case NativeTypeKind.ByValArray:         // fix sized array
-                        {
-                            var arrayType = (ArrayType)type;
-                            elementMarshallerKind = GetArrayElementMarshallerKind(
-                                arrayType,
-                                marshalAs,
-                                isAnsi);
+                    case NativeTypeKind.ByValArray: // fix sized array
+                    {
+                        var arrayType = (ArrayType)type;
+                        elementMarshallerKind = GetArrayElementMarshallerKind(
+                            arrayType,
+                            marshalAs,
+                            isAnsi
+                        );
 
-                            // If element is invalid type, the array itself is invalid
-                            if (elementMarshallerKind == MarshallerKind.Invalid)
-                                return MarshallerKind.Invalid;
+                        // If element is invalid type, the array itself is invalid
+                        if (elementMarshallerKind == MarshallerKind.Invalid)
+                            return MarshallerKind.Invalid;
 
-                            if (elementMarshallerKind == MarshallerKind.AnsiChar)
-                                return MarshallerKind.ByValAnsiCharArray;
-                            else
-                                return MarshallerKind.ByValArray;
-                        }
+                        if (elementMarshallerKind == MarshallerKind.AnsiChar)
+                            return MarshallerKind.ByValAnsiCharArray;
+                        else
+                            return MarshallerKind.ByValArray;
+                    }
 
                     default:
                         return MarshallerKind.Invalid;
@@ -504,8 +564,12 @@ namespace Internal.TypeSystem.Interop
                 if (nativeType == NativeTypeKind.Default)
                 {
                     var pointedAtType = type.GetParameterType();
-                    if (!pointedAtType.IsPrimitive && !type.IsEnum && marshallerType != MarshallerType.Field
-                        && HasCopyConstructorCustomModifier(parameterIndex, customModifierData))
+                    if (
+                        !pointedAtType.IsPrimitive
+                        && !type.IsEnum
+                        && marshallerType != MarshallerType.Field
+                        && HasCopyConstructorCustomModifier(parameterIndex, customModifierData)
+                    )
                     {
                         return MarshallerKind.BlittableValueClassWithCopyCtor;
                     }
@@ -583,12 +647,13 @@ namespace Internal.TypeSystem.Interop
             {
                 if (nativeType == NativeTypeKind.AsAny)
                     return isAnsi ? MarshallerKind.AsAnyA : MarshallerKind.AsAnyW;
-                else
-                if (context.Target.IsWindows)
+                else if (context.Target.IsWindows)
                 {
-                    if ((isField && nativeType == NativeTypeKind.Default)
+                    if (
+                        (isField && nativeType == NativeTypeKind.Default)
                         || nativeType == NativeTypeKind.Intf
-                        || nativeType == NativeTypeKind.IUnknown)
+                        || nativeType == NativeTypeKind.IUnknown
+                    )
                         return MarshallerKind.ComInterface;
                     else
                         return MarshallerKind.Variant;
@@ -641,9 +706,15 @@ namespace Internal.TypeSystem.Interop
                     return MarshallerKind.Invalid;
                 }
 
-                if (!isField && nativeType == NativeTypeKind.Default || nativeType == NativeTypeKind.LPStruct)
+                if (
+                    !isField && nativeType == NativeTypeKind.Default
+                    || nativeType == NativeTypeKind.LPStruct
+                )
                     return MarshallerKind.LayoutClassPtr;
-                else if (isField && (nativeType == NativeTypeKind.Default || nativeType == NativeTypeKind.Struct))
+                else if (
+                    isField
+                    && (nativeType == NativeTypeKind.Default || nativeType == NativeTypeKind.Struct)
+                )
                     return MarshallerKind.LayoutClass;
                 else
                     return MarshallerKind.Invalid;
@@ -660,9 +731,10 @@ namespace Internal.TypeSystem.Interop
         }
 
         private static MarshallerKind GetArrayElementMarshallerKind(
-                   ArrayType arrayType,
-                   MarshalAsDescriptor marshalAs,
-                   bool isAnsi)
+            ArrayType arrayType,
+            MarshalAsDescriptor marshalAs,
+            bool isAnsi
+        )
         {
             TypeDesc elementType = arrayType.ElementType;
             NativeTypeKind nativeType = NativeTypeKind.Default;
@@ -762,8 +834,7 @@ namespace Internal.TypeSystem.Interop
                 }
                 else if (InteropTypes.IsSystemDateTime(context, elementType))
                 {
-                    if (nativeType == NativeTypeKind.Default ||
-                        nativeType == NativeTypeKind.Struct)
+                    if (nativeType == NativeTypeKind.Default || nativeType == NativeTypeKind.Struct)
                     {
                         return MarshallerKind.OleDateTime;
                     }
@@ -844,7 +915,10 @@ namespace Internal.TypeSystem.Interop
             }
         }
 
-        internal static bool ShouldCheckForPendingException(TargetDetails target, PInvokeMetadata metadata)
+        internal static bool ShouldCheckForPendingException(
+            TargetDetails target,
+            PInvokeMetadata metadata
+        )
         {
             if (!target.IsOSX)
                 return false;

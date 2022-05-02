@@ -17,21 +17,36 @@ namespace Tracing.Tests.ExceptionThrown_V1
             {
                 new Provider("Microsoft-DotNETCore-SampleProfiler"),
                 //ExceptionKeyword (0x8000): 0b1000_0000_0000_0000
-                new Provider("Microsoft-Windows-DotNETRuntime", 0b1000_0000_0000_0000, EventLevel.Warning)
+                new Provider(
+                    "Microsoft-Windows-DotNETRuntime",
+                    0b1000_0000_0000_0000,
+                    EventLevel.Warning
+                )
             };
 
-            var configuration = new SessionConfiguration(circularBufferSizeMB: 1024, format: EventPipeSerializationFormat.NetTrace,  providers: providers);
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, configuration);
+            var configuration = new SessionConfiguration(
+                circularBufferSizeMB: 1024,
+                format: EventPipeSerializationFormat.NetTrace,
+                providers: providers
+            );
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                configuration
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) },
             { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
             { "Microsoft-DotNETCore-SampleProfiler", -1 }
         };
 
-        private static Action _eventGeneratingAction = () => 
+        private static Action _eventGeneratingAction = () =>
         {
             for (int i = 0; i < 1000; i++)
             {
@@ -40,7 +55,7 @@ namespace Tracing.Tests.ExceptionThrown_V1
                 try
                 {
                     throw new ArgumentNullException("Throw ArgumentNullException");
-                } 
+                }
                 catch (Exception e)
                 {
                     //Do nothing

@@ -21,8 +21,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </summary>
     internal sealed class CachingSemanticModelProvider : SemanticModelProvider
     {
-        private static readonly ConditionalWeakTable<Compilation, PerCompilationProvider>.CreateValueCallback s_createProviderCallback
-            = new ConditionalWeakTable<Compilation, PerCompilationProvider>.CreateValueCallback(compilation => new PerCompilationProvider(compilation));
+        private static readonly ConditionalWeakTable<
+            Compilation,
+            PerCompilationProvider
+        >.CreateValueCallback s_createProviderCallback = new ConditionalWeakTable<
+            Compilation,
+            PerCompilationProvider
+        >.CreateValueCallback(compilation => new PerCompilationProvider(compilation));
 
         private readonly ConditionalWeakTable<Compilation, PerCompilationProvider> _providerCache;
 
@@ -31,8 +36,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _providerCache = new ConditionalWeakTable<Compilation, PerCompilationProvider>();
         }
 
-        public override SemanticModel GetSemanticModel(SyntaxTree tree, Compilation compilation, bool ignoreAccessibility = false)
-            => _providerCache.GetValue(compilation, s_createProviderCallback).GetSemanticModel(tree, ignoreAccessibility);
+        public override SemanticModel GetSemanticModel(
+            SyntaxTree tree,
+            Compilation compilation,
+            bool ignoreAccessibility = false
+        ) =>
+            _providerCache
+                .GetValue(compilation, s_createProviderCallback)
+                .GetSemanticModel(tree, ignoreAccessibility);
 
         internal void ClearCache(SyntaxTree tree, Compilation compilation)
         {
@@ -60,15 +71,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 _compilation = compilation;
                 _semanticModelsMap = new ConcurrentDictionary<SyntaxTree, SemanticModel>();
-                _createSemanticModel = tree => compilation.CreateSemanticModel(tree, ignoreAccessibility: false);
+                _createSemanticModel = tree =>
+                    compilation.CreateSemanticModel(tree, ignoreAccessibility: false);
             }
 
             public SemanticModel GetSemanticModel(SyntaxTree tree, bool ignoreAccessibility)
             {
                 // We only care about caching semantic models for internal callers, which use the default 'ignoreAccessibility = false'.
                 return !ignoreAccessibility
-                    ? _semanticModelsMap.GetOrAdd(tree, _createSemanticModel)
-                    : _compilation.CreateSemanticModel(tree, ignoreAccessibility: true);
+                  ? _semanticModelsMap.GetOrAdd(tree, _createSemanticModel)
+                  : _compilation.CreateSemanticModel(tree, ignoreAccessibility: true);
             }
 
             public void ClearCachedSemanticModel(SyntaxTree tree)

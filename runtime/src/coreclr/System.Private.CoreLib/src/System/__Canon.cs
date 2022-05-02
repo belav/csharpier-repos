@@ -11,7 +11,5 @@ namespace System
 
     [ClassInterface(ClassInterfaceType.None)]
     [ComVisible(true)]
-    internal class __Canon
-    {
-    }
+    internal class __Canon { }
 }

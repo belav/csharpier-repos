@@ -28,8 +28,9 @@ namespace BoxTest
             if ((int)num <= 1)
                 N = (int)num;
             else
-                N = (int)Fibonacci((int)num - 2,
-                        ToPrintOrNotToPrint.DoNotPrint) + (int)Fibonacci((int)num - 1, flag);
+                N =
+                    (int)Fibonacci((int)num - 2, ToPrintOrNotToPrint.DoNotPrint)
+                    + (int)Fibonacci((int)num - 1, flag);
             if ((ToPrintOrNotToPrint)flag == ToPrintOrNotToPrint.Print)
                 Console.Write(N.ToString() + " ");
             return N;

@@ -41,7 +41,10 @@ public class ApiExplorerResponseTypeWithApiConventionController : Controller
     public Task<IActionResult> DeleteProductAsync(object id) => null;
 
     [HttpPost]
-    [ApiConventionMethod(typeof(CustomConventions), nameof(CustomConventions.CustomConventionMethod))]
+    [ApiConventionMethod(
+        typeof(CustomConventions),
+        nameof(CustomConventions.CustomConventionMethod)
+    )]
     public Task<IActionResult> PostItem(Product p) => null;
 }
 

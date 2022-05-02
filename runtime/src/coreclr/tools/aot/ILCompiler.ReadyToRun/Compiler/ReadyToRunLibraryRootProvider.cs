@@ -18,7 +18,11 @@ namespace ILCompiler
         private IEnumerable<MethodDesc> _profileData;
         private readonly bool _profileDrivenPartialNGen;
 
-        public ReadyToRunRootProvider(EcmaModule module, ProfileDataManager profileDataManager, bool profileDrivenPartialNGen)
+        public ReadyToRunRootProvider(
+            EcmaModule module,
+            ProfileDataManager profileDataManager,
+            bool profileDrivenPartialNGen
+        )
         {
             _module = module;
             _profileData = profileDataManager.GetMethodsForModuleDesc(module);
@@ -32,7 +36,10 @@ namespace ILCompiler
                 try
                 {
                     // Validate that this method is fully instantiated
-                    if (method.OwningType.IsGenericDefinition || method.OwningType.ContainsSignatureVariables())
+                    if (
+                        method.OwningType.IsGenericDefinition
+                        || method.OwningType.ContainsSignatureVariables()
+                    )
                     {
                         continue;
                     }
@@ -63,7 +70,11 @@ namespace ILCompiler
                     if (!CorInfoImpl.ShouldSkipCompilation(method))
                     {
                         CheckCanGenerateMethod(method);
-                        rootProvider.AddCompilationRoot(method, rootMinimalDependencies: true, reason: "Profile triggered method");
+                        rootProvider.AddCompilationRoot(
+                            method,
+                            rootMinimalDependencies: true,
+                            reason: "Profile triggered method"
+                        );
                     }
                 }
                 catch (TypeSystemException)
@@ -116,7 +127,11 @@ namespace ILCompiler
                     if (!CorInfoImpl.ShouldSkipCompilation(method))
                     {
                         CheckCanGenerateMethod(methodToRoot);
-                        rootProvider.AddCompilationRoot(methodToRoot, rootMinimalDependencies: false, reason: reason);
+                        rootProvider.AddCompilationRoot(
+                            methodToRoot,
+                            rootMinimalDependencies: false,
+                            reason: reason
+                        );
                     }
                 }
                 catch (TypeSystemException)
@@ -141,7 +156,10 @@ namespace ILCompiler
             MethodSignature signature = method.Signature;
 
             // Vararg methods are not supported in .NET Core
-            if ((signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) == MethodSignatureFlags.CallingConventionVarargs)
+            if (
+                (signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+                == MethodSignatureFlags.CallingConventionVarargs
+            )
                 ThrowHelper.ThrowBadImageFormatException();
 
             CheckTypeCanBeUsedInSignature(signature.ReturnType);

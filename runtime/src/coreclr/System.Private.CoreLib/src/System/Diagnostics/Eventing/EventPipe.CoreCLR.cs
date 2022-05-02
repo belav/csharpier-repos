@@ -20,7 +20,8 @@ namespace System.Diagnostics.Tracing
             EventPipeSerializationFormat format,
             uint circularBufferSizeInMB,
             EventPipeProviderConfigurationNative* providers,
-            uint numProviders);
+            uint numProviders
+        );
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_Disable")]
         internal static extern void Disable(ulong sessionID);
@@ -28,13 +29,32 @@ namespace System.Diagnostics.Tracing
         //
         // These PInvokes are used by EventSource to interact with the EventPipe.
         //
-        [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_CreateProvider", CharSet = CharSet.Unicode)]
-        internal static extern IntPtr CreateProvider(string providerName, Interop.Advapi32.EtwEnableCallback callbackFunc);
+        [DllImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "EventPipeInternal_CreateProvider",
+            CharSet = CharSet.Unicode
+        )]
+        internal static extern IntPtr CreateProvider(
+            string providerName,
+            Interop.Advapi32.EtwEnableCallback callbackFunc
+        );
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_DefineEvent")]
-        internal static extern unsafe IntPtr DefineEvent(IntPtr provHandle, uint eventID, long keywords, uint eventVersion, uint level, void *pMetadata, uint metadataLength);
+        internal static extern unsafe IntPtr DefineEvent(
+            IntPtr provHandle,
+            uint eventID,
+            long keywords,
+            uint eventVersion,
+            uint level,
+            void* pMetadata,
+            uint metadataLength
+        );
 
-        [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_GetProvider", CharSet = CharSet.Unicode)]
+        [DllImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "EventPipeInternal_GetProvider",
+            CharSet = CharSet.Unicode
+        )]
         internal static extern IntPtr GetProvider(string providerName);
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_DeleteProvider")]
@@ -44,16 +64,28 @@ namespace System.Diagnostics.Tracing
         internal static extern int EventActivityIdControl(uint controlCode, ref Guid activityId);
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_WriteEventData")]
-        internal static extern unsafe void WriteEventData(IntPtr eventHandle, EventProvider.EventData* pEventData, uint dataCount, Guid* activityId, Guid* relatedActivityId);
+        internal static extern unsafe void WriteEventData(
+            IntPtr eventHandle,
+            EventProvider.EventData* pEventData,
+            uint dataCount,
+            Guid* activityId,
+            Guid* relatedActivityId
+        );
 
         //
         // These PInvokes are used as part of the EventPipeEventDispatcher.
         //
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_GetSessionInfo")]
-        internal static extern unsafe bool GetSessionInfo(ulong sessionID, EventPipeSessionInfo* pSessionInfo);
+        internal static extern unsafe bool GetSessionInfo(
+            ulong sessionID,
+            EventPipeSessionInfo* pSessionInfo
+        );
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_GetNextEvent")]
-        internal static extern unsafe bool GetNextEvent(ulong sessionID, EventPipeEventInstanceData* pInstance);
+        internal static extern unsafe bool GetNextEvent(
+            ulong sessionID,
+            EventPipeEventInstanceData* pInstance
+        );
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "EventPipeInternal_GetWaitHandle")]
         internal static extern unsafe IntPtr GetWaitHandle(ulong sessionID);

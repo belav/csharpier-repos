@@ -33,7 +33,11 @@ namespace ILCompiler
                 for (int i = 0; i < method.Instantiation.Length - 1; i++)
                     sb.Append(method.Instantiation[i].GetDisplayNameWithoutNamespace()).Append(',');
 
-                sb.Append(method.Instantiation[method.Instantiation.Length - 1].GetDisplayNameWithoutNamespace());
+                sb.Append(
+                    method.Instantiation[
+                        method.Instantiation.Length - 1
+                    ].GetDisplayNameWithoutNamespace()
+                );
                 sb.Append('>');
             }
 
@@ -44,7 +48,9 @@ namespace ILCompiler
                 for (int i = 0; i < method.Signature.Length - 1; i++)
                     sb.Append(method.Signature[i].GetDisplayNameWithoutNamespace()).Append(',');
 
-                sb.Append(method.Signature[method.Signature.Length - 1].GetDisplayNameWithoutNamespace());
+                sb.Append(
+                    method.Signature[method.Signature.Length - 1].GetDisplayNameWithoutNamespace()
+                );
             }
 
             sb.Append(')');
@@ -56,7 +62,8 @@ namespace ILCompiler
         {
             return new StringBuilder(field.OwningType.GetDisplayName())
                 .Append('.')
-                .Append(field.Name).ToString();
+                .Append(field.Name)
+                .ToString();
         }
 
 #if !READYTORUN
@@ -64,7 +71,8 @@ namespace ILCompiler
         {
             return new StringBuilder(property.OwningType.GetDisplayName())
                 .Append('.')
-                .Append(property.Name).ToString();
+                .Append(property.Name)
+                .ToString();
         }
 #endif
 
@@ -99,14 +107,22 @@ namespace ILCompiler
                 return default;
             }
 
-            public override Unit AppendName(StringBuilder sb, PointerType type, FormatOptions options)
+            public override Unit AppendName(
+                StringBuilder sb,
+                PointerType type,
+                FormatOptions options
+            )
             {
                 AppendName(sb, type.ParameterType, options);
                 sb.Append('*');
                 return default;
             }
 
-            public override Unit AppendName(StringBuilder sb, FunctionPointerType type, FormatOptions options)
+            public override Unit AppendName(
+                StringBuilder sb,
+                FunctionPointerType type,
+                FormatOptions options
+            )
             {
                 MethodSignature signature = type.Signature;
 
@@ -122,25 +138,41 @@ namespace ILCompiler
                 return default;
             }
 
-            public override Unit AppendName(StringBuilder sb, GenericParameterDesc type, FormatOptions options)
+            public override Unit AppendName(
+                StringBuilder sb,
+                GenericParameterDesc type,
+                FormatOptions options
+            )
             {
                 sb.Append(type.Name);
                 return default;
             }
 
-            public override Unit AppendName(StringBuilder sb, SignatureMethodVariable type, FormatOptions options)
+            public override Unit AppendName(
+                StringBuilder sb,
+                SignatureMethodVariable type,
+                FormatOptions options
+            )
             {
                 sb.Append("!!" + type.Index);
                 return default;
             }
 
-            public override Unit AppendName(StringBuilder sb, SignatureTypeVariable type, FormatOptions options)
+            public override Unit AppendName(
+                StringBuilder sb,
+                SignatureTypeVariable type,
+                FormatOptions options
+            )
             {
                 sb.Append("!" + type.Index);
                 return default;
             }
 
-            protected override Unit AppendNameForInstantiatedType(StringBuilder sb, DefType type, FormatOptions options)
+            protected override Unit AppendNameForInstantiatedType(
+                StringBuilder sb,
+                DefType type,
+                FormatOptions options
+            )
             {
                 AppendName(sb, type.GetTypeDefinition(), options);
 
@@ -161,14 +193,23 @@ namespace ILCompiler
                 return default;
             }
 
-            protected override Unit AppendNameForNamespaceType(StringBuilder sb, DefType type, FormatOptions options)
+            protected override Unit AppendNameForNamespaceType(
+                StringBuilder sb,
+                DefType type,
+                FormatOptions options
+            )
             {
                 NamespaceQualify(sb, type, options);
                 sb.Append(type.Name);
                 return default;
             }
 
-            protected override Unit AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType, FormatOptions options)
+            protected override Unit AppendNameForNestedType(
+                StringBuilder sb,
+                DefType nestedType,
+                DefType containingType,
+                FormatOptions options
+            )
             {
                 if ((options & FormatOptions.NamespaceQualify) != 0)
                 {

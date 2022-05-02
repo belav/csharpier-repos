@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new DivideByZeroException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_DIVIDEBYZERO, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_DIVIDEBYZERO,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "divide by zero";
             var exception = new DivideByZeroException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_DIVIDEBYZERO, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_DIVIDEBYZERO,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "divide by zero";
             var innerException = new Exception("Inner exception");
             var exception = new DivideByZeroException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_DIVIDEBYZERO, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_DIVIDEBYZERO,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }

@@ -17,6 +17,7 @@ namespace System.Xml.Tests
         private string _xslFile = string.Empty;
 
         private ITestOutputHelper _output;
+
         public COutputSettings(ITestOutputHelper output) : base(output)
         {
             _output = output;
@@ -301,7 +302,9 @@ namespace System.Xml.Tests
             XmlWriter xw = XmlWriter.Create(stm2, os);
 
             //Transform to XmlWriter
-            _output.WriteLine("Transforming to XmlWriter over Stream2 with XSLT    OutputSettings - 'out2.xml'");
+            _output.WriteLine(
+                "Transforming to XmlWriter over Stream2 with XSLT    OutputSettings - 'out2.xml'"
+            );
             _xsl.Transform(_xmlFile, null, xw);
 
             //Close the streams

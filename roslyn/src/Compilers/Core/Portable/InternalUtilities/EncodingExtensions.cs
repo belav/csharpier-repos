@@ -15,7 +15,7 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Get maximum char count needed to decode the entire stream.
         /// </summary>
-        /// <exception cref="IOException">Stream is so big that max char count can't fit in <see cref="int"/>.</exception> 
+        /// <exception cref="IOException">Stream is so big that max char count can't fit in <see cref="int"/>.</exception>
         internal static int GetMaxCharCountOrThrowIfHuge(this Encoding encoding, Stream stream)
         {
             Debug.Assert(stream.CanSeek);
@@ -35,7 +35,11 @@ namespace Roslyn.Utilities
 #endif
         }
 
-        internal static bool TryGetMaxCharCount(this Encoding encoding, long length, out int maxCharCount)
+        internal static bool TryGetMaxCharCount(
+            this Encoding encoding,
+            long length,
+            out int maxCharCount
+        )
         {
             maxCharCount = 0;
 

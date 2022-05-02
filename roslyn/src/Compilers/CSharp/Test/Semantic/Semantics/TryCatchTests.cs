@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SemanticModel()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -41,19 +42,26 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var catchClause = tree.GetCompilationUnitRoot().DescendantNodes().OfType<CatchClauseSyntax>().Single();
+            var catchClause = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<CatchClauseSyntax>()
+                .Single();
             var localSymbol = (ILocalSymbol)model.GetDeclaredSymbol(catchClause.Declaration);
             Assert.Equal("e", localSymbol.Name);
             Assert.Equal("System.IO.IOException", localSymbol.Type.ToDisplayString());
 
             var filterExprInfo = model.GetSymbolInfo(catchClause.Filter.FilterExpression);
-            Assert.Equal("string.operator !=(string, string)", filterExprInfo.Symbol.ToDisplayString());
+            Assert.Equal(
+                "string.operator !=(string, string)",
+                filterExprInfo.Symbol.ToDisplayString()
+            );
         }
 
         [Fact]
         public void CatchClauseValueType()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -67,20 +75,25 @@ class C
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (9,16): error CS0155: The type caught or thrown must be derived from System.Exception
-                //         catch (int e)
-                Diagnostic(ErrorCode.ERR_BadExceptionType, "int").WithLocation(9, 16),
-                // (9,20): warning CS0168: The variable 'e' is declared but never used
-                //         catch (int e)
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "e").WithArguments("e").WithLocation(9, 20));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (9,16): error CS0155: The type caught or thrown must be derived from System.Exception
+                    //         catch (int e)
+                    Diagnostic(ErrorCode.ERR_BadExceptionType, "int").WithLocation(9, 16),
+                    // (9,20): warning CS0168: The variable 'e' is declared but never used
+                    //         catch (int e)
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "e")
+                        .WithArguments("e")
+                        .WithLocation(9, 20)
+                );
         }
 
         [Fact]
         [WorkItem(7030, "https://github.com/dotnet/roslyn/issues/7030")]
         public void Issue7030()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C

@@ -74,7 +74,7 @@ namespace System.Data.Tests.SqlTypes
             b[0] = 100;
             b[1] = 200;
 
-            _ =  new SqlGuid(b);
+            _ = new SqlGuid(b);
 
             // SqlGuid (Guid)
             Guid TestGuid = new Guid(b);
@@ -190,7 +190,10 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Throws<FormatException>(() => SqlGuid.Parse("9e400"));
 
-            Assert.Equal(new Guid("87654321-0000-0000-0000-000000000000"), SqlGuid.Parse("87654321-0000-0000-0000-000000000000").Value);
+            Assert.Equal(
+                new Guid("87654321-0000-0000-0000-000000000000"),
+                SqlGuid.Parse("87654321-0000-0000-0000-000000000000").Value
+            );
         }
 
         [Fact]
@@ -262,7 +265,10 @@ namespace System.Data.Tests.SqlTypes
             b[1] = 200;
             SqlBinary testBinary = new SqlBinary(b);
 
-            Assert.Equal(new Guid("0000c864-0000-0000-0000-000000000000"), ((SqlGuid)testBinary).Value);
+            Assert.Equal(
+                new Guid("0000c864-0000-0000-0000-000000000000"),
+                ((SqlGuid)testBinary).Value
+            );
         }
 
         [Fact]
@@ -278,7 +284,10 @@ namespace System.Data.Tests.SqlTypes
             SqlString testString = new SqlString("Test string");
             SqlString testString100 = new SqlString("0000c864-0000-0000-0000-000000000000");
 
-            Assert.Equal(new Guid("0000c864-0000-0000-0000-000000000000"), ((SqlGuid)testString100).Value);
+            Assert.Equal(
+                new Guid("0000c864-0000-0000-0000-000000000000"),
+                ((SqlGuid)testString100).Value
+            );
 
             Assert.Throws<FormatException>(() => (SqlGuid)testString);
         }
@@ -289,6 +298,7 @@ namespace System.Data.Tests.SqlTypes
             Guid testGuid = new Guid("0000c864-0000-0000-0000-000007650000");
             Assert.Equal(new SqlGuid("0000c864-0000-0000-0000-000007650000"), testGuid);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

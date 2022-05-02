@@ -31,27 +31,57 @@ namespace System.Security.Cryptography.X509Certificates
             DisplayX509Certificate(certificate, hwndParent);
         }
 
-        public static X509Certificate2Collection SelectFromCollection(X509Certificate2Collection certificates, string title, string message, X509SelectionFlag selectionFlag)
+        public static X509Certificate2Collection SelectFromCollection(
+            X509Certificate2Collection certificates,
+            string title,
+            string message,
+            X509SelectionFlag selectionFlag
+        )
         {
-            return SelectFromCollectionHelper(certificates, title, message, selectionFlag, IntPtr.Zero);
+            return SelectFromCollectionHelper(
+                certificates,
+                title,
+                message,
+                selectionFlag,
+                IntPtr.Zero
+            );
         }
 
-        public static X509Certificate2Collection SelectFromCollection(X509Certificate2Collection certificates, string title, string message, X509SelectionFlag selectionFlag, IntPtr hwndParent)
+        public static X509Certificate2Collection SelectFromCollection(
+            X509Certificate2Collection certificates,
+            string title,
+            string message,
+            X509SelectionFlag selectionFlag,
+            IntPtr hwndParent
+        )
         {
-            return SelectFromCollectionHelper(certificates, title, message, selectionFlag, hwndParent);
+            return SelectFromCollectionHelper(
+                certificates,
+                title,
+                message,
+                selectionFlag,
+                hwndParent
+            );
         }
 
         private static void DisplayX509Certificate(X509Certificate2 certificate, IntPtr hwndParent)
         {
-            using (SafeCertContextHandle safeCertContext = X509Utils.DuplicateCertificateContext(certificate))
+            using (
+                SafeCertContextHandle safeCertContext = X509Utils.DuplicateCertificateContext(
+                    certificate
+                )
+            )
             {
                 if (safeCertContext.IsInvalid)
-                    throw new CryptographicException(SR.Format(SR.Cryptography_InvalidHandle, nameof(safeCertContext)));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_InvalidHandle, nameof(safeCertContext))
+                    );
 
                 int dwErrorCode = ERROR_SUCCESS;
 
                 // Initialize view structure.
-                Interop.CryptUI.CRYPTUI_VIEWCERTIFICATE_STRUCTW ViewInfo = new Interop.CryptUI.CRYPTUI_VIEWCERTIFICATE_STRUCTW();
+                Interop.CryptUI.CRYPTUI_VIEWCERTIFICATE_STRUCTW ViewInfo =
+                    new Interop.CryptUI.CRYPTUI_VIEWCERTIFICATE_STRUCTW();
                 ViewInfo.dwSize = (uint)Marshal.SizeOf(ViewInfo);
                 ViewInfo.hwndParent = hwndParent;
                 ViewInfo.dwFlags = 0;
@@ -82,21 +112,48 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private static X509Certificate2Collection SelectFromCollectionHelper(X509Certificate2Collection certificates, string title, string message, X509SelectionFlag selectionFlag, IntPtr hwndParent)
+        private static X509Certificate2Collection SelectFromCollectionHelper(
+            X509Certificate2Collection certificates,
+            string title,
+            string message,
+            X509SelectionFlag selectionFlag,
+            IntPtr hwndParent
+        )
         {
             if (certificates == null)
                 throw new ArgumentNullException(nameof(certificates));
-            if (selectionFlag < X509SelectionFlag.SingleSelection || selectionFlag > X509SelectionFlag.MultiSelection)
+            if (
+                selectionFlag < X509SelectionFlag.SingleSelection
+                || selectionFlag > X509SelectionFlag.MultiSelection
+            )
                 throw new ArgumentException(SR.Format(SR.Enum_InvalidValue, nameof(selectionFlag)));
 
-            using (SafeCertStoreHandle safeSourceStoreHandle = X509Utils.ExportToMemoryStore(certificates))
-            using (SafeCertStoreHandle safeTargetStoreHandle = SelectFromStore(safeSourceStoreHandle, title, message, selectionFlag, hwndParent))
+            using (
+                SafeCertStoreHandle safeSourceStoreHandle = X509Utils.ExportToMemoryStore(
+                    certificates
+                )
+            )
+            using (
+                SafeCertStoreHandle safeTargetStoreHandle = SelectFromStore(
+                    safeSourceStoreHandle,
+                    title,
+                    message,
+                    selectionFlag,
+                    hwndParent
+                )
+            )
             {
                 return X509Utils.GetCertificates(safeTargetStoreHandle);
             }
         }
 
-        private static unsafe SafeCertStoreHandle SelectFromStore(SafeCertStoreHandle safeSourceStoreHandle, string title, string message, X509SelectionFlag selectionFlags, IntPtr hwndParent)
+        private static unsafe SafeCertStoreHandle SelectFromStore(
+            SafeCertStoreHandle safeSourceStoreHandle,
+            string title,
+            string message,
+            X509SelectionFlag selectionFlags,
+            IntPtr hwndParent
+        )
         {
             int dwErrorCode = ERROR_SUCCESS;
 
@@ -105,15 +162,21 @@ namespace System.Security.Cryptography.X509Certificates
                 Interop.Crypt32.X509_ASN_ENCODING | Interop.Crypt32.PKCS_7_ASN_ENCODING,
                 IntPtr.Zero,
                 0,
-                null);
+                null
+            );
 
             if (safeCertStoreHandle == null || safeCertStoreHandle.IsInvalid)
                 throw new CryptographicException(Marshal.GetLastWin32Error());
 
-            Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW csc = new Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW();
+            Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW csc =
+                new Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW();
             // Older versions of CRYPTUI do not check the size correctly,
             // so always force it to the oldest version of the structure.
-            csc.dwSize = (uint)Marshal.OffsetOf(typeof(Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW), "hSelectedCertStore");
+            csc.dwSize = (uint)
+                Marshal.OffsetOf(
+                    typeof(Interop.CryptUI.CRYPTUI_SELECTCERTIFICATE_STRUCTW),
+                    "hSelectedCertStore"
+                );
             csc.hwndParent = hwndParent;
             csc.dwFlags = (uint)selectionFlags;
             csc.szTitle = title;
@@ -131,16 +194,21 @@ namespace System.Security.Cryptography.X509Certificates
             csc.rgPropSheetPages = IntPtr.Zero;
             csc.hSelectedCertStore = safeCertStoreHandle.DangerousGetHandle();
 
-            SafeCertContextHandle safeCertContextHandle = Interop.CryptUI.CryptUIDlgSelectCertificateW(csc);
+            SafeCertContextHandle safeCertContextHandle =
+                Interop.CryptUI.CryptUIDlgSelectCertificateW(csc);
 
             if (safeCertContextHandle != null && !safeCertContextHandle.IsInvalid)
             {
                 // Single select, so add it to our hCertStore
                 SafeCertContextHandle ppStoreContext = SafeCertContextHandle.InvalidHandle;
-                if (!Interop.Crypt32.CertAddCertificateLinkToStore(safeCertStoreHandle,
-                                                        safeCertContextHandle,
-                                                        Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
-                                                        ppStoreContext))
+                if (
+                    !Interop.Crypt32.CertAddCertificateLinkToStore(
+                        safeCertStoreHandle,
+                        safeCertContextHandle,
+                        Interop.Crypt32.CERT_STORE_ADD_ALWAYS,
+                        ppStoreContext
+                    )
+                )
                 {
                     dwErrorCode = Marshal.GetLastWin32Error();
                 }

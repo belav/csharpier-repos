@@ -10,7 +10,6 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
     {
         public RQNormalParameter(RQType type) : base(type) { }
 
-        public override SimpleTreeNode CreateSimpleTreeForType()
-            => Type.ToSimpleTree();
+        public override SimpleTreeNode CreateSimpleTreeForType() => Type.ToSimpleTree();
     }
 }

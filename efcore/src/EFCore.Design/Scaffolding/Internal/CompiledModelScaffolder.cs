@@ -31,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         /// </summary>
         public CompiledModelScaffolder(
             ICompiledModelCodeGeneratorSelector modelCodeGeneratorSelector,
-            IOperationReporter reporter)
+            IOperationReporter reporter
+        )
         {
             ModelCodeGeneratorSelector = modelCodeGeneratorSelector;
             _reporter = reporter;
@@ -54,7 +55,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public virtual IReadOnlyList<string> ScaffoldModel(
             IModel model,
             string outputDir,
-            CompiledModelCodeGenerationOptions options)
+            CompiledModelCodeGenerationOptions options
+        )
         {
             var codeGenerator = ModelCodeGeneratorSelector.Select(options);
 
@@ -77,7 +79,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
         private static void CheckOutputFiles(
             IReadOnlyCollection<ScaffoldedFile> scaffoldedModel,
-            string outputDir)
+            string outputDir
+        )
         {
             var paths = scaffoldedModel.Select(f => f.Path).ToList();
 
@@ -103,7 +106,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 throw new OperationException(
                     DesignStrings.ReadOnlyFiles(
                         outputDir,
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, readOnlyFiles)));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            readOnlyFiles
+                        )
+                    )
+                );
             }
         }
     }

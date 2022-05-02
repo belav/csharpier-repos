@@ -59,8 +59,14 @@ public class RouteKeyTest
     public void RouteKey_WithAdditionalAssemblies()
     {
         // Arrange
-        var key1 = new RouteKey(typeof(string).Assembly, new[] { typeof(ComponentBase).Assembly, GetType().Assembly });
-        var key2 = new RouteKey(typeof(string).Assembly, new[] { typeof(ComponentBase).Assembly, GetType().Assembly });
+        var key1 = new RouteKey(
+            typeof(string).Assembly,
+            new[] { typeof(ComponentBase).Assembly, GetType().Assembly }
+        );
+        var key2 = new RouteKey(
+            typeof(string).Assembly,
+            new[] { typeof(ComponentBase).Assembly, GetType().Assembly }
+        );
 
         // Act & Assert
         Assert.Equal(key1.GetHashCode(), key2.GetHashCode());
@@ -71,8 +77,14 @@ public class RouteKeyTest
     public void RouteKey_WithAdditionalAssemblies_DifferentOrder()
     {
         // Arrange
-        var key1 = new RouteKey(typeof(string).Assembly, new[] { typeof(ComponentBase).Assembly, GetType().Assembly });
-        var key2 = new RouteKey(typeof(string).Assembly, new[] { GetType().Assembly, typeof(ComponentBase).Assembly });
+        var key1 = new RouteKey(
+            typeof(string).Assembly,
+            new[] { typeof(ComponentBase).Assembly, GetType().Assembly }
+        );
+        var key2 = new RouteKey(
+            typeof(string).Assembly,
+            new[] { GetType().Assembly, typeof(ComponentBase).Assembly }
+        );
 
         // Act & Assert
         Assert.Equal(key1.GetHashCode(), key2.GetHashCode());

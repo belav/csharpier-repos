@@ -37,7 +37,6 @@ class InheritingFromGrowingBase : GrowingBase
     public int x;
 }
 
-
 static class OpenClosedDelegateExtension
 {
     public static string OpenClosedDelegateTarget(this string x, string foo)
@@ -50,15 +49,18 @@ class Program
 {
     static void TestVirtualMethodCalls()
     {
-         var o = new MyClass();
-         Assert.AreEqual(o.VirtualMethod(), "Virtual method result");
+        var o = new MyClass();
+        Assert.AreEqual(o.VirtualMethod(), "Virtual method result");
 
-         var iface = (IMyInterface)o;
-         Assert.AreEqual(iface.InterfaceMethod(" "), "Interface result");
-         Assert.AreEqual(MyClass.TestInterfaceMethod(iface, "+"), "Interface+result");
+        var iface = (IMyInterface)o;
+        Assert.AreEqual(iface.InterfaceMethod(" "), "Interface result");
+        Assert.AreEqual(MyClass.TestInterfaceMethod(iface, "+"), "Interface+result");
 
         // V2 adds override of ToString
-        if (typeof(MyStructWithVirtuals).GetMethod("ToString").DeclaringType == typeof(MyStructWithVirtuals))
+        if (
+            typeof(MyStructWithVirtuals).GetMethod("ToString").DeclaringType
+            == typeof(MyStructWithVirtuals)
+        )
         {
             // Make sure the constrained call to ToString doesn't box
             var mystruct = new MyStructWithVirtuals();
@@ -95,12 +97,11 @@ class Program
         Assert.AreEqual("NullReferenceException", "thrown");
     }
 
-
     static void TestConstrainedMethodCalls()
     {
         using (MyStruct s = new MyStruct())
         {
-             ((Object)s).ToString();
+            ((Object)s).ToString();
         }
 
         // Enum.GetHashCode optimization requires special treatment
@@ -141,12 +142,23 @@ class Program
         }).Wait();
 #endif
 
-        Assert.AreEqual(MyClass.StaticObjectField, 894 + 12345678 /* + 1234 */);
-        Assert.AreEqual(MyClass.StaticLongField, (long)(4392854 * 456 /* * 45 */));
+        Assert.AreEqual(
+            MyClass.StaticObjectField,
+            894 + 12345678 /* + 1234 */
+        );
+        Assert.AreEqual(
+            MyClass.StaticLongField,
+            (long)(
+                4392854 * 456 /* * 45 */
+            )
+        );
         Assert.AreEqual(MyClass.StaticNullableGuidField, null);
         Assert.AreEqual(MyClass.ThreadStaticStringField, "HelloWorld");
-        Assert.AreEqual(MyClass.ThreadStaticIntField, 735/78);
-        Assert.AreEqual(MyClass.ThreadStaticDateTimeField, new DateTime(2011, 1, 1) + new TimeSpan(123));
+        Assert.AreEqual(MyClass.ThreadStaticIntField, 735 / 78);
+        Assert.AreEqual(
+            MyClass.ThreadStaticDateTimeField,
+            new DateTime(2011, 1, 1) + new TimeSpan(123)
+        );
     }
 
     static void TestPreInitializedArray()
@@ -154,30 +166,39 @@ class Program
         var a = new int[] { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
 
         int sum = 0;
-        foreach (var e in a) sum += e;
+        foreach (var e in a)
+            sum += e;
         Assert.AreEqual(sum, 1023);
     }
 
     static void TestMultiDimmArray()
     {
-       var a = new int[2,3,4];
-       a[0,1,2] = a[0,0,0] + a[1,1,1];
-       a.ToString();
+        var a = new int[2, 3, 4];
+        a[0, 1, 2] = a[0, 0, 0] + a[1, 1, 1];
+        a.ToString();
     }
 
     static void TestGenericVirtualMethod()
     {
         var o = new MyGeneric<String, Object>();
-        Assert.AreEqual(o.GenericVirtualMethod<Program, IEnumerable<String>>(),
-            "System.StringSystem.ObjectProgramSystem.Collections.Generic.IEnumerable`1[System.String]");
+        Assert.AreEqual(
+            o.GenericVirtualMethod<Program, IEnumerable<String>>(),
+            "System.StringSystem.ObjectProgramSystem.Collections.Generic.IEnumerable`1[System.String]"
+        );
     }
 
     static void TestMovedGenericVirtualMethod()
     {
         var o = new MyChildGeneric<Object>();
 
-        Assert.AreEqual(o.MovedToBaseClass<WeakReference>(), typeof(List<WeakReference>).ToString());
-        Assert.AreEqual(o.ChangedToVirtual<WeakReference>(), typeof(List<WeakReference>).ToString());
+        Assert.AreEqual(
+            o.MovedToBaseClass<WeakReference>(),
+            typeof(List<WeakReference>).ToString()
+        );
+        Assert.AreEqual(
+            o.ChangedToVirtual<WeakReference>(),
+            typeof(List<WeakReference>).ToString()
+        );
 
         o = null;
 
@@ -216,12 +237,20 @@ class Program
     static void TestGenericOverStruct()
     {
         var o1 = new MyGeneric<String, MyGrowingStruct>();
-        Assert.AreEqual(o1.GenericVirtualMethod < MyChangingStruct, IEnumerable<Program>>(),
-            "System.StringMyGrowingStructMyChangingStructSystem.Collections.Generic.IEnumerable`1[Program]");
+        Assert.AreEqual(
+            o1.GenericVirtualMethod<MyChangingStruct, IEnumerable<Program>>(),
+            "System.StringMyGrowingStructMyChangingStructSystem.Collections.Generic.IEnumerable`1[Program]"
+        );
 
         var o2 = new MyChildGeneric<MyChangingStruct>();
-        Assert.AreEqual(o2.MovedToBaseClass<MyGrowingStruct>(), typeof(List<MyGrowingStruct>).ToString());
-        Assert.AreEqual(o2.ChangedToVirtual<MyGrowingStruct>(), typeof(List<MyGrowingStruct>).ToString());
+        Assert.AreEqual(
+            o2.MovedToBaseClass<MyGrowingStruct>(),
+            typeof(List<MyGrowingStruct>).ToString()
+        );
+        Assert.AreEqual(
+            o2.ChangedToVirtual<MyGrowingStruct>(),
+            typeof(List<MyGrowingStruct>).ToString()
+        );
     }
 
     static void TestInstanceFields()
@@ -241,7 +270,10 @@ class Program
         var t = new InstanceFieldTestWithLayout();
         t.Value = 123;
 
-        Assert.AreEqual(typeof(InstanceFieldTestWithLayout).GetRuntimeField("Value").GetValue(t), 123);
+        Assert.AreEqual(
+            typeof(InstanceFieldTestWithLayout).GetRuntimeField("Value").GetValue(t),
+            123
+        );
     }
 
     static void TestInheritingFromGrowingBase()
@@ -324,13 +356,16 @@ class Program
     {
         // If running in a collectible context, make the MyLoadContext collectible too so that it doesn't prevent
         // unloading.
-        public MyLoadContext() : base(AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly()).IsCollectible)
-        {
-        }
+        public MyLoadContext()
+            : base(
+                AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly()).IsCollectible
+            ) { }
 
         public void TestMultipleLoads()
         {
-            Assembly a = LoadFromAssemblyPath(Path.Combine(Directory.GetCurrentDirectory(), "test.ni.dll"));
+            Assembly a = LoadFromAssemblyPath(
+                Path.Combine(Directory.GetCurrentDirectory(), "test.ni.dll")
+            );
             Assert.AreEqual(AssemblyLoadContext.GetLoadContext(a), this);
         }
 
@@ -366,31 +401,64 @@ class Program
         Func<string, object> idClosed = "World".OpenClosedDelegateTarget;
         Assert.AreEqual(idClosed("hey"), "World, hey");
     }
-    
+
     static void GenericLdtokenFieldsTest()
     {
-        Func<FieldInfo, string> FieldFullName = (fi) => fi.FieldType + " " + fi.DeclaringType.ToString() + "::" + fi.Name;
-        
+        Func<FieldInfo, string> FieldFullName = (fi) =>
+            fi.FieldType + " " + fi.DeclaringType.ToString() + "::" + fi.Name;
+
         IFieldGetter getter1 = new FieldGetter<string>();
         IFieldGetter getter2 = new FieldGetter<object>();
         IFieldGetter getter3 = new FieldGetter<int>();
 
-        foreach (var instArg in new Type[]{typeof(String), typeof(object), typeof(int)})
+        foreach (var instArg in new Type[] { typeof(String), typeof(object), typeof(int) })
         {
-            IFieldGetter getter = (IFieldGetter)Activator.CreateInstance(typeof(FieldGetter<>).MakeGenericType(instArg));
+            IFieldGetter getter = (IFieldGetter)
+                Activator.CreateInstance(typeof(FieldGetter<>).MakeGenericType(instArg));
 
-            string expectedField1 = "System.Int32 Gen`1[???]::m_Field1".Replace("???", instArg.ToString());
-            string expectedField2 = "System.String Gen`1[???]::m_Field2".Replace("???", instArg.ToString());
+            string expectedField1 = "System.Int32 Gen`1[???]::m_Field1".Replace(
+                "???",
+                instArg.ToString()
+            );
+            string expectedField2 = "System.String Gen`1[???]::m_Field2".Replace(
+                "???",
+                instArg.ToString()
+            );
             string expectedField3 = "??? Gen`1[???]::m_Field3".Replace("???", instArg.ToString());
-            string expectedField4 = "System.Collections.Generic.List`1[???] Gen`1[???]::m_Field4".Replace("???", instArg.ToString());
-            string expectedField5 = "System.Collections.Generic.KeyValuePair`2[???,System.Int32] Gen`1[???]::m_Field5".Replace("???", instArg.ToString());
+            string expectedField4 =
+                "System.Collections.Generic.List`1[???] Gen`1[???]::m_Field4".Replace(
+                    "???",
+                    instArg.ToString()
+                );
+            string expectedField5 =
+                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] Gen`1[???]::m_Field5".Replace(
+                    "???",
+                    instArg.ToString()
+                );
 
-            string expectedDllField1 = "System.String MyGeneric`2[???,???]::m_Field1".Replace("???", instArg.ToString());
-            string expectedDllField2 = "??? MyGeneric`2[???,???]::m_Field2".Replace("???", instArg.ToString());
-            string expectedDllField3 = "System.Collections.Generic.List`1[???] MyGeneric`2[???,???]::m_Field3".Replace("???", instArg.ToString());
-            string expectedDllField4 = "System.Collections.Generic.KeyValuePair`2[???,System.Int32] MyGeneric`2[???,???]::m_Field4".Replace("???", instArg.ToString());
-            string expectedDllField5 = "System.Int32 MyGeneric`2[???,???]::m_Field5".Replace("???", instArg.ToString());
-            
+            string expectedDllField1 = "System.String MyGeneric`2[???,???]::m_Field1".Replace(
+                "???",
+                instArg.ToString()
+            );
+            string expectedDllField2 = "??? MyGeneric`2[???,???]::m_Field2".Replace(
+                "???",
+                instArg.ToString()
+            );
+            string expectedDllField3 =
+                "System.Collections.Generic.List`1[???] MyGeneric`2[???,???]::m_Field3".Replace(
+                    "???",
+                    instArg.ToString()
+                );
+            string expectedDllField4 =
+                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] MyGeneric`2[???,???]::m_Field4".Replace(
+                    "???",
+                    instArg.ToString()
+                );
+            string expectedDllField5 = "System.Int32 MyGeneric`2[???,???]::m_Field5".Replace(
+                "???",
+                instArg.ToString()
+            );
+
             Assert.AreEqual(expectedField1, FieldFullName(getter.GetGenT_Field1()));
             Assert.AreEqual(expectedField2, FieldFullName(getter.GetGenT_Field2()));
             Assert.AreEqual(expectedField3, FieldFullName(getter.GetGenT_Field3()));
@@ -415,10 +483,10 @@ class Program
     static void TestLoadR2RImageFromByteArray()
     {
         Assembly assembly1 = typeof(Program).Assembly;
-        
+
         byte[] array = File.ReadAllBytes(assembly1.Location);
         Assembly assembly2 = Assembly.Load(array);
-        
+
         Assert.AreEqual(assembly2.FullName, assembly1.FullName);
     }
 
@@ -470,11 +538,11 @@ class Program
         TestRangeCheckElimination();
 
         TestOpenClosedDelegate();
-        
+
         GenericLdtokenFieldsTest();
 
         RVAFieldTest();
-        
+
         TestLoadR2RImageFromByteArray();
     }
 
@@ -482,7 +550,7 @@ class Program
     {
         // Run all tests 3x times to exercise both slow and fast paths work
         for (int i = 0; i < 3; i++)
-           RunAllTests();
+            RunAllTests();
 
         Console.WriteLine("PASSED");
         return Assert.HasAssertFired ? 1 : 100;

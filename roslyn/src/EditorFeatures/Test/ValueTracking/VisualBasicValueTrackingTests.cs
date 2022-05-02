@@ -14,15 +14,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ValueTracking
     [UseExportProvider]
     public class VisualBasicValueTrackingTests : AbstractBaseValueTrackingTests
     {
-        protected override TestWorkspace CreateWorkspace(string code, TestComposition composition)
-            => TestWorkspace.CreateVisualBasic(code, composition: composition);
+        protected override TestWorkspace CreateWorkspace(
+            string code,
+            TestComposition composition
+        ) => TestWorkspace.CreateVisualBasic(code, composition: composition);
 
         [Theory]
         [CombinatorialData]
         public async Task TestProperty(TestHost testHost)
         {
             var code =
-@"
+                @"
 Class C
     Private _s As String
     Public Property $$S() As String
@@ -49,7 +51,7 @@ End Class
             var initialItems = await GetTrackedItemsAsync(workspace);
 
             //
-            // property S 
+            // property S
             //  |> Me.S = s [Code.vb:14]
             //  |> Public Property S() As String [Code.vb:3]
             //
@@ -63,7 +65,7 @@ End Class
         public async Task TestField(TestHost testHost)
         {
             var code =
-@"
+                @"
 Class C
     Private $$_s As String = """"
     
@@ -81,17 +83,11 @@ End Class
             var initialItems = await GetTrackedItemsAsync(workspace);
 
             //
-            // field _s 
+            // field _s
             //  |> Me._s = s [Code.vb:4]
             //  |> Private _s As String = "" [Code.vb:2]
             //
-            await ValidateItemsAsync(
-                workspace,
-                itemInfo: new[]
-                {
-                    (5, "s"),
-                    (2, "_s")
-                });
+            await ValidateItemsAsync(workspace, itemInfo: new[] { (5, "s"), (2, "_s") });
         }
 
         [Theory]
@@ -99,7 +95,7 @@ End Class
         public async Task TestLocal(TestHost testHost)
         {
             var code =
-@"
+                @"
 Class C    
     Public Function Add(x As Integer, y As Integer) As Integer
         Dim $$z = x
@@ -113,7 +109,7 @@ End Class
             var initialItems = await GetTrackedItemsAsync(workspace);
 
             //
-            // local variable z 
+            // local variable z
             //  |> z += y [Code.vb:4]
             //  |> Dim z = x [Code.vb:3]
             //
@@ -127,7 +123,7 @@ End Class
         public async Task TestParameter(TestHost testHost)
         {
             var code =
-@"
+                @"
 Class C    
     Public Function Add($$x As Integer, y As Integer) As Integer
         x += y
@@ -154,7 +150,7 @@ End Class
         public async Task TestVariableReferenceStart(TestHost testHost)
         {
             var code =
-@"
+                @"
 Class Test
     Public Sub M()
         Dim x = GetM()
@@ -180,7 +176,8 @@ End Class";
                 itemInfo: new[]
                 {
                     (5, "x") // |> Dim y = [|x|] + 1; [Code.vb:7]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -188,7 +185,8 @@ End Class";
                 childInfo: new[]
                 {
                     (3, "GetM()") // |> Dim x = [|GetM()|] [Code.vb:5]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -196,7 +194,8 @@ End Class";
                 childInfo: new[]
                 {
                     (10, "x") // |> return [|x|]; [Code.vb:13]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -204,7 +203,8 @@ End Class";
                 childInfo: new[]
                 {
                     (9, "0") // |> var x = [|0|]; [Code.vb:12]
-                });
+                }
+            );
 
             await ValidateChildrenEmptyAsync(workspace, items.Single());
         }
@@ -214,7 +214,7 @@ End Class";
         public async Task TestVariableReferenceStart2(TestHost testHost)
         {
             var code =
-@"
+                @"
 Class Test
     Public Sub M()
         Dim x = GetM()
@@ -240,7 +240,8 @@ End Class";
                 itemInfo: new[]
                 {
                     (4, "x") // |> Dim y = [|x|] + 1; [Code.vb:7]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -248,7 +249,8 @@ End Class";
                 childInfo: new[]
                 {
                     (3, "GetM()") // |> Dim x = [|GetM()|] [Code.vb:5]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -256,7 +258,8 @@ End Class";
                 childInfo: new[]
                 {
                     (10, "x") // |> return [|x|]; [Code.vb:13]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -264,7 +267,8 @@ End Class";
                 childInfo: new[]
                 {
                     (9, "0") // |> var x = [|0|]; [Code.vb:12]
-                });
+                }
+            );
 
             await ValidateChildrenEmptyAsync(workspace, items.Single());
         }
@@ -274,7 +278,7 @@ End Class";
         public async Task TestMultipleDeclarators(TestHost testHost)
         {
             var code =
-@"
+                @"
 Imports System
 
 Class Test
@@ -302,7 +306,8 @@ End Class";
                 itemInfo: new[]
                 {
                     (7, "x") // |> Dim y = [|x|] + 1; [Code.vb:7]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -310,7 +315,8 @@ End Class";
                 childInfo: new[]
                 {
                     (5, "GetM()") // |> Dim x = [|GetM()|], z = 1, m As Boolean, n As Boolean, o As Boolean [Code.vb:5]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -318,7 +324,8 @@ End Class";
                 childInfo: new[]
                 {
                     (12, "x") // |> return [|x|]; [Code.vb:12]
-                });
+                }
+            );
 
             items = await ValidateChildrenAsync(
                 workspace,
@@ -326,7 +333,8 @@ End Class";
                 childInfo: new[]
                 {
                     (11, "0") // |> var x = [|0|]; [Code.vb:11]
-                });
+                }
+            );
 
             await ValidateChildrenEmptyAsync(workspace, items.Single());
         }

@@ -13,14 +13,17 @@ namespace System.Drawing.Imaging
         /// Specifies the image is read-only.
         /// </summary>
         ReadOnly = 0x0001,
+
         /// <summary>
         /// Specifies the image is write-only.
         /// </summary>
         WriteOnly = 0x0002,
+
         /// <summary>
         /// Specifies the image is read-write.
         /// </summary>
         ReadWrite = ReadOnly | WriteOnly,
+
         /// <summary>
         /// Indicates the image resides in a user input buffer, to which the user controls access.
         /// </summary>

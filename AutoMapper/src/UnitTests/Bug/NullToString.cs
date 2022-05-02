@@ -12,18 +12,21 @@ namespace AutoMapper.UnitTests.Bug
         {
             public InnerSource Inner { get; set; }
         }
-        class InnerSource
-        {
-        }
+
+        class InnerSource { }
+
         class Destination
         {
             public string Inner { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                }
+            );
 
         protected override void Because_of()
         {

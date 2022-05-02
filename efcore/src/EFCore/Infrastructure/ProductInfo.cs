@@ -15,8 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     for the EntityFrameworkCore assembly.
         /// </summary>
         /// <returns>The EF Core version being used.</returns>
-        public static string GetVersion()
-            => typeof(ProductInfo).Assembly
-                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
+        public static string GetVersion() =>
+            typeof(ProductInfo).Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+                .InformationalVersion;
     }
 }

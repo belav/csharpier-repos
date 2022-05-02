@@ -14,10 +14,15 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
     {
         private const int REGDG_E_CLASSNOTREG = unchecked((int)0x80040154);
 
-        [DllImport("Microsoft.VisualStudio.Setup.Configuration.Native.dll", ExactSpelling = true, PreserveSig = true)]
+        [DllImport(
+            "Microsoft.VisualStudio.Setup.Configuration.Native.dll",
+            ExactSpelling = true,
+            PreserveSig = true
+        )]
         private static extern int GetSetupConfiguration(
             [MarshalAs(UnmanagedType.Interface), Out] out ISetupConfiguration configuration,
-            IntPtr reserved);
+            IntPtr reserved
+        );
 
         public static ISetupConfiguration2 GetSetupConfiguration()
         {

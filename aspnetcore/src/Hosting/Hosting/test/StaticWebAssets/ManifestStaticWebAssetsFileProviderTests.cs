@@ -24,7 +24,10 @@ public class ManifestStaticWebAssetsFileProviderTest
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
         var expectedResult = OperatingSystem.IsWindows();
         var manifest = new ManifestStaticWebAssetFileProvider.StaticWebAssetManifest();
-        manifest.ContentRoots = new[] { Path.GetDirectoryName(typeof(ManifestStaticWebAssetsFileProviderTest).Assembly.Location) };
+        manifest.ContentRoots = new[]
+        {
+            Path.GetDirectoryName(typeof(ManifestStaticWebAssetsFileProviderTest).Assembly.Location)
+        };
         manifest.Root = new()
         {
             Children = new(comparer)
@@ -48,10 +51,13 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
-            contentRoot => new PhysicalFileProvider(contentRoot));
+            contentRoot => new PhysicalFileProvider(contentRoot)
+        );
 
         // Act
-        var file = provider.GetFileInfo("/_CONTENT/Microsoft.AspNetCore.Hosting.StaticWebAssets.xml");
+        var file = provider.GetFileInfo(
+            "/_CONTENT/Microsoft.AspNetCore.Hosting.StaticWebAssets.xml"
+        );
 
         // Assert
         Assert.Equal(expectedResult, file.Exists);
@@ -69,7 +75,8 @@ public class ManifestStaticWebAssetsFileProviderTest
         // Arrange
         using var memoryStream = new MemoryStream();
         using var writer = new StreamWriter(memoryStream);
-        writer.Write(@"{
+        writer.Write(
+            @"{
   ""ContentRoots"": [
     ""D:\\path\\"",
     ""D:\\other\\""
@@ -98,25 +105,34 @@ public class ManifestStaticWebAssetsFileProviderTest
       }
     }
   }
-}");
+}"
+        );
         var first = new Mock<IFileProvider>();
-        first.Setup(s => s.GetFileInfo("icon.png")).Returns(new TestFileInfo() { Name = "icon.png", Exists = true });
+        first
+            .Setup(s => s.GetFileInfo("icon.png"))
+            .Returns(new TestFileInfo() { Name = "icon.png", Exists = true });
         var second = new Mock<IFileProvider>();
-        second.Setup(s => s.GetFileInfo("hero.gif")).Returns(new TestFileInfo() { Name = "hero.gif", Exists = true });
+        second
+            .Setup(s => s.GetFileInfo("hero.gif"))
+            .Returns(new TestFileInfo() { Name = "hero.gif", Exists = true });
 
         writer.Flush();
         memoryStream.Seek(0, SeekOrigin.Begin);
-        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(memoryStream);
+        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
+            memoryStream
+        );
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
-            contentRoot => contentRoot switch
-            {
-                "D:\\path\\" => first.Object,
-                "D:\\other\\" => second.Object,
-                _ => throw new InvalidOperationException("Unknown provider")
-            });
+            contentRoot =>
+                contentRoot switch
+                {
+                    "D:\\path\\" => first.Object,
+                    "D:\\other\\" => second.Object,
+                    _ => throw new InvalidOperationException("Unknown provider")
+                }
+        );
 
         // Act
         var file = provider.GetFileInfo(path);
@@ -138,7 +154,8 @@ public class ManifestStaticWebAssetsFileProviderTest
         var firstLevelCount = OperatingSystem.IsWindows() ? 1 : 2;
         using var memoryStream = new MemoryStream();
         using var writer = new StreamWriter(memoryStream);
-        writer.Write(@"{
+        writer.Write(
+            @"{
   ""ContentRoots"": [
     ""D:\\path\\"",
     ""D:\\other\\""
@@ -175,25 +192,34 @@ public class ManifestStaticWebAssetsFileProviderTest
       }
     }
   }
-}");
+}"
+        );
         var first = new Mock<IFileProvider>();
-        first.Setup(s => s.GetFileInfo("icon.png")).Returns(new TestFileInfo() { Name = "icon.png", Exists = true });
+        first
+            .Setup(s => s.GetFileInfo("icon.png"))
+            .Returns(new TestFileInfo() { Name = "icon.png", Exists = true });
         var second = new Mock<IFileProvider>();
-        second.Setup(s => s.GetFileInfo("hero.gif")).Returns(new TestFileInfo() { Name = "hero.gif", Exists = true });
+        second
+            .Setup(s => s.GetFileInfo("hero.gif"))
+            .Returns(new TestFileInfo() { Name = "hero.gif", Exists = true });
 
         writer.Flush();
         memoryStream.Seek(0, SeekOrigin.Begin);
-        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(memoryStream);
+        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
+            memoryStream
+        );
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
-            contentRoot => contentRoot switch
-            {
-                "D:\\path\\" => first.Object,
-                "D:\\other\\" => second.Object,
-                _ => throw new InvalidOperationException("Unknown provider")
-            });
+            contentRoot =>
+                contentRoot switch
+                {
+                    "D:\\path\\" => first.Object,
+                    "D:\\other\\" => second.Object,
+                    _ => throw new InvalidOperationException("Unknown provider")
+                }
+        );
 
         // Act
         var file = provider.GetFileInfo(path);
@@ -218,7 +244,8 @@ public class ManifestStaticWebAssetsFileProviderTest
         using var memoryStream = new MemoryStream();
         using var writer = new StreamWriter(memoryStream);
         // img/Subdir is a file without extension
-        writer.Write(@"{
+        writer.Write(
+            @"{
   ""ContentRoots"": [
     ""D:\\path\\"",
     ""D:\\other\\""
@@ -251,25 +278,34 @@ public class ManifestStaticWebAssetsFileProviderTest
       }
     }
   }
-}");
+}"
+        );
         var first = new Mock<IFileProvider>();
-        first.Setup(s => s.GetFileInfo("Subdir")).Returns(new TestFileInfo() { Name = "Subdir", Exists = true });
+        first
+            .Setup(s => s.GetFileInfo("Subdir"))
+            .Returns(new TestFileInfo() { Name = "Subdir", Exists = true });
         var second = new Mock<IFileProvider>();
-        second.Setup(s => s.GetFileInfo("hero.gif")).Returns(new TestFileInfo() { Name = "hero.gif", Exists = true });
+        second
+            .Setup(s => s.GetFileInfo("hero.gif"))
+            .Returns(new TestFileInfo() { Name = "hero.gif", Exists = true });
 
         writer.Flush();
         memoryStream.Seek(0, SeekOrigin.Begin);
-        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(memoryStream);
+        var manifest = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.Parse(
+            memoryStream
+        );
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
-            contentRoot => contentRoot switch
-            {
-                "D:\\path\\" => first.Object,
-                "D:\\other\\" => second.Object,
-                _ => throw new InvalidOperationException("Unknown provider")
-            });
+            contentRoot =>
+                contentRoot switch
+                {
+                    "D:\\path\\" => first.Object,
+                    "D:\\other\\" => second.Object,
+                    _ => throw new InvalidOperationException("Unknown provider")
+                }
+        );
 
         // Act
         var file = provider.GetFileInfo(path);
@@ -357,7 +393,9 @@ public class ManifestStaticWebAssetsFileProviderTest
         var fileProvider = new ManifestStaticWebAssetFileProvider(manifest, factory);
 
         // Act
-        var file = fileProvider.GetFileInfo("_content/RazorClassLibrary/js/project-transitive-dep.js");
+        var file = fileProvider.GetFileInfo(
+            "_content/RazorClassLibrary/js/project-transitive-dep.js"
+        );
 
         // Assert
         Assert.NotNull(file);
@@ -372,7 +410,10 @@ public class ManifestStaticWebAssetsFileProviderTest
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
         var expectedResult = OperatingSystem.IsWindows();
         var manifest = new ManifestStaticWebAssetFileProvider.StaticWebAssetManifest();
-        manifest.ContentRoots = new[] { Path.Combine(AppContext.BaseDirectory, "testroot", "wwwroot") };
+        manifest.ContentRoots = new[]
+        {
+            Path.Combine(AppContext.BaseDirectory, "testroot", "wwwroot")
+        };
         manifest.Root = new()
         {
             Children = new(comparer)
@@ -383,18 +424,17 @@ public class ManifestStaticWebAssetsFileProviderTest
                     {
                         ["Static Web Assets.txt"] = new()
                         {
-                            Match = new()
-                            {
-                                ContentRoot = 0,
-                                Path = "Static Web Assets.txt"
-                            }
+                            Match = new() { ContentRoot = 0, Path = "Static Web Assets.txt" }
                         }
                     }
                 }
             }
         };
 
-        var provider = new ManifestStaticWebAssetFileProvider(manifest, root => new PhysicalFileProvider(root));
+        var provider = new ManifestStaticWebAssetFileProvider(
+            manifest,
+            root => new PhysicalFileProvider(root)
+        );
 
         // Assert
         Assert.True(provider.GetFileInfo("/_content/Static Web Assets.txt").Exists);
@@ -443,7 +483,10 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         // Assert
         Assert.NotNull(contents);
-        Assert.Equal(new[] { (true, "_content") }, contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray());
+        Assert.Equal(
+            new[] { (true, "_content") },
+            contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray()
+        );
     }
 
     [Fact]
@@ -473,10 +516,10 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         // Assert
         Assert.NotNull(contents);
-        Assert.Equal(new[]{
-                (true, "AnotherClassLibrary"),
-                (true, "RazorClassLibrary") },
-            contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray());
+        Assert.Equal(
+            new[] { (true, "AnotherClassLibrary"), (true, "RazorClassLibrary") },
+            contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray()
+        );
     }
 
     [Fact]
@@ -491,10 +534,10 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         // Assert
         Assert.NotNull(contents);
-        Assert.Equal(new[]{
-                (false, "project-transitive-dep.js"),
-                (false, "project-transitive-dep.v4.js") },
-            contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray());
+        Assert.Equal(
+            new[] { (false, "project-transitive-dep.js"), (false, "project-transitive-dep.v4.js") },
+            contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray()
+        );
     }
 
     [Theory]
@@ -528,15 +571,16 @@ public class ManifestStaticWebAssetsFileProviderTest
                             {
                                 ["Dir"] = new()
                                 {
-                                    Patterns = new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
-                                    {
+                                    Patterns =
+                                        new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
+                                        {
                                             new()
                                             {
                                                 Pattern = "**",
                                                 ContentRoot = 0,
                                                 Depth = 3,
                                             }
-                                    }
+                                        }
                                 }
                             }
                         }
@@ -545,7 +589,10 @@ public class ManifestStaticWebAssetsFileProviderTest
             }
         };
 
-        var provider = new ManifestStaticWebAssetFileProvider(manifest, root => new PhysicalFileProvider(root));
+        var provider = new ManifestStaticWebAssetFileProvider(
+            manifest,
+            root => new PhysicalFileProvider(root)
+        );
 
         // Act
         var directory = provider.GetDirectoryContents(searchDir);
@@ -574,19 +621,17 @@ public class ManifestStaticWebAssetsFileProviderTest
                     {
                         ["RazorClassLib"] = new()
                         {
-                            Children = new(comparer)
-                            {
-                                ["Dir"] = new()
-                                {
-                                }
-                            }
+                            Children = new(comparer) { ["Dir"] = new() { } }
                         }
                     }
                 }
             }
         };
 
-        var provider = new ManifestStaticWebAssetFileProvider(manifest, root => new PhysicalFileProvider(root));
+        var provider = new ManifestStaticWebAssetFileProvider(
+            manifest,
+            root => new PhysicalFileProvider(root)
+        );
 
         // Act
         var directory = provider.GetDirectoryContents(requestedUrl);
@@ -607,10 +652,10 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         // Assert
         Assert.NotNull(contents);
-        Assert.Equal(new[]{
-                (false, "file.version.js"),
-                (true, "js") },
-            contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray());
+        Assert.Equal(
+            new[] { (false, "file.version.js"), (true, "js") },
+            contents.Select(e => (e.IsDirectory, e.Name)).OrderBy(e => e.Name).ToArray()
+        );
     }
 
     [Fact]
@@ -620,7 +665,10 @@ public class ManifestStaticWebAssetsFileProviderTest
         var comparer = ManifestStaticWebAssetFileProvider.StaticWebAssetManifest.PathComparer;
         var expectedResult = OperatingSystem.IsWindows();
         var manifest = new ManifestStaticWebAssetFileProvider.StaticWebAssetManifest();
-        manifest.ContentRoots = new[] { Path.GetDirectoryName(typeof(ManifestStaticWebAssetsFileProviderTest).Assembly.Location) };
+        manifest.ContentRoots = new[]
+        {
+            Path.GetDirectoryName(typeof(ManifestStaticWebAssetsFileProviderTest).Assembly.Location)
+        };
         manifest.Root = new()
         {
             Children = new(comparer)
@@ -644,7 +692,8 @@ public class ManifestStaticWebAssetsFileProviderTest
 
         var provider = new ManifestStaticWebAssetFileProvider(
             manifest,
-            contentRoot => new PhysicalFileProvider(contentRoot));
+            contentRoot => new PhysicalFileProvider(contentRoot)
+        );
 
         // Act
         var directory = provider.GetDirectoryContents("/_CONTENT/");
@@ -653,60 +702,113 @@ public class ManifestStaticWebAssetsFileProviderTest
         Assert.Equal(expectedResult, directory.Exists);
     }
 
-    private static (ManifestStaticWebAssetFileProvider.StaticWebAssetManifest manifest, Func<string, IFileProvider> factory) CreateTestManifest()
+    private static (ManifestStaticWebAssetFileProvider.StaticWebAssetManifest manifest, Func<
+        string,
+        IFileProvider
+    > factory) CreateTestManifest()
     {
         // Arrange
         var manifest = new ManifestStaticWebAssetFileProvider.StaticWebAssetManifest();
-        manifest.ContentRoots = new string[2] {
-                "Cero",
-                "Uno"
-            };
+        manifest.ContentRoots = new string[2] { "Cero", "Uno" };
         Func<string, IFileProvider> factory = (string contentRoot) =>
         {
             if (contentRoot == "Cero")
             {
-                var styles = new TestFileInfo { Exists = true, IsDirectory = false, Name = "styles.css" };
-                var js = new TestFileInfo { Exists = true, IsDirectory = true, Name = "js" };
-                var file = new TestFileInfo { Exists = true, Name = "file.js", IsDirectory = false };
-                var transitiveDep = new TestFileInfo { Exists = true, IsDirectory = false, Name = "project-transitive-dep.js" };
-                var transitiveDepV4 = new TestFileInfo { Exists = true, IsDirectory = false, Name = "project-transitive-dep.v4.js" };
-                var providerMock = new Mock<IFileProvider>();
-                providerMock.Setup(p => p.GetDirectoryContents("")).Returns(new TestDirectoryContents(new[] { styles, js }));
-                providerMock.Setup(p => p.GetDirectoryContents("js")).Returns(new TestDirectoryContents(new[]
+                var styles = new TestFileInfo
                 {
-                        transitiveDep,
-                        transitiveDepV4
-                }));
-                providerMock.Setup(p => p.GetFileInfo("different")).Returns(new NotFoundFileInfo("different"));
+                    Exists = true,
+                    IsDirectory = false,
+                    Name = "styles.css"
+                };
+                var js = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = true,
+                    Name = "js"
+                };
+                var file = new TestFileInfo
+                {
+                    Exists = true,
+                    Name = "file.js",
+                    IsDirectory = false
+                };
+                var transitiveDep = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = false,
+                    Name = "project-transitive-dep.js"
+                };
+                var transitiveDepV4 = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = false,
+                    Name = "project-transitive-dep.v4.js"
+                };
+                var providerMock = new Mock<IFileProvider>();
+                providerMock
+                    .Setup(p => p.GetDirectoryContents(""))
+                    .Returns(new TestDirectoryContents(new[] { styles, js }));
+                providerMock
+                    .Setup(p => p.GetDirectoryContents("js"))
+                    .Returns(new TestDirectoryContents(new[] { transitiveDep, transitiveDepV4 }));
+                providerMock
+                    .Setup(p => p.GetFileInfo("different"))
+                    .Returns(new NotFoundFileInfo("different"));
                 providerMock.Setup(p => p.GetFileInfo("file.js")).Returns(file);
                 providerMock.Setup(p => p.GetFileInfo("js")).Returns(js);
                 providerMock.Setup(p => p.GetFileInfo("styles.css")).Returns(styles);
-                providerMock.Setup(p => p.GetFileInfo("js/project-transitive-dep.js")).Returns(transitiveDep);
-                providerMock.Setup(p => p.GetFileInfo("js/project-transitive-dep.v4.js")).Returns(transitiveDepV4);
+                providerMock
+                    .Setup(p => p.GetFileInfo("js/project-transitive-dep.js"))
+                    .Returns(transitiveDep);
+                providerMock
+                    .Setup(p => p.GetFileInfo("js/project-transitive-dep.v4.js"))
+                    .Returns(transitiveDepV4);
 
                 return providerMock.Object;
             }
             if (contentRoot == "Uno")
             {
-                var css = new TestFileInfo { Exists = true, IsDirectory = true, Name = "css" };
-                var site = new TestFileInfo { Exists = true, IsDirectory = false, Name = "site.css" };
-                var js = new TestFileInfo { Exists = true, IsDirectory = true, Name = "js" };
-                var projectDirectDep = new TestFileInfo { Exists = true, IsDirectory = false, Name = "project-direct-dep.js" };
+                var css = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = true,
+                    Name = "css"
+                };
+                var site = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = false,
+                    Name = "site.css"
+                };
+                var js = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = true,
+                    Name = "js"
+                };
+                var projectDirectDep = new TestFileInfo
+                {
+                    Exists = true,
+                    IsDirectory = false,
+                    Name = "project-direct-dep.js"
+                };
                 var providerMock = new Mock<IFileProvider>();
-                providerMock.Setup(p => p.GetDirectoryContents("")).Returns(new TestDirectoryContents(new[] { css, js }));
-                providerMock.Setup(p => p.GetDirectoryContents("js")).Returns(new TestDirectoryContents(new[]
-                {
-                        projectDirectDep
-                }));
-                providerMock.Setup(p => p.GetDirectoryContents("css")).Returns(new TestDirectoryContents(new[]
-                {
-                        site
-                }));
+                providerMock
+                    .Setup(p => p.GetDirectoryContents(""))
+                    .Returns(new TestDirectoryContents(new[] { css, js }));
+                providerMock
+                    .Setup(p => p.GetDirectoryContents("js"))
+                    .Returns(new TestDirectoryContents(new[] { projectDirectDep }));
+                providerMock
+                    .Setup(p => p.GetDirectoryContents("css"))
+                    .Returns(new TestDirectoryContents(new[] { site }));
 
                 providerMock.Setup(p => p.GetFileInfo("js")).Returns(js);
                 providerMock.Setup(p => p.GetFileInfo("css")).Returns(css);
                 providerMock.Setup(p => p.GetFileInfo("css/site.css")).Returns(site);
-                providerMock.Setup(p => p.GetFileInfo("js/project-direct-dep.js")).Returns(projectDirectDep);
+                providerMock
+                    .Setup(p => p.GetFileInfo("js/project-direct-dep.js"))
+                    .Returns(projectDirectDep);
 
                 return providerMock.Object;
             }
@@ -723,12 +825,36 @@ public class ManifestStaticWebAssetsFileProviderTest
                     {
                         ["RazorClassLibrary"] = new()
                         {
-                            Children = new() { ["file.version.js"] = new() { Match = new() { ContentRoot = 0, Path = "file.js" } } },
-                            Patterns = new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[] { new() { ContentRoot = 0, Depth = 2, Pattern = "**/*.js" } },
+                            Children = new()
+                            {
+                                ["file.version.js"] = new()
+                                {
+                                    Match = new() { ContentRoot = 0, Path = "file.js" }
+                                }
+                            },
+                            Patterns =
+                                new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
+                                {
+                                    new()
+                                    {
+                                        ContentRoot = 0,
+                                        Depth = 2,
+                                        Pattern = "**/*.js"
+                                    }
+                                },
                         },
                         ["AnotherClassLibrary"] = new()
                         {
-                            Patterns = new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[] { new() { ContentRoot = 1, Depth = 2, Pattern = "**" } }
+                            Patterns =
+                                new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern[]
+                                {
+                                    new()
+                                    {
+                                        ContentRoot = 1,
+                                        Depth = 2,
+                                        Pattern = "**"
+                                    }
+                                }
                         }
                     }
                 }
@@ -738,10 +864,18 @@ public class ManifestStaticWebAssetsFileProviderTest
         return (manifest, factory);
     }
 
-    private static (ManifestStaticWebAssetFileProvider.StaticWebAssetManifest manifest, Func<string, IFileProvider> factory) CreateTestManifestWithPattern()
+    private static (ManifestStaticWebAssetFileProvider.StaticWebAssetManifest manifest, Func<
+        string,
+        IFileProvider
+    > factory) CreateTestManifestWithPattern()
     {
         // Arrange
-        var otherHtml = new TestFileInfo { Exists = true, IsDirectory = false, Name = "other.html" };
+        var otherHtml = new TestFileInfo
+        {
+            Exists = true,
+            IsDirectory = false,
+            Name = "other.html"
+        };
 
         var manifest = new ManifestStaticWebAssetFileProvider.StaticWebAssetManifest();
         manifest.ContentRoots = new[] { "Cero" };
@@ -751,10 +885,9 @@ public class ManifestStaticWebAssetsFileProviderTest
             {
                 var providerMock = new Mock<IFileProvider>();
                 providerMock.Setup(p => p.GetFileInfo("other.html")).Returns(otherHtml);
-                providerMock.Setup(p => p.GetDirectoryContents("")).Returns(new TestDirectoryContents(new[] { otherHtml })
-                {
-                    Exists = true
-                });
+                providerMock
+                    .Setup(p => p.GetDirectoryContents(""))
+                    .Returns(new TestDirectoryContents(new[] { otherHtml }) { Exists = true });
 
                 return providerMock.Object;
             }
@@ -763,16 +896,17 @@ public class ManifestStaticWebAssetsFileProviderTest
         };
         manifest.Root = new()
         {
-            Children = new Dictionary<string, ManifestStaticWebAssetFileProvider.StaticWebAssetNode>(),
+            Children =
+                new Dictionary<string, ManifestStaticWebAssetFileProvider.StaticWebAssetNode>(),
             Patterns = new[]
             {
-                    new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern
-                    {
-                        ContentRoot = 0,
-                        Depth = 0,
-                        Pattern = "**"
-                    }
+                new ManifestStaticWebAssetFileProvider.StaticWebAssetPattern
+                {
+                    ContentRoot = 0,
+                    Depth = 0,
+                    Pattern = "**"
                 }
+            }
         };
 
         return (manifest, factory);

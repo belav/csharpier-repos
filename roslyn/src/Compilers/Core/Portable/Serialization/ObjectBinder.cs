@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace Roslyn.Utilities
 {
     /// <summary>
-    /// <see cref="ObjectBinder"/> is a registry that maps between arbitrary <see cref="Type"/>s and 
+    /// <see cref="ObjectBinder"/> is a registry that maps between arbitrary <see cref="Type"/>s and
     /// the 'reader' function used to deserialize serialized instances of those types.  Registration
     /// must happen ahead of time using the <see cref="RegisterTypeReader"/> method.
     /// </summary>
@@ -48,14 +48,21 @@ namespace Roslyn.Utilities
             {
                 if (s_lastSnapshot == null)
                 {
-                    s_lastSnapshot = new ObjectBinderSnapshot(s_typeToIndex, s_types, s_typeReaders);
+                    s_lastSnapshot = new ObjectBinderSnapshot(
+                        s_typeToIndex,
+                        s_types,
+                        s_typeReaders
+                    );
                 }
 
                 return s_lastSnapshot.Value;
             }
         }
 
-        public static void RegisterTypeReader(Type type, Func<ObjectReader, IObjectWritable> typeReader)
+        public static void RegisterTypeReader(
+            Type type,
+            Func<ObjectReader, IObjectWritable> typeReader
+        )
         {
             lock (s_gate)
             {

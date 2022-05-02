@@ -15,11 +15,21 @@ namespace DllImportGenerator.UnitTests
     public class AttributeForwarding
     {
         [ConditionalTheory]
-        [InlineData("SuppressGCTransition", "System.Runtime.InteropServices.SuppressGCTransitionAttribute")]
-        [InlineData("UnmanagedCallConv", "System.Runtime.InteropServices.UnmanagedCallConvAttribute")]
-        public async Task KnownParameterlessAttribute(string attributeSourceName, string attributeMetadataName)
+        [InlineData(
+            "SuppressGCTransition",
+            "System.Runtime.InteropServices.SuppressGCTransitionAttribute"
+        )]
+        [InlineData(
+            "UnmanagedCallConv",
+            "System.Runtime.InteropServices.UnmanagedCallConvAttribute"
+        )]
+        public async Task KnownParameterlessAttribute(
+            string attributeSourceName,
+            string attributeMetadataName
+        )
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class C
 {{
@@ -40,7 +50,11 @@ struct Native
 }}
 ";
             Compilation origComp = await TestUtils.CreateCompilation(source);
-            Compilation newComp = TestUtils.RunGenerators(origComp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                origComp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             Assert.Empty(newComp.GetDiagnostics());
 
             ITypeSymbol attributeType = newComp.GetTypeByMetadataName(attributeMetadataName)!;
@@ -51,13 +65,15 @@ struct Native
 
             Assert.Contains(
                 targetMethod.GetAttributes(),
-                attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType));
+                attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
+            );
         }
 
         [ConditionalFact]
         public async Task UnmanagedCallConvAttribute_EmptyCallConvArray()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 partial class C
@@ -79,10 +95,16 @@ struct Native
 }
 ";
             Compilation origComp = await TestUtils.CreateCompilation(source);
-            Compilation newComp = TestUtils.RunGenerators(origComp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                origComp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             Assert.Empty(newComp.GetDiagnostics());
 
-            ITypeSymbol attributeType = newComp.GetTypeByMetadataName("System.Runtime.InteropServices.UnmanagedCallConvAttribute")!;
+            ITypeSymbol attributeType = newComp.GetTypeByMetadataName(
+                "System.Runtime.InteropServices.UnmanagedCallConvAttribute"
+            )!;
 
             Assert.NotNull(attributeType);
 
@@ -90,16 +112,19 @@ struct Native
 
             Assert.Contains(
                 targetMethod.GetAttributes(),
-                attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
+                attr =>
+                    SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
                     && attr.NamedArguments.Length == 1
                     && attr.NamedArguments[0].Key == "CallConvs"
-                    && attr.NamedArguments[0].Value.Values.Length == 0);
+                    && attr.NamedArguments[0].Value.Values.Length == 0
+            );
         }
 
         [ConditionalFact]
         public async Task UnmanagedCallConvAttribute_SingleCallConvType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 partial class C
@@ -121,11 +146,19 @@ struct Native
 }
 ";
             Compilation origComp = await TestUtils.CreateCompilation(source);
-            Compilation newComp = TestUtils.RunGenerators(origComp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                origComp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             Assert.Empty(newComp.GetDiagnostics());
 
-            ITypeSymbol attributeType = newComp.GetTypeByMetadataName("System.Runtime.InteropServices.UnmanagedCallConvAttribute")!;
-            ITypeSymbol callConvType = newComp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall")!;
+            ITypeSymbol attributeType = newComp.GetTypeByMetadataName(
+                "System.Runtime.InteropServices.UnmanagedCallConvAttribute"
+            )!;
+            ITypeSymbol callConvType = newComp.GetTypeByMetadataName(
+                "System.Runtime.CompilerServices.CallConvStdcall"
+            )!;
 
             Assert.NotNull(attributeType);
 
@@ -133,19 +166,23 @@ struct Native
 
             Assert.Contains(
                 targetMethod.GetAttributes(),
-                attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
+                attr =>
+                    SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
                     && attr.NamedArguments.Length == 1
                     && attr.NamedArguments[0].Key == "CallConvs"
                     && attr.NamedArguments[0].Value.Values.Length == 1
                     && SymbolEqualityComparer.Default.Equals(
                         (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
-                        callConvType));
+                        callConvType
+                    )
+            );
         }
 
         [ConditionalFact]
         public async Task UnmanagedCallConvAttribute_MultipleCallConvTypes()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 partial class C
@@ -167,12 +204,22 @@ struct Native
 }
 ";
             Compilation origComp = await TestUtils.CreateCompilation(source);
-            Compilation newComp = TestUtils.RunGenerators(origComp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                origComp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
             Assert.Empty(newComp.GetDiagnostics());
 
-            ITypeSymbol attributeType = newComp.GetTypeByMetadataName("System.Runtime.InteropServices.UnmanagedCallConvAttribute")!;
-            ITypeSymbol callConvType = newComp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall")!;
-            ITypeSymbol callConvType2 = newComp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvSuppressGCTransition")!;
+            ITypeSymbol attributeType = newComp.GetTypeByMetadataName(
+                "System.Runtime.InteropServices.UnmanagedCallConvAttribute"
+            )!;
+            ITypeSymbol callConvType = newComp.GetTypeByMetadataName(
+                "System.Runtime.CompilerServices.CallConvStdcall"
+            )!;
+            ITypeSymbol callConvType2 = newComp.GetTypeByMetadataName(
+                "System.Runtime.CompilerServices.CallConvSuppressGCTransition"
+            )!;
 
             Assert.NotNull(attributeType);
 
@@ -180,22 +227,27 @@ struct Native
 
             Assert.Contains(
                 targetMethod.GetAttributes(),
-                attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
+                attr =>
+                    SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
                     && attr.NamedArguments.Length == 1
                     && attr.NamedArguments[0].Key == "CallConvs"
                     && attr.NamedArguments[0].Value.Values.Length == 2
                     && SymbolEqualityComparer.Default.Equals(
                         (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[0].Value!,
-                        callConvType)
+                        callConvType
+                    )
                     && SymbolEqualityComparer.Default.Equals(
                         (INamedTypeSymbol?)attr.NamedArguments[0].Value.Values[1].Value!,
-                        callConvType2));
+                        callConvType2
+                    )
+            );
         }
 
         [ConditionalFact]
         public async Task OtherAttributeType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -220,7 +272,11 @@ struct Native
 }
 ";
             Compilation origComp = await TestUtils.CreateCompilation(source);
-            Compilation newComp = TestUtils.RunGenerators(origComp, out _, new Microsoft.Interop.DllImportGenerator());
+            Compilation newComp = TestUtils.RunGenerators(
+                origComp,
+                out _,
+                new Microsoft.Interop.DllImportGenerator()
+            );
 
             Assert.Empty(newComp.GetDiagnostics());
 
@@ -232,7 +288,8 @@ struct Native
 
             Assert.DoesNotContain(
                 targetMethod.GetAttributes(),
-                attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType));
+                attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass, attributeType)
+            );
         }
 
         private static IMethodSymbol GetGeneratedPInvokeTargetFromCompilation(Compilation newComp)
@@ -241,8 +298,10 @@ struct Native
             SyntaxTree generatedCode = newComp.SyntaxTrees.Last();
             SemanticModel model = newComp.GetSemanticModel(generatedCode);
 
-            var localFunctions = generatedCode.GetRoot()
-                .DescendantNodes().OfType<LocalFunctionStatementSyntax>()
+            var localFunctions = generatedCode
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
                 .ToList();
             LocalFunctionStatementSyntax innerDllImport = Assert.Single(localFunctions);
             IMethodSymbol targetMethod = (IMethodSymbol)model.GetDeclaredSymbol(innerDllImport)!;

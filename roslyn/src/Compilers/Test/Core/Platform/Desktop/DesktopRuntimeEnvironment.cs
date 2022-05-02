@@ -23,7 +23,10 @@ using static Roslyn.Test.Utilities.RuntimeEnvironmentUtilities;
 
 namespace Roslyn.Test.Utilities.Desktop
 {
-    public sealed class DesktopRuntimeEnvironment : IDisposable, IRuntimeEnvironment, IInternalRuntimeEnvironment
+    public sealed class DesktopRuntimeEnvironment
+        : IDisposable,
+          IRuntimeEnvironment,
+          IInternalRuntimeEnvironment
     {
         private sealed class RuntimeData : IDisposable
         {
@@ -50,7 +53,9 @@ namespace Roslyn.Test.Utilities.Desktop
                 Manager.Dispose();
 
                 // A workaround for known bug DevDiv 369979 - don't unload the AppDomain if we may have loaded a module
-                var safeToUnload = !(Manager.ContainsNetModules() && (PeverifyRequested || ExecuteRequested));
+                var safeToUnload = !(
+                    Manager.ContainsNetModules() && (PeverifyRequested || ExecuteRequested)
+                );
                 if (safeToUnload && AppDomain != null)
                 {
                     AppDomain.Unload(AppDomain);
@@ -75,9 +80,7 @@ namespace Roslyn.Test.Utilities.Desktop
 
             internal ImmutableArray<Diagnostic> Diagnostics;
 
-            internal EmitData()
-            {
-            }
+            internal EmitData() { }
         }
 
         /// <summary>
@@ -98,7 +101,10 @@ namespace Roslyn.Test.Utilities.Desktop
             _additionalDependencies = additionalDependencies;
         }
 
-        private RuntimeData CreateAndInitializeRuntimeData(IEnumerable<ModuleData> compilationDependencies, ModuleDataId mainModuleId)
+        private RuntimeData CreateAndInitializeRuntimeData(
+            IEnumerable<ModuleData> compilationDependencies,
+            ModuleDataId mainModuleId
+        )
         {
             var allModules = compilationDependencies;
             if (_additionalDependencies != null)
@@ -146,7 +152,11 @@ namespace Roslyn.Test.Utilities.Desktop
                 {
                     var data = s_runtimeDataCache[i];
                     var manager = data.Manager;
-                    if (!manager.HasConflicts(modules.Select(x => new RuntimeModuleDataId(x.Id)).ToList()))
+                    if (
+                        !manager.HasConflicts(
+                            modules.Select(x => new RuntimeModuleDataId(x.Id)).ToList()
+                        )
+                    )
                     {
                         s_runtimeDataCache.RemoveAt(i);
                         return data;
@@ -178,7 +188,11 @@ namespace Roslyn.Test.Utilities.Desktop
                 var appDomainProxyType = typeof(RuntimeAssemblyManager);
                 var thisAssembly = appDomainProxyType.Assembly;
                 appDomain = AppDomainUtils.Create("HostedRuntimeEnvironment");
-                var manager = (RuntimeAssemblyManager)appDomain.CreateInstanceAndUnwrap(thisAssembly.FullName, appDomainProxyType.FullName);
+                var manager = (RuntimeAssemblyManager)
+                    appDomain.CreateInstanceAndUnwrap(
+                        thisAssembly.FullName,
+                        appDomainProxyType.FullName
+                    );
                 return new RuntimeData(manager, appDomain);
             }
             catch
@@ -195,13 +209,21 @@ namespace Roslyn.Test.Utilities.Desktop
             Compilation mainCompilation,
             IEnumerable<ResourceDescription> manifestResources,
             EmitOptions emitOptions,
-            bool usePdbForDebugging = false)
+            bool usePdbForDebugging = false
+        )
         {
             _testData.Methods.Clear();
 
             var diagnostics = DiagnosticBag.GetInstance();
             var dependencies = new List<ModuleData>();
-            var mainOutput = EmitCompilation(mainCompilation, manifestResources, dependencies, diagnostics, _testData, emitOptions);
+            var mainOutput = EmitCompilation(
+                mainCompilation,
+                manifestResources,
+                dependencies,
+                diagnostics,
+                _testData,
+                emitOptions
+            );
 
             _emitData = new EmitData();
             _emitData.Diagnostics = diagnostics.ToReadOnlyAndFree();
@@ -215,7 +237,8 @@ namespace Roslyn.Test.Utilities.Desktop
                     mainCompilation.Options.OutputKind,
                     mainImage,
                     pdb: usePdbForDebugging ? mainPdb : default(ImmutableArray<byte>),
-                    inMemoryModule: true);
+                    inMemoryModule: true
+                );
                 _emitData.MainModulePdb = mainPdb;
                 _emitData.AllModuleData = dependencies;
 
@@ -223,7 +246,10 @@ namespace Roslyn.Test.Utilities.Desktop
                 // If an assembly is loaded directly via PEVerify(image) another assembly of the same full name
                 // can't be loaded as a dependency (via Assembly.ReflectionOnlyLoad) in the same domain.
                 _emitData.AllModuleData.Insert(0, _emitData.MainModule);
-                _emitData.RuntimeData = CreateAndInitializeRuntimeData(dependencies, _emitData.MainModule.Id);
+                _emitData.RuntimeData = CreateAndInitializeRuntimeData(
+                    dependencies,
+                    _emitData.MainModule.Id
+                );
             }
             else
             {
@@ -241,7 +267,12 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 var emitData = GetEmitData();
                 emitData.RuntimeData.ExecuteRequested = true;
-                var resultCode = emitData.Manager.Execute(moduleName, args, expectedOutput?.Length, out var output);
+                var resultCode = emitData.Manager.Execute(
+                    moduleName,
+                    args,
+                    expectedOutput?.Length,
+                    out var output
+                );
 
                 if (expectedOutput != null && expectedOutput.Trim() != output.Trim())
                 {
@@ -267,7 +298,9 @@ namespace Roslyn.Test.Utilities.Desktop
         {
             if (_emitData == null)
             {
-                throw new InvalidOperationException("You must call Emit before calling this method.");
+                throw new InvalidOperationException(
+                    "You must call Emit before calling this method."
+                );
             }
 
             return _emitData;
@@ -295,7 +328,7 @@ namespace Roslyn.Test.Utilities.Desktop
 
         public void Verify(Verification verification)
         {
-            // Verification is only done on windows desktop 
+            // Verification is only done on windows desktop
             if (!ExecutionConditionUtil.IsWindowsDesktop)
             {
                 return;
@@ -311,7 +344,10 @@ namespace Roslyn.Test.Utilities.Desktop
             try
             {
                 emitData.RuntimeData.PeverifyRequested = true;
-                emitData.Manager.PeVerifyModules(new[] { emitData.MainModule.FullName }, throwOnError: true);
+                emitData.Manager.PeVerifyModules(
+                    new[] { emitData.MainModule.FullName },
+                    throwOnError: true
+                );
                 if (!shouldSucceed)
                 {
                     throw new Exception("Verification succeeded unexpectedly");
@@ -333,11 +369,20 @@ namespace Roslyn.Test.Utilities.Desktop
             return emitData.Manager.PeVerifyModules(modulesToVerify, throwOnError: false);
         }
 
-        public SortedSet<string> GetMemberSignaturesFromMetadata(string fullyQualifiedTypeName, string memberName)
+        public SortedSet<string> GetMemberSignaturesFromMetadata(
+            string fullyQualifiedTypeName,
+            string memberName
+        )
         {
             var emitData = GetEmitData();
-            var searchIds = emitData.AllModuleData.Select(x => new RuntimeModuleDataId(x.Id)).ToList();
-            return GetEmitData().Manager.GetMemberSignaturesFromMetadata(fullyQualifiedTypeName, memberName, searchIds);
+            var searchIds = emitData.AllModuleData
+                .Select(x => new RuntimeModuleDataId(x.Id))
+                .ToList();
+            return GetEmitData().Manager.GetMemberSignaturesFromMetadata(
+                fullyQualifiedTypeName,
+                memberName,
+                searchIds
+            );
         }
 
         void IDisposable.Dispose()
@@ -351,7 +396,10 @@ namespace Roslyn.Test.Utilities.Desktop
             {
                 lock (s_runtimeDataCache)
                 {
-                    if (_emitData.RuntimeData != null && s_runtimeDataCache.Count < MaxCachedRuntimeData)
+                    if (
+                        _emitData.RuntimeData != null
+                        && s_runtimeDataCache.Count < MaxCachedRuntimeData
+                    )
                     {
                         s_runtimeDataCache.Add(_emitData.RuntimeData);
                         _emitData.RuntimeData = null;
@@ -373,14 +421,21 @@ namespace Roslyn.Test.Utilities.Desktop
         {
             if (_testData.Module == null)
             {
-                throw new InvalidOperationException("You must call Emit before calling GetCompilationTestData.");
+                throw new InvalidOperationException(
+                    "You must call Emit before calling GetCompilationTestData."
+                );
             }
             return _testData;
         }
 
         private static readonly object s_consoleGuard = new object();
 
-        internal static void Capture(Action action, int expectedLength, out string output, out string errorOutput)
+        internal static void Capture(
+            Action action,
+            int expectedLength,
+            out string output,
+            out string errorOutput
+        )
         {
             TextWriter errorOutputWriter = new CappedStringWriter(expectedLength);
             TextWriter outputWriter = new CappedStringWriter(expectedLength);
@@ -406,8 +461,12 @@ namespace Roslyn.Test.Utilities.Desktop
             errorOutput = errorOutputWriter.ToString();
         }
 
-        public void CaptureOutput(Action action, int expectedLength, out string output, out string errorOutput) =>
-            Capture(action, expectedLength, out output, out errorOutput);
+        public void CaptureOutput(
+            Action action,
+            int expectedLength,
+            out string output,
+            out string errorOutput
+        ) => Capture(action, expectedLength, out output, out errorOutput);
     }
 }
 #endif

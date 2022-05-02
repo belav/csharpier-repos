@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 // reasonable TLS protocol version for outgoing connections.
 #pragma warning disable CA5364 // Do Not Use Deprecated Security Protocols
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (ServicePointManager.SecurityProtocol == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls))
+                if (
+                    ServicePointManager.SecurityProtocol
+                    == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls)
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CA5364 // Do Not Use Deprecated Security Protocols
                 {
@@ -47,17 +50,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 _sharedState = new SharedVerifierState(this, DefaultFileExt);
 
-                SolutionTransforms.Add((solution, projectId) =>
-                {
-                    var parseOptions = (CSharpParseOptions)solution.GetProject(projectId)!.ParseOptions!;
-                    solution = solution.WithProjectParseOptions(projectId, parseOptions.WithLanguageVersion(LanguageVersion));
+                SolutionTransforms.Add(
+                    (solution, projectId) =>
+                    {
+                        var parseOptions = (CSharpParseOptions)
+                            solution.GetProject(projectId)!.ParseOptions!;
+                        solution = solution.WithProjectParseOptions(
+                            projectId,
+                            parseOptions.WithLanguageVersion(LanguageVersion)
+                        );
 
-                    var compilationOptions = solution.GetProject(projectId)!.CompilationOptions!;
-                    compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(compilationOptions.SpecificDiagnosticOptions.SetItems(CSharpVerifierHelper.NullableWarnings));
-                    solution = solution.WithProjectCompilationOptions(projectId, compilationOptions);
+                        var compilationOptions = solution
+                            .GetProject(projectId)!
+                            .CompilationOptions!;
+                        compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
+                            compilationOptions.SpecificDiagnosticOptions.SetItems(
+                                CSharpVerifierHelper.NullableWarnings
+                            )
+                        );
+                        solution = solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions
+                        );
 
-                    return solution;
-                });
+                        return solution;
+                    }
+                );
             }
 
             /// <summary>
@@ -88,7 +106,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 await base.RunImplAsync(cancellationToken);
             }
 
-            protected override ImmutableArray<CodeAction> FilterCodeActions(ImmutableArray<CodeAction> actions)
+            protected override ImmutableArray<CodeAction> FilterCodeActions(
+                ImmutableArray<CodeAction> actions
+            )
             {
                 var result = base.FilterCodeActions(actions);
 
@@ -101,15 +121,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             }
 
 #if !CODE_STYLE
-            protected override AnalyzerOptions GetAnalyzerOptions(Project project)
-                => new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
+            protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
+                new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
 
             /// <summary>
             /// The <see cref="TestHost"/> we want this test to run in.  Defaults to <see cref="TestHost.InProcess"/> if unspecified.
             /// </summary>
             public TestHost TestHost { get; set; } = TestHost.InProcess;
 
-            private static readonly TestComposition s_editorFeaturesOOPComposition = EditorTestCompositions.EditorFeatures.WithTestHostParts(TestHost.OutOfProcess);
+            private static readonly TestComposition s_editorFeaturesOOPComposition =
+                EditorTestCompositions.EditorFeatures.WithTestHostParts(TestHost.OutOfProcess);
 
             protected override Workspace CreateWorkspaceImpl()
             {

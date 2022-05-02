@@ -10,7 +10,7 @@ using Microsoft.Build.Utilities;
 namespace Microsoft.CodeAnalysis.BuildTasks
 {
     /// <summary>
-    /// By default, this task copies the source over to the destination. 
+    /// By default, this task copies the source over to the destination.
     /// But if we're able to check that they are identical, the destination is left untouched.
     /// </summary>
     public sealed class CopyRefAssembly : Task
@@ -22,8 +22,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         [Required]
         public string DestinationPath { get; set; }
 
-        public CopyRefAssembly()
-            : base(ErrorString.ResourceManager)
+        public CopyRefAssembly() : base(ErrorString.ResourceManager)
         {
             // These required properties will all be assigned by MSBuild. Suppress warnings about leaving them with
             // their default values.
@@ -48,12 +47,22 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 }
                 catch (Exception e)
                 {
-                    Log.LogMessageFromResources(MessageImportance.High, "CopyRefAssembly_BadSource3", SourcePath, e.Message, e.StackTrace);
+                    Log.LogMessageFromResources(
+                        MessageImportance.High,
+                        "CopyRefAssembly_BadSource3",
+                        SourcePath,
+                        e.Message,
+                        e.StackTrace
+                    );
                 }
 
                 if (source.Equals(Guid.Empty))
                 {
-                    Log.LogMessageFromResources(MessageImportance.High, "CopyRefAssembly_SourceNotRef1", SourcePath);
+                    Log.LogMessageFromResources(
+                        MessageImportance.High,
+                        "CopyRefAssembly_SourceNotRef1",
+                        SourcePath
+                    );
                 }
                 else
                 {
@@ -63,13 +72,21 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
                         if (!source.Equals(Guid.Empty) && source.Equals(destination))
                         {
-                            Log.LogMessageFromResources(MessageImportance.Low, "CopyRefAssembly_SkippingCopy1", DestinationPath);
+                            Log.LogMessageFromResources(
+                                MessageImportance.Low,
+                                "CopyRefAssembly_SkippingCopy1",
+                                DestinationPath
+                            );
                             return true;
                         }
                     }
                     catch (Exception)
                     {
-                        Log.LogMessageFromResources(MessageImportance.High, "CopyRefAssembly_BadDestination1", DestinationPath);
+                        Log.LogMessageFromResources(
+                            MessageImportance.High,
+                            "CopyRefAssembly_BadDestination1",
+                            DestinationPath
+                        );
                     }
                 }
             }

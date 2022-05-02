@@ -38,8 +38,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns a value indicating whether the key is the primary key.
         /// </summary>
         /// <returns><see langword="true" /> if the key is the primary key.</returns>
-        bool IsPrimaryKey()
-            => this == DeclaringEntityType.FindPrimaryKey();
+        bool IsPrimaryKey() => this == DeclaringEntityType.FindPrimaryKey();
 
         /// <summary>
         ///     <para>
@@ -53,7 +52,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options">Options for generating the string.</param>
         /// <param name="indent">The number of indent spaces to use before each new line.</param>
         /// <returns>A human-readable representation.</returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        )
         {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
@@ -67,10 +69,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             }
 
             builder.AppendJoin(
-                ", ", Properties.Select(
-                    p => singleLine
-                        ? p.DeclaringEntityType.DisplayName(omitSharedType: true) + "." + p.Name
-                        : p.Name));
+                ", ",
+                Properties.Select(
+                    p =>
+                        singleLine
+                            ? p.DeclaringEntityType.DisplayName(omitSharedType: true) + "." + p.Name
+                            : p.Name
+                )
+            );
 
             if (IsPrimaryKey())
             {

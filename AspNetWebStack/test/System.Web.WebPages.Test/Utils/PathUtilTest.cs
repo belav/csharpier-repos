@@ -51,7 +51,13 @@ namespace System.Web.WebPages.Test
         public void GetExtensionReturnsEmptyStringForPathsThatDoNotContainExtension()
         {
             // Arrange
-            string[] paths = new[] { "SomePath", "SomePath/", "SomePath/MorePath", "SomePath/MorePath/" };
+            string[] paths = new[]
+            {
+                "SomePath",
+                "SomePath/",
+                "SomePath/MorePath",
+                "SomePath/MorePath/"
+            };
 
             // Act
             var extensions = paths.Select(PathUtil.GetExtension);
@@ -77,7 +83,12 @@ namespace System.Web.WebPages.Test
         public void GetExtensionReturnsEmptyStringForPathsTerminatingWithADot()
         {
             // Arrange
-            string[] paths = new[] { "SomePath.", "SomeDirectory/SomePath/SomePath.", "SomeDirectory/SomePath.foo." };
+            string[] paths = new[]
+            {
+                "SomePath.",
+                "SomeDirectory/SomePath/SomePath.",
+                "SomeDirectory/SomePath.foo."
+            };
 
             // Act
             var extensions = paths.Select(PathUtil.GetExtension);
@@ -107,7 +118,8 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             // Repro from test case in Bug 93828
-            string path = "Insights/110786998958803%7C2.d24wA6Y3MiT2w8p3OT4yTw__.3600.1289415600-708897727%7CRLN-t1w9bXtKWZ_11osz15Rk_jY";
+            string path =
+                "Insights/110786998958803%7C2.d24wA6Y3MiT2w8p3OT4yTw__.3600.1289415600-708897727%7CRLN-t1w9bXtKWZ_11osz15Rk_jY";
 
             // Act
             string extension = PathUtil.GetExtension(path);
@@ -119,49 +131,62 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void IsWithinAppRootNestedTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
-            {
-                var root = "/subfolder1/website1";
-                using (Utils.CreateHttpRuntime(root))
+            AppDomainUtils.RunInSeparateAppDomain(
+                () =>
                 {
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "~/"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "~/default.cshtml"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "~/test/default.cshtml"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/subfolder1/website1"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/subfolder1/website1/"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/subfolder1/website1/default.cshtml"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/subfolder1/website1/test/default.cshtml"));
+                    var root = "/subfolder1/website1";
+                    using (Utils.CreateHttpRuntime(root))
+                    {
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "~/"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "~/default.cshtml"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "~/test/default.cshtml"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "/subfolder1/website1"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "/subfolder1/website1/"));
+                        Assert.True(
+                            PathUtil.IsWithinAppRoot(root, "/subfolder1/website1/default.cshtml")
+                        );
+                        Assert.True(
+                            PathUtil.IsWithinAppRoot(
+                                root,
+                                "/subfolder1/website1/test/default.cshtml"
+                            )
+                        );
 
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/"));
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1"));
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1/"));
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1/website2"));
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder2"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1/"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1/website2"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder2"));
+                    }
                 }
-            });
+            );
         }
 
         [Fact]
         public void IsWithinAppRootTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(() =>
-            {
-                var root = "/website1";
-                using (Utils.CreateHttpRuntime(root))
+            AppDomainUtils.RunInSeparateAppDomain(
+                () =>
                 {
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "~/"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "~/default.cshtml"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "~/test/default.cshtml"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/website1"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/website1/"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/website1/default.cshtml"));
-                    Assert.True(PathUtil.IsWithinAppRoot(root, "/website1/test/default.cshtml"));
+                    var root = "/website1";
+                    using (Utils.CreateHttpRuntime(root))
+                    {
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "~/"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "~/default.cshtml"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "~/test/default.cshtml"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "/website1"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "/website1/"));
+                        Assert.True(PathUtil.IsWithinAppRoot(root, "/website1/default.cshtml"));
+                        Assert.True(
+                            PathUtil.IsWithinAppRoot(root, "/website1/test/default.cshtml")
+                        );
 
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/"));
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/website2"));
-                    Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1/"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/website2"));
+                        Assert.False(PathUtil.IsWithinAppRoot(root, "/subfolder1/"));
+                    }
                 }
-            });
+            );
         }
 
         private class TestVirtualPathUtility : IVirtualPathUtility

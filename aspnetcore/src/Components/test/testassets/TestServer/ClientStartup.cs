@@ -37,19 +37,24 @@ public class ClientStartup
         }
 
         // Mount the server-side Blazor app on /subdir
-        app.Map("/subdir", app =>
-        {
+        app.Map(
+            "/subdir",
+            app =>
+            {
                 // Add it before to ensure it takes priority over files in wwwroot
                 app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
+                app.UseStaticFiles();
 
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapControllers();
-                endpoints.MapFallbackToFile("index.html");
-            });
-        });
+                app.UseRouting();
+                app.UseEndpoints(
+                    endpoints =>
+                    {
+                        endpoints.MapRazorPages();
+                        endpoints.MapControllers();
+                        endpoints.MapFallbackToFile("index.html");
+                    }
+                );
+            }
+        );
     }
 }

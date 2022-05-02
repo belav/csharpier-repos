@@ -13,7 +13,8 @@ internal static partial class Interop
         internal static partial SocketError WSAEventSelect(
             SafeSocketHandle socketHandle,
             SafeHandle Event,
-            AsyncEventBits NetworkEvents);
+            AsyncEventBits NetworkEvents
+        );
 
         [Flags]
         internal enum AsyncEventBits

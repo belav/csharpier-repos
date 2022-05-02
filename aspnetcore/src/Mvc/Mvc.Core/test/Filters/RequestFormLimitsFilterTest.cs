@@ -21,7 +21,8 @@ public class RequestFormLimitsFilterTest
         var requestFormLimitsFilter = new RequestFormLimitsFilter(NullLoggerFactory.Instance);
         requestFormLimitsFilter.FormOptions = new FormOptions();
         var authorizationFilterContext = CreateAuthorizationFilterContext(
-            new IFilterMetadata[] { requestFormLimitsFilter });
+            new IFilterMetadata[] { requestFormLimitsFilter }
+        );
         // Set to null explicitly as we want to make sure the filter adds one
         authorizationFilterContext.HttpContext.Features.Set<IFormFeature>(null);
 
@@ -40,7 +41,8 @@ public class RequestFormLimitsFilterTest
         var requestFormLimitsFilter = new RequestFormLimitsFilter(NullLoggerFactory.Instance);
         requestFormLimitsFilter.FormOptions = new FormOptions();
         var authorizationFilterContext = CreateAuthorizationFilterContext(
-            new IFilterMetadata[] { requestFormLimitsFilter });
+            new IFilterMetadata[] { requestFormLimitsFilter }
+        );
         var oldFormFeature = new FormFeature(authorizationFilterContext.HttpContext.Request);
         // Set to null explicitly as we want to make sure the filter adds one
         authorizationFilterContext.HttpContext.Features.Set<IFormFeature>(oldFormFeature);
@@ -63,7 +65,8 @@ public class RequestFormLimitsFilterTest
         var requestFormLimitsFilter = new RequestFormLimitsFilter(loggerFactory);
         requestFormLimitsFilter.FormOptions = new FormOptions();
         var authorizationFilterContext = CreateAuthorizationFilterContext(
-            new IFilterMetadata[] { requestFormLimitsFilter });
+            new IFilterMetadata[] { requestFormLimitsFilter }
+        );
         authorizationFilterContext.HttpContext.Request.Form = new FormCollection(null);
 
         // Act
@@ -74,7 +77,8 @@ public class RequestFormLimitsFilterTest
         Assert.Equal(LogLevel.Warning, write.LogLevel);
         Assert.Equal(
             "Unable to apply configured form options since the request form has already been read.",
-            write.State.ToString());
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -87,7 +91,8 @@ public class RequestFormLimitsFilterTest
         var requestFormLimitsFilter = new RequestFormLimitsFilter(loggerFactory);
         requestFormLimitsFilter.FormOptions = new FormOptions();
         var authorizationFilterContext = CreateAuthorizationFilterContext(
-            new IFilterMetadata[] { requestFormLimitsFilter });
+            new IFilterMetadata[] { requestFormLimitsFilter }
+        );
         // Set to null explicitly as we want to make sure the filter adds one
         authorizationFilterContext.HttpContext.Features.Set<IFormFeature>(null);
 
@@ -99,7 +104,8 @@ public class RequestFormLimitsFilterTest
         Assert.Equal(LogLevel.Debug, write.LogLevel);
         Assert.Equal(
             "Applied the configured form options on the current request.",
-            write.State.ToString());
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -112,10 +118,12 @@ public class RequestFormLimitsFilterTest
         var requestFormLimitsFilter = new RequestFormLimitsFilter(loggerFactory);
         requestFormLimitsFilter.FormOptions = new FormOptions();
         var authorizationFilterContext = CreateAuthorizationFilterContext(
-            new IFilterMetadata[] { requestFormLimitsFilter });
+            new IFilterMetadata[] { requestFormLimitsFilter }
+        );
         // Set to null explicitly as we want to make sure the filter adds one
         authorizationFilterContext.HttpContext.Features.Set<IFormFeature>(
-            new FormFeature(authorizationFilterContext.HttpContext.Request));
+            new FormFeature(authorizationFilterContext.HttpContext.Request)
+        );
 
         // Act
         requestFormLimitsFilter.OnAuthorization(authorizationFilterContext);
@@ -125,10 +133,13 @@ public class RequestFormLimitsFilterTest
         Assert.Equal(LogLevel.Debug, write.LogLevel);
         Assert.Equal(
             "Applied the configured form options on the current request.",
-            write.State.ToString());
+            write.State.ToString()
+        );
     }
 
-    private static AuthorizationFilterContext CreateAuthorizationFilterContext(IFilterMetadata[] filters)
+    private static AuthorizationFilterContext CreateAuthorizationFilterContext(
+        IFilterMetadata[] filters
+    )
     {
         return new AuthorizationFilterContext(CreateActionContext(), filters);
     }

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             TextSpan span,
             IMoveStaticMembersOptionsService service,
             INamedTypeSymbol selectedType,
-            ISymbol? selectedMember = null)
+            ISymbol? selectedMember = null
+        )
         {
             _document = document;
             _service = service;
@@ -51,7 +52,10 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             return _service.GetMoveMembersToTypeOptions(_document, _selectedType, _selectedMember);
         }
 
-        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(object options, CancellationToken cancellationToken)
+        protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+            object options,
+            CancellationToken cancellationToken
+        )
         {
             if (options is not MoveStaticMembersOptions moveOptions || moveOptions.IsCancelled)
             {
@@ -60,7 +64,9 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
 
             // Find the original doc root
             var syntaxFacts = _document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await _document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await _document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // add annotations to the symbols that we selected so we can find them later to pull up
             // These symbols should all have (singular) definitions, but in the case that we can't find
@@ -72,9 +78,13 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             root = root.TrackNodes(memberNodes);
             var sourceDoc = _document.WithSyntaxRoot(root);
 
-            var typeParameters = ExtractTypeHelpers.GetRequiredTypeParametersForMembers(_selectedType, moveOptions.SelectedMembers);
+            var typeParameters = ExtractTypeHelpers.GetRequiredTypeParametersForMembers(
+                _selectedType,
+                moveOptions.SelectedMembers
+            );
             // which indices of the old type params should we keep for a new class reference, used for refactoring usages
-            var typeArgIndices = Enumerable.Range(0, _selectedType.TypeParameters.Length)
+            var typeArgIndices = Enumerable
+                .Range(0, _selectedType.TypeParameters.Length)
                 .Where(i => typeParameters.Contains(_selectedType.TypeParameters[i]))
                 .ToImmutableArrayOrEmpty();
 
@@ -85,40 +95,77 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 DeclarationModifiers.Static,
                 GetNewTypeKind(_selectedType),
                 moveOptions.TypeName,
-                typeParameters: typeParameters);
+                typeParameters: typeParameters
+            );
 
-            var (newDoc, annotation) = await ExtractTypeHelpers.AddTypeToNewFileAsync(
-                sourceDoc.Project.Solution,
-                moveOptions.NamespaceDisplay,
-                moveOptions.FileName,
-                _document.Project.Id,
-                _document.Folders,
-                newType,
-                _document,
-                cancellationToken).ConfigureAwait(false);
+            var (newDoc, annotation) = await ExtractTypeHelpers
+                .AddTypeToNewFileAsync(
+                    sourceDoc.Project.Solution,
+                    moveOptions.NamespaceDisplay,
+                    moveOptions.FileName,
+                    _document.Project.Id,
+                    _document.Folders,
+                    newType,
+                    _document,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // get back type declaration in the newly created file
-            var destRoot = await newDoc.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var destSemanticModel = await newDoc.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            newType = (INamedTypeSymbol)destSemanticModel.GetRequiredDeclaredSymbol(destRoot.GetAnnotatedNodes(annotation).Single(), cancellationToken);
+            var destRoot = await newDoc
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var destSemanticModel = await newDoc
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            newType = (INamedTypeSymbol)
+                destSemanticModel.GetRequiredDeclaredSymbol(
+                    destRoot.GetAnnotatedNodes(annotation).Single(),
+                    cancellationToken
+                );
 
             // refactor references across the entire solution
-            var memberReferenceLocations = await FindMemberReferencesAsync(moveOptions.SelectedMembers, newDoc.Project.Solution, cancellationToken).ConfigureAwait(false);
-            var projectToLocations = memberReferenceLocations.ToLookup(loc => loc.location.Document.Project.Id);
-            var solutionWithFixedReferences = await RefactorReferencesAsync(projectToLocations, newDoc.Project.Solution, newType, typeArgIndices, cancellationToken).ConfigureAwait(false);
+            var memberReferenceLocations = await FindMemberReferencesAsync(
+                    moveOptions.SelectedMembers,
+                    newDoc.Project.Solution,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var projectToLocations = memberReferenceLocations.ToLookup(
+                loc => loc.location.Document.Project.Id
+            );
+            var solutionWithFixedReferences = await RefactorReferencesAsync(
+                    projectToLocations,
+                    newDoc.Project.Solution,
+                    newType,
+                    typeArgIndices,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             sourceDoc = solutionWithFixedReferences.GetRequiredDocument(sourceDoc.Id);
 
             // get back nodes from our changes
-            root = await sourceDoc.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await sourceDoc.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            root = await sourceDoc
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await sourceDoc
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var members = memberNodes
                 .Select(node => root.GetCurrentNode(node))
                 .WhereNotNull()
-                .SelectAsArray(node => (semanticModel.GetDeclaredSymbol(node, cancellationToken), false));
+                .SelectAsArray(
+                    node => (semanticModel.GetDeclaredSymbol(node, cancellationToken), false)
+                );
 
-            var pullMembersUpOptions = PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(newType, members);
-            var movedSolution = await MembersPuller.PullMembersUpAsync(sourceDoc, pullMembersUpOptions, cancellationToken).ConfigureAwait(false);
+            var pullMembersUpOptions = PullMembersUpOptionsBuilder.BuildPullMembersUpOptions(
+                newType,
+                members
+            );
+            var movedSolution = await MembersPuller
+                .PullMembersUpAsync(sourceDoc, pullMembersUpOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             return new CodeActionOperation[] { new ApplyChangesOperation(movedSolution) };
         }
@@ -134,11 +181,15 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
         }
 
         private static async Task<Solution> RefactorReferencesAsync(
-            ILookup<ProjectId, (ReferenceLocation location, bool isExtensionMethod)> projectToLocations,
+            ILookup<
+                ProjectId,
+                (ReferenceLocation location, bool isExtensionMethod)
+            > projectToLocations,
             Solution solution,
             INamedTypeSymbol newType,
             ImmutableArray<int> typeArgIndices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // keep our new solution separate, since each change can be performed separately
             var updatedSolution = solution;
@@ -146,17 +197,23 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             {
                 // organize by project first, so we can solve one project at a time
                 var project = solution.GetRequiredProject(projectId);
-                var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
-                var documentToLocations = referencesForProject.ToLookup(reference => reference.location.Document.Id);
+                var compilation = await project
+                    .GetCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var documentToLocations = referencesForProject.ToLookup(
+                    reference => reference.location.Document.Id
+                );
                 foreach (var (docId, referencesForDoc) in documentToLocations)
                 {
                     var doc = project.GetRequiredDocument(docId);
                     var updatedRoot = await FixReferencesSingleDocumentAsync(
-                        referencesForDoc.ToImmutableArray(),
-                        doc,
-                        newType,
-                        typeArgIndices,
-                        cancellationToken).ConfigureAwait(false);
+                            referencesForDoc.ToImmutableArray(),
+                            doc,
+                            newType,
+                            typeArgIndices,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                     updatedSolution = updatedSolution.WithDocumentSyntaxRoot(docId, updatedRoot);
                 }
@@ -173,17 +230,23 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
             Document doc,
             INamedTypeSymbol newType,
             ImmutableArray<int> typeArgIndices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = doc.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // keep extension method flag attached to node through dict
-            var trackNodesDict = referenceLocations
-                .ToImmutableDictionary(refLoc => refLoc.location.Location.FindNode(
-                    getInnermostNodeForTie: true,
-                    cancellationToken));
+            var trackNodesDict = referenceLocations.ToImmutableDictionary(
+                refLoc =>
+                    refLoc.location.Location.FindNode(
+                        getInnermostNodeForTie: true,
+                        cancellationToken
+                    )
+            );
 
-            var docEditor = await DocumentEditor.CreateAsync(doc, cancellationToken).ConfigureAwait(false);
+            var docEditor = await DocumentEditor
+                .CreateAsync(doc, cancellationToken)
+                .ConfigureAwait(false);
             var generator = docEditor.Generator;
 
             foreach (var refNode in trackNodesDict.Keys)
@@ -197,33 +260,56 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 {
                     // extension methods should be changed into their static class versions with
                     // full qualifications, then the qualification changed to the new type
-                    if (syntaxFacts.IsNameOfAnyMemberAccessExpression(refNode) &&
-                        syntaxFacts.IsMemberAccessExpression(refNode.Parent) &&
-                        syntaxFacts.IsInvocationExpression(refNode.Parent.Parent))
+                    if (
+                        syntaxFacts.IsNameOfAnyMemberAccessExpression(refNode)
+                        && syntaxFacts.IsMemberAccessExpression(refNode.Parent)
+                        && syntaxFacts.IsInvocationExpression(refNode.Parent.Parent)
+                    )
                     {
                         // get the entire expression, guaranteed not null based on earlier checks
                         var extensionMethodInvocation = refNode.Parent.Parent;
                         // expand using our (possibly outdated) document/syntaxes
-                        var expandedExtensionInvocation = await Simplifier.ExpandAsync(
-                            extensionMethodInvocation,
-                            doc,
-                            cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var expandedExtensionInvocation = await Simplifier
+                            .ExpandAsync(
+                                extensionMethodInvocation,
+                                doc,
+                                cancellationToken: cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         // should be an invocation of a simple member access expression with the expression as a type name
-                        var memberAccessExpression = syntaxFacts.GetExpressionOfInvocationExpression(expandedExtensionInvocation);
-                        var typeExpression = syntaxFacts.GetExpressionOfMemberAccessExpression(memberAccessExpression)!;
-                        expandedExtensionInvocation = expandedExtensionInvocation.ReplaceNode(typeExpression, generator.TypeExpression(newType)
-                            .WithTriviaFrom(refNode)
-                            .WithAdditionalAnnotations(Simplifier.Annotation, Simplifier.AddImportsAnnotation, SymbolAnnotation.Create(newType)));
+                        var memberAccessExpression =
+                            syntaxFacts.GetExpressionOfInvocationExpression(
+                                expandedExtensionInvocation
+                            );
+                        var typeExpression = syntaxFacts.GetExpressionOfMemberAccessExpression(
+                            memberAccessExpression
+                        )!;
+                        expandedExtensionInvocation = expandedExtensionInvocation.ReplaceNode(
+                            typeExpression,
+                            generator
+                                .TypeExpression(newType)
+                                .WithTriviaFrom(refNode)
+                                .WithAdditionalAnnotations(
+                                    Simplifier.Annotation,
+                                    Simplifier.AddImportsAnnotation,
+                                    SymbolAnnotation.Create(newType)
+                                )
+                        );
 
-                        docEditor.ReplaceNode(extensionMethodInvocation, expandedExtensionInvocation);
+                        docEditor.ReplaceNode(
+                            extensionMethodInvocation,
+                            expandedExtensionInvocation
+                        );
                     }
                 }
                 else if (syntaxFacts.IsNameOfSimpleMemberAccessExpression(refNode))
                 {
                     // static member access should never be pointer or conditional member access,
                     // so syntax in this block should be of the form 'Class.Member' or 'Class<TArg>.Member'
-                    var expression = syntaxFacts.GetExpressionOfMemberAccessExpression(refNode.GetRequiredParent());
+                    var expression = syntaxFacts.GetExpressionOfMemberAccessExpression(
+                        refNode.GetRequiredParent()
+                    );
                     if (expression != null)
                     {
                         SyntaxNode replacement;
@@ -239,9 +325,16 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                             replacement = generator.TypeExpression(newType);
                         }
 
-                        docEditor.ReplaceNode(expression, replacement
-                            .WithTriviaFrom(refNode)
-                            .WithAdditionalAnnotations(Simplifier.Annotation, Simplifier.AddImportsAnnotation, SymbolAnnotation.Create(newType)));
+                        docEditor.ReplaceNode(
+                            expression,
+                            replacement
+                                .WithTriviaFrom(refNode)
+                                .WithAdditionalAnnotations(
+                                    Simplifier.Annotation,
+                                    Simplifier.AddImportsAnnotation,
+                                    SymbolAnnotation.Create(newType)
+                                )
+                        );
                     }
                 }
                 else if (syntaxFacts.IsIdentifierName(refNode))
@@ -252,27 +345,41 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                     docEditor.ReplaceNode(
                         refNode,
                         generator.MemberAccessExpression(
-                            generator.TypeExpression(newType)
-                                .WithAdditionalAnnotations(Simplifier.AddImportsAnnotation, SymbolAnnotation.Create(newType)),
-                            refNode));
+                            generator
+                                .TypeExpression(newType)
+                                .WithAdditionalAnnotations(
+                                    Simplifier.AddImportsAnnotation,
+                                    SymbolAnnotation.Create(newType)
+                                ),
+                            refNode
+                        )
+                    );
                 }
             }
 
             return docEditor.GetChangedRoot();
         }
 
-        private static async Task<ImmutableArray<(ReferenceLocation location, bool isExtension)>> FindMemberReferencesAsync(
+        private static async Task<
+            ImmutableArray<(ReferenceLocation location, bool isExtension)>
+        > FindMemberReferencesAsync(
             ImmutableArray<ISymbol> members,
             Solution solution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var tasks = members.Select(symbol => SymbolFinder.FindReferencesAsync(symbol, solution, cancellationToken));
+            var tasks = members.Select(
+                symbol => SymbolFinder.FindReferencesAsync(symbol, solution, cancellationToken)
+            );
             var symbolRefs = await Task.WhenAll(tasks).ConfigureAwait(false);
             return symbolRefs
                 .Flatten()
-                .SelectMany(refSymbol => refSymbol.Locations
-                    .Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
-                    .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod())))
+                .SelectMany(
+                    refSymbol =>
+                        refSymbol.Locations
+                            .Where(loc => !loc.IsCandidateLocation && !loc.IsImplicit)
+                            .Select(loc => (loc, refSymbol.Definition.IsExtensionMethod()))
+                )
                 .ToImmutableArrayOrEmpty();
         }
     }

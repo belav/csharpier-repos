@@ -40,7 +40,8 @@ namespace System.Threading.Tasks
             {
                 Debug.Fail(SR.ParallelState_NotSupportedException_UnsupportedMethod);
                 throw new NotSupportedException(
-                    SR.ParallelState_NotSupportedException_UnsupportedMethod);
+                    SR.ParallelState_NotSupportedException_UnsupportedMethod
+                );
             }
         }
 
@@ -59,10 +60,7 @@ namespace System.Threading.Tasks
         /// </remarks>
         public bool ShouldExitCurrentIteration
         {
-            get
-            {
-                return InternalShouldExitCurrentIteration;
-            }
+            get { return InternalShouldExitCurrentIteration; }
         }
 
         /// <summary>
@@ -72,7 +70,10 @@ namespace System.Threading.Tasks
         {
             get
             {
-                return ((_flagsBase.LoopStateFlags & ParallelLoopStateFlags.ParallelLoopStateStopped) != 0);
+                return (
+                    (_flagsBase.LoopStateFlags & ParallelLoopStateFlags.ParallelLoopStateStopped)
+                    != 0
+                );
             }
         }
 
@@ -84,7 +85,12 @@ namespace System.Threading.Tasks
         {
             get
             {
-                return ((_flagsBase.LoopStateFlags & ParallelLoopStateFlags.ParallelLoopStateExceptional) != 0);
+                return (
+                    (
+                        _flagsBase.LoopStateFlags
+                        & ParallelLoopStateFlags.ParallelLoopStateExceptional
+                    ) != 0
+                );
             }
         }
 
@@ -97,7 +103,8 @@ namespace System.Threading.Tasks
             {
                 Debug.Fail(SR.ParallelState_NotSupportedException_UnsupportedMethod);
                 throw new NotSupportedException(
-                    SR.ParallelState_NotSupportedException_UnsupportedMethod);
+                    SR.ParallelState_NotSupportedException_UnsupportedMethod
+                );
             }
         }
 
@@ -109,10 +116,7 @@ namespace System.Threading.Tasks
         /// </remarks>
         public long? LowestBreakIteration
         {
-            get
-            {
-                return InternalLowestBreakIteration;
-            }
+            get { return InternalLowestBreakIteration; }
         }
 
         /// <summary>
@@ -145,7 +149,8 @@ namespace System.Threading.Tasks
         {
             Debug.Fail(SR.ParallelState_NotSupportedException_UnsupportedMethod);
             throw new NotSupportedException(
-                    SR.ParallelState_NotSupportedException_UnsupportedMethod);
+                SR.ParallelState_NotSupportedException_UnsupportedMethod
+            );
         }
 
         /// <summary>
@@ -185,15 +190,22 @@ namespace System.Threading.Tasks
             int oldValue = ParallelLoopStateFlags.ParallelLoopStateNone;
 
             // Attempt to change state from "not stopped or broken or canceled or exceptional" to "broken".
-            if (!pflags.AtomicLoopStateUpdate(ParallelLoopStateFlags.ParallelLoopStateBroken,
-                                             ParallelLoopStateFlags.ParallelLoopStateStopped | ParallelLoopStateFlags.ParallelLoopStateExceptional | ParallelLoopStateFlags.ParallelLoopStateCanceled,
-                                             ref oldValue))
+            if (
+                !pflags.AtomicLoopStateUpdate(
+                    ParallelLoopStateFlags.ParallelLoopStateBroken,
+                    ParallelLoopStateFlags.ParallelLoopStateStopped
+                        | ParallelLoopStateFlags.ParallelLoopStateExceptional
+                        | ParallelLoopStateFlags.ParallelLoopStateCanceled,
+                    ref oldValue
+                )
+            )
             {
                 // If we were already stopped, we have a problem
                 if ((oldValue & ParallelLoopStateFlags.ParallelLoopStateStopped) != 0)
                 {
                     throw new InvalidOperationException(
-                        SR.ParallelState_Break_InvalidOperationException_BreakAfterStop);
+                        SR.ParallelState_Break_InvalidOperationException_BreakAfterStop
+                    );
                 }
                 else
                 {
@@ -208,14 +220,15 @@ namespace System.Threading.Tasks
             if (iteration < oldLBI)
             {
                 SpinWait wait = default;
-                while (Interlocked.CompareExchange(
-                    ref pflags._lowestBreakIteration,
-                        iteration,
-                        oldLBI) != oldLBI)
+                while (
+                    Interlocked.CompareExchange(ref pflags._lowestBreakIteration, iteration, oldLBI)
+                    != oldLBI
+                )
                 {
                     wait.SpinOnce();
                     oldLBI = pflags._lowestBreakIteration;
-                    if (iteration > oldLBI) break;
+                    if (iteration > oldLBI)
+                        break;
                 }
             }
         }
@@ -226,15 +239,22 @@ namespace System.Threading.Tasks
             int oldValue = ParallelLoopStateFlags.ParallelLoopStateNone;
 
             // Attempt to change state from "not stopped or broken or canceled or exceptional" to "broken".
-            if (!pflags.AtomicLoopStateUpdate(ParallelLoopStateFlags.ParallelLoopStateBroken,
-                                             ParallelLoopStateFlags.ParallelLoopStateStopped | ParallelLoopStateFlags.ParallelLoopStateExceptional | ParallelLoopStateFlags.ParallelLoopStateCanceled,
-                                             ref oldValue))
+            if (
+                !pflags.AtomicLoopStateUpdate(
+                    ParallelLoopStateFlags.ParallelLoopStateBroken,
+                    ParallelLoopStateFlags.ParallelLoopStateStopped
+                        | ParallelLoopStateFlags.ParallelLoopStateExceptional
+                        | ParallelLoopStateFlags.ParallelLoopStateCanceled,
+                    ref oldValue
+                )
+            )
             {
                 // If we were already stopped, we have a problem
                 if ((oldValue & ParallelLoopStateFlags.ParallelLoopStateStopped) != 0)
                 {
                     throw new InvalidOperationException(
-                        SR.ParallelState_Break_InvalidOperationException_BreakAfterStop);
+                        SR.ParallelState_Break_InvalidOperationException_BreakAfterStop
+                    );
                 }
                 else
                 {
@@ -249,14 +269,15 @@ namespace System.Threading.Tasks
             if (iteration < oldLBI)
             {
                 SpinWait wait = default;
-                while (Interlocked.CompareExchange(
-                    ref pflags._lowestBreakIteration,
-                        iteration,
-                        oldLBI) != oldLBI)
+                while (
+                    Interlocked.CompareExchange(ref pflags._lowestBreakIteration, iteration, oldLBI)
+                    != oldLBI
+                )
                 {
                     wait.SpinOnce();
                     oldLBI = pflags.LowestBreakIteration;
-                    if (iteration > oldLBI) break;
+                    if (iteration > oldLBI)
+                        break;
                 }
             }
         }
@@ -423,8 +444,12 @@ namespace System.Threading.Tasks
             do
             {
                 oldState = _loopStateFlags;
-                if ((oldState & illegalStates) != 0) return false;
-                if (Interlocked.CompareExchange(ref _loopStateFlags, oldState | newState, oldState) == oldState)
+                if ((oldState & illegalStates) != 0)
+                    return false;
+                if (
+                    Interlocked.CompareExchange(ref _loopStateFlags, oldState | newState, oldState)
+                    == oldState
+                )
                 {
                     return true;
                 }
@@ -443,7 +468,9 @@ namespace System.Threading.Tasks
             // disallow setting of ParallelLoopStateStopped bit only if ParallelLoopStateBroken was already set
             if (!AtomicLoopStateUpdate(ParallelLoopStateStopped, ParallelLoopStateBroken))
             {
-                throw new InvalidOperationException(SR.ParallelState_Stop_InvalidOperationException_StopAfterBreak);
+                throw new InvalidOperationException(
+                    SR.ParallelState_Stop_InvalidOperationException_StopAfterBreak
+                );
             }
         }
 
@@ -477,17 +504,19 @@ namespace System.Threading.Tasks
         {
             get
             {
-                if (_lowestBreakIteration == int.MaxValue) return null;
+                if (_lowestBreakIteration == int.MaxValue)
+                    return null;
                 else
                 {
                     // protect against torn read of 64-bit value
                     long rval = _lowestBreakIteration;
-                    if (IntPtr.Size >= 8) return rval;
-                    else return Interlocked.Read(ref rval);
+                    if (IntPtr.Size >= 8)
+                        return rval;
+                    else
+                        return Interlocked.Read(ref rval);
                 }
             }
         }
-
 
         /// <summary>
         /// Lets the caller know whether or not to prematurely exit the For/ForEach loop.
@@ -507,9 +536,25 @@ namespace System.Threading.Tasks
         internal bool ShouldExitLoop(int CallerIteration)
         {
             int flags = LoopStateFlags;
-            return (flags != ParallelLoopStateNone && (
-                            ((flags & (ParallelLoopStateExceptional | ParallelLoopStateStopped | ParallelLoopStateCanceled)) != 0) ||
-                            (((flags & ParallelLoopStateBroken) != 0) && (CallerIteration > LowestBreakIteration))));
+            return (
+                flags != ParallelLoopStateNone
+                && (
+                    (
+                        (
+                            flags
+                            & (
+                                ParallelLoopStateExceptional
+                                | ParallelLoopStateStopped
+                                | ParallelLoopStateCanceled
+                            )
+                        ) != 0
+                    )
+                    || (
+                        ((flags & ParallelLoopStateBroken) != 0)
+                        && (CallerIteration > LowestBreakIteration)
+                    )
+                )
+            );
         }
 
         // This lighter version of ShouldExitLoop will be used when the body type doesn't contain a state.
@@ -517,7 +562,10 @@ namespace System.Threading.Tasks
         internal bool ShouldExitLoop()
         {
             int flags = LoopStateFlags;
-            return ((flags != ParallelLoopStateNone) && ((flags & (ParallelLoopStateExceptional | ParallelLoopStateCanceled)) != 0));
+            return (
+                (flags != ParallelLoopStateNone)
+                && ((flags & (ParallelLoopStateExceptional | ParallelLoopStateCanceled)) != 0)
+            );
         }
     }
 
@@ -537,8 +585,10 @@ namespace System.Threading.Tasks
         {
             get
             {
-                if (IntPtr.Size >= 8) return _lowestBreakIteration;
-                else return Interlocked.Read(ref _lowestBreakIteration);
+                if (IntPtr.Size >= 8)
+                    return _lowestBreakIteration;
+                else
+                    return Interlocked.Read(ref _lowestBreakIteration);
             }
         }
 
@@ -547,11 +597,14 @@ namespace System.Threading.Tasks
         {
             get
             {
-                if (_lowestBreakIteration == long.MaxValue) return null;
+                if (_lowestBreakIteration == long.MaxValue)
+                    return null;
                 else
                 {
-                    if (IntPtr.Size >= 8) return _lowestBreakIteration;
-                    else return Interlocked.Read(ref _lowestBreakIteration);
+                    if (IntPtr.Size >= 8)
+                        return _lowestBreakIteration;
+                    else
+                        return Interlocked.Read(ref _lowestBreakIteration);
                 }
             }
         }
@@ -574,9 +627,25 @@ namespace System.Threading.Tasks
         internal bool ShouldExitLoop(long CallerIteration)
         {
             int flags = LoopStateFlags;
-            return (flags != ParallelLoopStateNone && (
-                            ((flags & (ParallelLoopStateExceptional | ParallelLoopStateStopped | ParallelLoopStateCanceled)) != 0) ||
-                            (((flags & ParallelLoopStateBroken) != 0) && (CallerIteration > LowestBreakIteration))));
+            return (
+                flags != ParallelLoopStateNone
+                && (
+                    (
+                        (
+                            flags
+                            & (
+                                ParallelLoopStateExceptional
+                                | ParallelLoopStateStopped
+                                | ParallelLoopStateCanceled
+                            )
+                        ) != 0
+                    )
+                    || (
+                        ((flags & ParallelLoopStateBroken) != 0)
+                        && (CallerIteration > LowestBreakIteration)
+                    )
+                )
+            );
         }
 
         // This lighter version of ShouldExitLoop will be used when the body type doesn't contain a state.
@@ -584,7 +653,10 @@ namespace System.Threading.Tasks
         internal bool ShouldExitLoop()
         {
             int flags = LoopStateFlags;
-            return ((flags != ParallelLoopStateNone) && ((flags & (ParallelLoopStateExceptional | ParallelLoopStateCanceled)) != 0));
+            return (
+                (flags != ParallelLoopStateNone)
+                && ((flags & (ParallelLoopStateExceptional | ParallelLoopStateCanceled)) != 0)
+            );
         }
     }
 
@@ -608,7 +680,10 @@ namespace System.Threading.Tasks
         /// Gets whether the loop ran to completion, such that all iterations of the loop were executed
         /// and the loop didn't receive a request to end prematurely.
         /// </summary>
-        public bool IsCompleted { get { return _completed; } }
+        public bool IsCompleted
+        {
+            get { return _completed; }
+        }
 
         /// <summary>
         /// Gets the index of the lowest iteration from which <see
@@ -619,6 +694,9 @@ namespace System.Threading.Tasks
         /// If <see cref="System.Threading.Tasks.ParallelLoopState.Break()"/> was not employed, this property will
         /// return null.
         /// </remarks>
-        public long? LowestBreakIteration { get { return _lowestBreakIteration; } }
+        public long? LowestBreakIteration
+        {
+            get { return _lowestBreakIteration; }
+        }
     }
 }

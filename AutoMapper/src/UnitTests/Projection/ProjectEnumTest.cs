@@ -13,21 +13,36 @@ namespace AutoMapper.UnitTests.Projection
 
         public ProjectEnumTest()
         {
-            _config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateProjection<Customer, CustomerDto>();
-                cfg.CreateProjection<CustomerType, string>().ConvertUsing(ct => ct.ToString().ToUpper());
-            });
+            _config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerDto>();
+                    cfg.CreateProjection<CustomerType, string>()
+                        .ConvertUsing(ct => ct.ToString().ToUpper());
+                }
+            );
         }
 
         [Fact]
         public void ProjectingEnumToString()
         {
-            var customers = new[] { new Customer() { FirstName = "Bill", LastName = "White", CustomerType = CustomerType.Vip } }.AsQueryable();
+            var customers = new[]
+            {
+                new Customer()
+                {
+                    FirstName = "Bill",
+                    LastName = "White",
+                    CustomerType = CustomerType.Vip
+                }
+            }.AsQueryable();
 
             var projected = customers.ProjectTo<CustomerDto>(_config);
             projected.ShouldNotBeNull();
-            Assert.Equal(customers.Single().CustomerType.ToString(), projected.Single().CustomerType, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                customers.Single().CustomerType.ToString(),
+                projected.Single().CustomerType,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public class Customer
@@ -57,26 +72,28 @@ namespace AutoMapper.UnitTests.Projection
 
     public class ProjectionOverrides : NonValidatingSpecBase
     {
-        public class Source
-        {
-            
-        }
+        public class Source { }
 
         public class Dest
         {
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateProjection<Source, Dest>()
-                .ConvertUsing(src => new Dest {Value = 10});
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Source, Dest>()
+                        .ConvertUsing(src => new Dest { Value = 10 });
+                }
+            );
 
         [Fact]
         public void Should_validate_because_of_overridden_projection()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
+            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
+                Configuration.AssertConfigurationIsValid
+            );
         }
     }
 }

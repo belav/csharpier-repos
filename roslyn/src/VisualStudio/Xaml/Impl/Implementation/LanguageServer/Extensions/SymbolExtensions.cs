@@ -21,7 +21,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 {
     internal static class SymbolExtensions
     {
-        public static async Task<IEnumerable<TaggedText>> GetDescriptionAsync(this ISymbol symbol, TextDocument document, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<TaggedText>> GetDescriptionAsync(
+            this ISymbol symbol,
+            TextDocument document,
+            CancellationToken cancellationToken
+        )
         {
             if (symbol == null)
             {
@@ -29,13 +33,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             }
 
             var codeProject = document.GetCodeProject();
-            var formatter = codeProject.LanguageServices.GetService<IDocumentationCommentFormattingService>();
+            var formatter =
+                codeProject.LanguageServices.GetService<IDocumentationCommentFormattingService>();
             if (formatter == null)
             {
                 return Enumerable.Empty<TaggedText>();
             }
 
-            var symbolDisplayService = codeProject.LanguageServices.GetService<ISymbolDisplayService>();
+            var symbolDisplayService =
+                codeProject.LanguageServices.GetService<ISymbolDisplayService>();
             if (symbolDisplayService == null)
             {
                 return Enumerable.Empty<TaggedText>();
@@ -48,7 +54,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 return Enumerable.Empty<TaggedText>();
             }
 
-            var semanticModel = await codeDocument.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await codeDocument
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (semanticModel == null)
             {
                 return Enumerable.Empty<TaggedText>();
@@ -56,7 +64,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 
             var services = codeProject.Solution.Workspace.Services;
             var options = SymbolDescriptionOptions.From(document.Project);
-            var quickInfo = await QuickInfoUtilities.CreateQuickInfoItemAsync(services, semanticModel, span: default, ImmutableArray.Create(symbol), options, cancellationToken).ConfigureAwait(false);
+            var quickInfo = await QuickInfoUtilities
+                .CreateQuickInfoItemAsync(
+                    services,
+                    semanticModel,
+                    span: default,
+                    ImmutableArray.Create(symbol),
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var builder = new List<TaggedText>();
             foreach (var section in quickInfo.Sections)
             {

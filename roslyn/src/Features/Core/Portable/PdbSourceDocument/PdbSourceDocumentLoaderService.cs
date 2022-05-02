@@ -20,16 +20,21 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PdbSourceDocumentLoaderService()
-        {
-        }
+        public PdbSourceDocumentLoaderService() { }
 
-        public Task<TextLoader?> LoadSourceDocumentAsync(SourceDocument sourceDocument, CancellationToken cancellationToken)
+        public Task<TextLoader?> LoadSourceDocumentAsync(
+            SourceDocument sourceDocument,
+            CancellationToken cancellationToken
+        )
         {
             // If we already have the embedded text then use that directly
             if (sourceDocument.EmbeddedText is not null)
             {
-                var textAndVersion = TextAndVersion.Create(sourceDocument.EmbeddedText, VersionStamp.Default, sourceDocument.FilePath);
+                var textAndVersion = TextAndVersion.Create(
+                    sourceDocument.EmbeddedText,
+                    VersionStamp.Default,
+                    sourceDocument.FilePath
+                );
                 return Task.FromResult<TextLoader?>(TextLoader.From(textAndVersion));
             }
 
@@ -50,17 +55,30 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
         private static TextLoader? TryLoadSourceFromDisk(SourceDocument sourceDocument)
         {
-            using var fileStream = new FileStream(sourceDocument.FilePath, FileMode.Open, FileAccess.Read, FileShare.Read | FileShare.Delete);
+            using var fileStream = new FileStream(
+                sourceDocument.FilePath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read | FileShare.Delete
+            );
             if (fileStream is null)
                 return null;
 
             // TODO: Don't hard code UTF8: https://github.com/dotnet/roslyn/issues/57350
-            var sourceText = SourceText.From(fileStream, Encoding.UTF8, sourceDocument.HashAlgorithm);
+            var sourceText = SourceText.From(
+                fileStream,
+                Encoding.UTF8,
+                sourceDocument.HashAlgorithm
+            );
             var fileChecksum = sourceText.GetChecksum();
 
             if (fileChecksum.SequenceEqual(sourceDocument.Checksum))
             {
-                var textAndVersion = TextAndVersion.Create(sourceText, VersionStamp.Default, sourceDocument.FilePath);
+                var textAndVersion = TextAndVersion.Create(
+                    sourceText,
+                    VersionStamp.Default,
+                    sourceDocument.FilePath
+                );
                 return TextLoader.From(textAndVersion);
             }
 

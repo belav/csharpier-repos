@@ -14,16 +14,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// <summary>
 /// A <see cref="IActionResultExecutor{PhysicalFileResult}"/> for <see cref="PhysicalFileResult"/>.
 /// </summary>
-public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultExecutor<PhysicalFileResult>
+public class PhysicalFileResultExecutor
+    : FileResultExecutorBase,
+      IActionResultExecutor<PhysicalFileResult>
 {
     /// <summary>
     /// Initializes a new instance of <see cref="PhysicalFileResultExecutor"/>.
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     public PhysicalFileResultExecutor(ILoggerFactory loggerFactory)
-        : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory))
-    {
-    }
+        : base(CreateLogger<PhysicalFileResultExecutor>(loggerFactory)) { }
 
     /// <inheritdoc />
     public virtual Task ExecuteAsync(ActionContext context, PhysicalFileResult result)
@@ -42,7 +42,9 @@ public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultE
         if (!fileInfo.Exists)
         {
             throw new FileNotFoundException(
-                Resources.FormatFileResult_InvalidPath(result.FileName), result.FileName);
+                Resources.FormatFileResult_InvalidPath(result.FileName),
+                result.FileName
+            );
         }
 
         Logger.ExecutingFileResult(result, result.FileName);
@@ -54,7 +56,8 @@ public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultE
             fileInfo.Length,
             result.EnableRangeProcessing,
             lastModified,
-            result.EntityTag);
+            result.EntityTag
+        );
 
         if (serveBody)
         {
@@ -65,7 +68,12 @@ public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultE
     }
 
     /// <inheritdoc/>
-    protected virtual Task WriteFileAsync(ActionContext context, PhysicalFileResult result, RangeItemHeaderValue? range, long rangeLength)
+    protected virtual Task WriteFileAsync(
+        ActionContext context,
+        PhysicalFileResult result,
+        RangeItemHeaderValue? range,
+        long rangeLength
+    )
     {
         return WriteFileAsyncInternal(context.HttpContext, result, range, rangeLength, Logger);
     }
@@ -75,7 +83,8 @@ public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultE
         PhysicalFileResult result,
         RangeItemHeaderValue? range,
         long rangeLength,
-        ILogger logger)
+        ILogger logger
+    )
     {
         if (httpContext == null)
         {
@@ -95,7 +104,9 @@ public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultE
         var response = httpContext.Response;
         if (!Path.IsPathRooted(result.FileName))
         {
-            throw new NotSupportedException(Resources.FormatFileResult_PathNotRooted(result.FileName));
+            throw new NotSupportedException(
+                Resources.FormatFileResult_PathNotRooted(result.FileName)
+            );
         }
 
         if (range != null)
@@ -105,14 +116,14 @@ public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultE
 
         if (range != null)
         {
-            return response.SendFileAsync(result.FileName,
+            return response.SendFileAsync(
+                result.FileName,
                 offset: range.From ?? 0L,
-                count: rangeLength);
+                count: rangeLength
+            );
         }
 
-        return response.SendFileAsync(result.FileName,
-            offset: 0,
-            count: null);
+        return response.SendFileAsync(result.FileName, offset: 0, count: null);
     }
 
     /// <summary>
@@ -127,14 +138,14 @@ public class PhysicalFileResultExecutor : FileResultExecutorBase, IActionResultE
         }
 
         return new FileStream(
-                path,
-                FileMode.Open,
-                FileAccess.Read,
-                FileShare.ReadWrite,
-                BufferSize,
-                FileOptions.Asynchronous | FileOptions.SequentialScan);
+            path,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.ReadWrite,
+            BufferSize,
+            FileOptions.Asynchronous | FileOptions.SequentialScan
+        );
     }
-
 
     /// <summary>
     /// Get the file metadata for a path.

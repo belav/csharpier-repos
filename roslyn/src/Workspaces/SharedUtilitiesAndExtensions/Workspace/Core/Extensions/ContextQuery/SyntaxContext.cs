@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             bool isAtEndOfPattern,
             bool isRightSideOfNumericType,
             bool isOnArgumentListBracketOrComma,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             this.Document = document;
             this.SemanticModel = semanticModel;
@@ -67,7 +68,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
             this.IsPossibleTupleContext = isPossibleTupleContext;
             this.IsAtStartOfPattern = isAtStartOfPattern;
             this.IsAtEndOfPattern = isAtEndOfPattern;
-            this.InferredTypes = document.GetRequiredLanguageService<ITypeInferenceService>().InferTypes(semanticModel, position, cancellationToken);
+            this.InferredTypes = document
+                .GetRequiredLanguageService<ITypeInferenceService>()
+                .InferTypes(semanticModel, position, cancellationToken);
             this.IsRightSideOfNumericType = isRightSideOfNumericType;
             this.IsOnArgumentListBracketOrComma = isOnArgumentListBracketOrComma;
         }
@@ -117,7 +120,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
 
         private ISet<INamedTypeSymbol> ComputeOuterTypes(CancellationToken cancellationToken)
         {
-            var enclosingSymbol = this.SemanticModel.GetEnclosingSymbol(this.LeftToken.SpanStart, cancellationToken);
+            var enclosingSymbol = this.SemanticModel.GetEnclosingSymbol(
+                this.LeftToken.SpanStart,
+                cancellationToken
+            );
             if (enclosingSymbol != null)
             {
                 var containingType = enclosingSymbol.GetContainingTypeOrThis();
@@ -136,13 +142,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
         {
             if (_outerTypes == null)
             {
-                Interlocked.CompareExchange(ref _outerTypes, ComputeOuterTypes(cancellationToken), null);
+                Interlocked.CompareExchange(
+                    ref _outerTypes,
+                    ComputeOuterTypes(cancellationToken),
+                    null
+                );
             }
 
             return _outerTypes;
         }
 
-        public TService GetLanguageService<TService>() where TService : class, ILanguageService
-            => Document.GetLanguageService<TService>();
+        public TService GetLanguageService<TService>() where TService : class, ILanguageService =>
+            Document.GetLanguageService<TService>();
     }
 }

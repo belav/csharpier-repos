@@ -25,7 +25,19 @@ internal class Http3StreamContext : HttpConnectionContext
         IHttp3StreamLifetimeHandler streamLifetimeHandler,
         ConnectionContext streamContext,
         Http3PeerSettings clientPeerSettings,
-        Http3PeerSettings serverPeerSettings) : base(connectionId, protocols, altSvcHeader, connectionContext, serviceContext, connectionFeatures, memoryPool, localEndPoint, remoteEndPoint)
+        Http3PeerSettings serverPeerSettings
+    )
+        : base(
+            connectionId,
+            protocols,
+            altSvcHeader,
+            connectionContext,
+            serviceContext,
+            connectionFeatures,
+            memoryPool,
+            localEndPoint,
+            remoteEndPoint
+        )
     {
         StreamLifetimeHandler = streamLifetimeHandler;
         StreamContext = streamContext;

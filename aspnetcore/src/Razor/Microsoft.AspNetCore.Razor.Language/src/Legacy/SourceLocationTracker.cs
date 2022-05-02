@@ -22,18 +22,33 @@ internal static class SourceLocationTracker
             {
                 nextCharacter = text[i + 1];
             }
-            UpdateCharacterCore(text[i], nextCharacter, ref absoluteIndex, ref lineIndex, ref characterIndex);
+            UpdateCharacterCore(
+                text[i],
+                nextCharacter,
+                ref absoluteIndex,
+                ref lineIndex,
+                ref characterIndex
+            );
         }
 
         return new SourceLocation(location.FilePath, absoluteIndex, lineIndex, characterIndex);
     }
 
-    internal static void UpdateCharacterCore(char characterRead, char nextCharacter, ref int absoluteIndex, ref int lineIndex, ref int characterIndex)
+    internal static void UpdateCharacterCore(
+        char characterRead,
+        char nextCharacter,
+        ref int absoluteIndex,
+        ref int lineIndex,
+        ref int characterIndex
+    )
     {
         absoluteIndex++;
 
-        if (Environment.NewLine.Length == 1 && characterRead == Environment.NewLine[0] ||
-            ParserHelpers.IsNewLine(characterRead) && (characterRead != '\r' || nextCharacter != '\n'))
+        if (
+            Environment.NewLine.Length == 1 && characterRead == Environment.NewLine[0]
+            || ParserHelpers.IsNewLine(characterRead)
+                && (characterRead != '\r' || nextCharacter != '\n')
+        )
         {
             lineIndex++;
             characterIndex = 0;

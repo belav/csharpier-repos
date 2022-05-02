@@ -20,14 +20,19 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureCodeStyle
 {
-    public abstract partial class MultipleCodeStyleOptionConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class MultipleCodeStyleOptionConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         protected abstract int OptionIndex { get; }
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        )
         {
             Assert.Single(actions);
-            var nestedActionForOptionIndex = ((AbstractConfigurationActionWithNestedActions)actions[0]).NestedCodeActions[OptionIndex];
+            var nestedActionForOptionIndex = (
+                (AbstractConfigurationActionWithNestedActions)actions[0]
+            ).NestedCodeActions[OptionIndex];
             return base.MassageActions(ImmutableArray.Create(nestedActionForOptionIndex));
         }
 
@@ -35,15 +40,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             /*
                 csharp_style_var_elsewhere
                 csharp_style_var_for_built_in_types
-                csharp_style_var_when_type_is_apparent                
+                csharp_style_var_when_type_is_apparent
              */
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CSharpUseExplicitTypeDiagnosticAnalyzer(), new ConfigureCodeStyleOptionCodeFixProvider());
+                new CSharpUseExplicitTypeDiagnosticAnalyzer(),
+                new ConfigureCodeStyleOptionCodeFixProvider()
+            );
         }
 
         public class VarElsewhere_TrueConfigurationTests : MultipleCodeStyleOptionConfigurationTests
@@ -52,10 +62,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
 
             protected override int CodeActionIndex => 0;
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_Empty_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -72,7 +86,8 @@ class Program1
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -99,7 +114,8 @@ csharp_style_var_elsewhere = true
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -119,7 +135,8 @@ csharp_style_var_for_built_in_types = true:suggestion    ; Comment3
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -145,7 +162,8 @@ csharp_style_var_for_built_in_types = true:suggestion    ; Comment3
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_True_WithoutSeveritySuffix()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -165,7 +183,8 @@ csharp_style_var_for_built_in_types = true    ; Comment3
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -188,10 +207,14 @@ csharp_style_var_for_built_in_types = true    ; Comment3
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidHeader_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -210,7 +233,8 @@ csharp_style_var_elsewhere = false:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -240,7 +264,8 @@ csharp_style_var_elsewhere = true
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_MaintainSeverity_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -259,7 +284,8 @@ csharp_style_var_elsewhere = false:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -281,10 +307,14 @@ csharp_style_var_elsewhere = true:suggestion
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidRule_True()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -303,7 +333,8 @@ csharp_style_var_when_type_is_apparent_error = false:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -329,16 +360,21 @@ csharp_style_var_elsewhere = true
             }
         }
 
-        public class VarForBuiltInTypes_FalseConfigurationTests : MultipleCodeStyleOptionConfigurationTests
+        public class VarForBuiltInTypes_FalseConfigurationTests
+            : MultipleCodeStyleOptionConfigurationTests
         {
             protected override int OptionIndex => 1;
 
             protected override int CodeActionIndex => 1;
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_Empty_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -355,7 +391,8 @@ class Program1
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -382,7 +419,8 @@ csharp_style_var_for_built_in_types = false
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -401,7 +439,8 @@ csharp_style_var_for_built_in_types = true:silent
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -426,7 +465,8 @@ csharp_style_var_for_built_in_types = false:silent
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_False_WithoutSeveritySuffix()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -445,7 +485,8 @@ csharp_style_var_for_built_in_types = true
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -467,10 +508,14 @@ csharp_style_var_for_built_in_types = false
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidHeader_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -489,7 +534,8 @@ csharp_style_var_for_built_in_types = true:silent
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -519,7 +565,8 @@ csharp_style_var_for_built_in_types = false
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_MaintainSeverity_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -538,7 +585,8 @@ csharp_style_var_for_built_in_types = true:suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -560,10 +608,14 @@ csharp_style_var_for_built_in_types = false:suggestion
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidRule_False()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -582,7 +634,8 @@ csharp_style_var_for_built_in_types_error = false:silent
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">

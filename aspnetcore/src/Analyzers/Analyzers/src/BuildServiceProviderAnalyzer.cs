@@ -28,11 +28,16 @@ internal class BuildServiceProviderAnalyzer
             {
                 if (serviceItem.UseMethod.Name == "BuildServiceProvider")
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(
-                        StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod,
-                        serviceItem.Operation.Syntax.GetLocation(),
-                        serviceItem.UseMethod.Name,
-                        serviceAnalysis.ConfigureServicesMethod.Name));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            StartupAnalyzer
+                                .Diagnostics
+                                .BuildServiceProviderShouldNotCalledInConfigureServicesMethod,
+                            serviceItem.Operation.Syntax.GetLocation(),
+                            serviceItem.UseMethod.Name,
+                            serviceAnalysis.ConfigureServicesMethod.Name
+                        )
+                    );
                 }
             }
         }

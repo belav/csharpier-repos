@@ -22,7 +22,6 @@ namespace Roslyn.Utilities
 
         public TimeSpan Elapsed => s_stopwatch.Elapsed - _started;
 
-        public static SharedStopwatch StartNew()
-            => new SharedStopwatch(s_stopwatch.Elapsed);
+        public static SharedStopwatch StartNew() => new SharedStopwatch(s_stopwatch.Elapsed);
     }
 }

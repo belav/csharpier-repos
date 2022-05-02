@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
         [Fact]
         public async Task TestUseVarCodeStyle_AppliesWhenNotUsingVar()
         {
-            var testCode = @"
+            var testCode =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -35,7 +36,8 @@ class C
     }
 }";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -57,13 +59,19 @@ class C
                 ["csharp_style_var_elsewhere"] = "true:error",
             };
 
-            await AssertCodeChangedAsync(testCode, expectedCode, editorConfig, fixCategory: FixCategory.CodeStyle);
+            await AssertCodeChangedAsync(
+                testCode,
+                expectedCode,
+                editorConfig,
+                fixCategory: FixCategory.CodeStyle
+            );
         }
 
         [Fact]
         public async Task TestNonFixableCompilerDiagnostics_AreNotReported()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class C
 {
     public int M()
@@ -72,7 +80,12 @@ class C
     }
 }";
 
-            await AssertNoReportedFileChangesAsync(testCode, "root = true", fixCategory: FixCategory.CodeStyle, codeStyleSeverity: DiagnosticSeverity.Warning);
+            await AssertNoReportedFileChangesAsync(
+                testCode,
+                "root = true",
+                fixCategory: FixCategory.CodeStyle,
+                codeStyleSeverity: DiagnosticSeverity.Warning
+            );
         }
     }
 }

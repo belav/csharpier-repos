@@ -10,7 +10,10 @@ namespace Wasm.Performance.ConsoleHost.Scenarios;
 
 internal class GridScenario : ComponentRenderingScenarioBase
 {
-    readonly CommandOption _gridTypeOption = new CommandOption("--gridtype", CommandOptionType.SingleValue);
+    readonly CommandOption _gridTypeOption = new CommandOption(
+        "--gridtype",
+        CommandOptionType.SingleValue
+    );
 
     public GridScenario() : base("grid")
     {
@@ -20,8 +23,9 @@ internal class GridScenario : ComponentRenderingScenarioBase
     protected override async Task ExecuteAsync(ConsoleHostRenderer renderer, int numCycles)
     {
         var gridType = _gridTypeOption.HasValue()
-            ? (GridRendering.RenderMode)Enum.Parse(typeof(GridRendering.RenderMode), _gridTypeOption.Value(), true)
-            : GridRendering.RenderMode.FastGrid;
+          ? (GridRendering.RenderMode)
+                Enum.Parse(typeof(GridRendering.RenderMode), _gridTypeOption.Value(), true)
+          : GridRendering.RenderMode.FastGrid;
 
         for (var i = 0; i < numCycles; i++)
         {

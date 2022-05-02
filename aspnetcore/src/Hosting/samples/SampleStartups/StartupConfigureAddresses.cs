@@ -17,10 +17,12 @@ public class StartupConfigureAddresses : StartupBase
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public override void Configure(IApplicationBuilder app)
     {
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Hello World!");
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            }
+        );
     }
 
     // Entry point for the application.
@@ -29,14 +31,16 @@ public class StartupConfigureAddresses : StartupBase
         var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
         var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseConfiguration(config)
-                    .UseKestrel()
-                    .UseStartup<StartupConfigureAddresses>()
-                    .UseUrls("http://localhost:5000", "http://localhost:5001");
-            })
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseConfiguration(config)
+                        .UseKestrel()
+                        .UseStartup<StartupConfigureAddresses>()
+                        .UseUrls("http://localhost:5000", "http://localhost:5001");
+                }
+            )
             .Build();
 
         return host.RunAsync();

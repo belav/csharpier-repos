@@ -25,7 +25,9 @@ namespace Microsoft.CodeAnalysis.Serialization
         private static Checksum CreateChecksum(object[] children)
         {
             // given children must be either Checksum or Checksums (collection of a checksum)
-            return Checksum.Create(children.Select(c => c as Checksum ?? ((ChecksumCollection)c).Checksum));
+            return Checksum.Create(
+                children.Select(c => c as Checksum ?? ((ChecksumCollection)c).Checksum)
+            );
         }
     }
 }

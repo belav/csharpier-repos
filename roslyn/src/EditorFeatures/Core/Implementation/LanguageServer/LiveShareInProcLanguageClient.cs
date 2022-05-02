@@ -37,13 +37,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             DefaultCapabilitiesProvider defaultCapabilitiesProvider,
             ILspLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(csharpVBRequestDispatcherFactory, globalOptions, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, lspLoggerFactory, threadingContext, diagnosticsClientName: null)
+            IThreadingContext threadingContext
+        )
+            : base(
+                csharpVBRequestDispatcherFactory,
+                globalOptions,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                lspLoggerFactory,
+                threadingContext,
+                diagnosticsClientName: null
+            )
         {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         public override string Name => "Live Share C#/Visual Basic Language Server Client";
 
@@ -65,12 +76,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 };
             }
 
-            var defaultCapabilities = _defaultCapabilitiesProvider.GetCapabilities(clientCapabilities);
+            var defaultCapabilities = _defaultCapabilitiesProvider.GetCapabilities(
+                clientCapabilities
+            );
 
             // If the LSP semantic tokens feature flag is enabled, advertise no semantic tokens capabilities for this Live Share
             // LSP server as LSP semantic tokens requests will be serviced by the AlwaysActiveInProcLanguageClient in both local and
             // remote scenarios.
-            var isLspSemanticTokenEnabled = GlobalOptions.GetOption(LspOptions.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokenEnabled = GlobalOptions.GetOption(
+                LspOptions.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokenEnabled)
             {
                 defaultCapabilities.SemanticTokensOptions = null;

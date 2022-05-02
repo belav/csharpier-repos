@@ -40,8 +40,13 @@ namespace Microsoft.EntityFrameworkCore.Design
             if (arguments.Length > parameterLength)
             {
                 throw new ArgumentException(
-                    CoreStrings.IncorrectNumberOfArguments(methodInfo.Name, arguments.Length, parameterLength),
-                    nameof(arguments));
+                    CoreStrings.IncorrectNumberOfArguments(
+                        methodInfo.Name,
+                        arguments.Length,
+                        parameterLength
+                    ),
+                    nameof(arguments)
+                );
             }
 
             MethodInfo = methodInfo;
@@ -66,19 +71,21 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="methodInfo">The method's <see cref="MethodInfo" />.</param>
         /// <param name="arguments">The method call's arguments.  Can be <see cref="NestedClosureCodeFragment" />.</param>
         /// <param name="chainedCall">The next method call to chain after this.</param>
-        [Obsolete("Use the constructor without a chained call, and then invoke Chain() on the result", error: true)]
+        [Obsolete(
+            "Use the constructor without a chained call, and then invoke Chain() on the result",
+            error: true
+        )]
         public MethodCallCodeFragment(
             MethodInfo methodInfo,
             object?[] arguments,
-            MethodCallCodeFragment chainedCall)
-            : this(methodInfo, arguments)
-            => throw new NotSupportedException();
+            MethodCallCodeFragment chainedCall
+        ) : this(methodInfo, arguments) => throw new NotSupportedException();
 
         private MethodCallCodeFragment(
             MethodInfo methodInfo,
             MethodCallCodeFragment chainedCall,
-            object?[] arguments)
-            : this(methodInfo, arguments)
+            object?[] arguments
+        ) : this(methodInfo, arguments)
         {
             ChainedCall = chainedCall;
         }
@@ -89,12 +96,14 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="method">The method's name.</param>
         /// <param name="arguments">The method call's arguments.  Can be <see cref="NestedClosureCodeFragment" />.</param>
         /// <param name="chainedCall">The next method call to chain after this.</param>
-        [Obsolete("Use the overload accepting a MethodInfo, and then invoke Chain on the instance for the chained call")]
+        [Obsolete(
+            "Use the overload accepting a MethodInfo, and then invoke Chain on the instance for the chained call"
+        )]
         public MethodCallCodeFragment(
             string method,
             object?[] arguments,
-            MethodCallCodeFragment chainedCall)
-            : this(method, arguments)
+            MethodCallCodeFragment chainedCall
+        ) : this(method, arguments)
         {
             ChainedCall = chainedCall;
         }
@@ -109,29 +118,25 @@ namespace Microsoft.EntityFrameworkCore.Design
         ///     Gets the namespace of the method's declaring type.
         /// </summary>
         /// <value> The declaring type's name. </value>
-        public virtual string? Namespace
-            => MethodInfo?.DeclaringType?.Namespace;
+        public virtual string? Namespace => MethodInfo?.DeclaringType?.Namespace;
 
         /// <summary>
         ///     Gets the name of the method's declaring type.
         /// </summary>
         /// <value> The declaring type's name. </value>
-        public virtual string? DeclaringType
-            => MethodInfo?.DeclaringType?.Name;
+        public virtual string? DeclaringType => MethodInfo?.DeclaringType?.Name;
 
         /// <summary>
         ///     Gets the method's name.
         /// </summary>
         /// <value> The method's name. </value>
-        public virtual string Method
-            => MethodInfo is null ? _method! : MethodInfo.Name;
+        public virtual string Method => MethodInfo is null ? _method! : MethodInfo.Name;
 
         /// <summary>
         ///     Gets the method call's arguments.
         /// </summary>
         /// <value> The method call's arguments. </value>
-        public virtual IReadOnlyList<object?> Arguments
-            => _arguments;
+        public virtual IReadOnlyList<object?> Arguments => _arguments;
 
         /// <summary>
         ///     Gets the next method call to chain after this.
@@ -145,8 +150,10 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="methodInfo">The method's <see cref="MethodInfo" />.</param>
         /// <param name="arguments">The next method call's arguments.</param>
         /// <returns>A new fragment representing the method chain.</returns>
-        public virtual MethodCallCodeFragment Chain(MethodInfo methodInfo, params object[] arguments)
-            => Chain(new MethodCallCodeFragment(methodInfo, arguments));
+        public virtual MethodCallCodeFragment Chain(
+            MethodInfo methodInfo,
+            params object[] arguments
+        ) => Chain(new MethodCallCodeFragment(methodInfo, arguments));
 
         /// <summary>
         ///     Creates a method chain from this method to another.
@@ -155,16 +162,16 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <param name="arguments">The next method call's arguments.</param>
         /// <returns>A new fragment representing the method chain.</returns>
         [Obsolete("Use the overload accepting a MethodInfo")]
-        public virtual MethodCallCodeFragment Chain(string method, params object[] arguments)
-            => Chain(new MethodCallCodeFragment(method, arguments));
+        public virtual MethodCallCodeFragment Chain(string method, params object[] arguments) =>
+            Chain(new MethodCallCodeFragment(method, arguments));
 
         /// <summary>
         ///     Creates a method chain from this method to another.
         /// </summary>
         /// <param name="call">The next method.</param>
         /// <returns>A new fragment representing the method chain.</returns>
-        public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call)
-            => MethodInfo is null
+        public virtual MethodCallCodeFragment Chain(MethodCallCodeFragment call) =>
+            MethodInfo is null
 #pragma warning disable 618
                 ? new(_method!, _arguments.ToArray(), ChainedCall?.Chain(call) ?? call)
 #pragma warning restore 618

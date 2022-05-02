@@ -10,9 +10,7 @@ namespace System
 #endif
     sealed class Empty
     {
-        private Empty()
-        {
-        }
+        private Empty() { }
 
         public static readonly Empty Value = new Empty();
 

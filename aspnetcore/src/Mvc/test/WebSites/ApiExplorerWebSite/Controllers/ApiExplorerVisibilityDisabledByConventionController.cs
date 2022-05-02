@@ -9,7 +9,5 @@ namespace ApiExplorerWebSite;
 public class ApiExplorerVisibilityDisabledByConventionController : Controller
 {
     [HttpGet]
-    public void Get()
-    {
-    }
+    public void Get() { }
 }

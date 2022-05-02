@@ -19,8 +19,7 @@ namespace System.Net.Mime
         private readonly byte[] _boundaryBytes;
         private bool _writeBoundary = true;
 
-        internal MimeWriter(Stream stream, string boundary)
-            : base(stream, false) // Unnecessary, the underlying MailWriter stream already encodes dots
+        internal MimeWriter(Stream stream, string boundary) : base(stream, false) // Unnecessary, the underlying MailWriter stream already encodes dots
         {
             if (boundary == null)
                 throw new ArgumentNullException(nameof(boundary));

@@ -16,7 +16,10 @@ namespace Microsoft.Extensions.Configuration
     /// ConfigurationManager is a mutable configuration object. It is both an <see cref="IConfigurationBuilder"/> and an <see cref="IConfigurationRoot"/>.
     /// As sources are added, it updates its current view of configuration. Once Build is called, configuration is frozen.
     /// </summary>
-    public sealed class ConfigurationManager : IConfigurationBuilder, IConfigurationRoot, IDisposable
+    public sealed class ConfigurationManager
+        : IConfigurationBuilder,
+          IConfigurationRoot,
+          IDisposable
     {
         private readonly ConfigurationSources _sources;
         private readonly ConfigurationBuilderProperties _properties;
@@ -119,7 +122,10 @@ namespace Microsoft.Extensions.Configuration
 
         private void RaiseChanged()
         {
-            var previousToken = Interlocked.Exchange(ref _changeToken, new ConfigurationReloadToken());
+            var previousToken = Interlocked.Exchange(
+                ref _changeToken,
+                new ConfigurationReloadToken()
+            );
             previousToken.OnReload();
         }
 
@@ -132,7 +138,9 @@ namespace Microsoft.Extensions.Configuration
                 _providers.Add(provider);
 
                 provider.Load();
-                _changeTokenRegistrations.Add(ChangeToken.OnChange(() => provider.GetReloadToken(), () => RaiseChanged()));
+                _changeTokenRegistrations.Add(
+                    ChangeToken.OnChange(() => provider.GetReloadToken(), () => RaiseChanged())
+                );
             }
 
             RaiseChanged();
@@ -156,7 +164,9 @@ namespace Microsoft.Extensions.Configuration
                 foreach (var p in _providers)
                 {
                     p.Load();
-                    _changeTokenRegistrations.Add(ChangeToken.OnChange(() => p.GetReloadToken(), () => RaiseChanged()));
+                    _changeTokenRegistrations.Add(
+                        ChangeToken.OnChange(() => p.GetReloadToken(), () => RaiseChanged())
+                    );
                 }
             }
 

@@ -13,16 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class InterpolatedStringExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<InterpolatedStringExpressionSyntax>
+    public class InterpolatedStringExpressionStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<InterpolatedStringExpressionSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider()
-            => new InterpolatedStringExpressionStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new InterpolatedStringExpressionStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestMultiLineStringLiteral()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -33,21 +34,23 @@ class C
 ""|}|};
     }
 }",
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestMissingOnIncompleteStringLiteral()
         {
             await VerifyNoBlockSpansAsync(
-@"
+                @"
 class C
 {
     void M()
     {
         var v = $$$"";
     }
-}");
+}"
+            );
         }
     }
 }

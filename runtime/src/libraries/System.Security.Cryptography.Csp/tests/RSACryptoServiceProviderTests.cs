@@ -113,7 +113,10 @@ namespace System.Security.Cryptography.Csp.Tests
                 Assert.Equal(PROV_RSA_AES, keyContainerInfo.ProviderType);
 
                 // This shouldn't be localized, so it should be safe to test on all cultures
-                Assert.Equal("Microsoft Enhanced RSA and AES Cryptographic Provider", keyContainerInfo.ProviderName);
+                Assert.Equal(
+                    "Microsoft Enhanced RSA and AES Cryptographic Provider",
+                    keyContainerInfo.ProviderName
+                );
 
                 Assert.Null(keyContainerInfo.KeyContainerName);
                 Assert.Equal(string.Empty, keyContainerInfo.UniqueKeyContainerName);
@@ -160,14 +163,20 @@ namespace System.Security.Cryptography.Csp.Tests
                 using (var rsa = new RSACryptoServiceProvider(KeySize, cspParameters))
                 {
                     Assert.True(rsa.PersistKeyInCsp, "rsa.PersistKeyInCsp");
-                    Assert.Equal(cspParameters.KeyContainerName, rsa.CspKeyContainerInfo.KeyContainerName);
+                    Assert.Equal(
+                        cspParameters.KeyContainerName,
+                        rsa.CspKeyContainerInfo.KeyContainerName
+                    );
 
                     uniqueKeyContainerName = rsa.CspKeyContainerInfo.UniqueKeyContainerName;
                     Assert.NotNull(uniqueKeyContainerName);
                     Assert.NotEqual(string.Empty, uniqueKeyContainerName);
 
                     privateBlob = rsa.ExportCspBlob(true);
-                    Assert.True(rsa.CspKeyContainerInfo.Exportable, "rsa.CspKeyContainerInfo.Exportable");
+                    Assert.True(
+                        rsa.CspKeyContainerInfo.Exportable,
+                        "rsa.CspKeyContainerInfo.Exportable"
+                    );
                 }
 
                 // Fail if the key didn't persist
@@ -178,7 +187,10 @@ namespace System.Security.Cryptography.Csp.Tests
                     Assert.True(rsa.PersistKeyInCsp);
                     Assert.Equal(KeySize, rsa.KeySize);
 
-                    Assert.Equal(uniqueKeyContainerName, rsa.CspKeyContainerInfo.UniqueKeyContainerName);
+                    Assert.Equal(
+                        uniqueKeyContainerName,
+                        rsa.CspKeyContainerInfo.UniqueKeyContainerName
+                    );
 
                     byte[] blob2 = rsa.ExportCspBlob(true);
                     Assert.Equal(privateBlob, blob2);
@@ -209,7 +221,10 @@ namespace System.Security.Cryptography.Csp.Tests
 
                     privateBlob = rsa.ExportCspBlob(true);
 
-                    Assert.Equal(cspParameters.KeyContainerName, rsa.CspKeyContainerInfo.KeyContainerName);
+                    Assert.Equal(
+                        cspParameters.KeyContainerName,
+                        rsa.CspKeyContainerInfo.KeyContainerName
+                    );
 
                     uniqueKeyContainerName = rsa.CspKeyContainerInfo.UniqueKeyContainerName;
                     Assert.NotNull(uniqueKeyContainerName);
@@ -227,7 +242,10 @@ namespace System.Security.Cryptography.Csp.Tests
                     // Since we're specifying the provider explicitly it should still match.
                     Assert.Equal(PROV_RSA_FULL, rsa.CspKeyContainerInfo.ProviderType);
 
-                    Assert.Equal(uniqueKeyContainerName, rsa.CspKeyContainerInfo.UniqueKeyContainerName);
+                    Assert.Equal(
+                        uniqueKeyContainerName,
+                        rsa.CspKeyContainerInfo.UniqueKeyContainerName
+                    );
 
                     byte[] blob2 = rsa.ExportCspBlob(true);
                     Assert.Equal(privateBlob, blob2);
@@ -268,7 +286,10 @@ namespace System.Security.Cryptography.Csp.Tests
             {
                 using (var rsa = new RSACryptoServiceProvider(cspParameters))
                 {
-                    Assert.False(rsa.CspKeyContainerInfo.Exportable, "rsa.CspKeyContainerInfo.Exportable");
+                    Assert.False(
+                        rsa.CspKeyContainerInfo.Exportable,
+                        "rsa.CspKeyContainerInfo.Exportable"
+                    );
 
                     Assert.ThrowsAny<CryptographicException>(() => rsa.ExportCspBlob(true));
                     Assert.ThrowsAny<CryptographicException>(() => rsa.ExportParameters(true));
@@ -281,8 +302,12 @@ namespace System.Security.Cryptography.Csp.Tests
         public static void Ctor_UseCspParameter_Throws_Unix()
         {
             var cspParameters = new CspParameters();
-            Assert.Throws<PlatformNotSupportedException>(() => new RSACryptoServiceProvider(cspParameters));
-            Assert.Throws<PlatformNotSupportedException>(() => new RSACryptoServiceProvider(0, cspParameters));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new RSACryptoServiceProvider(cspParameters)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => new RSACryptoServiceProvider(0, cspParameters)
+            );
         }
 
         [Fact]
@@ -301,7 +326,9 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 // Verify that Unix shims and Windows Csp both throws the same exception when large Exponent imported
-                Assert.ThrowsAny<CryptographicException>(() => rsa.ImportParameters(TestData.RsaBigExponentParams));
+                Assert.ThrowsAny<CryptographicException>(
+                    () => rsa.ImportParameters(TestData.RsaBigExponentParams)
+                );
             }
         }
 
@@ -334,7 +361,9 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(() => rsa.Encrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256));
+                Assert.Throws<CryptographicException>(
+                    () => rsa.Encrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256)
+                );
             }
         }
 
@@ -343,7 +372,9 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(() => rsa.Decrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256));
+                Assert.Throws<CryptographicException>(
+                    () => rsa.Decrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256)
+                );
             }
         }
 
@@ -352,7 +383,14 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(() => rsa.SignData(TestData.HelloBytes, HashAlgorithmName.SHA1, RSASignaturePadding.Pss));
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        rsa.SignData(
+                            TestData.HelloBytes,
+                            HashAlgorithmName.SHA1,
+                            RSASignaturePadding.Pss
+                        )
+                );
             }
         }
 
@@ -362,7 +400,15 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 byte[] sig = rsa.SignData(TestData.HelloBytes, "SHA1");
-                Assert.Throws<CryptographicException>(() => rsa.VerifyData(TestData.HelloBytes, sig, HashAlgorithmName.SHA1, RSASignaturePadding.Pss));
+                Assert.Throws<CryptographicException>(
+                    () =>
+                        rsa.VerifyData(
+                            TestData.HelloBytes,
+                            sig,
+                            HashAlgorithmName.SHA1,
+                            RSASignaturePadding.Pss
+                        )
+                );
             }
         }
 
@@ -403,13 +449,13 @@ namespace System.Security.Cryptography.Csp.Tests
 
             internal RsaKeyLifetime(CspParameters cspParameters)
             {
-                const CspProviderFlags CopyableFlags =
-                    CspProviderFlags.UseMachineKeyStore;
+                const CspProviderFlags CopyableFlags = CspProviderFlags.UseMachineKeyStore;
 
                 _cspParameters = new CspParameters(
                     cspParameters.ProviderType,
                     cspParameters.ProviderName,
-                    cspParameters.KeyContainerName)
+                    cspParameters.KeyContainerName
+                )
                 {
                     // If the test failed before creating the key, don't bother recreating it.
                     Flags = (cspParameters.Flags & CopyableFlags) | CspProviderFlags.UseExistingKey,
@@ -426,9 +472,7 @@ namespace System.Security.Cryptography.Csp.Tests
                         rsa.PersistKeyInCsp = false;
                     }
                 }
-                catch (CryptographicException)
-                {
-                }
+                catch (CryptographicException) { }
             }
         }
     }

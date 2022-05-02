@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class VirtualKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validMemberModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
             SyntaxKind.ExternKeyword,
             SyntaxKind.InternalKeyword,
@@ -24,24 +26,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.UnsafeKeyword,
         };
 
-        public VirtualKeywordRecommender()
-            : base(SyntaxKind.VirtualKeyword)
-        {
-        }
+        public VirtualKeywordRecommender() : base(SyntaxKind.VirtualKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            if (!context.IsMemberDeclarationContext(
-                validModifiers: s_validMemberModifiers,
-                validTypeDeclarations: SyntaxKindSet.ClassInterfaceRecordTypeDeclarations,
-                canBePartial: false,
-                cancellationToken: cancellationToken))
+            if (
+                !context.IsMemberDeclarationContext(
+                    validModifiers: s_validMemberModifiers,
+                    validTypeDeclarations: SyntaxKindSet.ClassInterfaceRecordTypeDeclarations,
+                    canBePartial: false,
+                    cancellationToken: cancellationToken
+                )
+            )
             {
                 return false;
             }
 
             var modifiers = context.PrecedingModifiers;
-            return !modifiers.Contains(SyntaxKind.PrivateKeyword) || modifiers.Contains(SyntaxKind.ProtectedKeyword);
+            return !modifiers.Contains(SyntaxKind.PrivateKeyword)
+                || modifiers.Contains(SyntaxKind.ProtectedKeyword);
         }
     }
 }

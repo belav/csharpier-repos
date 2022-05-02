@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor
     {
         public IEnumerable<string> ContentTypes { get; }
 
-        public OrderableContentTypeMetadata(IDictionary<string, object> data)
-            : base(data)
+        public OrderableContentTypeMetadata(IDictionary<string, object> data) : base(data)
         {
             this.ContentTypes = (IEnumerable<string>)data.GetValueOrDefault("ContentTypes");
         }

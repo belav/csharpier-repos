@@ -14,6 +14,7 @@ unsafe class Runtime_56743_1
     }
 
     static S* s_s;
+
     static int Foo(S s)
     {
         s_s = &s;
@@ -29,6 +30,9 @@ unsafe class Runtime_56743_1
 
     struct S
     {
-        public int A, B, C, D;
+        public int A,
+            B,
+            C,
+            D;
     }
 }

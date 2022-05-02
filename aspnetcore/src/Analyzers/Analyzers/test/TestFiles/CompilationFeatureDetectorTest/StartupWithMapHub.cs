@@ -12,14 +12,14 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
         {
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<MyHub>("/test");
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapHub<MyHub>("/test");
+                }
+            );
         }
     }
 
-    public class MyHub : Hub
-    {
-    }
+    public class MyHub : Hub { }
 }

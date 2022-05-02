@@ -24,8 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,8 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool GeneratesStableValues
-            => true;
+        public override bool GeneratesStableValues => true;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +47,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
 
             var primaryKey = entityType.FindPrimaryKey()!;
             var discriminator = entityType.GetDiscriminatorValue();
-            if (discriminator != null
-                && !primaryKey.Properties.Contains(entityType.FindDiscriminatorProperty()))
+            if (
+                discriminator != null
+                && !primaryKey.Properties.Contains(entityType.FindDiscriminatorProperty())
+            )
             {
                 AppendString(builder, discriminator);
                 builder.Append('|');
@@ -59,8 +59,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
             var partitionKey = entityType.GetPartitionKeyPropertyName();
             foreach (var property in primaryKey.Properties)
             {
-                if (property.Name == partitionKey
-                    && primaryKey.Properties.Count > 1)
+                if (property.Name == partitionKey && primaryKey.Properties.Count > 1)
                 {
                     continue;
                 }
@@ -118,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.ValueGeneration.Internal
         private static StringBuilder AppendEscape(StringBuilder builder, string stringValue)
         {
             var startingIndex = builder.Length;
-            return builder.Append(stringValue)
+            return builder
+                .Append(stringValue)
                 // We need this to avoid collissions with the value separator
                 .Replace("|", "^|", startingIndex, builder.Length - startingIndex)
                 // These are invalid characters, see https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.documents.resource.id

@@ -25,7 +25,10 @@ namespace System.Web.Mvc.Routing
         // 3 - Unconstrained parameter segments
         // 4 - Constrained wildcard parameter segments
         // 5 - Unconstrained wildcard parameter segments
-        internal static int ComputeDigit(PathContentSegment segment, IDictionary<string, object> constraints)
+        internal static int ComputeDigit(
+            PathContentSegment segment,
+            IDictionary<string, object> constraints
+        )
         {
             if (segment.Subsegments.Count > 1)
             {
@@ -56,11 +59,16 @@ namespace System.Web.Mvc.Routing
             }
         }
 
-        public static decimal Compute(TParsedRoute parsedRoute, IDictionary<string, object> constraints)
+        public static decimal Compute(
+            TParsedRoute parsedRoute,
+            IDictionary<string, object> constraints
+        )
         {
             // Each precedence digit corresponds to one decimal place. For example, 3 segments with precedences 2, 1,
             // and 4 results in a combined precedence of 2.14 (decimal).
-            IList<PathContentSegment> segments = parsedRoute.PathSegments.OfType<PathContentSegment>().ToArray();
+            IList<PathContentSegment> segments = parsedRoute.PathSegments
+                .OfType<PathContentSegment>()
+                .ToArray();
 
             decimal precedence = 0;
             uint divisor = 1; // The first digit occupies the one's place.

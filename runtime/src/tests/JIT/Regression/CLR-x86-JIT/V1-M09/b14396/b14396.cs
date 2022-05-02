@@ -12,8 +12,7 @@ namespace DefaultNamespace
     {
         public static int Main(String[] args)
         {
-
-            byte x = 0xFF;		//	ANDREIS: Added cast operator due compiler error SC0031
+            byte x = 0xFF; //	ANDREIS: Added cast operator due compiler error SC0031
             byte tmp = 255;
             if (tmp == (byte)x)
             {

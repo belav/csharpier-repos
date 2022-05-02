@@ -31,31 +31,70 @@ namespace Microsoft.CodeAnalysis.Options
         public ImmutableArray<OptionStorageLocation> StorageLocations { get; }
 
         public PerLanguageOption(string feature, string name, T defaultValue)
-            : this(feature, name, defaultValue, storageLocations: ImmutableArray<OptionStorageLocation>.Empty)
-        {
-        }
+            : this(
+                feature,
+                name,
+                defaultValue,
+                storageLocations: ImmutableArray<OptionStorageLocation>.Empty
+            ) { }
 
-        public PerLanguageOption(string feature, string name, T defaultValue, params OptionStorageLocation[] storageLocations)
-            : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations.ToImmutableArray())
-        {
-        }
+        public PerLanguageOption(
+            string feature,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation[] storageLocations
+        )
+            : this(
+                feature,
+                group: OptionGroup.Default,
+                name,
+                defaultValue,
+                storageLocations.ToImmutableArray()
+            ) { }
 
-        internal PerLanguageOption(string feature, string name, T defaultValue, OptionStorageLocation storageLocation)
-            : this(feature, name, defaultValue, storageLocations: ImmutableArray.Create(storageLocation))
-        {
-        }
+        internal PerLanguageOption(
+            string feature,
+            string name,
+            T defaultValue,
+            OptionStorageLocation storageLocation
+        )
+            : this(
+                feature,
+                name,
+                defaultValue,
+                storageLocations: ImmutableArray.Create(storageLocation)
+            ) { }
 
-        internal PerLanguageOption(string feature, string name, T defaultValue, ImmutableArray<OptionStorageLocation> storageLocations)
-            : this(feature, OptionGroup.Default, name, defaultValue, storageLocations)
-        {
-        }
+        internal PerLanguageOption(
+            string feature,
+            string name,
+            T defaultValue,
+            ImmutableArray<OptionStorageLocation> storageLocations
+        ) : this(feature, OptionGroup.Default, name, defaultValue, storageLocations) { }
 
-        internal PerLanguageOption(string feature, OptionGroup group, string name, T defaultValue, ImmutableArray<OptionStorageLocation> storageLocations)
-            : this(new OptionDefinition(feature, group, name, defaultValue, typeof(T), isPerLanguage: true), storageLocations)
-        {
-        }
+        internal PerLanguageOption(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            ImmutableArray<OptionStorageLocation> storageLocations
+        )
+            : this(
+                new OptionDefinition(
+                    feature,
+                    group,
+                    name,
+                    defaultValue,
+                    typeof(T),
+                    isPerLanguage: true
+                ),
+                storageLocations
+            ) { }
 
-        internal PerLanguageOption(OptionDefinition optionDefinition, ImmutableArray<OptionStorageLocation> storageLocations)
+        internal PerLanguageOption(
+            OptionDefinition optionDefinition,
+            ImmutableArray<OptionStorageLocation> storageLocations
+        )
         {
             _optionDefinition = optionDefinition;
             StorageLocations = storageLocations;

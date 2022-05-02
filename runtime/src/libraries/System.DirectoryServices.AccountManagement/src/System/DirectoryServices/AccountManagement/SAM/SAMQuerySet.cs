@@ -16,18 +16,25 @@ namespace System.DirectoryServices.AccountManagement
         // We will iterate over all principals under ctxBase, returning only those which are in the list of types and which
         // satisfy ALL the matching properties.
         internal SAMQuerySet(
-                        List<string> schemaTypes,
-                        DirectoryEntries entries,
-                        DirectoryEntry ctxBase,
-                        int sizeLimit,
-                        SAMStoreCtx storeCtx,
-                        SAMMatcher samMatcher)
+            List<string> schemaTypes,
+            DirectoryEntries entries,
+            DirectoryEntry ctxBase,
+            int sizeLimit,
+            SAMStoreCtx storeCtx,
+            SAMMatcher samMatcher
+        )
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "SAMQuerySet: creating for path={0}, sizelimit={1}", ctxBase.Path, sizeLimit);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMQuerySet",
+                "SAMQuerySet: creating for path={0}, sizelimit={1}",
+                ctxBase.Path,
+                sizeLimit
+            );
 
             _schemaTypes = schemaTypes;
             _entries = entries;
-            _sizeLimit = sizeLimit;     // -1 == no limit
+            _sizeLimit = sizeLimit; // -1 == no limit
             _storeCtx = storeCtx;
             _ctxBase = ctxBase;
             _matcher = samMatcher;
@@ -66,11 +73,13 @@ namespace System.DirectoryServices.AccountManagement
             // Have we exceeded the requested size limit?
             if ((_sizeLimit != -1) && (_resultsReturned >= _sizeLimit))
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                        "SAMQuerySet",
-                                        "MoveNext: exceeded sizelimit, ret={0}, limit={1}",
-                                        _resultsReturned,
-                                        _sizeLimit);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMQuerySet",
+                    "MoveNext: exceeded sizelimit, ret={0}, limit={1}",
+                    _resultsReturned,
+                    _sizeLimit
+                );
                 _endReached = true;
             }
 
@@ -100,7 +109,12 @@ namespace System.DirectoryServices.AccountManagement
                     // which would create multithreading issues for us.
                     if (IsOfCorrectType(entry) && _matcher.Matches(entry))
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "MoveNext: found a match on {0}", entry.Path);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMQuerySet",
+                            "MoveNext: found a match on {0}",
+                            entry.Path
+                        );
 
                         // Yes.  It's our new current object
                         _current = entry;
@@ -112,8 +126,7 @@ namespace System.DirectoryServices.AccountManagement
                         needToRetry = true;
                     }
                 }
-            }
-            while (needToRetry);
+            } while (needToRetry);
 
             if (!f)
             {
@@ -178,11 +191,11 @@ namespace System.DirectoryServices.AccountManagement
         private readonly SAMStoreCtx _storeCtx;
         private readonly DirectoryEntry _ctxBase;
         private readonly DirectoryEntries _entries;
-        private readonly IEnumerator _enumerator;  // the enumerator for "entries"
-        private DirectoryEntry _current;  // the DirectoryEntry that we're currently positioned at
+        private readonly IEnumerator _enumerator; // the enumerator for "entries"
+        private DirectoryEntry _current; // the DirectoryEntry that we're currently positioned at
 
         // Filter parameters
-        private readonly int _sizeLimit;  // -1 == no limit
+        private readonly int _sizeLimit; // -1 == no limit
         private readonly List<string> _schemaTypes;
         private readonly SAMMatcher _matcher;
 
@@ -252,33 +265,51 @@ namespace System.DirectoryServices.AccountManagement
             // SIDs).
             if (de.Properties["objectSid"] == null || de.Properties["objectSid"].Count == 0)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "SamMatcher: Matches: skipping no-SID {0}", de.Path);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMQuerySet",
+                    "SamMatcher: Matches: skipping no-SID {0}",
+                    de.Path
+                );
                 return false;
             }
 
             // Try to match each specified property in turn
             foreach (FilterBase filter in _propertiesToMatch.FiltersToApply)
             {
-                FilterPropertyTableEntry entry = (FilterPropertyTableEntry)s_filterPropertiesTable[filter.GetType()];
+                FilterPropertyTableEntry entry = (FilterPropertyTableEntry)
+                    s_filterPropertiesTable[filter.GetType()];
 
                 if (entry == null)
                 {
                     // Must be a property we don't support
                     throw new NotSupportedException(
-                                SR.Format(
-                                        SR.StoreCtxUnsupportedPropertyForQuery,
-                                        PropertyNamesExternal.GetExternalForm(filter.PropertyName)));
+                        SR.Format(
+                            SR.StoreCtxUnsupportedPropertyForQuery,
+                            PropertyNamesExternal.GetExternalForm(filter.PropertyName)
+                        )
+                    );
                 }
 
                 if (!entry.matcher(filter, entry.winNTPropertyName, de))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "SamMatcher: Matches: no match {0}", de.Path);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMQuerySet",
+                        "SamMatcher: Matches: no match {0}",
+                        de.Path
+                    );
                     return false;
                 }
             }
 
             // All tests pass --- it's a match
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "SamMatcher: Matches: match {0}", de.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMQuerySet",
+                "SamMatcher: Matches: match {0}",
+                de.Path
+            );
             return true;
         }
 
@@ -287,29 +318,64 @@ namespace System.DirectoryServices.AccountManagement
         private static readonly object[,] s_filterPropertiesTableRaw =
         {
             // QbeType                                          WinNT Property          Matcher
-            {typeof(DescriptionFilter),                         "Description",              new MatcherDelegate(StringMatcher)},
-            {typeof(DisplayNameFilter),                         "FullName",                 new MatcherDelegate(StringMatcher)},
-            {typeof(SidFilter),                                         "objectSid",                         new MatcherDelegate(SidMatcher)},
-            {typeof(SamAccountNameFilter),                       "Name",                         new MatcherDelegate(SamAccountNameMatcher)},
-
-            {typeof(AuthPrincEnabledFilter),                    "UserFlags",                new MatcherDelegate(UserFlagsMatcher)},
-            {typeof(PermittedWorkstationFilter),                "LoginWorkstations",        new MatcherDelegate(MultiStringMatcher)},
-            {typeof(PermittedLogonTimesFilter),                 "LoginHours",               new MatcherDelegate(BinaryMatcher)},
-            {typeof(ExpirationDateFilter),                      "AccountExpirationDate",    new MatcherDelegate(ExpirationDateMatcher)},
-            {typeof(SmartcardLogonRequiredFilter),              "UserFlags",                new MatcherDelegate(UserFlagsMatcher)},
-            {typeof(DelegationPermittedFilter),                 "UserFlags",                new MatcherDelegate(UserFlagsMatcher)},
-            {typeof(HomeDirectoryFilter),                       "HomeDirectory",            new MatcherDelegate(StringMatcher)},
-            {typeof(HomeDriveFilter),                           "HomeDirDrive",             new MatcherDelegate(StringMatcher)},
-            {typeof(ScriptPathFilter),                          "LoginScript",              new MatcherDelegate(StringMatcher)},
-            {typeof(PasswordNotRequiredFilter),                 "UserFlags",                new MatcherDelegate(UserFlagsMatcher)},
-            {typeof(PasswordNeverExpiresFilter),                "UserFlags",                new MatcherDelegate(UserFlagsMatcher)},
-            {typeof(CannotChangePasswordFilter),                "UserFlags",                new MatcherDelegate(UserFlagsMatcher)},
-            {typeof(AllowReversiblePasswordEncryptionFilter),   "UserFlags",                new MatcherDelegate(UserFlagsMatcher)},
-            {typeof(GroupScopeFilter),                           "groupType",                new MatcherDelegate(GroupTypeMatcher)},
-            {typeof(ExpiredAccountFilter),                           "AccountExpirationDate",                new MatcherDelegate(DateTimeMatcher)},
-            {typeof(LastLogonTimeFilter),                           "LastLogin",                new MatcherDelegate(DateTimeMatcher)},
-            {typeof(PasswordSetTimeFilter),                           "PasswordAge",                new MatcherDelegate(DateTimeMatcher)},
-            {typeof(BadLogonCountFilter),                           "BadPasswordAttempts",                new MatcherDelegate(IntMatcher)},
+            { typeof(DescriptionFilter), "Description", new MatcherDelegate(StringMatcher) },
+            { typeof(DisplayNameFilter), "FullName", new MatcherDelegate(StringMatcher) },
+            { typeof(SidFilter), "objectSid", new MatcherDelegate(SidMatcher) },
+            { typeof(SamAccountNameFilter), "Name", new MatcherDelegate(SamAccountNameMatcher) },
+            { typeof(AuthPrincEnabledFilter), "UserFlags", new MatcherDelegate(UserFlagsMatcher) },
+            {
+                typeof(PermittedWorkstationFilter),
+                "LoginWorkstations",
+                new MatcherDelegate(MultiStringMatcher)
+            },
+            { typeof(PermittedLogonTimesFilter), "LoginHours", new MatcherDelegate(BinaryMatcher) },
+            {
+                typeof(ExpirationDateFilter),
+                "AccountExpirationDate",
+                new MatcherDelegate(ExpirationDateMatcher)
+            },
+            {
+                typeof(SmartcardLogonRequiredFilter),
+                "UserFlags",
+                new MatcherDelegate(UserFlagsMatcher)
+            },
+            {
+                typeof(DelegationPermittedFilter),
+                "UserFlags",
+                new MatcherDelegate(UserFlagsMatcher)
+            },
+            { typeof(HomeDirectoryFilter), "HomeDirectory", new MatcherDelegate(StringMatcher) },
+            { typeof(HomeDriveFilter), "HomeDirDrive", new MatcherDelegate(StringMatcher) },
+            { typeof(ScriptPathFilter), "LoginScript", new MatcherDelegate(StringMatcher) },
+            {
+                typeof(PasswordNotRequiredFilter),
+                "UserFlags",
+                new MatcherDelegate(UserFlagsMatcher)
+            },
+            {
+                typeof(PasswordNeverExpiresFilter),
+                "UserFlags",
+                new MatcherDelegate(UserFlagsMatcher)
+            },
+            {
+                typeof(CannotChangePasswordFilter),
+                "UserFlags",
+                new MatcherDelegate(UserFlagsMatcher)
+            },
+            {
+                typeof(AllowReversiblePasswordEncryptionFilter),
+                "UserFlags",
+                new MatcherDelegate(UserFlagsMatcher)
+            },
+            { typeof(GroupScopeFilter), "groupType", new MatcherDelegate(GroupTypeMatcher) },
+            {
+                typeof(ExpiredAccountFilter),
+                "AccountExpirationDate",
+                new MatcherDelegate(DateTimeMatcher)
+            },
+            { typeof(LastLogonTimeFilter), "LastLogin", new MatcherDelegate(DateTimeMatcher) },
+            { typeof(PasswordSetTimeFilter), "PasswordAge", new MatcherDelegate(DateTimeMatcher) },
+            { typeof(BadLogonCountFilter), "BadPasswordAttempts", new MatcherDelegate(IntMatcher) },
         };
 
         private static readonly Hashtable s_filterPropertiesTable = CreateFilterPropertiesTable();
@@ -324,7 +390,11 @@ namespace System.DirectoryServices.AccountManagement
         // Conversion routines
         //
 
-        private static bool WildcardStringMatch(FilterBase filter, string wildcardFilter, string property)
+        private static bool WildcardStringMatch(
+            FilterBase filter,
+            string wildcardFilter,
+            string property
+        )
         {
             // Build a Regex that matches valueToMatch, and store it on the Filter (so that we don't have
             // to have the CLR constantly reparse the regex string).
@@ -335,7 +405,10 @@ namespace System.DirectoryServices.AccountManagement
             Regex regex = filter.Extra as Regex;
             if (regex == null)
             {
-                regex = new Regex(SAMUtils.PAPIQueryToRegexString(wildcardFilter), RegexOptions.Singleline);
+                regex = new Regex(
+                    SAMUtils.PAPIQueryToRegexString(wildcardFilter),
+                    RegexOptions.Singleline
+                );
                 filter.Extra = regex;
             }
 
@@ -343,25 +416,39 @@ namespace System.DirectoryServices.AccountManagement
 
             return match.Success;
         }
-        // returns true if specified WinNT property's value matches filter.Value
-        private delegate bool MatcherDelegate(FilterBase filter, string winNTPropertyName, DirectoryEntry de);
 
-        private static bool DateTimeMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        // returns true if specified WinNT property's value matches filter.Value
+        private delegate bool MatcherDelegate(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        );
+
+        private static bool DateTimeMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             QbeMatchType valueToMatch = (QbeMatchType)filter.Value;
 
             if (null == valueToMatch.Value)
             {
-                if ((de.Properties.Contains(winNTPropertyName) == false) ||
-                     (de.Properties[winNTPropertyName].Count == 0) ||
-                     (de.Properties[winNTPropertyName].Value == null))
+                if (
+                    (de.Properties.Contains(winNTPropertyName) == false)
+                    || (de.Properties[winNTPropertyName].Count == 0)
+                    || (de.Properties[winNTPropertyName].Value == null)
+                )
                     return true;
             }
             else
             {
                 Debug.Assert(valueToMatch.Value is DateTime);
 
-                if (de.Properties.Contains(winNTPropertyName) && (de.Properties[winNTPropertyName].Value != null))
+                if (
+                    de.Properties.Contains(winNTPropertyName)
+                    && (de.Properties[winNTPropertyName].Value != null)
+                )
                 {
                     DateTime value;
 
@@ -408,15 +495,21 @@ namespace System.DirectoryServices.AccountManagement
             return false;
         }
 
-        private static bool StringMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool StringMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             string valueToMatch = (string)filter.Value;
 
             if (valueToMatch == null)
             {
-                if ((de.Properties.Contains(winNTPropertyName) == false) ||
-                     (de.Properties[winNTPropertyName].Count == 0) ||
-                     (((string)de.Properties[winNTPropertyName].Value).Length == 0))
+                if (
+                    (de.Properties.Contains(winNTPropertyName) == false)
+                    || (de.Properties[winNTPropertyName].Count == 0)
+                    || (((string)de.Properties[winNTPropertyName].Value).Length == 0)
+                )
                     return true;
             }
             else
@@ -435,16 +528,22 @@ namespace System.DirectoryServices.AccountManagement
             return false;
         }
 
-        private static bool IntMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool IntMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             QbeMatchType valueToMatch = (QbeMatchType)filter.Value;
             bool result = false;
 
             if (null == valueToMatch.Value)
             {
-                if ((de.Properties.Contains(winNTPropertyName) == false) ||
-                     (de.Properties[winNTPropertyName].Count == 0) ||
-                     (de.Properties[winNTPropertyName].Value == null))
+                if (
+                    (de.Properties.Contains(winNTPropertyName) == false)
+                    || (de.Properties[winNTPropertyName].Count == 0)
+                    || (de.Properties[winNTPropertyName].Value == null)
+                )
                     result = true;
             }
             else
@@ -470,7 +569,11 @@ namespace System.DirectoryServices.AccountManagement
             return result;
         }
 
-        private static bool SamAccountNameMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool SamAccountNameMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             string samToMatch = (string)filter.Value;
 
@@ -479,12 +582,19 @@ namespace System.DirectoryServices.AccountManagement
             if (index == samToMatch.Length - 1)
                 throw new InvalidOperationException(SR.StoreCtxNT4IdentityClaimWrongForm);
 
-            string samAccountName = (index != -1) ? samToMatch.Substring(index + 1) :    // +1 to skip the '/'
-                                                     samToMatch;
+            string samAccountName =
+                (index != -1)
+                    ? samToMatch.Substring(index + 1)
+                    : // +1 to skip the '/'
+                      samToMatch;
 
             if (de.Properties["Name"].Count > 0 && de.Properties["Name"].Value != null)
             {
-                return WildcardStringMatch(filter, samAccountName, (string)de.Properties["Name"].Value);
+                return WildcardStringMatch(
+                    filter,
+                    samAccountName,
+                    (string)de.Properties["Name"].Value
+                );
                 /*
                 return (String.Compare(((string)de.Properties["Name"].Value),
                                        samAccountName,
@@ -496,7 +606,11 @@ namespace System.DirectoryServices.AccountManagement
             return false;
         }
 
-        private static bool SidMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool SidMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             byte[] sidToMatch = Utils.StringToByteArray((string)filter.Value);
 
@@ -511,14 +625,21 @@ namespace System.DirectoryServices.AccountManagement
             return false;
         }
 
-        private static bool UserFlagsMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool UserFlagsMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             Debug.Assert(winNTPropertyName == "UserFlags");
 
             bool valueToMatch = (bool)filter.Value;
 
             // If it doesn't contain the property, it certainly can't match the user's value
-            if (!de.Properties.Contains(winNTPropertyName) || de.Properties[winNTPropertyName].Count == 0)
+            if (
+                !de.Properties.Contains(winNTPropertyName)
+                || de.Properties[winNTPropertyName].Count == 0
+            )
                 return false;
 
             int value = (int)de.Properties[winNTPropertyName].Value;
@@ -561,25 +682,37 @@ namespace System.DirectoryServices.AccountManagement
                     return !(((value & 0x0080) != 0) ^ valueToMatch);
 
                 default:
-                    Debug.Fail("SAMQuerySet.UserFlagsMatcher: fell off end looking for " + filter.PropertyName);
+                    Debug.Fail(
+                        "SAMQuerySet.UserFlagsMatcher: fell off end looking for "
+                            + filter.PropertyName
+                    );
                     return false;
             }
         }
 
-        private static bool MultiStringMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool MultiStringMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             string valueToMatch = (string)filter.Value;
 
             if (valueToMatch == null)
             {
-                if ((de.Properties.Contains(winNTPropertyName) == false) ||
-                     (de.Properties[winNTPropertyName].Count == 0) ||
-                     (((string)de.Properties[winNTPropertyName].Value).Length == 0))
+                if (
+                    (de.Properties.Contains(winNTPropertyName) == false)
+                    || (de.Properties[winNTPropertyName].Count == 0)
+                    || (((string)de.Properties[winNTPropertyName].Value).Length == 0)
+                )
                     return true;
             }
             else
             {
-                if (de.Properties.Contains(winNTPropertyName) && (de.Properties[winNTPropertyName].Count != 0))
+                if (
+                    de.Properties.Contains(winNTPropertyName)
+                    && (de.Properties[winNTPropertyName].Count != 0)
+                )
                 {
                     foreach (string value in de.Properties[winNTPropertyName])
                     {
@@ -594,15 +727,21 @@ namespace System.DirectoryServices.AccountManagement
             return false;
         }
 
-        private static bool BinaryMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool BinaryMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             byte[] valueToMatch = (byte[])filter.Value;
 
             if (valueToMatch == null)
             {
-                if ((de.Properties.Contains(winNTPropertyName) == false) ||
-                     (de.Properties[winNTPropertyName].Count == 0) ||
-                     (de.Properties[winNTPropertyName].Value == null))
+                if (
+                    (de.Properties.Contains(winNTPropertyName) == false)
+                    || (de.Properties[winNTPropertyName].Count == 0)
+                    || (de.Properties[winNTPropertyName].Value == null)
+                )
                     return true;
             }
             else
@@ -619,7 +758,11 @@ namespace System.DirectoryServices.AccountManagement
             return false;
         }
 
-        private static bool ExpirationDateMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool ExpirationDateMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             Debug.Assert(filter is ExpirationDateFilter);
             Debug.Assert(winNTPropertyName == "AccountExpirationDate");
@@ -628,14 +771,19 @@ namespace System.DirectoryServices.AccountManagement
 
             if (!valueToCompare.HasValue)
             {
-                if ((de.Properties.Contains(winNTPropertyName) == false) ||
-                     (de.Properties[winNTPropertyName].Count == 0) ||
-                     (de.Properties[winNTPropertyName].Value == null))
+                if (
+                    (de.Properties.Contains(winNTPropertyName) == false)
+                    || (de.Properties[winNTPropertyName].Count == 0)
+                    || (de.Properties[winNTPropertyName].Value == null)
+                )
                     return true;
             }
             else
             {
-                if (de.Properties.Contains(winNTPropertyName) && (de.Properties[winNTPropertyName].Value != null))
+                if (
+                    de.Properties.Contains(winNTPropertyName)
+                    && (de.Properties[winNTPropertyName].Value != null)
+                )
                 {
                     DateTime value = (DateTime)de.Properties[winNTPropertyName].Value;
 
@@ -647,7 +795,11 @@ namespace System.DirectoryServices.AccountManagement
             return false;
         }
 
-        private static bool GroupTypeMatcher(FilterBase filter, string winNTPropertyName, DirectoryEntry de)
+        private static bool GroupTypeMatcher(
+            FilterBase filter,
+            string winNTPropertyName,
+            DirectoryEntry de
+        )
         {
             Debug.Assert(winNTPropertyName == "groupType");
             Debug.Assert(filter is GroupScopeFilter);
@@ -694,7 +846,12 @@ namespace System.DirectoryServices.AccountManagement
             // SIDs).
             if (de.Properties["objectSid"] == null || de.Properties["objectSid"].Count == 0)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "FindByDateMatcher: Matches: skipping no-SID {0}", de.Path);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMQuerySet",
+                    "FindByDateMatcher: Matches: skipping no-SID {0}",
+                    de.Path
+                );
                 return false;
             }
 
@@ -710,7 +867,10 @@ namespace System.DirectoryServices.AccountManagement
                     return MatchOnAccountExpirationTime(de);
 
                 default:
-                    Debug.Fail("FindByDateMatcher.Matches: Fell off end looking for propertyToMatch=" + _propertyToMatch.ToString());
+                    Debug.Fail(
+                        "FindByDateMatcher.Matches: Fell off end looking for propertyToMatch="
+                            + _propertyToMatch.ToString()
+                    );
                     return false;
             }
         }
@@ -798,7 +958,10 @@ namespace System.DirectoryServices.AccountManagement
                     return (storeValue <= _valueToMatch);
 
                 default:
-                    Debug.Fail("FindByDateMatcher.TestForMatch: Fell off end looking for matchType=" + _matchType.ToString());
+                    Debug.Fail(
+                        "FindByDateMatcher.TestForMatch: Fell off end looking for matchType="
+                            + _matchType.ToString()
+                    );
                     return false;
             }
         }
@@ -821,14 +984,23 @@ namespace System.DirectoryServices.AccountManagement
             // (In reg-SAM, computers don't have accounts and therefore don't have SIDs, but ADSI
             // creates fake Computer objects for them.  In LSAM, computers CAN have accounts, and thus
             // SIDs).
-            if (groupDE.Properties["objectSid"] == null || groupDE.Properties["objectSid"].Count == 0)
+            if (
+                groupDE.Properties["objectSid"] == null
+                || groupDE.Properties["objectSid"].Count == 0
+            )
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "GroupMemberMatcher: Matches: skipping no-SID group={0}", groupDE.Path);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMQuerySet",
+                    "GroupMemberMatcher: Matches: skipping no-SID group={0}",
+                    groupDE.Path
+                );
                 return false;
             }
 
             // Enumerate the members of the group, looking for a match
-            UnsafeNativeMethods.IADsGroup iADsGroup = (UnsafeNativeMethods.IADsGroup)groupDE.NativeObject;
+            UnsafeNativeMethods.IADsGroup iADsGroup = (UnsafeNativeMethods.IADsGroup)
+                groupDE.NativeObject;
             UnsafeNativeMethods.IADsMembers iADsMembers = iADsGroup.Members();
 
             foreach (UnsafeNativeMethods.IADs nativeMember in ((IEnumerable)iADsMembers))
@@ -838,9 +1010,17 @@ namespace System.DirectoryServices.AccountManagement
                 DirectoryEntry memberDE = new DirectoryEntry(nativeMember);
 
                 // No SID --> not interesting
-                if (memberDE.Properties["objectSid"] == null || memberDE.Properties["objectSid"].Count == 0)
+                if (
+                    memberDE.Properties["objectSid"] == null
+                    || memberDE.Properties["objectSid"].Count == 0
+                )
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "GroupMemberMatcher: Matches: skipping member no-SID member={0}", memberDE.Path);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMQuerySet",
+                        "GroupMemberMatcher: Matches: skipping member no-SID member={0}",
+                        memberDE.Path
+                    );
                     continue;
                 }
 
@@ -849,17 +1029,24 @@ namespace System.DirectoryServices.AccountManagement
                 // Did we find a matching member in the group?
                 if (Utils.AreBytesEqual(memberSid, _memberSidToMatch))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                            "SAMQuerySet",
-                                            "GroupMemberMatcher: Matches: match member={0}, group={1)",
-                                            memberDE.Path,
-                                            groupDE.Path);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMQuerySet",
+                        "GroupMemberMatcher: Matches: match member={0}, group={1)",
+                        memberDE.Path,
+                        groupDE.Path
+                    );
                     return true;
                 }
             }
 
             // We tried all the members in the group and didn't get a match on any
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMQuerySet", "SamMatcher: Matches: no match, group={0}", groupDE.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMQuerySet",
+                "SamMatcher: Matches: no match, group={0}",
+                groupDE.Path
+            );
             return false;
         }
     }

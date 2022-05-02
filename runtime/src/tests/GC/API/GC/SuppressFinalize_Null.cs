@@ -11,7 +11,7 @@ public class Test_SuppressFinalize_Null
     {
         try
         {
-            GC.SuppressFinalize(null);  // should not call the Finalizer() for obj1
+            GC.SuppressFinalize(null); // should not call the Finalizer() for obj1
         }
         catch (ArgumentNullException)
         {
@@ -24,7 +24,6 @@ public class Test_SuppressFinalize_Null
 
         return false;
     }
-
 
     public static int Main()
     {

@@ -22,15 +22,26 @@ namespace Microsoft.CodeAnalysis.Navigation
         /// <param name="options">A set of options. If these options are not supplied the
         /// current set of options from the project's workspace will be used.</param>
         /// <param name="cancellationToken">The token to check for cancellation</param>
-        bool TryNavigateToSymbol(ISymbol symbol, Project project, OptionSet? options = null, CancellationToken cancellationToken = default);
+        bool TryNavigateToSymbol(
+            ISymbol symbol,
+            Project project,
+            OptionSet? options = null,
+            CancellationToken cancellationToken = default
+        );
 
-        /// <returns>True if the navigation was handled, indicating that the caller should not 
+        /// <returns>True if the navigation was handled, indicating that the caller should not
         /// perform the navigation.</returns>
-        Task<bool> TrySymbolNavigationNotifyAsync(ISymbol symbol, Project project, CancellationToken cancellationToken);
+        Task<bool> TrySymbolNavigationNotifyAsync(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>Returns the location file and position we would navigate to for the given <see cref="DefinitionItem"/>.</summary>
         /// <returns>Non-null if the navigation would be handled.</returns>
         Task<(string filePath, LinePosition linePosition)?> GetExternalNavigationSymbolLocationAsync(
-            DefinitionItem definitionItem, CancellationToken cancellationToken);
+            DefinitionItem definitionItem,
+            CancellationToken cancellationToken
+        );
     }
 }

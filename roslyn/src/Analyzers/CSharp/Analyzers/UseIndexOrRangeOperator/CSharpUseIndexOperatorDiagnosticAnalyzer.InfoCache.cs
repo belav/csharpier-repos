@@ -22,19 +22,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             /// The <see cref="T:System.Index"/> type.  Needed so that we only fixup code if we see the type
             /// we're using has an indexer that takes an <see cref="T:System.Index"/>.
             /// </summary>
-            [SuppressMessage("Documentation", "CA1200:Avoid using cref tags with a prefix", Justification = "Required to avoid ambiguous reference warnings.")]
+            [SuppressMessage(
+                "Documentation",
+                "CA1200:Avoid using cref tags with a prefix",
+                Justification = "Required to avoid ambiguous reference warnings."
+            )]
             public readonly INamedTypeSymbol IndexType;
 
             /// <summary>
             /// Mapping from a method like <c>MyType.Get(int)</c> to the <c>Length</c>/<c>Count</c> property for
             /// <c>MyType</c> as well as the optional <c>MyType.Get(System.Index)</c> member if it exists.
             /// </summary>
-            private readonly ConcurrentDictionary<IMethodSymbol, MemberInfo> _methodToMemberInfo = new();
+            private readonly ConcurrentDictionary<IMethodSymbol, MemberInfo> _methodToMemberInfo =
+                new();
 
-            private InfoCache(INamedTypeSymbol indexType)
-                => IndexType = indexType;
+            private InfoCache(INamedTypeSymbol indexType) => IndexType = indexType;
 
-            public static bool TryCreate(Compilation compilation, [NotNullWhen(true)] out InfoCache? infoCache)
+            public static bool TryCreate(
+                Compilation compilation,
+                [NotNullWhen(true)] out InfoCache? infoCache
+            )
             {
                 var indexType = compilation.GetBestTypeByMetadataName("System.Index");
                 if (indexType == null)
@@ -53,7 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 
                 if (IsIntIndexingMethod(methodSymbol))
                 {
-                    memberInfo = _methodToMemberInfo.GetOrAdd(methodSymbol, m => ComputeMemberInfo(m));
+                    memberInfo = _methodToMemberInfo.GetOrAdd(
+                        methodSymbol,
+                        m => ComputeMemberInfo(m)
+                    );
                 }
 
                 return memberInfo.LengthLikeProperty != null;
@@ -87,7 +97,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 else
                 {
                     Debug.Assert(method.MethodKind == MethodKind.Ordinary);
-                    // it's a method like:   `SomeType MyType.Get(int index)`.  Look 
+                    // it's a method like:   `SomeType MyType.Get(int index)`.  Look
                     // for an overload like: `SomeType MyType.Get(Range)`
                     var overloadedIndexMethod = GetOverload(method, IndexType);
                     if (overloadedIndexMethod != null)

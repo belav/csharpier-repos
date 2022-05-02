@@ -20,11 +20,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public string GeneratorTypeName => base.Text;
         public AnalyzerReference AnalyzerReference { get; }
 
-        public SourceGeneratorItem(ProjectId projectId, ISourceGenerator generator, AnalyzerReference analyzerReference)
-            : base(name: SourceGeneratedDocumentIdentity.GetGeneratorTypeName(generator))
+        public SourceGeneratorItem(
+            ProjectId projectId,
+            ISourceGenerator generator,
+            AnalyzerReference analyzerReference
+        ) : base(name: SourceGeneratedDocumentIdentity.GetGeneratorTypeName(generator))
         {
             ProjectId = projectId;
-            GeneratorAssemblyName = SourceGeneratedDocumentIdentity.GetGeneratorAssemblyName(generator);
+            GeneratorAssemblyName = SourceGeneratedDocumentIdentity.GetGeneratorAssemblyName(
+                generator
+            );
             AnalyzerReference = analyzerReference;
         }
 

@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             List<InternalPropertyBuilder>? properties,
             List<InternalIndexBuilder>? indexes,
             List<(InternalKeyBuilder, ConfigurationSource?)>? keys,
-            List<RelationshipSnapshot>? relationships)
+            List<RelationshipSnapshot>? relationships
+        )
         {
             Properties = properties;
             Indexes = indexes;
@@ -32,10 +33,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Relationships = relationships;
         }
 
-        private List<InternalPropertyBuilder>? Properties { [DebuggerStepThrough] get; }
-        private List<RelationshipSnapshot>? Relationships { [DebuggerStepThrough] get; set; }
-        private List<InternalIndexBuilder>? Indexes { [DebuggerStepThrough] get; set; }
-        private List<(InternalKeyBuilder, ConfigurationSource?)>? Keys { [DebuggerStepThrough] get; set; }
+        private List<InternalPropertyBuilder>? Properties
+        {
+            [DebuggerStepThrough]
+            get;
+        }
+        private List<RelationshipSnapshot>? Relationships
+        {
+            [DebuggerStepThrough]
+            get;
+            set;
+        }
+        private List<InternalIndexBuilder>? Indexes
+        {
+            [DebuggerStepThrough]
+            get;
+            set;
+        }
+        private List<(InternalKeyBuilder, ConfigurationSource?)>? Keys
+        {
+            [DebuggerStepThrough]
+            get;
+            set;
+        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -111,7 +131,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 foreach (var detachedKeyTuple in Keys)
                 {
-                    detachedKeyTuple.Item1.Attach(entityTypeBuilder.Metadata.RootType().Builder, detachedKeyTuple.Item2);
+                    detachedKeyTuple.Item1.Attach(
+                        entityTypeBuilder.Metadata.RootType().Builder,
+                        detachedKeyTuple.Item2
+                    );
                 }
             }
 
@@ -120,8 +143,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 foreach (var indexBuilder in Indexes)
                 {
                     var originalEntityType = indexBuilder.Metadata.DeclaringEntityType;
-                    var targetEntityTypeBuilder = originalEntityType.Name == entityTypeBuilder.Metadata.Name
-                        || (!originalEntityType.HasSharedClrType && originalEntityType.ClrType == entityTypeBuilder.Metadata.ClrType)
+                    var targetEntityTypeBuilder =
+                        originalEntityType.Name == entityTypeBuilder.Metadata.Name
+                        || (
+                            !originalEntityType.HasSharedClrType
+                            && originalEntityType.ClrType == entityTypeBuilder.Metadata.ClrType
+                        )
                             ? entityTypeBuilder
                             : originalEntityType.Builder;
                     indexBuilder.Attach(targetEntityTypeBuilder);

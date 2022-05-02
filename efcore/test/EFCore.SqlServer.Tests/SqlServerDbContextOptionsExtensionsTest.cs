@@ -19,7 +19,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie", b => b.MaxBatchSize(123));
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>().Single();
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
+                .Single();
 
             Assert.Equal(123, extension.MaxBatchSize);
         }
@@ -30,7 +32,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie", b => b.CommandTimeout(30));
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>().Single();
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
+                .Single();
 
             Assert.Equal(30, extension.CommandTimeout);
         }
@@ -41,7 +45,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseSqlServer("Database=Crunchie");
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>().Single();
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
+                .Single();
 
             Assert.Equal("Database=Crunchie", extension.ConnectionString);
             Assert.Null(extension.Connection);
@@ -53,7 +59,9 @@ namespace Microsoft.EntityFrameworkCore
             var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
             optionsBuilder.UseSqlServer("Database=Whisper");
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>().Single();
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
+                .Single();
 
             Assert.Equal("Database=Whisper", extension.ConnectionString);
             Assert.Null(extension.Connection);
@@ -67,7 +75,9 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlServer(connection);
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>().Single();
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
+                .Single();
 
             Assert.Same(connection, extension.Connection);
             Assert.Null(extension.ConnectionString);
@@ -81,7 +91,9 @@ namespace Microsoft.EntityFrameworkCore
 
             optionsBuilder.UseSqlServer(connection);
 
-            var extension = optionsBuilder.Options.Extensions.OfType<SqlServerOptionsExtension>().Single();
+            var extension = optionsBuilder.Options.Extensions
+                .OfType<SqlServerOptionsExtension>()
+                .Single();
 
             Assert.Same(connection, extension.Connection);
             Assert.Null(extension.ConnectionString);
@@ -101,21 +113,24 @@ namespace Microsoft.EntityFrameworkCore
                 dbContextOption =>
                 {
                     dbContextOption.EnableDetailedErrors();
-                });
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-            using (var serviceScope = services
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope())
+            using (
+                var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            )
             {
                 var coreOptions = serviceScope.ServiceProvider
-                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CoreOptionsExtension>();
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                    .GetExtension<CoreOptionsExtension>();
 
                 Assert.True(coreOptions.DetailedErrorsEnabled);
 
                 var sqlServerOptions = serviceScope.ServiceProvider
-                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<SqlServerOptionsExtension>();
+                    .GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                    .GetExtension<SqlServerOptionsExtension>();
 
                 Assert.Equal(123, sqlServerOptions.MaxBatchSize);
                 Assert.Equal(30, sqlServerOptions.CommandTimeout);
@@ -125,10 +140,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ApplicationDbContext : DbContext
         {
-            public ApplicationDbContext(DbContextOptions options)
-                   : base(options)
-            {
-            }
+            public ApplicationDbContext(DbContextOptions options) : base(options) { }
         }
     }
 }

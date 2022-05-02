@@ -36,7 +36,8 @@ public static class LinkParserEndpointNameAddressExtensions
     public static RouteValueDictionary? ParsePathByEndpointName(
         this LinkParser parser,
         string endpointName,
-        PathString path)
+        PathString path
+    )
     {
         if (parser == null)
         {

@@ -13,14 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class FieldDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<FieldDeclarationSyntax>
+    public class FieldDeclarationStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<FieldDeclarationSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new FieldDeclarationStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new FieldDeclarationStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestFieldWithComments()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     {|span:// Goo
@@ -28,8 +31,7 @@ class C
     $$int F;
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("span", "// Goo ...", autoCollapse: true));
+            await VerifyBlockSpansAsync(code, Region("span", "// Goo ...", autoCollapse: true));
         }
     }
 }

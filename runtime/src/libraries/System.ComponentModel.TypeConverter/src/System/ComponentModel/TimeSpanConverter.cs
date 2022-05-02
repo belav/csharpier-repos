@@ -29,14 +29,19 @@ namespace System.ComponentModel
         /// </summary>
         public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
         {
-            return destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
         /// <summary>
         /// Converts the given object to a <see cref='System.TimeSpan'/>
         /// object.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string text)
             {
@@ -47,7 +52,10 @@ namespace System.ComponentModel
                 }
                 catch (FormatException e)
                 {
-                    throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, (string)value, nameof(TimeSpan)), e);
+                    throw new FormatException(
+                        SR.Format(SR.ConvertInvalidPrimitive, (string)value, nameof(TimeSpan)),
+                        e
+                    );
                 }
             }
 
@@ -61,12 +69,20 @@ namespace System.ComponentModel
         /// type is string. If this cannot convert to the destination type, this will
         /// throw a NotSupportedException.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(InstanceDescriptor) && value is TimeSpan)
             {
                 return new InstanceDescriptor(
-                    typeof(TimeSpan).GetMethod(nameof(TimeSpan.Parse), new Type[] { typeof(string) }),
+                    typeof(TimeSpan).GetMethod(
+                        nameof(TimeSpan.Parse),
+                        new Type[] { typeof(string) }
+                    ),
                     new object?[] { value.ToString() }
                 );
             }

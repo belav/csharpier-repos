@@ -26,8 +26,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
         public IReadOnlyList<InheritanceLeaf1> InheritanceLeafOnes { get; }
         public IReadOnlyList<InheritanceLeaf2> InheritanceLeafTwos { get; }
 
-        public abstract IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class;
+        public abstract IQueryable<TEntity> Set<TEntity>() where TEntity : class;
 
         protected ComplexNavigationsData()
         {
@@ -37,28 +36,69 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             LevelFours = CreateLevelFours(tableSplitting: false);
 
             WireUpPart1(LevelOnes, LevelTwos, LevelThrees, LevelFours, tableSplitting: false);
-            WireUpInversePart1(LevelOnes, LevelTwos, LevelThrees, LevelFours, tableSplitting: false);
+            WireUpInversePart1(
+                LevelOnes,
+                LevelTwos,
+                LevelThrees,
+                LevelFours,
+                tableSplitting: false
+            );
 
             WireUpPart2(LevelOnes, LevelTwos, LevelThrees, LevelFours, tableSplitting: false);
-            WireUpInversePart2(LevelOnes, LevelTwos, LevelThrees, LevelFours, tableSplitting: false);
+            WireUpInversePart2(
+                LevelOnes,
+                LevelTwos,
+                LevelThrees,
+                LevelFours,
+                tableSplitting: false
+            );
 
             SplitLevelOnes = CreateLevelOnes(tableSplitting: true);
             SplitLevelTwos = CreateLevelTwos(tableSplitting: true);
             SplitLevelThrees = CreateLevelThrees(tableSplitting: true);
             SplitLevelFours = CreateLevelFours(tableSplitting: true);
 
-            WireUpPart1(SplitLevelOnes, SplitLevelTwos, SplitLevelThrees, SplitLevelFours, tableSplitting: true);
-            WireUpInversePart1(SplitLevelOnes, SplitLevelTwos, SplitLevelThrees, SplitLevelFours, tableSplitting: true);
+            WireUpPart1(
+                SplitLevelOnes,
+                SplitLevelTwos,
+                SplitLevelThrees,
+                SplitLevelFours,
+                tableSplitting: true
+            );
+            WireUpInversePart1(
+                SplitLevelOnes,
+                SplitLevelTwos,
+                SplitLevelThrees,
+                SplitLevelFours,
+                tableSplitting: true
+            );
 
-            WireUpPart2(SplitLevelOnes, SplitLevelTwos, SplitLevelThrees, SplitLevelFours, tableSplitting: true);
-            WireUpInversePart2(SplitLevelOnes, SplitLevelTwos, SplitLevelThrees, SplitLevelFours, tableSplitting: true);
+            WireUpPart2(
+                SplitLevelOnes,
+                SplitLevelTwos,
+                SplitLevelThrees,
+                SplitLevelFours,
+                tableSplitting: true
+            );
+            WireUpInversePart2(
+                SplitLevelOnes,
+                SplitLevelTwos,
+                SplitLevelThrees,
+                SplitLevelFours,
+                tableSplitting: true
+            );
 
             InheritanceBaseOnes = CreateInheritanceBaseOnes();
             InheritanceBaseTwos = CreateInheritanceBaseTwos();
             InheritanceLeafOnes = CreateInheritanceLeafOnes();
             InheritanceLeafTwos = CreateInheritanceLeafTwos();
 
-            WireUpInheritancePart1(InheritanceBaseOnes, InheritanceBaseTwos, InheritanceLeafOnes, InheritanceLeafTwos);
+            WireUpInheritancePart1(
+                InheritanceBaseOnes,
+                InheritanceBaseTwos,
+                InheritanceLeafOnes,
+                InheritanceLeafTwos
+            );
             WireUpInheritancePart2(InheritanceBaseTwos, InheritanceLeafTwos);
         }
 
@@ -151,7 +191,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
                             Name = "L1 13",
                             Date = new DateTime(2007, 1, 1)
                         }
-                    });
+                    }
+                );
             }
 
             foreach (var l1 in result)
@@ -242,7 +283,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
                             Name = "L2 11",
                             Date = new DateTime(2000, 1, 1)
                         }
-                    });
+                    }
+                );
             }
 
             foreach (var l2 in result)
@@ -322,7 +364,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
 
         public static IReadOnlyList<InheritanceBase2> CreateInheritanceBaseTwos()
         {
-            var result = new List<InheritanceBase2> { new() { Id = 1, Name = "IB2 01" } };
+            var result = new List<InheritanceBase2>
+            {
+                new() { Id = 1, Name = "IB2 01" }
+            };
 
             return result;
         }
@@ -341,7 +386,10 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
 
         public static IReadOnlyList<InheritanceLeaf2> CreateInheritanceLeafTwos()
         {
-            var result = new List<InheritanceLeaf2> { new() { Id = 1, Name = "IL2 01" } };
+            var result = new List<InheritanceLeaf2>
+            {
+                new() { Id = 1, Name = "IL2 01" }
+            };
 
             return result;
         }
@@ -350,7 +398,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<InheritanceBase1> ib1s,
             IReadOnlyList<InheritanceBase2> ib2s,
             IReadOnlyList<InheritanceLeaf1> il1s,
-            IReadOnlyList<InheritanceLeaf2> il2s)
+            IReadOnlyList<InheritanceLeaf2> il2s
+        )
         {
             ib2s[0].Reference = ib1s[0];
             ib2s[0].Collection = new List<InheritanceBase1> { ib1s[1], ib1s[2] };
@@ -363,18 +412,36 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             ((InheritanceDerived1)ib1s[1]).ReferenceDifferentType = il1s[1];
             ((InheritanceDerived2)ib1s[2]).ReferenceDifferentType = il2s[0];
 
-            ((InheritanceDerived1)ib1s[0]).CollectionSameType = new List<InheritanceLeaf1> { il1s[0] };
+            ((InheritanceDerived1)ib1s[0]).CollectionSameType = new List<InheritanceLeaf1>
+            {
+                il1s[0]
+            };
             ((InheritanceDerived1)ib1s[1]).CollectionSameType = new List<InheritanceLeaf1>();
-            ((InheritanceDerived2)ib1s[2]).CollectionSameType = new List<InheritanceLeaf1> { il1s[1], il1s[2] };
+            ((InheritanceDerived2)ib1s[2]).CollectionSameType = new List<InheritanceLeaf1>
+            {
+                il1s[1],
+                il1s[2]
+            };
 
-            ((InheritanceDerived1)ib1s[0]).CollectionDifferentType = new List<InheritanceLeaf1> { il1s[0] };
-            ((InheritanceDerived1)ib1s[1]).CollectionDifferentType = new List<InheritanceLeaf1> { il1s[1], il1s[2] };
-            ((InheritanceDerived2)ib1s[2]).CollectionDifferentType = new List<InheritanceLeaf2> { il2s[0] };
+            ((InheritanceDerived1)ib1s[0]).CollectionDifferentType = new List<InheritanceLeaf1>
+            {
+                il1s[0]
+            };
+            ((InheritanceDerived1)ib1s[1]).CollectionDifferentType = new List<InheritanceLeaf1>
+            {
+                il1s[1],
+                il1s[2]
+            };
+            ((InheritanceDerived2)ib1s[2]).CollectionDifferentType = new List<InheritanceLeaf2>
+            {
+                il2s[0]
+            };
         }
 
         private static void WireUpInheritancePart2(
             IReadOnlyList<InheritanceBase2> ib2s,
-            IReadOnlyList<InheritanceLeaf2> il2s)
+            IReadOnlyList<InheritanceLeaf2> il2s
+        )
         {
             il2s[0].BaseCollection = new List<InheritanceBase2> { ib2s[0] };
         }
@@ -384,7 +451,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level2> l2s,
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
-            bool tableSplitting)
+            bool tableSplitting
+        )
         {
             l1s[0].OneToOne_Required_PK1 = l2s[0];
             l1s[1].OneToOne_Required_PK1 = l2s[1];
@@ -627,7 +695,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level2> l2s,
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
-            bool tableSplitting)
+            bool tableSplitting
+        )
         {
             l2s[0].OneToOne_Required_PK_Inverse2 = l1s[0];
             l2s[1].OneToOne_Required_PK_Inverse2 = l1s[1];
@@ -913,7 +982,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level2> l2s,
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
-            bool tableSplitting)
+            bool tableSplitting
+        )
         {
             l1s[0].OneToOne_Optional_PK1 = l2s[0];
             l1s[2].OneToOne_Optional_PK1 = l2s[2];
@@ -960,12 +1030,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             l2s[6].OneToOne_Optional_FK2 = l3s[2];
             l2s[8].OneToOne_Optional_FK2 = l3s[0];
 
-            l2s[0].OneToMany_Optional2 = new List<Level3>
-            {
-                l3s[1],
-                l3s[5],
-                l3s[9]
-            };
+            l2s[0].OneToMany_Optional2 = new List<Level3> { l3s[1], l3s[5], l3s[9] };
             l2s[1].OneToMany_Optional2 = new List<Level3> { l3s[3], l3s[7] };
 
             l2s[1].OneToMany_Optional_Self2 = new List<Level2> { l2s[0] };
@@ -1025,7 +1090,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             IReadOnlyList<Level2> l2s,
             IReadOnlyList<Level3> l3s,
             IReadOnlyList<Level4> l4s,
-            bool tableSplitting)
+            bool tableSplitting
+        )
         {
             l2s[0].OneToOne_Optional_PK_Inverse2 = l1s[0];
             l2s[2].OneToOne_Optional_PK_Inverse2 = l1s[2];
@@ -1142,8 +1208,16 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             var globalizations = new List<ComplexNavigationGlobalization>();
             for (var i = 0; i < 10; i++)
             {
-                var language = new ComplexNavigationLanguage { Name = "Language" + i, CultureString = "Foo" + i };
-                var globalization = new ComplexNavigationGlobalization { Text = "Globalization" + i, Language = language };
+                var language = new ComplexNavigationLanguage
+                {
+                    Name = "Language" + i,
+                    CultureString = "Foo" + i
+                };
+                var globalization = new ComplexNavigationGlobalization
+                {
+                    Text = "Globalization" + i,
+                    Language = language
+                };
                 globalizations.Add(globalization);
 
                 context.Languages.Add(language);
@@ -1166,10 +1240,26 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel
             WireUpInheritancePart2(ib2s, il2s);
             context.SaveChanges();
 
-            var mls1 = new ComplexNavigationString { DefaultText = "MLS1", Globalizations = globalizations.Take(3).ToList() };
-            var mls2 = new ComplexNavigationString { DefaultText = "MLS2", Globalizations = globalizations.Skip(3).Take(3).ToList() };
-            var mls3 = new ComplexNavigationString { DefaultText = "MLS3", Globalizations = globalizations.Skip(6).Take(3).ToList() };
-            var mls4 = new ComplexNavigationString { DefaultText = "MLS4", Globalizations = globalizations.Skip(9).ToList() };
+            var mls1 = new ComplexNavigationString
+            {
+                DefaultText = "MLS1",
+                Globalizations = globalizations.Take(3).ToList()
+            };
+            var mls2 = new ComplexNavigationString
+            {
+                DefaultText = "MLS2",
+                Globalizations = globalizations.Skip(3).Take(3).ToList()
+            };
+            var mls3 = new ComplexNavigationString
+            {
+                DefaultText = "MLS3",
+                Globalizations = globalizations.Skip(6).Take(3).ToList()
+            };
+            var mls4 = new ComplexNavigationString
+            {
+                DefaultText = "MLS4",
+                Globalizations = globalizations.Skip(9).ToList()
+            };
 
             context.MultilingualStrings.AddRange(mls1, mls2, mls3, mls4);
 

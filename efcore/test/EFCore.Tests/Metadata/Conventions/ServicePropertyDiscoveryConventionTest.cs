@@ -41,7 +41,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     ValidateServiceProperty<IEntityType, IEntityType>(entityType, "EntityType2");
                     ValidateServiceProperty<ILazyLoader, ILazyLoader>(entityType, "ALazyLoader");
                     ValidateServiceProperty<ILazyLoader, ILazyLoader>(entityType, "ALazyLoader2");
-                    ValidateServiceProperty<Action<object, string>, ILazyLoader>(entityType, "LazyLoader");
+                    ValidateServiceProperty<Action<object, string>, ILazyLoader>(
+                        entityType,
+                        "LazyLoader"
+                    );
 
                     var clrType = entityType.ClrType;
                     while (clrType!.BaseType != typeof(object))
@@ -108,9 +111,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     }
 
                     Assert.Same(context, clrType.GetAnyProperty("Context")!.GetValue(entry.Entity));
-                    Assert.Same(context, clrType.GetAnyProperty("Context2")!.GetValue(entry.Entity));
-                    Assert.Same(entry.Metadata, clrType.GetAnyProperty("EntityType")!.GetValue(entry.Entity));
-                    Assert.Same(entry.Metadata, clrType.GetAnyProperty("EntityType2")!.GetValue(entry.Entity));
+                    Assert.Same(
+                        context,
+                        clrType.GetAnyProperty("Context2")!.GetValue(entry.Entity)
+                    );
+                    Assert.Same(
+                        entry.Metadata,
+                        clrType.GetAnyProperty("EntityType")!.GetValue(entry.Entity)
+                    );
+                    Assert.Same(
+                        entry.Metadata,
+                        clrType.GetAnyProperty("EntityType2")!.GetValue(entry.Entity)
+                    );
                     Assert.NotNull(clrType.GetAnyProperty("ALazyLoader")!.GetValue(entry.Entity));
                     Assert.NotNull(clrType.GetAnyProperty("ALazyLoader2")!.GetValue(entry.Entity));
                     Assert.NotNull(clrType.GetAnyProperty("LazyLoader")!.GetValue(entry.Entity));
@@ -118,7 +130,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private static void ValidateServiceProperty<TProperty, TService>(IEntityType entityType, string propertyName)
+        private static void ValidateServiceProperty<TProperty, TService>(
+            IEntityType entityType,
+            string propertyName
+        )
         {
             var serviceProperty = entityType!.FindServiceProperty(propertyName);
             var binding = serviceProperty!.ParameterBinding;
@@ -142,9 +157,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [ConditionalFact]
         public void Does_not_find_service_property_configured_as_property()
         {
-            var entityType = new Model().AddEntityType(typeof(BlogOneService), owned: false, ConfigurationSource.Explicit);
-            entityType!.Builder.Property(typeof(ILazyLoader), nameof(BlogOneService.Loader), ConfigurationSource.Explicit)
-                !.HasConversion(typeof(string), ConfigurationSource.Explicit);
+            var entityType = new Model().AddEntityType(
+                typeof(BlogOneService),
+                owned: false,
+                ConfigurationSource.Explicit
+            );
+            entityType!.Builder
+                .Property(
+                    typeof(ILazyLoader),
+                    nameof(BlogOneService.Loader),
+                    ConfigurationSource.Explicit
+                )!
+                .HasConversion(typeof(string), ConfigurationSource.Explicit);
 
             RunConvention(entityType);
 
@@ -156,10 +180,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void Does_not_find_service_property_configured_as_navigation()
         {
             var model = new Model();
-            var entityType = model.AddEntityType(typeof(BlogOneService), owned: false, ConfigurationSource.Explicit);
+            var entityType = model.AddEntityType(
+                typeof(BlogOneService),
+                owned: false,
+                ConfigurationSource.Explicit
+            );
             entityType!.Builder.HasRelationship(
-                model.AddEntityType(typeof(LazyLoader), owned: false, ConfigurationSource.Explicit)!,
-                nameof(BlogOneService.Loader), ConfigurationSource.Explicit);
+                model.AddEntityType(
+                    typeof(LazyLoader),
+                    owned: false,
+                    ConfigurationSource.Explicit
+                )!,
+                nameof(BlogOneService.Loader),
+                ConfigurationSource.Explicit
+            );
 
             RunConvention(entityType);
 
@@ -172,30 +206,51 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityType = RunConvention<BlogDuplicateService>();
 
-            entityType.Builder.Ignore(nameof(BlogDuplicateService.ContextTwo), ConfigurationSource.Convention);
+            entityType.Builder.Ignore(
+                nameof(BlogDuplicateService.ContextTwo),
+                ConfigurationSource.Convention
+            );
 
             Assert.NotNull(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextOne)));
             Assert.Null(entityType.FindServiceProperty(nameof(BlogDuplicateService.ContextTwo)));
         }
 
-        private EntityType RunConvention<TEntity>()
-            => RunConvention(new Model().AddEntityType(typeof(TEntity), owned: false, ConfigurationSource.Explicit)!);
+        private EntityType RunConvention<TEntity>() =>
+            RunConvention(
+                new Model().AddEntityType(
+                    typeof(TEntity),
+                    owned: false,
+                    ConfigurationSource.Explicit
+                )!
+            );
 
         private EntityType RunConvention(EntityType entityType)
         {
-            entityType.AddProperty(nameof(Blog.Id), typeof(int), ConfigurationSource.Explicit, ConfigurationSource.Explicit);
+            entityType.AddProperty(
+                nameof(Blog.Id),
+                typeof(int),
+                ConfigurationSource.Explicit,
+                ConfigurationSource.Explicit
+            );
 
-            var context = new ConventionContext<IConventionEntityTypeBuilder?>(entityType.Model.ConventionDispatcher);
-            CreateServicePropertyDiscoveryConvention().ProcessEntityTypeAdded(entityType.Builder, context);
+            var context = new ConventionContext<IConventionEntityTypeBuilder?>(
+                entityType.Model.ConventionDispatcher
+            );
+            CreateServicePropertyDiscoveryConvention()
+                .ProcessEntityTypeAdded(entityType.Builder, context);
 
-            return context.ShouldStopProcessing() ? (EntityType)context.Result!.Metadata : entityType;
+            return context.ShouldStopProcessing()
+              ? (EntityType)context.Result!.Metadata
+              : entityType;
         }
 
-        private ServicePropertyDiscoveryConvention CreateServicePropertyDiscoveryConvention()
-            => new ServicePropertyDiscoveryConvention(CreateDependencies());
+        private ServicePropertyDiscoveryConvention CreateServicePropertyDiscoveryConvention() =>
+            new ServicePropertyDiscoveryConvention(CreateDependencies());
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private class BlogOneService : Blog
         {
@@ -215,47 +270,44 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private class ServicePropertiesContext : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseInMemoryDatabase(GetType().Name);
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) => optionsBuilder.UseInMemoryDatabase(GetType().Name);
 
-            public DbSet<PrivateUnmappedBaseSuper> PrivateUnmappedBaseSupers
-                => Set<PrivateUnmappedBaseSuper>();
+            public DbSet<PrivateUnmappedBaseSuper> PrivateUnmappedBaseSupers =>
+                Set<PrivateUnmappedBaseSuper>();
 
-            public DbSet<PrivateUnmappedBaseSub> PrivateUnmappedBaseSubs
-                => Set<PrivateUnmappedBaseSub>();
+            public DbSet<PrivateUnmappedBaseSub> PrivateUnmappedBaseSubs =>
+                Set<PrivateUnmappedBaseSub>();
 
-            public DbSet<PrivateMappedBase> PrivateMappedBases
-                => Set<PrivateMappedBase>();
+            public DbSet<PrivateMappedBase> PrivateMappedBases => Set<PrivateMappedBase>();
 
-            public DbSet<PrivateMappedBaseSuper> PrivateMappedBaseSupers
-                => Set<PrivateMappedBaseSuper>();
+            public DbSet<PrivateMappedBaseSuper> PrivateMappedBaseSupers =>
+                Set<PrivateMappedBaseSuper>();
 
-            public DbSet<PrivateMappedBaseSub> PrivateMappedBaseSubs
-                => Set<PrivateMappedBaseSub>();
+            public DbSet<PrivateMappedBaseSub> PrivateMappedBaseSubs => Set<PrivateMappedBaseSub>();
 
-            public DbSet<PublicUnmappedBaseSuper> PublicUnmappedBaseSupers
-                => Set<PublicUnmappedBaseSuper>();
+            public DbSet<PublicUnmappedBaseSuper> PublicUnmappedBaseSupers =>
+                Set<PublicUnmappedBaseSuper>();
 
-            public DbSet<PublicUnmappedBaseSub> PublicUnmappedBaseSubs
-                => Set<PublicUnmappedBaseSub>();
+            public DbSet<PublicUnmappedBaseSub> PublicUnmappedBaseSubs =>
+                Set<PublicUnmappedBaseSub>();
 
-            public DbSet<PublicMappedBase> PublicMappedBases
-                => Set<PublicMappedBase>();
+            public DbSet<PublicMappedBase> PublicMappedBases => Set<PublicMappedBase>();
 
-            public DbSet<PublicMappedBaseSuper> PublicMappedBaseSupers
-                => Set<PublicMappedBaseSuper>();
+            public DbSet<PublicMappedBaseSuper> PublicMappedBaseSupers =>
+                Set<PublicMappedBaseSuper>();
 
-            public DbSet<PublicMappedBaseSub> PublicMappedBaseSubs
-                => Set<PublicMappedBaseSub>();
+            public DbSet<PublicMappedBaseSub> PublicMappedBaseSubs => Set<PublicMappedBaseSub>();
 
-            public DbSet<PrivateWithDuplicatesBase> PrivateWithDuplicatesBases
-                => Set<PrivateWithDuplicatesBase>();
+            public DbSet<PrivateWithDuplicatesBase> PrivateWithDuplicatesBases =>
+                Set<PrivateWithDuplicatesBase>();
 
-            public DbSet<PrivateWithDuplicatesSuper> PrivateWithDuplicatesSupers
-                => Set<PrivateWithDuplicatesSuper>();
+            public DbSet<PrivateWithDuplicatesSuper> PrivateWithDuplicatesSupers =>
+                Set<PrivateWithDuplicatesSuper>();
 
-            public DbSet<PrivateWithDuplicatesSub> PrivateWithDuplicatesSubs
-                => Set<PrivateWithDuplicatesSub>();
+            public DbSet<PrivateWithDuplicatesSub> PrivateWithDuplicatesSubs =>
+                Set<PrivateWithDuplicatesSub>();
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -263,14 +315,29 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     b =>
                     {
                         // Because private properties on un-mapped base types are not found by convention
-                        b.Metadata.AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("Context")!);
-                        b.Metadata.AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("Context2")!);
-                        b.Metadata.AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!);
-                        b.Metadata.AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("EntityType2")!);
-                        b.Metadata.AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!);
-                        b.Metadata.AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader2")!);
-                        b.Metadata.AddServiceProperty(typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!);
-                    });
+                        b.Metadata.AddServiceProperty(
+                            typeof(PrivateUnmappedBase).GetAnyProperty("Context")!
+                        );
+                        b.Metadata.AddServiceProperty(
+                            typeof(PrivateUnmappedBase).GetAnyProperty("Context2")!
+                        );
+                        b.Metadata.AddServiceProperty(
+                            typeof(PrivateUnmappedBase).GetAnyProperty("EntityType")!
+                        );
+                        b.Metadata.AddServiceProperty(
+                            typeof(PrivateUnmappedBase).GetAnyProperty("EntityType2")!
+                        );
+                        b.Metadata.AddServiceProperty(
+                            typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader")!
+                        );
+                        b.Metadata.AddServiceProperty(
+                            typeof(PrivateUnmappedBase).GetAnyProperty("ALazyLoader2")!
+                        );
+                        b.Metadata.AddServiceProperty(
+                            typeof(PrivateUnmappedBase).GetAnyProperty("LazyLoader")!
+                        );
+                    }
+                );
             }
         }
 
@@ -286,13 +353,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             private Action<object, string>? LazyLoader { get; set; }
         }
 
-        protected class PrivateUnmappedBaseSuper : PrivateUnmappedBase
-        {
-        }
+        protected class PrivateUnmappedBaseSuper : PrivateUnmappedBase { }
 
-        protected class PrivateUnmappedBaseSub : PrivateUnmappedBaseSuper
-        {
-        }
+        protected class PrivateUnmappedBaseSub : PrivateUnmappedBaseSuper { }
 
         protected class PrivateMappedBase
         {
@@ -306,19 +369,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             private Action<object, string>? LazyLoader { get; set; }
         }
 
-        protected class PrivateMappedBaseSuper : PrivateMappedBase
-        {
-        }
+        protected class PrivateMappedBaseSuper : PrivateMappedBase { }
 
-        protected class PrivateMappedBaseSub : PrivateMappedBaseSuper
-        {
-        }
+        protected class PrivateMappedBaseSub : PrivateMappedBaseSuper { }
 
         protected class PublicUnmappedBase
         {
-            public PublicUnmappedBase()
-            {
-            }
+            public PublicUnmappedBase() { }
 
             public PublicUnmappedBase(
                 int id,
@@ -328,7 +385,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IEntityType? entityType2,
                 ILazyLoader? aLazyLoader,
                 ILazyLoader? aLazyLoader2,
-                Action<object, string>? lazyLoader)
+                Action<object, string>? lazyLoader
+            )
             {
                 Id = id;
                 Context = context;
@@ -365,9 +423,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         protected class PublicUnmappedBaseSuper : PublicUnmappedBase
         {
-            public PublicUnmappedBaseSuper()
-            {
-            }
+            public PublicUnmappedBaseSuper() { }
 
             public PublicUnmappedBaseSuper(
                 int id,
@@ -377,17 +433,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IEntityType? entityType2,
                 ILazyLoader? aLazyLoader,
                 ILazyLoader? aLazyLoader2,
-                Action<object, string>? lazyLoader)
-                : base(id, context, context2, entityType, entityType2, aLazyLoader, aLazyLoader2, lazyLoader)
-            {
-            }
+                Action<object, string>? lazyLoader
+            )
+                : base(
+                    id,
+                    context,
+                    context2,
+                    entityType,
+                    entityType2,
+                    aLazyLoader,
+                    aLazyLoader2,
+                    lazyLoader
+                ) { }
         }
 
         protected class PublicUnmappedBaseSub : PublicUnmappedBaseSuper
         {
-            public PublicUnmappedBaseSub()
-            {
-            }
+            public PublicUnmappedBaseSub() { }
 
             public PublicUnmappedBaseSub(
                 int id,
@@ -397,10 +459,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 IEntityType? entityType2,
                 ILazyLoader? aLazyLoader,
                 ILazyLoader? aLazyLoader2,
-                Action<object, string>? lazyLoader)
-                : base(id, context, context2, entityType, entityType2, aLazyLoader, aLazyLoader2, lazyLoader)
-            {
-            }
+                Action<object, string>? lazyLoader
+            )
+                : base(
+                    id,
+                    context,
+                    context2,
+                    entityType,
+                    entityType2,
+                    aLazyLoader,
+                    aLazyLoader2,
+                    lazyLoader
+                ) { }
         }
 
         protected class PublicMappedBase
@@ -415,13 +485,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public Action<object, string>? LazyLoader { get; set; }
         }
 
-        protected class PublicMappedBaseSuper : PublicMappedBase
-        {
-        }
+        protected class PublicMappedBaseSuper : PublicMappedBase { }
 
-        protected class PublicMappedBaseSub : PublicMappedBaseSuper
-        {
-        }
+        protected class PublicMappedBaseSub : PublicMappedBaseSuper { }
 
         protected class PrivateWithDuplicatesBase
         {

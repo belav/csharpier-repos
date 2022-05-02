@@ -46,17 +46,24 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
 
         public double Height => double.NaN;
 
-        public InlineDiagnosticsTag(string errorType, DiagnosticData diagnostic, IEditorFormatMap editorFormatMap,
-            IClassificationFormatMapService classificationFormatMapService, IClassificationTypeRegistryService classificationTypeRegistryService,
-            InlineDiagnosticsLocations location, INavigateToLinkService navigateToLinkService)
-            : base(editorFormatMap)
+        public InlineDiagnosticsTag(
+            string errorType,
+            DiagnosticData diagnostic,
+            IEditorFormatMap editorFormatMap,
+            IClassificationFormatMapService classificationFormatMapService,
+            IClassificationTypeRegistryService classificationTypeRegistryService,
+            InlineDiagnosticsLocations location,
+            INavigateToLinkService navigateToLinkService
+        ) : base(editorFormatMap)
         {
             ErrorType = errorType;
             _diagnostic = diagnostic;
             Location = location;
             _navigateToLinkService = navigateToLinkService;
             _editorFormatMap = editorFormatMap;
-            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap("text");
+            _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap(
+                "text"
+            );
             _classificationTypeRegistryService = classificationTypeRegistryService;
             _classificationType = _classificationTypeRegistryService.GetClassificationType("url");
         }
@@ -64,7 +71,11 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         /// <summary>
         /// Creates a GraphicsResult object which is the error block based on the geometry and formatting set for the item.
         /// </summary>
-        public override GraphicsResult GetGraphics(IWpfTextView view, Geometry bounds, TextFormattingRunProperties format)
+        public override GraphicsResult GetGraphics(
+            IWpfTextView view,
+            Geometry bounds,
+            TextFormattingRunProperties format
+        )
         {
             var block = new TextBlock
             {
@@ -118,15 +129,17 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             };
 
             // This is used as a workaround to the moniker issues in blue theme
-            var editorBackground = (Color)_editorFormatMap.GetProperties("TextView Background")["BackgroundColor"];
+            var editorBackground = (Color)
+                _editorFormatMap.GetProperties("TextView Background")["BackgroundColor"];
             ImageThemingUtilities.SetImageBackgroundColor(border, editorBackground);
 
             border.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             view.ViewportWidthChanged += ViewportWidthChangedHandler;
             view.LayoutChanged += View_LayoutChanged;
 
-            return new GraphicsResult(border, dispose:
-                () =>
+            return new GraphicsResult(
+                border,
+                dispose: () =>
                 {
                     if (hyperlink is not null)
                     {
@@ -135,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
 
                     view.ViewportWidthChanged -= ViewportWidthChangedHandler;
                     view.LayoutChanged -= View_LayoutChanged;
-                });
+                }
+            );
 
             // The tag listens to the width changing to allow the diagnostic UI to move with
             // the window as it gets moved.
@@ -171,25 +185,22 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
 
                 if (!string.IsNullOrEmpty(_diagnostic.HelpLink))
                 {
-                    link = new Hyperlink(id)
-                    {
-                        NavigateUri = new Uri(_diagnostic.HelpLink),
-                    };
+                    link = new Hyperlink(id) { NavigateUri = new Uri(_diagnostic.HelpLink), };
                 }
 
                 return id;
             }
         }
 
-        private ImageMoniker GetMoniker()
-        => _diagnostic.Severity switch
-        {
-            DiagnosticSeverity.Warning => KnownMonikers.StatusWarning,
-            _ => KnownMonikers.StatusError,
-        };
+        private ImageMoniker GetMoniker() =>
+            _diagnostic.Severity switch
+            {
+                DiagnosticSeverity.Warning => KnownMonikers.StatusWarning,
+                _ => KnownMonikers.StatusError,
+            };
 
-        public static string GetClassificationId(string error)
-            => error switch
+        public static string GetClassificationId(string error) =>
+            error switch
             {
                 EditAndContinueErrorTypeDefinition.Name => "inline diagnostics - Edit and Continue",
                 PredefinedErrorTypeNames.SyntaxError => "inline diagnostics - syntax error",

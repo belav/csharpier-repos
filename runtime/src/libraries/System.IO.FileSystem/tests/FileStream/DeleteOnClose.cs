@@ -9,7 +9,11 @@ namespace System.IO.Tests
 {
     public class FileStream_DeleteOnClose : FileSystemTest
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsFileLockingEnabled), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsFileLockingEnabled),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [OuterLoop]
         public async Task OpenOrCreate_DeleteOnClose_UsableAsMutex()
         {
@@ -27,7 +31,16 @@ namespace System.IO.Tests
                 {
                     try
                     {
-                        using (var fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None, 4096, FileOptions.DeleteOnClose))
+                        using (
+                            var fs = new FileStream(
+                                path,
+                                FileMode.OpenOrCreate,
+                                FileAccess.Write,
+                                FileShare.None,
+                                4096,
+                                FileOptions.DeleteOnClose
+                            )
+                        )
                         {
                             int counter = Interlocked.Increment(ref enterCount);
                             if (counter != 1)

@@ -8,16 +8,17 @@ namespace Wasm.Build.Tests
         private BuildEnvironment _buildEnvironment;
         private bool _useDefaultArgs;
 
-        public DotNetCommand(BuildEnvironment buildEnv, bool useDefaultArgs=true) : base(buildEnv.DotNet)
+        public DotNetCommand(BuildEnvironment buildEnv, bool useDefaultArgs = true)
+            : base(buildEnv.DotNet)
         {
             _buildEnvironment = buildEnv;
             _useDefaultArgs = useDefaultArgs;
             WithEnvironmentVariables(buildEnv.EnvVars);
         }
 
-        protected override string GetFullArgs(params string[] args)
-            => _useDefaultArgs
-                    ? $"{string.Join(" ", args)} {_buildEnvironment.DefaultBuildArgs}"
-                    : string.Join(" ", args);
+        protected override string GetFullArgs(params string[] args) =>
+            _useDefaultArgs
+                ? $"{string.Join(" ", args)} {_buildEnvironment.DefaultBuildArgs}"
+                : string.Join(" ", args);
     }
 }

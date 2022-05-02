@@ -11,8 +11,8 @@ namespace Microsoft.CodeAnalysis
     {
         private static class NamespaceSymbolKey
         {
-            // The containing symbol can be one of many things. 
-            // 1) Null when this is the global namespace for a compilation.  
+            // The containing symbol can be one of many things.
+            // 1) Null when this is the global namespace for a compilation.
             // 2) The SymbolId for an assembly symbol if this is the global namespace for an
             //    assembly.
             // 3) The SymbolId for a module symbol if this is the global namespace for a module.
@@ -52,15 +52,21 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            public static SymbolKeyResolution Resolve(SymbolKeyReader reader, out string? failureReason)
+            public static SymbolKeyResolution Resolve(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 var metadataName = reader.ReadString()!;
                 var isCompilationGlobalNamespace = reader.ReadBoolean();
-                var containingSymbolResolution = reader.ReadSymbolKey(out var containingSymbolFailureReason);
+                var containingSymbolResolution = reader.ReadSymbolKey(
+                    out var containingSymbolFailureReason
+                );
 
                 if (containingSymbolFailureReason != null)
                 {
-                    failureReason = $"({nameof(EventSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
+                    failureReason =
+                        $"({nameof(EventSymbolKey)} {nameof(containingSymbolResolution)} failed -> {containingSymbolFailureReason})";
                     return default;
                 }
 
@@ -96,7 +102,11 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                return CreateResolution(result, $"({nameof(NamespaceSymbolKey)} '{metadataName}' not found)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(NamespaceSymbolKey)} '{metadataName}' not found)",
+                    out failureReason
+                );
             }
         }
     }

@@ -11,6 +11,7 @@ internal static partial class Interop
         [GeneratedDllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         public static unsafe partial CERT_CONTEXT* CertEnumCertificatesInStore(
             IntPtr hCertStore,
-            CERT_CONTEXT* pPrevCertContext);
+            CERT_CONTEXT* pPrevCertContext
+        );
     }
 }

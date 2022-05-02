@@ -15,24 +15,24 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information.
     /// </remarks>
-    public class NonNullableNavigationConvention :
-        NonNullableConventionBase,
-        INavigationAddedConvention,
-        IForeignKeyPrincipalEndChangedConvention
+    public class NonNullableNavigationConvention
+        : NonNullableConventionBase,
+          INavigationAddedConvention,
+          IForeignKeyPrincipalEndChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NonNullableNavigationConvention" />.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-        public NonNullableNavigationConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public NonNullableNavigationConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <inheritdoc />
         public virtual void ProcessNavigationAdded(
             IConventionNavigationBuilder navigationBuilder,
-            IConventionContext<IConventionNavigationBuilder> context)
+            IConventionContext<IConventionNavigationBuilder> context
+        )
         {
             ProcessNavigation(navigationBuilder);
             context.StopProcessingIfChanged(navigationBuilder.Metadata.Builder);
@@ -41,7 +41,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessForeignKeyPrincipalEndChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<IConventionForeignKeyBuilder> context)
+            IConventionContext<IConventionForeignKeyBuilder> context
+        )
         {
             var fk = relationshipBuilder.Metadata;
             if (fk.DependentToPrincipal != null)
@@ -63,8 +64,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var foreignKey = navigation.ForeignKey;
             var modelBuilder = navigationBuilder.ModelBuilder;
 
-            if (!IsNonNullable(modelBuilder, navigation)
-                || navigation.IsCollection)
+            if (!IsNonNullable(modelBuilder, navigation) || navigation.IsCollection)
             {
                 return;
             }
@@ -79,8 +79,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private bool IsNonNullable(IConventionModelBuilder modelBuilder, IConventionNavigation navigation)
-            => navigation.DeclaringEntityType.GetRuntimeProperties().Find(navigation.Name) is PropertyInfo propertyInfo
-                && IsNonNullableReferenceType(modelBuilder, propertyInfo);
+        private bool IsNonNullable(
+            IConventionModelBuilder modelBuilder,
+            IConventionNavigation navigation
+        ) =>
+            navigation.DeclaringEntityType.GetRuntimeProperties().Find(navigation.Name)
+                is PropertyInfo propertyInfo
+            && IsNonNullableReferenceType(modelBuilder, propertyInfo);
     }
 }

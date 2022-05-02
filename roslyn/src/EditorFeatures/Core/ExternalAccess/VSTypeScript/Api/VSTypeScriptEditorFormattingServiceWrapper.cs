@@ -14,13 +14,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         private readonly IEditorFormattingService _underlyingObject;
 
-        private VSTypeScriptEditorFormattingServiceWrapper(IEditorFormattingService underlyingObject)
-            => _underlyingObject = underlyingObject;
+        private VSTypeScriptEditorFormattingServiceWrapper(
+            IEditorFormattingService underlyingObject
+        ) => _underlyingObject = underlyingObject;
 
-        public static VSTypeScriptEditorFormattingServiceWrapper Create(Document document)
-            => new(document.Project.LanguageServices.GetRequiredService<IEditorFormattingService>());
+        public static VSTypeScriptEditorFormattingServiceWrapper Create(Document document) =>
+            new(document.Project.LanguageServices.GetRequiredService<IEditorFormattingService>());
 
-        public Task<IList<TextChange>> GetFormattingChangesAsync(Document document, TextSpan? textSpan, CancellationToken cancellationToken)
-            => _underlyingObject.GetFormattingChangesAsync(document, textSpan, documentOptions: null, cancellationToken);
+        public Task<IList<TextChange>> GetFormattingChangesAsync(
+            Document document,
+            TextSpan? textSpan,
+            CancellationToken cancellationToken
+        ) =>
+            _underlyingObject.GetFormattingChangesAsync(
+                document,
+                textSpan,
+                documentOptions: null,
+                cancellationToken
+            );
     }
 }

@@ -33,16 +33,19 @@ namespace System.Drawing.Text
                 try
                 {
 #if DEBUG
-                    int status = !Gdip.Initialized ? Gdip.Ok :
+                    int status = !Gdip.Initialized
+                        ? Gdip.Ok
+                        :
 #endif
-                    Gdip.GdipDeletePrivateFontCollection(ref _nativeFontCollection);
+                          Gdip.GdipDeletePrivateFontCollection(ref _nativeFontCollection);
 #if DEBUG
-                    Debug.Assert(status == Gdip.Ok, $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}");
+                    Debug.Assert(
+                        status == Gdip.Ok,
+                        $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}"
+                    );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex))
-                {
-                }
+                catch (Exception ex) when (!ClientUtils.IsSecurityOrCriticalException(ex)) { }
                 finally
                 {
                     _nativeFontCollection = IntPtr.Zero;
@@ -79,7 +82,10 @@ namespace System.Drawing.Text
                 throw new FileNotFoundException();
             }
 
-            int status = Gdip.GdipPrivateAddFontFile(new HandleRef(this, _nativeFontCollection), fullPath);
+            int status = Gdip.GdipPrivateAddFontFile(
+                new HandleRef(this, _nativeFontCollection),
+                fullPath
+            );
             Gdip.CheckStatus(status);
 
             // Register private font with GDI as well so pure GDI-based controls (TextBox, Button for instance) can access it.
@@ -93,7 +99,13 @@ namespace System.Drawing.Text
         /// </summary>
         public void AddMemoryFont(IntPtr memory, int length)
         {
-            Gdip.CheckStatus(Gdip.GdipPrivateAddMemoryFont(new HandleRef(this, _nativeFontCollection), memory, length));
+            Gdip.CheckStatus(
+                Gdip.GdipPrivateAddMemoryFont(
+                    new HandleRef(this, _nativeFontCollection),
+                    memory,
+                    length
+                )
+            );
         }
     }
 }

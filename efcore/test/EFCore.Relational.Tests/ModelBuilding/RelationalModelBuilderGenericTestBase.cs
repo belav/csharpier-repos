@@ -11,14 +11,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 {
     public class RelationalModelBuilderTest : ModelBuilderTest
     {
-        public abstract class TestTableBuilder<TEntity>
-            where TEntity : class
+        public abstract class TestTableBuilder<TEntity> where TEntity : class
         {
             public abstract TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true);
         }
 
-        public class GenericTestTableBuilder<TEntity> : TestTableBuilder<TEntity>, IInfrastructure<TableBuilder<TEntity>>
-            where TEntity : class
+        public class GenericTestTableBuilder<TEntity>
+            : TestTableBuilder<TEntity>,
+              IInfrastructure<TableBuilder<TEntity>> where TEntity : class
         {
             public GenericTestTableBuilder(TableBuilder<TEntity> tableBuilder)
             {
@@ -29,15 +29,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public TableBuilder<TEntity> Instance => TableBuilder;
 
-            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder<TEntity> tableBuilder)
-                => new GenericTestTableBuilder<TEntity>(tableBuilder);
+            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder<TEntity> tableBuilder) =>
+                new GenericTestTableBuilder<TEntity>(tableBuilder);
 
-            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true)
-                => Wrap(TableBuilder.ExcludeFromMigrations(excluded));
+            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true) =>
+                Wrap(TableBuilder.ExcludeFromMigrations(excluded));
         }
 
-        public class NonGenericTestTableBuilder<TEntity> : TestTableBuilder<TEntity>, IInfrastructure<TableBuilder>
-            where TEntity : class
+        public class NonGenericTestTableBuilder<TEntity>
+            : TestTableBuilder<TEntity>,
+              IInfrastructure<TableBuilder> where TEntity : class
         {
             public NonGenericTestTableBuilder(TableBuilder tableBuilder)
             {
@@ -48,11 +49,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public TableBuilder Instance => TableBuilder;
 
-            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder tableBuilder)
-                => new NonGenericTestTableBuilder<TEntity>(tableBuilder);
+            protected virtual TestTableBuilder<TEntity> Wrap(TableBuilder tableBuilder) =>
+                new NonGenericTestTableBuilder<TEntity>(tableBuilder);
 
-            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true)
-                => Wrap(TableBuilder.ExcludeFromMigrations(excluded));
+            public override TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true) =>
+                Wrap(TableBuilder.ExcludeFromMigrations(excluded));
         }
 
         public abstract class TestCheckConstraintBuilder
@@ -60,9 +61,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public abstract TestCheckConstraintBuilder HasName(string name);
         }
 
-        public class NonGenericTestCheckConstraintBuilder : TestCheckConstraintBuilder, IInfrastructure<CheckConstraintBuilder>
+        public class NonGenericTestCheckConstraintBuilder
+            : TestCheckConstraintBuilder,
+              IInfrastructure<CheckConstraintBuilder>
         {
-            public NonGenericTestCheckConstraintBuilder(CheckConstraintBuilder checkConstraintBuilder)
+            public NonGenericTestCheckConstraintBuilder(
+                CheckConstraintBuilder checkConstraintBuilder
+            )
             {
                 CheckConstraintBuilder = checkConstraintBuilder;
             }
@@ -71,11 +76,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             public CheckConstraintBuilder Instance => CheckConstraintBuilder;
 
-            protected virtual TestCheckConstraintBuilder Wrap(CheckConstraintBuilder checkConstraintBuilder)
-                => new NonGenericTestCheckConstraintBuilder(checkConstraintBuilder);
+            protected virtual TestCheckConstraintBuilder Wrap(
+                CheckConstraintBuilder checkConstraintBuilder
+            ) => new NonGenericTestCheckConstraintBuilder(checkConstraintBuilder);
 
-            public override TestCheckConstraintBuilder HasName(string name)
-                => Wrap(CheckConstraintBuilder.HasName(name));
+            public override TestCheckConstraintBuilder HasName(string name) =>
+                Wrap(CheckConstraintBuilder.HasName(name));
         }
     }
 }

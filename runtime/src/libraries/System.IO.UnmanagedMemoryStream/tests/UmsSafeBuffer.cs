@@ -8,8 +8,7 @@ namespace System.IO.Tests
 {
     internal class FakeSafeBuffer : SafeBuffer
     {
-        public FakeSafeBuffer(ulong size)
-            : base(true)
+        public FakeSafeBuffer(ulong size) : base(true)
         {
             Initialize(size);
         }
@@ -94,7 +93,12 @@ namespace System.IO.Tests
             const int length = 1000;
             using (var buffer = new TestSafeBuffer(length))
             {
-                var stream = new UnmanagedMemoryStream(buffer, 0, (long)buffer.ByteLength, FileAccess.Write);
+                var stream = new UnmanagedMemoryStream(
+                    buffer,
+                    0,
+                    (long)buffer.ByteLength,
+                    FileAccess.Write
+                );
                 Assert.Equal(stream.Length, length);
 
                 var bytes = ArrayHelpers.CreateByteArray(length);
@@ -115,7 +119,12 @@ namespace System.IO.Tests
             const int length = 1000;
             using (var buffer = new TestSafeBuffer(length))
             {
-                var stream = new UnmanagedMemoryStream(buffer, 0, (long)buffer.ByteLength, FileAccess.ReadWrite);
+                var stream = new UnmanagedMemoryStream(
+                    buffer,
+                    0,
+                    (long)buffer.ByteLength,
+                    FileAccess.ReadWrite
+                );
                 Assert.Equal(stream.Length, length);
 
                 var bytes = ArrayHelpers.CreateByteArray(length);

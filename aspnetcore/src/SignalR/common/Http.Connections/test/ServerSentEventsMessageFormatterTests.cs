@@ -29,7 +29,9 @@ public class ServerSentEventsMessageFormatterTests
     [MemberData(nameof(PayloadData))]
     public async Task WriteTextMessageFromMultipleSegments(string encoded, string payload)
     {
-        var buffer = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(Encoding.UTF8.GetBytes(payload));
+        var buffer = ReadOnlySequenceFactory.SegmentPerByteFactory.CreateWithContent(
+            Encoding.UTF8.GetBytes(payload)
+        );
 
         var output = new MemoryStream();
         await ServerSentEventsMessageFormatter.WriteMessageAsync(buffer, output, default);
@@ -37,7 +39,8 @@ public class ServerSentEventsMessageFormatterTests
         Assert.Equal(encoded, Encoding.UTF8.GetString(output.ToArray()));
     }
 
-    public static IEnumerable<object[]> PayloadData => new List<object[]>
+    public static IEnumerable<object[]> PayloadData =>
+        new List<object[]>
         {
             new object[] { "\r\n", "" },
             new object[] { "data: Hello, World\r\n\r\n", "Hello, World" },

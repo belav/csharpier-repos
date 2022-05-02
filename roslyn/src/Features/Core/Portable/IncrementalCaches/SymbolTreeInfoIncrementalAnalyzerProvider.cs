@@ -18,21 +18,26 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
     /// <summary>
     /// Features like add-using want to be able to quickly search symbol indices for projects and
     /// metadata.  However, creating those indices can be expensive.  As such, we don't want to
-    /// construct them during the add-using process itself.  Instead, we expose this type as an 
+    /// construct them during the add-using process itself.  Instead, we expose this type as an
     /// Incremental-Analyzer to walk our projects/metadata in the background to keep the indices
     /// up to date.
-    /// 
+    ///
     /// We also then export this type as a service that can give back the index for a project or
-    /// metadata dll on request.  If the index has been produced then it will be returned and 
+    /// metadata dll on request.  If the index has been produced then it will be returned and
     /// can be used by add-using.  Otherwise, nothing is returned and no results will be found.
-    /// 
+    ///
     /// This means that as the project is being indexed, partial results may be returned.  However
     /// once it is fully indexed, then total results will be returned.
     /// </summary>
     [Shared]
-    [ExportIncrementalAnalyzerProvider(nameof(SymbolTreeInfoIncrementalAnalyzerProvider), new[] { WorkspaceKind.RemoteWorkspace })]
+    [ExportIncrementalAnalyzerProvider(
+        nameof(SymbolTreeInfoIncrementalAnalyzerProvider),
+        new[] { WorkspaceKind.RemoteWorkspace }
+    )]
     [ExportWorkspaceServiceFactory(typeof(ISymbolTreeInfoCacheService))]
-    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider, IWorkspaceServiceFactory
+    internal partial class SymbolTreeInfoIncrementalAnalyzerProvider
+        : IIncrementalAnalyzerProvider,
+          IWorkspaceServiceFactory
     {
         // Concurrent dictionaries so they can be read from the SymbolTreeInfoCacheService while they are being
         // populated/updated by the IncrementalAnalyzer.
@@ -45,14 +50,12 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SymbolTreeInfoIncrementalAnalyzerProvider()
-        {
-        }
+        public SymbolTreeInfoIncrementalAnalyzerProvider() { }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new SymbolTreeInfoIncrementalAnalyzer(_projectIdToInfo, _metadataIdToInfo);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new SymbolTreeInfoIncrementalAnalyzer(_projectIdToInfo, _metadataIdToInfo);
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new SymbolTreeInfoCacheService(_projectIdToInfo, _metadataIdToInfo);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new SymbolTreeInfoCacheService(_projectIdToInfo, _metadataIdToInfo);
     }
 }

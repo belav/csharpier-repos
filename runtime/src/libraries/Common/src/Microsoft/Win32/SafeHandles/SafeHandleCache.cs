@@ -47,8 +47,14 @@ namespace Microsoft.Win32.SafeHandles
         internal static bool IsCachedInvalidHandle(SafeHandle handle)
         {
             Debug.Assert(handle != null);
-            bool isCachedInvalidHandle = ReferenceEquals(handle, Volatile.Read(ref s_invalidHandle));
-            Debug.Assert(!isCachedInvalidHandle || handle.IsInvalid, "The cached invalid handle must still be invalid.");
+            bool isCachedInvalidHandle = ReferenceEquals(
+                handle,
+                Volatile.Read(ref s_invalidHandle)
+            );
+            Debug.Assert(
+                !isCachedInvalidHandle || handle.IsInvalid,
+                "The cached invalid handle must still be invalid."
+            );
             return isCachedInvalidHandle;
         }
     }

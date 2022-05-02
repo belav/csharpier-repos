@@ -19,25 +19,29 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FullyQualify
 {
-    public class FullyQualifyUnboundIdentifierTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class FullyQualifyUnboundIdentifierTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public FullyQualifyUnboundIdentifierTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public FullyQualifyUnboundIdentifierTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUnboundIdentifiersDiagnosticAnalyzer(), new CSharpFullyQualifyCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUnboundIdentifiersDiagnosticAnalyzer(),
+                new CSharpFullyQualifyCodeFixProvider()
+            );
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [WorkItem(26887, "https://github.com/dotnet/roslyn/issues/26887")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
         public async Task TestFullyQualifyUnboundIdentifier1()
         {
             await TestInRegularAndScriptAsync(
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -48,7 +52,7 @@ class Test
 {
     [|Inner|]
 }",
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -58,7 +62,8 @@ class Test
 class Test
 {
     Program.Inner
-}");
+}"
+            );
         }
 
         [WorkItem(26887, "https://github.com/dotnet/roslyn/issues/26887")]
@@ -66,7 +71,7 @@ class Test
         public async Task TestFullyQualifyUnboundIdentifier2()
         {
             await TestInRegularAndScriptAsync(
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -77,7 +82,7 @@ class Test
 {
     public [|Inner|]
 }",
-@"public class Program
+                @"public class Program
 {
     public class Inner
     {
@@ -87,7 +92,8 @@ class Test
 class Test
 {
     public Program.Inner
-}");
+}"
+            );
         }
     }
 }

@@ -16,9 +16,21 @@ namespace System.ComponentModel.Composition
     // Provides helpers for creating and dealing with Exports
     internal static partial class ExportServices
     {
-        private static readonly MethodInfo _createStronglyTypedLazyOfTM = typeof(ExportServices).GetMethod("CreateStronglyTypedLazyOfTM", BindingFlags.NonPublic | BindingFlags.Static)!;
-        private static readonly MethodInfo _createStronglyTypedLazyOfT = typeof(ExportServices).GetMethod("CreateStronglyTypedLazyOfT", BindingFlags.NonPublic | BindingFlags.Static)!;
-        private static readonly MethodInfo _createSemiStronglyTypedLazy = typeof(ExportServices).GetMethod("CreateSemiStronglyTypedLazy", BindingFlags.NonPublic | BindingFlags.Static)!;
+        private static readonly MethodInfo _createStronglyTypedLazyOfTM =
+            typeof(ExportServices).GetMethod(
+                "CreateStronglyTypedLazyOfTM",
+                BindingFlags.NonPublic | BindingFlags.Static
+            )!;
+        private static readonly MethodInfo _createStronglyTypedLazyOfT =
+            typeof(ExportServices).GetMethod(
+                "CreateStronglyTypedLazyOfT",
+                BindingFlags.NonPublic | BindingFlags.Static
+            )!;
+        private static readonly MethodInfo _createSemiStronglyTypedLazy =
+            typeof(ExportServices).GetMethod(
+                "CreateSemiStronglyTypedLazy",
+                BindingFlags.NonPublic | BindingFlags.Static
+            )!;
 
         internal static readonly Type DefaultMetadataViewType = typeof(IDictionary<string, object>);
         internal static readonly Type DefaultExportedValueType = typeof(object);
@@ -44,22 +56,32 @@ namespace System.ComponentModel.Composition
             }
 
             // Does the view type have a constructor that is a Dictionary<string, object>
-            return metadataViewType.GetConstructor(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
-                                                    Type.DefaultBinder,
-                                                    new Type[] { typeof(IDictionary<string, object>) },
-                                                    Array.Empty<ParameterModifier>()) != null;
+            return metadataViewType.GetConstructor(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+                    Type.DefaultBinder,
+                    new Type[] { typeof(IDictionary<string, object>) },
+                    Array.Empty<ParameterModifier>()
+                ) != null;
         }
 
-        internal static Func<Export, object> CreateStronglyTypedLazyFactory(Type? exportType, Type? metadataViewType)
+        internal static Func<Export, object> CreateStronglyTypedLazyFactory(
+            Type? exportType,
+            Type? metadataViewType
+        )
         {
             MethodInfo genericMethod;
             if (metadataViewType != null)
             {
-                genericMethod = _createStronglyTypedLazyOfTM.MakeGenericMethod(exportType ?? ExportServices.DefaultExportedValueType, metadataViewType);
+                genericMethod = _createStronglyTypedLazyOfTM.MakeGenericMethod(
+                    exportType ?? ExportServices.DefaultExportedValueType,
+                    metadataViewType
+                );
             }
             else
             {
-                genericMethod = _createStronglyTypedLazyOfT.MakeGenericMethod(exportType ?? ExportServices.DefaultExportedValueType);
+                genericMethod = _createStronglyTypedLazyOfT.MakeGenericMethod(
+                    exportType ?? ExportServices.DefaultExportedValueType
+                );
             }
 
             if (genericMethod == null)
@@ -67,19 +89,25 @@ namespace System.ComponentModel.Composition
                 throw new ArgumentNullException(nameof(genericMethod));
             }
 
-            return (Func<Export, object>)Delegate.CreateDelegate(typeof(Func<Export, object>), genericMethod);
+            return (Func<Export, object>)
+                Delegate.CreateDelegate(typeof(Func<Export, object>), genericMethod);
         }
 
-        internal static Func<Export, Lazy<object, object>> CreateSemiStronglyTypedLazyFactory(Type? exportType, Type? metadataViewType)
+        internal static Func<Export, Lazy<object, object>> CreateSemiStronglyTypedLazyFactory(
+            Type? exportType,
+            Type? metadataViewType
+        )
         {
             MethodInfo genericMethod = _createSemiStronglyTypedLazy.MakeGenericMethod(
                 exportType ?? ExportServices.DefaultExportedValueType,
-                metadataViewType ?? ExportServices.DefaultMetadataViewType);
+                metadataViewType ?? ExportServices.DefaultMetadataViewType
+            );
             if (genericMethod == null)
             {
                 throw new ArgumentNullException(nameof(genericMethod));
             }
-            return (Func<Export, Lazy<object, object>>)Delegate.CreateDelegate(typeof(Func<Export, Lazy<object, object>>), genericMethod);
+            return (Func<Export, Lazy<object, object>>)
+                Delegate.CreateDelegate(typeof(Func<Export, Lazy<object, object>>), genericMethod);
         }
 
         internal static Lazy<T, M> CreateStronglyTypedLazyOfTM<T, M>(Export export)
@@ -90,14 +118,16 @@ namespace System.ComponentModel.Composition
                     () => ExportServices.GetCastedExportedValue<T>(export),
                     AttributedModelServices.GetMetadataView<M>(export.Metadata),
                     disposable,
-                    LazyThreadSafetyMode.PublicationOnly);
+                    LazyThreadSafetyMode.PublicationOnly
+                );
             }
             else
             {
                 return new Lazy<T, M>(
                     () => ExportServices.GetCastedExportedValue<T>(export),
                     AttributedModelServices.GetMetadataView<M>(export.Metadata),
-                    LazyThreadSafetyMode.PublicationOnly);
+                    LazyThreadSafetyMode.PublicationOnly
+                );
             }
         }
 
@@ -108,11 +138,15 @@ namespace System.ComponentModel.Composition
                 return new DisposableLazy<T>(
                     () => ExportServices.GetCastedExportedValue<T>(export),
                     disposable,
-                    LazyThreadSafetyMode.PublicationOnly);
+                    LazyThreadSafetyMode.PublicationOnly
+                );
             }
             else
             {
-                return new Lazy<T>(() => ExportServices.GetCastedExportedValue<T>(export), LazyThreadSafetyMode.PublicationOnly);
+                return new Lazy<T>(
+                    () => ExportServices.GetCastedExportedValue<T>(export),
+                    LazyThreadSafetyMode.PublicationOnly
+                );
             }
         }
 
@@ -124,14 +158,16 @@ namespace System.ComponentModel.Composition
                     () => ExportServices.GetCastedExportedValue<T>(export),
                     AttributedModelServices.GetMetadataView<M>(export.Metadata)!,
                     disposable,
-                    LazyThreadSafetyMode.PublicationOnly);
+                    LazyThreadSafetyMode.PublicationOnly
+                );
             }
             else
             {
                 return new Lazy<object?, object>(
                     () => ExportServices.GetCastedExportedValue<T>(export),
                     AttributedModelServices.GetMetadataView<M>(export.Metadata)!,
-                    LazyThreadSafetyMode.PublicationOnly);
+                    LazyThreadSafetyMode.PublicationOnly
+                );
             }
         }
 
@@ -142,26 +178,40 @@ namespace System.ComponentModel.Composition
 
         internal static T CastExportedValue<T>(ICompositionElement element, object? exportedValue)
         {
-            bool succeeded = ContractServices.TryCast(typeof(T), exportedValue, out object? typedExportedValue);
+            bool succeeded = ContractServices.TryCast(
+                typeof(T),
+                exportedValue,
+                out object? typedExportedValue
+            );
             if (!succeeded)
             {
-                throw new CompositionContractMismatchException(SR.Format(
-                    SR.ContractMismatch_ExportedValueCannotBeCastToT,
-                    element.DisplayName,
-                    typeof(T)));
+                throw new CompositionContractMismatchException(
+                    SR.Format(
+                        SR.ContractMismatch_ExportedValueCannotBeCastToT,
+                        element.DisplayName,
+                        typeof(T)
+                    )
+                );
             }
 
             return (T)typedExportedValue!;
         }
 
-        internal static ExportCardinalityCheckResult CheckCardinality<T>(ImportDefinition definition, IEnumerable<T>? enumerable)
+        internal static ExportCardinalityCheckResult CheckCardinality<T>(
+            ImportDefinition definition,
+            IEnumerable<T>? enumerable
+        )
         {
-            EnumerableCardinality actualCardinality = (enumerable != null) ? enumerable.GetCardinality() : EnumerableCardinality.Zero;
+            EnumerableCardinality actualCardinality =
+                (enumerable != null) ? enumerable.GetCardinality() : EnumerableCardinality.Zero;
 
             return MatchCardinality(actualCardinality, definition.Cardinality);
         }
 
-        private static ExportCardinalityCheckResult MatchCardinality(EnumerableCardinality actualCardinality, ImportCardinality importCardinality)
+        private static ExportCardinalityCheckResult MatchCardinality(
+            EnumerableCardinality actualCardinality,
+            ImportCardinality importCardinality
+        )
         {
             switch (actualCardinality)
             {
@@ -185,7 +235,6 @@ namespace System.ComponentModel.Composition
                         throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                     }
                     break;
-
             }
 
             return ExportCardinalityCheckResult.Match;

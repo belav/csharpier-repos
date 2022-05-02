@@ -33,7 +33,9 @@ namespace System.Text.Json.Nodes.Tests
         public static void FromElement_WrongNodeTypeThrows(string json)
         {
             using (JsonDocument document = JsonDocument.Parse(json))
-            Assert.Throws<InvalidOperationException>(() => JsonArray.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(
+                    () => JsonArray.Create(document.RootElement)
+                );
         }
 
         [Fact]
@@ -286,8 +288,10 @@ namespace System.Text.Json.Nodes.Tests
             };
 
             var strangeWordsJsonArray = new JsonArray();
-            strangeWords.Where(word => word.Length < 10).
-                ToList().ForEach(str => strangeWordsJsonArray.Add(JsonValue.Create(str)));
+            strangeWords
+                .Where(word => word.Length < 10)
+                .ToList()
+                .ForEach(str => strangeWordsJsonArray.Add(JsonValue.Create(str)));
 
             Assert.Equal(2, strangeWordsJsonArray.Count);
 
@@ -381,9 +385,18 @@ namespace System.Text.Json.Nodes.Tests
         {
             var issues = new JsonObject
             {
-                { "features", new JsonArray { "new functionality 1", "new functionality 2" } },
-                { "bugs", new JsonArray { "bug 123", "bug 4566", "bug 821" } },
-                { "tests", new JsonArray { "code coverage" } },
+                {
+                    "features",
+                    new JsonArray { "new functionality 1", "new functionality 2" }
+                },
+                {
+                    "bugs",
+                    new JsonArray { "bug 123", "bug 4566", "bug 821" }
+                },
+                {
+                    "tests",
+                    new JsonArray { "code coverage" }
+                },
             };
 
             issues["bugs"].AsArray().Add("bug 12356");
@@ -450,16 +463,20 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[-1]);
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[0]);
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[1]);
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                var jArray = new JsonArray { 1, 2, 3 };
-                jArray.Insert(4, 17);
-            });
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                var jArray = new JsonArray { 1, 2, 3 };
-                jArray.Insert(-1, 17);
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    var jArray = new JsonArray { 1, 2, 3 };
+                    jArray.Insert(4, 17);
+                }
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    var jArray = new JsonArray { 1, 2, 3 };
+                    jArray.Insert(-1, 17);
+                }
+            );
         }
 
         [Fact]

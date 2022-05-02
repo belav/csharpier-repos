@@ -35,6 +35,5 @@ internal static partial class Interop
             public int dwProvSpec2;
             public char wcProvChar;
         }
-
     }
 }

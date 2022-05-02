@@ -72,6 +72,7 @@ namespace System.DirectoryServices.Protocols
         LDAP_OPT_HOST_NAME = 0x30,
         LDAP_OPT_ERROR_NUMBER = 0x31, // aka LDAP_OPT_RESULT_CODE
         LDAP_OPT_ERROR_STRING = 0x32, // aka LDAP_OPT_DIAGNOSTIC_MESSAGE
+
         // This one is overloaded between Windows and Linux servers:
         // in OpenLDAP, LDAP_OPT_MATCHED_DN = 0x33
         LDAP_OPT_SERVER_ERROR = 0x33, // Not Supported in Linux

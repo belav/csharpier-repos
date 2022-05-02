@@ -8,6 +8,7 @@ using System;
 internal class plainarr
 {
     private static double s_tolerance = 0.0000000000001;
+
     public static bool AreEqual(double left, double right)
     {
         return Math.Abs(left - right) < s_tolerance;
@@ -23,8 +24,16 @@ internal class plainarr
 
     public static void gaussj(double[,] a, int n, double[,] b, int m)
     {
-        int i, icol = 0, irow = 0, j, k, l, ll;
-        double big = 0.0, dum = 0.0, pivinv = 0.0;
+        int i,
+            icol = 0,
+            irow = 0,
+            j,
+            k,
+            l,
+            ll;
+        double big = 0.0,
+            dum = 0.0,
+            pivinv = 0.0;
 
         int[] indxc = new int[3];
         int[] indxr = new int[3];
@@ -55,8 +64,10 @@ internal class plainarr
             ++(ipiv[icol]);
             if (irow != icol)
             {
-                for (l = 0; l < n; l++) swap(a[irow, l], a[icol, l]);
-                for (l = 0; l < m; l++) swap(b[irow, l], b[icol, l]);
+                for (l = 0; l < n; l++)
+                    swap(a[irow, l], a[icol, l]);
+                for (l = 0; l < m; l++)
+                    swap(b[irow, l], b[icol, l]);
             }
 
             indxr[i] = irow;
@@ -65,15 +76,19 @@ internal class plainarr
                 Console.WriteLine("GAUSSJ: Singular Matrix-2. icol is {0}\n", icol);
             pivinv = 1.0 / a[icol, icol];
             a[icol, icol] = 1.0;
-            for (l = 0; l < n; l++) a[icol, l] *= pivinv;
-            for (l = 0; l < m; l++) b[icol, l] *= pivinv;
+            for (l = 0; l < n; l++)
+                a[icol, l] *= pivinv;
+            for (l = 0; l < m; l++)
+                b[icol, l] *= pivinv;
             for (ll = 0; ll < n; ll++)
                 if (ll != icol)
                 {
                     dum = a[ll, icol];
                     a[ll, icol] = 0.0;
-                    for (l = 0; l < n; l++) a[ll, l] -= a[icol, l] * dum;
-                    for (l = 0; l < m; l++) b[ll, l] -= b[icol, l] * dum;
+                    for (l = 0; l < n; l++)
+                        a[ll, l] -= a[icol, l] * dum;
+                    for (l = 0; l < m; l++)
+                        b[ll, l] -= b[icol, l] * dum;
                 }
         }
         for (l = n - 1; l >= 0; l--)
@@ -110,54 +125,54 @@ internal class plainarr
         b[2, 0] = 3;
 
         /*
-		int i, j;
-				
-		Console.WriteLine("Matrix A is \n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a[i,j]);
-			Console.WriteLine();
-		}
+        int i, j;
+                
+        Console.WriteLine("Matrix A is \n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("Matrix B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("Matrix B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         gaussj(a, n, b, m);
 
         /*
-		Console.WriteLine();
-		Console.WriteLine("The inverse of matrix A is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<n; j++)
-				Console.Write("{0}\t", a[i,j]);
-			Console.WriteLine();
-		}
+        Console.WriteLine();
+        Console.WriteLine("The inverse of matrix A is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<n; j++)
+                Console.Write("{0}\t", a[i,j]);
+            Console.WriteLine();
+        }
 
-		Console.WriteLine();
-		Console.WriteLine("The solution X of AX=B is:\n");
-		for (i=0; i<n; i++)
-		{
-			for (j=0; j<m; j++)
-				Console.Write("{0}\t", b[i,j]);
-			Console.WriteLine();
-		}
-		*/
+        Console.WriteLine();
+        Console.WriteLine("The solution X of AX=B is:\n");
+        for (i=0; i<n; i++)
+        {
+            for (j=0; j<m; j++)
+                Console.Write("{0}\t", b[i,j]);
+            Console.WriteLine();
+        }
+        */
 
         if (
-               AreEqual(a[0, 0], 3)
+            AreEqual(a[0, 0], 3)
             && AreEqual(a[1, 1], 4)
             && AreEqual(b[0, 0], -9)
             && AreEqual(b[1, 0], 10)
-            )
+        )
             pass = true;
 
         if (!pass)

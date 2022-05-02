@@ -31,26 +31,14 @@ namespace System.Security.Cryptography
 
         internal int KeySpec
         {
-            get
-            {
-                return _keySpec;
-            }
-            set
-            {
-                _keySpec = value;
-            }
+            get { return _keySpec; }
+            set { _keySpec = value; }
         }
 
         internal bool PublicOnly
         {
-            get
-            {
-                return _fPublicOnly;
-            }
-            set
-            {
-                _fPublicOnly = value;
-            }
+            get { return _fPublicOnly; }
+            set { _fPublicOnly = value; }
         }
 
         internal void SetParent(SafeProvHandle parent)
@@ -72,7 +60,10 @@ namespace System.Security.Cryptography
 
         internal static SafeKeyHandle InvalidHandle
         {
-            get { return SafeHandleCache<SafeKeyHandle>.GetInvalidHandle(() => new SafeKeyHandle()); }
+            get
+            {
+                return SafeHandleCache<SafeKeyHandle>.GetInvalidHandle(() => new SafeKeyHandle());
+            }
         }
 
         protected override void Dispose(bool disposing)

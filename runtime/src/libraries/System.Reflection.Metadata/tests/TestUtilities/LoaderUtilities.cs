@@ -11,23 +11,39 @@ namespace System.Reflection.Metadata.Tests
 {
     internal static unsafe class LoaderUtilities
     {
-        public static void LoadPEAndValidate(byte[] peImage, Action<PEReader> validator, bool useStream = false)
+        public static void LoadPEAndValidate(
+            byte[] peImage,
+            Action<PEReader> validator,
+            bool useStream = false
+        )
         {
             using (var tempFile = new TempFile(Path.GetTempFileName()))
             {
                 File.WriteAllBytes(tempFile.Path, peImage);
 
-                using (SafeLibraryHandle libHandle = global::Interop.Kernel32.LoadLibraryExW(tempFile.Path, IntPtr.Zero, 0))
+                using (
+                    SafeLibraryHandle libHandle = global::Interop.Kernel32.LoadLibraryExW(
+                        tempFile.Path,
+                        IntPtr.Zero,
+                        0
+                    )
+                )
                 {
-                    byte* peImagePtr = (byte*)global::Interop.Kernel32.GetModuleHandle(Path.GetFileName(tempFile.Path));
+                    byte* peImagePtr = (byte*)
+                        global::Interop.Kernel32.GetModuleHandle(Path.GetFileName(tempFile.Path));
 
                     Assert.True(peImagePtr != null);
                     Assert.Equal('M', (char)peImagePtr[0]);
                     Assert.Equal('Z', (char)peImagePtr[1]);
 
-                    using (var peReader = useStream ?
-                        new PEReader(new ReadOnlyUnmanagedMemoryStream(peImagePtr, int.MaxValue), PEStreamOptions.IsLoadedImage) :
-                        new PEReader(peImagePtr, int.MaxValue, isLoadedImage: true))
+                    using (
+                        var peReader = useStream
+                            ? new PEReader(
+                                  new ReadOnlyUnmanagedMemoryStream(peImagePtr, int.MaxValue),
+                                  PEStreamOptions.IsLoadedImage
+                              )
+                            : new PEReader(peImagePtr, int.MaxValue, isLoadedImage: true)
+                    )
                     {
                         validator(peReader);
                     }

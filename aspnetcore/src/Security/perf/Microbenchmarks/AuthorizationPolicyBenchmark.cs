@@ -16,7 +16,9 @@ public class AuthorizationPolicyBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        _policyProvider = new DefaultAuthorizationPolicyProvider(Options.Create(new AuthorizationOptions()));
+        _policyProvider = new DefaultAuthorizationPolicyProvider(
+            Options.Create(new AuthorizationOptions())
+        );
     }
 
     [Benchmark]

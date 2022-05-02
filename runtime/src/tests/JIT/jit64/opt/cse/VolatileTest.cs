@@ -12,7 +12,8 @@ internal class Program
     private static int Main(string[] args)
     {
         Console.WriteLine("this test is designed to hang if jit cse doesnt honor volatile");
-        if (TestCSE.Test()) return 100;
+        if (TestCSE.Test())
+            return 100;
         return 1;
     }
 }
@@ -56,7 +57,16 @@ public class TestCSE
         if (result == expected2)
             return false;
         Console.WriteLine("this failure may not repro everytime");
-        Console.WriteLine("ERROR FAILED:" + tname + ",got val1=" + result + " expected value is, either " + expected1 + " or " + expected2);
+        Console.WriteLine(
+            "ERROR FAILED:"
+                + tname
+                + ",got val1="
+                + result
+                + " expected value is, either "
+                + expected1
+                + " or "
+                + expected2
+        );
         throw new Exception("check failed for " + tname);
     }
 
@@ -67,38 +77,55 @@ public class TestCSE
 
         Thread.Sleep(0);
 
-
         _a = VAL1;
         _b = VAL1;
         for (i = 0; ; i++)
         {
 #if OP_ADD
-			if (!Equal(_a + _b, _a + _b)) break;
-			if (!Equal(_a + _b, _a + _b)) break;
+            if (!Equal(_a + _b, _a + _b))
+                break;
+            if (!Equal(_a + _b, _a + _b))
+                break;
 #elif OP_SUB
-			if (!Equal(_a - _b, _a - _b)) break;
-			if (!Equal(_a - _b, _a - _b)) break;
+            if (!Equal(_a - _b, _a - _b))
+                break;
+            if (!Equal(_a - _b, _a - _b))
+                break;
 #elif OP_MUL
-            if (!Equal(_a * _b, _a * _b)) break;
-            if (!Equal(_a * _b, _a * _b)) break;
+            if (!Equal(_a * _b, _a * _b))
+                break;
+            if (!Equal(_a * _b, _a * _b))
+                break;
 #elif OP_DIV
-			if (!Equal(_a / _b, _a / _b)) break;
-			if (!Equal(_a / _b, _a / _b)) break;
+            if (!Equal(_a / _b, _a / _b))
+                break;
+            if (!Equal(_a / _b, _a / _b))
+                break;
 #elif OP_MOD
-			if (!Equal(_a % _b, _a % _b)) break;
-			if (!Equal(_a % _b, _a % _b)) break;
+            if (!Equal(_a % _b, _a % _b))
+                break;
+            if (!Equal(_a % _b, _a % _b))
+                break;
 #elif OP_XOR
-			if (!Equal(_a ^ _b, _a ^ _b)) break;
-			if (!Equal(_a ^ _b, _a ^ _b)) break;
+            if (!Equal(_a ^ _b, _a ^ _b))
+                break;
+            if (!Equal(_a ^ _b, _a ^ _b))
+                break;
 #elif OP_OR
-			if (!Equal(_a | _b, _a | _b)) break;
-			if (!Equal(_a | _b, _a | _b)) break;
+            if (!Equal(_a | _b, _a | _b))
+                break;
+            if (!Equal(_a | _b, _a | _b))
+                break;
 #elif OP_AND
-			if (!Equal(_a & _b, _a & _b)) break;
-			if (!Equal(_a & _b, _a & _b)) break;
+            if (!Equal(_a & _b, _a & _b))
+                break;
+            if (!Equal(_a & _b, _a & _b))
+                break;
 #elif OP_SHR
-			if (!Equal(_a >> _b, _a >> _b)) break;
-			if (!Equal(_a >> _b, _a >> _b)) break;
+            if (!Equal(_a >> _b, _a >> _b))
+                break;
+            if (!Equal(_a >> _b, _a >> _b))
+                break;
 #else
 #error Please define an operator (e.g. /define:OP_ADD, /define:OP:SUB...)
 #endif
@@ -106,44 +133,60 @@ public class TestCSE
         }
         Console.WriteLine("Test 1 passed after " + i + " tries");
 
-
         _a = VAL1;
         _b = VAL1;
         for (i = 0; ; i++)
         {
 #if OP_ADD
-			if (!Equal(_a + _b, VAL1 + VAL1)) break;
-			if (!Equal(_a + _b, VAL1 + VAL1)) break;
+            if (!Equal(_a + _b, VAL1 + VAL1))
+                break;
+            if (!Equal(_a + _b, VAL1 + VAL1))
+                break;
 #elif OP_SUB
-			if (!Equal(_a - _b, VAL1 - VAL2)) break;
-			if (!Equal(_a - _b, VAL1 - VAL2)) break;
+            if (!Equal(_a - _b, VAL1 - VAL2))
+                break;
+            if (!Equal(_a - _b, VAL1 - VAL2))
+                break;
 #elif OP_MUL
-            if (!Equal(_a * _b, VAL1 * VAL2)) break;
-            if (!Equal(_a * _b, VAL1 * VAL2)) break;
+            if (!Equal(_a * _b, VAL1 * VAL2))
+                break;
+            if (!Equal(_a * _b, VAL1 * VAL2))
+                break;
 #elif OP_DIV
-			if (!Equal(_a / _b, VAL1 / VAL2)) break;
-			if (!Equal(_a / _b, VAL1 / VAL2)) break;
+            if (!Equal(_a / _b, VAL1 / VAL2))
+                break;
+            if (!Equal(_a / _b, VAL1 / VAL2))
+                break;
 #elif OP_MOD
-			if (!Equal(_a % _b, VAL1 % VAL2)) break;
-			if (!Equal(_a % _b, VAL1 % VAL2)) break;
+            if (!Equal(_a % _b, VAL1 % VAL2))
+                break;
+            if (!Equal(_a % _b, VAL1 % VAL2))
+                break;
 #elif OP_XOR
-			if (!Equal(_a ^ _b, VAL1 ^ VAL2)) break;
-			if (!Equal(_a ^ _b, VAL1 ^ VAL2)) break;
+            if (!Equal(_a ^ _b, VAL1 ^ VAL2))
+                break;
+            if (!Equal(_a ^ _b, VAL1 ^ VAL2))
+                break;
 #elif OP_OR
-			if (!Equal(_a | _b, VAL1 | VAL2)) break;
-			if (!Equal(_a | _b, VAL1 | VAL2)) break;
+            if (!Equal(_a | _b, VAL1 | VAL2))
+                break;
+            if (!Equal(_a | _b, VAL1 | VAL2))
+                break;
 #elif OP_AND
-			if (!Equal(_a & _b, VAL1 & VAL2)) break;
-			if (!Equal(_a & _b, VAL1 & VAL2)) break;
+            if (!Equal(_a & _b, VAL1 & VAL2))
+                break;
+            if (!Equal(_a & _b, VAL1 & VAL2))
+                break;
 #elif OP_SHR
-			if (!Equal(_a >> _b, VAL1 >> VAL2)) break;
-			if (!Equal(_a >> _b, VAL1 >> VAL2)) break;
+            if (!Equal(_a >> _b, VAL1 >> VAL2))
+                break;
+            if (!Equal(_a >> _b, VAL1 >> VAL2))
+                break;
 #else
 #error Please define an operator (e.g. /define:OP_ADD, /define:OP:SUB...)
 #endif
         }
         Console.WriteLine("Test 2 passed after " + i + " tries");
-
 
         bool passed = false;
         _a = VAL1;
@@ -151,41 +194,65 @@ public class TestCSE
         for (i = 0; ; i++)
         {
 #if OP_ADD
-			int ans1 = _a + _b;
-			int ans2 = _a + _b;
-			if (TestFailed(ans1, VAL1 + VAL1, VAL1 + VAL2, "Test 3") || TestFailed(ans2, VAL1 + VAL1, VAL1 + VAL2, "Test 3"))
+            int ans1 = _a + _b;
+            int ans2 = _a + _b;
+            if (
+                TestFailed(ans1, VAL1 + VAL1, VAL1 + VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 + VAL1, VAL1 + VAL2, "Test 3")
+            )
 #elif OP_SUB
-			int ans1 = _a - _b;
-			int ans2 = _a - _b;
-			if (TestFailed(ans1, VAL1 - VAL1, VAL1 - VAL2, "Test 3") || TestFailed(ans2, VAL1 - VAL1, VAL1 - VAL2, "Test 3"))
+            int ans1 = _a - _b;
+            int ans2 = _a - _b;
+            if (
+                TestFailed(ans1, VAL1 - VAL1, VAL1 - VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 - VAL1, VAL1 - VAL2, "Test 3")
+            )
 #elif OP_MUL
             int ans1 = _a * _b;
             int ans2 = _a * _b;
-            if (TestFailed(ans1, VAL1 * VAL1, VAL1 * VAL2, "Test 3") || TestFailed(ans2, VAL1 * VAL1, VAL1 * VAL2, "Test 3"))
+            if (
+                TestFailed(ans1, VAL1 * VAL1, VAL1 * VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 * VAL1, VAL1 * VAL2, "Test 3")
+            )
 #elif OP_DIV
-			int ans1 = _a / _b;
-			int ans2 = _a / _b;
-			if (TestFailed(ans1, VAL1 / VAL1, VAL1 / VAL2, "Test 3") || TestFailed(ans2, VAL1 / VAL1, VAL1 / VAL2, "Test 3"))
+            int ans1 = _a / _b;
+            int ans2 = _a / _b;
+            if (
+                TestFailed(ans1, VAL1 / VAL1, VAL1 / VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 / VAL1, VAL1 / VAL2, "Test 3")
+            )
 #elif OP_MOD
-			int ans1 = _a % _b;
-			int ans2 = _a % _b;
-			if (TestFailed(ans1, VAL1 % VAL1, VAL1 % VAL2, "Test 3") || TestFailed(ans2, VAL1 % VAL1, VAL1 % VAL2, "Test 3"))
+            int ans1 = _a % _b;
+            int ans2 = _a % _b;
+            if (
+                TestFailed(ans1, VAL1 % VAL1, VAL1 % VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 % VAL1, VAL1 % VAL2, "Test 3")
+            )
 #elif OP_XOR
-			int ans1 = _a ^ _b;
-			int ans2 = _a ^ _b;
-			if (TestFailed(ans1, VAL1 ^ VAL1, VAL1 ^ VAL2, "Test 3") || TestFailed(ans2, VAL1 ^ VAL1, VAL1 ^ VAL2, "Test 3"))
+            int ans1 = _a ^ _b;
+            int ans2 = _a ^ _b;
+            if (
+                TestFailed(ans1, VAL1 ^ VAL1, VAL1 ^ VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 ^ VAL1, VAL1 ^ VAL2, "Test 3")
+            )
 #elif OP_OR
-			int ans1 = _a | _b;
-			int ans2 = _a | _b;
-			if (TestFailed(ans1, VAL1 | VAL1, VAL1 | VAL2, "Test 3") || TestFailed(ans2, VAL1 | VAL1, VAL1 | VAL2, "Test 3"))
+            int ans1 = _a | _b;
+            int ans2 = _a | _b;
+            if (
+                TestFailed(ans1, VAL1 | VAL1, VAL1 | VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 | VAL1, VAL1 | VAL2, "Test 3")
+            )
 #elif OP_AND
-			int ans1 = _a & _b;
-			int ans2 = _a & _b;
-			if (TestFailed(ans1, VAL1 & VAL1, VAL1 & VAL2, "Test 3") || TestFailed(ans2, VAL1 & VAL1, VAL1 & VAL2, "Test 3"))
+            int ans1 = _a & _b;
+            int ans2 = _a & _b;
+            if (
+                TestFailed(ans1, VAL1 & VAL1, VAL1 & VAL2, "Test 3")
+                || TestFailed(ans2, VAL1 & VAL1, VAL1 & VAL2, "Test 3")
+            )
 #elif OP_SHR
-			int ans1 = _a >> _b;
-			int ans2 = _a >> _b;
-			if (passed) 
+            int ans1 = _a >> _b;
+            int ans2 = _a >> _b;
+            if (passed)
 #else
 #error Please define an operator (e.g. /define:OP_ADD, /define:OP:SUB...)
 #endif
@@ -205,7 +272,6 @@ public class TestCSE
         return passed;
     }
 
-
     private void Flip()
     {
         for (uint i = 0; !s_timeUp; i++)
@@ -215,7 +281,6 @@ public class TestCSE
             _b = s_objs[(i % 2) + 1];
         }
     }
-
 
     public static bool Test()
     {

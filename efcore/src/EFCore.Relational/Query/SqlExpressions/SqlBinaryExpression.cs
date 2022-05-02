@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             //ExpressionType.LeftShift,
         };
 
-        internal static bool IsValidOperator(ExpressionType operatorType)
-            => _allowedOperators.Contains(operatorType);
+        internal static bool IsValidOperator(ExpressionType operatorType) =>
+            _allowedOperators.Contains(operatorType);
 
         /// <summary>
         ///     Creates a new instance of the <see cref="SqlBinaryExpression" /> class.
@@ -61,14 +61,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             SqlExpression left,
             SqlExpression right,
             Type type,
-            RelationalTypeMapping? typeMapping)
-            : base(type, typeMapping)
+            RelationalTypeMapping? typeMapping
+        ) : base(type, typeMapping)
         {
             if (!IsValidOperator(operatorType))
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UnsupportedOperatorForSqlExpression(
-                        operatorType, typeof(SqlBinaryExpression).ShortDisplayName()));
+                        operatorType,
+                        typeof(SqlBinaryExpression).ShortDisplayName()
+                    )
+                );
             }
 
             OperatorType = operatorType;
@@ -107,8 +110,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="left">The <see cref="Left" /> property of the result.</param>
         /// <param name="right">The <see cref="Right" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public virtual SqlBinaryExpression Update(SqlExpression left, SqlExpression right)
-            => left != Left || right != Right
+        public virtual SqlBinaryExpression Update(SqlExpression left, SqlExpression right) =>
+            left != Left || right != Right
                 ? new SqlBinaryExpression(OperatorType, left, right, Type, TypeMapping)
                 : this;
 
@@ -145,25 +148,26 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 expressionPrinter.Append(")");
             }
 
-            static bool RequiresBrackets(SqlExpression expression)
-                => expression is SqlBinaryExpression || expression is LikeExpression;
+            static bool RequiresBrackets(SqlExpression expression) =>
+                expression is SqlBinaryExpression || expression is LikeExpression;
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is SqlBinaryExpression sqlBinaryExpression
-                    && Equals(sqlBinaryExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is SqlBinaryExpression sqlBinaryExpression && Equals(sqlBinaryExpression)
+            );
 
-        private bool Equals(SqlBinaryExpression sqlBinaryExpression)
-            => base.Equals(sqlBinaryExpression)
-                && OperatorType == sqlBinaryExpression.OperatorType
-                && Left.Equals(sqlBinaryExpression.Left)
-                && Right.Equals(sqlBinaryExpression.Right);
+        private bool Equals(SqlBinaryExpression sqlBinaryExpression) =>
+            base.Equals(sqlBinaryExpression)
+            && OperatorType == sqlBinaryExpression.OperatorType
+            && Left.Equals(sqlBinaryExpression.Left)
+            && Right.Equals(sqlBinaryExpression.Right);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), OperatorType, Left, Right);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), OperatorType, Left, Right);
     }
 }

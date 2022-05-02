@@ -41,38 +41,45 @@ class LPTStrTest
 
     private static void RunByValTStrTests()
     {
-        Assert.True(MatchFuncNameAnsi(new ByValStringInStructAnsi { str = nameof(MatchFuncNameAnsi)}));
+        Assert.True(
+            MatchFuncNameAnsi(new ByValStringInStructAnsi { str = nameof(MatchFuncNameAnsi) })
+        );
 
-        var ansiStr = new ByValStringInStructAnsi
-        {
-            str = InitialString
-        };
+        var ansiStr = new ByValStringInStructAnsi { str = InitialString };
 
         ReverseByValStringAnsi(ref ansiStr);
 
         Assert.Equal(Helpers.Reverse(InitialString), ansiStr.str);
 
-        Assert.True(MatchFuncNameUni(new ByValStringInStructUnicode { str = nameof(MatchFuncNameUni)}));
+        Assert.True(
+            MatchFuncNameUni(new ByValStringInStructUnicode { str = nameof(MatchFuncNameUni) })
+        );
 
-        var uniStr = new ByValStringInStructUnicode
-        {
-            str = InitialString
-        };
+        var uniStr = new ByValStringInStructUnicode { str = InitialString };
 
         ReverseByValStringUni(ref uniStr);
         Assert.Equal(Helpers.Reverse(InitialString), uniStr.str);
 
-        ReverseCopyByValStringAnsi(new ByValStringInStructAnsi { str = LongString }, out ByValStringInStructSplitAnsi ansiStrSplit);
+        ReverseCopyByValStringAnsi(
+            new ByValStringInStructAnsi { str = LongString },
+            out ByValStringInStructSplitAnsi ansiStrSplit
+        );
 
         Assert.Equal(Helpers.Reverse(LongString[^10..]), ansiStrSplit.str1);
         Assert.Equal(Helpers.Reverse(LongString[..^10]), ansiStrSplit.str2);
 
-        ReverseCopyByValStringUni(new ByValStringInStructUnicode { str = LongString }, out ByValStringInStructSplitUnicode uniStrSplit);
+        ReverseCopyByValStringUni(
+            new ByValStringInStructUnicode { str = LongString },
+            out ByValStringInStructSplitUnicode uniStrSplit
+        );
 
         Assert.Equal(Helpers.Reverse(LongString[^10..]), uniStrSplit.str1);
         Assert.Equal(Helpers.Reverse(LongString[..^10]), uniStrSplit.str2);
 
-        ReverseCopyByValStringUni(new ByValStringInStructUnicode { str = LongUnicodeString }, out ByValStringInStructSplitUnicode uniStrSplit2);
+        ReverseCopyByValStringUni(
+            new ByValStringInStructUnicode { str = LongUnicodeString },
+            out ByValStringInStructSplitUnicode uniStrSplit2
+        );
 
         Assert.Equal(Helpers.Reverse(LongUnicodeString[^10..]), uniStrSplit2.str1);
         Assert.Equal(Helpers.Reverse(LongUnicodeString[..^10]), uniStrSplit2.str2);

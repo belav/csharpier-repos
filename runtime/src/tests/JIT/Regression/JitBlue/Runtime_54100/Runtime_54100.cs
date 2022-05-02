@@ -5,14 +5,15 @@ using System.Runtime.CompilerServices;
 
 public class Runtime_54100
 {
-    // The test ends up containing an empty try block and we do not find a 
-    // non-empty block from which a treeNode can be extracted to use it for 
+    // The test ends up containing an empty try block and we do not find a
+    // non-empty block from which a treeNode can be extracted to use it for
     // creating zero-init refPositions.
-    
-    static ushort[][] s_23 = new ushort[][]{new ushort[]{0}};
+
+    static ushort[][] s_23 = new ushort[][] { new ushort[] { 0 } };
     static short s_32;
     static short s_33;
     static int s_45;
+
     public static int Main()
     {
         ushort[] vr4 = s_23[0];

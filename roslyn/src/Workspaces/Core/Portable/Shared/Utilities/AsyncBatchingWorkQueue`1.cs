@@ -18,33 +18,37 @@ namespace Roslyn.Utilities
             TimeSpan delay,
             Func<ImmutableArray<TItem>, CancellationToken, ValueTask> processBatchAsync,
             IAsynchronousOperationListener asyncListener,
-            CancellationToken cancellationToken)
-            : this(delay,
-                   processBatchAsync,
-                   equalityComparer: null,
-                   asyncListener,
-                   cancellationToken)
-        {
-        }
+            CancellationToken cancellationToken
+        ) : this(delay, processBatchAsync, equalityComparer: null, asyncListener, cancellationToken)
+        { }
 
         public AsyncBatchingWorkQueue(
             TimeSpan delay,
             Func<ImmutableArray<TItem>, CancellationToken, ValueTask> processBatchAsync,
             IEqualityComparer<TItem>? equalityComparer,
             IAsynchronousOperationListener asyncListener,
-            CancellationToken cancellationToken)
-            : base(delay, Convert(processBatchAsync), equalityComparer, asyncListener, cancellationToken)
-        {
-        }
+            CancellationToken cancellationToken
+        )
+            : base(
+                delay,
+                Convert(processBatchAsync),
+                equalityComparer,
+                asyncListener,
+                cancellationToken
+            ) { }
 
-        private static Func<ImmutableArray<TItem>, CancellationToken, ValueTask<VoidResult>> Convert(Func<ImmutableArray<TItem>, CancellationToken, ValueTask> processBatchAsync)
-            => async (items, ct) =>
+        private static Func<
+            ImmutableArray<TItem>,
+            CancellationToken,
+            ValueTask<VoidResult>
+        > Convert(Func<ImmutableArray<TItem>, CancellationToken, ValueTask> processBatchAsync) =>
+            async (items, ct) =>
             {
                 await processBatchAsync(items, ct).ConfigureAwait(false);
                 return default;
             };
 
-        public new Task WaitUntilCurrentBatchCompletesAsync()
-            => base.WaitUntilCurrentBatchCompletesAsync();
+        public new Task WaitUntilCurrentBatchCompletesAsync() =>
+            base.WaitUntilCurrentBatchCompletesAsync();
     }
 }

@@ -9,16 +9,41 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 internal readonly struct DeclaredApiResponseMetadata
 {
     public static DeclaredApiResponseMetadata ImplicitResponse { get; } =
-        new DeclaredApiResponseMetadata(statusCode: 200, attributeData: null, attributeSource: null, @implicit: true, @default: false);
+        new DeclaredApiResponseMetadata(
+            statusCode: 200,
+            attributeData: null,
+            attributeSource: null,
+            @implicit: true,
+            @default: false
+        );
 
-    public static DeclaredApiResponseMetadata ForProducesResponseType(int statusCode, AttributeData attributeData, IMethodSymbol attributeSource)
+    public static DeclaredApiResponseMetadata ForProducesResponseType(
+        int statusCode,
+        AttributeData attributeData,
+        IMethodSymbol attributeSource
+    )
     {
-        return new DeclaredApiResponseMetadata(statusCode, attributeData, attributeSource, @implicit: false, @default: false);
+        return new DeclaredApiResponseMetadata(
+            statusCode,
+            attributeData,
+            attributeSource,
+            @implicit: false,
+            @default: false
+        );
     }
 
-    public static DeclaredApiResponseMetadata ForProducesDefaultResponse(AttributeData attributeData, IMethodSymbol attributeSource)
+    public static DeclaredApiResponseMetadata ForProducesDefaultResponse(
+        AttributeData attributeData,
+        IMethodSymbol attributeSource
+    )
     {
-        return new DeclaredApiResponseMetadata(statusCode: 0, attributeData, attributeSource, @implicit: false, @default: true);
+        return new DeclaredApiResponseMetadata(
+            statusCode: 0,
+            attributeData,
+            attributeSource,
+            @implicit: false,
+            @default: true
+        );
     }
 
     private DeclaredApiResponseMetadata(
@@ -26,7 +51,8 @@ internal readonly struct DeclaredApiResponseMetadata
         AttributeData? attributeData,
         IMethodSymbol? attributeSource,
         bool @implicit,
-        bool @default)
+        bool @default
+    )
     {
         StatusCode = statusCode;
         Attribute = attributeData;
@@ -53,7 +79,10 @@ internal readonly struct DeclaredApiResponseMetadata
     /// </summary>
     public bool IsDefault { get; }
 
-    internal static bool Contains(IList<DeclaredApiResponseMetadata> declaredApiResponseMetadata, ActualApiResponseMetadata actualMetadata)
+    internal static bool Contains(
+        IList<DeclaredApiResponseMetadata> declaredApiResponseMetadata,
+        ActualApiResponseMetadata actualMetadata
+    )
     {
         return TryGetDeclaredMetadata(declaredApiResponseMetadata, actualMetadata, out _);
     }
@@ -61,7 +90,8 @@ internal readonly struct DeclaredApiResponseMetadata
     internal static bool TryGetDeclaredMetadata(
         IList<DeclaredApiResponseMetadata> declaredApiResponseMetadata,
         ActualApiResponseMetadata actualMetadata,
-        out DeclaredApiResponseMetadata result)
+        out DeclaredApiResponseMetadata result
+    )
     {
         for (var i = 0; i < declaredApiResponseMetadata.Count; i++)
         {

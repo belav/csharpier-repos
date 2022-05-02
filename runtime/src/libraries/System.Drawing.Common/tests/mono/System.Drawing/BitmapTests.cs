@@ -45,11 +45,13 @@ using Xunit;
 
 namespace MonoTests.System.Drawing
 {
-
-    [SkipOnCoreClr("https://github.com/dotnet/runtime/issues/37082", TestPlatforms.AnyUnix, RuntimeConfiguration.Checked)]
+    [SkipOnCoreClr(
+        "https://github.com/dotnet/runtime/issues/37082",
+        TestPlatforms.AnyUnix,
+        RuntimeConfiguration.Checked
+    )]
     public class TestBitmap
     {
-
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void TestPixels()
         {
@@ -72,7 +74,9 @@ namespace MonoTests.System.Drawing
             using (Bitmap bmp = new Bitmap(100, 100, PixelFormat.Format8bppIndexed))
             {
                 Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                Assert.Throws<ArgumentException>(() => bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb));
+                Assert.Throws<ArgumentException>(
+                    () => bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb)
+                );
             }
         }
 
@@ -84,14 +88,26 @@ namespace MonoTests.System.Drawing
             {
                 BitmapData bd = new BitmapData();
                 Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                Assert.Throws<ArgumentException>(() => bmp.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed, bd));
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        bmp.LockBits(
+                            rect,
+                            ImageLockMode.ReadWrite,
+                            PixelFormat.Format8bppIndexed,
+                            bd
+                        )
+                );
 
                 // test to see if there's a leak or not in this case
                 Assert.Equal(IntPtr.Zero, bd.Scan0);
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBits_ImageLockMode_Invalid()
         {
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format24bppRgb))
@@ -119,10 +135,16 @@ namespace MonoTests.System.Drawing
             using (Bitmap bmp = new Bitmap(10, 10, PixelFormat.Format24bppRgb))
             {
                 Rectangle r = new Rectangle(4, 4, 4, 4);
-                BitmapData data = bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData data = bmp.LockBits(
+                    r,
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb));
+                    Assert.Throws<InvalidOperationException>(
+                        () => bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb)
+                    );
                 }
                 finally
                 {
@@ -229,7 +251,11 @@ namespace MonoTests.System.Drawing
                     Assert.Equal(Color.FromArgb(255, 64, 32, 16), c);
                     Assert.Equal(Color.FromArgb(255, 96, 48, 24), d);
                 }
-                BitmapData bd = bmp.LockBits(new Rectangle(0, 0, 2, 1), ImageLockMode.ReadOnly, format);
+                BitmapData bd = bmp.LockBits(
+                    new Rectangle(0, 0, 2, 1),
+                    ImageLockMode.ReadOnly,
+                    format
+                );
                 try
                 {
                     byte[] data = new byte[size];
@@ -314,7 +340,8 @@ namespace MonoTests.System.Drawing
         /* Get the output directory depending on the runtime and location*/
         public static string getOutSubDir()
         {
-            string sSub, sRslt;
+            string sSub,
+                sRslt;
 
             if (Environment.GetEnvironmentVariable("MSNet") == null)
                 sSub = "mono/";
@@ -400,15 +427,21 @@ namespace MonoTests.System.Drawing
             return sOutput.ToString();
         }
 
-
         public string RotateBmp(Bitmap src, RotateFlipType rotate)
         {
-            int width = 150, height = 150, index = 0;
+            int width = 150,
+                height = 150,
+                index = 0;
             byte[] pixels = new byte[width * height * 3];
             byte[] hash;
             Color clr;
 
-            using (Bitmap bmp_rotate = src.Clone(new RectangleF(0, 0, width, height), PixelFormat.Format32bppArgb))
+            using (
+                Bitmap bmp_rotate = src.Clone(
+                    new RectangleF(0, 0, width, height),
+                    PixelFormat.Format32bppArgb
+                )
+            )
             {
                 bmp_rotate.RotateFlip(rotate);
 
@@ -427,6 +460,7 @@ namespace MonoTests.System.Drawing
                 return ByteArrayToString(hash);
             }
         }
+
         public string RotateIndexedBmp(Bitmap src, RotateFlipType type)
         {
             int pixels_per_byte;
@@ -444,7 +478,9 @@ namespace MonoTests.System.Drawing
                     break;
 
                 default:
-                    throw new Exception("Cannot pass a bitmap of format " + src.PixelFormat + " to RotateIndexedBmp");
+                    throw new Exception(
+                        "Cannot pass a bitmap of format " + src.PixelFormat + " to RotateIndexedBmp"
+                    );
             }
 
             using (Bitmap test = src.Clone() as Bitmap)
@@ -456,7 +492,11 @@ namespace MonoTests.System.Drawing
 
                 try
                 {
-                    data = test.LockBits(new Rectangle(0, 0, test.Width, test.Height), ImageLockMode.ReadOnly, test.PixelFormat);
+                    data = test.LockBits(
+                        new Rectangle(0, 0, test.Width, test.Height),
+                        ImageLockMode.ReadOnly,
+                        test.PixelFormat
+                    );
 
                     int scan_size = (data.Width + pixels_per_byte - 1) / pixels_per_byte;
                     pixel_data = new byte[data.Height * scan_size];
@@ -474,7 +514,9 @@ namespace MonoTests.System.Drawing
                     if (test != null && data != null)
                     {
                         try
-                        { test.UnlockBits(data); }
+                        {
+                            test.UnlockBits(data);
+                        }
                         catch { }
                     }
                 }
@@ -487,7 +529,6 @@ namespace MonoTests.System.Drawing
             }
         }
 
-
         // Rotate bitmap in diffent ways, and check the result
         // pixels using MD5
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -496,32 +537,73 @@ namespace MonoTests.System.Drawing
             string sInFile = Helpers.GetTestBitmapPath("almogaver24bits.bmp");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
-                Assert.Equal("312958A3C67402E1299413794988A3C7", RotateBmp(bmp, RotateFlipType.Rotate90FlipNone));
-                Assert.Equal("BF70D8DA4F1545AEDD77D0296B47AE58", RotateBmp(bmp, RotateFlipType.Rotate180FlipNone));
-                Assert.Equal("15AD2ADBDC7090C0EC744D0F7ACE2FD4", RotateBmp(bmp, RotateFlipType.Rotate270FlipNone));
-                Assert.Equal("2E10FEC1F4FD64ECC51D7CE68AEB183F", RotateBmp(bmp, RotateFlipType.RotateNoneFlipX));
-                Assert.Equal("E63204779B566ED01162B90B49BD9EE9", RotateBmp(bmp, RotateFlipType.Rotate90FlipX));
-                Assert.Equal("B1ECB17B5093E13D04FF55CFCF7763C9", RotateBmp(bmp, RotateFlipType.Rotate180FlipX));
-                Assert.Equal("71A173882C16755D86F4BC2653237425", RotateBmp(bmp, RotateFlipType.Rotate270FlipX));
+                Assert.Equal(
+                    "312958A3C67402E1299413794988A3C7",
+                    RotateBmp(bmp, RotateFlipType.Rotate90FlipNone)
+                );
+                Assert.Equal(
+                    "BF70D8DA4F1545AEDD77D0296B47AE58",
+                    RotateBmp(bmp, RotateFlipType.Rotate180FlipNone)
+                );
+                Assert.Equal(
+                    "15AD2ADBDC7090C0EC744D0F7ACE2FD4",
+                    RotateBmp(bmp, RotateFlipType.Rotate270FlipNone)
+                );
+                Assert.Equal(
+                    "2E10FEC1F4FD64ECC51D7CE68AEB183F",
+                    RotateBmp(bmp, RotateFlipType.RotateNoneFlipX)
+                );
+                Assert.Equal(
+                    "E63204779B566ED01162B90B49BD9EE9",
+                    RotateBmp(bmp, RotateFlipType.Rotate90FlipX)
+                );
+                Assert.Equal(
+                    "B1ECB17B5093E13D04FF55CFCF7763C9",
+                    RotateBmp(bmp, RotateFlipType.Rotate180FlipX)
+                );
+                Assert.Equal(
+                    "71A173882C16755D86F4BC2653237425",
+                    RotateBmp(bmp, RotateFlipType.Rotate270FlipX)
+                );
             }
         }
 
         // Rotate 1- and 4-bit bitmaps in different ways and check the
         // resulting pixels using MD5
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
-        [InlineData("1bit.png", RotateFlipType.Rotate180FlipNone, "64AE60858A02228F7B1B18C7812FB683")]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [InlineData(
+            "1bit.png",
+            RotateFlipType.Rotate180FlipNone,
+            "64AE60858A02228F7B1B18C7812FB683"
+        )]
         [InlineData("1bit.png", RotateFlipType.Rotate180FlipX, "353E937CFF31B1BF6C3DD0A031ACB54D")]
         [InlineData("1bit.png", RotateFlipType.Rotate180FlipXY, "A4DAF507C92BDE10626BC7B34FEFE5D1")]
         [InlineData("1bit.png", RotateFlipType.Rotate180FlipY, "23947CE822C1DDE6BEA69C01F8D0D984")]
-        [InlineData("1bit.png", RotateFlipType.Rotate270FlipNone, "E96D3390938350F9DE2608C436442452")]
+        [InlineData(
+            "1bit.png",
+            RotateFlipType.Rotate270FlipNone,
+            "E96D3390938350F9DE2608C436442452"
+        )]
         [InlineData("1bit.png", RotateFlipType.Rotate270FlipX, "AEA18A770A845E25B6A8CE28DD6DCB2E")]
         [InlineData("1bit.png", RotateFlipType.Rotate270FlipXY, "C0975EAFD2FC1CC9CC7AF20B92FC9F15")]
         [InlineData("1bit.png", RotateFlipType.Rotate270FlipY, "BE45F685BDEBD7079AA1B2CBA467234E")]
-        [InlineData("4bit.png", RotateFlipType.Rotate180FlipNone, "27CF5E9CE70BE9EBC47FB996721B95DC")]
+        [InlineData(
+            "4bit.png",
+            RotateFlipType.Rotate180FlipNone,
+            "27CF5E9CE70BE9EBC47FB996721B95DC"
+        )]
         [InlineData("4bit.png", RotateFlipType.Rotate180FlipX, "05A77EDDCDF20D5B0AC0169E95D7D778")]
         [InlineData("4bit.png", RotateFlipType.Rotate180FlipXY, "3CC874B571902366AACED5D619E87D85")]
         [InlineData("4bit.png", RotateFlipType.Rotate180FlipY, "545876C99ACF833E69FBFFBF4360345D")]
-        [InlineData("4bit.png", RotateFlipType.Rotate270FlipNone, "A919CCB8F97CAD7DC1F01026D11A5D15")]
+        [InlineData(
+            "4bit.png",
+            RotateFlipType.Rotate270FlipNone,
+            "A919CCB8F97CAD7DC1F01026D11A5D15"
+        )]
         [InlineData("4bit.png", RotateFlipType.Rotate270FlipX, "B6B6245796C836923ABAABDF368B2983")]
         [InlineData("4bit.png", RotateFlipType.Rotate270FlipXY, "8DE25C7E1BE4A3B535DB5D83198D83E3")]
         [InlineData("4bit.png", RotateFlipType.Rotate270FlipY, "5DB56687757CDEFC52D89C77CA92239B")]
@@ -577,7 +659,13 @@ namespace MonoTests.System.Drawing
             return MD5.Create().ComputeHash(pixels);
         }
 
-        private byte[] HashLock(Bitmap bmp, int width, int height, PixelFormat fmt, ImageLockMode mode)
+        private byte[] HashLock(
+            Bitmap bmp,
+            int width,
+            int height,
+            PixelFormat fmt,
+            ImageLockMode mode
+        )
         {
             int len = bmp.Width * bmp.Height * 4;
             byte[] pixels = new byte[len];
@@ -592,7 +680,6 @@ namespace MonoTests.System.Drawing
                 {
                     for (int x = 0; x < bd.Width; x++)
                     {
-
                         /* Read the pixels*/
                         for (int bt = 0; bt < bbps / 8; bt++, index++)
                         {
@@ -626,30 +713,122 @@ namespace MonoTests.System.Drawing
         //  Tests the LockBitmap functions. Makes a hash of the block of pixels that it returns
         // firsts, changes them, and then using GetPixel does another check of the changes.
         // The results match the .NET Framework
-        private static byte[] DefaultBitmapHash = new byte[] { 0xD8, 0xD3, 0x68, 0x9C, 0x86, 0x7F, 0xB6, 0xA0, 0x76, 0xD6, 0x00, 0xEF, 0xFF, 0xE5, 0x8E, 0x1B };
-        private static byte[] FinalWholeBitmapHash = new byte[] { 0x5F, 0x52, 0x98, 0x37, 0xE3, 0x94, 0xE1, 0xA6, 0x06, 0x6C, 0x5B, 0xF1, 0xA9, 0xC2, 0xA9, 0x43 };
+        private static byte[] DefaultBitmapHash = new byte[]
+        {
+            0xD8,
+            0xD3,
+            0x68,
+            0x9C,
+            0x86,
+            0x7F,
+            0xB6,
+            0xA0,
+            0x76,
+            0xD6,
+            0x00,
+            0xEF,
+            0xFF,
+            0xE5,
+            0x8E,
+            0x1B
+        };
+        private static byte[] FinalWholeBitmapHash = new byte[]
+        {
+            0x5F,
+            0x52,
+            0x98,
+            0x37,
+            0xE3,
+            0x94,
+            0xE1,
+            0xA6,
+            0x06,
+            0x6C,
+            0x5B,
+            0xF1,
+            0xA9,
+            0xC2,
+            0xA9,
+            0x43
+        };
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBitmap_Format32bppArgb_Format32bppArgb_ReadWrite_Whole()
         {
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0x89, 0x6A, 0x6B, 0x35, 0x5C, 0x89, 0xD9, 0xE9, 0xF4, 0x51, 0xD5, 0x89, 0xED, 0x28, 0x68, 0x5C };
-                byte[] actual = HashLock(bmp, bmp.Width, bmp.Height, PixelFormat.Format32bppArgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0x89,
+                    0x6A,
+                    0x6B,
+                    0x35,
+                    0x5C,
+                    0x89,
+                    0xD9,
+                    0xE9,
+                    0xF4,
+                    0x51,
+                    0xD5,
+                    0x89,
+                    0xED,
+                    0x28,
+                    0x68,
+                    0x5C
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    bmp.Width,
+                    bmp.Height,
+                    PixelFormat.Format32bppArgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalWholeBitmapHash, HashPixels(bmp));
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBitmap_Format32bppArgb_Format32bppPArgb_ReadWrite_Whole()
         {
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0x89, 0x6A, 0x6B, 0x35, 0x5C, 0x89, 0xD9, 0xE9, 0xF4, 0x51, 0xD5, 0x89, 0xED, 0x28, 0x68, 0x5C };
-                byte[] actual = HashLock(bmp, bmp.Width, bmp.Height, PixelFormat.Format32bppPArgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0x89,
+                    0x6A,
+                    0x6B,
+                    0x35,
+                    0x5C,
+                    0x89,
+                    0xD9,
+                    0xE9,
+                    0xF4,
+                    0x51,
+                    0xD5,
+                    0x89,
+                    0xED,
+                    0x28,
+                    0x68,
+                    0x5C
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    bmp.Width,
+                    bmp.Height,
+                    PixelFormat.Format32bppPArgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalWholeBitmapHash, HashPixels(bmp));
             }
@@ -662,49 +841,175 @@ namespace MonoTests.System.Drawing
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0xC0, 0x28, 0xB5, 0x2E, 0x86, 0x90, 0x6F, 0x37, 0x09, 0x5F, 0x49, 0xA4, 0x91, 0xDA, 0xEE, 0xB9 };
-                byte[] actual = HashLock(bmp, bmp.Width, bmp.Height, PixelFormat.Format32bppRgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0xC0,
+                    0x28,
+                    0xB5,
+                    0x2E,
+                    0x86,
+                    0x90,
+                    0x6F,
+                    0x37,
+                    0x09,
+                    0x5F,
+                    0x49,
+                    0xA4,
+                    0x91,
+                    0xDA,
+                    0xEE,
+                    0xB9
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    bmp.Width,
+                    bmp.Height,
+                    PixelFormat.Format32bppRgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalWholeBitmapHash, HashPixels(bmp));
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBitmap_Format32bppArgb_Format24bppRgb_ReadWrite_Whole()
         {
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0xA7, 0xB2, 0x50, 0x04, 0x11, 0x12, 0x64, 0x68, 0x6B, 0x7D, 0x2F, 0x6E, 0x69, 0x24, 0xCB, 0x14 };
-                byte[] actual = HashLock(bmp, bmp.Width, bmp.Height, PixelFormat.Format24bppRgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0xA7,
+                    0xB2,
+                    0x50,
+                    0x04,
+                    0x11,
+                    0x12,
+                    0x64,
+                    0x68,
+                    0x6B,
+                    0x7D,
+                    0x2F,
+                    0x6E,
+                    0x69,
+                    0x24,
+                    0xCB,
+                    0x14
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    bmp.Width,
+                    bmp.Height,
+                    PixelFormat.Format24bppRgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalWholeBitmapHash, HashPixels(bmp));
             }
         }
 
-        private static byte[] FinalPartialBitmapHash = new byte[] { 0xED, 0xD8, 0xDC, 0x9B, 0x44, 0x00, 0x22, 0x9B, 0x07, 0x06, 0x4A, 0x21, 0x70, 0xA7, 0x31, 0x1D };
+        private static byte[] FinalPartialBitmapHash = new byte[]
+        {
+            0xED,
+            0xD8,
+            0xDC,
+            0x9B,
+            0x44,
+            0x00,
+            0x22,
+            0x9B,
+            0x07,
+            0x06,
+            0x4A,
+            0x21,
+            0x70,
+            0xA7,
+            0x31,
+            0x1D
+        };
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBitmap_Format32bppArgb_Format32bppArgb_ReadWrite_Partial()
         {
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0x5D, 0xFF, 0x02, 0x34, 0xEB, 0x7C, 0xF7, 0x42, 0xD4, 0xB7, 0x70, 0x49, 0xB4, 0x06, 0x79, 0xBC };
-                byte[] actual = HashLock(bmp, 50, 50, PixelFormat.Format32bppArgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0x5D,
+                    0xFF,
+                    0x02,
+                    0x34,
+                    0xEB,
+                    0x7C,
+                    0xF7,
+                    0x42,
+                    0xD4,
+                    0xB7,
+                    0x70,
+                    0x49,
+                    0xB4,
+                    0x06,
+                    0x79,
+                    0xBC
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    50,
+                    50,
+                    PixelFormat.Format32bppArgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalPartialBitmapHash, HashPixels(bmp));
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBitmap_Format32bppArgb_Format32bppPArgb_ReadWrite_Partial()
         {
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0x5D, 0xFF, 0x02, 0x34, 0xEB, 0x7C, 0xF7, 0x42, 0xD4, 0xB7, 0x70, 0x49, 0xB4, 0x06, 0x79, 0xBC };
-                byte[] actual = HashLock(bmp, 50, 50, PixelFormat.Format32bppPArgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0x5D,
+                    0xFF,
+                    0x02,
+                    0x34,
+                    0xEB,
+                    0x7C,
+                    0xF7,
+                    0x42,
+                    0xD4,
+                    0xB7,
+                    0x70,
+                    0x49,
+                    0xB4,
+                    0x06,
+                    0x79,
+                    0xBC
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    50,
+                    50,
+                    PixelFormat.Format32bppPArgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalPartialBitmapHash, HashPixels(bmp));
             }
@@ -717,21 +1022,73 @@ namespace MonoTests.System.Drawing
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0x72, 0x33, 0x09, 0x67, 0x53, 0x65, 0x38, 0xF9, 0xE4, 0x58, 0xE1, 0x0A, 0xAA, 0x6A, 0xCC, 0xB8 };
-                byte[] actual = HashLock(bmp, 50, 50, PixelFormat.Format32bppRgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0x72,
+                    0x33,
+                    0x09,
+                    0x67,
+                    0x53,
+                    0x65,
+                    0x38,
+                    0xF9,
+                    0xE4,
+                    0x58,
+                    0xE1,
+                    0x0A,
+                    0xAA,
+                    0x6A,
+                    0xCC,
+                    0xB8
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    50,
+                    50,
+                    PixelFormat.Format32bppRgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalPartialBitmapHash, HashPixels(bmp));
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockBitmap_Format32bppArgb_Format24bppRgb_ReadWrite_Partial()
         {
             using (Bitmap bmp = CreateBitmap(100, 100, PixelFormat.Format32bppArgb))
             {
                 Assert.Equal(DefaultBitmapHash, HashPixels(bmp));
-                byte[] expected = { 0x4D, 0x39, 0x21, 0x88, 0xC2, 0x17, 0x14, 0x5F, 0x89, 0x9E, 0x02, 0x75, 0xF3, 0x64, 0xD8, 0xF0 };
-                byte[] actual = HashLock(bmp, 50, 50, PixelFormat.Format24bppRgb, ImageLockMode.ReadWrite);
+                byte[] expected =
+                {
+                    0x4D,
+                    0x39,
+                    0x21,
+                    0x88,
+                    0xC2,
+                    0x17,
+                    0x14,
+                    0x5F,
+                    0x89,
+                    0x9E,
+                    0x02,
+                    0x75,
+                    0xF3,
+                    0x64,
+                    0xD8,
+                    0xF0
+                };
+                byte[] actual = HashLock(
+                    bmp,
+                    50,
+                    50,
+                    PixelFormat.Format24bppRgb,
+                    ImageLockMode.ReadWrite
+                );
                 Assert.Equal(expected, actual);
                 Assert.Equal(FinalPartialBitmapHash, HashPixels(bmp));
             }
@@ -739,7 +1096,11 @@ namespace MonoTests.System.Drawing
 
         // Tests the LockBitmap and UnlockBitmap functions, specifically the copying
         // of bitmap data in the directions indicated by the ImageLockMode.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDrawingSupported), nameof(PlatformDetection.IsNotArm64Process))] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDrawingSupported),
+            nameof(PlatformDetection.IsNotArm64Process)
+        )] // [ActiveIssue("https://github.com/dotnet/runtime/issues/28859")]
         public void LockUnlockBitmap()
         {
             BitmapData data;
@@ -755,7 +1116,11 @@ namespace MonoTests.System.Drawing
                 pixel_colour = bmp.GetPixel(0, 0);
                 Assert.Equal(red, pixel_colour);
 
-                data = bmp.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+                data = bmp.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format32bppArgb
+                );
                 try
                 {
                     pixel_value = Marshal.ReadByte(data.Scan0, 0);
@@ -765,7 +1130,12 @@ namespace MonoTests.System.Drawing
 
                     pixel_colour = Color.FromArgb(pixel_value);
                     // Disregard alpha information in the test
-                    pixel_colour = Color.FromArgb(red.A, pixel_colour.R, pixel_colour.G, pixel_colour.B);
+                    pixel_colour = Color.FromArgb(
+                        red.A,
+                        pixel_colour.R,
+                        pixel_colour.G,
+                        pixel_colour.B
+                    );
                     Assert.Equal(red, pixel_colour);
 
                     // write blue but we're locked in read-only...
@@ -779,12 +1149,21 @@ namespace MonoTests.System.Drawing
                     bmp.UnlockBits(data);
                     pixel_colour = bmp.GetPixel(0, 0);
                     // Disregard alpha information in the test
-                    pixel_colour = Color.FromArgb(red.A, pixel_colour.R, pixel_colour.G, pixel_colour.B);
+                    pixel_colour = Color.FromArgb(
+                        red.A,
+                        pixel_colour.R,
+                        pixel_colour.G,
+                        pixel_colour.B
+                    );
                     // ...so we still read red after unlocking
                     Assert.Equal(red, pixel_colour);
                 }
 
-                data = bmp.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+                data = bmp.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadWrite,
+                    PixelFormat.Format32bppArgb
+                );
                 try
                 {
                     // write blue
@@ -798,7 +1177,12 @@ namespace MonoTests.System.Drawing
                     bmp.UnlockBits(data);
                     pixel_colour = bmp.GetPixel(0, 0);
                     // Disregard alpha information in the test
-                    pixel_colour = Color.FromArgb(blue.A, pixel_colour.R, pixel_colour.G, pixel_colour.B);
+                    pixel_colour = Color.FromArgb(
+                        blue.A,
+                        pixel_colour.R,
+                        pixel_colour.G,
+                        pixel_colour.B
+                    );
                     // read blue
                     Assert.Equal(blue, pixel_colour);
                 }
@@ -808,7 +1192,11 @@ namespace MonoTests.System.Drawing
             {
                 bmp.SetPixel(0, 0, red);
 
-                data = bmp.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                data = bmp.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadOnly,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     byte b = Marshal.ReadByte(data.Scan0, 0);
@@ -828,7 +1216,11 @@ namespace MonoTests.System.Drawing
                     Assert.Equal(red, bmp.GetPixel(0, 0));
                 }
 
-                data = bmp.LockBits(new Rectangle(0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+                data = bmp.LockBits(
+                    new Rectangle(0, 0, 1, 1),
+                    ImageLockMode.ReadWrite,
+                    PixelFormat.Format24bppRgb
+                );
                 try
                 {
                     // write blue
@@ -844,6 +1236,7 @@ namespace MonoTests.System.Drawing
                 }
             }
         }
+
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void DefaultFormat1()
         {
@@ -873,7 +1266,11 @@ namespace MonoTests.System.Drawing
         public void BmpDataStride1()
         {
             Bitmap bmp = new Bitmap(184, 184, PixelFormat.Format1bppIndexed);
-            BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format1bppIndexed);
+            BitmapData data = bmp.LockBits(
+                new Rectangle(0, 0, bmp.Width, bmp.Height),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format1bppIndexed
+            );
             try
             {
                 Assert.Equal(24, data.Stride);
@@ -885,10 +1282,7 @@ namespace MonoTests.System.Drawing
             }
         }
 
-        static int[] palette1 = {
-            -16777216,
-            -1,
-        };
+        static int[] palette1 = { -16777216, -1, };
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void Format1bppIndexed_Palette()
@@ -905,7 +1299,8 @@ namespace MonoTests.System.Drawing
             }
         }
 
-        static int[] palette16 = {
+        static int[] palette16 =
+        {
             -16777216,
             -8388608,
             -16744448,
@@ -939,7 +1334,8 @@ namespace MonoTests.System.Drawing
             }
         }
 
-        static int[] palette256 = {
+        static int[] palette256 =
+        {
             -16777216,
             -8388608,
             -16744448,
@@ -1266,7 +1662,9 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void SetResolution_NegativeInfinity()
         {
-            Assert.Throws<ArgumentException>(() => SetResolution(float.NegativeInfinity, float.NegativeInfinity));
+            Assert.Throws<ArgumentException>(
+                () => SetResolution(float.NegativeInfinity, float.NegativeInfinity)
+            );
         }
     }
 

@@ -5,7 +5,6 @@ using System;
 
 class Program
 {
-
     private static TestUtil.TestLog testLog;
 
     static Program()
@@ -34,7 +33,8 @@ class Program
                 try
                 {
                     Console.WriteLine("  in try");
-                    if (count-- == 0) return;
+                    if (count-- == 0)
+                        return;
                 }
                 finally
                 {

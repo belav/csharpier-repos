@@ -47,11 +47,7 @@ public class SeleniumStandaloneServer : IDisposable
         _diagnosticsMessageSink = diagnosticsMessageSink;
     }
 
-    private void Initialize(
-        Uri uri,
-        Process process,
-        string sentinelPath,
-        Process sentinelProcess)
+    private void Initialize(Uri uri, Process process, string sentinelPath, Process sentinelProcess)
     {
         Uri = uri;
         _process = process;
@@ -94,7 +90,9 @@ public class SeleniumStandaloneServer : IDisposable
 
         if (seleniumConfigPath == null)
         {
-            throw new InvalidOperationException("Selenium config path not configured. Does this project import the E2ETesting.targets?");
+            throw new InvalidOperationException(
+                "Selenium config path not configured. Does this project import the E2ETesting.targets?"
+            );
         }
 
         // In AzDO, the path to the system chromedriver is in an env var called CHROMEWEBDRIVER
@@ -104,14 +102,16 @@ public class SeleniumStandaloneServer : IDisposable
         var chromeDriverPathEnvVar = Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
         if (!string.IsNullOrEmpty(chromeDriverPathEnvVar))
         {
-            chromeDriverArg = $"--javaArgs=-Dwebdriver.chrome.driver={chromeDriverPathEnvVar}/chromedriver";
+            chromeDriverArg =
+                $"--javaArgs=-Dwebdriver.chrome.driver={chromeDriverPathEnvVar}/chromedriver";
             output.WriteLine($"Using chromedriver at path {chromeDriverPathEnvVar}");
         }
 
         var psi = new ProcessStartInfo
         {
             FileName = "npm",
-            Arguments = $"run selenium-standalone start -- --config \"{seleniumConfigPath}\" {chromeDriverArg} -- -port {port}",
+            Arguments =
+                $"run selenium-standalone start -- --config \"{seleniumConfigPath}\" {chromeDriverArg} -- -port {port}",
             RedirectStandardOutput = true,
             RedirectStandardError = true,
         };
@@ -128,13 +128,18 @@ public class SeleniumStandaloneServer : IDisposable
         if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
         {
             // Just create a random tracking folder on helix
-            trackingFolder = Path.Combine(Directory.GetCurrentDirectory(), Path.GetRandomFileName());
+            trackingFolder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                Path.GetRandomFileName()
+            );
             Directory.CreateDirectory(trackingFolder);
         }
 
         if (!Directory.Exists(trackingFolder))
         {
-            throw new InvalidOperationException($"Invalid tracking folder. Set the 'SeleniumProcessTrackingFolder' MSBuild property to a valid folder.");
+            throw new InvalidOperationException(
+                $"Invalid tracking folder. Set the 'SeleniumProcessTrackingFolder' MSBuild property to a valid folder."
+            );
         }
 
         Process process = null;
@@ -187,10 +192,7 @@ public class SeleniumStandaloneServer : IDisposable
             }
         }
 
-        var httpClient = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(1),
-        };
+        var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(1), };
 
         var retries = 0;
         do
@@ -206,12 +208,8 @@ public class SeleniumStandaloneServer : IDisposable
                     return;
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (HttpRequestException)
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (HttpRequestException) { }
 
             retries++;
         } while (retries < 30);
@@ -219,8 +217,11 @@ public class SeleniumStandaloneServer : IDisposable
         // Make output null so that we stop logging to it.
         output = null;
         logOutput.CompleteAdding();
-        var exitCodeString = process.HasExited ? process.ExitCode.ToString(CultureInfo.InvariantCulture) : "Process has not yet exited.";
-        var message = $@"Failed to launch the server.
+        var exitCodeString = process.HasExited
+            ? process.ExitCode.ToString(CultureInfo.InvariantCulture)
+            : "Process has not yet exited.";
+        var message =
+            $@"Failed to launch the server.
 ExitCode: {exitCodeString}
 Captured output lines:
 {string.Join(Environment.NewLine, logOutput.GetConsumingEnumerable())}.";
@@ -237,10 +238,11 @@ Captured output lines:
         var psi = new ProcessStartInfo
         {
             FileName = "powershell",
-            Arguments = $"-NoProfile -NonInteractive -Command \"Start-Sleep {timeout}; " +
-            $"if(Test-Path {sentinelFile}){{ " +
-            $"Write-Output 'Stopping process {process.Id}'; Stop-Process {process.Id}; }}" +
-            $"else{{ Write-Output 'Sentinel file {sentinelFile} not found.'}}",
+            Arguments =
+                $"-NoProfile -NonInteractive -Command \"Start-Sleep {timeout}; "
+                + $"if(Test-Path {sentinelFile}){{ "
+                + $"Write-Output 'Stopping process {process.Id}'; Stop-Process {process.Id}; }}"
+                + $"else{{ Write-Output 'Sentinel file {sentinelFile} not found.'}}",
         };
 
         return Process.Start(psi);
@@ -273,14 +275,21 @@ Captured output lines:
         }
     }
 
-    private static async Task<string> WriteTrackingFileAsync(ITestOutputHelper output, string trackingFolder, Process process)
+    private static async Task<string> WriteTrackingFileAsync(
+        ITestOutputHelper output,
+        string trackingFolder,
+        Process process
+    )
     {
         var pidFile = Path.Combine(trackingFolder, $"{process.Id}.{Guid.NewGuid()}.pid");
         for (var i = 0; i < 3; i++)
         {
             try
             {
-                await File.WriteAllTextAsync(pidFile, process.Id.ToString(CultureInfo.InvariantCulture));
+                await File.WriteAllTextAsync(
+                    pidFile,
+                    process.Id.ToString(CultureInfo.InvariantCulture)
+                );
                 return pidFile;
             }
             catch
@@ -310,7 +319,8 @@ Captured output lines:
     private static string GetProcessTrackingFolder() =>
         typeof(SeleniumStandaloneServer).Assembly
             .GetCustomAttributes<AssemblyMetadataAttribute>()
-            .Single(a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.ProcessTracking").Value;
+            .Single(a => a.Key == "Microsoft.AspNetCore.Testing.Selenium.ProcessTracking")
+            .Value;
 
     public void Dispose()
     {

@@ -91,11 +91,14 @@ public class HeaderModelBinder : IModelBinder
         // Create a new binding scope in order to supply the HeaderValueProvider so that the binders like
         // SimpleTypeModelBinder can find values from header.
         ModelBindingResult result;
-        using (bindingContext.EnterNestedScope(
+        using (
+            bindingContext.EnterNestedScope(
                 bindingContext.ModelMetadata,
                 fieldName: bindingContext.FieldName,
                 modelName: bindingContext.ModelName,
-                model: bindingContext.Model))
+                model: bindingContext.Model
+            )
+        )
         {
             bindingContext.IsTopLevelObject = isTopLevelObject;
             bindingContext.ValueProvider = headerValueProvider;
@@ -109,7 +112,10 @@ public class HeaderModelBinder : IModelBinder
         _logger.DoneAttemptingToBindModel(bindingContext);
     }
 
-    private HeaderValueProvider GetHeaderValueProvider(string headerName, ModelBindingContext bindingContext)
+    private HeaderValueProvider GetHeaderValueProvider(
+        string headerName,
+        ModelBindingContext bindingContext
+    )
     {
         var request = bindingContext.HttpContext.Request;
 
@@ -166,7 +172,8 @@ public class HeaderModelBinder : IModelBinder
             bindingContext.ModelState.SetModelValue(
                 bindingContext.ModelName,
                 request.Headers.GetCommaSeparatedValues(headerName),
-                request.Headers[headerName]);
+                request.Headers[headerName]
+            );
 
             bindingContext.Result = ModelBindingResult.Success(model);
         }
@@ -174,7 +181,10 @@ public class HeaderModelBinder : IModelBinder
         _logger.DoneAttemptingToBindModel(bindingContext);
     }
 
-    private static object? GetCompatibleCollection(ModelBindingContext bindingContext, string[] values)
+    private static object? GetCompatibleCollection(
+        ModelBindingContext bindingContext,
+        string[] values
+    )
     {
         // Almost-always success if IsTopLevelObject.
         if (!bindingContext.IsTopLevelObject && values.Length == 0)
@@ -188,7 +198,10 @@ public class HeaderModelBinder : IModelBinder
             return values;
         }
 
-        var collection = ModelBindingHelper.GetCompatibleCollection<string>(bindingContext, values.Length);
+        var collection = ModelBindingHelper.GetCompatibleCollection<string>(
+            bindingContext,
+            values.Length
+        );
         for (var i = 0; i < values.Length; i++)
         {
             collection.Add(values[i]);

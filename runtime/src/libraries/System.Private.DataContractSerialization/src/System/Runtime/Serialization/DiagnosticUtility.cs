@@ -58,6 +58,7 @@ namespace System.Runtime.Serialization
             {
                 return ThrowHelperError(new Exception(message, innerException));
             }
+
             internal static Exception ThrowHelperCallback(Exception e)
             {
                 return ThrowHelperError(e);

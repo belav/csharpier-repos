@@ -2,12 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal struct VT
 {
     public float one;
     public double delta;
     public double temp;
 }
+
 internal class loop6
 {
     public static int cnt;
@@ -111,6 +113,7 @@ internal class loop6
         else
             System.Console.WriteLine("f5 failed");
     }
+
     public static void f6()
     {
         VT vt;
@@ -163,7 +166,8 @@ internal class loop6
 
         while (__refvalue(temp_ref, double) != __refvalue(one_ref, float))
         {
-            __refvalue(temp_ref, double) = __refvalue(one_ref, float) + __refvalue(delta_ref, double);
+            __refvalue(temp_ref, double) =
+                __refvalue(one_ref, float) + __refvalue(delta_ref, double);
             __refvalue(delta_ref, double) = __refvalue(delta_ref, double) / 2.0F;
         }
         if ((__refvalue(delta_ref, double) - 5.551115E-17) < 1.2E-10)

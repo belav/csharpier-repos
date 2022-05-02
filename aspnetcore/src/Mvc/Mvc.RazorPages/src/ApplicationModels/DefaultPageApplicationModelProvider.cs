@@ -19,7 +19,8 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
 {
     private const string ModelPropertyName = "Model";
     private readonly PageHandlerPageFilter _pageHandlerPageFilter = new PageHandlerPageFilter();
-    private readonly PageHandlerResultFilter _pageHandlerResultFilter = new PageHandlerResultFilter();
+    private readonly PageHandlerResultFilter _pageHandlerResultFilter =
+        new PageHandlerResultFilter();
     private readonly IModelMetadataProvider _modelMetadataProvider;
     private readonly RazorPagesOptions _razorPagesOptions;
     private readonly IPageApplicationModelPartsProvider _pageApplicationModelPartsProvider;
@@ -28,7 +29,8 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
     public DefaultPageApplicationModelProvider(
         IModelMetadataProvider modelMetadataProvider,
         IOptions<RazorPagesOptions> razorPagesOptions,
-        IPageApplicationModelPartsProvider pageApplicationModelPartsProvider)
+        IPageApplicationModelPartsProvider pageApplicationModelPartsProvider
+    )
     {
         _modelMetadataProvider = modelMetadataProvider;
         _razorPagesOptions = razorPagesOptions.Value;
@@ -52,9 +54,7 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(PageApplicationModelProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(PageApplicationModelProviderContext context) { }
 
     /// <summary>
     /// Creates a <see cref="PageApplicationModel"/> for the given <paramref name="pageTypeInfo"/>.
@@ -64,7 +64,8 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
     /// <returns>A <see cref="PageApplicationModel"/> for the given <see cref="TypeInfo"/>.</returns>
     protected virtual PageApplicationModel CreateModel(
         PageActionDescriptor actionDescriptor,
-        TypeInfo pageTypeInfo)
+        TypeInfo pageTypeInfo
+    )
     {
         if (actionDescriptor == null)
         {
@@ -78,19 +79,28 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
 
         if (!typeof(PageBase).GetTypeInfo().IsAssignableFrom(pageTypeInfo))
         {
-            throw new InvalidOperationException(Resources.FormatInvalidPageType_WrongBase(
-                pageTypeInfo.FullName,
-                typeof(PageBase).FullName));
+            throw new InvalidOperationException(
+                Resources.FormatInvalidPageType_WrongBase(
+                    pageTypeInfo.FullName,
+                    typeof(PageBase).FullName
+                )
+            );
         }
 
         // Pages always have a model type. If it's not set explicitly by the developer using
         // @model, it will be the same as the page type.
-        var modelProperty = pageTypeInfo.GetProperty(ModelPropertyName, BindingFlags.Public | BindingFlags.Instance);
+        var modelProperty = pageTypeInfo.GetProperty(
+            ModelPropertyName,
+            BindingFlags.Public | BindingFlags.Instance
+        );
         if (modelProperty == null)
         {
-            throw new InvalidOperationException(Resources.FormatInvalidPageType_NoModelProperty(
-                pageTypeInfo.FullName,
-                ModelPropertyName));
+            throw new InvalidOperationException(
+                Resources.FormatInvalidPageType_NoModelProperty(
+                    pageTypeInfo.FullName,
+                    ModelPropertyName
+                )
+            );
         }
 
         var modelTypeInfo = modelProperty.PropertyType.GetTypeInfo();
@@ -107,7 +117,10 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
             // If a PageModel is specified, combine the attributes specified on the Page and the Model type.
             // Attributes that appear earlier in the are more significant. In this case, we'll treat attributes on the model (code)
             // to be more signficant than the page (code-generated).
-            handlerTypeAttributes = modelTypeInfo.GetCustomAttributes(inherit: true).Concat(pageTypeAttributes).ToArray();
+            handlerTypeAttributes = modelTypeInfo
+                .GetCustomAttributes(inherit: true)
+                .Concat(pageTypeAttributes)
+                .ToArray();
         }
         else
         {
@@ -119,7 +132,8 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
             actionDescriptor,
             declaredModelType,
             handlerType,
-            handlerTypeAttributes)
+            handlerTypeAttributes
+        )
         {
             PageType = pageTypeInfo,
             ModelType = modelTypeInfo,
@@ -139,7 +153,9 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
 
         for (var i = 0; i < properties.Length; i++)
         {
-            var propertyModel = _pageApplicationModelPartsProvider.CreatePropertyModel(properties[i].Property);
+            var propertyModel = _pageApplicationModelPartsProvider.CreatePropertyModel(
+                properties[i].Property
+            );
             if (propertyModel != null)
             {
                 propertyModel.Page = pageModel;
@@ -173,14 +189,18 @@ internal class DefaultPageApplicationModelProvider : IPageApplicationModelProvid
             }
         }
 
-        if (typeof(IAsyncPageFilter).IsAssignableFrom(pageModel.HandlerType) ||
-            typeof(IPageFilter).IsAssignableFrom(pageModel.HandlerType))
+        if (
+            typeof(IAsyncPageFilter).IsAssignableFrom(pageModel.HandlerType)
+            || typeof(IPageFilter).IsAssignableFrom(pageModel.HandlerType)
+        )
         {
             pageModel.Filters.Add(_pageHandlerPageFilter);
         }
 
-        if (typeof(IAsyncResultFilter).IsAssignableFrom(pageModel.HandlerType) ||
-            typeof(IResultFilter).IsAssignableFrom(pageModel.HandlerType))
+        if (
+            typeof(IAsyncResultFilter).IsAssignableFrom(pageModel.HandlerType)
+            || typeof(IResultFilter).IsAssignableFrom(pageModel.HandlerType)
+        )
         {
             pageModel.Filters.Add(_pageHandlerResultFilter);
         }

@@ -13,10 +13,14 @@ public static class InheritsDirective
         DirectiveKind.SingleLine,
         builder =>
         {
-            builder.AddTypeToken(Resources.InheritsDirective_TypeToken_Name, Resources.InheritsDirective_TypeToken_Description);
+            builder.AddTypeToken(
+                Resources.InheritsDirective_TypeToken_Name,
+                Resources.InheritsDirective_TypeToken_Description
+            );
             builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
             builder.Description = Resources.InheritsDirective_Description;
-        });
+        }
+    );
 
     public static void Register(RazorProjectEngineBuilder builder)
     {
@@ -25,7 +29,12 @@ public static class InheritsDirective
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.AddDirective(Directive, FileKinds.Legacy, FileKinds.Component, FileKinds.ComponentImport);
+        builder.AddDirective(
+            Directive,
+            FileKinds.Legacy,
+            FileKinds.Component,
+            FileKinds.ComponentImport
+        );
         builder.Features.Add(new InheritsDirectivePass());
     }
 

@@ -78,8 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
         /// </remarks>
         /// <param name="name">The name of the savepoint to be created.</param>
-        void CreateSavepoint(string name)
-            => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
+        void CreateSavepoint(string name) =>
+            throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
         /// <summary>
         ///     Creates a savepoint in the transaction. This allows all commands that are executed after the savepoint
@@ -93,8 +93,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-        Task CreateSavepointAsync(string name, CancellationToken cancellationToken = default)
-            => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
+        Task CreateSavepointAsync(string name, CancellationToken cancellationToken = default) =>
+            throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
         /// <summary>
         ///     Rolls back all commands that were executed after the specified savepoint was established.
@@ -103,8 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information.
         /// </remarks>
         /// <param name="name">The name of the savepoint to roll back to.</param>
-        void RollbackToSavepoint(string name)
-            => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
+        void RollbackToSavepoint(string name) =>
+            throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
         /// <summary>
         ///     Rolls back all commands that were executed after the specified savepoint was established.
@@ -116,8 +116,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-        Task RollbackToSavepointAsync(string name, CancellationToken cancellationToken = default)
-            => throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
+        Task RollbackToSavepointAsync(string name, CancellationToken cancellationToken = default) =>
+            throw new NotSupportedException(CoreStrings.SavepointsNotSupported);
 
         /// <summary>
         ///     Destroys a savepoint previously defined in the current transaction. This allows the system to
@@ -133,9 +133,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     </para>
         /// </remarks>
         /// <param name="name">The name of the savepoint to release.</param>
-        void ReleaseSavepoint(string name)
-        {
-        }
+        void ReleaseSavepoint(string name) { }
 
         /// <summary>
         ///     Destroys a savepoint previously defined in the current transaction. This allows the system to
@@ -154,8 +152,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
         /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-        Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
-            => Task.CompletedTask;
+        Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default) =>
+            Task.CompletedTask;
 
         /// <summary>
         ///     Gets a value that indicates whether this <see cref="IDbContextTransaction" /> instance supports
@@ -171,7 +169,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     <see langword="true" /> if this <see cref="IDbContextTransaction" /> instance supports database savepoints;
         ///     otherwise, <see langword="false" />.
         /// </returns>
-        bool SupportsSavepoints
-            => false;
+        bool SupportsSavepoints => false;
     }
 }

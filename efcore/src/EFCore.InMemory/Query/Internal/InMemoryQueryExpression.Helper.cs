@@ -24,11 +24,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 _getElement = getElement;
             }
 
-            public IEnumerator<ValueBuffer> GetEnumerator()
-                => new ResultEnumerator(_getElement());
+            public IEnumerator<ValueBuffer> GetEnumerator() => new ResultEnumerator(_getElement());
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             private sealed class ResultEnumerator : IEnumerator<ValueBuffer>
             {
@@ -58,26 +56,26 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     _moved = false;
                 }
 
-                object IEnumerator.Current
-                    => Current;
+                object IEnumerator.Current => Current;
 
-                public ValueBuffer Current
-                    => !_moved ? ValueBuffer.Empty : _value;
+                public ValueBuffer Current => !_moved ? ValueBuffer.Empty : _value;
 
-                void IDisposable.Dispose()
-                {
-                }
+                void IDisposable.Dispose() { }
             }
         }
 
         private sealed class ProjectionMemberRemappingExpressionVisitor : ExpressionVisitor
         {
             private readonly Expression _queryExpression;
-            private readonly Dictionary<ProjectionMember, ProjectionMember> _projectionMemberMappings;
+            private readonly Dictionary<
+                ProjectionMember,
+                ProjectionMember
+            > _projectionMemberMappings;
 
             public ProjectionMemberRemappingExpressionVisitor(
                 Expression queryExpression,
-                Dictionary<ProjectionMember, ProjectionMember> projectionMemberMappings)
+                Dictionary<ProjectionMember, ProjectionMember> projectionMemberMappings
+            )
             {
                 _queryExpression = queryExpression;
                 _projectionMemberMappings = projectionMemberMappings;
@@ -90,12 +88,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     Check.DebugAssert(
                         projectionBindingExpression.ProjectionMember != null,
-                        "ProjectionBindingExpression must have projection member.");
+                        "ProjectionBindingExpression must have projection member."
+                    );
 
                     return new ProjectionBindingExpression(
                         _queryExpression,
                         _projectionMemberMappings[projectionBindingExpression.ProjectionMember],
-                        projectionBindingExpression.Type);
+                        projectionBindingExpression.Type
+                    );
                 }
 
                 return base.Visit(expression);
@@ -109,7 +109,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
             public ProjectionMemberToIndexConvertingExpressionVisitor(
                 Expression queryExpression,
-                Dictionary<ProjectionMember, int> projectionMemberMappings)
+                Dictionary<ProjectionMember, int> projectionMemberMappings
+            )
             {
                 _queryExpression = queryExpression;
                 _projectionMemberMappings = projectionMemberMappings;
@@ -122,12 +123,14 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     Check.DebugAssert(
                         projectionBindingExpression.ProjectionMember != null,
-                        "ProjectionBindingExpression must have projection member.");
+                        "ProjectionBindingExpression must have projection member."
+                    );
 
                     return new ProjectionBindingExpression(
                         _queryExpression,
                         _projectionMemberMappings[projectionBindingExpression.ProjectionMember],
-                        projectionBindingExpression.Type);
+                        projectionBindingExpression.Type
+                    );
                 }
 
                 return base.Visit(expression);
@@ -143,7 +146,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             public ProjectionIndexRemappingExpressionVisitor(
                 Expression oldExpression,
                 Expression newExpression,
-                int[] indexMap)
+                int[] indexMap
+            )
             {
                 _oldExpression = oldExpression;
                 _newExpression = newExpression;
@@ -153,17 +157,21 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             [return: NotNullIfNotNull("expression")]
             public override Expression? Visit(Expression? expression)
             {
-                if (expression is ProjectionBindingExpression projectionBindingExpression
-                    && ReferenceEquals(projectionBindingExpression.QueryExpression, _oldExpression))
+                if (
+                    expression is ProjectionBindingExpression projectionBindingExpression
+                    && ReferenceEquals(projectionBindingExpression.QueryExpression, _oldExpression)
+                )
                 {
                     Check.DebugAssert(
                         projectionBindingExpression.Index != null,
-                        "ProjectionBindingExpression must have index.");
+                        "ProjectionBindingExpression must have index."
+                    );
 
                     return new ProjectionBindingExpression(
                         _newExpression,
                         _indexMap[projectionBindingExpression.Index.Value],
-                        projectionBindingExpression.Type);
+                        projectionBindingExpression.Type
+                    );
                 }
 
                 return base.Visit(expression);
@@ -172,8 +180,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
         private sealed class EntityShaperNullableMarkingExpressionVisitor : ExpressionVisitor
         {
-            protected override Expression VisitExtension(Expression extensionExpression)
-                => extensionExpression is EntityShaperExpression entityShaper
+            protected override Expression VisitExtension(Expression extensionExpression) =>
+                extensionExpression is EntityShaperExpression entityShaper
                     ? entityShaper.MakeNullable()
                     : base.VisitExtension(extensionExpression);
         }
@@ -183,7 +191,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             private readonly Expression _oldQuery;
             private readonly Expression _newQuery;
 
-            public QueryExpressionReplacingExpressionVisitor(Expression oldQuery, Expression newQuery)
+            public QueryExpressionReplacingExpressionVisitor(
+                Expression oldQuery,
+                Expression newQuery
+            )
             {
                 _oldQuery = oldQuery;
                 _newQuery = newQuery;
@@ -192,14 +203,21 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             [return: NotNullIfNotNull("expression")]
             public override Expression? Visit(Expression? expression)
             {
-                return expression is ProjectionBindingExpression projectionBindingExpression
+                return
+                    expression is ProjectionBindingExpression projectionBindingExpression
                     && ReferenceEquals(projectionBindingExpression.QueryExpression, _oldQuery)
-                        ? projectionBindingExpression.ProjectionMember != null
-                            ? new ProjectionBindingExpression(
-                                _newQuery, projectionBindingExpression.ProjectionMember!, projectionBindingExpression.Type)
-                            : new ProjectionBindingExpression(
-                                _newQuery, projectionBindingExpression.Index!.Value, projectionBindingExpression.Type)
-                        : base.Visit(expression);
+                  ? projectionBindingExpression.ProjectionMember != null
+                      ? new ProjectionBindingExpression(
+                            _newQuery,
+                            projectionBindingExpression.ProjectionMember!,
+                            projectionBindingExpression.Type
+                        )
+                      : new ProjectionBindingExpression(
+                            _newQuery,
+                            projectionBindingExpression.Index!.Value,
+                            projectionBindingExpression.Type
+                        )
+                  : base.Visit(expression);
             }
         }
 
@@ -211,7 +229,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 if (expression is InMemoryQueryExpression inMemoryQueryExpression)
                 {
                     var clonedInMemoryQueryExpression = new InMemoryQueryExpression(
-                        inMemoryQueryExpression.ServerQueryExpression, inMemoryQueryExpression._valueBufferParameter)
+                        inMemoryQueryExpression.ServerQueryExpression,
+                        inMemoryQueryExpression._valueBufferParameter
+                    )
                     {
                         _groupingParameter = inMemoryQueryExpression._groupingParameter,
                         _singleResultMethodInfo = inMemoryQueryExpression._singleResultMethodInfo,
@@ -219,12 +239,16 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     };
 
                     clonedInMemoryQueryExpression._clientProjections.AddRange(
-                        inMemoryQueryExpression._clientProjections.Select(e => Visit(e)));
+                        inMemoryQueryExpression._clientProjections.Select(e => Visit(e))
+                    );
                     clonedInMemoryQueryExpression._projectionMappingExpressions.AddRange(
-                        inMemoryQueryExpression._projectionMappingExpressions);
+                        inMemoryQueryExpression._projectionMappingExpressions
+                    );
                     foreach (var item in inMemoryQueryExpression._projectionMapping)
                     {
-                        clonedInMemoryQueryExpression._projectionMapping[item.Key] = Visit(item.Value);
+                        clonedInMemoryQueryExpression._projectionMapping[item.Key] = Visit(
+                            item.Value
+                        );
                     }
 
                     return clonedInMemoryQueryExpression;

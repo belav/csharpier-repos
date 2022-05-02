@@ -15,12 +15,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             private readonly Dictionary<string, List<SyntaxToken>> _map = new();
 
-            private DeclarationFinder()
-                : base(SyntaxWalkerDepth.Node)
-            {
-            }
+            private DeclarationFinder() : base(SyntaxWalkerDepth.Node) { }
 
-            public static Dictionary<string, List<SyntaxToken>> GetAllDeclarations(SyntaxNode syntax)
+            public static Dictionary<string, List<SyntaxToken>> GetAllDeclarations(
+                SyntaxNode syntax
+            )
             {
                 var finder = new DeclarationFinder();
                 finder.Visit(syntax);

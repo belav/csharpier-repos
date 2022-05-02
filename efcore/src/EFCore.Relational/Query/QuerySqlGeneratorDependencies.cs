@@ -50,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public QuerySqlGeneratorDependencies(
             IRelationalCommandBuilderFactory relationalCommandBuilderFactory,
-            ISqlGenerationHelper sqlGenerationHelper)
+            ISqlGenerationHelper sqlGenerationHelper
+        )
         {
             RelationalCommandBuilderFactory = relationalCommandBuilderFactory;
             SqlGenerationHelper = sqlGenerationHelper;

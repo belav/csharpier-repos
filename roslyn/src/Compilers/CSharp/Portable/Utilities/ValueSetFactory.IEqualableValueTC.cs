@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal static partial class ValueSetFactory
     {
         /// <summary>
-        /// A type class for values (of type <typeparamref name="T"/>) that can be directly compared for equality 
+        /// A type class for values (of type <typeparamref name="T"/>) that can be directly compared for equality
         /// using <see cref="System.Object.Equals(object?, object?)"/>.
         /// </summary>
         private interface IEquatableValueTC<T> where T : notnull

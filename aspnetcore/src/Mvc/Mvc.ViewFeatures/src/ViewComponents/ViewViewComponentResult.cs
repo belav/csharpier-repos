@@ -87,7 +87,11 @@ public class ViewViewComponentResult : IViewComponentResult
         if (!isNullOrEmptyViewName)
         {
             // If view name was passed in is already a path, the view engine will handle this.
-            result = viewEngine.GetView(viewContext.ExecutingFilePath, ViewName!, isMainPage: false);
+            result = viewEngine.GetView(
+                viewContext.ExecutingFilePath,
+                ViewName!,
+                isMainPage: false
+            );
             originalLocations = result.SearchedLocations;
         }
 
@@ -109,7 +113,8 @@ public class ViewViewComponentResult : IViewComponentResult
                 CultureInfo.InvariantCulture,
                 ViewPathFormat,
                 context.ViewComponentDescriptor.ShortName,
-                viewName);
+                viewName
+            );
 
             result = viewEngine.FindView(viewContext, qualifiedViewName, isMainPage: false);
         }
@@ -119,7 +124,8 @@ public class ViewViewComponentResult : IViewComponentResult
         {
             if (_diagnosticListener == null)
             {
-                _diagnosticListener = viewContext.HttpContext.RequestServices.GetRequiredService<DiagnosticListener>();
+                _diagnosticListener =
+                    viewContext.HttpContext.RequestServices.GetRequiredService<DiagnosticListener>();
             }
 
             _diagnosticListener.ViewComponentBeforeViewExecute(context, view);
@@ -128,7 +134,8 @@ public class ViewViewComponentResult : IViewComponentResult
                 viewContext,
                 view,
                 ViewData ?? context.ViewData,
-                context.Writer);
+                context.Writer
+            );
             await view.RenderAsync(childViewContext);
 
             _diagnosticListener.ViewComponentAfterViewExecute(context, view);

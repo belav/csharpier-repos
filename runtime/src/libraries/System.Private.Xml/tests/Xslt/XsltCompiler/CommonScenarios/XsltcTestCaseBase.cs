@@ -22,8 +22,10 @@ namespace System.Xml.Tests
 
         public string szEmpty = "";
         public string szInvalid = "*?%(){}[]&!@#$";
-        public string szLongNS = "http://www.microsoft.com/this/is/a/very/long/namespace/uri/to/do/the/api/testing/for/xslt/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/";
-        public string szLongString = "ThisIsAVeryLongStringToBeStoredAsAVariableToDetermineHowLargeThisBufferForAVariableNameCanBeAndStillFunctionAsExpected";
+        public string szLongNS =
+            "http://www.microsoft.com/this/is/a/very/long/namespace/uri/to/do/the/api/testing/for/xslt/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/0123456789/";
+        public string szLongString =
+            "ThisIsAVeryLongStringToBeStoredAsAVariableToDetermineHowLargeThisBufferForAVariableNameCanBeAndStillFunctionAsExpected";
         public string szSimple = "myArg";
         public string[] szWhiteSpace = { "  ", "\n", "\t", "\r", "\t\n  \r\t" };
         public string szXslNS = "http://www.w3.org/1999/XSL/Transform";
@@ -34,6 +36,7 @@ namespace System.Xml.Tests
         protected bool _isInProc; // Is the current test run in proc or /Host None?
 
         private static ITestOutputHelper s_output;
+
         public XsltcTestCaseBase(ITestOutputHelper output)
         {
             s_output = output;
@@ -72,7 +75,11 @@ namespace System.Xml.Tests
             }
         }
 
-        protected static void CompareOutput(Stream expectedStream, Stream actualStream, int count = 0)
+        protected static void CompareOutput(
+            Stream expectedStream,
+            Stream actualStream,
+            int count = 0
+        )
         {
             actualStream.Seek(0, SeekOrigin.Begin);
 
@@ -93,13 +100,24 @@ namespace System.Xml.Tests
                     return;
                 }
 
-                throw new CTestFailedException("Output was not as expected.", actual, expected, null);
+                throw new CTestFailedException(
+                    "Output was not as expected.",
+                    actual,
+                    expected,
+                    null
+                );
             }
         }
 
-        protected bool LoadPersistedTransformAssembly(string asmName, string typeName, string baselineFile, bool pdb)
+        protected bool LoadPersistedTransformAssembly(
+            string asmName,
+            string typeName,
+            string baselineFile,
+            bool pdb
+        )
         {
-            var other = (AssemblyLoader)Activator.CreateInstance(typeof(AssemblyLoader), typeof(AssemblyLoader).FullName);
+            var other = (AssemblyLoader)
+                Activator.CreateInstance(typeof(AssemblyLoader), typeof(AssemblyLoader).FullName);
 
             bool result = other.Verify(asmName, typeName, baselineFile, pdb);
 
@@ -114,7 +132,8 @@ namespace System.Xml.Tests
         protected bool ShouldSkip(bool englishOnly)
         {
             // some test only applicable in English environment, so skip them if current cultral is not english
-            return englishOnly && CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() != "en";
+            return englishOnly
+                && CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() != "en";
         }
 
         protected void VerifyTest(string cmdLine, string baselineFile, bool loadFromFile)
@@ -122,21 +141,78 @@ namespace System.Xml.Tests
             VerifyTest(cmdLine, string.Empty, false, string.Empty, baselineFile, loadFromFile);
         }
 
-        protected void VerifyTest(string cmdLine, string asmName, bool asmCreated, string typeName, string baselineFile, bool loadFromFile)
+        protected void VerifyTest(
+            string cmdLine,
+            string asmName,
+            bool asmCreated,
+            string typeName,
+            string baselineFile,
+            bool loadFromFile
+        )
         {
-            VerifyTest(cmdLine, asmName, asmCreated, typeName, string.Empty, false, baselineFile, loadFromFile);
+            VerifyTest(
+                cmdLine,
+                asmName,
+                asmCreated,
+                typeName,
+                string.Empty,
+                false,
+                baselineFile,
+                loadFromFile
+            );
         }
 
-        protected void VerifyTest(string cmdLine, string asmName, bool asmCreated, string typeName, string pdbName, bool pdbCreated, string baselineFile, bool loadFromFile)
+        protected void VerifyTest(
+            string cmdLine,
+            string asmName,
+            bool asmCreated,
+            string typeName,
+            string pdbName,
+            bool pdbCreated,
+            string baselineFile,
+            bool loadFromFile
+        )
         {
-            VerifyTest(cmdLine, asmName, asmCreated, typeName, pdbName, pdbCreated, baselineFile, true, loadFromFile);
+            VerifyTest(
+                cmdLine,
+                asmName,
+                asmCreated,
+                typeName,
+                pdbName,
+                pdbCreated,
+                baselineFile,
+                true,
+                loadFromFile
+            );
         }
 
-        protected void VerifyTest(string cmdLine, string asmName, bool asmCreated, string typeName, string pdbName, bool pdbCreated, string baselineFile, bool runAssemblyVerification, bool loadFromFile)
+        protected void VerifyTest(
+            string cmdLine,
+            string asmName,
+            bool asmCreated,
+            string typeName,
+            string pdbName,
+            bool pdbCreated,
+            string baselineFile,
+            bool runAssemblyVerification,
+            bool loadFromFile
+        )
         {
             string targetDirectory = XsltcModule.TargetDirectory;
 
-            string output = asmCreated ? TryCreatePersistedTransformAssembly(cmdLine, _createFromInputFile, true, targetDirectory) : TryCreatePersistedTransformAssembly(cmdLine, _createFromInputFile, false, targetDirectory);
+            string output = asmCreated
+                ? TryCreatePersistedTransformAssembly(
+                      cmdLine,
+                      _createFromInputFile,
+                      true,
+                      targetDirectory
+                  )
+                : TryCreatePersistedTransformAssembly(
+                      cmdLine,
+                      _createFromInputFile,
+                      false,
+                      targetDirectory
+                  );
 
             //verify assembly file existence
             if (asmName != null && string.CompareOrdinal(string.Empty, asmName) != 0)
@@ -158,7 +234,14 @@ namespace System.Xml.Tests
 
             if (asmCreated && !string.IsNullOrEmpty(typeName))
             {
-                if (!LoadPersistedTransformAssembly(GetPath(asmName), typeName, baselineFile, pdbCreated))
+                if (
+                    !LoadPersistedTransformAssembly(
+                        GetPath(asmName),
+                        typeName,
+                        baselineFile,
+                        pdbCreated
+                    )
+                )
                 {
                     throw new CTestFailedException("Assembly loaded failed");
                 }
@@ -167,7 +250,13 @@ namespace System.Xml.Tests
             {
                 using (var ms = new MemoryStream())
                 using (var sw = new StreamWriter(ms) { AutoFlush = true })
-                using (var expected = new FileStream(GetPath(baselineFile), FileMode.Open, FileAccess.Read))
+                using (
+                    var expected = new FileStream(
+                        GetPath(baselineFile),
+                        FileMode.Open,
+                        FileAccess.Read
+                    )
+                )
                 {
                     sw.Write(output);
                     CompareOutput(expected, ms, 4);
@@ -196,12 +285,8 @@ namespace System.Xml.Tests
                     fileInfo.Delete();
                 }
             }
-            catch (ArgumentException)
-            {
-            }
-            catch (PathTooLongException)
-            {
-            }
+            catch (ArgumentException) { }
+            catch (PathTooLongException) { }
             catch (Exception e)
             {
                 s_output.WriteLine(e.Message);
@@ -235,10 +320,17 @@ namespace System.Xml.Tests
         /// <param name="expectedToSucceed"></param>
         /// <param name="targetDirectory"></param>
         /// <returns></returns>
-        private string TryCreatePersistedTransformAssembly(string commandLine, bool createFromInputFile, bool expectedToSucceed, string targetDirectory)
+        private string TryCreatePersistedTransformAssembly(
+            string commandLine,
+            bool createFromInputFile,
+            bool expectedToSucceed,
+            string targetDirectory
+        )
         {
             // If createFromInputFile is specified, create an input file now that the compiler can consume.
-            string processArguments = createFromInputFile ? "@" + CreateInputFile(commandLine) : commandLine;
+            string processArguments = createFromInputFile
+                ? "@" + CreateInputFile(commandLine)
+                : commandLine;
 
             var processStartInfo = new ProcessStartInfo
             {
@@ -252,10 +344,7 @@ namespace System.Xml.Tests
             };
 
             // Call xsltc to create persistant assembly.
-            var compilerProcess = new Process
-            {
-                StartInfo = processStartInfo
-            };
+            var compilerProcess = new Process { StartInfo = processStartInfo };
 
             compilerProcess.Start();
             string output = compilerProcess.StandardOutput.ReadToEnd();
@@ -282,16 +371,16 @@ namespace System.Xml.Tests
 
         public class AssemblyLoader //: MarshalByRefObject
         {
-            public AssemblyLoader(string asmName)
-            {
-            }
+            public AssemblyLoader(string asmName) { }
 
             public bool Verify(string asmName, string typeName, string baselineFile, bool pdb)
             {
                 try
                 {
                     var xslt = new XslCompiledTransform();
-                    Assembly xsltasm = AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.GetFullPath(asmName));
+                    Assembly xsltasm = AssemblyLoadContext.Default.LoadFromAssemblyPath(
+                        Path.GetFullPath(asmName)
+                    );
 
                     if (xsltasm == null)
                     {
@@ -317,7 +406,12 @@ namespace System.Xml.Tests
                         inputXml.LoadXml("<foo><bar>Hello, world!</bar></foo>");
                         xslt.Transform(inputXml, null, sw);
 
-                        if (!XsltVerificationLibrary.CompareXml(Path.Combine(XsltcModule.TargetDirectory, baselineFile), stream))
+                        if (
+                            !XsltVerificationLibrary.CompareXml(
+                                Path.Combine(XsltcModule.TargetDirectory, baselineFile),
+                                stream
+                            )
+                        )
                         {
                             //_output.WriteLine("Baseline file comparison failed");
                             return false;

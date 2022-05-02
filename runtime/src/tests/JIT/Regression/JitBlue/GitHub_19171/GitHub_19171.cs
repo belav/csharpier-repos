@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using System.Runtime.CompilerServices;
+
 public class GitHub_19171
 {
     public static long g_static = -1;
@@ -13,7 +14,7 @@ public class GitHub_19171
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool checkResult(long result)
     {
-        return(result == g_static);
+        return (result == g_static);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -26,6 +27,7 @@ public class GitHub_19171
             returnVal = -1;
         }
     }
+
     public static int Main()
     {
         Function(7);

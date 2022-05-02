@@ -11,13 +11,9 @@ public sealed class SimpleValueProvider : Dictionary<string, object>, IValueProv
 {
     private readonly CultureInfo _culture;
 
-    public SimpleValueProvider()
-        : this(null)
-    {
-    }
+    public SimpleValueProvider() : this(null) { }
 
-    public SimpleValueProvider(CultureInfo culture)
-        : base(StringComparer.OrdinalIgnoreCase)
+    public SimpleValueProvider(CultureInfo culture) : base(StringComparer.OrdinalIgnoreCase)
     {
         _culture = culture ?? CultureInfo.InvariantCulture;
     }
@@ -46,14 +42,17 @@ public sealed class SimpleValueProvider : Dictionary<string, object>, IValueProv
                 var stringValues = new string[array.Length];
                 for (var i = 0; i < array.Length; i++)
                 {
-                    stringValues[i] = array.GetValue(i) as string ?? Convert.ToString(array.GetValue(i), _culture);
+                    stringValues[i] =
+                        array.GetValue(i) as string
+                        ?? Convert.ToString(array.GetValue(i), _culture);
                 }
 
                 return new ValueProviderResult(stringValues, _culture);
             }
             else
             {
-                var stringValue = rawValue as string ?? Convert.ToString(rawValue, _culture) ?? string.Empty;
+                var stringValue =
+                    rawValue as string ?? Convert.ToString(rawValue, _culture) ?? string.Empty;
                 return new ValueProviderResult(stringValue, _culture);
             }
         }

@@ -31,22 +31,26 @@ public abstract class WebRenderer : Renderer
         IServiceProvider serviceProvider,
         ILoggerFactory loggerFactory,
         JsonSerializerOptions jsonOptions,
-        JSComponentInterop jsComponentInterop)
-        : base(serviceProvider, loggerFactory)
+        JSComponentInterop jsComponentInterop
+    ) : base(serviceProvider, loggerFactory)
     {
         _serviceProvider = serviceProvider;
         _interopMethodsReference = DotNetObjectReference.Create(
-            new WebRendererInteropMethods(this, jsonOptions, jsComponentInterop));
+            new WebRendererInteropMethods(this, jsonOptions, jsComponentInterop)
+        );
 
         // Supply a DotNetObjectReference to JS that it can use to call us back for events etc.
         jsComponentInterop.AttachToRenderer(this);
         var jsRuntime = _serviceProvider.GetRequiredService<IJSRuntime>();
-        jsRuntime.InvokeVoidAsync(
-            "Blazor._internal.attachWebRendererInterop",
-            RendererId,
-            _interopMethodsReference,
-            jsComponentInterop.Configuration.JSComponentParametersByIdentifier,
-            jsComponentInterop.Configuration.JSComponentIdentifiersByInitializer).Preserve();
+        jsRuntime
+            .InvokeVoidAsync(
+                "Blazor._internal.attachWebRendererInterop",
+                RendererId,
+                _interopMethodsReference,
+                jsComponentInterop.Configuration.JSComponentParametersByIdentifier,
+                jsComponentInterop.Configuration.JSComponentIdentifiersByInitializer
+            )
+            .Preserve();
     }
 
     /// <summary>
@@ -60,7 +64,10 @@ public abstract class WebRenderer : Renderer
     /// <param name="componentType">The type of the component.</param>
     /// <param name="domElementSelector">A CSS selector that uniquely identifies a DOM element.</param>
     /// <returns>The new component ID.</returns>
-    protected internal int AddRootComponent([DynamicallyAccessedMembers(Component)] Type componentType, string domElementSelector)
+    protected internal int AddRootComponent(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        string domElementSelector
+    )
     {
         var component = InstantiateComponent(componentType);
         var componentId = AssignRootComponentId(component);
@@ -73,7 +80,10 @@ public abstract class WebRenderer : Renderer
     /// </summary>
     /// <param name="componentId">The component ID.</param>
     /// <param name="domElementSelector">A CSS selector that uniquely identifies a DOM element.</param>
-    protected abstract void AttachRootComponentToBrowser(int componentId, string domElementSelector);
+    protected abstract void AttachRootComponentToBrowser(
+        int componentId,
+        string domElementSelector
+    );
 
     /// <inheritdoc />
     protected override void Dispose(bool disposing)
@@ -98,7 +108,11 @@ public abstract class WebRenderer : Renderer
         private readonly JSComponentInterop _jsComponentInterop;
 
         [DynamicDependency(nameof(DispatchEventAsync))]
-        public WebRendererInteropMethods(WebRenderer renderer, JsonSerializerOptions jsonOptions, JSComponentInterop jsComponentInterop)
+        public WebRendererInteropMethods(
+            WebRenderer renderer,
+            JsonSerializerOptions jsonOptions,
+            JSComponentInterop jsComponentInterop
+        )
         {
             _renderer = renderer;
             _jsonOptions = jsonOptions;
@@ -108,23 +122,38 @@ public abstract class WebRenderer : Renderer
         [JSInvokable]
         public Task DispatchEventAsync(JsonElement eventDescriptor, JsonElement eventArgs)
         {
-            var webEventData = WebEventData.Parse(_renderer, _jsonOptions, eventDescriptor, eventArgs);
+            var webEventData = WebEventData.Parse(
+                _renderer,
+                _jsonOptions,
+                eventDescriptor,
+                eventArgs
+            );
             return _renderer.DispatchEventAsync(
                 webEventData.EventHandlerId,
                 webEventData.EventFieldInfo,
-                webEventData.EventArgs);
+                webEventData.EventArgs
+            );
         }
 
         [JSInvokable] // Linker preserves this if you call RootComponents.Add
-        public int AddRootComponent(string identifier, string domElementSelector)
-            => _jsComponentInterop.AddRootComponent(identifier, domElementSelector);
+        public int AddRootComponent(string identifier, string domElementSelector) =>
+            _jsComponentInterop.AddRootComponent(identifier, domElementSelector);
 
         [JSInvokable] // Linker preserves this if you call RootComponents.Add
-        public void SetRootComponentParameters(int componentId, int parameterCount, JsonElement parametersJson)
-            => _jsComponentInterop.SetRootComponentParameters(componentId, parameterCount, parametersJson, _jsonOptions);
+        public void SetRootComponentParameters(
+            int componentId,
+            int parameterCount,
+            JsonElement parametersJson
+        ) =>
+            _jsComponentInterop.SetRootComponentParameters(
+                componentId,
+                parameterCount,
+                parametersJson,
+                _jsonOptions
+            );
 
         [JSInvokable] // Linker preserves this if you call RootComponents.Add
-        public void RemoveRootComponent(int componentId)
-            => _jsComponentInterop.RemoveRootComponent(componentId);
+        public void RemoveRootComponent(int componentId) =>
+            _jsComponentInterop.RemoveRootComponent(componentId);
     }
 }

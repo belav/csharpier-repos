@@ -13,7 +13,13 @@ namespace System.Xml
         {
             if (uri.Scheme == "file")
             {
-                return new FileStream(uri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, 1);
+                return new FileStream(
+                    uri.LocalPath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    1
+                );
             }
             else
             {

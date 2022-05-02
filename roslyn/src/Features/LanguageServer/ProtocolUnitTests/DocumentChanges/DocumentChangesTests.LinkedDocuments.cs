@@ -19,15 +19,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 {
     public partial class DocumentChangesTests
     {
-        protected override TestComposition Composition => base.Composition
-            .AddParts(typeof(GetLspSolutionHandlerProvider));
+        protected override TestComposition Composition =>
+            base.Composition.AddParts(typeof(GetLspSolutionHandlerProvider));
 
         [Fact]
         public async Task LinkedDocuments_AllTracked()
         {
             var documentText = "class C { }";
             var workspaceXml =
-@$"<Workspace>
+                @$"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""CSProj1"">
         <Document FilePath=""C:\C.cs"">{documentText}{{|caret:|}}</Document>
     </Project>
@@ -48,7 +48,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
             foreach (var document in solution.Projects.First().Documents)
             {
-                Assert.Equal(documentText, document.GetTextSynchronously(CancellationToken.None).ToString());
+                Assert.Equal(
+                    documentText,
+                    document.GetTextSynchronously(CancellationToken.None).ToString()
+                );
             }
 
             await DidClose(testLspServer, caretLocation.Uri);
@@ -60,7 +63,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task LinkedDocuments_AllTextChanged()
         {
             var initialText =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -68,7 +71,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
             var workspaceXml =
-@$"<Workspace>
+                @$"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""CSProj1"">
         <Document FilePath=""C:\C.cs"">{initialText}</Document>
     </Project>
@@ -81,7 +84,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
             var caretLocation = testLspServer.GetLocations("caret").Single();
 
             var updatedText =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -99,7 +102,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
             foreach (var document in solution.Projects.First().Documents)
             {
-                Assert.Equal(updatedText, document.GetTextSynchronously(CancellationToken.None).ToString());
+                Assert.Equal(
+                    updatedText,
+                    document.GetTextSynchronously(CancellationToken.None).ToString()
+                );
             }
 
             await DidClose(testLspServer, caretLocation.Uri);
@@ -109,7 +115,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
         private static async Task<Solution> GetLSPSolution(TestLspServer testLspServer, Uri uri)
         {
-            var result = await testLspServer.ExecuteRequestAsync<Uri, Solution>(nameof(GetLSPSolutionHandler), uri, new ClientCapabilities(), null, CancellationToken.None);
+            var result = await testLspServer.ExecuteRequestAsync<Uri, Solution>(
+                nameof(GetLSPSolutionHandler),
+                uri,
+                new ClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
             Contract.ThrowIfNull(result);
             return result;
         }
@@ -120,11 +132,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public GetLspSolutionHandlerProvider()
-            {
-            }
+            public GetLspSolutionHandlerProvider() { }
 
-            public override ImmutableArray<IRequestHandler> CreateRequestHandlers() => ImmutableArray.Create<IRequestHandler>(new GetLSPSolutionHandler());
+            public override ImmutableArray<IRequestHandler> CreateRequestHandlers() =>
+                ImmutableArray.Create<IRequestHandler>(new GetLSPSolutionHandler());
         }
 
         private class GetLSPSolutionHandler : IRequestHandler<Uri, Solution>
@@ -136,11 +147,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
             public bool MutatesSolutionState => false;
             public bool RequiresLSPSolution => true;
 
-            public TextDocumentIdentifier? GetTextDocumentIdentifier(Uri request)
-                => new TextDocumentIdentifier { Uri = request };
+            public TextDocumentIdentifier? GetTextDocumentIdentifier(Uri request) =>
+                new TextDocumentIdentifier { Uri = request };
 
-            public Task<Solution> HandleRequestAsync(Uri request, RequestContext context, CancellationToken cancellationToken)
-                => Task.FromResult(context.Solution!);
+            public Task<Solution> HandleRequestAsync(
+                Uri request,
+                RequestContext context,
+                CancellationToken cancellationToken
+            ) => Task.FromResult(context.Solution!);
         }
     }
 }

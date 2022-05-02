@@ -20,7 +20,9 @@ public class ComponentServiceCollectionExtensionsTest
         services.AddServerSideBlazor();
 
         // Act
-        var options = services.BuildServiceProvider().GetRequiredService<IOptions<HubOptions<ComponentHub>>>();
+        var options = services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<HubOptions<ComponentHub>>>();
 
         // Assert
         var protocol = Assert.Single(options.Value.SupportedProtocols);
@@ -34,14 +36,18 @@ public class ComponentServiceCollectionExtensionsTest
         var services = new ServiceCollection();
         services.AddServerSideBlazor();
 
-        services.Configure<HubOptions>(options =>
-        {
-            options.SupportedProtocols.Add("test");
-            options.HandshakeTimeout = TimeSpan.FromMinutes(10);
-        });
+        services.Configure<HubOptions>(
+            options =>
+            {
+                options.SupportedProtocols.Add("test");
+                options.HandshakeTimeout = TimeSpan.FromMinutes(10);
+            }
+        );
 
         // Act
-        var options = services.BuildServiceProvider().GetRequiredService<IOptions<HubOptions<ComponentHub>>>();
+        var options = services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<HubOptions<ComponentHub>>>();
 
         // Assert
         var protocol = Assert.Single(options.Value.SupportedProtocols);
@@ -54,21 +60,31 @@ public class ComponentServiceCollectionExtensionsTest
     {
         // Arrange
         var services = new ServiceCollection();
-        services.AddServerSideBlazor().AddHubOptions(options =>
-        {
-            Assert.Equal(TimeSpan.FromMinutes(10), options.HandshakeTimeout);
-            options.HandshakeTimeout = TimeSpan.FromMinutes(5);
-        });
+        services
+            .AddServerSideBlazor()
+            .AddHubOptions(
+                options =>
+                {
+                    Assert.Equal(TimeSpan.FromMinutes(10), options.HandshakeTimeout);
+                    options.HandshakeTimeout = TimeSpan.FromMinutes(5);
+                }
+            );
 
-        services.Configure<HubOptions>(options =>
-        {
-            options.SupportedProtocols.Add("test");
-            options.HandshakeTimeout = TimeSpan.FromMinutes(10);
-        });
+        services.Configure<HubOptions>(
+            options =>
+            {
+                options.SupportedProtocols.Add("test");
+                options.HandshakeTimeout = TimeSpan.FromMinutes(10);
+            }
+        );
 
         // Act
-        var options = services.BuildServiceProvider().GetRequiredService<IOptions<HubOptions<ComponentHub>>>();
-        var globalOptions = services.BuildServiceProvider().GetRequiredService<IOptions<HubOptions>>();
+        var options = services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<HubOptions<ComponentHub>>>();
+        var globalOptions = services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<HubOptions>>();
 
         // Assert
         var protocol = Assert.Single(options.Value.SupportedProtocols);

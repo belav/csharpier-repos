@@ -10,27 +10,47 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Owin;
 
-using RawWebSocketReceiveResult = Tuple<int, // type
+using RawWebSocketReceiveResult = Tuple<
+    int, // type
     bool, // end of message?
-    int>; // count
+    int
+>; // count
 // http://owin.org/extensions/owin-WebSocket-Extension-v0.4.0.htm
-using WebSocketCloseAsync =
-    Func<int /* closeStatus */,
-        string /* closeDescription */,
-        CancellationToken /* cancel */,
-        Task>;
-using WebSocketReceiveAsync =
-    Func<ArraySegment<byte> /* data */,
-        CancellationToken /* cancel */,
-        Task<Tuple<int /* messageType */,
-            bool /* endOfMessage */,
-            int /* count */>>>;
-using WebSocketSendAsync =
-    Func<ArraySegment<byte> /* data */,
-        int /* messageType */,
-        bool /* endOfMessage */,
-        CancellationToken /* cancel */,
-        Task>;
+using WebSocketCloseAsync = Func<
+    int /* closeStatus */
+    ,
+    string /* closeDescription */
+    ,
+    CancellationToken /* cancel */
+    ,
+    Task
+>;
+using WebSocketReceiveAsync = Func<
+    ArraySegment<byte> /* data */
+    ,
+    CancellationToken /* cancel */
+    ,
+    Task<
+        Tuple<
+            int /* messageType */
+            ,
+            bool /* endOfMessage */
+            ,
+            int /* count */
+        >
+    >
+>;
+using WebSocketSendAsync = Func<
+    ArraySegment<byte> /* data */
+    ,
+    int /* messageType */
+    ,
+    bool /* endOfMessage */
+    ,
+    CancellationToken /* cancel */
+    ,
+    Task
+>;
 
 /// <summary>
 /// OWIN WebSocket adapter.
@@ -54,7 +74,8 @@ public class OwinWebSocketAdapter : WebSocket
     {
         _websocketContext = websocketContext;
         _sendAsync = (WebSocketSendAsync)websocketContext[OwinConstants.WebSocket.SendAsync];
-        _receiveAsync = (WebSocketReceiveAsync)websocketContext[OwinConstants.WebSocket.ReceiveAsync];
+        _receiveAsync = (WebSocketReceiveAsync)
+            websocketContext[OwinConstants.WebSocket.ReceiveAsync];
         _closeAsync = (WebSocketCloseAsync)websocketContext[OwinConstants.WebSocket.CloseAsync];
         _state = WebSocketState.Open;
         _subProtocol = subProtocol;
@@ -80,7 +101,12 @@ public class OwinWebSocketAdapter : WebSocket
         get
         {
             object obj;
-            if (_websocketContext.TryGetValue(OwinConstants.WebSocket.ClientCloseDescription, out obj))
+            if (
+                _websocketContext.TryGetValue(
+                    OwinConstants.WebSocket.ClientCloseDescription,
+                    out obj
+                )
+            )
             {
                 return (string)obj;
             }
@@ -91,23 +117,20 @@ public class OwinWebSocketAdapter : WebSocket
     /// <inheritdocs />
     public override string SubProtocol
     {
-        get
-        {
-            return _subProtocol;
-        }
+        get { return _subProtocol; }
     }
 
     /// <inheritdocs />
     public override WebSocketState State
     {
-        get
-        {
-            return _state;
-        }
+        get { return _state; }
     }
 
     /// <inheritdocs />
-    public override async Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+    public override async Task<WebSocketReceiveResult> ReceiveAsync(
+        ArraySegment<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         var rawResult = await _receiveAsync(buffer, cancellationToken);
         var messageType = OpCodeToEnum(rawResult.Item1);
@@ -121,7 +144,13 @@ public class OwinWebSocketAdapter : WebSocket
             {
                 _state = WebSocketState.Closed;
             }
-            return new WebSocketReceiveResult(rawResult.Item3, messageType, rawResult.Item2, CloseStatus, CloseStatusDescription);
+            return new WebSocketReceiveResult(
+                rawResult.Item3,
+                messageType,
+                rawResult.Item2,
+                CloseStatus,
+                CloseStatusDescription
+            );
         }
         else
         {
@@ -130,13 +159,22 @@ public class OwinWebSocketAdapter : WebSocket
     }
 
     /// <inheritdocs />
-    public override Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+    public override Task SendAsync(
+        ArraySegment<byte> buffer,
+        WebSocketMessageType messageType,
+        bool endOfMessage,
+        CancellationToken cancellationToken
+    )
     {
         return _sendAsync(buffer, EnumToOpCode(messageType), endOfMessage, cancellationToken);
     }
 
     /// <inheritdocs />
-    public override async Task CloseAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
+    public override async Task CloseAsync(
+        WebSocketCloseStatus closeStatus,
+        string statusDescription,
+        CancellationToken cancellationToken
+    )
     {
         if (State == WebSocketState.Open || State == WebSocketState.CloseReceived)
         {
@@ -159,7 +197,11 @@ public class OwinWebSocketAdapter : WebSocket
     }
 
     /// <inheritdocs />
-    public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
+    public override Task CloseOutputAsync(
+        WebSocketCloseStatus closeStatus,
+        string statusDescription,
+        CancellationToken cancellationToken
+    )
     {
         // TODO: Validate state
         if (State == WebSocketState.Open)
@@ -196,7 +238,11 @@ public class OwinWebSocketAdapter : WebSocket
             case 0x8:
                 return WebSocketMessageType.Close;
             default:
-                throw new ArgumentOutOfRangeException(nameof(messageType), messageType, string.Empty);
+                throw new ArgumentOutOfRangeException(
+                    nameof(messageType),
+                    messageType,
+                    string.Empty
+                );
         }
     }
 
@@ -211,7 +257,11 @@ public class OwinWebSocketAdapter : WebSocket
             case WebSocketMessageType.Close:
                 return 0x8;
             default:
-                throw new ArgumentOutOfRangeException(nameof(webSocketMessageType), webSocketMessageType, string.Empty);
+                throw new ArgumentOutOfRangeException(
+                    nameof(webSocketMessageType),
+                    webSocketMessageType,
+                    string.Empty
+                );
         }
     }
 }

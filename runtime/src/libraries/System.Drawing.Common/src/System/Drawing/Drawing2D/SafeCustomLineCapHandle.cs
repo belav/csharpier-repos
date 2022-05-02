@@ -11,9 +11,7 @@ namespace System.Drawing.Drawing2D
 {
     internal sealed class SafeCustomLineCapHandle : SafeHandle
     {
-        public SafeCustomLineCapHandle() : base(IntPtr.Zero, true)
-        {
-        }
+        public SafeCustomLineCapHandle() : base(IntPtr.Zero, true) { }
 
         // Create a SafeHandle, informing the base class
         // that this SafeHandle instance "owns" the handle,
@@ -32,8 +30,9 @@ namespace System.Drawing.Drawing2D
             {
                 try
                 {
-                    status = !Gdip.Initialized ? Gdip.Ok :
-                        Gdip.GdipDeleteCustomLineCap(new HandleRef(this, handle));
+                    status = !Gdip.Initialized
+                        ? Gdip.Ok
+                        : Gdip.GdipDeleteCustomLineCap(new HandleRef(this, handle));
                 }
                 catch (Exception ex)
                 {
@@ -48,15 +47,20 @@ namespace System.Drawing.Drawing2D
                 {
                     handle = IntPtr.Zero;
                 }
-                Debug.Assert(status == Gdip.Ok, $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}");
+                Debug.Assert(
+                    status == Gdip.Ok,
+                    $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}"
+                );
             }
             return status == Gdip.Ok;
         }
 
         public override bool IsInvalid => handle == IntPtr.Zero;
 
-        public static implicit operator IntPtr(SafeCustomLineCapHandle handle) => handle?.handle ?? IntPtr.Zero;
+        public static implicit operator IntPtr(SafeCustomLineCapHandle handle) =>
+            handle?.handle ?? IntPtr.Zero;
 
-        public static explicit operator SafeCustomLineCapHandle(IntPtr handle) => new SafeCustomLineCapHandle(handle);
+        public static explicit operator SafeCustomLineCapHandle(IntPtr handle) =>
+            new SafeCustomLineCapHandle(handle);
     }
 }

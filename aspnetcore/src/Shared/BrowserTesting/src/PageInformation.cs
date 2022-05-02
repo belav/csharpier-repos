@@ -69,9 +69,7 @@ public class PageInformation : IDisposable
         {
             _logger.LogError(e.FailureText);
         }
-        catch
-        {
-        }
+        catch { }
         FailedRequests.Add(e.FailureText);
     }
 
@@ -82,9 +80,7 @@ public class PageInformation : IDisposable
         {
             _logger.LogError(e.Message);
         }
-        catch
-        {
-        }
+        catch { }
 
         PageErrors.Add(e.Message);
     }
@@ -94,23 +90,28 @@ public class PageInformation : IDisposable
         try
         {
             var message = e.Message;
-            var messageText = message.Text.Replace(Environment.NewLine, $"{Environment.NewLine}      ");
+            var messageText = message.Text.Replace(
+                Environment.NewLine,
+                $"{Environment.NewLine}      "
+            );
             var location = message.Location;
 
-            var logMessage = $"[{_page.Url}]{Environment.NewLine}      {messageText}{Environment.NewLine}      ({location.URL}:{location.LineNumber}:{location.ColumnNumber})";
+            var logMessage =
+                $"[{_page.Url}]{Environment.NewLine}      {messageText}{Environment.NewLine}      ({location.URL}:{location.LineNumber}:{location.ColumnNumber})";
 
             _logger.Log(MapLogLevel(message.Type), logMessage);
 
             BrowserConsoleLogs.Add(new LogEntry(messageText, message.Type));
 
-            LogLevel MapLogLevel(string messageType) => messageType switch
-            {
-                "info" => LogLevel.Information,
-                "verbose" => LogLevel.Debug,
-                "warning" => LogLevel.Warning,
-                "error" => LogLevel.Error,
-                _ => LogLevel.Information
-            };
+            LogLevel MapLogLevel(string messageType) =>
+                messageType switch
+                {
+                    "info" => LogLevel.Information,
+                    "verbose" => LogLevel.Debug,
+                    "warning" => LogLevel.Warning,
+                    "error" => LogLevel.Error,
+                    _ => LogLevel.Information
+                };
         }
         catch
         {

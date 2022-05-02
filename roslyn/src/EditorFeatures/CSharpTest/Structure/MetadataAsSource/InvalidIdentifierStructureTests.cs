@@ -26,54 +26,68 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSou
         protected override string LanguageName => LanguageNames.CSharp;
         protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
 
-        internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(Document document, int position)
+        internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
+            Document document,
+            int position
+        )
         {
             var outliningService = document.GetLanguageService<BlockStructureService>();
 
-            return (await outliningService.GetBlockStructureAsync(document, CancellationToken.None)).Spans;
+            return (
+                await outliningService.GetBlockStructureAsync(document, CancellationToken.None)
+            ).Spans;
         }
 
         [WorkItem(1174405, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1174405")]
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task PrependedDollarSign()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:$$class C{|textspan:
 {
     public void $Invoke();
 }|}|}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [WorkItem(1174405, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1174405")]
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task SymbolsAndPunctuation()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint:$$class C{|textspan:
 {
     public void !#$%^&*(()_-+=|\}]{[""':;?/>.<,~`();
 }|}|}";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [WorkItem(1174405, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1174405")]
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
         public async Task IdentifierThatLooksLikeCode()
         {
-            const string code = @"
+            const string code =
+                @"
 {|hint1:$$class C{|textspan1:
 {
     public void }|}|} } {|hint2:public class CodeInjection{|textspan2:{ }|}|} /* now everything is commented ();
 }";
 
-            await VerifyBlockSpansAsync(code,
+            await VerifyBlockSpansAsync(
+                code,
                 Region("textspan1", "hint1", CSharpStructureHelpers.Ellipsis, autoCollapse: false),
-                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan2", "hint2", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

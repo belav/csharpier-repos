@@ -15,17 +15,22 @@ namespace BenchmarksGame
         public readonly int ExpectedLength;
         private readonly string resourceName;
 
-        public TestHarnessHelpers(bool bigInput, [System.Runtime.CompilerServices.CallerFilePath] string csFileName = "")
+        public TestHarnessHelpers(
+            bool bigInput,
+            [System.Runtime.CompilerServices.CallerFilePath] string csFileName = ""
+        )
         {
             if (bigInput)
             {
                 ExpectedLength = 136381;
-                resourceName = $"{Path.GetFileNameWithoutExtension(csFileName)}.regexdna-input25000.txt";
+                resourceName =
+                    $"{Path.GetFileNameWithoutExtension(csFileName)}.regexdna-input25000.txt";
             }
             else
             {
                 ExpectedLength = 152;
-                resourceName = $"{Path.GetFileNameWithoutExtension(csFileName)}.regexdna-input25.txt";
+                resourceName =
+                    $"{Path.GetFileNameWithoutExtension(csFileName)}.regexdna-input25.txt";
             }
         }
 

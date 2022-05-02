@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.AddMissingImports
         public ImmutableArray<AddImportFixData> AddImportFixData { get; }
         public bool CanAddMissingImports => !AddImportFixData.IsEmpty;
 
-        public AddMissingImportsAnalysisResult(
-            ImmutableArray<AddImportFixData> addImportFixData)
+        public AddMissingImportsAnalysisResult(ImmutableArray<AddImportFixData> addImportFixData)
         {
             AddImportFixData = addImportFixData;
         }

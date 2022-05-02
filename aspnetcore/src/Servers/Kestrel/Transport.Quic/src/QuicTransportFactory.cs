@@ -22,7 +22,10 @@ internal class QuicTransportFactory : IMultiplexedConnectionListenerFactory
     private readonly ILogger _log;
     private readonly QuicTransportOptions _options;
 
-    public QuicTransportFactory(ILoggerFactory loggerFactory, IOptions<QuicTransportOptions> options)
+    public QuicTransportFactory(
+        ILoggerFactory loggerFactory,
+        IOptions<QuicTransportOptions> options
+    )
     {
         if (options == null)
         {
@@ -34,7 +37,9 @@ internal class QuicTransportFactory : IMultiplexedConnectionListenerFactory
             throw new ArgumentNullException(nameof(loggerFactory));
         }
 
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.Quic");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Server.Kestrel.Transport.Quic"
+        );
         _log = logger;
         _options = options.Value;
     }
@@ -46,7 +51,11 @@ internal class QuicTransportFactory : IMultiplexedConnectionListenerFactory
     /// <param name="features">Additional features to be used to create the listener.</param>
     /// <param name="cancellationToken">To cancel the </param>
     /// <returns>A </returns>
-    public ValueTask<IMultiplexedConnectionListener> BindAsync(EndPoint endpoint, IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public ValueTask<IMultiplexedConnectionListener> BindAsync(
+        EndPoint endpoint,
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         if (endpoint == null)
         {
@@ -57,18 +66,28 @@ internal class QuicTransportFactory : IMultiplexedConnectionListenerFactory
 
         if (sslServerAuthenticationOptions == null)
         {
-            throw new InvalidOperationException("Couldn't find HTTPS configuration for QUIC transport.");
+            throw new InvalidOperationException(
+                "Couldn't find HTTPS configuration for QUIC transport."
+            );
         }
-        if (sslServerAuthenticationOptions.ServerCertificate == null
+        if (
+            sslServerAuthenticationOptions.ServerCertificate == null
             && sslServerAuthenticationOptions.ServerCertificateContext == null
-            && sslServerAuthenticationOptions.ServerCertificateSelectionCallback == null)
+            && sslServerAuthenticationOptions.ServerCertificateSelectionCallback == null
+        )
         {
-            var message = $"{nameof(SslServerAuthenticationOptions)} must provide a server certificate using {nameof(SslServerAuthenticationOptions.ServerCertificate)},"
+            var message =
+                $"{nameof(SslServerAuthenticationOptions)} must provide a server certificate using {nameof(SslServerAuthenticationOptions.ServerCertificate)},"
                 + $" {nameof(SslServerAuthenticationOptions.ServerCertificateContext)}, or {nameof(SslServerAuthenticationOptions.ServerCertificateSelectionCallback)}.";
             throw new InvalidOperationException(message);
         }
 
-        var transport = new QuicConnectionListener(_options, _log, endpoint, sslServerAuthenticationOptions);
+        var transport = new QuicConnectionListener(
+            _options,
+            _log,
+            endpoint,
+            sslServerAuthenticationOptions
+        );
         return new ValueTask<IMultiplexedConnectionListener>(transport);
     }
 }

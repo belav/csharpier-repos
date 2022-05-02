@@ -11,8 +11,12 @@ namespace System.ComponentModel.Composition
         {
             private readonly IDisposable _disposable;
 
-            public DisposableLazy(Func<T> valueFactory, TMetadataView metadataView, IDisposable disposable, LazyThreadSafetyMode mode)
-                : base(valueFactory, metadataView, mode)
+            public DisposableLazy(
+                Func<T> valueFactory,
+                TMetadataView metadataView,
+                IDisposable disposable,
+                LazyThreadSafetyMode mode
+            ) : base(valueFactory, metadataView, mode)
             {
                 if (disposable == null)
                 {
@@ -32,8 +36,11 @@ namespace System.ComponentModel.Composition
         {
             private readonly IDisposable _disposable;
 
-            public DisposableLazy(Func<T> valueFactory, IDisposable disposable, LazyThreadSafetyMode mode)
-                : base(valueFactory, mode)
+            public DisposableLazy(
+                Func<T> valueFactory,
+                IDisposable disposable,
+                LazyThreadSafetyMode mode
+            ) : base(valueFactory, mode)
             {
                 if (disposable == null)
                 {

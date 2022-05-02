@@ -12,15 +12,20 @@ namespace AutoMapper.UnitTests.Bug
         {
             public long? Number { get; set; }
         }
+
         class Destination
         {
             public long? Number { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().ForMember(d => d.Number, o => o.NullSubstitute(0));
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(d => d.Number, o => o.NullSubstitute(0));
+                }
+            );
 
         protected override void Because_of()
         {

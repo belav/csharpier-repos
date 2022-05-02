@@ -8,7 +8,11 @@ namespace System.Text.RegularExpressions
         private readonly Action<RegexRunner> _goMethod;
         private readonly Func<RegexRunner, bool> _findFirstCharMethod;
 
-        public CompiledRegexRunner(Action<RegexRunner> go, Func<RegexRunner, bool> findFirstChar, int trackCount)
+        public CompiledRegexRunner(
+            Action<RegexRunner> go,
+            Func<RegexRunner, bool> findFirstChar,
+            int trackCount
+        )
         {
             _goMethod = go;
             _findFirstCharMethod = findFirstChar;

@@ -15,10 +15,11 @@ public class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool Eval(byte b) => b == 100;
 
-    static ulong[] s_34 = new ulong[]{0};
+    static ulong[] s_34 = new ulong[] { 0 };
+
     public static int Main()
     {
-        byte[] vr1 = new byte[]{0};
+        byte[] vr1 = new byte[] { 0 };
         bool result = false;
         for (int vr2 = 0; vr2 < 2; vr2++)
         {

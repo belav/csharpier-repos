@@ -24,10 +24,11 @@ namespace System.Reflection.Metadata
             _rawValue = rawValue;
         }
 
-        public SignatureHeader(SignatureKind kind, SignatureCallingConvention convention, SignatureAttributes attributes)
-             : this((byte)((int)kind | (int)convention | (int)attributes))
-        {
-        }
+        public SignatureHeader(
+            SignatureKind kind,
+            SignatureCallingConvention convention,
+            SignatureAttributes attributes
+        ) : this((byte)((int)kind | (int)convention | (int)attributes)) { }
 
         public byte RawValue
         {
@@ -40,8 +41,10 @@ namespace System.Reflection.Metadata
             {
                 int callingConventionOrKind = _rawValue & CallingConventionOrKindMask;
 
-                if (callingConventionOrKind > maxCallingConvention
-                    && callingConventionOrKind != (int)SignatureCallingConvention.Unmanaged)
+                if (
+                    callingConventionOrKind > maxCallingConvention
+                    && callingConventionOrKind != (int)SignatureCallingConvention.Unmanaged
+                )
                 {
                     return SignatureCallingConvention.Default;
                 }
@@ -56,8 +59,10 @@ namespace System.Reflection.Metadata
             {
                 int callingConventionOrKind = _rawValue & CallingConventionOrKindMask;
 
-                if (callingConventionOrKind <= maxCallingConvention
-                    || callingConventionOrKind == (int)SignatureCallingConvention.Unmanaged)
+                if (
+                    callingConventionOrKind <= maxCallingConvention
+                    || callingConventionOrKind == (int)SignatureCallingConvention.Unmanaged
+                )
                 {
                     return SignatureKind.Method;
                 }

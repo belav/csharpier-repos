@@ -19,7 +19,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-public abstract class ManagementTests<TStartup, TContext> : IClassFixture<ServerFactory<TStartup, TContext>>
+public abstract class ManagementTests<TStartup, TContext>
+    : IClassFixture<ServerFactory<TStartup, TContext>>
     where TStartup : class
     where TContext : DbContext
 {
@@ -34,8 +35,7 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
     public async Task CanEnableTwoFactorAuthentication()
     {
         // Arrange
-        var client = ServerFactory
-            .CreateClient();
+        var client = ServerFactory.CreateClient();
 
         var userName = $"{Guid.NewGuid()}@example.com";
         var password = $"[PLACEHOLDER]-1a";
@@ -50,8 +50,7 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
     public async Task CannotEnableTwoFactorAuthenticationWithoutCookieConsent()
     {
         // Arrange
-        var client = ServerFactory
-            .CreateClient();
+        var client = ServerFactory.CreateClient();
 
         var userName = $"{Guid.NewGuid()}@example.com";
         var password = $"[PLACEHOLDER]-1a";
@@ -70,8 +69,9 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupTestEmailSender(emails);
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(
+            whb => whb.ConfigureServices(ConfigureTestServices)
+        );
         var client = server.CreateClient();
 
         var userName = $"{Guid.NewGuid()}@example.com";
@@ -94,8 +94,9 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupTestEmailSender(emails);
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(
+            whb => whb.ConfigureServices(ConfigureTestServices)
+        );
         var client = server.CreateClient();
         var newClient = server.CreateClient();
         var failedClient = server.CreateClient();
@@ -114,7 +115,6 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         // Verify can login with new email, fails with old
         await UserStories.LoginExistingUserAsync(newClient, newEmail, password);
         await UserStories.LoginFailsWithWrongPasswordAsync(failedClient, userName, password);
-
     }
 
     [Fact]
@@ -123,10 +123,14 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         // Arrange
         var principals = new List<ClaimsPrincipal>();
         void ConfigureTestServices(IServiceCollection services) =>
-            services.SetupGetUserClaimsPrincipal(user => principals.Add(user), IdentityConstants.ApplicationScheme);
+            services.SetupGetUserClaimsPrincipal(
+                user => principals.Add(user),
+                IdentityConstants.ApplicationScheme
+            );
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureTestServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(
+            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -160,10 +164,14 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         void ConfigureTestServices(IServiceCollection services) =>
             services
                 .SetupTestThirdPartyLogin()
-                .SetupGetUserClaimsPrincipal(user => principals.Add(user), IdentityConstants.ApplicationScheme);
+                .SetupGetUserClaimsPrincipal(
+                    user => principals.Add(user),
+                    IdentityConstants.ApplicationScheme
+                );
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureTestServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(
+            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -178,7 +186,12 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         index = await UserStories.LoginWithSocialLoginAsync(newClient, userName);
 
         // Assert 1
-        Assert.NotNull(principals[1].Identities.Single().Claims.Single(c => c.Type == ClaimTypes.AuthenticationMethod).Value);
+        Assert.NotNull(
+            principals[1].Identities
+                .Single()
+                .Claims.Single(c => c.Type == ClaimTypes.AuthenticationMethod)
+                .Value
+        );
 
         // Act 2
         await UserStories.SetPasswordAsync(index, "[PLACEHOLDER]-1a-updated");
@@ -189,7 +202,11 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
 
         // Act & Assert 3
         // Can log in with the password set above
-        await UserStories.LoginExistingUserAsync(loginAfterSetPasswordClient, email, "[PLACEHOLDER]-1a-updated");
+        await UserStories.LoginExistingUserAsync(
+            loginAfterSetPasswordClient,
+            email,
+            "[PLACEHOLDER]-1a-updated"
+        );
     }
 
     [Fact]
@@ -200,10 +217,14 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         void ConfigureTestServices(IServiceCollection services) =>
             services
                 .SetupTestThirdPartyLogin()
-                .SetupGetUserClaimsPrincipal(user => principals.Add(user), IdentityConstants.ApplicationScheme);
+                .SetupGetUserClaimsPrincipal(
+                    user => principals.Add(user),
+                    IdentityConstants.ApplicationScheme
+                );
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureTestServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(
+            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
 
@@ -224,10 +245,12 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
     public async Task CanSeeExternalLoginProviderDisplayName()
     {
         // Arrange
-        void ConfigureTestServices(IServiceCollection services) => services.SetupTestThirdPartyLogin();
+        void ConfigureTestServices(IServiceCollection services) =>
+            services.SetupTestThirdPartyLogin();
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureTestServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(
+            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
 
@@ -250,10 +273,14 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         void ConfigureTestServices(IServiceCollection services) =>
             services
                 .SetupTestThirdPartyLogin()
-                .SetupGetUserClaimsPrincipal(user => principals.Add(user), IdentityConstants.ApplicationScheme);
+                .SetupGetUserClaimsPrincipal(
+                    user => principals.Add(user),
+                    IdentityConstants.ApplicationScheme
+                );
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureTestServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(
+            whb => whb.ConfigureTestServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -268,7 +295,12 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
 
         // Use a new client to simulate a new browser session.
         await UserStories.AcceptCookiePolicy(newClient);
-        var index = await UserStories.LoginExistingUser2FaAsync(newClient, userName, password, twoFactorKey);
+        var index = await UserStories.LoginExistingUser2FaAsync(
+            newClient,
+            userName,
+            password,
+            twoFactorKey
+        );
         await UserStories.ResetAuthenticator(index);
 
         // RefreshSignIn generates a new security stamp claim
@@ -343,8 +375,7 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
     public async Task GetOnDownloadPersonalData_ReturnsNotFound()
     {
         // Arrange
-        var client = ServerFactory
-            .CreateClient();
+        var client = ServerFactory.CreateClient();
 
         await UserStories.RegisterNewUserAsync(client);
 
@@ -359,8 +390,7 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
     public async Task CanDeleteUser()
     {
         // Arrange
-        var client = ServerFactory
-            .CreateClient();
+        var client = ServerFactory.CreateClient();
 
         var userName = $"{Guid.NewGuid()}@example.com";
         var password = $"[PLACEHOLDER]-1a";
@@ -371,17 +401,37 @@ public abstract class ManagementTests<TStartup, TContext> : IClassFixture<Server
         await UserStories.DeleteUser(index, password);
     }
 
-    private void AssertClaimsEqual(ClaimsPrincipal expectedPrincipal, ClaimsPrincipal actualPrincipal, string claimType)
+    private void AssertClaimsEqual(
+        ClaimsPrincipal expectedPrincipal,
+        ClaimsPrincipal actualPrincipal,
+        string claimType
+    )
     {
-        var expectedPrincipalClaim = expectedPrincipal.Identities.Single().Claims.Single(c => c.Type == claimType).Value;
-        var actualPrincipalClaim = actualPrincipal.Identities.Single().Claims.Single(c => c.Type == claimType).Value;
+        var expectedPrincipalClaim = expectedPrincipal.Identities
+            .Single()
+            .Claims.Single(c => c.Type == claimType)
+            .Value;
+        var actualPrincipalClaim = actualPrincipal.Identities
+            .Single()
+            .Claims.Single(c => c.Type == claimType)
+            .Value;
         Assert.Equal(expectedPrincipalClaim, actualPrincipalClaim);
     }
 
-    private void AssertClaimsNotEqual(ClaimsPrincipal expectedPrincipal, ClaimsPrincipal actualPrincipal, string claimType)
+    private void AssertClaimsNotEqual(
+        ClaimsPrincipal expectedPrincipal,
+        ClaimsPrincipal actualPrincipal,
+        string claimType
+    )
     {
-        var expectedPrincipalClaim = expectedPrincipal.Identities.Single().Claims.Single(c => c.Type == claimType).Value;
-        var actualPrincipalClaim = actualPrincipal.Identities.Single().Claims.Single(c => c.Type == claimType).Value;
+        var expectedPrincipalClaim = expectedPrincipal.Identities
+            .Single()
+            .Claims.Single(c => c.Type == claimType)
+            .Value;
+        var actualPrincipalClaim = actualPrincipal.Identities
+            .Single()
+            .Claims.Single(c => c.Type == claimType)
+            .Value;
         Assert.NotEqual(expectedPrincipalClaim, actualPrincipalClaim);
     }
 }

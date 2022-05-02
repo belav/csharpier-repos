@@ -18,9 +18,7 @@ namespace System.CommandLine.Invocation
 
         /// <param name="parseResult">The result of the current parse operation.</param>
         /// <param name="console">The console to which output is to be written.</param>
-        public InvocationContext(
-            ParseResult parseResult,
-            IConsole? console = null)
+        public InvocationContext(ParseResult parseResult, IConsole? console = null)
         {
             BindingContext = new BindingContext(parseResult, console);
             BindingContext.ServiceProvider.AddService(_ => GetCancellationToken());
@@ -50,7 +48,8 @@ namespace System.CommandLine.Invocation
         /// <summary>
         /// Provides localizable strings for help and error messages.
         /// </summary>
-        public LocalizationResources LocalizationResources => Parser.Configuration.LocalizationResources;
+        public LocalizationResources LocalizationResources =>
+            Parser.Configuration.LocalizationResources;
 
         /// <summary>
         /// The parse result for the current invocation.
@@ -78,7 +77,9 @@ namespace System.CommandLine.Invocation
             {
                 if (_cts is not null)
                 {
-                    throw new InvalidOperationException("Handlers must be added before adding cancellation handling.");
+                    throw new InvalidOperationException(
+                        "Handlers must be added before adding cancellation handling."
+                    );
                 }
 
                 _cancellationHandlingAddedEvent += value;

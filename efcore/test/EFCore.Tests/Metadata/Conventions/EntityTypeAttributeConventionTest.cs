@@ -70,7 +70,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(2, modelBuilder.Model.GetEntityTypes().Count());
             Assert.True(
-                modelBuilder.Model.FindEntityType(typeof(Customer)).FindNavigation(nameof(Customer.Address)).ForeignKey.IsOwnership);
+                modelBuilder.Model
+                    .FindEntityType(typeof(Customer))
+                    .FindNavigation(nameof(Customer.Address))
+                    .ForeignKey.IsOwnership
+            );
         }
 
         [ConditionalFact]
@@ -80,8 +84,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(
                 CoreStrings.ClashingOwnedEntityType(nameof(Address)),
-                Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.Entity<Customer>().HasOne(e => e.Address).WithOne(e => e.Customer)).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () =>
+                            modelBuilder
+                                .Entity<Customer>()
+                                .HasOne(e => e.Address)
+                                .WithOne(e => e.Customer)
+                    )
+                    .Message
+            );
         }
 
         #endregion
@@ -93,7 +105,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = new InternalModelBuilder(new Model());
 
-            var entityBuilder = modelBuilder.Entity(typeof(KeylessEntity), ConfigurationSource.Convention);
+            var entityBuilder = modelBuilder.Entity(
+                typeof(KeylessEntity),
+                ConfigurationSource.Convention
+            );
             entityBuilder.Property("Id", ConfigurationSource.Convention);
             entityBuilder.PrimaryKey(new List<string> { "Id" }, ConfigurationSource.Convention);
 
@@ -135,20 +150,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
         {
-            var context = new ConventionContext<IConventionEntityTypeBuilder>(entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+            var context = new ConventionContext<IConventionEntityTypeBuilder>(
+                entityTypeBuilder.Metadata.Model.ConventionDispatcher
+            );
 
-            new NotMappedEntityTypeAttributeConvention(CreateDependencies())
-                .ProcessEntityTypeAdded(entityTypeBuilder, context);
+            new NotMappedEntityTypeAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
+                entityTypeBuilder,
+                context
+            );
 
-            new OwnedEntityTypeAttributeConvention(CreateDependencies())
-                .ProcessEntityTypeAdded(entityTypeBuilder, context);
+            new OwnedEntityTypeAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
+                entityTypeBuilder,
+                context
+            );
 
-            new KeylessEntityTypeAttributeConvention(CreateDependencies())
-                .ProcessEntityTypeAdded(entityTypeBuilder, context);
+            new KeylessEntityTypeAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
+                entityTypeBuilder,
+                context
+            );
         }
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         [NotMapped]
         private class A

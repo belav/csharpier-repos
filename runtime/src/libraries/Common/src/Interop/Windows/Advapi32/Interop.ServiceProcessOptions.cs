@@ -48,16 +48,16 @@ internal static partial class Interop
             internal const int SERVICE_USER_DEFINED_CONTROL = 0x0100;
 
             internal const int SERVICE_ALL_ACCESS =
-                STANDARD_RIGHTS_REQUIRED |
-                SERVICE_QUERY_CONFIG |
-                SERVICE_CHANGE_CONFIG |
-                SERVICE_QUERY_STATUS |
-                SERVICE_ENUMERATE_DEPENDENTS |
-                SERVICE_START |
-                SERVICE_STOP |
-                SERVICE_PAUSE_CONTINUE |
-                SERVICE_INTERROGATE |
-                SERVICE_USER_DEFINED_CONTROL;
+                STANDARD_RIGHTS_REQUIRED
+                | SERVICE_QUERY_CONFIG
+                | SERVICE_CHANGE_CONFIG
+                | SERVICE_QUERY_STATUS
+                | SERVICE_ENUMERATE_DEPENDENTS
+                | SERVICE_START
+                | SERVICE_STOP
+                | SERVICE_PAUSE_CONTINUE
+                | SERVICE_INTERROGATE
+                | SERVICE_USER_DEFINED_CONTROL;
 
             internal const int STANDARD_RIGHTS_DELETE = 0x00010000;
             internal const int STANDARD_RIGHTS_REQUIRED = 0x000F0000;
@@ -73,17 +73,16 @@ internal static partial class Interop
             internal const int SERVICE_TYPE_WIN32_OWN_PROCESS = 0x00000010;
             internal const int SERVICE_TYPE_WIN32_SHARE_PROCESS = 0x00000020;
             internal const int SERVICE_TYPE_WIN32 =
-                SERVICE_TYPE_WIN32_OWN_PROCESS |
-                SERVICE_TYPE_WIN32_SHARE_PROCESS;
+                SERVICE_TYPE_WIN32_OWN_PROCESS | SERVICE_TYPE_WIN32_SHARE_PROCESS;
             internal const int SERVICE_TYPE_DRIVER =
-                SERVICE_TYPE_KERNEL_DRIVER |
-                SERVICE_TYPE_FILE_SYSTEM_DRIVER |
-                SERVICE_TYPE_RECOGNIZER_DRIVER;
+                SERVICE_TYPE_KERNEL_DRIVER
+                | SERVICE_TYPE_FILE_SYSTEM_DRIVER
+                | SERVICE_TYPE_RECOGNIZER_DRIVER;
             internal const int SERVICE_TYPE_ALL =
-                SERVICE_TYPE_WIN32 |
-                SERVICE_TYPE_ADAPTER |
-                SERVICE_TYPE_DRIVER |
-                SERVICE_TYPE_INTERACTIVE_PROCESS;
+                SERVICE_TYPE_WIN32
+                | SERVICE_TYPE_ADAPTER
+                | SERVICE_TYPE_DRIVER
+                | SERVICE_TYPE_INTERACTIVE_PROCESS;
         }
 
         internal static partial class ServiceAccessOptions
@@ -98,16 +97,16 @@ internal static partial class Interop
             internal const int ACCESS_TYPE_STOP = 0x0020;
             internal const int ACCESS_TYPE_USER_DEFINED_CONTROL = 0x0100;
             internal const int ACCESS_TYPE_ALL =
-                ServiceOptions.STANDARD_RIGHTS_REQUIRED |
-                ACCESS_TYPE_QUERY_CONFIG |
-                ACCESS_TYPE_CHANGE_CONFIG |
-                ACCESS_TYPE_QUERY_STATUS |
-                ACCESS_TYPE_ENUMERATE_DEPENDENTS |
-                ACCESS_TYPE_START |
-                ACCESS_TYPE_STOP |
-                ACCESS_TYPE_PAUSE_CONTINUE |
-                ACCESS_TYPE_INTERROGATE |
-                ACCESS_TYPE_USER_DEFINED_CONTROL;
+                ServiceOptions.STANDARD_RIGHTS_REQUIRED
+                | ACCESS_TYPE_QUERY_CONFIG
+                | ACCESS_TYPE_CHANGE_CONFIG
+                | ACCESS_TYPE_QUERY_STATUS
+                | ACCESS_TYPE_ENUMERATE_DEPENDENTS
+                | ACCESS_TYPE_START
+                | ACCESS_TYPE_STOP
+                | ACCESS_TYPE_PAUSE_CONTINUE
+                | ACCESS_TYPE_INTERROGATE
+                | ACCESS_TYPE_USER_DEFINED_CONTROL;
         }
 
         internal static partial class ServiceStartModes
@@ -163,13 +162,13 @@ internal static partial class Interop
             internal const int SC_MANAGER_MODIFY_BOOT_CONFIG = 0x0020;
             internal const int SC_MANAGER_QUERY_LOCK_STATUS = 0x0010;
             internal const int SC_MANAGER_ALL =
-                ServiceOptions.STANDARD_RIGHTS_REQUIRED |
-                SC_MANAGER_CONNECT |
-                SC_MANAGER_CREATE_SERVICE |
-                SC_MANAGER_ENUMERATE_SERVICE |
-                SC_MANAGER_LOCK |
-                SC_MANAGER_QUERY_LOCK_STATUS |
-                SC_MANAGER_MODIFY_BOOT_CONFIG;
+                ServiceOptions.STANDARD_RIGHTS_REQUIRED
+                | SC_MANAGER_CONNECT
+                | SC_MANAGER_CREATE_SERVICE
+                | SC_MANAGER_ENUMERATE_SERVICE
+                | SC_MANAGER_LOCK
+                | SC_MANAGER_QUERY_LOCK_STATUS
+                | SC_MANAGER_MODIFY_BOOT_CONFIG;
         }
 
         internal static partial class PowerBroadcastStatus

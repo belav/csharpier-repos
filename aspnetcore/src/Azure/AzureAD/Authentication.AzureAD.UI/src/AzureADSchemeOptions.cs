@@ -7,9 +7,11 @@ namespace Microsoft.AspNetCore.Authentication.AzureAD.UI;
 
 internal class AzureADSchemeOptions
 {
-    public IDictionary<string, AzureADOpenIDSchemeMapping> OpenIDMappings { get; set; } = new Dictionary<string, AzureADOpenIDSchemeMapping>();
+    public IDictionary<string, AzureADOpenIDSchemeMapping> OpenIDMappings { get; set; } =
+        new Dictionary<string, AzureADOpenIDSchemeMapping>();
 
-    public IDictionary<string, JwtBearerSchemeMapping> JwtBearerMappings { get; set; } = new Dictionary<string, JwtBearerSchemeMapping>();
+    public IDictionary<string, JwtBearerSchemeMapping> JwtBearerMappings { get; set; } =
+        new Dictionary<string, JwtBearerSchemeMapping>();
 
     public class AzureADOpenIDSchemeMapping
     {

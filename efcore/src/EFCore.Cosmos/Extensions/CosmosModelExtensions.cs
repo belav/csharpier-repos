@@ -23,18 +23,19 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>The default container name.</returns>
-        public static string? GetDefaultContainer(this IReadOnlyModel model)
-            => (string?)model[CosmosAnnotationNames.ContainerName];
+        public static string? GetDefaultContainer(this IReadOnlyModel model) =>
+            (string?)model[CosmosAnnotationNames.ContainerName];
 
         /// <summary>
         ///     Sets the default container name.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="name">The name to set.</param>
-        public static void SetDefaultContainer(this IMutableModel model, string? name)
-            => model.SetOrRemoveAnnotation(
+        public static void SetDefaultContainer(this IMutableModel model, string? name) =>
+            model.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.ContainerName,
-                Check.NullButNotEmpty(name, nameof(name)));
+                Check.NullButNotEmpty(name, nameof(name))
+            );
 
         /// <summary>
         ///     Sets the default container name.
@@ -46,12 +47,14 @@ namespace Microsoft.EntityFrameworkCore
         public static string? SetDefaultContainer(
             this IConventionModel model,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             model.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.ContainerName,
                 Check.NullButNotEmpty(name, nameof(name)),
-                fromDataAnnotation);
+                fromDataAnnotation
+            );
 
             return name;
         }
@@ -61,16 +64,17 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>The configuration source for the default container name.</returns>
-        public static ConfigurationSource? GetDefaultContainerConfigurationSource(this IConventionModel model)
-            => model.FindAnnotation(CosmosAnnotationNames.ContainerName)?.GetConfigurationSource();
+        public static ConfigurationSource? GetDefaultContainerConfigurationSource(
+            this IConventionModel model
+        ) => model.FindAnnotation(CosmosAnnotationNames.ContainerName)?.GetConfigurationSource();
 
         /// <summary>
         ///     Returns the provisioned throughput at database scope.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>The throughput.</returns>
-        public static ThroughputProperties? GetThroughput(this IReadOnlyModel model)
-            => (ThroughputProperties?)model[CosmosAnnotationNames.Throughput];
+        public static ThroughputProperties? GetThroughput(this IReadOnlyModel model) =>
+            (ThroughputProperties?)model[CosmosAnnotationNames.Throughput];
 
         /// <summary>
         ///     Sets the provisioned throughput at database scope.
@@ -78,14 +82,19 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="model">The model.</param>
         /// <param name="throughput">The throughput to set.</param>
         /// <param name="autoscale">Whether autoscale is enabled.</param>
-        public static void SetThroughput(this IMutableModel model, int? throughput, bool? autoscale)
-            => model.SetOrRemoveAnnotation(
+        public static void SetThroughput(
+            this IMutableModel model,
+            int? throughput,
+            bool? autoscale
+        ) =>
+            model.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.Throughput,
                 throughput == null || autoscale == null
-                    ? null
-                    : autoscale.Value
-                        ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                        : ThroughputProperties.CreateManualThroughput(throughput.Value));
+                  ? null
+                  : autoscale.Value
+                      ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                      : ThroughputProperties.CreateManualThroughput(throughput.Value)
+            );
 
         /// <summary>
         ///     Sets the provisioned throughput at database scope.
@@ -98,16 +107,21 @@ namespace Microsoft.EntityFrameworkCore
             this IConventionModel model,
             int? throughput,
             bool? autoscale,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
-            var valueSet = (ThroughputProperties?)model.SetOrRemoveAnnotation(
-                CosmosAnnotationNames.Throughput,
-                throughput == null || autoscale == null
-                    ? null
-                    : autoscale.Value
-                        ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                        : ThroughputProperties.CreateManualThroughput(throughput.Value),
-                fromDataAnnotation)?.Value;
+            var valueSet = (ThroughputProperties?)
+                model
+                    .SetOrRemoveAnnotation(
+                        CosmosAnnotationNames.Throughput,
+                        throughput == null || autoscale == null
+                          ? null
+                          : autoscale.Value
+                              ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                              : ThroughputProperties.CreateManualThroughput(throughput.Value),
+                        fromDataAnnotation
+                    )
+                    ?.Value;
             return valueSet?.AutoscaleMaxThroughput ?? valueSet?.Throughput;
         }
 
@@ -116,8 +130,8 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>The <see cref="ConfigurationSource" /> for the throughput.</returns>
-        public static ConfigurationSource? GetThroughputConfigurationSource(this IConventionModel model)
-            => model.FindAnnotation(CosmosAnnotationNames.Throughput)
-                ?.GetConfigurationSource();
+        public static ConfigurationSource? GetThroughputConfigurationSource(
+            this IConventionModel model
+        ) => model.FindAnnotation(CosmosAnnotationNames.Throughput)?.GetConfigurationSource();
     }
 }

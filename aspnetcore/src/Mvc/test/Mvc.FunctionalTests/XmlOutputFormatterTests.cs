@@ -28,7 +28,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/Home/GetDummyClass?sampleInput=10");
+            "http://localhost/Home/GetDummyClass?sampleInput=10"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -37,10 +38,11 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">" +
-            "<SampleInt>10</SampleInt></DummyClass>",
-            await response.Content.ReadAsStringAsync());
+            "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">"
+                + "<SampleInt>10</SampleInt></DummyClass>",
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.Equal(167, response.Content.Headers.ContentLength);
     }
 
@@ -50,7 +52,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/XmlSerializer/GetDummyClass?sampleInput=10");
+            "http://localhost/XmlSerializer/GetDummyClass?sampleInput=10"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -59,9 +62,10 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SampleInt>10</SampleInt></DummyClass>",
-            await response.Content.ReadAsStringAsync());
+            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SampleInt>10</SampleInt></DummyClass>",
+            await response.Content.ReadAsStringAsync()
+        );
         Assert.Equal(149, response.Content.Headers.ContentLength);
     }
 
@@ -73,7 +77,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/DataContractSerializer/GetPerson?name=HelloWorld");
+            "http://localhost/DataContractSerializer/GetPerson?name=HelloWorld"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -82,10 +87,11 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<Person xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">" +
-            "<Name>HelloWorld</Name></Person>",
-            await response.Content.ReadAsStringAsync());
+            "<Person xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">"
+                + "<Name>HelloWorld</Name></Person>",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]
@@ -94,7 +100,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/XmlSerializer/GetDerivedDummyClass?sampleInput=10");
+            "http://localhost/XmlSerializer/GetDerivedDummyClass?sampleInput=10"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -103,10 +110,11 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xsi:type=\"DerivedDummyClass\">" +
-            "<SampleInt>10</SampleInt><SampleIntInDerived>50</SampleIntInDerived></DummyClass>",
-            await response.Content.ReadAsStringAsync());
+            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xsi:type=\"DerivedDummyClass\">"
+                + "<SampleInt>10</SampleInt><SampleIntInDerived>50</SampleIntInDerived></DummyClass>",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [ConditionalFact]
@@ -117,7 +125,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/Home/GetDerivedDummyClass?sampleInput=10");
+            "http://localhost/Home/GetDerivedDummyClass?sampleInput=10"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -126,10 +135,11 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "i:type=\"DerivedDummyClass\" xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\"" +
-            "><SampleInt>10</SampleInt><SampleIntInDerived>50</SampleIntInDerived></DummyClass>",
-            await response.Content.ReadAsStringAsync());
+            "<DummyClass xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "i:type=\"DerivedDummyClass\" xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\""
+                + "><SampleInt>10</SampleInt><SampleIntInDerived>50</SampleIntInDerived></DummyClass>",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]
@@ -138,7 +148,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/XmlSerializer/GetDictionary");
+            "http://localhost/XmlSerializer/GetDictionary"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -156,7 +167,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/XmlSerializer/GetTaskOfDummyClass");
+            "http://localhost/XmlSerializer/GetTaskOfDummyClass"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -165,9 +177,10 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SampleInt>10</SampleInt></DummyClass>",
-            await response.Content.ReadAsStringAsync());
+            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SampleInt>10</SampleInt></DummyClass>",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]
@@ -176,7 +189,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/XmlSerializer/GetTaskOfDummyClassAsObject");
+            "http://localhost/XmlSerializer/GetTaskOfDummyClassAsObject"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -185,9 +199,10 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SampleInt>10</SampleInt></DummyClass>",
-            await response.Content.ReadAsStringAsync());
+            "<DummyClass xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SampleInt>10</SampleInt></DummyClass>",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]
@@ -196,7 +211,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/DataContractSerializer/GetTaskOfPerson?name=HelloWorld");
+            "http://localhost/DataContractSerializer/GetTaskOfPerson?name=HelloWorld"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -205,10 +221,11 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<Person xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">" +
-            "<Name>HelloWorld</Name></Person>",
-            await response.Content.ReadAsStringAsync());
+            "<Person xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">"
+                + "<Name>HelloWorld</Name></Person>",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]
@@ -217,7 +234,8 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Post,
-            "http://localhost/DataContractSerializer/GetTaskOfPersonAsObject?name=HelloWorld");
+            "http://localhost/DataContractSerializer/GetTaskOfPersonAsObject?name=HelloWorld"
+        );
         request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
         // Act
@@ -226,9 +244,10 @@ public class XmlOutputFormatterTests : IClassFixture<MvcTestFixture<FormatterWeb
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         XmlAssert.Equal(
-            "<Person xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-            "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">" +
-            "<Name>HelloWorld</Name></Person>",
-            await response.Content.ReadAsStringAsync());
+            "<Person xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns=\"http://schemas.datacontract.org/2004/07/FormatterWebSite\">"
+                + "<Name>HelloWorld</Name></Person>",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 }

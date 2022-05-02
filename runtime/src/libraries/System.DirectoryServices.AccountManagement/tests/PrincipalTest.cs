@@ -18,17 +18,22 @@ namespace System.DirectoryServices.AccountManagement.Tests
             string username = "Administrator";
             string password = Environment.GetEnvironmentVariable("TESTPASSWORD");
             string OU = "Tests";
-            string baseDomain = WindowsIdentity.GetCurrent().Name.Split(new char[] { '\\' })[1] + "-TEST";
+            string baseDomain =
+                WindowsIdentity.GetCurrent().Name.Split(new char[] { '\\' })[1] + "-TEST";
             string domain = $"{baseDomain}.nttest.microsoft.com";
             string container = $"ou={OU},dc={baseDomain},dc=nttest,dc=microsoft,dc=com";
             DomainContext?.Dispose();
             try
             {
-                DomainContext = new PrincipalContext(ContextType.Domain, domain, container, username, password);
+                DomainContext = new PrincipalContext(
+                    ContextType.Domain,
+                    domain,
+                    container,
+                    username,
+                    password
+                );
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         public void Dispose() => DomainContext?.Dispose();
@@ -115,7 +120,12 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 return;
             }
 
-            using (Principal principal = CreateExtendedPrincipal(DomainContext, Guid.NewGuid().ToString()))
+            using (
+                Principal principal = CreateExtendedPrincipal(
+                    DomainContext,
+                    Guid.NewGuid().ToString()
+                )
+            )
             {
                 Assert.Throws<InvalidOperationException>(() => principal.Save(context));
             }

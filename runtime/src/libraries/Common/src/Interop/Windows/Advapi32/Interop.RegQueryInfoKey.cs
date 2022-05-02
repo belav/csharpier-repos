@@ -14,7 +14,12 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [GeneratedDllImport(Libraries.Advapi32, EntryPoint = "RegQueryInfoKeyW", CharSet = CharSet.Unicode, ExactSpelling = true)]
+        [GeneratedDllImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegQueryInfoKeyW",
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true
+        )]
         internal static partial int RegQueryInfoKey(
             SafeRegistryHandle hKey,
             [Out] char[]? lpClass,
@@ -27,6 +32,7 @@ internal static partial class Interop
             int[]? lpcbMaxValueNameLen,
             int[]? lpcbMaxValueLen,
             int[]? lpcbSecurityDescriptor,
-            int[]? lpftLastWriteTime);
+            int[]? lpftLastWriteTime
+        );
     }
 }

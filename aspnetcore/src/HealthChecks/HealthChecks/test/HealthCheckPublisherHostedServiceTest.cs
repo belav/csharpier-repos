@@ -21,28 +21,57 @@ public class HealthCheckPublisherHostedServiceTest
 {
     private static class DefaultHealthCheckEventIds
     {
-        public static readonly EventId HealthCheckProcessingBegin = new EventId(DefaultHealthCheckService.EventIds.HealthCheckProcessingBeginId, DefaultHealthCheckService.EventIds.HealthCheckProcessingBeginName);
-        public static readonly EventId HealthCheckProcessingEnd = new EventId(DefaultHealthCheckService.EventIds.HealthCheckProcessingEndId, DefaultHealthCheckService.EventIds.HealthCheckProcessingEndName);
-        public static readonly EventId HealthCheckBegin = new EventId(DefaultHealthCheckService.EventIds.HealthCheckBeginId, DefaultHealthCheckService.EventIds.HealthCheckBeginName);
-        public static readonly EventId HealthCheckEnd = new EventId(DefaultHealthCheckService.EventIds.HealthCheckEndId, DefaultHealthCheckService.EventIds.HealthCheckEndName);
+        public static readonly EventId HealthCheckProcessingBegin = new EventId(
+            DefaultHealthCheckService.EventIds.HealthCheckProcessingBeginId,
+            DefaultHealthCheckService.EventIds.HealthCheckProcessingBeginName
+        );
+        public static readonly EventId HealthCheckProcessingEnd = new EventId(
+            DefaultHealthCheckService.EventIds.HealthCheckProcessingEndId,
+            DefaultHealthCheckService.EventIds.HealthCheckProcessingEndName
+        );
+        public static readonly EventId HealthCheckBegin = new EventId(
+            DefaultHealthCheckService.EventIds.HealthCheckBeginId,
+            DefaultHealthCheckService.EventIds.HealthCheckBeginName
+        );
+        public static readonly EventId HealthCheckEnd = new EventId(
+            DefaultHealthCheckService.EventIds.HealthCheckEndId,
+            DefaultHealthCheckService.EventIds.HealthCheckEndName
+        );
     }
+
     private static class HealthCheckPublisherEventIds
     {
-        public static readonly EventId HealthCheckPublisherProcessingBegin = new EventId(HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingBeginId, HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingBeginName);
-        public static readonly EventId HealthCheckPublisherProcessingEnd = new EventId(HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingEndId, HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingEndName);
-        public static readonly EventId HealthCheckPublisherBegin = new EventId(HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherBeginId, HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherBeginName);
-        public static readonly EventId HealthCheckPublisherEnd = new EventId(HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherEndId, HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherEndName);
-        public static readonly EventId HealthCheckPublisherError = new EventId(HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherErrorId, HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherErrorName);
-        public static readonly EventId HealthCheckPublisherTimeout = new EventId(HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherTimeoutId, HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherTimeoutName);
+        public static readonly EventId HealthCheckPublisherProcessingBegin = new EventId(
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingBeginId,
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingBeginName
+        );
+        public static readonly EventId HealthCheckPublisherProcessingEnd = new EventId(
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingEndId,
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherProcessingEndName
+        );
+        public static readonly EventId HealthCheckPublisherBegin = new EventId(
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherBeginId,
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherBeginName
+        );
+        public static readonly EventId HealthCheckPublisherEnd = new EventId(
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherEndId,
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherEndName
+        );
+        public static readonly EventId HealthCheckPublisherError = new EventId(
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherErrorId,
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherErrorName
+        );
+        public static readonly EventId HealthCheckPublisherTimeout = new EventId(
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherTimeoutId,
+            HealthCheckPublisherHostedService.EventIds.HealthCheckPublisherTimeoutName
+        );
     }
 
     [Fact]
     public async Task StartAsync_WithoutPublishers_DoesNotStartTimer()
     {
         // Arrange
-        var publishers = new IHealthCheckPublisher[]
-        {
-        };
+        var publishers = new IHealthCheckPublisher[] { };
 
         var service = CreateService(publishers);
 
@@ -67,10 +96,7 @@ public class HealthCheckPublisherHostedServiceTest
     public async Task StartAsync_WithPublishers_StartsTimer()
     {
         // Arrange
-        var publishers = new IHealthCheckPublisher[]
-        {
-                new TestPublisher(),
-        };
+        var publishers = new IHealthCheckPublisher[] { new TestPublisher(), };
 
         var service = CreateService(publishers);
 
@@ -95,21 +121,30 @@ public class HealthCheckPublisherHostedServiceTest
     public async Task StartAsync_WithPublishers_StartsTimer_RunsPublishers()
     {
         // Arrange
-        var unblock0 = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var unblock1 = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var unblock2 = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var unblock0 = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var unblock1 = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var unblock2 = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var publishers = new TestPublisher[]
         {
-                new TestPublisher() { Wait = unblock0.Task, },
-                new TestPublisher() { Wait = unblock1.Task, },
-                new TestPublisher() { Wait = unblock2.Task, },
+            new TestPublisher() { Wait = unblock0.Task, },
+            new TestPublisher() { Wait = unblock1.Task, },
+            new TestPublisher() { Wait = unblock2.Task, },
         };
 
-        var service = CreateService(publishers, configure: (options) =>
-        {
-            options.Delay = TimeSpan.FromMilliseconds(0);
-        });
+        var service = CreateService(
+            publishers,
+            configure: (options) =>
+            {
+                options.Delay = TimeSpan.FromMilliseconds(0);
+            }
+        );
 
         try
         {
@@ -140,12 +175,11 @@ public class HealthCheckPublisherHostedServiceTest
     public async Task StopAsync_CancelsExecution()
     {
         // Arrange
-        var unblock = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var unblock = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        var publishers = new TestPublisher[]
-        {
-                new TestPublisher() { Wait = unblock.Task, }
-        };
+        var publishers = new TestPublisher[] { new TestPublisher() { Wait = unblock.Task, } };
 
         var service = CreateService(publishers);
 
@@ -186,12 +220,11 @@ public class HealthCheckPublisherHostedServiceTest
         // Arrange
         var sink = new TestSink();
 
-        var unblock = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var unblock = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        var publishers = new TestPublisher[]
-        {
-                new TestPublisher() { Wait = unblock.Task, },
-        };
+        var publishers = new TestPublisher[] { new TestPublisher() { Wait = unblock.Task, }, };
 
         var service = CreateService(publishers, sink: sink);
 
@@ -227,16 +260,67 @@ public class HealthCheckPublisherHostedServiceTest
 
         Assert.Collection(
             sink.Writes,
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherProcessingBegin, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingBegin, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckBegin, entry.EventId); },
-            entry => { Assert.Contains(entry.EventId, new[] { DefaultHealthCheckEventIds.HealthCheckBegin, DefaultHealthCheckEventIds.HealthCheckEnd }); },
-            entry => { Assert.Contains(entry.EventId, new[] { DefaultHealthCheckEventIds.HealthCheckBegin, DefaultHealthCheckEventIds.HealthCheckEnd }); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckEnd, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingEnd, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherBegin, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherEnd, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherProcessingEnd, entry.EventId); });
+            entry =>
+            {
+                Assert.Equal(
+                    HealthCheckPublisherEventIds.HealthCheckPublisherProcessingBegin,
+                    entry.EventId
+                );
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Contains(
+                    entry.EventId,
+                    new[]
+                    {
+                        DefaultHealthCheckEventIds.HealthCheckBegin,
+                        DefaultHealthCheckEventIds.HealthCheckEnd
+                    }
+                );
+            },
+            entry =>
+            {
+                Assert.Contains(
+                    entry.EventId,
+                    new[]
+                    {
+                        DefaultHealthCheckEventIds.HealthCheckBegin,
+                        DefaultHealthCheckEventIds.HealthCheckEnd
+                    }
+                );
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckEnd, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingEnd, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherEnd, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(
+                    HealthCheckPublisherEventIds.HealthCheckPublisherProcessingEnd,
+                    entry.EventId
+                );
+            }
+        );
     }
 
     // Not testing logs here to avoid differences in logging order
@@ -244,15 +328,21 @@ public class HealthCheckPublisherHostedServiceTest
     public async Task RunAsync_WaitsForCompletion_Multiple()
     {
         // Arrange
-        var unblock0 = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var unblock1 = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var unblock2 = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var unblock0 = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var unblock1 = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var unblock2 = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var publishers = new TestPublisher[]
         {
-                new TestPublisher() { Wait = unblock0.Task, },
-                new TestPublisher() { Wait = unblock1.Task, },
-                new TestPublisher() { Wait = unblock2.Task, },
+            new TestPublisher() { Wait = unblock0.Task, },
+            new TestPublisher() { Wait = unblock1.Task, },
+            new TestPublisher() { Wait = unblock2.Task, },
         };
 
         var service = CreateService(publishers);
@@ -297,12 +387,11 @@ public class HealthCheckPublisherHostedServiceTest
     {
         // Arrange
         var sink = new TestSink();
-        var unblock = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var unblock = new TaskCompletionSource<object?>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        var publishers = new TestPublisher[]
-        {
-                new TestPublisher() { Wait = unblock.Task, },
-        };
+        var publishers = new TestPublisher[] { new TestPublisher() { Wait = unblock.Task, }, };
 
         var service = CreateService(publishers, sink: sink);
 
@@ -336,32 +425,85 @@ public class HealthCheckPublisherHostedServiceTest
 
         Assert.Collection(
             sink.Writes,
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherProcessingBegin, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingBegin, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckBegin, entry.EventId); },
-            entry => { Assert.Contains(entry.EventId, new[] { DefaultHealthCheckEventIds.HealthCheckBegin, DefaultHealthCheckEventIds.HealthCheckEnd }); },
-            entry => { Assert.Contains(entry.EventId, new[] { DefaultHealthCheckEventIds.HealthCheckBegin, DefaultHealthCheckEventIds.HealthCheckEnd }); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckEnd, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingEnd, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherBegin, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherTimeout, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherProcessingEnd, entry.EventId); });
+            entry =>
+            {
+                Assert.Equal(
+                    HealthCheckPublisherEventIds.HealthCheckPublisherProcessingBegin,
+                    entry.EventId
+                );
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Contains(
+                    entry.EventId,
+                    new[]
+                    {
+                        DefaultHealthCheckEventIds.HealthCheckBegin,
+                        DefaultHealthCheckEventIds.HealthCheckEnd
+                    }
+                );
+            },
+            entry =>
+            {
+                Assert.Contains(
+                    entry.EventId,
+                    new[]
+                    {
+                        DefaultHealthCheckEventIds.HealthCheckBegin,
+                        DefaultHealthCheckEventIds.HealthCheckEnd
+                    }
+                );
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckEnd, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingEnd, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(
+                    HealthCheckPublisherEventIds.HealthCheckPublisherTimeout,
+                    entry.EventId
+                );
+            },
+            entry =>
+            {
+                Assert.Equal(
+                    HealthCheckPublisherEventIds.HealthCheckPublisherProcessingEnd,
+                    entry.EventId
+                );
+            }
+        );
     }
 
     [Fact]
     public async Task RunAsync_CanFilterHealthChecks()
     {
         // Arrange
-        var publishers = new TestPublisher[]
-        {
-                new TestPublisher(),
-                new TestPublisher(),
-        };
+        var publishers = new TestPublisher[] { new TestPublisher(), new TestPublisher(), };
 
-        var service = CreateService(publishers, configure: (options) =>
-        {
-            options.Predicate = (r) => r.Name == "one";
-        });
+        var service = CreateService(
+            publishers,
+            configure: (options) =>
+            {
+                options.Predicate = (r) => r.Name == "one";
+            }
+        );
 
         try
         {
@@ -392,7 +534,7 @@ public class HealthCheckPublisherHostedServiceTest
         var sink = new TestSink();
         var publishers = new TestPublisher[]
         {
-                new TestPublisher() { Exception = new InvalidTimeZoneException(), },
+            new TestPublisher() { Exception = new InvalidTimeZoneException(), },
         };
 
         var service = CreateService(publishers, sink: sink);
@@ -403,7 +545,6 @@ public class HealthCheckPublisherHostedServiceTest
 
             // Act
             await service.RunAsync().TimeoutAfter(TimeSpan.FromSeconds(10));
-
         }
         finally
         {
@@ -414,16 +555,67 @@ public class HealthCheckPublisherHostedServiceTest
 
         Assert.Collection(
             sink.Writes,
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherProcessingBegin, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingBegin, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckBegin, entry.EventId); },
-            entry => { Assert.Contains(entry.EventId, new[] { DefaultHealthCheckEventIds.HealthCheckBegin, DefaultHealthCheckEventIds.HealthCheckEnd }); },
-            entry => { Assert.Contains(entry.EventId, new[] { DefaultHealthCheckEventIds.HealthCheckBegin, DefaultHealthCheckEventIds.HealthCheckEnd }); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckEnd, entry.EventId); },
-            entry => { Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingEnd, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherBegin, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherError, entry.EventId); },
-            entry => { Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherProcessingEnd, entry.EventId); });
+            entry =>
+            {
+                Assert.Equal(
+                    HealthCheckPublisherEventIds.HealthCheckPublisherProcessingBegin,
+                    entry.EventId
+                );
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Contains(
+                    entry.EventId,
+                    new[]
+                    {
+                        DefaultHealthCheckEventIds.HealthCheckBegin,
+                        DefaultHealthCheckEventIds.HealthCheckEnd
+                    }
+                );
+            },
+            entry =>
+            {
+                Assert.Contains(
+                    entry.EventId,
+                    new[]
+                    {
+                        DefaultHealthCheckEventIds.HealthCheckBegin,
+                        DefaultHealthCheckEventIds.HealthCheckEnd
+                    }
+                );
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckEnd, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(DefaultHealthCheckEventIds.HealthCheckProcessingEnd, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherBegin, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(HealthCheckPublisherEventIds.HealthCheckPublisherError, entry.EventId);
+            },
+            entry =>
+            {
+                Assert.Equal(
+                    HealthCheckPublisherEventIds.HealthCheckPublisherProcessingEnd,
+                    entry.EventId
+                );
+            }
+        );
     }
 
     // Not testing logging here to avoid flaky ordering issues
@@ -434,9 +626,9 @@ public class HealthCheckPublisherHostedServiceTest
         var sink = new TestSink();
         var publishers = new TestPublisher[]
         {
-                new TestPublisher() { Exception = new InvalidTimeZoneException(), },
-                new TestPublisher(),
-                new TestPublisher() { Exception = new InvalidTimeZoneException(), },
+            new TestPublisher() { Exception = new InvalidTimeZoneException(), },
+            new TestPublisher(),
+            new TestPublisher() { Exception = new InvalidTimeZoneException(), },
         };
 
         var service = CreateService(publishers, sink: sink);
@@ -447,7 +639,6 @@ public class HealthCheckPublisherHostedServiceTest
 
             // Act
             await service.RunAsync().TimeoutAfter(TimeSpan.FromSeconds(10));
-
         }
         finally
         {
@@ -460,23 +651,39 @@ public class HealthCheckPublisherHostedServiceTest
     private HealthCheckPublisherHostedService CreateService(
         IHealthCheckPublisher[] publishers,
         Action<HealthCheckPublisherOptions>? configure = null,
-        TestSink? sink = null)
+        TestSink? sink = null
+    )
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddOptions();
         serviceCollection.AddLogging();
-        serviceCollection.AddHealthChecks()
-            .AddCheck("one", () => { return HealthCheckResult.Healthy(); })
-            .AddCheck("two", () => { return HealthCheckResult.Healthy(); });
+        serviceCollection
+            .AddHealthChecks()
+            .AddCheck(
+                "one",
+                () =>
+                {
+                    return HealthCheckResult.Healthy();
+                }
+            )
+            .AddCheck(
+                "two",
+                () =>
+                {
+                    return HealthCheckResult.Healthy();
+                }
+            );
 
         // Choosing big values for tests to make sure that we're not dependent on the defaults.
         // All of the tests that rely on the timer will set their own values for speed.
-        serviceCollection.Configure<HealthCheckPublisherOptions>(options =>
-        {
-            options.Delay = TimeSpan.FromMinutes(5);
-            options.Period = TimeSpan.FromMinutes(5);
-            options.Timeout = TimeSpan.FromMinutes(5);
-        });
+        serviceCollection.Configure<HealthCheckPublisherOptions>(
+            options =>
+            {
+                options.Delay = TimeSpan.FromMinutes(5);
+                options.Period = TimeSpan.FromMinutes(5);
+                options.Timeout = TimeSpan.FromMinutes(5);
+            }
+        );
 
         if (publishers != null)
         {
@@ -493,16 +700,23 @@ public class HealthCheckPublisherHostedServiceTest
 
         if (sink != null)
         {
-            serviceCollection.AddSingleton<ILoggerFactory>(new TestLoggerFactory(sink, enabled: true));
+            serviceCollection.AddSingleton<ILoggerFactory>(
+                new TestLoggerFactory(sink, enabled: true)
+            );
         }
 
         var services = serviceCollection.BuildServiceProvider();
-        return services.GetServices<IHostedService>().OfType<HealthCheckPublisherHostedService>().Single();
+        return services
+            .GetServices<IHostedService>()
+            .OfType<HealthCheckPublisherHostedService>()
+            .Single();
     }
 
     private static async Task AssertCanceledAsync(CancellationToken cancellationToken)
     {
-        await Assert.ThrowsAsync<TaskCanceledException>(() => Task.Delay(TimeSpan.FromSeconds(10), cancellationToken));
+        await Assert.ThrowsAsync<TaskCanceledException>(
+            () => Task.Delay(TimeSpan.FromSeconds(10), cancellationToken)
+        );
     }
 
     private class TestPublisher : IHealthCheckPublisher
@@ -511,10 +725,13 @@ public class HealthCheckPublisherHostedServiceTest
 
         public TestPublisher()
         {
-            _started = new TaskCompletionSource<object?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _started = new TaskCompletionSource<object?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
         }
 
-        public List<(HealthReport report, CancellationToken cancellationToken)> Entries { get; } = new List<(HealthReport report, CancellationToken cancellationToken)>();
+        public List<(HealthReport report, CancellationToken cancellationToken)> Entries { get; } =
+            new List<(HealthReport report, CancellationToken cancellationToken)>();
 
         public Exception? Exception { get; set; }
 

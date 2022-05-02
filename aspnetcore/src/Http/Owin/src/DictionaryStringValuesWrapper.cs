@@ -19,9 +19,11 @@ internal class DictionaryStringValuesWrapper : IHeaderDictionary
 
     public readonly IDictionary<string, string[]> Inner;
 
-    private KeyValuePair<string, StringValues> Convert(KeyValuePair<string, string[]> item) => new KeyValuePair<string, StringValues>(item.Key, item.Value);
+    private KeyValuePair<string, StringValues> Convert(KeyValuePair<string, string[]> item) =>
+        new KeyValuePair<string, StringValues>(item.Key, item.Value);
 
-    private KeyValuePair<string, string[]> Convert(KeyValuePair<string, StringValues> item) => new KeyValuePair<string, string[]>(item.Key, item.Value);
+    private KeyValuePair<string, string[]> Convert(KeyValuePair<string, StringValues> item) =>
+        new KeyValuePair<string, string[]>(item.Key, item.Value);
 
     private StringValues Convert(string[] item) => item;
 
@@ -55,9 +57,14 @@ internal class DictionaryStringValuesWrapper : IHeaderDictionary
                 return null;
             }
 
-            if (rawValue.Length == 1 &&
-                !string.IsNullOrEmpty(rawValue[0]) &&
-                HeaderUtilities.TryParseNonNegativeInt64(new StringSegment(rawValue[0]).Trim(), out value))
+            if (
+                rawValue.Length == 1
+                && !string.IsNullOrEmpty(rawValue[0])
+                && HeaderUtilities.TryParseNonNegativeInt64(
+                    new StringSegment(rawValue[0]).Trim(),
+                    out value
+                )
+            )
             {
                 return value;
             }
@@ -68,7 +75,8 @@ internal class DictionaryStringValuesWrapper : IHeaderDictionary
         {
             if (value.HasValue)
             {
-                Inner[HeaderNames.ContentLength] = (StringValues)HeaderUtilities.FormatNonNegativeInt64(value.GetValueOrDefault());
+                Inner[HeaderNames.ContentLength] = (StringValues)
+                    HeaderUtilities.FormatNonNegativeInt64(value.GetValueOrDefault());
             }
             else
             {
@@ -83,19 +91,28 @@ internal class DictionaryStringValuesWrapper : IHeaderDictionary
 
     ICollection<string> IDictionary<string, StringValues>.Keys => Inner.Keys;
 
-    ICollection<StringValues> IDictionary<string, StringValues>.Values => Inner.Values.Select(Convert).ToList();
+    ICollection<StringValues> IDictionary<string, StringValues>.Values =>
+        Inner.Values.Select(Convert).ToList();
 
-    void ICollection<KeyValuePair<string, StringValues>>.Add(KeyValuePair<string, StringValues> item) => Inner.Add(Convert(item));
+    void ICollection<KeyValuePair<string, StringValues>>.Add(
+        KeyValuePair<string, StringValues> item
+    ) => Inner.Add(Convert(item));
 
-    void IDictionary<string, StringValues>.Add(string key, StringValues value) => Inner.Add(key, value);
+    void IDictionary<string, StringValues>.Add(string key, StringValues value) =>
+        Inner.Add(key, value);
 
     void ICollection<KeyValuePair<string, StringValues>>.Clear() => Inner.Clear();
 
-    bool ICollection<KeyValuePair<string, StringValues>>.Contains(KeyValuePair<string, StringValues> item) => Inner.Contains(Convert(item));
+    bool ICollection<KeyValuePair<string, StringValues>>.Contains(
+        KeyValuePair<string, StringValues> item
+    ) => Inner.Contains(Convert(item));
 
     bool IDictionary<string, StringValues>.ContainsKey(string key) => Inner.ContainsKey(key);
 
-    void ICollection<KeyValuePair<string, StringValues>>.CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex)
+    void ICollection<KeyValuePair<string, StringValues>>.CopyTo(
+        KeyValuePair<string, StringValues>[] array,
+        int arrayIndex
+    )
     {
         foreach (var kv in Inner)
         {
@@ -105,9 +122,13 @@ internal class DictionaryStringValuesWrapper : IHeaderDictionary
 
     IEnumerator IEnumerable.GetEnumerator() => Inner.Select(Convert).GetEnumerator();
 
-    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator() => Inner.Select(Convert).GetEnumerator();
+    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+        KeyValuePair<string, StringValues>
+    >.GetEnumerator() => Inner.Select(Convert).GetEnumerator();
 
-    bool ICollection<KeyValuePair<string, StringValues>>.Remove(KeyValuePair<string, StringValues> item) => Inner.Remove(Convert(item));
+    bool ICollection<KeyValuePair<string, StringValues>>.Remove(
+        KeyValuePair<string, StringValues> item
+    ) => Inner.Remove(Convert(item));
 
     bool IDictionary<string, StringValues>.Remove(string key) => Inner.Remove(key);
 

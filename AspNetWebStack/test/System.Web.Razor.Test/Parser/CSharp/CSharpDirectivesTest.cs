@@ -15,150 +15,191 @@ namespace System.Web.Razor.Test.Parser.CSharp
         [Fact]
         public void InheritsDirective()
         {
-            ParseBlockTest("@inherits System.Web.WebPages.WebPage",
+            ParseBlockTest(
+                "@inherits System.Web.WebPages.WebPage",
                 new DirectiveBlock(
                     Factory.CodeTransition(),
-                    Factory.MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code("System.Web.WebPages.WebPage")
-                           .AsBaseType("System.Web.WebPages.WebPage")));
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory
+                        .Code("System.Web.WebPages.WebPage")
+                        .AsBaseType("System.Web.WebPages.WebPage")
+                )
+            );
         }
 
         [Fact]
         public void InheritsDirectiveSupportsArrays()
         {
-            ParseBlockTest("@inherits string[[]][]",
+            ParseBlockTest(
+                "@inherits string[[]][]",
                 new DirectiveBlock(
                     Factory.CodeTransition(),
-                    Factory.MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code("string[[]][]")
-                           .AsBaseType("string[[]][]")));
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.Code("string[[]][]").AsBaseType("string[[]][]")
+                )
+            );
         }
 
         [Fact]
         public void InheritsDirectiveSupportsNestedGenerics()
         {
-            ParseBlockTest("@inherits System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>",
+            ParseBlockTest(
+                "@inherits System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>",
                 new DirectiveBlock(
                     Factory.CodeTransition(),
-                    Factory.MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code("System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>")
-                           .AsBaseType("System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>")));
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory
+                        .Code(
+                            "System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>"
+                        )
+                        .AsBaseType(
+                            "System.Web.Mvc.WebViewPage<IEnumerable<MvcApplication2.Models.RegisterModel>>"
+                        )
+                )
+            );
         }
 
         [Fact]
         public void InheritsDirectiveSupportsTypeKeywords()
         {
-            ParseBlockTest("@inherits string",
+            ParseBlockTest(
+                "@inherits string",
                 new DirectiveBlock(
                     Factory.CodeTransition(),
-                    Factory.MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code("string")
-                           .AsBaseType("string")));
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.Code("string").AsBaseType("string")
+                )
+            );
         }
 
         [Fact]
         public void InheritsDirectiveSupportsVSTemplateTokens()
         {
-            ParseBlockTest("@inherits $rootnamespace$.MyBase",
+            ParseBlockTest(
+                "@inherits $rootnamespace$.MyBase",
                 new DirectiveBlock(
                     Factory.CodeTransition(),
-                    Factory.MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code("$rootnamespace$.MyBase")
-                           .AsBaseType("$rootnamespace$.MyBase")));
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.InheritsKeyword + " ")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.Code("$rootnamespace$.MyBase").AsBaseType("$rootnamespace$.MyBase")
+                )
+            );
         }
 
         [Fact]
         public void SessionStateDirectiveWorks()
         {
-            ParseBlockTest("@sessionstate InProc",
-                           new DirectiveBlock(
-                               Factory.CodeTransition(),
-                               Factory.MetaCode(SyntaxConstants.CSharp.SessionStateKeyword + " ")
-                                   .Accepts(AcceptedCharacters.None),
-                               Factory.Code("InProc")
-                                      .AsRazorDirectiveAttribute("sessionstate", "InProc")
-                               ));
+            ParseBlockTest(
+                "@sessionstate InProc",
+                new DirectiveBlock(
+                    Factory.CodeTransition(),
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.SessionStateKeyword + " ")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.Code("InProc").AsRazorDirectiveAttribute("sessionstate", "InProc")
+                )
+            );
         }
 
         [Fact]
         public void SessionStateDirectiveParsesInvalidSessionValue()
         {
-            ParseBlockTest("@sessionstate Blah",
-                           new DirectiveBlock(
-                               Factory.CodeTransition(),
-                               Factory.MetaCode(SyntaxConstants.CSharp.SessionStateKeyword + " ")
-                                   .Accepts(AcceptedCharacters.None),
-                               Factory.Code("Blah")
-                                   .AsRazorDirectiveAttribute("sessionstate", "Blah")
-                               ));
+            ParseBlockTest(
+                "@sessionstate Blah",
+                new DirectiveBlock(
+                    Factory.CodeTransition(),
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.SessionStateKeyword + " ")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.Code("Blah").AsRazorDirectiveAttribute("sessionstate", "Blah")
+                )
+            );
         }
 
         [Fact]
         public void FunctionsDirective()
         {
-            ParseBlockTest("@functions { foo(); bar(); }",
+            ParseBlockTest(
+                "@functions { foo(); bar(); }",
                 new FunctionsBlock(
                     Factory.CodeTransition(),
-                    Factory.MetaCode(SyntaxConstants.CSharp.FunctionsKeyword + " {")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code(" foo(); bar(); ")
-                           .AsFunctionsBody(),
-                    Factory.MetaCode("}")
-                           .Accepts(AcceptedCharacters.None)));
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.FunctionsKeyword + " {")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.Code(" foo(); bar(); ").AsFunctionsBody(),
+                    Factory.MetaCode("}").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void EmptyFunctionsDirective()
         {
-            ParseBlockTest("@functions { }",
+            ParseBlockTest(
+                "@functions { }",
                 new FunctionsBlock(
                     Factory.CodeTransition(),
-                    Factory.MetaCode(SyntaxConstants.CSharp.FunctionsKeyword + " {")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code(" ")
-                           .AsFunctionsBody(),
-                    Factory.MetaCode("}")
-                           .Accepts(AcceptedCharacters.None)));
+                    Factory
+                        .MetaCode(SyntaxConstants.CSharp.FunctionsKeyword + " {")
+                        .Accepts(AcceptedCharacters.None),
+                    Factory.Code(" ").AsFunctionsBody(),
+                    Factory.MetaCode("}").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void SectionDirective()
         {
-            ParseBlockTest("@section Header { <p>F{o}o</p> }",
-                new SectionBlock(new SectionCodeGenerator("Header"),
+            ParseBlockTest(
+                "@section Header { <p>F{o}o</p> }",
+                new SectionBlock(
+                    new SectionCodeGenerator("Header"),
                     Factory.CodeTransition(),
-                    Factory.MetaCode("section Header {")
-                           .AutoCompleteWith(null, atEndOfSpan: true)
-                           .Accepts(AcceptedCharacters.Any),
-                    new MarkupBlock(
-                        Factory.Markup(" <p>F", "{", "o", "}", "o", "</p> ")),
-                    Factory.MetaCode("}")
-                           .Accepts(AcceptedCharacters.None)));
+                    Factory
+                        .MetaCode("section Header {")
+                        .AutoCompleteWith(null, atEndOfSpan: true)
+                        .Accepts(AcceptedCharacters.Any),
+                    new MarkupBlock(Factory.Markup(" <p>F", "{", "o", "}", "o", "</p> ")),
+                    Factory.MetaCode("}").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
 
         [Fact]
         public void HelperDirective()
         {
-            ParseBlockTest("@helper Strong(string value) { foo(); }",
-                new HelperBlock(new HelperCodeGenerator(new LocationTagged<string>("Strong(string value) {", new SourceLocation(8, 0, 8)), headerComplete: true),
+            ParseBlockTest(
+                "@helper Strong(string value) { foo(); }",
+                new HelperBlock(
+                    new HelperCodeGenerator(
+                        new LocationTagged<string>(
+                            "Strong(string value) {",
+                            new SourceLocation(8, 0, 8)
+                        ),
+                        headerComplete: true
+                    ),
                     Factory.CodeTransition(),
-                    Factory.MetaCode("helper ")
-                           .Accepts(AcceptedCharacters.None),
-                    Factory.Code("Strong(string value) {")
-                           .Hidden()
-                           .Accepts(AcceptedCharacters.None),
+                    Factory.MetaCode("helper ").Accepts(AcceptedCharacters.None),
+                    Factory
+                        .Code("Strong(string value) {")
+                        .Hidden()
+                        .Accepts(AcceptedCharacters.None),
                     new StatementBlock(
-                        Factory.Code(" foo(); ")
-                               .AsStatement()
-                               .With(new StatementCodeGenerator())),
-                    Factory.Code("}")
-                           .Hidden()
-                           .Accepts(AcceptedCharacters.None)));
+                        Factory.Code(" foo(); ").AsStatement().With(new StatementCodeGenerator())
+                    ),
+                    Factory.Code("}").Hidden().Accepts(AcceptedCharacters.None)
+                )
+            );
         }
     }
 }

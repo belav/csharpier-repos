@@ -13,10 +13,13 @@ namespace System.ComponentModel.Composition.Hosting
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void Constructor_NullAsCatalogArgument_ShouldThrowArgumentNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("catalog", () =>
-            {
-                new AssemblyCatalogDebuggerProxy((AssemblyCatalog)null);
-            });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "catalog",
+                () =>
+                {
+                    new AssemblyCatalogDebuggerProxy((AssemblyCatalog)null);
+                }
+            );
         }
 
         [Fact]
@@ -59,5 +62,5 @@ namespace System.ComponentModel.Composition.Hosting
         {
             return new AssemblyCatalog(assembly);
         }
-   }
+    }
 }

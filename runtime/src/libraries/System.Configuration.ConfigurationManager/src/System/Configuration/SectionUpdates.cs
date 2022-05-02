@@ -29,12 +29,18 @@ namespace System.Configuration
         // Find the SectionUpdates for a configKey, and create it if it does not exist.
         private SectionUpdates FindSectionUpdates(string configKey, bool isGroup)
         {
-            string group, dummy;
+            string group,
+                dummy;
 
-            if (isGroup) group = configKey;
-            else BaseConfigurationRecord.SplitConfigKey(configKey, out group, out dummy);
+            if (isGroup)
+                group = configKey;
+            else
+                BaseConfigurationRecord.SplitConfigKey(configKey, out group, out dummy);
 
-            Debug.Assert(string.IsNullOrEmpty(_name), "FindSectionUpdates assumes search is from root record");
+            Debug.Assert(
+                string.IsNullOrEmpty(_name),
+                "FindSectionUpdates assumes search is from root record"
+            );
             SectionUpdates sectionUpdates = this;
             if (group.Length != 0)
             {
@@ -42,7 +48,8 @@ namespace System.Configuration
                 string[] groups = group.Split(BaseConfigurationRecord.s_configPathSeparatorParams);
                 foreach (string groupPart in groups)
                 {
-                    SectionUpdates sectionUpdatesChild = (SectionUpdates)sectionUpdates._groups[groupPart];
+                    SectionUpdates sectionUpdatesChild = (SectionUpdates)
+                        sectionUpdates._groups[groupPart];
                     if (sectionUpdatesChild == null)
                     {
                         sectionUpdatesChild = new SectionUpdates(groupPart);
@@ -66,7 +73,8 @@ namespace System.Configuration
             foreach (SectionUpdates sectionUpdates in _groups.Values)
             {
                 sectionUpdates.CompleteUpdates();
-                if (!sectionUpdates.IsNew) allSubgroupsAreNew = false;
+                if (!sectionUpdates.IsNew)
+                    allSubgroupsAreNew = false;
             }
 
             IsNew = allSubgroupsAreNew && (_cMoved == _sections.Count);
@@ -79,7 +87,8 @@ namespace System.Configuration
 
             // Maintain counts.
             sectionUpdates._cUnretrieved++;
-            if (update.Moved) sectionUpdates._cMoved++;
+            if (update.Moved)
+                sectionUpdates._cMoved++;
         }
 
         internal void AddSectionGroup(Update update)
@@ -93,12 +102,14 @@ namespace System.Configuration
             Update update = (Update)_sections[configKey];
             if (update != null)
             {
-                if (update.Retrieved) update = null;
+                if (update.Retrieved)
+                    update = null;
                 else
                 {
                     update.Retrieved = true;
                     _cUnretrieved--;
-                    if (update.Moved) _cMoved--;
+                    if (update.Moved)
+                        _cMoved--;
                 }
             }
 
@@ -134,10 +145,15 @@ namespace System.Configuration
         // Return true if this section group or any of its children have unretrieved sections.
         internal bool HasUnretrievedSections()
         {
-            if ((_cUnretrieved > 0) || ((_sectionGroupUpdate != null) && !_sectionGroupUpdate.Retrieved)) return true;
+            if (
+                (_cUnretrieved > 0)
+                || ((_sectionGroupUpdate != null) && !_sectionGroupUpdate.Retrieved)
+            )
+                return true;
 
             foreach (SectionUpdates sectionUpdates in _groups.Values)
-                if (sectionUpdates.HasUnretrievedSections()) return true;
+                if (sectionUpdates.HasUnretrievedSections())
+                    return true;
 
             return false;
         }
@@ -145,8 +161,10 @@ namespace System.Configuration
         internal void MarkAsRetrieved()
         {
             _cUnretrieved = 0;
-            foreach (SectionUpdates sectionUpdates in _groups.Values) sectionUpdates.MarkAsRetrieved();
-            if (_sectionGroupUpdate != null) _sectionGroupUpdate.Retrieved = true;
+            foreach (SectionUpdates sectionUpdates in _groups.Values)
+                sectionUpdates.MarkAsRetrieved();
+            if (_sectionGroupUpdate != null)
+                _sectionGroupUpdate.Retrieved = true;
         }
 
         internal void MarkGroupAsRetrieved(string groupName)
@@ -211,7 +229,8 @@ namespace System.Configuration
             {
                 string group = (string)de.Key;
                 SectionUpdates sectionUpdates = (SectionUpdates)de.Value;
-                if (sectionUpdates.HasUnretrievedSections()) unretrievedGroups.Add(group);
+                if (sectionUpdates.HasUnretrievedSections())
+                    unretrievedGroups.Add(group);
             }
 
             if (unretrievedGroups.Count == 0)
@@ -232,7 +251,8 @@ namespace System.Configuration
             {
                 string group = (string)de.Key;
                 SectionUpdates sectionUpdates = (SectionUpdates)de.Value;
-                if (sectionUpdates.IsNew && sectionUpdates.HasUnretrievedSections()) newsGroups.Add(group);
+                if (sectionUpdates.IsNew && sectionUpdates.HasUnretrievedSections())
+                    newsGroups.Add(group);
             }
 
             if (newsGroups.Count == 0)

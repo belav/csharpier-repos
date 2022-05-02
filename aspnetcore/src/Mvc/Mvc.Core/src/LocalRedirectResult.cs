@@ -23,10 +23,7 @@ public class LocalRedirectResult : ActionResult
     /// provided.
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
-    public LocalRedirectResult(string localUrl)
-         : this(localUrl, permanent: false)
-    {
-    }
+    public LocalRedirectResult(string localUrl) : this(localUrl, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -35,9 +32,7 @@ public class LocalRedirectResult : ActionResult
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     public LocalRedirectResult(string localUrl, bool permanent)
-        : this(localUrl, permanent, preserveMethod: false)
-    {
-    }
+        : this(localUrl, permanent, preserveMethod: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -74,7 +69,6 @@ public class LocalRedirectResult : ActionResult
     public string Url
     {
         get => _localUrl;
-
         [MemberNotNull(nameof(_localUrl))]
         set
         {
@@ -100,7 +94,9 @@ public class LocalRedirectResult : ActionResult
             throw new ArgumentNullException(nameof(context));
         }
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<LocalRedirectResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<LocalRedirectResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

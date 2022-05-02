@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-// This test case is ported from S.N.Vector counterpart 
+// This test case is ported from S.N.Vector counterpart
 // https://github.com/dotnet/coreclr/blob/master/tests/src/JIT/SIMD/VectorArray.cs
 
 using System;
@@ -48,7 +48,13 @@ internal partial class IntelHardwareIntrinsicTest
                 T checkValue = GetValueFromInt<T>(i + 2);
                 for (int j = 0; j < elementCount; j++)
                 {
-                    if (!CheckValue<T>(Unsafe.Read<T>(&buffer[i * vectorSize + j * elementSize]), checkValue)) return Fail;
+                    if (
+                        !CheckValue<T>(
+                            Unsafe.Read<T>(&buffer[i * vectorSize + j * elementSize]),
+                            checkValue
+                        )
+                    )
+                        return Fail;
                 }
             }
 
@@ -88,7 +94,13 @@ internal partial class IntelHardwareIntrinsicTest
                 T checkValue = GetValueFromInt<T>(i + 2);
                 for (int j = 0; j < elementCount; j++)
                 {
-                    if (!CheckValue<T>(Unsafe.Read<T>(&buffer[i * vectorSize + j * elementSize]), checkValue)) return Fail;
+                    if (
+                        !CheckValue<T>(
+                            Unsafe.Read<T>(&buffer[i * vectorSize + j * elementSize]),
+                            checkValue
+                        )
+                    )
+                        return Fail;
                 }
             }
 
@@ -103,35 +115,55 @@ internal partial class IntelHardwareIntrinsicTest
         {
             if (Sse2.IsSupported)
             {
-                if (Vector128ArrayTest<float>.Vector128Array() != Pass) returnVal = Fail;
-                if (Vector128ArrayTest<double>.Vector128Array() != Pass) returnVal = Fail;
-                if (Vector128ArrayTest<byte>.Vector128Array() != Pass) returnVal = Fail;
-                if (Vector128ArrayTest<sbyte>.Vector128Array() != Pass) returnVal = Fail;
-                if (Vector128ArrayTest<short>.Vector128Array() != Pass) returnVal = Fail;
-                if (Vector128ArrayTest<ushort>.Vector128Array() != Pass) returnVal = Fail;
-                if (Vector128ArrayTest<int>.Vector128Array() != Pass) returnVal = Fail;
-                if (Vector128ArrayTest<uint>.Vector128Array() != Pass) returnVal = Fail;
+                if (Vector128ArrayTest<float>.Vector128Array() != Pass)
+                    returnVal = Fail;
+                if (Vector128ArrayTest<double>.Vector128Array() != Pass)
+                    returnVal = Fail;
+                if (Vector128ArrayTest<byte>.Vector128Array() != Pass)
+                    returnVal = Fail;
+                if (Vector128ArrayTest<sbyte>.Vector128Array() != Pass)
+                    returnVal = Fail;
+                if (Vector128ArrayTest<short>.Vector128Array() != Pass)
+                    returnVal = Fail;
+                if (Vector128ArrayTest<ushort>.Vector128Array() != Pass)
+                    returnVal = Fail;
+                if (Vector128ArrayTest<int>.Vector128Array() != Pass)
+                    returnVal = Fail;
+                if (Vector128ArrayTest<uint>.Vector128Array() != Pass)
+                    returnVal = Fail;
                 if (Environment.Is64BitProcess)
                 {
-                    if (Vector128ArrayTest<long>.Vector128Array() != Pass) returnVal = Fail;
-                    if (Vector128ArrayTest<ulong>.Vector128Array() != Pass) returnVal = Fail;
+                    if (Vector128ArrayTest<long>.Vector128Array() != Pass)
+                        returnVal = Fail;
+                    if (Vector128ArrayTest<ulong>.Vector128Array() != Pass)
+                        returnVal = Fail;
                 }
             }
 
             if (Avx2.IsSupported)
             {
-                if (Vector256ArrayTest<float>.Vector256Array() != Pass) returnVal = Fail;
-                if (Vector256ArrayTest<double>.Vector256Array() != Pass) returnVal = Fail;
-                if (Vector256ArrayTest<byte>.Vector256Array() != Pass) returnVal = Fail;
-                if (Vector256ArrayTest<sbyte>.Vector256Array() != Pass) returnVal = Fail;
-                if (Vector256ArrayTest<short>.Vector256Array() != Pass) returnVal = Fail;
-                if (Vector256ArrayTest<ushort>.Vector256Array() != Pass) returnVal = Fail;
-                if (Vector256ArrayTest<int>.Vector256Array() != Pass) returnVal = Fail;
-                if (Vector256ArrayTest<uint>.Vector256Array() != Pass) returnVal = Fail;
+                if (Vector256ArrayTest<float>.Vector256Array() != Pass)
+                    returnVal = Fail;
+                if (Vector256ArrayTest<double>.Vector256Array() != Pass)
+                    returnVal = Fail;
+                if (Vector256ArrayTest<byte>.Vector256Array() != Pass)
+                    returnVal = Fail;
+                if (Vector256ArrayTest<sbyte>.Vector256Array() != Pass)
+                    returnVal = Fail;
+                if (Vector256ArrayTest<short>.Vector256Array() != Pass)
+                    returnVal = Fail;
+                if (Vector256ArrayTest<ushort>.Vector256Array() != Pass)
+                    returnVal = Fail;
+                if (Vector256ArrayTest<int>.Vector256Array() != Pass)
+                    returnVal = Fail;
+                if (Vector256ArrayTest<uint>.Vector256Array() != Pass)
+                    returnVal = Fail;
                 if (Environment.Is64BitProcess)
                 {
-                    if (Vector256ArrayTest<long>.Vector256Array() != Pass) returnVal = Fail;
-                    if (Vector256ArrayTest<ulong>.Vector256Array() != Pass) returnVal = Fail;
+                    if (Vector256ArrayTest<long>.Vector256Array() != Pass)
+                        returnVal = Fail;
+                    if (Vector256ArrayTest<ulong>.Vector256Array() != Pass)
+                        returnVal = Fail;
                 }
             }
         }

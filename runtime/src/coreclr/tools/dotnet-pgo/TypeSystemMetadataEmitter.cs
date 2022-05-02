@@ -18,13 +18,19 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         MetadataBuilder _metadataBuilder;
         BlobBuilder _ilBuilder;
         MethodBodyStreamEncoder _methodBodyStream;
-        Dictionary<IAssemblyDesc, AssemblyReferenceHandle> _assemblyRefs = new Dictionary<IAssemblyDesc, AssemblyReferenceHandle>();
+        Dictionary<IAssemblyDesc, AssemblyReferenceHandle> _assemblyRefs =
+            new Dictionary<IAssemblyDesc, AssemblyReferenceHandle>();
         Dictionary<TypeDesc, EntityHandle> _typeRefs = new Dictionary<TypeDesc, EntityHandle>();
-        Dictionary<MethodDesc, EntityHandle> _methodRefs = new Dictionary<MethodDesc, EntityHandle>();
+        Dictionary<MethodDesc, EntityHandle> _methodRefs =
+            new Dictionary<MethodDesc, EntityHandle>();
         Blob _mvidFixup;
         BlobHandle _noArgsVoidReturnStaticMethodSigHandle;
 
-        public TypeSystemMetadataEmitter(AssemblyName assemblyName, TypeSystemContext context, AssemblyFlags flags = default(AssemblyFlags))
+        public TypeSystemMetadataEmitter(
+            AssemblyName assemblyName,
+            TypeSystemContext context,
+            AssemblyFlags flags = default(AssemblyFlags)
+        )
         {
             _metadataBuilder = new MetadataBuilder();
             _ilBuilder = new BlobBuilder();
@@ -39,23 +45,48 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             var mvid = _metadataBuilder.ReserveGuid();
             _mvidFixup = mvid.Content;
 
-            _metadataBuilder.AddModule(0, assemblyNameHandle, mvid.Handle, default(GuidHandle), default(GuidHandle));
-            _metadataBuilder.AddAssembly(assemblyNameHandle, assemblyName.Version ?? new Version(0,0,0,0), default(StringHandle), default(BlobHandle), flags, AssemblyHashAlgorithm.None);
+            _metadataBuilder.AddModule(
+                0,
+                assemblyNameHandle,
+                mvid.Handle,
+                default(GuidHandle),
+                default(GuidHandle)
+            );
+            _metadataBuilder.AddAssembly(
+                assemblyNameHandle,
+                assemblyName.Version ?? new Version(0, 0, 0, 0),
+                default(StringHandle),
+                default(BlobHandle),
+                flags,
+                AssemblyHashAlgorithm.None
+            );
 
             var canonAssemblyNameHandle = _metadataBuilder.GetOrAddString("System.Private.Canon");
-            var canonAssemblyRef = _metadataBuilder.AddAssemblyReference(canonAssemblyNameHandle, new Version(0, 0, 0, 0), default(StringHandle), default(BlobHandle), (AssemblyFlags)0, default(BlobHandle));
+            var canonAssemblyRef = _metadataBuilder.AddAssemblyReference(
+                canonAssemblyNameHandle,
+                new Version(0, 0, 0, 0),
+                default(StringHandle),
+                default(BlobHandle),
+                (AssemblyFlags)0,
+                default(BlobHandle)
+            );
             var systemStringHandle = _metadataBuilder.GetOrAddString("System");
             var canonStringHandle = _metadataBuilder.GetOrAddString("__Canon");
-            var canonTypeRef = _metadataBuilder.AddTypeReference(canonAssemblyRef, systemStringHandle, canonStringHandle);
+            var canonTypeRef = _metadataBuilder.AddTypeReference(
+                canonAssemblyRef,
+                systemStringHandle,
+                canonStringHandle
+            );
             _typeRefs.Add(context.CanonType, canonTypeRef);
 
             _metadataBuilder.AddTypeDefinition(
-               default(TypeAttributes),
-               default(StringHandle),
-               _metadataBuilder.GetOrAddString("<Module>"),
-               baseType: default(EntityHandle),
-               fieldList: MetadataTokens.FieldDefinitionHandle(1),
-               methodList: MetadataTokens.MethodDefinitionHandle(1));
+                default(TypeAttributes),
+                default(StringHandle),
+                _metadataBuilder.GetOrAddString("<Module>"),
+                baseType: default(EntityHandle),
+                fieldList: MetadataTokens.FieldDefinitionHandle(1),
+                methodList: MetadataTokens.MethodDefinitionHandle(1)
+            );
 
             BlobBuilder noArgsNoReturnStaticMethodSig = new BlobBuilder();
             BlobEncoder signatureEncoder = new BlobEncoder(noArgsNoReturnStaticMethodSig);
@@ -63,17 +94,26 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             signatureEncoder.MethodSignature(SignatureCallingConvention.Default, 0, false);
             noArgsNoReturnStaticMethodSig.WriteCompressedInteger(0);
             noArgsNoReturnStaticMethodSig.WriteByte((byte)SignatureTypeCode.Void);
-            _noArgsVoidReturnStaticMethodSigHandle = _metadataBuilder.GetOrAddBlob(noArgsNoReturnStaticMethodSig);
+            _noArgsVoidReturnStaticMethodSigHandle = _metadataBuilder.GetOrAddBlob(
+                noArgsNoReturnStaticMethodSig
+            );
         }
 
-        public MethodDefinitionHandle AddGlobalMethod(string name, InstructionEncoder il, int maxStack)
+        public MethodDefinitionHandle AddGlobalMethod(
+            string name,
+            InstructionEncoder il,
+            int maxStack
+        )
         {
             int methodILOffset = _methodBodyStream.AddMethodBody(il, maxStack);
-            return _metadataBuilder.AddMethodDefinition(MethodAttributes.Public | MethodAttributes.Static,
-                MethodImplAttributes.IL, _metadataBuilder.GetOrAddString(name),
+            return _metadataBuilder.AddMethodDefinition(
+                MethodAttributes.Public | MethodAttributes.Static,
+                MethodImplAttributes.IL,
+                _metadataBuilder.GetOrAddString(name),
                 _noArgsVoidReturnStaticMethodSigHandle,
                 methodILOffset,
-                default(ParameterHandle));
+                default(ParameterHandle)
+            );
         }
 
         private static readonly Guid s_guid = new Guid("97F4DBD4-F6D1-4FAD-91B3-1001F92068E5");
@@ -82,8 +122,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public void SerializeToStream(Stream peStream)
         {
             var peHeaderBuilder = new PEHeaderBuilder();
-            var peBuilder = new ManagedPEBuilder(peHeaderBuilder, new MetadataRootBuilder(_metadataBuilder), _ilBuilder,
-                deterministicIdProvider: content => s_contentId);
+            var peBuilder = new ManagedPEBuilder(
+                peHeaderBuilder,
+                new MetadataRootBuilder(_metadataBuilder),
+                _ilBuilder,
+                deterministicIdProvider: content => s_contentId
+            );
 
             var peBlob = new BlobBuilder();
             var contentId = peBuilder.Serialize(peBlob);
@@ -99,8 +143,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
             AssemblyName name = assemblyDesc.GetName();
             StringHandle assemblyName = _metadataBuilder.GetOrAddString(name.Name);
-            StringHandle cultureName = (name.CultureName != null) ? _metadataBuilder.GetOrAddString(name.CultureName) : default(StringHandle);
-            BlobHandle publicTokenBlob = name.GetPublicKeyToken() != null ? _metadataBuilder.GetOrAddBlob(name.GetPublicKeyToken()) : default(BlobHandle);
+            StringHandle cultureName =
+                (name.CultureName != null)
+                    ? _metadataBuilder.GetOrAddString(name.CultureName)
+                    : default(StringHandle);
+            BlobHandle publicTokenBlob =
+                name.GetPublicKeyToken() != null
+                    ? _metadataBuilder.GetOrAddBlob(name.GetPublicKeyToken())
+                    : default(BlobHandle);
             AssemblyFlags flags = default(AssemblyFlags);
             if (name.Flags.HasFlag(AssemblyNameFlags.Retargetable))
             {
@@ -115,7 +165,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             if (version == null)
                 version = new Version(0, 0);
 
-            var referenceHandle = _metadataBuilder.AddAssemblyReference(assemblyName, version, cultureName, publicTokenBlob, flags, default(BlobHandle));
+            var referenceHandle = _metadataBuilder.AddAssemblyReference(
+                assemblyName,
+                version,
+                cultureName,
+                publicTokenBlob,
+                flags,
+                default(BlobHandle)
+            );
             _assemblyRefs.Add(assemblyDesc, referenceHandle);
             return referenceHandle;
         }
@@ -140,7 +197,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 // Make a typeref
                 StringHandle typeName = _metadataBuilder.GetOrAddString(metadataType.Name);
-                StringHandle typeNamespace = metadataType.Namespace != null ? _metadataBuilder.GetOrAddString(metadataType.Namespace) : default(StringHandle);
+                StringHandle typeNamespace =
+                    metadataType.Namespace != null
+                        ? _metadataBuilder.GetOrAddString(metadataType.Namespace)
+                        : default(StringHandle);
                 EntityHandle resolutionScope;
 
                 if (metadataType.ContainingType == null)
@@ -154,7 +214,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     resolutionScope = GetTypeRef((MetadataType)metadataType.ContainingType);
                 }
 
-                typeHandle = _metadataBuilder.AddTypeReference(resolutionScope, typeNamespace, typeName);
+                typeHandle = _metadataBuilder.AddTypeReference(
+                    resolutionScope,
+                    typeNamespace,
+                    typeName
+                );
             }
             else
             {
@@ -187,7 +251,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     EncodeType(methodSpecSig, type, EmbeddedSignatureDataEmitter.EmptySingleton);
 
                 var methodSpecSigHandle = _metadataBuilder.GetOrAddBlob(methodSpecSig);
-                methodHandle = _metadataBuilder.AddMethodSpecification(uninstantiatedHandle, methodSpecSigHandle);
+                methodHandle = _metadataBuilder.AddMethodSpecification(
+                    uninstantiatedHandle,
+                    methodSpecSigHandle
+                );
             }
             else
             {
@@ -198,7 +265,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 EmbeddedSignatureDataEmitter signatureDataEmitter;
                 if (sig.HasEmbeddedSignatureData)
                 {
-                    signatureDataEmitter = new EmbeddedSignatureDataEmitter(sig.GetEmbeddedSignatureData(), this);
+                    signatureDataEmitter = new EmbeddedSignatureDataEmitter(
+                        sig.GetEmbeddedSignatureData(),
+                        this
+                    );
                 }
                 else
                 {
@@ -219,7 +289,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return methodHandle;
         }
 
-        private void EncodeType(BlobBuilder blobBuilder, TypeDesc type, EmbeddedSignatureDataEmitter signatureDataEmitter)
+        private void EncodeType(
+            BlobBuilder blobBuilder,
+            TypeDesc type,
+            EmbeddedSignatureDataEmitter signatureDataEmitter
+        )
         {
             signatureDataEmitter.Push();
             signatureDataEmitter.Push();
@@ -295,7 +369,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 EncodeType(blobBuilder, type.GetParameterType(), signatureDataEmitter);
                 var shapeEncoder = new ArrayShapeEncoder(blobBuilder);
                 // TODO Add support for non-standard array shapes
-                shapeEncoder.Shape(arrayType.Rank, default(ImmutableArray<int>), default(ImmutableArray<int>));
+                shapeEncoder.Shape(
+                    arrayType.Rank,
+                    default(ImmutableArray<int>),
+                    default(ImmutableArray<int>)
+                );
             }
             else if (type.IsPointer)
             {
@@ -332,7 +410,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             else if (type is SignatureVariable)
             {
                 SignatureVariable sigVar = (SignatureVariable)type;
-                SignatureTypeCode code = sigVar.IsMethodSignatureVariable ? SignatureTypeCode.GenericMethodParameter : SignatureTypeCode.GenericTypeParameter;
+                SignatureTypeCode code = sigVar.IsMethodSignatureVariable
+                    ? SignatureTypeCode.GenericMethodParameter
+                    : SignatureTypeCode.GenericTypeParameter;
                 blobBuilder.WriteByte((byte)code);
                 blobBuilder.WriteCompressedInteger(sigVar.Index);
             }
@@ -348,7 +428,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 var metadataType = (MetadataType)type;
                 // Must be class or valuetype
-                blobBuilder.WriteByte(type.IsValueType ? (byte)SignatureTypeKind.ValueType : (byte)SignatureTypeKind.Class);
+                blobBuilder.WriteByte(
+                    type.IsValueType
+                      ? (byte)SignatureTypeKind.ValueType
+                      : (byte)SignatureTypeKind.Class
+                );
                 int codedIndex = CodedIndex.TypeDefOrRef(GetTypeRef(metadataType));
                 blobBuilder.WriteCompressedInteger(codedIndex);
             }
@@ -367,9 +451,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             Stack<int> _indexStack = new Stack<int>();
             TypeSystemMetadataEmitter _metadataEmitter;
 
-            public static EmbeddedSignatureDataEmitter EmptySingleton = new EmbeddedSignatureDataEmitter(null, null);
+            public static EmbeddedSignatureDataEmitter EmptySingleton =
+                new EmbeddedSignatureDataEmitter(null, null);
 
-            public EmbeddedSignatureDataEmitter(EmbeddedSignatureData[] embeddedData, TypeSystemMetadataEmitter metadataEmitter)
+            public EmbeddedSignatureDataEmitter(
+                EmbeddedSignatureData[] embeddedData,
+                TypeSystemMetadataEmitter metadataEmitter
+            )
             {
                 _embeddedData = embeddedData;
                 _indexStack.Push(0);
@@ -393,23 +481,40 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (_embeddedDataIndex < _embeddedData.Length)
                     {
                         string indexData = string.Join(".", _indexStack);
-                        while ((_embeddedDataIndex < _embeddedData.Length) && _embeddedData[_embeddedDataIndex].index == indexData)
+                        while (
+                            (_embeddedDataIndex < _embeddedData.Length)
+                            && _embeddedData[_embeddedDataIndex].index == indexData
+                        )
                         {
                             switch (_embeddedData[_embeddedDataIndex].kind)
                             {
                                 case EmbeddedSignatureDataKind.OptionalCustomModifier:
+
                                     {
-                                        signatureBuilder.WriteByte((byte)SignatureTypeCode.OptionalModifier);
-                                        EntityHandle handle = _metadataEmitter.GetTypeRef((MetadataType)_embeddedData[_embeddedDataIndex].type);
-                                        signatureBuilder.WriteCompressedInteger(CodedIndex.TypeDefOrRefOrSpec(handle));
+                                        signatureBuilder.WriteByte(
+                                            (byte)SignatureTypeCode.OptionalModifier
+                                        );
+                                        EntityHandle handle = _metadataEmitter.GetTypeRef(
+                                            (MetadataType)_embeddedData[_embeddedDataIndex].type
+                                        );
+                                        signatureBuilder.WriteCompressedInteger(
+                                            CodedIndex.TypeDefOrRefOrSpec(handle)
+                                        );
                                     }
                                     break;
 
                                 case EmbeddedSignatureDataKind.RequiredCustomModifier:
+
                                     {
-                                        signatureBuilder.WriteByte((byte)SignatureTypeCode.RequiredModifier);
-                                        EntityHandle handle = _metadataEmitter.GetTypeRef((MetadataType)_embeddedData[_embeddedDataIndex].type);
-                                        signatureBuilder.WriteCompressedInteger(CodedIndex.TypeDefOrRefOrSpec(handle));
+                                        signatureBuilder.WriteByte(
+                                            (byte)SignatureTypeCode.RequiredModifier
+                                        );
+                                        EntityHandle handle = _metadataEmitter.GetTypeRef(
+                                            (MetadataType)_embeddedData[_embeddedDataIndex].type
+                                        );
+                                        signatureBuilder.WriteCompressedInteger(
+                                            CodedIndex.TypeDefOrRefOrSpec(handle)
+                                        );
                                     }
                                     break;
 
@@ -443,7 +548,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
         }
 
-        void EncodeMethodSignature(BlobBuilder signatureBuilder, MethodSignature sig, EmbeddedSignatureDataEmitter signatureDataEmitter)
+        void EncodeMethodSignature(
+            BlobBuilder signatureBuilder,
+            MethodSignature sig,
+            EmbeddedSignatureDataEmitter signatureDataEmitter
+        )
         {
             signatureDataEmitter.Push();
             BlobEncoder signatureEncoder = new BlobEncoder(signatureBuilder);
@@ -470,7 +579,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     break;
             }
 
-            signatureEncoder.MethodSignature(sigCallingConvention, genericParameterCount, isInstanceMethod);
+            signatureEncoder.MethodSignature(
+                sigCallingConvention,
+                genericParameterCount,
+                isInstanceMethod
+            );
             signatureBuilder.WriteCompressedInteger(sig.Length);
             // TODO Process custom modifiers in some way
             EncodeType(signatureBuilder, sig.ReturnType, signatureDataEmitter);
