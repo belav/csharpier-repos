@@ -19,8 +19,8 @@ namespace System.Linq
             }
 
             return source is AppendPrependIterator<TSource> appendable
-              ? appendable.Append(element)
-              : new AppendPrepend1Iterator<TSource>(source, element, appending: true);
+                ? appendable.Append(element)
+                : new AppendPrepend1Iterator<TSource>(source, element, appending: true);
         }
 
         public static IEnumerable<TSource> Prepend<TSource>(
@@ -34,8 +34,8 @@ namespace System.Linq
             }
 
             return source is AppendPrependIterator<TSource> appendable
-              ? appendable.Prepend(element)
-              : new AppendPrepend1Iterator<TSource>(source, element, appending: false);
+                ? appendable.Prepend(element)
+                : new AppendPrepend1Iterator<TSource>(source, element, appending: false);
         }
 
         /// <summary>

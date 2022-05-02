@@ -482,8 +482,8 @@ namespace System.Xml.Schema
             get
             {
                 return context!.ElementDecl != null
-                  ? context.ElementDecl.ContentValidator!.PreserveWhitespace
-                  : false;
+                    ? context.ElementDecl.ContentValidator!.PreserveWhitespace
+                    : false;
             }
         }
 

@@ -24,7 +24,7 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate;
 /// </summary>
 public class NegotiateHandler
     : AuthenticationHandler<NegotiateOptions>,
-      IAuthenticationRequestHandler
+        IAuthenticationRequestHandler
 {
     private const string AuthPersistenceKey = nameof(AuthPersistence);
     private const string NegotiateVerb = "Negotiate";

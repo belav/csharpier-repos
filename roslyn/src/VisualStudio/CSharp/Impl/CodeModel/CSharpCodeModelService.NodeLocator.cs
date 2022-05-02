@@ -162,12 +162,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 );
 
                 return string.IsNullOrWhiteSpace(textAfterBrace)
-                  ? new VirtualTreePoint(
+                    ? new VirtualTreePoint(
                         openBrace.SyntaxTree,
                         text,
                         text.Lines[openBraceLine.LineNumber + 1].Start
                     )
-                  : new VirtualTreePoint(openBrace.SyntaxTree, text, openBrace.Span.End);
+                    : new VirtualTreePoint(openBrace.SyntaxTree, text, openBrace.Span.End);
             }
 
             private VirtualTreePoint GetBodyStartPoint(
@@ -266,8 +266,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 );
 
                 return string.IsNullOrWhiteSpace(textBeforeBrace)
-                  ? new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBraceLine.Start)
-                  : new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBrace.SpanStart);
+                    ? new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBraceLine.Start)
+                    : new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBrace.SpanStart);
             }
 
             private VirtualTreePoint GetStartPoint(

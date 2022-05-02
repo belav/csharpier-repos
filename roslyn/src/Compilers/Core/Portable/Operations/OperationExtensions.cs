@@ -422,11 +422,11 @@ namespace Microsoft.CodeAnalysis.Operations
                 switch (current)
                 {
                     case ILoopOperation correspondingLoop
-                          when operation.Target.Equals(correspondingLoop.ExitLabel)
-                              || operation.Target.Equals(correspondingLoop.ContinueLabel):
+                    when operation.Target.Equals(correspondingLoop.ExitLabel)
+                        || operation.Target.Equals(correspondingLoop.ContinueLabel):
                         return correspondingLoop;
                     case ISwitchOperation correspondingSwitch
-                          when operation.Target.Equals(correspondingSwitch.ExitLabel):
+                    when operation.Target.Equals(correspondingSwitch.ExitLabel):
                         return correspondingSwitch;
                 }
             }

@@ -15,8 +15,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class AuthorizationFilterTracer
         : FilterTracer,
-          IAuthorizationFilter,
-          IDecorator<IAuthorizationFilter>
+            IAuthorizationFilter,
+            IDecorator<IAuthorizationFilter>
     {
         private const string ExecuteAuthorizationFilterAsyncMethodName =
             "ExecuteAuthorizationFilterAsync";

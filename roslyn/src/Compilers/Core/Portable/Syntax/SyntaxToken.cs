@@ -114,8 +114,8 @@ namespace Microsoft.CodeAnalysis
             get
             {
                 return Node != null
-                  ? new TextSpan(Position + Node.GetLeadingTriviaWidth(), Node.Width)
-                  : default(TextSpan);
+                    ? new TextSpan(Position + Node.GetLeadingTriviaWidth(), Node.Width)
+                    : default(TextSpan);
             }
         }
 
@@ -421,8 +421,8 @@ namespace Microsoft.CodeAnalysis
             get
             {
                 return Node != null
-                  ? new SyntaxTriviaList(this, Node.GetLeadingTriviaCore(), this.Position)
-                  : default(SyntaxTriviaList);
+                    ? new SyntaxTriviaList(this, Node.GetLeadingTriviaCore(), this.Position)
+                    : default(SyntaxTriviaList);
             }
         }
 
@@ -488,7 +488,7 @@ namespace Microsoft.CodeAnalysis
         public SyntaxToken WithLeadingTrivia(IEnumerable<SyntaxTrivia>? trivia)
         {
             return Node != null
-              ? new SyntaxToken(
+                ? new SyntaxToken(
                     null,
                     Node.WithLeadingTrivia(
                         GreenNode.CreateList(trivia, static t => t.RequiredUnderlyingNode)
@@ -496,7 +496,7 @@ namespace Microsoft.CodeAnalysis
                     position: 0,
                     index: 0
                 )
-              : default(SyntaxToken);
+                : default(SyntaxToken);
         }
 
         /// <summary>
@@ -521,7 +521,7 @@ namespace Microsoft.CodeAnalysis
         public SyntaxToken WithTrailingTrivia(IEnumerable<SyntaxTrivia>? trivia)
         {
             return Node != null
-              ? new SyntaxToken(
+                ? new SyntaxToken(
                     null,
                     Node.WithTrailingTrivia(
                         GreenNode.CreateList(trivia, static t => t.RequiredUnderlyingNode)
@@ -529,7 +529,7 @@ namespace Microsoft.CodeAnalysis
                     position: 0,
                     index: 0
                 )
-              : default(SyntaxToken);
+                : default(SyntaxToken);
         }
 
         /// <summary>
@@ -719,8 +719,8 @@ namespace Microsoft.CodeAnalysis
                 var diagnostics = Node.GetDiagnostics();
 
                 return diagnostics.Length == 0
-                  ? SpecializedCollections.EmptyEnumerable<Diagnostic>()
-                  : diagnostics.Select(s_createDiagnosticWithoutLocation);
+                    ? SpecializedCollections.EmptyEnumerable<Diagnostic>()
+                    : diagnostics.Select(s_createDiagnosticWithoutLocation);
             }
 
             return tree.GetDiagnostics(this);

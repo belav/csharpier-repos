@@ -102,8 +102,8 @@ namespace Microsoft.Extensions.Configuration
                 StringComparison.OrdinalIgnoreCase
             );
             return indexOf < 0
-              ? key.Substring(prefixLength)
-              : key.Substring(prefixLength, indexOf - prefixLength);
+                ? key.Substring(prefixLength)
+                : key.Substring(prefixLength, indexOf - prefixLength);
         }
 
         /// <summary>

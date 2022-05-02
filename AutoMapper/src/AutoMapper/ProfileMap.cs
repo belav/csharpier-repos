@@ -297,8 +297,8 @@ namespace AutoMapper
                         : Type.EmptyTypes
                 ).Concat(
                     openMapConfig.DestinationType.IsGenericTypeDefinition
-                      ? closedTypes.DestinationType.GenericTypeArguments
-                      : Type.EmptyTypes
+                        ? closedTypes.DestinationType.GenericTypeArguments
+                        : Type.EmptyTypes
                 );
                 var neededParameters = closedMap.TypeConverterType.GenericParametersCount();
                 closedMap.TypeConverterType = closedMap.TypeConverterType.MakeGenericType(

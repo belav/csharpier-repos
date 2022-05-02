@@ -34,8 +34,8 @@ namespace System.Security.Cryptography
         //   Windows CSP : (512, 1024, 64)
         // Use the most restrictive legal key sizes
         private static readonly KeySizes[] s_legalKeySizes = OperatingSystem.IsAndroid()
-          ? s_legalKeySizesAndroid
-          : s_legalKeySizesWindowsCsp;
+            ? s_legalKeySizesAndroid
+            : s_legalKeySizesWindowsCsp;
 
         public DSACryptoServiceProvider() : this(DefaultKeySize) { }
 

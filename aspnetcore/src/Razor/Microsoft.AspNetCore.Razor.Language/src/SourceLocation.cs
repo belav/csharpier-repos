@@ -90,8 +90,8 @@ public struct SourceLocation : IEquatable<SourceLocation>
     public static SourceLocation FromSpan(SourceSpan? span)
     {
         return span == null
-          ? SourceLocation.Undefined
-          : new SourceLocation(
+            ? SourceLocation.Undefined
+            : new SourceLocation(
                 span.Value.FilePath,
                 span.Value.AbsoluteIndex,
                 span.Value.LineIndex,

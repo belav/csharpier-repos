@@ -57,7 +57,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
 
             // Issue #15586: Query: TypeCompatibility chart for inference.
             return _methodInfo.Equals(method)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     "abs",
                     new SqlExpression[]
                     {
@@ -76,7 +76,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     argumentsPropagateNullability: Array.Empty<bool>(),
                     method.ReturnType
                 )
-              : null;
+                : null;
         }
     }
 }

@@ -56,8 +56,8 @@ namespace Roslyn.Test.Utilities
             }
 
             return map.TryGetValue(reference, out var result)
-              ? ImmutableArray.Create(result)
-              : ImmutableArray<PortableExecutableReference>.Empty;
+                ? ImmutableArray.Create(result)
+                : ImmutableArray<PortableExecutableReference>.Empty;
         }
 
         public override bool Equals(object other) => true;

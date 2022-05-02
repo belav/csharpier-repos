@@ -2695,8 +2695,8 @@ namespace System.ComponentModel
                 CharDescriptor chDex = _stringDescriptor[position];
                 st.Append(
                     IsEditPosition(chDex) && chDex.IsAssigned
-                      ? _passwordChar
-                      : _testString[position]
+                        ? _passwordChar
+                        : _testString[position]
                 );
             }
 

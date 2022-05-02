@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ChangeSignature
 {
     internal abstract class AbstractChangeSignatureCommandHandler
         : ICommandHandler<ReorderParametersCommandArgs>,
-          ICommandHandler<RemoveParametersCommandArgs>
+            ICommandHandler<RemoveParametersCommandArgs>
     {
         private readonly IThreadingContext _threadingContext;
 

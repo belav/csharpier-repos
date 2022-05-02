@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 AddAccessor(symbol, symbol.GetMethod, SyntaxKind.GetKeyword);
                 var keywordForSetAccessor = IsInitOnly(symbol.SetMethod)
-                  ? SyntaxKind.InitKeyword
-                  : SyntaxKind.SetKeyword;
+                    ? SyntaxKind.InitKeyword
+                    : SyntaxKind.SetKeyword;
                 AddAccessor(symbol, symbol.SetMethod, keywordForSetAccessor);
 
                 AddSpace();
@@ -500,10 +500,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AddPunctuation(SyntaxKind.DotToken);
                     AddKeyword(
                         symbol.MethodKind == MethodKind.PropertyGet
-                          ? SyntaxKind.GetKeyword
-                          : IsInitOnly(symbol)
-                              ? SyntaxKind.InitKeyword
-                              : SyntaxKind.SetKeyword
+                            ? SyntaxKind.GetKeyword
+                            : IsInitOnly(symbol)
+                                ? SyntaxKind.InitKeyword
+                                : SyntaxKind.SetKeyword
                     );
                     break;
                 }
@@ -520,8 +520,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AddPunctuation(SyntaxKind.DotToken);
                     AddKeyword(
                         symbol.MethodKind == MethodKind.EventAdd
-                          ? SyntaxKind.AddKeyword
-                          : SyntaxKind.RemoveKeyword
+                            ? SyntaxKind.AddKeyword
+                            : SyntaxKind.RemoveKeyword
                     );
                     break;
                 }

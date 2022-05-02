@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static string GetNamespaceIdentifierName(INamespaceSymbol symbol)
         {
             return symbol.IsGlobalNamespace
-              ? symbol.ToDisplayString(s_globalNamespaceFormat)
-              : symbol.Name;
+                ? symbol.ToDisplayString(s_globalNamespaceFormat)
+                : symbol.Name;
         }
 
         protected override async ValueTask<

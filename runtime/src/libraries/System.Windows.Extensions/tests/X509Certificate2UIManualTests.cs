@@ -48,8 +48,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         $"Choose {count} Certificate",
                         string.Empty,
                         count < 2
-                          ? X509SelectionFlag.SingleSelection
-                          : X509SelectionFlag.MultiSelection,
+                            ? X509SelectionFlag.SingleSelection
+                            : X509SelectionFlag.MultiSelection,
                         IntPtr.Zero
                     );
                     Assert.Equal(count, actual.Count);

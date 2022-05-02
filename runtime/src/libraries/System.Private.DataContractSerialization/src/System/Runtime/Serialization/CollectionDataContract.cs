@@ -1742,21 +1742,21 @@ namespace System.Runtime.Serialization
                 {
                     dataContract = isReadOnlyContract
                         ? new CollectionDataContract(
-                              type,
-                              kind,
-                              itemType,
-                              getEnumeratorMethod,
-                              deserializationExceptionMessage
-                          )
+                            type,
+                            kind,
+                            itemType,
+                            getEnumeratorMethod,
+                            deserializationExceptionMessage
+                        )
                         : new CollectionDataContract(
-                              type,
-                              kind,
-                              itemType,
-                              getEnumeratorMethod,
-                              addMethod,
-                              defaultCtor,
-                              !constructorRequired
-                          );
+                            type,
+                            kind,
+                            itemType,
+                            getEnumeratorMethod,
+                            addMethod,
+                            defaultCtor,
+                            !constructorRequired
+                        );
                 }
             }
             else
@@ -1824,21 +1824,21 @@ namespace System.Runtime.Serialization
 
                     dataContract = isReadOnlyContract
                         ? new CollectionDataContract(
-                              type,
-                              kind,
-                              itemType,
-                              getEnumeratorMethod,
-                              deserializationExceptionMessage
-                          )
+                            type,
+                            kind,
+                            itemType,
+                            getEnumeratorMethod,
+                            deserializationExceptionMessage
+                        )
                         : new CollectionDataContract(
-                              type,
-                              kind,
-                              itemType,
-                              getEnumeratorMethod,
-                              addMethod,
-                              defaultCtor,
-                              !constructorRequired
-                          );
+                            type,
+                            kind,
+                            itemType,
+                            getEnumeratorMethod,
+                            addMethod,
+                            defaultCtor,
+                            !constructorRequired
+                        );
                 }
             }
 
@@ -1920,8 +1920,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (param == null)
-              ? SR.Format(message, nestedMessage)
-              : SR.Format(message, nestedMessage, param);
+                ? SR.Format(message, nestedMessage)
+                : SR.Format(message, nestedMessage, param);
         }
 
         // Once https://github.com/mono/linker/issues/1731 is fixed we can remove the suppression from here as it won't be needed any longer.

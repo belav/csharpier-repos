@@ -52,10 +52,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     /// <typeparam name="TEntity">The type of the entity in the local view.</typeparam>
     public class LocalView<TEntity>
         : ICollection<TEntity>,
-          INotifyCollectionChanged,
-          INotifyPropertyChanged,
-          INotifyPropertyChanging,
-          IListSource where TEntity : class
+            INotifyCollectionChanged,
+            INotifyPropertyChanged,
+            INotifyPropertyChanging,
+            IListSource where TEntity : class
     {
         private ObservableBackedBindingList<TEntity>? _bindingList;
         private ObservableCollection<TEntity>? _observable;

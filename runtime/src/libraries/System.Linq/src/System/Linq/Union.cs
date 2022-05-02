@@ -33,8 +33,8 @@ namespace System.Linq
             return
                 first is UnionIterator<TSource> union
                 && AreEqualityComparersEqual(comparer, union._comparer)
-              ? union.Union(second)
-              : new UnionIterator2<TSource>(first, second, comparer);
+                ? union.Union(second)
+                : new UnionIterator2<TSource>(first, second, comparer);
         }
 
         /// <summary>Produces the set union of two sequences according to a specified key selector function.</summary>

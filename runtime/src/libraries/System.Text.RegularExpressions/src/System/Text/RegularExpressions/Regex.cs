@@ -397,10 +397,10 @@ namespace System.Text.RegularExpressions
             else
             {
                 return caps != null && !caps.TryGetValue(i, out i)
-                  ? string.Empty
-                  : (uint)i < (uint)capslist.Length
-                      ? capslist[i]
-                      : string.Empty;
+                    ? string.Empty
+                    : (uint)i < (uint)capslist.Length
+                        ? capslist[i]
+                        : string.Empty;
             }
         }
 
@@ -430,8 +430,8 @@ namespace System.Text.RegularExpressions
                         out uint result
                     )
                     && result < capsize
-                  ? (int)result
-                  : -1;
+                    ? (int)result
+                    : -1;
             }
         }
 

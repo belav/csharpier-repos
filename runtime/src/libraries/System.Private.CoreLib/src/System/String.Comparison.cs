@@ -748,8 +748,8 @@ namespace System
 
                 case StringComparison.OrdinalIgnoreCase:
                     return this.Length < value.Length
-                      ? false
-                      : (
+                        ? false
+                        : (
                             Ordinal.CompareStringIgnoreCase(
                                 ref Unsafe.Add(
                                     ref this.GetRawStringData(),
@@ -1251,8 +1251,8 @@ namespace System
                         return false;
                     }
                     return (value.Length == 1)
-                      ? true
-                      : // First char is the same and thats all there is to compare
+                        ? true
+                        : // First char is the same and thats all there is to compare
                         SpanHelpers.SequenceEqual(
                             ref Unsafe.As<char, byte>(ref this.GetRawStringData()),
                             ref Unsafe.As<char, byte>(ref value.GetRawStringData()),

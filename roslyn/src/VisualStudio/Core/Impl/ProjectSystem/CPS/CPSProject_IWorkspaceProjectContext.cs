@@ -82,13 +82,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                     };
 
                     return (prefix != null)
-                      ? new ProjectExternalErrorReporter(
+                        ? new ProjectExternalErrorReporter(
                             visualStudioProject.Id,
                             prefix,
                             visualStudioProject.Language,
                             visualStudioWorkspace
                         )
-                      : null;
+                        : null;
                 }
             );
 
@@ -189,15 +189,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             else if (name == AdditionalPropertyNames.RunAnalyzers)
             {
                 var boolValue = bool.TryParse(value, out var parsedBoolValue)
-                  ? parsedBoolValue
-                  : (bool?)null;
+                    ? parsedBoolValue
+                    : (bool?)null;
                 _visualStudioProject.RunAnalyzers = boolValue;
             }
             else if (name == AdditionalPropertyNames.RunAnalyzersDuringLiveAnalysis)
             {
                 var boolValue = bool.TryParse(value, out var parsedBoolValue)
-                  ? parsedBoolValue
-                  : (bool?)null;
+                    ? parsedBoolValue
+                    : (bool?)null;
                 _visualStudioProject.RunAnalyzersDuringLiveAnalysis = boolValue;
             }
             else if (

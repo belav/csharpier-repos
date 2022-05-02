@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private static SpacingWithinParenthesesOption? ConvertToSpacingOption(string value) =>
             s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(value, out var option)
-              ? option
-              : null;
+                ? option
+                : null;
 
         private static string GetSpacingWithParenthesesEditorConfigString(OptionSet optionSet)
         {
@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 binaryOperatorSpacingValue.Trim(),
                 out var value
             )
-              ? value
-              : BinaryOperatorSpacingOptions.Single;
+                ? value
+                : BinaryOperatorSpacingOptions.Single;
 
         private static string GetSpacingAroundBinaryOperatorEditorConfigString(
             BinaryOperatorSpacingOptions value
@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 labelIndentationValue.Trim(),
                 out var value
             )
-              ? value
-              : LabelPositionOptions.NoIndent;
+                ? value
+                : LabelPositionOptions.NoIndent;
 
         private static string GetLabelPositionOptionEditorConfigString(
             LabelPositionOptions value

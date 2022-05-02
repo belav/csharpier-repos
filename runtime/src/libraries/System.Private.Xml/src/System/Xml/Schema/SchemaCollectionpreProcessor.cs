@@ -212,10 +212,10 @@ namespace System.Xml.Schema
                                     subImp.BaseUri != null
                                         ? subImp.BaseUri
                                         : (
-                                              subImp.Schema != null && subImp.Schema.BaseUri != null
-                                                  ? subImp.Schema.BaseUri
-                                                  : null
-                                          );
+                                            subImp.Schema != null && subImp.Schema.BaseUri != null
+                                                ? subImp.Schema.BaseUri
+                                                : null
+                                        );
                                 if (subUri != null)
                                 {
                                     if (_schemaLocations![subUri] != null)
@@ -1009,8 +1009,8 @@ namespace System.Xml.Schema
                                 && _attributeFormDefault == XmlSchemaForm.Qualified
                             )
                         )
-                          ? _targetNamespace
-                          : null
+                            ? _targetNamespace
+                            : null
                     )
                 );
             }
@@ -1176,8 +1176,8 @@ namespace System.Xml.Schema
                                 && _elementFormDefault == XmlSchemaForm.Qualified
                             )
                         )
-                          ? _targetNamespace
-                          : null
+                            ? _targetNamespace
+                            : null
                     )
                 );
             }

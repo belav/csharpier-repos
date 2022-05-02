@@ -950,8 +950,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                         handler.AutomaticDecompression = decompressionMethods;
                         TestServer.SetResponse(
                             responseIsGZip
-                              ? DecompressionMethods.GZip
-                              : DecompressionMethods.Deflate,
+                                ? DecompressionMethods.GZip
+                                : DecompressionMethods.Deflate,
                             TestServer.ExpectedResponseBody
                         );
                     }

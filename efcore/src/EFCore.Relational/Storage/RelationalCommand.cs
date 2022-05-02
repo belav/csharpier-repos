@@ -206,23 +206,23 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         logger == null
                             ? default
                             : await logger
-                                  .CommandNonQueryExecutingAsync(
-                                      connection,
-                                      command,
-                                      context,
-                                      commandId,
-                                      connection.ConnectionId,
-                                      startTime,
-                                      parameterObject.CommandSource,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false);
+                                .CommandNonQueryExecutingAsync(
+                                    connection,
+                                    command,
+                                    context,
+                                    commandId,
+                                    connection.ConnectionId,
+                                    startTime,
+                                    parameterObject.CommandSource,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
 
                     var result = interceptionResult.HasResult
                         ? interceptionResult.Result
                         : await command
-                              .ExecuteNonQueryAsync(cancellationToken)
-                              .ConfigureAwait(false);
+                            .ExecuteNonQueryAsync(cancellationToken)
+                            .ConfigureAwait(false);
 
                     if (logger != null)
                     {
@@ -418,17 +418,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         logger == null
                             ? default
                             : await logger
-                                  .CommandScalarExecutingAsync(
-                                      connection,
-                                      command,
-                                      context,
-                                      commandId,
-                                      connection.ConnectionId,
-                                      startTime,
-                                      parameterObject.CommandSource,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false);
+                                .CommandScalarExecutingAsync(
+                                    connection,
+                                    command,
+                                    context,
+                                    commandId,
+                                    connection.ConnectionId,
+                                    startTime,
+                                    parameterObject.CommandSource,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
 
                     var result = interceptionResult.HasResult
                         ? interceptionResult.Result

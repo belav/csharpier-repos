@@ -117,8 +117,8 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
             tmpSpan = explicitReader.ReadEncodedValue();
             decoded.Content = rebindSpan.Overlaps(tmpSpan, out offset)
-              ? rebind.Slice(offset, tmpSpan.Length)
-              : tmpSpan.ToArray();
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             explicitReader.ThrowIfNotEmpty();
 
             sequenceReader.ThrowIfNotEmpty();

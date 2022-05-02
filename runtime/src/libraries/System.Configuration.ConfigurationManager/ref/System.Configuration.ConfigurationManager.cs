@@ -25,7 +25,7 @@ namespace System.Configuration
 
     public abstract partial class ApplicationSettingsBase
         : System.Configuration.SettingsBase,
-          System.ComponentModel.INotifyPropertyChanged
+            System.ComponentModel.INotifyPropertyChanged
     {
         protected ApplicationSettingsBase() { }
 
@@ -626,8 +626,8 @@ namespace System.Configuration
     [System.Diagnostics.DebuggerDisplayAttribute("Count = {Count}")]
     public abstract partial class ConfigurationElementCollection
         : System.Configuration.ConfigurationElement,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         protected ConfigurationElementCollection() { }
 
@@ -1045,7 +1045,7 @@ namespace System.Configuration
 
     public sealed partial class ConfigurationLockCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal ConfigurationLockCollection() { }
 
@@ -1282,7 +1282,7 @@ namespace System.Configuration
 
     public partial class ConfigurationPropertyCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public ConfigurationPropertyCollection() { }
 
@@ -1629,7 +1629,7 @@ namespace System.Configuration
 
     public sealed partial class ConfigXmlDocument
         : System.Xml.XmlDocument,
-          System.Configuration.Internal.IConfigErrorInfo
+            System.Configuration.Internal.IConfigErrorInfo
     {
         public ConfigXmlDocument() { }
 
@@ -2308,7 +2308,7 @@ namespace System.Configuration
 
     public partial class LocalFileSettingsProvider
         : System.Configuration.SettingsProvider,
-          System.Configuration.IApplicationSettingsProvider
+            System.Configuration.IApplicationSettingsProvider
     {
         public LocalFileSettingsProvider() { }
 
@@ -3350,8 +3350,8 @@ namespace System.Configuration
 
     public partial class SettingsPropertyCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.ICloneable
+            System.Collections.IEnumerable,
+            System.ICloneable
     {
         public SettingsPropertyCollection() { }
 
@@ -3475,8 +3475,8 @@ namespace System.Configuration
 
     public partial class SettingsPropertyValueCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.ICloneable
+            System.Collections.IEnumerable,
+            System.ICloneable
     {
         public SettingsPropertyValueCollection() { }
 
@@ -4510,7 +4510,7 @@ namespace System.Configuration.Provider
 
     public partial class ProviderCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public ProviderCollection() { }
 

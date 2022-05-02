@@ -597,16 +597,19 @@ namespace System.Diagnostics.Eventing.Reader
                             generalDisplayName = objectTypeName switch
                             {
                                 ObjectTypeName.Level
-                                  => FindStandardLevelDisplayName(generalName, generalValue),
+                                    => FindStandardLevelDisplayName(generalName, generalValue),
                                 ObjectTypeName.Opcode
-                                  => FindStandardOpcodeDisplayName(generalName, generalValue >> 16),
+                                    => FindStandardOpcodeDisplayName(
+                                        generalName,
+                                        generalValue >> 16
+                                    ),
                                 ObjectTypeName.Keyword
-                                  => FindStandardKeywordDisplayName(
-                                      generalName,
-                                      generalValueKeyword
-                                  ),
+                                    => FindStandardKeywordDisplayName(
+                                        generalName,
+                                        generalValueKeyword
+                                    ),
                                 ObjectTypeName.Task
-                                  => FindStandardTaskDisplayName(generalName, generalValue),
+                                    => FindStandardTaskDisplayName(generalName, generalValue),
                                 _ => null,
                             };
                         }

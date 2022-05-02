@@ -36,8 +36,8 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
             //inReverse only matters if Ar contains some line anchor
             _q0 = _builder.MkState(
                 inReverse
-                  ? srm._reversePattern
-                  : (addDotStar ? srm._dotStarredPattern : srm._pattern),
+                    ? srm._reversePattern
+                    : (addDotStar ? srm._dotStarredPattern : srm._pattern),
                 startId
             );
 
@@ -86,8 +86,8 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
 
                             var qp = (q.Id, p.Id);
                             normalizedmoves[qp] = normalizedmoves.ContainsKey(qp)
-                              ? _builder._solver.Or(normalizedmoves[qp], c)
-                              : c;
+                                ? _builder._solver.Or(normalizedmoves[qp], c)
+                                : c;
                         }
                     }
                 }
@@ -128,10 +128,8 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
             lab.Item1 is null
                 ? Net.WebUtility.HtmlEncode(_builder._solver.PrettyPrint(lab.Item2))
                 :
-                  // Conditional nullability based on anchors
-                  Net.WebUtility.HtmlEncode(
-                      $"{lab.Item1}/{_builder._solver.PrettyPrint(lab.Item2)}"
-                  );
+                // Conditional nullability based on anchors
+                Net.WebUtility.HtmlEncode($"{lab.Item1}/{_builder._solver.PrettyPrint(lab.Item2)}");
 
         public string DescribeStartLabel() => "";
 

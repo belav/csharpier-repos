@@ -56,8 +56,8 @@ namespace Microsoft.Data.Sqlite
         public override int FieldCount =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(FieldCount))
-                  )
+                    Resources.DataReaderClosed(nameof(FieldCount))
+                )
                 : (_record?.FieldCount ?? 0);
 
         /// <summary>
@@ -283,8 +283,8 @@ namespace Microsoft.Data.Sqlite
         public override int GetOrdinal(string name) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetOrdinal))
-                  )
+                    Resources.DataReaderClosed(nameof(GetOrdinal))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetOrdinal(name);
@@ -300,8 +300,8 @@ namespace Microsoft.Data.Sqlite
         public override string GetDataTypeName(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetDataTypeName))
-                  )
+                    Resources.DataReaderClosed(nameof(GetDataTypeName))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetDataTypeName(ordinal);
@@ -314,8 +314,8 @@ namespace Microsoft.Data.Sqlite
         public override Type GetFieldType(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetFieldType))
-                  )
+                    Resources.DataReaderClosed(nameof(GetFieldType))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetFieldType(ordinal);
@@ -340,8 +340,8 @@ namespace Microsoft.Data.Sqlite
         public override bool GetBoolean(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetBoolean))
-                  )
+                    Resources.DataReaderClosed(nameof(GetBoolean))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetBoolean(ordinal);
@@ -378,8 +378,8 @@ namespace Microsoft.Data.Sqlite
         public override DateTime GetDateTime(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetDateTime))
-                  )
+                    Resources.DataReaderClosed(nameof(GetDateTime))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetDateTime(ordinal);
@@ -392,8 +392,8 @@ namespace Microsoft.Data.Sqlite
         public virtual DateTimeOffset GetDateTimeOffset(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetDateTimeOffset))
-                  )
+                    Resources.DataReaderClosed(nameof(GetDateTimeOffset))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetDateTimeOffset(ordinal);
@@ -406,8 +406,8 @@ namespace Microsoft.Data.Sqlite
         public virtual TimeSpan GetTimeSpan(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetTimeSpan))
-                  )
+                    Resources.DataReaderClosed(nameof(GetTimeSpan))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetTimeSpan(ordinal);
@@ -420,8 +420,8 @@ namespace Microsoft.Data.Sqlite
         public override decimal GetDecimal(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetDecimal))
-                  )
+                    Resources.DataReaderClosed(nameof(GetDecimal))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetDecimal(ordinal);
@@ -577,8 +577,8 @@ namespace Microsoft.Data.Sqlite
         public override TextReader GetTextReader(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetTextReader))
-                  )
+                    Resources.DataReaderClosed(nameof(GetTextReader))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetTextReader(ordinal);
@@ -593,8 +593,8 @@ namespace Microsoft.Data.Sqlite
         public override T GetFieldValue<T>(int ordinal) =>
             _closed
                 ? throw new InvalidOperationException(
-                      Resources.DataReaderClosed(nameof(GetFieldValue))
-                  )
+                    Resources.DataReaderClosed(nameof(GetFieldValue))
+                )
                 : _record == null
                     ? throw new InvalidOperationException(Resources.NoData)
                     : _record.GetFieldValue<T>(ordinal);
@@ -765,8 +765,8 @@ namespace Microsoft.Data.Sqlite
                             (type != null)
                                 ? SqliteDataRecord.GetFieldType(type)
                                 : SqliteDataRecord.GetFieldTypeFromSqliteType(
-                                      SqliteDataRecord.Sqlite3AffinityType(dataTypeName)
-                                  );
+                                    SqliteDataRecord.Sqlite3AffinityType(dataTypeName)
+                                );
 
                         command.CommandText =
                             "SELECT COUNT(*) FROM sqlite_master WHERE name = $name AND type IN ('table', 'view')";

@@ -886,11 +886,11 @@ namespace Microsoft.Cci
             documentHandle = _debugMetadataOpt.AddDocument(
                 name: _debugMetadataOpt.GetOrAddDocumentName(name),
                 hashAlgorithm: info.Checksum.IsDefault
-                  ? default(GuidHandle)
-                  : _debugMetadataOpt.GetOrAddGuid(info.ChecksumAlgorithmId),
+                    ? default(GuidHandle)
+                    : _debugMetadataOpt.GetOrAddGuid(info.ChecksumAlgorithmId),
                 hash: info.Checksum.IsDefault
-                  ? default(BlobHandle)
-                  : _debugMetadataOpt.GetOrAddBlob(info.Checksum),
+                    ? default(BlobHandle)
+                    : _debugMetadataOpt.GetOrAddBlob(info.Checksum),
                 language: _debugMetadataOpt.GetOrAddGuid(document.Language)
             );
 
@@ -1170,9 +1170,9 @@ namespace Microsoft.Cci
                         MetadataImageKind.Assembly => 1,
                         MetadataImageKind.Module => 0,
                         _
-                          => throw ExceptionUtilities.UnexpectedValue(
-                              portableReference.Properties.Kind
-                          )
+                            => throw ExceptionUtilities.UnexpectedValue(
+                                portableReference.Properties.Kind
+                            )
                     };
 
                     builder.WriteByte(kindAndEmbedInteropTypes);

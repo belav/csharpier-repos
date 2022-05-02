@@ -24,16 +24,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     internal abstract class PEModuleBuilder
         : PEModuleBuilder<
-              CSharpCompilation,
-              SourceModuleSymbol,
-              AssemblySymbol,
-              TypeSymbol,
-              NamedTypeSymbol,
-              MethodSymbol,
-              SyntaxNode,
-              NoPia.EmbeddedTypesManager,
-              ModuleCompilationState
-          >
+            CSharpCompilation,
+            SourceModuleSymbol,
+            AssemblySymbol,
+            TypeSymbol,
+            NamedTypeSymbol,
+            MethodSymbol,
+            SyntaxNode,
+            NoPia.EmbeddedTypesManager,
+            ModuleCompilationState
+        >
     {
         // TODO: Need to estimate amount of elements for this map and pass that value to the constructor.
         protected readonly ConcurrentDictionary<

@@ -106,10 +106,10 @@ namespace System.ComponentModel.DataAnnotations
                     MatchTimeoutInMilliseconds == -1
                         ? new Regex(Pattern)
                         : new Regex(
-                              Pattern,
-                              default(RegexOptions),
-                              TimeSpan.FromMilliseconds(MatchTimeoutInMilliseconds)
-                          );
+                            Pattern,
+                            default(RegexOptions),
+                            TimeSpan.FromMilliseconds(MatchTimeoutInMilliseconds)
+                        );
             }
         }
     }

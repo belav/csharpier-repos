@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class SingleQueryingEnumerable<T>
         : IEnumerable<T>,
-          IAsyncEnumerable<T>,
-          IRelationalQueryingEnumerable
+            IAsyncEnumerable<T>,
+            IRelationalQueryingEnumerable
     {
         private readonly RelationalQueryContext _relationalQueryContext;
         private readonly RelationalCommandCache _relationalCommandCache;

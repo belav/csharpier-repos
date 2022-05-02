@@ -485,8 +485,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 var parentExperssion = _parent.GetExpression();
                 return _parent.Left == this
-                  ? MakeMemberAccess(parentExperssion, parentExperssion.Type.GetMember("Outer")[0])
-                  : MakeMemberAccess(parentExperssion, parentExperssion.Type.GetMember("Inner")[0]);
+                    ? MakeMemberAccess(
+                        parentExperssion,
+                        parentExperssion.Type.GetMember("Outer")[0]
+                    )
+                    : MakeMemberAccess(
+                        parentExperssion,
+                        parentExperssion.Type.GetMember("Inner")[0]
+                    );
             }
         }
 

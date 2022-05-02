@@ -38,10 +38,10 @@ internal static class CommandLineApplicationExtensions
             template,
             description,
             template.IndexOf("<", StringComparison.Ordinal) != -1
-              ? template.EndsWith(">...", StringComparison.Ordinal)
-                  ? CommandOptionType.MultipleValue
-                  : CommandOptionType.SingleValue
-              : CommandOptionType.NoValue
+                ? template.EndsWith(">...", StringComparison.Ordinal)
+                    ? CommandOptionType.MultipleValue
+                    : CommandOptionType.SingleValue
+                : CommandOptionType.NoValue
         );
 
     public static void VersionOptionFromAssemblyAttributes(this CommandLineApplication app) =>

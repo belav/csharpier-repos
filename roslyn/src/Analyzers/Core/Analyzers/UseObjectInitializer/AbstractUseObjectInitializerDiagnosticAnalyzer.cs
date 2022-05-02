@@ -167,11 +167,11 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             {
                 var end = FadeOutOperatorToken
                     ? syntaxFacts
-                      .GetOperatorTokenOfMemberAccessExpression(match.MemberAccessExpression)
-                      .Span.End
+                        .GetOperatorTokenOfMemberAccessExpression(match.MemberAccessExpression)
+                        .Span.End
                     : syntaxFacts
-                      .GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)!
-                      .Span.End;
+                        .GetExpressionOfMemberAccessExpression(match.MemberAccessExpression)!
+                        .Span.End;
 
                 var location1 = Location.Create(
                     syntaxTree,

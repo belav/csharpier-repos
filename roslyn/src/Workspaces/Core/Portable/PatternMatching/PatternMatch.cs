@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 punctuationStripped,
                 isCaseSensitive,
                 matchedSpan == null
-                  ? ImmutableArray<TextSpan>.Empty
-                  : ImmutableArray.Create(matchedSpan.Value)
+                    ? ImmutableArray<TextSpan>.Empty
+                    : ImmutableArray.Create(matchedSpan.Value)
             ) { }
 
         internal PatternMatch(

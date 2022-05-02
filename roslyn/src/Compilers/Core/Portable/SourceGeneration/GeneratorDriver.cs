@@ -290,19 +290,19 @@ namespace Microsoft.CodeAnalysis
 
                     generatorState = ex is null
                         ? new GeneratorState(
-                              generatorState.Info,
-                              postInitSources,
-                              inputNodes,
-                              outputNodes
-                          )
+                            generatorState.Info,
+                            postInitSources,
+                            inputNodes,
+                            outputNodes
+                        )
                         : SetGeneratorException(
-                              MessageProvider,
-                              generatorState,
-                              sourceGenerator,
-                              ex,
-                              diagnosticsBag,
-                              isInit: true
-                          );
+                            MessageProvider,
+                            generatorState,
+                            sourceGenerator,
+                            ex,
+                            diagnosticsBag,
+                            isInit: true
+                        );
                 }
 
                 // if the pipeline registered any syntax input nodes, record them

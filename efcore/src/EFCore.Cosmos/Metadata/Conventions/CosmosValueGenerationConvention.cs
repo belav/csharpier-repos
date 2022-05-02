@@ -19,7 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class CosmosValueGenerationConvention
         : ValueGenerationConvention,
-          IEntityTypeAnnotationChangedConvention
+            IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CosmosValueGenerationConvention" />.

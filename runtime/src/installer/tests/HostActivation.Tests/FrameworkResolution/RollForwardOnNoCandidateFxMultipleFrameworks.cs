@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
     public class RollForwardOnNoCandidateFxMultipleFrameworks
         : FrameworkResolutionBase,
-          IClassFixture<RollForwardOnNoCandidateFxMultipleFrameworks.SharedTestState>
+            IClassFixture<RollForwardOnNoCandidateFxMultipleFrameworks.SharedTestState>
     {
         private const string MiddleWare = "MiddleWare";
         private const string AnotherMiddleWare = "AnotherMiddleWare";

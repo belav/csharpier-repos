@@ -20,10 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertLogical
     ]
     internal class CSharpInvertLogicalCodeRefactoringProvider
         : AbstractInvertLogicalCodeRefactoringProvider<
-              SyntaxKind,
-              ExpressionSyntax,
-              BinaryExpressionSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            BinaryExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

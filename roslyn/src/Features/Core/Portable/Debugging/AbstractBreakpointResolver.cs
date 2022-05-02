@@ -254,10 +254,10 @@ namespace Microsoft.CodeAnalysis.Debugging
                 .Select(s => GetPartialImplementationPartOrNull(s) ?? s);
 
             return nameAndArity.Arity == 0
-              ? members
-              : members
-                .OfType<IMethodSymbol>()
-                .Where(m => m.TypeParameters.Length == nameAndArity.Arity);
+                ? members
+                : members
+                    .OfType<IMethodSymbol>()
+                    .Where(m => m.TypeParameters.Length == nameAndArity.Arity);
         }
 
         private async Task<IEnumerable<INamedTypeSymbol>> GetAllTypesAsync(
@@ -343,12 +343,12 @@ namespace Microsoft.CodeAnalysis.Debugging
             container switch
             {
                 INamespaceSymbol namespaceSymbol
-                  => namespaceSymbol.GetMembers().SelectMany(n => GetTypeMembersRecursive(n)),
+                    => namespaceSymbol.GetMembers().SelectMany(n => GetTypeMembersRecursive(n)),
                 INamedTypeSymbol typeSymbol
-                  => typeSymbol
-                      .GetTypeMembers()
-                      .SelectMany(t => GetTypeMembersRecursive(t))
-                      .Concat(typeSymbol),
+                    => typeSymbol
+                        .GetTypeMembers()
+                        .SelectMany(t => GetTypeMembersRecursive(t))
+                        .Concat(typeSymbol),
                 _ => null,
             };
     }

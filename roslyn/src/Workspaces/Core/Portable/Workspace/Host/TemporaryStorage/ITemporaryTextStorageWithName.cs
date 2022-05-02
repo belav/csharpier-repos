@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Host
     /// </summary>
     internal interface ITemporaryTextStorageWithName
         : ITemporaryTextStorage,
-          ITemporaryStorageWithName
+            ITemporaryStorageWithName
     {
         /// <summary>
         /// Gets the value for the <see cref="SourceText.ChecksumAlgorithm"/> property for the <see cref="SourceText"/>

@@ -19,12 +19,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
         TInvocationExpressionSyntax
     >
         : AbstractGenerateParameterizedMemberService<
-              TService,
-              TSimpleNameSyntax,
-              TExpressionSyntax,
-              TInvocationExpressionSyntax
-          >,
-          IGenerateDeconstructMemberService
+            TService,
+            TSimpleNameSyntax,
+            TExpressionSyntax,
+            TInvocationExpressionSyntax
+        >,
+            IGenerateDeconstructMemberService
         where TService : AbstractGenerateDeconstructMethodService<
                 TService,
                 TSimpleNameSyntax,
@@ -64,8 +64,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     .ConfigureAwait(false);
 
                 return state != null
-                  ? await GetActionsAsync(document, state, cancellationToken).ConfigureAwait(false)
-                  : ImmutableArray<CodeAction>.Empty;
+                    ? await GetActionsAsync(document, state, cancellationToken)
+                        .ConfigureAwait(false)
+                    : ImmutableArray<CodeAction>.Empty;
             }
         }
     }

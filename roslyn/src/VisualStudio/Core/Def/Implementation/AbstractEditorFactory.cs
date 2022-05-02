@@ -29,8 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     /// </summary>
     internal abstract class AbstractEditorFactory
         : IVsEditorFactory,
-          IVsEditorFactory4,
-          IVsEditorFactoryNotify
+            IVsEditorFactory4,
+            IVsEditorFactoryNotify
     {
         private readonly IComponentModel _componentModel;
         private Microsoft.VisualStudio.OLE.Interop.IServiceProvider? _oleServiceProvider;
@@ -363,8 +363,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 PackageUtilities.QueryService<IWinFormsEditorFactory>(_oleServiceProvider);
 
             return winFormsEditorFactory is null
-              ? VSConstants.E_FAIL
-              : winFormsEditorFactory.CreateEditorInstance(
+                ? VSConstants.E_FAIL
+                : winFormsEditorFactory.CreateEditorInstance(
                     vsHierarchy,
                     itemid,
                     _oleServiceProvider,

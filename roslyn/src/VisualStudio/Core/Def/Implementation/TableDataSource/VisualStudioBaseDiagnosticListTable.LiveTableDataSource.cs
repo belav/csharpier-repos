@@ -396,7 +396,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             private class TableEntriesSnapshot
                 : AbstractTableEntriesSnapshot<DiagnosticTableItem>,
-                  IWpfTableEntriesSnapshot
+                    IWpfTableEntriesSnapshot
             {
                 private readonly DiagnosticTableEntriesSource _source;
                 private FrameworkElement[]? _descriptions;

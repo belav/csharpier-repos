@@ -146,8 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         )
         {
             return token.IntersectsWith(position) && IsWord(token)
-              ? token.GetPreviousToken(includeSkipped: true)
-              : token;
+                ? token.GetPreviousToken(includeSkipped: true)
+                : token;
         }
 
         private static bool IsWord(SyntaxToken token) => CSharpSyntaxFacts.Instance.IsWord(token);

@@ -3121,8 +3121,8 @@ unsafe
 ",
                 options: TestOptions.UnsafeReleaseExe,
                 verify: ExecutionConditionUtil.IsMonoOrCoreClr
-                  ? Verification.Passes
-                  : Verification.Skipped
+                    ? Verification.Passes
+                    : Verification.Skipped
             );
 
             verifier.VerifyIL(
@@ -3155,8 +3155,8 @@ unsafe
 ",
                 options: TestOptions.UnsafeReleaseExe,
                 verify: ExecutionConditionUtil.IsMonoOrCoreClr
-                  ? Verification.Passes
-                  : Verification.Skipped
+                    ? Verification.Passes
+                    : Verification.Skipped
             );
 
             verifier.VerifyIL(
@@ -3463,8 +3463,8 @@ unsafe
                 expectedOutput: "11",
                 options: TestOptions.UnsafeReleaseExe,
                 verify: ExecutionConditionUtil.IsMonoOrCoreClr
-                  ? Verification.Passes
-                  : Verification.Skipped
+                    ? Verification.Passes
+                    : Verification.Skipped
             );
 
             verifier.VerifyIL(

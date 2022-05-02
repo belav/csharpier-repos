@@ -224,7 +224,7 @@ namespace SerializationTestTypes
 
     public class DerivedIXmlSerializable_POCOBaseDCNOISRef
         : DerivedPOCOBaseDCNOISRef,
-          IXmlSerializable
+            IXmlSerializable
     {
         public System.Xml.Schema.XmlSchema GetSchema()
         {

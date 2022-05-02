@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.ExtractClass
                 .GetExtractClassOptionsAsync(document, originalType, selectedMember)
                 .ConfigureAwait(false);
             return result == null
-              ? null
-              : new ExtractClassOptions(
+                ? null
+                : new ExtractClassOptions(
                     result.FileName,
                     result.TypeName,
                     result.SameFile,

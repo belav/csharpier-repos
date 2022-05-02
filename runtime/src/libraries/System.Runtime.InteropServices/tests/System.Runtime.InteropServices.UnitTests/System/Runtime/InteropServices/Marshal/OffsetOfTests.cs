@@ -51,9 +51,9 @@ namespace System.Runtime.InteropServices.Tests
             Type t = typeof(ExplicitLayoutTest);
             Assert.Equal(
                 OperatingSystem.IsAndroid()
-                    && RuntimeInformation.ProcessArchitecture == Architecture.X86
-                  ? 52
-                  : 56,
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86
+                    ? 52
+                    : 56,
                 Marshal.SizeOf(t)
             );
             Assert.Equal(new IntPtr(0), Marshal.OffsetOf(t, nameof(ExplicitLayoutTest.m_short1)));
@@ -240,9 +240,9 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(new IntPtr(0), Marshal.OffsetOf(t, nameof(FieldAlignmentTest_Decimal.b)));
             Assert.Equal(
                 OperatingSystem.IsAndroid()
-                    && RuntimeInformation.ProcessArchitecture == Architecture.X86
-                  ? new IntPtr(4)
-                  : new IntPtr(8),
+                && RuntimeInformation.ProcessArchitecture == Architecture.X86
+                    ? new IntPtr(4)
+                    : new IntPtr(8),
                 Marshal.OffsetOf(t, nameof(FieldAlignmentTest_Decimal.p))
             );
 

@@ -22,9 +22,9 @@ namespace SdtEventSources
         public sealed class EventSource
             :
 #if USE_MDT_EVENTSOURCE
-              Microsoft.Diagnostics.Tracing.EventSource
+            Microsoft.Diagnostics.Tracing.EventSource
 #else
-              System.Diagnostics.Tracing.EventSource
+            System.Diagnostics.Tracing.EventSource
 #endif
         {
             [Event(1)]

@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
 {
     internal abstract class AbstractToggleBlockCommentBase
         :
-          // Value tuple to represent that there is no distinct command to be passed in.
-          AbstractCommentSelectionBase<ValueTuple>,
-          ICommandHandler<ToggleBlockCommentCommandArgs>
+        // Value tuple to represent that there is no distinct command to be passed in.
+        AbstractCommentSelectionBase<ValueTuple>,
+            ICommandHandler<ToggleBlockCommentCommandArgs>
     {
         private static readonly CommentSelectionResult s_emptyCommentSelectionResult =
             new(new List<TextChange>(), new List<CommentTrackingSpan>(), Operation.Uncomment);

@@ -71,12 +71,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 // While implementing just one default action, like in the case of pressing enter after interface name in VB,
                 // choose to implement with the dispose pattern as that's the Dev12 behavior.
                 var action = ShouldImplementDisposePattern(state, explicitly: false)
-                  ? ImplementInterfaceWithDisposePatternCodeAction.CreateImplementWithDisposePatternCodeAction(
+                    ? ImplementInterfaceWithDisposePatternCodeAction.CreateImplementWithDisposePatternCodeAction(
                         this,
                         document,
                         state
                     )
-                  : ImplementInterfaceCodeAction.CreateImplementCodeAction(this, document, state);
+                    : ImplementInterfaceCodeAction.CreateImplementCodeAction(this, document, state);
 
                 return await action
                     .GetUpdatedDocumentAsync(cancellationToken)

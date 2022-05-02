@@ -32,7 +32,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
     [Order(After = CodeAnalysis.Editor.PredefinedCommandHandlerNames.SignatureHelpAfterCompletion)]
     internal sealed class SnippetCommandHandler
         : AbstractSnippetCommandHandler,
-          ICommandHandler<SurroundWithCommandArgs>
+            ICommandHandler<SurroundWithCommandArgs>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -122,14 +122,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
                     GetSnippetExpansionClient(textView, subjectBuffer),
                     subjectBuffer.ContentType,
                     types: surroundWith
-                      ? new[] { "SurroundsWith" }
-                      : new[] { "Expansion", "SurroundsWith" },
+                        ? new[] { "SurroundsWith" }
+                        : new[] { "Expansion", "SurroundsWith" },
                     includeNullType: true,
                     kinds: null,
                     includeNullKind: false,
                     prefixText: surroundWith
-                      ? GettextCatalog.GetString("Surround With")
-                      : GettextCatalog.GetString("Insert Snippet"),
+                        ? GettextCatalog.GetString("Surround With")
+                        : GettextCatalog.GetString("Insert Snippet"),
                     completionChar: null
                 );
 

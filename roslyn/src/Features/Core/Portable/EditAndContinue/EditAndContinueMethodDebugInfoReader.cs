@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 // Compiler generated methods (e.g. async kick-off methods) might not have debug information.
                 return symMethod == null
-                  ? default
-                  : MetadataTokens.StandaloneSignatureHandle(symMethod.GetLocalSignatureToken());
+                    ? default
+                    : MetadataTokens.StandaloneSignatureHandle(symMethod.GetLocalSignatureToken());
             }
 
             public override EditAndContinueMethodDebugInformation GetDebugInfo(
@@ -164,8 +164,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 Guid kind
             ) =>
                 TryGetCustomDebugInformation(_pdbReader, methodHandle, kind, out var cdi)
-                  ? _pdbReader.GetBlobContent(cdi.Value)
-                  : default;
+                    ? _pdbReader.GetBlobContent(cdi.Value)
+                    : default;
 
             /// <exception cref="BadImageFormatException">Invalid data format.</exception>
             private static bool TryGetCustomDebugInformation(

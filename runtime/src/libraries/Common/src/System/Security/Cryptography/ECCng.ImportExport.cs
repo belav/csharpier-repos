@@ -46,13 +46,13 @@ namespace System.Security.Cryptography
                     BCRYPT_ECCKEY_BLOB* pBcryptBlob = (BCRYPT_ECCKEY_BLOB*)pBlob;
                     pBcryptBlob->Magic = ecdh
                         ? EcdhCurveNameToMagicNumber(
-                              parameters.Curve.Oid.FriendlyName,
-                              includePrivateParameters
-                          )
+                            parameters.Curve.Oid.FriendlyName,
+                            includePrivateParameters
+                        )
                         : EcdsaCurveNameToMagicNumber(
-                              parameters.Curve.Oid.FriendlyName,
-                              includePrivateParameters
-                          );
+                            parameters.Curve.Oid.FriendlyName,
+                            includePrivateParameters
+                        );
                     pBcryptBlob->cbKey = parameters.Q.X.Length;
 
                     // Emit the blob
@@ -121,15 +121,15 @@ namespace System.Security.Cryptography
                     pBcryptBlob->Version = 1; // No constant for this found in bcrypt.h
                     pBcryptBlob->Magic = includePrivateParameters
                         ? (
-                              ecdh
-                                  ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC
-                                  : KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC
-                          )
+                            ecdh
+                                ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC
+                                : KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC
+                        )
                         : (
-                              ecdh
-                                  ? KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC
-                                  : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC
-                          );
+                            ecdh
+                                ? KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC
+                                : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC
+                        );
                     pBcryptBlob->cbCofactor = curve.Cofactor.Length;
                     pBcryptBlob->cbFieldLength = parameters.Q.X.Length;
                     pBcryptBlob->cbSeed = curve.Seed == null ? 0 : curve.Seed.Length;
@@ -441,24 +441,24 @@ namespace System.Security.Cryptography
             EcdsaCurveNameToAlgorithm(name) switch
             {
                 AlgorithmName.ECDsaP256
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P256_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P256_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P256_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P256_MAGIC,
 
                 AlgorithmName.ECDsaP384
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P384_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P384_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P384_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P384_MAGIC,
 
                 AlgorithmName.ECDsaP521
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P521_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P521_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_P521_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_P521_MAGIC,
 
                 _
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC,
             };
 
         /// <summary>
@@ -473,24 +473,24 @@ namespace System.Security.Cryptography
             EcdhCurveNameToAlgorithm(name) switch
             {
                 AlgorithmName.ECDHP256
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P256_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P256_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P256_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P256_MAGIC,
 
                 AlgorithmName.ECDHP384
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P384_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P384_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P384_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P384_MAGIC,
 
                 AlgorithmName.ECDHP521
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P521_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P521_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_P521_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_P521_MAGIC,
 
                 _
-                  => includePrivateParameters
-                      ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC
-                      : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC,
+                    => includePrivateParameters
+                        ? KeyBlobMagicNumber.BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC
+                        : KeyBlobMagicNumber.BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC,
             };
 
         /// <summary>

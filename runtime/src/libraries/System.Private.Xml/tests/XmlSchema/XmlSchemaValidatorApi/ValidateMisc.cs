@@ -1192,8 +1192,8 @@ namespace System.Xml.Tests
                 throw new ArgumentException();
 
             return path[path.Length - 1] == Path.DirectorySeparatorChar
-              ? path
-              : path + Path.DirectorySeparatorChar;
+                ? path
+                : path + Path.DirectorySeparatorChar;
         }
 
         private static string xsd445844 =

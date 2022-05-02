@@ -207,10 +207,10 @@ namespace System.IO.MemoryMappedFiles
                         | Interop.Sys.MemoryMappedProtections.PROT_WRITE
                     )
                 ) != 0
-              ? FileAccess.ReadWrite
-              : (protections & (Interop.Sys.MemoryMappedProtections.PROT_WRITE)) != 0
-                  ? FileAccess.Write
-                  : FileAccess.Read;
+                ? FileAccess.ReadWrite
+                : (protections & (Interop.Sys.MemoryMappedProtections.PROT_WRITE)) != 0
+                    ? FileAccess.Write
+                    : FileAccess.Read;
         }
 
         private static FileStream CreateSharedBackingObject(

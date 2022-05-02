@@ -61,6 +61,6 @@ internal class InputRadioContext
     /// <returns>The <see cref="InputRadioContext"/>, or <c>null</c> if none was found.</returns>
     public InputRadioContext? FindContextInAncestors(string groupName) =>
         string.Equals(GroupName, groupName)
-          ? this
-          : _parentContext?.FindContextInAncestors(groupName);
+            ? this
+            : _parentContext?.FindContextInAncestors(groupName);
 }

@@ -90,8 +90,8 @@ namespace System.Data.OleDb
             {
                 parameters.Add(
                     parameter is ICloneable cloneableParameter
-                      ? cloneableParameter.Clone()
-                      : parameter
+                        ? cloneableParameter.Clone()
+                        : parameter
                 );
             }
         }
@@ -1139,11 +1139,11 @@ namespace System.Data.OleDb
             {
                 // do nothing, already expanded by user
                 System.Data.CommandType.Text
-                  => cmdtxt,
+                    => cmdtxt,
 
                 // { ? = CALL SPROC (? ?) }, { ? = CALL SPROC }, { CALL SPRC (? ?) }, { CALL SPROC }
                 System.Data.CommandType.StoredProcedure
-                  => ExpandStoredProcedureToText(cmdtxt),
+                    => ExpandStoredProcedureToText(cmdtxt),
 
                 // @devnote: Provider=Jolt4.0 doesn't like quoted table names, SQOLEDB requires them
                 // Providers should not require table names to be quoted and should guarantee that
@@ -1151,7 +1151,7 @@ namespace System.Data.OleDb
                 // contains special characters, as long as the table can be unambiguously identified
                 // without quoting.
                 System.Data.CommandType.TableDirect
-                  => cmdtxt,
+                    => cmdtxt,
 
                 _ => throw ADP.InvalidCommandType(cmdtype),
             };

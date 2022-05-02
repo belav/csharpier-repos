@@ -2119,12 +2119,12 @@ namespace System.Text
             GetType() != typeof(UnicodeEncoding)
                 ? new ReadOnlySpan<byte>(GetPreamble())
                 : // in case a derived UnicodeEncoding overrode GetPreamble
-                  !byteOrderMark
+                !byteOrderMark
                     ? default
                     : bigEndian
                         ? (ReadOnlySpan<byte>)new byte[2] { 0xfe, 0xff }
                         : // uses C# compiler's optimization for static byte[] data
-                          (ReadOnlySpan<byte>)new byte[2] { 0xff, 0xfe };
+                        (ReadOnlySpan<byte>)new byte[2] { 0xff, 0xfe };
 
         public override int GetMaxByteCount(int charCount)
         {

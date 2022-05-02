@@ -37,9 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal partial class DefiniteAssignmentPass
         : LocalDataFlowPass<
-              DefiniteAssignmentPass.LocalState,
-              DefiniteAssignmentPass.LocalFunctionState
-          >
+            DefiniteAssignmentPass.LocalState,
+            DefiniteAssignmentPass.LocalFunctionState
+        >
     {
         /// <summary>
         /// A mapping from local variables to the index of their slot in a flow analysis local state.
@@ -176,8 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 member,
                 node,
                 strictAnalysis
-                  ? EmptyStructTypeCache.CreatePrecise()
-                  : EmptyStructTypeCache.CreateForDev12Compatibility(compilation),
+                    ? EmptyStructTypeCache.CreatePrecise()
+                    : EmptyStructTypeCache.CreateForDev12Compatibility(compilation),
                 trackUnassignments
             )
         {
@@ -568,7 +568,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
 #pragma warning disable format
                     ErrorCode.ERR_UnassignedThisAutoProperty
-                      => ErrorCode.WRN_UnassignedThisAutoProperty,
+                        => ErrorCode.WRN_UnassignedThisAutoProperty,
                     ErrorCode.ERR_UnassignedThis => ErrorCode.WRN_UnassignedThis,
                     ErrorCode.ERR_ParamUnassigned => ErrorCode.WRN_ParamUnassigned,
                     ErrorCode.ERR_UseDefViolationProperty => ErrorCode.WRN_UseDefViolationProperty,
@@ -2108,8 +2108,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Diagnostics.Add(
                         assigned && _writtenVariables.Contains(symbol)
-                          ? ErrorCode.WRN_UnreferencedVarAssg
-                          : ErrorCode.WRN_UnreferencedVar,
+                            ? ErrorCode.WRN_UnreferencedVarAssg
+                            : ErrorCode.WRN_UnreferencedVar,
                         symbol.Locations.FirstOrNone(),
                         symbol.Name
                     );
@@ -2680,10 +2680,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             builder.Append(
                 bit == 0
-                  ? "<unreachable>"
-                  : string.IsNullOrEmpty(id.Symbol.Name)
-                      ? "<anon>" + id.Symbol.GetHashCode()
-                      : id.Symbol.Name
+                    ? "<unreachable>"
+                    : string.IsNullOrEmpty(id.Symbol.Name)
+                        ? "<anon>" + id.Symbol.GetHashCode()
+                        : id.Symbol.Name
             );
         }
 

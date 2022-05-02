@@ -12,9 +12,9 @@ namespace System.Data.OleDb
     [System.ComponentModel.ToolboxItemAttribute(true)]
     public sealed partial class OleDbCommand
         : System.Data.Common.DbCommand,
-          System.Data.IDbCommand,
-          System.ICloneable,
-          System.IDisposable
+            System.Data.IDbCommand,
+            System.ICloneable,
+            System.IDisposable
     {
         public OleDbCommand() { }
 
@@ -286,9 +286,9 @@ namespace System.Data.OleDb
     [System.ComponentModel.DefaultEventAttribute("InfoMessage")]
     public sealed partial class OleDbConnection
         : System.Data.Common.DbConnection,
-          System.Data.IDbConnection,
-          System.ICloneable,
-          System.IDisposable
+            System.Data.IDbConnection,
+            System.ICloneable,
+            System.IDisposable
     {
         public OleDbConnection() { }
 
@@ -518,9 +518,9 @@ namespace System.Data.OleDb
     )]
     public sealed partial class OleDbDataAdapter
         : System.Data.Common.DbDataAdapter,
-          System.Data.IDataAdapter,
-          System.Data.IDbDataAdapter,
-          System.ICloneable
+            System.Data.IDataAdapter,
+            System.Data.IDbDataAdapter,
+            System.ICloneable
     {
         public OleDbDataAdapter() { }
 
@@ -889,7 +889,7 @@ namespace System.Data.OleDb
     [System.ComponentModel.ListBindableAttribute(false)]
     public sealed partial class OleDbErrorCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal OleDbErrorCollection() { }
 
@@ -1065,9 +1065,9 @@ namespace System.Data.OleDb
 
     public sealed partial class OleDbParameter
         : System.Data.Common.DbParameter,
-          System.Data.IDataParameter,
-          System.Data.IDbDataParameter,
-          System.ICloneable
+            System.Data.IDataParameter,
+            System.Data.IDbDataParameter,
+            System.ICloneable
     {
         public OleDbParameter() { }
 

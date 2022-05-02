@@ -97,7 +97,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 var distinctArguments = arguments.Distinct().ToList();
 
                 return distinctArguments.Count > 1
-                  ? new SqlFunctionExpression(
+                    ? new SqlFunctionExpression(
                         sqlFunctionExpression.Name,
                         distinctArguments,
                         sqlFunctionExpression.IsNullable,
@@ -107,7 +107,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         sqlFunctionExpression.Type,
                         sqlFunctionExpression.TypeMapping
                     )
-                  : distinctArguments[0];
+                    : distinctArguments[0];
             }
 
             return base.VisitExtension(extensionExpression);
@@ -182,13 +182,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 sqlBinaryExpression.Right is SqlConstantExpression
                     ? sqlBinaryExpression.OperatorType
                     : sqlBinaryExpression.OperatorType switch
-                      {
-                          ExpressionType.GreaterThan => ExpressionType.LessThan,
-                          ExpressionType.GreaterThanOrEqual => ExpressionType.LessThanOrEqual,
-                          ExpressionType.LessThan => ExpressionType.GreaterThan,
-                          ExpressionType.LessThanOrEqual => ExpressionType.GreaterThanOrEqual,
-                          _ => sqlBinaryExpression.OperatorType
-                      };
+                    {
+                        ExpressionType.GreaterThan => ExpressionType.LessThan,
+                        ExpressionType.GreaterThanOrEqual => ExpressionType.LessThanOrEqual,
+                        ExpressionType.LessThan => ExpressionType.GreaterThan,
+                        ExpressionType.LessThanOrEqual => ExpressionType.GreaterThanOrEqual,
+                        _ => sqlBinaryExpression.OperatorType
+                    };
 
             switch (operatorType)
             {
@@ -214,10 +214,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         {
                             0 => _sqlExpressionFactory.GreaterThan(testLeft, testRight),
                             1
-                              => _sqlExpressionFactory.Constant(
-                                  false,
-                                  sqlBinaryExpression.TypeMapping
-                              ),
+                                => _sqlExpressionFactory.Constant(
+                                    false,
+                                    sqlBinaryExpression.TypeMapping
+                                ),
                             _ => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight),
                         }
                     );
@@ -232,10 +232,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             0 => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight),
                             1 => _sqlExpressionFactory.GreaterThan(testLeft, testRight),
                             _
-                              => _sqlExpressionFactory.Constant(
-                                  true,
-                                  sqlBinaryExpression.TypeMapping
-                              ),
+                                => _sqlExpressionFactory.Constant(
+                                    true,
+                                    sqlBinaryExpression.TypeMapping
+                                ),
                         }
                     );
 
@@ -249,10 +249,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             0 => _sqlExpressionFactory.LessThan(testLeft, testRight),
                             1 => _sqlExpressionFactory.LessThanOrEqual(testLeft, testRight),
                             _
-                              => _sqlExpressionFactory.Constant(
-                                  false,
-                                  sqlBinaryExpression.TypeMapping
-                              ),
+                                => _sqlExpressionFactory.Constant(
+                                    false,
+                                    sqlBinaryExpression.TypeMapping
+                                ),
                         }
                     );
 
@@ -266,10 +266,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         {
                             0 => _sqlExpressionFactory.LessThanOrEqual(testLeft, testRight),
                             1
-                              => _sqlExpressionFactory.Constant(
-                                  true,
-                                  sqlBinaryExpression.TypeMapping
-                              ),
+                                => _sqlExpressionFactory.Constant(
+                                    true,
+                                    sqlBinaryExpression.TypeMapping
+                                ),
                             _ => _sqlExpressionFactory.LessThan(testLeft, testRight),
                         }
                     );
@@ -528,8 +528,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         inner.ConstantValue,
                         inner.TypeMapping,
                         inner.OperationType == ExpressionType.Equal
-                          ? ExpressionType.NotEqual
-                          : ExpressionType.Equal
+                            ? ExpressionType.NotEqual
+                            : ExpressionType.Equal
                     );
 
                     return true;

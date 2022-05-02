@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationTypeParameterSymbol
         : CodeGenerationTypeSymbol,
-          ITypeParameterSymbol
+            ITypeParameterSymbol
     {
         public VarianceKind Variance { get; }
         public ImmutableArray<ITypeSymbol> ConstraintTypes { get; internal set; }
@@ -94,8 +94,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             get
             {
                 return this.DeclaringMethod != null
-                  ? TypeParameterKind.Method
-                  : TypeParameterKind.Type;
+                    ? TypeParameterKind.Method
+                    : TypeParameterKind.Type;
             }
         }
 

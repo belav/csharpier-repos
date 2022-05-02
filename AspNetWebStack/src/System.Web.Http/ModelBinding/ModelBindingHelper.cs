@@ -61,8 +61,8 @@ namespace System.Web.Http.ModelBinding
                 return prefix;
             }
             return suffix.StartsWith("[", StringComparison.Ordinal)
-              ? prefix + suffix
-              : prefix + "." + suffix;
+                ? prefix + suffix
+                : prefix + "." + suffix;
         }
 
         internal static IModelBinder GetPossibleBinderInstance(
@@ -76,9 +76,9 @@ namespace System.Web.Http.ModelBinding
                 openModelType
             );
             return (typeArguments != null)
-              ? (IModelBinder)
+                ? (IModelBinder)
                     Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
-              : null;
+                : null;
         }
 
         internal static object[] RawValueToObjectArray(object rawValue)
@@ -148,8 +148,8 @@ namespace System.Web.Http.ModelBinding
             {
                 Type closedBinderType = modelBinderAttribute.BinderType.IsGenericTypeDefinition
                     ? modelBinderAttribute.BinderType.MakeGenericType(
-                          modelType.GetGenericArguments()
-                      )
+                        modelType.GetGenericArguments()
+                    )
                     : modelBinderAttribute.BinderType;
 
                 IModelBinder binderInstance = (IModelBinder)

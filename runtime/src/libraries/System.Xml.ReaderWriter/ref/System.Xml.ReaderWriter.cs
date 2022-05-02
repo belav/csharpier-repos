@@ -276,8 +276,8 @@ namespace System.Xml
 
     public sealed partial class XmlAttributeCollection
         : System.Xml.XmlNamedNodeMap,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         internal XmlAttributeCollection() { }
 
@@ -1671,7 +1671,7 @@ namespace System.Xml
 
     public partial class XmlNamespaceManager
         : System.Collections.IEnumerable,
-          System.Xml.IXmlNamespaceResolver
+            System.Xml.IXmlNamespaceResolver
     {
         public XmlNamespaceManager(System.Xml.XmlNameTable nameTable) { }
 
@@ -1743,8 +1743,8 @@ namespace System.Xml
     [System.Diagnostics.DebuggerDisplayAttribute("{debuggerDisplayProxy}")]
     public abstract partial class XmlNode
         : System.Collections.IEnumerable,
-          System.ICloneable,
-          System.Xml.XPath.IXPathNavigable
+            System.ICloneable,
+            System.Xml.XPath.IXPathNavigable
     {
         internal XmlNode() { }
 
@@ -3433,8 +3433,8 @@ namespace System.Xml
     )]
     public partial class XmlTextReader
         : System.Xml.XmlReader,
-          System.Xml.IXmlLineInfo,
-          System.Xml.IXmlNamespaceResolver
+            System.Xml.IXmlLineInfo,
+            System.Xml.IXmlNamespaceResolver
     {
         protected XmlTextReader() { }
 
@@ -3933,8 +3933,8 @@ namespace System.Xml
     )]
     public partial class XmlValidatingReader
         : System.Xml.XmlReader,
-          System.Xml.IXmlLineInfo,
-          System.Xml.IXmlNamespaceResolver
+            System.Xml.IXmlLineInfo,
+            System.Xml.IXmlNamespaceResolver
     {
         public XmlValidatingReader(
             System.IO.Stream xmlFragment,
@@ -5501,7 +5501,7 @@ namespace System.Xml.Schema
     )]
     public sealed partial class XmlSchemaCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public XmlSchemaCollection() { }
 
@@ -8098,9 +8098,9 @@ namespace System.Xml.XPath
 
     public abstract partial class XPathNavigator
         : System.Xml.XPath.XPathItem,
-          System.ICloneable,
-          System.Xml.IXmlNamespaceResolver,
-          System.Xml.XPath.IXPathNavigable
+            System.ICloneable,
+            System.Xml.IXmlNamespaceResolver,
+            System.Xml.XPath.IXPathNavigable
     {
         protected XPathNavigator() { }
 
@@ -8602,7 +8602,7 @@ namespace System.Xml.XPath
     )]
     public abstract partial class XPathNodeIterator
         : System.Collections.IEnumerable,
-          System.ICloneable
+            System.ICloneable
     {
         protected XPathNodeIterator() { }
 

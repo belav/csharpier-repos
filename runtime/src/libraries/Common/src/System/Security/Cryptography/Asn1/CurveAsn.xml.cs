@@ -102,8 +102,8 @@ namespace System.Security.Cryptography.Asn1
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
                 decoded.A = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {
@@ -113,8 +113,8 @@ namespace System.Security.Cryptography.Asn1
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
                 decoded.B = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {
@@ -129,8 +129,8 @@ namespace System.Security.Cryptography.Asn1
                 if (sequenceReader.TryReadPrimitiveBitString(out _, out tmpSpan))
                 {
                     decoded.Seed = rebindSpan.Overlaps(tmpSpan, out offset)
-                      ? rebind.Slice(offset, tmpSpan.Length)
-                      : tmpSpan.ToArray();
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {

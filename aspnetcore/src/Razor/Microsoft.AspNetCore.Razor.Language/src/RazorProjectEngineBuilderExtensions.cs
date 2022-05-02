@@ -317,7 +317,7 @@ public static class RazorProjectEngineBuilderExtensions
 
     private class AdditionalImportsProjectFeature
         : RazorProjectEngineFeatureBase,
-          IImportProjectFeature
+            IImportProjectFeature
     {
         private readonly IReadOnlyList<RazorProjectItem> _imports;
 
@@ -367,7 +367,7 @@ public static class RazorProjectEngineBuilderExtensions
 
     private class SetSupportLocalizedComponentNamesFeature
         : RazorEngineFeatureBase,
-          IConfigureRazorCodeGenerationOptionsFeature
+            IConfigureRazorCodeGenerationOptionsFeature
     {
         public int Order { get; set; }
 

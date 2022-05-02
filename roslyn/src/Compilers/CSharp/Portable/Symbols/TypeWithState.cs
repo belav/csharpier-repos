@@ -113,20 +113,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var type = TypeWithAnnotations.Create(Type, NullableAnnotation.NotAnnotated);
                 return (State == NullableFlowState.MaybeDefault || asAnnotatedType)
-                  ? type.SetIsAnnotated(compilation)
-                  : type;
+                    ? type.SetIsAnnotated(compilation)
+                    : type;
             }
             NullableAnnotation annotation = asAnnotatedType
                 ? (
-                      Type?.IsValueType == true
-                          ? NullableAnnotation.NotAnnotated
-                          : NullableAnnotation.Annotated
-                  )
+                    Type?.IsValueType == true
+                        ? NullableAnnotation.NotAnnotated
+                        : NullableAnnotation.Annotated
+                )
                 : (
-                      State.IsNotNull() || Type?.CanContainNull() == false
-                          ? NullableAnnotation.NotAnnotated
-                          : NullableAnnotation.Annotated
-                  );
+                    State.IsNotNull() || Type?.CanContainNull() == false
+                        ? NullableAnnotation.NotAnnotated
+                        : NullableAnnotation.Annotated
+                );
             return TypeWithAnnotations.Create(this.Type, annotation);
         }
 

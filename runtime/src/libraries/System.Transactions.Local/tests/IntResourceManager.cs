@@ -231,7 +231,7 @@ namespace System.Transactions.Tests
 
     public class PromotableSinglePhaseNotification
         : SinglePhaseNotification,
-          IPromotableSinglePhaseNotification
+            IPromotableSinglePhaseNotification
     {
         public PromotableSinglePhaseNotification(IntResourceManager resource) : base(resource) { }
 

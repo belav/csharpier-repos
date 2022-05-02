@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
                 .GetDesiredIndentation(document, lineNumber, cancellationToken)
                 .ConfigureAwait(false);
             return result.HasValue
-              ? new VSTypeScriptIndentationResultWrapper(result.Value)
-              : (VSTypeScriptIndentationResultWrapper?)null;
+                ? new VSTypeScriptIndentationResultWrapper(result.Value)
+                : (VSTypeScriptIndentationResultWrapper?)null;
         }
     }
 }

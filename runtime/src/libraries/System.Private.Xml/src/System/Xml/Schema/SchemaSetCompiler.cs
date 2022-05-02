@@ -2025,14 +2025,14 @@ namespace System.Xml.Schema
             XmlSchemaDerivationMethod baseEffectiveBlock =
                 baseElement.ElementDecl!.Block == XmlSchemaDerivationMethod.All
                     ? XmlSchemaDerivationMethod.Substitution
-                      | XmlSchemaDerivationMethod.Restriction
-                      | XmlSchemaDerivationMethod.Extension
+                        | XmlSchemaDerivationMethod.Restriction
+                        | XmlSchemaDerivationMethod.Extension
                     : baseElement.ElementDecl.Block;
             XmlSchemaDerivationMethod derivedEffectiveBlock =
                 derivedElement.ElementDecl!.Block == XmlSchemaDerivationMethod.All
                     ? XmlSchemaDerivationMethod.Substitution
-                      | XmlSchemaDerivationMethod.Restriction
-                      | XmlSchemaDerivationMethod.Extension
+                        | XmlSchemaDerivationMethod.Restriction
+                        | XmlSchemaDerivationMethod.Extension
                     : derivedElement.ElementDecl.Block;
 
             if (

@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
     // GoToDefinition
     internal abstract class AbstractGoToDefinitionService
         : AbstractFindDefinitionService,
-          IGoToDefinitionService
+            IGoToDefinitionService
     {
         private readonly IThreadingContext _threadingContext;
 

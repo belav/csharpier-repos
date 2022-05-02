@@ -10,7 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class QueryLoggingCosmosTest
         : QueryLoggingCosmosTestBase,
-          IClassFixture<QueryLoggingCosmosTest.NorthwindQueryCosmosFixtureInsensitive<NoopModelCustomizer>>
+            IClassFixture<QueryLoggingCosmosTest.NorthwindQueryCosmosFixtureInsensitive<NoopModelCustomizer>>
     {
         public QueryLoggingCosmosTest(
             NorthwindQueryCosmosFixtureInsensitive<NoopModelCustomizer> fixture

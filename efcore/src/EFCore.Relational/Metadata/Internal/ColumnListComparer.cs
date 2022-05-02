@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     // Sealed for perf
     public sealed class ColumnListComparer
         : IComparer<IReadOnlyList<IColumn>>,
-          IEqualityComparer<IReadOnlyList<IColumn>>
+            IEqualityComparer<IReadOnlyList<IColumn>>
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

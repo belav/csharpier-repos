@@ -274,10 +274,10 @@ public class IdentityBuilderTest
 
     private class MyUberThingy
         : IUserValidator<PocoUser>,
-          IPasswordValidator<PocoUser>,
-          IRoleValidator<PocoRole>,
-          IUserStore<PocoUser>,
-          IRoleStore<PocoRole>
+            IPasswordValidator<PocoUser>,
+            IRoleValidator<PocoRole>,
+            IUserStore<PocoUser>,
+            IRoleStore<PocoRole>
     {
         public Task<IdentityResult> CreateAsync(
             PocoRole role,

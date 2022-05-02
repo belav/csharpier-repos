@@ -139,9 +139,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 syntaxFacts,
                 out var simpleName
             )
-              ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
+                ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
                     .ConfigureAwait(false)
-              : ImmutableArray<Document>.Empty;
+                : ImmutableArray<Document>.Empty;
 
             result.AddRange(documentsWithName);
             result.AddRange(documentsWithAttribute);
@@ -380,7 +380,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             );
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             return TryGetNameWithoutAttributeSuffix(name, syntaxFacts, out var nameWithoutSuffix)
-              ? FindReferencesInDocumentUsingIdentifierAsync(
+                ? FindReferencesInDocumentUsingIdentifierAsync(
                     namedType,
                     nameWithoutSuffix,
                     document,
@@ -388,7 +388,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     symbolsMatch,
                     cancellationToken
                 )
-              : new ValueTask<ImmutableArray<FinderLocation>>(ImmutableArray<FinderLocation>.Empty);
+                : new ValueTask<ImmutableArray<FinderLocation>>(
+                    ImmutableArray<FinderLocation>.Empty
+                );
         }
     }
 }

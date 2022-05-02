@@ -15,8 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public abstract class HttpMethodAttribute
     : Attribute,
-      IActionHttpMethodProvider,
-      IRouteTemplateProvider
+        IActionHttpMethodProvider,
+        IRouteTemplateProvider
 {
     private readonly List<string> _httpMethods;
 

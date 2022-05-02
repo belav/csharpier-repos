@@ -15,11 +15,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ReassignedVariable
     [ExportLanguageService(typeof(IReassignedVariableService), LanguageNames.CSharp), Shared]
     internal class CSharpReassignedVariableService
         : AbstractReassignedVariableService<
-              ParameterSyntax,
-              VariableDeclaratorSyntax,
-              SingleVariableDesignationSyntax,
-              IdentifierNameSyntax
-          >
+            ParameterSyntax,
+            VariableDeclaratorSyntax,
+            SingleVariableDesignationSyntax,
+            IdentifierNameSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

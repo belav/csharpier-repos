@@ -162,10 +162,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (
                             CurrentSymbol == null
                                 ? SymbolLoader.LookupAggMember(
-                                      _name,
-                                      CurrentType.OwningAggregate,
-                                      _mask
-                                  )
+                                    _name,
+                                    CurrentType.OwningAggregate,
+                                    _mask
+                                )
                                 : CurrentSymbol.LookupNext(_mask)
                         ) as MethodOrPropertySymbol;
 

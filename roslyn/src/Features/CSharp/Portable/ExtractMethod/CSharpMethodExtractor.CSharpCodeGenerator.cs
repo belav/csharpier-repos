@@ -253,8 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private SimpleNameSyntax CreateMethodNameForInvocation()
             {
                 return AnalyzerResult.MethodTypeParametersInDeclaration.Count == 0
-                  ? SyntaxFactory.IdentifierName(_methodName)
-                  : SyntaxFactory.GenericName(
+                    ? SyntaxFactory.IdentifierName(_methodName)
+                    : SyntaxFactory.GenericName(
                         _methodName,
                         SyntaxFactory.TypeArgumentList(CreateMethodCallTypeVariables())
                     );
@@ -330,10 +330,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             private static SyntaxKind GetParameterRefSyntaxKind(ParameterBehavior parameterBehavior)
             {
                 return parameterBehavior == ParameterBehavior.Ref
-                  ? SyntaxKind.RefKeyword
-                  : parameterBehavior == ParameterBehavior.Out
-                      ? SyntaxKind.OutKeyword
-                      : SyntaxKind.None;
+                    ? SyntaxKind.RefKeyword
+                    : parameterBehavior == ParameterBehavior.Out
+                        ? SyntaxKind.OutKeyword
+                        : SyntaxKind.None;
             }
 
             private OperationStatus<ImmutableArray<SyntaxNode>> CreateMethodBody(
@@ -763,8 +763,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             protected override StatementSyntax CreateReturnStatement(string identifierName = null)
             {
                 return string.IsNullOrEmpty(identifierName)
-                  ? SyntaxFactory.ReturnStatement()
-                  : SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName(identifierName));
+                    ? SyntaxFactory.ReturnStatement()
+                    : SyntaxFactory.ReturnStatement(SyntaxFactory.IdentifierName(identifierName));
             }
 
             protected override ExpressionSyntax CreateCallSignature()
@@ -893,11 +893,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     {
                         MethodDeclarationSyntax method => TweakNewLinesInMethod(method),
                         LocalFunctionStatementSyntax localFunction
-                          => TweakNewLinesInMethod(localFunction),
+                            => TweakNewLinesInMethod(localFunction),
                         _
-                          => throw new NotSupportedException(
-                              "SyntaxNode expected to be MethodDeclarationSyntax or LocalFunctionStatementSyntax."
-                          ),
+                            => throw new NotSupportedException(
+                                "SyntaxNode expected to be MethodDeclarationSyntax or LocalFunctionStatementSyntax."
+                            ),
                     };
 
                     newDocument = await newDocument

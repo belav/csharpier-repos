@@ -502,7 +502,7 @@ namespace System.DirectoryServices.Protocols
 
     public partial class DirectoryOperationException
         : System.DirectoryServices.Protocols.DirectoryException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public DirectoryOperationException() { }
 
@@ -746,7 +746,7 @@ namespace System.DirectoryServices.Protocols
 
     public partial class LdapConnection
         : System.DirectoryServices.Protocols.DirectoryConnection,
-          System.IDisposable
+            System.IDisposable
     {
         public LdapConnection(System.DirectoryServices.Protocols.LdapDirectoryIdentifier identifier)
         { }
@@ -904,7 +904,7 @@ namespace System.DirectoryServices.Protocols
 
     public partial class LdapException
         : System.DirectoryServices.Protocols.DirectoryException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public LdapException() { }
 

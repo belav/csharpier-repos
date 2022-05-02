@@ -627,8 +627,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests
             else
             {
                 workspaceType = workspacePath.EndsWith("proj")
-                  ? WorkspaceType.Project
-                  : WorkspaceType.Solution;
+                    ? WorkspaceType.Project
+                    : WorkspaceType.Solution;
             }
 
             var logger = new TestLogger();

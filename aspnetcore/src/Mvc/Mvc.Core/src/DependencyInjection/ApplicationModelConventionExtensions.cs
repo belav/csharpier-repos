@@ -196,7 +196,7 @@ public static class ApplicationModelConventionExtensions
 
     private class ParameterBaseApplicationModelConvention
         : IApplicationModelConvention,
-          IParameterModelBaseConvention
+            IParameterModelBaseConvention
     {
         private readonly IParameterModelBaseConvention _parameterBaseModelConvention;
 

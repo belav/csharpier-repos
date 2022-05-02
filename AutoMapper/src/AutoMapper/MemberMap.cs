@@ -115,8 +115,8 @@ namespace AutoMapper
         {
             var mapExpression = TypeMap.SourceType.IsGenericTypeDefinition
                 ?
-                  // just a placeholder so the member is mapped
-                  Lambda(ExpressionBuilder.Null)
+                // just a placeholder so the member is mapped
+                Lambda(ExpressionBuilder.Null)
                 : ExpressionBuilder.MemberAccessLambda(TypeMap.SourceType, sourceMembersPath);
             MapFrom(mapExpression);
         }

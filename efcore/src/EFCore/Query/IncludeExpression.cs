@@ -109,11 +109,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         ) =>
             entityExpression != EntityExpression || navigationExpression != NavigationExpression
                 ? new IncludeExpression(
-                      entityExpression,
-                      navigationExpression,
-                      Navigation,
-                      SetLoaded
-                  )
+                    entityExpression,
+                    navigationExpression,
+                    Navigation,
+                    SetLoaded
+                )
                 : this;
 
         /// <inheritdoc />

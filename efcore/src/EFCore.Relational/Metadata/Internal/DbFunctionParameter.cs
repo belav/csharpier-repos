@@ -19,9 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class DbFunctionParameter
         : ConventionAnnotatable,
-          IMutableDbFunctionParameter,
-          IConventionDbFunctionParameter,
-          IRuntimeDbFunctionParameter
+            IMutableDbFunctionParameter,
+            IConventionDbFunctionParameter,
+            IRuntimeDbFunctionParameter
     {
         private string? _storeType;
         private RelationalTypeMapping? _typeMapping;
@@ -152,22 +152,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             get =>
                 IsReadOnly
                     ? NonCapturingLazyInitializer.EnsureInitialized(
-                          ref _typeMapping,
-                          this,
-                          static parameter =>
-                          {
-                              var relationalTypeMappingSource = (IRelationalTypeMappingSource)
-                                  ((IModel)parameter.Function.Model)
-                                      .GetModelDependencies()
-                                      .TypeMappingSource;
-                              return !string.IsNullOrEmpty(parameter._storeType)
+                        ref _typeMapping,
+                        this,
+                        static parameter =>
+                        {
+                            var relationalTypeMappingSource = (IRelationalTypeMappingSource)
+                                ((IModel)parameter.Function.Model)
+                                    .GetModelDependencies()
+                                    .TypeMappingSource;
+                            return !string.IsNullOrEmpty(parameter._storeType)
                                 ? relationalTypeMappingSource.FindMapping(parameter._storeType)!
                                 : relationalTypeMappingSource.FindMapping(
-                                      parameter.ClrType,
-                                      (IModel)parameter.Function.Model
-                                  )!;
-                          }
-                      )
+                                    parameter.ClrType,
+                                    (IModel)parameter.Function.Model
+                                )!;
+                        }
+                    )
                     : _typeMapping;
             set => SetTypeMapping(value, ConfigurationSource.Explicit);
         }
@@ -305,8 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -325,8 +325,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetStoreType(
                 storeType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

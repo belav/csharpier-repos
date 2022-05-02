@@ -47,13 +47,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             Equals(member, _count)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     "NumGeometries",
                     new[] { instance! },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
                     returnType
                 )
-              : null;
+                : null;
     }
 }

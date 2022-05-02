@@ -41,8 +41,8 @@ namespace Microsoft.WebAssembly.Build.Tasks
             }
 
             var workingDir = string.IsNullOrEmpty(WorkingDirectory)
-              ? Directory.GetCurrentDirectory()
-              : WorkingDirectory;
+                ? Directory.GetCurrentDirectory()
+                : WorkingDirectory;
             Log.LogMessage(MessageImportance.Low, $"Working directory: {workingDir}");
             Log.LogMessage(MessageImportance.Low, $"Using Command: {Command}");
 

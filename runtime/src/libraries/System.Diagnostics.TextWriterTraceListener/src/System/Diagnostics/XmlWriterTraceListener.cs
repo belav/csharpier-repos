@@ -95,8 +95,8 @@ namespace System.Diagnostics
             WriteHeader(source, eventType, id, eventCache);
             WriteEscaped(
                 args != null && args.Length != 0
-                  ? string.Format(CultureInfo.InvariantCulture, format!, args)
-                  : format
+                    ? string.Format(CultureInfo.InvariantCulture, format!, args)
+                    : format
             );
             WriteFooter(eventCache);
         }

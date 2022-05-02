@@ -146,10 +146,10 @@ namespace System.Net.Http.Functional.Tests
                 3 => new Http3LoopbackServerFactory(quicImplementationProvider),
 #endif
                 2
-                  => Http2LoopbackServerFactory.Singleton,
+                    => Http2LoopbackServerFactory.Singleton,
 #endif
                 _
-                  => Http11LoopbackServerFactory.Singleton
+                    => Http11LoopbackServerFactory.Singleton
             };
         }
     }

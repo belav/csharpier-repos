@@ -318,9 +318,9 @@ namespace System.Net.Http
                 long? contentLength = c.Headers.ContentLength;
                 using Stream buffer = contentLength.HasValue
                     ? new HttpContent.LimitMemoryStream(
-                          _maxResponseContentBufferSize,
-                          (int)contentLength.GetValueOrDefault()
-                      )
+                        _maxResponseContentBufferSize,
+                        (int)contentLength.GetValueOrDefault()
+                    )
                     : new HttpContent.LimitArrayPoolWriteStream(_maxResponseContentBufferSize);
 
                 using Stream responseStream =
@@ -336,10 +336,10 @@ namespace System.Net.Http
                 }
 
                 return buffer.Length == 0
-                  ? Array.Empty<byte>()
-                  : buffer is HttpContent.LimitMemoryStream lms
-                      ? lms.GetSizedBuffer()
-                      : ((HttpContent.LimitArrayPoolWriteStream)buffer).ToArray();
+                    ? Array.Empty<byte>()
+                    : buffer is HttpContent.LimitMemoryStream lms
+                        ? lms.GetSizedBuffer()
+                        : ((HttpContent.LimitArrayPoolWriteStream)buffer).ToArray();
             }
             catch (Exception e)
             {

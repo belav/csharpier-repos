@@ -6,7 +6,7 @@ namespace System.CommandLine.Generator.Invocations
 {
     internal class ConstructorModelBindingInvocation
         : DelegateInvocation,
-          IEquatable<ConstructorModelBindingInvocation>
+            IEquatable<ConstructorModelBindingInvocation>
     {
         public ConstructorModelBindingInvocation(
             IMethodSymbol constructor,

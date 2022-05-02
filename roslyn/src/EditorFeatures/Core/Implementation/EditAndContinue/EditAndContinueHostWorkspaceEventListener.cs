@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     internal sealed class EditAndContinueHostWorkspaceEventListener
         : IEventListener<object>,
-          IEventListenerStoppable
+            IEventListenerStoppable
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

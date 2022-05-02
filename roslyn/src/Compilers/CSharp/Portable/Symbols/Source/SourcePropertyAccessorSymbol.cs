@@ -844,10 +844,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 (object)implementedAccessor != null
                                     ? implementedAccessor.Name
                                     : GetAccessorName(
-                                          explicitlyImplementedPropertyOpt.MetadataName,
-                                          isGetMethod,
-                                          isWinMdOutput: _property.IsCompilationOutputWinMdObj()
-                                      ); //Not name - could be indexer placeholder
+                                        explicitlyImplementedPropertyOpt.MetadataName,
+                                        isGetMethod,
+                                        isWinMdOutput: _property.IsCompilationOutputWinMdObj()
+                                    ); //Not name - could be indexer placeholder
 
                             string? aliasQualifierOpt = _property
                                 .GetExplicitInterfaceSpecifier()

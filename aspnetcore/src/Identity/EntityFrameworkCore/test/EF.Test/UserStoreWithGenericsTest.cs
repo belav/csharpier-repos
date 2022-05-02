@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class UserStoreWithGenericsTest
     : IdentitySpecificationTestBase<IdentityUserWithGenerics, MyIdentityRole, string>,
-      IClassFixture<ScratchDatabaseFixture>
+        IClassFixture<ScratchDatabaseFixture>
 {
     private readonly ScratchDatabaseFixture _fixture;
 
@@ -247,16 +247,16 @@ public class IdentityUserWithGenerics : IdentityUser<string>
 
 public class UserStoreWithGenerics
     : UserStore<
-          IdentityUserWithGenerics,
-          MyIdentityRole,
-          ContextWithGenerics,
-          string,
-          IdentityUserClaimWithIssuer,
-          IdentityUserRoleWithDate,
-          IdentityUserLoginWithContext,
-          IdentityUserTokenWithStuff,
-          IdentityRoleClaimWithIssuer
-      >
+        IdentityUserWithGenerics,
+        MyIdentityRole,
+        ContextWithGenerics,
+        string,
+        IdentityUserClaimWithIssuer,
+        IdentityUserRoleWithDate,
+        IdentityUserLoginWithContext,
+        IdentityUserTokenWithStuff,
+        IdentityRoleClaimWithIssuer
+    >
 {
     public string LoginContext { get; set; }
 
@@ -327,12 +327,12 @@ public class UserStoreWithGenerics
 
 public class RoleStoreWithGenerics
     : RoleStore<
-          MyIdentityRole,
-          ContextWithGenerics,
-          string,
-          IdentityUserRoleWithDate,
-          IdentityRoleClaimWithIssuer
-      >
+        MyIdentityRole,
+        ContextWithGenerics,
+        string,
+        IdentityUserRoleWithDate,
+        IdentityRoleClaimWithIssuer
+    >
 {
     private string _loginContext;
 
@@ -417,15 +417,15 @@ public class IdentityUserLoginWithContext : IdentityUserLogin<string>
 
 public class ContextWithGenerics
     : IdentityDbContext<
-          IdentityUserWithGenerics,
-          MyIdentityRole,
-          string,
-          IdentityUserClaimWithIssuer,
-          IdentityUserRoleWithDate,
-          IdentityUserLoginWithContext,
-          IdentityRoleClaimWithIssuer,
-          IdentityUserTokenWithStuff
-      >
+        IdentityUserWithGenerics,
+        MyIdentityRole,
+        string,
+        IdentityUserClaimWithIssuer,
+        IdentityUserRoleWithDate,
+        IdentityUserLoginWithContext,
+        IdentityRoleClaimWithIssuer,
+        IdentityUserTokenWithStuff
+    >
 {
     public ContextWithGenerics(DbContextOptions options) : base(options) { }
 }

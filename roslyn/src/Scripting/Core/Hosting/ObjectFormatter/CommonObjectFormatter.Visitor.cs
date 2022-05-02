@@ -1044,8 +1044,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                             {
                                 result.AppendFormat(
                                     callableOnly
-                                      ? "!<Method '{0}' not found>"
-                                      : "!<Member '{0}' not found>",
+                                        ? "!<Method '{0}' not found>"
+                                        : "!<Member '{0}' not found>",
                                     memberName
                                 );
                             }

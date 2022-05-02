@@ -27,8 +27,8 @@ namespace System.Net.NetworkInformation
         )
         {
             PingReply reply = RawSocketPermissions.CanUseRawSockets(address.AddressFamily)
-              ? SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options)
-              : SendWithPingUtility(address, buffer, timeout, options);
+                ? SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options)
+                : SendWithPingUtility(address, buffer, timeout, options);
             return reply;
         }
 
@@ -40,8 +40,8 @@ namespace System.Net.NetworkInformation
         )
         {
             Task<PingReply> t = RawSocketPermissions.CanUseRawSockets(address.AddressFamily)
-              ? SendIcmpEchoRequestOverRawSocketAsync(address, buffer, timeout, options)
-              : SendWithPingUtilityAsync(address, buffer, timeout, options);
+                ? SendIcmpEchoRequestOverRawSocketAsync(address, buffer, timeout, options)
+                : SendWithPingUtilityAsync(address, buffer, timeout, options);
 
             PingReply reply = await t.ConfigureAwait(false);
 

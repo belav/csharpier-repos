@@ -115,10 +115,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 var readValueExpression = property is IServiceProperty serviceProperty
                     ? serviceProperty.ParameterBinding.BindToParameter(bindingInfo)
                     : valueBufferExpression.CreateValueBufferReadValueExpression(
-                          memberInfo.GetMemberType(),
-                          property.GetIndex(),
-                          property
-                      );
+                        memberInfo.GetMemberType(),
+                        property.GetIndex(),
+                        property
+                    );
 
                 blockExpressions.Add(
                     CreateMemberAssignment(
@@ -142,7 +142,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             )
             {
                 return property.IsIndexerProperty()
-                  ? Expression.Assign(
+                    ? Expression.Assign(
                         Expression.MakeIndex(
                             parameter,
                             (PropertyInfo)memberInfo,
@@ -150,7 +150,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         ),
                         value
                     )
-                  : Expression.MakeMemberAccess(parameter, memberInfo).Assign(value);
+                    : Expression.MakeMemberAccess(parameter, memberInfo).Assign(value);
             }
         }
 

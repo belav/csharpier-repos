@@ -282,8 +282,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     .WithMatchPriority(preselect ? MatchPriority.Preselect : MatchPriority.Default)
                     .WithSelectionBehavior(
                         context.IsRightSideOfNumericType
-                          ? CompletionItemSelectionBehavior.SoftSelection
-                          : CompletionItemSelectionBehavior.Default
+                            ? CompletionItemSelectionBehavior.SoftSelection
+                            : CompletionItemSelectionBehavior.Default
                     )
             );
         }
@@ -298,8 +298,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 (displayText == symbol.Name)
                 || (displayText.Length > 0 && displayText[0] == '@')
                 || (context.IsAttributeNameContext && symbol.IsAttribute())
-              ? displayText
-              : symbol.Name;
+                ? displayText
+                : symbol.Name;
         }
 
         internal override Task<CompletionDescription> GetDescriptionWorkerAsync(
@@ -555,8 +555,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 syntaxContext.Position,
                 cancellationToken
             )
-              ? default
-              : await GetSymbolsAsync(
+                ? default
+                : await GetSymbolsAsync(
                         completionContext,
                         syntaxContext,
                         syntaxContext.Position,
@@ -659,8 +659,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private string GetInsertionText(CompletionItem item, char? ch)
         {
             return ch == null
-              ? SymbolCompletionItem.GetInsertionText(item)
-              : GetInsertionText(item, ch.Value);
+                ? SymbolCompletionItem.GetInsertionText(item)
+                : GetInsertionText(item, ch.Value);
         }
 
         /// <summary>

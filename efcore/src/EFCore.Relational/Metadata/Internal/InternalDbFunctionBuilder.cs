@@ -21,7 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class InternalDbFunctionBuilder
         : AnnotatableBuilder<DbFunction, IConventionModelBuilder>,
-          IConventionDbFunctionBuilder
+            IConventionDbFunctionBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -306,8 +306,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasName(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -316,8 +316,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetName(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -329,8 +329,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasSchema(
                 schema,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -339,8 +339,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetSchema(
                 schema,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -352,8 +352,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsBuiltIn(
                 builtIn,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -362,8 +362,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsBuiltIn(
                 builtIn,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -375,8 +375,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsNullable(
                 nullable,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -388,8 +388,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsNullable(
                 nullable,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -401,8 +401,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasStoreType(
                 storeType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -414,8 +414,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetStoreType(
                 storeType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -427,8 +427,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -440,8 +440,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -453,8 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasTranslation(
                 translation,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -466,8 +466,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetTranslation(
                 translation,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -479,8 +479,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasParameter(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

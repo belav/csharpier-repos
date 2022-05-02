@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class IndexAttributeConvention
         : IEntityTypeAddedConvention,
-          IEntityTypeBaseTypeChangedConvention,
-          IModelFinalizingConvention
+            IEntityTypeBaseTypeChangedConvention,
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="IndexAttributeConvention" />.
@@ -98,10 +98,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         indexAttribute.Name == null
                             ? entityType.Builder.HasIndex(indexProperties, fromDataAnnotation: true)
                             : entityType.Builder.HasIndex(
-                                  indexProperties,
-                                  indexAttribute.Name,
-                                  fromDataAnnotation: true
-                              );
+                                indexProperties,
+                                indexAttribute.Name,
+                                fromDataAnnotation: true
+                            );
                 }
                 else
                 {
@@ -113,14 +113,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         indexBuilder =
                             indexAttribute.Name == null
                                 ? entityType.Builder.HasIndex(
-                                      indexAttribute.PropertyNames,
-                                      fromDataAnnotation: true
-                                  )
+                                    indexAttribute.PropertyNames,
+                                    fromDataAnnotation: true
+                                )
                                 : entityType.Builder.HasIndex(
-                                      indexAttribute.PropertyNames,
-                                      indexAttribute.Name,
-                                      fromDataAnnotation: true
-                                  );
+                                    indexAttribute.PropertyNames,
+                                    indexAttribute.Name,
+                                    fromDataAnnotation: true
+                                );
                     }
                     catch (InvalidOperationException exception)
                     {

@@ -20,10 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp.PopulateSwitch
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.ImplementInterface)]
     internal class CSharpPopulateSwitchStatementCodeFixProvider
         : AbstractPopulateSwitchStatementCodeFixProvider<
-              SwitchStatementSyntax,
-              SwitchSectionSyntax,
-              MemberAccessExpressionSyntax
-          >
+            SwitchStatementSyntax,
+            SwitchSectionSyntax,
+            MemberAccessExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

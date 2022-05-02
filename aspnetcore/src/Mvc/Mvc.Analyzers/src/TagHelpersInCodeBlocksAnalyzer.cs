@@ -87,11 +87,11 @@ public class TagHelpersInCodeBlocksAnalyzer : DiagnosticAnalyzer
                             parent switch
                             {
                                 ILocalFunctionOperation localFunctionOperation
-                                  => localFunctionOperation.Symbol,
+                                    => localFunctionOperation.Symbol,
                                 IAnonymousFunctionOperation anonymousFunctionOperation
-                                  => anonymousFunctionOperation.Symbol,
+                                    => anonymousFunctionOperation.Symbol,
                                 IMethodBodyOperation methodBodyOperation
-                                  => startBlockContext.OwningSymbol,
+                                    => startBlockContext.OwningSymbol,
                                 _ => null,
                             }
                         );

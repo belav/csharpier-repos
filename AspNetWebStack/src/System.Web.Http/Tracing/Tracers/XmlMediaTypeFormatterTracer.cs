@@ -21,8 +21,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class XmlMediaTypeFormatterTracer
         : XmlMediaTypeFormatter,
-          IFormatterTracer,
-          IDecorator<XmlMediaTypeFormatter>
+            IFormatterTracer,
+            IDecorator<XmlMediaTypeFormatter>
     {
         private readonly XmlMediaTypeFormatter _inner;
         private readonly MediaTypeFormatterTracer _innerTracer;

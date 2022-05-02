@@ -121,11 +121,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
 
                 return _parameters.Contains(parameterExpression)
-                  ? Expression.Parameter(
+                    ? Expression.Parameter(
                         parameterExpression.Type,
                         QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name
                     )
-                  : parameterExpression;
+                    : parameterExpression;
             }
         }
     }

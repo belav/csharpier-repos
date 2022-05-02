@@ -933,15 +933,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var variableSlotAllocatorOpt =
                         ((object)lambda != null)
                             ? _moduleBeingBuiltOpt.TryCreateVariableSlotAllocator(
-                                  lambda,
-                                  lambda.TopLevelMethod,
-                                  diagnosticsThisMethod.DiagnosticBag
-                              )
+                                lambda,
+                                lambda.TopLevelMethod,
+                                diagnosticsThisMethod.DiagnosticBag
+                            )
                             : _moduleBeingBuiltOpt.TryCreateVariableSlotAllocator(
-                                  method,
-                                  method,
-                                  diagnosticsThisMethod.DiagnosticBag
-                              );
+                                method,
+                                method,
+                                diagnosticsThisMethod.DiagnosticBag
+                            );
 
                     // Synthesized methods have no ordinal stored in custom debug information (only user-defined methods have ordinals).
                     // In case of async lambdas, which synthesize a state machine type during the following rewrite, the containing method has already been uniquely named,
@@ -2023,8 +2023,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     moveNextBodyDebugInfoOpt = new AsyncMoveNextBodyDebugInfo(
                         kickoffMethod.GetCciAdapter(),
                         catchHandlerOffset: (kickoffMethod.ReturnsVoid || isAsyncMainMoveNext)
-                          ? asyncCatchHandlerOffset
-                          : -1,
+                            ? asyncCatchHandlerOffset
+                            : -1,
                         asyncYieldPoints,
                         asyncResumePoints
                     );
@@ -2317,8 +2317,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // if language version is insufficient, we do not want to surface nullability diagnostics,
                                 // but we should still provide nullability information through the semantic model.
                                 isSufficientLangVersion
-                                  ? diagnostics.DiagnosticBag
-                                  : new DiagnosticBag(),
+                                    ? diagnostics.DiagnosticBag
+                                    : new DiagnosticBag(),
                                 createSnapshots: true,
                                 out snapshotManager,
                                 ref remappedSymbols

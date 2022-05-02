@@ -85,8 +85,8 @@ internal partial class IISHttpContext
         }
 
         return !HasResponseStarted
-          ? WriteFirstAsync()
-          : _bodyOutput.WriteAsync(memory, cancellationToken);
+            ? WriteFirstAsync()
+            : _bodyOutput.WriteAsync(memory, cancellationToken);
     }
 
     /// <summary>

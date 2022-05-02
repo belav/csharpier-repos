@@ -1205,7 +1205,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultKind == LookupResultKind.Ambiguous
                     ? ErrorCode.ERR_AmbigUnaryOp
                     : // Operator '{0}' is ambiguous on an operand of type '{1}'
-                      ErrorCode.ERR_BadUnaryOp; // Operator '{0}' cannot be applied to operand of type '{1}'
+                    ErrorCode.ERR_BadUnaryOp; // Operator '{0}' cannot be applied to operand of type '{1}'
 
             Error(diagnostics, errorCode, node, operatorName, operand.Display);
         }
@@ -1336,7 +1336,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 resultKind == LookupResultKind.Ambiguous
                     ? ErrorCode.ERR_AmbigBinaryOps
                     : // Operator '{0}' is ambiguous on operands of type '{1}' and '{2}'
-                      ErrorCode.ERR_BadBinaryOps; // Operator '{0}' cannot be applied to operands of type '{1}' and '{2}'
+                    ErrorCode.ERR_BadBinaryOps; // Operator '{0}' cannot be applied to operands of type '{1}' and '{2}'
 
             Error(diagnostics, errorCode, node, operatorToken.Text, left.Display, right.Display);
         }
@@ -1563,8 +1563,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             && CheckConstraintLanguageVersionAndRuntimeSupportForOperator(
                                 node,
                                 kind == BinaryOperatorKind.LogicalAnd
-                                  ? falseOperator
-                                  : trueOperator,
+                                    ? falseOperator
+                                    : trueOperator,
                                 signature.ConstrainedToTypeOpt,
                                 diagnostics
                             );
@@ -1687,8 +1687,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var result = HasApplicableBooleanOperator(
                 namedType,
                 isNegative
-                  ? WellKnownMemberNames.FalseOperatorName
-                  : WellKnownMemberNames.TrueOperatorName,
+                    ? WellKnownMemberNames.FalseOperatorName
+                    : WellKnownMemberNames.TrueOperatorName,
                 type,
                 ref useSiteInfo,
                 out userDefinedOperator
@@ -2714,8 +2714,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // make sense (why warn that a constant has a constant value?).
                                 return
                                     (leftIsNull == rightIsNull) == (op == BinaryOperatorKind.Equal)
-                                  ? ConstantValue.True
-                                  : ConstantValue.False;
+                                    ? ConstantValue.True
+                                    : ConstantValue.False;
                             }
                         }
                     }
@@ -2942,12 +2942,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // MinValue % -1 always overflows at runtime but never at compile time
                 case BinaryOperatorKind.IntRemainder:
                     return (valueRight.Int32Value != -1)
-                      ? valueLeft.Int32Value % valueRight.Int32Value
-                      : 0;
+                        ? valueLeft.Int32Value % valueRight.Int32Value
+                        : 0;
                 case BinaryOperatorKind.LongRemainder:
                     return (valueRight.Int64Value != -1)
-                      ? valueLeft.Int64Value % valueRight.Int64Value
-                      : 0;
+                        ? valueLeft.Int64Value % valueRight.Int64Value
+                        : 0;
                 case BinaryOperatorKind.UIntRemainder:
                 case BinaryOperatorKind.NUIntRemainder:
                     return valueLeft.UInt32Value % valueRight.UInt32Value;
@@ -2977,8 +2977,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 long newLength = (long)leftValue.Length + (long)rightValue.Length;
                 return (newLength > int.MaxValue)
-                  ? ConstantValue.Bad
-                  : ConstantValue.CreateFromRope(Rope.Concat(leftValue, rightValue));
+                    ? ConstantValue.Bad
+                    : ConstantValue.CreateFromRope(Rope.Concat(leftValue, rightValue));
             }
 
             return null;
@@ -3436,8 +3436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Error(
                             diagnostics,
                             isFixedStatementAddressOfExpression
-                              ? ErrorCode.ERR_FixedNotNeeded
-                              : ErrorCode.ERR_FixedNeeded,
+                                ? ErrorCode.ERR_FixedNotNeeded
+                                : ErrorCode.ERR_FixedNeeded,
                             node
                         );
                         hasErrors = true;
@@ -4779,8 +4779,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         targetType.GetNullableUnderlyingType(),
                         TypeCompareKind.AllIgnoreOptions
                     )
-                      ? ConstantValue.True
-                      : ConstantValue.False;
+                        ? ConstantValue.True
+                        : ConstantValue.False;
 
                 default:
                 case ConversionKind.ImplicitDynamic:
@@ -5295,7 +5295,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isLeftNullable = (object)optLeftType != null && optLeftType.IsNullableType();
             TypeSymbol optLeftType0 = isLeftNullable
                 ? // "A0"
-                  optLeftType.GetNullableUnderlyingType()
+                optLeftType.GetNullableUnderlyingType()
                 : optLeftType;
 
             // SPEC: The left hand side must be either the null literal or it must have a type. Lambdas and method groups do not have a type,
@@ -5802,8 +5802,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return isRef
-              ? BindRefConditionalOperator(node, whenTrue, whenFalse, diagnostics)
-              : BindValueConditionalOperator(node, whenTrue, whenFalse, diagnostics);
+                ? BindRefConditionalOperator(node, whenTrue, whenFalse, diagnostics)
+                : BindValueConditionalOperator(node, whenTrue, whenFalse, diagnostics);
         }
 
 #nullable enable

@@ -57,19 +57,19 @@ namespace System.IO.MemoryMappedFiles
             SafeMemoryMappedFileHandle handle =
                 fileHandle != null
                     ? Interop.CreateFileMapping(
-                          fileHandle,
-                          ref secAttrs,
-                          GetPageAccess(access) | (int)options,
-                          capacity,
-                          mapName
-                      )
+                        fileHandle,
+                        ref secAttrs,
+                        GetPageAccess(access) | (int)options,
+                        capacity,
+                        mapName
+                    )
                     : Interop.CreateFileMapping(
-                          new IntPtr(-1),
-                          ref secAttrs,
-                          GetPageAccess(access) | (int)options,
-                          capacity,
-                          mapName
-                      );
+                        new IntPtr(-1),
+                        ref secAttrs,
+                        GetPageAccess(access) | (int)options,
+                        capacity,
+                        mapName
+                    );
 
             int errorCode = Marshal.GetLastPInvokeError();
             if (!handle.IsInvalid)

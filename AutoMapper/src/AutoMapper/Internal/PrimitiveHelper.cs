@@ -22,8 +22,8 @@ namespace AutoMapper.Internal
                 return otherCollection;
             }
             return otherCollection.Count == 0
-              ? collection
-              : Enumerable.Concat(collection, otherCollection);
+                ? collection
+                : Enumerable.Concat(collection, otherCollection);
         }
 
         public static TValue GetOrDefault<TKey, TValue>(

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public readonly struct SyntaxNodeOrTokenList
         : IEquatable<SyntaxNodeOrTokenList>,
-          IReadOnlyCollection<SyntaxNodeOrToken>
+            IReadOnlyCollection<SyntaxNodeOrToken>
     {
         /// <summary>
         /// The underlying field
@@ -89,10 +89,10 @@ namespace Microsoft.CodeAnalysis
             get
             {
                 return _node == null
-                  ? 0
-                  : _node.Green.IsList
-                      ? _node.SlotCount
-                      : 1;
+                    ? 0
+                    : _node.Green.IsList
+                        ? _node.SlotCount
+                        : 1;
             }
         }
 
@@ -425,8 +425,8 @@ namespace Microsoft.CodeAnalysis
         IEnumerator<SyntaxNodeOrToken> IEnumerable<SyntaxNodeOrToken>.GetEnumerator()
         {
             return _node == null
-              ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
-              : this.GetEnumerator();
+                ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
+                : this.GetEnumerator();
         }
 
         /// <summary>
@@ -438,8 +438,8 @@ namespace Microsoft.CodeAnalysis
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _node == null
-              ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
-              : this.GetEnumerator();
+                ? SpecializedCollections.EmptyEnumerator<SyntaxNodeOrToken>()
+                : this.GetEnumerator();
         }
 
         /// <summary>

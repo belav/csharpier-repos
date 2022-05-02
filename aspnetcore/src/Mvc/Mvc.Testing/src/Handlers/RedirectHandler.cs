@@ -53,8 +53,8 @@ public class RedirectHandler : DelegatingHandler
         var remainingRedirects = MaxRedirects;
         var redirectRequest = new HttpRequestMessage();
         var originalRequestContent = HasBody(request)
-          ? await DuplicateRequestContent(request)
-          : null;
+            ? await DuplicateRequestContent(request)
+            : null;
         CopyRequestHeaders(request.Headers, redirectRequest.Headers);
         var response = await base.SendAsync(request, cancellationToken);
         while (IsRedirect(response) && remainingRedirects > 0)
@@ -62,8 +62,8 @@ public class RedirectHandler : DelegatingHandler
             remainingRedirects--;
             UpdateRedirectRequest(response, redirectRequest, originalRequestContent);
             originalRequestContent = HasBody(redirectRequest)
-              ? await DuplicateRequestContent(redirectRequest)
-              : null;
+                ? await DuplicateRequestContent(redirectRequest)
+                : null;
             response = await base.SendAsync(redirectRequest, cancellationToken);
         }
 

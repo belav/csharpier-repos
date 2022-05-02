@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     internal sealed class RazorDocumentServiceProviderWrapper
         : IDocumentServiceProvider,
-          IDocumentOperationService
+            IDocumentOperationService
     {
         private readonly IRazorDocumentServiceProvider _innerDocumentServiceProvider;
         private readonly object _lock;

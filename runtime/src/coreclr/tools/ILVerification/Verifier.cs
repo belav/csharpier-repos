@@ -218,8 +218,8 @@ namespace ILVerify
                             Method = methodHandle,
                             ErrorArguments = args,
                             Message = string.IsNullOrEmpty(codeResource)
-                              ? code.ToString()
-                              : codeResource
+                                ? code.ToString()
+                                : codeResource
                         }
                     );
                 };

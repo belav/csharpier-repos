@@ -81,8 +81,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 case Kind.Lazy:
                     instructionEncoder.EmitMOV(
                         factory.Target.OperatingSystem == TargetOS.Windows
-                          ? Register.RDX
-                          : Register.RSI,
+                            ? Register.RDX
+                            : Register.RSI,
                         factory.ModuleImport
                     );
 

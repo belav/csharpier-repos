@@ -50,8 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             else if (IsStringToken(token))
             {
                 return IsVerbatimStringToken(token)
-                  ? ClassificationTypeNames.VerbatimStringLiteral
-                  : ClassificationTypeNames.StringLiteral;
+                    ? ClassificationTypeNames.VerbatimStringLiteral
+                    : ClassificationTypeNames.StringLiteral;
             }
             else if (token.Kind() == SyntaxKind.NumericLiteralToken)
             {
@@ -226,8 +226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             )
             {
                 return IsExtensionMethod(methodDeclaration)
-                  ? ClassificationTypeNames.ExtensionMethodName
-                  : ClassificationTypeNames.MethodName;
+                    ? ClassificationTypeNames.ExtensionMethodName
+                    : ClassificationTypeNames.MethodName;
             }
             else if (
                 token.Parent is ConstructorDeclarationSyntax constructorDeclaration
@@ -284,13 +284,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 return varDecl?.Parent switch
                 {
                     FieldDeclarationSyntax fieldDeclaration
-                      => fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
-                        ? ClassificationTypeNames.ConstantName
-                        : ClassificationTypeNames.FieldName,
+                        => fieldDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword)
+                            ? ClassificationTypeNames.ConstantName
+                            : ClassificationTypeNames.FieldName,
                     LocalDeclarationStatementSyntax localDeclarationStatement
-                      => localDeclarationStatement.IsConst
-                          ? ClassificationTypeNames.ConstantName
-                          : ClassificationTypeNames.LocalName,
+                        => localDeclarationStatement.IsConst
+                            ? ClassificationTypeNames.ConstantName
+                            : ClassificationTypeNames.LocalName,
                     EventFieldDeclarationSyntax _ => ClassificationTypeNames.EventName,
                     _ => ClassificationTypeNames.LocalName,
                 };
@@ -680,8 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                             // It changed!  Return the new type of tagspan.
                             return new ClassifiedSpan(
                                 isKeyword
-                                  ? ClassificationTypeNames.Keyword
-                                  : ClassificationTypeNames.Identifier,
+                                    ? ClassificationTypeNames.Keyword
+                                    : ClassificationTypeNames.Identifier,
                                 span
                             );
                         }

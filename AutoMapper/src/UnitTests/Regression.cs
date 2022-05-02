@@ -90,10 +90,10 @@ namespace AutoMapper.UnitTests
                                 src =>
                                     src.HasValue
                                         ? new MyCustomDate(
-                                              src.Value.Day,
-                                              src.Value.Month,
-                                              src.Value.Year
-                                          )
+                                            src.Value.Day,
+                                            src.Value.Month,
+                                            src.Value.Year
+                                        )
                                         : null
                             );
                     }

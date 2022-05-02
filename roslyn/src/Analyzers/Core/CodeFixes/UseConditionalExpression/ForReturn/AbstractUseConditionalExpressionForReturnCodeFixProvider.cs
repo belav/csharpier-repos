@@ -26,11 +26,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         TConditionalExpressionSyntax
     >
         : AbstractUseConditionalExpressionCodeFixProvider<
-              TStatementSyntax,
-              TIfStatementSyntax,
-              TExpressionSyntax,
-              TConditionalExpressionSyntax
-          >
+            TStatementSyntax,
+            TIfStatementSyntax,
+            TExpressionSyntax,
+            TConditionalExpressionSyntax
+        >
         where TStatementSyntax : SyntaxNode
         where TIfStatementSyntax : TStatementSyntax
         where TExpressionSyntax : SyntaxNode
@@ -101,7 +101,7 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
             var returnStatement =
                 anyReturn.Kind == OperationKind.YieldReturn
                     ? (TStatementSyntax)
-                          generatorInternal.YieldReturnStatement(conditionalExpression)
+                        generatorInternal.YieldReturnStatement(conditionalExpression)
                     : (TStatementSyntax)editor.Generator.ReturnStatement(conditionalExpression);
 
             returnStatement = returnStatement.WithTriviaFrom(ifStatement);

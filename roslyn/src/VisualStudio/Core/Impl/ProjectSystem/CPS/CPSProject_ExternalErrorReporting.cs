@@ -11,7 +11,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 {
     internal sealed partial class CPSProject
         : IVsReportExternalErrors,
-          IVsLanguageServiceBuildErrorReporter2
+            IVsLanguageServiceBuildErrorReporter2
     {
         private ProjectExternalErrorReporter GetExternalErrorReporter()
         {

@@ -695,13 +695,13 @@ namespace JIT.HardwareIntrinsics.X86
                             (left[i3 - inner] > 0xFFFF)
                                 ? 0xFFFF
                                 : (
-                                      (left[i3 - inner] < 0)
-                                          ? 0
-                                          : BitConverter.ToUInt16(
-                                                BitConverter.GetBytes(left[i3 - inner]),
-                                                0
-                                            )
-                                  )
+                                    (left[i3 - inner] < 0)
+                                        ? 0
+                                        : BitConverter.ToUInt16(
+                                            BitConverter.GetBytes(left[i3 - inner]),
+                                            0
+                                        )
+                                )
                         )
                     )
                     {
@@ -715,13 +715,13 @@ namespace JIT.HardwareIntrinsics.X86
                             (right[i3 - inner] > 0xFFFF)
                                 ? 0xFFFF
                                 : (
-                                      (right[i3 - inner] < 0)
-                                          ? 0
-                                          : BitConverter.ToUInt16(
-                                                BitConverter.GetBytes(right[i3 - inner]),
-                                                0
-                                            )
-                                  )
+                                    (right[i3 - inner] < 0)
+                                        ? 0
+                                        : BitConverter.ToUInt16(
+                                            BitConverter.GetBytes(right[i3 - inner]),
+                                            0
+                                        )
+                                )
                         )
                     )
                     {

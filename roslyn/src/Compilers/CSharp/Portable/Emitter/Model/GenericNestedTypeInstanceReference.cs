@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal sealed class GenericNestedTypeInstanceReference
         : GenericTypeInstanceReference,
-          Cci.INestedTypeReference
+            Cci.INestedTypeReference
     {
         public GenericNestedTypeInstanceReference(NamedTypeSymbol underlyingNamedType)
             : base(underlyingNamedType) { }

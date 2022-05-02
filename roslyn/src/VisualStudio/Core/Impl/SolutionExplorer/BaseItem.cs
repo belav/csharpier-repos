@@ -23,15 +23,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
     /// </summary>
     internal abstract class BaseItem
         : LocalizableProperties,
-          ITreeDisplayItem,
-          IInteractionPatternProvider,
-          IInvocationPattern,
-          IContextMenuPattern,
-          INotifyPropertyChanged,
-          IDragDropSourcePattern,
-          IBrowsablePattern,
-          ISupportDisposalNotification,
-          IPrioritizedComparable
+            ITreeDisplayItem,
+            IInteractionPatternProvider,
+            IInvocationPattern,
+            IContextMenuPattern,
+            INotifyPropertyChanged,
+            IDragDropSourcePattern,
+            IBrowsablePattern,
+            ISupportDisposalNotification,
+            IPrioritizedComparable
     {
         public virtual event PropertyChangedEventHandler PropertyChanged
         {

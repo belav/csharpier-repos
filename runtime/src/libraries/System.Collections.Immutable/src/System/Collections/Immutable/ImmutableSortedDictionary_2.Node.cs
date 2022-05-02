@@ -16,7 +16,7 @@ namespace System.Collections.Immutable
         [DebuggerDisplay("{_key} = {_value}")]
         internal sealed class Node
             : IBinaryTree<KeyValuePair<TKey, TValue>>,
-              IEnumerable<KeyValuePair<TKey, TValue>>
+                IEnumerable<KeyValuePair<TKey, TValue>>
         {
             /// <summary>
             /// The default empty node.

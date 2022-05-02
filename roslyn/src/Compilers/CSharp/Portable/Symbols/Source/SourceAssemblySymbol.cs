@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed partial class SourceAssemblySymbol
         : MetadataOrSourceAssemblySymbol,
-          ISourceAssemblySymbolInternal,
-          IAttributeTargetSymbol
+            ISourceAssemblySymbolInternal,
+            IAttributeTargetSymbol
     {
         /// <summary>
         /// A Compilation the assembly is created for.
@@ -237,8 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     (attributeMatchesOpt is null || _lazyNetModuleAttributesBag is not null)
                         ? GetNetModuleDecodedWellKnownAttributeData()
                         : GetLimitedNetModuleDecodedWellKnownAttributeData(
-                              attributeMatchesOpt.Value
-                          );
+                            attributeMatchesOpt.Value
+                        );
 
                 if (data != null)
                 {
@@ -261,8 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // By default WrapNonExceptionThrows is considered to be true.
                 return (data != null)
-                  ? data.RuntimeCompatibilityWrapNonExceptionThrows
-                  : CommonAssemblyWellKnownAttributeData.WrapNonExceptionThrowsDefault;
+                    ? data.RuntimeCompatibilityWrapNonExceptionThrows
+                    : CommonAssemblyWellKnownAttributeData.WrapNonExceptionThrowsDefault;
             }
         }
 
@@ -458,8 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         attributeValue.Build != ushort.MaxValue
                         && attributeValue.Revision != ushort.MaxValue
                     )
-                  ? null
-                  : attributeValue;
+                    ? null
+                    : attributeValue;
             }
         }
 
@@ -2657,8 +2657,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _lazyInternalsVisibleToMap.TryGetValue(simpleName, out result);
 
             return (result != null)
-              ? result.Keys
-              : SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
+                ? result.Keys
+                : SpecializedCollections.EmptyEnumerable<ImmutableArray<byte>>();
         }
 
         internal override bool AreInternalsVisibleToThisAssembly(
@@ -2732,8 +2732,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             return (object)attributeSyntaxOpt != null
-              ? attributeSyntaxOpt.Location
-              : NoLocation.Singleton;
+                ? attributeSyntaxOpt.Location
+                : NoLocation.Singleton;
         }
 
         private void DecodeTypeForwardedToAttribute(
@@ -2767,8 +2767,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && diagnostics.Add(
                     useSiteInfo,
                     useSiteInfo.DiagnosticInfo is object
-                      ? GetAssemblyAttributeLocationForDiagnostic(arguments.AttributeSyntaxOpt)
-                      : Location.None
+                        ? GetAssemblyAttributeLocationForDiagnostic(arguments.AttributeSyntaxOpt)
+                        : Location.None
                 )
             )
             {
@@ -2949,8 +2949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return IsInteractive
-                  ? AttributeLocation.None
-                  : AttributeLocation.Assembly | AttributeLocation.Module;
+                    ? AttributeLocation.None
+                    : AttributeLocation.Assembly | AttributeLocation.Module;
             }
         }
 
@@ -3066,8 +3066,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         _compilation.IsEmitDeterministic && verString?.Contains('*') == true;
                     diagnostics.Add(
                         foundBadWildcard
-                          ? ErrorCode.ERR_InvalidVersionFormatDeterministic
-                          : ErrorCode.ERR_InvalidVersionFormat,
+                            ? ErrorCode.ERR_InvalidVersionFormatDeterministic
+                            : ErrorCode.ERR_InvalidVersionFormat,
                         attributeArgumentSyntaxLocation
                     );
                 }

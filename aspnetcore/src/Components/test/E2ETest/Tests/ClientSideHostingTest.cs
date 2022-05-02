@@ -20,8 +20,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 /// </summary>
 public class ClientSideHostingTest
     : ServerTestBase<
-          BasicTestAppServerSiteFixture<TestServer.StartupWithMapFallbackToClientSideBlazor>
-      >
+        BasicTestAppServerSiteFixture<TestServer.StartupWithMapFallbackToClientSideBlazor>
+    >
 {
     public ClientSideHostingTest(
         BrowserFixture browserFixture,

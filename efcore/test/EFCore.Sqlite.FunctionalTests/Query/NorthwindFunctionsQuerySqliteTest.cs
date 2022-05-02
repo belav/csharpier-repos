@@ -9,8 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindFunctionsQuerySqliteTest
         : NorthwindFunctionsQueryRelationalTestBase<
-              NorthwindQuerySqliteFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqliteFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindFunctionsQuerySqliteTest(
             NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,

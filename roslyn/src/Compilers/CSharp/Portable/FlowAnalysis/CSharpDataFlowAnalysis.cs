@@ -65,14 +65,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var result = Succeeded
                         ? Normalize(
-                              VariablesDeclaredWalker.Analyze(
-                                  _context.Compilation,
-                                  _context.Member,
-                                  _context.BoundNode,
-                                  _context.FirstInRegion,
-                                  _context.LastInRegion
-                              )
-                          )
+                            VariablesDeclaredWalker.Analyze(
+                                _context.Compilation,
+                                _context.Member,
+                                _context.BoundNode,
+                                _context.FirstInRegion,
+                                _context.LastInRegion
+                            )
+                        )
                         : ImmutableArray<ISymbol>.Empty;
                     ImmutableInterlocked.InterlockedInitialize(ref _variablesDeclared, result);
                 }
@@ -89,10 +89,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var result = Succeeded
                         ? UnassignedVariablesWalker.Analyze(
-                              _context.Compilation,
-                              _context.Member,
-                              _context.BoundNode
-                          )
+                            _context.Compilation,
+                            _context.Member,
+                            _context.BoundNode
+                        )
                         : new HashSet<Symbol>();
                     Interlocked.CompareExchange(ref _unassignedVariables, result, null);
                 }
@@ -114,17 +114,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var result = _context.Failed
                         ? ImmutableArray<ISymbol>.Empty
                         : Normalize(
-                              DataFlowsInWalker.Analyze(
-                                  _context.Compilation,
-                                  _context.Member,
-                                  _context.BoundNode,
-                                  _context.FirstInRegion,
-                                  _context.LastInRegion,
-                                  UnassignedVariables,
-                                  UnassignedVariableAddressOfSyntaxes,
-                                  out _succeeded
-                              )
-                          );
+                            DataFlowsInWalker.Analyze(
+                                _context.Compilation,
+                                _context.Member,
+                                _context.BoundNode,
+                                _context.FirstInRegion,
+                                _context.LastInRegion,
+                                UnassignedVariables,
+                                UnassignedVariableAddressOfSyntaxes,
+                                out _succeeded
+                            )
+                        );
                     ImmutableInterlocked.InterlockedInitialize(ref _dataFlowsIn, result);
                 }
 
@@ -194,16 +194,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var result = Succeeded
                         ? Normalize(
-                              DataFlowsOutWalker.Analyze(
-                                  _context.Compilation,
-                                  _context.Member,
-                                  _context.BoundNode,
-                                  _context.FirstInRegion,
-                                  _context.LastInRegion,
-                                  UnassignedVariables,
-                                  _dataFlowsIn
-                              )
-                          )
+                            DataFlowsOutWalker.Analyze(
+                                _context.Compilation,
+                                _context.Member,
+                                _context.BoundNode,
+                                _context.FirstInRegion,
+                                _context.LastInRegion,
+                                UnassignedVariables,
+                                _dataFlowsIn
+                            )
+                        )
                         : ImmutableArray<ISymbol>.Empty;
                     ImmutableInterlocked.InterlockedInitialize(ref _dataFlowsOut, result);
                 }
@@ -223,14 +223,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var result = Succeeded
                         ? Normalize(
-                              AlwaysAssignedWalker.Analyze(
-                                  _context.Compilation,
-                                  _context.Member,
-                                  _context.BoundNode,
-                                  _context.FirstInRegion,
-                                  _context.LastInRegion
-                              )
-                          )
+                            AlwaysAssignedWalker.Analyze(
+                                _context.Compilation,
+                                _context.Member,
+                                _context.BoundNode,
+                                _context.FirstInRegion,
+                                _context.LastInRegion
+                            )
+                        )
                         : ImmutableArray<ISymbol>.Empty;
                     ImmutableInterlocked.InterlockedInitialize(ref _alwaysAssigned, result);
                 }
@@ -461,10 +461,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var result = Succeeded
                         ? UnassignedAddressTakenVariablesWalker.Analyze(
-                              _context.Compilation,
-                              _context.Member,
-                              _context.BoundNode
-                          )
+                            _context.Compilation,
+                            _context.Member,
+                            _context.BoundNode
+                        )
                         : new HashSet<PrefixUnaryExpressionSyntax>();
                     Interlocked.CompareExchange(
                         ref _unassignedVariableAddressOfSyntaxes,

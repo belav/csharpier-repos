@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Components;
 // Base class for Ignitor-based tests.
 public abstract class IgnitorTest<TStartup>
     : IClassFixture<BasicTestAppServerSiteFixture<TStartup>>,
-      IAsyncLifetime where TStartup : class
+        IAsyncLifetime where TStartup : class
 {
     private static readonly TimeSpan DefaultTimeout = Debugger.IsAttached
         ? TimeSpan.MaxValue

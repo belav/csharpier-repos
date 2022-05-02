@@ -67,8 +67,8 @@ namespace System.Tests
 
                         // Use 'kill' command with signal name to validate the signal pal mapping.
                         string sigArg = signalStr.StartsWith("SIG")
-                          ? signalStr.Substring(3)
-                          : signalStr;
+                            ? signalStr.Substring(3)
+                            : signalStr;
                         using var process = Process.Start(
                             new ProcessStartInfo
                             {

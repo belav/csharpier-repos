@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public readonly partial struct SyntaxList<TNode>
         : IReadOnlyList<TNode>,
-          IEquatable<SyntaxList<TNode>> where TNode : SyntaxNode
+            IEquatable<SyntaxList<TNode>> where TNode : SyntaxNode
     {
         private readonly SyntaxNode? _node;
 

@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
     [Export(typeof(ICodeActionEditHandlerService))]
     internal class CodeActionEditHandlerService
         : ForegroundThreadAffinitizedObject,
-          ICodeActionEditHandlerService
+            ICodeActionEditHandlerService
     {
         private readonly IPreviewFactoryService _previewService;
         private readonly IInlineRenameService _renameService;

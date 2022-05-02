@@ -329,12 +329,12 @@ namespace System.Diagnostics.PerformanceData
                                 throw Status switch
                                 {
                                     (uint)Interop.Errors.ERROR_ALREADY_EXISTS
-                                      => new InvalidOperationException(
-                                          SR.Format(
-                                              SR.Perflib_Argument_CounterSetAlreadyRegister,
-                                              _counterSet
-                                          )
-                                      ),
+                                        => new InvalidOperationException(
+                                            SR.Format(
+                                                SR.Perflib_Argument_CounterSetAlreadyRegister,
+                                                _counterSet
+                                            )
+                                        ),
 
                                     _ => new Win32Exception((int)Status),
                                 };

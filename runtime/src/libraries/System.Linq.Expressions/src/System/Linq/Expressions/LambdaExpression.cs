@@ -318,12 +318,12 @@ namespace System.Linq.Expressions
                     1 => new Expression1<TDelegate>(body, parameters[0]),
                     2 => new Expression2<TDelegate>(body, parameters[0], parameters[1]),
                     3
-                      => new Expression3<TDelegate>(
-                          body,
-                          parameters[0],
-                          parameters[1],
-                          parameters[2]
-                      ),
+                        => new Expression3<TDelegate>(
+                            body,
+                            parameters[0],
+                            parameters[1],
+                            parameters[2]
+                        ),
                     _ => new ExpressionN<TDelegate>(body, parameters),
                 };
             }

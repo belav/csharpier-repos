@@ -974,10 +974,10 @@ namespace System.Text
                         iBytes < 0x100
                             ? new byte[] { unchecked((byte)iBytes) }
                             : new byte[]
-                              {
-                                  unchecked((byte)(iBytes >> 8)),
-                                  unchecked((byte)iBytes)
-                              };
+                            {
+                                unchecked((byte)(iBytes >> 8)),
+                                unchecked((byte)iBytes)
+                            };
                     charCount += fallbackHelper.InternalFallback(byteBuffer, bytes);
                 }
             }
@@ -1162,10 +1162,10 @@ namespace System.Text
                         iBytes < 0x100
                             ? new byte[] { unchecked((byte)iBytes) }
                             : new byte[]
-                              {
-                                  unchecked((byte)(iBytes >> 8)),
-                                  unchecked((byte)iBytes)
-                              };
+                            {
+                                unchecked((byte)(iBytes >> 8)),
+                                unchecked((byte)iBytes)
+                            };
                     if (!fallbackHelper.InternalFallback(byteBuffer, bytes, ref chars))
                     {
                         // May or may not throw, but we didn't get these byte(s)

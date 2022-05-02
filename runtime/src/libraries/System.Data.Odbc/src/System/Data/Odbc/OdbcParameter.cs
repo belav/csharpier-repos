@@ -14,9 +14,9 @@ namespace System.Data.Odbc
 {
     public sealed partial class OdbcParameter
         : DbParameter,
-          ICloneable,
-          IDataParameter,
-          IDbDataParameter
+            ICloneable,
+            IDataParameter,
+            IDbDataParameter
     {
         private bool _hasChanged;
         private bool _userSpecifiedType;
@@ -633,8 +633,8 @@ namespace System.Data.Odbc
             _internalValue = Value;
             // we should coerce the parameter value at this time.
             _internalPrecision = ShouldSerializePrecision()
-              ? PrecisionInternal
-              : ValuePrecision(_internalValue);
+                ? PrecisionInternal
+                : ValuePrecision(_internalValue);
             _internalShouldSerializeSize = ShouldSerializeSize();
             _internalSize = _internalShouldSerializeSize ? Size : ValueSize(_internalValue);
             _internalDirection = Direction;

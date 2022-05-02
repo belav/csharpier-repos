@@ -1050,13 +1050,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.FinallyBlockOpt == null
                     ? null
                     : F.Block(
-                          F.HiddenSequencePoint(),
-                          F.If(
-                              condition: ShouldEnterFinallyBlock(),
-                              thenClause: VisitFinally(node.FinallyBlockOpt)
-                          ),
-                          F.HiddenSequencePoint()
-                      );
+                        F.HiddenSequencePoint(),
+                        F.If(
+                            condition: ShouldEnterFinallyBlock(),
+                            thenClause: VisitFinally(node.FinallyBlockOpt)
+                        ),
+                        F.HiddenSequencePoint()
+                    );
 
             BoundStatement result = node.Update(
                 tryBlock,

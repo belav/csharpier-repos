@@ -1429,8 +1429,8 @@ namespace System.Xml
                     {
                         throw new ArgumentException(
                             _conformanceLevel == ConformanceLevel.Document
-                              ? SR.Xml_DupXmlDecl
-                              : SR.Xml_CannotWriteXmlDecl
+                                ? SR.Xml_DupXmlDecl
+                                : SR.Xml_CannotWriteXmlDecl
                         );
                     }
 
@@ -1824,8 +1824,8 @@ namespace System.Xml
                     }
                 }
                 return (_predefinedNamespaces != null)
-                  ? _predefinedNamespaces.LookupPrefix(ns)
-                  : null;
+                    ? _predefinedNamespaces.LookupPrefix(ns)
+                    : null;
             }
             catch
             {
@@ -2627,8 +2627,8 @@ namespace System.Xml
                 }
             }
             return (_predefinedNamespaces != null)
-              ? _predefinedNamespaces.LookupNamespace(prefix)
-              : null;
+                ? _predefinedNamespaces.LookupNamespace(prefix)
+                : null;
         }
 
         private string? LookupLocalNamespace(string prefix)

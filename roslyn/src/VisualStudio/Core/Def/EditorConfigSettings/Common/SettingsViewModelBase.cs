@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
     internal abstract partial class SettingsViewModelBase<T, TSnapshotFactory, TEntriesSnapshot>
         : IWpfSettingsEditorViewModel,
-          ITableDataSource
+            ITableDataSource
         where TSnapshotFactory : SettingsSnapshotFactoryBase<T, TEntriesSnapshot>
         where TEntriesSnapshot : SettingsEntriesSnapshotBase<T>
     {

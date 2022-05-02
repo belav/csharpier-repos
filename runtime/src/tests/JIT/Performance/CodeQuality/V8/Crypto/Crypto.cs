@@ -935,9 +935,9 @@ namespace V8.Crypto
                     (r_array[--i] == y0)
                         ? s_BI_DM
                         : (int)
-                              Math.Floor(
-                                  (double)r_array[i] * d1 + ((double)(r_array[i - 1] + e)) * d2
-                              );
+                            Math.Floor(
+                                (double)r_array[i] * d1 + ((double)(r_array[i - 1] + e)) * d2
+                            );
                 if ((r_array[i] += s_am(y, 0, qd, r, (int)j, 0, (int)ys)) < qd)
                 { // Try it out
                     y.dLShiftTo(j, t);
@@ -2417,7 +2417,7 @@ namespace V8.Crypto
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
             string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
-              => new Random().Next(),
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };

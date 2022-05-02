@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 #pragma warning disable CS0618 // Type or member is obsolete
 internal class DefaultRazorIntermediateNodeLoweringPhase
     : RazorEnginePhaseBase,
-      IRazorIntermediateNodeLoweringPhase
+        IRazorIntermediateNodeLoweringPhase
 {
     private IRazorCodeGenerationOptionsFeature _optionsFeature;
 
@@ -537,8 +537,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 node.Name.LiteralTokens,
                 node.NameSuffix?.LiteralTokens,
                 node.EqualsToken == null
-                  ? new SyntaxList<SyntaxToken>()
-                  : new SyntaxList<SyntaxToken>(node.EqualsToken),
+                    ? new SyntaxList<SyntaxToken>()
+                    : new SyntaxList<SyntaxToken>(node.EqualsToken),
                 node.ValuePrefix?.LiteralTokens
             );
             var prefix = (MarkupTextLiteralSyntax)
@@ -1496,8 +1496,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                 node.Name.LiteralTokens,
                 node.NameSuffix?.LiteralTokens,
                 node.EqualsToken == null
-                  ? new SyntaxList<SyntaxToken>()
-                  : new SyntaxList<SyntaxToken>(node.EqualsToken),
+                    ? new SyntaxList<SyntaxToken>()
+                    : new SyntaxList<SyntaxToken>(node.EqualsToken),
                 node.ValuePrefix?.LiteralTokens
             );
             var prefix = (MarkupTextLiteralSyntax)
@@ -2139,8 +2139,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                             "@",
                             StringComparison.Ordinal
                         )
-                          ? attributeName.Substring(1)
-                          : attributeName;
+                            ? attributeName.Substring(1)
+                            : attributeName;
 
                         IntermediateNode attributeNode;
                         if (
@@ -2317,8 +2317,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
                             "@",
                             StringComparison.Ordinal
                         )
-                          ? attributeName.Substring(1)
-                          : attributeName;
+                            ? attributeName.Substring(1)
+                            : attributeName;
 
                         IntermediateNode attributeNode;
                         if (

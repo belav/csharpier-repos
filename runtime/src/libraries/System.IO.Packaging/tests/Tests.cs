@@ -4714,8 +4714,8 @@ namespace System.IO.Packaging.Tests
             {
                 Uri partUri = PackUriHelper.CreatePartUri(new Uri(fileName, UriKind.Relative));
                 PackagePart part = package.PartExists(partUri)
-                  ? package.GetPart(partUri)
-                  : package.CreatePart(partUri, System.Net.Mime.MediaTypeNames.Text.Plain);
+                    ? package.GetPart(partUri)
+                    : package.CreatePart(partUri, System.Net.Mime.MediaTypeNames.Text.Plain);
                 action(part, fileName);
 
                 // Part didn't exist previously so create relationships

@@ -23,12 +23,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
 {
     internal class NavigationBarClient
         : IVsDropdownBarClient,
-          IVsDropdownBarClient3,
-          IVsDropdownBarClient4,
-          IVsDropdownBarClientEx,
-          IVsCoTaskMemFreeMyStrings,
-          INavigationBarPresenter,
-          IVsCodeWindowEvents
+            IVsDropdownBarClient3,
+            IVsDropdownBarClient4,
+            IVsDropdownBarClientEx,
+            IVsCoTaskMemFreeMyStrings,
+            INavigationBarPresenter,
+            IVsCodeWindowEvents
     {
         private readonly IVsDropdownBarManager _manager;
         private readonly IVsCodeWindow _codeWindow;

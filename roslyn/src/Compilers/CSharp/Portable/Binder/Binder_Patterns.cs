@@ -239,69 +239,69 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 DiscardPatternSyntax p => BindDiscardPattern(p, inputType),
                 DeclarationPatternSyntax p
-                  => BindDeclarationPattern(
-                      p,
-                      inputType,
-                      inputValEscape,
-                      permitDesignations,
-                      hasErrors,
-                      diagnostics
-                  ),
+                    => BindDeclarationPattern(
+                        p,
+                        inputType,
+                        inputValEscape,
+                        permitDesignations,
+                        hasErrors,
+                        diagnostics
+                    ),
                 ConstantPatternSyntax p
-                  => BindConstantPatternWithFallbackToTypePattern(
-                      p,
-                      inputType,
-                      hasErrors,
-                      diagnostics
-                  ),
+                    => BindConstantPatternWithFallbackToTypePattern(
+                        p,
+                        inputType,
+                        hasErrors,
+                        diagnostics
+                    ),
                 RecursivePatternSyntax p
-                  => BindRecursivePattern(
-                      p,
-                      inputType,
-                      inputValEscape,
-                      permitDesignations,
-                      hasErrors,
-                      diagnostics
-                  ),
+                    => BindRecursivePattern(
+                        p,
+                        inputType,
+                        inputValEscape,
+                        permitDesignations,
+                        hasErrors,
+                        diagnostics
+                    ),
                 VarPatternSyntax p
-                  => BindVarPattern(
-                      p,
-                      inputType,
-                      inputValEscape,
-                      permitDesignations,
-                      hasErrors,
-                      diagnostics
-                  ),
+                    => BindVarPattern(
+                        p,
+                        inputType,
+                        inputValEscape,
+                        permitDesignations,
+                        hasErrors,
+                        diagnostics
+                    ),
                 ParenthesizedPatternSyntax p
-                  => BindPattern(
-                      p.Pattern,
-                      inputType,
-                      inputValEscape,
-                      permitDesignations,
-                      hasErrors,
-                      diagnostics,
-                      underIsPattern
-                  ),
+                    => BindPattern(
+                        p.Pattern,
+                        inputType,
+                        inputValEscape,
+                        permitDesignations,
+                        hasErrors,
+                        diagnostics,
+                        underIsPattern
+                    ),
                 BinaryPatternSyntax p
-                  => BindBinaryPattern(
-                      p,
-                      inputType,
-                      inputValEscape,
-                      permitDesignations,
-                      hasErrors,
-                      diagnostics
-                  ),
+                    => BindBinaryPattern(
+                        p,
+                        inputType,
+                        inputValEscape,
+                        permitDesignations,
+                        hasErrors,
+                        diagnostics
+                    ),
                 UnaryPatternSyntax p
-                  => BindUnaryPattern(
-                      p,
-                      inputType,
-                      inputValEscape,
-                      hasErrors,
-                      diagnostics,
-                      underIsPattern
-                  ),
+                    => BindUnaryPattern(
+                        p,
+                        inputType,
+                        inputValEscape,
+                        hasErrors,
+                        diagnostics,
+                        underIsPattern
+                    ),
                 RelationalPatternSyntax p
-                  => BindRelationalPattern(p, inputType, hasErrors, diagnostics),
+                    => BindRelationalPattern(p, inputType, hasErrors, diagnostics),
                 TypePatternSyntax p => BindTypePattern(p, inputType, hasErrors, diagnostics),
                 _ => throw ExceptionUtilities.UnexpectedValue(node.Kind()),
             };
@@ -478,7 +478,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _ => true
             };
             return wasExpression
-              ? BindExpressionForPatternContinued(
+                ? BindExpressionForPatternContinued(
                     expression,
                     inputType,
                     patternExpression,
@@ -486,7 +486,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics,
                     out constantValueOpt
                 )
-              : expression;
+                : expression;
         }
 
         private BoundExpression BindExpressionForPatternContinued(
@@ -846,12 +846,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 operandCouldBeNull
             );
             return (result == null)
-              ? (bool?)null
-              : (result == ConstantValue.True)
-                  ? true
-                  : (result == ConstantValue.False)
-                      ? false
-                      : throw ExceptionUtilities.UnexpectedValue(result);
+                ? (bool?)null
+                : (result == ConstantValue.True)
+                    ? true
+                    : (result == ConstantValue.False)
+                        ? false
+                        : throw ExceptionUtilities.UnexpectedValue(result);
         }
 
         private BoundPattern BindDeclarationPattern(
@@ -983,8 +983,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             syntax: designation,
                             localSymbol: localSymbol,
                             localSymbol.IsVar
-                              ? BoundLocalDeclarationKind.WithInferredType
-                              : BoundLocalDeclarationKind.WithExplicitType,
+                                ? BoundLocalDeclarationKind.WithInferredType
+                                : BoundLocalDeclarationKind.WithExplicitType,
                             constantValueOpt: null,
                             isNullableUnknown: false,
                             type: declType.Type
@@ -1955,7 +1955,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbol = BindPropertyPatternMember(inputType, name, ref hasErrors, diagnostics);
                     break;
                 case MemberAccessExpressionSyntax { Name: IdentifierNameSyntax name } memberAccess
-                      when memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression):
+                when memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression):
                     receiver = LookupMembersForPropertyPattern(
                         inputType,
                         memberAccess.Expression,
@@ -2235,7 +2235,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SpecialType.System_Boolean => BinaryOperatorKind.Bool,
                 SpecialType.System_IntPtr when type.IsNativeIntegerType => BinaryOperatorKind.NInt,
                 SpecialType.System_UIntPtr when type.IsNativeIntegerType
-                  => BinaryOperatorKind.NUInt,
+                    => BinaryOperatorKind.NUInt,
                 _ => BinaryOperatorKind.Error,
             };
 

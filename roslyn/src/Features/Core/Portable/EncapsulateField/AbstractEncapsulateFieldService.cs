@@ -578,8 +578,8 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
                     parameters: ImmutableArray<IParameterSymbol>.Empty,
                     getMethod: CreateGet(fieldName, field, factory),
                     setMethod: field.IsReadOnly || field.IsConst
-                      ? null
-                      : CreateSet(fieldName, field, factory)
+                        ? null
+                        : CreateSet(fieldName, field, factory)
                 )
             );
 
@@ -616,9 +616,9 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         {
             var assigned = !field.IsStatic
                 ? factory.MemberAccessExpression(
-                      factory.ThisExpression(),
-                      factory.IdentifierName(originalFieldName)
-                  )
+                    factory.ThisExpression(),
+                    factory.IdentifierName(originalFieldName)
+                )
                 : factory.IdentifierName(originalFieldName);
 
             var body = factory.ExpressionStatement(
@@ -643,9 +643,9 @@ namespace Microsoft.CodeAnalysis.EncapsulateField
         {
             var value = !field.IsStatic
                 ? factory.MemberAccessExpression(
-                      factory.ThisExpression(),
-                      factory.IdentifierName(originalFieldName)
-                  )
+                    factory.ThisExpression(),
+                    factory.IdentifierName(originalFieldName)
+                )
                 : factory.IdentifierName(originalFieldName);
 
             var body = factory.ReturnStatement(

@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     /// </summary>
     internal abstract partial class Formatter
         : IDkmClrFormatter,
-          IDkmClrFormatter2,
-          IDkmClrFullNameProvider
+            IDkmClrFormatter2,
+            IDkmClrFullNameProvider
     {
         private readonly string _defaultFormat;
         private readonly string _nullString;

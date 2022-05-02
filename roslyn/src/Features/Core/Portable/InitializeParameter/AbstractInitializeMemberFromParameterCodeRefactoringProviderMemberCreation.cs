@@ -32,11 +32,11 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         TExpressionSyntax
     >
         : AbstractInitializeParameterCodeRefactoringProvider<
-              TTypeDeclarationSyntax,
-              TParameterSyntax,
-              TStatementSyntax,
-              TExpressionSyntax
-          >
+            TTypeDeclarationSyntax,
+            TParameterSyntax,
+            TStatementSyntax,
+            TExpressionSyntax
+        >
         where TTypeDeclarationSyntax : SyntaxNode
         where TParameterSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
@@ -793,8 +793,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                     {
                         var statementIndex = blockStatementOpt!.Operations.IndexOf(statement);
                         return statementIndex > 0
-                          ? blockStatementOpt.Operations[statementIndex - 1].Syntax
-                          : null;
+                            ? blockStatementOpt.Operations[statementIndex - 1].Syntax
+                            : null;
                     }
                 }
             }

@@ -142,15 +142,15 @@ namespace System.CommandLine.Parsing
                     return argument.Arity.MaximumNumberOfValues switch
                     {
                         1
-                          => ArgumentConversionResult.Success(
-                              argument,
-                              Tokens.Select(t => t.Value).SingleOrDefault()
-                          ),
+                            => ArgumentConversionResult.Success(
+                                argument,
+                                Tokens.Select(t => t.Value).SingleOrDefault()
+                            ),
                         _
-                          => ArgumentConversionResult.Success(
-                              argument,
-                              Tokens.Select(t => t.Value).ToArray()
-                          )
+                            => ArgumentConversionResult.Success(
+                                argument,
+                                Tokens.Select(t => t.Value).ToArray()
+                            )
                     };
                 }
 
@@ -199,15 +199,15 @@ namespace System.CommandLine.Parsing
             return argument.Arity.MaximumNumberOfValues switch
             {
                 1
-                  => ArgumentConversionResult.Success(
-                      argument,
-                      Tokens.Select(t => t.Value).SingleOrDefault()
-                  ),
+                    => ArgumentConversionResult.Success(
+                        argument,
+                        Tokens.Select(t => t.Value).SingleOrDefault()
+                    ),
                 _
-                  => ArgumentConversionResult.Success(
-                      argument,
-                      Tokens.Select(t => t.Value).ToArray()
-                  )
+                    => ArgumentConversionResult.Success(
+                        argument,
+                        Tokens.Select(t => t.Value).ToArray()
+                    )
             };
 
             bool ShouldCheckArity() => Parent is not OptionResult { IsImplicit: true };

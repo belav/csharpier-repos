@@ -26,8 +26,8 @@ namespace System.Text
             {
                 throw new ArgumentNullException(
                     name == null
-                      ? nameof(name)
-                      : (displayName == null ? nameof(displayName) : nameof(provider))
+                        ? nameof(name)
+                        : (displayName == null ? nameof(displayName) : nameof(provider))
                 );
             }
 

@@ -51,11 +51,11 @@ namespace Microsoft.CodeAnalysis.Editor
                         return
                             i1.DocumentId == preferredDocumentId
                             && i2.DocumentId != preferredDocumentId
-                          ? -1
-                          : i1.DocumentId != preferredDocumentId
+                            ? -1
+                            : i1.DocumentId != preferredDocumentId
                             && i2.DocumentId == preferredDocumentId
-                              ? 1
-                              : _previews.IndexOf(i1) - _previews.IndexOf(i2);
+                                ? 1
+                                : _previews.IndexOf(i1) - _previews.IndexOf(i2);
                     }
                 )
                 .ThenBy(
@@ -63,20 +63,21 @@ namespace Microsoft.CodeAnalysis.Editor
                     {
                         return
                             i1.ProjectId == preferredProjectId && i2.ProjectId != preferredProjectId
-                          ? -1
-                          : i1.ProjectId != preferredProjectId && i2.ProjectId == preferredProjectId
-                              ? 1
-                              : _previews.IndexOf(i1) - _previews.IndexOf(i2);
+                            ? -1
+                            : i1.ProjectId != preferredProjectId
+                            && i2.ProjectId == preferredProjectId
+                                ? 1
+                                : _previews.IndexOf(i1) - _previews.IndexOf(i2);
                     }
                 )
                 .ThenBy(
                     (i1, i2) =>
                     {
                         return i1.Text == null && i2.Text != null
-                          ? -1
-                          : i1.Text != null && i2.Text == null
-                              ? 1
-                              : _previews.IndexOf(i1) - _previews.IndexOf(i2);
+                            ? -1
+                            : i1.Text != null && i2.Text == null
+                                ? 1
+                                : _previews.IndexOf(i1) - _previews.IndexOf(i2);
                     }
                 );
 

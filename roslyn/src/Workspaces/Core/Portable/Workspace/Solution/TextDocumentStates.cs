@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis
 
         public TState GetRequiredState(DocumentId documentId) =>
             _map.TryGetValue(documentId, out var state)
-              ? state
-              : throw ExceptionUtilities.Unreachable;
+                ? state
+                : throw ExceptionUtilities.Unreachable;
 
         /// <summary>
         /// <see cref="DocumentId"/>s in the order in which they were added to the project (the compilation order).

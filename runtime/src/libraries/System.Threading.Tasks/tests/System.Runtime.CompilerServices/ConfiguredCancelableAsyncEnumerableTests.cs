@@ -73,8 +73,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .UnsafeOnCompleted(() => { });
             Assert.Equal(
                 continueOnCapturedContext
-                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                  : ValueTaskSourceOnCompletedFlags.None,
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
                 enumerable.Flags
             );
 
@@ -89,8 +89,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .UnsafeOnCompleted(() => { });
             Assert.Equal(
                 continueOnCapturedContext
-                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                  : ValueTaskSourceOnCompletedFlags.None,
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
                 enumerable.Flags
             );
 
@@ -105,8 +105,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .UnsafeOnCompleted(() => { });
             Assert.Equal(
                 continueOnCapturedContext
-                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                  : ValueTaskSourceOnCompletedFlags.None,
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
                 enumerable.Flags
             );
 
@@ -121,8 +121,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .UnsafeOnCompleted(() => { });
             Assert.Equal(
                 continueOnCapturedContext
-                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                  : ValueTaskSourceOnCompletedFlags.None,
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
                 enumerable.Flags
             );
         }
@@ -143,8 +143,8 @@ namespace System.Runtime.CompilerServices.Tests
                 .UnsafeOnCompleted(() => { });
             Assert.Equal(
                 continueOnCapturedContext
-                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                  : ValueTaskSourceOnCompletedFlags.None,
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
                 enumerable.Flags
             );
         }
@@ -230,8 +230,8 @@ namespace System.Runtime.CompilerServices.Tests
 
             private sealed class Enumerator
                 : IAsyncEnumerator<int>,
-                  IValueTaskSource<bool>,
-                  IValueTaskSource
+                    IValueTaskSource<bool>,
+                    IValueTaskSource
             {
                 private readonly TrackFlagsAsyncEnumerable _enumerable;
 
@@ -261,7 +261,7 @@ namespace System.Runtime.CompilerServices.Tests
 
         private sealed class EnumerableWithDelayToAsyncEnumerable<T>
             : IAsyncEnumerable<T>,
-              IAsyncEnumerator<T>
+                IAsyncEnumerator<T>
         {
             private readonly int _delayMs;
             private readonly IEnumerable<T> _enumerable;

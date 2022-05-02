@@ -510,14 +510,14 @@ public class KestrelConfigurationLoaderTests
                     ),
                 }.Concat(
                     password != null
-                      ? new[]
+                        ? new[]
                         {
                             new KeyValuePair<string, string>(
                                 "Certificates:Default:Password",
                                 password
                             )
                         }
-                      : Array.Empty<KeyValuePair<string, string>>()
+                        : Array.Empty<KeyValuePair<string, string>>()
                 )
             )
             .Build();

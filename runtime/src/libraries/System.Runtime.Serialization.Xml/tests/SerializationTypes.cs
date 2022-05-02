@@ -1258,11 +1258,11 @@ public class DefaultValuesSetToNaN
     {
         var other = obj as DefaultValuesSetToNaN;
         return other == null
-          ? false
-          : other.DoubleProp == this.DoubleProp
-            && other.FloatProp == this.FloatProp
-            && other.DoubleField == this.DoubleField
-            && other.SingleField == this.SingleField;
+            ? false
+            : other.DoubleProp == this.DoubleProp
+                && other.FloatProp == this.FloatProp
+                && other.DoubleField == this.DoubleField
+                && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()
@@ -1292,11 +1292,11 @@ public class DefaultValuesSetToPositiveInfinity
     {
         var other = obj as DefaultValuesSetToPositiveInfinity;
         return other == null
-          ? false
-          : other.DoubleProp == this.DoubleProp
-            && other.FloatProp == this.FloatProp
-            && other.DoubleField == this.DoubleField
-            && other.SingleField == this.SingleField;
+            ? false
+            : other.DoubleProp == this.DoubleProp
+                && other.FloatProp == this.FloatProp
+                && other.DoubleField == this.DoubleField
+                && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()
@@ -1326,11 +1326,11 @@ public class DefaultValuesSetToNegativeInfinity
     {
         var other = obj as DefaultValuesSetToNegativeInfinity;
         return other == null
-          ? false
-          : other.DoubleProp == this.DoubleProp
-            && other.FloatProp == this.FloatProp
-            && other.DoubleField == this.DoubleField
-            && other.SingleField == this.SingleField;
+            ? false
+            : other.DoubleProp == this.DoubleProp
+                && other.FloatProp == this.FloatProp
+                && other.DoubleField == this.DoubleField
+                && other.SingleField == this.SingleField;
     }
 
     public override int GetHashCode()

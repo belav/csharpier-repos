@@ -938,7 +938,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public abstract class Ef6GroupByFixtureBase
             : SharedStoreFixtureBase<ArubaContext>,
-              IQueryFixtureBase
+                IQueryFixtureBase
         {
             protected override string StoreName => "Ef6GroupByTest";
 

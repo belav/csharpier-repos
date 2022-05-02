@@ -97,8 +97,8 @@ namespace System.PrivateUri.Tests
                                     : new Uri($"{scheme}://foo").Port;
 
                             string expectedQuery = rawTarget.Contains('?')
-                              ? rawTarget.Substring(rawTarget.IndexOf('?'))
-                              : "";
+                                ? rawTarget.Substring(rawTarget.IndexOf('?'))
+                                : "";
 
                             string expectedPath = rawTarget.Substring(
                                 0,

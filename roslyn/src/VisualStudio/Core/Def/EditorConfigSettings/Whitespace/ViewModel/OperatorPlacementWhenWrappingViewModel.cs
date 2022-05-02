@@ -69,7 +69,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
                 return _setting.GetValue() switch
                 {
                     OperatorPlacementWhenWrappingPreference.BeginningOfLine
-                      => OperatorPlacementWhenWrappingPreference.BeginningOfLine,
+                        => OperatorPlacementWhenWrappingPreference.BeginningOfLine,
                     _ => OperatorPlacementWhenWrappingPreference.EndOfLine,
                 };
             }

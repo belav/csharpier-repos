@@ -89,8 +89,8 @@ namespace System.ComponentModel
                         Volatile.Write(
                             ref s_convertFromInvariantString,
                             mi == null
-                              ? new object()
-                              : mi.CreateDelegate(typeof(Func<Type, string, object>))
+                                ? new object()
+                                : mi.CreateDelegate(typeof(Func<Type, string, object>))
                         );
                     }
 

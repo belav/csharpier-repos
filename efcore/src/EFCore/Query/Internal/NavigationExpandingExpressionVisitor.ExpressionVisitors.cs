@@ -242,8 +242,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 return navigation.IsCollection
-                  ? new MaterializeCollectionNavigationExpression(expansion, navigation)
-                  : expansion;
+                    ? new MaterializeCollectionNavigationExpression(expansion, navigation)
+                    : expansion;
             }
 
             protected Expression ExpandSkipNavigation(
@@ -255,8 +255,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 var inverseNavigation = navigation.Inverse;
                 var includeTree = entityReference.IncludePaths.TryGetValue(navigation, out var tree)
-                  ? tree
-                  : null;
+                    ? tree
+                    : null;
 
                 var primaryExpansion = ExpandForeignKey(
                     root,
@@ -309,8 +309,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var outerKeyparameter = Expression.Parameter(sourceElementType);
                         var outerKey = outerKeyparameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                              ? secondaryForeignKey.Properties
-                              : secondaryForeignKey.PrincipalKey.Properties,
+                                ? secondaryForeignKey.Properties
+                                : secondaryForeignKey.PrincipalKey.Properties,
                             makeNullable: true
                         );
                         var outerKeySelector = Expression.Lambda(outerKey, outerKeyparameter);
@@ -319,8 +319,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var innerKeyParameter = Expression.Parameter(innerSourceElementType);
                         var innerKey = innerKeyParameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                              ? secondaryForeignKey.PrincipalKey.Properties
-                              : secondaryForeignKey.Properties,
+                                ? secondaryForeignKey.PrincipalKey.Properties
+                                : secondaryForeignKey.Properties,
                             makeNullable: true
                         );
                         var innerKeySelector = Expression.Lambda(innerKey, innerKeyParameter);
@@ -375,8 +375,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var outersourceParameter = Expression.Parameter(sourceElementType);
                         var outerKey = outersourceParameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                              ? secondaryForeignKey.Properties
-                              : secondaryForeignKey.PrincipalKey.Properties,
+                                ? secondaryForeignKey.Properties
+                                : secondaryForeignKey.PrincipalKey.Properties,
                             makeNullable: true
                         );
 
@@ -384,8 +384,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         var innerSourceParameter = Expression.Parameter(innerSourceElementType);
                         var innerKey = innerSourceParameter.CreateKeyValuesExpression(
                             !inverseNavigation.IsOnDependent
-                              ? secondaryForeignKey.PrincipalKey.Properties
-                              : secondaryForeignKey.Properties,
+                                ? secondaryForeignKey.PrincipalKey.Properties
+                                : secondaryForeignKey.Properties,
                             makeNullable: true
                         );
 
@@ -423,8 +423,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 }
 
                 return navigation.IsCollection
-                  ? new MaterializeCollectionNavigationExpression(secondaryExpansion, navigation)
-                  : secondaryExpansion;
+                    ? new MaterializeCollectionNavigationExpression(secondaryExpansion, navigation)
+                    : secondaryExpansion;
             }
 
             private Expression ExpandForeignKey(
@@ -544,20 +544,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     // Since outerKey's reference could change if a reference navigation is expanded afterwards
                     var predicateBody = Expression.AndAlso(
                         outerKey is NewArrayExpression newArrayExpression
-                          ? newArrayExpression.Expressions
-                            .Select(
-                                e =>
-                                {
-                                    var left = (e as UnaryExpression)?.Operand ?? e;
+                            ? newArrayExpression.Expressions
+                                .Select(
+                                    e =>
+                                    {
+                                        var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                    return Expression.NotEqual(
-                                        left,
-                                        Expression.Constant(null, left.Type)
-                                    );
-                                }
-                            )
-                            .Aggregate((l, r) => Expression.AndAlso(l, r))
-                          : Expression.NotEqual(outerKey, Expression.Constant(null, outerKey.Type)),
+                                        return Expression.NotEqual(
+                                            left,
+                                            Expression.Constant(null, left.Type)
+                                        );
+                                    }
+                                )
+                                .Aggregate((l, r) => Expression.AndAlso(l, r))
+                            : Expression.NotEqual(
+                                outerKey,
+                                Expression.Constant(null, outerKey.Type)
+                            ),
                         Expression.Call(
                             _objectEqualsMethodInfo,
                             AddConvertToObject(outerKey),
@@ -978,23 +981,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var included = navigationBase switch
                     {
                         INavigation navigation
-                          => ExpandNavigation(
-                              convertedRoot,
-                              entityReference,
-                              navigation,
-                              converted
-                          ),
+                            => ExpandNavigation(
+                                convertedRoot,
+                                entityReference,
+                                navigation,
+                                converted
+                            ),
                         ISkipNavigation skipNavigation
-                          => ExpandSkipNavigation(
-                              convertedRoot,
-                              entityReference,
-                              skipNavigation,
-                              converted
-                          ),
+                            => ExpandSkipNavigation(
+                                convertedRoot,
+                                entityReference,
+                                skipNavigation,
+                                converted
+                            ),
                         _
-                          => throw new InvalidOperationException(
-                              CoreStrings.UnhandledNavigationBase(navigationBase.GetType())
-                          ),
+                            => throw new InvalidOperationException(
+                                CoreStrings.UnhandledNavigationBase(navigationBase.GetType())
+                            ),
                     };
 
                     _logger.NavigationBaseIncluded(navigationBase);
@@ -1436,9 +1439,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 extensionExpression is QueryRootExpression queryRootExpression
                 && queryRootExpression.EntityType == _entityType
                     ? _navigationExpandingExpressionVisitor.CreateNavigationExpansionExpression(
-                          queryRootExpression,
-                          _entityType
-                      )
+                        queryRootExpression,
+                        _entityType
+                    )
                     : base.VisitExtension(extensionExpression);
         }
 
@@ -1598,8 +1601,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 return
                     memberExpression.Member == _keyMemberInfo
                     && memberExpression.Expression == _parameterExpression
-                  ? _keyAccessExpression!
-                  : base.VisitMember(memberExpression);
+                    ? _keyAccessExpression!
+                    : base.VisitMember(memberExpression);
             }
         }
 
@@ -1684,8 +1687,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 if (left.IsNullConstantExpression() || right.IsNullConstantExpression())
                 {
                     NavigationDataExpression nonNullNavigationData = left.IsNullConstantExpression()
-                      ? rightNavigationData!
-                      : leftNavigationData!;
+                        ? rightNavigationData!
+                        : leftNavigationData!;
 
                     if (nonNullNavigationData.Navigation?.IsCollection == true)
                     {
@@ -1759,10 +1762,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         return expression;
 
                     case MethodCallExpression methodCallExpression
-                          when methodCallExpression.TryGetEFPropertyArguments(
-                              out var source,
-                              out var navigationName
-                          ):
+                    when methodCallExpression.TryGetEFPropertyArguments(
+                        out var source,
+                        out var navigationName
+                    ):
                         return expression;
 
                     default:

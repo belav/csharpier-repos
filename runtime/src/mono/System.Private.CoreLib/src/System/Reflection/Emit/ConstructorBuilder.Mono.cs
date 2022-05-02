@@ -206,8 +206,8 @@ namespace System.Reflection.Emit
             get
             {
                 return (attrs & MethodAttributes.Static) != 0
-                  ? TypeConstructorName
-                  : ConstructorName;
+                    ? TypeConstructorName
+                    : ConstructorName;
             }
         }
 

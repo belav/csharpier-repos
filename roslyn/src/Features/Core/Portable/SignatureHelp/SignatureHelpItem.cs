@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             : this(
                 isVariadic,
                 documentationFactory != null
-                  ? c => documentationFactory(c).ToTaggedText()
-                  : s_emptyDocumentationFactory,
+                    ? c => documentationFactory(c).ToTaggedText()
+                    : s_emptyDocumentationFactory,
                 prefixParts.ToTaggedText(),
                 separatorParts.ToTaggedText(),
                 suffixParts.ToTaggedText(),

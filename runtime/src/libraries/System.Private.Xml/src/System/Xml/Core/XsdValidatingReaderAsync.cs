@@ -17,9 +17,9 @@ namespace System.Xml
 {
     internal sealed partial class XsdValidatingReader
         : XmlReader,
-          IXmlSchemaInfo,
-          IXmlLineInfo,
-          IXmlNamespaceResolver
+            IXmlSchemaInfo,
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         // Gets the text value of the current node.
         public override Task<string> GetValueAsync()
@@ -749,8 +749,8 @@ namespace System.Xml
                             Debug.Assert(_nsManager != null);
                             _nsManager.AddNamespace(
                                 _coreReader.Prefix.Length == 0
-                                  ? string.Empty
-                                  : _coreReader.LocalName,
+                                    ? string.Empty
+                                    : _coreReader.LocalName,
                                 _coreReader.Value
                             );
                         }

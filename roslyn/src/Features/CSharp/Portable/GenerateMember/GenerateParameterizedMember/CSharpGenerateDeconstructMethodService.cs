@@ -17,11 +17,11 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
     [ExportLanguageService(typeof(IGenerateDeconstructMemberService), LanguageNames.CSharp), Shared]
     internal sealed class CSharpGenerateDeconstructMethodService
         : AbstractGenerateDeconstructMethodService<
-              CSharpGenerateDeconstructMethodService,
-              SimpleNameSyntax,
-              ExpressionSyntax,
-              InvocationExpressionSyntax
-          >
+            CSharpGenerateDeconstructMethodService,
+            SimpleNameSyntax,
+            ExpressionSyntax,
+            InvocationExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

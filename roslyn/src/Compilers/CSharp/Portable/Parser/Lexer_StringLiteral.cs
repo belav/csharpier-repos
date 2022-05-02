@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 {
                     this.AddError(
                         (_builder.Length != 0)
-                          ? ErrorCode.ERR_TooManyCharsInConst
-                          : ErrorCode.ERR_EmptyCharConst
+                            ? ErrorCode.ERR_TooManyCharsInConst
+                            : ErrorCode.ERR_EmptyCharConst
                     );
                 }
 
@@ -386,15 +386,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 {
                     Debug.Assert(IsAtEnd());
                     int position = IsAtEnd(allowNewline: true)
-                      ? _lexer.TextWindow.Position - 1
-                      : _lexer.TextWindow.Position;
+                        ? _lexer.TextWindow.Position - 1
+                        : _lexer.TextWindow.Position;
                     TrySetUnrecoverableError(
                         _lexer.MakeError(
                             position,
                             1,
                             _isVerbatim
-                              ? ErrorCode.ERR_UnterminatedStringLit
-                              : ErrorCode.ERR_NewlineInConst
+                                ? ErrorCode.ERR_UnterminatedStringLit
+                                : ErrorCode.ERR_NewlineInConst
                         )
                     );
 

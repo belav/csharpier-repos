@@ -1937,8 +1937,8 @@ namespace System.Xml.Tests
                         CError.Compare(
                             w.WriteState,
                             (utils.WriterType == WriterType.CharCheckingWriter)
-                              ? WriteState.Element
-                              : WriteState.Error,
+                                ? WriteState.Element
+                                : WriteState.Error,
                             "WriteState should be Error"
                         );
                         return;
@@ -1949,8 +1949,8 @@ namespace System.Xml.Tests
                         CError.Compare(
                             w.WriteState,
                             (utils.WriterType == WriterType.CharCheckingWriter)
-                              ? WriteState.Element
-                              : WriteState.Error,
+                                ? WriteState.Element
+                                : WriteState.Error,
                             "WriteState should be Error"
                         );
                         return;
@@ -1966,10 +1966,10 @@ namespace System.Xml.Tests
             public void entityRef_2(XmlWriterUtils utils)
             {
                 string exp = utils.IsIndent()
-                  ? "<!DOCTYPE Root [<!ENTITY e \"test\">]>"
-                    + Environment.NewLine
-                    + "<Root>&e;</Root>"
-                  : "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&e;</Root>";
+                    ? "<!DOCTYPE Root [<!ENTITY e \"test\">]>"
+                        + Environment.NewLine
+                        + "<Root>&e;</Root>"
+                    : "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&e;</Root>";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -1988,10 +1988,10 @@ namespace System.Xml.Tests
             public void entityRef_3(XmlWriterUtils utils)
             {
                 string exp = utils.IsIndent()
-                  ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
-                    + Environment.NewLine
-                    + "<root xml:lang=\"&e;&lt;\" />"
-                  : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;&lt;\" />";
+                    ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
+                        + Environment.NewLine
+                        + "<root xml:lang=\"&e;&lt;\" />"
+                    : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;&lt;\" />";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -2013,10 +2013,10 @@ namespace System.Xml.Tests
             public void var_14(XmlWriterUtils utils)
             {
                 string exp = utils.IsIndent()
-                  ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
-                    + Environment.NewLine
-                    + "<root xml:lang=\"&e;\" />"
-                  : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;\" />";
+                    ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
+                        + Environment.NewLine
+                        + "<root xml:lang=\"&e;\" />"
+                    : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;\" />";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -2486,8 +2486,8 @@ namespace System.Xml.Tests
                         CError.Compare(
                             w.WriteState,
                             (utils.WriterType == WriterType.CharCheckingWriter)
-                              ? WriteState.Element
-                              : WriteState.Error,
+                                ? WriteState.Element
+                                : WriteState.Error,
                             "WriteState should be Error"
                         );
                         return;
@@ -2886,8 +2886,8 @@ namespace System.Xml.Tests
                         CError.Compare(
                             w.WriteState,
                             (utils.WriterType == WriterType.CharCheckingWriter)
-                              ? WriteState.Element
-                              : WriteState.Error,
+                                ? WriteState.Element
+                                : WriteState.Error,
                             "WriteState should be Error"
                         );
                         return;
@@ -2898,8 +2898,8 @@ namespace System.Xml.Tests
                         CError.Compare(
                             w.WriteState,
                             (utils.WriterType == WriterType.CharCheckingWriter)
-                              ? WriteState.Element
-                              : WriteState.Error,
+                                ? WriteState.Element
+                                : WriteState.Error,
                             "WriteState should be Error"
                         );
                         return;
@@ -2997,8 +2997,8 @@ namespace System.Xml.Tests
                         CError.Compare(
                             w.WriteState,
                             (utils.WriterType == WriterType.CharCheckingWriter)
-                              ? WriteState.Element
-                              : WriteState.Error,
+                                ? WriteState.Element
+                                : WriteState.Error,
                             "WriteState should be Error"
                         );
                         return;
@@ -3582,8 +3582,8 @@ namespace System.Xml.Tests
                         CError.Compare(
                             w.WriteState,
                             (utils.WriterType == WriterType.CharCheckingWriter)
-                              ? WriteState.Element
-                              : WriteState.Error,
+                                ? WriteState.Element
+                                : WriteState.Error,
                             "WriteState should be Error"
                         );
                         return;
@@ -6935,17 +6935,17 @@ namespace System.Xml.Tests
                             || utils.WriterType == WriterType.UnicodeWriterIndent
                         )
                             ? string.Format(
-                                  "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?>"
-                                      + Environment.NewLine
-                                      + "<a />",
-                                  enc,
-                                  param
-                              )
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?>"
+                                    + Environment.NewLine
+                                    + "<a />",
+                                enc,
+                                param
+                            )
                             : string.Format(
-                                  "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?><a />",
-                                  enc,
-                                  param
-                              );
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?><a />",
+                                enc,
+                                param
+                            );
 
                     Assert.True((utils.CompareString(exp)));
                 }
@@ -6978,15 +6978,15 @@ namespace System.Xml.Tests
                             || utils.WriterType == WriterType.UnicodeWriterIndent
                         )
                             ? string.Format(
-                                  "<?xml version=\"1.0\" encoding=\"utf-{0}\"?>"
-                                      + Environment.NewLine
-                                      + "<a />",
-                                  enc
-                              )
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\"?>"
+                                    + Environment.NewLine
+                                    + "<a />",
+                                enc
+                            )
                             : string.Format(
-                                  "<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a />",
-                                  enc
-                              );
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a />",
+                                enc
+                            );
 
                     exp =
                         (utils.WriterType == WriterType.CustomWriter)

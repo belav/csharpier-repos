@@ -152,8 +152,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             where TNode : SyntaxNode
         {
             return options?.AddImports ?? true
-              ? node.WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
-              : node;
+                ? node.WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
+                : node;
         }
 
         protected abstract TDeclarationNode AddEvent<TDeclarationNode>(
@@ -495,14 +495,14 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             );
 
             return options.AutoInsertionLocation
-              ? AddMembersToAppropriateLocationInDestination(
+                ? AddMembersToAppropriateLocationInDestination(
                     destination,
                     filteredMembers,
                     availableIndices,
                     options,
                     cancellationToken
                 )
-              : AddMembersToEndOfDestination(
+                : AddMembersToEndOfDestination(
                     destination,
                     filteredMembers,
                     options,
@@ -580,27 +580,27 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             member switch
             {
                 IEventSymbol @event
-                  => this.CreateEventDeclaration(@event, codeGenerationDestination, options),
+                    => this.CreateEventDeclaration(@event, codeGenerationDestination, options),
                 IFieldSymbol field
-                  => this.CreateFieldDeclaration(field, codeGenerationDestination, options),
+                    => this.CreateFieldDeclaration(field, codeGenerationDestination, options),
                 IPropertySymbol property
-                  => this.CreatePropertyDeclaration(property, codeGenerationDestination, options),
+                    => this.CreatePropertyDeclaration(property, codeGenerationDestination, options),
                 IMethodSymbol method
-                  => this.CreateMethodDeclaration(method, codeGenerationDestination, options),
+                    => this.CreateMethodDeclaration(method, codeGenerationDestination, options),
                 INamedTypeSymbol namedType
-                  => this.CreateNamedTypeDeclaration(
-                      namedType,
-                      codeGenerationDestination,
-                      options,
-                      cancellationToken
-                  ),
+                    => this.CreateNamedTypeDeclaration(
+                        namedType,
+                        codeGenerationDestination,
+                        options,
+                        cancellationToken
+                    ),
                 INamespaceSymbol @namespace
-                  => this.CreateNamespaceDeclaration(
-                      @namespace,
-                      codeGenerationDestination,
-                      options,
-                      cancellationToken
-                  ),
+                    => this.CreateNamespaceDeclaration(
+                        @namespace,
+                        codeGenerationDestination,
+                        options,
+                        cancellationToken
+                    ),
                 _ => null,
             };
 
@@ -615,29 +615,29 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return member switch
             {
                 IEventSymbol @event
-                  => this.AddEvent(currentDestination, @event, options, availableIndices),
+                    => this.AddEvent(currentDestination, @event, options, availableIndices),
                 IFieldSymbol field
-                  => this.AddField(currentDestination, field, options, availableIndices),
+                    => this.AddField(currentDestination, field, options, availableIndices),
                 IPropertySymbol property
-                  => this.AddProperty(currentDestination, property, options, availableIndices),
+                    => this.AddProperty(currentDestination, property, options, availableIndices),
                 IMethodSymbol method
-                  => this.AddMethod(currentDestination, method, options, availableIndices),
+                    => this.AddMethod(currentDestination, method, options, availableIndices),
                 INamedTypeSymbol namedType
-                  => this.AddNamedType(
-                      currentDestination,
-                      namedType,
-                      options,
-                      availableIndices,
-                      cancellationToken
-                  ),
+                    => this.AddNamedType(
+                        currentDestination,
+                        namedType,
+                        options,
+                        availableIndices,
+                        cancellationToken
+                    ),
                 INamespaceSymbol @namespace
-                  => this.AddNamespace(
-                      currentDestination,
-                      @namespace,
-                      options,
-                      availableIndices,
-                      cancellationToken
-                  ),
+                    => this.AddNamespace(
+                        currentDestination,
+                        @namespace,
+                        options,
+                        availableIndices,
+                        cancellationToken
+                    ),
                 _ => currentDestination,
             };
         }
@@ -893,12 +893,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             var root = attributeToRemove.SyntaxTree.GetRoot();
             var previousToken = root.FindToken(attributeToRemove.FullSpan.Start - 1);
             var leading = isComma(previousToken)
-              ? previousToken.LeadingTrivia
-              : attributeToRemove.GetLeadingTrivia();
+                ? previousToken.LeadingTrivia
+                : attributeToRemove.GetLeadingTrivia();
             var nextToken = root.FindToken(attributeToRemove.FullSpan.End + 1);
             var trailing = isComma(nextToken)
-              ? nextToken.TrailingTrivia
-              : attributeToRemove.GetTrailingTrivia();
+                ? nextToken.TrailingTrivia
+                : attributeToRemove.GetTrailingTrivia();
             triviaOfRemovedNode = leading.Concat(trailing);
         }
 

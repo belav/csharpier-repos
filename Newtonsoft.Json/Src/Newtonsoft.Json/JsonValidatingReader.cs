@@ -300,11 +300,11 @@ namespace Newtonsoft.Json
             string exceptionMessage =
                 (lineInfo.HasLineInfo())
                     ? message
-                      + " Line {0}, position {1}.".FormatWith(
-                          CultureInfo.InvariantCulture,
-                          lineInfo.LineNumber,
-                          lineInfo.LinePosition
-                      )
+                        + " Line {0}, position {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            lineInfo.LineNumber,
+                            lineInfo.LinePosition
+                        )
                     : message;
 
             OnValidationEvent(

@@ -138,8 +138,8 @@ namespace System.Linq
             }
 
             return count <= 0
-              ? source.Skip(0)
-              : TakeRangeFromEndIterator(
+                ? source.Skip(0)
+                : TakeRangeFromEndIterator(
                     source,
                     isStartIndexFromEnd: false,
                     startIndex: 0,

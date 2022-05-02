@@ -225,8 +225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             sourceParameter.Type,
                             sourceParameter.TypeWithAnnotations.CustomModifiers,
                             destinationParameter.RefKind != RefKind.None
-                              ? sourceParameter.RefCustomModifiers
-                              : ImmutableArray<CustomModifier>.Empty,
+                                ? sourceParameter.RefCustomModifiers
+                                : ImmutableArray<CustomModifier>.Empty,
                             newParams
                         )
                     );

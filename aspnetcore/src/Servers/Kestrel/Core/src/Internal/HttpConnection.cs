@@ -286,8 +286,8 @@ internal class HttpConnection : ITimeoutHandler
         }
 
         return http2Enabled && (!hasTls || Http2Id.SequenceEqual(applicationProtocol.Span))
-          ? HttpProtocols.Http2
-          : HttpProtocols.Http1;
+            ? HttpProtocols.Http2
+            : HttpProtocols.Http1;
     }
 
     private void Tick()

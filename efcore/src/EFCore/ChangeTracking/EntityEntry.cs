@@ -164,8 +164,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             if (navigation != null)
             {
                 return navigation.IsCollection
-                  ? new CollectionEntry(InternalEntry, propertyName)
-                  : new ReferenceEntry(InternalEntry, propertyName);
+                    ? new CollectionEntry(InternalEntry, propertyName)
+                    : new ReferenceEntry(InternalEntry, propertyName);
             }
 
             throw new InvalidOperationException(
@@ -205,8 +205,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             if (navigation != null)
             {
                 return navigation.IsCollection
-                  ? new CollectionEntry(InternalEntry, propertyName)
-                  : new ReferenceEntry(InternalEntry, propertyName);
+                    ? new CollectionEntry(InternalEntry, propertyName)
+                    : new ReferenceEntry(InternalEntry, propertyName);
             }
 
             if (InternalEntry.EntityType.FindProperty(propertyName) != null)
@@ -248,7 +248,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         navigation =>
                             navigation.IsCollection
                                 ? (NavigationEntry)
-                                      new CollectionEntry(InternalEntry, navigation.Name)
+                                    new CollectionEntry(InternalEntry, navigation.Name)
                                 : new ReferenceEntry(InternalEntry, navigation.Name)
                     );
             }

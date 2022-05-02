@@ -348,8 +348,8 @@ namespace System.IO.Compression
 
                     Debug.Assert(
                         success
-                          ? availableOutput <= (nuint)destination.Length
-                          : availableOutput == 0
+                            ? availableOutput <= (nuint)destination.Length
+                            : availableOutput == 0
                     );
 
                     bytesWritten = (int)availableOutput;

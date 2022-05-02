@@ -130,10 +130,10 @@ namespace System.Data.ProviderBase
                         _tableMapping = mappingAction switch
                         {
                             MissingMappingAction.Passthrough
-                              => new DataTableMapping(_dataTable.TableName, _dataTable.TableName),
+                                => new DataTableMapping(_dataTable.TableName, _dataTable.TableName),
                             MissingMappingAction.Ignore => null,
                             MissingMappingAction.Error
-                              => throw ADP.MissingTableMappingDestination(_dataTable.TableName),
+                                => throw ADP.MissingTableMappingDestination(_dataTable.TableName),
                             _ => throw ADP.InvalidMissingMappingAction(mappingAction),
                         };
                     }

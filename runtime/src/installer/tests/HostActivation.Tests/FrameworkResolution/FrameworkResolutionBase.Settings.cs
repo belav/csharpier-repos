@@ -41,8 +41,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     Environment == null
                         ? new Dictionary<string, string>() { { key, value } }
                         : new Dictionary<string, string>(
-                              Environment.Append(new KeyValuePair<string, string>(key, value))
-                          );
+                            Environment.Append(new KeyValuePair<string, string>(key, value))
+                        );
                 return this;
             }
 

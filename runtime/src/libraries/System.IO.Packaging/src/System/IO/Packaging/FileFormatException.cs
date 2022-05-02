@@ -51,8 +51,8 @@ namespace System.IO
         public FileFormatException(Uri? sourceUri)
             : base(
                 sourceUri == null
-                  ? SR.FileFormatException
-                  : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri)
+                    ? SR.FileFormatException
+                    : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri)
             )
         {
             _sourceUri = sourceUri;
@@ -85,8 +85,8 @@ namespace System.IO
         public FileFormatException(Uri? sourceUri, Exception? innerException)
             : base(
                 sourceUri == null
-                  ? SR.FileFormatException
-                  : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri),
+                    ? SR.FileFormatException
+                    : SR.Format(SR.FileFormatExceptionWithFileName, sourceUri),
                 innerException
             )
         {

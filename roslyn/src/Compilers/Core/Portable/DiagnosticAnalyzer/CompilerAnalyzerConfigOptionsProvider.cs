@@ -29,13 +29,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public override AnalyzerConfigOptions GetOptions(SyntaxTree tree) =>
             _treeDict.TryGetValue(tree, out var options)
-              ? options
-              : CompilerAnalyzerConfigOptions.Empty;
+                ? options
+                : CompilerAnalyzerConfigOptions.Empty;
 
         public override AnalyzerConfigOptions GetOptions(AdditionalText textFile) =>
             _treeDict.TryGetValue(textFile, out var options)
-              ? options
-              : CompilerAnalyzerConfigOptions.Empty;
+                ? options
+                : CompilerAnalyzerConfigOptions.Empty;
 
         internal CompilerAnalyzerConfigOptionsProvider WithAdditionalTreeOptions(
             ImmutableDictionary<object, AnalyzerConfigOptions> treeDict

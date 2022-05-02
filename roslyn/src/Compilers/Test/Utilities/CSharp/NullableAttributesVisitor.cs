@@ -173,8 +173,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             var nullableContextAttribute = GetNullableContextAttribute(symbol.GetAttributes());
             var nullableAttribute = GetNullableAttribute(
                 (symbol is MethodSymbol method)
-                  ? method.GetReturnTypeAttributes()
-                  : symbol.GetAttributes()
+                    ? method.GetReturnTypeAttributes()
+                    : symbol.GetAttributes()
             );
 
             if (nullableContextAttribute == null && nullableAttribute == null)

@@ -30,8 +30,8 @@ namespace System.Net.Http
         {
             string fileName = headers.ContentDisposition.FileName;
             return _isResultNull
-              ? null
-              : new RemoteStreamInfo(CreateMockStream(), UrlBase + fileName, fileName);
+                ? null
+                : new RemoteStreamInfo(CreateMockStream(), UrlBase + fileName, fileName);
         }
 
         private Stream CreateMockStream()

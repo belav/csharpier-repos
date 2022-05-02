@@ -327,8 +327,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
                 int GetValue(CodeFixCollection c) =>
                     priorityMap.TryGetValue((CodeFixProvider)c.Provider, out var value)
-                      ? value
-                      : int.MaxValue;
+                        ? value
+                        : int.MaxValue;
             }
 
             // TODO (https://github.com/dotnet/roslyn/issues/4932): Don't restrict CodeFixes in Interactive
@@ -505,9 +505,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     var message =
                         lazyFixer.Metadata.Name != null
                             ? string.Format(
-                                  FeaturesResources.Error_creating_instance_of_CodeFixProvider_0,
-                                  lazyFixer.Metadata.Name
-                              )
+                                FeaturesResources.Error_creating_instance_of_CodeFixProvider_0,
+                                lazyFixer.Metadata.Name
+                            )
                             : FeaturesResources.Error_creating_instance_of_CodeFixProvider;
 
                     errorReportingService.ShowGlobalErrorInfo(
@@ -805,8 +805,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 }
 
                 return newApplicableDiagnostics.Count == applicableDiagnostics.Length
-                  ? applicableDiagnostics
-                  : newApplicableDiagnostics.ToImmutable();
+                    ? applicableDiagnostics
+                    : newApplicableDiagnostics.ToImmutable();
             }
         }
 
@@ -960,11 +960,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 var diagnosticProvider = fixAllForInSpan
                     ? new FixAllPredefinedDiagnosticProvider(allDiagnostics)
                     : (FixAllContext.DiagnosticProvider)
-                          new FixAllDiagnosticProvider(
-                              this,
-                              diagnosticIdsForDiagnosticProvider,
-                              includeSuppressedDiagnostics
-                          );
+                        new FixAllDiagnosticProvider(
+                            this,
+                            diagnosticIdsForDiagnosticProvider,
+                            includeSuppressedDiagnostics
+                        );
 
                 fixAllState = new FixAllState(
                     fixAllProvider: fixAllProviderInfo.FixAllProvider,
@@ -1435,8 +1435,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         {
             // TODO (https://github.com/dotnet/roslyn/issues/4932): Don't restrict CodeFixes in Interactive
             return project.Solution.Workspace.Kind == WorkspaceKind.Interactive
-              ? ImmutableDictionary<DiagnosticId, List<CodeFixProvider>>.Empty
-              : _projectFixersMap.GetValue(
+                ? ImmutableDictionary<DiagnosticId, List<CodeFixProvider>>.Empty
+                : _projectFixersMap.GetValue(
                     project.AnalyzerReferences,
                     pId => ComputeProjectFixers(project)
                 );

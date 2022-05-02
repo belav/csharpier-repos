@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
                 var argument = syntaxFacts.IsNullLiteralExpression(
                     syntaxFacts.GetExpressionOfArgument(arguments[0])
                 )
-                  ? (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(arguments[1])
-                  : (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(arguments[0]);
+                    ? (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(arguments[1])
+                    : (TExpressionSyntax)syntaxFacts.GetExpressionOfArgument(arguments[0]);
 
                 var toReplace = negate ? invocation.GetRequiredParent() : invocation;
                 var replacement = negate

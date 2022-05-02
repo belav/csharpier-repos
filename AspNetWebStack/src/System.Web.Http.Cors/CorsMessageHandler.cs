@@ -205,9 +205,9 @@ namespace System.Web.Http.Cors
                     response =
                         result != null
                             ? request.CreateErrorResponse(
-                                  HttpStatusCode.BadRequest,
-                                  String.Join(" | ", result.ErrorMessages)
-                              )
+                                HttpStatusCode.BadRequest,
+                                String.Join(" | ", result.ErrorMessages)
+                            )
                             : request.CreateResponse(HttpStatusCode.BadRequest);
                 }
 

@@ -455,10 +455,10 @@ namespace System
             // a relative uri is always less than an absolute one
             if (!uri1.IsAbsoluteUri || !uri2.IsAbsoluteUri)
                 return uri1.IsAbsoluteUri
-                  ? 1
-                  : uri2.IsAbsoluteUri
-                      ? -1
-                      : string.Compare(uri1.OriginalString, uri2.OriginalString, comparisonType);
+                    ? 1
+                    : uri2.IsAbsoluteUri
+                        ? -1
+                        : string.Compare(uri1.OriginalString, uri2.OriginalString, comparisonType);
 
             return string.Compare(
                 uri1.GetParts(partsToCompare, compareFormat),
@@ -961,8 +961,8 @@ namespace System
                     string prefix;
                     if (baseUri.InFact(Flags.AuthorityFound))
                         prefix = baseUri.Syntax.InFact(UriSyntaxFlags.PathIsRooted)
-                          ? ":///"
-                          : "://";
+                            ? ":///"
+                            : "://";
                     else
                         prefix = baseUri.Syntax.InFact(UriSyntaxFlags.PathIsRooted) ? ":/" : ":";
 

@@ -448,8 +448,8 @@ namespace System.Diagnostics.Tests
             );
 
             StringComparison osSpecificComparison = OperatingSystem.IsWindows()
-              ? StringComparison.OrdinalIgnoreCase
-              : StringComparison.Ordinal;
+                ? StringComparison.OrdinalIgnoreCase
+                : StringComparison.Ordinal;
             foreach (var providedEnvVar in caseSensitiveEnvVars)
             {
                 Assert.Single(
@@ -494,8 +494,8 @@ namespace System.Diagnostics.Tests
             );
 
             StringComparison osSpecificComparison = OperatingSystem.IsWindows()
-              ? StringComparison.OrdinalIgnoreCase
-              : StringComparison.Ordinal;
+                ? StringComparison.OrdinalIgnoreCase
+                : StringComparison.Ordinal;
             foreach (var providedEnvVar in caseSensitiveEnvVars)
             {
                 Assert.Single(
@@ -630,8 +630,8 @@ namespace System.Diagnostics.Tests
         public void TestWorkingDirectoryPropertyInChildProcess()
         {
             string workingDirectory = string.IsNullOrEmpty(Environment.SystemDirectory)
-              ? TestDirectory
-              : Environment.SystemDirectory;
+                ? TestDirectory
+                : Environment.SystemDirectory;
             Assert.NotEqual(workingDirectory, Directory.GetCurrentDirectory());
             var psi = new ProcessStartInfo { WorkingDirectory = workingDirectory };
             RemoteExecutor

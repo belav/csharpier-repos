@@ -93,10 +93,10 @@ namespace ILCompiler
             // restricted to that use only. Replace them if they happened to be used in any identifiers in
             // the compilation input.
             return _mangleForCplusPlus
-              ? sanitizedName
-                .Replace(EnterNameScopeSequence, "_AA_")
-                .Replace(ExitNameScopeSequence, "_VV_")
-              : sanitizedName;
+                ? sanitizedName
+                    .Replace(EnterNameScopeSequence, "_AA_")
+                    .Replace(ExitNameScopeSequence, "_VV_")
+                : sanitizedName;
         }
 
         private static byte[] GetBytesFromString(string literal)

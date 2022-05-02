@@ -35,9 +35,9 @@ namespace Microsoft.EntityFrameworkCore
             new SqlConnectionStringBuilder(TestStore.ConnectionString).MultipleActiveResultSets
                 ? Task.CompletedTask
                 : base.SaveChanges_uses_explicit_transaction_with_failure_behavior(
-                      async,
-                      autoTransaction
-                  );
+                    async,
+                    autoTransaction
+                );
 
         [ConditionalTheory]
         [InlineData(true)]

@@ -36,8 +36,8 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.Equal(expected.Length, charsWritten);
             Assert.Equal(
                 address.AddressFamily == AddressFamily.InterNetworkV6
-                  ? expected.ToLowerInvariant()
-                  : expected,
+                    ? expected.ToLowerInvariant()
+                    : expected,
                 new string(largerThanRequired, 0, charsWritten)
             );
         }

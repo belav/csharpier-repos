@@ -15,8 +15,8 @@ namespace System.Web.Http.ValueProviders.Providers
     )]
     public class CompositeValueProvider
         : Collection<IValueProvider>,
-          IValueProvider,
-          IEnumerableValueProvider
+            IValueProvider,
+            IEnumerableValueProvider
     {
         public CompositeValueProvider() { }
 
@@ -71,8 +71,8 @@ namespace System.Web.Http.ValueProviders.Providers
         {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
             return (enumeratedProvider != null)
-              ? enumeratedProvider.GetKeysFromPrefix(prefix)
-              : null;
+                ? enumeratedProvider.GetKeysFromPrefix(prefix)
+                : null;
         }
 
         protected override void InsertItem(int index, IValueProvider item)

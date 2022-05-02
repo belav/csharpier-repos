@@ -92,10 +92,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (analyzer == FileContentLoadAnalyzer.Instance)
             {
                 return loadDiagnostic != null
-                  ? SpecializedCollections.SingletonEnumerable(
+                    ? SpecializedCollections.SingletonEnumerable(
                         DiagnosticData.Create(loadDiagnostic, textDocument)
                     )
-                  : SpecializedCollections.EmptyEnumerable<DiagnosticData>();
+                    : SpecializedCollections.EmptyEnumerable<DiagnosticData>();
             }
 
             if (loadDiagnostic != null)
@@ -172,19 +172,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var diagnostics = kind switch
             {
                 AnalysisKind.Syntax
-                  => await GetSyntaxDiagnosticsAsync(
-                          analyzer,
-                          isCompilerAnalyzer,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetSyntaxDiagnosticsAsync(
+                            analyzer,
+                            isCompilerAnalyzer,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 AnalysisKind.Semantic
-                  => await GetSemanticDiagnosticsAsync(
-                          analyzer,
-                          isCompilerAnalyzer,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetSemanticDiagnosticsAsync(
+                            analyzer,
+                            isCompilerAnalyzer,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 
@@ -309,11 +309,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             return _lazySyntaxDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
-              ? diagnosticAnalysisResult.GetDocumentDiagnostics(
+                ? diagnosticAnalysisResult.GetDocumentDiagnostics(
                     AnalysisScope.TextDocument.Id,
                     AnalysisScope.Kind
                 )
-              : ImmutableArray<DiagnosticData>.Empty;
+                : ImmutableArray<DiagnosticData>.Empty;
         }
 
         private async Task<ImmutableArray<DiagnosticData>> GetSemanticDiagnosticsAsync(
@@ -366,11 +366,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             return _lazySemanticDiagnostics.TryGetValue(analyzer, out var diagnosticAnalysisResult)
-              ? diagnosticAnalysisResult.GetDocumentDiagnostics(
+                ? diagnosticAnalysisResult.GetDocumentDiagnostics(
                     AnalysisScope.TextDocument.Id,
                     AnalysisScope.Kind
                 )
-              : ImmutableArray<DiagnosticData>.Empty;
+                : ImmutableArray<DiagnosticData>.Empty;
 
             async Task<TextSpan?> GetAdjustedSpanForCompilerAnalyzerAsync()
             {
@@ -404,8 +404,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 var startSpan = service.IsMethodLevelMember(startNode)
-                  ? startNode.FullSpan
-                  : span.Value;
+                    ? startNode.FullSpan
+                    : span.Value;
                 var endSpan = service.IsMethodLevelMember(endNode) ? endNode.FullSpan : span.Value;
 
                 return TextSpan.FromBounds(

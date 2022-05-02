@@ -160,8 +160,8 @@ namespace Newtonsoft.Json.Converters
             writer.WriteStartObject();
             writer.WritePropertyName(
                 (resolver != null)
-                  ? resolver.GetResolvedPropertyName(CasePropertyName)
-                  : CasePropertyName
+                    ? resolver.GetResolvedPropertyName(CasePropertyName)
+                    : CasePropertyName
             );
             writer.WriteValue(caseInfo.Name);
             if (caseInfo.Fields != null && caseInfo.Fields.Length > 0)
@@ -170,8 +170,8 @@ namespace Newtonsoft.Json.Converters
 
                 writer.WritePropertyName(
                     (resolver != null)
-                      ? resolver.GetResolvedPropertyName(FieldsPropertyName)
-                      : FieldsPropertyName
+                        ? resolver.GetResolvedPropertyName(FieldsPropertyName)
+                        : FieldsPropertyName
                 );
                 writer.WriteStartArray();
                 foreach (object field in fields)

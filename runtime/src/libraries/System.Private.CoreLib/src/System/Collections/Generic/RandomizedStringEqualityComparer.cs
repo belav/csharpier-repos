@@ -13,7 +13,7 @@ namespace System.Collections.Generic
     /// </summary>
     internal abstract class RandomizedStringEqualityComparer
         : EqualityComparer<string?>,
-          IInternalStringEqualityComparer
+            IInternalStringEqualityComparer
     {
         private readonly MarvinSeed _seed;
         private readonly IEqualityComparer<string?> _underlyingComparer;

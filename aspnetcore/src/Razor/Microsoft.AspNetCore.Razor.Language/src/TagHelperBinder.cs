@@ -174,8 +174,8 @@ internal sealed class TagHelperBinder
                 TagHelperMatchingConventions.ElementCatchAllName,
                 StringComparison.Ordinal
             )
-              ? TagHelperMatchingConventions.ElementCatchAllName
-              : _tagHelperPrefix + rule.TagName;
+                ? TagHelperMatchingConventions.ElementCatchAllName
+                : _tagHelperPrefix + rule.TagName;
 
             // Ensure there's a HashSet to add the descriptor to.
             if (

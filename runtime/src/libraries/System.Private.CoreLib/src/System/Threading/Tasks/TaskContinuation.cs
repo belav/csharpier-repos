@@ -385,10 +385,10 @@ namespace System.Threading.Tasks
             bool isRightKind = completedTask.IsCompletedSuccessfully
                 ? (options & TaskContinuationOptions.NotOnRanToCompletion) == 0
                 : (
-                      completedTask.IsCanceled
-                          ? (options & TaskContinuationOptions.NotOnCanceled) == 0
-                          : (options & TaskContinuationOptions.NotOnFaulted) == 0
-                  );
+                    completedTask.IsCanceled
+                        ? (options & TaskContinuationOptions.NotOnCanceled) == 0
+                        : (options & TaskContinuationOptions.NotOnFaulted) == 0
+                );
 
             // If the completion status is allowed, run the continuation.
             if (isRightKind)

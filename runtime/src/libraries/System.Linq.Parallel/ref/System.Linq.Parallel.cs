@@ -1669,8 +1669,8 @@ namespace System.Linq
 
     public partial class ParallelQuery<TSource>
         : System.Linq.ParallelQuery,
-          System.Collections.Generic.IEnumerable<TSource>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<TSource>,
+            System.Collections.IEnumerable
     {
         internal ParallelQuery() { }
 

@@ -38,8 +38,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             }
 
             return ReferenceEquals(this, obj)
-              ? true
-              : obj.GetType() == GetType() && Equals((CompositeOne)obj);
+                ? true
+                : obj.GetType() == GetType() && Equals((CompositeOne)obj);
         }
 
         private bool Equals(CompositeOne other)

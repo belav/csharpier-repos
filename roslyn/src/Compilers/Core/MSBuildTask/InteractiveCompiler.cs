@@ -122,8 +122,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             }
 
             return (SkipInteractiveExecution)
-              ? 0
-              : base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
+                ? 0
+                : base.ExecuteTool(pathToTool, responseFileCommands, commandLineCommands);
         }
 
         public string GenerateCommandLineContents() => GenerateCommandLineCommands();

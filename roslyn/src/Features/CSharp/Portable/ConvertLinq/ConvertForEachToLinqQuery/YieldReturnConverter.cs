@@ -41,14 +41,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                     _yieldReturnStatement.ReturnOrBreakKeyword
                 },
                 trailingTokensForSelect: _yieldBreakStatement != null
-                  ? new[]
+                    ? new[]
                     {
                         _yieldReturnStatement.SemicolonToken,
                         _yieldBreakStatement.YieldKeyword,
                         _yieldBreakStatement.ReturnOrBreakKeyword,
                         _yieldBreakStatement.SemicolonToken
                     }
-                  : new[] { _yieldReturnStatement.SemicolonToken },
+                    : new[] { _yieldReturnStatement.SemicolonToken },
                 convertToQuery: convertToQuery
             );
 

@@ -47,7 +47,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         private SqlExpression ConvertToValue(SqlExpression sqlExpression, bool condition)
         {
             return condition
-              ? _sqlExpressionFactory.Case(
+                ? _sqlExpressionFactory.Case(
                     new[]
                     {
                         new CaseWhenClause(
@@ -59,18 +59,18 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     },
                     _sqlExpressionFactory.Constant(false)
                 )
-              : sqlExpression;
+                : sqlExpression;
         }
 
         private SqlExpression BuildCompareToExpression(SqlExpression sqlExpression) =>
             sqlExpression is SqlConstantExpression sqlConstantExpression
             && sqlConstantExpression.Value is bool boolValue
                 ? _sqlExpressionFactory.Equal(
-                      boolValue
+                    boolValue
                         ? _sqlExpressionFactory.Constant(1)
                         : _sqlExpressionFactory.Constant(0),
-                      _sqlExpressionFactory.Constant(1)
-                  )
+                    _sqlExpressionFactory.Constant(1)
+                )
                 : _sqlExpressionFactory.Equal(sqlExpression, _sqlExpressionFactory.Constant(true));
 
         private SqlExpression SimplifyNegatedBinary(SqlExpression sqlExpression)
@@ -124,8 +124,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
                 return _sqlExpressionFactory.MakeBinary(
                     sqlBinaryOperand.OperatorType == ExpressionType.Equal
-                      ? ExpressionType.NotEqual
-                      : ExpressionType.Equal,
+                        ? ExpressionType.NotEqual
+                        : ExpressionType.Equal,
                     sqlBinaryOperand.Left,
                     sqlBinaryOperand.Right,
                     sqlBinaryOperand.TypeMapping
@@ -338,7 +338,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             _isSearchCondition = parentSearchCondition;
 
             return changed
-              ? selectExpression.Update(
+                ? selectExpression.Update(
                     projections,
                     tables,
                     predicate,
@@ -348,7 +348,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     limit,
                     offset
                 )
-              : selectExpression;
+                : selectExpression;
         }
 
         /// <summary>

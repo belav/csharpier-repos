@@ -822,12 +822,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 ErrorCode errorCode = symbol.RequiresInstanceReceiver()
-                  ? Binder.WasImplicitReceiver(receiverOpt)
+                    ? Binder.WasImplicitReceiver(receiverOpt)
                     && binder.InFieldInitializer
                     && !binder.BindingTopLevelScriptCode
-                      ? ErrorCode.ERR_FieldInitRefNonstatic
-                      : ErrorCode.ERR_ObjectRequired
-                  : ErrorCode.ERR_ObjectProhibited;
+                        ? ErrorCode.ERR_FieldInitRefNonstatic
+                        : ErrorCode.ERR_ObjectRequired
+                    : ErrorCode.ERR_ObjectProhibited;
                 // error CS0176: Member 'Program.M(B)' cannot be accessed with an instance reference; qualify it with a type name instead
                 //     -or-
                 // error CS0120: An object reference is required for the non-static field, method, or property 'Program.M(B)'
@@ -852,8 +852,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 diagnostics.Add(
                     delegateOrFunctionPointerType.IsFunctionPointer()
-                      ? ErrorCode.ERR_FuncPtrRefMismatch
-                      : ErrorCode.ERR_DelegateRefMismatch,
+                        ? ErrorCode.ERR_FuncPtrRefMismatch
+                        : ErrorCode.ERR_DelegateRefMismatch,
                     location,
                     mismatch.Member,
                     delegateOrFunctionPointerType
@@ -1797,10 +1797,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             var arguments =
                 (first.ContainingNamespace != second.ContainingNamespace)
                     ? new object[]
-                      {
-                          new FormattedSymbol(first, SymbolDisplayFormat.CSharpErrorMessageFormat),
-                          new FormattedSymbol(second, SymbolDisplayFormat.CSharpErrorMessageFormat)
-                      }
+                    {
+                        new FormattedSymbol(first, SymbolDisplayFormat.CSharpErrorMessageFormat),
+                        new FormattedSymbol(second, SymbolDisplayFormat.CSharpErrorMessageFormat)
+                    }
                     : new object[] { first, second };
             return new DiagnosticInfoWithSymbols(ErrorCode.ERR_AmbigCall, arguments, symbols);
         }

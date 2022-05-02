@@ -88,8 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var map = _mapOrType as TypeMap;
                 return map != null
-                  ? map.SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers)
-                  : this._underlyingParameter.RefCustomModifiers;
+                    ? map.SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers)
+                    : this._underlyingParameter.RefCustomModifiers;
             }
         }
 

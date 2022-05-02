@@ -416,9 +416,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 var additionalTexts =
                     (additionalFileText != null)
                         ? new[]
-                          {
-                              new InMemoryAdditionalText("additional_file", additionalFileText)
-                          }
+                        {
+                            new InMemoryAdditionalText("additional_file", additionalFileText)
+                        }
                         : null;
                 var generatorDriver = CSharpGeneratorDriver.Create(
                     new[] { generator },
@@ -798,10 +798,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var captureMatchingDocuments = captureAllDocuments
                 ? ImmutableArray<DocumentId>.Empty
                 : (
-                      from project in solution.Projects
-                      from documentId in project.DocumentIds
-                      select documentId
-                  ).ToImmutableArray();
+                    from project in solution.Projects
+                    from documentId in project.DocumentIds
+                    select documentId
+                ).ToImmutableArray();
 
             var sessionId = await service.StartDebuggingSessionAsync(
                 solution,
@@ -4844,8 +4844,8 @@ class C { int Y => 1; }
                 service,
                 solution,
                 isOutOfSync
-                  ? CommittedSolution.DocumentState.OutOfSync
-                  : CommittedSolution.DocumentState.MatchesBuildOutput
+                    ? CommittedSolution.DocumentState.OutOfSync
+                    : CommittedSolution.DocumentState.MatchesBuildOutput
             );
 
             var moduleId = Guid.NewGuid();

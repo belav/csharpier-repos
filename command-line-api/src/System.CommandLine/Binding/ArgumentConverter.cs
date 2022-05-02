@@ -392,33 +392,33 @@ namespace System.CommandLine.Binding
             {
                 SuccessfulArgumentConversionResult successful
                     when !toType.IsInstanceOfType(successful.Value)
-                  => ConvertObject(
-                      conversionResult.Argument,
-                      toType,
-                      successful.Value,
-                      symbolResult.LocalizationResources
-                  ),
+                    => ConvertObject(
+                        conversionResult.Argument,
+                        toType,
+                        successful.Value,
+                        symbolResult.LocalizationResources
+                    ),
                 SuccessfulArgumentConversionResult successful
                     when toType == typeof(object)
                         && conversionResult.Argument.Arity.MaximumNumberOfValues > 1
                         && successful.Value is string
-                  => ConvertObject(
-                      conversionResult.Argument,
-                      typeof(IEnumerable<string>),
-                      successful.Value,
-                      symbolResult.LocalizationResources
-                  ),
+                    => ConvertObject(
+                        conversionResult.Argument,
+                        typeof(IEnumerable<string>),
+                        successful.Value,
+                        symbolResult.LocalizationResources
+                    ),
                 NoArgumentConversionResult _ when toType == typeof(bool)
-                  => Success(conversionResult.Argument, true),
+                    => Success(conversionResult.Argument, true),
                 NoArgumentConversionResult _
                     when conversionResult.Argument.Arity.MinimumNumberOfValues > 0
-                  => new MissingArgumentConversionResult(
-                      conversionResult.Argument,
-                      symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult)
-                  ),
+                    => new MissingArgumentConversionResult(
+                        conversionResult.Argument,
+                        symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult)
+                    ),
                 NoArgumentConversionResult _
                     when conversionResult.Argument.Arity.MaximumNumberOfValues > 1
-                  => Success(conversionResult.Argument, Array.Empty<string>()),
+                    => Success(conversionResult.Argument, Array.Empty<string>()),
                 _ => conversionResult
             };
         }
@@ -430,7 +430,7 @@ namespace System.CommandLine.Binding
             {
                 SuccessfulArgumentConversionResult successful => (T)successful.Value!,
                 FailedArgumentConversionResult failed
-                  => throw new InvalidOperationException(failed.ErrorMessage),
+                    => throw new InvalidOperationException(failed.ErrorMessage),
                 NoArgumentConversionResult _ => default!,
                 _ => default!,
             };
@@ -460,22 +460,22 @@ namespace System.CommandLine.Binding
                 // 0 is an implicit bool, i.e. a "flag"
                 0 => Success(argumentResult.Argument, true),
                 1
-                  => ConvertObject(
-                      argument,
-                      argument.ValueType,
-                      argumentResult.Tokens.Count > 0
-                        ? argumentResult.Tokens[argumentResult.Tokens.Count - 1].Value
-                        : null,
-                      argumentResult.LocalizationResources
-                  ),
+                    => ConvertObject(
+                        argument,
+                        argument.ValueType,
+                        argumentResult.Tokens.Count > 0
+                            ? argumentResult.Tokens[argumentResult.Tokens.Count - 1].Value
+                            : null,
+                        argumentResult.LocalizationResources
+                    ),
                 _
-                  => ConvertStrings(
-                      argument,
-                      argument.ValueType,
-                      argumentResult.Tokens.Select(t => t.Value).ToArray(),
-                      argumentResult.LocalizationResources,
-                      argumentResult
-                  )
+                    => ConvertStrings(
+                        argument,
+                        argument.ValueType,
+                        argumentResult.Tokens.Select(t => t.Value).ToArray(),
+                        argumentResult.LocalizationResources,
+                        argumentResult
+                    )
             };
 
             return value is SuccessfulArgumentConversionResult;

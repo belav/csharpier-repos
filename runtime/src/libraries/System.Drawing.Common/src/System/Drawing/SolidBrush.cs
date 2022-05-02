@@ -15,8 +15,8 @@ namespace System.Drawing
         : Brush
 #pragma warning disable SA1001
 #if FEATURE_SYSTEM_EVENTS
-          ,
-          ISystemColorTracker
+            ,
+            ISystemColorTracker
 #endif
 #pragma warning restore SA1001
     {

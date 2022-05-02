@@ -10,9 +10,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     internal sealed class ServiceProviderEngineScope
         : IServiceScope,
-          IServiceProvider,
-          IAsyncDisposable,
-          IServiceScopeFactory
+            IServiceProvider,
+            IAsyncDisposable,
+            IServiceScopeFactory
     {
         // For testing only
         internal IList<object> Disposables => _disposables ?? (IList<object>)Array.Empty<object>();

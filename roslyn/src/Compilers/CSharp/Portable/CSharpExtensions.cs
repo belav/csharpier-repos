@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis
         internal static SyntaxKind ContextualKind(this SyntaxToken token)
         {
             return (object)token.Language == (object)LanguageNames.CSharp
-              ? (SyntaxKind)token.RawContextualKind
-              : SyntaxKind.None;
+                ? (SyntaxKind)token.RawContextualKind
+                : SyntaxKind.None;
         }
 
         internal static bool IsUnderscoreToken(this SyntaxToken identifier)
@@ -1072,8 +1072,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return semanticModel is CSharpSemanticModel csmodel
-              ? csmodel.GetDeconstructionInfo(assignment)
-              : default;
+                ? csmodel.GetDeconstructionInfo(assignment)
+                : default;
         }
 
         public static DeconstructionInfo GetDeconstructionInfo(
@@ -1082,8 +1082,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return semanticModel is CSharpSemanticModel csmodel
-              ? csmodel.GetDeconstructionInfo(@foreach)
-              : default;
+                ? csmodel.GetDeconstructionInfo(@foreach)
+                : default;
         }
 
         public static AwaitExpressionInfo GetAwaitExpressionInfo(

@@ -385,7 +385,7 @@ namespace System.IO.Enumeration
                                 else if (
                                     ignoreCase
                                         ? char.ToUpperInvariant(expressionChar)
-                                          == char.ToUpperInvariant(nameChar)
+                                            == char.ToUpperInvariant(nameChar)
                                         : expressionChar == nameChar
                                 )
                                 {

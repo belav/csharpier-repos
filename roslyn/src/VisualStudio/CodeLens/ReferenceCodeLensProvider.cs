@@ -285,9 +285,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                         referenceCount.Count == 1
                             ? string.Format(CodeLensVSResources._0_reference, referenceCountString)
                             : string.Format(
-                                  CodeLensVSResources._0_references,
-                                  referenceCountString
-                              ),
+                                CodeLensVSResources._0_references,
+                                referenceCountString
+                            ),
                     IntValue = referenceCount.Count,
                     TooltipText = string.Format(
                         CodeLensVSResources.This_0_has_1_references,

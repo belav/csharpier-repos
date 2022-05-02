@@ -290,8 +290,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             EnsureInitialized();
 
             return IsLoaded
-              ? Task.CompletedTask
-              : TargetLoader.LoadAsync(InternalEntry, cancellationToken);
+                ? Task.CompletedTask
+                : TargetLoader.LoadAsync(InternalEntry, cancellationToken);
         }
 
         /// <summary>
@@ -351,8 +351,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             _loader ??= Metadata is IRuntimeSkipNavigation skipNavigation
                 ? skipNavigation.GetManyToManyLoader()
                 : new EntityFinderCollectionLoaderAdapter(
-                      InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType),
-                      (INavigation)Metadata
-                  );
+                    InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType),
+                    (INavigation)Metadata
+                );
     }
 }

@@ -2655,13 +2655,13 @@ namespace System.Reflection.Tests
 
         public class ClassWithInterface2Interface3
             : TI_NonGenericInterface2,
-              TI_NonGenericInterface3 { }
+                TI_NonGenericInterface3 { }
 
         public class SubClassWithInterface1 : TI_ClassWithInterface1 { }
 
         public class SubClassWithInterface1Interface2Interface3
             : ClassWithInterface2Interface3,
-              TI_NonGenericInterface1 { }
+                TI_NonGenericInterface1 { }
 
         public interface TI_NonGenericInterface2 { }
 
@@ -2730,23 +2730,23 @@ namespace System.Reflection.Tests
 
         public class CompoundClass1
             : NonGenericClassWithNonGenericInterface,
-              InheritedInteraface { }
+                InheritedInteraface { }
 
         public class CompoundClass2<T>
             : NonGenericClassWithNonGenericInterface,
-              InheritedInteraface { }
+                InheritedInteraface { }
 
         public class CompoundClass3<T>
             : NonGenericClassWithNonGenericInterface,
-              GenericInterface1<T> { }
+                GenericInterface1<T> { }
 
         public class CompoundClass4<T>
             : NonGenericClassWithNonGenericInterface,
-              GenericInterface1<string> { }
+                GenericInterface1<string> { }
 
         public class BaseClassWithInterface1Interface2
             : TI_NonGenericInterface1,
-              TI_NonGenericInterface2 { }
+                TI_NonGenericInterface2 { }
 
         public class SubClassWithInterface1Interface2 : BaseClassWithInterface1Interface2 { }
 

@@ -278,8 +278,8 @@ namespace System.Net.Http.QPack
                 (name.Length + value.Length) < 256
                     ? stackalloc byte[256 + IntegerEncoder.MaxInt32EncodedLength * 2]
                     : new byte[
-                          name.Length + value.Length + IntegerEncoder.MaxInt32EncodedLength * 2
-                      ];
+                        name.Length + value.Length + IntegerEncoder.MaxInt32EncodedLength * 2
+                    ];
 
             bool res = EncodeLiteralHeaderFieldWithoutNameReference(
                 name,

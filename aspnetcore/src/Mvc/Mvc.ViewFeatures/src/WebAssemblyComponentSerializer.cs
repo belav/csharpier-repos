@@ -37,13 +37,13 @@ internal class WebAssemblyComponentSerializer
         );
 
         return prerendered
-          ? WebAssemblyComponentMarker.Prerendered(
+            ? WebAssemblyComponentMarker.Prerendered(
                 assembly,
                 typeFullName,
                 serializedDefinitions,
                 serializedValues
             )
-          : WebAssemblyComponentMarker.NonPrerendered(
+            : WebAssemblyComponentMarker.NonPrerendered(
                 assembly,
                 typeFullName,
                 serializedDefinitions,

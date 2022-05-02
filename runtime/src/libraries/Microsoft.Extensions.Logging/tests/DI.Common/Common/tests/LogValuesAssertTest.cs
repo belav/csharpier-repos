@@ -225,8 +225,8 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
         private string GetString(IEnumerable<KeyValuePair<string, object>> logValues)
         {
             return logValues == null
-              ? "Null"
-              : string.Join(",", logValues.Select(kvp => $"[{kvp.Key} {kvp.Value}]"));
+                ? "Null"
+                : string.Join(",", logValues.Select(kvp => $"[{kvp.Key} {kvp.Value}]"));
         }
     }
 }

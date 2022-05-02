@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class SqlServerMemoryOptimizedTablesConvention
         : IEntityTypeAnnotationChangedConvention,
-          IKeyAddedConvention,
-          IIndexAddedConvention
+            IKeyAddedConvention,
+            IIndexAddedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerMemoryOptimizedTablesConvention" />.

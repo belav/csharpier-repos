@@ -22,8 +22,8 @@ namespace AutoMapper.UnitTests.Mappers
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 return args.Name == typeof(CustomTypeConverter).Assembly.FullName
-                  ? typeof(CustomTypeConverter).Assembly
-                  : null;
+                    ? typeof(CustomTypeConverter).Assembly
+                    : null;
             };
         }
 #endif
@@ -86,8 +86,8 @@ namespace AutoMapper.UnitTests.Mappers
             {
                 var typeConverter = GetConverter(sourceType);
                 return typeConverter.CanConvertTo(destinationType)
-                  ? typeConverter.ConvertTo(source, destinationType)
-                  : GetConverter(destinationType).ConvertFrom(source);
+                    ? typeConverter.ConvertTo(source, destinationType)
+                    : GetConverter(destinationType).ConvertFrom(source);
             }
         }
     }

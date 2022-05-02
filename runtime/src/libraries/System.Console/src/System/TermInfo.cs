@@ -141,11 +141,11 @@ namespace System
                         : magic == Magic32BitNumber
                             ? true
                             : throw new InvalidOperationException(
-                                  SR.Format(
-                                      SR.IO_TermInfoInvalidMagicNumber,
-                                      "O" + Convert.ToString(magic, 8)
-                                  )
-                              ); // magic number was not recognized. Printing the magic number in octal.
+                                SR.Format(
+                                    SR.IO_TermInfoInvalidMagicNumber,
+                                    "O" + Convert.ToString(magic, 8)
+                                )
+                            ); // magic number was not recognized. Printing the magic number in octal.
                 _sizeOfInt = (_readAs32Bit) ? 4 : 2;
 
                 _nameSectionNumBytes = ReadInt16(data, 2);
@@ -846,36 +846,36 @@ namespace System
                             char c = format[pos];
                             stack.Push(
                                 c == '+'
-                                  ? (first + second)
-                                  : c == '-'
-                                      ? (first - second)
-                                      : c == '*'
-                                          ? (first * second)
-                                          : c == '/'
-                                              ? (first / second)
-                                              : c == 'm'
-                                                  ? (first % second)
-                                                  : c == '^'
-                                                      ? (first ^ second)
-                                                      : c == '&'
-                                                          ? (first & second)
-                                                          : c == '|'
-                                                              ? (first | second)
-                                                              : c == '='
-                                                                  ? AsInt(first == second)
-                                                                  : c == '>'
-                                                                      ? AsInt(first > second)
-                                                                      : c == '<'
-                                                                          ? AsInt(first < second)
-                                                                          : c == 'A'
-                                                                              ? AsInt(
+                                    ? (first + second)
+                                    : c == '-'
+                                        ? (first - second)
+                                        : c == '*'
+                                            ? (first * second)
+                                            : c == '/'
+                                                ? (first / second)
+                                                : c == 'm'
+                                                    ? (first % second)
+                                                    : c == '^'
+                                                        ? (first ^ second)
+                                                        : c == '&'
+                                                            ? (first & second)
+                                                            : c == '|'
+                                                                ? (first | second)
+                                                                : c == '='
+                                                                    ? AsInt(first == second)
+                                                                    : c == '>'
+                                                                        ? AsInt(first > second)
+                                                                        : c == '<'
+                                                                            ? AsInt(first < second)
+                                                                            : c == 'A'
+                                                                                ? AsInt(
                                                                                     AsBool(first)
                                                                                         && AsBool(
                                                                                             second
                                                                                         )
                                                                                 )
-                                                                              : c == 'O'
-                                                                                  ? AsInt(
+                                                                                : c == 'O'
+                                                                                    ? AsInt(
                                                                                         AsBool(
                                                                                             first
                                                                                         )
@@ -883,7 +883,7 @@ namespace System
                                                                                                 second
                                                                                             )
                                                                                     )
-                                                                                  : 0
+                                                                                    : 0
                             ); // not possible; we just validated above
                             break;
 

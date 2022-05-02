@@ -407,11 +407,11 @@ namespace Microsoft.CodeAnalysis.Formatting
         private TextSpan GetSpanToFormat()
         {
             var startPosition = this.TreeData.IsFirstToken(_token1)
-              ? this.TreeData.StartPosition
-              : _token1.SpanStart;
+                ? this.TreeData.StartPosition
+                : _token1.SpanStart;
             var endPosition = this.TreeData.IsLastToken(_token2)
-              ? this.TreeData.EndPosition
-              : _token2.Span.End;
+                ? this.TreeData.EndPosition
+                : _token2.Span.End;
 
             return TextSpan.FromBounds(startPosition, endPosition);
         }

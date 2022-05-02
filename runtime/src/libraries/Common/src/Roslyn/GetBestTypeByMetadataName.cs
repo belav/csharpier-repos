@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
                         {
                             case SymbolVisibility.Public:
                             case SymbolVisibility.Internal
-                                  when referencedAssembly.GivesAccessTo(compilation.Assembly):
+                            when referencedAssembly.GivesAccessTo(compilation.Assembly):
                                 break;
 
                             default:

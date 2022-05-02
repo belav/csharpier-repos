@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     // matched all the humps, then this was an exact match, otherwise it was a
                     // contiguous prefix match
                     return toEnd
-                      ? PatternMatchKind.CamelCaseExact
-                      : PatternMatchKind.CamelCasePrefix;
+                        ? PatternMatchKind.CamelCaseExact
+                        : PatternMatchKind.CamelCasePrefix;
                 }
                 else
                 {
@@ -81,8 +81,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 // We didn't match from the start.  Distinguish between a match whose humps are all
                 // contiguous, and one that isn't.
                 return result.Contiguous
-                  ? PatternMatchKind.CamelCaseSubstring
-                  : PatternMatchKind.CamelCaseNonContiguousSubstring;
+                    ? PatternMatchKind.CamelCaseSubstring
+                    : PatternMatchKind.CamelCaseNonContiguousSubstring;
             }
         }
     }

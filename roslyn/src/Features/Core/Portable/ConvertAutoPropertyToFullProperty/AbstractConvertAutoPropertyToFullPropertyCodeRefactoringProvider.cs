@@ -124,8 +124,8 @@ namespace Microsoft.CodeAnalysis.ConvertAutoPropertyToFullProperty
                 .WithAccessorDeclarations(
                     GetPropertyWithoutInitializer(property),
                     newSetAccessor == null
-                      ? new SyntaxNode[] { newGetAccessor }
-                      : new SyntaxNode[] { newGetAccessor, newSetAccessor }
+                        ? new SyntaxNode[] { newGetAccessor }
+                        : new SyntaxNode[] { newGetAccessor, newSetAccessor }
                 )
                 .WithLeadingTrivia(property.GetLeadingTrivia());
             fullProperty = ConvertPropertyToExpressionBodyIfDesired(options, fullProperty);

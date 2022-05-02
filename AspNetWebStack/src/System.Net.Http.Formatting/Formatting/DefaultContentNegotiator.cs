@@ -687,8 +687,8 @@ namespace System.Net.Http.Formatting
             if (current != null)
             {
                 return (potentialReplacement.Quality > current.Quality)
-                  ? potentialReplacement
-                  : current;
+                    ? potentialReplacement
+                    : current;
             }
 
             return potentialReplacement;

@@ -49,18 +49,18 @@ internal static partial class Interop
         {
             Debug.Assert((nice >= -20) && (nice <= 20));
             return (nice < -15)
-              ? ThreadPriorityLevel.TimeCritical
-              : (nice < -10)
-                  ? ThreadPriorityLevel.Highest
-                  : (nice < -5)
-                      ? ThreadPriorityLevel.AboveNormal
-                      : (nice == 0)
-                          ? ThreadPriorityLevel.Normal
-                          : (nice <= 5)
-                              ? ThreadPriorityLevel.BelowNormal
-                              : (nice <= 10)
-                                  ? ThreadPriorityLevel.Lowest
-                                  : ThreadPriorityLevel.Idle;
+                ? ThreadPriorityLevel.TimeCritical
+                : (nice < -10)
+                    ? ThreadPriorityLevel.Highest
+                    : (nice < -5)
+                        ? ThreadPriorityLevel.AboveNormal
+                        : (nice == 0)
+                            ? ThreadPriorityLevel.Normal
+                            : (nice <= 5)
+                                ? ThreadPriorityLevel.BelowNormal
+                                : (nice <= 10)
+                                    ? ThreadPriorityLevel.Lowest
+                                    : ThreadPriorityLevel.Idle;
         }
 
         internal static int GetNiceValueFromThreadPriority(

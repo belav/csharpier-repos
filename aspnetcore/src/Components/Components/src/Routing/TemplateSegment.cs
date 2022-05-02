@@ -144,20 +144,20 @@ internal class TemplateSegment
         this switch
         {
             { IsParameter: true, IsOptional: false, IsCatchAll: false, Constraints: { Length: 0 } }
-              => $"{{{Value}}}",
+                => $"{{{Value}}}",
             {
                 IsParameter: true,
                 IsOptional: false,
                 IsCatchAll: false,
                 Constraints: { Length: > 0 }
             }
-              => $"{{{Value}:{string.Join(':', (object[])Constraints)}}}",
+                => $"{{{Value}:{string.Join(':', (object[])Constraints)}}}",
             { IsParameter: true, IsOptional: true, Constraints: { Length: 0 } } => $"{{{Value}?}}",
             { IsParameter: true, IsOptional: true, Constraints: { Length: > 0 } }
-              => $"{{{Value}:{string.Join(':', (object[])Constraints)}?}}",
+                => $"{{{Value}:{string.Join(':', (object[])Constraints)}?}}",
             { IsParameter: true, IsCatchAll: true, Constraints: { Length: 0 } } => $"{{*{Value}}}",
             { IsParameter: true, IsCatchAll: true, Constraints: { Length: > 0 } }
-              => $"{{*{Value}:{string.Join(':', (object[])Constraints)}?}}",
+                => $"{{*{Value}:{string.Join(':', (object[])Constraints)}?}}",
             { IsParameter: false } => Value,
             _ => throw new InvalidOperationException("Invalid template segment.")
         };

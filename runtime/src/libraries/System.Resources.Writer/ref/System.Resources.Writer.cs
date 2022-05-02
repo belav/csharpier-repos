@@ -17,7 +17,7 @@ namespace System.Resources
 
     public sealed partial class ResourceWriter
         : System.IDisposable,
-          System.Resources.IResourceWriter
+            System.Resources.IResourceWriter
     {
         public ResourceWriter(System.IO.Stream stream) { }
 

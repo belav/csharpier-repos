@@ -494,27 +494,27 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 {
                     navigation.IsCollection
                         ? AddToCollectionNavigation(
-                              entityParameter,
-                              relatedEntityParameter,
-                              navigation
-                          )
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
                         : AssignReferenceNavigation(
-                              entityParameter,
-                              relatedEntityParameter,
-                              navigation
-                          )
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
                 };
 
                 if (inverseNavigation != null)
                 {
                     expressions.Add(
                         inverseNavigation.IsCollection
-                          ? AddToCollectionNavigation(
+                            ? AddToCollectionNavigation(
                                 relatedEntityParameter,
                                 entityParameter,
                                 inverseNavigation
                             )
-                          : AssignReferenceNavigation(
+                            : AssignReferenceNavigation(
                                 relatedEntityParameter,
                                 entityParameter,
                                 inverseNavigation

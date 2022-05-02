@@ -167,8 +167,8 @@ namespace System.Web.Razor.Test.Generator
                     className: name,
                     rootNamespace: TestRootNamespaceName,
                     sourceFileName: generatePragmas
-                      ? String.Format("{0}.{1}", name, FileExtension)
-                      : null
+                        ? String.Format("{0}.{1}", name, FileExtension)
+                        : null
                 );
             }
 

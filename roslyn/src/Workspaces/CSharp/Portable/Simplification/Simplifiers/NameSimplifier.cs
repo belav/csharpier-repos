@@ -148,8 +148,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                                 .Name
                                 .Identifier;
                             text = declIdentifier.IsVerbatimIdentifier()
-                              ? declIdentifier.ToString().Substring(1)
-                              : declIdentifier.ToString();
+                                ? declIdentifier.ToString().Substring(1)
+                                : declIdentifier.ToString();
                         }
 
                         var identifierToken = SyntaxFactory.Identifier(
@@ -324,11 +324,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
                             var codeStyleOptionName = inDeclarationContext
                                 ? nameof(
-                                      CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration
-                                  )
+                                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration
+                                )
                                 : nameof(
-                                      CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess
-                                  );
+                                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess
+                                );
 
                             var type = semanticModel.GetTypeInfo(name, cancellationToken).Type;
                             if (type != null)

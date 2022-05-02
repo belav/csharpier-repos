@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
                 .FindBracesAsync(document, position, cancellationToken)
                 .ConfigureAwait(false);
             return result.HasValue
-              ? new BraceMatchingResult(result.Value.LeftSpan, result.Value.RightSpan)
-              : null;
+                ? new BraceMatchingResult(result.Value.LeftSpan, result.Value.RightSpan)
+                : null;
         }
     }
 }

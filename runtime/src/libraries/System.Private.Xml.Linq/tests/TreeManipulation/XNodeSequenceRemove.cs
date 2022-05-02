@@ -665,8 +665,8 @@ namespace XLinqTests
             );
             XElement e = useSelf
                 ? doc.Descendants(@"{http://www.books.com/}book")
-                  .Where(x => x.Element("title").Value == "XQL The Golden Years")
-                  .First()
+                    .Where(x => x.Element("title").Value == "XQL The Golden Years")
+                    .First()
                 : doc.Root;
             TestLog.Compare(e != null, "TEST_FAILING: wrong starting position");
             IEnumerable<XNode> toRemove = e.DescendantsAndSelf(@"{http://www.books.com/}book")

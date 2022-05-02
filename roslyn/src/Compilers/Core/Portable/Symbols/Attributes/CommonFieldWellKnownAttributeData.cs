@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal class CommonFieldWellKnownAttributeData
         : WellKnownAttributeData,
-          IMarshalAsAttributeTarget
+            IMarshalAsAttributeTarget
     {
         public CommonFieldWellKnownAttributeData()
         {

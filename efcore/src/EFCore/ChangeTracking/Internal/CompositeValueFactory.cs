@@ -164,10 +164,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var comparers = properties.Select(p => p.GetKeyValueComparer()).ToList();
 
             return comparers.All(c => c != null)
-              ? new CompositeCustomComparer(comparers!)
-              : properties.Any(p => typeof(IStructuralEquatable).IsAssignableFrom(p.ClrType))
-                  ? new StructuralCompositeComparer()
-                  : new CompositeComparer();
+                ? new CompositeCustomComparer(comparers!)
+                : properties.Any(p => typeof(IStructuralEquatable).IsAssignableFrom(p.ClrType))
+                    ? new StructuralCompositeComparer()
+                    : new CompositeComparer();
         }
 
         private sealed class CompositeCustomComparer : IEqualityComparer<object[]>

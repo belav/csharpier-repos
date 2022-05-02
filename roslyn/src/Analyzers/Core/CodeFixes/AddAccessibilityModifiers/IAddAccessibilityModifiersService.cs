@@ -8,5 +8,5 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
     internal interface IAddAccessibilityModifiersService
         : IAddAccessibilityModifiers,
-          ILanguageService { }
+            ILanguageService { }
 }

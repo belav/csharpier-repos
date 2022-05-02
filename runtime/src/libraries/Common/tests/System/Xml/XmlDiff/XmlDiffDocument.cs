@@ -1152,8 +1152,8 @@ namespace System.Xml.XmlDiff
                     _currentNode is XmlDiffElement
                     && ((XmlDiffElement)_currentNode).FirstAttribute != null
                 )
-                  ? true
-                  : false;
+                    ? true
+                    : false;
             }
         }
         public bool HasChildren

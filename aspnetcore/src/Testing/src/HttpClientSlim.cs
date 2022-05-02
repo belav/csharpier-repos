@@ -226,8 +226,8 @@ public static class HttpClientSlim
                 stream,
                 leaveInnerStreamOpen: false,
                 userCertificateValidationCallback: validateCertificate
-                  ? null
-                  : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
+                    ? null
+                    : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
             );
 
             await sslStream

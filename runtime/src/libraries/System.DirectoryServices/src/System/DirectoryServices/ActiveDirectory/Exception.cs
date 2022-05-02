@@ -215,7 +215,7 @@ namespace System.DirectoryServices.ActiveDirectory
     )]
     public class SyncFromAllServersOperationException
         : ActiveDirectoryOperationException,
-          ISerializable
+            ISerializable
     {
         private readonly SyncFromAllServersErrorInformation[]? _errors;
 

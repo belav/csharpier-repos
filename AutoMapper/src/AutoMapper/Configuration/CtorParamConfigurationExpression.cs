@@ -42,7 +42,7 @@ namespace AutoMapper.Configuration
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class CtorParamConfigurationExpression<TSource, TDestination>
         : ICtorParamConfigurationExpression<TSource>,
-          ICtorParameterConfiguration
+            ICtorParameterConfiguration
     {
         public string CtorParamName { get; }
         public Type SourceType { get; }

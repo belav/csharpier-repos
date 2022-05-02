@@ -28,9 +28,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
             functionDeclaration switch
             {
                 BaseMethodDeclarationSyntax methodDeclaration
-                  => (SyntaxNode?)methodDeclaration.Body ?? methodDeclaration.ExpressionBody!,
+                    => (SyntaxNode?)methodDeclaration.Body ?? methodDeclaration.ExpressionBody!,
                 LocalFunctionStatementSyntax localFunction
-                  => (SyntaxNode?)localFunction.Body ?? localFunction.ExpressionBody!,
+                    => (SyntaxNode?)localFunction.Body ?? localFunction.ExpressionBody!,
                 AnonymousFunctionExpressionSyntax anonymousFunction => anonymousFunction.Body,
                 _ => throw ExceptionUtilities.UnexpectedValue(functionDeclaration),
             };
@@ -88,8 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
                 editor.SetStatements(
                     functionDeclaration,
                     statementToAddAfterOpt == null
-                      ? ImmutableArray.Create(statement, convertedStatement)
-                      : ImmutableArray.Create(convertedStatement, statement)
+                        ? ImmutableArray.Create(statement, convertedStatement)
+                        : ImmutableArray.Create(convertedStatement, statement)
                 );
             }
             else if (body is BlockSyntax block)
@@ -158,18 +158,18 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
             {
                 // If this is a => method, then we'll have to convert the method to have a block body.
                 ArrowExpressionClauseSyntax arrowClause
-                  => arrowClause.TryConvertToStatement(
-                      semicolonToken,
-                      createReturnStatementForExpression,
-                      out statement
-                  ),
+                    => arrowClause.TryConvertToStatement(
+                        semicolonToken,
+                        createReturnStatementForExpression,
+                        out statement
+                    ),
                 // must be an expression lambda
                 ExpressionSyntax expression
-                  => expression.TryConvertToStatement(
-                      semicolonToken,
-                      createReturnStatementForExpression,
-                      out statement
-                  ),
+                    => expression.TryConvertToStatement(
+                        semicolonToken,
+                        createReturnStatementForExpression,
+                        out statement
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(body),
             };
         }

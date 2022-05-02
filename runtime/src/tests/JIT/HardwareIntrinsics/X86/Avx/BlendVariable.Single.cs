@@ -814,9 +814,9 @@ namespace JIT.HardwareIntrinsics.X86
             if (
                 ((BitConverter.SingleToInt32Bits(thirdOp[0]) >> 31) & 1) == 1
                     ? BitConverter.SingleToInt32Bits(secondOp[0])
-                      != BitConverter.SingleToInt32Bits(result[0])
+                        != BitConverter.SingleToInt32Bits(result[0])
                     : BitConverter.SingleToInt32Bits(firstOp[0])
-                      != BitConverter.SingleToInt32Bits(result[0])
+                        != BitConverter.SingleToInt32Bits(result[0])
             )
             {
                 succeeded = false;
@@ -828,9 +828,9 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         ((BitConverter.SingleToInt32Bits(thirdOp[i]) >> 31) & 1) == 1
                             ? BitConverter.SingleToInt32Bits(secondOp[i])
-                              != BitConverter.SingleToInt32Bits(result[i])
+                                != BitConverter.SingleToInt32Bits(result[i])
                             : BitConverter.SingleToInt32Bits(firstOp[i])
-                              != BitConverter.SingleToInt32Bits(result[i])
+                                != BitConverter.SingleToInt32Bits(result[i])
                     )
                     {
                         succeeded = false;

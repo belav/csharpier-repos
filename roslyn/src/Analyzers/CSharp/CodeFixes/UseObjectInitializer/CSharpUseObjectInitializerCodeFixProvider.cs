@@ -21,14 +21,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
     ]
     internal class CSharpUseObjectInitializerCodeFixProvider
         : AbstractUseObjectInitializerCodeFixProvider<
-              SyntaxKind,
-              ExpressionSyntax,
-              StatementSyntax,
-              ObjectCreationExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              ExpressionStatementSyntax,
-              VariableDeclaratorSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            StatementSyntax,
+            ObjectCreationExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            ExpressionStatementSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

@@ -190,9 +190,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             platform =
                 (projectOpt != null)
                     ? GetInteractiveHostPlatform(
-                          targetFrameworkMoniker,
-                          projectOpt.CompilationOptions.Platform
-                      )
+                        targetFrameworkMoniker,
+                        projectOpt.CompilationOptions.Platform
+                    )
                     : null;
         }
 

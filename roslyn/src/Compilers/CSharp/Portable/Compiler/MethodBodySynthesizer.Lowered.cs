@@ -194,8 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 MethodSymbol methodToInvoke = this.IsGenericMethod
                     ? this.ImplementingMethod.Construct(
-                          this.TypeParameters.Cast<TypeParameterSymbol, TypeSymbol>()
-                      )
+                        this.TypeParameters.Cast<TypeParameterSymbol, TypeSymbol>()
+                    )
                     : this.ImplementingMethod;
 
                 F.CloseMethod(
@@ -480,8 +480,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             BoundExpression invocation = F.Call(
                 methodToInvoke.IsStatic
-                  ? null
-                  : (
+                    ? null
+                    : (
                         useBaseReference
                             ? (BoundExpression)F.Base(baseType: methodToInvoke.ContainingType)
                             : F.This()
@@ -491,8 +491,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             return F.CurrentFunction.ReturnsVoid
-              ? F.Block(F.ExpressionStatement(invocation), F.Return())
-              : F.Block(F.Return(invocation));
+                ? F.Block(F.ExpressionStatement(invocation), F.Return())
+                : F.Block(F.Return(invocation));
         }
     }
 }

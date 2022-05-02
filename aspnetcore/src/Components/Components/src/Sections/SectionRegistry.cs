@@ -104,8 +104,8 @@ internal sealed class SectionRegistry
 
     private RenderFragment? GetCurrentProviderContentOrDefault(string name) =>
         _providersByName.TryGetValue(name, out var existingList)
-          ? GetCurrentProviderContentOrDefault(existingList)
-          : null;
+            ? GetCurrentProviderContentOrDefault(existingList)
+            : null;
 
     private void NotifyContentChangedForSubscriber(string name, RenderFragment? content)
     {

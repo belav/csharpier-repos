@@ -640,8 +640,8 @@ namespace System.Web.Helpers
                     addDoubleQuotes: true
                 ),
                 !String.IsNullOrEmpty(AjaxUpdateCallback)
-                  ? ',' + HttpUtility.JavaScriptStringEncode(AjaxUpdateCallback)
-                  : String.Empty
+                    ? ',' + HttpUtility.JavaScriptStringEncode(AjaxUpdateCallback)
+                    : String.Empty
             );
 
             return new HtmlString(HttpUtility.HtmlAttributeEncode(script));

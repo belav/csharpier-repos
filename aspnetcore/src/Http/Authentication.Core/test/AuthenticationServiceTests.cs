@@ -456,9 +456,9 @@ public class AuthenticationServiceTests
 
     private class UberHandler
         : IAuthenticationHandler,
-          IAuthenticationRequestHandler,
-          IAuthenticationSignInHandler,
-          IAuthenticationSignOutHandler
+            IAuthenticationRequestHandler,
+            IAuthenticationSignInHandler,
+            IAuthenticationSignOutHandler
     {
         public Task<AuthenticateResult> AuthenticateAsync()
         {
@@ -498,9 +498,9 @@ public class AuthenticationServiceTests
 
     private class ForbidHandler
         : IAuthenticationHandler,
-          IAuthenticationRequestHandler,
-          IAuthenticationSignInHandler,
-          IAuthenticationSignOutHandler
+            IAuthenticationRequestHandler,
+            IAuthenticationSignInHandler,
+            IAuthenticationSignOutHandler
     {
         public Task<AuthenticateResult> AuthenticateAsync()
         {

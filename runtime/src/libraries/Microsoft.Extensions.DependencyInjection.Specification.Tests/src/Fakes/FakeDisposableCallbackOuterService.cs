@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
     public class FakeDisposableCallbackOuterService
         : FakeDisposableCallbackService,
-          IFakeOuterService
+            IFakeOuterService
     {
         public FakeDisposableCallbackOuterService(
             IFakeService singleService,

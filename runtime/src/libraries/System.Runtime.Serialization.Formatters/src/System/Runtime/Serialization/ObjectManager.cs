@@ -818,8 +818,8 @@ namespace System.Runtime.Serialization
             if (_selector != null)
             {
                 Type selectorType = CanCallGetType(obj)
-                  ? obj.GetType()
-                  : typeof(MarshalByRefObject);
+                    ? obj.GetType()
+                    : typeof(MarshalByRefObject);
 
                 //If we need a surrogate for this object, lets find it now.
                 surrogate = _selector.GetSurrogate(selectorType, _context, out useless);

@@ -63,8 +63,8 @@ namespace Microsoft.Interop
         public static string MarshalEx(InteropGenerationOptions options)
         {
             return options.UseMarshalType
-              ? System_Runtime_InteropServices_Marshal
-              : System_Runtime_InteropServices_MarshalEx;
+                ? System_Runtime_InteropServices_Marshal
+                : System_Runtime_InteropServices_MarshalEx;
         }
 
         public const string System_Runtime_InteropServices_UnmanagedType =
@@ -100,8 +100,8 @@ namespace Microsoft.Interop
         public static string Unsafe(InteropGenerationOptions options)
         {
             return options.UseInternalUnsafeType
-              ? Internal_Runtime_CompilerServices_Unsafe
-              : System_Runtime_CompilerServices_Unsafe;
+                ? Internal_Runtime_CompilerServices_Unsafe
+                : System_Runtime_CompilerServices_Unsafe;
         }
     }
 }

@@ -141,8 +141,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var actualNamespaceURI = Reader.NamespaceURI;
             return actualNamespaceURI == underlyingNamespaceURI
-              ? rootNamespaceURI
-              : actualNamespaceURI;
+                ? rootNamespaceURI
+                : actualNamespaceURI;
         }
 
         public override string Value

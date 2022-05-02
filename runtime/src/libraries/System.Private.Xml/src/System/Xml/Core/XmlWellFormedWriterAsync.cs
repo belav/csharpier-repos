@@ -951,8 +951,8 @@ namespace System.Xml
                     {
                         throw new ArgumentException(
                             _conformanceLevel == ConformanceLevel.Document
-                              ? SR.Xml_DupXmlDecl
-                              : SR.Xml_CannotWriteXmlDecl
+                                ? SR.Xml_DupXmlDecl
+                                : SR.Xml_CannotWriteXmlDecl
                         );
                     }
 

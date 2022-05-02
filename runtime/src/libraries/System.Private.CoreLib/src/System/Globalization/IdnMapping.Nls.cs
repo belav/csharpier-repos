@@ -135,8 +135,12 @@ namespace System.Globalization
 
             throw new ArgumentException(
                 lastError == Interop.Errors.ERROR_INVALID_NAME
-                  ? SR.Argument_IdnIllegalName
-                  : (unicode ? SR.Argument_InvalidCharSequenceNoIndex : SR.Argument_IdnBadPunycode),
+                    ? SR.Argument_IdnIllegalName
+                    : (
+                        unicode
+                            ? SR.Argument_InvalidCharSequenceNoIndex
+                            : SR.Argument_IdnBadPunycode
+                    ),
                 unicode ? "unicode" : "ascii"
             );
         }

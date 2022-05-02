@@ -124,8 +124,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
                 t1.TestGetMethod<long>(1, new MemberClass())
                     + t1.TestSetMethod<Test, string>(string.Empty, new MemberClass())
                 == 0
-              ? 0
-              : 1;
+                ? 0
+                : 1;
         }
 
         public int TestGetMethod<T>(T t, MemberClass mc)

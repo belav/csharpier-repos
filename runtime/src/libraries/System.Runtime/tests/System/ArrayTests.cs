@@ -10356,13 +10356,13 @@ namespace System.Tests
 
         public struct StructWithNonGenericInterface1_2
             : NonGenericInterface1,
-              NonGenericInterface2 { }
+                NonGenericInterface2 { }
 
         public class ClassWithNonGenericInterface1 : NonGenericInterface1 { }
 
         public class ClassWithNonGenericInterface1_2
             : NonGenericInterface1,
-              NonGenericInterface2 { }
+                NonGenericInterface2 { }
 
         public interface NonGenericInterfaceWithNonGenericInterface1 : NonGenericInterface1 { }
 

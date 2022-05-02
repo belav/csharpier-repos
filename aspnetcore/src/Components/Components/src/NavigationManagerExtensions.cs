@@ -576,8 +576,8 @@ public static class NavigationManagerExtensions
         var uri = navigationManager.Uri;
 
         return value is null
-          ? GetUriWithRemovedQueryParameter(uri, name)
-          : GetUriWithUpdatedQueryParameter(uri, name, value);
+            ? GetUriWithRemovedQueryParameter(uri, name)
+            : GetUriWithUpdatedQueryParameter(uri, name, value);
     }
 
     /// <summary>

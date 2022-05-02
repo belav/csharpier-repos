@@ -22,13 +22,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
 
             public override SyntaxNode VisitXmlElementStartTag(XmlElementStartTagSyntax node) =>
                 IsValueName(node.Name)
-                  ? node.ReplaceNode(node.Name, ConvertToReturns(node.Name))
-                  : base.VisitXmlElementStartTag(node);
+                    ? node.ReplaceNode(node.Name, ConvertToReturns(node.Name))
+                    : base.VisitXmlElementStartTag(node);
 
             public override SyntaxNode VisitXmlElementEndTag(XmlElementEndTagSyntax node) =>
                 IsValueName(node.Name)
-                  ? node.ReplaceNode(node.Name, ConvertToReturns(node.Name))
-                  : base.VisitXmlElementEndTag(node);
+                    ? node.ReplaceNode(node.Name, ConvertToReturns(node.Name))
+                    : base.VisitXmlElementEndTag(node);
         }
     }
 }

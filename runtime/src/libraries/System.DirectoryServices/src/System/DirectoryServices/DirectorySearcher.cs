@@ -1035,7 +1035,7 @@ namespace System.DirectoryServices
                             (int)AdsSearchPreferences.EXTENDED_DN => "ExtendedDn",
                             (int)AdsSearchPreferences.DIRSYNC => "DirectorySynchronization",
                             (int)AdsSearchPreferences.DIRSYNC_FLAG
-                              => "DirectorySynchronizationFlag",
+                                => "DirectorySynchronizationFlag",
                             (int)AdsSearchPreferences.VLV => "VirtualListView",
                             _ => "",
                         };

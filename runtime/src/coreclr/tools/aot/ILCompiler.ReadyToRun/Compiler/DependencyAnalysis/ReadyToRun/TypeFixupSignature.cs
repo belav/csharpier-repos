@@ -100,10 +100,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     ValueTypeShapeCharacteristics.Float32Aggregate => ReadyToRunHFAElemType.Float32,
                     ValueTypeShapeCharacteristics.Float64Aggregate => ReadyToRunHFAElemType.Float64,
                     ValueTypeShapeCharacteristics.Vector64Aggregate
-                      => ReadyToRunHFAElemType.Vector64,
+                        => ReadyToRunHFAElemType.Vector64,
                     // See MethodTable::GetHFAType
                     ValueTypeShapeCharacteristics.Vector128Aggregate
-                      => ReadyToRunHFAElemType.Vector128,
+                        => ReadyToRunHFAElemType.Vector128,
                     _ => throw new NotSupportedException()
                 };
                 dataBuilder.EmitUInt((uint)hfaElementType);

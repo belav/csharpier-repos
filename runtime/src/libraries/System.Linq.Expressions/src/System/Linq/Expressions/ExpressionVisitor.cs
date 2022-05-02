@@ -605,7 +605,7 @@ namespace System.Linq.Expressions
             {
                 MemberBindingType.Assignment => VisitMemberAssignment((MemberAssignment)node),
                 MemberBindingType.MemberBinding
-                  => VisitMemberMemberBinding((MemberMemberBinding)node),
+                    => VisitMemberMemberBinding((MemberMemberBinding)node),
                 MemberBindingType.ListBinding => VisitMemberListBinding((MemberListBinding)node),
                 _ => throw Error.UnhandledBindingType(node.BindingType),
             };

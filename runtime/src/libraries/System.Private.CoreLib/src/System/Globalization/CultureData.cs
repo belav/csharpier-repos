@@ -984,10 +984,10 @@ namespace System.Globalization
                     {
                         localizedDisplayName = GetLanguageDisplayNameCore(
                             Name.Equals("zh-CHT", StringComparison.OrdinalIgnoreCase)
-                              ? "zh-Hant"
-                              : Name.Equals("zh-CHS", StringComparison.OrdinalIgnoreCase)
-                                  ? "zh-Hans"
-                                  : Name
+                                ? "zh-Hant"
+                                : Name.Equals("zh-CHS", StringComparison.OrdinalIgnoreCase)
+                                    ? "zh-Hans"
+                                    : Name
                         );
                     }
                     catch
@@ -2463,8 +2463,8 @@ namespace System.Globalization
                 return null!;
 
             return GlobalizationMode.UseNls
-              ? NlsGetLocaleInfo(type)
-              : IcuGetLocaleInfo(type, uiCultureName);
+                ? NlsGetLocaleInfo(type)
+                : IcuGetLocaleInfo(type, uiCultureName);
         }
 
         private string GetLocaleInfoCore(
@@ -2478,8 +2478,8 @@ namespace System.Globalization
                 return null!;
 
             return GlobalizationMode.UseNls
-              ? NlsGetLocaleInfo(localeName, type)
-              : IcuGetLocaleInfo(localeName, type, uiCultureName);
+                ? NlsGetLocaleInfo(localeName, type)
+                : IcuGetLocaleInfo(localeName, type, uiCultureName);
         }
 
         private int[] GetLocaleInfoCoreUserOverride(LocaleGroupingData type)

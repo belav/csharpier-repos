@@ -13,8 +13,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class ExceptionFilterTracer
         : FilterTracer,
-          IExceptionFilter,
-          IDecorator<IExceptionFilter>
+            IExceptionFilter,
+            IDecorator<IExceptionFilter>
     {
         private const string ExecuteExceptionFilterAsyncMethodName = "ExecuteExceptionFilterAsync";
 

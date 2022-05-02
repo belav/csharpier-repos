@@ -44,8 +44,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
             if (token.Kind() == SyntaxKind.StringLiteralToken)
             {
                 return token.IsVerbatimStringLiteral()
-                  ? TryConvertVerbatimStringToVirtualChars(token, "@\"", "\"", escapeBraces: false)
-                  : TryConvertStringToVirtualChars(token, "\"", "\"", escapeBraces: false);
+                    ? TryConvertVerbatimStringToVirtualChars(
+                        token,
+                        "@\"",
+                        "\"",
+                        escapeBraces: false
+                    )
+                    : TryConvertStringToVirtualChars(token, "\"", "\"", escapeBraces: false);
             }
 
             if (token.Kind() == SyntaxKind.CharacterLiteralToken)
@@ -62,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
                     return
                         interpolatedString.StringStartToken.Kind()
                         == SyntaxKind.InterpolatedVerbatimStringStartToken
-                      ? TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true)
-                      : TryConvertStringToVirtualChars(token, "", "", escapeBraces: true);
+                        ? TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true)
+                        : TryConvertStringToVirtualChars(token, "", "", escapeBraces: true);
                 }
             }
 

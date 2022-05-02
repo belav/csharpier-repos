@@ -10,9 +10,9 @@ namespace System.Text.Json.Serialization.Tests
     {
         private class MyClass
             : IJsonOnDeserializing,
-              IJsonOnDeserialized,
-              IJsonOnSerializing,
-              IJsonOnSerialized
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
 
@@ -76,9 +76,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private struct MyStruct
             : IJsonOnDeserializing,
-              IJsonOnDeserialized,
-              IJsonOnSerializing,
-              IJsonOnSerialized
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
 
@@ -142,9 +142,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private class MyClassWithSmallConstructor
             : IJsonOnDeserializing,
-              IJsonOnDeserialized,
-              IJsonOnSerializing,
-              IJsonOnSerialized
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
 
@@ -217,9 +217,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private class MyClassWithLargeConstructor
             : IJsonOnDeserializing,
-              IJsonOnDeserialized,
-              IJsonOnSerializing,
-              IJsonOnSerialized
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt1 { get; set; }
             public int MyInt2 { get; set; }
@@ -313,9 +313,9 @@ namespace System.Text.Json.Serialization.Tests
 
         private class MyCyclicClass
             : IJsonOnDeserializing,
-              IJsonOnDeserialized,
-              IJsonOnSerializing,
-              IJsonOnSerialized
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public int MyInt { get; set; }
             public MyCyclicClass Cycle { get; set; }
@@ -386,10 +386,10 @@ namespace System.Text.Json.Serialization.Tests
 
         private class MyCollection
             : List<int>,
-              IJsonOnDeserializing,
-              IJsonOnDeserialized,
-              IJsonOnSerializing,
-              IJsonOnSerialized
+                IJsonOnDeserializing,
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public void OnDeserialized() => Assert.True(false, "Not expected");
 
@@ -403,9 +403,9 @@ namespace System.Text.Json.Serialization.Tests
         [JsonConverter(converterType: typeof(MyValueConverter))]
         private class MyValue
             : IJsonOnDeserializing,
-              IJsonOnDeserialized,
-              IJsonOnSerializing,
-              IJsonOnSerialized
+                IJsonOnDeserialized,
+                IJsonOnSerializing,
+                IJsonOnSerialized
         {
             public void OnDeserialized() => Assert.True(false, "Not expected");
 

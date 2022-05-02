@@ -54,11 +54,11 @@ namespace System.Net
                 out string? username,
                 out string? password
             )
-              ? new GenericPrincipal(
+                ? new GenericPrincipal(
                     new HttpListenerBasicIdentity(username, password),
                     Array.Empty<string>()
                 )
-              : null;
+                : null;
 
         internal static bool IsBasicHeader(string header) =>
             header.Length >= 6

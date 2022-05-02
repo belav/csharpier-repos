@@ -46,8 +46,8 @@ public class InputRadio<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTyp
     protected override void OnParametersSet()
     {
         Context = string.IsNullOrEmpty(Name)
-          ? CascadedContext
-          : CascadedContext?.FindContextInAncestors(Name);
+            ? CascadedContext
+            : CascadedContext?.FindContextInAncestors(Name);
 
         if (Context == null)
         {

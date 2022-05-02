@@ -521,9 +521,9 @@ namespace Microsoft.EntityFrameworkCore
                                     && e.Entity.CompositeId2 == key2
                                     && e.Entity.CompositeId3 == key3
                                 )
-                                    || e.Entity.LeafId == id
-                                  ? EntityState.Deleted
-                                  : EntityState.Unchanged,
+                                || e.Entity.LeafId == id
+                                    ? EntityState.Deleted
+                                    : EntityState.Unchanged,
                                 e.State
                             )
                     );
@@ -1141,9 +1141,9 @@ namespace Microsoft.EntityFrameworkCore
                                     && (string)e.Entity["CompositeKeySkipSharedKey2"] == key2
                                     && (DateTime)e.Entity["CompositeKeySkipSharedKey3"] == key3
                                 )
-                                    || (int)e.Entity["RootSkipSharedId"] == id
-                                  ? EntityState.Deleted
-                                  : EntityState.Unchanged,
+                                || (int)e.Entity["RootSkipSharedId"] == id
+                                    ? EntityState.Deleted
+                                    : EntityState.Unchanged,
                                 e.State
                             )
                     );
@@ -1786,9 +1786,9 @@ namespace Microsoft.EntityFrameworkCore
                                     e.Entity.CompositeId2 == "6_1"
                                     && e.Entity.CompositeId3 == new DateTime(2006, 1, 1)
                                 )
-                                    || e.Entity.ThreeId == threeId
-                                  ? EntityState.Deleted
-                                  : EntityState.Unchanged,
+                                || e.Entity.ThreeId == threeId
+                                    ? EntityState.Deleted
+                                    : EntityState.Unchanged,
                                 e.State
                             )
                     );
@@ -4838,8 +4838,8 @@ namespace Microsoft.EntityFrameworkCore
                         e =>
                             Assert.Equal(
                                 e.Entity.OneId == 1 || e.Entity.ThreeId == 1
-                                  ? EntityState.Deleted
-                                  : EntityState.Unchanged,
+                                    ? EntityState.Deleted
+                                    : EntityState.Unchanged,
                                 e.State
                             )
                     );
@@ -5796,8 +5796,8 @@ namespace Microsoft.EntityFrameworkCore
                         e =>
                             Assert.Equal(
                                 e.Entity.OneId == oneId || e.Entity.TwoId == twoId
-                                  ? EntityState.Deleted
-                                  : EntityState.Unchanged,
+                                    ? EntityState.Deleted
+                                    : EntityState.Unchanged,
                                 e.State
                             )
                     );
@@ -6210,11 +6210,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             !useUpdate
-                                && joinEntry.Property<int>("RightsId").CurrentValue
-                                    == existingRightId
-                                && joinEntry.Property<int>("LeftsId").CurrentValue == existingLeftId
-                              ? EntityState.Unchanged
-                              : EntityState.Added,
+                            && joinEntry.Property<int>("RightsId").CurrentValue == existingRightId
+                            && joinEntry.Property<int>("LeftsId").CurrentValue == existingLeftId
+                                ? EntityState.Unchanged
+                                : EntityState.Added,
                             joinEntry.State
                         );
                     }
@@ -6223,10 +6222,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             leftEntry.Entity.Id == existingLeftId
-                              ? useUpdate
-                                  ? EntityState.Modified
-                                  : EntityState.Unchanged
-                              : EntityState.Added,
+                                ? useUpdate
+                                    ? EntityState.Modified
+                                    : EntityState.Unchanged
+                                : EntityState.Added,
                             leftEntry.State
                         );
                     }
@@ -6235,10 +6234,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             rightEntry.Entity.Id == existingRightId
-                              ? useUpdate
-                                  ? EntityState.Modified
-                                  : EntityState.Unchanged
-                              : EntityState.Added,
+                                ? useUpdate
+                                    ? EntityState.Modified
+                                    : EntityState.Unchanged
+                                : EntityState.Added,
                             rightEntry.State
                         );
                     }

@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class InheritanceRelationshipsQueryFixtureBase
         : SharedStoreFixtureBase<InheritanceRelationshipsContext>,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         protected override string StoreName { get; } = "InheritanceRelationships";
 

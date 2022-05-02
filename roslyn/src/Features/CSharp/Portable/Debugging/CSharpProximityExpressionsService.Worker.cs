@@ -104,11 +104,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             private BlockSyntax GetImmediatelyContainingBlock()
             {
                 return IsFirstBlockStatement()
-                  ? (BlockSyntax)_parentStatement.Parent
-                  : _parentStatement is BlockSyntax
+                    ? (BlockSyntax)_parentStatement.Parent
+                    : _parentStatement is BlockSyntax
                     && ((BlockSyntax)_parentStatement).OpenBraceToken == _token
-                      ? (BlockSyntax)_parentStatement
-                      : null;
+                        ? (BlockSyntax)_parentStatement
+                        : null;
             }
 
             private bool IsFirstBlockStatement() =>

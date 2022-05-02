@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
 
             public override SyntaxNode VisitXmlElementEndTag(XmlElementEndTagSyntax node) =>
                 IsValueName(node.Name)
-                  ? node.ReplaceNode(node.Name, ConvertToParam(node.Name))
-                  : base.VisitXmlElementEndTag(node);
+                    ? node.ReplaceNode(node.Name, ConvertToParam(node.Name))
+                    : base.VisitXmlElementEndTag(node);
         }
     }
 }

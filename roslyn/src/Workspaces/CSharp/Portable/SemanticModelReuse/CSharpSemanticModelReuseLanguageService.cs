@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SemanticModelReuse
     ]
     internal class CSharpSemanticModelReuseLanguageService
         : AbstractSemanticModelReuseLanguageService<
-              MemberDeclarationSyntax,
-              BaseMethodDeclarationSyntax,
-              BasePropertyDeclarationSyntax,
-              AccessorDeclarationSyntax
-          >
+            MemberDeclarationSyntax,
+            BaseMethodDeclarationSyntax,
+            BasePropertyDeclarationSyntax,
+            AccessorDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

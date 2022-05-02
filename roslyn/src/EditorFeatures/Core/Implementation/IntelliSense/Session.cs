@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
     internal class Session<TController, TModel, TPresenterSession>
         : ForegroundThreadAffinitizedObject,
-          ISession<TModel>
+            ISession<TModel>
         where TPresenterSession : IIntelliSensePresenterSession
         where TController : IController<TModel>
         where TModel : class

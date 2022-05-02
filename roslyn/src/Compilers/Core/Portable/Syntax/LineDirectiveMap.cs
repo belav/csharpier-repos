@@ -94,8 +94,8 @@ namespace Microsoft.CodeAnalysis
             {
                 int mappedLine = unmapped.Line - entry.UnmappedLine + entry.MappedLine;
                 return (mappedLine == -1)
-                  ? new LinePosition(unmapped.Character)
-                  : new LinePosition(mappedLine, unmapped.Character);
+                    ? new LinePosition(unmapped.Character)
+                    : new LinePosition(mappedLine, unmapped.Character);
             }
         }
 
@@ -128,10 +128,10 @@ namespace Microsoft.CodeAnalysis
                 return new LinePosition(
                     unmapped.Line - entry.UnmappedLine + entry.MappedSpan.Start.Line,
                     unmapped.Line == entry.UnmappedLine
-                      ? entry.MappedSpan.Start.Character
+                        ? entry.MappedSpan.Start.Character
                             + unmapped.Character
                             - entry.UnmappedCharacterOffset.GetValueOrDefault()
-                      : unmapped.Character
+                        : unmapped.Character
                 );
             }
         }

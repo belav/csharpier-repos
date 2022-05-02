@@ -27,10 +27,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
     ]
     internal sealed class CSharpInvertIfCodeRefactoringProvider
         : AbstractInvertIfCodeRefactoringProvider<
-              IfStatementSyntax,
-              StatementSyntax,
-              StatementSyntax
-          >
+            IfStatementSyntax,
+            StatementSyntax,
+            StatementSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(
@@ -152,10 +152,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             }
 
             return original is BlockSyntax block
-              ? block.WithStatements(SyntaxFactory.List(statementArray))
-              : statementArray.Length == 1
-                  ? statementArray[0]
-                  : SyntaxFactory.Block(statementArray);
+                ? block.WithStatements(SyntaxFactory.List(statementArray))
+                : statementArray.Length == 1
+                    ? statementArray[0]
+                    : SyntaxFactory.Block(statementArray);
         }
 
         protected override IfStatementSyntax UpdateIf(
@@ -187,8 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 .WithCondition((ExpressionSyntax)condition)
                 .WithStatement(
                     trueStatement is IfStatementSyntax
-                      ? SyntaxFactory.Block(trueStatement)
-                      : trueStatement
+                        ? SyntaxFactory.Block(trueStatement)
+                        : trueStatement
                 );
 
             if (ShouldKeepFalse(ifNode, falseStatementOpt))
@@ -210,8 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             // whatnot.  Don't do this with single-line because we want to ensure as closely
             // as possible that we've kept things on that single line.
             return isSingleLine
-              ? updatedIf
-              : updatedIf.WithAdditionalAnnotations(Formatter.Annotation);
+                ? updatedIf
+                : updatedIf.WithAdditionalAnnotations(Formatter.Annotation);
         }
 
         private static bool ShouldKeepFalse(
@@ -279,8 +279,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
         protected override IEnumerable<StatementSyntax> UnwrapBlock(StatementSyntax ifBody)
         {
             return ifBody is BlockSyntax block
-              ? block.Statements
-              : SyntaxFactory.SingletonList(ifBody);
+                ? block.Statements
+                : SyntaxFactory.SingletonList(ifBody);
         }
 
         protected override bool IsSingleStatementStatementRange(StatementRange statementRange)

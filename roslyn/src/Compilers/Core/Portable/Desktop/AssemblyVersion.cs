@@ -56,10 +56,10 @@ namespace Microsoft.CodeAnalysis
             var left = ToInteger();
             var right = other.ToInteger();
             return (left == right)
-              ? 0
-              : (left < right)
-                  ? -1
-                  : +1;
+                ? 0
+                : (left < right)
+                    ? -1
+                    : +1;
         }
 
         public bool Equals(AssemblyVersion other)

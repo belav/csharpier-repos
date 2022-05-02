@@ -8494,26 +8494,26 @@ extern static void internalCallStatic();
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                             + ">g__forwardRef|0_0"
-                          => MethodImplAttributes.ForwardRef,
+                            => MethodImplAttributes.ForwardRef,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                             + ">g__noInlining|0_1"
-                          => MethodImplAttributes.NoInlining,
+                            => MethodImplAttributes.NoInlining,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                             + ">g__noOptimization|0_2"
-                          => MethodImplAttributes.NoOptimization,
+                            => MethodImplAttributes.NoOptimization,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                             + ">g__synchronized|0_3"
-                          => MethodImplAttributes.Synchronized,
+                            => MethodImplAttributes.Synchronized,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
                             + ">g__internalCallStatic|0_4"
-                          => MethodImplAttributes.InternalCall,
+                            => MethodImplAttributes.InternalCall,
                         ".ctor" => MethodImplAttributes.IL,
                         WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                          => MethodImplAttributes.IL,
+                            => MethodImplAttributes.IL,
                         _ => throw TestExceptionUtilities.UnexpectedValue(methodName)
                     };
 
@@ -9020,15 +9020,15 @@ class B : A
                     case "System.Console.WriteLine(1);":
                         Interlocked.Increment(
                             ref context.ContainingSymbol.Kind == SymbolKind.Namespace
-                              ? ref FireCount5
-                              : ref FireCount3
+                                ? ref FireCount5
+                                : ref FireCount3
                         );
                         break;
                     case "System.Console.WriteLine(2);":
                         Interlocked.Increment(
                             ref context.ContainingSymbol.Kind == SymbolKind.Namespace
-                              ? ref FireCount6
-                              : ref FireCount4
+                                ? ref FireCount6
+                                : ref FireCount4
                         );
                         break;
                     default:

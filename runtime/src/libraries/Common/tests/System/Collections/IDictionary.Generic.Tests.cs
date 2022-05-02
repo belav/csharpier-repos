@@ -95,7 +95,7 @@ namespace System.Collections.Tests
         /// </summary>
         public class KVPComparer
             : IEqualityComparer<KeyValuePair<TKey, TValue>>,
-              IComparer<KeyValuePair<TKey, TValue>>
+                IComparer<KeyValuePair<TKey, TValue>>
         {
             private IComparer<TKey> _comparer;
             private IEqualityComparer<TKey> _equalityComparer;

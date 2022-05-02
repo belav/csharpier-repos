@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     // Sealed for perf
     public sealed class UniqueConstraintComparer
         : IEqualityComparer<IUniqueConstraint>,
-          IComparer<IUniqueConstraint>
+            IComparer<IUniqueConstraint>
     {
         private UniqueConstraintComparer() { }
 
@@ -59,8 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             result = ColumnListComparer.Instance.Compare(x.Columns, y.Columns);
 
             return result != 0
-              ? result
-              : StringComparer.Ordinal.Compare(x.Table.Name, y.Table.Name);
+                ? result
+                : StringComparer.Ordinal.Compare(x.Table.Name, y.Table.Name);
         }
 
         /// <summary>

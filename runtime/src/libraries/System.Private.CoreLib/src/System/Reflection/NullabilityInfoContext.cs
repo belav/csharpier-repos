@@ -21,8 +21,8 @@ namespace System.Reflection
                 "System.Reflection.NullabilityInfoContext.IsSupported",
                 out bool isSupported
             )
-              ? isSupported
-              : true;
+                ? isSupported
+                : true;
 
         [Flags]
         private enum NotAnnotatedStatus

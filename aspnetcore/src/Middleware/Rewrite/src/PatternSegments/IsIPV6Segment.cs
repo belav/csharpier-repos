@@ -20,7 +20,7 @@ internal class IsIPV6Segment : PatternSegment
         return
             context.HttpContext.Connection.RemoteIpAddress.AddressFamily
             == AddressFamily.InterNetworkV6
-          ? "on"
-          : "off";
+            ? "on"
+            : "off";
     }
 }

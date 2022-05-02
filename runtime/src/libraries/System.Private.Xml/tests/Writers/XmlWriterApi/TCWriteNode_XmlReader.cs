@@ -443,8 +443,8 @@ namespace System.Xml.Tests
             string strxml = "<!DOCTYPE ROOT []><ROOT/>";
 
             string exp = utils.IsIndent()
-              ? "<!DOCTYPE ROOT []>" + Environment.NewLine + "<ROOT />"
-              : "<!DOCTYPE ROOT []><ROOT />";
+                ? "<!DOCTYPE ROOT []>" + Environment.NewLine + "<ROOT />"
+                : "<!DOCTYPE ROOT []><ROOT />";
 
             using (XmlReader xr = CreateReader(new StringReader(strxml)))
             using (XmlWriter w = utils.CreateWriter())
@@ -727,8 +727,8 @@ namespace System.Xml.Tests
             xr.Dispose();
             w.Dispose();
             strxml = utils.IsIndent()
-              ? "<?xml version=\"1.0\" standalone=\"yes\"?>" + Environment.NewLine + "<Root />"
-              : strxml;
+                ? "<?xml version=\"1.0\" standalone=\"yes\"?>" + Environment.NewLine + "<Root />"
+                : strxml;
             Assert.True(utils.CompareString(strxml));
         }
 
@@ -940,8 +940,8 @@ namespace System.Xml.Tests
         {
             string strxml = "<!DOCTYPE root PUBLIC \"\" \"#\"><root/>";
             string exp = utils.IsIndent()
-              ? "<!DOCTYPE root PUBLIC \"\" \"#\"[]>" + Environment.NewLine + "<root />"
-              : "<!DOCTYPE root PUBLIC \"\" \"#\"[]><root />";
+                ? "<!DOCTYPE root PUBLIC \"\" \"#\"[]>" + Environment.NewLine + "<root />"
+                : "<!DOCTYPE root PUBLIC \"\" \"#\"[]><root />";
 
             using (XmlReader xr = CreateReader(new StringReader(strxml)))
             using (XmlWriter w = utils.CreateWriter())
@@ -986,8 +986,8 @@ namespace System.Xml.Tests
         {
             string strxml = "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"><root/>";
             string exp = utils.IsIndent()
-              ? "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]>" + Environment.NewLine + "<root />"
-              : "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]><root />";
+                ? "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]>" + Environment.NewLine + "<root />"
+                : "<!DOCTYPE root SYSTEM \"\uD812\uDD12\"[]><root />";
 
             using (XmlReader xr = CreateReader(new StringReader(strxml)))
             {

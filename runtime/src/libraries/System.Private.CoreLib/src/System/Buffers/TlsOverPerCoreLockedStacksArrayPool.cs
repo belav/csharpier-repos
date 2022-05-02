@@ -128,8 +128,8 @@ namespace System.Buffers
                     Id,
                     ArrayPoolEventSource.NoBucketId,
                     bucketIndex >= _buckets.Length
-                      ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
-                      : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
+                        ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
+                        : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
                 );
             }
             return buffer;
@@ -199,8 +199,8 @@ namespace System.Buffers
                         Id,
                         haveBucket ? bucketIndex : ArrayPoolEventSource.NoBucketId,
                         haveBucket
-                          ? ArrayPoolEventSource.BufferDroppedReason.Full
-                          : ArrayPoolEventSource.BufferDroppedReason.OverMaximumSize
+                            ? ArrayPoolEventSource.BufferDroppedReason.Full
+                            : ArrayPoolEventSource.BufferDroppedReason.OverMaximumSize
                     );
                 }
             }
@@ -549,7 +549,7 @@ namespace System.Buffers
                         _count > 0
                             ? _millisecondsTimestamp + (trimMilliseconds / 4)
                             : // Give the remaining items a bit more time
-                              0;
+                            0;
                 }
             }
         }

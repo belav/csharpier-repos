@@ -27,8 +27,8 @@ namespace ILCompiler.DependencyAnalysisFramework
 
     internal class DgmlWriter<DependencyContextType>
         : IDisposable,
-          IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>,
-          IDependencyAnalyzerLogNodeVisitor<DependencyContextType>
+            IDependencyAnalyzerLogEdgeVisitor<DependencyContextType>,
+            IDependencyAnalyzerLogNodeVisitor<DependencyContextType>
     {
         private XmlWriter _xmlWrite;
         private bool _done = false;

@@ -602,8 +602,12 @@ namespace System.Xml
             }
 
             return returnType == typeof(string)
-              ? string.Empty
-              : XmlUntypedConverter.Untyped.ChangeType(string.Empty, returnType, namespaceResolver);
+                ? string.Empty
+                : XmlUntypedConverter.Untyped.ChangeType(
+                    string.Empty,
+                    returnType,
+                    namespaceResolver
+                );
         }
 
         // Checks local name and namespace of the current element and returns its content as the requested type.

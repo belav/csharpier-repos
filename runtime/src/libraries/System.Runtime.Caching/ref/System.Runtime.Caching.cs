@@ -226,8 +226,8 @@ namespace System.Runtime.Caching
 
     public partial class MemoryCache
         : System.Runtime.Caching.ObjectCache,
-          System.Collections.IEnumerable,
-          System.IDisposable
+            System.Collections.IEnumerable,
+            System.IDisposable
     {
         public MemoryCache(
             string name,
@@ -406,10 +406,10 @@ namespace System.Runtime.Caching
 
     public abstract partial class ObjectCache
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  object
-              >>,
-          System.Collections.IEnumerable
+                string,
+                object
+            >>,
+            System.Collections.IEnumerable
     {
         public static readonly System.DateTimeOffset InfiniteAbsoluteExpiration;
         public static readonly System.TimeSpan NoSlidingExpiration;

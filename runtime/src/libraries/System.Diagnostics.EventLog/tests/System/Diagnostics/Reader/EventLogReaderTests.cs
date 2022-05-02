@@ -15,8 +15,8 @@ namespace System.Diagnostics.Tests
         {
             var eventLog = useQuery
                 ? new EventLogReader(
-                      new EventLogQuery(logName, PathType.LogName) { ReverseDirection = true }
-                  )
+                    new EventLogQuery(logName, PathType.LogName) { ReverseDirection = true }
+                )
                 : new EventLogReader(logName);
 
             using (eventLog)

@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     [Order(After = "LSP SignatureHelpCommandHandler")]
     internal class SignatureHelpBeforeCompletionCommandHandler
         : AbstractSignatureHelpCommandHandler,
-          IChainedCommandHandler<TypeCharCommandArgs>,
-          IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
+            IChainedCommandHandler<TypeCharCommandArgs>,
+            IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
     {
         public string DisplayName => EditorFeaturesResources.Signature_Help;
 
@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         {
             AssertIsForeground();
             return TryGetControllerCommandHandler(args, out var commandHandler)
-              ? commandHandler.GetCommandState(args, nextHandler)
-              : nextHandler();
+                ? commandHandler.GetCommandState(args, nextHandler)
+                : nextHandler();
         }
 
         private void ExecuteCommandWorker<TCommandArgs>(

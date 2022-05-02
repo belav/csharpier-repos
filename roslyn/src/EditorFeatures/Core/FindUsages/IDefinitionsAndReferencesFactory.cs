@@ -234,12 +234,12 @@ namespace Microsoft.CodeAnalysis.Editor.FindUsages
                             var documentLocation = !includeClassifiedSpans
                                 ? new DocumentSpan(document, location.SourceSpan)
                                 : await ClassifiedSpansAndHighlightSpanFactory
-                                      .GetClassifiedDocumentSpanAsync(
-                                          document,
-                                          location.SourceSpan,
-                                          cancellationToken
-                                      )
-                                      .ConfigureAwait(false);
+                                    .GetClassifiedDocumentSpanAsync(
+                                        document,
+                                        location.SourceSpan,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
 
                             sourceLocations.Add(documentLocation);
                         }

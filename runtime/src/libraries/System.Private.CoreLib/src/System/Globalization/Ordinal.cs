@@ -346,11 +346,11 @@ namespace System.Globalization
             if (GlobalizationMode.Invariant)
             {
                 return ignoreCase
-                  ? InvariantModeCasing.LastIndexOfIgnoreCase(
+                    ? InvariantModeCasing.LastIndexOfIgnoreCase(
                         source.AsSpan().Slice(startIndex, count),
                         value
                     )
-                  : LastIndexOf(source, value, startIndex, count);
+                    : LastIndexOf(source, value, startIndex, count);
             }
 
             if (GlobalizationMode.UseNls)

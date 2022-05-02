@@ -1132,8 +1132,8 @@ namespace System.Threading.Tasks.Tests
             {
                 case PartitionerType.RangePartitioner:
                     return (chunkSize == -1)
-                      ? Partitioner.Create(from, to)
-                      : Partitioner.Create(from, to, chunkSize);
+                        ? Partitioner.Create(from, to)
+                        : Partitioner.Create(from, to, chunkSize);
                 default:
                     break;
             }

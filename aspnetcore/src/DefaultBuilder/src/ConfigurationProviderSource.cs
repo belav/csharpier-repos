@@ -25,8 +25,8 @@ internal sealed class ConfigurationProviderSource : IConfigurationSource
     // Otherwise, providers that cannot be reloaded like StreamConfigurationProviders will fail.
     private sealed class IgnoreFirstLoadConfigurationProvider
         : IConfigurationProvider,
-          IEnumerable<IConfigurationProvider>,
-          IDisposable
+            IEnumerable<IConfigurationProvider>,
+            IDisposable
     {
         private readonly IConfigurationProvider _provider;
 

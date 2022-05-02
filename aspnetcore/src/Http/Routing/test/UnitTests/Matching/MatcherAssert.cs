@@ -134,7 +134,7 @@ internal static class MatcherAssert
     private static string FormatRouteValues(RouteValueDictionary values)
     {
         return values == null
-          ? "{}"
-          : "{" + string.Join(", ", values.Select(kvp => $"{kvp.Key} = '{kvp.Value}'")) + "}";
+            ? "{}"
+            : "{" + string.Join(", ", values.Select(kvp => $"{kvp.Key} = '{kvp.Value}'")) + "}";
     }
 }

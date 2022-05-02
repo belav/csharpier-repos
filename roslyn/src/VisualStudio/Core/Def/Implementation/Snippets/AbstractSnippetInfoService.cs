@@ -25,8 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
     /// </summary>
     internal abstract class AbstractSnippetInfoService
         : ForegroundThreadAffinitizedObject,
-          ISnippetInfoService,
-          IVsExpansionEvents
+            ISnippetInfoService,
+            IVsExpansionEvents
     {
         private readonly Guid _languageGuidForSnippets;
         private IVsExpansionManager? _expansionManager;

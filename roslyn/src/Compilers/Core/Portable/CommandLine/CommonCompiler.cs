@@ -1137,8 +1137,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             var exitCode = ReportDiagnostics(diagnostics, consoleOutput, errorLogger, compilation)
-              ? Failed
-              : Succeeded;
+                ? Failed
+                : Succeeded;
 
             // The act of reporting errors can cause more errors to appear in
             // additional files due to forcing all additional files to fetch text
@@ -1313,8 +1313,8 @@ namespace Microsoft.CodeAnalysis
 
                     var analyzerOptionsBuilder = hasAnalyzerConfigs
                         ? ArrayBuilder<AnalyzerConfigOptionsResult>.GetInstance(
-                              generatedSyntaxTrees.Count
-                          )
+                            generatedSyntaxTrees.Count
+                        )
                         : null;
                     var embeddedTextBuilder = ArrayBuilder<EmbeddedText>.GetInstance(
                         generatedSyntaxTrees.Count
@@ -2070,8 +2070,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return outputKind.IsNetModule()
-              ? null
-              : OpenStream(
+                ? null
+                : OpenStream(
                     fileSystem,
                     messageProvider,
                     arguments.Win32Manifest,

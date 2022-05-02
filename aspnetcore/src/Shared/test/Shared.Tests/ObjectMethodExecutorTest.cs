@@ -592,11 +592,11 @@ public class ObjectMethodExecutorTest
 
     public class TestAwaiterWithICriticalNotifyCompletion
         : CompletionTrackingAwaiterBase,
-          ICriticalNotifyCompletion { }
+            ICriticalNotifyCompletion { }
 
     public class TestAwaiterWithoutICriticalNotifyCompletion
         : CompletionTrackingAwaiterBase,
-          INotifyCompletion { }
+            INotifyCompletion { }
 
     public class CompletionTrackingAwaiterBase
     {

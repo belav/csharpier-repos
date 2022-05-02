@@ -3537,8 +3537,8 @@ namespace System.Security.AccessControl
             AddQualifiedAce(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 ObjectAceFlags.None,
@@ -3561,8 +3561,8 @@ namespace System.Security.AccessControl
             SetQualifiedAce(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 ObjectAceFlags.None,
@@ -3584,8 +3584,8 @@ namespace System.Security.AccessControl
             return RemoveQualifiedAces(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 false,
@@ -3608,8 +3608,8 @@ namespace System.Security.AccessControl
             RemoveQualifiedAcesSpecific(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 ObjectAceFlags.None,
@@ -3661,8 +3661,8 @@ namespace System.Security.AccessControl
             AddQualifiedAce(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 objectFlags,
@@ -3714,8 +3714,8 @@ namespace System.Security.AccessControl
             SetQualifiedAce(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 objectFlags,
@@ -3766,8 +3766,8 @@ namespace System.Security.AccessControl
             return RemoveQualifiedAces(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 false,
@@ -3819,8 +3819,8 @@ namespace System.Security.AccessControl
             RemoveQualifiedAcesSpecific(
                 sid,
                 accessType == AccessControlType.Allow
-                  ? AceQualifier.AccessAllowed
-                  : AceQualifier.AccessDenied,
+                    ? AceQualifier.AccessAllowed
+                    : AceQualifier.AccessDenied,
                 accessMask,
                 GenericAce.AceFlagsFromInheritanceFlags(inheritanceFlags, propagationFlags),
                 objectFlags,
@@ -3870,8 +3870,8 @@ namespace System.Security.AccessControl
                 _sidEveryone,
                 -1,
                 isContainer
-                  ? (InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit)
-                  : InheritanceFlags.None,
+                    ? (InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit)
+                    : InheritanceFlags.None,
                 PropagationFlags.None
             );
 

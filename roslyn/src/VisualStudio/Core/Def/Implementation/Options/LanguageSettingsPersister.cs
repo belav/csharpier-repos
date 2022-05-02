@@ -28,8 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     /// </summary>
     internal sealed class LanguageSettingsPersister
         : ForegroundThreadAffinitizedObject,
-          IVsTextManagerEvents4,
-          IOptionPersister
+            IVsTextManagerEvents4,
+            IOptionPersister
     {
         private readonly IVsTextManager4 _textManager;
         private readonly IGlobalOptionService _optionService;

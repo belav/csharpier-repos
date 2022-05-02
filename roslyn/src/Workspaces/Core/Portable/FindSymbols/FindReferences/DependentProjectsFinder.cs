@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 // namespaces are visible in all projects.
                 return projects != null
-                  ? projects.ToImmutableArray()
-                  : solution.Projects.ToImmutableArray();
+                    ? projects.ToImmutableArray()
+                    : solution.Projects.ToImmutableArray();
             }
             else
             {
@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     )
                     .ConfigureAwait(false);
                 return projects != null
-                  ? dependentProjects.WhereAsArray(projects.Contains)
-                  : dependentProjects;
+                    ? dependentProjects.WhereAsArray(projects.Contains)
+                    : dependentProjects;
             }
         }
 
@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         {
             var assembly = symbol.OriginalDefinition.ContainingAssembly;
             return assembly == null
-              ? default
-              : (assembly, solution.GetProject(assembly, cancellationToken));
+                ? default
+                : (assembly, solution.GetProject(assembly, cancellationToken));
         }
 
         private static async Task<

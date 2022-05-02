@@ -774,10 +774,10 @@ public class CertFixture : IDisposable
     public CertFixture()
     {
         Manager = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-          ? new WindowsCertificateManager(TestCertificateSubject, 1)
-          : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-              ? new MacOSCertificateManager(TestCertificateSubject, 1) as CertificateManager
-              : new UnixCertificateManager(TestCertificateSubject, 1);
+            ? new WindowsCertificateManager(TestCertificateSubject, 1)
+            : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                ? new MacOSCertificateManager(TestCertificateSubject, 1) as CertificateManager
+                : new UnixCertificateManager(TestCertificateSubject, 1);
 
         CleanupCertificates();
     }

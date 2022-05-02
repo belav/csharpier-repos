@@ -46,8 +46,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         )
         {
             return workspace.TryApplyChanges(ChangedSolution, progressTracker)
-              ? SpecializedTasks.True
-              : SpecializedTasks.False;
+                ? SpecializedTasks.True
+                : SpecializedTasks.False;
         }
     }
 }

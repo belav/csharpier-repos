@@ -147,19 +147,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__UnaryOperation,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal((int)binderFlags),
-                              // expression type:
-                              _factory.Literal((int)operatorKind.ToExpressionType()),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments)
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__UnaryOperation,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal((int)binderFlags),
+                            // expression type:
+                            _factory.Literal((int)operatorKind.ToExpressionType()),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments)
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -205,21 +205,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__BinaryOperation,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal((int)binderFlags),
-                              // expression type:
-                              _factory.Literal(
-                                  (int)operatorKind.ToExpressionType(isCompoundAssignment)
-                              ),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments)
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__BinaryOperation,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal((int)binderFlags),
+                            // expression type:
+                            _factory.Literal(
+                                (int)operatorKind.ToExpressionType(isCompoundAssignment)
+                            ),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments)
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -282,36 +282,36 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__InvokeMember,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal((int)binderFlags),
-                              // member name:
-                              _factory.Literal(name),
-                              // type arguments:
-                              typeArgumentsWithAnnotations.IsDefaultOrEmpty
-                                  ? _factory.Null(
-                                        _factory.WellKnownArrayType(WellKnownType.System_Type)
-                                    )
-                                  : _factory.ArrayOrEmpty(
-                                        _factory.WellKnownType(WellKnownType.System_Type),
-                                        _factory.TypeOfs(typeArgumentsWithAnnotations)
-                                    ),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  argumentNames,
-                                  refKinds,
-                                  loweredReceiver,
-                                  receiverRefKind,
-                                  receiverIsStaticType
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__InvokeMember,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal((int)binderFlags),
+                            // member name:
+                            _factory.Literal(name),
+                            // type arguments:
+                            typeArgumentsWithAnnotations.IsDefaultOrEmpty
+                                ? _factory.Null(
+                                    _factory.WellKnownArrayType(WellKnownType.System_Type)
+                                )
+                                : _factory.ArrayOrEmpty(
+                                    _factory.WellKnownType(WellKnownType.System_Type),
+                                    _factory.TypeOfs(typeArgumentsWithAnnotations)
+                                ),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                argumentNames,
+                                refKinds,
+                                loweredReceiver,
+                                receiverRefKind,
+                                receiverIsStaticType
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -343,26 +343,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__InvokeMember,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal((int)binderFlags),
-                              // member name:
-                              _factory.Literal(accessorName),
-                              // type arguments:
-                              _factory.Null(_factory.WellKnownArrayType(WellKnownType.System_Type)),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  loweredReceiver: loweredReceiver,
-                                  loweredRight: loweredHandler
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__InvokeMember,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal((int)binderFlags),
+                            // member name:
+                            _factory.Literal(accessorName),
+                            // type arguments:
+                            _factory.Null(_factory.WellKnownArrayType(WellKnownType.System_Type)),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                loweredReceiver: loweredReceiver,
+                                loweredRight: loweredHandler
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -402,23 +402,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__Invoke,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal((int)binderFlags),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  argumentNames,
-                                  refKinds,
-                                  loweredReceiver
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__Invoke,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal((int)binderFlags),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                argumentNames,
+                                refKinds,
+                                loweredReceiver
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -448,24 +448,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__InvokeConstructor,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal(0),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  argumentNames,
-                                  refKinds,
-                                  loweredReceiver,
-                                  receiverIsStaticType: true
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__InvokeConstructor,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal(0),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                argumentNames,
+                                refKinds,
+                                loweredReceiver,
+                                receiverIsStaticType: true
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -500,23 +500,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__GetMember,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal((int)binderFlags),
-                              // name:
-                              _factory.Literal(name),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  loweredReceiver: loweredReceiver
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__GetMember,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal((int)binderFlags),
+                            // name:
+                            _factory.Literal(name),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                loweredReceiver: loweredReceiver
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -557,24 +557,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__SetMember,
-                          new[]
-                          {
-                              // flags:
-                              _factory.Literal((int)binderFlags),
-                              // name:
-                              _factory.Literal(name),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  loweredReceiver: loweredReceiver,
-                                  loweredRight: loweredRight
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__SetMember,
+                        new[]
+                        {
+                            // flags:
+                            _factory.Literal((int)binderFlags),
+                            // name:
+                            _factory.Literal(name),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                loweredReceiver: loweredReceiver,
+                                loweredRight: loweredRight
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -603,23 +603,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__GetIndex,
-                          new[]
-                          {
-                              // flags (unused):
-                              _factory.Literal((int)CSharpBinderFlags.None),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  argumentNames,
-                                  refKinds,
-                                  loweredReceiver: loweredReceiver
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__GetIndex,
+                        new[]
+                        {
+                            // flags (unused):
+                            _factory.Literal((int)CSharpBinderFlags.None),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                argumentNames,
+                                refKinds,
+                                loweredReceiver: loweredReceiver
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -661,25 +661,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             var binderConstruction =
                 ((object)argumentInfoFactory != null)
                     ? MakeBinderConstruction(
-                          WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__SetIndex,
-                          new[]
-                          {
-                              // flags (unused):
-                              _factory.Literal((int)binderFlags),
-                              // context:
-                              _factory.TypeofDynamicOperationContextType(),
-                              // argument infos:
-                              MakeCallSiteArgumentInfos(
-                                  argumentInfoFactory,
-                                  loweredArguments,
-                                  argumentNames,
-                                  refKinds,
-                                  loweredReceiver,
-                                  loweredReceiverRefKind,
-                                  loweredRight: loweredRight
-                              )
-                          }
-                      )
+                        WellKnownMember.Microsoft_CSharp_RuntimeBinder_Binder__SetIndex,
+                        new[]
+                        {
+                            // flags (unused):
+                            _factory.Literal((int)binderFlags),
+                            // context:
+                            _factory.TypeofDynamicOperationContextType(),
+                            // argument infos:
+                            MakeCallSiteArgumentInfos(
+                                argumentInfoFactory,
+                                loweredArguments,
+                                argumentNames,
+                                refKinds,
+                                loweredReceiver,
+                                loweredReceiverRefKind,
+                                loweredRight: loweredRight
+                            )
+                        }
+                    )
                     : null;
 
             return MakeDynamicOperation(
@@ -1052,8 +1052,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             _factory.AddField(containerDefinition, field);
             Debug.Assert(_currentDynamicCallSiteContainer is { });
             return _currentDynamicCallSiteContainer.IsGenericType
-              ? field.AsMember(_currentDynamicCallSiteContainer)
-              : field;
+                ? field.AsMember(_currentDynamicCallSiteContainer)
+                : field;
         }
 
         internal NamedTypeSymbol? GetDelegateType(
@@ -1089,11 +1089,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var wkDelegateType = returnsVoid
                     ? WellKnownTypes.GetWellKnownActionDelegate(
-                          invokeArgumentCount: delegateSignature.Length
-                      )
+                        invokeArgumentCount: delegateSignature.Length
+                    )
                     : WellKnownTypes.GetWellKnownFunctionDelegate(
-                          invokeArgumentCount: delegateSignature.Length - 1
-                      );
+                        invokeArgumentCount: delegateSignature.Length - 1
+                    );
 
                 if (wkDelegateType != WellKnownType.Unknown)
                 {

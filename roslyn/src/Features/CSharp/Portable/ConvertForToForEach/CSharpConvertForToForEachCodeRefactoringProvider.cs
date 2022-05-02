@@ -24,13 +24,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForToForEach
     ]
     internal class CSharpConvertForToForEachCodeRefactoringProvider
         : AbstractConvertForToForEachCodeRefactoringProvider<
-              StatementSyntax,
-              ForStatementSyntax,
-              ExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              TypeSyntax,
-              VariableDeclaratorSyntax
-          >
+            StatementSyntax,
+            ForStatementSyntax,
+            ExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            TypeSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

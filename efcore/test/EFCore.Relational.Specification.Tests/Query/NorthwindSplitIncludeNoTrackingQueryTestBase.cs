@@ -67,17 +67,17 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var customer = async
                 ? await context
-                      .Set<Customer>()
-                      .Include(c => c.Orders)
-                      .AsSplitQuery()
-                      .AsNoTracking()
-                      .SingleAsync(c => c.CustomerID == "ALFKI")
+                    .Set<Customer>()
+                    .Include(c => c.Orders)
+                    .AsSplitQuery()
+                    .AsNoTracking()
+                    .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context
-                  .Set<Customer>()
-                  .Include(c => c.Orders)
-                  .AsSplitQuery()
-                  .AsNoTracking()
-                  .Single(c => c.CustomerID == "ALFKI");
+                    .Set<Customer>()
+                    .Include(c => c.Orders)
+                    .AsSplitQuery()
+                    .AsNoTracking()
+                    .Single(c => c.CustomerID == "ALFKI");
 
             Assert.NotEqual(orders, customer.Orders, LegacyReferenceEqualityComparer.Instance);
             Assert.Equal(6, customer.Orders.Count);
@@ -95,17 +95,17 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var customer2 = async
                 ? await context
-                      .Set<Customer>()
-                      .Include(c => c.Orders)
-                      .AsSplitQuery()
-                      .AsNoTracking()
-                      .SingleAsync(c => c.CustomerID == "ALFKI")
+                    .Set<Customer>()
+                    .Include(c => c.Orders)
+                    .AsSplitQuery()
+                    .AsNoTracking()
+                    .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context
-                  .Set<Customer>()
-                  .Include(c => c.Orders)
-                  .AsSplitQuery()
-                  .AsNoTracking()
-                  .Single(c => c.CustomerID == "ALFKI");
+                    .Set<Customer>()
+                    .Include(c => c.Orders)
+                    .AsSplitQuery()
+                    .AsNoTracking()
+                    .Single(c => c.CustomerID == "ALFKI");
 
             Assert.NotSame(customer1, customer2);
             Assert.Equal(6, customer2.Orders.Count);
@@ -123,19 +123,19 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var orders = async
                 ? await context
-                      .Set<Order>()
-                      .Include(o => o.Customer)
-                      .AsNoTracking()
-                      .AsSplitQuery()
-                      .Where(o => o.CustomerID == "ALFKI")
-                      .ToListAsync()
+                    .Set<Order>()
+                    .Include(o => o.Customer)
+                    .AsNoTracking()
+                    .AsSplitQuery()
+                    .Where(o => o.CustomerID == "ALFKI")
+                    .ToListAsync()
                 : context
-                  .Set<Order>()
-                  .Include(o => o.Customer)
-                  .AsNoTracking()
-                  .AsSplitQuery()
-                  .Where(o => o.CustomerID == "ALFKI")
-                  .ToList();
+                    .Set<Order>()
+                    .Include(o => o.Customer)
+                    .AsNoTracking()
+                    .AsSplitQuery()
+                    .Where(o => o.CustomerID == "ALFKI")
+                    .ToList();
 
             Assert.Equal(6, orders.Count);
             Assert.True(orders.All(o => !ReferenceEquals(o.Customer, customer)));

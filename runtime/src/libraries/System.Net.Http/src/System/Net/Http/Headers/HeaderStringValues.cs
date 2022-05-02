@@ -49,12 +49,12 @@ namespace System.Net.Http.Headers
             {
                 string value => value,
                 string[] values
-                  => string.Join(
-                      _header.Parser is HttpHeaderParser parser && parser.SupportsMultipleValues
-                        ? parser.Separator
-                        : HttpHeaderParser.DefaultSeparator,
-                      values
-                  ),
+                    => string.Join(
+                        _header.Parser is HttpHeaderParser parser && parser.SupportsMultipleValues
+                            ? parser.Separator
+                            : HttpHeaderParser.DefaultSeparator,
+                        values
+                    ),
                 _ => string.Empty,
             };
 

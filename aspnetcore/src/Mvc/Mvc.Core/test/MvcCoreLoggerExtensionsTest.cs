@@ -506,20 +506,20 @@ public class MvcCoreLoggerExtensionsTest
 
     public interface IOrderedAuthorizeFilter
         : IAuthorizationFilter,
-          IAsyncAuthorizationFilter,
-          IOrderedFilter { }
+            IAsyncAuthorizationFilter,
+            IOrderedFilter { }
 
     public interface IOrderedResourceFilter
         : IResourceFilter,
-          IAsyncResourceFilter,
-          IOrderedFilter { }
+            IAsyncResourceFilter,
+            IOrderedFilter { }
 
     public interface IOrderedActionFilter : IActionFilter, IAsyncActionFilter, IOrderedFilter { }
 
     public interface IOrderedExceptionFilter
         : IExceptionFilter,
-          IAsyncExceptionFilter,
-          IOrderedFilter { }
+            IAsyncExceptionFilter,
+            IOrderedFilter { }
 
     public interface IOrderedResultFilter : IResultFilter, IAsyncResultFilter, IOrderedFilter { }
 }

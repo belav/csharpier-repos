@@ -37,14 +37,14 @@ namespace System.Xml.Tests
                 (insertType == InsertType.Prepend)
                     ? (newChild.OuterXml + parent.InnerXml)
                     : (
-                          (insertType == InsertType.Append)
-                              ? (parent.InnerXml + newChild.OuterXml)
-                              : (
-                                    refChild.PreviousSibling.OuterXml
-                                    + newChild.OuterXml
-                                    + refChild.OuterXml
-                                )
-                      );
+                        (insertType == InsertType.Append)
+                            ? (parent.InnerXml + newChild.OuterXml)
+                            : (
+                                refChild.PreviousSibling.OuterXml
+                                + newChild.OuterXml
+                                + refChild.OuterXml
+                            )
+                    );
 
             // insert new child
             var insertDelegate = TestHelper.CreateInsertBeforeOrAfter(insertType);

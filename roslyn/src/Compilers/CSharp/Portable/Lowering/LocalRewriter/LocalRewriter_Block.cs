@@ -148,12 +148,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitNoOpStatement(BoundNoOpStatement node)
         {
             return (node.WasCompilerGenerated || !this.Instrument)
-              ? new BoundBlock(
+                ? new BoundBlock(
                     node.Syntax,
                     ImmutableArray<LocalSymbol>.Empty,
                     ImmutableArray<BoundStatement>.Empty
                 )
-              : _instrumenter.InstrumentNoOpStatement(node, node);
+                : _instrumenter.InstrumentNoOpStatement(node, node);
         }
     }
 }

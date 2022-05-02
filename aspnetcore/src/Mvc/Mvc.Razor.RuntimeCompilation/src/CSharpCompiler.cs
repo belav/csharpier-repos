@@ -204,8 +204,8 @@ internal class CSharpCompiler
         else
         {
             optimizationLevel = hostingEnvironment.IsDevelopment()
-              ? OptimizationLevel.Debug
-              : OptimizationLevel.Release;
+                ? OptimizationLevel.Debug
+                : OptimizationLevel.Release;
         }
         csharpCompilationOptions = csharpCompilationOptions.WithOptimizationLevel(
             optimizationLevel

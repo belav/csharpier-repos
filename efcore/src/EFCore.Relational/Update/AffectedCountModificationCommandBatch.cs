@@ -144,17 +144,17 @@ namespace Microsoft.EntityFrameworkCore.Update
                     {
                         commandIndex = ModificationCommands[commandIndex].RequiresResultPropagation
                             ? await ConsumeResultSetWithPropagationAsync(
-                                      commandIndex,
-                                      reader,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false)
+                                    commandIndex,
+                                    reader,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
                             : await ConsumeResultSetWithoutPropagationAsync(
-                                      commandIndex,
-                                      reader,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false);
+                                    commandIndex,
+                                    reader,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                         actualResultSetCount++;
                     }
                 } while (

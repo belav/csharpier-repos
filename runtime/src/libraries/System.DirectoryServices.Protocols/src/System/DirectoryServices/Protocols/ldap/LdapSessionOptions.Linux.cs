@@ -41,8 +41,8 @@ namespace System.DirectoryServices.Protocols
             get
             {
                 return GetBoolValueHelper(LdapOption.LDAP_OPT_REFERRALS)
-                  ? ReferralChasingOptions.All
-                  : ReferralChasingOptions.None;
+                    ? ReferralChasingOptions.All
+                    : ReferralChasingOptions.None;
             }
             set
             {

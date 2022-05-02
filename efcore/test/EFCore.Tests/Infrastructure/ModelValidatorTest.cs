@@ -1638,8 +1638,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                  ? CoreStrings.SeedDatumDuplicateSensitive(nameof(D), $"{nameof(A.Id)}:1")
-                  : CoreStrings.SeedDatumDuplicate(nameof(D), $"{{'{nameof(A.Id)}'}}"),
+                    ? CoreStrings.SeedDatumDuplicateSensitive(nameof(D), $"{nameof(A.Id)}:1")
+                    : CoreStrings.SeedDatumDuplicate(nameof(D), $"{{'{nameof(A.Id)}'}}"),
                 modelBuilder,
                 sensitiveDataLoggingEnabled
             );
@@ -1662,13 +1662,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                  ? CoreStrings.SeedDatumIncompatibleValueSensitive(
+                    ? CoreStrings.SeedDatumIncompatibleValueSensitive(
                         nameof(A),
                         "invalid",
                         nameof(A.P0),
                         "int?"
                     )
-                  : CoreStrings.SeedDatumIncompatibleValue(nameof(A), nameof(A.P0), "int?"),
+                    : CoreStrings.SeedDatumIncompatibleValue(nameof(A), nameof(A.P0), "int?"),
                 modelBuilder,
                 sensitiveDataLoggingEnabled
             );
@@ -1697,14 +1697,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                  ? CoreStrings.SeedDatumNavigationSensitive(
+                    ? CoreStrings.SeedDatumNavigationSensitive(
                         nameof(SampleEntity),
                         $"{nameof(SampleEntity.Id)}:1",
                         nameof(SampleEntity.ReferencedEntity),
                         nameof(ReferencedEntity),
                         $"{{'{nameof(ReferencedEntity.SampleEntityId)}'}}"
                     )
-                  : CoreStrings.SeedDatumNavigation(
+                    : CoreStrings.SeedDatumNavigation(
                         nameof(SampleEntity),
                         nameof(SampleEntity.ReferencedEntity),
                         nameof(ReferencedEntity),
@@ -1741,14 +1741,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                  ? CoreStrings.SeedDatumNavigationSensitive(
+                    ? CoreStrings.SeedDatumNavigationSensitive(
                         nameof(Order),
                         $"{nameof(Order.Id)}:1",
                         nameof(Order.Products),
                         "OrderProduct (Dictionary<string, object>)",
                         "{'OrdersId'}"
                     )
-                  : CoreStrings.SeedDatumNavigation(
+                    : CoreStrings.SeedDatumNavigation(
                         nameof(Order),
                         nameof(Order.Products),
                         "OrderProduct (Dictionary<string, object>)",
@@ -1786,14 +1786,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             VerifyError(
                 sensitiveDataLoggingEnabled
-                  ? CoreStrings.SeedDatumNavigationSensitive(
+                    ? CoreStrings.SeedDatumNavigationSensitive(
                         nameof(SampleEntity),
                         $"{nameof(SampleEntity.Id)}:1",
                         nameof(SampleEntity.OtherSamples),
                         nameof(SampleEntity),
                         "{'SampleEntityId'}"
                     )
-                  : CoreStrings.SeedDatumNavigation(
+                    : CoreStrings.SeedDatumNavigation(
                         nameof(SampleEntity),
                         nameof(SampleEntity.OtherSamples),
                         nameof(SampleEntity),

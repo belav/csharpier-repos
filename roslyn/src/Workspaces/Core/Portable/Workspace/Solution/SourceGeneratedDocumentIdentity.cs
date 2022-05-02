@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal readonly struct SourceGeneratedDocumentIdentity
         : IObjectWritable,
-          IEquatable<SourceGeneratedDocumentIdentity>
+            IEquatable<SourceGeneratedDocumentIdentity>
     {
         public DocumentId DocumentId { get; }
         public string HintName { get; }

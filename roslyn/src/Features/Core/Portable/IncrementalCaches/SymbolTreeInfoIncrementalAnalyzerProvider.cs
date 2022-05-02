@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.IncrementalCaches
     [ExportWorkspaceServiceFactory(typeof(ISymbolTreeInfoCacheService))]
     internal partial class SymbolTreeInfoIncrementalAnalyzerProvider
         : IIncrementalAnalyzerProvider,
-          IWorkspaceServiceFactory
+            IWorkspaceServiceFactory
     {
         // Concurrent dictionaries so they can be read from the SymbolTreeInfoCacheService while they are being
         // populated/updated by the IncrementalAnalyzer.

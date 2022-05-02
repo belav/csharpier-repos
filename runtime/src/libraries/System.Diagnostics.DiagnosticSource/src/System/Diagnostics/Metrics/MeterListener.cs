@@ -185,14 +185,14 @@ namespace System.Diagnostics.Metrics
                 _byteMeasurementCallback =
                     (measurementCallback is null)
                         ? (
-                              (
-                                  instrument,
-                                  measurement,
-                                  tags,
-                                  state
-                              ) => { /* no-op */
-                              }
-                          )
+                            (
+                                instrument,
+                                measurement,
+                                tags,
+                                state
+                            ) => { /* no-op */
+                            }
+                        )
                         : byteCallback;
             }
             else if (measurementCallback is MeasurementCallback<int> intCallback)
@@ -200,14 +200,14 @@ namespace System.Diagnostics.Metrics
                 _intMeasurementCallback =
                     (measurementCallback is null)
                         ? (
-                              (
-                                  instrument,
-                                  measurement,
-                                  tags,
-                                  state
-                              ) => { /* no-op */
-                              }
-                          )
+                            (
+                                instrument,
+                                measurement,
+                                tags,
+                                state
+                            ) => { /* no-op */
+                            }
+                        )
                         : intCallback;
             }
             else if (measurementCallback is MeasurementCallback<float> floatCallback)
@@ -215,14 +215,14 @@ namespace System.Diagnostics.Metrics
                 _floatMeasurementCallback =
                     (measurementCallback is null)
                         ? (
-                              (
-                                  instrument,
-                                  measurement,
-                                  tags,
-                                  state
-                              ) => { /* no-op */
-                              }
-                          )
+                            (
+                                instrument,
+                                measurement,
+                                tags,
+                                state
+                            ) => { /* no-op */
+                            }
+                        )
                         : floatCallback;
             }
             else if (measurementCallback is MeasurementCallback<double> doubleCallback)
@@ -230,14 +230,14 @@ namespace System.Diagnostics.Metrics
                 _doubleMeasurementCallback =
                     (measurementCallback is null)
                         ? (
-                              (
-                                  instrument,
-                                  measurement,
-                                  tags,
-                                  state
-                              ) => { /* no-op */
-                              }
-                          )
+                            (
+                                instrument,
+                                measurement,
+                                tags,
+                                state
+                            ) => { /* no-op */
+                            }
+                        )
                         : doubleCallback;
             }
             else if (measurementCallback is MeasurementCallback<decimal> decimalCallback)
@@ -245,14 +245,14 @@ namespace System.Diagnostics.Metrics
                 _decimalMeasurementCallback =
                     (measurementCallback is null)
                         ? (
-                              (
-                                  instrument,
-                                  measurement,
-                                  tags,
-                                  state
-                              ) => { /* no-op */
-                              }
-                          )
+                            (
+                                instrument,
+                                measurement,
+                                tags,
+                                state
+                            ) => { /* no-op */
+                            }
+                        )
                         : decimalCallback;
             }
             else if (measurementCallback is MeasurementCallback<short> shortCallback)
@@ -260,14 +260,14 @@ namespace System.Diagnostics.Metrics
                 _shortMeasurementCallback =
                     (measurementCallback is null)
                         ? (
-                              (
-                                  instrument,
-                                  measurement,
-                                  tags,
-                                  state
-                              ) => { /* no-op */
-                              }
-                          )
+                            (
+                                instrument,
+                                measurement,
+                                tags,
+                                state
+                            ) => { /* no-op */
+                            }
+                        )
                         : shortCallback;
             }
             else if (measurementCallback is MeasurementCallback<long> longCallback)
@@ -275,14 +275,14 @@ namespace System.Diagnostics.Metrics
                 _longMeasurementCallback =
                     (measurementCallback is null)
                         ? (
-                              (
-                                  instrument,
-                                  measurement,
-                                  tags,
-                                  state
-                              ) => { /* no-op */
-                              }
-                          )
+                            (
+                                instrument,
+                                measurement,
+                                tags,
+                                state
+                            ) => { /* no-op */
+                            }
+                        )
                         : longCallback;
             }
             else

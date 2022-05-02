@@ -24,7 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class InversePropertyAttributeConvention
         : NavigationAttributeConventionBase<InversePropertyAttribute>,
-          IModelFinalizingConvention
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="InversePropertyAttributeConvention" />.

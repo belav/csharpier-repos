@@ -21,13 +21,13 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
     [ExportLanguageService(typeof(IIntroduceVariableService), LanguageNames.CSharp), Shared]
     internal partial class CSharpIntroduceVariableService
         : AbstractIntroduceVariableService<
-              CSharpIntroduceVariableService,
-              ExpressionSyntax,
-              TypeSyntax,
-              TypeDeclarationSyntax,
-              QueryExpressionSyntax,
-              NameSyntax
-          >
+            CSharpIntroduceVariableService,
+            ExpressionSyntax,
+            TypeSyntax,
+            TypeDeclarationSyntax,
+            QueryExpressionSyntax,
+            NameSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

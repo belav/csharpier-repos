@@ -19,7 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class SqlServerValueGenerationStrategyConvention
         : IModelInitializedConvention,
-          IModelFinalizingConvention
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerValueGenerationStrategyConvention" />.

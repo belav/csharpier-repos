@@ -6134,8 +6134,8 @@ public class DfaMatcherBuilderTest
 
     private class TestMetadata1MatcherPolicy
         : MatcherPolicy,
-          IEndpointComparerPolicy,
-          INodeBuilderPolicy
+            IEndpointComparerPolicy,
+            INodeBuilderPolicy
     {
         public override int Order => 100;
 
@@ -6180,8 +6180,8 @@ public class DfaMatcherBuilderTest
 
     private class TestMetadata2MatcherPolicy
         : MatcherPolicy,
-          IEndpointComparerPolicy,
-          INodeBuilderPolicy
+            IEndpointComparerPolicy,
+            INodeBuilderPolicy
     {
         public override int Order => 101;
 
@@ -6214,8 +6214,8 @@ public class DfaMatcherBuilderTest
 
     private class TestNonRoutePatternMatcherPolicy
         : MatcherPolicy,
-          IEndpointComparerPolicy,
-          INodeBuilderPolicy
+            IEndpointComparerPolicy,
+            INodeBuilderPolicy
     {
         public override int Order => 100;
 

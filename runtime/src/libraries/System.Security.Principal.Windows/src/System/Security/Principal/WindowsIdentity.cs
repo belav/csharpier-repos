@@ -35,9 +35,9 @@ namespace System.Security.Principal
 
     public class WindowsIdentity
         : ClaimsIdentity,
-          IDisposable,
-          ISerializable,
-          IDeserializationCallback
+            IDisposable,
+            ISerializable,
+            IDeserializationCallback
     {
         private static SecurityIdentifier? s_authenticatedUserRid;
         private static SecurityIdentifier? s_domainRid;

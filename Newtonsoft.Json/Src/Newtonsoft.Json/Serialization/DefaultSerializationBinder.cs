@@ -38,9 +38,9 @@ namespace Newtonsoft.Json.Serialization
     public class DefaultSerializationBinder
         :
 #pragma warning disable 618
-          SerializationBinder,
+        SerializationBinder,
 #pragma warning restore 618
-          ISerializationBinder
+            ISerializationBinder
     {
         internal static readonly DefaultSerializationBinder Instance =
             new DefaultSerializationBinder();

@@ -346,11 +346,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var baseTypeSymbol =
                 baseArray.Length == 1
                     ? (INamedTypeSymbol?)
-                          CodeModelService.GetTypeSymbol(
-                              baseArray[0],
-                              semanticModel,
-                              containerNodePosition
-                          )
+                        CodeModelService.GetTypeSymbol(
+                            baseArray[0],
+                            semanticModel,
+                            containerNodePosition
+                        )
                     : null;
 
             var implementedInterfaceArray = GetValidArray(
@@ -1028,9 +1028,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             var typeSymbol =
                 codeTypeRef != null
                     ? CodeModelService.GetTypeSymbolFromFullName(
-                          codeTypeRef.AsFullName,
-                          GetCompilation()
-                      )
+                        codeTypeRef.AsFullName,
+                        GetCompilation()
+                    )
                     : null;
 
             var updatedNode = CodeModelService.SetType(node, typeSymbol);

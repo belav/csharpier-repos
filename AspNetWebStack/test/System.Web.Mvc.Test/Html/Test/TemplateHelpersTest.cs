@@ -1736,16 +1736,16 @@ namespace System.Web.Mvc.Html.Test
                 "Model = {0}, ModelType = {1}, RealModelType = {2}, PropertyName = {3}, FormattedModelValue = {4}, HtmlFieldPrefix = {5}, TemplateName = {6}, Mode = {7}",
                 viewData.ModelMetadata.Model ?? "(null)",
                 viewData.ModelMetadata.ModelType == null
-                  ? "(null)"
-                  : viewData.ModelMetadata.ModelType.FullName,
+                    ? "(null)"
+                    : viewData.ModelMetadata.ModelType.FullName,
                 viewData.ModelMetadata.RealModelType == null
-                  ? "(null)"
-                  : viewData.ModelMetadata.RealModelType.FullName,
+                    ? "(null)"
+                    : viewData.ModelMetadata.RealModelType.FullName,
                 viewData.ModelMetadata.PropertyName ?? "(null)",
                 viewData.TemplateInfo.FormattedModelValue ?? "(null)",
                 viewData.TemplateInfo.HtmlFieldPrefix == ""
-                  ? "(empty)"
-                  : viewData.TemplateInfo.HtmlFieldPrefix ?? "(null)",
+                    ? "(empty)"
+                    : viewData.TemplateInfo.HtmlFieldPrefix ?? "(null)",
                 templateName ?? "(null)",
                 mode
             );
@@ -1850,8 +1850,8 @@ namespace System.Web.Mvc.Html.Test
                     )
                     .Returns(
                         returnView
-                          ? new ViewEngineResult(View.Object, Engine.Object)
-                          : new ViewEngineResult(new string[0])
+                            ? new ViewEngineResult(View.Object, Engine.Object)
+                            : new ViewEngineResult(new string[0])
                     );
 
                 ViewEngines.Engines.Clear();

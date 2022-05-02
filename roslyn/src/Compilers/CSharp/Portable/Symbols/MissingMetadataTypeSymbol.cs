@@ -386,8 +386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     int typeId = TypeId;
                     return (typeId >= (int)WellKnownType.First)
-                      ? SpecialType.None
-                      : (SpecialType)_lazyTypeId;
+                        ? SpecialType.None
+                        : (SpecialType)_lazyTypeId;
                 }
             }
 
@@ -400,12 +400,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         var errorInfo =
                             this.TypeId != (int)SpecialType.None
                                 ? new CSDiagnosticInfo(
-                                      ErrorCode.ERR_PredefinedTypeNotFound,
-                                      MetadataHelpers.BuildQualifiedName(
-                                          _namespaceName,
-                                          MetadataName
-                                      )
-                                  )
+                                    ErrorCode.ERR_PredefinedTypeNotFound,
+                                    MetadataHelpers.BuildQualifiedName(_namespaceName, MetadataName)
+                                )
                                 : base.ErrorInfo;
                         Interlocked.CompareExchange(ref _lazyErrorInfo, errorInfo, null);
                     }

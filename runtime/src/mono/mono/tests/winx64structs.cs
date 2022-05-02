@@ -567,8 +567,8 @@ class winx64structs
         vector3Pair.second = winx64_vector3Struct.Add(local1, local2);
 
         return (vector3Pair.second.x == 2 && vector3Pair.second.y == 3 && vector3Pair.second.z == 4)
-          ? 0
-          : 1;
+            ? 0
+            : 1;
     }
 
     [MonoPInvokeCallback(typeof(managed_struct1_delegate))]

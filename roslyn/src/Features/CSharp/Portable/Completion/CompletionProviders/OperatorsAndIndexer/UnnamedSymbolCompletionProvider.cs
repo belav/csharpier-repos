@@ -208,29 +208,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return kind switch
             {
                 IndexerKindName
-                  => await GetIndexerDescriptionAsync(
-                          document,
-                          item,
-                          displayOptions,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetIndexerDescriptionAsync(
+                            document,
+                            item,
+                            displayOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 OperatorKindName
-                  => await GetOperatorDescriptionAsync(
-                          document,
-                          item,
-                          displayOptions,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetOperatorDescriptionAsync(
+                            document,
+                            item,
+                            displayOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 ConversionKindName
-                  => await GetConversionDescriptionAsync(
-                          document,
-                          item,
-                          displayOptions,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetConversionDescriptionAsync(
+                            document,
+                            item,
+                            displayOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
         }

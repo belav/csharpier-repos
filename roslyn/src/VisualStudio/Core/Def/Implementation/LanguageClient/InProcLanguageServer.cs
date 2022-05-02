@@ -1184,8 +1184,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                     // If this is a `pull` client, and `pull` diagnostics is on, then we should not `publish` (push) the
                     // diagnostics here.
                     var diagnosticMode = document.IsRazorDocument()
-                      ? InternalDiagnosticsOptions.RazorDiagnosticMode
-                      : InternalDiagnosticsOptions.NormalDiagnosticMode;
+                        ? InternalDiagnosticsOptions.RazorDiagnosticMode
+                        : InternalDiagnosticsOptions.NormalDiagnosticMode;
                     if (_workspace.IsPushDiagnostics(diagnosticMode))
                         await PublishDiagnosticsAsync(
                                 diagnosticService,
@@ -1309,8 +1309,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         )
         {
             var option = document.IsRazorDocument()
-              ? InternalDiagnosticsOptions.RazorDiagnosticMode
-              : InternalDiagnosticsOptions.NormalDiagnosticMode;
+                ? InternalDiagnosticsOptions.RazorDiagnosticMode
+                : InternalDiagnosticsOptions.NormalDiagnosticMode;
             var pushDiagnostics = await diagnosticService
                 .GetPushDiagnosticsAsync(
                     document.Project.Solution.Workspace,
@@ -1375,8 +1375,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 Range = GetDiagnosticRange(diagnosticData.DataLocation, text),
                 // Only the unnecessary diagnostic tag is currently supported via LSP.
                 Tags = diagnosticData.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary)
-                  ? new DiagnosticTag[] { DiagnosticTag.Unnecessary }
-                  : Array.Empty<DiagnosticTag>()
+                    ? new DiagnosticTag[] { DiagnosticTag.Unnecessary }
+                    : Array.Empty<DiagnosticTag>()
             };
 
             if (diagnosticData.Message != null)

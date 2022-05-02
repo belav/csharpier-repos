@@ -1086,29 +1086,29 @@ namespace System.Net.Sockets
                 int received =
                     buffers == null
                         ? SysReceiveMessageFrom(
-                              socket,
-                              flags,
-                              buffer,
-                              socketAddress,
-                              ref socketAddressLen,
-                              isIPv4,
-                              isIPv6,
-                              out receivedFlags,
-                              out ipPacketInformation,
-                              out errno
-                          )
+                            socket,
+                            flags,
+                            buffer,
+                            socketAddress,
+                            ref socketAddressLen,
+                            isIPv4,
+                            isIPv6,
+                            out receivedFlags,
+                            out ipPacketInformation,
+                            out errno
+                        )
                         : SysReceiveMessageFrom(
-                              socket,
-                              flags,
-                              buffers,
-                              socketAddress,
-                              ref socketAddressLen,
-                              isIPv4,
-                              isIPv6,
-                              out receivedFlags,
-                              out ipPacketInformation,
-                              out errno
-                          );
+                            socket,
+                            flags,
+                            buffers,
+                            socketAddress,
+                            ref socketAddressLen,
+                            isIPv4,
+                            isIPv6,
+                            out receivedFlags,
+                            out ipPacketInformation,
+                            out errno
+                        );
 
                 if (received != -1)
                 {
@@ -1260,34 +1260,34 @@ namespace System.Net.Sockets
                         sent =
                             buffers != null
                                 ? SysSend(
-                                      socket,
-                                      flags,
-                                      buffers,
-                                      ref bufferIndex,
-                                      ref offset,
-                                      socketAddress,
-                                      socketAddressLen,
-                                      out errno
-                                  )
+                                    socket,
+                                    flags,
+                                    buffers,
+                                    ref bufferIndex,
+                                    ref offset,
+                                    socketAddress,
+                                    socketAddressLen,
+                                    out errno
+                                )
                                 : socketAddress == null
                                     ? SysSend(
-                                          socket,
-                                          flags,
-                                          buffer,
-                                          ref offset,
-                                          ref count,
-                                          out errno
-                                      )
+                                        socket,
+                                        flags,
+                                        buffer,
+                                        ref offset,
+                                        ref count,
+                                        out errno
+                                    )
                                     : SysSend(
-                                          socket,
-                                          flags,
-                                          buffer,
-                                          ref offset,
-                                          ref count,
-                                          socketAddress,
-                                          socketAddressLen,
-                                          out errno
-                                      );
+                                        socket,
+                                        flags,
+                                        buffer,
+                                        ref offset,
+                                        ref count,
+                                        socketAddress,
+                                        socketAddressLen,
+                                        out errno
+                                    );
                     }
                 }
                 catch (ObjectDisposedException)
@@ -1406,8 +1406,8 @@ namespace System.Net.Sockets
         {
             Interop.Error err = Interop.Sys.GetSockName(handle, buffer, nameLen);
             return err == Interop.Error.SUCCESS
-              ? SocketError.Success
-              : GetSocketErrorForErrorCode(err);
+                ? SocketError.Success
+                : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetAvailable(SafeSocketHandle handle, out int available)
@@ -1417,8 +1417,8 @@ namespace System.Net.Sockets
             available = value;
 
             return err == Interop.Error.SUCCESS
-              ? SocketError.Success
-              : GetSocketErrorForErrorCode(err);
+                ? SocketError.Success
+                : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetAtOutOfBandMark(
@@ -1431,8 +1431,8 @@ namespace System.Net.Sockets
             atOutOfBandMark = value;
 
             return err == Interop.Error.SUCCESS
-              ? SocketError.Success
-              : GetSocketErrorForErrorCode(err);
+                ? SocketError.Success
+                : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetPeerName(
@@ -1450,8 +1450,8 @@ namespace System.Net.Sockets
 
             nameLen = addrLen;
             return err == Interop.Error.SUCCESS
-              ? SocketError.Success
-              : GetSocketErrorForErrorCode(err);
+                ? SocketError.Success
+                : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError Bind(
@@ -1468,16 +1468,16 @@ namespace System.Net.Sockets
             }
 
             return err == Interop.Error.SUCCESS
-              ? SocketError.Success
-              : GetSocketErrorForErrorCode(err);
+                ? SocketError.Success
+                : GetSocketErrorForErrorCode(err);
         }
 
         public static SocketError Listen(SafeSocketHandle handle, int backlog)
         {
             Interop.Error err = Interop.Sys.Listen(handle, backlog);
             return err == Interop.Error.SUCCESS
-              ? SocketError.Success
-              : GetSocketErrorForErrorCode(err);
+                ? SocketError.Success
+                : GetSocketErrorForErrorCode(err);
         }
 
         public static SocketError Accept(
@@ -2385,8 +2385,8 @@ namespace System.Net.Sockets
                 );
                 optionValue = (int)GetSocketErrorForErrorCode(socketError);
                 return getErrorError == Interop.Error.SUCCESS
-                  ? SocketError.Success
-                  : GetSocketErrorForErrorCode(getErrorError);
+                    ? SocketError.Success
+                    : GetSocketErrorForErrorCode(getErrorError);
             }
 
             int value = 0;
@@ -2401,8 +2401,8 @@ namespace System.Net.Sockets
 
             optionValue = value;
             return err == Interop.Error.SUCCESS
-              ? SocketError.Success
-              : GetSocketErrorForErrorCode(err);
+                ? SocketError.Success
+                : GetSocketErrorForErrorCode(err);
         }
 
         public static unsafe SocketError GetSockOpt(

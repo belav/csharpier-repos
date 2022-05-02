@@ -45,21 +45,21 @@ namespace System.IO.Strategies
         ) =>
             (options & FileOptions.Asynchronous) != 0
                 ? new AsyncWindowsFileStreamStrategy(
-                      path,
-                      mode,
-                      access,
-                      share,
-                      options,
-                      preallocationSize
-                  )
+                    path,
+                    mode,
+                    access,
+                    share,
+                    options,
+                    preallocationSize
+                )
                 : new SyncWindowsFileStreamStrategy(
-                      path,
-                      mode,
-                      access,
-                      share,
-                      options,
-                      preallocationSize
-                  );
+                    path,
+                    mode,
+                    access,
+                    share,
+                    options,
+                    preallocationSize
+                );
 
         internal static void FlushToDisk(SafeFileHandle handle)
         {
@@ -176,9 +176,9 @@ namespace System.IO.Strategies
             {
                 throw errorCode == Interop.Errors.ERROR_INVALID_PARAMETER
                     ? new ArgumentOutOfRangeException(
-                          nameof(length),
-                          SR.ArgumentOutOfRange_FileLengthTooBig
-                      )
+                        nameof(length),
+                        SR.ArgumentOutOfRange_FileLengthTooBig
+                    )
                     : Win32Marshal.GetExceptionForWin32Error(errorCode, handle.Path);
             }
         }
@@ -224,19 +224,19 @@ namespace System.IO.Strategies
                 r =
                     overlapped == null
                         ? Interop.Kernel32.ReadFile(
-                              handle,
-                              p,
-                              bytes.Length,
-                              out numBytesRead,
-                              overlapped
-                          )
+                            handle,
+                            p,
+                            bytes.Length,
+                            out numBytesRead,
+                            overlapped
+                        )
                         : Interop.Kernel32.ReadFile(
-                              handle,
-                              p,
-                              bytes.Length,
-                              IntPtr.Zero,
-                              overlapped
-                          );
+                            handle,
+                            p,
+                            bytes.Length,
+                            IntPtr.Zero,
+                            overlapped
+                        );
             }
 
             if (r == 0)
@@ -399,8 +399,8 @@ namespace System.IO.Strategies
                             case Interop.Errors.ERROR_OPERATION_ABORTED: // canceled
                                 throw new OperationCanceledException(
                                     cancellationToken.IsCancellationRequested
-                                      ? cancellationToken
-                                      : new CancellationToken(true)
+                                        ? cancellationToken
+                                        : new CancellationToken(true)
                                 );
                             default: // error
                                 throw Win32Marshal.GetExceptionForWin32Error(

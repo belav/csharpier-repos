@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits;
 /// </summary>
 internal sealed partial class RemoteNavigationManager
     : NavigationManager,
-      IHostEnvironmentNavigationManager
+        IHostEnvironmentNavigationManager
 {
     private readonly ILogger<RemoteNavigationManager> _logger;
     private IJSRuntime _jsRuntime;

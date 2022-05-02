@@ -280,8 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations()
         {
             return Syntax is LambdaExpressionSyntax lambdaSyntax
-              ? OneOrMany.Create(lambdaSyntax.AttributeLists)
-              : default;
+                ? OneOrMany.Create(lambdaSyntax.AttributeLists)
+                : default;
         }
 
         internal void GetDeclarationDiagnostics(BindingDiagnosticBag addTo)

@@ -213,8 +213,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
                         _workspace.Options.WithChangedOption(
                             CSharpFormattingOptions2.LabelPositioning,
                             value == 1
-                              ? LabelPositionOptions.LeftMost
-                              : LabelPositionOptions.NoIndent
+                                ? LabelPositionOptions.LeftMost
+                                : LabelPositionOptions.NoIndent
                         )
                     )
                 );
@@ -429,8 +429,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
             get
             {
                 return GetOption(CompletionOptions.SnippetsBehavior) == SnippetsRule.AlwaysInclude
-                  ? 1
-                  : 0;
+                    ? 1
+                    : 0;
             }
             set
             {

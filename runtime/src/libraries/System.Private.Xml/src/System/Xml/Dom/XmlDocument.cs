@@ -278,8 +278,8 @@ namespace System.Xml
             Debug.Assert(n.LocalName == localName);
             Debug.Assert(
                 (namespaceURI == null)
-                  ? (n.NamespaceURI.Length == 0)
-                  : (n.NamespaceURI == namespaceURI)
+                    ? (n.NamespaceURI.Length == 0)
+                    : (n.NamespaceURI == namespaceURI)
             );
             return n;
         }
@@ -321,8 +321,8 @@ namespace System.Xml
             Debug.Assert(xmlName.LocalName == localName);
             Debug.Assert(
                 (namespaceURI == null)
-                  ? (xmlName.NamespaceURI.Length == 0)
-                  : (xmlName.NamespaceURI == namespaceURI)
+                    ? (xmlName.NamespaceURI.Length == 0)
+                    : (xmlName.NamespaceURI == namespaceURI)
             );
 
             if (!this.IsLoading)

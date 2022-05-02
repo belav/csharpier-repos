@@ -29,8 +29,8 @@ namespace System.Text
             // this method is running.
 
             return (Sse2.IsSupported)
-              ? GetIndexOfFirstNonLatin1Char_Sse2(pBuffer, bufferLength)
-              : GetIndexOfFirstNonLatin1Char_Default(pBuffer, bufferLength);
+                ? GetIndexOfFirstNonLatin1Char_Sse2(pBuffer, bufferLength)
+                : GetIndexOfFirstNonLatin1Char_Default(pBuffer, bufferLength);
         }
 
         private static unsafe nuint GetIndexOfFirstNonLatin1Char_Default(

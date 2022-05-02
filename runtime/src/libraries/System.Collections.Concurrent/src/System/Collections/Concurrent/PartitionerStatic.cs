@@ -654,7 +654,7 @@ namespace System.Collections.Concurrent
             /// </summary>
             private sealed class InternalPartitionEnumerable
                 : IEnumerable<KeyValuePair<long, TSource>>,
-                  IDisposable
+                    IDisposable
             {
                 //reader through which we access the source data
                 private readonly IEnumerator<TSource> _sharedReader;

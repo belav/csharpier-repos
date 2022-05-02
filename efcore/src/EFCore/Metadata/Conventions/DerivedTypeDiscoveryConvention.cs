@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     [Obsolete]
     public class DerivedTypeDiscoveryConvention
         : InheritanceDiscoveryConventionBase,
-          IEntityTypeAddedConvention
+            IEntityTypeAddedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="DerivedTypeDiscoveryConvention" />.

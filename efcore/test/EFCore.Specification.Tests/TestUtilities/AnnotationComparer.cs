@@ -26,11 +26,12 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
 
             return y == null
-              ? false
-              : x.Name == y.Name
-                && (
-                    x.Name == CoreAnnotationNames.ValueGeneratorFactory || Equals(x.Value, y.Value)
-                );
+                ? false
+                : x.Name == y.Name
+                    && (
+                        x.Name == CoreAnnotationNames.ValueGeneratorFactory
+                        || Equals(x.Value, y.Value)
+                    );
         }
 
         public int GetHashCode(IAnnotation obj) =>

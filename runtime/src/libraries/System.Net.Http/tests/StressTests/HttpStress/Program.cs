@@ -343,11 +343,11 @@ namespace HttpStress
                 (null, null) => clientOperations,
                 (int[] incl, null) => incl.Select(i => clientOperations[i]).ToArray(),
                 (_, int[] excl)
-                  => Enumerable
-                      .Range(0, clientOperations.Length)
-                      .Except(excl)
-                      .Select(i => clientOperations[i])
-                      .ToArray(),
+                    => Enumerable
+                        .Range(0, clientOperations.Length)
+                        .Except(excl)
+                        .Select(i => clientOperations[i])
+                        .ToArray(),
             };
 
             string GetAssemblyInfo(Assembly assembly) =>

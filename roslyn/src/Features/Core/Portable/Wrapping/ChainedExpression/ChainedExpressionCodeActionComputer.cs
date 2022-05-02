@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         /// </summary>
         private class CallExpressionCodeActionComputer
             : AbstractCodeActionComputer<
-                  AbstractChainedExpressionWrapper<TNameSyntax, TBaseArgumentListSyntax>
-              >
+                AbstractChainedExpressionWrapper<TNameSyntax, TBaseArgumentListSyntax>
+            >
         {
             /// <summary>
             /// The chunks to normalize and wrap.  The first chunk will be normalized,

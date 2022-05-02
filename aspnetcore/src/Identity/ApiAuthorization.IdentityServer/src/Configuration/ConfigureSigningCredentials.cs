@@ -139,11 +139,11 @@ internal class ConfigureSigningCredentials : IConfigureOptions<ApiAuthorizationO
     private static X509KeyStorageFlags GetStorageFlags(KeyDefinition key)
     {
         var defaultFlags = OperatingSystem.IsLinux()
-          ? UnsafeEphemeralKeySet
-          : (
+            ? UnsafeEphemeralKeySet
+            : (
                 OperatingSystem.IsMacOS()
-                  ? X509KeyStorageFlags.PersistKeySet
-                  : X509KeyStorageFlags.DefaultKeySet
+                    ? X509KeyStorageFlags.PersistKeySet
+                    : X509KeyStorageFlags.DefaultKeySet
             );
 
         if (key.StorageFlags == null)

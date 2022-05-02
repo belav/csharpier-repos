@@ -138,7 +138,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 return Expression.Lambda<Func<T?, T?, bool>>(
                     type.IsClass
-                      ? Expression.OrElse(
+                        ? Expression.OrElse(
                             Expression.AndAlso(
                                 Expression.Equal(param1, Expression.Constant(null, type)),
                                 Expression.Equal(param2, Expression.Constant(null, type))
@@ -151,7 +151,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                                 Expression.Call(param1, typedEquals, param2)
                             )
                         )
-                      : Expression.Call(param1, typedEquals, param2),
+                        : Expression.Call(param1, typedEquals, param2),
                     param1,
                     param2
                 );
@@ -175,12 +175,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             return Expression.Lambda<Func<T?, T?, bool>>(
                 typedEquals == null
-                  ? Expression.Call(
+                    ? Expression.Call(
                         ObjectEqualsMethod,
                         Expression.Convert(param1, typeof(object)),
                         Expression.Convert(param2, typeof(object))
                     )
-                  : Expression.Call(typedEquals, param1, param2),
+                    : Expression.Call(typedEquals, param1, param2),
                 param1,
                 param2
             );
@@ -268,17 +268,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 type == typeof(int)
                     ? param
                     : unwrappedType == typeof(int)
-                      || unwrappedType == typeof(short)
-                      || unwrappedType == typeof(byte)
-                      || unwrappedType == typeof(uint)
-                      || unwrappedType == typeof(ushort)
-                      || unwrappedType == typeof(sbyte)
-                      || unwrappedType == typeof(char)
+                    || unwrappedType == typeof(short)
+                    || unwrappedType == typeof(byte)
+                    || unwrappedType == typeof(uint)
+                    || unwrappedType == typeof(ushort)
+                    || unwrappedType == typeof(sbyte)
+                    || unwrappedType == typeof(char)
                         ? (Expression)Expression.Convert(param, typeof(int))
                         : Expression.Call(
-                              Expression.Convert(param, typeof(object)),
-                              ObjectGetHashCodeMethod
-                          );
+                            Expression.Convert(param, typeof(object)),
+                            ObjectGetHashCodeMethod
+                        );
 
             return Expression.Lambda<Func<T, int>>(expression, param);
         }

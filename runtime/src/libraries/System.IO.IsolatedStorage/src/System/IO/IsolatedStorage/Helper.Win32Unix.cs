@@ -18,11 +18,11 @@ namespace System.IO.IsolatedStorage
             // (note that Silverlight used "CoreIsolatedStorage" for a directory name and did not support machine scope)
 
             Environment.SpecialFolder specialFolder = IsMachine(scope)
-              ? Environment.SpecialFolder.CommonApplicationData
-              : // e.g. C:\ProgramData
+                ? Environment.SpecialFolder.CommonApplicationData
+                : // e.g. C:\ProgramData
                 IsRoaming(scope)
-                  ? Environment.SpecialFolder.ApplicationData
-                  : // e.g. C:\Users\Joe\AppData\Roaming
+                    ? Environment.SpecialFolder.ApplicationData
+                    : // e.g. C:\Users\Joe\AppData\Roaming
                     Environment.SpecialFolder.LocalApplicationData; // e.g. C:\Users\Joe\AppData\Local
 
             string dataDirectory = Environment.GetFolderPath(

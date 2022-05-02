@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -54,7 +54,7 @@ public class [|C|]
     public C();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -62,7 +62,7 @@ Public Class [|C|]
     Public Sub New()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -78,7 +78,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -115,7 +115,7 @@ public class [|C|]
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -123,14 +123,14 @@ public interface [|I|]
 {{
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
 Public Interface [|I|]
 End Interface",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -146,7 +146,7 @@ public interface [|I|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -182,7 +182,7 @@ public interface [|I|]
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -191,7 +191,7 @@ public class C
     public [|C|]();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -199,7 +199,7 @@ Public Class C
     Public Sub [|New|]()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -215,7 +215,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -251,7 +251,7 @@ public class [|C|]
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -262,7 +262,7 @@ public class C
     public void [|Goo|]();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -272,7 +272,7 @@ Public Class C
     Public Sub [|Goo|]()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -291,7 +291,7 @@ public class C
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -330,7 +330,7 @@ public class C
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -341,7 +341,7 @@ public class C
     public C();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -351,7 +351,7 @@ Public Class C
     Public Sub New()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -368,7 +368,7 @@ public class C
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -406,7 +406,7 @@ public class C
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -417,7 +417,7 @@ public class C
     public string [|S|] {{ get; protected set; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -427,7 +427,7 @@ Public Class C
     Public Property [|S|] As String
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -448,7 +448,7 @@ public class C
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -491,7 +491,7 @@ public class C
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -504,7 +504,7 @@ public class C
     public event Action [|E|];
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -516,7 +516,7 @@ Public Class C
     Public Event [|E|] As Action
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -535,7 +535,7 @@ public class C
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -574,7 +574,7 @@ public class C
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -588,7 +588,7 @@ public class C
     }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -600,7 +600,7 @@ Public Class C
     End Class
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -619,7 +619,7 @@ public class C
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -662,7 +662,7 @@ public class C
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -673,7 +673,7 @@ public enum [|E|]
     C = 2
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -683,7 +683,7 @@ Public Enum [|E|]
     C = 2
 End Enum",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -702,7 +702,7 @@ public enum [|E|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -748,7 +748,7 @@ public enum [|E|]
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -759,7 +759,7 @@ public enum E
     [|C|] = 2
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -769,7 +769,7 @@ Public Enum E
     [|C|] = 2
 End Enum",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -788,7 +788,7 @@ public enum E
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -831,7 +831,7 @@ public enum E
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -842,7 +842,7 @@ public enum E : short
     [|C|] = 2
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -852,7 +852,7 @@ Public Enum E As Short
     [|C|] = 2
 End Enum",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -871,7 +871,7 @@ public enum E : short
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -914,7 +914,7 @@ public enum E : short
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -923,7 +923,7 @@ public enum E : ulong
     [|A|] = 9223372036854775808
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -931,7 +931,7 @@ Public Enum E As ULong
     [|A|] = 9223372036854775808UL
 End Enum",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -948,7 +948,7 @@ public enum E : ulong
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -988,7 +988,7 @@ public enum E : ulong
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -999,7 +999,7 @@ public enum E : short
     [|C|] = 3
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1009,7 +1009,7 @@ Public Enum E As Short
     [|C|] = 3
 End Enum",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1028,7 +1028,7 @@ public enum E : short
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1071,7 +1071,7 @@ public enum E : short
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1083,7 +1083,7 @@ namespace N
     }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1093,7 +1093,7 @@ Namespace N
     End Class
 End Namespace",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1112,7 +1112,7 @@ namespace N
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1268,7 +1268,7 @@ namespace N
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1279,7 +1279,7 @@ public class C
     public C();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1289,7 +1289,7 @@ Public Class C
     Public Sub New()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1306,7 +1306,7 @@ public class C
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1355,7 +1355,7 @@ public class C {}";
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1365,7 +1365,7 @@ public class [|C|]
     public C();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1374,7 +1374,7 @@ Public Class [|C|]
     Public Sub New()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1391,7 +1391,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1432,7 +1432,7 @@ public class [|C|]
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1440,14 +1440,14 @@ public struct [|S|]
 {{
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
 Public Structure [|S|]
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1466,7 +1466,7 @@ public struct [|S|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1508,7 +1508,7 @@ public struct [|S|]
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1519,7 +1519,7 @@ public class [|C|]
     public static C Create();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1529,7 +1529,7 @@ Public Class [|C|]
     Public Shared Function Create() As C
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1549,7 +1549,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1590,7 +1590,7 @@ public class [|C|]
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1601,7 +1601,7 @@ public class [|G|]<SomeType>
     public G();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1611,7 +1611,7 @@ Public Class [|G|](Of SomeType)
     Public Sub New()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1628,7 +1628,7 @@ public class [|G|]<SomeType>
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1677,7 +1677,7 @@ internal class MyAttribute : System.Attribute { }
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1688,7 +1688,7 @@ public class [|C|]<[MyAttribute] T>
     public void Method([MyAttribute] T x, [MyAttribute] T y);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1698,7 +1698,7 @@ Public Class [|C|](Of T)
     Public Sub Method(<MyAttribute> x As T, <MyAttribute> y As T)
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1717,7 +1717,7 @@ public class [|C|]<[My] T>
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1769,7 +1769,7 @@ internal class AllowNullAttribute : System.Attribute { }
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1778,7 +1778,7 @@ public interface [|C|]<T>
     bool Equals([AllowNullAttribute] T other);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1788,7 +1788,7 @@ Public Interface [|C|](Of T)
     Function Equals(<AllowNullAttribute> other As T) As Boolean
 End Interface",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1805,7 +1805,7 @@ public interface [|C|]<T>
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1846,7 +1846,7 @@ public interface [|C|]<T>
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1857,7 +1857,7 @@ public class C
     public delegate void [|D|]<SomeType>(SomeType s);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1866,7 +1866,7 @@ Public Class C
     Public Delegate Sub [|D|](Of SomeType)(s As SomeType)
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1883,7 +1883,7 @@ public class C
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1935,7 +1935,7 @@ public class C {}";
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -1947,7 +1947,7 @@ public class [|C|]
     public C();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -1958,7 +1958,7 @@ Public Class [|C|]
     Public Sub New()
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -1977,7 +1977,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -2246,7 +2246,7 @@ public class C
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -2289,7 +2289,7 @@ public class [|C|]
     public static C operator +(C c1, C c2);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -2327,7 +2327,7 @@ Public Class [|C|]
     Public Shared Operator +(c1 As C, c2 As C) As C
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -2420,7 +2420,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -2556,7 +2556,7 @@ public class C
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -2589,7 +2589,7 @@ public class [|C|]
     public static C operator -(C c1, C c2);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -2619,7 +2619,7 @@ Public Class [|C|]
     Public Shared Operator -(c1 As C, c2 As C) As C
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -2703,7 +2703,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -2823,7 +2823,7 @@ public interface IGoo
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -2845,7 +2845,7 @@ public interface [|IGoo|]
     Uri Method1();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -2866,7 +2866,7 @@ Public Interface [|IGoo|]
     Function Method1() As Uri
 End Interface",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -2895,7 +2895,7 @@ public interface [|IGoo|]
 {string.Format(CSharpEditorResources.Load_from_0, "System.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -2960,7 +2960,7 @@ public class Test
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -2973,7 +2973,7 @@ public class [|Test|]
     public void goo(FileOptions options = FileOptions.None);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -2985,7 +2985,7 @@ Public Class [|Test|]
     Public Sub goo(Optional options As FileOptions = FileOptions.None)
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3006,7 +3006,7 @@ public class [|Test|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3061,7 +3061,7 @@ public class TestAttribute : Attribute
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -3073,7 +3073,7 @@ public class [|TestAttribute|] : Attribute
     public TestAttribute(int[] i);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -3086,7 +3086,7 @@ Public Class [|TestAttribute|]
     Public Sub New(i() As Integer)
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3108,7 +3108,7 @@ public class [|TestAttribute|] : Attribute
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3259,7 +3259,7 @@ End Namespace";
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -3275,7 +3275,7 @@ public class [|Program|]
     public static Program operator +(Program p1, Program p2);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -3290,7 +3290,7 @@ Public Class [|Program|]
     Public Shared Operator +(p1 As Program, p2 As Program) As Program
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3321,7 +3321,7 @@ public class [|Program|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3385,7 +3385,7 @@ public interface IComImport
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -3401,7 +3401,7 @@ public interface [|IComImport|]
     int Prop {{ get; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -3416,7 +3416,7 @@ Public Interface [|IComImport|]
     Sub MOverload(i As Integer)
 End Interface",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3446,7 +3446,7 @@ public interface [|IComImport|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3505,7 +3505,7 @@ public class C {
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -3518,7 +3518,7 @@ public class [|C|]
     public void M(CancellationToken cancellationToken = default);
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -3530,7 +3530,7 @@ Public Class [|C|]
     Public Sub M(Optional cancellationToken As CancellationToken = Nothing)
 End Class",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3551,7 +3551,7 @@ public class [|C|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3622,7 +3622,7 @@ public interface IGoo
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -3644,7 +3644,7 @@ public interface [|IGoo|]
     Uri Method1();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -3665,7 +3665,7 @@ Public Interface [|IGoo|]
     Function Method1() As Uri
 End Interface",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3694,7 +3694,7 @@ public interface [|IGoo|]
 {string.Format(CSharpEditorResources.Load_from_0, "System.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -3994,7 +3994,7 @@ public readonly struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4003,7 +4003,7 @@ public readonly struct [|S|]
     public readonly int i;
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4013,7 +4013,7 @@ Public Structure [|S|]
     Public ReadOnly i As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4030,7 +4030,7 @@ public readonly struct [|S|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4077,7 +4077,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4086,7 +4086,7 @@ public struct [|S|]
     public readonly int i;
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4094,7 +4094,7 @@ Public Structure [|S|]
     Public ReadOnly i As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4111,7 +4111,7 @@ public struct [|S|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4154,7 +4154,7 @@ public ref struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4162,7 +4162,7 @@ public ref struct [|S|]
 {{
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4172,7 +4172,7 @@ Imports System
 Public Structure [|S|]
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4191,7 +4191,7 @@ public ref struct [|S|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4239,7 +4239,7 @@ public readonly ref struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4247,7 +4247,7 @@ public readonly ref struct [|S|]
 {{
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4257,7 +4257,7 @@ Imports System
 Public Structure [|S|]
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4276,7 +4276,7 @@ public readonly ref struct [|S|]
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4325,7 +4325,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4334,7 +4334,7 @@ public struct S
     public readonly void [|M|]();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4343,7 +4343,7 @@ Public Structure S <IsReadOnlyAttribute>
     Public Sub [|M|]()
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4365,7 +4365,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4417,7 +4417,7 @@ public readonly struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4426,7 +4426,7 @@ public readonly struct S
     public void [|M|]();
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4436,7 +4436,7 @@ Public Structure S
     Public Sub [|M|]()
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4458,7 +4458,7 @@ public readonly struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4510,7 +4510,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4519,7 +4519,7 @@ public struct S
     public readonly int [|P|] {{ get; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4527,7 +4527,7 @@ Public Structure S
     Public ReadOnly Property [|P|] As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4547,7 +4547,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4597,7 +4597,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4606,7 +4606,7 @@ public struct S
     public int [|P|] {{ get; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4614,7 +4614,7 @@ Public Structure S
     Public ReadOnly Property [|P|] As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4634,7 +4634,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4692,7 +4692,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4701,7 +4701,7 @@ public struct S
     public readonly int [|P|] {{ get; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4709,7 +4709,7 @@ Public Structure S
     Public ReadOnly Property [|P|] As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4729,7 +4729,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4779,7 +4779,7 @@ public readonly struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4788,7 +4788,7 @@ public readonly struct S
     public int [|P|] {{ get; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4798,7 +4798,7 @@ Public Structure S
     Public ReadOnly Property [|P|] As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4818,7 +4818,7 @@ public readonly struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4868,7 +4868,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4877,7 +4877,7 @@ public struct S
     public int [|P|] {{ readonly get; set; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4885,7 +4885,7 @@ Public Structure S
     Public Property [|P|] As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4914,7 +4914,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -4973,7 +4973,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -4982,7 +4982,7 @@ public struct S
     public int [|P|] {{ get; readonly set; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -4990,7 +4990,7 @@ Public Structure S
     Public Property [|P|] As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5019,7 +5019,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5078,7 +5078,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -5087,7 +5087,7 @@ public struct S
     public readonly int [|P|] {{ get; set; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -5095,7 +5095,7 @@ Public Structure S
     Public Property [|P|] As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5124,7 +5124,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5183,7 +5183,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -5195,7 +5195,7 @@ public struct S
     public readonly int [|this|][int i] {{ get; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -5206,7 +5206,7 @@ Public Structure S
     Default Public ReadOnly Property [|Item|](i As Integer) As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5226,7 +5226,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5276,7 +5276,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -5288,7 +5288,7 @@ public struct S
     public int [|this|][int i] {{ readonly get; set; }}
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -5299,7 +5299,7 @@ Public Structure S
     Default Public Property [|Item|](i As Integer) As Integer
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5328,7 +5328,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5387,7 +5387,7 @@ public struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -5398,7 +5398,7 @@ public struct S
     public readonly event Action [|E|];
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -5408,7 +5408,7 @@ Public Structure S
     Public Event [|E|] As Action
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5437,7 +5437,7 @@ public struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5496,7 +5496,7 @@ public readonly struct S
             var expected = (language, signaturesOnly) switch
             {
                 (OriginatingProjectLanguage.CSharp, true)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -5507,7 +5507,7 @@ public readonly struct S
     public event Action [|E|];
 }}",
                 (OriginatingProjectLanguage.VisualBasic, true)
-                  => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                    => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -5518,7 +5518,7 @@ Public Structure S
     Public Event [|E|] As Action
 End Structure",
                 (OriginatingProjectLanguage.CSharp, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -5547,7 +5547,7 @@ public readonly struct S
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
-                  => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                    => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion

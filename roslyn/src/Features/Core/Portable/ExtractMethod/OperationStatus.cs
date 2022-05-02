@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     ? newFlag.RemoveFlag(OperationStatusFlag.Succeeded)
                     : newFlag;
             newFlag = newFlag.Succeeded()
-              ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort)
-              : newFlag;
+                ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort)
+                : newFlag;
 
             var reasons = reason == null ? Reasons : Reasons.Concat(reason);
             return new OperationStatus(newFlag, reasons);
@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     ? newFlag.RemoveFlag(OperationStatusFlag.Succeeded)
                     : newFlag;
             newFlag = newFlag.Succeeded()
-              ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort)
-              : newFlag;
+                ? newFlag.RemoveFlag(OperationStatusFlag.BestEffort)
+                : newFlag;
 
             var reasons = Reasons.Concat(operationStatus.Reasons);
             return new OperationStatus(newFlag, reasons);

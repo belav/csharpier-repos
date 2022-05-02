@@ -84,46 +84,46 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             {
                 CodeGenerationOperatorKind.Addition => WellKnownMemberNames.AdditionOperatorName,
                 CodeGenerationOperatorKind.BitwiseAnd
-                  => WellKnownMemberNames.BitwiseAndOperatorName,
+                    => WellKnownMemberNames.BitwiseAndOperatorName,
                 CodeGenerationOperatorKind.BitwiseOr => WellKnownMemberNames.BitwiseOrOperatorName,
                 CodeGenerationOperatorKind.Concatenate
-                  => WellKnownMemberNames.ConcatenateOperatorName,
+                    => WellKnownMemberNames.ConcatenateOperatorName,
                 CodeGenerationOperatorKind.Decrement => WellKnownMemberNames.DecrementOperatorName,
                 CodeGenerationOperatorKind.Division => WellKnownMemberNames.DivisionOperatorName,
                 CodeGenerationOperatorKind.Equality => WellKnownMemberNames.EqualityOperatorName,
                 CodeGenerationOperatorKind.ExclusiveOr
-                  => WellKnownMemberNames.ExclusiveOrOperatorName,
+                    => WellKnownMemberNames.ExclusiveOrOperatorName,
                 CodeGenerationOperatorKind.Exponent => WellKnownMemberNames.ExponentOperatorName,
                 CodeGenerationOperatorKind.False => WellKnownMemberNames.FalseOperatorName,
                 CodeGenerationOperatorKind.GreaterThan
-                  => WellKnownMemberNames.GreaterThanOperatorName,
+                    => WellKnownMemberNames.GreaterThanOperatorName,
                 CodeGenerationOperatorKind.GreaterThanOrEqual
-                  => WellKnownMemberNames.GreaterThanOrEqualOperatorName,
+                    => WellKnownMemberNames.GreaterThanOrEqualOperatorName,
                 CodeGenerationOperatorKind.Increment => WellKnownMemberNames.IncrementOperatorName,
                 CodeGenerationOperatorKind.Inequality
-                  => WellKnownMemberNames.InequalityOperatorName,
+                    => WellKnownMemberNames.InequalityOperatorName,
                 CodeGenerationOperatorKind.IntegerDivision
-                  => WellKnownMemberNames.IntegerDivisionOperatorName,
+                    => WellKnownMemberNames.IntegerDivisionOperatorName,
                 CodeGenerationOperatorKind.LeftShift => WellKnownMemberNames.LeftShiftOperatorName,
                 CodeGenerationOperatorKind.LessThan => WellKnownMemberNames.LessThanOperatorName,
                 CodeGenerationOperatorKind.LessThanOrEqual
-                  => WellKnownMemberNames.LessThanOrEqualOperatorName,
+                    => WellKnownMemberNames.LessThanOrEqualOperatorName,
                 CodeGenerationOperatorKind.Like => WellKnownMemberNames.LikeOperatorName,
                 CodeGenerationOperatorKind.LogicalNot
-                  => WellKnownMemberNames.LogicalNotOperatorName,
+                    => WellKnownMemberNames.LogicalNotOperatorName,
                 CodeGenerationOperatorKind.Modulus => WellKnownMemberNames.ModulusOperatorName,
                 CodeGenerationOperatorKind.Multiplication
-                  => WellKnownMemberNames.MultiplyOperatorName,
+                    => WellKnownMemberNames.MultiplyOperatorName,
                 CodeGenerationOperatorKind.OnesComplement
-                  => WellKnownMemberNames.OnesComplementOperatorName,
+                    => WellKnownMemberNames.OnesComplementOperatorName,
                 CodeGenerationOperatorKind.RightShift
-                  => WellKnownMemberNames.RightShiftOperatorName,
+                    => WellKnownMemberNames.RightShiftOperatorName,
                 CodeGenerationOperatorKind.Subtraction
-                  => WellKnownMemberNames.SubtractionOperatorName,
+                    => WellKnownMemberNames.SubtractionOperatorName,
                 CodeGenerationOperatorKind.True => WellKnownMemberNames.TrueOperatorName,
                 CodeGenerationOperatorKind.UnaryPlus => WellKnownMemberNames.UnaryPlusOperatorName,
                 CodeGenerationOperatorKind.UnaryNegation
-                  => WellKnownMemberNames.UnaryNegationOperatorName,
+                    => WellKnownMemberNames.UnaryNegationOperatorName,
                 _ => throw ExceptionUtilities.UnexpectedValue(operatorKind),
             };
     }

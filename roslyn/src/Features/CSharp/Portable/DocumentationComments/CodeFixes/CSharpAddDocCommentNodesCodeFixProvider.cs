@@ -26,11 +26,11 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.ImplementInterface)]
     internal class CSharpAddDocCommentNodesCodeFixProvider
         : AbstractAddDocCommentNodesCodeFixProvider<
-              XmlElementSyntax,
-              XmlNameAttributeSyntax,
-              XmlTextSyntax,
-              MemberDeclarationSyntax
-          >
+            XmlElementSyntax,
+            XmlNameAttributeSyntax,
+            XmlTextSyntax,
+            MemberDeclarationSyntax
+        >
     {
         /// <summary>
         /// Parameter has no matching param tag in XML comment
@@ -93,8 +93,8 @@ namespace Microsoft.CodeAnalysis.DiagnosticComments.CodeFixes
                     .FirstOrDefault(f => f is ParameterListSyntax);
 
             return parameterList != null
-              ? parameterList.Parameters.Select(s => s.Identifier.ValueText).ToList()
-              : new List<string>();
+                ? parameterList.Parameters.Select(s => s.Identifier.ValueText).ToList()
+                : new List<string>();
         }
 
         protected override XmlElementSyntax GetNewNode(

@@ -278,16 +278,16 @@ namespace Microsoft.CodeAnalysis
                     container =
                         rank == 0
                             ? GetSZArrayTypeSymbol(
-                                  container,
-                                  default(ImmutableArray<ModifierInfo<TypeSymbol>>)
-                              )
+                                container,
+                                default(ImmutableArray<ModifierInfo<TypeSymbol>>)
+                            )
                             : GetMDArrayTypeSymbol(
-                                  rank,
-                                  container,
-                                  default(ImmutableArray<ModifierInfo<TypeSymbol>>),
-                                  ImmutableArray<int>.Empty,
-                                  default(ImmutableArray<int>)
-                              );
+                                rank,
+                                container,
+                                default(ImmutableArray<ModifierInfo<TypeSymbol>>),
+                                ImmutableArray<int>.Empty,
+                                default(ImmutableArray<int>)
+                            );
                 }
             }
 

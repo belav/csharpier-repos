@@ -32,15 +32,15 @@ namespace System.Web.Http.Metadata.Providers
         protected override bool ComputeConvertEmptyStringToNull()
         {
             return PrototypeCache.DisplayFormat != null
-              ? PrototypeCache.DisplayFormat.ConvertEmptyStringToNull
-              : base.ComputeConvertEmptyStringToNull();
+                ? PrototypeCache.DisplayFormat.ConvertEmptyStringToNull
+                : base.ComputeConvertEmptyStringToNull();
         }
 
         protected override string ComputeDescription()
         {
             return PrototypeCache.Display != null
-              ? PrototypeCache.Display.GetDescription()
-              : base.ComputeDescription();
+                ? PrototypeCache.Display.GetDescription()
+                : base.ComputeDescription();
         }
 
         protected override bool ComputeIsReadOnly()

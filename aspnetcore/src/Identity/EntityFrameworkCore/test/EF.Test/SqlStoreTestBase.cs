@@ -22,7 +22,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public abstract class SqlStoreTestBase<TUser, TRole, TKey>
     : IdentitySpecificationTestBase<TUser, TRole, TKey>,
-      IClassFixture<ScratchDatabaseFixture>
+        IClassFixture<ScratchDatabaseFixture>
     where TUser : IdentityUser<TKey>, new()
     where TRole : IdentityRole<TKey>, new()
     where TKey : IEquatable<TKey>

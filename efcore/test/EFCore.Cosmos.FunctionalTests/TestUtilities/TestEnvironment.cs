@@ -20,13 +20,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
         public static string DefaultConnection { get; } =
             string.IsNullOrEmpty(Config["DefaultConnection"])
-              ? "https://localhost:8081"
-              : Config["DefaultConnection"];
+                ? "https://localhost:8081"
+                : Config["DefaultConnection"];
 
         public static string AuthToken { get; } =
             string.IsNullOrEmpty(Config["AuthToken"])
-              ? "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
-              : Config["AuthToken"];
+                ? "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw=="
+                : Config["AuthToken"];
 
         public static string ConnectionString { get; } =
             $"AccountEndpoint={DefaultConnection};AccountKey={AuthToken}";

@@ -229,8 +229,8 @@ namespace System.Net.Http.Functional.Tests
                     // value back from the handler instead of using the parameter value of the test.
                     Assert.Equal(
                         handler.CheckCertificateRevocationList
-                          ? X509RevocationMode.Online
-                          : X509RevocationMode.NoCheck,
+                            ? X509RevocationMode.Online
+                            : X509RevocationMode.NoCheck,
                         chain.ChainPolicy.RevocationMode
                     );
                     return true;

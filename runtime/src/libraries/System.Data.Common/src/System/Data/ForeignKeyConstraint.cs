@@ -264,14 +264,14 @@ namespace System.Data
             {
                 Index childIndex = _childKey.GetSortIndex(
                     row.RowState == DataRowState.Deleted
-                      ? DataViewRowState.Deleted
-                      : DataViewRowState.CurrentRows
+                        ? DataViewRowState.Deleted
+                        : DataViewRowState.CurrentRows
                 );
                 object[] key = row.GetKeyValues(
                     _parentKey,
                     row.RowState == DataRowState.Deleted
-                      ? DataRowVersion.Original
-                      : DataRowVersion.Default
+                        ? DataRowVersion.Original
+                        : DataRowVersion.Default
                 );
                 if (IsKeyNull(key))
                 {
@@ -403,14 +403,14 @@ namespace System.Data
 
             Index childIndex = _childKey.GetSortIndex(
                 row.RowState == DataRowState.Deleted
-                  ? DataViewRowState.OriginalRows
-                  : DataViewRowState.CurrentRows
+                    ? DataViewRowState.OriginalRows
+                    : DataViewRowState.CurrentRows
             );
             object[] key = row.GetKeyValues(
                 _parentKey,
                 row.RowState == DataRowState.Modified
-                  ? DataRowVersion.Current
-                  : DataRowVersion.Default
+                    ? DataRowVersion.Current
+                    : DataRowVersion.Default
             );
 
             if (IsKeyNull(key))

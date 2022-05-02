@@ -497,8 +497,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 treeNode: _syntaxTree.GetReference(compilationUnit),
                 children: children,
                 referenceDirectives: isForScript
-                  ? GetReferenceDirectives(compilationUnit)
-                  : ImmutableArray<ReferenceDirective>.Empty,
+                    ? GetReferenceDirectives(compilationUnit)
+                    : ImmutableArray<ReferenceDirective>.Empty,
                 hasAssemblyAttributes: compilationUnit.AttributeLists.Any(),
                 diagnostics: diagnostics.ToReadOnlyAndFree(),
                 globalAliasedQuickAttributes
@@ -738,8 +738,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             SingleTypeDeclaration.TypeDeclarationFlags declFlags = node.AttributeLists.Any()
-              ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
-              : SingleTypeDeclaration.TypeDeclarationFlags.None;
+                ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
+                : SingleTypeDeclaration.TypeDeclarationFlags.None;
 
             if (node.BaseList != null)
             {
@@ -806,8 +806,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var declFlags = node.AttributeLists.Any()
-              ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
-              : SingleTypeDeclaration.TypeDeclarationFlags.None;
+                ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
+                : SingleTypeDeclaration.TypeDeclarationFlags.None;
 
             var diagnostics = DiagnosticBag.GetInstance();
             if (node.Arity == 0)
@@ -842,8 +842,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var members = node.Members;
 
             SingleTypeDeclaration.TypeDeclarationFlags declFlags = node.AttributeLists.Any()
-              ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
-              : SingleTypeDeclaration.TypeDeclarationFlags.None;
+                ? SingleTypeDeclaration.TypeDeclarationFlags.HasAnyAttributes
+                : SingleTypeDeclaration.TypeDeclarationFlags.None;
 
             if (node.BaseList != null)
             {
@@ -1159,8 +1159,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ((Syntax.InternalSyntax.ConstructorDeclarationSyntax)member).Modifiers.Any(
                             (int)SyntaxKind.StaticKeyword
                         )
-                          ? WellKnownMemberNames.StaticConstructorName
-                          : WellKnownMemberNames.InstanceConstructorName
+                            ? WellKnownMemberNames.StaticConstructorName
+                            : WellKnownMemberNames.InstanceConstructorName
                     );
                     break;
 

@@ -374,13 +374,13 @@ namespace System.Text.RegularExpressions.Symbolic
                 : thencase._builder._solver.False.Equals(test)
                     ? elsecase
                     : Create(
-                          thencase._builder,
-                          TransitionRegexKind.Conditional,
-                          test,
-                          thencase,
-                          elsecase,
-                          null
-                      );
+                        thencase._builder,
+                        TransitionRegexKind.Conditional,
+                        test,
+                        thencase,
+                        elsecase,
+                        null
+                    );
 
         public static TransitionRegex<S> Lookaround(
             SymbolicRegexNode<S> nullabilityTest,
@@ -390,13 +390,13 @@ namespace System.Text.RegularExpressions.Symbolic
             (thencase == elsecase)
                 ? thencase
                 : Create(
-                      thencase._builder,
-                      TransitionRegexKind.Lookaround,
-                      default(S),
-                      thencase,
-                      elsecase,
-                      nullabilityTest
-                  );
+                    thencase._builder,
+                    TransitionRegexKind.Lookaround,
+                    default(S),
+                    thencase,
+                    elsecase,
+                    nullabilityTest
+                );
 
         /// <summary>Intersection of transition regexes</summary>
         public static TransitionRegex<S> operator &(

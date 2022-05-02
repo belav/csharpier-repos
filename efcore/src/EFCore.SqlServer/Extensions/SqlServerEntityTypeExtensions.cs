@@ -252,7 +252,7 @@ namespace Microsoft.EntityFrameworkCore
             (entityType is RuntimeEntityType)
                 ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
                 : entityType[SqlServerAnnotationNames.TemporalHistoryTableName]
-                      is string historyTableName
+                    is string historyTableName
                     ? historyTableName
                     : entityType[SqlServerAnnotationNames.IsTemporal] as bool? == true
                         ? entityType.GetTableName() is string tableName
@@ -317,7 +317,7 @@ namespace Microsoft.EntityFrameworkCore
             (entityType is RuntimeEntityType)
                 ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
                 : entityType[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
-                  ?? entityType[RelationalAnnotationNames.Schema] as string;
+                    ?? entityType[RelationalAnnotationNames.Schema] as string;
 
         /// <summary>
         ///     Sets a value representing the schema of the history table associated with the entity mapped to a temporal table.

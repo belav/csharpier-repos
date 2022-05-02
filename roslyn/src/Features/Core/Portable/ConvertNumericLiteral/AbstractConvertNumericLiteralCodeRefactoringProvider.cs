@@ -64,12 +64,12 @@ namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
                 binaryPrefix
             );
             var kind = string.IsNullOrEmpty(prefix)
-              ? NumericKind.Decimal
-              : prefix.Equals(hexPrefix, StringComparison.OrdinalIgnoreCase)
-                  ? NumericKind.Hexadecimal
-                  : prefix.Equals(binaryPrefix, StringComparison.OrdinalIgnoreCase)
-                      ? NumericKind.Binary
-                      : NumericKind.Unknown;
+                ? NumericKind.Decimal
+                : prefix.Equals(hexPrefix, StringComparison.OrdinalIgnoreCase)
+                    ? NumericKind.Hexadecimal
+                    : prefix.Equals(binaryPrefix, StringComparison.OrdinalIgnoreCase)
+                        ? NumericKind.Binary
+                        : NumericKind.Unknown;
 
             if (kind == NumericKind.Unknown)
             {
@@ -174,12 +174,12 @@ namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
                 .TryGetRelevantNodeAsync<TNumericLiteralExpression>()
                 .ConfigureAwait(false);
             var numericLiteralExpressionNode = syntaxFacts.IsNumericLiteralExpression(literalNode)
-              ? literalNode
-              : null;
+                ? literalNode
+                : null;
 
             return numericLiteralExpressionNode != null
-              ? numericLiteralExpressionNode.GetFirstToken() // We know that TNumericLiteralExpression has always only one token: NumericLiteralToken
-              : default;
+                ? numericLiteralExpressionNode.GetFirstToken() // We know that TNumericLiteralExpression has always only one token: NumericLiteralToken
+                : default;
         }
 
         private static (string prefix, string number, string suffix) GetNumericLiteralParts(

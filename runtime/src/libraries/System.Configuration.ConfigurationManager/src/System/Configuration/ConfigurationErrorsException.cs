@@ -155,18 +155,18 @@ namespace System.Configuration
                 if (!string.IsNullOrEmpty(file))
                 {
                     return Line != 0
-                      ? BareMessage
-                        + " ("
-                        + file
-                        + " line "
-                        + Line.ToString(CultureInfo.CurrentCulture)
-                        + ")"
-                      : BareMessage + " (" + file + ")";
+                        ? BareMessage
+                            + " ("
+                            + file
+                            + " line "
+                            + Line.ToString(CultureInfo.CurrentCulture)
+                            + ")"
+                        : BareMessage + " (" + file + ")";
                 }
 
                 return Line != 0
-                  ? BareMessage + " (line " + Line.ToString("G", CultureInfo.CurrentCulture) + ")"
-                  : BareMessage;
+                    ? BareMessage + " (line " + Line.ToString("G", CultureInfo.CurrentCulture) + ")"
+                    : BareMessage;
             }
         }
 

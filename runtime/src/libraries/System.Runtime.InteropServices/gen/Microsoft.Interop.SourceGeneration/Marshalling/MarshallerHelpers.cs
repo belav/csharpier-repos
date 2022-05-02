@@ -293,9 +293,9 @@ namespace Microsoft.Interop
                 {
                     CharEncoding.Utf8 => "StringToCoTaskMemUTF8", // Not in .NET Standard 2.0, so we use the hard-coded name
                     CharEncoding.Utf16
-                      => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemUni),
+                        => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemUni),
                     CharEncoding.Ansi
-                      => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemAnsi),
+                        => nameof(System.Runtime.InteropServices.Marshal.StringToCoTaskMemAnsi),
                     _ => throw new System.ArgumentOutOfRangeException(nameof(encoding))
                 };
 

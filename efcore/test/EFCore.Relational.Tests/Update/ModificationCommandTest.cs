@@ -416,12 +416,12 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             Assert.Equal(
                 sensitive
-                  ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
+                    ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
                         "T1",
                         "{Id: 1}",
                         EntityState.Unchanged
                     )
-                  : RelationalStrings.ModificationCommandInvalidEntityState(
+                    : RelationalStrings.ModificationCommandInvalidEntityState(
                         "T1",
                         EntityState.Unchanged
                     ),
@@ -448,12 +448,12 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             Assert.Equal(
                 sensitive
-                  ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
+                    ? RelationalStrings.ModificationCommandInvalidEntityStateSensitive(
                         "T1",
                         "{Id: 1}",
                         EntityState.Detached
                     )
-                  : RelationalStrings.ModificationCommandInvalidEntityState(
+                    : RelationalStrings.ModificationCommandInvalidEntityState(
                         "T1",
                         EntityState.Detached
                     ),

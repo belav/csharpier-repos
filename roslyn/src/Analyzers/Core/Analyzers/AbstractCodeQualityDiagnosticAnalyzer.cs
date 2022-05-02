@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CodeQuality
 {
     internal abstract class AbstractCodeQualityDiagnosticAnalyzer
         : DiagnosticAnalyzer,
-          IBuiltInAnalyzer
+            IBuiltInAnalyzer
     {
         private readonly GeneratedCodeAnalysisFlags _generatedCodeAnalysisFlags;
 

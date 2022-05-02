@@ -323,8 +323,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     .Select(p => p.Parameter)
                     .ToImmutableArray(),
                 (_paramsParameter == null || _paramsParameter.IsRemoved)
-                  ? null
-                  : (ExistingParameter)_paramsParameter.Parameter,
+                    ? null
+                    : (ExistingParameter)_paramsParameter.Parameter,
                 selectedIndex: -1
             );
         }
@@ -515,11 +515,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             index = _thisParameter == null ? index : index - 1;
             Move(
                 index < _parametersWithoutDefaultValues.Count
-                  ? _parametersWithoutDefaultValues
-                  : _parametersWithDefaultValues,
+                    ? _parametersWithoutDefaultValues
+                    : _parametersWithDefaultValues,
                 index < _parametersWithoutDefaultValues.Count
-                  ? index
-                  : index - _parametersWithoutDefaultValues.Count,
+                    ? index
+                    : index - _parametersWithoutDefaultValues.Count,
                 delta: -1
             );
         }
@@ -532,11 +532,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             index = _thisParameter == null ? index : index - 1;
             Move(
                 index < _parametersWithoutDefaultValues.Count
-                  ? _parametersWithoutDefaultValues
-                  : _parametersWithDefaultValues,
+                    ? _parametersWithoutDefaultValues
+                    : _parametersWithDefaultValues,
                 index < _parametersWithoutDefaultValues.Count
-                  ? index
-                  : index - _parametersWithoutDefaultValues.Count,
+                    ? index
+                    : index - _parametersWithoutDefaultValues.Count,
                 delta: 1
             );
         }

@@ -1228,7 +1228,7 @@ namespace ILCompiler.Reflection.ReadyToRun
     {
         private class TextTypeProvider
             : StringTypeProviderBase<TextSignatureDecoderContext>,
-              IR2RSignatureTypeProvider<string, string, TextSignatureDecoderContext>
+                IR2RSignatureTypeProvider<string, string, TextSignatureDecoderContext>
         {
             private TextTypeProvider() { }
 

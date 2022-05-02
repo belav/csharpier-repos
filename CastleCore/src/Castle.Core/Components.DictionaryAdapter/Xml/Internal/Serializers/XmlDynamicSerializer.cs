@@ -32,8 +32,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         )
         {
             return node.ClrType == typeof(object)
-              ? new object()
-              : XmlTypeSerializer.For(node.ClrType).GetValue(node, parent, accessor);
+                ? new object()
+                : XmlTypeSerializer.For(node.ClrType).GetValue(node, parent, accessor);
         }
 
         public override void SetValue(

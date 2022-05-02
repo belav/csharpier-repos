@@ -44,16 +44,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             sqlExpression == null || sqlExpression.TypeMapping != null
                 ? sqlExpression
                 : sqlExpression is SqlUnaryExpression sqlUnaryExpression
-                  && sqlUnaryExpression.OperatorType == ExpressionType.Convert
-                  && sqlUnaryExpression.Type == typeof(object)
+                && sqlUnaryExpression.OperatorType == ExpressionType.Convert
+                && sqlUnaryExpression.Type == typeof(object)
                     ? sqlUnaryExpression.Operand
                     : ApplyTypeMapping(
-                          sqlExpression,
-                          Dependencies.TypeMappingSource.FindMapping(
-                              sqlExpression.Type,
-                              Dependencies.Model
-                          )
-                      );
+                        sqlExpression,
+                        Dependencies.TypeMappingSource.FindMapping(
+                            sqlExpression.Type,
+                            Dependencies.Model
+                        )
+                    );
 
         /// <inheritdoc />
         [return: NotNullIfNotNull("sqlExpression")]
@@ -95,14 +95,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     likeExpression.EscapeChar == null
                         ? ExpressionExtensions.InferTypeMapping(
-                              likeExpression.Match,
-                              likeExpression.Pattern
-                          )
+                            likeExpression.Match,
+                            likeExpression.Pattern
+                        )
                         : ExpressionExtensions.InferTypeMapping(
-                              likeExpression.Match,
-                              likeExpression.Pattern,
-                              likeExpression.EscapeChar
-                          )
+                            likeExpression.Match,
+                            likeExpression.Pattern,
+                            likeExpression.EscapeChar
+                        )
                 )
                 ?? Dependencies.TypeMappingSource.FindMapping(
                     likeExpression.Match.Type,
@@ -226,13 +226,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                         ?? (
                             left.Type != typeof(object)
                                 ? Dependencies.TypeMappingSource.FindMapping(
-                                      left.Type,
-                                      Dependencies.Model
-                                  )
+                                    left.Type,
+                                    Dependencies.Model
+                                )
                                 : Dependencies.TypeMappingSource.FindMapping(
-                                      right.Type,
-                                      Dependencies.Model
-                                  )
+                                    right.Type,
+                                    Dependencies.Model
+                                )
                         );
                     resultType = typeof(bool);
                     resultTypeMapping = _boolTypeMapping;
@@ -287,14 +287,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     inExpression.Values != null
                         ? ExpressionExtensions.InferTypeMapping(
-                              inExpression.Item,
-                              inExpression.Values
-                          )
+                            inExpression.Item,
+                            inExpression.Values
+                        )
                         : inExpression.Subquery != null
                             ? ExpressionExtensions.InferTypeMapping(
-                                  inExpression.Item,
-                                  inExpression.Subquery.Projection[0].Expression
-                              )
+                                inExpression.Item,
+                                inExpression.Subquery.Projection[0].Expression
+                            )
                             : inExpression.Item.TypeMapping
                 )
                 ?? Dependencies.TypeMappingSource.FindMapping(
@@ -311,18 +311,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                     item != inExpression.Item
                     || values != inExpression.Values
                     || inExpression.TypeMapping != _boolTypeMapping
-                  ? new InExpression(item, values, inExpression.IsNegated, _boolTypeMapping)
-                  : inExpression;
+                    ? new InExpression(item, values, inExpression.IsNegated, _boolTypeMapping)
+                    : inExpression;
             }
 
             return item != inExpression.Item || inExpression.TypeMapping != _boolTypeMapping
-              ? new InExpression(
+                ? new InExpression(
                     item,
                     inExpression.Subquery!,
                     inExpression.IsNegated,
                     _boolTypeMapping
                 )
-              : inExpression;
+                : inExpression;
         }
 
         /// <inheritdoc />
@@ -484,9 +484,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             !SqlUnaryExpression.IsValidOperator(operatorType)
                 ? null
                 : (SqlUnaryExpression)ApplyTypeMapping(
-                      new SqlUnaryExpression(operatorType, operand, type, null),
-                      typeMapping
-                  );
+                    new SqlUnaryExpression(operatorType, operand, type, null),
+                    typeMapping
+                );
 
         /// <inheritdoc />
         public virtual SqlUnaryExpression IsNull(SqlExpression operand) =>
@@ -882,16 +882,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             var predicate =
                 concreteEntityTypes.Count == 1
                     ? (SqlExpression)Equal(
-                          discriminatorColumn,
-                          Constant(concreteEntityTypes[0].GetDiscriminatorValue())
-                      )
+                        discriminatorColumn,
+                        Constant(concreteEntityTypes[0].GetDiscriminatorValue())
+                    )
                     : In(
-                          discriminatorColumn,
-                          Constant(
-                              concreteEntityTypes.Select(et => et.GetDiscriminatorValue()).ToList()
-                          ),
-                          negated: false
-                      );
+                        discriminatorColumn,
+                        Constant(
+                            concreteEntityTypes.Select(et => et.GetDiscriminatorValue()).ToList()
+                        ),
+                        negated: false
+                    );
 
             selectExpression.ApplyPredicate(predicate);
 

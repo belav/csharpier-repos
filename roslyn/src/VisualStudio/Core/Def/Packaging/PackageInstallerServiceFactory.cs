@@ -51,8 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
     [ExportWorkspaceService(typeof(IPackageInstallerService)), Shared]
     internal partial class PackageInstallerService
         : AbstractDelayStartedService,
-          IPackageInstallerService,
-          IVsSearchProviderCallback
+            IPackageInstallerService,
+            IVsSearchProviderCallback
     {
         // Proper name, should not be localized.
         private const string NugetTitle = "NuGet";
@@ -416,8 +416,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Packaging
                                 packageName,
                                 out var result
                             )
-                              ? result
-                              : null;
+                                ? result
+                                : null;
 
                             await UpdateStatusBarAsync(
                                     dte,

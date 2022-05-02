@@ -60,15 +60,15 @@ namespace System.Net.Http
                         0,
                         versionLength
                     )
-                      ? HttpVersion.Version11
-                      : CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(
+                        ? HttpVersion.Version11
+                        : CharArrayHelpers.EqualsOrdinalAsciiIgnoreCase(
                             "HTTP/1.0",
                             buffer,
                             0,
                             versionLength
                         )
-                          ? HttpVersion.Version10
-                          : WinHttpHandler.HttpVersionUnknown;
+                            ? HttpVersion.Version10
+                            : WinHttpHandler.HttpVersionUnknown;
                 }
 
                 response.StatusCode = (HttpStatusCode)GetResponseHeaderNumberInfo(
@@ -397,8 +397,8 @@ namespace System.Net.Http
                 knownReasonPhrase != null
                 && knownReasonPhrase.AsSpan().SequenceEqual(buffer.AsSpan(0, bufferLength))
             )
-              ? knownReasonPhrase
-              : new string(buffer, 0, bufferLength);
+                ? knownReasonPhrase
+                : new string(buffer, 0, bufferLength);
         }
 
         private static void ParseResponseHeaders(

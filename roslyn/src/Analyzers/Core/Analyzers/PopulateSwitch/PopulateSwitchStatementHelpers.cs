@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             // and check if it is of enum type
             if (switchExpressionType != null)
                 switchExpressionType = switchExpressionType.IsNullable(out var underlyingType)
-                  ? underlyingType
-                  : switchExpressionType;
+                    ? underlyingType
+                    : switchExpressionType;
 
             if (switchExpressionType?.TypeKind == TypeKind.Enum)
             {

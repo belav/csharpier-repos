@@ -48,11 +48,11 @@ namespace System
             ClassName == null
                 ? base.Message
                 : SR.Format(
-                      SR.MissingMethod_Name,
-                      ClassName
-                          + "."
-                          + MemberName
-                          + (Signature != null ? " " + FormatSignature(Signature) : string.Empty)
-                  );
+                    SR.MissingMethod_Name,
+                    ClassName
+                        + "."
+                        + MemberName
+                        + (Signature != null ? " " + FormatSignature(Signature) : string.Empty)
+                );
     }
 }

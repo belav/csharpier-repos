@@ -80,9 +80,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new BroadcastBlock<int>(
-                              i => i,
-                              new DataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            i => i,
+                            new DataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new BroadcastBlock<int>(i => i)
             );
         }

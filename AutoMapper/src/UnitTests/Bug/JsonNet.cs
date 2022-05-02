@@ -15,8 +15,8 @@ namespace AutoMapper.UnitTests.Bug
 
         class JObject
             : Dictionary<string, string>,
-              IEnumerable,
-              IEnumerable<KeyValuePair<string, string>>
+                IEnumerable,
+                IEnumerable<KeyValuePair<string, string>>
         {
             public JObject(string json)
                 : base(

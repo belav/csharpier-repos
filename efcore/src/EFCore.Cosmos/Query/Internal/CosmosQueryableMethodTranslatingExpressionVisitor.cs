@@ -404,8 +404,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ) =>
             source.ShaperExpression.Type != resultType
                 ? source.UpdateShaperExpression(
-                      Expression.Convert(source.ShaperExpression, resultType)
-                  )
+                    Expression.Convert(source.ShaperExpression, resultType)
+                )
                 : source;
 
         /// <summary>
@@ -565,10 +565,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1)));
 
             return source.ShaperExpression.Type != returnType
-              ? source.UpdateShaperExpression(
+                ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, returnType)
                 )
-              : source;
+                : source;
         }
 
         /// <summary>
@@ -650,10 +650,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(1)));
 
             return source.ShaperExpression.Type != returnType
-              ? source.UpdateShaperExpression(
+                ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, returnType)
                 )
-              : source;
+                : source;
         }
 
         /// <summary>
@@ -1018,10 +1018,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             selectExpression.ApplyLimit(TranslateExpression(Expression.Constant(2)));
 
             return source.ShaperExpression.Type != returnType
-              ? source.UpdateShaperExpression(
+                ? source.UpdateShaperExpression(
                     Expression.Convert(source.ShaperExpression, returnType)
                 )
-              : source;
+                : source;
         }
 
         /// <summary>
@@ -1262,10 +1262,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                                 leftPredicate != null
                                     ? rightPredicate != null
                                         ? binaryExpression.Update(
-                                              leftPredicate,
-                                              binaryExpression.Conversion,
-                                              rightPredicate
-                                          )
+                                            leftPredicate,
+                                            binaryExpression.Conversion,
+                                            rightPredicate
+                                        )
                                         : leftPredicate
                                     : rightPredicate;
 
@@ -1290,10 +1290,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         binaryExpression.Left,
                         entityType
                     )
-                      ? binaryExpression.Right
-                      : IsPartitionKeyPropertyAccess(binaryExpression.Right, entityType)
-                          ? binaryExpression.Left
-                          : null;
+                        ? binaryExpression.Right
+                        : IsPartitionKeyPropertyAccess(binaryExpression.Right, entityType)
+                            ? binaryExpression.Left
+                            : null;
 
                     if (
                         valueExpression is ConstantExpression
@@ -1325,19 +1325,19 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         break;
 
                     case MethodCallExpression methodCallExpression
-                          when methodCallExpression.TryGetEFPropertyArguments(
-                              out _,
-                              out var propertyName
-                          ):
+                    when methodCallExpression.TryGetEFPropertyArguments(
+                        out _,
+                        out var propertyName
+                    ):
                         property = entityType.FindProperty(propertyName);
                         break;
 
                     case MethodCallExpression methodCallExpression
-                          when methodCallExpression.TryGetIndexerArguments(
-                              _queryCompilationContext.Model,
-                              out _,
-                              out var propertyName
-                          ):
+                    when methodCallExpression.TryGetIndexerArguments(
+                        _queryCompilationContext.Model,
+                        out _,
+                        out var propertyName
+                    ):
                         property = entityType.FindProperty(propertyName);
                         break;
                 }
@@ -1409,8 +1409,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 var resultVariable = Expression.Variable(nullableResultType, "result");
                 var returnValueForNull = resultType.IsNullableType()
-                  ? (Expression)Expression.Constant(null, resultType)
-                  : Expression.Throw(
+                    ? (Expression)Expression.Constant(null, resultType)
+                    : Expression.Throw(
                         Expression.New(
                             typeof(InvalidOperationException)
                                 .GetConstructors()
@@ -1427,8 +1427,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         Expression.Equal(resultVariable, Expression.Default(nullableResultType)),
                         returnValueForNull,
                         resultType != resultVariable.Type
-                          ? Expression.Convert(resultVariable, resultType)
-                          : resultVariable
+                            ? Expression.Convert(resultVariable, resultType)
+                            : resultVariable
                     )
                 );
             }

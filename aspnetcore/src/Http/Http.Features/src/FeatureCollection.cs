@@ -71,8 +71,8 @@ namespace Microsoft.AspNetCore.Http.Features
                 }
 
                 return _features != null && _features.TryGetValue(key, out var result)
-                  ? result
-                  : _defaults?[key];
+                    ? result
+                    : _defaults?[key];
             }
             set
             {

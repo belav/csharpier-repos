@@ -12,8 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindFunctionsQuerySqlServerTest
         : NorthwindFunctionsQueryRelationalTestBase<
-              NorthwindQuerySqlServerFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindFunctionsQuerySqlServerTest(
 #pragma warning disable IDE0060 // Remove unused parameter

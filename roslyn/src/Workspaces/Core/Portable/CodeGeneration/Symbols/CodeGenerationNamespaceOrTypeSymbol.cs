@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal abstract class CodeGenerationNamespaceOrTypeSymbol
         : CodeGenerationSymbol,
-          INamespaceOrTypeSymbol
+            INamespaceOrTypeSymbol
     {
         protected CodeGenerationNamespaceOrTypeSymbol(
             IAssemblySymbol containingAssembly,

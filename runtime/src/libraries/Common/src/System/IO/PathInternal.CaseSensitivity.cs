@@ -14,8 +14,8 @@ namespace System.IO
             get
             {
                 return IsCaseSensitive
-                  ? StringComparison.Ordinal
-                  : StringComparison.OrdinalIgnoreCase;
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase;
             }
         }
 

@@ -25,11 +25,11 @@ internal static class HealthCheckResponseWriters
         return result.Status switch
         {
             HealthStatus.Degraded
-              => httpContext.Response.Body.WriteAsync(DegradedBytes.AsMemory()).AsTask(),
+                => httpContext.Response.Body.WriteAsync(DegradedBytes.AsMemory()).AsTask(),
             HealthStatus.Healthy
-              => httpContext.Response.Body.WriteAsync(HealthyBytes.AsMemory()).AsTask(),
+                => httpContext.Response.Body.WriteAsync(HealthyBytes.AsMemory()).AsTask(),
             HealthStatus.Unhealthy
-              => httpContext.Response.Body.WriteAsync(UnhealthyBytes.AsMemory()).AsTask(),
+                => httpContext.Response.Body.WriteAsync(UnhealthyBytes.AsMemory()).AsTask(),
             _ => httpContext.Response.WriteAsync(result.Status.ToString())
         };
     }

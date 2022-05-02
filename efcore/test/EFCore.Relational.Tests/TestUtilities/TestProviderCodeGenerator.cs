@@ -20,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             new(
                 _useTestProviderMethodInfo,
                 providerOptions == null
-                  ? new object[] { connectionString }
-                  : new object[]
+                    ? new object[] { connectionString }
+                    : new object[]
                     {
                         connectionString,
                         new NestedClosureCodeFragment("x", providerOptions)

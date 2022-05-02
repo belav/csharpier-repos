@@ -167,8 +167,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             )
             {
                 return _diagnosticsByProject.ContainsKey(project)
-                  ? Task.FromResult<IEnumerable<Diagnostic>>(_diagnosticsByProject[project])
-                  : EmptyDignosticResult;
+                    ? Task.FromResult<IEnumerable<Diagnostic>>(_diagnosticsByProject[project])
+                    : EmptyDignosticResult;
             }
         }
     }

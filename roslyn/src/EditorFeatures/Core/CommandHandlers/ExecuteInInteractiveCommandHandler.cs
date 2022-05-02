@@ -65,8 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         )
         {
             return GetCommandHandler(args.SubjectBuffer) == null
-              ? CommandState.Unavailable
-              : CommandState.Available;
+                ? CommandState.Unavailable
+                : CommandState.Available;
         }
     }
 }

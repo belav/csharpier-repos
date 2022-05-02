@@ -20,8 +20,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlElementBehaviorAccessor
         : XmlNodeAccessor,
-          IConfigurable<XmlElementAttribute>,
-          IXmlBehaviorSemantics<XmlElementAttribute>
+            IConfigurable<XmlElementAttribute>,
+            IXmlBehaviorSemantics<XmlElementAttribute>
     {
         private ItemAccessor itemAccessor;
         private List<XmlElementAttribute> attributes;

@@ -217,8 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var reusableDeclarationSyntax =
                 GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(namedType, options);
             return reusableDeclarationSyntax == null
-              ? GetDeclarationSyntaxWithoutMembersWorker(namedType, destination, options)
-              : RemoveAllMembers(reusableDeclarationSyntax);
+                ? GetDeclarationSyntaxWithoutMembersWorker(namedType, destination, options)
+                : RemoveAllMembers(reusableDeclarationSyntax);
         }
 
         private static MemberDeclarationSyntax RemoveAllMembers(MemberDeclarationSyntax declaration)
@@ -342,12 +342,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 namedType.EnumUnderlyingType != null
                 && namedType.EnumUnderlyingType.SpecialType != SpecialType.System_Int32
                     ? SyntaxFactory.BaseList(
-                          SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(
-                              SyntaxFactory.SimpleBaseType(
-                                  namedType.EnumUnderlyingType.GenerateTypeSyntax()
-                              )
-                          )
-                      )
+                        SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(
+                            SyntaxFactory.SimpleBaseType(
+                                namedType.EnumUnderlyingType.GenerateTypeSyntax()
+                            )
+                        )
+                    )
                     : null;
 
             return SyntaxFactory.EnumDeclaration(

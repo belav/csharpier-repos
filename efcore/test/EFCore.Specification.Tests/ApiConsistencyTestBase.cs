@@ -556,18 +556,18 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 var expectedName = method.Name.StartsWith("HasNo", StringComparison.Ordinal)
-                  ? "CanRemove" + method.Name[5..]
-                  : "CanSet"
-                    + (
-                        method.Name.StartsWith("Has", StringComparison.Ordinal)
-                        || method.Name.StartsWith("Use", StringComparison.Ordinal)
-                            ? method.Name[3..]
-                            : method.Name.StartsWith("To", StringComparison.Ordinal)
-                                ? method.Name[2..]
-                                : method.Name.StartsWith("With", StringComparison.Ordinal)
-                                    ? method.Name[4..]
-                                    : method.Name
-                    );
+                    ? "CanRemove" + method.Name[5..]
+                    : "CanSet"
+                        + (
+                            method.Name.StartsWith("Has", StringComparison.Ordinal)
+                            || method.Name.StartsWith("Use", StringComparison.Ordinal)
+                                ? method.Name[3..]
+                                : method.Name.StartsWith("To", StringComparison.Ordinal)
+                                    ? method.Name[2..]
+                                    : method.Name.StartsWith("With", StringComparison.Ordinal)
+                                        ? method.Name[4..]
+                                        : method.Name
+                        );
 
                 if (!methodLookup.TryGetValue(expectedName, out var canSetMethod))
                 {

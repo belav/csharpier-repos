@@ -274,10 +274,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 Canvas.SetLeft(
                     visualElement,
                     tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfCode
-                      ? lineView.Right
-                      : tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfEditor
-                          ? TextView.ViewportRight - visualElement.DesiredSize.Width
-                          : throw ExceptionUtilities.UnexpectedValue(tag.Location)
+                        ? lineView.Right
+                        : tag.Location == InlineDiagnosticsLocations.PlacedAtEndOfEditor
+                            ? TextView.ViewportRight - visualElement.DesiredSize.Width
+                            : throw ExceptionUtilities.UnexpectedValue(tag.Location)
                 );
 
                 Canvas.SetTop(

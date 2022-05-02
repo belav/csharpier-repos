@@ -337,7 +337,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             return changed
-              ? new SqlFunctionExpression(
+                ? new SqlFunctionExpression(
                     instance,
                     Schema,
                     Name,
@@ -350,7 +350,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     Type,
                     TypeMapping
                 )
-              : this;
+                : this;
         }
 
         /// <summary>
@@ -388,7 +388,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             return
                 instance != Instance
                 || (arguments != null && Arguments != null && !arguments.SequenceEqual(Arguments))
-              ? new SqlFunctionExpression(
+                ? new SqlFunctionExpression(
                     instance,
                     Schema,
                     Name,
@@ -401,7 +401,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     Type,
                     TypeMapping
                 )
-              : this;
+                : this;
         }
 
         /// <inheritdoc />

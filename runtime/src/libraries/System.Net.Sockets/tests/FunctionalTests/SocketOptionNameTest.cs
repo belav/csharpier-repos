@@ -915,8 +915,8 @@ namespace System.Net.Sockets.Tests
             {
                 const int SetSize = 8192;
                 int ExpectedGetSize = OperatingSystem.IsLinux()
-                  ? SetSize * 2
-                  : // Linux kernel documented to double the size
+                    ? SetSize * 2
+                    : // Linux kernel documented to double the size
                     SetSize;
 
                 socket.SetRawSocketOption(SOL_SOCKET, SO_RCVBUF, BitConverter.GetBytes(SetSize));
@@ -1150,8 +1150,8 @@ namespace System.Net.Sockets.Tests
         }
 
         private static int SOL_SOCKET = OperatingSystem.IsLinux()
-          ? 1
-          : (int)SocketOptionLevel.Socket;
+            ? 1
+            : (int)SocketOptionLevel.Socket;
     }
 
     [Collection("NoParallelTests")]

@@ -128,7 +128,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private class ExportFactoryImportDefinition
             : ContractBasedImportDefinition,
-              IPartCreatorImportDefinition
+                IPartCreatorImportDefinition
         {
             private readonly ContractBasedImportDefinition _productImportDefinition;
 

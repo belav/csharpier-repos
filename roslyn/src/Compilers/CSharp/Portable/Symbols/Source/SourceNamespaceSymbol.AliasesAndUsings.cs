@@ -1091,14 +1091,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 {
                                     diagnostics.Add(
                                         !globalUsingNamespacesOrTypes.IsEmpty
-                                            && getOrCreateUniqueGlobalUsingsNotInTree(
-                                                    ref uniqueGlobalUsings,
-                                                    globalUsingNamespacesOrTypes,
-                                                    declarationSyntax.SyntaxTree
-                                                )
-                                                .Contains(imported)
-                                          ? ErrorCode.HDN_DuplicateWithGlobalUsing
-                                          : ErrorCode.WRN_DuplicateUsing,
+                                        && getOrCreateUniqueGlobalUsingsNotInTree(
+                                                ref uniqueGlobalUsings,
+                                                globalUsingNamespacesOrTypes,
+                                                declarationSyntax.SyntaxTree
+                                            )
+                                            .Contains(imported)
+                                            ? ErrorCode.HDN_DuplicateWithGlobalUsing
+                                            : ErrorCode.WRN_DuplicateUsing,
                                         usingDirective.Name.Location,
                                         imported
                                     );
@@ -1141,14 +1141,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     {
                                         diagnostics.Add(
                                             !globalUsingNamespacesOrTypes.IsEmpty
-                                                && getOrCreateUniqueGlobalUsingsNotInTree(
-                                                        ref uniqueGlobalUsings,
-                                                        globalUsingNamespacesOrTypes,
-                                                        declarationSyntax.SyntaxTree
-                                                    )
-                                                    .Contains(imported)
-                                              ? ErrorCode.HDN_DuplicateWithGlobalUsing
-                                              : ErrorCode.WRN_DuplicateUsing,
+                                            && getOrCreateUniqueGlobalUsingsNotInTree(
+                                                    ref uniqueGlobalUsings,
+                                                    globalUsingNamespacesOrTypes,
+                                                    declarationSyntax.SyntaxTree
+                                                )
+                                                .Contains(imported)
+                                                ? ErrorCode.HDN_DuplicateWithGlobalUsing
+                                                : ErrorCode.WRN_DuplicateUsing,
                                             usingDirective.Name.Location,
                                             importedType
                                         );
@@ -1314,10 +1314,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ?? (
                         declaringSymbol.IsGlobalNamespace
                             ? GetGlobalUsingsAndDiagnostics(
-                                  declaringSymbol,
-                                  (CSharpSyntaxNode)declarationSyntax.GetSyntax(cancellationToken),
-                                  basesBeingResolved: null
-                              )
+                                declaringSymbol,
+                                (CSharpSyntaxNode)declarationSyntax.GetSyntax(cancellationToken),
+                                basesBeingResolved: null
+                            )
                             : UsingsAndDiagnostics.Empty
                     );
                 cancellationToken.ThrowIfCancellationRequested();

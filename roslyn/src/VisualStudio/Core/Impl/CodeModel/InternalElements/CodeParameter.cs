@@ -20,9 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeParameter2))]
     public sealed class CodeParameter
         : AbstractCodeElement,
-          EnvDTE.CodeParameter,
-          EnvDTE80.CodeParameter2,
-          IParameterKind
+            EnvDTE.CodeParameter,
+            EnvDTE80.CodeParameter2,
+            IParameterKind
     {
         internal static EnvDTE.CodeParameter Create(
             CodeModelState state,

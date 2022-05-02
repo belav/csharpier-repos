@@ -11,9 +11,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class ExtractInterfaceDialog_InProc
         : AbstractCodeRefactorDialog_InProc<
-              ExtractInterfaceDialog,
-              ExtractInterfaceDialog.TestAccessor
-          >
+            ExtractInterfaceDialog,
+            ExtractInterfaceDialog.TestAccessor
+        >
     {
         private ExtractInterfaceDialog_InProc() { }
 

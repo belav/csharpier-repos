@@ -17,7 +17,7 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class HttpControllerDescriptorTracer
         : HttpControllerDescriptor,
-          IDecorator<HttpControllerDescriptor>
+            IDecorator<HttpControllerDescriptor>
     {
         private const string CreateControllerMethodName = "CreateController";
 

@@ -54,13 +54,13 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryGetMember))
-              ? CallMethodWithResult(
+                ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryGetMember),
                     binder,
                     NoArgs,
                     e => binder.FallbackGetMember(this, e)
                 )
-              : base.BindGetMember(binder);
+                : base.BindGetMember(binder);
         }
 
         public override DynamicMetaObject BindSetMember(
@@ -69,37 +69,37 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             return IsOverridden(nameof(DynamicProxy<T>.TrySetMember))
-              ? CallMethodReturnLast(
+                ? CallMethodReturnLast(
                     nameof(DynamicProxy<T>.TrySetMember),
                     binder,
                     GetArgs(value),
                     e => binder.FallbackSetMember(this, value, e)
                 )
-              : base.BindSetMember(binder, value);
+                : base.BindSetMember(binder, value);
         }
 
         public override DynamicMetaObject BindDeleteMember(DeleteMemberBinder binder)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryDeleteMember))
-              ? CallMethodNoResult(
+                ? CallMethodNoResult(
                     nameof(DynamicProxy<T>.TryDeleteMember),
                     binder,
                     NoArgs,
                     e => binder.FallbackDeleteMember(this, e)
                 )
-              : base.BindDeleteMember(binder);
+                : base.BindDeleteMember(binder);
         }
 
         public override DynamicMetaObject BindConvert(ConvertBinder binder)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryConvert))
-              ? CallMethodWithResult(
+                ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryConvert),
                     binder,
                     NoArgs,
                     e => binder.FallbackConvert(this, e)
                 )
-              : base.BindConvert(binder);
+                : base.BindConvert(binder);
         }
 
         public override DynamicMetaObject BindInvokeMember(
@@ -151,25 +151,25 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryCreateInstance))
-              ? CallMethodWithResult(
+                ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryCreateInstance),
                     binder,
                     GetArgArray(args),
                     e => binder.FallbackCreateInstance(this, args, e)
                 )
-              : base.BindCreateInstance(binder, args);
+                : base.BindCreateInstance(binder, args);
         }
 
         public override DynamicMetaObject BindInvoke(InvokeBinder binder, DynamicMetaObject[] args)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryInvoke))
-              ? CallMethodWithResult(
+                ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryInvoke),
                     binder,
                     GetArgArray(args),
                     e => binder.FallbackInvoke(this, args, e)
                 )
-              : base.BindInvoke(binder, args);
+                : base.BindInvoke(binder, args);
         }
 
         public override DynamicMetaObject BindBinaryOperation(
@@ -178,25 +178,25 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryBinaryOperation))
-              ? CallMethodWithResult(
+                ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryBinaryOperation),
                     binder,
                     GetArgs(arg),
                     e => binder.FallbackBinaryOperation(this, arg, e)
                 )
-              : base.BindBinaryOperation(binder, arg);
+                : base.BindBinaryOperation(binder, arg);
         }
 
         public override DynamicMetaObject BindUnaryOperation(UnaryOperationBinder binder)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryUnaryOperation))
-              ? CallMethodWithResult(
+                ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryUnaryOperation),
                     binder,
                     NoArgs,
                     e => binder.FallbackUnaryOperation(this, e)
                 )
-              : base.BindUnaryOperation(binder);
+                : base.BindUnaryOperation(binder);
         }
 
         public override DynamicMetaObject BindGetIndex(
@@ -205,13 +205,13 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryGetIndex))
-              ? CallMethodWithResult(
+                ? CallMethodWithResult(
                     nameof(DynamicProxy<T>.TryGetIndex),
                     binder,
                     GetArgArray(indexes),
                     e => binder.FallbackGetIndex(this, indexes, e)
                 )
-              : base.BindGetIndex(binder, indexes);
+                : base.BindGetIndex(binder, indexes);
         }
 
         public override DynamicMetaObject BindSetIndex(
@@ -221,13 +221,13 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             return IsOverridden(nameof(DynamicProxy<T>.TrySetIndex))
-              ? CallMethodReturnLast(
+                ? CallMethodReturnLast(
                     nameof(DynamicProxy<T>.TrySetIndex),
                     binder,
                     GetArgArray(indexes, value),
                     e => binder.FallbackSetIndex(this, indexes, value, e)
                 )
-              : base.BindSetIndex(binder, indexes, value);
+                : base.BindSetIndex(binder, indexes, value);
         }
 
         public override DynamicMetaObject BindDeleteIndex(
@@ -236,13 +236,13 @@ namespace Newtonsoft.Json.Utilities
         )
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryDeleteIndex))
-              ? CallMethodNoResult(
+                ? CallMethodNoResult(
                     nameof(DynamicProxy<T>.TryDeleteIndex),
                     binder,
                     GetArgArray(indexes),
                     e => binder.FallbackDeleteIndex(this, indexes, e)
                 )
-              : base.BindDeleteIndex(binder, indexes);
+                : base.BindDeleteIndex(binder, indexes);
         }
 
         private delegate DynamicMetaObject Fallback(DynamicMetaObject? errorSuggestion);
@@ -479,8 +479,8 @@ namespace Newtonsoft.Json.Utilities
         private BindingRestrictions GetRestrictions()
         {
             return (Value == null && HasValue)
-              ? BindingRestrictions.GetInstanceRestriction(Expression, null)
-              : BindingRestrictions.GetTypeRestriction(Expression, LimitType);
+                ? BindingRestrictions.GetInstanceRestriction(Expression, null)
+                : BindingRestrictions.GetTypeRestriction(Expression, LimitType);
         }
 
         public override IEnumerable<string> GetDynamicMemberNames()

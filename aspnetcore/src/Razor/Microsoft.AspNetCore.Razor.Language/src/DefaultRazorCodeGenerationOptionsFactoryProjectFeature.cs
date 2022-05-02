@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorCodeGenerationOptionsFactoryProjectFeature
     : RazorProjectEngineFeatureBase,
-      IRazorCodeGenerationOptionsFactoryProjectFeature
+        IRazorCodeGenerationOptionsFactoryProjectFeature
 {
     private IConfigureRazorCodeGenerationOptionsFeature[] _configureOptions;
 

@@ -75,10 +75,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             return snippetFunctionName switch
             {
                 "SimpleTypeName"
-                  => new SnippetFunctionSimpleTypeName(this, SubjectBuffer, fieldName, param),
+                    => new SnippetFunctionSimpleTypeName(this, SubjectBuffer, fieldName, param),
                 "ClassName" => new SnippetFunctionClassName(this, SubjectBuffer, fieldName),
                 "GenerateSwitchCases"
-                  => new SnippetFunctionGenerateSwitchCases(this, SubjectBuffer, fieldName, param),
+                    => new SnippetFunctionGenerateSwitchCases(
+                        this,
+                        SubjectBuffer,
+                        fieldName,
+                        param
+                    ),
                 _ => null,
             };
         }

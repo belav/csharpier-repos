@@ -53,13 +53,13 @@ public class UserOnlyStore<TUser, TContext> : UserOnlyStore<TUser, TContext, str
 /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
 public class UserOnlyStore<TUser, TContext, TKey>
     : UserOnlyStore<
-          TUser,
-          TContext,
-          TKey,
-          IdentityUserClaim<TKey>,
-          IdentityUserLogin<TKey>,
-          IdentityUserToken<TKey>
-      >
+        TUser,
+        TContext,
+        TKey,
+        IdentityUserClaim<TKey>,
+        IdentityUserLogin<TKey>,
+        IdentityUserToken<TKey>
+    >
     where TUser : IdentityUser<TKey>
     where TContext : DbContext
     where TKey : IEquatable<TKey>
@@ -84,19 +84,19 @@ public class UserOnlyStore<TUser, TContext, TKey>
 /// <typeparam name="TUserToken">The type representing a user token.</typeparam>
 public class UserOnlyStore<TUser, TContext, TKey, TUserClaim, TUserLogin, TUserToken>
     : UserStoreBase<TUser, TKey, TUserClaim, TUserLogin, TUserToken>,
-      IUserLoginStore<TUser>,
-      IUserClaimStore<TUser>,
-      IUserPasswordStore<TUser>,
-      IUserSecurityStampStore<TUser>,
-      IUserEmailStore<TUser>,
-      IUserLockoutStore<TUser>,
-      IUserPhoneNumberStore<TUser>,
-      IQueryableUserStore<TUser>,
-      IUserTwoFactorStore<TUser>,
-      IUserAuthenticationTokenStore<TUser>,
-      IUserAuthenticatorKeyStore<TUser>,
-      IUserTwoFactorRecoveryCodeStore<TUser>,
-      IProtectedUserStore<TUser>
+        IUserLoginStore<TUser>,
+        IUserClaimStore<TUser>,
+        IUserPasswordStore<TUser>,
+        IUserSecurityStampStore<TUser>,
+        IUserEmailStore<TUser>,
+        IUserLockoutStore<TUser>,
+        IUserPhoneNumberStore<TUser>,
+        IQueryableUserStore<TUser>,
+        IUserTwoFactorStore<TUser>,
+        IUserAuthenticationTokenStore<TUser>,
+        IUserAuthenticatorKeyStore<TUser>,
+        IUserTwoFactorRecoveryCodeStore<TUser>,
+        IProtectedUserStore<TUser>
     where TUser : IdentityUser<TKey>
     where TContext : DbContext
     where TKey : IEquatable<TKey>

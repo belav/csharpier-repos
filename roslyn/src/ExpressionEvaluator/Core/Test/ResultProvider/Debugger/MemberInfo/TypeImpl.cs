@@ -324,8 +324,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         map.TargetMethods,
                         (interfaceMethod, implementingMethod) =>
                             implementingMethod.Name.Contains(".")
-                              ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
-                              : null
+                                ? MakeExplicitInterfaceInfo(interfaceMethod, implementingMethod)
+                                : null
                     )
             );
             return infos.Where(i => i != null).ToArray();

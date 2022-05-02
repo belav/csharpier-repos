@@ -42,8 +42,8 @@ namespace System.CommandLine.Rendering
         public static ConsoleFormatInfo GetInstance(IFormatProvider formatProvider)
         {
             return formatProvider == null
-              ? CurrentInfo
-              : // Fast path for a null provider
+                ? CurrentInfo
+                : // Fast path for a null provider
                 GetProviderNonNull(formatProvider);
 
             static ConsoleFormatInfo GetProviderNonNull(IFormatProvider provider)

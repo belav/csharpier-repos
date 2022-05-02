@@ -90,8 +90,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             argumentsPropagateNullability: new[] { false, true },
                             returnType,
                             declaringType == typeof(DateTime)
-                              ? instance!.TypeMapping
-                              : _typeMappingSource.FindMapping(typeof(DateTime))
+                                ? instance!.TypeMapping
+                                : _typeMappingSource.FindMapping(typeof(DateTime))
                         );
 
                     case nameof(DateTime.TimeOfDay):
@@ -122,8 +122,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         );
 
                         return declaringType == typeof(DateTime)
-                          ? serverTranslation
-                          : _sqlExpressionFactory.Convert(serverTranslation, returnType);
+                            ? serverTranslation
+                            : _sqlExpressionFactory.Convert(serverTranslation, returnType);
 
                     case nameof(DateTime.Today):
                         return _sqlExpressionFactory.Function(

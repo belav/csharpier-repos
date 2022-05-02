@@ -120,8 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // [[rewritten body]]
             newBody = F.Block(
                 (object)cachedThis == null
-                  ? ImmutableArray.Create(cachedState)
-                  : ImmutableArray.Create(cachedState, cachedThis),
+                    ? ImmutableArray.Create(cachedState)
+                    : ImmutableArray.Create(cachedState, cachedThis),
                 F.HiddenSequencePoint(),
                 F.Assignment(F.Local(cachedState), F.Field(F.This(), stateField)),
                 CacheThisIfNeeded(),
@@ -431,8 +431,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(frame.parent.finalizeState == _currentFinallyFrame.finalizeState);
             rewrittenHandler = F.Block(
                 (object)this.cachedThis != null
-                  ? ImmutableArray.Create(this.cachedThis)
-                  : ImmutableArray<LocalSymbol>.Empty,
+                    ? ImmutableArray.Create(this.cachedThis)
+                    : ImmutableArray<LocalSymbol>.Empty,
                 F.Assignment(F.Field(F.This(), stateField), F.Literal(frame.parent.finalizeState)),
                 CacheThisIfNeeded(),
                 rewrittenHandler,

@@ -548,10 +548,10 @@ namespace Moq
                 ExpressionType.Parameter => false,
                 ExpressionType.Extension => !(expression is MatchExpression),
                 ExpressionType.Call
-                  => !((MethodCallExpression)expression).Method.IsDefined(
-                      typeof(MatcherAttribute),
-                      true
-                  ) && !expression.IsMatch(out _),
+                    => !((MethodCallExpression)expression).Method.IsDefined(
+                        typeof(MatcherAttribute),
+                        true
+                    ) && !expression.IsMatch(out _),
                 ExpressionType.MemberAccess => !expression.IsMatch(out _),
                 _ => true,
             };

@@ -1265,8 +1265,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             using (_gate.DisposableWait())
             {
                 return _allMetadataReferences.TryGetValue(fullPath, out var list)
-                  ? list
-                  : ImmutableArray<MetadataReferenceProperties>.Empty;
+                    ? list
+                    : ImmutableArray<MetadataReferenceProperties>.Empty;
             }
         }
 

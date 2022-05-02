@@ -1353,8 +1353,8 @@ namespace System.Runtime.Intrinsics
                     left.GetElementUnsafe(index),
                     right.GetElementUnsafe(index)
                 )
-                  ? Scalar<T>.AllBitsSet
-                  : default;
+                    ? Scalar<T>.AllBitsSet
+                    : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1452,8 +1452,8 @@ namespace System.Runtime.Intrinsics
                     left.GetElementUnsafe(index),
                     right.GetElementUnsafe(index)
                 )
-                  ? Scalar<T>.AllBitsSet
-                  : default;
+                    ? Scalar<T>.AllBitsSet
+                    : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1498,8 +1498,8 @@ namespace System.Runtime.Intrinsics
                     left.GetElementUnsafe(index),
                     right.GetElementUnsafe(index)
                 )
-                  ? Scalar<T>.AllBitsSet
-                  : default;
+                    ? Scalar<T>.AllBitsSet
+                    : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1544,8 +1544,8 @@ namespace System.Runtime.Intrinsics
                     left.GetElementUnsafe(index),
                     right.GetElementUnsafe(index)
                 )
-                  ? Scalar<T>.AllBitsSet
-                  : default;
+                    ? Scalar<T>.AllBitsSet
+                    : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1589,8 +1589,8 @@ namespace System.Runtime.Intrinsics
                     left.GetElementUnsafe(index),
                     right.GetElementUnsafe(index)
                 )
-                  ? Scalar<T>.AllBitsSet
-                  : default;
+                    ? Scalar<T>.AllBitsSet
+                    : default;
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1634,8 +1634,8 @@ namespace System.Runtime.Intrinsics
                     left.GetElementUnsafe(index),
                     right.GetElementUnsafe(index)
                 )
-                  ? left.GetElementUnsafe(index)
-                  : right.GetElementUnsafe(index);
+                    ? left.GetElementUnsafe(index)
+                    : right.GetElementUnsafe(index);
                 result.SetElementUnsafe(index, value);
             }
 
@@ -1658,8 +1658,8 @@ namespace System.Runtime.Intrinsics
                     left.GetElementUnsafe(index),
                     right.GetElementUnsafe(index)
                 )
-                  ? left.GetElementUnsafe(index)
-                  : right.GetElementUnsafe(index);
+                    ? left.GetElementUnsafe(index)
+                    : right.GetElementUnsafe(index);
                 result.SetElementUnsafe(index, value);
             }
 

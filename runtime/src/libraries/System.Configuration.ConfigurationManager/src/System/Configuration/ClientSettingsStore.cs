@@ -313,7 +313,7 @@ namespace System.Configuration
                     ConfigurationUserLevel.None => ClientHost.GetExeConfigPath(),
                     ConfigurationUserLevel.PerUserRoaming => ClientHost.GetRoamingUserConfigPath(),
                     ConfigurationUserLevel.PerUserRoamingAndLocal
-                      => ClientHost.GetLocalUserConfigPath(),
+                        => ClientHost.GetLocalUserConfigPath(),
                     _ => throw new ArgumentException(SR.UnknownUserLevel),
                 };
 

@@ -178,7 +178,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 : originalToken.ToString();
 
             return escape
-              ? originalToken.CopyAnnotationsTo(
+                ? originalToken.CopyAnnotationsTo(
                     SyntaxFactory.VerbatimIdentifier(
                         originalToken.LeadingTrivia,
                         unescapedText,
@@ -186,7 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         originalToken.TrailingTrivia
                     )
                 )
-              : originalToken.CopyAnnotationsTo(
+                : originalToken.CopyAnnotationsTo(
                     SyntaxFactory.Identifier(
                         originalToken.LeadingTrivia,
                         SyntaxKind.IdentifierToken,

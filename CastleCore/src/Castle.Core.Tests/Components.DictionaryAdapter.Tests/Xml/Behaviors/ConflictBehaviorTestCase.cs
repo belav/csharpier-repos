@@ -149,8 +149,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
             public class MultipleCopyAttribute
                 : DictionaryBehaviorAttribute,
-                  IDictionaryInitializer,
-                  IDictionaryCopyStrategy
+                    IDictionaryInitializer,
+                    IDictionaryCopyStrategy
             {
                 private bool copying;
 

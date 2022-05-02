@@ -97,10 +97,10 @@ namespace Microsoft.EntityFrameworkCore
         ) where TContext : DbContext =>
             withDependencyInjection
                 ? BuildServiceProviderWithFactory<TContext>()
-                  .GetService<IDbContextFactory<TContext>>()
+                    .GetService<IDbContextFactory<TContext>>()
                 : new PooledDbContextFactory<TContext>(
-                      ConfigureOptions(new DbContextOptionsBuilder<TContext>()).Options
-                  );
+                    ConfigureOptions(new DbContextOptionsBuilder<TContext>()).Options
+                );
 
         private static IDbContextFactory<TContext> BuildFactory<TContext>(
             bool withDependencyInjection,
@@ -108,11 +108,11 @@ namespace Microsoft.EntityFrameworkCore
         ) where TContext : DbContext =>
             withDependencyInjection
                 ? BuildServiceProviderWithFactory<TContext>(poolSize)
-                  .GetService<IDbContextFactory<TContext>>()
+                    .GetService<IDbContextFactory<TContext>>()
                 : new PooledDbContextFactory<TContext>(
-                      ConfigureOptions(new DbContextOptionsBuilder<TContext>()).Options,
-                      poolSize
-                  );
+                    ConfigureOptions(new DbContextOptionsBuilder<TContext>()).Options,
+                    poolSize
+                );
 
         private interface IPooledContext { }
 
@@ -567,11 +567,11 @@ namespace Microsoft.EntityFrameworkCore
                 useFactory
                     ? async
                         ? await serviceScope.ServiceProvider
-                              .GetService<IDbContextFactory<DbContext>>()!
-                              .CreateDbContextAsync()
+                            .GetService<IDbContextFactory<DbContext>>()!
+                            .CreateDbContextAsync()
                         : serviceScope.ServiceProvider
-                          .GetService<IDbContextFactory<DbContext>>()!
-                          .CreateDbContext()
+                            .GetService<IDbContextFactory<DbContext>>()!
+                            .CreateDbContext()
                     : serviceScope.ServiceProvider.GetService<DbContext>();
         }
 

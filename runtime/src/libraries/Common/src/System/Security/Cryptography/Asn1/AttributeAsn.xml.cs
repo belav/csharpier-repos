@@ -127,8 +127,8 @@ namespace System.Security.Cryptography.Asn1
                 {
                     tmpSpan = collectionReader.ReadEncodedValue();
                     tmpItem = rebindSpan.Overlaps(tmpSpan, out offset)
-                      ? rebind.Slice(offset, tmpSpan.Length)
-                      : tmpSpan.ToArray();
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                     tmpList.Add(tmpItem);
                 }
 

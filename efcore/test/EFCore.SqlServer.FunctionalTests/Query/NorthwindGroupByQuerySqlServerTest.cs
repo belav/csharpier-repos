@@ -11,8 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindGroupByQuerySqlServerTest
         : NorthwindGroupByQueryRelationalTestBase<
-              NorthwindQuerySqlServerFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+        >
     {
         // ReSharper disable once UnusedParameter.Local
         public NorthwindGroupByQuerySqlServerTest(

@@ -157,7 +157,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     )]
     internal partial class SerializationWithPerTypeAttributeContext
         : JsonSerializerContext,
-          ITestContext
+            ITestContext
     {
         public JsonSourceGenerationMode JsonSourceGenerationMode =>
             JsonSourceGenerationMode.Serialization;

@@ -9,8 +9,8 @@ namespace System.Globalization
         {
             object? datPath = AppContext.GetData("ICU_DAT_FILE_PATH");
             return (datPath != null)
-              ? Interop.Globalization.LoadICUData(datPath!.ToString()!)
-              : Interop.Globalization.LoadICU();
+                ? Interop.Globalization.LoadICUData(datPath!.ToString()!)
+                : Interop.Globalization.LoadICU();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ILCompiler.DependencyAnalysisFramework
 {
     public abstract class DependencyNodeCore<DependencyContextType>
         : DependencyNode,
-          IDependencyNode<DependencyContextType>
+            IDependencyNode<DependencyContextType>
     {
         public struct DependencyListEntry
         {

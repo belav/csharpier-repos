@@ -51,9 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 diagnostic.Id switch
                 {
                     IDEDiagnosticIds.UseBlockScopedNamespaceDiagnosticId
-                      => NamespaceDeclarationPreference.BlockScoped,
+                        => NamespaceDeclarationPreference.BlockScoped,
                     IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId
-                      => NamespaceDeclarationPreference.FileScoped,
+                        => NamespaceDeclarationPreference.FileScoped,
                     _ => throw ExceptionUtilities.UnexpectedValue(diagnostic.Id),
                 }
             );

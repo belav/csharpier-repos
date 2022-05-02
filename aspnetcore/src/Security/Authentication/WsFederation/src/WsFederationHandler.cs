@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation;
 /// </summary>
 public class WsFederationHandler
     : RemoteAuthenticationHandler<WsFederationOptions>,
-      IAuthenticationSignOutHandler
+        IAuthenticationSignOutHandler
 {
     private const string CorrelationProperty = ".xsrf";
     private WsFederationConfiguration? _configuration;

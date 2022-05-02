@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     {
         private class WrappedNamedTypeSymbol
             : AbstractWrappedNamespaceOrTypeSymbol,
-              INamedTypeSymbol
+                INamedTypeSymbol
         {
             private readonly INamedTypeSymbol _symbol;
             private readonly ImmutableArray<ISymbol> _members;
@@ -59,31 +59,31 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 m.Kind switch
                 {
                     SymbolKind.Field
-                      => new WrappedFieldSymbol((IFieldSymbol)m, docCommentFormattingService),
+                        => new WrappedFieldSymbol((IFieldSymbol)m, docCommentFormattingService),
                     SymbolKind.Event
-                      => new WrappedEventSymbol(
-                          (IEventSymbol)m,
-                          canImplementImplicitly,
-                          docCommentFormattingService
-                      ),
+                        => new WrappedEventSymbol(
+                            (IEventSymbol)m,
+                            canImplementImplicitly,
+                            docCommentFormattingService
+                        ),
                     SymbolKind.Method
-                      => new WrappedMethodSymbol(
-                          (IMethodSymbol)m,
-                          canImplementImplicitly,
-                          docCommentFormattingService
-                      ),
+                        => new WrappedMethodSymbol(
+                            (IMethodSymbol)m,
+                            canImplementImplicitly,
+                            docCommentFormattingService
+                        ),
                     SymbolKind.NamedType
-                      => new WrappedNamedTypeSymbol(
-                          (INamedTypeSymbol)m,
-                          canImplementImplicitly,
-                          docCommentFormattingService
-                      ),
+                        => new WrappedNamedTypeSymbol(
+                            (INamedTypeSymbol)m,
+                            canImplementImplicitly,
+                            docCommentFormattingService
+                        ),
                     SymbolKind.Property
-                      => new WrappedPropertySymbol(
-                          (IPropertySymbol)m,
-                          canImplementImplicitly,
-                          docCommentFormattingService
-                      ),
+                        => new WrappedPropertySymbol(
+                            (IPropertySymbol)m,
+                            canImplementImplicitly,
+                            docCommentFormattingService
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(m.Kind),
                 };
 

@@ -28,18 +28,18 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddImport)]
     internal class CSharpRemoveUnusedValuesCodeFixProvider
         : AbstractRemoveUnusedValuesCodeFixProvider<
-              ExpressionSyntax,
-              StatementSyntax,
-              BlockSyntax,
-              ExpressionStatementSyntax,
-              LocalDeclarationStatementSyntax,
-              VariableDeclaratorSyntax,
-              ForEachStatementSyntax,
-              SwitchSectionSyntax,
-              SwitchLabelSyntax,
-              CatchClauseSyntax,
-              CatchClauseSyntax
-          >
+            ExpressionSyntax,
+            StatementSyntax,
+            BlockSyntax,
+            ExpressionStatementSyntax,
+            LocalDeclarationStatementSyntax,
+            VariableDeclaratorSyntax,
+            ForEachStatementSyntax,
+            SwitchSectionSyntax,
+            SwitchLabelSyntax,
+            CatchClauseSyntax,
+            CatchClauseSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(
@@ -83,8 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                     return
                         newName.ValueText
                         == AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
-                      ? SyntaxFactory.DiscardDesignation().WithTriviaFrom(node)
-                      : SyntaxFactory.SingleVariableDesignation(newName).WithTriviaFrom(node);
+                        ? SyntaxFactory.DiscardDesignation().WithTriviaFrom(node)
+                        : SyntaxFactory.SingleVariableDesignation(newName).WithTriviaFrom(node);
 
                 case SyntaxKind.CatchDeclaration:
                     var catchDeclaration = (CatchDeclarationSyntax)node;

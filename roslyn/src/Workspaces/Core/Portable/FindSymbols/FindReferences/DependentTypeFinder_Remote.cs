@@ -95,11 +95,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var functionId = kind switch
             {
                 DependentTypesKind.DerivedClasses
-                  => FunctionId.DependentTypeFinder_FindAndCacheDerivedClassesAsync,
+                    => FunctionId.DependentTypeFinder_FindAndCacheDerivedClassesAsync,
                 DependentTypesKind.DerivedInterfaces
-                  => FunctionId.DependentTypeFinder_FindAndCacheDerivedInterfacesAsync,
+                    => FunctionId.DependentTypeFinder_FindAndCacheDerivedInterfacesAsync,
                 DependentTypesKind.ImplementingTypes
-                  => FunctionId.DependentTypeFinder_FindAndCacheImplementingTypesAsync,
+                    => FunctionId.DependentTypeFinder_FindAndCacheImplementingTypesAsync,
                 _ => throw ExceptionUtilities.UnexpectedValue(kind)
             };
 
@@ -108,29 +108,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var task = kind switch
                 {
                     DependentTypesKind.DerivedClasses
-                      => FindDerivedClassesInCurrentProcessAsync(
-                          type,
-                          solution,
-                          projects,
-                          transitive,
-                          cancellationToken
-                      ),
+                        => FindDerivedClassesInCurrentProcessAsync(
+                            type,
+                            solution,
+                            projects,
+                            transitive,
+                            cancellationToken
+                        ),
                     DependentTypesKind.DerivedInterfaces
-                      => FindDerivedInterfacesInCurrentProcessAsync(
-                          type,
-                          solution,
-                          projects,
-                          transitive,
-                          cancellationToken
-                      ),
+                        => FindDerivedInterfacesInCurrentProcessAsync(
+                            type,
+                            solution,
+                            projects,
+                            transitive,
+                            cancellationToken
+                        ),
                     DependentTypesKind.ImplementingTypes
-                      => FindImplementingTypesInCurrentProcessAsync(
-                          type,
-                          solution,
-                          projects,
-                          transitive,
-                          cancellationToken
-                      ),
+                        => FindImplementingTypesInCurrentProcessAsync(
+                            type,
+                            solution,
+                            projects,
+                            transitive,
+                            cancellationToken
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(kind)
                 };
 

@@ -296,8 +296,8 @@ namespace Microsoft.CodeAnalysis
                         InvariantCultureDisplay,
                         StringComparison.OrdinalIgnoreCase
                     )
-                      ? null
-                      : propertyValue;
+                        ? null
+                        : propertyValue;
                     parsedParts |= AssemblyIdentityParts.Culture;
                 }
                 else if (

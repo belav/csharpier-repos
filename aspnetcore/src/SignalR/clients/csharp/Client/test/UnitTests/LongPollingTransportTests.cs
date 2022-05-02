@@ -397,8 +397,8 @@ public class LongPollingTransportTests : VerifiableLoggedTest
                     else
                     {
                         return stopped
-                          ? ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
-                          : ResponseUtils.CreateResponse(HttpStatusCode.OK);
+                            ? ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                            : ResponseUtils.CreateResponse(HttpStatusCode.OK);
                     }
                 }
             );

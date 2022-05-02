@@ -17,10 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeProperty2))]
     public sealed partial class CodeProperty
         : AbstractCodeMember,
-          ICodeElementContainer<CodeParameter>,
-          ICodeElementContainer<CodeAttribute>,
-          EnvDTE.CodeProperty,
-          EnvDTE80.CodeProperty2
+            ICodeElementContainer<CodeParameter>,
+            ICodeElementContainer<CodeAttribute>,
+            EnvDTE.CodeProperty,
+            EnvDTE80.CodeProperty2
     {
         internal static EnvDTE.CodeProperty Create(
             CodeModelState state,

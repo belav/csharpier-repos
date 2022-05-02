@@ -14,9 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyLinqExpression
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class CSharpSimplifyLinqExpressionDiagnosticAnalyzer
         : AbstractSimplifyLinqExpressionDiagnosticAnalyzer<
-              InvocationExpressionSyntax,
-              MemberAccessExpressionSyntax
-          >
+            InvocationExpressionSyntax,
+            MemberAccessExpressionSyntax
+        >
     {
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

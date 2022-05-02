@@ -112,8 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         /// </summary>
         public virtual CosmosClient Client =>
             _client ??= string.IsNullOrEmpty(_connectionString)
-              ? new CosmosClient(_endpoint, _key, _options)
-              : new CosmosClient(_connectionString, _options);
+                ? new CosmosClient(_endpoint, _key, _options)
+                : new CosmosClient(_connectionString, _options);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

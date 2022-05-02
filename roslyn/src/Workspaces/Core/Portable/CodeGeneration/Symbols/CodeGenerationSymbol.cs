@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         )
         {
             return annotations.IsNullOrEmpty()
-              ? this
-              : AddAnnotationsTo(this, this.Clone(), annotations);
+                ? this
+                : AddAnnotationsTo(this, this.Clone(), annotations);
         }
 
         private static CodeGenerationSymbol AddAnnotationsTo(

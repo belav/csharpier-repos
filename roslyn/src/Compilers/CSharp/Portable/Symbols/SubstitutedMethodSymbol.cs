@@ -169,8 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var method = OriginalDefinition.ReducedFrom;
                 return ((object)method == null)
-                  ? null
-                  : method.Construct(this.TypeArgumentsWithAnnotations);
+                    ? null
+                    : method.Construct(this.TypeArgumentsWithAnnotations);
             }
         }
 
@@ -236,8 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 Symbol underlying = OriginalDefinition.AssociatedSymbol;
                 return ((object)underlying == null)
-                  ? null
-                  : underlying.SymbolAsMember(ContainingType);
+                    ? null
+                    : underlying.SymbolAsMember(ContainingType);
             }
         }
 

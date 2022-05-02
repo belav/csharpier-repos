@@ -31,7 +31,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     [Export]
     internal class VisualStudioActiveDocumentTracker
         : ForegroundThreadAffinitizedObject,
-          IVsSelectionEvents
+            IVsSelectionEvents
     {
         private readonly IVsEditorAdaptersFactoryService _editorAdaptersFactoryService;
 

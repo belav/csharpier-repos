@@ -242,8 +242,8 @@ namespace System.Security.AccessControl.Tests
                 new SecurityIdentifier("S-1-1-0"),
                 -1,
                 isContainer
-                  ? InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit
-                  : InheritanceFlags.None,
+                    ? InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit
+                    : InheritanceFlags.None,
                 PropagationFlags.None
             );
             craftedBForm = new byte[craftedDacl.BinaryLength];

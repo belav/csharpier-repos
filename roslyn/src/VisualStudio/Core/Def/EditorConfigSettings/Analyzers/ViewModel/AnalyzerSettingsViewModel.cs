@@ -14,10 +14,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
 {
     internal partial class AnalyzerSettingsViewModel
         : SettingsViewModelBase<
-              AnalyzerSetting,
-              AnalyzerSettingsViewModel.SettingsSnapshotFactory,
-              AnalyzerSettingsViewModel.SettingsEntriesSnapshot
-          >
+            AnalyzerSetting,
+            AnalyzerSettingsViewModel.SettingsSnapshotFactory,
+            AnalyzerSettingsViewModel.SettingsEntriesSnapshot
+        >
     {
         public AnalyzerSettingsViewModel(
             ISettingsProvider<AnalyzerSetting> data,

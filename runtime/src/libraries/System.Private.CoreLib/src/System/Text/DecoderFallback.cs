@@ -229,8 +229,8 @@ namespace System.Text
                     index: _originalByteCount - remainingBytes.Length
                 )
             )
-              ? DrainRemainingDataForGetCharCount()
-              : 0;
+                ? DrainRemainingDataForGetCharCount()
+                : 0;
         }
 
         internal bool TryInternalFallbackGetChars(

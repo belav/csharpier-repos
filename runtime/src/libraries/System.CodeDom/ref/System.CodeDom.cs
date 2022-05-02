@@ -1340,8 +1340,8 @@ namespace System.CodeDom
 
     public partial class CodeNamespaceImportCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public CodeNamespaceImportCollection() { }
 
@@ -2300,7 +2300,7 @@ namespace System.CodeDom.Compiler
 {
     public abstract partial class CodeCompiler
         : System.CodeDom.Compiler.CodeGenerator,
-          System.CodeDom.Compiler.ICodeCompiler
+            System.CodeDom.Compiler.ICodeCompiler
     {
         protected CodeCompiler() { }
 
@@ -3459,8 +3459,8 @@ namespace System.CodeDom.Compiler
 
     public partial class TempFileCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.IDisposable
+            System.Collections.IEnumerable,
+            System.IDisposable
     {
         public TempFileCollection() { }
 

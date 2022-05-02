@@ -86,7 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
         private sealed class UncancellableWaitContext
             : IWaitContext,
-              VisualStudioIndicator.IWaitContext
+                VisualStudioIndicator.IWaitContext
         {
             public CancellationToken CancellationToken
             {

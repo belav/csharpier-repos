@@ -23,7 +23,7 @@ namespace System.Web.Http.Tracing.Tracers
     )]
     internal class AuthorizationFilterAttributeTracer
         : AuthorizationFilterAttribute,
-          IDecorator<AuthorizationFilterAttribute>
+            IDecorator<AuthorizationFilterAttribute>
     {
         private readonly AuthorizationFilterAttribute _innerFilter;
         private readonly ITraceWriter _traceStore;

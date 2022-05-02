@@ -16,9 +16,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new ActionBlock<int>(
-                              i => { },
-                              new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            i => { },
+                            new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new ActionBlock<int>(i => { })
             );
 
@@ -27,20 +27,17 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new ActionBlock<int>(
-                              i => { },
-                              new ExecutionDataflowBlockOptions()
-                              {
-                                  NameFormat = nameFormat,
-                                  SingleProducerConstrained = true
-                              }
-                          )
+                            i => { },
+                            new ExecutionDataflowBlockOptions()
+                            {
+                                NameFormat = nameFormat,
+                                SingleProducerConstrained = true
+                            }
+                        )
                         : new ActionBlock<int>(
-                              i => { },
-                              new ExecutionDataflowBlockOptions()
-                              {
-                                  SingleProducerConstrained = true
-                              }
-                          )
+                            i => { },
+                            new ExecutionDataflowBlockOptions() { SingleProducerConstrained = true }
+                        )
             );
         }
 
@@ -415,13 +412,13 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     ActionBlock<int> ab = sync
                         ? new ActionBlock<int>(body, options)
                         : new ActionBlock<int>(
-                              async i =>
-                              {
-                                  await Task.Yield();
-                                  body(i);
-                              },
-                              options
-                          );
+                            async i =>
+                            {
+                                await Task.Yield();
+                                body(i);
+                            },
+                            options
+                        );
 
                     const int MaxValue = 10;
                     ab.PostRange(0, MaxValue);
@@ -573,9 +570,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     ActionBlock<int> ab = sync
                         ? new ActionBlock<int>(_ => barrier.SignalAndWait(), options)
                         : new ActionBlock<int>(
-                              _ => Task.Run(() => barrier.SignalAndWait()),
-                              options
-                          );
+                            _ => Task.Run(() => barrier.SignalAndWait()),
+                            options
+                        );
 
                     int iters = dop * 4;
                     ab.PostRange(0, iters);

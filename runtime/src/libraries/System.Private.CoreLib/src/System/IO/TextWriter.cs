@@ -560,10 +560,10 @@ namespace System.IO
         )
         {
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : value == null
-                  ? Task.CompletedTask
-                  : WriteAsyncCore(value, cancellationToken);
+                ? Task.FromCanceled(cancellationToken)
+                : value == null
+                    ? Task.CompletedTask
+                    : WriteAsyncCore(value, cancellationToken);
 
             async Task WriteAsyncCore(StringBuilder sb, CancellationToken ct)
             {
@@ -606,16 +606,16 @@ namespace System.IO
                 : MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
                     ? WriteAsync(array.Array!, array.Offset, array.Count)
                     : Task.Factory.StartNew(
-                          static state =>
-                          {
-                              var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
-                              t.Item1.Write(t.Item2.Span);
-                          },
-                          new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer),
-                          cancellationToken,
-                          TaskCreationOptions.DenyChildAttach,
-                          TaskScheduler.Default
-                      );
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
+                            t.Item1.Write(t.Item2.Span);
+                        },
+                        new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
 
         public virtual Task WriteLineAsync(char value) =>
             Task.Factory.StartNew(
@@ -655,10 +655,10 @@ namespace System.IO
         )
         {
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : value == null
-                  ? WriteAsync(CoreNewLine, cancellationToken)
-                  : WriteLineAsyncCore(value, cancellationToken);
+                ? Task.FromCanceled(cancellationToken)
+                : value == null
+                    ? WriteAsync(CoreNewLine, cancellationToken)
+                    : WriteLineAsyncCore(value, cancellationToken);
 
             async Task WriteLineAsyncCore(StringBuilder sb, CancellationToken ct)
             {
@@ -702,16 +702,16 @@ namespace System.IO
                 : MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
                     ? WriteLineAsync(array.Array!, array.Offset, array.Count)
                     : Task.Factory.StartNew(
-                          static state =>
-                          {
-                              var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
-                              t.Item1.WriteLine(t.Item2.Span);
-                          },
-                          new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer),
-                          cancellationToken,
-                          TaskCreationOptions.DenyChildAttach,
-                          TaskScheduler.Default
-                      );
+                        static state =>
+                        {
+                            var t = (TupleSlim<TextWriter, ReadOnlyMemory<char>>)state!;
+                            t.Item1.WriteLine(t.Item2.Span);
+                        },
+                        new TupleSlim<TextWriter, ReadOnlyMemory<char>>(this, buffer),
+                        cancellationToken,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
 
         public virtual Task WriteLineAsync()
         {

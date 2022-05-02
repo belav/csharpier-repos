@@ -580,8 +580,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                     SqlGenerationHelper.GenerateParameterNamePlaceholder(
                         commandStringBuilder,
                         useOriginalValue
-                          ? columnModification.OriginalParameterName!
-                          : columnModification.ParameterName!
+                            ? columnModification.OriginalParameterName!
+                            : columnModification.ParameterName!
                     );
                 }
             }

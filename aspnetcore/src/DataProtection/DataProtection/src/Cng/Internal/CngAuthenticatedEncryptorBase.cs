@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.DataProtection.Cng.Internal;
 /// </summary>
 internal abstract unsafe class CngAuthenticatedEncryptorBase
     : IOptimizedAuthenticatedEncryptor,
-      IDisposable
+        IDisposable
 {
     public byte[] Decrypt(
         ArraySegment<byte> ciphertext,
@@ -33,12 +33,14 @@ internal abstract unsafe class CngAuthenticatedEncryptorBase
                 {
                     return DecryptImpl(
                         pbCiphertext: (pbCiphertextArray != null)
-                          ? &pbCiphertextArray[ciphertext.Offset]
-                          : &dummy,
+                            ? &pbCiphertextArray[ciphertext.Offset]
+                            : &dummy,
                         cbCiphertext: (uint)ciphertext.Count,
                         pbAdditionalAuthenticatedData: (pbAdditionalAuthenticatedDataArray != null)
-                          ? &pbAdditionalAuthenticatedDataArray[additionalAuthenticatedData.Offset]
-                          : &dummy,
+                            ? &pbAdditionalAuthenticatedDataArray[
+                                additionalAuthenticatedData.Offset
+                            ]
+                            : &dummy,
                         cbAdditionalAuthenticatedData: (uint)additionalAuthenticatedData.Count
                     );
                 }
@@ -90,12 +92,14 @@ internal abstract unsafe class CngAuthenticatedEncryptorBase
                 {
                     return EncryptImpl(
                         pbPlaintext: (pbPlaintextArray != null)
-                          ? &pbPlaintextArray[plaintext.Offset]
-                          : &dummy,
+                            ? &pbPlaintextArray[plaintext.Offset]
+                            : &dummy,
                         cbPlaintext: (uint)plaintext.Count,
                         pbAdditionalAuthenticatedData: (pbAdditionalAuthenticatedDataArray != null)
-                          ? &pbAdditionalAuthenticatedDataArray[additionalAuthenticatedData.Offset]
-                          : &dummy,
+                            ? &pbAdditionalAuthenticatedDataArray[
+                                additionalAuthenticatedData.Offset
+                            ]
+                            : &dummy,
                         cbAdditionalAuthenticatedData: (uint)additionalAuthenticatedData.Count,
                         cbPreBuffer: preBufferSize,
                         cbPostBuffer: postBufferSize

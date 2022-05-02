@@ -1521,12 +1521,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BinaryOperatorKind.LessThan:
                 case BinaryOperatorKind.LessThanOrEqual:
                     return result.SpecialType == SpecialType.System_Boolean
-                      ? LiftingResult.LiftOperandsButNotResult
-                      : LiftingResult.NotLifted;
+                        ? LiftingResult.LiftOperandsButNotResult
+                        : LiftingResult.NotLifted;
                 default:
                     return result.IsValueType && !result.IsNullableType()
-                      ? LiftingResult.LiftOperandsAndResult
-                      : LiftingResult.NotLifted;
+                        ? LiftingResult.LiftOperandsAndResult
+                        : LiftingResult.NotLifted;
             }
         }
 
@@ -1690,8 +1690,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 return (op1.Priority.GetValueOrDefault() < op2.Priority.GetValueOrDefault())
-                  ? BetterResult.Left
-                  : BetterResult.Right;
+                    ? BetterResult.Left
+                    : BetterResult.Right;
             }
 
             BetterResult leftBetter = BetterConversionFromExpression(

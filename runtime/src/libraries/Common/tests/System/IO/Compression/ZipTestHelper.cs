@@ -319,10 +319,10 @@ namespace System.IO.Compression.Tests
         {
             Debug.Assert(!(name.Contains("\\") && name.Contains("/")));
             return name.Contains("\\")
-              ? name.Replace("\\", "/")
-              : name.Contains("/")
-                  ? name.Replace("/", "\\")
-                  : name;
+                ? name.Replace("\\", "/")
+                : name.Contains("/")
+                    ? name.Replace("/", "\\")
+                    : name;
         }
 
         public static void DirsEqual(string actual, string expected)

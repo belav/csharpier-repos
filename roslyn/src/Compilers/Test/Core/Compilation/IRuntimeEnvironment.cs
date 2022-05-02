@@ -104,8 +104,8 @@ namespace Roslyn.Test.Utilities
         private static IEnumerable<ModuleMetadata> EnumerateModules(Metadata metadata)
         {
             return (metadata.Kind == MetadataImageKind.Assembly)
-              ? ((AssemblyMetadata)metadata).GetModules().AsEnumerable()
-              : SpecializedCollections.SingletonEnumerable((ModuleMetadata)metadata);
+                ? ((AssemblyMetadata)metadata).GetModules().AsEnumerable()
+                : SpecializedCollections.SingletonEnumerable((ModuleMetadata)metadata);
         }
 
         /// <summary>

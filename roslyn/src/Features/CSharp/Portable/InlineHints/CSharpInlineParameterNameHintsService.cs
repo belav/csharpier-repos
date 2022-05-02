@@ -119,7 +119,7 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                 PrefixUnaryExpressionSyntax prefix => GetKind(prefix.Operand),
                 // Treat `expr!` the same as `expr` (i.e. treat `!` as if it's just trivia).
                 PostfixUnaryExpressionSyntax(SyntaxKind.SuppressNullableWarningExpression) postfix
-                  => GetKind(postfix.Operand),
+                    => GetKind(postfix.Operand),
                 _ => HintKind.Other,
             };
 

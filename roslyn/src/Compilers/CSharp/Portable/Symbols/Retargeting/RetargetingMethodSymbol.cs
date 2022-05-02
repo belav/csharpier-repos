@@ -202,8 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 var associatedPropertyOrEvent = _underlyingMethod.AssociatedSymbol;
                 return (object)associatedPropertyOrEvent == null
-                  ? null
-                  : this.RetargetingTranslator.Retarget(associatedPropertyOrEvent);
+                    ? null
+                    : this.RetargetingTranslator.Retarget(associatedPropertyOrEvent);
             }
         }
 
@@ -368,11 +368,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             get
             {
                 return _underlyingMethod.RequiresExplicitOverride(out _)
-                  ? this.RetargetingTranslator.Retarget(
+                    ? this.RetargetingTranslator.Retarget(
                         _underlyingMethod.OverriddenMethod,
                         MemberSignatureComparer.RetargetedExplicitImplementationComparer
                     )
-                  : null;
+                    : null;
             }
         }
 

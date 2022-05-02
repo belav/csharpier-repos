@@ -469,8 +469,8 @@ namespace System.Speech.Internal.SrgsCompiler
                     sb.Append('#');
                     sb.Append(
                         arc.Start != null
-                          ? arc.Start._id.ToString(CultureInfo.InvariantCulture)
-                          : "S"
+                            ? arc.Start._id.ToString(CultureInfo.InvariantCulture)
+                            : "S"
                     );
                     sb.Append(' ');
                     sb.Append(arc.DebuggerDisplayTags());

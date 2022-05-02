@@ -261,8 +261,8 @@ namespace Roslyn.Utilities
             {
                 // handles c: and c:\
                 return length >= 3 && IsDirectorySeparator(path[2])
-                  ? path.Substring(0, 3)
-                  : path.Substring(0, 2);
+                    ? path.Substring(0, 3)
+                    : path.Substring(0, 2);
             }
             else
             {
@@ -693,8 +693,8 @@ namespace Roslyn.Utilities
             }
 
             return IsUnixLikePlatform
-              ? x == y
-              : char.ToUpperInvariant(x) == char.ToUpperInvariant(y);
+                ? x == y
+                : char.ToUpperInvariant(x) == char.ToUpperInvariant(y);
         }
 
         private static int PathHashCode(string? path)
@@ -746,10 +746,10 @@ namespace Roslyn.Utilities
                     bool hasSlash = replacementPrefix.IndexOf('/') >= 0;
                     bool hasBackslash = replacementPrefix.IndexOf('\\') >= 0;
                     return (hasSlash && !hasBackslash)
-                      ? replacement.Replace('\\', '/')
-                      : (hasBackslash && !hasSlash)
-                          ? replacement.Replace('/', '\\')
-                          : replacement;
+                        ? replacement.Replace('\\', '/')
+                        : (hasBackslash && !hasSlash)
+                            ? replacement.Replace('/', '\\')
+                            : replacement;
                 }
             }
 

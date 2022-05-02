@@ -717,10 +717,10 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     var newNameToken =
                         preference == UnusedValuePreference.DiscardVariable
                             ? document
-                              .GetRequiredLanguageService<SyntaxGeneratorInternal>()
-                              .Identifier(
-                                  AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
-                              )
+                                .GetRequiredLanguageService<SyntaxGeneratorInternal>()
+                                .Identifier(
+                                    AbstractRemoveUnusedParametersAndValuesDiagnosticAnalyzer.DiscardVariableName
+                                )
                             : nameGenerator.GenerateUniqueNameAtSpanStart(node);
                     newLocalNameOpt = newNameToken.ValueText;
                     var newNameNode = TryUpdateNameForFlaggedNode(node, newNameToken);

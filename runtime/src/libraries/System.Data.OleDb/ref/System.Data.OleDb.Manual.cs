@@ -9,9 +9,9 @@ namespace System.Data.OleDb
     [System.ComponentModel.TypeConverterAttribute(typeof(OleDbParameter.OleDbParameterConverter))]
     public sealed partial class OleDbParameter
         : System.Data.Common.DbParameter,
-          System.Data.IDataParameter,
-          System.Data.IDbDataParameter,
-          System.ICloneable
+            System.Data.IDataParameter,
+            System.Data.IDbDataParameter,
+            System.ICloneable
     {
         internal sealed class OleDbParameterConverter
             : System.ComponentModel.ExpandableObjectConverter { }

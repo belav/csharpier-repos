@@ -65,8 +65,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             if (propertyBackingField.IsStatic)
             {
                 return propertyBackingField.ContainingType == null
-                  ? memberName
-                  : generator.MemberAccessExpression(
+                    ? memberName
+                    : generator.MemberAccessExpression(
                         generator.TypeExpression(propertyBackingField.ContainingType),
                         memberName
                     );
@@ -229,8 +229,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                 var writeValue = replacer._syntaxFacts.IsOperandOfIncrementExpression(
                     replacer._expression
                 )
-                  ? replacer.Generator.AddExpression(readExpression, literalOne)
-                  : replacer.Generator.SubtractExpression(readExpression, literalOne);
+                    ? replacer.Generator.AddExpression(readExpression, literalOne)
+                    : replacer.Generator.SubtractExpression(readExpression, literalOne);
 
                 return (TExpressionSyntax)writeValue;
             };

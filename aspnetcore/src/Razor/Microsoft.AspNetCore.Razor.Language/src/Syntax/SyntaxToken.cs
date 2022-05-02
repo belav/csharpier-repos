@@ -41,15 +41,15 @@ internal class SyntaxToken : RazorSyntaxNode
     public SyntaxToken WithLeadingTrivia(SyntaxNode trivia)
     {
         return Green != null
-          ? new SyntaxToken(Green.WithLeadingTrivia(trivia.Green), parent: null, position: 0)
-          : default(SyntaxToken);
+            ? new SyntaxToken(Green.WithLeadingTrivia(trivia.Green), parent: null, position: 0)
+            : default(SyntaxToken);
     }
 
     public SyntaxToken WithTrailingTrivia(SyntaxNode trivia)
     {
         return Green != null
-          ? new SyntaxToken(Green.WithTrailingTrivia(trivia.Green), parent: null, position: 0)
-          : default(SyntaxToken);
+            ? new SyntaxToken(Green.WithTrailingTrivia(trivia.Green), parent: null, position: 0)
+            : default(SyntaxToken);
     }
 
     public SyntaxToken WithLeadingTrivia(IEnumerable<SyntaxTrivia> trivia)

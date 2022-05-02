@@ -190,8 +190,8 @@ namespace System
             set
             {
                 _path = string.IsNullOrEmpty(value)
-                  ? "/"
-                  : Uri.InternalEscapeString(value.Replace('\\', '/'));
+                    ? "/"
+                    : Uri.InternalEscapeString(value.Replace('\\', '/'));
                 _changed = true;
             }
         }

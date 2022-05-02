@@ -36,10 +36,10 @@ static class PathExtensions
         path
         + (
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-              ? ".dll"
-              : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-                  ? ".dylib"
-                  : ".so"
+                ? ".dll"
+                : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                    ? ".dylib"
+                    : ".so"
         );
 
     internal static string ToAbsolutePath(this string argValue) => Path.GetFullPath(argValue);
@@ -342,6 +342,6 @@ static class PathExtensions
 
     public static StringComparer OSPathCaseComparer =>
         RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-          ? StringComparer.OrdinalIgnoreCase
-          : StringComparer.Ordinal;
+            ? StringComparer.OrdinalIgnoreCase
+            : StringComparer.Ordinal;
 }

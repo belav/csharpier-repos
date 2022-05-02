@@ -24,11 +24,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
     {
         internal new class State
             : AbstractGenerateParameterizedMemberService<
-                  TService,
-                  TSimpleNameSyntax,
-                  TExpressionSyntax,
-                  TInvocationExpressionSyntax
-              >.State
+                TService,
+                TSimpleNameSyntax,
+                TExpressionSyntax,
+                TInvocationExpressionSyntax
+            >.State
         {
             public static async Task<State> GenerateMethodStateAsync(
                 TService service,

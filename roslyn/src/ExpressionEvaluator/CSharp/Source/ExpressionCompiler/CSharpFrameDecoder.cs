@@ -16,12 +16,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     ]
     internal sealed class CSharpFrameDecoder
         : FrameDecoder<
-              CSharpCompilation,
-              MethodSymbol,
-              PEModuleSymbol,
-              TypeSymbol,
-              TypeParameterSymbol
-          >
+            CSharpCompilation,
+            MethodSymbol,
+            PEModuleSymbol,
+            TypeSymbol,
+            TypeParameterSymbol
+        >
     {
         public CSharpFrameDecoder() : base(CSharpInstructionDecoder.Instance) { }
     }

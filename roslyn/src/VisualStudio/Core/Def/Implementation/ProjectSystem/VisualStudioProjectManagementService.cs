@@ -22,7 +22,7 @@ namespace Roslyn.VisualStudio.Services.Implementation.ProjectSystem
     [ExportWorkspaceService(typeof(IProjectManagementService), ServiceLayer.Host), Shared]
     internal class VisualStudioProjectManagementService
         : ForegroundThreadAffinitizedObject,
-          IProjectManagementService
+            IProjectManagementService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

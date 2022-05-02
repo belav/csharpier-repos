@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class SuppressChecksumOptionsFeature
     : RazorEngineFeatureBase,
-      IConfigureRazorCodeGenerationOptionsFeature
+        IConfigureRazorCodeGenerationOptionsFeature
 {
     public int Order { get; set; }
 

@@ -8,8 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindQueryFiltersQuerySqliteTest
         : NorthwindQueryFiltersQueryTestBase<
-              NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer>
-          >
+            NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer>
+        >
     {
         public NorthwindQueryFiltersQuerySqliteTest(
             NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer> fixture,

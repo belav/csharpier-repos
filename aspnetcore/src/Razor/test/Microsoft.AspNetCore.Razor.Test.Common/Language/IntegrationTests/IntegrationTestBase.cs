@@ -837,7 +837,7 @@ public abstract class IntegrationTestBase
     // 'Default' imports won't have normalized line-endings, which is unfriendly for testing.
     private class NormalizedDefaultImportFeature
         : RazorProjectEngineFeatureBase,
-          IImportProjectFeature
+            IImportProjectFeature
     {
         private readonly IImportProjectFeature _inner;
         private readonly string _lineEnding;

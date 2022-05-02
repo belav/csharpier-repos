@@ -17,9 +17,9 @@ namespace Microsoft.AspNetCore.Mvc;
 )]
 public class FromHeaderAttribute
     : Attribute,
-      IBindingSourceMetadata,
-      IModelNameProvider,
-      IFromHeaderMetadata
+        IBindingSourceMetadata,
+        IModelNameProvider,
+        IFromHeaderMetadata
 {
     /// <inheritdoc />
     public BindingSource BindingSource => BindingSource.Header;

@@ -814,9 +814,9 @@ namespace JIT.HardwareIntrinsics.X86
             if (
                 ((BitConverter.DoubleToInt64Bits(thirdOp[0]) >> 63) & 1) == 1
                     ? BitConverter.DoubleToInt64Bits(secondOp[0])
-                      != BitConverter.DoubleToInt64Bits(result[0])
+                        != BitConverter.DoubleToInt64Bits(result[0])
                     : BitConverter.DoubleToInt64Bits(firstOp[0])
-                      != BitConverter.DoubleToInt64Bits(result[0])
+                        != BitConverter.DoubleToInt64Bits(result[0])
             )
             {
                 succeeded = false;
@@ -828,9 +828,9 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         ((BitConverter.DoubleToInt64Bits(thirdOp[i]) >> 63) & 1) == 1
                             ? BitConverter.DoubleToInt64Bits(secondOp[i])
-                              != BitConverter.DoubleToInt64Bits(result[i])
+                                != BitConverter.DoubleToInt64Bits(result[i])
                             : BitConverter.DoubleToInt64Bits(firstOp[i])
-                              != BitConverter.DoubleToInt64Bits(result[i])
+                                != BitConverter.DoubleToInt64Bits(result[i])
                     )
                     {
                         succeeded = false;

@@ -258,8 +258,8 @@ namespace Microsoft.CodeAnalysis
                     cultureName,
                     InvariantCultureDisplay
                 )
-              ? string.Empty
-              : cultureName;
+                ? string.Empty
+                : cultureName;
         }
 
         private static void InitializeKey(

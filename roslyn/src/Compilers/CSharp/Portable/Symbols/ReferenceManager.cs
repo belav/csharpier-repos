@@ -642,8 +642,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     hasCircularReference,
                                     resolutionDiagnostics.ToReadOnly(),
                                     ReferenceEquals(corLibrary, assemblySymbol)
-                                      ? null!
-                                      : corLibrary, // https://github.com/dotnet/roslyn/issues/40751 Unnecessary suppression
+                                        ? null!
+                                        : corLibrary, // https://github.com/dotnet/roslyn/issues/40751 Unnecessary suppression
                                     modules,
                                     moduleReferences,
                                     assemblySymbol.SourceModule.GetReferencedAssemblySymbols(),

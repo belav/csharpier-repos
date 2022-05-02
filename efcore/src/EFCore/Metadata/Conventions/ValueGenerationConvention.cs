@@ -18,11 +18,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class ValueGenerationConvention
         : IEntityTypePrimaryKeyChangedConvention,
-          IForeignKeyAddedConvention,
-          IForeignKeyRemovedConvention,
-          IForeignKeyPropertiesChangedConvention,
-          IEntityTypeBaseTypeChangedConvention,
-          IForeignKeyOwnershipChangedConvention
+            IForeignKeyAddedConvention,
+            IForeignKeyRemovedConvention,
+            IForeignKeyPropertiesChangedConvention,
+            IEntityTypeBaseTypeChangedConvention,
+            IForeignKeyOwnershipChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ValueGenerationConvention" />.

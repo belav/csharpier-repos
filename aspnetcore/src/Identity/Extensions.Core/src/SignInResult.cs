@@ -84,13 +84,13 @@ public class SignInResult
     public override string ToString()
     {
         return IsLockedOut
-          ? "Lockedout"
-          : IsNotAllowed
-              ? "NotAllowed"
-              : RequiresTwoFactor
-                  ? "RequiresTwoFactor"
-                  : Succeeded
-                      ? "Succeeded"
-                      : "Failed";
+            ? "Lockedout"
+            : IsNotAllowed
+                ? "NotAllowed"
+                : RequiresTwoFactor
+                    ? "RequiresTwoFactor"
+                    : Succeeded
+                        ? "Succeeded"
+                        : "Failed";
     }
 }

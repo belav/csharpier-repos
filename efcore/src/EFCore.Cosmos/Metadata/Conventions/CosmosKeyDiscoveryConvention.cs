@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class CosmosKeyDiscoveryConvention
         : KeyDiscoveryConvention,
-          IEntityTypeAnnotationChangedConvention
+            IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CosmosKeyDiscoveryConvention" />.

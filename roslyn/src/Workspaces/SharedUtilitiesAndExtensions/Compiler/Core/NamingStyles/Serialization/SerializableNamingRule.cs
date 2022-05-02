@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 {
     internal sealed class SerializableNamingRule
         : IEquatable<SerializableNamingRule>,
-          IObjectWritable
+            IObjectWritable
     {
         public Guid SymbolSpecificationID;
         public Guid NamingStyleID;

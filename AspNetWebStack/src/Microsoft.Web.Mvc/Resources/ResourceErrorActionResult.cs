@@ -30,8 +30,8 @@ namespace Microsoft.Web.Mvc.Resources
         {
             this.statusCode = (HttpStatusCode)httpException.GetHttpCode();
             this.details = httpException.Data.Contains("details")
-              ? httpException.Data["details"]
-              : httpException.ToString();
+                ? httpException.Data["details"]
+                : httpException.ToString();
             this.responseFormat = responseFormat;
         }
 

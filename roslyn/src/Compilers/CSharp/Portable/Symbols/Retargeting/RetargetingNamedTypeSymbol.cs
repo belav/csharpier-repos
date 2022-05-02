@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 var underlying = _underlyingType.EnumUnderlyingType;
                 return (object)underlying == null
-                  ? null
-                  : this.RetargetingTranslator.Retarget(
+                    ? null
+                    : this.RetargetingTranslator.Retarget(
                         underlying,
                         RetargetOptions.RetargetPrimitiveTypesByTypeCode
                     ); // comes from field's signature.
@@ -351,8 +351,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 ImmutableArray<NamedTypeSymbol> result = declaredInterfaces.SelectAsArray(
                     t =>
                         BaseTypeAnalysis.TypeDependsOn(t, this)
-                          ? CyclicInheritanceError(this, t)
-                          : t
+                            ? CyclicInheritanceError(this, t)
+                            : t
                 );
 
                 ImmutableInterlocked.InterlockedCompareExchange(
@@ -380,9 +380,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 var declaredBase =
                     (object)underlyingBase != null
                         ? this.RetargetingTranslator.Retarget(
-                              underlyingBase,
-                              RetargetOptions.RetargetPrimitiveTypesByName
-                          )
+                            underlyingBase,
+                            RetargetOptions.RetargetPrimitiveTypesByName
+                        )
                         : null;
                 Interlocked.CompareExchange(
                     ref _lazyDeclaredBaseType,
@@ -436,8 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             {
                 NamedTypeSymbol coClass = _underlyingType.ComImportCoClass;
                 return (object)coClass == null
-                  ? null
-                  : this.RetargetingTranslator.Retarget(
+                    ? null
+                    : this.RetargetingTranslator.Retarget(
                         coClass,
                         RetargetOptions.RetargetPrimitiveTypesByName
                     );

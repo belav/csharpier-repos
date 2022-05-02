@@ -198,11 +198,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // TODO: determine correct diagnosis
             var diagInfo = diagnose
                 ? new CSDiagnosticInfo(
-                      ErrorCode.ERR_BadSKknown,
-                      unwrappedSymbol.Name,
-                      unwrappedSymbol.GetKindText(),
-                      MessageID.IDS_SK_TYPE.Localize()
-                  )
+                    ErrorCode.ERR_BadSKknown,
+                    unwrappedSymbol.Name,
+                    unwrappedSymbol.GetKindText(),
+                    MessageID.IDS_SK_TYPE.Localize()
+                )
                 : null;
             return new SingleLookupResult(LookupResultKind.NotATypeOrNamespace, symbol, diagInfo);
         }

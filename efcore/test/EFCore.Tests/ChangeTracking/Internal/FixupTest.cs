@@ -1408,8 +1408,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     );
                     Assert.Equal(
                         entityState == EntityState.Unchanged && (setToPrincipal || setFk)
-                          ? EntityState.Modified
-                          : entityState,
+                            ? EntityState.Modified
+                            : entityState,
                         context.Entry(dependent).State
                     );
                 }
@@ -1571,12 +1571,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(entityState, context.Entry(principal).State);
                     Assert.Equal(
                         setToDependent
-                          ? (
+                            ? (
                                 entityState == EntityState.Added
                                     ? EntityState.Added
                                     : EntityState.Modified
                             )
-                          : EntityState.Detached,
+                            : EntityState.Detached,
                         context.Entry(dependent).State
                     );
                 }
@@ -1664,8 +1664,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                     Assert.Equal(
                         entityState == EntityState.Unchanged && setFk
-                          ? EntityState.Modified
-                          : entityState,
+                            ? EntityState.Modified
+                            : entityState,
                         context.Entry(dependent).State
                     );
                 }
@@ -1753,12 +1753,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(entityState, context.Entry(principal).State);
                     Assert.Equal(
                         setToDependent
-                          ? (
+                            ? (
                                 entityState == EntityState.Added
                                     ? EntityState.Added
                                     : EntityState.Modified
                             )
-                          : EntityState.Detached,
+                            : EntityState.Detached,
                         context.Entry(dependent).State
                     );
                 }
@@ -2152,8 +2152,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     );
                     Assert.Equal(
                         entityState == EntityState.Unchanged && (setFk || setToPrincipal)
-                          ? EntityState.Modified
-                          : entityState,
+                            ? EntityState.Modified
+                            : entityState,
                         context.Entry(dependent).State
                     );
                 }
@@ -2315,12 +2315,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(entityState, context.Entry(principal).State);
                     Assert.Equal(
                         setToDependent
-                          ? (
+                            ? (
                                 entityState == EntityState.Added
                                     ? EntityState.Added
                                     : EntityState.Modified
                             )
-                          : EntityState.Detached,
+                            : EntityState.Detached,
                         context.Entry(dependent).State
                     );
                 }
@@ -2405,8 +2405,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(EntityState.Detached, context.Entry(principal).State);
                     Assert.Equal(
                         entityState == EntityState.Unchanged && setFk
-                          ? EntityState.Modified
-                          : entityState,
+                            ? EntityState.Modified
+                            : entityState,
                         context.Entry(dependent).State
                     );
                 }
@@ -2491,12 +2491,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(entityState, context.Entry(principal).State);
                     Assert.Equal(
                         setToDependent
-                          ? (
+                            ? (
                                 entityState == EntityState.Added
                                     ? EntityState.Added
                                     : EntityState.Modified
                             )
-                          : EntityState.Detached,
+                            : EntityState.Detached,
                         context.Entry(dependent).State
                     );
                 }
@@ -2947,8 +2947,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(oldEntityState, context.Entry(principal).State);
                     Assert.Equal(
                         oldEntityState == EntityState.Added
-                          ? EntityState.Added
-                          : EntityState.Modified,
+                            ? EntityState.Added
+                            : EntityState.Modified,
                         context.Entry(oldDependent).State
                     );
                 }
@@ -3068,8 +3068,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(oldEntityState, context.Entry(principal).State);
                     Assert.Equal(
                         oldEntityState == EntityState.Added
-                          ? EntityState.Added
-                          : EntityState.Modified,
+                            ? EntityState.Added
+                            : EntityState.Modified,
                         context.Entry(oldDependent).State
                     );
                 }
@@ -3187,8 +3187,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(oldEntityState, context.Entry(principal).State);
                     Assert.Equal(
                         oldEntityState == EntityState.Added
-                          ? EntityState.Added
-                          : EntityState.Modified,
+                            ? EntityState.Added
+                            : EntityState.Modified,
                         context.Entry(oldDependent).State
                     );
                 }
@@ -3238,8 +3238,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     Assert.Equal(oldEntityState, context.Entry(principal).State);
                     Assert.Equal(
                         oldEntityState == EntityState.Added
-                          ? EntityState.Added
-                          : EntityState.Modified,
+                            ? EntityState.Added
+                            : EntityState.Modified,
                         context.Entry(oldDependent).State
                     );
                 }

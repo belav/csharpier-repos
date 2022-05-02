@@ -780,22 +780,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 newToken =
                     _isVerbatim || (isAttributeName && oldToken.IsVerbatimIdentifier())
                         ? newToken.CopyAnnotationsTo(
-                              SyntaxFactory.VerbatimIdentifier(
-                                  newToken.LeadingTrivia,
-                                  currentNewIdentifier,
-                                  valueText,
-                                  newToken.TrailingTrivia
-                              )
-                          )
+                            SyntaxFactory.VerbatimIdentifier(
+                                newToken.LeadingTrivia,
+                                currentNewIdentifier,
+                                valueText,
+                                newToken.TrailingTrivia
+                            )
+                        )
                         : newToken.CopyAnnotationsTo(
-                              SyntaxFactory.Identifier(
-                                  newToken.LeadingTrivia,
-                                  SyntaxKind.IdentifierToken,
-                                  currentNewIdentifier,
-                                  valueText,
-                                  newToken.TrailingTrivia
-                              )
-                          );
+                            SyntaxFactory.Identifier(
+                                newToken.LeadingTrivia,
+                                SyntaxKind.IdentifierToken,
+                                currentNewIdentifier,
+                                valueText,
+                                newToken.TrailingTrivia
+                            )
+                        );
 
                 if (_replacementTextValid)
                 {
@@ -1604,13 +1604,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             var possibleLambdaExpression =
                 enclosingStatement == null
                     ? token
-                      .GetAncestors(
-                          n =>
-                              n
-                                  is SimpleLambdaExpressionSyntax
-                                      or ParenthesizedLambdaExpressionSyntax
-                      )
-                      .FirstOrDefault()
+                        .GetAncestors(
+                            n =>
+                                n
+                                    is SimpleLambdaExpressionSyntax
+                                        or ParenthesizedLambdaExpressionSyntax
+                        )
+                        .FirstOrDefault()
                     : null;
             if (possibleLambdaExpression != null)
             {
@@ -1692,8 +1692,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
             }
 
             var escapedIdentifier = replacementText.StartsWith("@", StringComparison.Ordinal)
-              ? replacementText
-              : "@" + replacementText;
+                ? replacementText
+                : "@" + replacementText;
 
             // Make sure we got an identifier.
             if (!syntaxFactsService.IsValidIdentifier(escapedIdentifier))

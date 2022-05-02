@@ -150,8 +150,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
                         sortText: sortText,
                         properties: properties.ToImmutable(),
                         rules: embeddedItem.IsDefault
-                          ? s_rules.WithMatchPriority(MatchPriority.Preselect)
-                          : s_rules
+                            ? s_rules.WithMatchPriority(MatchPriority.Preselect)
+                            : s_rules
                     )
                 );
             }

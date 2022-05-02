@@ -296,8 +296,8 @@ namespace System.Web.Razor.Parser
         {
             return PushSpanConfig(
                 newConfig == null
-                  ? (Action<SpanBuilder, Action<SpanBuilder>>)null
-                  : (span, _) => newConfig(span)
+                    ? (Action<SpanBuilder, Action<SpanBuilder>>)null
+                    : (span, _) => newConfig(span)
             );
         }
 

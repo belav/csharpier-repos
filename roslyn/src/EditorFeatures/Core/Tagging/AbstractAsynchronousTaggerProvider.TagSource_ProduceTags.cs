@@ -113,10 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                                 this.AccumulatedTextChanges == null
                                     ? textChangeRange
                                     : this.AccumulatedTextChanges.Accumulate(
-                                          SpecializedCollections.SingletonEnumerable(
-                                              textChangeRange
-                                          )
-                                      );
+                                        SpecializedCollections.SingletonEnumerable(textChangeRange)
+                                    );
                         }
 
                         break;
@@ -207,8 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             )
             {
                 return tagTrees.TryGetValue(snapshot.TextBuffer, out var tagTree)
-                  ? tagTree
-                  : new TagSpanIntervalTree<TTag>(
+                    ? tagTree
+                    : new TagSpanIntervalTree<TTag>(
                         snapshot.TextBuffer,
                         _dataSource.SpanTrackingMode
                     );
@@ -491,8 +489,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             {
                 // If the feature is disabled, then just produce no tags.
                 return ShouldSkipTagProduction()
-                  ? Task.CompletedTask
-                  : _dataSource.ProduceTagsAsync(context, cancellationToken);
+                    ? Task.CompletedTask
+                    : _dataSource.ProduceTagsAsync(context, cancellationToken);
             }
 
             private static Dictionary<ITextBuffer, DiffResult> ProcessNewTagTrees(
@@ -681,8 +679,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var tags = this.TryGetTagIntervalTreeForBuffer(buffer);
 
                 return tags == null
-                  ? SpecializedCollections.EmptyEnumerable<ITagSpan<TTag>>()
-                  : tags.GetIntersectingTagSpans(requestedSpans);
+                    ? SpecializedCollections.EmptyEnumerable<ITagSpan<TTag>>()
+                    : tags.GetIntersectingTagSpans(requestedSpans);
             }
         }
     }

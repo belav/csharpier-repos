@@ -43,8 +43,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 //individual character BDDs are always fixed
                 BDD[] charPredTable = _charPredTable;
                 return c < charPredTable.Length
-                  ? charPredTable[c] ??= CreateBDDFromChar(c)
-                  : CreateBDDFromChar(c);
+                    ? charPredTable[c] ??= CreateBDDFromChar(c)
+                    : CreateBDDFromChar(c);
             }
         }
 
@@ -305,8 +305,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 {
                     //check first if this is purely ascii range for digits
                     return And(pred, s).Equals(s) && And(pred, nonasciiDigit).IsEmpty
-                      ? $"[\\s{RepresentRanges(ToRanges(And(pred, asciiDigit)), checkSingletonComlement: false)}]"
-                      : $"[\\s\\d-[{RepresentSet(And(s_or_d, Not(pred)))}]]";
+                        ? $"[\\s{RepresentRanges(ToRanges(And(pred, asciiDigit)), checkSingletonComlement: false)}]"
+                        : $"[\\s\\d-[{RepresentSet(And(s_or_d, Not(pred)))}]]";
                 }
                 //---
                 // s|wD

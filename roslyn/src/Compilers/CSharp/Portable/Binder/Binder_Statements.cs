@@ -610,9 +610,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 result.Symbols.Count > 0 && result.IsMultiViable
                     ? (LabelSymbol)result.Symbols.First()
                     : new SourceLabelSymbol(
-                          (MethodSymbol)ContainingMemberOrLambda,
-                          node.Identifier
-                      );
+                        (MethodSymbol)ContainingMemberOrLambda,
+                        node.Identifier
+                    );
 
             if (
                 !symbol.IdentifierNodeOrToken.IsToken
@@ -1014,8 +1014,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var result = PerformPatternMethodLookup(
                 expr,
                 hasAwait
-                  ? WellKnownMemberNames.DisposeAsyncMethodName
-                  : WellKnownMemberNames.DisposeMethodName,
+                    ? WellKnownMemberNames.DisposeAsyncMethodName
+                    : WellKnownMemberNames.DisposeMethodName,
                 syntaxNode,
                 diagnostics,
                 out var disposeMethod
@@ -1439,8 +1439,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             initializerOpt,
                             localDiagnostics,
                             localSymbol.RefKind != RefKind.None
-                              ? ConversionForAssignmentFlags.RefAssignment
-                              : ConversionForAssignmentFlags.None
+                                ? ConversionForAssignmentFlags.RefAssignment
+                                : ConversionForAssignmentFlags.None
                         );
                     }
                 }
@@ -1471,8 +1471,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Error(
                             localDiagnostics,
                             declTypeOpt.Type.IsFunctionPointer()
-                              ? ErrorCode.ERR_CannotUseFunctionPointerAsFixedLocal
-                              : ErrorCode.ERR_BadFixedInitType,
+                                ? ErrorCode.ERR_CannotUseFunctionPointerAsFixedLocal
+                                : ErrorCode.ERR_BadFixedInitType,
                             declarator
                         );
                         hasErrors = true;
@@ -1595,8 +1595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 localSymbol: localSymbol,
                 declaredTypeOpt: boundDeclType,
                 initializerOpt: hasErrors
-                  ? BindToTypeForErrorRecovery(initializerOpt)?.WithHasErrors()
-                  : initializerOpt,
+                    ? BindToTypeForErrorRecovery(initializerOpt)?.WithHasErrors()
+                    : initializerOpt,
                 argumentsOpt: arguments,
                 inferredType: isVar,
                 hasErrors: hasErrors | nameConflict
@@ -1933,8 +1933,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     conversionGroupOpt: null,
                     declType,
                     elementConversionClassification.IsImplicit
-                      ? diagnostics
-                      : BindingDiagnosticBag.Discarded
+                        ? diagnostics
+                        : BindingDiagnosticBag.Discarded
                 );
             }
             else
@@ -2062,8 +2062,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     op2,
                     diagnostics,
                     isRef
-                      ? ConversionForAssignmentFlags.RefAssignment
-                      : ConversionForAssignmentFlags.None
+                        ? ConversionForAssignmentFlags.RefAssignment
+                        : ConversionForAssignmentFlags.None
                 );
 
                 // If the result is a dynamic assignment operation (SetMember or SetIndex),
@@ -2219,12 +2219,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var leastOverridden = (EventSymbol)
                 eventSymbol.GetLeastOverriddenMember(this.ContainingType);
             return leastOverridden.HasAssociatedField
-              ? new CSDiagnosticInfo(
+                ? new CSDiagnosticInfo(
                     ErrorCode.ERR_BadEventUsage,
                     leastOverridden,
                     leastOverridden.ContainingType
                 )
-              : new CSDiagnosticInfo(ErrorCode.ERR_BadEventUsageNoField, leastOverridden);
+                : new CSDiagnosticInfo(ErrorCode.ERR_BadEventUsageNoField, leastOverridden);
         }
 
         internal static bool AccessingAutoPropertyFromConstructor(
@@ -2462,15 +2462,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             var conversion =
                 (flags & ConversionForAssignmentFlags.IncrementAssignment) == 0
                     ? this.Conversions.ClassifyConversionFromExpression(
-                          expression,
-                          targetType,
-                          ref useSiteInfo
-                      )
+                        expression,
+                        targetType,
+                        ref useSiteInfo
+                    )
                     : this.Conversions.ClassifyConversionFromType(
-                          expression.Type,
-                          targetType,
-                          ref useSiteInfo
-                      );
+                        expression.Type,
+                        targetType,
+                        ref useSiteInfo
+                    );
 
             diagnostics.Add(expression.Syntax, useSiteInfo);
 
@@ -2496,9 +2496,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (flags & ConversionForAssignmentFlags.CompoundAssignment) == 0
                         ? !conversion.IsImplicit
                         : (
-                              conversion.IsExplicit
-                              && (flags & ConversionForAssignmentFlags.PredefinedOperator) == 0
-                          )
+                            conversion.IsExplicit
+                            && (flags & ConversionForAssignmentFlags.PredefinedOperator) == 0
+                        )
                 )
             )
             {
@@ -3686,8 +3686,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             declarations = declarationArray.AsImmutableOrNull();
 
             return (count == 1)
-              ? (BoundStatement)declarations[0]
-              : new BoundMultipleLocalDeclarations(nodeOpt, declarations);
+                ? (BoundStatement)declarations[0]
+                : new BoundMultipleLocalDeclarations(nodeOpt, declarations);
         }
 
         internal BoundStatement BindStatementExpressionList(
@@ -3958,8 +3958,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // Error case: void-returning or async task-returning method or lambda with "return x;"
                             var errorCode = retType.IsVoidType()
-                              ? ErrorCode.ERR_RetNoObjectRequiredLambda
-                              : ErrorCode.ERR_TaskRetNoObjectRequiredLambda;
+                                ? ErrorCode.ERR_RetNoObjectRequiredLambda
+                                : ErrorCode.ERR_TaskRetNoObjectRequiredLambda;
 
                             // Anonymous function converted to a void returning delegate cannot return a value
                             Error(diagnostics, errorCode, syntax.ReturnKeyword);
@@ -3975,8 +3975,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // Error case: void-returning or async task-returning method or lambda with "return x;"
                             var errorCode = retType.IsVoidType()
-                              ? ErrorCode.ERR_RetNoObjectRequired
-                              : ErrorCode.ERR_TaskRetNoObjectRequired;
+                                ? ErrorCode.ERR_RetNoObjectRequired
+                                : ErrorCode.ERR_TaskRetNoObjectRequired;
 
                             Error(diagnostics, errorCode, syntax.ReturnKeyword, container);
                             hasErrors = true;
@@ -3989,8 +3989,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // Error case: non-void-returning or Task<T>-returning method or lambda but just have "return;"
                         var requiredType = IsEffectivelyGenericTaskReturningAsyncMethod()
-                          ? retType.GetMemberTypeArgumentsNoUseSiteDiagnostics().Single()
-                          : retType;
+                            ? retType.GetMemberTypeArgumentsNoUseSiteDiagnostics().Single()
+                            : retType;
 
                         Error(
                             diagnostics,
@@ -4371,10 +4371,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var errorCode = boundFilter.ConstantValue.BooleanValue
                     ? ErrorCode.WRN_FilterIsConstantTrue
                     : (
-                          filter.Parent.Parent is TryStatementSyntax s
-                          && s.Catches.Count == 1
-                          && s.Finally == null
-                      )
+                        filter.Parent.Parent is TryStatementSyntax s
+                        && s.Catches.Count == 1
+                        && s.Finally == null
+                    )
                         ? ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch
                         : ErrorCode.WRN_FilterIsConstantFalse;
 
@@ -4575,8 +4575,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else
                 {
                     expression = returnType.IsErrorType()
-                      ? BindToTypeForErrorRecovery(expression)
-                      : CreateReturnConversion(
+                        ? BindToTypeForErrorRecovery(expression)
+                        : CreateReturnConversion(
                             syntax,
                             diagnostics,
                             expression,
@@ -4936,16 +4936,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 constructor,
                 bodyBinder.GetDeclaredLocalsForScope(constructor),
                 skipInitializer
-                  ? new BoundNoOpStatement(constructor, NoOpStatementFlavor.Default)
-                  : initializer == null
-                      ? null
-                      : bodyBinder.BindConstructorInitializer(initializer, diagnostics),
+                    ? new BoundNoOpStatement(constructor, NoOpStatementFlavor.Default)
+                    : initializer == null
+                        ? null
+                        : bodyBinder.BindConstructorInitializer(initializer, diagnostics),
                 constructor.Body == null
-                  ? null
-                  : (BoundBlock)bodyBinder.BindStatement(constructor.Body, diagnostics),
+                    ? null
+                    : (BoundBlock)bodyBinder.BindStatement(constructor.Body, diagnostics),
                 constructor.ExpressionBody == null
-                  ? null
-                  : bodyBinder.BindExpressionBodyAsBlock(
+                    ? null
+                    : bodyBinder.BindExpressionBodyAsBlock(
                         constructor.ExpressionBody,
                         constructor.Body == null ? diagnostics : BindingDiagnosticBag.Discarded
                     )
@@ -4994,8 +4994,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 declaration,
                 blockBody == null ? null : (BoundBlock)BindStatement(blockBody, diagnostics),
                 expressionBody == null
-                  ? null
-                  : BindExpressionBodyAsBlock(
+                    ? null
+                    : BindExpressionBodyAsBlock(
                         expressionBody,
                         blockBody == null ? diagnostics : BindingDiagnosticBag.Discarded
                     )

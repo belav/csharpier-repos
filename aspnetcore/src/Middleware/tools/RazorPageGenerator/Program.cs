@@ -168,7 +168,7 @@ dotnet razorpagegenerator Microsoft.AspNetCore.Diagnostics.RazorViews c:\project
 
     private class SuppressChecksumOptionsFeature
         : RazorEngineFeatureBase,
-          IConfigureRazorCodeGenerationOptionsFeature
+            IConfigureRazorCodeGenerationOptionsFeature
     {
         public int Order { get; set; }
 
@@ -185,7 +185,7 @@ dotnet razorpagegenerator Microsoft.AspNetCore.Diagnostics.RazorViews c:\project
 
     private class SuppressMetadataAttributesFeature
         : RazorEngineFeatureBase,
-          IConfigureRazorCodeGenerationOptionsFeature
+            IConfigureRazorCodeGenerationOptionsFeature
     {
         public int Order { get; set; }
 

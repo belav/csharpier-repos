@@ -83,8 +83,8 @@ namespace System.Text.Json.Serialization
             string? constructingTypeName = type.GetImmutableEnumerableConstructingTypeName();
 
             return constructingTypeName == null
-              ? null
-              : type.Assembly.GetType(constructingTypeName);
+                ? null
+                : type.Assembly.GetType(constructingTypeName);
         }
 
         [RequiresUnreferencedCode(ImmutableConvertersUnreferencedCodeMessage)]
@@ -95,8 +95,8 @@ namespace System.Text.Json.Serialization
             string? constructingTypeName = type.GetImmutableDictionaryConstructingTypeName();
 
             return constructingTypeName == null
-              ? null
-              : type.Assembly.GetType(constructingTypeName);
+                ? null
+                : type.Assembly.GetType(constructingTypeName);
         }
 
         public static bool IsNonGenericStackOrQueue(this Type type)

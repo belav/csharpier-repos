@@ -108,11 +108,11 @@ namespace Microsoft.Web.Mvc.ModelBinding
             List<TElement> boundCollection =
                 (valueProviderResult != null)
                     ? BindSimpleCollection(
-                          controllerContext,
-                          bindingContext,
-                          valueProviderResult.RawValue,
-                          valueProviderResult.Culture
-                      )
+                        controllerContext,
+                        bindingContext,
+                        valueProviderResult.RawValue,
+                        valueProviderResult.Culture
+                    )
                     : BindComplexCollection(controllerContext, bindingContext);
 
             bool retVal = CreateOrReplaceCollection(

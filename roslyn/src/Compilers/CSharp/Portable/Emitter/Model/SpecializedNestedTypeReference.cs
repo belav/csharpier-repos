@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal class SpecializedNestedTypeReference
         : NamedTypeReference,
-          Cci.ISpecializedNestedTypeReference
+            Cci.ISpecializedNestedTypeReference
     {
         public SpecializedNestedTypeReference(NamedTypeSymbol underlyingNamedType)
             : base(underlyingNamedType) { }

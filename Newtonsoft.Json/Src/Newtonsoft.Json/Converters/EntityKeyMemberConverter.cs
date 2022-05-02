@@ -73,21 +73,21 @@ namespace Newtonsoft.Json.Converters
             writer.WriteStartObject();
             writer.WritePropertyName(
                 (resolver != null)
-                  ? resolver.GetResolvedPropertyName(KeyPropertyName)
-                  : KeyPropertyName
+                    ? resolver.GetResolvedPropertyName(KeyPropertyName)
+                    : KeyPropertyName
             );
             writer.WriteValue(keyName);
             writer.WritePropertyName(
                 (resolver != null)
-                  ? resolver.GetResolvedPropertyName(TypePropertyName)
-                  : TypePropertyName
+                    ? resolver.GetResolvedPropertyName(TypePropertyName)
+                    : TypePropertyName
             );
             writer.WriteValue(keyValueType?.FullName);
 
             writer.WritePropertyName(
                 (resolver != null)
-                  ? resolver.GetResolvedPropertyName(ValuePropertyName)
-                  : ValuePropertyName
+                    ? resolver.GetResolvedPropertyName(ValuePropertyName)
+                    : ValuePropertyName
             );
 
             if (keyValueType != null)

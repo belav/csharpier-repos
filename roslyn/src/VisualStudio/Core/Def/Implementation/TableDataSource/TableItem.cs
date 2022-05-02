@@ -54,7 +54,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 (projectId == null)
                     ? null
                     : workspace.CurrentSolution.GetProject(projectId)?.Name
-                      ?? ServicesVSResources.Unknown2;
+                        ?? ServicesVSResources.Unknown2;
             projectGuid =
                 (projectId != null && workspace is VisualStudioWorkspace vsWorkspace)
                     ? vsWorkspace.GetProjectGuid(projectId)

@@ -23,8 +23,8 @@ internal abstract class ComponentRenderingScenarioBase : CommandLineApplication
             () =>
             {
                 var numCycles = cyclesOption.HasValue()
-                  ? int.Parse(cyclesOption.Value(), CultureInfo.InvariantCulture)
-                  : 1;
+                    ? int.Parse(cyclesOption.Value(), CultureInfo.InvariantCulture)
+                    : 1;
 
                 var serviceCollection = new ServiceCollection();
                 PopulateServiceCollection(serviceCollection);

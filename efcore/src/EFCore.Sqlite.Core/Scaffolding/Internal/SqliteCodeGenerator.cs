@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
             new(
                 _useSqliteMethodInfo,
                 providerOptions == null
-                  ? new object[] { connectionString }
-                  : new object[]
+                    ? new object[] { connectionString }
+                    : new object[]
                     {
                         connectionString,
                         new NestedClosureCodeFragment("x", providerOptions)

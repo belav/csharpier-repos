@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return ImmutableArray<BoundDecisionDagNode>.Empty;
                 case BoundWhenDecisionDagNode w:
                     return (w.WhenFalse != null)
-                      ? ImmutableArray.Create(w.WhenTrue, w.WhenFalse)
-                      : ImmutableArray.Create(w.WhenTrue);
+                        ? ImmutableArray.Create(w.WhenTrue, w.WhenFalse)
+                        : ImmutableArray.Create(w.WhenTrue);
                 default:
                     throw ExceptionUtilities.UnexpectedValue(node.Kind);
             }

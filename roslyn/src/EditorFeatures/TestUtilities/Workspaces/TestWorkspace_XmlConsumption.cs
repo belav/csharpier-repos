@@ -515,8 +515,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         )
         {
             return language is LanguageNames.CSharp or LanguageNames.VisualBasic
-              ? GetParseOptionsWorker(projectElement, language, languageServices)
-              : null;
+                ? GetParseOptionsWorker(projectElement, language, languageServices)
+                : null;
         }
 
         private static ParseOptions GetParseOptionsWorker(
@@ -692,10 +692,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             projectId++;
             return language == LanguageNames.CSharp
-              ? "CSharpAssembly" + projectId
-              : language == LanguageNames.VisualBasic
-                  ? "VisualBasicAssembly" + projectId
-                  : language + "Assembly" + projectId;
+                ? "CSharpAssembly" + projectId
+                : language == LanguageNames.VisualBasic
+                    ? "VisualBasicAssembly" + projectId
+                    : language + "Assembly" + projectId;
         }
 
         private static string GetLanguage(TestWorkspace workspace, XElement projectElement)
@@ -755,13 +755,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             var compilationOptionsElement = projectElement.Element(CompilationOptionsElementName);
             return language is LanguageNames.CSharp or LanguageNames.VisualBasic
-              ? CreateCompilationOptions(
+                ? CreateCompilationOptions(
                     workspace,
                     language,
                     compilationOptionsElement,
                     parseOptions
                 )
-              : null;
+                : null;
         }
 
         private static CompilationOptions CreateCompilationOptions(
@@ -889,16 +889,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
                     // VB needs Compilation.ParseOptions set (we do the same at the VS layer)
                     return language == LanguageNames.CSharp
-                      ? new CSharpCompilationOptions(
+                        ? new CSharpCompilationOptions(
                             OutputKind.WindowsRuntimeMetadata,
                             allowUnsafe: allowUnsafe
                         )
-                      : new VisualBasicCompilationOptions(OutputKind.WindowsRuntimeMetadata)
-                        .WithGlobalImports(globalImports)
-                        .WithRootNamespace(rootNamespace)
-                        .WithParseOptions(
-                            (VisualBasicParseOptions)parseOptions ?? VisualBasicParseOptions.Default
-                        );
+                        : new VisualBasicCompilationOptions(OutputKind.WindowsRuntimeMetadata)
+                            .WithGlobalImports(globalImports)
+                            .WithRootNamespace(rootNamespace)
+                            .WithParseOptions(
+                                (VisualBasicParseOptions)parseOptions
+                                    ?? VisualBasicParseOptions.Default
+                            );
                 }
             }
             else

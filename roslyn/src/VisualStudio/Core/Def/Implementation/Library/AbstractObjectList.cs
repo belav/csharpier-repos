@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 {
     internal abstract class AbstractObjectList<TLibraryManager>
         : IVsCoTaskMemFreeMyStrings,
-          IVsSimpleObjectList2,
-          IVsBrowseContainersList where TLibraryManager : AbstractLibraryManager
+            IVsSimpleObjectList2,
+            IVsBrowseContainersList where TLibraryManager : AbstractLibraryManager
     {
         protected readonly TLibraryManager LibraryManager;
 
@@ -187,8 +187,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             }
 
             return TryFillDescription(index, (_VSOBJDESCOPTIONS)grfOptions, pobDesc)
-              ? VSConstants.S_OK
-              : VSConstants.E_FAIL;
+                ? VSConstants.S_OK
+                : VSConstants.E_FAIL;
         }
 
         int IVsSimpleObjectList2.GetBrowseObject(uint index, out object ppdispBrowseObj)
@@ -201,15 +201,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
         int IVsSimpleObjectList2.GetCapabilities2(out uint pgrfCapabilities)
         {
             return TryGetCapabilities(out pgrfCapabilities)
-              ? VSConstants.S_OK
-              : VSConstants.E_NOTIMPL;
+                ? VSConstants.S_OK
+                : VSConstants.E_NOTIMPL;
         }
 
         int IVsSimpleObjectList2.GetCategoryField2(uint index, int category, out uint pfCatField)
         {
             return TryGetCategoryField(index, category, out pfCatField)
-              ? VSConstants.S_OK
-              : VSConstants.E_NOTIMPL;
+                ? VSConstants.S_OK
+                : VSConstants.E_NOTIMPL;
         }
 
         int IVsSimpleObjectList2.GetClipboardFormat(
@@ -399,8 +399,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             }
 
             return TryLocateNavInfoNode(pNavInfoNode, out pulIndex)
-              ? VSConstants.S_OK
-              : VSConstants.E_FAIL;
+                ? VSConstants.S_OK
+                : VSConstants.E_FAIL;
         }
 
         int IVsSimpleObjectList2.OnClose(VSTREECLOSEACTIONS[] ptca) => VSConstants.E_NOTIMPL;
@@ -441,8 +441,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             pData[0].dwSize = (uint)Marshal.SizeOf(typeof(VSCOMPONENTSELECTORDATA));
 
             return TryGetBrowseContainerData(ulIndex, ref pData[0])
-              ? VSConstants.S_OK
-              : VSConstants.E_FAIL;
+                ? VSConstants.S_OK
+                : VSConstants.E_FAIL;
         }
 
         int IVsBrowseContainersList.FindContainer(
@@ -463,8 +463,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             }
 
             return TryFindBrowseContainer(pData[0], out pulIndex)
-              ? VSConstants.S_OK
-              : VSConstants.E_FAIL;
+                ? VSConstants.S_OK
+                : VSConstants.E_FAIL;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 /// </summary>
 public class RootComponentMappingCollection
     : Collection<RootComponentMapping>,
-      IJSComponentConfiguration
+        IJSComponentConfiguration
 {
     /// <inheritdoc />
     public JSComponentConfigurationStore JSComponents { get; } =

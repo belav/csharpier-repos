@@ -82,8 +82,8 @@ public class InitCommand : ICommand
 
         // Accept the `--id` CLI option to the main app
         string newSecretsId = string.IsNullOrWhiteSpace(OverrideId)
-          ? Guid.NewGuid().ToString()
-          : OverrideId;
+            ? Guid.NewGuid().ToString()
+            : OverrideId;
 
         // Confirm secret ID does not contain invalid characters
         if (Path.GetInvalidPathChars().Any(invalidChar => newSecretsId.Contains(invalidChar)))

@@ -116,19 +116,19 @@ namespace System.Buffers
                     if (digit > 9)
                     {
                         return throws
-                          ? throw new FormatException(
+                            ? throw new FormatException(
                                 SR.Format(SR.Argument_CannotParsePrecision, MaxPrecision)
                             )
-                          : false;
+                            : false;
                     }
                     parsedPrecision = parsedPrecision * 10 + digit;
                     if (parsedPrecision > MaxPrecision)
                     {
                         return throws
-                          ? throw new FormatException(
+                            ? throw new FormatException(
                                 SR.Format(SR.Argument_PrecisionTooLarge, MaxPrecision)
                             )
-                          : false;
+                            : false;
                     }
                 }
 

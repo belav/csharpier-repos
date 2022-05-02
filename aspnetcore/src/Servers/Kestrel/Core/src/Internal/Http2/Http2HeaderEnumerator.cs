@@ -63,32 +63,32 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
             if (_headersType == HeadersType.Headers)
             {
                 return _headersEnumerator.MoveNext()
-                  ? SetCurrent(
+                    ? SetCurrent(
                         _headersEnumerator.Current.Key,
                         _headersEnumerator.Current.Value,
                         _headersEnumerator.CurrentKnownType
                     )
-                  : false;
+                    : false;
             }
             else if (_headersType == HeadersType.Trailers)
             {
                 return _trailersEnumerator.MoveNext()
-                  ? SetCurrent(
+                    ? SetCurrent(
                         _trailersEnumerator.Current.Key,
                         _trailersEnumerator.Current.Value,
                         _trailersEnumerator.CurrentKnownType
                     )
-                  : false;
+                    : false;
             }
             else
             {
                 return _genericEnumerator!.MoveNext()
-                  ? SetCurrent(
+                    ? SetCurrent(
                         _genericEnumerator.Current.Key,
                         _genericEnumerator.Current.Value,
                         default
                     )
-                  : false;
+                    : false;
             }
         }
 

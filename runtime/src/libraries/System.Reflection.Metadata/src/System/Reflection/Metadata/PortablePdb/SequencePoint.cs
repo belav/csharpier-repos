@@ -80,8 +80,8 @@ namespace System.Reflection.Metadata
         private string GetDebuggerDisplay()
         {
             return IsHidden
-              ? "<hidden>"
-              : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
+                ? "<hidden>"
+                : $"{Offset}: ({StartLine}, {StartColumn}) - ({EndLine}, {EndColumn})";
         }
     }
 }

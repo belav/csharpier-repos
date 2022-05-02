@@ -178,8 +178,8 @@ namespace System.Security.Cryptography.Asn1
             {
                 tmpSpan = reader.ReadEncodedValue();
                 decoded.UniversalString = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(UniversalTagNumber.UTF8String)))
             {

@@ -24,7 +24,7 @@ internal class UrlSegment : PatternSegment
     )
     {
         return _uriMatchPart == UriMatchPart.Full
-          ? context.HttpContext.Request.GetEncodedUrl()
-          : (string)context.HttpContext.Request.Path;
+            ? context.HttpContext.Request.GetEncodedUrl()
+            : (string)context.HttpContext.Request.Path;
     }
 }

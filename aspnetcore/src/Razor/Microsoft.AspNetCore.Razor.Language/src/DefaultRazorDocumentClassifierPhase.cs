@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorDocumentClassifierPhase
     : RazorEnginePhaseBase,
-      IRazorDocumentClassifierPhase
+        IRazorDocumentClassifierPhase
 {
     public IRazorDocumentClassifierPass[] Passes { get; private set; }
 

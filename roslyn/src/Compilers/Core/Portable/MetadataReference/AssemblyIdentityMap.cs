@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis
 
             OneOrMany<KeyValuePair<AssemblyIdentity, TValue>> sameName;
             _map[identity.Name] = _map.TryGetValue(identity.Name, out sameName)
-              ? sameName.Add(pair)
-              : OneOrMany.Create(pair);
+                ? sameName.Add(pair)
+                : OneOrMany.Create(pair);
         }
     }
 }

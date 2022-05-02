@@ -63,18 +63,18 @@ namespace Microsoft.CodeAnalysis.Emit
             var mappedHoistedLocalSlots = StateMachineHoistedLocalSlotsOpt.IsDefault
                 ? default
                 : ImmutableArray.CreateRange(
-                      StateMachineHoistedLocalSlotsOpt,
-                      MapHoistedLocalSlot,
-                      map
-                  );
+                    StateMachineHoistedLocalSlotsOpt,
+                    MapHoistedLocalSlot,
+                    map
+                );
 
             var mappedAwaiterSlots = StateMachineAwaiterSlotsOpt.IsDefault
                 ? default
                 : ImmutableArray.CreateRange(
-                      StateMachineAwaiterSlotsOpt,
-                      static (typeRef, map) => (typeRef is null) ? null : map.MapReference(typeRef),
-                      map
-                  );
+                    StateMachineAwaiterSlotsOpt,
+                    static (typeRef, map) => (typeRef is null) ? null : map.MapReference(typeRef),
+                    map
+                );
 
             return new AddedOrChangedMethodInfo(
                 MethodId,

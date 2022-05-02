@@ -153,14 +153,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                     QueryCompilationContext.QueryParameterPrefix,
                                     StringComparison.Ordinal
                                 ) == true
-                              ? Expression.Call(
+                                ? Expression.Call(
                                     _getParameterValueMethodInfo.MakeGenericMethod(
                                         parameterExpression.Type
                                     ),
                                     QueryCompilationContext.QueryContextParameter,
                                     Expression.Constant(parameterExpression.Name)
                                 )
-                              : throw new InvalidOperationException(
+                                : throw new InvalidOperationException(
                                     CoreStrings.TranslationFailed(parameterExpression.Print())
                                 );
 
@@ -257,12 +257,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                                         );
                                     return
                                         subquery.ResultCardinality == ResultCardinality.Enumerable
-                                      ? new CollectionResultExpression(
+                                        ? new CollectionResultExpression(
                                             projectionBindingExpression,
                                             navigation: null,
                                             subquery.ShaperExpression.Type
                                         )
-                                      : projectionBindingExpression;
+                                        : projectionBindingExpression;
                                 }
                             }
 
@@ -412,8 +412,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 case IncludeExpression _:
                     return _indexBasedBinding
-                      ? base.VisitExtension(extensionExpression)
-                      : QueryCompilationContext.NotTranslatedExpression;
+                        ? base.VisitExtension(extensionExpression)
+                        : QueryCompilationContext.NotTranslatedExpression;
 
                 case CollectionResultExpression collectionResultExpression:
                 {
@@ -474,8 +474,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var expression = Visit(memberExpression.Expression);
             Expression updatedMemberExpression = memberExpression.Update(
                 expression != null
-                  ? MatchTypes(expression, memberExpression.Expression!.Type)
-                  : expression
+                    ? MatchTypes(expression, memberExpression.Expression!.Type)
+                    : expression
             );
 
             if (
@@ -695,8 +695,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                 )
                 && unaryExpression.Type == operand.Type
-              ? operand
-              : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
+                ? operand
+                : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
         }
 
         [DebuggerStepThrough]

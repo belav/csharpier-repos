@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteSemanticClassificationCacheService
         : BrokeredServiceBase,
-          IRemoteSemanticClassificationCacheService
+            IRemoteSemanticClassificationCacheService
     {
         internal sealed class Factory : FactoryBase<IRemoteSemanticClassificationCacheService>
         {

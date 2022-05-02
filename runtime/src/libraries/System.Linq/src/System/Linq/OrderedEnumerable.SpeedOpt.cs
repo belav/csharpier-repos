@@ -54,8 +54,8 @@ namespace System.Linq
             }
 
             return !onlyIfCheap || _source is ICollection<TElement> || _source is ICollection
-              ? _source.Count()
-              : -1;
+                ? _source.Count()
+                : -1;
         }
 
         internal TElement[] ToArray(int minIdx, int maxIdx)
@@ -236,8 +236,8 @@ namespace System.Linq
 
             found = true;
             return (maxIdx < count - 1)
-              ? GetEnumerableSorter().ElementAt(buffer._items, count, maxIdx)
-              : Last(buffer);
+                ? GetEnumerableSorter().ElementAt(buffer._items, count, maxIdx)
+                : Last(buffer);
         }
 
         private TElement Last(Buffer<TElement> buffer)

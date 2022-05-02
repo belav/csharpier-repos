@@ -84,8 +84,8 @@ namespace System
             // in case it is present.
 
             return s_commandLineArgs != null
-              ? (string[])s_commandLineArgs.Clone()
-              : GetCommandLineArgsNative();
+                ? (string[])s_commandLineArgs.Clone()
+                : GetCommandLineArgsNative();
         }
 
         [DllImport(RuntimeHelpers.QCall, EntryPoint = "Environment_GetProcessorCount")]

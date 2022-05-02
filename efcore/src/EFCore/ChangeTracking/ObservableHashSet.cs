@@ -20,10 +20,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     /// <typeparam name="T">The type of elements in the hash set.</typeparam>
     public class ObservableHashSet<T>
         : ISet<T>,
-          IReadOnlyCollection<T>,
-          INotifyCollectionChanged,
-          INotifyPropertyChanged,
-          INotifyPropertyChanging
+            IReadOnlyCollection<T>,
+            INotifyCollectionChanged,
+            INotifyPropertyChanged,
+            INotifyPropertyChanging
     {
         private HashSet<T> _set;
 

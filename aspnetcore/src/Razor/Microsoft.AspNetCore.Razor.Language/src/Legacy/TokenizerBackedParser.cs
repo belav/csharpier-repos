@@ -678,8 +678,8 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase where TTo
     {
         return PushSpanContextConfig(
             newConfig == null
-              ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
-              : (span, _) => newConfig(span)
+                ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
+                : (span, _) => newConfig(span)
         );
     }
 

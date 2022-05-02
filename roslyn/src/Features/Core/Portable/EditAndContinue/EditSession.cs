@@ -118,9 +118,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 ?? (
                     inBreakState
                         ? new AsyncLazy<ActiveStatementsMap>(
-                              GetBaseActiveStatementsAsync,
-                              cacheResult: true
-                          )
+                            GetBaseActiveStatementsAsync,
+                            cacheResult: true
+                        )
                         : new AsyncLazy<ActiveStatementsMap>(ActiveStatementsMap.Empty)
                 );
 
@@ -500,8 +500,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     case CommittedSolution.DocumentState.OutOfSync:
                         var descriptor = EditAndContinueDiagnosticDescriptors.GetDescriptor(
                             (oldDocumentState == CommittedSolution.DocumentState.Indeterminate)
-                              ? EditAndContinueErrorCode.UnableToReadSourceFileOrPdb
-                              : EditAndContinueErrorCode.DocumentIsOutOfSyncWithDebuggee
+                                ? EditAndContinueErrorCode.UnableToReadSourceFileOrPdb
+                                : EditAndContinueErrorCode.DocumentIsOutOfSyncWithDebuggee
                         );
                         documentDiagnostics.Add(
                             Diagnostic.Create(
@@ -581,7 +581,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     (sourceFilePath == null)
                         ? solution.Projects
                         : from documentId in solution.GetDocumentIdsWithFilePath(sourceFilePath)
-                          select solution.GetProject(documentId.ProjectId)!;
+                        select solution.GetProject(documentId.ProjectId)!;
 
                 using var _ = ArrayBuilder<Document>.GetInstance(out var changedOrAddedDocuments);
 
@@ -766,12 +766,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             (oldDocument == null)
                                 ? ImmutableArray<UnmappedActiveStatement>.Empty
                                 : await baseActiveStatements
-                                      .GetOldActiveStatementsAsync(
-                                          analyzer,
-                                          oldDocument,
-                                          cancellationToken
-                                      )
-                                      .ConfigureAwait(false);
+                                    .GetOldActiveStatementsAsync(
+                                        analyzer,
+                                        oldDocument,
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
 
                         activeStatementsInChangedDocuments.Add(
                             new(
@@ -1304,24 +1304,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 var update = isBlocked
                     ? SolutionUpdate.Blocked(
-                          diagnostics.ToImmutable(),
-                          documentsWithRudeEdits.ToImmutable(),
-                          syntaxError,
-                          hasEmitErrors
-                      )
+                        diagnostics.ToImmutable(),
+                        documentsWithRudeEdits.ToImmutable(),
+                        syntaxError,
+                        hasEmitErrors
+                    )
                     : new SolutionUpdate(
-                          new ManagedModuleUpdates(
-                              (deltas.Count > 0)
+                        new ManagedModuleUpdates(
+                            (deltas.Count > 0)
                                 ? ManagedModuleUpdateStatus.Ready
                                 : ManagedModuleUpdateStatus.None,
-                              deltas.ToImmutable()
-                          ),
-                          nonRemappableRegions.ToImmutable(),
-                          emitBaselines.ToImmutable(),
-                          diagnostics.ToImmutable(),
-                          documentsWithRudeEdits.ToImmutable(),
-                          syntaxError
-                      );
+                            deltas.ToImmutable()
+                        ),
+                        nonRemappableRegions.ToImmutable(),
+                        emitBaselines.ToImmutable(),
+                        diagnostics.ToImmutable(),
+                        documentsWithRudeEdits.ToImmutable(),
+                        syntaxError
+                    );
 
                 return update;
             }

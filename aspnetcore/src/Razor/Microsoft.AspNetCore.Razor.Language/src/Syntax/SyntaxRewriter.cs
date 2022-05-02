@@ -76,15 +76,15 @@ internal abstract partial class SyntaxRewriter : SyntaxVisitor<SyntaxNode>
                 }
 
                 return trailing.Node.Green != trailingTrivia
-                  ? token.WithTrailingTrivia(trailing)
-                  : token;
+                    ? token.WithTrailingTrivia(trailing)
+                    : token;
             }
             else
             {
                 // Leading trivia only
                 return leading.Node.Green != leadingTrivia
-                  ? token.WithLeadingTrivia(leading)
-                  : token;
+                    ? token.WithLeadingTrivia(leading)
+                    : token;
             }
         }
         else if (trailingTrivia != null)
@@ -97,8 +97,8 @@ internal abstract partial class SyntaxRewriter : SyntaxVisitor<SyntaxNode>
                 new SyntaxTriviaList(trailingTrivia.CreateRed(token, position), position, index: 0)
             );
             return trailing.Node.Green != trailingTrivia
-              ? token.WithTrailingTrivia(trailing)
-              : token;
+                ? token.WithTrailingTrivia(trailing)
+                : token;
         }
         else
         {

@@ -24,7 +24,7 @@ public class Http2ConnectionBenchmark : Http2ConnectionBenchmarkBase
     protected override Task ProcessRequest(HttpContext httpContext)
     {
         return ResponseDataLength == 0
-          ? Task.CompletedTask
-          : httpContext.Response.WriteAsync(_responseData);
+            ? Task.CompletedTask
+            : httpContext.Response.WriteAsync(_responseData);
     }
 }

@@ -10,8 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindKeylessEntitiesQuerySqlServerTest
         : NorthwindKeylessEntitiesQueryRelationalTestBase<
-              NorthwindQuerySqlServerFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindKeylessEntitiesQuerySqlServerTest(
             NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,

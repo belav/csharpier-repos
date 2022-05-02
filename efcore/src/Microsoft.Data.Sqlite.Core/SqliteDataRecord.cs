@@ -401,8 +401,8 @@ namespace Microsoft.Data.Sqlite
 
         public virtual TextReader GetTextReader(int ordinal) =>
             IsDBNull(ordinal)
-              ? new StringReader(string.Empty)
-              : new StreamReader(GetStream(ordinal), Encoding.UTF8);
+                ? new StringReader(string.Empty)
+                : new StreamReader(GetStream(ordinal), Encoding.UTF8);
 
         public bool Read()
         {

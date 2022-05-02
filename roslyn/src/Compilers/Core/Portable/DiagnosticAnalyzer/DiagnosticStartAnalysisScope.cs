@@ -459,8 +459,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             GeneratedCodeAnalysisFlags mode;
             return _generatedCodeConfigurationMap.TryGetValue(analyzer, out mode)
-              ? mode
-              : AnalyzerDriver.DefaultGeneratedCodeAnalysisFlags;
+                ? mode
+                : AnalyzerDriver.DefaultGeneratedCodeAnalysisFlags;
         }
 
         public void RegisterCompilationStartAction(

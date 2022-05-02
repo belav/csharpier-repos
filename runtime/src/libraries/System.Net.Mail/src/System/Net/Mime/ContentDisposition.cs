@@ -295,8 +295,8 @@ namespace System.Net.Mime
         public override bool Equals([NotNullWhen(true)] object? rparam)
         {
             return rparam == null
-              ? false
-              : string.Equals(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase);
+                ? false
+                : string.Equals(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase);
         }
 
         public override int GetHashCode() => ToString().ToLowerInvariant().GetHashCode();

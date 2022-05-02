@@ -24,8 +24,8 @@ namespace System.Threading.Tasks.Dataflow
     [DebuggerTypeProxy(typeof(WriteOnceBlock<>.DebugView))]
     public sealed class WriteOnceBlock<T>
         : IPropagatorBlock<T, T>,
-          IReceivableSourceBlock<T>,
-          IDebuggerDisplay
+            IReceivableSourceBlock<T>,
+            IDebuggerDisplay
     {
         /// <summary>A registry used to store all linked targets and information about them.</summary>
         private readonly TargetRegistry<T> _targetRegistry;

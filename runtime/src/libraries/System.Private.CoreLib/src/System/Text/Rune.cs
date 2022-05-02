@@ -21,8 +21,8 @@ namespace System.Text
     public readonly struct Rune : IComparable, IComparable<Rune>, IEquatable<Rune>
 #if SYSTEM_PRIVATE_CORELIB
 #pragma warning disable SA1001 // Commas should be spaced correctly
-          ,
-          ISpanFormattable
+            ,
+            ISpanFormattable
 #pragma warning restore SA1001
 #endif
     {

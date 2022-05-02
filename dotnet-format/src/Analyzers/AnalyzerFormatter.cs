@@ -184,8 +184,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 options.WorkspaceType == WorkspaceType.Solution
                     ? solution.Projects
                     : solution.Projects.Where(
-                          project => project.FilePath == options.WorkspaceFilePath
-                      );
+                        project => project.FilePath == options.WorkspaceFilePath
+                    );
             foreach (var project in projects)
             {
                 var analyzers = projectAnalyzers[project.Id];

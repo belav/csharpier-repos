@@ -393,10 +393,10 @@ namespace Microsoft.XmlSerializer.Generator
                 outputDirectory =
                     outputDirectory == null
                         ? (
-                              gac
-                                  ? Environment.CurrentDirectory
-                                  : Path.GetDirectoryName(assembly.Location)
-                          )
+                            gac
+                                ? Environment.CurrentDirectory
+                                : Path.GetDirectoryName(assembly.Location)
+                        )
                         : outputDirectory;
 
                 if (!Directory.Exists(outputDirectory))
@@ -631,8 +631,8 @@ namespace Microsoft.XmlSerializer.Generator
         {
             Assembly assembly = null;
             string path = Path.IsPathRooted(assemblyName)
-              ? assemblyName
-              : Path.GetFullPath(assemblyName);
+                ? assemblyName
+                : Path.GetFullPath(assemblyName);
             assembly = Assembly.LoadFile(path);
             if (assembly == null)
             {

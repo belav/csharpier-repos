@@ -19,12 +19,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.MoveType
     [ExportLanguageService(typeof(IMoveTypeService), LanguageNames.CSharp), Shared]
     internal class CSharpMoveTypeService
         : AbstractMoveTypeService<
-              CSharpMoveTypeService,
-              BaseTypeDeclarationSyntax,
-              BaseNamespaceDeclarationSyntax,
-              MemberDeclarationSyntax,
-              CompilationUnitSyntax
-          >
+            CSharpMoveTypeService,
+            BaseTypeDeclarationSyntax,
+            BaseNamespaceDeclarationSyntax,
+            MemberDeclarationSyntax,
+            CompilationUnitSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

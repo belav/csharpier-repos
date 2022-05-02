@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             (host == TestHost.InProcess)
                 ? composition
                 : composition
-                  .AddAssemblies(typeof(RemoteWorkspacesResources).Assembly)
-                  .AddParts(typeof(InProcRemoteHostClientProvider.Factory));
+                    .AddAssemblies(typeof(RemoteWorkspacesResources).Assembly)
+                    .AddParts(typeof(InProcRemoteHostClientProvider.Factory));
     }
 }

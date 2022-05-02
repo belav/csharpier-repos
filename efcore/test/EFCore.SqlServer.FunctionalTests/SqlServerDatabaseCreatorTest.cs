@@ -318,11 +318,13 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             return TestEnvironment.IsSqlAzure
-              ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+                ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
                     (true, async, ambientTransaction, file),
                     Creates_physical_database_and_schema_test
                 )
-              : Creates_physical_database_and_schema_test((true, async, ambientTransaction, file));
+                : Creates_physical_database_and_schema_test(
+                    (true, async, ambientTransaction, file)
+                );
         }
 
         [ConditionalTheory]
@@ -361,11 +363,13 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             return TestEnvironment.IsSqlAzure
-              ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
+                ? new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
                     (false, async, ambientTransaction, file),
                     Creates_physical_database_and_schema_test
                 )
-              : Creates_physical_database_and_schema_test((false, async, ambientTransaction, file));
+                : Creates_physical_database_and_schema_test(
+                    (false, async, ambientTransaction, file)
+                );
         }
 
         private static async Task Creates_physical_database_and_schema_test(
@@ -507,10 +511,10 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         var errorNumber = async
                             ? (
-                                  await Assert.ThrowsAsync<SqlException>(
-                                      () => creator.HasTablesAsyncBase()
-                                  )
-                              ).Number
+                                await Assert.ThrowsAsync<SqlException>(
+                                    () => creator.HasTablesAsyncBase()
+                                )
+                            ).Number
                             : Assert.Throws<SqlException>(() => creator.HasTablesBase()).Number;
 
                         if (errorNumber != 233) // skip if no-process transient failure

@@ -48,7 +48,7 @@ namespace Microsoft.Extensions.Hosting.WindowsServices
 
     public partial class WindowsServiceLifetime
         : System.ServiceProcess.ServiceBase,
-          Microsoft.Extensions.Hosting.IHostLifetime
+            Microsoft.Extensions.Hosting.IHostLifetime
     {
         public WindowsServiceLifetime(
             Microsoft.Extensions.Hosting.IHostEnvironment environment,

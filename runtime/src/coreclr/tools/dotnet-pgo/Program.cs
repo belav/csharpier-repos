@@ -1861,12 +1861,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             {
                                 EcmaMethod em => EcmaMethodIL.Create(em),
                                 var m
-                                  => new InstantiatedMethodIL(
-                                      m,
-                                      EcmaMethodIL.Create(
-                                          (EcmaMethod)m.GetTypicalMethodDefinition()
-                                      )
-                                  ),
+                                    => new InstantiatedMethodIL(
+                                        m,
+                                        EcmaMethodIL.Create(
+                                            (EcmaMethod)m.GetTypicalMethodDefinition()
+                                        )
+                                    ),
                             };
 
                             ils.Add(desc, il);

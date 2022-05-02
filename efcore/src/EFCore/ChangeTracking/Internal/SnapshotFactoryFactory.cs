@@ -31,14 +31,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         public virtual Func<ISnapshot> CreateEmpty(IEntityType entityType)
         {
             return GetPropertyCount(entityType) == 0
-              ? (() => Snapshot.Empty)
-              : Expression
-                .Lambda<Func<ISnapshot>>(
-                    // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
-                    // as if always exists.
-                    CreateConstructorExpression(entityType, null!)
-                )
-                .Compile();
+                ? (() => Snapshot.Empty)
+                : Expression
+                    .Lambda<Func<ISnapshot>>(
+                        // TODO-Nullable: This whole code path is null unsafe. We are passing null parameter but later using parameter
+                        // as if always exists.
+                        CreateConstructorExpression(entityType, null!)
+                    )
+                    .Compile();
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             );
 
             return UseEntityVariable && entityVariable != null
-              ? (Expression)
+                ? (Expression)
                     Expression.Block(
                         new List<ParameterExpression> { entityVariable },
                         new List<Expression>
@@ -204,7 +204,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             constructorExpression
                         }
                     )
-              : constructorExpression;
+                : constructorExpression;
         }
 
         private Expression CreateSnapshotValueExpression(
@@ -233,7 +233,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     }
 
                     expression = propertyBase.ClrType.IsNullableType()
-                      ? Expression.Condition(
+                        ? Expression.Condition(
                             Expression.Equal(
                                 expression,
                                 Expression.Constant(null, propertyBase.ClrType)
@@ -241,7 +241,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             Expression.Constant(null, propertyBase.ClrType),
                             snapshotExpression
                         )
-                      : snapshotExpression;
+                        : snapshotExpression;
                 }
             }
 

@@ -109,13 +109,13 @@ internal class RedirectRule : IRule
 
                 encodedPath = host.HasValue
                     ? UriHelper.BuildAbsolute(
-                          request.Scheme,
-                          host,
-                          pathBase,
-                          resolvedPath,
-                          resolvedQuery,
-                          default
-                      )
+                        request.Scheme,
+                        host,
+                        pathBase,
+                        resolvedPath,
+                        resolvedQuery,
+                        default
+                    )
                     : UriHelper.BuildRelative(pathBase, resolvedPath, resolvedQuery, default);
             }
 

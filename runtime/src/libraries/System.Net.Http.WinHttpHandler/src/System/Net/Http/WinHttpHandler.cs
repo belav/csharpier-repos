@@ -807,14 +807,14 @@ namespace System.Net.Http
                             sessionHandle = Interop.WinHttp.WinHttpOpen(
                                 IntPtr.Zero,
                                 _proxyHelper.ManualSettingsOnly
-                                  ? Interop.WinHttp.WINHTTP_ACCESS_TYPE_NAMED_PROXY
-                                  : Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
+                                    ? Interop.WinHttp.WINHTTP_ACCESS_TYPE_NAMED_PROXY
+                                    : Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
                                 _proxyHelper.ManualSettingsOnly
-                                  ? _proxyHelper.Proxy
-                                  : Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
+                                    ? _proxyHelper.Proxy
+                                    : Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
                                 _proxyHelper.ManualSettingsOnly
-                                  ? _proxyHelper.ProxyBypass
-                                  : Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
+                                    ? _proxyHelper.ProxyBypass
+                                    : Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
                                 (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
                             );
                             ThrowOnInvalidHandle(
@@ -883,8 +883,8 @@ namespace System.Net.Http
                 connectHandle = Interop.WinHttp.WinHttpConnect(
                     _sessionHandle,
                     state.RequestMessage.RequestUri.HostNameType == UriHostNameType.IPv6
-                      ? "[" + state.RequestMessage.RequestUri.IdnHost + "]"
-                      : state.RequestMessage.RequestUri.IdnHost,
+                        ? "[" + state.RequestMessage.RequestUri.IdnHost + "]"
+                        : state.RequestMessage.RequestUri.IdnHost,
                     (ushort)state.RequestMessage.RequestUri.Port,
                     0
                 );
@@ -926,11 +926,11 @@ namespace System.Net.Http
                     state.RequestHandle,
                     state.RequestMessage,
                     _cookieUsePolicy == CookieUsePolicy.UseSpecifiedCookieContainer
-                      ? _cookieContainer
-                      : null,
+                        ? _cookieContainer
+                        : null,
                     _doManualDecompressionCheck
-                      ? _automaticDecompression
-                      : DecompressionMethods.None
+                        ? _automaticDecompression
+                        : DecompressionMethods.None
                 );
 
                 uint proxyAuthScheme = 0;
@@ -1031,8 +1031,8 @@ namespace System.Net.Http
                 HttpResponseMessage responseMessage = WinHttpResponseParser.CreateResponseMessage(
                     state,
                     _doManualDecompressionCheck
-                      ? _automaticDecompression
-                      : DecompressionMethods.None
+                        ? _automaticDecompression
+                        : DecompressionMethods.None
                 );
                 state.Tcs.TrySetResult(responseMessage);
 
@@ -1363,8 +1363,8 @@ namespace System.Net.Http
                         updateProxySettings = true;
 
                         Uri? proxyUri = state.Proxy.IsBypassed(uri)
-                          ? null
-                          : state.Proxy.GetProxy(uri);
+                            ? null
+                            : state.Proxy.GetProxy(uri);
                         if (proxyUri == null)
                         {
                             proxyInfo.AccessType = Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY;

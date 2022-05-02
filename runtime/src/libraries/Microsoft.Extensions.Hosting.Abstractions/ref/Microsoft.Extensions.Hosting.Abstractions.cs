@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.Hosting
 {
     public abstract partial class BackgroundService
         : Microsoft.Extensions.Hosting.IHostedService,
-          System.IDisposable
+            System.IDisposable
     {
         protected BackgroundService() { }
 

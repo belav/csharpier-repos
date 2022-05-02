@@ -690,13 +690,13 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         i > 1
                             ? (
-                                  BitConverter.DoubleToInt64Bits(left[2])
-                                  != BitConverter.DoubleToInt64Bits(result[i])
-                              )
+                                BitConverter.DoubleToInt64Bits(left[2])
+                                != BitConverter.DoubleToInt64Bits(result[i])
+                            )
                             : (
-                                  BitConverter.DoubleToInt64Bits(left[0])
-                                  != BitConverter.DoubleToInt64Bits(result[i])
-                              )
+                                BitConverter.DoubleToInt64Bits(left[0])
+                                != BitConverter.DoubleToInt64Bits(result[i])
+                            )
                     )
                     {
                         succeeded = false;

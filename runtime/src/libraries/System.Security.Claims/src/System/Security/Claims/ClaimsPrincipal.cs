@@ -284,8 +284,8 @@ namespace System.Security.Claims
             get
             {
                 return s_principalSelector is not null
-                  ? s_principalSelector()
-                  : SelectClaimsPrincipal();
+                    ? s_principalSelector()
+                    : SelectClaimsPrincipal();
             }
         }
 

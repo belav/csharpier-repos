@@ -495,7 +495,7 @@ namespace System.DirectoryServices.AccountManagement
                 PropertyNames.UserSurname => _surnameChanged == LoadState.Changed,
                 PropertyNames.UserEmailAddress => _emailAddressChanged == LoadState.Changed,
                 PropertyNames.UserVoiceTelephoneNumber
-                  => _voiceTelephoneNumberChanged == LoadState.Changed,
+                    => _voiceTelephoneNumberChanged == LoadState.Changed,
                 PropertyNames.UserEmployeeID => _employeeIDChanged == LoadState.Changed,
                 _ => base.GetChangeStatusForProperty(propertyName),
             };

@@ -1428,10 +1428,10 @@ namespace System
     [DebuggerDisplay("{v,nq}")]
     public unsafe struct nint
         : IFormattable,
-          IConvertible,
-          IComparable,
-          IComparable<nint>,
-          IEquatable<nint>
+            IConvertible,
+            IComparable,
+            IComparable<nint>,
+            IEquatable<nint>
     {
         internal nint(nint v)
         {
@@ -2254,10 +2254,10 @@ namespace System
     [DebuggerDisplay("{v,nq}")]
     public unsafe struct nuint
         : IFormattable,
-          IConvertible,
-          IComparable,
-          IComparable<nuint>,
-          IEquatable<nuint>
+            IConvertible,
+            IComparable,
+            IComparable<nuint>,
+            IEquatable<nuint>
     {
         internal nuint(nuint v)
         {
@@ -3047,10 +3047,10 @@ namespace System
     [DebuggerDisplay("{v,nq}")]
     public unsafe struct nfloat
         : IFormattable,
-          IConvertible,
-          IComparable,
-          IComparable<nfloat>,
-          IEquatable<nfloat>
+            IConvertible,
+            IComparable,
+            IComparable<nfloat>,
+            IEquatable<nfloat>
     {
         internal nfloat(nfloat v)
         {

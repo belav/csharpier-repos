@@ -246,8 +246,8 @@ namespace System
         {
             return TextWriter.Synchronized(
                 outputStream == Stream.Null
-                  ? StreamWriter.Null
-                  : new StreamWriter(
+                    ? StreamWriter.Null
+                    : new StreamWriter(
                         stream: outputStream,
                         encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
                         bufferSize: WriteBufferSize,
@@ -1031,8 +1031,8 @@ namespace System
             {
                 var args = new ConsoleCancelEventArgs(
                     ctx.Signal == PosixSignal.SIGINT
-                      ? ConsoleSpecialKey.ControlC
-                      : ConsoleSpecialKey.ControlBreak
+                        ? ConsoleSpecialKey.ControlC
+                        : ConsoleSpecialKey.ControlBreak
                 );
                 args.Cancel = ctx.Cancel;
                 handler(null, args);

@@ -153,8 +153,8 @@ namespace System.Web.Http.WebHost.Routing
                 IHttpVirtualPathData virtualPathData = HttpRoute.GetVirtualPath(request, values);
 
                 return virtualPathData == null
-                  ? null
-                  : new VirtualPathData(this, virtualPathData.VirtualPath);
+                    ? null
+                    : new VirtualPathData(this, virtualPathData.VirtualPath);
             }
         }
 

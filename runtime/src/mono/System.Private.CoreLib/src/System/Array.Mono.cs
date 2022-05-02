@@ -664,8 +664,8 @@ namespace System
         internal IEnumerator<T> InternalArray__IEnumerable_GetEnumerator<T>()
         {
             return Length == 0
-              ? SZGenericArrayEnumerator<T>.Empty
-              : new SZGenericArrayEnumerator<T>(Unsafe.As<T[]>(this));
+                ? SZGenericArrayEnumerator<T>.Empty
+                : new SZGenericArrayEnumerator<T>(Unsafe.As<T[]>(this));
         }
 
         internal void InternalArray__ICollection_Clear()

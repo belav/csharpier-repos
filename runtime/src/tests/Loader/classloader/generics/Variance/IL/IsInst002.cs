@@ -17,18 +17,18 @@ public class GTArrUArr<T, U> : IMinusT<T[]>, IPlusT<U[]>, IMinusTPlusU<T[], U[]>
 
 public class GRefTRefU<T, U>
     : IMinusT<IPlusT<T>>,
-      IMinusT<IMinusT<U>>,
-      IMinusTPlusU<IPlusT<T>, IPlusT<U>> { }
+        IMinusT<IMinusT<U>>,
+        IMinusTPlusU<IPlusT<T>, IPlusT<U>> { }
 
 public class GRefTArrRefUArr<T, U>
     : IMinusT<IPlusT<T[]>>,
-      IMinusT<IMinusT<U[]>>,
-      IMinusTPlusU<IPlusT<T[]>, IPlusT<U[]>> { }
+        IMinusT<IMinusT<U[]>>,
+        IMinusTPlusU<IPlusT<T[]>, IPlusT<U[]>> { }
 
 public class GArrRefTArrRefU<T, U>
     : IMinusT<IPlusT<T>[]>,
-      IMinusT<IMinusT<U>[]>,
-      IMinusTPlusU<IPlusT<T>[], IPlusT<U>[]> { }
+        IMinusT<IMinusT<U>[]>,
+        IMinusTPlusU<IPlusT<T>[], IPlusT<U>[]> { }
 
 public class TestClass
 {

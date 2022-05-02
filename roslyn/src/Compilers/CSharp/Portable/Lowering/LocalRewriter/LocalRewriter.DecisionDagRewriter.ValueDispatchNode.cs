@@ -161,8 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Debug.Assert(whenTrue.Height == this.WhenTrue.Height);
                         Debug.Assert(whenFalse.Height == this.WhenFalse.Height);
                         var (left, right) = IsReversed(Operator)
-                          ? (whenFalse, whenTrue)
-                          : (whenTrue, whenFalse);
+                            ? (whenFalse, whenTrue)
+                            : (whenTrue, whenFalse);
                         return WithLeftAndRight(left, right);
                     }
 
@@ -176,8 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // Keep the lower numbers on the left and the higher numbers on the right.
                         var (left, right) = IsReversed(op)
-                          ? (whenFalse, whenTrue)
-                          : (whenTrue, whenFalse);
+                            ? (whenFalse, whenTrue)
+                            : (whenTrue, whenFalse);
                         return CreateBalancedCore(syntax, value, op, left: left, right: right);
                     }
 

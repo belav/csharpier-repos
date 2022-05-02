@@ -77,11 +77,11 @@ namespace Generic.Dictionary
                 comparerType == null
                     ? new Dictionary<int, int>()
                     : new Dictionary<int, int>(
-                          (
-                              customComparer =
-                                  (IEqualityComparer<int>)Activator.CreateInstance(comparerType)
-                          )
-                      );
+                        (
+                            customComparer =
+                                (IEqualityComparer<int>)Activator.CreateInstance(comparerType)
+                        )
+                    );
 
             dic.Add(1, 1);
 
@@ -113,12 +113,12 @@ namespace Generic.Dictionary
                 comparerType == null
                     ? new Dictionary<DummyRefType, DummyRefType>()
                     : new Dictionary<DummyRefType, DummyRefType>(
-                          (
-                              customComparer =
-                                  (IEqualityComparer<DummyRefType>)
-                                      Activator.CreateInstance(comparerType)
-                          )
-                      );
+                        (
+                            customComparer =
+                                (IEqualityComparer<DummyRefType>)
+                                    Activator.CreateInstance(comparerType)
+                        )
+                    );
 
             var keyValueSample = new DummyRefType() { Value = 1 };
 

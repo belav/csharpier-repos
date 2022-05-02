@@ -112,44 +112,44 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             this.Kind switch
             {
                 RoslynNavigationBarItemKind.Symbol
-                  => new SymbolItem(
-                      Name!,
-                      Text,
-                      Glyph,
-                      IsObsolete,
-                      Location!.Value,
-                      ChildItems.SelectAsArray(i => i.Rehydrate()),
-                      Indent,
-                      Bolded
-                  ),
+                    => new SymbolItem(
+                        Name!,
+                        Text,
+                        Glyph,
+                        IsObsolete,
+                        Location!.Value,
+                        ChildItems.SelectAsArray(i => i.Rehydrate()),
+                        Indent,
+                        Bolded
+                    ),
                 RoslynNavigationBarItemKind.GenerateDefaultConstructor
-                  => new GenerateDefaultConstructor(Text, DestinationTypeSymbolKey!.Value),
+                    => new GenerateDefaultConstructor(Text, DestinationTypeSymbolKey!.Value),
                 RoslynNavigationBarItemKind.GenerateEventHandler
-                  => new GenerateEventHandler(
-                      Text,
-                      Glyph,
-                      ContainerName!,
-                      EventSymbolKey!.Value,
-                      DestinationTypeSymbolKey!.Value
-                  ),
+                    => new GenerateEventHandler(
+                        Text,
+                        Glyph,
+                        ContainerName!,
+                        EventSymbolKey!.Value,
+                        DestinationTypeSymbolKey!.Value
+                    ),
                 RoslynNavigationBarItemKind.GenerateFinalizer
-                  => new GenerateFinalizer(Text, DestinationTypeSymbolKey!.Value),
+                    => new GenerateFinalizer(Text, DestinationTypeSymbolKey!.Value),
                 RoslynNavigationBarItemKind.GenerateMethod
-                  => new GenerateMethod(
-                      Text,
-                      Glyph,
-                      DestinationTypeSymbolKey!.Value,
-                      MethodToReplicateSymbolKey!.Value
-                  ),
+                    => new GenerateMethod(
+                        Text,
+                        Glyph,
+                        DestinationTypeSymbolKey!.Value,
+                        MethodToReplicateSymbolKey!.Value
+                    ),
                 RoslynNavigationBarItemKind.Actionless
-                  => new ActionlessItem(
-                      Text,
-                      Glyph,
-                      ChildItems.SelectAsArray(v => v.Rehydrate()),
-                      Indent,
-                      Bolded,
-                      Grayed
-                  ),
+                    => new ActionlessItem(
+                        Text,
+                        Glyph,
+                        ChildItems.SelectAsArray(v => v.Rehydrate()),
+                        Indent,
+                        Bolded,
+                        Grayed
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(this.Kind),
             };
 

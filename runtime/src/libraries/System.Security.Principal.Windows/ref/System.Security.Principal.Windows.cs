@@ -83,8 +83,8 @@ namespace System.Security.Principal
 
     public partial class IdentityReferenceCollection
         : System.Collections.Generic.ICollection<System.Security.Principal.IdentityReference>,
-          System.Collections.Generic.IEnumerable<System.Security.Principal.IdentityReference>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Security.Principal.IdentityReference>,
+            System.Collections.IEnumerable
     {
         public IdentityReferenceCollection() { }
 
@@ -205,7 +205,7 @@ namespace System.Security.Principal
 
     public sealed partial class SecurityIdentifier
         : System.Security.Principal.IdentityReference,
-          System.IComparable<System.Security.Principal.SecurityIdentifier>
+            System.IComparable<System.Security.Principal.SecurityIdentifier>
     {
         public static readonly int MaxBinaryLength;
         public static readonly int MinBinaryLength;
@@ -455,9 +455,9 @@ namespace System.Security.Principal
 
     public partial class WindowsIdentity
         : System.Security.Claims.ClaimsIdentity,
-          System.IDisposable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable
+            System.IDisposable,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable
     {
         public new const string DefaultIssuer = "AD AUTHORITY";
 

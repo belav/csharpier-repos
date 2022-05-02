@@ -173,8 +173,8 @@ namespace Microsoft.CodeAnalysis.Completion
         )
         {
             return CommonCompletionItem.HasDescription(item)
-              ? Task.FromResult(CommonCompletionItem.GetDescription(item))
-              : Task.FromResult(CompletionDescription.Empty);
+                ? Task.FromResult(CommonCompletionItem.GetDescription(item))
+                : Task.FromResult(CompletionDescription.Empty);
         }
 
         public override async Task<CompletionChange> GetChangeAsync(

@@ -1136,8 +1136,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                             Data = Task.WhenAll(
                                 client.GetByteArrayAsync(url, token),
                                 pdb != null
-                                  ? client.GetByteArrayAsync(pdb, token)
-                                  : Task.FromResult<byte[]>(null)
+                                    ? client.GetByteArrayAsync(pdb, token)
+                                    : Task.FromResult<byte[]>(null)
                             )
                         }
                     );

@@ -269,23 +269,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             parentElement switch
             {
                 EnvDTE.CodeDelegate parentDelegate
-                  => GetParameterElementForCodeModelEvent(
-                      codeModelEvent,
-                      parentDelegate.Parameters,
-                      parentElement
-                  ),
+                    => GetParameterElementForCodeModelEvent(
+                        codeModelEvent,
+                        parentDelegate.Parameters,
+                        parentElement
+                    ),
                 EnvDTE.CodeFunction parentFunction
-                  => GetParameterElementForCodeModelEvent(
-                      codeModelEvent,
-                      parentFunction.Parameters,
-                      parentElement
-                  ),
+                    => GetParameterElementForCodeModelEvent(
+                        codeModelEvent,
+                        parentFunction.Parameters,
+                        parentElement
+                    ),
                 EnvDTE80.CodeProperty2 parentProperty
-                  => GetParameterElementForCodeModelEvent(
-                      codeModelEvent,
-                      parentProperty.Parameters,
-                      parentElement
-                  ),
+                    => GetParameterElementForCodeModelEvent(
+                        codeModelEvent,
+                        parentProperty.Parameters,
+                        parentElement
+                    ),
                 _ => null,
             };
 

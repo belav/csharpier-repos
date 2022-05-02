@@ -209,11 +209,11 @@ namespace Microsoft.EntityFrameworkCore
                         (
                             async
                                 ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                      async () => await context.SaveChangesAsync()
-                                  )
+                                    async () => await context.SaveChangesAsync()
+                                )
                                 : Assert.Throws<InvalidOperationException>(
-                                      () => context.SaveChanges()
-                                  )
+                                    () => context.SaveChanges()
+                                )
                         ).Message
                     );
                 }
@@ -268,11 +268,11 @@ namespace Microsoft.EntityFrameworkCore
                             (
                                 async
                                     ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                          async () => await context.SaveChangesAsync()
-                                      )
+                                        async () => await context.SaveChangesAsync()
+                                    )
                                     : Assert.Throws<InvalidOperationException>(
-                                          () => context.SaveChanges()
-                                      )
+                                        () => context.SaveChanges()
+                                    )
                             ).Message
                         );
                     }
@@ -331,11 +331,11 @@ namespace Microsoft.EntityFrameworkCore
                         (
                             async
                                 ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                      async () => await context.SaveChangesAsync()
-                                  )
+                                    async () => await context.SaveChangesAsync()
+                                )
                                 : Assert.Throws<InvalidOperationException>(
-                                      () => context.SaveChanges()
-                                  )
+                                    () => context.SaveChanges()
+                                )
                         ).Message
                     );
                 }
@@ -385,8 +385,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         var owner = async
                             ? await context
-                                  .Set<OwnerWithNonCompositeOwnedCollection>()
-                                  .SingleAsync()
+                                .Set<OwnerWithNonCompositeOwnedCollection>()
+                                .SingleAsync()
                             : context.Set<OwnerWithNonCompositeOwnedCollection>().Single();
 
                         Assert.Equal("Rome", owner.Owned.Single().Foo);
@@ -518,8 +518,8 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.False(
                             async
-                              ? await context.Set<OwnerWithKeyedCollection>().AnyAsync()
-                              : context.Set<OwnerWithKeyedCollection>().Any()
+                                ? await context.Set<OwnerWithKeyedCollection>().AnyAsync()
+                                : context.Set<OwnerWithKeyedCollection>().Any()
                         );
                     }
                 }
@@ -575,18 +575,18 @@ namespace Microsoft.EntityFrameworkCore
 
                     owner.OwnedCollection = addNew
                         ? new List<OwnedWithKey>
-                          {
-                              new() { Bar = "OfGold" },
-                              new() { Bar = "OfSoap" }
-                          }
+                        {
+                            new() { Bar = "OfGold" },
+                            new() { Bar = "OfSoap" }
+                        }
                         : new List<OwnedWithKey>();
 
                     owner.OwnedCollectionPrivateKey = addNew
                         ? new List<OwnedWithPrivateKey>
-                          {
-                              new() { Bar = "OfChocolate" },
-                              new() { Bar = "OfLead" }
-                          }
+                        {
+                            new() { Bar = "OfChocolate" },
+                            new() { Bar = "OfLead" }
+                        }
                         : new List<OwnedWithPrivateKey>();
 
                     if (async)
@@ -686,11 +686,11 @@ namespace Microsoft.EntityFrameworkCore
                         (
                             async
                                 ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                      async () => await context.SaveChangesAsync()
-                                  )
+                                    async () => await context.SaveChangesAsync()
+                                )
                                 : Assert.Throws<InvalidOperationException>(
-                                      () => context.SaveChanges()
-                                  )
+                                    () => context.SaveChanges()
+                                )
                         ).Message
                     );
                 }

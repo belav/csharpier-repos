@@ -363,8 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             );
             return newOwner.IsDefinition
-              ? this
-              : new SubstitutedPropertySymbol(newOwner as SubstitutedNamedTypeSymbol, this);
+                ? this
+                : new SubstitutedPropertySymbol(newOwner as SubstitutedNamedTypeSymbol, this);
         }
 
         #region Use-Site Diagnostics

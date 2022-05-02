@@ -138,9 +138,9 @@ internal sealed partial class ComponentHub : Hub
             var circuitClient = new CircuitClientProxy(Clients.Caller, Context.ConnectionId);
             var store = !string.IsNullOrEmpty(applicationState)
                 ? new ProtectedPrerenderComponentApplicationStore(
-                      applicationState,
-                      _dataProtectionProvider
-                  )
+                    applicationState,
+                    _dataProtectionProvider
+                )
                 : new ProtectedPrerenderComponentApplicationStore(_dataProtectionProvider);
 
             circuitHost = await _circuitFactory.CreateCircuitHostAsync(

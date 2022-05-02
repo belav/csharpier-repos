@@ -62,8 +62,8 @@ internal sealed partial class SocketConnection : TransportConnection
         // Yes, the IOQueues are still used for the PipeSchedulers. This is intentional.
         // https://github.com/aspnet/KestrelHttpServer/issues/2573
         var awaiterScheduler = OperatingSystem.IsWindows()
-          ? transportScheduler
-          : PipeScheduler.Inline;
+            ? transportScheduler
+            : PipeScheduler.Inline;
 
         _receiver = new SocketReceiver(awaiterScheduler);
 

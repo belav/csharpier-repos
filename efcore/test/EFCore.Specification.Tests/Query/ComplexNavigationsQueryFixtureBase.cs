@@ -13,7 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class ComplexNavigationsQueryFixtureBase
         : SharedStoreFixtureBase<ComplexNavigationsContext>,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         private ComplexNavigationsDefaultData _expectedData;
 

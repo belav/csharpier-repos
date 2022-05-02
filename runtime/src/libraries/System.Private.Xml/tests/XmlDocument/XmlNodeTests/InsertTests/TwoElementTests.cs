@@ -44,14 +44,14 @@ namespace System.Xml.Tests
                 (insertType == InsertType.Prepend)
                     ? (newChild.OuterXml + parent.InnerXml)
                     : (
-                          (insertType == InsertType.Append)
-                              ? (parent.InnerXml + newChild.OuterXml)
-                              : (
-                                    refChild.PreviousSibling.OuterXml
-                                    + newChild.OuterXml
-                                    + refChild.OuterXml
-                                )
-                      );
+                        (insertType == InsertType.Append)
+                            ? (parent.InnerXml + newChild.OuterXml)
+                            : (
+                                refChild.PreviousSibling.OuterXml
+                                + newChild.OuterXml
+                                + refChild.OuterXml
+                            )
+                    );
             if (deleteFirst)
                 expected[1] =
                     (insertType == InsertType.Append)

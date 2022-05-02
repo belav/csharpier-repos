@@ -369,12 +369,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             return node switch
             {
                 AssignmentExpressionSyntax _ when token.Kind() == SyntaxKind.EqualsToken
-                  => GetDeconstructionAssignmentMethods(semanticModel, node).As<ISymbol>(),
+                    => GetDeconstructionAssignmentMethods(semanticModel, node).As<ISymbol>(),
                 ForEachVariableStatementSyntax _ when token.Kind() == SyntaxKind.InKeyword
-                  => GetDeconstructionForEachMethods(semanticModel, node).As<ISymbol>(),
+                    => GetDeconstructionForEachMethods(semanticModel, node).As<ISymbol>(),
                 _
-                  => GetSymbolInfo(semanticModel, node, token, cancellationToken)
-                      .GetBestOrAllSymbols(),
+                    => GetSymbolInfo(semanticModel, node, token, cancellationToken)
+                        .GetBestOrAllSymbols(),
             };
         }
 
@@ -434,8 +434,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // the tokens in the clause determine which of the two SymbolInfos are returned.
                         // See also the proposal at https://github.com/dotnet/roslyn/issues/23394
                         return token.IsKind(SyntaxKind.InKeyword)
-                          ? queryInfo.CastInfo
-                          : queryInfo.OperationInfo;
+                            ? queryInfo.CastInfo
+                            : queryInfo.OperationInfo;
                     }
 
                     if (hasCastInfo)

@@ -83,7 +83,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             {
                 IReturnOperation { ReturnedValue: { } value } => (ExpressionSyntax)value.Syntax,
                 IThrowOperation { Exception: { } exception }
-                  => ThrowExpression((ExpressionSyntax)exception.Syntax),
+                    => ThrowExpression((ExpressionSyntax)exception.Syntax),
                 IBlockOperation op => AsExpressionSyntax(op.Operations.Single()),
                 var v => throw ExceptionUtilities.UnexpectedValue(v.Kind)
             };
@@ -137,22 +137,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
             pattern switch
             {
                 AnalyzedPattern.And p
-                  => BinaryPattern(
-                      SyntaxKind.AndPattern,
-                      AsPatternSyntax(p.LeftPattern, feature).Parenthesize(),
-                      AsPatternSyntax(p.RightPattern, feature).Parenthesize()
-                  ),
+                    => BinaryPattern(
+                        SyntaxKind.AndPattern,
+                        AsPatternSyntax(p.LeftPattern, feature).Parenthesize(),
+                        AsPatternSyntax(p.RightPattern, feature).Parenthesize()
+                    ),
                 AnalyzedPattern.Constant p => ConstantPattern(p.ExpressionSyntax),
                 AnalyzedPattern.Source p => p.PatternSyntax,
                 AnalyzedPattern.Type p when feature.HasFlag(Feature.TypePattern)
-                  => TypePattern((TypeSyntax)p.IsExpressionSyntax.Right),
+                    => TypePattern((TypeSyntax)p.IsExpressionSyntax.Right),
                 AnalyzedPattern.Type p
-                  => DeclarationPattern(
-                      (TypeSyntax)p.IsExpressionSyntax.Right,
-                      DiscardDesignation()
-                  ),
+                    => DeclarationPattern(
+                        (TypeSyntax)p.IsExpressionSyntax.Right,
+                        DiscardDesignation()
+                    ),
                 AnalyzedPattern.Relational p
-                  => RelationalPattern(Token(s_operatorMap[p.OperatorKind]), p.Value),
+                    => RelationalPattern(Token(s_operatorMap[p.OperatorKind]), p.Value),
                 var p => throw ExceptionUtilities.UnexpectedValue(p)
             };
 

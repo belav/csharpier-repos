@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
     {
         internal sealed class PragmaWarningCodeAction
             : AbstractSuppressionCodeAction,
-              IPragmaBasedCodeAction
+                IPragmaBasedCodeAction
         {
             private readonly SuppressionTargetInfo _suppressionTargetInfo;
             private readonly Document _document;
@@ -94,26 +94,26 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         (startToken, currentDiagnosticSpan) =>
                         {
                             return includeStartTokenChange
-                              ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
+                                ? PragmaHelpers.GetNewStartTokenWithAddedPragma(
                                     startToken,
                                     currentDiagnosticSpan,
                                     _diagnostic,
                                     Fixer,
                                     FormatNode
                                 )
-                              : startToken;
+                                : startToken;
                         },
                         (endToken, currentDiagnosticSpan) =>
                         {
                             return includeEndTokenChange
-                              ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
+                                ? PragmaHelpers.GetNewEndTokenWithAddedPragma(
                                     endToken,
                                     currentDiagnosticSpan,
                                     _diagnostic,
                                     Fixer,
                                     FormatNode
                                 )
-                              : endToken;
+                                : endToken;
                         },
                         cancellationToken
                     )

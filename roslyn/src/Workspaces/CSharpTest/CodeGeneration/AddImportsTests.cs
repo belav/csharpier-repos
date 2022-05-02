@@ -52,11 +52,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
                     {
                         var symbol = model.GetSymbolInfo(o).Symbol;
                         return symbol != null
-                          ? c.WithAdditionalAnnotations(
+                            ? c.WithAdditionalAnnotations(
                                 SymbolAnnotation.Create(symbol),
                                 Simplifier.Annotation
                             )
-                          : c;
+                            : c;
                     }
                 );
                 doc = doc.WithSyntaxRoot(root);
@@ -855,19 +855,19 @@ class C
             // Add namespace import.
             var imported = useSymbolAnnotations
                 ? await ImportAdder
-                      .AddImportsFromSymbolAnnotationAsync(
-                          documentWithAttribute,
-                          null,
-                          CancellationToken.None
-                      )
-                      .ConfigureAwait(false)
+                    .AddImportsFromSymbolAnnotationAsync(
+                        documentWithAttribute,
+                        null,
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false)
                 : await ImportAdder
-                      .AddImportsFromSyntaxesAsync(
-                          documentWithAttribute,
-                          null,
-                          CancellationToken.None
-                      )
-                      .ConfigureAwait(false);
+                    .AddImportsFromSyntaxesAsync(
+                        documentWithAttribute,
+                        null,
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false);
 
             var formatted = await Formatter.FormatAsync(imported, options);
             var actualText = (await formatted.GetTextAsync()).ToString();

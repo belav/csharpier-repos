@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     PropertySymbol
         :
 #endif
-          IPropertyDefinition
+            IPropertyDefinition
     {
         #region IPropertyDefinition Members
 
@@ -293,8 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SynthesizedSealedPropertyAccessor synthesized =
                     sourceProperty.SynthesizedSealedAccessorOpt;
                 return (object)synthesized != null && synthesized.MethodKind == targetMethodKind
-                  ? synthesized.GetCciAdapter()
-                  : null;
+                    ? synthesized.GetCciAdapter()
+                    : null;
             }
 
             return null;

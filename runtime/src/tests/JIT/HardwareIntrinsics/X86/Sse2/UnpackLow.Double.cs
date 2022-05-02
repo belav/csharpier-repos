@@ -690,9 +690,9 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         (i % 2 == 0)
                             ? BitConverter.DoubleToInt64Bits(result[i])
-                              != BitConverter.DoubleToInt64Bits(left[i / 2])
+                                != BitConverter.DoubleToInt64Bits(left[i / 2])
                             : BitConverter.DoubleToInt64Bits(result[i])
-                              != BitConverter.DoubleToInt64Bits(right[(i - 1) / 2])
+                                != BitConverter.DoubleToInt64Bits(right[(i - 1) / 2])
                     )
                     {
                         succeeded = false;

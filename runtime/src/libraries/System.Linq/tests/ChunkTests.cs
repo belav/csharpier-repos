@@ -39,7 +39,7 @@ namespace System.Linq.Tests
             return type switch
             {
                 { } x when x == typeof(TestReadOnlyCollection<T>)
-                  => new TestReadOnlyCollection<T>(array),
+                    => new TestReadOnlyCollection<T>(array),
                 { } x when x == typeof(TestCollection<T>) => new TestCollection<T>(array),
                 { } x when x == typeof(TestEnumerable<T>) => new TestEnumerable<T>(array),
                 _ => throw new Exception()

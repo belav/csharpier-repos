@@ -11,17 +11,17 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 {
     internal class CSharpDocumentationCommentService
         : AbstractDocumentationCommentService<
-              DocumentationCommentTriviaSyntax,
-              XmlNodeSyntax,
-              XmlAttributeSyntax,
-              CrefSyntax,
-              XmlElementSyntax,
-              XmlTextSyntax,
-              XmlEmptyElementSyntax,
-              XmlCrefAttributeSyntax,
-              XmlNameAttributeSyntax,
-              XmlTextAttributeSyntax
-          >
+            DocumentationCommentTriviaSyntax,
+            XmlNodeSyntax,
+            XmlAttributeSyntax,
+            CrefSyntax,
+            XmlElementSyntax,
+            XmlTextSyntax,
+            XmlEmptyElementSyntax,
+            XmlCrefAttributeSyntax,
+            XmlNameAttributeSyntax,
+            XmlTextAttributeSyntax
+        >
     {
         private CSharpDocumentationCommentService() : base(CSharpSyntaxFacts.Instance) { }
 

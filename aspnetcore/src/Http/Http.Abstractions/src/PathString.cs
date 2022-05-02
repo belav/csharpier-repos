@@ -527,7 +527,7 @@ internal sealed class PathStringConverter : TypeConverter
         }
 
         return destinationType == typeof(string)
-          ? value?.ToString() ?? string.Empty
-          : base.ConvertTo(context, culture, value, destinationType);
+            ? value?.ToString() ?? string.Empty
+            : base.ConvertTo(context, culture, value, destinationType);
     }
 }

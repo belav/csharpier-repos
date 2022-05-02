@@ -29,10 +29,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         ContainingSymbol is MethodSymbol
                             ? TypeParameterKind.Method
                             : (
-                                  ContainingSymbol is NamedTypeSymbol
-                                      ? TypeParameterKind.Type
-                                      : TypeParameterKind.Cref
-                              )
+                                ContainingSymbol is NamedTypeSymbol
+                                    ? TypeParameterKind.Type
+                                    : TypeParameterKind.Cref
+                            )
                     ),
                 $"Container is {ContainingSymbol?.Kind}, TypeParameterKind is {this.TypeParameterKind}"
             );

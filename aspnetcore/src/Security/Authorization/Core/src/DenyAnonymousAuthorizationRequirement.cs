@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 /// </summary>
 public class DenyAnonymousAuthorizationRequirement
     : AuthorizationHandler<DenyAnonymousAuthorizationRequirement>,
-      IAuthorizationRequirement
+        IAuthorizationRequirement
 {
     /// <summary>
     /// Makes a decision if authorization is allowed based on a specific requirement.

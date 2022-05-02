@@ -355,9 +355,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var span =
                 forEachSyntax.AwaitKeyword != default
                     ? TextSpan.FromBounds(
-                          forEachSyntax.AwaitKeyword.Span.Start,
-                          forEachSyntax.ForEachKeyword.Span.End
-                      )
+                        forEachSyntax.AwaitKeyword.Span.Start,
+                        forEachSyntax.ForEachKeyword.Span.End
+                    )
                     : forEachSyntax.ForEachKeyword.Span;
 
             var foreachKeywordSequencePoint = new BoundSequencePointWithSpan(
@@ -508,8 +508,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return AddSequencePoint(
                 original.Syntax.Kind() == SyntaxKind.VariableDeclarator
-                  ? (VariableDeclaratorSyntax)original.Syntax
-                  : (
+                    ? (VariableDeclaratorSyntax)original.Syntax
+                    : (
                         (LocalDeclarationStatementSyntax)original.Syntax
                     ).Declaration.Variables.First(),
                 base.InstrumentLocalInitialization(original, rewritten)
@@ -565,8 +565,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TextSpan switchSequencePointSpan = TextSpan.FromBounds(
                 switchSyntax.SwitchKeyword.SpanStart,
                 (switchSyntax.CloseParenToken != default)
-                  ? switchSyntax.CloseParenToken.Span.End
-                  : switchSyntax.Expression.Span.End
+                    ? switchSyntax.CloseParenToken.Span.End
+                    : switchSyntax.Expression.Span.End
             );
 
             return new BoundSequencePointWithSpan(

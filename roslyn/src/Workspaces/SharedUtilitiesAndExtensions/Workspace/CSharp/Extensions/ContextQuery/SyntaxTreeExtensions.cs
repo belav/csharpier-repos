@@ -1205,7 +1205,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                         Parent: { RawKind: (int)SyntaxKind.FunctionPointerParameter }
                     }
                 }
-                  => true,
+                    => true,
                 _ => false
             };
         }

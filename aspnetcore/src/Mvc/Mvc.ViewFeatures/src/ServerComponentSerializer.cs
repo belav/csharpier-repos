@@ -32,8 +32,8 @@ internal class ServerComponentSerializer
             parameters
         );
         return prerendered
-          ? ServerComponentMarker.Prerendered(sequence, serverComponent)
-          : ServerComponentMarker.NonPrerendered(sequence, serverComponent);
+            ? ServerComponentMarker.Prerendered(sequence, serverComponent)
+            : ServerComponentMarker.NonPrerendered(sequence, serverComponent);
     }
 
     private (int sequence, string payload) CreateSerializedServerComponent(

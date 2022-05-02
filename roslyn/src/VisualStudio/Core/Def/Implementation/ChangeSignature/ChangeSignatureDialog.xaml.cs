@@ -218,12 +218,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     addParameterViewModel.ParameterName,
                     GetCallSiteKind(addParameterViewModel),
                     addParameterViewModel.IsCallsiteRegularValue
-                      ? addParameterViewModel.CallSiteValue
-                      : string.Empty,
+                        ? addParameterViewModel.CallSiteValue
+                        : string.Empty,
                     addParameterViewModel.IsRequired,
                     addParameterViewModel.IsRequired
-                      ? string.Empty
-                      : addParameterViewModel.DefaultValue,
+                        ? string.Empty
+                        : addParameterViewModel.DefaultValue,
                     addParameterViewModel.TypeBinds
                 );
 
@@ -249,8 +249,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             Debug.Assert(addParameterViewModel.IsCallsiteRegularValue);
 
             return addParameterViewModel.UseNamedArguments
-              ? CallSiteKind.ValueWithName
-              : CallSiteKind.Value;
+                ? CallSiteKind.ValueWithName
+                : CallSiteKind.Value;
         }
 
         private void SetFocusToSelectedRow(bool focusRow)

@@ -34,8 +34,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                         hashAlgorithm,
                         out int bytesWritten
                     )
-                      ? (true, bytesWritten)
-                      : (false, 0)
+                        ? (true, bytesWritten)
+                        : (false, 0)
             );
 
         protected override void UseAfterDispose(ECDsa ecdsa, byte[] data, byte[] sig)

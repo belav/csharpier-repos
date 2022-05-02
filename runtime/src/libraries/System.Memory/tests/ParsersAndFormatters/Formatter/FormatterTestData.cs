@@ -46,11 +46,11 @@ namespace System.Buffers.Text.Tests
                 (FormatSymbol == default)
                     ? "default"
                     : FormatSymbol
-                      + (
-                          (Precision == StandardFormat.NoPrecision)
-                              ? string.Empty
-                              : Precision.ToString()
-                      );
+                        + (
+                            (Precision == StandardFormat.NoPrecision)
+                                ? string.Empty
+                                : Precision.ToString()
+                        );
 
             string bufferLengthString;
             if (PassedInBufferLength == ExpectedOutput.Length)

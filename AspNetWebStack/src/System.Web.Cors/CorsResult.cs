@@ -169,8 +169,8 @@ namespace System.Web.Cors
             builder.Append(", PreflightMaxAge: ");
             builder.Append(
                 PreflightMaxAge.HasValue
-                  ? PreflightMaxAge.Value.ToString(CultureInfo.InvariantCulture)
-                  : "null"
+                    ? PreflightMaxAge.Value.ToString(CultureInfo.InvariantCulture)
+                    : "null"
             );
             builder.Append(", AllowOrigin: ");
             builder.Append(AllowedOrigin);

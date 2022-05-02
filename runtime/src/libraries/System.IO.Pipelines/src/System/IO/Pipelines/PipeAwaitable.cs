@@ -115,11 +115,11 @@ namespace System.IO.Pipelines
             completionData =
                 currentCompletion != null
                     ? new CompletionData(
-                          currentCompletion,
-                          currentState,
-                          executionContext,
-                          synchronizationContext
-                      )
+                        currentCompletion,
+                        currentState,
+                        executionContext,
+                        synchronizationContext
+                    )
                     : default;
         }
 

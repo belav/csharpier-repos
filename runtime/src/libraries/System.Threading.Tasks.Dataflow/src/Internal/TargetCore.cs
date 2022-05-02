@@ -149,9 +149,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
             _messages =
                 (dataflowBlockOptions.MaxDegreeOfParallelism == 1)
                     ? (IProducerConsumerQueue<KeyValuePair<TInput, long>>)
-                          new SingleProducerSingleConsumerQueue<KeyValuePair<TInput, long>>()
+                        new SingleProducerSingleConsumerQueue<KeyValuePair<TInput, long>>()
                     : (IProducerConsumerQueue<KeyValuePair<TInput, long>>)
-                          new MultiProducerMultiConsumerQueue<KeyValuePair<TInput, long>>();
+                        new MultiProducerMultiConsumerQueue<KeyValuePair<TInput, long>>();
             if (
                 _dataflowBlockOptions.BoundedCapacity
                 != System.Threading.Tasks.Dataflow.DataflowBlockOptions.Unbounded
@@ -1105,8 +1105,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 get
                 {
                     return _target._boundingState != null
-                      ? _target._boundingState.PostponedMessages
-                      : null;
+                        ? _target._boundingState.PostponedMessages
+                        : null;
                 }
             }
 

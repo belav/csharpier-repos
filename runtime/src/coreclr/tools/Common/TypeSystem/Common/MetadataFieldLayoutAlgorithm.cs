@@ -1133,8 +1133,8 @@ namespace Internal.TypeSystem
                     instanceSize = LayoutInt.AlignUp(
                         instanceSize,
                         alignUpInstanceByteSize
-                          ? alignment
-                          : LayoutInt.Min(alignment, target.LayoutPointerSize),
+                            ? alignment
+                            : LayoutInt.Min(alignment, target.LayoutPointerSize),
                         target
                     );
                 }

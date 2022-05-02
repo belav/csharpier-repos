@@ -83,8 +83,8 @@ namespace System.Security.AccessControl.Tests
             SecurityIdentifier newGroup = (
                 newGroupStr != null
                     ? new SecurityIdentifier(
-                          Utils.TranslateStringConstFormatSidToStandardFormatSid(newGroupStr)
-                      )
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(newGroupStr)
+                    )
                     : null
             );
             SecurityIdentifier group = new SecurityIdentifier(

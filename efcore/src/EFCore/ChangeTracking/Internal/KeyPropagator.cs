@@ -53,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var valueGenerator = TryGetValueGenerator(
                     generationProperty,
                     generationProperty == property
-                      ? entry.EntityType
-                      : generationProperty?.DeclaringEntityType
+                        ? entry.EntityType
+                        : generationProperty?.DeclaringEntityType
                 );
 
                 if (valueGenerator != null)
@@ -102,8 +102,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var valueGenerator = TryGetValueGenerator(
                     generationProperty,
                     generationProperty == property
-                      ? entry.EntityType
-                      : generationProperty?.DeclaringEntityType
+                        ? entry.EntityType
+                        : generationProperty?.DeclaringEntityType
                 );
 
                 if (valueGenerator != null)

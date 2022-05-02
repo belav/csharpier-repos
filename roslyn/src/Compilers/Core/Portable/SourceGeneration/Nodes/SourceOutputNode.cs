@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis
 {
     internal sealed class SourceOutputNode<TInput>
         : IIncrementalGeneratorOutputNode,
-          IIncrementalGeneratorNode<TOutput>
+            IIncrementalGeneratorNode<TOutput>
     {
         private readonly IIncrementalGeneratorNode<TInput> _source;
 

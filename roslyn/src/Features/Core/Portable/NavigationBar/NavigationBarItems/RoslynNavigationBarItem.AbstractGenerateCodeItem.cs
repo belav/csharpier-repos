@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
     {
         public abstract class AbstractGenerateCodeItem
             : RoslynNavigationBarItem,
-              IEquatable<AbstractGenerateCodeItem>
+                IEquatable<AbstractGenerateCodeItem>
         {
             public readonly SymbolKey DestinationTypeSymbolKey;
 

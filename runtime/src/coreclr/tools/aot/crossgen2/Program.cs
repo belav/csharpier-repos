@@ -679,23 +679,23 @@ namespace ILCompiler
             string nearOutFilePath = inputFileExtension switch
             {
                 ".dll"
-                  => Path.ChangeExtension(
-                      inFilePath,
-                      _commandLineOptions.SingleFileCompilation && _commandLineOptions.InputBubble
-                        ? ".ni.dll.tmp"
-                        : ".ni.dll"
-                  ),
+                    => Path.ChangeExtension(
+                        inFilePath,
+                        _commandLineOptions.SingleFileCompilation && _commandLineOptions.InputBubble
+                            ? ".ni.dll.tmp"
+                            : ".ni.dll"
+                    ),
                 ".exe"
-                  => Path.ChangeExtension(
-                      inFilePath,
-                      _commandLineOptions.SingleFileCompilation && _commandLineOptions.InputBubble
-                        ? ".ni.exe.tmp"
-                        : ".ni.exe"
-                  ),
+                    => Path.ChangeExtension(
+                        inFilePath,
+                        _commandLineOptions.SingleFileCompilation && _commandLineOptions.InputBubble
+                            ? ".ni.exe.tmp"
+                            : ".ni.exe"
+                    ),
                 _
-                  => throw new CommandLineException(
-                      string.Format(SR.UnsupportedInputFileExtension, inputFileExtension)
-                  )
+                    => throw new CommandLineException(
+                        string.Format(SR.UnsupportedInputFileExtension, inputFileExtension)
+                    )
             };
             string outFile = _commandLineOptions.OutNearInput
                 ? nearOutFilePath
@@ -868,8 +868,8 @@ namespace ILCompiler
                         optimizationMode = (
                             (EcmaAssembly)inputModules[0].Assembly
                         ).HasOptimizationsDisabled()
-                          ? OptimizationMode.None
-                          : OptimizationMode.Blended;
+                            ? OptimizationMode.None
+                            : OptimizationMode.Blended;
                     }
 
                     CompositeImageSettings compositeImageSettings = new CompositeImageSettings();
@@ -910,10 +910,10 @@ namespace ILCompiler
                         _commandLineOptions.DgmlLogFileName == null
                             ? DependencyTrackingLevel.None
                             : (
-                                  _commandLineOptions.GenerateFullDgmlLog
-                                      ? DependencyTrackingLevel.All
-                                      : DependencyTrackingLevel.First
-                              );
+                                _commandLineOptions.GenerateFullDgmlLog
+                                    ? DependencyTrackingLevel.All
+                                    : DependencyTrackingLevel.First
+                            );
 
                     builder
                         .UseIbcTuning(_commandLineOptions.Tuning)

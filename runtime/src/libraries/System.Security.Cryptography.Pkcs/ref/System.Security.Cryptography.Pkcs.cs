@@ -27,7 +27,7 @@ namespace System.Security.Cryptography
 
     public sealed partial class CryptographicAttributeObjectCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public CryptographicAttributeObjectCollection() { }
 
@@ -155,7 +155,7 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class CmsRecipientCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public CmsRecipientCollection() { }
 
@@ -565,7 +565,7 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class RecipientInfoCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal RecipientInfoCollection() { }
 
@@ -771,7 +771,7 @@ namespace System.Security.Cryptography.Pkcs
 
     public sealed partial class SignerInfoCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal SignerInfoCollection() { }
 

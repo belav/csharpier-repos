@@ -172,10 +172,10 @@ namespace System.Tests
         {
             PlatformID id = Environment.OSVersion.Platform;
             PlatformID expected = OperatingSystem.IsWindows()
-              ? PlatformID.Win32NT
-              : OperatingSystem.IsBrowser()
-                  ? PlatformID.Other
-                  : PlatformID.Unix;
+                ? PlatformID.Win32NT
+                : OperatingSystem.IsBrowser()
+                    ? PlatformID.Other
+                    : PlatformID.Unix;
             Assert.Equal(expected, id);
         }
 
@@ -194,10 +194,10 @@ namespace System.Tests
             Assert.Contains(version.ToString(2), versionString);
 
             string expectedOS = OperatingSystem.IsWindows()
-              ? "Windows "
-              : OperatingSystem.IsBrowser()
-                  ? "Other "
-                  : "Unix ";
+                ? "Windows "
+                : OperatingSystem.IsBrowser()
+                    ? "Other "
+                    : "Unix ";
             Assert.Contains(expectedOS, versionString);
         }
 

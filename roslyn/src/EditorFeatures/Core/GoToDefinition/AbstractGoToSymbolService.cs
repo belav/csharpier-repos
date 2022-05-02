@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Editor.GoToDefinition
     // Ctrl+Click (GoToSymbol)
     internal abstract class AbstractGoToSymbolService
         : ForegroundThreadAffinitizedObject,
-          IGoToSymbolService
+            IGoToSymbolService
     {
         protected AbstractGoToSymbolService(
             IThreadingContext threadingContext,

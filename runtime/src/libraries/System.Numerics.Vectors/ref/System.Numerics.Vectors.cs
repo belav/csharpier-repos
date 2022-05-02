@@ -2812,7 +2812,7 @@ namespace System.Numerics
 
     public readonly partial struct Vector<T>
         : System.IEquatable<System.Numerics.Vector<T>>,
-          System.IFormattable where T : struct
+            System.IFormattable where T : struct
     {
         private readonly int _dummyPrimitive;
 

@@ -31,8 +31,8 @@ namespace Castle.Services.Logging.NLogIntegration
 
     public class ExtendedNLogLogger
         : Castle.Services.Logging.NLogIntegration.NLogLogger,
-          Castle.Core.Logging.IExtendedLogger,
-          Castle.Core.Logging.ILogger
+            Castle.Core.Logging.IExtendedLogger,
+            Castle.Core.Logging.ILogger
     {
         public ExtendedNLogLogger(
             NLog.Logger logger,

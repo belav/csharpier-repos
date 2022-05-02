@@ -38,8 +38,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             Debug.Assert(arguments.Length == 1);
             return Explicit
-              ? runtimeBinder.BindExplicitConversion(arguments, Type, locals)
-              : runtimeBinder.BindImplicitConversion(
+                ? runtimeBinder.BindExplicitConversion(arguments, Type, locals)
+                : runtimeBinder.BindImplicitConversion(
                     arguments,
                     Type,
                     locals,

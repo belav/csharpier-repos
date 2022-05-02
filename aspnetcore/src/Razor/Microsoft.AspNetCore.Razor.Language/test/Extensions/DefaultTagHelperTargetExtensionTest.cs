@@ -1310,7 +1310,7 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
 
     private class DesignTimeOptionsFeature
         : IConfigureRazorParserOptionsFeature,
-          IConfigureRazorCodeGenerationOptionsFeature
+            IConfigureRazorCodeGenerationOptionsFeature
     {
         private readonly bool _designTime;
 

@@ -209,8 +209,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
 
             // Gets a token that is directly to the right of current location or that encompasses current location (`[||]tokenToRightOrIn` or `tok[||]enToRightOrIn`)
             var tokenToRightOrIn = tokenOnLocation.Span.Contains(location)
-              ? tokenOnLocation
-              : default;
+                ? tokenOnLocation
+                : default;
 
             // A token can be to the left only when there's either no tokenDirectlyToRightOrIn or there's one  directly starting at current location.
             // Otherwise (otherwise tokenToRightOrIn is also left from location, e.g: `tok[||]enToRightOrIn`)
@@ -452,8 +452,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             )
             {
                 var localDeclarationStatement = syntaxFacts.IsLocalDeclarationStatement(node)
-                  ? node
-                  : node.Parent!;
+                    ? node
+                    : node.Parent!;
 
                 // Check if there's only one variable being declared, otherwise following transformation
                 // would go through which isn't reasonable since we can't say the first one specifically

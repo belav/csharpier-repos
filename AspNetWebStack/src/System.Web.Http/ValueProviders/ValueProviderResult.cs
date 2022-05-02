@@ -91,8 +91,8 @@ namespace System.Web.Http.ValueProviders
             try
             {
                 return canConvertFrom
-                  ? converter.ConvertFrom(null, culture, value)
-                  : converter.ConvertTo(null, culture, value, destinationType);
+                    ? converter.ConvertFrom(null, culture, value)
+                    : converter.ConvertTo(null, culture, value, destinationType);
             }
             catch (Exception ex)
             {

@@ -453,8 +453,8 @@ namespace System.ComponentModel.Composition.Hosting
                     var assembly =
                         (catalogReflectionContextAttribute != null)
                             ? catalogReflectionContextAttribute
-                              .CreateReflectionContext()
-                              .MapAssembly(_assembly)
+                                .CreateReflectionContext()
+                                .MapAssembly(_assembly)
                             : _assembly;
                     lock (_thisLock)
                     {
@@ -463,10 +463,10 @@ namespace System.ComponentModel.Composition.Hosting
                             var catalog =
                                 (_reflectionContext != null)
                                     ? new TypeCatalog(
-                                          assembly.GetTypes(),
-                                          _reflectionContext,
-                                          _definitionOrigin
-                                      )
+                                        assembly.GetTypes(),
+                                        _reflectionContext,
+                                        _definitionOrigin
+                                    )
                                     : new TypeCatalog(assembly.GetTypes(), _definitionOrigin);
                             Thread.MemoryBarrier();
                             _innerCatalog = catalog;

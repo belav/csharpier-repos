@@ -822,8 +822,8 @@ namespace System.IO.Tests
             foreach (string file in sourceFiles)
                 CreateItem(
                     useExtendedPaths && PlatformDetection.IsWindows
-                      ? @"\\?\" + Path.Combine(testDir, file)
-                      : Path.Combine(testDir, file)
+                        ? @"\\?\" + Path.Combine(testDir, file)
+                        : Path.Combine(testDir, file)
                 );
 
             return testDir;

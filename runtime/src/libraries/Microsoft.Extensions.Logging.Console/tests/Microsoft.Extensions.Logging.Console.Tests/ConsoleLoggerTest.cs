@@ -112,8 +112,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 Assert.Equal(
                     formatter.FormatterOptions.ColorBehavior,
                     logger.Options.DisableColors
-                      ? LoggerColorBehavior.Disabled
-                      : LoggerColorBehavior.Enabled
+                        ? LoggerColorBehavior.Disabled
+                        : LoggerColorBehavior.Enabled
                 );
             }
             else

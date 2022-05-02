@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Authentication.Tests;
 
 public class TestAuthHandler
     : AuthenticationHandler<AuthenticationSchemeOptions>,
-      IAuthenticationSignInHandler
+        IAuthenticationSignInHandler
 {
     public TestAuthHandler(
         IOptionsMonitor<AuthenticationSchemeOptions> options,

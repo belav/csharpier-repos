@@ -125,13 +125,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                         return edit.Operation switch
                         {
                             DiffEdit.Type.Insert
-                              => new DiffEdit(
-                                  DiffEdit.Type.Insert,
-                                  position,
-                                  newTextPosition: edit.NewTextPosition + (setNum * MaxArraySize)
-                              ),
+                                => new DiffEdit(
+                                    DiffEdit.Type.Insert,
+                                    position,
+                                    newTextPosition: edit.NewTextPosition + (setNum * MaxArraySize)
+                                ),
                             DiffEdit.Type.Delete
-                              => new DiffEdit(DiffEdit.Type.Delete, position, null),
+                                => new DiffEdit(DiffEdit.Type.Delete, position, null),
                             _ => throw ExceptionUtilities.UnexpectedValue(edit.Operation),
                         };
                     }

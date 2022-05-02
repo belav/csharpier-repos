@@ -117,12 +117,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             return IsMapped
-              ? new(
+                ? new(
                     filePath,
                     new(MappedStartLine, MappedStartColumn),
                     new(MappedEndLine, MappedEndColumn)
                 )
-              : new(
+                : new(
                     filePath,
                     new(OriginalStartLine, OriginalStartColumn),
                     new(OriginalEndLine, OriginalEndColumn)

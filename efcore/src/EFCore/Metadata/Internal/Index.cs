@@ -191,8 +191,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return isChanging
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnIndexUniquenessChanged(Builder)
-              : oldIsUnique;
+                ? DeclaringEntityType.Model.ConventionDispatcher.OnIndexUniquenessChanged(Builder)
+                : oldIsUnique;
         }
 
         private static bool DefaultIsUnique => false;
@@ -398,8 +398,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsUnique(
                 unique,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

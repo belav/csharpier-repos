@@ -88,8 +88,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         )
         {
             return tupleElementNames != null && index < tupleElementNames.Count
-              ? tupleElementNames[index]
-              : null;
+                ? tupleElementNames[index]
+                : null;
         }
 
         // Encode in payload as a sequence of bytes {count}{dynamicFlags}{tupleNames}

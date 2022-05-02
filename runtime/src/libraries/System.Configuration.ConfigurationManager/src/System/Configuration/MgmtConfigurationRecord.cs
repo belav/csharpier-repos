@@ -80,8 +80,8 @@ namespace System.Configuration
                 if (_flags[NamespacePresentCurrent] == _flags[NamespacePresentInFile])
                     return NamespaceChange.None;
                 return _flags[NamespacePresentCurrent]
-                  ? NamespaceChange.Add
-                  : NamespaceChange.Remove;
+                    ? NamespaceChange.Add
+                    : NamespaceChange.Remove;
             }
         }
 
@@ -194,8 +194,8 @@ namespace System.Configuration
         private ConstructorInfo CreateSectionGroupFactory(FactoryRecord factoryRecord)
         {
             Type type = string.IsNullOrEmpty(factoryRecord.FactoryTypeName)
-              ? typeof(ConfigurationSectionGroup)
-              : TypeUtil.GetType(Host, factoryRecord.FactoryTypeName, true);
+                ? typeof(ConfigurationSectionGroup)
+                : TypeUtil.GetType(Host, factoryRecord.FactoryTypeName, true);
 
             ConstructorInfo ctor = TypeUtil.GetConstructor(
                 type,
@@ -1573,11 +1573,11 @@ namespace System.Configuration
             {
                 ConfigurationAllowExeDefinition.MachineOnly => AllowDefinitionMachineOnly,
                 ConfigurationAllowExeDefinition.MachineToApplication
-                  => AllowDefinitionMachineToApplication,
+                    => AllowDefinitionMachineToApplication,
                 ConfigurationAllowExeDefinition.MachineToRoamingUser
-                  => AllowExeDefinitionMachineToRoaming,
+                    => AllowExeDefinitionMachineToRoaming,
                 ConfigurationAllowExeDefinition.MachineToLocalUser
-                  => AllowExeDefinitionMachineToLocal,
+                    => AllowExeDefinitionMachineToLocal,
                 _ => throw ExceptionUtil.PropertyInvalid("AllowExeDefinition"),
             };
 

@@ -16,11 +16,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseAutoPropertyAnalyzer
         : AbstractUseAutoPropertyAnalyzer<
-              PropertyDeclarationSyntax,
-              FieldDeclarationSyntax,
-              VariableDeclaratorSyntax,
-              ExpressionSyntax
-          >
+            PropertyDeclarationSyntax,
+            FieldDeclarationSyntax,
+            VariableDeclaratorSyntax,
+            ExpressionSyntax
+        >
     {
         protected override bool SupportsReadOnlyProperties(Compilation compilation) =>
             ((CSharpCompilation)compilation).LanguageVersion >= LanguageVersion.CSharp6;
@@ -275,8 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
                 )
                 {
                     return CheckExpressionSyntactically(assignmentExpression.Left)
-                      ? assignmentExpression.Left
-                      : null;
+                        ? assignmentExpression.Left
+                        : null;
                 }
             }
 
@@ -295,8 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
         )
         {
             return fieldDeclaration.Declaration.Variables.Count == 1
-              ? fieldDeclaration
-              : variableDeclarator;
+                ? fieldDeclaration
+                : variableDeclarator;
         }
     }
 }

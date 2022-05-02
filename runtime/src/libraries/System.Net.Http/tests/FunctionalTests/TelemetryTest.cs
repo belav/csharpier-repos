@@ -605,8 +605,8 @@ namespace System.Net.Http.Functional.Tests
                             events,
                             RequestContentLength,
                             responseContentLength: testMethod.StartsWith("InvokerSend")
-                              ? null
-                              : ResponseContentLength,
+                                ? null
+                                : ResponseContentLength,
                             count: 1
                         );
 

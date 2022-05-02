@@ -16,10 +16,10 @@ namespace Microsoft.Extensions.Primitives
     /// </summary>
     public readonly struct StringValues
         : IList<string?>,
-          IReadOnlyList<string?>,
-          IEquatable<StringValues>,
-          IEquatable<string?>,
-          IEquatable<string?[]?>
+            IReadOnlyList<string?>,
+            IEquatable<StringValues>,
+            IEquatable<string?>,
+            IEquatable<string?[]?>
     {
         /// <summary>
         /// A readonly instance of the <see cref="StringValues"/> struct whose value is an empty string array.
@@ -336,8 +336,8 @@ namespace Microsoft.Extensions.Primitives
             {
                 // value not array, can only be string
                 return string.Equals(Unsafe.As<string>(value), item, StringComparison.Ordinal)
-                  ? 0
-                  : -1;
+                    ? 0
+                    : -1;
             }
 
             return -1;

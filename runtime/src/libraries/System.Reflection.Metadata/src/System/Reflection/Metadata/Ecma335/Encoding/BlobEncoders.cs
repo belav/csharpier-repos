@@ -715,8 +715,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             Builder.WriteByte(
                 isField
-                  ? (byte)CustomAttributeNamedArgumentKind.Field
-                  : (byte)CustomAttributeNamedArgumentKind.Property
+                    ? (byte)CustomAttributeNamedArgumentKind.Field
+                    : (byte)CustomAttributeNamedArgumentKind.Property
             );
             type = new NamedArgumentTypeEncoder(Builder);
             name = new NameEncoder(Builder);

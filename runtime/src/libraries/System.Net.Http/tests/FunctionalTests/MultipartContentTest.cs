@@ -332,15 +332,15 @@ namespace System.Net.Http.Functional.Tests
             c.Add(
                 new StreamContent(
                     firstContentSeekable
-                      ? new MemoryStream(new byte[42])
-                      : new NonSeekableMemoryStream(new byte[42])
+                        ? new MemoryStream(new byte[42])
+                        : new NonSeekableMemoryStream(new byte[42])
                 )
             );
             c.Add(
                 new StreamContent(
                     secondContentSeekable
-                      ? new MemoryStream(new byte[42])
-                      : new NonSeekableMemoryStream(new byte[1])
+                        ? new MemoryStream(new byte[42])
+                        : new NonSeekableMemoryStream(new byte[1])
                 )
             );
             using (Stream s = await c.ReadAsStreamAsync(readStreamAsync))

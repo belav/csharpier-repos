@@ -232,7 +232,7 @@ namespace System.Formats.Cbor.Tests
                             or CoseCrvId.Ed25519
                             or CoseCrvId.Ed448
                     )
-                      => true,
+                        => true,
                     _ => false,
                 };
                 ;
@@ -249,7 +249,7 @@ namespace System.Formats.Cbor.Tests
                     or CoseCrvId.X448
                     or CoseCrvId.Ed25519
                     or CoseCrvId.Ed448
-                      => throw new NotImplementedException("OKP type curves not implemented."),
+                        => throw new NotImplementedException("OKP type curves not implemented."),
                     _ => throw new CborContentException("Unrecognized COSE crv value."),
                 };
             }

@@ -70,9 +70,9 @@ namespace System.Net.Http
                 ValueTask task =
                     buffer.Length == 0
                         ?
-                          // Don't write if nothing was given, especially since we don't want to accidentally send a 0 chunk,
-                          // which would indicate end of body.  Instead, just ensure no content is stuck in the buffer.
-                          connection.FlushAsync(async: true)
+                        // Don't write if nothing was given, especially since we don't want to accidentally send a 0 chunk,
+                        // which would indicate end of body.  Instead, just ensure no content is stuck in the buffer.
+                        connection.FlushAsync(async: true)
                         : WriteChunkAsync(connection, buffer);
 
                 return task;

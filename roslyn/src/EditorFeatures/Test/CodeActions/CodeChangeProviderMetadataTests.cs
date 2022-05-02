@@ -170,8 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 .Select(
                     exportedProvider =>
                         TryGetExportName(exportedProvider.Export, out var name)
-                          ? name
-                          : string.Empty
+                            ? name
+                            : string.Empty
                 )
                 .ToImmutableHashSet();
 

@@ -83,8 +83,8 @@ namespace BenchmarksGame
 
                 T input;
                 tasks[pos] = queue.TryTake(out input, Timeout.Infinite)
-                  ? Task.Run(() => transform(input))
-                  : null;
+                    ? Task.Run(() => transform(input))
+                    : null;
 
                 pos = (pos + 1) % threadCount;
             }

@@ -519,8 +519,8 @@ namespace Microsoft.AspNetCore.Components
 
     public abstract partial class ComponentBase
         : Microsoft.AspNetCore.Components.IComponent,
-          Microsoft.AspNetCore.Components.IHandleAfterRender,
-          Microsoft.AspNetCore.Components.IHandleEvent
+            Microsoft.AspNetCore.Components.IHandleAfterRender,
+            Microsoft.AspNetCore.Components.IHandleEvent
     {
         public ComponentBase() { }
 
@@ -1350,7 +1350,7 @@ namespace Microsoft.AspNetCore.Components
 
     public abstract partial class OwningComponentBase
         : Microsoft.AspNetCore.Components.ComponentBase,
-          System.IDisposable
+            System.IDisposable
     {
         protected OwningComponentBase() { }
 
@@ -1371,7 +1371,7 @@ namespace Microsoft.AspNetCore.Components
 
     public abstract partial class OwningComponentBase<TService>
         : Microsoft.AspNetCore.Components.OwningComponentBase,
-          System.IDisposable
+            System.IDisposable
     {
         protected OwningComponentBase() { }
 
@@ -1731,7 +1731,7 @@ namespace Microsoft.AspNetCore.Components.RenderTree
     )]
     public readonly partial struct ArrayBuilderSegment<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1918,8 +1918,8 @@ namespace Microsoft.AspNetCore.Components.Routing
 
     public partial class Router
         : Microsoft.AspNetCore.Components.IComponent,
-          Microsoft.AspNetCore.Components.IHandleAfterRender,
-          System.IDisposable
+            Microsoft.AspNetCore.Components.IHandleAfterRender,
+            System.IDisposable
     {
         public Router() { }
 

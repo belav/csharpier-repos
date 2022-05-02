@@ -400,8 +400,8 @@ namespace System.Collections.ObjectModel.Tests
 
     public class KeyedItem<TKey, TValue>
         : IComparable<KeyedItem<TKey, TValue>>,
-          IKeyedItem<TKey, TValue>,
-          IEquatable<KeyedItem<TKey, TValue>> where TValue : IComparable<TValue>
+            IKeyedItem<TKey, TValue>,
+            IEquatable<KeyedItem<TKey, TValue>> where TValue : IComparable<TValue>
     {
         private readonly TValue _item;
 

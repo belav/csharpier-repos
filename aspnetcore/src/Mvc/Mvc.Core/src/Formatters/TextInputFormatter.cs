@@ -100,8 +100,8 @@ public abstract class TextInputFormatter : InputFormatter
 
         var requestContentType = context.HttpContext.Request.ContentType;
         var requestMediaType = string.IsNullOrEmpty(requestContentType)
-          ? default
-          : new MediaType(requestContentType);
+            ? default
+            : new MediaType(requestContentType);
         if (requestMediaType.Charset.HasValue)
         {
             // Create Encoding based on requestMediaType.Charset to support charset aliases and custom Encoding

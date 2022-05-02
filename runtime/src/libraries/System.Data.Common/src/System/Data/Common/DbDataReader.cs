@@ -13,9 +13,9 @@ namespace System.Data.Common
 {
     public abstract class DbDataReader
         : MarshalByRefObject,
-          IDataReader,
-          IEnumerable,
-          IAsyncDisposable
+            IDataReader,
+            IEnumerable,
+            IAsyncDisposable
     {
         protected DbDataReader() : base() { }
 

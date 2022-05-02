@@ -14,10 +14,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QualifyMemberAccess
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class CSharpQualifyMemberAccessDiagnosticAnalyzer
         : AbstractQualifyMemberAccessDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              SimpleNameSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            SimpleNameSyntax
+        >
     {
         protected override string GetLanguageName() => LanguageNames.CSharp;
 

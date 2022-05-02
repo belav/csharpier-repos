@@ -9,7 +9,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
     public class ApplyPatchesSettings
         : FrameworkResolutionBase,
-          IClassFixture<ApplyPatchesSettings.SharedTestState>
+            IClassFixture<ApplyPatchesSettings.SharedTestState>
     {
         private const string MiddleWare = "MiddleWare";
 

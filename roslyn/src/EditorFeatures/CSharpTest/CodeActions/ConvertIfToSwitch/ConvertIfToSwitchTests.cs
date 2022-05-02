@@ -474,7 +474,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
             var fixedSource = languageVersion switch
             {
                 LanguageVersion.CSharp8
-                  => @"class C
+                    => @"class C
 {
     void M(object o)
     {
@@ -488,7 +488,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
     }
 }",
                 LanguageVersion.CSharp9
-                  => @"class C
+                    => @"class C
 {
     void M(object o)
     {

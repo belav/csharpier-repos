@@ -108,8 +108,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
                 t1.TestGetMethod(new MemberClass<bool>())
                     + t1.TestSetMethod(new MemberClass<bool>())
                 == 0
-              ? 0
-              : 1;
+                ? 0
+                : 1;
         }
 
         public int TestGetMethod(MemberClass<bool> mc)

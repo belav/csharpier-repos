@@ -48,7 +48,7 @@ namespace System.Runtime.CompilerServices
         /// <remarks>This type is intended for compiler use only.</remarks>
         public readonly struct YieldAwaiter
             : ICriticalNotifyCompletion,
-              IStateMachineBoxAwareAwaiter
+                IStateMachineBoxAwareAwaiter
         {
             /// <summary>Gets whether a yield is not required.</summary>
             /// <remarks>This property is intended for compiler user rather than use directly in code.</remarks>

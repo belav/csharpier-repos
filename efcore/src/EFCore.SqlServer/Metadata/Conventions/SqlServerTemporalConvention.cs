@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class SqlServerTemporalConvention
         : IEntityTypeAnnotationChangedConvention,
-          ISkipNavigationForeignKeyChangedConvention
+            ISkipNavigationForeignKeyChangedConvention
     {
         private const string PeriodStartDefaultName = "PeriodStart";
         private const string PeriodEndDefaultName = "PeriodEnd";

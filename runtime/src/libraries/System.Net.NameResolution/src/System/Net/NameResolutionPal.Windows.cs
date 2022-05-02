@@ -265,8 +265,8 @@ namespace System.Net
                     );
                     state.SetResult(
                         state.JustAddresses
-                          ? (object)addresses
-                          : new IPHostEntry
+                            ? (object)addresses
+                            : new IPHostEntry
                             {
                                 HostName = hostName ?? state.HostName,
                                 Aliases = Array.Empty<string>(),

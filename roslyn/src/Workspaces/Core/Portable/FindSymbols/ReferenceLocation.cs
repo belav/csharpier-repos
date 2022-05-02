@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     public readonly struct ReferenceLocation
         : IComparable<ReferenceLocation>,
-          IEquatable<ReferenceLocation>
+            IEquatable<ReferenceLocation>
     {
         /// <summary>
         /// The document that the reference was found in.

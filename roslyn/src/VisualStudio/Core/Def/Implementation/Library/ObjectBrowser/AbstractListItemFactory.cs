@@ -65,8 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         protected static string GetSimpleDisplayText(INamedTypeSymbol namedTypeSymbol)
         {
             return namedTypeSymbol.SpecialType.ToPredefinedType() != PredefinedType.None
-              ? namedTypeSymbol.ToDisplayString(s_simplePredefinedTypeDisplay)
-              : namedTypeSymbol.ToDisplayString(s_simpleNormalTypeDisplay);
+                ? namedTypeSymbol.ToDisplayString(s_simplePredefinedTypeDisplay)
+                : namedTypeSymbol.ToDisplayString(s_simpleNormalTypeDisplay);
         }
 
         protected abstract string GetMemberDisplayString(ISymbol memberSymbol);
@@ -917,17 +917,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
             var listItems = fullyQualified
                 ? CreateListItemsFromSymbols(
-                      types,
-                      compilation,
-                      projectId,
-                      CreateFullyQualifiedTypeListItem
-                  )
+                    types,
+                    compilation,
+                    projectId,
+                    CreateFullyQualifiedTypeListItem
+                )
                 : CreateListItemsFromSymbols(
-                      types,
-                      compilation,
-                      projectId,
-                      CreateSimpleTypeListItem
-                  );
+                    types,
+                    compilation,
+                    projectId,
+                    CreateSimpleTypeListItem
+                );
 
             if (searchString == null)
             {

@@ -112,8 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                         CodeGenerationSymbolFactory.CreateParameterSymbol(
                             attributes: default,
                             refKind: dataFlow.WrittenInside.Contains(capture)
-                              ? RefKind.Ref
-                              : RefKind.None,
+                                ? RefKind.Ref
+                                : RefKind.None,
                             isParams: false,
                             type: capture.GetSymbolType(),
                             name: capture.Name
@@ -189,8 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             var hasAdditionalTypeArguments = !additionalTypeParameters.IsEmpty();
             var additionalTypeArguments = hasAdditionalTypeArguments
                 ? additionalTypeParameters
-                  .Select(p => (TypeSyntax)p.Name.ToIdentifierName())
-                  .ToArray()
+                    .Select(p => (TypeSyntax)p.Name.ToIdentifierName())
+                    .ToArray()
                 : null;
 
             var anyDelegatesToReplace = false;

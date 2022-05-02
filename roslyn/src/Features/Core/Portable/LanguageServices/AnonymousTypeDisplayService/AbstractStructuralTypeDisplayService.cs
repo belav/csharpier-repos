@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 typeParts.Add(
                     Part(
                         structuralType.IsValueType
-                          ? SymbolDisplayPartKind.StructName
-                          : SymbolDisplayPartKind.ClassName,
+                            ? SymbolDisplayPartKind.StructName
+                            : SymbolDisplayPartKind.ClassName,
                         structuralType,
                         structuralType.Name
                     )

@@ -237,7 +237,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TResult rewrittenLeft = currentBinary.Left switch
                     {
                         TInterpolatedStringType interpolatedString
-                          => interpolatedStringFactory(interpolatedString, i++, arg),
+                            => interpolatedStringFactory(interpolatedString, i++, arg),
                         BoundBinaryOperator => result!,
                         _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Left.Kind)
                     };
@@ -249,15 +249,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var rewrittenRight = currentBinary.Right switch
                     {
                         TInterpolatedStringType interpolatedString
-                          => interpolatedStringFactory(interpolatedString, i++, arg),
+                            => interpolatedStringFactory(interpolatedString, i++, arg),
                         BoundBinaryOperator binaryOperator
-                          => doRewrite(
-                              binaryOperator,
-                              arg,
-                              interpolatedStringFactory,
-                              binaryOperatorFactory,
-                              ref i
-                          ),
+                            => doRewrite(
+                                binaryOperator,
+                                arg,
+                                interpolatedStringFactory,
+                                binaryOperatorFactory,
+                                ref i
+                            ),
                         _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Right.Kind)
                     };
 

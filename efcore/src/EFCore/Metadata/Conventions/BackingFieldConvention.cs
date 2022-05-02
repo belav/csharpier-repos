@@ -33,9 +33,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class BackingFieldConvention
         : IPropertyAddedConvention,
-          INavigationAddedConvention,
-          ISkipNavigationAddedConvention,
-          IModelFinalizingConvention
+            INavigationAddedConvention,
+            ISkipNavigationAddedConvention,
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="BackingFieldConvention" />.
@@ -315,10 +315,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         typeInfo == null
                             ? currentValue.Value
                             : (
-                                  typeInfo.IsCompatibleWith(currentValue.Value.FieldType)
+                                typeInfo.IsCompatibleWith(currentValue.Value.FieldType)
                                     ? currentValue.Value
                                     : null
-                              );
+                            );
 
                     if (newMatch != null)
                     {

@@ -33,7 +33,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.ArrayInit => VisitARRINIT(pExpr as ExprArrayInit),
                 ExpressionKind.Cast => VisitCAST(pExpr as ExprCast),
                 ExpressionKind.UserDefinedConversion
-                  => VisitUSERDEFINEDCONVERSION(pExpr as ExprUserDefinedConversion),
+                    => VisitUSERDEFINEDCONVERSION(pExpr as ExprUserDefinedConversion),
                 ExpressionKind.TypeOf => VisitTYPEOF(pExpr as ExprTypeOf),
                 ExpressionKind.ZeroInit => VisitZEROINIT(pExpr as ExprZeroInit),
                 ExpressionKind.UserLogicalOp => VisitUSERLOGOP(pExpr as ExprUserLogicalOp),
@@ -43,7 +43,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 // Binary operators
                 ExpressionKind.EqualsParam
-                  => VisitEQUALS(pExpr as ExprBinOp),
+                    => VisitEQUALS(pExpr as ExprBinOp),
                 ExpressionKind.Compare => VisitCOMPARE(pExpr as ExprBinOp),
                 ExpressionKind.NotEq => VisitNE(pExpr as ExprBinOp),
                 ExpressionKind.LessThan => VisitLT(pExpr as ExprBinOp),
@@ -76,7 +76,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 // Unary operators
                 ExpressionKind.True
-                  => VisitTRUE(pExpr as ExprUnaryOp),
+                    => VisitTRUE(pExpr as ExprUnaryOp),
                 ExpressionKind.False => VisitFALSE(pExpr as ExprUnaryOp),
                 ExpressionKind.Inc => VisitINC(pExpr as ExprUnaryOp),
                 ExpressionKind.Dec => VisitDEC(pExpr as ExprUnaryOp),

@@ -26,14 +26,14 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlAdapter
         : DictionaryBehaviorAttribute,
-          IDictionaryInitializer,
-          IDictionaryPropertyGetter,
-          IDictionaryPropertySetter,
-          IDictionaryCreateStrategy,
-          IDictionaryCopyStrategy,
-          IDictionaryReferenceManager,
-          IVirtual,
-          IXmlNodeSource
+            IDictionaryInitializer,
+            IDictionaryPropertyGetter,
+            IDictionaryPropertySetter,
+            IDictionaryCreateStrategy,
+            IDictionaryCopyStrategy,
+            IDictionaryReferenceManager,
+            IVirtual,
+            IXmlNodeSource
     {
         private IXmlNode node;
         private object source;
@@ -275,8 +275,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         )
         {
             accessor = property.HasAccessor()
-              ? property.GetAccessor()
-              : CreateAccessor(key, property);
+                ? property.GetAccessor()
+                : CreateAccessor(key, property);
 
             if (accessor.IsIgnored)
                 return Try.Failure(out accessor);

@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class UserStoreTest
     : IdentitySpecificationTestBase<IdentityUser, IdentityRole>,
-      IClassFixture<ScratchDatabaseFixture>
+        IClassFixture<ScratchDatabaseFixture>
 {
     private readonly ScratchDatabaseFixture _fixture;
 

@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             {
                 return ValueTaskFactory.FromResult(
                     LoadedModules.TryGetValue(mvid, out var result)
-                      ? result
-                      : new ManagedHotReloadAvailability(
+                        ? result
+                        : new ManagedHotReloadAvailability(
                             ManagedHotReloadAvailabilityStatus.ModuleNotLoaded
                         )
                 );

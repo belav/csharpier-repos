@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
 {
     internal abstract class PythiaCompletionProviderBase
         : CommonCompletionProvider,
-          INotifyCommittingItemCompletionProvider
+            INotifyCommittingItemCompletionProvider
     {
         public static PerLanguageOption2<bool> HideAdvancedMembersOption =>
             CompletionOptions.Metadata.HideAdvancedMembers;

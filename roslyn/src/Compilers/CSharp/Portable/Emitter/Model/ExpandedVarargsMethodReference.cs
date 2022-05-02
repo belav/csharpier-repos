@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
     internal sealed class ExpandedVarargsMethodReference
         : Cci.IMethodReference,
-          Cci.IGenericMethodInstanceReference,
-          Cci.ISpecializedMethodReference
+            Cci.IGenericMethodInstanceReference,
+            Cci.ISpecializedMethodReference
     {
         private readonly Cci.IMethodReference _underlyingMethod;
         private readonly ImmutableArray<Cci.IParameterTypeInformation> _argListParams;

@@ -22,9 +22,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
     [OnDemand]
     public interface IItemContainer<TItem>
         : IDictionaryAdapter,
-          IDictionaryCreate,
-          IEditableObject,
-          INotifyPropertyChanged
+            IDictionaryCreate,
+            IEditableObject,
+            INotifyPropertyChanged
     {
         Guid Id { get; set; }
 

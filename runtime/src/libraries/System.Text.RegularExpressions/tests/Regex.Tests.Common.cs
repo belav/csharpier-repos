@@ -135,10 +135,10 @@ namespace System.Text.RegularExpressions.Tests
             // - Handle NonBacktrackingSourceGenerated
 
             return options is null
-              ? new Regex(pattern, RegexOptions.Compiled | OptionsFromEngine(engine))
-              : matchTimeout is null
-                  ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
-                  : new Regex(
+                ? new Regex(pattern, RegexOptions.Compiled | OptionsFromEngine(engine))
+                : matchTimeout is null
+                    ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
+                    : new Regex(
                         pattern,
                         options.Value | OptionsFromEngine(engine),
                         matchTimeout.Value
@@ -167,10 +167,10 @@ namespace System.Text.RegularExpressions.Tests
                     : matchTimeout is null
                         ? new Regex(pattern, options.Value | OptionsFromEngine(engine))
                         : new Regex(
-                              pattern,
-                              options.Value | OptionsFromEngine(engine),
-                              matchTimeout.Value
-                          );
+                            pattern,
+                            options.Value | OptionsFromEngine(engine),
+                            matchTimeout.Value
+                        );
             }
 
             return results;
@@ -184,7 +184,7 @@ namespace System.Text.RegularExpressions.Tests
                 RegexEngine.SourceGenerated => RegexOptions.Compiled,
                 RegexEngine.NonBacktracking => RegexOptionNonBacktracking,
                 RegexEngine.NonBacktrackingSourceGenerated
-                  => RegexOptionNonBacktracking | RegexOptions.Compiled,
+                    => RegexOptionNonBacktracking | RegexOptions.Compiled,
                 _ => throw new ArgumentException($"Unknown engine: {engine}"),
             };
     }

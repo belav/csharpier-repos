@@ -173,7 +173,7 @@ public sealed class TestHttpResponseMessageWrapper : IHttpResponseMessageWrapper
             or HttpStatusCode.Created
             or HttpStatusCode.NoContent
             or HttpStatusCode.Accepted
-              => true,
+                => true,
             _ => false,
         };
     }

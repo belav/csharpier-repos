@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
         {
             ImmutableArray<ISymbol> normalSymbols =
                 ShouldRestrictMinimallyQualifyLookupToNamespacesAndTypes()
-                  ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
-                  : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
+                    ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
+                    : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
             ISymbol normalSymbol = SingleSymbolWithArity(normalSymbols, symbol.Arity);
 
             if (normalSymbol == null)

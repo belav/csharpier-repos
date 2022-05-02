@@ -1178,8 +1178,8 @@ namespace System.Xml
         {
             int writeLen = RawTextNoFlush(text, 0, text.Length);
             return writeLen >= 0
-              ? _RawTextAsync(text, writeLen, text.Length - writeLen)
-              : Task.CompletedTask;
+                ? _RawTextAsync(text, writeLen, text.Length - writeLen)
+                : Task.CompletedTask;
         }
 
         protected Task RawTextAsync(

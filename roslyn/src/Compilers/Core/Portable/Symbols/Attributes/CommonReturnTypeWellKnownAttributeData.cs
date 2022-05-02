@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal class CommonReturnTypeWellKnownAttributeData
         : WellKnownAttributeData,
-          IMarshalAsAttributeTarget
+            IMarshalAsAttributeTarget
     {
         #region MarshalAsAttribute
         // data from MarshalAsAttribute applied on the return value

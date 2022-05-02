@@ -285,8 +285,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         {
             var sequence = virtualCharService.TryConvertToVirtualChars(formatToken);
             return sequence.IsDefaultOrEmpty
-              ? default
-              : TextSpan.FromBounds(sequence.First().Span.Start, sequence.Last().Span.End);
+                ? default
+                : TextSpan.FromBounds(sequence.First().Span.Start, sequence.Last().Span.End);
         }
 
         private void UnwrapAlignmentPadding<TExpressionSyntax>(

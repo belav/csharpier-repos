@@ -700,8 +700,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     ParenthesesPreference.AlwaysForClarity
                 );
             return option.Notification == null
-              ? value!
-              : $"{value}{GetEditorConfigStringNotificationPart(option, defaultValue)}";
+                ? value!
+                : $"{value}{GetEditorConfigStringNotificationPart(option, defaultValue)}";
         }
 
         private static CodeStyleOption2<UnusedParametersPreference> ParseUnusedParametersPreference(
@@ -737,8 +737,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 s_unusedParametersPreferenceMap.GetKeyOrDefault(option.Value)
                 ?? s_unusedParametersPreferenceMap.GetKeyOrDefault(defaultValue.Value);
             return option.Notification == null
-              ? value!
-              : $"{value}{GetEditorConfigStringNotificationPart(option, defaultValue)}";
+                ? value!
+                : $"{value}{GetEditorConfigStringNotificationPart(option, defaultValue)}";
         }
     }
 

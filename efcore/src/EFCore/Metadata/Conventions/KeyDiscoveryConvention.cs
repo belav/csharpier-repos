@@ -31,16 +31,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class KeyDiscoveryConvention
         : IEntityTypeAddedConvention,
-          IPropertyAddedConvention,
-          IKeyRemovedConvention,
-          IEntityTypeBaseTypeChangedConvention,
-          IEntityTypeMemberIgnoredConvention,
-          IForeignKeyAddedConvention,
-          IForeignKeyRemovedConvention,
-          IForeignKeyPropertiesChangedConvention,
-          IForeignKeyUniquenessChangedConvention,
-          IForeignKeyOwnershipChangedConvention,
-          ISkipNavigationForeignKeyChangedConvention
+            IPropertyAddedConvention,
+            IKeyRemovedConvention,
+            IEntityTypeBaseTypeChangedConvention,
+            IEntityTypeMemberIgnoredConvention,
+            IForeignKeyAddedConvention,
+            IForeignKeyRemovedConvention,
+            IForeignKeyPropertiesChangedConvention,
+            IForeignKeyUniquenessChangedConvention,
+            IForeignKeyOwnershipChangedConvention,
+            ISkipNavigationForeignKeyChangedConvention
     {
         private const string KeySuffix = "Id";
 

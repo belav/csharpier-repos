@@ -45,8 +45,8 @@ internal sealed class HttpMethodSingleEntryPolicyJumpTable : PolicyJumpTable
         )
         {
             return HttpMethods.Equals(accessControlRequestMethod.ToString(), _method)
-              ? _corsPreflightDestination
-              : _corsPreflightExitDestination;
+                ? _corsPreflightDestination
+                : _corsPreflightExitDestination;
         }
 
         return HttpMethods.Equals(httpMethod, _method) ? _destination : _exitDestination;

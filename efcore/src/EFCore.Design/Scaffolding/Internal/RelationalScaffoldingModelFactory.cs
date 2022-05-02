@@ -85,15 +85,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             _tableNamer = new CSharpUniqueNamer<DatabaseTable>(
                 options.UseDatabaseNames
-                  ? (t => t.Name)
-                  : t => _candidateNamingService.GenerateCandidateIdentifier(t),
+                    ? (t => t.Name)
+                    : t => _candidateNamingService.GenerateCandidateIdentifier(t),
                 _cSharpUtilities,
                 options.NoPluralize ? null : _pluralizer.Singularize
             );
             _dbSetNamer = new CSharpUniqueNamer<DatabaseTable>(
                 options.UseDatabaseNames
-                  ? (t => t.Name)
-                  : t => _candidateNamingService.GenerateCandidateIdentifier(t),
+                    ? (t => t.Name)
+                    : t => _candidateNamingService.GenerateCandidateIdentifier(t),
                 _cSharpUtilities,
                 options.NoPluralize ? null : _pluralizer.Pluralize
             );
@@ -650,8 +650,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             var propertyNames = uniqueConstraint.Columns.Select(GetPropertyName).ToArray();
             var indexBuilder = string.IsNullOrEmpty(uniqueConstraint.Name)
-              ? builder.HasIndex(propertyNames)
-              : builder.HasIndex(propertyNames, uniqueConstraint.Name);
+                ? builder.HasIndex(propertyNames)
+                : builder.HasIndex(propertyNames, uniqueConstraint.Name);
             indexBuilder = indexBuilder.IsUnique();
             indexBuilder.Metadata.AddAnnotations(uniqueConstraint.GetAnnotations());
 
@@ -705,8 +705,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
             var propertyNames = index.Columns.Select(GetPropertyName).ToArray();
             var indexBuilder = string.IsNullOrEmpty(index.Name)
-              ? builder.HasIndex(propertyNames)
-              : builder.HasIndex(propertyNames, index.Name);
+                ? builder.HasIndex(propertyNames)
+                : builder.HasIndex(propertyNames, index.Name);
 
             indexBuilder = indexBuilder.IsUnique(index.IsUnique);
 
@@ -1046,12 +1046,12 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 foreignKey.PrincipalEntityType
             );
             var principalEndNavigationPropertyCandidateName = foreignKey.IsSelfReferencing()
-              ? string.Format(
+                ? string.Format(
                     CultureInfo.CurrentCulture,
                     SelfReferencingPrincipalEndNavigationNamePattern,
                     dependentEndNavigationPropertyName
                 )
-              : _candidateNamingService.GetPrincipalEndCandidateNavigationPropertyName(
+                : _candidateNamingService.GetPrincipalEndCandidateNavigationPropertyName(
                     foreignKey,
                     dependentEndNavigationPropertyName
                 );

@@ -10,12 +10,12 @@ namespace System.Collections.Immutable
     /// </content>
     public sealed partial class ImmutableHashSet<T>
         : IImmutableSet<T>,
-          IHashKeyCollection<T>,
-          IReadOnlyCollection<T>,
-          ICollection<T>,
-          ISet<T>,
-          ICollection,
-          IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
+            IHashKeyCollection<T>,
+            IReadOnlyCollection<T>,
+            ICollection<T>,
+            ISet<T>,
+            ICollection,
+            IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
     {
         /// <summary>
         /// Compares equality between two <see cref="HashBucket"/> instances

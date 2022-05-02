@@ -144,8 +144,8 @@ namespace System.Linq.Expressions.Compiler
             {
                 // When the lambda does not have a name or the name is empty, generate a unique name for it.
                 string name = String.IsNullOrEmpty(lambda.Name)
-                  ? GetUniqueMethodName()
-                  : lambda.Name;
+                    ? GetUniqueMethodName()
+                    : lambda.Name;
                 MethodBuilder mb = _typeBuilder.DefineMethod(
                     name,
                     MethodAttributes.Private | MethodAttributes.Static

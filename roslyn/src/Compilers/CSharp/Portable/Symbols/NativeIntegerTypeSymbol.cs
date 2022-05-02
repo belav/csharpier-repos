@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal sealed class NativeIntegerTypeSymbol : WrappedNamedTypeSymbol
 #if !DEBUG
-          ,
-          Cci.IReference
+            ,
+            Cci.IReference
 #endif
     {
         private ImmutableArray<NamedTypeSymbol> _lazyInterfaces;
@@ -147,10 +147,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                         underlyingAccessor is null
                                             ? null
                                             : new NativeIntegerMethodSymbol(
-                                                  container,
-                                                  underlyingAccessor,
-                                                  property
-                                              )
+                                                container,
+                                                underlyingAccessor,
+                                                property
+                                            )
                                 );
                                 builder.Add(property);
                                 builder.AddIfNotNull(property.GetMethod);
@@ -342,8 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal override NamedTypeSymbol SubstituteTypeDeclaration(NamedTypeSymbol previous)
             {
                 return previous.SpecialType == _specialType
-                  ? _type
-                  : base.SubstituteTypeDeclaration(previous);
+                    ? _type
+                    : base.SubstituteTypeDeclaration(previous);
             }
 
             internal override ImmutableArray<CustomModifier> SubstituteCustomModifiers(
@@ -357,8 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
     internal sealed class NativeIntegerMethodSymbol : WrappedMethodSymbol
 #if !DEBUG
-          ,
-          Cci.IReference
+            ,
+            Cci.IReference
 #endif
     {
         private readonly NativeIntegerTypeSymbol _container;
@@ -448,8 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
     internal sealed class NativeIntegerParameterSymbol : WrappedParameterSymbol
 #if !DEBUG
-          ,
-          Cci.IReference
+            ,
+            Cci.IReference
 #endif
     {
         private readonly NativeIntegerTypeSymbol _containingType;
@@ -510,8 +510,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
     internal sealed class NativeIntegerPropertySymbol : WrappedPropertySymbol
 #if !DEBUG
-          ,
-          Cci.IReference
+            ,
+            Cci.IReference
 #endif
     {
         private readonly NativeIntegerTypeSymbol _container;

@@ -40,8 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
     [Export(typeof(RemoteLanguageServiceWorkspace))]
     internal sealed class RemoteLanguageServiceWorkspace
         : CodeAnalysis.Workspace,
-          IDisposable,
-          IRunningDocumentTableEventListener
+            IDisposable,
+            IRunningDocumentTableEventListener
     {
         /// <summary>
         /// Gate to make sure we only update the paths and trigger RDT one at a time.

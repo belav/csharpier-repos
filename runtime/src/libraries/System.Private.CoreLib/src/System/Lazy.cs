@@ -149,8 +149,8 @@ namespace System
 
                 case LazyThreadSafetyMode.PublicationOnly:
                     return useDefaultConstructor
-                      ? PublicationOnlyViaConstructor
-                      : PublicationOnlyViaFactory;
+                        ? PublicationOnlyViaConstructor
+                        : PublicationOnlyViaFactory;
 
                 case LazyThreadSafetyMode.ExecutionAndPublication:
                     // we need to create an object for ExecutionAndPublication because we use Monitor-based locking
@@ -184,8 +184,8 @@ namespace System
         internal static LazyThreadSafetyMode GetModeFromIsThreadSafe(bool isThreadSafe)
         {
             return isThreadSafe
-              ? LazyThreadSafetyMode.ExecutionAndPublication
-              : LazyThreadSafetyMode.None;
+                ? LazyThreadSafetyMode.ExecutionAndPublication
+                : LazyThreadSafetyMode.None;
         }
     }
 
@@ -474,8 +474,8 @@ namespace System
         public override string? ToString()
         {
             return IsValueCreated
-              ? Value!.ToString()
-              : // Throws NullReferenceException as if caller called ToString on the value itself
+                ? Value!.ToString()
+                : // Throws NullReferenceException as if caller called ToString on the value itself
                 SR.Lazy_ToString_ValueNotCreated;
         }
 

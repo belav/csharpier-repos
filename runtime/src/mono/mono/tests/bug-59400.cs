@@ -39,7 +39,7 @@ namespace MonoBug
 
     struct IncorrectEnumerator1<TValue>
         : IEnumerator<ValueHolder<TValue>>,
-          IEnumerator<IValue<TValue>> where TValue : class
+            IEnumerator<IValue<TValue>> where TValue : class
     {
         object IEnumerator.Current => null;
 

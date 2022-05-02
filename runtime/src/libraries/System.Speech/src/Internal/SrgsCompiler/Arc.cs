@@ -647,10 +647,10 @@ namespace System.Speech.Internal.SrgsCompiler
                 sb.Append('\'');
                 sb.Append(
                     _iWord == 0
-                      ? new string(new char[] { (char)0x3b5 })
-                      : _be != null
-                          ? _be.Words[_iWord]
-                          : _iWord.ToString(CultureInfo.InvariantCulture)
+                        ? new string(new char[] { (char)0x3b5 })
+                        : _be != null
+                            ? _be.Words[_iWord]
+                            : _iWord.ToString(CultureInfo.InvariantCulture)
                 );
                 sb.Append('\'');
             }
@@ -871,8 +871,8 @@ namespace System.Speech.Internal.SrgsCompiler
 #pragma warning restore 0618
 
             return tag._nameOffset > 0
-              ? symbols.FromOffset(tag._nameOffset)
-              : tag._nameOffset.ToString(CultureInfo.InvariantCulture);
+                ? symbols.FromOffset(tag._nameOffset)
+                : tag._nameOffset.ToString(CultureInfo.InvariantCulture);
         }
 #endif
 

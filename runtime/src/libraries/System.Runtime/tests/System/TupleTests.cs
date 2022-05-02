@@ -1362,9 +1362,9 @@ namespace System.Tests
             tupleDriverA.CompareTo(
                 tupleDriverC,
                 PlatformDetection.IsInvariantGlobalization
-                  ? /* 'T'-'t' */
+                    ? /* 'T'-'t' */
                     -32
-                  : 1,
+                    : 1,
                 5
             );
             //Tuple-5

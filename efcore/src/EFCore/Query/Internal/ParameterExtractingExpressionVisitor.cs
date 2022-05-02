@@ -193,8 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             )
             {
                 return constantTestValue
-                  ? Visit(conditionalExpression.IfTrue)
-                  : Visit(conditionalExpression.IfFalse);
+                    ? Visit(conditionalExpression.IfTrue)
+                    : Visit(conditionalExpression.IfFalse);
             }
 
             return conditionalExpression.Update(
@@ -221,8 +221,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     if (newLeftExpression is ConstantExpression constantLeftExpression)
                     {
                         return constantLeftExpression.Value == null
-                          ? Visit(binaryExpression.Right)
-                          : newLeftExpression;
+                            ? Visit(binaryExpression.Right)
+                            : newLeftExpression;
                     }
 
                     return binaryExpression.Update(
@@ -322,8 +322,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var constantExpression = Expression.Constant(value, value?.GetType() ?? returnType);
 
             return constantExpression.Type != returnType
-              ? Expression.Convert(constantExpression, returnType)
-              : (Expression)constantExpression;
+                ? Expression.Convert(constantExpression, returnType)
+                : (Expression)constantExpression;
         }
 
         private Expression Evaluate(Expression expression, bool generateParameter)
@@ -515,14 +515,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     break;
 
                 case UnaryExpression unaryExpression
-                      when (
-                          unaryExpression.NodeType == ExpressionType.Convert
-                          || unaryExpression.NodeType == ExpressionType.ConvertChecked
-                      )
-                          && (
-                              unaryExpression.Type.UnwrapNullableType()
-                              == unaryExpression.Operand.Type
-                          ):
+                when (
+                    unaryExpression.NodeType == ExpressionType.Convert
+                    || unaryExpression.NodeType == ExpressionType.ConvertChecked
+                ) && (unaryExpression.Type.UnwrapNullableType() == unaryExpression.Operand.Type):
                     return GetValue(unaryExpression.Operand, out parameterName);
             }
 
@@ -537,8 +533,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 throw new InvalidOperationException(
                     _logger.ShouldLogSensitiveData()
-                      ? CoreStrings.ExpressionParameterizationExceptionSensitive(expression)
-                      : CoreStrings.ExpressionParameterizationException,
+                        ? CoreStrings.ExpressionParameterizationExceptionSensitive(expression)
+                        : CoreStrings.ExpressionParameterizationException,
                     exception
                 );
             }

@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
     internal sealed partial class AsynchronousOperationListener
         : IAsynchronousOperationListener,
-          IAsynchronousOperationWaiter
+            IAsynchronousOperationWaiter
     {
         private readonly NonReentrantLock _gate = new();
 

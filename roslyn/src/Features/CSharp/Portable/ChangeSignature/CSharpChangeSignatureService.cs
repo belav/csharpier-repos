@@ -271,8 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             }
 
             return node.AncestorsAndSelf().Any(n => n == nodeContainingOriginal)
-              ? matchingNode
-              : null;
+                ? matchingNode
+                : null;
         }
 
         private static SyntaxNode? GetNodeContainingTargetNode(SyntaxNode matchingNode)
@@ -843,9 +843,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 {
                     InvocationExpressionSyntax invocation => invocation.ArgumentList,
                     BaseObjectCreationExpressionSyntax objectCreation
-                      => objectCreation.ArgumentList,
+                        => objectCreation.ArgumentList,
                     ConstructorInitializerSyntax constructorInitializer
-                      => constructorInitializer.ArgumentList,
+                        => constructorInitializer.ArgumentList,
                     ElementAccessExpressionSyntax elementAccess => elementAccess.ArgumentList,
                     _ => throw ExceptionUtilities.UnexpectedValue(node.Kind())
                 };
@@ -1038,8 +1038,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             {
                 result.Add(
                     index < oldArguments.Count
-                      ? TransferLeadingWhitespaceTrivia(newArgument, oldArguments[index])
-                      : newArgument
+                        ? TransferLeadingWhitespaceTrivia(newArgument, oldArguments[index])
+                        : newArgument
                 );
 
                 index++;

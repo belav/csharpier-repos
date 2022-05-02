@@ -487,10 +487,10 @@ namespace System.Data
                         StorageType.Double => ((double)argumentValues[0] != 0.0),
                         StorageType.String => bool.Parse((string)argumentValues[0]),
                         _
-                          => throw ExprException.DatatypeConvertion(
-                              argumentValues[0].GetType(),
-                              typeof(bool)
-                          ),
+                            => throw ExprException.DatatypeConvertion(
+                                argumentValues[0].GetType(),
+                                typeof(bool)
+                            ),
                     };
                 case FunctionId.cInt:
                     Debug.Assert(

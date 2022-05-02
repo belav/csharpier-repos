@@ -108,8 +108,8 @@ namespace System.Web.Razor.Text
                 left.AbsoluteIndex - right.AbsoluteIndex,
                 left.LineIndex - right.LineIndex,
                 left.LineIndex != right.LineIndex
-                  ? left.CharacterIndex
-                  : left.CharacterIndex - right.CharacterIndex
+                    ? left.CharacterIndex
+                    : left.CharacterIndex - right.CharacterIndex
             );
         }
 

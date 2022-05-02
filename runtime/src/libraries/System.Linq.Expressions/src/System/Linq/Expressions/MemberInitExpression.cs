@@ -117,19 +117,19 @@ namespace System.Linq.Expressions
             return binding.BindingType switch
             {
                 MemberBindingType.Assignment
-                  => Expression.Assign(member, ((MemberAssignment)binding).Expression),
+                    => Expression.Assign(member, ((MemberAssignment)binding).Expression),
                 MemberBindingType.ListBinding
-                  => ReduceListInit(
-                      member,
-                      ((MemberListBinding)binding).Initializers,
-                      keepOnStack: false
-                  ),
+                    => ReduceListInit(
+                        member,
+                        ((MemberListBinding)binding).Initializers,
+                        keepOnStack: false
+                    ),
                 MemberBindingType.MemberBinding
-                  => ReduceMemberInit(
-                      member,
-                      ((MemberMemberBinding)binding).Bindings,
-                      keepOnStack: false
-                  ),
+                    => ReduceMemberInit(
+                        member,
+                        ((MemberMemberBinding)binding).Bindings,
+                        keepOnStack: false
+                    ),
                 _ => throw ContractUtils.Unreachable,
             };
         }

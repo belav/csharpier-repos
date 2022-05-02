@@ -86,23 +86,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 returnInfo.CustomModifiers.IsDefaultOrEmpty
                 && returnInfo.RefCustomModifiers.IsDefaultOrEmpty
                     ? new PEPropertySymbol(
-                          moduleSymbol,
-                          containingType,
-                          handle,
-                          getMethod,
-                          setMethod,
-                          propertyParams,
-                          metadataDecoder
-                      )
+                        moduleSymbol,
+                        containingType,
+                        handle,
+                        getMethod,
+                        setMethod,
+                        propertyParams,
+                        metadataDecoder
+                    )
                     : new PEPropertySymbolWithCustomModifiers(
-                          moduleSymbol,
-                          containingType,
-                          handle,
-                          getMethod,
-                          setMethod,
-                          propertyParams,
-                          metadataDecoder
-                      );
+                        moduleSymbol,
+                        containingType,
+                        handle,
+                        getMethod,
+                        setMethod,
+                        propertyParams,
+                        metadataDecoder
+                    );
 
             // A property should always have this modreq, and vice versa.
             var isBad =
@@ -158,19 +158,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 (object)getMethod == null
                     ? null
                     : metadataDecoder.GetSignatureForMethod(
-                          getMethod.Handle,
-                          out unusedCallingConvention,
-                          out getEx
-                      );
+                        getMethod.Handle,
+                        out unusedCallingConvention,
+                        out getEx
+                    );
             BadImageFormatException setEx = null;
             var setMethodParams =
                 (object)setMethod == null
                     ? null
                     : metadataDecoder.GetSignatureForMethod(
-                          setMethod.Handle,
-                          out unusedCallingConvention,
-                          out setEx
-                      );
+                        setMethod.Handle,
+                        out unusedCallingConvention,
+                        out setEx
+                    );
 
             // NOTE: property parameter names are not recorded in metadata, so we have to
             // use the parameter names from one of the indexers
@@ -179,21 +179,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             _parameters = setMethodParams is null
                 ? GetParameters(
-                      moduleSymbol,
-                      this,
-                      getMethod,
-                      propertyParams,
-                      getMethodParams,
-                      out isBad
-                  )
+                    moduleSymbol,
+                    this,
+                    getMethod,
+                    propertyParams,
+                    getMethodParams,
+                    out isBad
+                )
                 : GetParameters(
-                      moduleSymbol,
-                      this,
-                      setMethod,
-                      propertyParams,
-                      setMethodParams,
-                      out isBad
-                  );
+                    moduleSymbol,
+                    this,
+                    setMethod,
+                    propertyParams,
+                    setMethodParams,
+                    out isBad
+                );
 
             if (getEx != null || setEx != null || mrEx != null || isBad)
             {
@@ -682,8 +682,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         _handle,
                         out _,
                         this.RefKind == RefKind.RefReadOnly
-                          ? AttributeDescription.IsReadOnlyAttribute
-                          : default
+                            ? AttributeDescription.IsReadOnlyAttribute
+                            : default
                     );
 
                 ImmutableInterlocked.InterlockedInitialize(ref _lazyCustomAttributes, attributes);

@@ -991,8 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (!IsDeclared(assemblyCompliance))
                 {
                     ErrorCode code = IsTrue(compliance)
-                      ? ErrorCode.WRN_CLS_AssemblyNotCLS
-                      : ErrorCode.WRN_CLS_AssemblyNotCLS2;
+                        ? ErrorCode.WRN_CLS_AssemblyNotCLS
+                        : ErrorCode.WRN_CLS_AssemblyNotCLS2;
                     this.AddDiagnostic(code, symbol.Locations[0], symbol);
                     return false;
                 }
@@ -1409,8 +1409,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (declaredCompliance.HasValue)
             {
                 compliance = declaredCompliance.GetValueOrDefault()
-                  ? Compliance.DeclaredTrue
-                  : Compliance.DeclaredFalse;
+                    ? Compliance.DeclaredTrue
+                    : Compliance.DeclaredFalse;
             }
             else if (symbol.Kind == SymbolKind.Assembly)
             {
@@ -1420,14 +1420,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 compliance = IsTrue(GetInheritedCompliance(symbol))
-                  ? Compliance.InheritedTrue
-                  : Compliance.InheritedFalse;
+                    ? Compliance.InheritedTrue
+                    : Compliance.InheritedFalse;
             }
 
             // Don't bother caching methods, etc - they won't be reused.
             return (symbol.Kind == SymbolKind.Assembly || symbol.Kind == SymbolKind.NamedType)
-              ? _declaredOrInheritedCompliance.GetOrAdd(symbol, compliance)
-              : compliance;
+                ? _declaredOrInheritedCompliance.GetOrAdd(symbol, compliance)
+                : compliance;
         }
 
         private Compliance GetInheritedCompliance(Symbol symbol)
@@ -1459,8 +1459,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             _diagnostics.ReportUseSite(
                                 attributeClass,
                                 symbol.Locations.IsEmpty
-                                  ? NoLocation.Singleton
-                                  : symbol.Locations[0]
+                                    ? NoLocation.Singleton
+                                    : symbol.Locations[0]
                             )
                         )
                         {
@@ -1690,7 +1690,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 : sawArrayRankDifference
                     ? ErrorCode.WRN_CLS_OverloadRefOut
                     : // Lumping rank difference with refkind is odd, but matches dev11.
-                      sawRefKindDifference
+                    sawRefKindDifference
                         ? ErrorCode.WRN_CLS_OverloadRefOut
                         : ErrorCode.Void;
 

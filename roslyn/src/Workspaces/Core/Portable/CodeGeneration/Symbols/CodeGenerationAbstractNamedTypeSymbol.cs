@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal abstract class CodeGenerationAbstractNamedTypeSymbol
         : CodeGenerationTypeSymbol,
-          INamedTypeSymbol
+            INamedTypeSymbol
     {
         public new INamedTypeSymbol OriginalDefinition { get; protected set; }
 

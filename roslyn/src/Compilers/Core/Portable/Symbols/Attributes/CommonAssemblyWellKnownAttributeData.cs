@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal class CommonAssemblyWellKnownAttributeData<TNamedTypeSymbol>
         : WellKnownAttributeData,
-          ISecurityAttributeTarget
+            ISecurityAttributeTarget
     {
         #region AssemblySignatureKeyAttributeSetting
         private string _assemblySignatureKeyAttributeSetting;

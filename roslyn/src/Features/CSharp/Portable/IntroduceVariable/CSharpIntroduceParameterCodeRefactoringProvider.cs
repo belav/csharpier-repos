@@ -20,11 +20,11 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
     ]
     internal partial class CSharpIntroduceParameterCodeRefactoringProvider
         : AbstractIntroduceParameterService<
-              ExpressionSyntax,
-              InvocationExpressionSyntax,
-              ObjectCreationExpressionSyntax,
-              IdentifierNameSyntax
-          >
+            ExpressionSyntax,
+            InvocationExpressionSyntax,
+            ObjectCreationExpressionSyntax,
+            IdentifierNameSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

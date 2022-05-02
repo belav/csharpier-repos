@@ -375,8 +375,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         [DebuggerTypeProxy(typeof(TargetRegistry<>.NopLinkPropagator.DebugView))]
         private sealed class NopLinkPropagator
             : IPropagatorBlock<T, T>,
-              ISourceBlock<T>,
-              IDebuggerDisplay
+                ISourceBlock<T>,
+                IDebuggerDisplay
         {
             /// <summary>The source that encapsulates this block.</summary>
             private readonly ISourceBlock<T> _owningSource;

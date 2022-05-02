@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
                     var foundContinuedLoop = TryFindContinuableConstruct(node);
 
                     return foundContinuedLoop?.IsContinuableConstruct() == true
-                      ? foundContinuedLoop.GetFirstToken().Span.Start
-                      : null;
+                        ? foundContinuedLoop.GetFirstToken().Span.Start
+                        : null;
 
                 case SyntaxKind.BreakKeyword:
                     if (token.GetPreviousToken().IsKind(SyntaxKind.YieldKeyword))
@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
                     var foundBrokenLoop = TryFindBreakableConstruct(node);
 
                     return foundBrokenLoop?.IsBreakableConstruct() == true
-                      ? foundBrokenLoop.GetLastToken().Span.End
-                      : null;
+                        ? foundBrokenLoop.GetLastToken().Span.End
+                        : null;
 
                 case SyntaxKind.YieldKeyword:
                 case SyntaxKind.ReturnKeyword:

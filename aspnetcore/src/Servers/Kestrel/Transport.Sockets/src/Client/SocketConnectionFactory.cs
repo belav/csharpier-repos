@@ -55,8 +55,8 @@ internal class SocketConnectionFactory : IConnectionFactory, IAsyncDisposable
         var transportScheduler = applicationScheduler;
         // https://github.com/aspnet/KestrelHttpServer/issues/2573
         var awaiterScheduler = OperatingSystem.IsWindows()
-          ? transportScheduler
-          : PipeScheduler.Inline;
+            ? transportScheduler
+            : PipeScheduler.Inline;
 
         _inputOptions = new PipeOptions(
             _memoryPool,

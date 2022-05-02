@@ -17,14 +17,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private static CSharpTestSource GetSource(string code, bool hasDefaultHandler) =>
             hasDefaultHandler
                 ? new[]
-                  {
-                      code,
-                      GetInterpolatedStringHandlerDefinition(
-                          includeSpanOverloads: false,
-                          useDefaultParameters: false,
-                          useBoolReturns: false
-                      )
-                  }
+                {
+                    code,
+                    GetInterpolatedStringHandlerDefinition(
+                        includeSpanOverloads: false,
+                        useDefaultParameters: false,
+                        useBoolReturns: false
+                    )
+                }
                 : code;
 
         [CompilerTrait(CompilerFeature.IOperation)]

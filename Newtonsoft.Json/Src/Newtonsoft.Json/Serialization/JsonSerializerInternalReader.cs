@@ -82,8 +82,8 @@ namespace Newtonsoft.Json.Serialization
 
                     PopulateList(
                         (arrayContract.ShouldCreateWrapper)
-                          ? arrayContract.CreateWrapper(target)
-                          : (IList)target,
+                            ? arrayContract.CreateWrapper(target)
+                            : (IList)target,
                         reader,
                         arrayContract,
                         null,
@@ -126,8 +126,8 @@ namespace Newtonsoft.Json.Serialization
                     JsonDictionaryContract dictionaryContract = (JsonDictionaryContract)contract;
                     PopulateDictionary(
                         (dictionaryContract.ShouldCreateWrapper)
-                          ? dictionaryContract.CreateWrapper(target)
-                          : (IDictionary)target,
+                            ? dictionaryContract.CreateWrapper(target)
+                            : (IDictionary)target,
                         reader,
                         dictionaryContract,
                         null,
@@ -816,9 +816,9 @@ namespace Newtonsoft.Json.Serialization
                     {
                         targetDictionary = PopulateDictionary(
                             dictionaryContract.ShouldCreateWrapper
-                                || !(existingValue is IDictionary)
-                              ? dictionaryContract.CreateWrapper(existingValue)
-                              : (IDictionary)existingValue,
+                            || !(existingValue is IDictionary)
+                                ? dictionaryContract.CreateWrapper(existingValue)
+                                : (IDictionary)existingValue,
                             reader,
                             dictionaryContract,
                             member,
@@ -1434,8 +1434,8 @@ namespace Newtonsoft.Json.Serialization
 
                 value = PopulateList(
                     (arrayContract.ShouldCreateWrapper || !(existingValue is IList list))
-                      ? arrayContract.CreateWrapper(existingValue)
-                      : list,
+                        ? arrayContract.CreateWrapper(existingValue)
+                        : list,
                     reader,
                     arrayContract,
                     member,
@@ -2169,8 +2169,8 @@ namespace Newtonsoft.Json.Serialization
                                             reader.Culture,
                                             out DateTime dt
                                         )
-                                          ? dt
-                                          : EnsureType(
+                                            ? dt
+                                            : EnsureType(
                                                 reader,
                                                 keyValue,
                                                 CultureInfo.InvariantCulture,
@@ -2189,8 +2189,8 @@ namespace Newtonsoft.Json.Serialization
                                             reader.Culture,
                                             out DateTimeOffset dt
                                         )
-                                          ? dt
-                                          : EnsureType(
+                                            ? dt
+                                            : EnsureType(
                                                 reader,
                                                 keyValue,
                                                 CultureInfo.InvariantCulture,
@@ -2205,23 +2205,21 @@ namespace Newtonsoft.Json.Serialization
                                             contract.KeyContract != null
                                             && contract.KeyContract.IsEnum
                                                 ? EnumUtils.ParseEnum(
-                                                      contract
-                                                          .KeyContract
-                                                          .NonNullableUnderlyingType,
-                                                      (
-                                                          Serializer._contractResolver
-                                                          as DefaultContractResolver
-                                                      )?.NamingStrategy,
-                                                      keyValue.ToString(),
-                                                      false
-                                                  )
+                                                    contract.KeyContract.NonNullableUnderlyingType,
+                                                    (
+                                                        Serializer._contractResolver
+                                                        as DefaultContractResolver
+                                                    )?.NamingStrategy,
+                                                    keyValue.ToString(),
+                                                    false
+                                                )
                                                 : EnsureType(
-                                                      reader,
-                                                      keyValue,
-                                                      CultureInfo.InvariantCulture,
-                                                      contract.KeyContract,
-                                                      contract.DictionaryKeyType
-                                                  )!;
+                                                    reader,
+                                                    keyValue,
+                                                    CultureInfo.InvariantCulture,
+                                                    contract.KeyContract,
+                                                    contract.DictionaryKeyType
+                                                )!;
                                         break;
                                 }
                             }
@@ -3161,8 +3159,8 @@ namespace Newtonsoft.Json.Serialization
                                 context.Property.PropertyContract,
                                 s
                             )
-                              ? PropertyPresence.Null
-                              : PropertyPresence.Value;
+                                ? PropertyPresence.Null
+                                : PropertyPresence.Value;
                         }
                         else
                         {
@@ -3286,8 +3284,8 @@ namespace Newtonsoft.Json.Serialization
                                 IList createdObjectCollectionWrapper =
                                     (propertyArrayContract.ShouldCreateWrapper)
                                         ? propertyArrayContract.CreateWrapper(
-                                              createdObjectCollection
-                                          )
+                                            createdObjectCollection
+                                        )
                                         : (IList)createdObjectCollection;
 
                                 // Don't attempt to populate array/read-only list

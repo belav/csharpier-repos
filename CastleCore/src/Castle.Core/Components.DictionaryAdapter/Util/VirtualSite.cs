@@ -20,7 +20,7 @@ namespace Castle.Components.DictionaryAdapter
 
     public sealed class VirtualSite<TNode, TMember>
         : IVirtualSite<TNode>,
-          IEquatable<VirtualSite<TNode, TMember>>
+            IEquatable<VirtualSite<TNode, TMember>>
     {
         private readonly IVirtualTarget<TNode, TMember> target;
         private readonly TMember member;

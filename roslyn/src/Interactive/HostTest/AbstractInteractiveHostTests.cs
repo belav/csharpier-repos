@@ -253,8 +253,8 @@ STDOUT: {_synchronizedOutput}
                     references
                 ),
                 options: fileName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
-                  ? TestOptions.ReleaseExe
-                  : TestOptions.ReleaseDll
+                    ? TestOptions.ReleaseExe
+                    : TestOptions.ReleaseDll
             );
 
             var image = compilation.EmitToArray();

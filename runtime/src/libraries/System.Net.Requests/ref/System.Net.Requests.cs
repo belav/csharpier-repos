@@ -92,7 +92,7 @@ namespace System.Net
 
     public partial class FileWebRequest
         : System.Net.WebRequest,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         [System.ObsoleteAttribute("Serialization has been deprecated for FileWebRequest.")]
         protected FileWebRequest(
@@ -215,7 +215,7 @@ namespace System.Net
 
     public partial class FileWebResponse
         : System.Net.WebResponse,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         [System.ObsoleteAttribute("Serialization has been deprecated for FileWebResponse.")]
         protected FileWebResponse(
@@ -534,7 +534,7 @@ namespace System.Net
 
     public partial class HttpWebRequest
         : System.Net.WebRequest,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         [System.ObsoleteAttribute(
             "WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead",
@@ -849,7 +849,7 @@ namespace System.Net
 
     public partial class HttpWebResponse
         : System.Net.WebResponse,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         [System.ObsoleteAttribute(
             "This API supports the .NET infrastructure and is not intended to be used directly from your code.",
@@ -987,7 +987,7 @@ namespace System.Net
 
     public partial class ProtocolViolationException
         : System.InvalidOperationException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public ProtocolViolationException() { }
 
@@ -1011,7 +1011,7 @@ namespace System.Net
 
     public partial class WebException
         : System.InvalidOperationException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public WebException() { }
 
@@ -1080,7 +1080,7 @@ namespace System.Net
 
     public abstract partial class WebRequest
         : System.MarshalByRefObject,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         [System.ObsoleteAttribute(
             "WebRequest, HttpWebRequest, ServicePoint, and WebClient are obsolete. Use HttpClient instead.",
@@ -1338,8 +1338,8 @@ namespace System.Net
 
     public abstract partial class WebResponse
         : System.MarshalByRefObject,
-          System.IDisposable,
-          System.Runtime.Serialization.ISerializable
+            System.IDisposable,
+            System.Runtime.Serialization.ISerializable
     {
         protected WebResponse() { }
 

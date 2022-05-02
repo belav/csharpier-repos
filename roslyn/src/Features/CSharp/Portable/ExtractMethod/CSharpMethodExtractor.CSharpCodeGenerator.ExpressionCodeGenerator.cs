@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             .Identifier
                             .ValueText;
                         return (name != null && name.Length > 0)
-                          ? MakeMethodName("Get", name, methodName.Equals(NewMethodCamelCaseStr))
-                          : methodName;
+                            ? MakeMethodName("Get", name, methodName.Equals(NewMethodCamelCaseStr))
+                            : methodName;
                     }
 
                     if (expression is MemberAccessExpressionSyntax memberAccess)
@@ -105,12 +105,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             unqualifiedNameIdentifierValueText != null
                             && unqualifiedNameIdentifierValueText.Length > 0
                         )
-                          ? MakeMethodName(
+                            ? MakeMethodName(
                                 "Get",
                                 unqualifiedNameIdentifierValueText,
                                 methodName.Equals(NewMethodCamelCaseStr)
                             )
-                          : methodName;
+                            : methodName;
                     }
 
                     return methodName;

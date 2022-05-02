@@ -30,7 +30,7 @@ namespace System.Diagnostics
     [StructLayout(LayoutKind.Sequential)]
     public struct TagList
         : IList<KeyValuePair<string, object?>>,
-          IReadOnlyList<KeyValuePair<string, object?>>
+            IReadOnlyList<KeyValuePair<string, object?>>
     {
         internal KeyValuePair<string, object?> Tag1;
         internal KeyValuePair<string, object?> Tag2;

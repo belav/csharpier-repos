@@ -27,14 +27,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class StoreKeyConvention
         : IEntityTypeAddedConvention,
-          IPropertyAnnotationChangedConvention,
-          IForeignKeyOwnershipChangedConvention,
-          IForeignKeyRemovedConvention,
-          IKeyAddedConvention,
-          IKeyRemovedConvention,
-          IEntityTypePrimaryKeyChangedConvention,
-          IEntityTypeAnnotationChangedConvention,
-          IEntityTypeBaseTypeChangedConvention
+            IPropertyAnnotationChangedConvention,
+            IForeignKeyOwnershipChangedConvention,
+            IForeignKeyRemovedConvention,
+            IKeyAddedConvention,
+            IKeyRemovedConvention,
+            IEntityTypePrimaryKeyChangedConvention,
+            IEntityTypeAnnotationChangedConvention,
+            IEntityTypeBaseTypeChangedConvention
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

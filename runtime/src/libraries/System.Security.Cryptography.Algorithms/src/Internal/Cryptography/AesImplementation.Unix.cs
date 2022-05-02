@@ -77,11 +77,11 @@ namespace Internal.Cryptography
                 (256, CipherMode.CFB) when feedback == 128 => Interop.Crypto.EvpAes256Cfb128(),
 
                 _
-                  => throw (
-                      keySize == 128 || keySize == 192 || keySize == 256
-                          ? (Exception)new NotSupportedException()
-                          : new CryptographicException(SR.Cryptography_InvalidKeySize)
-                  ),
+                    => throw (
+                        keySize == 128 || keySize == 192 || keySize == 256
+                            ? (Exception)new NotSupportedException()
+                            : new CryptographicException(SR.Cryptography_InvalidKeySize)
+                    ),
             };
     }
 }

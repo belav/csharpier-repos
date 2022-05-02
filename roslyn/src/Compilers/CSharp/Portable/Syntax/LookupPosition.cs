@@ -257,19 +257,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         stepInto: null
                     );
                 return initializerOpt == null
-                  ? position >= constructorDecl.ParameterList.CloseParenToken.Span.End
-                    && IsBeforeToken(position, nextToken)
-                  : IsBetweenTokens(position, initializerOpt.ColonToken, nextToken);
+                    ? position >= constructorDecl.ParameterList.CloseParenToken.Span.End
+                        && IsBeforeToken(position, nextToken)
+                    : IsBetweenTokens(position, initializerOpt.ColonToken, nextToken);
             }
 
             return initializerOpt == null
-              ? IsInBody(position, constructorDecl)
-              : IsBetweenTokens(
+                ? IsInBody(position, constructorDecl)
+                : IsBetweenTokens(
                     position,
                     initializerOpt.ColonToken,
                     constructorDecl.SemicolonToken.Kind() == SyntaxKind.None
-                      ? constructorDecl.Body!.CloseBraceToken
-                      : constructorDecl.SemicolonToken
+                        ? constructorDecl.Body!.CloseBraceToken
+                        : constructorDecl.SemicolonToken
                 );
         }
 
@@ -579,11 +579,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 bodyStatement != null
                     ? GetFirstExcludedToken(bodyStatement)
                     : (SyntaxToken)
-                          SyntaxNavigator.Instance.GetNextToken(
-                              body,
-                              predicate: null,
-                              stepInto: null
-                          );
+                        SyntaxNavigator.Instance.GetNextToken(
+                            body,
+                            predicate: null,
+                            stepInto: null
+                        );
 
             return IsBetweenTokens(position, firstIncluded, firstExcluded);
         }

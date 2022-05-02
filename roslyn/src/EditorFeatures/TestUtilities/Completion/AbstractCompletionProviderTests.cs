@@ -143,8 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             document.SourceCodeKind == SourceCodeKind.Regular
                 ? ImmutableHashSet<string>.Empty
                 : ImmutableHashSet.Create(
-                      PredefinedInteractiveTextViewRoles.InteractiveTextViewRole
-                  );
+                    PredefinedInteractiveTextViewRoles.InteractiveTextViewRole
+                );
 
         protected abstract string ItemPartiallyWritten(string expectedItemOrNull);
 
@@ -265,8 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                             && (
                                 expectedDescriptionOrNull != null
                                     ? completionService
-                                          .GetDescriptionAsync(document, c, options, displayOptions)
-                                          .Result.Text == expectedDescriptionOrNull
+                                        .GetDescriptionAsync(document, c, options, displayOptions)
+                                        .Result.Text == expectedDescriptionOrNull
                                     : true
                             )
                     );
@@ -1117,13 +1117,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
         )
         {
             return isProjectReference
-              ? CreateMarkupForProjectWithProjectReference(
+                ? CreateMarkupForProjectWithProjectReference(
                     currentFile,
                     referencedFile,
                     sourceLanguage,
                     referenceLanguage
                 )
-              : CreateMarkupForProjectWithMetadataReference(
+                : CreateMarkupForProjectWithMetadataReference(
                     currentFile,
                     referencedFile,
                     sourceLanguage,
@@ -2031,8 +2031,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
 
             var trigger = usePreviousCharAsTrigger
                 ? RoslynCompletion.CompletionTrigger.CreateInsertionTrigger(
-                      insertedCharacter: code.ElementAt(position - 1)
-                  )
+                    insertedCharacter: code.ElementAt(position - 1)
+                )
                 : RoslynCompletion.CompletionTrigger.Invoke;
 
             var completionService = GetCompletionService(document.Project);
@@ -2044,8 +2044,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             );
 
             return completionList == null
-              ? ImmutableArray<RoslynCompletion.CompletionItem>.Empty
-              : completionList.Items;
+                ? ImmutableArray<RoslynCompletion.CompletionItem>.Empty
+                : completionList.Items;
         }
     }
 }

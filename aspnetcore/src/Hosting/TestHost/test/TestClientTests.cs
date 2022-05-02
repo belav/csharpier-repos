@@ -749,8 +749,8 @@ public class TestClientTests
                 else
                 {
                     var subprotocols = ctx.WebSockets.WebSocketRequestedProtocols.Any()
-                      ? string.Join(", ", ctx.WebSockets.WebSocketRequestedProtocols)
-                      : "<none>";
+                        ? string.Join(", ", ctx.WebSockets.WebSocketRequestedProtocols)
+                        : "<none>";
                     var closeReason = "Unexpected subprotocols: " + subprotocols;
                     var websocket = await ctx.WebSockets.AcceptWebSocketAsync();
                     await websocket.CloseAsync(

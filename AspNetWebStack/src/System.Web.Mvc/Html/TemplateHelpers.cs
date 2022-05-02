@@ -207,8 +207,8 @@ namespace System.Web.Mvc.Html
         )
         {
             return mode == DataBoundControlMode.ReadOnly
-              ? _defaultDisplayActions
-              : _defaultEditorActions;
+                ? _defaultDisplayActions
+                : _defaultEditorActions;
         }
 
         internal static IEnumerable<string> GetViewNames(

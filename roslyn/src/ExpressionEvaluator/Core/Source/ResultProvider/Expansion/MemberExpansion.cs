@@ -318,11 +318,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             nonPublicExpansion =
                 (nonPublicMembers.Count > 0)
                     ? new NonPublicMembersExpansion(
-                          members: new MemberExpansion(
-                              nonPublicMembers.ToArray(),
-                              customTypeInfoMap
-                          )
-                      )
+                        members: new MemberExpansion(nonPublicMembers.ToArray(), customTypeInfoMap)
+                    )
                     : null;
             nonPublicMembers.Free();
         }
@@ -567,9 +564,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 member.GetExplicitlyImplementedInterface(out memberName) ?? member.DeclaringType;
             var typeDeclaringMemberInfo = typeDeclaringMember.IsInterface
                 ? customTypeInfoMap.SubstituteCustomTypeInfo(
-                      typeDeclaringMember.GetInterfaceListEntry(member.DeclaringType),
-                      customInfo: null
-                  )
+                    typeDeclaringMember.GetInterfaceListEntry(member.DeclaringType),
+                    customInfo: null
+                )
                 : null;
             var memberNameForFullName = fullNameProvider.GetClrValidIdentifier(
                 inspectionContext,
@@ -603,11 +600,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 typeDeclaringMemberAndInfo: (
                     member.IncludeTypeInMemberName || typeDeclaringMember.IsInterface
                 )
-                  ? new TypeAndCustomInfo(
+                    ? new TypeAndCustomInfo(
                         DkmClrType.Create(appDomain, typeDeclaringMember),
                         typeDeclaringMemberInfo
                     )
-                  : default(TypeAndCustomInfo), // Note: Won't include DynamicAttribute.
+                    : default(TypeAndCustomInfo), // Note: Won't include DynamicAttribute.
                 declaredTypeAndInfo: new TypeAndCustomInfo(
                     DkmClrType.Create(appDomain, declaredType),
                     declaredTypeInfo

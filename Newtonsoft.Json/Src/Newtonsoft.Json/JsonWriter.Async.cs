@@ -77,8 +77,8 @@ namespace Newtonsoft.Json
                     case State.Array:
                     case State.Constructor:
                         return tokenBeingWritten == JsonToken.Comment
-                          ? WriteIndentAsync(cancellationToken)
-                          : AutoCompleteAsync(cancellationToken);
+                            ? WriteIndentAsync(cancellationToken)
+                            : AutoCompleteAsync(cancellationToken);
                     case State.Object:
                         switch (tokenBeingWritten)
                         {

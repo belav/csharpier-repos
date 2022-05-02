@@ -254,14 +254,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             var documentServiceProvider = GetDocumentServiceProvider();
             var workspace = TestWorkspace.IsWorkspaceElement(workspaceMarkupOrCode)
-              ? TestWorkspace.Create(
+                ? TestWorkspace.Create(
                     XElement.Parse(workspaceMarkupOrCode),
                     openDocuments: false,
                     composition: composition,
                     documentServiceProvider: documentServiceProvider,
                     workspaceKind: parameters.workspaceKind
                 )
-              : TestWorkspace.Create(
+                : TestWorkspace.Create(
                     GetLanguage(),
                     parameters.compilationOptions,
                     parameters.parseOptions,

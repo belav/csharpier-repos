@@ -143,8 +143,8 @@ namespace CSharpSyntaxGenerator.Grammar
                     child =>
                         child is Choice c
                             ? HandleChildren(c.Children, delim: " | ")
-                              .Parenthesize()
-                              .Suffix("?", when: c.Optional)
+                                .Parenthesize()
+                                .Suffix("?", when: c.Optional)
                             : child is Sequence s
                                 ? HandleChildren(s.Children).Parenthesize()
                                 : child is Field f
@@ -163,9 +163,9 @@ namespace CSharpSyntaxGenerator.Grammar
                     ? RuleReference(field.Kinds.Single().Name + "Syntax")
                     : field.Type.StartsWith("SeparatedSyntaxList")
                         ? HandleSeparatedList(
-                              field,
-                              field.Type[("SeparatedSyntaxList".Length + 1)..^1]
-                          )
+                            field,
+                            field.Type[("SeparatedSyntaxList".Length + 1)..^1]
+                        )
                         : field.Type.StartsWith("SyntaxList")
                             ? HandleList(field, field.Type[("SyntaxList".Length + 1)..^1])
                             : field.IsToken
@@ -198,7 +198,7 @@ namespace CSharpSyntaxGenerator.Grammar
             field.Kinds.Count == 0
                 ? HandleTokenName(field.Name)
                 : Join(" | ", field.Kinds.Select(k => HandleTokenName(k.Name)))
-                  .Parenthesize(when: field.Kinds.Count >= 2);
+                    .Parenthesize(when: field.Kinds.Count >= 2);
 
         private static Production HandleTokenName(string tokenName) =>
             GetSyntaxKind(tokenName) is var kind && kind == SyntaxKind.None

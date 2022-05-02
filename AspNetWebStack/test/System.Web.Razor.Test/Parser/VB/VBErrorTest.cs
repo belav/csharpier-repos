@@ -173,11 +173,11 @@ bar",
                             (SpanEditHandler)(
                                 autoComplete
                                     ? new AutoCompleteEditHandler(
-                                          CSharpLanguageCharacteristics.Instance.TokenizeString
-                                      )
-                                      {
-                                          AutoCompleteString = expectedTerminator
-                                      }
+                                        CSharpLanguageCharacteristics.Instance.TokenizeString
+                                    )
+                                    {
+                                        AutoCompleteString = expectedTerminator
+                                    }
                                     : SpanEditHandler.CreateDefault()
                             )
                         )
@@ -191,11 +191,11 @@ bar",
                             (SpanEditHandler)(
                                 autoComplete
                                     ? new AutoCompleteEditHandler(
-                                          CSharpLanguageCharacteristics.Instance.TokenizeString
-                                      )
-                                      {
-                                          AutoCompleteString = expectedTerminator
-                                      }
+                                        CSharpLanguageCharacteristics.Instance.TokenizeString
+                                    )
+                                    {
+                                        AutoCompleteString = expectedTerminator
+                                    }
                                     : SpanEditHandler.CreateDefault()
                             )
                         )

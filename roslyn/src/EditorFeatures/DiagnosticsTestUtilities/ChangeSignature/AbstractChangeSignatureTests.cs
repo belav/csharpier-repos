@@ -231,8 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 }
 
                 removeDescription = removed.Any()
-                  ? string.Format(", Removed: {{{0}}}", string.Join(", ", removed))
-                  : string.Empty;
+                    ? string.Format(", Removed: {{{0}}}", string.Join(", ", removed))
+                    : string.Empty;
             }
 
             var newParametersString = string.Join(

@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     {
         private sealed class ReadItemQueryingEnumerable<T>
             : IEnumerable<T>,
-              IAsyncEnumerable<T>,
-              IQueryingEnumerable
+                IAsyncEnumerable<T>,
+                IQueryingEnumerable
         {
             private readonly CosmosQueryContext _cosmosQueryContext;
             private readonly ReadItemExpression _readItemExpression;
@@ -145,8 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 var converter = property.GetTypeMapping().Converter;
 
                 return converter is null
-                  ? (string)value
-                  : (string)converter.ConvertToProvider(value);
+                    ? (string)value
+                    : (string)converter.ConvertToProvider(value);
             }
 
             private bool TryGenerateIdFromKeys(IProperty idProperty, out object value)

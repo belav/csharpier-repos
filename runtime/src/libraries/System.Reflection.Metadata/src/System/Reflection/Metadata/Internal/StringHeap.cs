@@ -173,15 +173,15 @@ namespace System.Reflection.Metadata.Ecma335
         internal string GetString(StringHandle handle, MetadataStringDecoder utf8Decoder)
         {
             return handle.IsVirtual
-              ? GetVirtualHandleString(handle, utf8Decoder)
-              : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
+                ? GetVirtualHandleString(handle, utf8Decoder)
+                : GetNonVirtualString(handle, utf8Decoder, prefixOpt: null);
         }
 
         internal MemoryBlock GetMemoryBlock(StringHandle handle)
         {
             return handle.IsVirtual
-              ? GetVirtualHandleMemoryBlock(handle)
-              : GetNonVirtualStringMemoryBlock(handle);
+                ? GetVirtualHandleMemoryBlock(handle)
+                : GetNonVirtualStringMemoryBlock(handle);
         }
 
         internal static string GetVirtualString(StringHandle.VirtualIndex index)
@@ -242,7 +242,7 @@ namespace System.Reflection.Metadata.Ecma335
             {
                 StringKind.Virtual => GetVirtualString(handle.GetVirtualIndex()),
                 StringKind.WinRTPrefixed
-                  => GetNonVirtualString(handle, utf8Decoder, MetadataReader.WinRTPrefix),
+                    => GetNonVirtualString(handle, utf8Decoder, MetadataReader.WinRTPrefix),
                 _ => throw ExceptionUtilities.UnexpectedValue(handle.StringKind),
             };
         }
@@ -259,9 +259,9 @@ namespace System.Reflection.Metadata.Ecma335
                     byte[] bytes = handle.StringKind switch
                     {
                         StringKind.Virtual
-                          => Encoding.UTF8.GetBytes(GetVirtualString(handle.GetVirtualIndex())),
+                            => Encoding.UTF8.GetBytes(GetVirtualString(handle.GetVirtualIndex())),
                         StringKind.WinRTPrefixed
-                          => GetNonVirtualStringBytes(handle, MetadataReader.WinRTPrefix),
+                            => GetNonVirtualStringBytes(handle, MetadataReader.WinRTPrefix),
                         _ => throw ExceptionUtilities.UnexpectedValue(handle.StringKind),
                     };
                     block = heap.AddBlob(handle.RawValue, bytes);

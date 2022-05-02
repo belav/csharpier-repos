@@ -48,11 +48,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     AccessorDeclarationSyntax _ => false,
                     MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
                     ParenthesizedLambdaExpressionSyntax lambda
-                      => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
+                        => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
                     SimpleLambdaExpressionSyntax lambda
-                      => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
+                        => lambda.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
                     AnonymousMethodExpressionSyntax anonymous
-                      => anonymous.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
+                        => anonymous.AsyncKeyword.Kind() == SyntaxKind.AsyncKeyword,
                     _ => false,
                 };
             }

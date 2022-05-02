@@ -86,7 +86,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _supportedMethods.Contains(method)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     "CONVERT",
                     new[]
                     {
@@ -97,6 +97,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     argumentsPropagateNullability: new[] { false, true },
                     method.ReturnType
                 )
-              : null;
+                : null;
     }
 }

@@ -1004,10 +1004,10 @@ internal static partial class Interop
             IntPtr address =
                 request->Address.pRemoteAddress != null
                     ? (IntPtr)(
-                          pMemoryBlob
-                          - (byte*)originalAddress
-                          + (byte*)request->Address.pRemoteAddress
-                      )
+                        pMemoryBlob
+                        - (byte*)originalAddress
+                        + (byte*)request->Address.pRemoteAddress
+                    )
                     : IntPtr.Zero;
             CopyOutAddress(address, ref v4address, ref v6address);
 
@@ -1047,10 +1047,8 @@ internal static partial class Interop
             IntPtr address =
                 request->Address.pLocalAddress != null
                     ? (IntPtr)(
-                          pMemoryBlob
-                          - (byte*)originalAddress
-                          + (byte*)request->Address.pLocalAddress
-                      )
+                        pMemoryBlob - (byte*)originalAddress + (byte*)request->Address.pLocalAddress
+                    )
                     : IntPtr.Zero;
             CopyOutAddress(address, ref v4address, ref v6address);
 

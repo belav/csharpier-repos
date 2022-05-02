@@ -44,8 +44,8 @@ namespace Microsoft.Extensions.FileProviders.Composite
 {
     public partial class CompositeDirectoryContents
         : Microsoft.Extensions.FileProviders.IDirectoryContents,
-          System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
+            System.Collections.IEnumerable
     {
         public CompositeDirectoryContents(
             System.Collections.Generic.IList<Microsoft.Extensions.FileProviders.IFileProvider> fileProviders,

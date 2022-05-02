@@ -225,8 +225,8 @@ namespace System.IO.Pipes
                         CancellationToken ct = _cancellationRegistration.Token;
                         _source.SetException(
                             ct.IsCancellationRequested
-                              ? new OperationCanceledException(ct)
-                              : new OperationCanceledException()
+                                ? new OperationCanceledException(ct)
+                                : new OperationCanceledException()
                         );
                         break;
 
@@ -258,8 +258,8 @@ namespace System.IO.Pipes
                         CancellationToken ct = _cancellationRegistration.Token;
                         _source.SetException(
                             ct.CanBeCanceled && !ct.IsCancellationRequested
-                              ? Error.GetOperationAborted()
-                              : new OperationCanceledException(ct)
+                                ? Error.GetOperationAborted()
+                                : new OperationCanceledException(ct)
                         );
                         break;
 

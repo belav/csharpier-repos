@@ -153,10 +153,10 @@ namespace Microsoft.EntityFrameworkCore
             // Support pre-6.0 IdentitySeed annotations, which contained an int rather than a long
             var annotation = model.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
             return annotation is null || annotation.Value is null
-              ? 1
-              : annotation.Value is int intValue
-                  ? intValue
-                  : (long)annotation.Value;
+                ? 1
+                : annotation.Value is int intValue
+                    ? intValue
+                    : (long)annotation.Value;
         }
 
         /// <summary>

@@ -2012,8 +2012,8 @@ namespace Microsoft.EntityFrameworkCore
                     name,
                     sql,
                     fromDataAnnotation
-                      ? ConfigurationSource.DataAnnotation
-                      : ConfigurationSource.Convention
+                        ? ConfigurationSource.DataAnnotation
+                        : ConfigurationSource.Convention
                 )
                 ?.Builder;
 
@@ -2058,8 +2058,8 @@ namespace Microsoft.EntityFrameworkCore
                 name,
                 sql,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

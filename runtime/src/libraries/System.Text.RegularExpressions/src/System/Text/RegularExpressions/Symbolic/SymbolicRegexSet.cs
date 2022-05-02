@@ -191,13 +191,13 @@ namespace System.Text.RegularExpressions.Symbolic
                                                     S pred =
                                                         kind == SymbolicRegexKind.Or
                                                             ? builder._solver.Or(
-                                                                  singleton._set,
-                                                                  alt._set
-                                                              )
+                                                                singleton._set,
+                                                                alt._set
+                                                            )
                                                             : builder._solver.And(
-                                                                  singleton._set,
-                                                                  alt._set
-                                                              );
+                                                                singleton._set,
+                                                                alt._set
+                                                            );
                                                     singleton = SymbolicRegexNode<S>.MkSingleton(
                                                         builder,
                                                         pred
@@ -326,13 +326,13 @@ namespace System.Text.RegularExpressions.Symbolic
             }
 
             return other.Count != 0 || loops.Count != 0 || singleton is not null
-              ? new SymbolicRegexSet<S>(builder, kind, other, loops, singleton)
+                ? new SymbolicRegexSet<S>(builder, kind, other, loops, singleton)
                 {
                     _watchdog = watchdog
                 }
-              : kind == SymbolicRegexKind.Or
-                  ? builder._emptySet
-                  : builder._fullSet;
+                : kind == SymbolicRegexKind.Or
+                    ? builder._emptySet
+                    : builder._fullSet;
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             static void AddLoopElement(

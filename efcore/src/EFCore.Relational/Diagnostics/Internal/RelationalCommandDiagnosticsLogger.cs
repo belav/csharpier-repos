@@ -25,7 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
     /// </summary>
     public class RelationalCommandDiagnosticsLogger
         : DiagnosticsLogger<DbLoggerCategory.Database.Command>,
-          IRelationalCommandDiagnosticsLogger
+            IRelationalCommandDiagnosticsLogger
     {
         private DateTimeOffset _suppressCommandCreateExpiration;
         private DateTimeOffset _suppressCommandExecuteExpiration;

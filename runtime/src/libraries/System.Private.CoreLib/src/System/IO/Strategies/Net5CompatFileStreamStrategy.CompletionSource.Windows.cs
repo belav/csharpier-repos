@@ -48,14 +48,14 @@ namespace System.IO.Strategies
                     bytes != null
                     && strategy.CompareExchangeCurrentOverlappedOwner(this, null) == null
                         ? strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                              preallocatedOverlapped!
-                          )
+                            preallocatedOverlapped!
+                        )
                         : // allocated when buffer was created, and buffer is non-null
-                          strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
-                              s_ioCallback,
-                              this,
-                              bytes
-                          );
+                        strategy._fileHandle.ThreadPoolBinding!.AllocateNativeOverlapped(
+                            s_ioCallback,
+                            this,
+                            bytes
+                        );
                 Debug.Assert(_overlapped != null, "AllocateNativeOverlapped returned null");
             }
 
@@ -217,8 +217,8 @@ namespace System.IO.Strategies
                     {
                         TrySetCanceled(
                             cancellationToken.IsCancellationRequested
-                              ? cancellationToken
-                              : new CancellationToken(true)
+                                ? cancellationToken
+                                : new CancellationToken(true)
                         );
                     }
                     else
@@ -281,13 +281,13 @@ namespace System.IO.Strategies
                     preallocatedOverlapped != null
                     && MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> buffer)
                     && preallocatedOverlapped.IsUserObject(buffer.Array) // preallocatedOverlapped is allocated when BufferedStream|Net5CompatFileStreamStrategy allocates the buffer
-                  ? new CompletionSource(
+                    ? new CompletionSource(
                         strategy,
                         preallocatedOverlapped,
                         numBufferedBytesRead,
                         buffer.Array
                     )
-                  : new MemoryFileStreamCompletionSource(strategy, numBufferedBytesRead, memory);
+                    : new MemoryFileStreamCompletionSource(strategy, numBufferedBytesRead, memory);
             }
         }
 

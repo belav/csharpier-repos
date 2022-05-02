@@ -64,17 +64,17 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
 
                 var value = arguments[1] is SqlConstantExpression constantValue
                     ? (SqlExpression)
-                          _sqlExpressionFactory.Constant(
-                              new[] { (byte)constantValue.Value! },
-                              source.TypeMapping
-                          )
+                        _sqlExpressionFactory.Constant(
+                            new[] { (byte)constantValue.Value! },
+                            source.TypeMapping
+                        )
                     : _sqlExpressionFactory.Function(
-                          "char",
-                          new[] { arguments[1] },
-                          nullable: false,
-                          argumentsPropagateNullability: new[] { false },
-                          typeof(string)
-                      );
+                        "char",
+                        new[] { arguments[1] },
+                        nullable: false,
+                        argumentsPropagateNullability: new[] { false },
+                        typeof(string)
+                    );
 
                 return _sqlExpressionFactory.GreaterThan(
                     _sqlExpressionFactory.Function(

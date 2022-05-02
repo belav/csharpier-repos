@@ -22,7 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
     [ExportWorkspaceService(typeof(ISemanticClassificationCacheService), ServiceLayer.Host), Shared]
     internal class VisualStudioSemanticClassificationCacheService
         : ForegroundThreadAffinitizedObject,
-          ISemanticClassificationCacheService
+            ISemanticClassificationCacheService
     {
         private readonly VisualStudioWorkspaceImpl _workspace;
 

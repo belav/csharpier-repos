@@ -15,9 +15,9 @@ namespace System
     )]
     public abstract class StringComparer
         : IComparer,
-          IEqualityComparer,
-          IComparer<string?>,
-          IEqualityComparer<string?>
+            IEqualityComparer,
+            IComparer<string?>,
+            IEqualityComparer<string?>
     {
         public static StringComparer InvariantCulture =>
             CultureAwareComparer.InvariantCaseSensitiveInstance;
@@ -47,10 +47,10 @@ namespace System
                 StringComparison.Ordinal => Ordinal,
                 StringComparison.OrdinalIgnoreCase => OrdinalIgnoreCase,
                 _
-                  => throw new ArgumentException(
-                      SR.NotSupported_StringComparison,
-                      nameof(comparisonType)
-                  ),
+                    => throw new ArgumentException(
+                        SR.NotSupported_StringComparison,
+                        nameof(comparisonType)
+                    ),
             };
         }
 

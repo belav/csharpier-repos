@@ -51,8 +51,8 @@ public static class MemCheck
 
     private static uint? TryGetPhysicalMemMB() =>
         OperatingSystem.IsWindows()
-          ? TryGetPhysicalMemMBWindows()
-          : TryGetPhysicalMemMBNonWindows();
+            ? TryGetPhysicalMemMBWindows()
+            : TryGetPhysicalMemMBNonWindows();
 
     private static uint? TryGetPhysicalMemMBNonWindows()
     {

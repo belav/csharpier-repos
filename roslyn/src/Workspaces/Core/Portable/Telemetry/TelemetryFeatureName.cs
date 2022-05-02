@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis.Telemetry
         public static TelemetryFeatureName GetExtensionName(Type type) =>
             new(
                 type.Assembly.FullName?.StartsWith("Microsoft.", StringComparison.Ordinal) == true
-                  ? type.FullName!
-                  : "External",
+                    ? type.FullName!
+                    : "External",
                 ExtensionKind
             );
 

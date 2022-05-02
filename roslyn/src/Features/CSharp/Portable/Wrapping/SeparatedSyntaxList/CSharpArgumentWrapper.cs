@@ -34,13 +34,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping.SeparatedSyntaxList
             node switch
             {
                 InvocationExpressionSyntax invocationExpression
-                  => invocationExpression.ArgumentList,
+                    => invocationExpression.ArgumentList,
                 ElementAccessExpressionSyntax elementAccessExpression
-                  => elementAccessExpression.ArgumentList,
+                    => elementAccessExpression.ArgumentList,
                 BaseObjectCreationExpressionSyntax objectCreationExpression
-                  => objectCreationExpression.ArgumentList,
+                    => objectCreationExpression.ArgumentList,
                 ConstructorInitializerSyntax constructorInitializer
-                  => constructorInitializer.ArgumentList,
+                    => constructorInitializer.ArgumentList,
                 _ => null,
             };
 

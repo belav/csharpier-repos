@@ -54,8 +54,8 @@ public class RazorComponentsController : Controller
         // Override the path so that the router finds the RoutedPage component
         // as the client router doesn't support optional parameters.
         Request.Path = Request.Path.StartsWithSegments("/components/routable")
-          ? PathString.FromUriComponent("/components/routable")
-          : Request.Path;
+            ? PathString.FromUriComponent("/components/routable")
+            : Request.Path;
 
         return View();
     }

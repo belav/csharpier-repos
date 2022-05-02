@@ -8,8 +8,8 @@ namespace System.Collections
 {
     public sealed partial class BitArray
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.ICloneable
+            System.Collections.IEnumerable,
+            System.ICloneable
     {
         public BitArray(bool[] values) { }
 
@@ -157,7 +157,7 @@ namespace System.Collections.Generic
 
     public abstract partial class Comparer<T>
         : System.Collections.Generic.IComparer<T>,
-          System.Collections.IComparer
+            System.Collections.IComparer
     {
         protected Comparer() { }
 
@@ -180,24 +180,24 @@ namespace System.Collections.Generic
 
     public partial class Dictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IDictionary<TKey, TValue>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable where TKey : notnull
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IDictionary<TKey, TValue>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.ICollection,
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable where TKey : notnull
     {
         public Dictionary() { }
 
@@ -444,12 +444,12 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.IDictionaryEnumerator,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                    TKey,
+                    TValue
+                >>,
+                System.Collections.IDictionaryEnumerator,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -486,10 +486,10 @@ namespace System.Collections.Generic
 
         public sealed partial class KeyCollection
             : System.Collections.Generic.ICollection<TKey>,
-              System.Collections.Generic.IEnumerable<TKey>,
-              System.Collections.Generic.IReadOnlyCollection<TKey>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<TKey>,
+                System.Collections.Generic.IReadOnlyCollection<TKey>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             public KeyCollection(System.Collections.Generic.Dictionary<TKey, TValue> dictionary) { }
 
@@ -548,8 +548,8 @@ namespace System.Collections.Generic
 
             public partial struct Enumerator
                 : System.Collections.Generic.IEnumerator<TKey>,
-                  System.Collections.IEnumerator,
-                  System.IDisposable
+                    System.Collections.IEnumerator,
+                    System.IDisposable
             {
                 private TKey _currentKey;
                 private object _dummy;
@@ -576,10 +576,10 @@ namespace System.Collections.Generic
 
         public sealed partial class ValueCollection
             : System.Collections.Generic.ICollection<TValue>,
-              System.Collections.Generic.IEnumerable<TValue>,
-              System.Collections.Generic.IReadOnlyCollection<TValue>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<TValue>,
+                System.Collections.Generic.IReadOnlyCollection<TValue>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             public ValueCollection(System.Collections.Generic.Dictionary<TKey, TValue> dictionary)
             { }
@@ -639,8 +639,8 @@ namespace System.Collections.Generic
 
             public partial struct Enumerator
                 : System.Collections.Generic.IEnumerator<TValue>,
-                  System.Collections.IEnumerator,
-                  System.IDisposable
+                    System.Collections.IEnumerator,
+                    System.IDisposable
             {
                 private TValue _currentValue;
                 private object _dummy;
@@ -668,7 +668,7 @@ namespace System.Collections.Generic
 
     public abstract partial class EqualityComparer<T>
         : System.Collections.Generic.IEqualityComparer<T>,
-          System.Collections.IEqualityComparer
+            System.Collections.IEqualityComparer
     {
         protected EqualityComparer() { }
 
@@ -694,13 +694,13 @@ namespace System.Collections.Generic
 
     public partial class HashSet<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.ISet<T>,
-          System.Collections.Generic.IReadOnlySet<T>,
-          System.Collections.IEnumerable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.ISet<T>,
+            System.Collections.Generic.IReadOnlySet<T>,
+            System.Collections.IEnumerable,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable
     {
         public HashSet() { }
 
@@ -847,8 +847,8 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private T _current;
             private object _dummy;
@@ -902,12 +902,12 @@ namespace System.Collections.Generic
 
     public partial class LinkedList<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable
     {
         public LinkedList() { }
 
@@ -1041,10 +1041,10 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable,
-              System.Runtime.Serialization.IDeserializationCallback,
-              System.Runtime.Serialization.ISerializable
+                System.Collections.IEnumerator,
+                System.IDisposable,
+                System.Runtime.Serialization.IDeserializationCallback,
+                System.Runtime.Serialization.ISerializable
         {
             private T _current;
             private object _dummy;
@@ -1080,13 +1080,13 @@ namespace System.Collections.Generic
 
     public partial class List<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.IReadOnlyList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.IReadOnlyList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public List() { }
 
@@ -1359,8 +1359,8 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private T _current;
             private object _dummy;
@@ -1476,9 +1476,9 @@ namespace System.Collections.Generic
 
         public sealed partial class UnorderedItemsCollection
             : System.Collections.Generic.IEnumerable<(TElement Element, TPriority Priority)>,
-              System.Collections.Generic.IReadOnlyCollection<(TElement Element, TPriority Priority)>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IReadOnlyCollection<(TElement Element, TPriority Priority)>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             internal UnorderedItemsCollection(PriorityQueue<TElement, TPriority> queue) { }
 
@@ -1517,8 +1517,8 @@ namespace System.Collections.Generic
 
             public partial struct Enumerator
                 : System.Collections.Generic.IEnumerator<(TElement Element, TPriority Priority)>,
-                  System.Collections.IEnumerator,
-                  System.IDisposable
+                    System.Collections.IEnumerator,
+                    System.IDisposable
             {
                 (TElement Element, TPriority Priority) IEnumerator<(TElement Element, TPriority Priority)>.Current
                 {
@@ -1548,9 +1548,9 @@ namespace System.Collections.Generic
 
     public partial class Queue<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public Queue() { }
 
@@ -1637,8 +1637,8 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private T _currentElement;
             private object _dummy;
@@ -1665,7 +1665,7 @@ namespace System.Collections.Generic
 
     public sealed class ReferenceEqualityComparer
         : System.Collections.Generic.IEqualityComparer<object?>,
-          System.Collections.IEqualityComparer
+            System.Collections.IEqualityComparer
     {
         private ReferenceEqualityComparer() { }
 
@@ -1687,22 +1687,22 @@ namespace System.Collections.Generic
 
     public partial class SortedDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IDictionary<TKey, TValue>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable where TKey : notnull
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IDictionary<TKey, TValue>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.ICollection,
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable where TKey : notnull
     {
         public SortedDictionary() { }
 
@@ -1893,12 +1893,12 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.IDictionaryEnumerator,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                    TKey,
+                    TValue
+                >>,
+                System.Collections.IDictionaryEnumerator,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -1935,10 +1935,10 @@ namespace System.Collections.Generic
 
         public sealed partial class KeyCollection
             : System.Collections.Generic.ICollection<TKey>,
-              System.Collections.Generic.IEnumerable<TKey>,
-              System.Collections.Generic.IReadOnlyCollection<TKey>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<TKey>,
+                System.Collections.Generic.IReadOnlyCollection<TKey>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             public KeyCollection(
                 System.Collections.Generic.SortedDictionary<TKey, TValue> dictionary
@@ -1999,8 +1999,8 @@ namespace System.Collections.Generic
 
             public partial struct Enumerator
                 : System.Collections.Generic.IEnumerator<TKey>,
-                  System.Collections.IEnumerator,
-                  System.IDisposable
+                    System.Collections.IEnumerator,
+                    System.IDisposable
             {
                 private object _dummy;
                 private int _dummyPrimitive;
@@ -2026,10 +2026,10 @@ namespace System.Collections.Generic
 
         public sealed partial class ValueCollection
             : System.Collections.Generic.ICollection<TValue>,
-              System.Collections.Generic.IEnumerable<TValue>,
-              System.Collections.Generic.IReadOnlyCollection<TValue>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<TValue>,
+                System.Collections.Generic.IReadOnlyCollection<TValue>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             public ValueCollection(
                 System.Collections.Generic.SortedDictionary<TKey, TValue> dictionary
@@ -2090,8 +2090,8 @@ namespace System.Collections.Generic
 
             public partial struct Enumerator
                 : System.Collections.Generic.IEnumerator<TValue>,
-                  System.Collections.IEnumerator,
-                  System.IDisposable
+                    System.Collections.IEnumerator,
+                    System.IDisposable
             {
                 private object _dummy;
                 private int _dummyPrimitive;
@@ -2118,22 +2118,22 @@ namespace System.Collections.Generic
 
     public partial class SortedList<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IDictionary<TKey, TValue>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable where TKey : notnull
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IDictionary<TKey, TValue>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.ICollection,
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable where TKey : notnull
     {
         public SortedList() { }
 
@@ -2366,14 +2366,14 @@ namespace System.Collections.Generic
 
     public partial class SortedSet<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.ISet<T>,
-          System.Collections.Generic.IReadOnlySet<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.ISet<T>,
+            System.Collections.Generic.IReadOnlySet<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable
     {
         public SortedSet() { }
 
@@ -2556,10 +2556,10 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable,
-              System.Runtime.Serialization.IDeserializationCallback,
-              System.Runtime.Serialization.ISerializable
+                System.Collections.IEnumerator,
+                System.IDisposable,
+                System.Runtime.Serialization.IDeserializationCallback,
+                System.Runtime.Serialization.ISerializable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2594,9 +2594,9 @@ namespace System.Collections.Generic
 
     public partial class Stack<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public Stack() { }
 
@@ -2683,8 +2683,8 @@ namespace System.Collections.Generic
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private T _currentElement;
             private object _dummy;

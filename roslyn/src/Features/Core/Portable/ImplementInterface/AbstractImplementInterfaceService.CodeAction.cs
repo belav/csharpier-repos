@@ -545,37 +545,37 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 return member switch
                 {
                     IMethodSymbol method
-                      => GenerateMethod(
-                          compilation,
-                          method,
-                          accessibility,
-                          modifiers,
-                          generateAbstractly,
-                          useExplicitInterfaceSymbol,
-                          memberName
-                      ),
+                        => GenerateMethod(
+                            compilation,
+                            method,
+                            accessibility,
+                            modifiers,
+                            generateAbstractly,
+                            useExplicitInterfaceSymbol,
+                            memberName
+                        ),
                     IPropertySymbol property
-                      => GenerateProperty(
-                          compilation,
-                          property,
-                          accessibility,
-                          modifiers,
-                          generateAbstractly,
-                          useExplicitInterfaceSymbol,
-                          memberName,
-                          propertyGenerationBehavior
-                      ),
+                        => GenerateProperty(
+                            compilation,
+                            property,
+                            accessibility,
+                            modifiers,
+                            generateAbstractly,
+                            useExplicitInterfaceSymbol,
+                            memberName,
+                            propertyGenerationBehavior
+                        ),
                     IEventSymbol @event
-                      => GenerateEvent(
-                          compilation,
-                          memberName,
-                          generateInvisibly,
-                          factory,
-                          modifiers,
-                          useExplicitInterfaceSymbol,
-                          accessibility,
-                          @event
-                      ),
+                        => GenerateEvent(
+                            compilation,
+                            memberName,
+                            generateInvisibly,
+                            factory,
+                            modifiers,
+                            useExplicitInterfaceSymbol,
+                            accessibility,
+                            @event
+                        ),
                     _ => null,
                 };
             }
@@ -602,8 +602,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     accessibility: accessibility,
                     modifiers: modifiers,
                     explicitInterfaceImplementations: useExplicitInterfaceSymbol
-                      ? ImmutableArray.Create(@event)
-                      : default,
+                        ? ImmutableArray.Create(@event)
+                        : default,
                     name: memberName,
                     addMethod: GetAddOrRemoveMethod(
                         @event,
@@ -694,8 +694,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             private bool IdentifiersMatch(string identifier1, string identifier2)
             {
                 return IsCaseSensitive
-                  ? identifier1 == identifier2
-                  : StringComparer.OrdinalIgnoreCase.Equals(identifier1, identifier2);
+                    ? identifier1 == identifier2
+                    : StringComparer.OrdinalIgnoreCase.Equals(identifier1, identifier2);
             }
 
             private bool IsCaseSensitive

@@ -61,10 +61,10 @@ public sealed class BeforeViewComponentEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(ViewComponentContext),
-                  ViewComponentContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -129,10 +129,10 @@ public sealed class AfterViewComponentEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(ViewComponentContext),
-                  ViewComponentContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
             3 => new KeyValuePair<string, object>(nameof(ViewComponentResult), ViewComponentResult),
             _ => throw new IndexOutOfRangeException(nameof(index))
@@ -190,10 +190,10 @@ public sealed class ViewComponentBeforeViewExecuteEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(ViewComponentContext),
-                  ViewComponentContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(View), View),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -250,10 +250,10 @@ public sealed class ViewComponentAfterViewExecuteEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(ViewComponentContext),
-                  ViewComponentContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(ViewComponentContext),
+                    ViewComponentContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(View), View),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };

@@ -234,14 +234,14 @@ namespace Microsoft.CodeAnalysis.Emit
                         return _definitionMap.NamespaceExists(
                             (INamespace)internalSymbol.GetCciAdapter()
                         )
-                          ? SymbolChange.ContainsChanges
-                          : SymbolChange.Added;
+                            ? SymbolChange.ContainsChanges
+                            : SymbolChange.Added;
                     }
 
                     // If the definition did not exist in the previous generation, it was added.
                     return DefinitionExistsInPreviousGeneration(internalSymbol)
-                      ? SymbolChange.None
-                      : SymbolChange.Added;
+                        ? SymbolChange.None
+                        : SymbolChange.Added;
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(containerChange);

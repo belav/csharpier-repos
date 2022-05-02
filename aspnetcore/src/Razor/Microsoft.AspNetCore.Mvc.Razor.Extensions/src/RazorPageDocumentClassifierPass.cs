@@ -186,7 +186,7 @@ public class RazorPageDocumentClassifierPass : DocumentClassifierPassBase
 
     private class LeadingDirectiveParserOptionsFeature
         : RazorEngineFeatureBase,
-          IConfigureRazorParserOptionsFeature
+            IConfigureRazorParserOptionsFeature
     {
         public int Order { get; }
 

@@ -22,9 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.MatchFolderAndNamespace
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpMatchFolderAndNamespaceDiagnosticAnalyzer
         : AbstractMatchFolderAndNamespaceDiagnosticAnalyzer<
-              SyntaxKind,
-              BaseNamespaceDeclarationSyntax
-          >
+            SyntaxKind,
+            BaseNamespaceDeclarationSyntax
+        >
     {
 #if !CODE_STYLE
         [ImportingConstructor]

@@ -35,8 +35,8 @@ namespace System.Net.Test.Common
                             await connection
                                 .SendResponseAsync(
                                     _options.IsProxy
-                                      ? HttpStatusCode.ProxyAuthenticationRequired
-                                      : HttpStatusCode.Unauthorized,
+                                        ? HttpStatusCode.ProxyAuthenticationRequired
+                                        : HttpStatusCode.Unauthorized,
                                     authenticateHeaders
                                 )
                                 .ConfigureAwait(false);
@@ -126,8 +126,8 @@ namespace System.Net.Test.Common
                 )
                 .Trim();
             string userPass = string.IsNullOrEmpty(options.Domain)
-              ? options.Username + ":" + options.Password
-              : options.Domain + "\\" + options.Username + ":" + options.Password;
+                ? options.Username + ":" + options.Password
+                : options.Domain + "\\" + options.Username + ":" + options.Password;
             return clientHash == Convert.ToBase64String(Encoding.UTF8.GetBytes(userPass));
         }
 
@@ -376,8 +376,8 @@ namespace System.Net.Test.Common
                     "SHA-256",
                     StringComparison.OrdinalIgnoreCase
                 )
-                  ? SHA256.Create()
-                  : (HashAlgorithm)MD5.Create()
+                    ? SHA256.Create()
+                    : (HashAlgorithm)MD5.Create()
             )
 #pragma warning restore CA5351
             {

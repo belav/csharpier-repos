@@ -14,8 +14,8 @@ namespace System.Threading
     /// </remarks>
     public readonly struct CancellationTokenRegistration
         : IEquatable<CancellationTokenRegistration>,
-          IDisposable,
-          IAsyncDisposable
+            IDisposable,
+            IAsyncDisposable
     {
         private readonly long _id;
         private readonly CancellationTokenSource.CallbackNode _node;
@@ -85,8 +85,8 @@ namespace System.Threading
             return
                 _node is CancellationTokenSource.CallbackNode node
                 && !node.Registrations.Unregister(_id, node)
-              ? WaitForCallbackIfNecessaryAsync(_id, node)
-              : default;
+                ? WaitForCallbackIfNecessaryAsync(_id, node)
+                : default;
 
             static ValueTask WaitForCallbackIfNecessaryAsync(
                 long id,
@@ -125,7 +125,7 @@ namespace System.Threading
             _node is CancellationTokenSource.CallbackNode node
                 ? new CancellationToken(node.Registrations.Source)
                 : // avoid CTS.Token, which throws after disposal
-                  default;
+                default;
 
         /// <summary>
         /// Disposes of the registration and unregisters the target callback from the associated

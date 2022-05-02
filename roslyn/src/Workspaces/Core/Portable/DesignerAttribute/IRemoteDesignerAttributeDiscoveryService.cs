@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
     ]
     internal sealed class RemoteDesignerAttributeDiscoveryCallbackDispatcher
         : RemoteServiceCallbackDispatcher,
-          IRemoteDesignerAttributeDiscoveryService.ICallback
+            IRemoteDesignerAttributeDiscoveryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

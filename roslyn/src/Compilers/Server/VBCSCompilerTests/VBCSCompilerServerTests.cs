@@ -351,9 +351,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     var request =
                         i + 1 >= connectionCount
                             ? ProtocolUtil.CreateEmptyCSharpWithKeepAlive(
-                                  TimeSpan.FromSeconds(3),
-                                  workingDirectory
-                              )
+                                TimeSpan.FromSeconds(3),
+                                workingDirectory
+                            )
                             : ProtocolUtil.EmptyCSharpBuildRequest;
                     await serverData.SendAsync(request);
                 }

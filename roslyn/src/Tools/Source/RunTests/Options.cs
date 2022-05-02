@@ -294,8 +294,8 @@ namespace RunTests
             {
                 var dir = RuntimeEnvironment.GetRuntimeDirectory();
                 var programName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                  ? "dotnet.exe"
-                  : "dotnet";
+                    ? "dotnet.exe"
+                    : "dotnet";
 
                 while (dir != null && !File.Exists(Path.Combine(dir, programName)))
                 {

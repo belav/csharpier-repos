@@ -35,13 +35,13 @@ namespace System.Text.RegularExpressions
 
     public partial class CaptureCollection
         : System.Collections.Generic.ICollection<System.Text.RegularExpressions.Capture>,
-          System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Capture>,
-          System.Collections.Generic.IList<System.Text.RegularExpressions.Capture>,
-          System.Collections.Generic.IReadOnlyCollection<System.Text.RegularExpressions.Capture>,
-          System.Collections.Generic.IReadOnlyList<System.Text.RegularExpressions.Capture>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Capture>,
+            System.Collections.Generic.IList<System.Text.RegularExpressions.Capture>,
+            System.Collections.Generic.IReadOnlyCollection<System.Text.RegularExpressions.Capture>,
+            System.Collections.Generic.IReadOnlyList<System.Text.RegularExpressions.Capture>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         internal CaptureCollection() { }
 
@@ -181,25 +181,25 @@ namespace System.Text.RegularExpressions
 
     public partial class GroupCollection
         : System.Collections.Generic.ICollection<System.Text.RegularExpressions.Group>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  System.Text.RegularExpressions.Group
-              >>,
-          System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Group>,
-          System.Collections.Generic.IList<System.Text.RegularExpressions.Group>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  string,
-                  System.Text.RegularExpressions.Group
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Text.RegularExpressions.Group>,
-          System.Collections.Generic.IReadOnlyDictionary<
-              string,
-              System.Text.RegularExpressions.Group
-          >,
-          System.Collections.Generic.IReadOnlyList<System.Text.RegularExpressions.Group>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    string,
+                    System.Text.RegularExpressions.Group
+                >>,
+            System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Group>,
+            System.Collections.Generic.IList<System.Text.RegularExpressions.Group>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    string,
+                    System.Text.RegularExpressions.Group
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Text.RegularExpressions.Group>,
+            System.Collections.Generic.IReadOnlyDictionary<
+                string,
+                System.Text.RegularExpressions.Group
+            >,
+            System.Collections.Generic.IReadOnlyList<System.Text.RegularExpressions.Group>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         internal GroupCollection() { }
 
@@ -382,13 +382,13 @@ namespace System.Text.RegularExpressions
 
     public partial class MatchCollection
         : System.Collections.Generic.ICollection<System.Text.RegularExpressions.Match>,
-          System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Match>,
-          System.Collections.Generic.IList<System.Text.RegularExpressions.Match>,
-          System.Collections.Generic.IReadOnlyCollection<System.Text.RegularExpressions.Match>,
-          System.Collections.Generic.IReadOnlyList<System.Text.RegularExpressions.Match>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Match>,
+            System.Collections.Generic.IList<System.Text.RegularExpressions.Match>,
+            System.Collections.Generic.IReadOnlyCollection<System.Text.RegularExpressions.Match>,
+            System.Collections.Generic.IReadOnlyList<System.Text.RegularExpressions.Match>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         internal MatchCollection() { }
 
@@ -981,7 +981,7 @@ namespace System.Text.RegularExpressions
 
     public partial class RegexMatchTimeoutException
         : System.TimeoutException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public RegexMatchTimeoutException() { }
 

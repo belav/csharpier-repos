@@ -54,12 +54,12 @@ namespace CoreXml.Test.XLinq
                             return XName.Get(name, ns);
                         case GetNameType.ExpandedName:
                             return (ns == null || ns.Length == 0)
-                              ? XName.Get(name)
-                              : XName.Get("{" + ns + "}" + name);
+                                ? XName.Get(name)
+                                : XName.Get("{" + ns + "}" + name);
                         case GetNameType.XNamespacePlusOperator:
                             return (ns == null || ns.Length == 0)
-                              ? XName.Get(name)
-                              : XNamespace.Get(ns) + name;
+                                ? XName.Get(name)
+                                : XNamespace.Get(ns) + name;
                         default:
                             TestLog.Compare(
                                 false,

@@ -186,8 +186,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 cancellationToken
             );
             return formattingResult == null
-              ? node
-              : formattingResult.GetFormattedRoot(cancellationToken);
+                ? node
+                : formattingResult.GetFormattedRoot(cancellationToken);
         }
 
         internal static IList<TextChange> GetFormattedTextChanges(
@@ -208,8 +208,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 cancellationToken
             );
             return formattingResult == null
-              ? SpecializedCollections.EmptyList<TextChange>()
-              : formattingResult.GetTextChanges(cancellationToken);
+                ? SpecializedCollections.EmptyList<TextChange>()
+                : formattingResult.GetTextChanges(cancellationToken);
         }
 
         internal static IFormattingResult GetFormattingResult(

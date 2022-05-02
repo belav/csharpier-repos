@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Mvc;
 /// </summary>
 internal class MvcCoreMvcOptionsSetup
     : IConfigureOptions<MvcOptions>,
-      IPostConfigureOptions<MvcOptions>
+        IPostConfigureOptions<MvcOptions>
 {
     private readonly IHttpRequestStreamReaderFactory _readerFactory;
     private readonly ILoggerFactory _loggerFactory;

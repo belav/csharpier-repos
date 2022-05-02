@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
     [ExportWorkspaceService(typeof(IChangeSignatureOptionsService), ServiceLayer.Host), Shared]
     internal class VisualStudioChangeSignatureOptionsService
         : ForegroundThreadAffinitizedObject,
-          IChangeSignatureOptionsService
+            IChangeSignatureOptionsService
     {
         private readonly IClassificationFormatMap _classificationFormatMap;
         private readonly ClassificationTypeMap _classificationTypeMap;

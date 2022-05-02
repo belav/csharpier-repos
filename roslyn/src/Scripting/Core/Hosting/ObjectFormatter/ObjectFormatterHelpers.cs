@@ -275,8 +275,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 if ((method = member as MethodInfo) != null)
                 {
                     return (method.ReturnType == typeof(void))
-                      ? VoidValue
-                      : method.Invoke(obj, Array.Empty<object>());
+                        ? VoidValue
+                        : method.Invoke(obj, Array.Empty<object>());
                 }
 
                 var property = (PropertyInfo)member;

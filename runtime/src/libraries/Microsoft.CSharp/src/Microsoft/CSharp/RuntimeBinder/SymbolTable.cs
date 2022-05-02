@@ -900,9 +900,9 @@ namespace Microsoft.CSharp.RuntimeBinder
         internal static CType GetCTypeFromType(Type type) =>
             type.IsByRef
                 ? TypeManager.GetParameterModifier(
-                      LoadSymbolsFromType(type.GetElementType()),
-                      false
-                  )
+                    LoadSymbolsFromType(type.GetElementType()),
+                    false
+                )
                 : LoadSymbolsFromType(type);
 
         #endregion
@@ -1442,8 +1442,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                             m,
                             type,
                             m.Name == SpecialNames.Invoke
-                              ? MethodKindEnum.Invoke
-                              : MethodKindEnum.Actual
+                                ? MethodKindEnum.Invoke
+                                : MethodKindEnum.Actual
                         );
                     }
                 }

@@ -258,7 +258,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class NonGenericTestEntityTypeBuilder<TEntity>
             : TestEntityTypeBuilder<TEntity>,
-              IInfrastructure<EntityTypeBuilder> where TEntity : class
+                IInfrastructure<EntityTypeBuilder> where TEntity : class
         {
             public NonGenericTestEntityTypeBuilder(EntityTypeBuilder entityTypeBuilder)
             {
@@ -771,7 +771,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class NonGenericTestOwnedEntityTypeBuilder<TEntity>
             : TestOwnedEntityTypeBuilder<TEntity>,
-              IInfrastructure<OwnedEntityTypeBuilder> where TEntity : class
+                IInfrastructure<OwnedEntityTypeBuilder> where TEntity : class
         {
             public NonGenericTestOwnedEntityTypeBuilder(
                 OwnedEntityTypeBuilder ownedEntityTypeBuilder
@@ -787,7 +787,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class NonGenericTestPropertyBuilder<TProperty>
             : TestPropertyBuilder<TProperty>,
-              IInfrastructure<PropertyBuilder>
+                IInfrastructure<PropertyBuilder>
         {
             public NonGenericTestPropertyBuilder(PropertyBuilder propertyBuilder)
             {
@@ -985,7 +985,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class NonGenericTestKeyBuilder<TEntity>
             : TestKeyBuilder<TEntity>,
-              IInfrastructure<KeyBuilder>
+                IInfrastructure<KeyBuilder>
         {
             public NonGenericTestKeyBuilder(KeyBuilder keyBuilder)
             {
@@ -1006,7 +1006,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public class NonGenericTestIndexBuilder<TEntity>
             : TestIndexBuilder<TEntity>,
-              IInfrastructure<IndexBuilder>
+                IInfrastructure<IndexBuilder>
         {
             public NonGenericTestIndexBuilder(IndexBuilder indexBuilder)
             {
@@ -1696,7 +1696,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class NonGenericTestOwnershipBuilder<TEntity, TRelatedEntity>
             : TestOwnershipBuilder<TEntity, TRelatedEntity>,
-              IInfrastructure<OwnershipBuilder>
+                IInfrastructure<OwnershipBuilder>
             where TEntity : class
             where TRelatedEntity : class
         {
@@ -1761,7 +1761,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class NonGenericTestOwnedNavigationBuilder<TEntity, TDependentEntity>
             : TestOwnedNavigationBuilder<TEntity, TDependentEntity>,
-              IInfrastructure<OwnedNavigationBuilder>
+                IInfrastructure<OwnedNavigationBuilder>
             where TEntity : class
             where TDependentEntity : class
         {

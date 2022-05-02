@@ -238,11 +238,11 @@ namespace System.IO
             return searchTarget switch
             {
                 SearchTarget.Files
-                  => FileSystemEnumerableFactory.UserFiles(path, searchPattern, options),
+                    => FileSystemEnumerableFactory.UserFiles(path, searchPattern, options),
                 SearchTarget.Directories
-                  => FileSystemEnumerableFactory.UserDirectories(path, searchPattern, options),
+                    => FileSystemEnumerableFactory.UserDirectories(path, searchPattern, options),
                 SearchTarget.Both
-                  => FileSystemEnumerableFactory.UserEntries(path, searchPattern, options),
+                    => FileSystemEnumerableFactory.UserEntries(path, searchPattern, options),
                 _ => throw new ArgumentOutOfRangeException(nameof(searchTarget)),
             };
         }

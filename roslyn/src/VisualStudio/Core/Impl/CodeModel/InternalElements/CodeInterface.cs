@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeInterface2))]
     public sealed class CodeInterface
         : AbstractCodeType,
-          EnvDTE.CodeInterface,
-          EnvDTE80.CodeInterface2
+            EnvDTE.CodeInterface,
+            EnvDTE80.CodeInterface2
     {
         internal static EnvDTE.CodeInterface Create(
             CodeModelState state,

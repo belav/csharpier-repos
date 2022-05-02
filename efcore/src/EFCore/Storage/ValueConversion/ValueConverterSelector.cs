@@ -331,26 +331,26 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                 {
                     yield return modelClrType == typeof(DateTimeOffset)
                         ? _converters.GetOrAdd(
-                              (modelClrType, typeof(byte[])),
-                              k => DateTimeOffsetToBytesConverter.DefaultInfo
-                          )
+                            (modelClrType, typeof(byte[])),
+                            k => DateTimeOffsetToBytesConverter.DefaultInfo
+                        )
                         : _converters.GetOrAdd(
-                              (modelClrType, typeof(byte[])),
-                              k =>
-                                  new ValueConverterInfo(
-                                      modelClrType,
-                                      typeof(byte[]),
-                                      i =>
-                                          (
-                                              i.ModelClrType == typeof(DateTime)
-                                                  ? DateTimeToBinaryConverter.DefaultInfo.Create()
-                                                  : TimeSpanToTicksConverter.DefaultInfo.Create()
-                                          ).ComposeWith(
-                                              NumberToBytesConverter<long>.DefaultInfo.Create()
-                                          ),
-                                      NumberToBytesConverter<long>.DefaultInfo.MappingHints
-                                  )
-                          );
+                            (modelClrType, typeof(byte[])),
+                            k =>
+                                new ValueConverterInfo(
+                                    modelClrType,
+                                    typeof(byte[]),
+                                    i =>
+                                        (
+                                            i.ModelClrType == typeof(DateTime)
+                                                ? DateTimeToBinaryConverter.DefaultInfo.Create()
+                                                : TimeSpanToTicksConverter.DefaultInfo.Create()
+                                        ).ComposeWith(
+                                            NumberToBytesConverter<long>.DefaultInfo.Create()
+                                        ),
+                                    NumberToBytesConverter<long>.DefaultInfo.MappingHints
+                                )
+                        );
                 }
             }
             else if (modelClrType == typeof(IPAddress) || modelClrType == _readOnlyIPAddressType)
@@ -652,8 +652,11 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                         k =>
                             GetDefaultValueConverterInfo(
                                 converterType.GetTypeInfo().GenericTypeParameters.Length == 1
-                                  ? converterType.MakeGenericType(k.ProviderClrType)
-                                  : converterType.MakeGenericType(k.ModelClrType, k.ProviderClrType)
+                                    ? converterType.MakeGenericType(k.ProviderClrType)
+                                    : converterType.MakeGenericType(
+                                        k.ModelClrType,
+                                        k.ProviderClrType
+                                    )
                             )
                     );
                 }

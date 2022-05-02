@@ -29,12 +29,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
     ]
     internal partial class CSharpReplacePropertyWithMethodsService
         : AbstractReplacePropertyWithMethodsService<
-              IdentifierNameSyntax,
-              ExpressionSyntax,
-              NameMemberCrefSyntax,
-              StatementSyntax,
-              PropertyDeclarationSyntax
-          >
+            IdentifierNameSyntax,
+            ExpressionSyntax,
+            NameMemberCrefSyntax,
+            StatementSyntax,
+            PropertyDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -468,26 +468,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
             var parent = (AssignmentExpressionSyntax)compoundAssignment;
 
             var operatorKind = parent.IsKind(SyntaxKind.OrAssignmentExpression)
-              ? SyntaxKind.BitwiseOrExpression
-              : parent.IsKind(SyntaxKind.AndAssignmentExpression)
-                  ? SyntaxKind.BitwiseAndExpression
-                  : parent.IsKind(SyntaxKind.ExclusiveOrAssignmentExpression)
-                      ? SyntaxKind.ExclusiveOrExpression
-                      : parent.IsKind(SyntaxKind.LeftShiftAssignmentExpression)
-                          ? SyntaxKind.LeftShiftExpression
-                          : parent.IsKind(SyntaxKind.RightShiftAssignmentExpression)
-                              ? SyntaxKind.RightShiftExpression
-                              : parent.IsKind(SyntaxKind.AddAssignmentExpression)
-                                  ? SyntaxKind.AddExpression
-                                  : parent.IsKind(SyntaxKind.SubtractAssignmentExpression)
-                                      ? SyntaxKind.SubtractExpression
-                                      : parent.IsKind(SyntaxKind.MultiplyAssignmentExpression)
-                                          ? SyntaxKind.MultiplyExpression
-                                          : parent.IsKind(SyntaxKind.DivideAssignmentExpression)
-                                              ? SyntaxKind.DivideExpression
-                                              : parent.IsKind(SyntaxKind.ModuloAssignmentExpression)
-                                                  ? SyntaxKind.ModuloExpression
-                                                  : SyntaxKind.None;
+                ? SyntaxKind.BitwiseOrExpression
+                : parent.IsKind(SyntaxKind.AndAssignmentExpression)
+                    ? SyntaxKind.BitwiseAndExpression
+                    : parent.IsKind(SyntaxKind.ExclusiveOrAssignmentExpression)
+                        ? SyntaxKind.ExclusiveOrExpression
+                        : parent.IsKind(SyntaxKind.LeftShiftAssignmentExpression)
+                            ? SyntaxKind.LeftShiftExpression
+                            : parent.IsKind(SyntaxKind.RightShiftAssignmentExpression)
+                                ? SyntaxKind.RightShiftExpression
+                                : parent.IsKind(SyntaxKind.AddAssignmentExpression)
+                                    ? SyntaxKind.AddExpression
+                                    : parent.IsKind(SyntaxKind.SubtractAssignmentExpression)
+                                        ? SyntaxKind.SubtractExpression
+                                        : parent.IsKind(SyntaxKind.MultiplyAssignmentExpression)
+                                            ? SyntaxKind.MultiplyExpression
+                                            : parent.IsKind(SyntaxKind.DivideAssignmentExpression)
+                                                ? SyntaxKind.DivideExpression
+                                                : parent.IsKind(
+                                                    SyntaxKind.ModuloAssignmentExpression
+                                                )
+                                                    ? SyntaxKind.ModuloExpression
+                                                    : SyntaxKind.None;
 
             return SyntaxFactory.BinaryExpression(
                 operatorKind,

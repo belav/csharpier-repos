@@ -156,17 +156,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
                 var pragmaTrivia = !isRemoveSuppression
                     ? fixer.CreatePragmaDisableDirectiveTrivia(
-                          diagnostic,
-                          formatNode,
-                          needsLeadingEOL,
-                          needsTrailingEndOfLine: true
-                      )
+                        diagnostic,
+                        formatNode,
+                        needsLeadingEOL,
+                        needsTrailingEndOfLine: true
+                    )
                     : fixer.CreatePragmaRestoreDirectiveTrivia(
-                          diagnostic,
-                          formatNode,
-                          needsLeadingEOL,
-                          needsTrailingEndOfLine: true
-                      );
+                        diagnostic,
+                        formatNode,
+                        needsLeadingEOL,
+                        needsTrailingEndOfLine: true
+                    );
 
                 return startToken.WithLeadingTrivia(trivia.InsertRange(index, pragmaTrivia));
             }
@@ -255,17 +255,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 
                 var pragmaTrivia = !isRemoveSuppression
                     ? fixer.CreatePragmaRestoreDirectiveTrivia(
-                          diagnostic,
-                          formatNode,
-                          needsLeadingEndOfLine: true,
-                          needsTrailingEndOfLine: needsTrailingEOL
-                      )
+                        diagnostic,
+                        formatNode,
+                        needsLeadingEndOfLine: true,
+                        needsTrailingEndOfLine: needsTrailingEOL
+                    )
                     : fixer.CreatePragmaDisableDirectiveTrivia(
-                          diagnostic,
-                          formatNode,
-                          needsLeadingEndOfLine: true,
-                          needsTrailingEndOfLine: needsTrailingEOL
-                      );
+                        diagnostic,
+                        formatNode,
+                        needsLeadingEndOfLine: true,
+                        needsTrailingEndOfLine: needsTrailingEOL
+                    );
 
                 if (isEOF)
                 {

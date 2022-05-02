@@ -150,7 +150,7 @@ namespace System.Xml.Xsl.Qil
                 QilNodeType.XsltGenerateId => CheckXsltGenerateId((QilUnary)n),
                 QilNodeType.XsltInvokeLateBound => CheckXsltInvokeLateBound((QilInvokeLateBound)n),
                 QilNodeType.XsltInvokeEarlyBound
-                  => CheckXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
+                    => CheckXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
                 QilNodeType.XsltCopy => CheckXsltCopy((QilBinary)n),
                 QilNodeType.XsltCopyOf => CheckXsltCopyOf((QilUnary)n),
                 QilNodeType.XsltConvert => CheckXsltConvert((QilTargetType)n),
@@ -489,8 +489,8 @@ namespace System.Xml.Xsl.Qil
             CheckNumericX(node.Right);
             CheckNotDisjoint(node);
             return node.Left.XmlType!.TypeCode == XmlTypeCode.None
-              ? node.Right.XmlType!
-              : node.Left.XmlType!;
+                ? node.Right.XmlType!
+                : node.Left.XmlType!;
         }
 
         public XmlQueryType CheckSubtract(QilBinary node)

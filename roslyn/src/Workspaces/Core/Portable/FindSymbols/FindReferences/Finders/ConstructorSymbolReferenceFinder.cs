@@ -93,13 +93,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 
             result.AddRange(
                 symbol.MethodKind == MethodKind.Constructor
-                  ? await FindDocumentsWithImplicitObjectCreationExpressionAsync(
+                    ? await FindDocumentsWithImplicitObjectCreationExpressionAsync(
                             project,
                             documents,
                             cancellationToken
                         )
                         .ConfigureAwait(false)
-                  : ImmutableArray<Document>.Empty
+                    : ImmutableArray<Document>.Empty
             );
 
             return result.ToImmutable();
@@ -126,9 +126,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 project.LanguageServices.GetRequiredService<ISyntaxFactsService>(),
                 out var simpleName
             )
-              ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
+                ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
                     .ConfigureAwait(false)
-              : ImmutableArray<Document>.Empty;
+                : ImmutableArray<Document>.Empty;
 
             result.AddRange(documentsWithName);
             result.AddRange(documentsWithAttribute);
@@ -352,14 +352,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             return TryGetNameWithoutAttributeSuffix(name, syntaxFacts, out var simpleName)
-              ? FindReferencesInDocumentUsingIdentifierAsync(
+                ? FindReferencesInDocumentUsingIdentifierAsync(
                     symbol,
                     simpleName,
                     document,
                     semanticModel,
                     cancellationToken
                 )
-              : new ValueTask<ImmutableArray<FinderLocation>>(ImmutableArray<FinderLocation>.Empty);
+                : new ValueTask<ImmutableArray<FinderLocation>>(
+                    ImmutableArray<FinderLocation>.Empty
+                );
         }
 
         private Task<
@@ -379,8 +381,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     : symbol.Parameters.Length;
 
             var exactArgumentCount = symbol.Parameters.Any(p => p.IsOptional || p.IsParams)
-              ? -1
-              : symbol.Parameters.Length;
+                ? -1
+                : symbol.Parameters.Length;
 
             return FindReferencesInDocumentAsync(
                 document,

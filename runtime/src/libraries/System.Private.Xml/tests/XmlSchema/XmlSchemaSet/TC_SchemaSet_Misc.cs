@@ -1349,8 +1349,8 @@ namespace System.Xml.Tests
         {
             _output.WriteLine(
                 nav.CheckValidity(schemaSet, OnValidationEvent)
-                  ? "Validation succeeded."
-                  : "Validation failed."
+                    ? "Validation succeeded."
+                    : "Validation failed."
             );
         }
 

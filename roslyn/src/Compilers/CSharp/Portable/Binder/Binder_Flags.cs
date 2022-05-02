@@ -101,8 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 this.Flags.Includes(BinderFlags.UnsafeRegion)
                 || !modifiers.Any(SyntaxKind.UnsafeKeyword)
             )
-              ? this
-              : new Binder(this, this.Flags | BinderFlags.UnsafeRegion);
+                ? this
+                : new Binder(this, this.Flags | BinderFlags.UnsafeRegion);
         }
 
         internal Binder WithCheckedOrUncheckedRegion(bool @checked)
@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 : BinderFlags.CheckedRegion;
 
             return this.Flags.Includes(added)
-              ? this
-              : new Binder(this, (this.Flags & ~removed) | added);
+                ? this
+                : new Binder(this, (this.Flags & ~removed) | added);
         }
     }
 }

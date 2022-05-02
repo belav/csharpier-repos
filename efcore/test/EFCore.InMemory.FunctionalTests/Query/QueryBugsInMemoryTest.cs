@@ -877,13 +877,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 i => i.State >= IllustrationState21768.Approved
                             ) != null
                                 ? new PageViewModel21768
-                                  {
-                                      Uri = b.FrontCover.Illustrations
-                                          .FirstOrDefault(
-                                              i => i.State >= IllustrationState21768.Approved
-                                          )
-                                          .Uri
-                                  }
+                                {
+                                    Uri = b.FrontCover.Illustrations
+                                        .FirstOrDefault(
+                                            i => i.State >= IllustrationState21768.Approved
+                                        )
+                                        .Uri
+                                }
                                 : null,
                     };
 
@@ -1066,11 +1066,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 Owned2 = dtoOwner.Owned2 == null
                                     ? null
                                     : new
-                                      {
-                                          Other = dtoOwner.Owned2.Other == null
-                                              ? null
-                                              : new { dtoOwner.Owned2.Other.Id }
-                                      },
+                                    {
+                                        Other = dtoOwner.Owned2.Other == null
+                                            ? null
+                                            : new { dtoOwner.Owned2.Other.Id }
+                                    },
                                 Owned1 = dtoOwner.Owned1 == null
                                     ? null
                                     : new { dtoOwner.Owned1.Value }
@@ -2097,19 +2097,19 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     (x.PropertyB == null)
                                         ? null
                                         : new BDto18394
-                                          {
-                                              Id = x.PropertyB.Id,
-                                              PropertyCList = x.PropertyB.PropertyCList
-                                                  .Select(
-                                                      y =>
-                                                          new CDto18394
-                                                          {
-                                                              Id = y.Id,
-                                                              SomeText = y.SomeText
-                                                          }
-                                                  )
-                                                  .ToList()
-                                          }
+                                        {
+                                            Id = x.PropertyB.Id,
+                                            PropertyCList = x.PropertyB.PropertyCList
+                                                .Select(
+                                                    y =>
+                                                        new CDto18394
+                                                        {
+                                                            Id = y.Id,
+                                                            SomeText = y.SomeText
+                                                        }
+                                                )
+                                                .ToList()
+                                        }
                             }
                     )
                     .FirstOrDefault();

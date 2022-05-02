@@ -93,13 +93,13 @@ public class GenerateEmbeddedResourcesManifest : Microsoft.Build.Utilities.Task
 
     private string GetManifestPath(ITaskItem taskItem) =>
         string.Equals(taskItem.GetMetadata(LogicalName), taskItem.GetMetadata(ManifestResourceName))
-          ? taskItem.GetMetadata(TargetPath)
-          : NormalizePath(taskItem.GetMetadata(LogicalName));
+            ? taskItem.GetMetadata(TargetPath)
+            : NormalizePath(taskItem.GetMetadata(LogicalName));
 
     private string GetAssemblyResourceName(ITaskItem taskItem) =>
         string.Equals(taskItem.GetMetadata(LogicalName), taskItem.GetMetadata(ManifestResourceName))
-          ? taskItem.GetMetadata(ManifestResourceName)
-          : taskItem.GetMetadata(LogicalName);
+            ? taskItem.GetMetadata(ManifestResourceName)
+            : taskItem.GetMetadata(LogicalName);
 
     private string NormalizePath(string path) =>
         Path.DirectorySeparatorChar == '\\' ? path.Replace("/", "\\") : path.Replace("\\", "/");

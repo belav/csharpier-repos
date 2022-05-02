@@ -41,9 +41,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             return baseNamespace switch
             {
                 FileScopedNamespaceDeclarationSyntax fileScopedNamespace
-                  => ConvertFileScopedNamespace(fileScopedNamespace),
+                    => ConvertFileScopedNamespace(fileScopedNamespace),
                 NamespaceDeclarationSyntax namespaceDeclaration
-                  => ConvertNamespaceDeclaration(namespaceDeclaration),
+                    => ConvertNamespaceDeclaration(namespaceDeclaration),
                 _ => throw ExceptionUtilities.UnexpectedValue(baseNamespace.Kind()),
             };
         }

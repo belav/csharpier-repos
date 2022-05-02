@@ -100,8 +100,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         )
         {
             return (error is SimpleMessageDiagnostic simpleMessage)
-              ? simpleMessage.GetMessage()
-              : formatter.Format(error, preferredUICulture ?? CultureInfo.CurrentUICulture);
+                ? simpleMessage.GetMessage()
+                : formatter.Format(error, preferredUICulture ?? CultureInfo.CurrentUICulture);
         }
 
         internal abstract bool HasDuplicateTypesOrAssemblies(Diagnostic diagnostic);

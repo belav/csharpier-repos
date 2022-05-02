@@ -15,8 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeVariable))]
     public sealed class ExternalCodeVariable
         : AbstractExternalCodeMember,
-          EnvDTE.CodeVariable,
-          EnvDTE80.CodeVariable2
+            EnvDTE.CodeVariable,
+            EnvDTE80.CodeVariable2
     {
         internal static EnvDTE.CodeVariable Create(
             CodeModelState state,
@@ -120,8 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             {
                 // TODO: C# checks whether the field Type is generic. What does VB do?
                 return GetSymbolType() is INamedTypeSymbol namedType
-                  ? namedType.IsGenericType
-                  : false;
+                    ? namedType.IsGenericType
+                    : false;
             }
         }
     }

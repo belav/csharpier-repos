@@ -582,8 +582,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return IsPartialDefinition
-                  ? _otherPartOfPartial?.IsExtern ?? false
-                  : HasExternModifier;
+                    ? _otherPartOfPartial?.IsExtern ?? false
+                    : HasExternModifier;
             }
         }
 
@@ -730,20 +730,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var typeParameter =
                     (typeMap != null)
                         ? (TypeParameterSymbol)
-                              new SourceOverridingMethodTypeParameterSymbol(
-                                  typeMap,
-                                  name,
-                                  ordinal,
-                                  locations,
-                                  syntaxRefs
-                              )
+                            new SourceOverridingMethodTypeParameterSymbol(
+                                typeMap,
+                                name,
+                                ordinal,
+                                locations,
+                                syntaxRefs
+                            )
                         : new SourceMethodTypeParameterSymbol(
-                              this,
-                              name,
-                              ordinal,
-                              locations,
-                              syntaxRefs
-                          );
+                            this,
+                            name,
+                            ordinal,
+                            locations,
+                            syntaxRefs
+                        );
 
                 result.Add(typeParameter);
             }

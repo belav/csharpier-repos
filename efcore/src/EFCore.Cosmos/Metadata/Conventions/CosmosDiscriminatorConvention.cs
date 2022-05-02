@@ -17,10 +17,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class CosmosDiscriminatorConvention
         : DiscriminatorConvention,
-          IForeignKeyOwnershipChangedConvention,
-          IForeignKeyRemovedConvention,
-          IEntityTypeAddedConvention,
-          IEntityTypeAnnotationChangedConvention
+            IForeignKeyOwnershipChangedConvention,
+            IForeignKeyRemovedConvention,
+            IEntityTypeAddedConvention,
+            IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CosmosDiscriminatorConvention" />.

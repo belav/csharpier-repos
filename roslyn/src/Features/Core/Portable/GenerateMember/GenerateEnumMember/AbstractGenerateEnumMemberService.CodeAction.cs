@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
                 var semanticFacts = languageServices.GetService<ISemanticFactsService>();
 
                 var value = semanticFacts.LastEnumValueHasInitializer(_state.TypeToGenerateIn)
-                  ? EnumValueUtilities.GetNextEnumValue(_state.TypeToGenerateIn)
-                  : null;
+                    ? EnumValueUtilities.GetNextEnumValue(_state.TypeToGenerateIn)
+                    : null;
 
                 var result = await codeGenerator
                     .AddFieldAsync(

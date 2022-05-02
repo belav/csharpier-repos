@@ -449,8 +449,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 trivia1.RawKind == 0
                     ? lineColumnBeforeTrivia1
                     : lineColumnBeforeTrivia1.With(
-                          format(lineColumnBeforeTrivia1, trivia1, changes, cancellationToken)
-                      );
+                        format(lineColumnBeforeTrivia1, trivia1, changes, cancellationToken)
+                    );
 
             var rule = GetOverallLineColumnRuleBetween(
                 trivia1,
@@ -703,15 +703,15 @@ namespace Microsoft.CodeAnalysis.Formatting
                 {
                     LineColumnRule.IndentationOperations.Absolute => Math.Max(0, rule.Indentation),
                     LineColumnRule.IndentationOperations.Default
-                      => this.Context.GetBaseIndentation(
-                          trivia2.RawKind == 0 ? this.EndPosition : trivia2.SpanStart
-                      ),
+                        => this.Context.GetBaseIndentation(
+                            trivia2.RawKind == 0 ? this.EndPosition : trivia2.SpanStart
+                        ),
                     LineColumnRule.IndentationOperations.Given
-                      => (trivia2.RawKind == 0) ? this.Spaces : Math.Max(0, _indentation),
+                        => (trivia2.RawKind == 0) ? this.Spaces : Math.Max(0, _indentation),
                     LineColumnRule.IndentationOperations.Follow
-                      => Math.Max(0, lineColumnBeforeTrivia1.Column),
+                        => Math.Max(0, lineColumnBeforeTrivia1.Column),
                     LineColumnRule.IndentationOperations.Preserve
-                      => existingWhitespaceBetween.Spaces,
+                        => existingWhitespaceBetween.Spaces,
                     _ => throw ExceptionUtilities.UnexpectedValue(rule.IndentationOperation),
                 };
             }
@@ -720,7 +720,7 @@ namespace Microsoft.CodeAnalysis.Formatting
             return rule.SpaceOperation switch
             {
                 LineColumnRule.SpaceOperations.Preserve
-                  => Math.Max(rule.Spaces, existingWhitespaceBetween.Spaces),
+                    => Math.Max(rule.Spaces, existingWhitespaceBetween.Spaces),
                 LineColumnRule.SpaceOperations.Force => Math.Max(rule.Spaces, 0),
                 _ => throw ExceptionUtilities.UnexpectedValue(rule.SpaceOperation),
             };
@@ -738,8 +738,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             );
 
             return (rule.LineOperation == LineColumnRule.LineOperations.Preserve)
-              ? Math.Max(adjustedRuleLines, existingWhitespaceBetween.Lines)
-              : adjustedRuleLines;
+                ? Math.Max(adjustedRuleLines, existingWhitespaceBetween.Lines)
+                : adjustedRuleLines;
         }
 
         private int GetIndentation()

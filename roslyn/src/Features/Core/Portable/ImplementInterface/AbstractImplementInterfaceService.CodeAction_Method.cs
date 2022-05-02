@@ -41,12 +41,12 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     accessibility: accessibility,
                     modifiers: modifiers,
                     explicitInterfaceImplementations: useExplicitInterfaceSymbol
-                      ? ImmutableArray.Create(updatedMethod)
-                      : default,
+                        ? ImmutableArray.Create(updatedMethod)
+                        : default,
                     name: memberName,
                     statements: generateAbstractly
-                      ? default
-                      : ImmutableArray.Create(CreateStatement(compilation, updatedMethod))
+                        ? default
+                        : ImmutableArray.Create(CreateStatement(compilation, updatedMethod))
                 );
             }
 
@@ -54,8 +54,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             {
                 var factory = Document.GetLanguageService<SyntaxGenerator>();
                 return ThroughMember == null
-                  ? factory.CreateThrowNotImplementedStatement(compilation)
-                  : factory.GenerateDelegateThroughMemberStatement(method, ThroughMember);
+                    ? factory.CreateThrowNotImplementedStatement(compilation)
+                    : factory.GenerateDelegateThroughMemberStatement(method, ThroughMember);
             }
         }
     }

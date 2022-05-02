@@ -364,9 +364,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                                     Level3 = l2.OneToOne_Required_FK2 == null
                                                         ? null
                                                         : new ProjectedDto<string>
-                                                          {
-                                                              Value = l2.OneToOne_Required_FK2.Name
-                                                          }
+                                                        {
+                                                            Value = l2.OneToOne_Required_FK2.Name
+                                                        }
                                                 }
                                         )
                                         .ToList()
@@ -3518,8 +3518,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     l2 =>
                                         l2.Id == 1
                                             ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                                  e => e.Id
-                                              )
+                                                e => e.Id
+                                            )
                                             : null
                                 )
                     )
@@ -3540,8 +3540,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     l2 =>
                                         l2.Id == 1
                                             ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(
-                                                  e => e.Id
-                                              )
+                                                e => e.Id
+                                            )
                                             : Enumerable.Empty<int>()
                                 )
                     )

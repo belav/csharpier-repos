@@ -60,7 +60,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             return principalType.IsNullableType()
-              ? (IDependentKeyValueFactory<TKey>)
+                ? (IDependentKeyValueFactory<TKey>)
                     Activator.CreateInstance(
                         typeof(SimpleNullablePrincipalDependentKeyValueFactory<,>).MakeGenericType(
                             typeof(TKey),
@@ -69,7 +69,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         dependentProperty,
                         propertyAccessors
                     )!
-              : new SimpleNonNullableDependentKeyValueFactory<TKey>(
+                : new SimpleNonNullableDependentKeyValueFactory<TKey>(
                     dependentProperty,
                     propertyAccessors
                 );

@@ -19,8 +19,8 @@ namespace System.Net.Http.Json
         )
         {
             Uri? uri = string.IsNullOrEmpty(requestUri)
-              ? null
-              : new Uri(requestUri, UriKind.RelativeOrAbsolute);
+                ? null
+                : new Uri(requestUri, UriKind.RelativeOrAbsolute);
             return client.PatchAsync(uri, content, cancellationToken);
         }
 

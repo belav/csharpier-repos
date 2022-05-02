@@ -22,9 +22,9 @@ namespace System.Resources
 {
     internal sealed class FastResourceComparer
         : IComparer,
-          IEqualityComparer,
-          IComparer<string?>,
-          IEqualityComparer<string?>
+            IEqualityComparer,
+            IComparer<string?>,
+            IEqualityComparer<string?>
     {
         internal static readonly FastResourceComparer Default = new FastResourceComparer();
 

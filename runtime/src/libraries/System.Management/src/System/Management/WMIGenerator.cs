@@ -3475,8 +3475,8 @@ namespace System.Management
                             new CodePropertyReferenceExpression(
                                 new CodeVariableReferenceExpression(
                                     bStatic
-                                      ? strClassObj
-                                      : PrivateNamesUsed["LateBoundObject"].ToString()
+                                        ? strClassObj
+                                        : PrivateNamesUsed["LateBoundObject"].ToString()
                                 ),
                                 PublicNamesUsed["ScopeProperty"].ToString()
                             ),

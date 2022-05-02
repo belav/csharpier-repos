@@ -360,7 +360,7 @@ namespace System.Reflection.Metadata.Ecma335
                                 isShortInstruction
                                     ? srcBlob.Buffer[srcBlobOffset + 1] == 0xff
                                     : BitConverter.ToUInt32(srcBlob.Buffer, srcBlobOffset + 1)
-                                      == 0xffffffff
+                                        == 0xffffffff
                             )
                     );
 

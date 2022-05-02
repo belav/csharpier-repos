@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteNavigationBarItemService
         : BrokeredServiceBase,
-          IRemoteNavigationBarItemService
+            IRemoteNavigationBarItemService
     {
         internal sealed class Factory : FactoryBase<IRemoteNavigationBarItemService>
         {

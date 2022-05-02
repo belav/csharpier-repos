@@ -391,11 +391,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         label,
                         pattern,
                         matchLabelSyntax.WhenClause != null
-                          ? sectionBinder.BindBooleanExpression(
+                            ? sectionBinder.BindBooleanExpression(
                                 matchLabelSyntax.WhenClause.Condition,
                                 diagnostics
                             )
-                          : null,
+                            : null,
                         node.HasErrors
                     );
                 }

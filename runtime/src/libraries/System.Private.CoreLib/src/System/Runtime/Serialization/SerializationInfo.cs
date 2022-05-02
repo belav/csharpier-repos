@@ -424,16 +424,16 @@ namespace System.Runtime.Serialization
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(bool))
-              ? (bool)value!
-              : _converter.ToBoolean(value!); // if value is null To* method will either deal with it or throw
+                ? (bool)value!
+                : _converter.ToBoolean(value!); // if value is null To* method will either deal with it or throw
         }
 
         public char GetChar(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(char))
-              ? (char)value!
-              : _converter.ToChar(value!);
+                ? (char)value!
+                : _converter.ToChar(value!);
         }
 
         [CLSCompliant(false)]
@@ -441,24 +441,24 @@ namespace System.Runtime.Serialization
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(sbyte))
-              ? (sbyte)value!
-              : _converter.ToSByte(value!);
+                ? (sbyte)value!
+                : _converter.ToSByte(value!);
         }
 
         public byte GetByte(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(byte))
-              ? (byte)value!
-              : _converter.ToByte(value!);
+                ? (byte)value!
+                : _converter.ToByte(value!);
         }
 
         public short GetInt16(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(short))
-              ? (short)value!
-              : _converter.ToInt16(value!);
+                ? (short)value!
+                : _converter.ToInt16(value!);
         }
 
         [CLSCompliant(false)]
@@ -466,16 +466,16 @@ namespace System.Runtime.Serialization
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(ushort))
-              ? (ushort)value!
-              : _converter.ToUInt16(value!);
+                ? (ushort)value!
+                : _converter.ToUInt16(value!);
         }
 
         public int GetInt32(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(int))
-              ? (int)value!
-              : _converter.ToInt32(value!);
+                ? (int)value!
+                : _converter.ToInt32(value!);
         }
 
         [CLSCompliant(false)]
@@ -483,16 +483,16 @@ namespace System.Runtime.Serialization
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(uint))
-              ? (uint)value!
-              : _converter.ToUInt32(value!);
+                ? (uint)value!
+                : _converter.ToUInt32(value!);
         }
 
         public long GetInt64(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(long))
-              ? (long)value!
-              : _converter.ToInt64(value!);
+                ? (long)value!
+                : _converter.ToInt64(value!);
         }
 
         [CLSCompliant(false)]
@@ -500,48 +500,48 @@ namespace System.Runtime.Serialization
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(ulong))
-              ? (ulong)value!
-              : _converter.ToUInt64(value!);
+                ? (ulong)value!
+                : _converter.ToUInt64(value!);
         }
 
         public float GetSingle(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(float))
-              ? (float)value!
-              : _converter.ToSingle(value!);
+                ? (float)value!
+                : _converter.ToSingle(value!);
         }
 
         public double GetDouble(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(double))
-              ? (double)value!
-              : _converter.ToDouble(value!);
+                ? (double)value!
+                : _converter.ToDouble(value!);
         }
 
         public decimal GetDecimal(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(decimal))
-              ? (decimal)value!
-              : _converter.ToDecimal(value!);
+                ? (decimal)value!
+                : _converter.ToDecimal(value!);
         }
 
         public DateTime GetDateTime(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(DateTime))
-              ? (DateTime)value!
-              : _converter.ToDateTime(value!);
+                ? (DateTime)value!
+                : _converter.ToDateTime(value!);
         }
 
         public string? GetString(string name)
         {
             object? value = GetElement(name, out Type foundType);
             return ReferenceEquals(foundType, typeof(string)) || value == null
-              ? (string?)value
-              : _converter.ToString(value);
+                ? (string?)value
+                : _converter.ToString(value);
         }
     }
 }

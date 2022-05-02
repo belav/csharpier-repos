@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 matchedSpans =
                     _includeMatchedSpans && result.Value.MatchedSpansInReverse != null
                         ? new NormalizedTextSpanCollection(
-                              result.Value.MatchedSpansInReverse
-                          ).ToImmutableArray()
+                            result.Value.MatchedSpansInReverse
+                        ).ToImmutableArray()
                         : ImmutableArray<TextSpan>.Empty;
 
                 result?.Free();

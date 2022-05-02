@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     (object)implementedAccessor != null
                         ? implementedAccessor.Name
                         : SourceEventSymbol.GetAccessorName(
-                              explicitlyImplementedEventOpt.Name,
-                              isAdder
-                          );
+                            explicitlyImplementedEventOpt.Name,
+                            isAdder
+                        );
 
                 name = ExplicitInterfaceHelpers.GetMemberName(
                     accessorName,

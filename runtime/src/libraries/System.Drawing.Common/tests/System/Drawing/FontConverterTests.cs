@@ -143,201 +143,195 @@ namespace System.ComponentModel.TypeConverterTests
         {
             var data = PlatformDetection.IsWindows
                 ? new TheoryData<string, string, float, GraphicsUnit, FontStyle>()
-                  {
-                      {
-                          $"Courier New",
-                          "Courier New",
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Courier New{s_Separator} 11",
-                          "Courier New",
-                          11f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Arial{s_Separator} 11px",
-                          "Arial",
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Courier New{s_Separator} 11 px",
-                          "Courier New",
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Courier New{s_Separator} 11 px{s_Separator} style=Regular",
-                          "Courier New",
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Courier New{s_Separator} style=Bold",
-                          "Courier New",
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Bold
-                      },
-                      {
-                          $"Courier New{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic",
-                          "Courier New",
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Bold | FontStyle.Italic
-                      },
-                      {
-                          $"Courier New{s_Separator} 11 px{s_Separator} style=Regular, Italic",
-                          "Courier New",
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Regular | FontStyle.Italic
-                      },
-                      {
-                          $"Courier New{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic{s_Separator} Strikeout",
-                          "Courier New",
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout
-                      },
-                      {
-                          $"Arial{s_Separator} 11 px{s_Separator} style=Bold, Italic, Strikeout",
-                          "Arial",
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout
-                      },
-                      {
-                          $"11px",
-                          "Microsoft Sans Serif",
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Style=Bold",
-                          "Microsoft Sans Serif",
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"arIAL{s_Separator} 10{s_Separator} style=bold",
-                          "Arial",
-                          10f,
-                          GraphicsUnit.Point,
-                          FontStyle.Bold
-                      },
-                      {
-                          $"Arial{s_Separator} 10{s_Separator}",
-                          "Arial",
-                          10f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Arial{s_Separator}",
-                          "Arial",
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"Arial{s_Separator} 10{s_Separator} style=12",
-                          "Arial",
-                          10f,
-                          GraphicsUnit.Point,
-                          FontStyle.Underline | FontStyle.Strikeout
-                      },
-                      {
-                          $"Courier New{s_Separator} Style=Bold",
-                          "Courier New",
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Bold
-                      }, // FullFramework style keyword is case sensitive.
-                      {
-                          $"11px{s_Separator} Style=Bold",
-                          "Microsoft Sans Serif",
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Bold
-                      }
-                  }
+                {
+                    { $"Courier New", "Courier New", 8.25f, GraphicsUnit.Point, FontStyle.Regular },
+                    {
+                        $"Courier New{s_Separator} 11",
+                        "Courier New",
+                        11f,
+                        GraphicsUnit.Point,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"Arial{s_Separator} 11px",
+                        "Arial",
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"Courier New{s_Separator} 11 px",
+                        "Courier New",
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"Courier New{s_Separator} 11 px{s_Separator} style=Regular",
+                        "Courier New",
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"Courier New{s_Separator} style=Bold",
+                        "Courier New",
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Bold
+                    },
+                    {
+                        $"Courier New{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic",
+                        "Courier New",
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Bold | FontStyle.Italic
+                    },
+                    {
+                        $"Courier New{s_Separator} 11 px{s_Separator} style=Regular, Italic",
+                        "Courier New",
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Regular | FontStyle.Italic
+                    },
+                    {
+                        $"Courier New{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic{s_Separator} Strikeout",
+                        "Courier New",
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout
+                    },
+                    {
+                        $"Arial{s_Separator} 11 px{s_Separator} style=Bold, Italic, Strikeout",
+                        "Arial",
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout
+                    },
+                    {
+                        $"11px",
+                        "Microsoft Sans Serif",
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"Style=Bold",
+                        "Microsoft Sans Serif",
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"arIAL{s_Separator} 10{s_Separator} style=bold",
+                        "Arial",
+                        10f,
+                        GraphicsUnit.Point,
+                        FontStyle.Bold
+                    },
+                    {
+                        $"Arial{s_Separator} 10{s_Separator}",
+                        "Arial",
+                        10f,
+                        GraphicsUnit.Point,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"Arial{s_Separator}",
+                        "Arial",
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"Arial{s_Separator} 10{s_Separator} style=12",
+                        "Arial",
+                        10f,
+                        GraphicsUnit.Point,
+                        FontStyle.Underline | FontStyle.Strikeout
+                    },
+                    {
+                        $"Courier New{s_Separator} Style=Bold",
+                        "Courier New",
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Bold
+                    }, // FullFramework style keyword is case sensitive.
+                    {
+                        $"11px{s_Separator} Style=Bold",
+                        "Microsoft Sans Serif",
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Bold
+                    }
+                }
                 : new TheoryData<string, string, float, GraphicsUnit, FontStyle>()
-                  {
-                      // Unix has different fonts installed, let's use a default one.
-                      {
-                          FontFamily.GenericSansSerif.Name,
-                          FontFamily.GenericSansSerif.Name,
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11",
-                          FontFamily.GenericSansSerif.Name,
-                          11f,
-                          GraphicsUnit.Point,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px",
-                          FontFamily.GenericSansSerif.Name,
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Regular",
-                          FontFamily.GenericSansSerif.Name,
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Regular
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} style=Bold",
-                          FontFamily.GenericSansSerif.Name,
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Bold
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic",
-                          FontFamily.GenericSansSerif.Name,
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Bold | FontStyle.Italic
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Regular, Italic",
-                          FontFamily.GenericSansSerif.Name,
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Regular | FontStyle.Italic
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic{s_Separator} Strikeout",
-                          FontFamily.GenericSansSerif.Name,
-                          11f,
-                          GraphicsUnit.Pixel,
-                          FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout
-                      },
-                      {
-                          $"{FontFamily.GenericSansSerif.Name}{s_Separator} Style=Bold",
-                          FontFamily.GenericSansSerif.Name,
-                          8.25f,
-                          GraphicsUnit.Point,
-                          FontStyle.Bold
-                      }, // FullFramework style keyword is case sensitive.
-                  };
+                {
+                    // Unix has different fonts installed, let's use a default one.
+                    {
+                        FontFamily.GenericSansSerif.Name,
+                        FontFamily.GenericSansSerif.Name,
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11",
+                        FontFamily.GenericSansSerif.Name,
+                        11f,
+                        GraphicsUnit.Point,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px",
+                        FontFamily.GenericSansSerif.Name,
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Regular",
+                        FontFamily.GenericSansSerif.Name,
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Regular
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} style=Bold",
+                        FontFamily.GenericSansSerif.Name,
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Bold
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic",
+                        FontFamily.GenericSansSerif.Name,
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Bold | FontStyle.Italic
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Regular, Italic",
+                        FontFamily.GenericSansSerif.Name,
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Regular | FontStyle.Italic
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} 11 px{s_Separator} style=Bold{s_Separator} Italic{s_Separator} Strikeout",
+                        FontFamily.GenericSansSerif.Name,
+                        11f,
+                        GraphicsUnit.Pixel,
+                        FontStyle.Bold | FontStyle.Italic | FontStyle.Strikeout
+                    },
+                    {
+                        $"{FontFamily.GenericSansSerif.Name}{s_Separator} Style=Bold",
+                        FontFamily.GenericSansSerif.Name,
+                        8.25f,
+                        GraphicsUnit.Point,
+                        FontStyle.Bold
+                    }, // FullFramework style keyword is case sensitive.
+                };
 
             if (PlatformDetection.IsWindows)
             {

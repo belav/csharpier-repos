@@ -148,9 +148,9 @@ namespace AutoMapper.Execution
             var ifSourceNull =
                 memberMap == null
                     ? destinationParameter.IfNullElse(
-                          DefaultDestination(),
-                          ClearDestinationCollection()
-                      )
+                        DefaultDestination(),
+                        ClearDestinationCollection()
+                    )
                     : mustUseDestination
                         ? ClearDestinationCollection()
                         : DefaultDestination();
@@ -207,16 +207,18 @@ namespace AutoMapper.Execution
                 )
                 {
                     return destinationParameter.NodeType == ExpressionType.Default
-                      ? destinationParameter
-                      : Default(destinationType);
+                        ? destinationParameter
+                        : Default(destinationType);
                 }
                 if (destinationType.IsArray)
                 {
                     var destinationElementType = destinationType.GetElementType();
                     var rank = destinationType.GetArrayRank();
                     return rank == 1
-                      ? Expression.Call(ArrayEmptyMethod.MakeGenericMethod(destinationElementType))
-                      : NewArrayBounds(destinationElementType, Enumerable.Repeat(Zero, rank));
+                        ? Expression.Call(
+                            ArrayEmptyMethod.MakeGenericMethod(destinationElementType)
+                        )
+                        : NewArrayBounds(destinationElementType, Enumerable.Repeat(Zero, rank));
                 }
                 return ObjectFactory.GenerateConstructorExpression(destinationType);
             }
@@ -314,11 +316,11 @@ namespace AutoMapper.Execution
                     FieldInfo field => Field(target, field),
                     MethodInfo getter => Expression.Call(target, getter),
                     _
-                      => throw new ArgumentOutOfRangeException(
-                          nameof(member),
-                          member,
-                          "Unexpected member."
-                      )
+                        => throw new ArgumentOutOfRangeException(
+                            nameof(member),
+                            member,
+                            "Unexpected member."
+                        )
                 };
             }
             return target;
@@ -358,15 +360,15 @@ namespace AutoMapper.Execution
                         Expression: Expression target,
                         Member: MemberInfo propertyOrField
                     }
-                      => new Member(expression, propertyOrField, target),
+                        => new Member(expression, propertyOrField, target),
                     MethodCallExpression { Method: var instanceMethod, Object: Expression target }
-                      => new Member(expression, instanceMethod, target),
+                        => new Member(expression, instanceMethod, target),
                     MethodCallExpression
                     {
                         Method: var extensionMethod,
                         Arguments: { Count: > 0 } arguments
                     } when extensionMethod.Has<ExtensionAttribute>()
-                      => new Member(expression, extensionMethod, arguments[0]),
+                        => new Member(expression, extensionMethod, arguments[0]),
                     _ => default
                 };
                 if (member.Expression == null)
@@ -579,8 +581,8 @@ namespace AutoMapper.Execution
             int index = 0;
             var nullCheckedExpression = NullCheck(parameter);
             return variables == null
-              ? nullCheckedExpression
-              : Block(variables, nullCheckedExpression);
+                ? nullCheckedExpression
+                : Block(variables, nullCheckedExpression);
             Expression NullCheck(ParameterExpression variable)
             {
                 var member = chain.Pop();
@@ -607,9 +609,9 @@ namespace AutoMapper.Execution
                         Method: { IsStatic: true },
                         Arguments: var args
                     } methodCall when args[0] != newTarget
-                      => methodCall.Update(null, new[] { newTarget }.Concat(args.Skip(1))),
+                        => methodCall.Update(null, new[] { newTarget }.Concat(args.Skip(1))),
                     MethodCallExpression { Method: { IsStatic: false } } methodCall
-                      => methodCall.Update(newTarget, methodCall.Arguments),
+                        => methodCall.Update(newTarget, methodCall.Arguments),
                     _ => sourceExpression,
                 };
         }
@@ -621,14 +623,14 @@ namespace AutoMapper.Execution
         ) =>
             expression.Type.IsValueType
                 ? (
-                      expression.Type.IsNullableType()
+                    expression.Type.IsNullableType()
                         ? Condition(
-                              Property(expression, "HasValue"),
-                              ToType(@else, then.Type),
-                              then
-                          )
+                            Property(expression, "HasValue"),
+                            ToType(@else, then.Type),
+                            then
+                        )
                         : @else
-                  )
+                )
                 : Condition(ReferenceEqual(expression, Null), then, ToType(@else, then.Type));
 
         class ReplaceVisitorBase : ExpressionVisitor

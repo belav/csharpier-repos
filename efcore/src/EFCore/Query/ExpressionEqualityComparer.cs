@@ -319,50 +319,50 @@ namespace Microsoft.EntityFrameworkCore.Query
                 return left switch
                 {
                     BinaryExpression leftBinary
-                      => CompareBinary(leftBinary, (BinaryExpression)right),
+                        => CompareBinary(leftBinary, (BinaryExpression)right),
                     BlockExpression leftBlock => CompareBlock(leftBlock, (BlockExpression)right),
                     ConditionalExpression leftConditional
-                      => CompareConditional(leftConditional, (ConditionalExpression)right),
+                        => CompareConditional(leftConditional, (ConditionalExpression)right),
                     ConstantExpression leftConstant
-                      => CompareConstant(leftConstant, (ConstantExpression)right),
+                        => CompareConstant(leftConstant, (ConstantExpression)right),
                     DefaultExpression _ => true, // Intentionally empty. No additional members
                     GotoExpression leftGoto => CompareGoto(leftGoto, (GotoExpression)right),
                     IndexExpression leftIndex => CompareIndex(leftIndex, (IndexExpression)right),
                     InvocationExpression leftInvocation
-                      => CompareInvocation(leftInvocation, (InvocationExpression)right),
+                        => CompareInvocation(leftInvocation, (InvocationExpression)right),
                     LabelExpression leftLabel => CompareLabel(leftLabel, (LabelExpression)right),
                     LambdaExpression leftLambda
-                      => CompareLambda(leftLambda, (LambdaExpression)right),
+                        => CompareLambda(leftLambda, (LambdaExpression)right),
                     ListInitExpression leftListInit
-                      => CompareListInit(leftListInit, (ListInitExpression)right),
+                        => CompareListInit(leftListInit, (ListInitExpression)right),
                     LoopExpression leftLoop => CompareLoop(leftLoop, (LoopExpression)right),
                     MemberExpression leftMember
-                      => CompareMember(leftMember, (MemberExpression)right),
+                        => CompareMember(leftMember, (MemberExpression)right),
                     MemberInitExpression leftMemberInit
-                      => CompareMemberInit(leftMemberInit, (MemberInitExpression)right),
+                        => CompareMemberInit(leftMemberInit, (MemberInitExpression)right),
                     MethodCallExpression leftMethodCall
-                      => CompareMethodCall(leftMethodCall, (MethodCallExpression)right),
+                        => CompareMethodCall(leftMethodCall, (MethodCallExpression)right),
                     NewArrayExpression leftNewArray
-                      => CompareNewArray(leftNewArray, (NewArrayExpression)right),
+                        => CompareNewArray(leftNewArray, (NewArrayExpression)right),
                     NewExpression leftNew => CompareNew(leftNew, (NewExpression)right),
                     ParameterExpression leftParameter
-                      => CompareParameter(leftParameter, (ParameterExpression)right),
+                        => CompareParameter(leftParameter, (ParameterExpression)right),
                     RuntimeVariablesExpression leftRuntimeVariables
-                      => CompareRuntimeVariables(
-                          leftRuntimeVariables,
-                          (RuntimeVariablesExpression)right
-                      ),
+                        => CompareRuntimeVariables(
+                            leftRuntimeVariables,
+                            (RuntimeVariablesExpression)right
+                        ),
                     SwitchExpression leftSwitch
-                      => CompareSwitch(leftSwitch, (SwitchExpression)right),
+                        => CompareSwitch(leftSwitch, (SwitchExpression)right),
                     TryExpression leftTry => CompareTry(leftTry, (TryExpression)right),
                     TypeBinaryExpression leftTypeBinary
-                      => CompareTypeBinary(leftTypeBinary, (TypeBinaryExpression)right),
+                        => CompareTypeBinary(leftTypeBinary, (TypeBinaryExpression)right),
                     UnaryExpression leftUnary => CompareUnary(leftUnary, (UnaryExpression)right),
 
                     _
-                      => left.NodeType == ExpressionType.Extension
-                          ? left.Equals(right)
-                          : throw new InvalidOperationException(
+                        => left.NodeType == ExpressionType.Extension
+                            ? left.Equals(right)
+                            : throw new InvalidOperationException(
                                 CoreStrings.UnhandledExpressionNode(left.NodeType)
                             )
                 };

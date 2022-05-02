@@ -281,8 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal static string EscapeKeywordIdentifiers(string identifier)
         {
             return SyntaxFacts.IsKeywordKind(SyntaxFacts.GetKeywordKind(identifier))
-              ? "@" + identifier
-              : identifier;
+                ? "@" + identifier
+                : identifier;
         }
 
         /// <remarks>

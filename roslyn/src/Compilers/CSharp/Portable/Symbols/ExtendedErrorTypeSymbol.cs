@@ -141,8 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal ExtendedErrorTypeSymbol AsUnreported()
         {
             return this.Unreported
-              ? this
-              : new ExtendedErrorTypeSymbol(
+                ? this
+                : new ExtendedErrorTypeSymbol(
                     _containingSymbol,
                     _name,
                     _arity,
@@ -162,8 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ? null
                 : candidateSymbols[0] as ErrorTypeSymbol;
             return ((object?)candidate != null && !candidate.CandidateSymbols.IsEmpty)
-              ? candidate.CandidateSymbols
-              : candidateSymbols;
+                ? candidate.CandidateSymbols
+                : candidateSymbols;
         }
 
         protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
@@ -372,8 +372,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.Arity,
                 Hash.Combine(
                     (object?)this.ContainingSymbol != null
-                      ? this.ContainingSymbol.GetHashCode()
-                      : 0,
+                        ? this.ContainingSymbol.GetHashCode()
+                        : 0,
                     this.Name != null ? this.Name.GetHashCode() : 0
                 )
             );

@@ -664,13 +664,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     sourceOpt == null
                         ? _F.MakeSequence(storePending, rewrittenFilter)
                         : _F.MakeSequence(
-                              storePending,
-                              AssignCatchSource(
-                                  (BoundExpression)this.Visit(sourceOpt),
-                                  currentAwaitCatchFrame
-                              ),
-                              rewrittenFilter
-                          );
+                            storePending,
+                            AssignCatchSource(
+                                (BoundExpression)this.Visit(sourceOpt),
+                                currentAwaitCatchFrame
+                            ),
+                            rewrittenFilter
+                        );
 
                 catchAndPend = node.Update(
                     ImmutableArray.Create(catchTemp),

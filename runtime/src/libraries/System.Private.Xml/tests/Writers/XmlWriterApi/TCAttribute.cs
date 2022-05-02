@@ -184,8 +184,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                          ? WriteState.Element
-                          : WriteState.Error,
+                            ? WriteState.Element
+                            : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;
@@ -213,8 +213,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                          ? WriteState.Element
-                          : WriteState.Error,
+                            ? WriteState.Element
+                            : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;
@@ -391,12 +391,12 @@ namespace System.Xml.Tests
                 w.WriteEndElement();
             }
             string exp = utils.IsIndent()
-              ? "<test xmlns:n1=\"http://testbasens\">"
-                + Environment.NewLine
-                + "  <base n1:id=\"5\" p4:lang=\"en\" xmlns:p4=\"http://common\" />"
-                + Environment.NewLine
-                + "</test>"
-              : "<test xmlns:~f n1 A~=\"http://testbasens\"><base ~f n1 a~:id=\"5\" ~a p4 a~:lang=\"en\" xmlns:~a p4 A~=\"http://common\" /></test>";
+                ? "<test xmlns:n1=\"http://testbasens\">"
+                    + Environment.NewLine
+                    + "  <base n1:id=\"5\" p4:lang=\"en\" xmlns:p4=\"http://common\" />"
+                    + Environment.NewLine
+                    + "</test>"
+                : "<test xmlns:~f n1 A~=\"http://testbasens\"><base ~f n1 a~:id=\"5\" ~a p4 a~:lang=\"en\" xmlns:~a p4 A~=\"http://common\" /></test>";
             Assert.True(utils.CompareString(exp));
         }
 
@@ -419,12 +419,12 @@ namespace System.Xml.Tests
                 w.WriteEndElement();
             }
             exp = utils.IsIndent()
-              ? "<test p:a1=\"v\" xmlns:p=\"ns1\">"
-                + Environment.NewLine
-                + "  <base p:a2=\"v\" p4:a3=\"v\" xmlns:p4=\"ns2\" />"
-                + Environment.NewLine
-                + "</test>"
-              : exp;
+                ? "<test p:a1=\"v\" xmlns:p=\"ns1\">"
+                    + Environment.NewLine
+                    + "  <base p:a2=\"v\" p4:a3=\"v\" xmlns:p4=\"ns2\" />"
+                    + Environment.NewLine
+                    + "</test>"
+                : exp;
             Assert.True(utils.CompareString(exp));
         }
 

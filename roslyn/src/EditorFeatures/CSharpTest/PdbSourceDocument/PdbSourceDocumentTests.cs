@@ -1084,10 +1084,10 @@ public class C
                     pdbFilePath == null
                         ? null
                         : FileUtilities.CreateFileStreamChecked(
-                              File.Create,
-                              pdbFilePath,
-                              nameof(pdbFilePath)
-                          )
+                            File.Create,
+                            pdbFilePath,
+                            nameof(pdbFilePath)
+                        )
                 )
             )
             {

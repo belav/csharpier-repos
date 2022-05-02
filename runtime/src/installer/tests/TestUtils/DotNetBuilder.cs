@@ -97,9 +97,9 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 { Major: 2, Minor: 2 } => "mockhostfxr_2_2",
                 { Major: 5, Minor: 0 } => "mockhostfxr_5_0",
                 _
-                  => throw new InvalidOperationException(
-                      $"Unsupported version {version} of mockhostfxr."
-                  )
+                    => throw new InvalidOperationException(
+                        $"Unsupported version {version} of mockhostfxr."
+                    )
             };
 
             string mockHostFxrFileName =

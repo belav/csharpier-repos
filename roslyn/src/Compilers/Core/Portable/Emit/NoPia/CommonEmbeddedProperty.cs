@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
     {
         internal abstract class CommonEmbeddedProperty
             : CommonEmbeddedMember<TPropertySymbol>,
-              Cci.IPropertyDefinition
+                Cci.IPropertyDefinition
         {
             private readonly ImmutableArray<TEmbeddedParameter> _parameters;
             private readonly TEmbeddedMethod _getter;

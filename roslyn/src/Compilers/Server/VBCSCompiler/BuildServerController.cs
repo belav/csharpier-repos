@@ -58,8 +58,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             };
 
             return shutdown
-              ? RunShutdown(pipeName, cancellationToken: cancellationTokenSource.Token)
-              : RunServer(pipeName, cancellationToken: cancellationTokenSource.Token);
+                ? RunShutdown(pipeName, cancellationToken: cancellationTokenSource.Token)
+                : RunServer(pipeName, cancellationToken: cancellationTokenSource.Token);
         }
 
         internal TimeSpan? GetKeepAliveTimeout()

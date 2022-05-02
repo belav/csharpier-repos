@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class TypeWellKnownAttributeData
         : CommonTypeWellKnownAttributeData,
-          ISkipLocalsInitAttributeTarget
+            ISkipLocalsInitAttributeTarget
     {
         #region CoClassAttribute
 

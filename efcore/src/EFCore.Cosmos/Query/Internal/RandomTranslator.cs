@@ -50,11 +50,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _methodInfo.Equals(method)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     "RAND",
                     Array.Empty<SqlExpression>(),
                     method.ReturnType
                 )
-              : null;
+                : null;
     }
 }

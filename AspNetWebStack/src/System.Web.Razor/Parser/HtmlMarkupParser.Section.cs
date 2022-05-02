@@ -17,8 +17,8 @@ namespace System.Web.Razor.Parser
             get
             {
                 return CaseSensitive
-                  ? StringComparison.Ordinal
-                  : StringComparison.OrdinalIgnoreCase;
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase;
             }
         }
 

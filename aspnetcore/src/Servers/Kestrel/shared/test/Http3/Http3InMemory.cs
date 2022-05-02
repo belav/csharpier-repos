@@ -1046,10 +1046,10 @@ internal class Http3ControlStream : Http3StreamBase
 
 internal class TestMultiplexedConnectionContext
     : MultiplexedConnectionContext,
-      IConnectionLifetimeNotificationFeature,
-      IConnectionLifetimeFeature,
-      IConnectionHeartbeatFeature,
-      IProtocolErrorCodeFeature
+        IConnectionLifetimeNotificationFeature,
+        IConnectionLifetimeFeature,
+        IConnectionHeartbeatFeature,
+        IProtocolErrorCodeFeature
 {
     public readonly Channel<ConnectionContext> ToServerAcceptQueue =
         Channel.CreateUnbounded<ConnectionContext>(
@@ -1149,12 +1149,12 @@ internal class TestMultiplexedConnectionContext
 
 internal class TestStreamContext
     : ConnectionContext,
-      IStreamDirectionFeature,
-      IStreamIdFeature,
-      IProtocolErrorCodeFeature,
-      IPersistentStateFeature,
-      IStreamAbortFeature,
-      IDisposable
+        IStreamDirectionFeature,
+        IStreamIdFeature,
+        IProtocolErrorCodeFeature,
+        IPersistentStateFeature,
+        IStreamAbortFeature,
+        IDisposable
 {
     private readonly Http3InMemory _testBase;
 

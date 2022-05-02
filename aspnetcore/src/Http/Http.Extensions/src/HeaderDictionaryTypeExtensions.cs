@@ -185,8 +185,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return ContentDispositionHeaderValue.TryParse(value, out var result)
-                      ? result
-                      : null;
+                        ? result
+                        : null;
                 }
             )
         },
@@ -214,8 +214,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return RangeConditionHeaderValue.TryParse(value, out var result)
-                      ? result
-                      : null;
+                        ? result
+                        : null;
                 }
             )
         },
@@ -252,8 +252,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return HeaderUtilities.TryParseNonNegativeInt64(value, out var result)
-                      ? result
-                      : null;
+                        ? result
+                        : null;
                 }
             )
         },
@@ -270,8 +270,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return MediaTypeHeaderValue.TryParseList(value, out var result)
-                      ? result
-                      : Array.Empty<MediaTypeHeaderValue>();
+                        ? result
+                        : Array.Empty<MediaTypeHeaderValue>();
                 }
             )
         },
@@ -281,8 +281,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return StringWithQualityHeaderValue.TryParseList(value, out var result)
-                      ? result
-                      : Array.Empty<StringWithQualityHeaderValue>();
+                        ? result
+                        : Array.Empty<StringWithQualityHeaderValue>();
                 }
             )
         },
@@ -292,8 +292,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return CookieHeaderValue.TryParseList(value, out var result)
-                      ? result
-                      : Array.Empty<CookieHeaderValue>();
+                        ? result
+                        : Array.Empty<CookieHeaderValue>();
                 }
             )
         },
@@ -303,8 +303,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return EntityTagHeaderValue.TryParseList(value, out var result)
-                      ? result
-                      : Array.Empty<EntityTagHeaderValue>();
+                        ? result
+                        : Array.Empty<EntityTagHeaderValue>();
                 }
             )
         },
@@ -314,8 +314,8 @@ public static class HeaderDictionaryTypeExtensions
                 value =>
                 {
                     return SetCookieHeaderValue.TryParseList(value, out var result)
-                      ? result
-                      : Array.Empty<SetCookieHeaderValue>();
+                        ? result
+                        : Array.Empty<SetCookieHeaderValue>();
                 }
             )
         },

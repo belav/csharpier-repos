@@ -179,19 +179,19 @@ public class Program
         {
             Func<string, string, Task> verifyFunc = shouldSuggestConversion
                 ? (markup, expectedItem) =>
-                      VerifyItemExistsAsync(
-                          markup,
-                          expectedItem,
-                          displayTextPrefix: "(",
-                          displayTextSuffix: ")"
-                      )
+                    VerifyItemExistsAsync(
+                        markup,
+                        expectedItem,
+                        displayTextPrefix: "(",
+                        displayTextSuffix: ")"
+                    )
                 : (markup, expectedItem) =>
-                      VerifyItemIsAbsentAsync(
-                          markup,
-                          expectedItem,
-                          displayTextPrefix: "(",
-                          displayTextSuffix: ")"
-                      );
+                    VerifyItemIsAbsentAsync(
+                        markup,
+                        expectedItem,
+                        displayTextPrefix: "(",
+                        displayTextSuffix: ")"
+                    );
 
             await verifyFunc(
                 @$"
@@ -1546,12 +1546,12 @@ namespace A.C
         {
             Func<string, Task> verifyFunc = conversionIsOffered
                 ? markup =>
-                      VerifyItemExistsAsync(
-                          markup,
-                          "int",
-                          displayTextPrefix: "(",
-                          displayTextSuffix: ")"
-                      )
+                    VerifyItemExistsAsync(
+                        markup,
+                        "int",
+                        displayTextPrefix: "(",
+                        displayTextSuffix: ")"
+                    )
                 : markup => VerifyNoItemsExistAsync(markup);
             await verifyFunc(
                 @$"

@@ -1504,8 +1504,8 @@ namespace System.Net.Tests
                                 // will consider this a retryable request, since we never received any response.
                                 await connection.WriteStringAsync(
                                     forceTimeoutDuringHeaders
-                                      ? "H"
-                                      : "HTTP/1.1 200 OK\r\nContent-Length: 10\r\n\r\nHello Wor"
+                                        ? "H"
+                                        : "HTTP/1.1 200 OK\r\nContent-Length: 10\r\n\r\nHello Wor"
                                 );
                                 await tcs.Task;
                             }
@@ -2117,8 +2117,8 @@ namespace System.Net.Tests
                                 using (
                                     var response = (HttpWebResponse)(
                                         bool.Parse(async)
-                                          ? await request.GetResponseAsync()
-                                          : request.GetResponse()
+                                            ? await request.GetResponseAsync()
+                                            : request.GetResponse()
                                     )
                                 )
                                 {
@@ -2318,8 +2318,8 @@ namespace System.Net.Tests
                             string responseContent = "Test response.";
 
                             Task<WebResponse> firstResponseTask = bool.Parse(async)
-                              ? request0.GetResponseAsync()
-                              : Task.Run(() => request0.GetResponse());
+                                ? request0.GetResponseAsync()
+                                : Task.Run(() => request0.GetResponse());
                             using (Socket server = await listener.AcceptAsync())
                             using (var serverStream = new NetworkStream(server, ownsSocket: false))
                             using (var serverReader = new StreamReader(serverStream))
@@ -2330,8 +2330,8 @@ namespace System.Net.Tests
                                 Task<Socket> secondAccept = listener.AcceptAsync();
 
                                 Task<WebResponse> secondResponseTask = bool.Parse(async)
-                                  ? request1.GetResponseAsync()
-                                  : Task.Run(() => request1.GetResponse());
+                                    ? request1.GetResponseAsync()
+                                    : Task.Run(() => request1.GetResponse());
                                 await ReplyToClient(responseContent, server, serverReader);
                                 if (bool.Parse(connectionReusedString))
                                 {
@@ -2391,8 +2391,8 @@ namespace System.Net.Tests
 
                             string responseContent = "Test response.";
                             Task<WebResponse> firstResponseTask = bool.Parse(async)
-                              ? firstRequest.GetResponseAsync()
-                              : Task.Run(() => firstRequest.GetResponse());
+                                ? firstRequest.GetResponseAsync()
+                                : Task.Run(() => firstRequest.GetResponse());
                             using (Socket server = await listener.AcceptAsync())
                             using (var serverStream = new NetworkStream(server, ownsSocket: false))
                             using (var serverReader = new StreamReader(serverStream))
@@ -2410,8 +2410,8 @@ namespace System.Net.Tests
                                     currentParameters.Configure(currentRequest);
 
                                     Task<WebResponse> currentResponseTask = bool.Parse(async)
-                                      ? currentRequest.GetResponseAsync()
-                                      : Task.Run(() => currentRequest.GetResponse());
+                                        ? currentRequest.GetResponseAsync()
+                                        : Task.Run(() => currentRequest.GetResponse());
                                     if (connectionReused)
                                     {
                                         await ReplyToClient(responseContent, server, serverReader);
@@ -2607,9 +2607,9 @@ namespace System.Net.Tests
                     request.CachePolicy =
                         ageControl != null
                             ? new HttpRequestCachePolicy(
-                                  ageControl.Value,
-                                  TimeSpan.FromSeconds((double)age)
-                              )
+                                ageControl.Value,
+                                TimeSpan.FromSeconds((double)age)
+                            )
                             : new HttpRequestCachePolicy(requestCacheLevel);
                     Task<WebResponse> getResponse = GetResponseAsync(request);
 
@@ -2702,8 +2702,8 @@ namespace System.Net.Tests
                                 );
                                 HttpWebRequest request = WebRequest.CreateHttp(uri);
                                 Task<WebResponse> getResponse = bool.Parse(async)
-                                  ? request.GetResponseAsync()
-                                  : Task.Run(() => request.GetResponse());
+                                    ? request.GetResponseAsync()
+                                    : Task.Run(() => request.GetResponse());
 
                                 await server.AcceptConnectionAsync(
                                     async connection =>

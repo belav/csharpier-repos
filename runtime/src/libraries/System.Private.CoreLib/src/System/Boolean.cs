@@ -223,8 +223,8 @@ namespace System
 
         public static bool Parse(ReadOnlySpan<char> value) =>
             TryParse(value, out bool result)
-              ? result
-              : throw new FormatException(SR.Format(SR.Format_BadBoolean, new string(value)));
+                ? result
+                : throw new FormatException(SR.Format(SR.Format_BadBoolean, new string(value)));
 
         // Determines whether a String represents true or false.
         //

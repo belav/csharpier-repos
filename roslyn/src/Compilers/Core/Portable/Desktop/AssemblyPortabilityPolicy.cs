@@ -104,10 +104,10 @@ namespace Microsoft.CodeAnalysis
                         "false",
                         StringComparison.OrdinalIgnoreCase
                     )
-                      ? false
-                      : string.Equals(enableAttribute, "true", StringComparison.OrdinalIgnoreCase)
-                          ? true
-                          : (bool?)null;
+                        ? false
+                        : string.Equals(enableAttribute, "true", StringComparison.OrdinalIgnoreCase)
+                            ? true
+                            : (bool?)null;
 
                     if (enable != null)
                     {

@@ -70,8 +70,8 @@ internal class DefaultRequiredAttributeDescriptorBuilder : RequiredAttributeDesc
     private string GetDisplayName()
     {
         return NameComparisonMode == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
-          ? string.Concat(Name, "...")
-          : Name;
+            ? string.Concat(Name, "...")
+            : Name;
     }
 
     private HashSet<RazorDiagnostic> Validate()

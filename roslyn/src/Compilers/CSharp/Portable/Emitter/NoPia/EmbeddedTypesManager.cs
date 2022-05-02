@@ -30,28 +30,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 {
     internal sealed class EmbeddedTypesManager
         : EmbeddedTypesManager<
-              PEModuleBuilder,
-              ModuleCompilationState,
-              EmbeddedTypesManager,
-              SyntaxNode,
-              CSharpAttributeData,
-              SymbolAdapter,
-              AssemblySymbol,
-              NamedTypeSymbolAdapter,
-              FieldSymbolAdapter,
-              MethodSymbolAdapter,
-              EventSymbolAdapter,
-              PropertySymbolAdapter,
-              ParameterSymbolAdapter,
-              TypeParameterSymbolAdapter,
-              EmbeddedType,
-              EmbeddedField,
-              EmbeddedMethod,
-              EmbeddedEvent,
-              EmbeddedProperty,
-              EmbeddedParameter,
-              EmbeddedTypeParameter
-          >
+            PEModuleBuilder,
+            ModuleCompilationState,
+            EmbeddedTypesManager,
+            SyntaxNode,
+            CSharpAttributeData,
+            SymbolAdapter,
+            AssemblySymbol,
+            NamedTypeSymbolAdapter,
+            FieldSymbolAdapter,
+            MethodSymbolAdapter,
+            EventSymbolAdapter,
+            PropertySymbolAdapter,
+            ParameterSymbolAdapter,
+            TypeParameterSymbolAdapter,
+            EmbeddedType,
+            EmbeddedField,
+            EmbeddedMethod,
+            EmbeddedEvent,
+            EmbeddedProperty,
+            EmbeddedParameter,
+            EmbeddedTypeParameter
+        >
     {
         private readonly ConcurrentDictionary<AssemblySymbol, string> _assemblyGuidMap =
             new ConcurrentDictionary<AssemblySymbol, string>(ReferenceEqualityComparer.Instance);

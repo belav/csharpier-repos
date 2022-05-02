@@ -174,8 +174,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             }
 
             return _navigationExpressionsCache.TryGetValue(navigation, out var expression)
-              ? expression
-              : null;
+                ? expression
+                : null;
         }
 
         /// <summary>

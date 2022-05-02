@@ -44,9 +44,9 @@ namespace System.Collections.Concurrent
     [DebuggerDisplay("Count = {Count}, Type = {_collection}")]
     public class BlockingCollection<T>
         : IEnumerable<T>,
-          ICollection,
-          IDisposable,
-          IReadOnlyCollection<T>
+            ICollection,
+            IDisposable,
+            IReadOnlyCollection<T>
     {
         private IProducerConsumerCollection<T> _collection;
         private int _boundedCapacity;

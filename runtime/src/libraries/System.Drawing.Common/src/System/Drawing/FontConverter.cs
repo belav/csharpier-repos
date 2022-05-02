@@ -311,10 +311,10 @@ namespace System.Drawing
                 "px" => GraphicsUnit.Pixel,
                 "world" => GraphicsUnit.World,
                 _
-                  => throw new ArgumentException(
-                      SR.Format(SR.InvalidArgumentValueFontConverter, units),
-                      nameof(units)
-                  ),
+                    => throw new ArgumentException(
+                        SR.Format(SR.InvalidArgumentValueFontConverter, units),
+                        nameof(units)
+                    ),
             };
 
         public override object CreateInstance(
@@ -451,8 +451,8 @@ namespace System.Drawing
             public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
             {
                 return sourceType == typeof(string)
-                  ? true
-                  : base.CanConvertFrom(context, sourceType);
+                    ? true
+                    : base.CanConvertFrom(context, sourceType);
             }
 
             public override object? ConvertFrom(
@@ -462,8 +462,8 @@ namespace System.Drawing
             )
             {
                 return value is string strValue
-                  ? MatchFontName(strValue, context)
-                  : base.ConvertFrom(context, culture, value);
+                    ? MatchFontName(strValue, context)
+                    : base.ConvertFrom(context, culture, value);
             }
 
             public override StandardValuesCollection GetStandardValues(

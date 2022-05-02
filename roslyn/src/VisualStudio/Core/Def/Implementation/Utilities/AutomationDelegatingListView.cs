@@ -168,8 +168,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         {
             var automationPeer = GetAutomationPeer();
             return automationPeer != null
-              ? automationPeer.GetPattern(patternInterface)
-              : base.GetPattern(patternInterface);
+                ? automationPeer.GetPattern(patternInterface)
+                : base.GetPattern(patternInterface);
         }
 
         protected override string GetNameCore() => GetAutomationPeer()?.GetName() ?? string.Empty;

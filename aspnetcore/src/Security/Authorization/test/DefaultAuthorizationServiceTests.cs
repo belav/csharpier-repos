@@ -880,7 +880,7 @@ public class DefaultAuthorizationServiceTests
 
     public class PassThroughRequirement
         : AuthorizationHandler<PassThroughRequirement>,
-          IAuthorizationRequirement
+            IAuthorizationRequirement
     {
         public PassThroughRequirement(bool succeed)
         {

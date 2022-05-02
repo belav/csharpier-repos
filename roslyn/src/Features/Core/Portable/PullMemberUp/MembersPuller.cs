@@ -72,21 +72,21 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             return pullMembersUpOptions.Destination.TypeKind switch
             {
                 TypeKind.Interface
-                  => PullMembersIntoInterfaceAsync(
-                      document,
-                      pullMembersUpOptions,
-                      document.Project.Solution,
-                      cancellationToken
-                  ),
+                    => PullMembersIntoInterfaceAsync(
+                        document,
+                        pullMembersUpOptions,
+                        document.Project.Solution,
+                        cancellationToken
+                    ),
                 // We can treat VB modules as a static class
                 TypeKind.Class
                 or TypeKind.Module
-                  => PullMembersIntoClassAsync(
-                      document,
-                      pullMembersUpOptions,
-                      document.Project.Solution,
-                      cancellationToken
-                  ),
+                    => PullMembersIntoClassAsync(
+                        document,
+                        pullMembersUpOptions,
+                        document.Project.Solution,
+                        cancellationToken
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(pullMembersUpOptions.Destination),
             };
         }
@@ -98,8 +98,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // In this scenario, only the public getter/setter
             // will be add to the destination interface.
             return getterOrSetter?.DeclaredAccessibility == Accessibility.Public
-              ? getterOrSetter
-              : null;
+                ? getterOrSetter
+                : null;
         }
 
         private static IMethodSymbol MakePublicAccessor(IMethodSymbol getterOrSetter)
@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // Create a public getter/setter since user is trying to pull a non-public property to an interface.
             // If getterOrSetter is null, it means this property doesn't have a getter/setter, so just don't generate it.
             return getterOrSetter == null
-              ? getterOrSetter
-              : CodeGenerationSymbolFactory.CreateMethodSymbol(
+                ? getterOrSetter
+                : CodeGenerationSymbolFactory.CreateMethodSymbol(
                     getterOrSetter,
                     accessibility: Accessibility.Public
                 );

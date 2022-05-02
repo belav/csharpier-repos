@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.ValueGeneration.Internal
     /// </summary>
     public class InMemoryIntegerValueGenerator<TValue>
         : ValueGenerator<TValue>,
-          IInMemoryIntegerValueGenerator
+            IInMemoryIntegerValueGenerator
     {
         private readonly int _propertyIndex;
         private long _current;

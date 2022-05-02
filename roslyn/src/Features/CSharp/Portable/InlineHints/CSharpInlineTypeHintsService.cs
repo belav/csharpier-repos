@@ -87,14 +87,14 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
                     if (IsValidType(type))
                     {
                         return node.Parent is VarPatternSyntax varPattern
-                          ? CreateTypeHint(
+                            ? CreateTypeHint(
                                 type,
                                 displayAllOverride,
                                 forImplicitVariableTypes,
                                 varPattern.VarKeyword,
                                 variableDesignation.Identifier
                             )
-                          : new(
+                            : new(
                                 type,
                                 new TextSpan(variableDesignation.Identifier.SpanStart, 0),
                                 trailingSpace: true

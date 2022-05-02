@@ -762,8 +762,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
             {
                 var typeSyntax = generateTypeFromExpression
                     ? _semanticModel
-                      .GetTypeInfo(expression, _cancellationToken)
-                      .ConvertedType.GenerateTypeSyntax()
+                        .GetTypeInfo(expression, _cancellationToken)
+                        .ConvertedType.GenerateTypeSyntax()
                     : VarNameIdentifier;
                 return SyntaxFactory
                     .LocalDeclarationStatement(

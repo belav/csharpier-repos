@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         ) =>
             IsValidContext(context)
-              ? ImmutableArray.Create(Keyword)
-              : ImmutableArray<RecommendedKeyword>.Empty;
+                ? ImmutableArray.Create(Keyword)
+                : ImmutableArray<RecommendedKeyword>.Empty;
     }
 }

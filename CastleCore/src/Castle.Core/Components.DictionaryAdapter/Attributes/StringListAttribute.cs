@@ -27,8 +27,8 @@ namespace Castle.Components.DictionaryAdapter
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class StringListAttribute
         : DictionaryBehaviorAttribute,
-          IDictionaryPropertyGetter,
-          IDictionaryPropertySetter
+            IDictionaryPropertyGetter,
+            IDictionaryPropertySetter
     {
         public StringListAttribute()
         {

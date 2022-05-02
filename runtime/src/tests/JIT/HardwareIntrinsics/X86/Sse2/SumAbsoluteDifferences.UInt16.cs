@@ -705,13 +705,13 @@ namespace JIT.HardwareIntrinsics.X86
                             i != 4
                                 ? 0
                                 : Math.Abs(left[8] - right[8])
-                                  + Math.Abs(left[9] - right[9])
-                                  + Math.Abs(left[10] - right[10])
-                                  + Math.Abs(left[11] - right[11])
-                                  + Math.Abs(left[12] - right[12])
-                                  + Math.Abs(left[13] - right[13])
-                                  + Math.Abs(left[14] - right[14])
-                                  + Math.Abs(left[15] - right[15])
+                                    + Math.Abs(left[9] - right[9])
+                                    + Math.Abs(left[10] - right[10])
+                                    + Math.Abs(left[11] - right[11])
+                                    + Math.Abs(left[12] - right[12])
+                                    + Math.Abs(left[13] - right[13])
+                                    + Math.Abs(left[14] - right[14])
+                                    + Math.Abs(left[15] - right[15])
                         )
                     )
                     {

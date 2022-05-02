@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis
     {
         public readonly partial struct Reversed
             : IEnumerable<SyntaxNodeOrToken>,
-              IEquatable<Reversed>
+                IEquatable<Reversed>
         {
             private readonly SyntaxNode? _node;
             private readonly int _count;

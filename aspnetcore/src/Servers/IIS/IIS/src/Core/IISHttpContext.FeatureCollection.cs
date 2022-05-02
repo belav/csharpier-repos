@@ -24,20 +24,20 @@ namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 internal partial class IISHttpContext
     : IFeatureCollection,
-      IHttpRequestFeature,
-      IHttpRequestBodyDetectionFeature,
-      IHttpResponseFeature,
-      IHttpResponseBodyFeature,
-      IHttpUpgradeFeature,
-      IHttpRequestLifetimeFeature,
-      IHttpAuthenticationFeature,
-      IServerVariablesFeature,
-      ITlsConnectionFeature,
-      IHttpBodyControlFeature,
-      IHttpMaxRequestBodySizeFeature,
-      IHttpResponseTrailersFeature,
-      IHttpResetFeature,
-      IConnectionLifetimeNotificationFeature
+        IHttpRequestFeature,
+        IHttpRequestBodyDetectionFeature,
+        IHttpResponseFeature,
+        IHttpResponseBodyFeature,
+        IHttpUpgradeFeature,
+        IHttpRequestLifetimeFeature,
+        IHttpAuthenticationFeature,
+        IServerVariablesFeature,
+        ITlsConnectionFeature,
+        IHttpBodyControlFeature,
+        IHttpMaxRequestBodySizeFeature,
+        IHttpResponseTrailersFeature,
+        IHttpResetFeature,
+        IConnectionLifetimeNotificationFeature
 {
     private int _featureRevision;
     private string? _httpProtocolVersion;
@@ -306,8 +306,8 @@ internal partial class IISHttpContext
                     variableName,
                     out var value
                 )
-                  ? value
-                  : null;
+                    ? value
+                    : null;
             }
         }
         set

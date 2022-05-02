@@ -37,10 +37,10 @@ namespace System.IO.Compression.Tests
                     ZipArchiveEntry e = withCompressionLevel
                         ? archive.CreateEntryFromFile(sourceFilePath, entryName)
                         : archive.CreateEntryFromFile(
-                              sourceFilePath,
-                              entryName,
-                              CompressionLevel.Fastest
-                          );
+                            sourceFilePath,
+                            entryName,
+                            CompressionLevel.Fastest
+                        );
                     Assert.NotNull(e);
                 }
                 await IsZipSameAsDirAsync(

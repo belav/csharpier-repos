@@ -217,8 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var converterType = (Type?)this[CoreAnnotationNames.ValueConverterType];
             return converterType == null
-              ? null
-              : _valueConverter = (ValueConverter?)Activator.CreateInstance(converterType);
+                ? null
+                : _valueConverter = (ValueConverter?)Activator.CreateInstance(converterType);
         }
 
         /// <summary>

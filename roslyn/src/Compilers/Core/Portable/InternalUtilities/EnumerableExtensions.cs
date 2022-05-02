@@ -78,8 +78,8 @@ namespace Roslyn.Utilities
             if (items is ImmutableArray<T> array)
             {
                 return array.IsDefaultOrEmpty
-                  ? SpecializedCollections.EmptyBoxedImmutableArray<T>()
-                  : (IReadOnlyList<T>)items;
+                    ? SpecializedCollections.EmptyBoxedImmutableArray<T>()
+                    : (IReadOnlyList<T>)items;
             }
 
             if (items is ICollection<T> collection && collection.Count == 0)
@@ -421,7 +421,7 @@ namespace Roslyn.Utilities
             {
                 IList<T> list => list.IndexOf(value),
                 IReadOnlyList<T> readOnlyList
-                  => IndexOf(readOnlyList, value, EqualityComparer<T>.Default),
+                    => IndexOf(readOnlyList, value, EqualityComparer<T>.Default),
                 _ => EnumeratingIndexOf(sequence, value, EqualityComparer<T>.Default)
             };
         }

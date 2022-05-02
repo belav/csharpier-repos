@@ -22,8 +22,8 @@ namespace ILCompiler.Reflection.ReadyToRun
 
                 case Architecture.X64:
                     return reader.OperatingSystem == OperatingSystem.Windows
-                      ? X64WindowsTransitionBlock.Instance
-                      : X64UnixTransitionBlock.Instance;
+                        ? X64WindowsTransitionBlock.Instance
+                        : X64UnixTransitionBlock.Instance;
 
                 case Architecture.Arm:
                     return ArmTransitionBlock.Instance;

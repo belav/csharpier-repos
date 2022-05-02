@@ -258,8 +258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                         var directInvocation = invocation.Expression
                             is MemberAccessExpressionSyntax memberAccess // it's a .Invoke call
                             ? invocation
-                              .WithExpression(memberAccess.Expression)
-                              .WithTriviaFrom(invocation) // remove it
+                                .WithExpression(memberAccess.Expression)
+                                .WithTriviaFrom(invocation) // remove it
                             : invocation;
 
                         return WithNewParameterNames(
@@ -305,14 +305,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             var constraintClauses = default(SyntaxList<TypeParameterConstraintClauseSyntax>);
 
             var body = anonymousFunction.Body.IsKind(SyntaxKind.Block, out BlockSyntax block)
-              ? block
-              : null;
+                ? block
+                : null;
 
             var expressionBody = anonymousFunction.Body is ExpressionSyntax expression
                 ? SyntaxFactory.ArrowExpressionClause(
-                      ((LambdaExpressionSyntax)anonymousFunction).ArrowToken,
-                      expression
-                  )
+                    ((LambdaExpressionSyntax)anonymousFunction).ArrowToken,
+                    expression
+                )
                 : null;
 
             var semicolonToken =
@@ -342,7 +342,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
             var i = 0;
 
             return parameterList != null
-              ? parameterList.ReplaceNodes(
+                ? parameterList.ReplaceNodes(
                     parameterList.Parameters,
                     (parameterNode, _) =>
                         PromoteParameter(
@@ -350,7 +350,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
                             delegateMethod.Parameters.ElementAtOrDefault(i++)
                         )
                 )
-              : SyntaxFactory.ParameterList(
+                : SyntaxFactory.ParameterList(
                     SyntaxFactory.SeparatedList(
                         delegateMethod.Parameters.Select(
                             parameter =>

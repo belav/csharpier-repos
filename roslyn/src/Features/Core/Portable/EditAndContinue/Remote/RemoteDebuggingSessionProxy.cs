@@ -471,8 +471,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 .ConfigureAwait(false);
 
             return result.HasValue
-              ? result.Value
-              : ImmutableArray<ImmutableArray<ActiveStatementSpan>>.Empty;
+                ? result.Value
+                : ImmutableArray<ImmutableArray<ActiveStatementSpan>>.Empty;
         }
 
         public async ValueTask<

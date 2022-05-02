@@ -87,8 +87,8 @@ namespace System.Text.RegularExpressions.Symbolic
             //    in the BDD now maps to the same minterm, we can replace the BDD with a much simpler/faster/smaller one.
             BDD nonAsciiBDD = solver.And(anyCharacterToMintermId, solver._nonAscii);
             nonAsciiBDD = nonAsciiBDD.IsEssentiallyBoolean(out BDD? singleTerminalBDD)
-              ? singleTerminalBDD
-              : nonAsciiBDD;
+                ? singleTerminalBDD
+                : nonAsciiBDD;
             _nonAscii = nonAsciiBDD;
         }
 

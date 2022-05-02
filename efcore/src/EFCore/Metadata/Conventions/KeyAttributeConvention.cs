@@ -21,7 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class KeyAttributeConvention
         : PropertyAttributeConventionBase<KeyAttribute>,
-          IModelFinalizingConvention
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="KeyAttributeConvention" />.

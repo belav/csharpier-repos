@@ -529,15 +529,15 @@ namespace System.Net.WebSockets.Tests
                     await (
                         useCloseOutputAsync
                             ? socket.CloseOutputAsync(
-                                  WebSocketCloseStatus.NormalClosure,
-                                  "",
-                                  CancellationToken.None
-                              )
+                                WebSocketCloseStatus.NormalClosure,
+                                "",
+                                CancellationToken.None
+                            )
                             : socket.CloseAsync(
-                                  WebSocketCloseStatus.NormalClosure,
-                                  "",
-                                  CancellationToken.None
-                              )
+                                WebSocketCloseStatus.NormalClosure,
+                                "",
+                                CancellationToken.None
+                            )
                     );
 
                     Assert.False(stream.CanRead);

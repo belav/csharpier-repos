@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     internal sealed class RemoteEditAndContinueService
         : BrokeredServiceBase,
-          IRemoteEditAndContinueService
+            IRemoteEditAndContinueService
     {
         internal sealed class Factory
             : FactoryBase<IRemoteEditAndContinueService, IRemoteEditAndContinueService.ICallback>

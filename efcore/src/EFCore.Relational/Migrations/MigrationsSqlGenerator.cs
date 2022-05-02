@@ -1113,11 +1113,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var propertyMappings =
                 operation.ColumnTypes == null
                     ? GetPropertyMappings(
-                          operation.Columns,
-                          operation.Table,
-                          operation.Schema,
-                          model
-                      )
+                        operation.Columns,
+                        operation.Table,
+                        operation.Schema,
+                        model
+                    )
                     : null;
 
             for (var i = 0; i < operation.Values.GetLength(0); i++)
@@ -1141,9 +1141,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             ? propertyMapping.TypeMapping
                             : value != null
                                 ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                    value.GetType(),
+                                    columnType
+                                )
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modificationCommand.AddColumnModification(
@@ -1239,11 +1239,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var keypropertyMappings =
                 operation.KeyColumnTypes == null
                     ? GetPropertyMappings(
-                          operation.KeyColumns,
-                          operation.Table,
-                          operation.Schema,
-                          model
-                      )
+                        operation.KeyColumns,
+                        operation.Table,
+                        operation.Schema,
+                        model
+                    )
                     : null;
 
             for (var i = 0; i < operation.KeyValues.GetLength(0); i++)
@@ -1267,9 +1267,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             ? propertyMapping.TypeMapping
                             : value != null
                                 ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                    value.GetType(),
+                                    columnType
+                                )
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modificationCommand.AddColumnModification(
@@ -1401,20 +1401,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var keyPropertyMappings =
                 operation.KeyColumnTypes == null
                     ? GetPropertyMappings(
-                          operation.KeyColumns,
-                          operation.Table,
-                          operation.Schema,
-                          model
-                      )
+                        operation.KeyColumns,
+                        operation.Table,
+                        operation.Schema,
+                        model
+                    )
                     : null;
             var propertyMappings =
                 operation.ColumnTypes == null
                     ? GetPropertyMappings(
-                          operation.Columns,
-                          operation.Table,
-                          operation.Schema,
-                          model
-                      )
+                        operation.Columns,
+                        operation.Table,
+                        operation.Schema,
+                        model
+                    )
                     : null;
 
             for (var i = 0; i < operation.KeyValues.GetLength(0); i++)
@@ -1438,9 +1438,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             ? propertyMapping.TypeMapping
                             : value != null
                                 ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                    value.GetType(),
+                                    columnType
+                                )
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modificationCommand.AddColumnModification(
@@ -1472,9 +1472,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                             ? propertyMapping.TypeMapping
                             : value != null
                                 ? Dependencies.TypeMappingSource.FindMapping(
-                                      value.GetType(),
-                                      columnType
-                                  )
+                                    value.GetType(),
+                                    columnType
+                                )
                                 : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modificationCommand.AddColumnModification(
@@ -1795,9 +1795,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 var typeMapping =
                     columnType != null
                         ? Dependencies.TypeMappingSource.FindMapping(
-                              defaultValue.GetType(),
-                              columnType
-                          )
+                            defaultValue.GetType(),
+                            columnType
+                        )
                         : null;
                 if (typeMapping == null)
                 {

@@ -13,7 +13,7 @@ namespace System.ComponentModel.Composition.Hosting
     [DebuggerTypeProxy(typeof(CompositionScopeDefinitionDebuggerProxy))]
     public class CompositionScopeDefinition
         : ComposablePartCatalog,
-          INotifyComposablePartCatalogChanged
+            INotifyComposablePartCatalogChanged
     {
         private ComposablePartCatalog? _catalog;
         private IEnumerable<ExportDefinition>? _publicSurface;

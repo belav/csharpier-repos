@@ -91,14 +91,14 @@ namespace System.Threading
             {
 #pragma warning disable CA1825 // Avoid unnecessary zero-length array allocations
                 return isFlowSuppressed
-                  ? (
+                    ? (
                         s_defaultFlowSuppressed ??= new ExecutionContext(
                             AsyncLocalValueMap.Empty,
                             new IAsyncLocal[0],
                             isFlowSuppressed: true
                         )
                     )
-                  : null; // implies the default context
+                    : null; // implies the default context
 #pragma warning restore CA1825
             }
 
@@ -639,7 +639,7 @@ namespace System.Threading
                 (!isFlowSuppressed && AsyncLocalValueMap.IsEmpty(newValues))
                     ? null
                     : // No values, return to Default context
-                      new ExecutionContext(newValues, newChangeNotifications, isFlowSuppressed);
+                    new ExecutionContext(newValues, newChangeNotifications, isFlowSuppressed);
 
             if (needChangeNotifications)
             {

@@ -17,8 +17,8 @@ namespace System.Security.Permissions
 #endif
     public sealed class PrincipalPermission
         : IPermission,
-          ISecurityEncodable,
-          IUnrestrictedPermission
+            ISecurityEncodable,
+            IUnrestrictedPermission
     {
         private IDRole[] _idArray;
 

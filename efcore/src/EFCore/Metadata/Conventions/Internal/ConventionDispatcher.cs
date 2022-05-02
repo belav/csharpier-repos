@@ -716,8 +716,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 using var foreignKeyReference = _dispatcher.Tracker.Track(foreignKey);
                 Run();
                 return foreignKeyReference.Object is null || !foreignKeyReference.Object.IsInModel
-                  ? null
-                  : foreignKeyReference.Object;
+                    ? null
+                    : foreignKeyReference.Object;
             }
 
             public void Dispose()

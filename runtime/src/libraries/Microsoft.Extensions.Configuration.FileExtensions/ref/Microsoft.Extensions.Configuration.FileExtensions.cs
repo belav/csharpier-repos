@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.Configuration
 
     public abstract partial class FileConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public FileConfigurationProvider(
             Microsoft.Extensions.Configuration.FileConfigurationSource source

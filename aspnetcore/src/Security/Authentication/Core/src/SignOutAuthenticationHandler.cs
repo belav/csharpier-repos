@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Authentication;
 /// </summary>
 public abstract class SignOutAuthenticationHandler<TOptions>
     : AuthenticationHandler<TOptions>,
-      IAuthenticationSignOutHandler where TOptions : AuthenticationSchemeOptions, new()
+        IAuthenticationSignOutHandler where TOptions : AuthenticationSchemeOptions, new()
 {
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutAuthenticationHandler{TOptions}"/>.
@@ -34,8 +34,8 @@ public abstract class SignOutAuthenticationHandler<TOptions>
     {
         var target = ResolveTarget(Options.ForwardSignOut);
         return (target != null)
-          ? Context.SignOutAsync(target, properties)
-          : HandleSignOutAsync(properties ?? new AuthenticationProperties());
+            ? Context.SignOutAsync(target, properties)
+            : HandleSignOutAsync(properties ?? new AuthenticationProperties());
     }
 
     /// <summary>

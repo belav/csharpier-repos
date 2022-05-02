@@ -162,8 +162,8 @@ namespace System.IO.Compression
             EnsureNotDisposed();
 
             return cancellationToken.IsCancellationRequested
-              ? ValueTask.FromCanceled(cancellationToken)
-              : WriteAsyncMemoryCore(buffer, cancellationToken);
+                ? ValueTask.FromCanceled(cancellationToken)
+                : WriteAsyncMemoryCore(buffer, cancellationToken);
         }
 
         private async ValueTask WriteAsyncMemoryCore(
@@ -249,8 +249,8 @@ namespace System.IO.Compression
                 return Task.FromCanceled(cancellationToken);
 
             return _mode != CompressionMode.Compress
-              ? Task.CompletedTask
-              : FlushAsyncCore(cancellationToken);
+                ? Task.CompletedTask
+                : FlushAsyncCore(cancellationToken);
         }
 
         private async Task FlushAsyncCore(CancellationToken cancellationToken)

@@ -423,8 +423,8 @@ namespace Internal.TypeSystem
                 // Must be class or valuetype
                 blobBuilder.WriteByte(
                     type.IsValueType
-                      ? (byte)SignatureTypeKind.ValueType
-                      : (byte)SignatureTypeKind.Class
+                        ? (byte)SignatureTypeKind.ValueType
+                        : (byte)SignatureTypeKind.Class
                 );
                 int codedIndex = CodedIndex.TypeDefOrRef(GetTypeRef(metadataType));
                 blobBuilder.WriteCompressedInteger(codedIndex);

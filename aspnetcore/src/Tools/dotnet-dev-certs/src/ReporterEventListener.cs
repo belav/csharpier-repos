@@ -29,11 +29,11 @@ internal class ReporterEventListener : EventListener
             EventLevel.Informational => _reporter.Output,
             EventLevel.Verbose => _reporter.Verbose,
             _
-              => throw new ArgumentOutOfRangeException(
-                  nameof(eventData),
-                  eventData.Level,
-                  $"The value of argument '{nameof(eventData.Level)}' ({eventData.Level}) is invalid for Enum type '{nameof(EventLevel)}'."
-              )
+                => throw new ArgumentOutOfRangeException(
+                    nameof(eventData),
+                    eventData.Level,
+                    $"The value of argument '{nameof(eventData.Level)}' ({eventData.Level}) is invalid for Enum type '{nameof(EventLevel)}'."
+                )
         };
         var message = string.Format(
             CultureInfo.InvariantCulture,

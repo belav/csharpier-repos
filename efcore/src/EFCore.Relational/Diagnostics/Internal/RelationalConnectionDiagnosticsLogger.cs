@@ -21,7 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
     /// </summary>
     public class RelationalConnectionDiagnosticsLogger
         : DiagnosticsLogger<DbLoggerCategory.Database.Connection>,
-          IRelationalConnectionDiagnosticsLogger
+            IRelationalConnectionDiagnosticsLogger
     {
         private DateTimeOffset _suppressOpenExpiration;
         private DateTimeOffset _suppressCloseExpiration;

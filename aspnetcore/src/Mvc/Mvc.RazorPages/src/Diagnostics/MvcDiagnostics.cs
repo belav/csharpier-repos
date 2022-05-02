@@ -69,10 +69,10 @@ public sealed class BeforeHandlerMethodEventData : EventData
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
             1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
             2
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerMethodDescriptor),
-                  HandlerMethodDescriptor
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerMethodDescriptor),
+                    HandlerMethodDescriptor
+                ),
             3 => new KeyValuePair<string, object>(nameof(Instance), Instance),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -146,10 +146,10 @@ public sealed class AfterHandlerMethodEventData : EventData
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
             1 => new KeyValuePair<string, object>(nameof(Arguments), Arguments),
             2
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerMethodDescriptor),
-                  HandlerMethodDescriptor
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerMethodDescriptor),
+                    HandlerMethodDescriptor
+                ),
             3 => new KeyValuePair<string, object>(nameof(Instance), Instance),
             4 => new KeyValuePair<string, object>(nameof(Result), Result!),
             _ => throw new IndexOutOfRangeException(nameof(index))
@@ -207,10 +207,10 @@ public sealed class BeforePageFilterOnPageHandlerExecutionEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerExecutionContext),
-                  HandlerExecutionContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutionContext),
+                    HandlerExecutionContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -267,10 +267,10 @@ public sealed class AfterPageFilterOnPageHandlerExecutionEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerExecutedContext),
-                  HandlerExecutedContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutedContext),
+                    HandlerExecutedContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -327,10 +327,10 @@ public sealed class BeforePageFilterOnPageHandlerExecutingEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerExecutingContext),
-                  HandlerExecutingContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutingContext),
+                    HandlerExecutingContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -388,10 +388,10 @@ public sealed class AfterPageFilterOnPageHandlerExecutingEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerExecutingContext),
-                  HandlerExecutingContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutingContext),
+                    HandlerExecutingContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -448,10 +448,10 @@ public sealed class BeforePageFilterOnPageHandlerExecutedEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerExecutedContext),
-                  HandlerExecutedContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutedContext),
+                    HandlerExecutedContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -508,10 +508,10 @@ public sealed class AfterPageFilterOnPageHandlerExecutedEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerExecutedContext),
-                  HandlerExecutedContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerExecutedContext),
+                    HandlerExecutedContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -568,10 +568,10 @@ public sealed class BeforePageFilterOnPageHandlerSelectionEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerSelectedContext),
-                  HandlerSelectedContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -628,10 +628,10 @@ public sealed class AfterPageFilterOnPageHandlerSelectionEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerSelectedContext),
-                  HandlerSelectedContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -688,10 +688,10 @@ public sealed class BeforePageFilterOnPageHandlerSelectedEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerSelectedContext),
-                  HandlerSelectedContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };
@@ -749,10 +749,10 @@ public sealed class AfterPageFilterOnPageHandlerSelectedEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
             1
-              => new KeyValuePair<string, object>(
-                  nameof(HandlerSelectedContext),
-                  HandlerSelectedContext
-              ),
+                => new KeyValuePair<string, object>(
+                    nameof(HandlerSelectedContext),
+                    HandlerSelectedContext
+                ),
             2 => new KeyValuePair<string, object>(nameof(Filter), Filter),
             _ => throw new IndexOutOfRangeException(nameof(index))
         };

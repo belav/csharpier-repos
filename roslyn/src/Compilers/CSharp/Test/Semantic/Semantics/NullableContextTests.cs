@@ -979,8 +979,8 @@ static class B
         )
         {
             return currentState == NullableContextState.State.Unknown
-              ? previousState
-              : currentState;
+                ? previousState
+                : currentState;
         }
 
         private static bool IsNullableEnabled(
@@ -3036,8 +3036,8 @@ string";
                 expectedWarningsState,
                 isNullableEnabledForProject
             )
-              ? Microsoft.CodeAnalysis.NullableAnnotation.NotAnnotated
-              : Microsoft.CodeAnalysis.NullableAnnotation.None;
+                ? Microsoft.CodeAnalysis.NullableAnnotation.NotAnnotated
+                : Microsoft.CodeAnalysis.NullableAnnotation.None;
 
             VerifySpeculativeSemanticModel(source, projectContext, typeName, expectedAnnotation);
         }

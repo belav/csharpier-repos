@@ -85,11 +85,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     oldSyntaxDiagnostic == null
                         ? oldDiagnostic
                         : new SyntaxDiagnosticInfo(
-                              oldSyntaxDiagnostic.Offset + diagnosticOffsetDelta,
-                              oldSyntaxDiagnostic.Width,
-                              (ErrorCode)oldSyntaxDiagnostic.Code,
-                              oldSyntaxDiagnostic.Arguments
-                          );
+                            oldSyntaxDiagnostic.Offset + diagnosticOffsetDelta,
+                            oldSyntaxDiagnostic.Width,
+                            (ErrorCode)oldSyntaxDiagnostic.Code,
+                            oldSyntaxDiagnostic.Arguments
+                        );
             }
             return node.WithDiagnosticsGreen(newDiagnostics);
         }

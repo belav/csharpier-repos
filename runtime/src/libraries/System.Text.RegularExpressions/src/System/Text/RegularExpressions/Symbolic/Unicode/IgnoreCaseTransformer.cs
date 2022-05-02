@@ -72,30 +72,30 @@ namespace System.Text.RegularExpressions.Symbolic.Unicode
 
                 case 'i':
                     return culture == string.Empty
-                      ? _i_Invariant
-                      : IsTurkishAlphabet(culture)
-                          ? _i_Turkish
-                          : _i_Default; // for all other cultures, case-sensitivity is the same as for en-US
+                        ? _i_Invariant
+                        : IsTurkishAlphabet(culture)
+                            ? _i_Turkish
+                            : _i_Default; // for all other cultures, case-sensitivity is the same as for en-US
 
                 case 'I':
                     return culture == string.Empty
-                      ? _i_Invariant
-                      : IsTurkishAlphabet(culture)
-                          ? _I_Turkish
-                          : // different from 'i' above
+                        ? _i_Invariant
+                        : IsTurkishAlphabet(culture)
+                            ? _I_Turkish
+                            : // different from 'i' above
                             _i_Default;
 
                 case Turkish_I_WithDot:
                     return culture == string.Empty
-                      ? _solver.CharConstraint(Turkish_I_WithDot)
-                      : IsTurkishAlphabet(culture)
-                          ? _i_Turkish
-                          : _i_Default;
+                        ? _solver.CharConstraint(Turkish_I_WithDot)
+                        : IsTurkishAlphabet(culture)
+                            ? _i_Turkish
+                            : _i_Default;
 
                 case Turkish_i_WithoutDot:
                     return IsTurkishAlphabet(culture)
-                      ? _I_Turkish
-                      : _solver.CharConstraint(Turkish_i_WithoutDot);
+                        ? _I_Turkish
+                        : _solver.CharConstraint(Turkish_i_WithoutDot);
 
                 case 'k':
                 case 'K':

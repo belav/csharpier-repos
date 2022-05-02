@@ -1433,9 +1433,9 @@ namespace System.Data
 
     public partial class DataRowView
         : System.ComponentModel.ICustomTypeDescriptor,
-          System.ComponentModel.IDataErrorInfo,
-          System.ComponentModel.IEditableObject,
-          System.ComponentModel.INotifyPropertyChanged
+            System.ComponentModel.IDataErrorInfo,
+            System.ComponentModel.IEditableObject,
+            System.ComponentModel.INotifyPropertyChanged
     {
         internal DataRowView() { }
 
@@ -1635,11 +1635,11 @@ namespace System.Data
     )]
     public partial class DataSet
         : System.ComponentModel.MarshalByValueComponent,
-          System.ComponentModel.IListSource,
-          System.ComponentModel.ISupportInitialize,
-          System.ComponentModel.ISupportInitializeNotification,
-          System.Runtime.Serialization.ISerializable,
-          System.Xml.Serialization.IXmlSerializable
+            System.ComponentModel.IListSource,
+            System.ComponentModel.ISupportInitialize,
+            System.ComponentModel.ISupportInitializeNotification,
+            System.Runtime.Serialization.ISerializable,
+            System.Xml.Serialization.IXmlSerializable
     {
         public DataSet() { }
 
@@ -2248,11 +2248,11 @@ namespace System.Data
     )]
     public partial class DataTable
         : System.ComponentModel.MarshalByValueComponent,
-          System.ComponentModel.IListSource,
-          System.ComponentModel.ISupportInitialize,
-          System.ComponentModel.ISupportInitializeNotification,
-          System.Runtime.Serialization.ISerializable,
-          System.Xml.Serialization.IXmlSerializable
+            System.ComponentModel.IListSource,
+            System.ComponentModel.ISupportInitialize,
+            System.ComponentModel.ISupportInitializeNotification,
+            System.Runtime.Serialization.ISerializable,
+            System.Xml.Serialization.IXmlSerializable
     {
         protected internal bool fInitInProgress;
 
@@ -3261,14 +3261,14 @@ namespace System.Data
     )]
     public partial class DataView
         : System.ComponentModel.MarshalByValueComponent,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.ComponentModel.IBindingList,
-          System.ComponentModel.IBindingListView,
-          System.ComponentModel.ISupportInitialize,
-          System.ComponentModel.ISupportInitializeNotification,
-          System.ComponentModel.ITypedList
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.ComponentModel.IBindingList,
+            System.ComponentModel.IBindingListView,
+            System.ComponentModel.ISupportInitialize,
+            System.ComponentModel.ISupportInitializeNotification,
+            System.ComponentModel.ITypedList
     {
         public DataView() { }
 
@@ -3623,11 +3623,11 @@ namespace System.Data
     )]
     public partial class DataViewManager
         : System.ComponentModel.MarshalByValueComponent,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.ComponentModel.IBindingList,
-          System.ComponentModel.ITypedList
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.ComponentModel.IBindingList,
+            System.ComponentModel.ITypedList
     {
         public DataViewManager() { }
 
@@ -3884,7 +3884,7 @@ namespace System.Data
     )]
     public partial class DataViewSettingCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal DataViewSettingCollection() { }
 
@@ -4145,8 +4145,8 @@ namespace System.Data
 
     public partial class EnumerableRowCollection<TRow>
         : System.Data.EnumerableRowCollection,
-          System.Collections.Generic.IEnumerable<TRow>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<TRow>,
+            System.Collections.IEnumerable
     {
         internal EnumerableRowCollection() { }
 
@@ -4319,8 +4319,8 @@ namespace System.Data
 
     public partial interface IColumnMappingCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         object this[string index] { get; set; }
         System.Data.IColumnMapping Add(string sourceColumnName, string dataSetColumnName);
@@ -4369,8 +4369,8 @@ namespace System.Data
 
     public partial interface IDataParameterCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         object this[string parameterName] { get; set; }
         bool Contains(string parameterName);
@@ -4496,7 +4496,7 @@ namespace System.Data
 
     public partial class InternalDataCollectionBase
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public InternalDataCollectionBase() { }
 
@@ -4584,8 +4584,8 @@ namespace System.Data
 
     public partial interface ITableMappingCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         object this[string index] { get; set; }
         System.Data.ITableMapping Add(string sourceTableName, string dataSetTableName);
@@ -4938,8 +4938,8 @@ namespace System.Data
 
     public abstract partial class TypedTableBase<T>
         : System.Data.DataTable,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable where T : System.Data.DataRow
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.IEnumerable where T : System.Data.DataRow
     {
         protected TypedTableBase() { }
 
@@ -5301,8 +5301,8 @@ namespace System.Data.Common
 
     public sealed partial class DataColumnMapping
         : System.MarshalByRefObject,
-          System.Data.IColumnMapping,
-          System.ICloneable
+            System.Data.IColumnMapping,
+            System.ICloneable
     {
         public DataColumnMapping() { }
 
@@ -5371,10 +5371,10 @@ namespace System.Data.Common
 
     public sealed partial class DataColumnMappingCollection
         : System.MarshalByRefObject,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Data.IColumnMappingCollection
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Data.IColumnMappingCollection
     {
         public DataColumnMappingCollection() { }
 
@@ -5549,8 +5549,8 @@ namespace System.Data.Common
 
     public sealed partial class DataTableMapping
         : System.MarshalByRefObject,
-          System.Data.ITableMapping,
-          System.ICloneable
+            System.Data.ITableMapping,
+            System.ICloneable
     {
         public DataTableMapping() { }
 
@@ -5648,10 +5648,10 @@ namespace System.Data.Common
     [System.ComponentModel.ListBindableAttribute(false)]
     public sealed partial class DataTableMappingCollection
         : System.MarshalByRefObject,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Data.ITableMappingCollection
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Data.ITableMappingCollection
     {
         public DataTableMappingCollection() { }
 
@@ -6052,9 +6052,9 @@ namespace System.Data.Common
 
     public abstract partial class DbCommand
         : System.ComponentModel.Component,
-          System.Data.IDbCommand,
-          System.IDisposable,
-          System.IAsyncDisposable
+            System.Data.IDbCommand,
+            System.IDisposable,
+            System.IAsyncDisposable
     {
         protected DbCommand() { }
 
@@ -6394,9 +6394,9 @@ namespace System.Data.Common
 
     public abstract partial class DbConnection
         : System.ComponentModel.Component,
-          System.Data.IDbConnection,
-          System.IDisposable,
-          System.IAsyncDisposable
+            System.Data.IDbConnection,
+            System.IDisposable,
+            System.IAsyncDisposable
     {
         protected DbConnection() { }
 
@@ -6598,9 +6598,9 @@ namespace System.Data.Common
     )]
     public partial class DbConnectionStringBuilder
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable,
-          System.ComponentModel.ICustomTypeDescriptor
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable,
+            System.ComponentModel.ICustomTypeDescriptor
     {
         public DbConnectionStringBuilder() { }
 
@@ -6851,9 +6851,9 @@ namespace System.Data.Common
 
     public abstract partial class DbDataAdapter
         : System.Data.Common.DataAdapter,
-          System.Data.IDataAdapter,
-          System.Data.IDbDataAdapter,
-          System.ICloneable
+            System.Data.IDataAdapter,
+            System.Data.IDbDataAdapter,
+            System.ICloneable
     {
         public const string DefaultSourceTableName = "Table";
 
@@ -7174,11 +7174,11 @@ namespace System.Data.Common
 
     public abstract partial class DbDataReader
         : System.MarshalByRefObject,
-          System.Collections.IEnumerable,
-          System.Data.IDataReader,
-          System.Data.IDataRecord,
-          System.IDisposable,
-          System.IAsyncDisposable
+            System.Collections.IEnumerable,
+            System.Data.IDataReader,
+            System.Data.IDataRecord,
+            System.IDisposable,
+            System.IAsyncDisposable
     {
         protected DbDataReader() { }
 
@@ -7405,7 +7405,7 @@ namespace System.Data.Common
 
     public abstract partial class DbDataRecord
         : System.ComponentModel.ICustomTypeDescriptor,
-          System.Data.IDataRecord
+            System.Data.IDataRecord
     {
         protected DbDataRecord() { }
 
@@ -7670,8 +7670,8 @@ namespace System.Data.Common
 
     public abstract partial class DbParameter
         : System.MarshalByRefObject,
-          System.Data.IDataParameter,
-          System.Data.IDbDataParameter
+            System.Data.IDataParameter,
+            System.Data.IDbDataParameter
     {
         protected DbParameter() { }
 
@@ -7756,10 +7756,10 @@ namespace System.Data.Common
 
     public abstract partial class DbParameterCollection
         : System.MarshalByRefObject,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Data.IDataParameterCollection
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Data.IDataParameterCollection
     {
         protected DbParameterCollection() { }
 
@@ -8046,9 +8046,9 @@ namespace System.Data.Common
 
     public abstract partial class DbTransaction
         : System.MarshalByRefObject,
-          System.Data.IDbTransaction,
-          System.IDisposable,
-          System.IAsyncDisposable
+            System.Data.IDbTransaction,
+            System.IDisposable,
+            System.IAsyncDisposable
     {
         protected DbTransaction() { }
 
@@ -8318,8 +8318,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlBinary
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -8536,8 +8536,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlBoolean
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlBoolean False;
@@ -8918,8 +8918,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlByte
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlByte MaxValue;
@@ -9353,8 +9353,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public sealed partial class SqlBytes
         : System.Data.SqlTypes.INullable,
-          System.Runtime.Serialization.ISerializable,
-          System.Xml.Serialization.IXmlSerializable
+            System.Runtime.Serialization.ISerializable,
+            System.Xml.Serialization.IXmlSerializable
     {
         public SqlBytes() { }
 
@@ -9458,8 +9458,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public sealed partial class SqlChars
         : System.Data.SqlTypes.INullable,
-          System.Runtime.Serialization.ISerializable,
-          System.Xml.Serialization.IXmlSerializable
+            System.Runtime.Serialization.ISerializable,
+            System.Xml.Serialization.IXmlSerializable
     {
         public SqlChars() { }
 
@@ -9568,8 +9568,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlDateTime
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlDateTime MaxValue;
@@ -9844,8 +9844,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlDecimal
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly byte MaxPrecision;
@@ -10333,8 +10333,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlDouble
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlDouble MaxValue;
@@ -10691,8 +10691,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlGuid
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -10926,8 +10926,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlInt16
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlInt16 MaxValue;
@@ -11366,8 +11366,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlInt32
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlInt32 MaxValue;
@@ -11806,8 +11806,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlInt64
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlInt64 MaxValue;
@@ -12246,8 +12246,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlMoney
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlMoney MaxValue;
@@ -12667,8 +12667,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlSingle
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private int _dummyPrimitive;
         public static readonly System.Data.SqlTypes.SqlSingle MaxValue;
@@ -13030,8 +13030,8 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public partial struct SqlString
         : System.Data.SqlTypes.INullable,
-          System.IComparable,
-          System.Xml.Serialization.IXmlSerializable
+            System.IComparable,
+            System.Xml.Serialization.IXmlSerializable
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -13483,7 +13483,7 @@ namespace System.Data.SqlTypes
     [System.Xml.Serialization.XmlSchemaProviderAttribute("GetXsdType")]
     public sealed partial class SqlXml
         : System.Data.SqlTypes.INullable,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public SqlXml() { }
 

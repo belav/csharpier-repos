@@ -15,8 +15,8 @@ namespace System.Linq
             }
 
             return source is IIListProvider<TSource> arrayProvider
-              ? arrayProvider.ToArray()
-              : EnumerableHelpers.ToArray(source);
+                ? arrayProvider.ToArray()
+                : EnumerableHelpers.ToArray(source);
         }
 
         public static List<TSource> ToList<TSource>(this IEnumerable<TSource> source)
@@ -27,8 +27,8 @@ namespace System.Linq
             }
 
             return source is IIListProvider<TSource> listProvider
-              ? listProvider.ToList()
-              : new List<TSource>(source);
+                ? listProvider.ToList()
+                : new List<TSource>(source);
         }
 
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(

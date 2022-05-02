@@ -129,10 +129,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             Check.NotNull(logger, nameof(logger));
 
             return method.DeclaringType == typeof(DateTime)
-              ? TranslateDateTime(instance, method, arguments)
-              : method.DeclaringType == typeof(DateOnly)
-                  ? TranslateDateOnly(instance, method, arguments)
-                  : null;
+                ? TranslateDateTime(instance, method, arguments)
+                : method.DeclaringType == typeof(DateOnly)
+                    ? TranslateDateOnly(instance, method, arguments)
+                    : null;
         }
 
         private SqlExpression? TranslateDateTime(

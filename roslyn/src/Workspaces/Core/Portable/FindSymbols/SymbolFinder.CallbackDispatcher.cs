@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteSymbolFinderService)), Shared]
         internal sealed class CallbackDispatcher
             : RemoteServiceCallbackDispatcher,
-              IRemoteSymbolFinderService.ICallback
+                IRemoteSymbolFinderService.ICallback
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

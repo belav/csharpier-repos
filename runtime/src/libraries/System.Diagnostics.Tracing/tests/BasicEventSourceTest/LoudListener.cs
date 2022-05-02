@@ -31,8 +31,8 @@ namespace BasicEventSourceTests
                     " (activity {0}{1}) ",
                     eventData.ActivityId,
                     eventData.RelatedActivityId != Guid.Empty
-                      ? "->" + eventData.RelatedActivityId
-                      : ""
+                        ? "->" + eventData.RelatedActivityId
+                        : ""
                 )
             );
             Debug.WriteLine(

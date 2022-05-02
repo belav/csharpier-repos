@@ -45,8 +45,8 @@ namespace Internal.Cryptography
             {
                 ret = Interop.AppleCrypto.CryptorCreate(
                     encrypting
-                      ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
-                      : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
+                        ? Interop.AppleCrypto.PAL_SymmetricOperation.Encrypt
+                        : Interop.AppleCrypto.PAL_SymmetricOperation.Decrypt,
                     algorithm,
                     GetPalChainMode(algorithm, cipherMode, feedbackSizeInBytes),
                     Interop.AppleCrypto.PAL_PaddingMode.None,
@@ -188,9 +188,9 @@ namespace Internal.Cryptography
                 CipherMode.CFB when feedbackSizeInBytes == 1 => PAL_ChainingMode.CFB8,
                 CipherMode.CFB => PAL_ChainingMode.CFB,
                 _
-                  => throw new PlatformNotSupportedException(
-                      SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode)
-                  ),
+                    => throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_CipherModeNotSupported, cipherMode)
+                    ),
             };
         }
 

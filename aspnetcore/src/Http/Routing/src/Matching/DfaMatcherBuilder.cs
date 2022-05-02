@@ -865,11 +865,11 @@ internal class DfaMatcherBuilder : MatcherBuilder
                             parameterPart.Default != null || parameterPart.IsCatchAll;
                         _slots.Add(
                             hasDefaultValue
-                              ? new KeyValuePair<string, object>(
+                                ? new KeyValuePair<string, object>(
                                     parameterPart.Name,
                                     parameterPart.Default
                                 )
-                              : default
+                                : default
                         );
                     }
                 }

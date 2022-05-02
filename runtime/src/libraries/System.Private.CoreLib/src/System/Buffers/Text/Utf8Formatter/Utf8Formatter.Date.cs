@@ -114,12 +114,12 @@ namespace System.Buffers.Text
                 'R' => TryFormatDateTimeR(value.UtcDateTime, destination, out bytesWritten),
                 'l' => TryFormatDateTimeL(value.UtcDateTime, destination, out bytesWritten),
                 'O'
-                  => TryFormatDateTimeO(
-                      value.DateTime,
-                      value.Offset,
-                      destination,
-                      out bytesWritten
-                  ),
+                    => TryFormatDateTimeO(
+                        value.DateTime,
+                        value.Offset,
+                        destination,
+                        out bytesWritten
+                    ),
                 'G' => TryFormatDateTimeG(value.DateTime, offset, destination, out bytesWritten),
                 _ => FormattingHelpers.TryFormatThrowFormatException(out bytesWritten),
             };
@@ -160,19 +160,19 @@ namespace System.Buffers.Text
                 'R' => TryFormatDateTimeR(value, destination, out bytesWritten),
                 'l' => TryFormatDateTimeL(value, destination, out bytesWritten),
                 'O'
-                  => TryFormatDateTimeO(
-                      value,
-                      Utf8Constants.NullUtcOffset,
-                      destination,
-                      out bytesWritten
-                  ),
+                    => TryFormatDateTimeO(
+                        value,
+                        Utf8Constants.NullUtcOffset,
+                        destination,
+                        out bytesWritten
+                    ),
                 'G'
-                  => TryFormatDateTimeG(
-                      value,
-                      Utf8Constants.NullUtcOffset,
-                      destination,
-                      out bytesWritten
-                  ),
+                    => TryFormatDateTimeG(
+                        value,
+                        Utf8Constants.NullUtcOffset,
+                        destination,
+                        out bytesWritten
+                    ),
                 _ => FormattingHelpers.TryFormatThrowFormatException(out bytesWritten),
             };
         }

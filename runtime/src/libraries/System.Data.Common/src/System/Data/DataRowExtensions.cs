@@ -150,7 +150,7 @@ namespace System.Data
                     return
                         typeof(T).IsGenericType
                         && typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>)
-                      ? (Converter<object, T>)
+                        ? (Converter<object, T>)
                             Delegate.CreateDelegate(
                                 typeof(Converter<object, T>),
                                 typeof(UnboxT<T>)
@@ -161,7 +161,7 @@ namespace System.Data
                                     )!
                                     .MakeGenericMethod(typeof(T).GetGenericArguments()[0])
                             )
-                      : ValueField;
+                        : ValueField;
                 }
 
                 return ReferenceField;
@@ -173,8 +173,8 @@ namespace System.Data
             private static T ValueField(object value) =>
                 value == DBNull.Value
                     ? throw DataSetUtil.InvalidCast(
-                          SR.Format(SR.DataSetLinq_NonNullableCast, typeof(T))
-                      )
+                        SR.Format(SR.DataSetLinq_NonNullableCast, typeof(T))
+                    )
                     : (T)value;
 
             private static Nullable<TElem> NullableField<TElem>(object value)

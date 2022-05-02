@@ -64,7 +64,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             flags
                         );
                     case VariableDeclaratorSyntax variableDeclarator
-                          when symbol.Kind == SymbolKind.Field:
+                    when symbol.Kind == SymbolKind.Field:
                         return GetVariablePrototype(
                             variableDeclarator,
                             (IFieldSymbol)symbol,

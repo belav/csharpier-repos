@@ -228,8 +228,8 @@ namespace System.Web.Http.Batch
                     request.RequestUri == null
                         ? await httpContent.ReadAsHttpRequestMessageAsync()
                         : await httpContent.ReadAsHttpRequestMessageAsync(
-                              request.RequestUri.Scheme
-                          );
+                            request.RequestUri.Scheme
+                        );
                 innerRequest.CopyBatchRequestProperties(request);
                 requests.Add(innerRequest);
             }

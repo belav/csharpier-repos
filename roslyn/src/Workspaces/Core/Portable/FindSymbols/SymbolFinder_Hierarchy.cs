@@ -208,8 +208,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                             // make sure that the interface even contains a symbol with the same
                             // name as the symbol we're looking for.
                             var nameToLookFor = symbol.IsPropertyAccessor()
-                              ? ((IMethodSymbol)symbol).AssociatedSymbol.Name
-                              : symbol.Name;
+                                ? ((IMethodSymbol)symbol).AssociatedSymbol.Name
+                                : symbol.Name;
                             if (interfaceType.MemberNames.Contains(nameToLookFor))
                             {
                                 foreach (var m in interfaceType.GetMembers(symbol.Name))

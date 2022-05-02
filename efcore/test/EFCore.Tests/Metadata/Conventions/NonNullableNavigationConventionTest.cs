@@ -181,8 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             CreateNotNullNavigationConvention().ProcessNavigationAdded(navigation.Builder, context);
             return context.ShouldStopProcessing()
-              ? (Navigation)context.Result?.Metadata
-              : navigation;
+                ? (Navigation)context.Result?.Metadata
+                : navigation;
         }
 
         private NonNullableNavigationConvention CreateNotNullNavigationConvention() =>

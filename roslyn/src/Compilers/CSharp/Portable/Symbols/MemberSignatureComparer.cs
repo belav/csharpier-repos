@@ -705,8 +705,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var typeParameters = member.GetMemberTypeParameters();
             return typeParameters.IsEmpty
-              ? null
-              : new TypeMap(
+                ? null
+                : new TypeMap(
                     typeParameters,
                     IndexedTypeParameterSymbol.Take(member.GetMemberArity()),
                     true
@@ -997,8 +997,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             return typeMap == null
-              ? customModifiers
-              : typeMap.SubstituteCustomModifiers(customModifiers);
+                ? customModifiers
+                : typeMap.SubstituteCustomModifiers(customModifiers);
         }
 
         private static Cci.CallingConvention GetCallingConvention(Symbol member)

@@ -16,15 +16,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseNullPropagationDiagnosticAnalyzer
         : AbstractUseNullPropagationDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              ConditionalExpressionSyntax,
-              BinaryExpressionSyntax,
-              InvocationExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              ConditionalAccessExpressionSyntax,
-              ElementAccessExpressionSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            ConditionalExpressionSyntax,
+            BinaryExpressionSyntax,
+            InvocationExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            ConditionalAccessExpressionSyntax,
+            ElementAccessExpressionSyntax
+        >
     {
         protected override bool ShouldAnalyze(Compilation compilation) =>
             ((CSharpCompilation)compilation).LanguageVersion >= LanguageVersion.CSharp6;

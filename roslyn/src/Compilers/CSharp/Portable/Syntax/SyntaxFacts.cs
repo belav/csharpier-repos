@@ -549,11 +549,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             case AwaitExpressionSyntax _:
                             case LocalDeclarationStatementSyntax local
-                                  when local.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                            when local.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
                             case CommonForEachStatementSyntax @foreach
-                                  when @foreach.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                            when @foreach.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
                             case UsingStatementSyntax @using
-                                  when @using.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                            when @using.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
                                 return true;
                             default:
                                 return false;

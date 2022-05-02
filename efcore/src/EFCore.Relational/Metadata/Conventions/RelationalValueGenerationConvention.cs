@@ -18,8 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class RelationalValueGenerationConvention
         : ValueGenerationConvention,
-          IPropertyAnnotationChangedConvention,
-          IEntityTypeAnnotationChangedConvention
+            IPropertyAnnotationChangedConvention,
+            IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalValueGenerationConvention" />.
@@ -124,14 +124,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var oldLink =
                 oldTable != null
                     ? entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
-                          StoreObjectIdentifier.Table(oldTable, oldSchema)
-                      )
+                        StoreObjectIdentifier.Table(oldTable, oldSchema)
+                    )
                     : null;
             var newLink =
                 newTable != null
                     ? entityTypeBuilder.Metadata.FindRowInternalForeignKeys(
-                          StoreObjectIdentifier.Table(newTable, newSchema)
-                      )
+                        StoreObjectIdentifier.Table(newTable, newSchema)
+                    )
                     : null;
 
             if ((oldLink?.Any() != true && newLink?.Any() != true) || newLink == null)
@@ -183,7 +183,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     property.GetComputedColumnSql(storeObject) != null
                         ? ValueGenerated.OnAddOrUpdate
                         : property.TryGetDefaultValue(storeObject, out _)
-                          || property.GetDefaultValueSql(storeObject) != null
+                        || property.GetDefaultValueSql(storeObject) != null
                             ? ValueGenerated.OnAdd
                             : null
                 );

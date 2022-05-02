@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             get
             {
                 return DeclaringTypeId <= (int)SpecialType.Count
-                  ? ((SpecialType)DeclaringTypeId).GetMetadataName()
-                  : ((WellKnownType)DeclaringTypeId).GetMetadataName();
+                    ? ((SpecialType)DeclaringTypeId).GetMetadataName()
+                    : ((WellKnownType)DeclaringTypeId).GetMetadataName();
             }
         }
 

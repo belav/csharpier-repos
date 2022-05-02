@@ -4332,8 +4332,8 @@ WHERE [b].[Id] = 13"
                         ColumnName = reader.GetString(1),
                         DataType = reader.GetString(2),
                         IsNullable = reader.IsDBNull(3)
-                          ? null
-                          : (bool?)(reader.GetString(3) == "YES"),
+                            ? null
+                            : (bool?)(reader.GetString(3) == "YES"),
                         MaxLength = reader.IsDBNull(4) ? null : (int?)reader.GetInt32(4),
                         NumericPrecision = reader.IsDBNull(5) ? null : (int?)reader.GetByte(5),
                         NumericScale = reader.IsDBNull(6) ? null : (int?)reader.GetInt32(6),

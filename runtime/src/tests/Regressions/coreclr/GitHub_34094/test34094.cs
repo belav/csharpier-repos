@@ -673,7 +673,7 @@ class Test34094
             & TestAvxCompareGreaterThanOrEqualDouble()
             & TestAvxCompareNotGreaterThanDouble()
             & TestAvxCompareNotGreaterThanOrEqualDouble()
-          ? 100
-          : 0;
+            ? 100
+            : 0;
     }
 }

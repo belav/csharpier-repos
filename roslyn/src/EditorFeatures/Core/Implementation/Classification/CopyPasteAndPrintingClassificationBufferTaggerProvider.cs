@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
     [ContentType(ContentTypeNames.VisualBasicContentType)]
     internal partial class CopyPasteAndPrintingClassificationBufferTaggerProvider
         : ForegroundThreadAffinitizedObject,
-          ITaggerProvider
+            ITaggerProvider
     {
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly ClassificationTypeMap _typeMap;

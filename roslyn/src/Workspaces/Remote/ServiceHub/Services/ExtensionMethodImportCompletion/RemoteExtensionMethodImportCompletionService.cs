@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteExtensionMethodImportCompletionService
         : BrokeredServiceBase,
-          IRemoteExtensionMethodImportCompletionService
+            IRemoteExtensionMethodImportCompletionService
     {
         internal sealed class Factory : FactoryBase<IRemoteExtensionMethodImportCompletionService>
         {

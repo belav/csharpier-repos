@@ -8,7 +8,7 @@ namespace System.Web.Mvc
 {
     internal sealed class ViewMasterPageControlBuilder
         : FileLevelMasterPageControlBuilder,
-          IMvcControlBuilder
+            IMvcControlBuilder
     {
         public string Inherits { get; set; }
 

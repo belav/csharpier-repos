@@ -488,8 +488,8 @@ namespace Microsoft.CodeAnalysis.DocumentHighlighting
                         return
                             syntaxFacts.IsGenericName(token.Parent)
                             || syntaxFacts.IsIndexerMemberCRef(token.Parent)
-                          ? new DocumentSpan(document, token.Span)
-                          : new DocumentSpan(document, location.SourceSpan);
+                            ? new DocumentSpan(document, token.Span)
+                            : new DocumentSpan(document, location.SourceSpan);
                     }
                 }
             }

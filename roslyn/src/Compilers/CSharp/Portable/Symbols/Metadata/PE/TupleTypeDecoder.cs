@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 hasTupleElementNamesAttribute
             );
             return (object)decoded == (object)type
-              ? metadataType
-              : TypeWithAnnotations.Create(
+                ? metadataType
+                : TypeWithAnnotations.Create(
                     decoded,
                     metadataType.NullableAnnotation,
                     metadataType.CustomModifiers
@@ -385,8 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             TypeSymbol type = typeWithAnnotations.Type;
             TypeSymbol decoded = DecodeType(type);
             return ReferenceEquals(decoded, type)
-              ? typeWithAnnotations
-              : TypeWithAnnotations.Create(
+                ? typeWithAnnotations
+                : TypeWithAnnotations.Create(
                     decoded,
                     typeWithAnnotations.NullableAnnotation,
                     typeWithAnnotations.CustomModifiers

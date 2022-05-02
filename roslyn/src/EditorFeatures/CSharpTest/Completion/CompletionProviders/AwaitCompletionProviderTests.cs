@@ -58,13 +58,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         {
             var expectedDescription = dotAwait
                 ? GetDescription(
-                      CompletionDisplayTextAwait,
-                      FeaturesResources.Await_the_preceding_expression
-                  )
+                    CompletionDisplayTextAwait,
+                    FeaturesResources.Await_the_preceding_expression
+                )
                 : GetDescription(
-                      CompletionDisplayTextAwait,
-                      FeaturesResources.Asynchronously_waits_for_the_task_to_finish
-                  );
+                    CompletionDisplayTextAwait,
+                    FeaturesResources.Asynchronously_waits_for_the_task_to_finish
+                );
             await VerifyItemExistsAsync(
                 GetMarkup(code, languageVersion),
                 CompletionDisplayTextAwait,

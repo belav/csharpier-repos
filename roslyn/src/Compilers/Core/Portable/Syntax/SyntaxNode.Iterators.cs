@@ -22,10 +22,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return descendIntoTrivia
-              ? DescendantNodesAndTokensImpl(span, descendIntoChildren, true, includeSelf)
-                .Where(e => e.IsNode)
-                .Select(e => e.AsNode()!)
-              : DescendantNodesOnly(span, descendIntoChildren, includeSelf);
+                ? DescendantNodesAndTokensImpl(span, descendIntoChildren, true, includeSelf)
+                    .Where(e => e.IsNode)
+                    .Select(e => e.AsNode()!)
+                : DescendantNodesOnly(span, descendIntoChildren, includeSelf);
         }
 
         private IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokensImpl(
@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return descendIntoTrivia
-              ? DescendantNodesAndTokensIntoTrivia(span, descendIntoChildren, includeSelf)
-              : DescendantNodesAndTokensOnly(span, descendIntoChildren, includeSelf);
+                ? DescendantNodesAndTokensIntoTrivia(span, descendIntoChildren, includeSelf)
+                : DescendantNodesAndTokensOnly(span, descendIntoChildren, includeSelf);
         }
 
         private IEnumerable<SyntaxTrivia> DescendantTriviaImpl(
@@ -47,8 +47,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return descendIntoTrivia
-              ? DescendantTriviaIntoTrivia(span, descendIntoChildren)
-              : DescendantTriviaOnly(span, descendIntoChildren);
+                ? DescendantTriviaIntoTrivia(span, descendIntoChildren)
+                : DescendantTriviaOnly(span, descendIntoChildren);
         }
 
         private static bool IsInSpan(in TextSpan span, TextSpan childSpan)

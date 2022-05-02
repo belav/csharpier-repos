@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
     [ExportLanguageService(typeof(IAddAccessibilityModifiersService), LanguageNames.CSharp), Shared]
     internal class CSharpAddAccessibilityModifiersService
         : CSharpAddAccessibilityModifiers,
-          IAddAccessibilityModifiersService
+            IAddAccessibilityModifiersService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

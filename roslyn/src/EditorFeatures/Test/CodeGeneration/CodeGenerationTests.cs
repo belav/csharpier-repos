@@ -825,8 +825,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         )
         {
             return arrayRank == 0
-              ? compilation.GetTypeByMetadataName(typeFullName)
-              : compilation.CreateArrayTypeSymbol(
+                ? compilation.GetTypeByMetadataName(typeFullName)
+                : compilation.CreateArrayTypeSymbol(
                     compilation.GetTypeByMetadataName(typeFullName),
                     arrayRank
                 );
@@ -1191,8 +1191,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             public static string GetLanguage(string input)
             {
                 return ContainsVisualBasicKeywords(input)
-                  ? LanguageNames.VisualBasic
-                  : LanguageNames.CSharp;
+                    ? LanguageNames.VisualBasic
+                    : LanguageNames.CSharp;
             }
 
             private static bool ContainsVisualBasicKeywords(string input)
@@ -1215,12 +1215,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             )
             {
                 return isVisualBasic
-                  ? TestWorkspace.CreateVisualBasic(
+                    ? TestWorkspace.CreateVisualBasic(
                         file,
                         (VB.VisualBasicParseOptions)parseOptions,
                         (VB.VisualBasicCompilationOptions)compilationOptions
                     )
-                  : TestWorkspace.CreateCSharp(
+                    : TestWorkspace.CreateCSharp(
                         file,
                         (CS.CSharpParseOptions)parseOptions,
                         (CS.CSharpCompilationOptions)compilationOptions

@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.Configuration.Memory
     /// </summary>
     public class MemoryConfigurationProvider
         : ConfigurationProvider,
-          IEnumerable<KeyValuePair<string, string?>>
+            IEnumerable<KeyValuePair<string, string?>>
     {
         private readonly MemoryConfigurationSource _source;
 

@@ -403,18 +403,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Since we have a concrete member in hand, we can resolve the receiver.
                         var typeOrValue = (BoundTypeOrValueExpression)receiver;
                         receiver = otherSymbol.RequiresInstanceReceiver()
-                          ? typeOrValue.Data.ValueExpression
-                          : null; // no receiver required
+                            ? typeOrValue.Data.ValueExpression
+                            : null; // no receiver required
                     }
                     return new BoundBadExpression(
                         expr.Syntax,
                         methodGroup.ResultKind,
                         (object)otherSymbol == null
-                          ? ImmutableArray<Symbol>.Empty
-                          : ImmutableArray.Create(otherSymbol),
+                            ? ImmutableArray<Symbol>.Empty
+                            : ImmutableArray.Create(otherSymbol),
                         receiver == null
-                          ? ImmutableArray<BoundExpression>.Empty
-                          : ImmutableArray.Create(receiver),
+                            ? ImmutableArray<BoundExpression>.Empty
+                            : ImmutableArray.Create(receiver),
                         GetNonMethodMemberType(otherSymbol)
                     );
                 }
@@ -452,8 +452,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case BoundKind.TypeOrValueExpression:
                 case BoundKind.QueryClause
-                      when ((BoundQueryClause)expression).Value.Kind
-                          == BoundKind.TypeOrValueExpression:
+                when ((BoundQueryClause)expression).Value.Kind == BoundKind.TypeOrValueExpression:
                     return true;
                 default:
                     return false;
@@ -1112,16 +1111,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && (
                             Compilation.FeatureStrictEnabled
                                 ? TypeSymbol.Equals(
-                                      fieldSymbol.ContainingType,
-                                      containing.ContainingType,
-                                      TypeCompareKind.ConsiderEverything2
-                                  )
+                                    fieldSymbol.ContainingType,
+                                    containing.ContainingType,
+                                    TypeCompareKind.ConsiderEverything2
+                                )
                                 // We duplicate a bug in the native compiler for compatibility in non-strict mode
                                 : TypeSymbol.Equals(
-                                      fieldSymbol.ContainingType.OriginalDefinition,
-                                      containing.ContainingType.OriginalDefinition,
-                                      TypeCompareKind.ConsiderEverything2
-                                  )
+                                    fieldSymbol.ContainingType.OriginalDefinition,
+                                    containing.ContainingType.OriginalDefinition,
+                                    TypeCompareKind.ConsiderEverything2
+                                )
                         )
                     )
                     {
@@ -1496,8 +1495,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Error(
                         diagnostics,
                         valueKind == BindValueKind.RefOrOut
-                          ? ErrorCode.ERR_RefProperty
-                          : GetStandardLvalueError(valueKind),
+                            ? ErrorCode.ERR_RefProperty
+                            : GetStandardLvalueError(valueKind),
                         node,
                         propertySymbol
                     );
@@ -2014,21 +2013,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var valid =
                         effectiveRefKind != RefKind.None && isRefEscape
                             ? CheckRefEscape(
-                                  argument.Syntax,
-                                  argument,
-                                  escapeFrom,
-                                  escapeTo,
-                                  false,
-                                  diagnostics
-                              )
+                                argument.Syntax,
+                                argument,
+                                escapeFrom,
+                                escapeTo,
+                                false,
+                                diagnostics
+                            )
                             : CheckValEscape(
-                                  argument.Syntax,
-                                  argument,
-                                  escapeFrom,
-                                  escapeTo,
-                                  false,
-                                  diagnostics
-                              );
+                                argument.Syntax,
+                                argument,
+                                escapeFrom,
+                                escapeTo,
+                                false,
+                                diagnostics
+                            );
 
                     if (!valid)
                     {
@@ -2277,8 +2276,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // For now we are pessimistic and check escape if any accessor is non-readonly.
                     // Tracking in https://github.com/dotnet/roslyn/issues/35606
                     PropertySymbol p
-                      => p.GetMethod?.IsEffectivelyReadOnly != false
-                          && p.SetMethod?.IsEffectivelyReadOnly != false,
+                        => p.GetMethod?.IsEffectivelyReadOnly != false
+                            && p.SetMethod?.IsEffectivelyReadOnly != false,
                     _ => throw ExceptionUtilities.UnexpectedValue(methodOrPropertySymbol)
                 };
         }
@@ -2430,8 +2429,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BindValueKind.IncrementDecrement:
                     return isValueType
-                      ? ErrorCode.ERR_AssgReadonlyLocal
-                      : ErrorCode.ERR_IncrementLvalueExpected;
+                        ? ErrorCode.ERR_AssgReadonlyLocal
+                        : ErrorCode.ERR_IncrementLvalueExpected;
 
                 case BindValueKind.RefReturn:
                 case BindValueKind.ReadonlyRef:
@@ -2724,8 +2723,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // byval parameters can escape to method's top level. Others can escape further.
                     // NOTE: "method" here means nearest containing method, lambda or local function.
                     return parameter.RefKind == RefKind.None
-                      ? Binder.TopLevelScope
-                      : Binder.ExternalScope;
+                        ? Binder.TopLevelScope
+                        : Binder.ExternalScope;
 
                 case BoundKind.Local:
                     return ((BoundLocal)expr).LocalSymbol.RefEscapeScope;

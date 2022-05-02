@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE80.CodeElement2))]
     public sealed class ExternalCodeUnknown
         : AbstractExternalCodeElement,
-          EnvDTE.CodeElement,
-          EnvDTE80.CodeElement2
+            EnvDTE.CodeElement,
+            EnvDTE80.CodeElement2
     {
         internal static EnvDTE.CodeElement Create(
             CodeModelState state,

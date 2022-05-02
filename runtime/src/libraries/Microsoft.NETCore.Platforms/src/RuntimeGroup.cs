@@ -211,8 +211,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                     {
                         CreateRuntime(BaseRID),
                         IsNullOrRoot(Parent)
-                          ? CreateRuntime(qualifier)
-                          : CreateRuntime(Parent, qualifier: qualifier)
+                            ? CreateRuntime(qualifier)
+                            : CreateRuntime(Parent, qualifier: qualifier)
                     }
                 );
 

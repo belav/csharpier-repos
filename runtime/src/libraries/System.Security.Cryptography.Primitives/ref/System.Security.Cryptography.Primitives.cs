@@ -395,7 +395,7 @@ namespace System.Security.Cryptography
 
     public abstract partial class HashAlgorithm
         : System.IDisposable,
-          System.Security.Cryptography.ICryptoTransform
+            System.Security.Cryptography.ICryptoTransform
     {
         protected int HashSizeValue;
         protected internal byte[]? HashValue;

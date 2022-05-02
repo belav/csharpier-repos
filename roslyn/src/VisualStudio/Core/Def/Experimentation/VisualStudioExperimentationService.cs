@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
     [ExportWorkspaceService(typeof(IExperimentationService), ServiceLayer.Host), Shared]
     internal class VisualStudioExperimentationService
         : ForegroundThreadAffinitizedObject,
-          IExperimentationService
+            IExperimentationService
     {
         private readonly object _experimentationServiceOpt;
         private readonly MethodInfo _isCachedFlightEnabledInfo;

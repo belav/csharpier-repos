@@ -696,12 +696,12 @@ namespace System.Runtime.Serialization
                     xsdType.Annotation = GetSchemaAnnotation(
                         ExportSurrogateData(dataContract),
                         dataContract.IsValueType
-                          ? GetAnnotationMarkup(
+                            ? GetAnnotationMarkup(
                                 IsValueTypeName,
                                 XmlConvert.ToString(dataContract.IsValueType),
                                 schema!
                             )
-                          : null
+                            : null
                     );
                 }
             }

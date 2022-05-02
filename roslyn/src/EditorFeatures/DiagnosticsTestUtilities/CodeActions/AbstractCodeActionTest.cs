@@ -239,8 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             OptionsCallback?.Invoke(options);
             return new PickMembersResult(
                 MemberNames.IsDefault
-                  ? members
-                  : MemberNames.SelectAsArray(n => members.Single(m => m.Name == n)),
+                    ? members
+                    : MemberNames.SelectAsArray(n => members.Single(m => m.Name == n)),
                 options,
                 selectAll
             );

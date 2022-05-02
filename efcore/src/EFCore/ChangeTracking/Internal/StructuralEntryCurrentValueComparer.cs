@@ -53,8 +53,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             return
                 xValue is Array xArray && yValue is Array yArray && xArray.Length != yArray.Length
-              ? xArray.Length - yArray.Length
-              : base.ComparePropertyValues(xValue, yValue);
+                ? xArray.Length - yArray.Length
+                : base.ComparePropertyValues(xValue, yValue);
         }
     }
 }

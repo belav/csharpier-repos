@@ -800,7 +800,7 @@ namespace Microsoft.Extensions.Hosting.Tests
 
         private class HostingListener
             : IObserver<DiagnosticListener>,
-              IObserver<KeyValuePair<string, object?>>
+                IObserver<KeyValuePair<string, object?>>
         {
             private IDisposable? _disposable;
             private readonly Action<KeyValuePair<string, object?>> _callback;

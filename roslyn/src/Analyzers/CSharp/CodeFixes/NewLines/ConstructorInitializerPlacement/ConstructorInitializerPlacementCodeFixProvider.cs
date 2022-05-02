@@ -141,8 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
                 return previousToken.TrailingTrivia.All(
                     t => t.Kind() == SyntaxKind.WhitespaceTrivia
                 )
-                  ? previousToken.WithTrailingTrivia(allColonTrivia)
-                  : previousToken.WithAppendedTrailingTrivia(allColonTrivia);
+                    ? previousToken.WithTrailingTrivia(allColonTrivia)
+                    : previousToken.WithAppendedTrailingTrivia(allColonTrivia);
             }
         }
 

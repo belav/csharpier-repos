@@ -120,10 +120,10 @@ internal abstract class AbstractFileWriter
     protected static string OverrideOrNewModifier(Field field)
     {
         return IsOverride(field)
-          ? "override "
-          : IsNew(field)
-              ? "new "
-              : "";
+            ? "override "
+            : IsNew(field)
+                ? "new "
+                : "";
     }
 
     protected static bool CanBeField(Field field)
@@ -271,8 +271,8 @@ internal abstract class AbstractFileWriter
     protected string StripNode(string name)
     {
         return (_tree.Root.EndsWith("Node", StringComparison.Ordinal))
-          ? _tree.Root.Substring(0, _tree.Root.Length - 4)
-          : _tree.Root;
+            ? _tree.Root.Substring(0, _tree.Root.Length - 4)
+            : _tree.Root;
     }
 
     protected string StripRoot(string name)
@@ -288,8 +288,8 @@ internal abstract class AbstractFileWriter
     protected static string StripPost(string name, string post)
     {
         return name.EndsWith(post, StringComparison.Ordinal)
-          ? name.Substring(0, name.Length - post.Length)
-          : name;
+            ? name.Substring(0, name.Length - post.Length)
+            : name;
     }
 
     protected static bool IsKeyword(string name)

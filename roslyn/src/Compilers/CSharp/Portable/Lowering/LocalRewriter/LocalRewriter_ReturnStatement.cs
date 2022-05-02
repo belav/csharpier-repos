@@ -30,9 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         node.ExpressionOpt != null
                             ? IsLambdaOrExpressionBodiedMember
                             : (
-                                  node.Syntax.Kind() == SyntaxKind.Block
-                                  && _factory.CurrentFunction?.IsAsync == false
-                              )
+                                node.Syntax.Kind() == SyntaxKind.Block
+                                && _factory.CurrentFunction?.IsAsync == false
+                            )
                     )
                 )
             )

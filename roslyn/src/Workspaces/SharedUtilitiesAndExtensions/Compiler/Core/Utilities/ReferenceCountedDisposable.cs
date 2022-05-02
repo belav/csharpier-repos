@@ -55,7 +55,7 @@ namespace Roslyn.Utilities
     /// <typeparam name="T">The type of disposable object.</typeparam>
     internal sealed class ReferenceCountedDisposable<T>
         : IReferenceCountedDisposable<T>,
-          IDisposable where T : class, IDisposable
+            IDisposable where T : class, IDisposable
     {
         /// <summary>
         /// The target of this reference. This value is initialized to a non-<see langword="null"/> value in the

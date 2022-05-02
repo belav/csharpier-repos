@@ -142,8 +142,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                                 builder.AddOptional(
                                     TypeManager.CreateSynthesizedAttribute(
                                         signatureIndex == 0
-                                          ? WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctor
-                                          : WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctorByteByteInt32Int32Int32,
+                                            ? WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctor
+                                            : WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctorByteByteInt32Int32Int32,
                                         attrData,
                                         syntaxNodeOpt,
                                         diagnostics

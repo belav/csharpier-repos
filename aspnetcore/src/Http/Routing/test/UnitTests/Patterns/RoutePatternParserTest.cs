@@ -691,7 +691,7 @@ public class RoutePatternParameterParserTest
 
     private class RoutePatternEqualityComparer
         : IEqualityComparer<RoutePattern>,
-          IEqualityComparer<RoutePatternParameterPolicyReference>
+            IEqualityComparer<RoutePatternParameterPolicyReference>
     {
         public bool Equals(RoutePattern x, RoutePattern y)
         {

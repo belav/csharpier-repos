@@ -146,9 +146,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                     var resultCodeAction =
                         nestedActions.Count > 1
                             ? new TopLevelConfigureCodeStyleOptionCodeAction(
-                                  diagnostic,
-                                  nestedActions.ToImmutable()
-                              )
+                                diagnostic,
+                                nestedActions.ToImmutable()
+                            )
                             : nestedActions.Single();
 
                     result.Add(new CodeFix(project, resultCodeAction, diagnostic));
@@ -195,11 +195,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
                     // In that case, we will already have a containing top level action for the diagnostic.
                     // Otherwise, use the diagnostic information in the title.
                     return hasMultipleOptions
-                      ? new TopLevelConfigureCodeStyleOptionCodeAction(
+                        ? new TopLevelConfigureCodeStyleOptionCodeAction(
                             optionName,
                             nestedActions.ToImmutable()
                         )
-                      : new TopLevelConfigureCodeStyleOptionCodeAction(
+                        : new TopLevelConfigureCodeStyleOptionCodeAction(
                             diagnostic,
                             nestedActions.ToImmutable()
                         );

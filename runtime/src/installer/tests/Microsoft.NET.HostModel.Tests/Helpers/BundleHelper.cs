@@ -157,14 +157,14 @@ namespace BundleTests.Helpers
         public static Architecture GetTargetArch(string runtimeIdentifier)
         {
             return runtimeIdentifier.EndsWith("-x64") || runtimeIdentifier.Contains("-x64-")
-              ? Architecture.X64
-              : runtimeIdentifier.EndsWith("-x86") || runtimeIdentifier.Contains("-x86-")
-                  ? Architecture.X86
-                  : runtimeIdentifier.EndsWith("-arm64") || runtimeIdentifier.Contains("-arm64-")
-                      ? Architecture.Arm64
-                      : runtimeIdentifier.EndsWith("-arm") || runtimeIdentifier.Contains("-arm-")
-                          ? Architecture.Arm
-                          : throw new ArgumentException(nameof(runtimeIdentifier));
+                ? Architecture.X64
+                : runtimeIdentifier.EndsWith("-x86") || runtimeIdentifier.Contains("-x86-")
+                    ? Architecture.X86
+                    : runtimeIdentifier.EndsWith("-arm64") || runtimeIdentifier.Contains("-arm64-")
+                        ? Architecture.Arm64
+                        : runtimeIdentifier.EndsWith("-arm") || runtimeIdentifier.Contains("-arm-")
+                            ? Architecture.Arm
+                            : throw new ArgumentException(nameof(runtimeIdentifier));
         }
 
         /// Generate a bundle containind the (embeddable) files in sourceDir

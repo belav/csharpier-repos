@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 else
                 {
                     _ilEmitStyle = IsDebugPlus()
-                      ? ILEmitStyle.DebugFriendlyRelease
-                      : ILEmitStyle.Release;
+                        ? ILEmitStyle.DebugFriendlyRelease
+                        : ILEmitStyle.Release;
                 }
             }
 

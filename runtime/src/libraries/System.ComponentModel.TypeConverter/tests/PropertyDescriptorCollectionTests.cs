@@ -225,8 +225,8 @@ namespace System.ComponentModel.Tests
                                 p.Name,
                                 name,
                                 ignoreCase
-                                  ? StringComparison.OrdinalIgnoreCase
-                                  : StringComparison.Ordinal
+                                    ? StringComparison.OrdinalIgnoreCase
+                                    : StringComparison.Ordinal
                             )
                     );
 

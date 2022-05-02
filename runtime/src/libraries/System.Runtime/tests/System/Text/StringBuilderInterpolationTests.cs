@@ -542,8 +542,8 @@ namespace System.Text.Tests
 
         private sealed class SpanFormattableStringWrapper
             : IFormattable,
-              ISpanFormattable,
-              IHasToStringState
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly string _value;
             public ToStringState ToStringState { get; } = new ToStringState();
@@ -597,8 +597,8 @@ namespace System.Text.Tests
 
         private struct SpanFormattableInt32Wrapper
             : IFormattable,
-              ISpanFormattable,
-              IHasToStringState
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly int _value;
             public ToStringState ToStringState { get; }

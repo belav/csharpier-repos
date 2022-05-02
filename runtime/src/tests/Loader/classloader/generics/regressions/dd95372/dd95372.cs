@@ -32,13 +32,13 @@ public interface ISubIface<
     U /*=object*/
 >
     : IMembers<
-          T,
-          IMember<
-              T,
-              U /*=object*/
-          >,
-          object
-      >
+        T,
+        IMember<
+            T,
+            U /*=object*/
+        >,
+        object
+    >
     where T : IMember<
             IMember<
                 T,

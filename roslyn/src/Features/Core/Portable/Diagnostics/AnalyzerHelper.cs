@@ -64,8 +64,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             return options == null
-              ? descriptor.DefaultSeverity.ToReportDiagnostic()
-              : descriptor.GetEffectiveSeverity(options);
+                ? descriptor.DefaultSeverity.ToReportDiagnostic()
+                : descriptor.GetEffectiveSeverity(options);
         }
 
         public static (string analyzerId, VersionStamp version) GetAnalyzerIdAndVersion(
@@ -488,7 +488,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     AnalysisKind.Syntax => analyzer.AnalyzeSyntaxAsync(document, cancellationToken),
                     AnalysisKind.Semantic
-                      => analyzer.AnalyzeSemanticsAsync(document, cancellationToken),
+                        => analyzer.AnalyzeSemanticsAsync(document, cancellationToken),
                     _ => throw ExceptionUtilities.UnexpectedValue(kind),
                 };
 

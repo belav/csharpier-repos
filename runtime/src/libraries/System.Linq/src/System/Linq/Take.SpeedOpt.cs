@@ -17,10 +17,10 @@ namespace System.Linq
             Debug.Assert(count > 0);
 
             return source is IPartition<TSource> partition
-              ? partition.Take(count)
-              : source is IList<TSource> sourceList
-                  ? new ListPartition<TSource>(sourceList, 0, count - 1)
-                  : new EnumerablePartition<TSource>(source, 0, count - 1);
+                ? partition.Take(count)
+                : source is IList<TSource> sourceList
+                    ? new ListPartition<TSource>(sourceList, 0, count - 1)
+                    : new EnumerablePartition<TSource>(source, 0, count - 1);
         }
 
         private static IEnumerable<TSource> TakeRangeIterator<TSource>(
@@ -33,10 +33,10 @@ namespace System.Linq
             Debug.Assert(startIndex >= 0 && startIndex < endIndex);
 
             return source is IPartition<TSource> partition
-              ? TakePartitionRange(partition, startIndex, endIndex)
-              : source is IList<TSource> sourceList
-                  ? new ListPartition<TSource>(sourceList, startIndex, endIndex - 1)
-                  : new EnumerablePartition<TSource>(source, startIndex, endIndex - 1);
+                ? TakePartitionRange(partition, startIndex, endIndex)
+                : source is IList<TSource> sourceList
+                    ? new ListPartition<TSource>(sourceList, startIndex, endIndex - 1)
+                    : new EnumerablePartition<TSource>(source, startIndex, endIndex - 1);
 
             static IPartition<TSource> TakePartitionRange(
                 IPartition<TSource> partition,

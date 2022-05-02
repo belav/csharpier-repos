@@ -87,9 +87,9 @@ namespace System.Net.Http
             string altUsedValue = altUsedDefaultPort
                 ? authority.IdnHost
                 : string.Create(
-                      CultureInfo.InvariantCulture,
-                      $"{authority.IdnHost}:{authority.Port}"
-                  );
+                    CultureInfo.InvariantCulture,
+                    $"{authority.IdnHost}:{authority.Port}"
+                );
             _altUsedEncodedHeader =
                 QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(
                     KnownHeaders.AltUsed.Name,

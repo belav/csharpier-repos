@@ -31,11 +31,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     internal class VisualStudioTodoCommentsService
         : ForegroundThreadAffinitizedObject,
-          ITodoCommentsListener,
-          ITodoListProvider,
-          IVsTypeScriptTodoCommentService,
-          IEventListener<object>,
-          IDisposable
+            ITodoCommentsListener,
+            ITodoListProvider,
+            IVsTypeScriptTodoCommentService,
+            IEventListener<object>,
+            IDisposable
     {
         private readonly VisualStudioWorkspaceImpl _workspace;
         private readonly EventListenerTracker<ITodoListProvider> _eventListenerTracker;
@@ -183,8 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
                 var newComments = docAndComments.Comments;
 
                 var oldComments = _documentToInfos.TryGetValue(documentId, out var oldBoxedInfos)
-                  ? oldBoxedInfos
-                  : ImmutableArray<TodoCommentData>.Empty;
+                    ? oldBoxedInfos
+                    : ImmutableArray<TodoCommentData>.Empty;
 
                 // only one thread can be executing ProcessTodoCommentInfosAsync at a time,
                 // so it's safe to remove/add here.
@@ -243,8 +243,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
         )
         {
             return _documentToInfos.TryGetValue(documentId, out var values)
-              ? values
-              : ImmutableArray<TodoCommentData>.Empty;
+                ? values
+                : ImmutableArray<TodoCommentData>.Empty;
         }
 
         /// <summary>

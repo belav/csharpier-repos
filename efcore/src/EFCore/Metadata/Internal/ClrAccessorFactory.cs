@@ -48,15 +48,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var boundMethod =
                 propertyBase != null
                     ? _genericCreate.MakeGenericMethod(
-                          propertyBase.DeclaringType.ClrType,
-                          propertyBase.ClrType,
-                          propertyBase.ClrType.UnwrapNullableType()
-                      )
+                        propertyBase.DeclaringType.ClrType,
+                        propertyBase.ClrType,
+                        propertyBase.ClrType.UnwrapNullableType()
+                    )
                     : _genericCreate.MakeGenericMethod(
-                          memberInfo.DeclaringType!,
-                          memberInfo.GetMemberType(),
-                          memberInfo.GetMemberType().UnwrapNullableType()
-                      );
+                        memberInfo.DeclaringType!,
+                        memberInfo.GetMemberType(),
+                        memberInfo.GetMemberType().UnwrapNullableType()
+                    );
 
             try
             {

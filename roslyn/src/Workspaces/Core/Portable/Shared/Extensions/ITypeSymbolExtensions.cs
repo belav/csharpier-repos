@@ -167,9 +167,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 IEventSymbol eventSymbol => typeSymbol.FindImplementations(eventSymbol, workspace),
                 IMethodSymbol methodSymbol
-                  => typeSymbol.FindImplementations(methodSymbol, workspace),
+                    => typeSymbol.FindImplementations(methodSymbol, workspace),
                 IPropertySymbol propertySymbol
-                  => typeSymbol.FindImplementations(propertySymbol, workspace),
+                    => typeSymbol.FindImplementations(propertySymbol, workspace),
                 _ => null,
             };
 

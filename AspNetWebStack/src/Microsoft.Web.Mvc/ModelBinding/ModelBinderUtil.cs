@@ -54,9 +54,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 openModelType
             );
             return (typeArguments != null)
-              ? (IExtensibleModelBinder)
+                ? (IExtensibleModelBinder)
                     Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
-              : null;
+                : null;
         }
 
         public static object[] RawValueToObjectArray(object rawValue)

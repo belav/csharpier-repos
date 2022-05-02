@@ -469,8 +469,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return ContainingAssembly.IsInteractive
-                  ? AttributeLocation.None
-                  : AttributeLocation.Assembly | AttributeLocation.Module;
+                    ? AttributeLocation.None
+                    : AttributeLocation.Assembly | AttributeLocation.Module;
             }
         }
 
@@ -660,8 +660,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var data = GetDecodedWellKnownAttributeData();
                 return data != null && data.HasDefaultCharSetAttribute
-                  ? data.DefaultCharacterSet
-                  : (CharSet?)null;
+                    ? data.DefaultCharacterSet
+                    : (CharSet?)null;
             }
         }
 

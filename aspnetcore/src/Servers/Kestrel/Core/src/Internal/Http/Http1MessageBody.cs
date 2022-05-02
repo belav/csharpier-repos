@@ -192,8 +192,8 @@ internal abstract class Http1MessageBody : MessageBody
             if (contentLength == 0)
             {
                 return keepAlive
-                  ? MessageBody.ZeroContentLengthKeepAlive
-                  : MessageBody.ZeroContentLengthClose;
+                    ? MessageBody.ZeroContentLengthKeepAlive
+                    : MessageBody.ZeroContentLengthClose;
             }
 
             return new Http1ContentLengthMessageBody(context, contentLength, keepAlive);
@@ -214,8 +214,8 @@ internal abstract class Http1MessageBody : MessageBody
 
         context.OnTrailersComplete(); // No trailers for these.
         return keepAlive
-          ? MessageBody.ZeroContentLengthKeepAlive
-          : MessageBody.ZeroContentLengthClose;
+            ? MessageBody.ZeroContentLengthKeepAlive
+            : MessageBody.ZeroContentLengthClose;
     }
 
     [StackTraceHidden]

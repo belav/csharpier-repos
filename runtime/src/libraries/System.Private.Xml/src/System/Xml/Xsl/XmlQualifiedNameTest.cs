@@ -185,15 +185,15 @@ namespace System.Xml.Xsl
             //         *    other                       this|other      other
             //         x    x!=y ? this : null          this            x=y ? this|other : null
             XmlQualifiedNameTest namespaceFrom = IsNamespaceSubsetOf(other)
-              ? this
-              : other.IsNamespaceSubsetOf(this)
-                  ? other
-                  : null;
+                ? this
+                : other.IsNamespaceSubsetOf(this)
+                    ? other
+                    : null;
             XmlQualifiedNameTest nameFrom = IsNameSubsetOf(other)
-              ? this
-              : other.IsNameSubsetOf(this)
-                  ? other
-                  : null;
+                ? this
+                : other.IsNameSubsetOf(this)
+                    ? other
+                    : null;
 
             if ((object)namespaceFrom == (object)nameFrom)
             {

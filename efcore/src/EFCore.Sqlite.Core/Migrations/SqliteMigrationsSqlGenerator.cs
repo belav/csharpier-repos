@@ -184,14 +184,14 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                         var index =
                             renameIndexOperation.Table != null
                                 ? model
-                                  ?.GetRelationalModel()
-                                  .FindTable(
-                                      renameIndexOperation.Table,
-                                      renameIndexOperation.Schema
-                                  )
-                                  ?.Indexes.FirstOrDefault(
-                                      i => i.Name == renameIndexOperation.NewName
-                                  )
+                                    ?.GetRelationalModel()
+                                    .FindTable(
+                                        renameIndexOperation.Table,
+                                        renameIndexOperation.Schema
+                                    )
+                                    ?.Indexes.FirstOrDefault(
+                                        i => i.Name == renameIndexOperation.NewName
+                                    )
                                 : null;
                         if (index != null)
                         {
@@ -502,8 +502,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 column.Name,
                                 out var renameColumnOperation
                             )
-                              ? renameColumnOperation.Name
-                              : column.Name
+                                ? renameColumnOperation.Name
+                                : column.Name
                         )
                     );
 
@@ -514,9 +514,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                                 column.StoreType == null
                                     ? null
                                     : Dependencies.TypeMappingSource.FindMapping(
-                                          defaultValue.GetType(),
-                                          column.StoreType
-                                      )
+                                        defaultValue.GetType(),
+                                        column.StoreType
+                                    )
                             ) ?? Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
 
                         selectBuilder

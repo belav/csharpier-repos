@@ -136,8 +136,8 @@ namespace BenchmarksGame
         public static TreeNode CreateTree(int depth)
         {
             return depth <= 0
-              ? default(TreeNode)
-              : new TreeNode(CreateTree(depth - 1), CreateTree(depth - 1));
+                ? default(TreeNode)
+                : new TreeNode(CreateTree(depth - 1), CreateTree(depth - 1));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

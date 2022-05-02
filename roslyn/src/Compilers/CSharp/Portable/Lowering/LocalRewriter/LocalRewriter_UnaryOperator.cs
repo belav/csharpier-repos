@@ -162,8 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return BoundCall.Synthesized(
                         syntax,
                         receiverOpt: constrainedToTypeOpt is null
-                          ? null
-                          : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
+                            ? null
+                            : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
                         method,
                         loweredOperand
                     );
@@ -191,24 +191,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var newNode =
                     (oldNode != null)
                         ? oldNode.Update(
-                              newKind,
-                              newOperand,
-                              oldNode.ConstantValueOpt,
-                              methodOpt: method,
-                              constrainedToTypeOpt: constrainedToTypeOpt,
-                              newOperand.ResultKind,
-                              upconvertType
-                          )
+                            newKind,
+                            newOperand,
+                            oldNode.ConstantValueOpt,
+                            methodOpt: method,
+                            constrainedToTypeOpt: constrainedToTypeOpt,
+                            newOperand.ResultKind,
+                            upconvertType
+                        )
                         : new BoundUnaryOperator(
-                              syntax,
-                              newKind,
-                              newOperand,
-                              null,
-                              methodOpt: method,
-                              constrainedToTypeOpt: constrainedToTypeOpt,
-                              LookupResultKind.Viable,
-                              upconvertType
-                          );
+                            syntax,
+                            newKind,
+                            newOperand,
+                            null,
+                            methodOpt: method,
+                            constrainedToTypeOpt: constrainedToTypeOpt,
+                            LookupResultKind.Viable,
+                            upconvertType
+                        );
 
                 return MakeConversionNode(
                     newNode.Syntax,
@@ -232,7 +232,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return (oldNode != null)
-              ? oldNode.Update(
+                ? oldNode.Update(
                     kind,
                     loweredOperand,
                     oldNode.ConstantValueOpt,
@@ -241,7 +241,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     oldNode.ResultKind,
                     type
                 )
-              : new BoundUnaryOperator(
+                : new BoundUnaryOperator(
                     syntax,
                     kind,
                     loweredOperand,
@@ -910,8 +910,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return BoundCall.Synthesized(
                     syntax,
                     receiverOpt: node.ConstrainedToTypeOpt is null
-                      ? null
-                      : new BoundTypeExpression(syntax, aliasOpt: null, node.ConstrainedToTypeOpt),
+                        ? null
+                        : new BoundTypeExpression(
+                            syntax,
+                            aliasOpt: null,
+                            node.ConstrainedToTypeOpt
+                        ),
                     node.MethodOpt,
                     rewrittenArgument
                 );
@@ -954,8 +958,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression userDefinedCall = BoundCall.Synthesized(
                 syntax,
                 receiverOpt: node.ConstrainedToTypeOpt is null
-                  ? null
-                  : new BoundTypeExpression(syntax, aliasOpt: null, node.ConstrainedToTypeOpt),
+                    ? null
+                    : new BoundTypeExpression(syntax, aliasOpt: null, node.ConstrainedToTypeOpt),
                 node.MethodOpt,
                 call_GetValueOrDefault
             );
@@ -1017,8 +1021,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // as. That is, "int + int --> int" in the example above.
             BinaryOperatorKind binaryOperatorKind = GetCorrespondingBinaryOperator(node);
             binaryOperatorKind |= IsIncrement(node)
-              ? BinaryOperatorKind.Addition
-              : BinaryOperatorKind.Subtraction;
+                ? BinaryOperatorKind.Addition
+                : BinaryOperatorKind.Subtraction;
 
             // The input/output type of the binary operand. "int" in the example.
             // The "1" in the example above.

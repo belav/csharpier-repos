@@ -316,7 +316,7 @@ namespace System.IO.Packaging
 
     public partial class PackagePartCollection
         : System.Collections.Generic.IEnumerable<System.IO.Packaging.PackagePart>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal PackagePartCollection() { }
 
@@ -394,7 +394,7 @@ namespace System.IO.Packaging
 
     public partial class PackageRelationshipCollection
         : System.Collections.Generic.IEnumerable<System.IO.Packaging.PackageRelationship>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal PackageRelationshipCollection() { }
 

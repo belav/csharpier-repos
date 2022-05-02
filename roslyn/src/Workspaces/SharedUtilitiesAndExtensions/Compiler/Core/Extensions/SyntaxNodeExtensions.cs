@@ -827,22 +827,22 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             return (position < root.FullSpan.End || !(root is ICompilationUnitSyntax))
-              ? root.FindToken(
+                ? root.FindToken(
                     position,
                     includeSkipped || includeDirectives || includeDocumentationComments
                 )
-              : root.GetLastToken(
+                : root.GetLastToken(
                         includeZeroWidth: true,
                         includeSkipped: true,
                         includeDirectives: true,
                         includeDocumentationComments: true
                     )
-                .GetPreviousToken(
-                    includeZeroWidth: false,
-                    includeSkipped: includeSkipped,
-                    includeDirectives: includeDirectives,
-                    includeDocumentationComments: includeDocumentationComments
-                );
+                    .GetPreviousToken(
+                        includeZeroWidth: false,
+                        includeSkipped: includeSkipped,
+                        includeDirectives: includeDirectives,
+                        includeDocumentationComments: includeDocumentationComments
+                    );
         }
 
         /// <summary>
@@ -880,11 +880,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         skippedToken.RawKind != 0
                             ? skippedToken
                             : token.GetNextToken(
-                                  includeZeroWidth: false,
-                                  includeSkipped: includeSkipped,
-                                  includeDirectives: includeDirectives,
-                                  includeDocumentationComments: includeDocumentationComments
-                              );
+                                includeZeroWidth: false,
+                                includeSkipped: includeSkipped,
+                                includeDirectives: includeDirectives,
+                                includeDocumentationComments: includeDocumentationComments
+                            );
                 } while (
                     token.RawKind != 0
                     && token.Span.End <= position
@@ -932,11 +932,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         skippedToken.RawKind != 0
                             ? skippedToken
                             : token.GetPreviousToken(
-                                  includeZeroWidth: false,
-                                  includeSkipped: includeSkipped,
-                                  includeDirectives: includeDirectives,
-                                  includeDocumentationComments: includeDocumentationComments
-                              );
+                                includeZeroWidth: false,
+                                includeSkipped: includeSkipped,
+                                includeDirectives: includeDirectives,
+                                includeDocumentationComments: includeDocumentationComments
+                            );
                 } while (position <= token.SpanStart && root.FullSpan.Start < token.SpanStart);
             }
             else if (token.Span.End < position)

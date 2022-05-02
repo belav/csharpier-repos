@@ -431,8 +431,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     public partial class X509Certificate
         : System.IDisposable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable
     {
         [System.ObsoleteAttribute(
             "X509Certificate and X509Certificate2 are immutable. Use the appropriate constructor to create a new certificate.",
@@ -1092,8 +1092,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     public partial class X509Certificate2Collection
         : System.Security.Cryptography.X509Certificates.X509CertificateCollection,
-          System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Certificate2>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Certificate2>,
+            System.Collections.IEnumerable
     {
         public X509Certificate2Collection() { }
 
@@ -1258,8 +1258,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class X509Certificate2Enumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509Certificate2>,
-          System.Collections.IEnumerator,
-          System.IDisposable
+            System.Collections.IEnumerator,
+            System.IDisposable
     {
         internal X509Certificate2Enumerator() { }
 
@@ -1455,8 +1455,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class X509ChainElementCollection
         : System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509ChainElement>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         internal X509ChainElementCollection() { }
 
@@ -1502,8 +1502,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class X509ChainElementEnumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509ChainElement>,
-          System.Collections.IEnumerator,
-          System.IDisposable
+            System.Collections.IEnumerator,
+            System.IDisposable
     {
         internal X509ChainElementEnumerator() { }
 
@@ -1712,8 +1712,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class X509ExtensionCollection
         : System.Collections.Generic.IEnumerable<System.Security.Cryptography.X509Certificates.X509Extension>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public X509ExtensionCollection() { }
 
@@ -1768,8 +1768,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     public sealed partial class X509ExtensionEnumerator
         : System.Collections.Generic.IEnumerator<System.Security.Cryptography.X509Certificates.X509Extension>,
-          System.Collections.IEnumerator,
-          System.IDisposable
+            System.Collections.IEnumerator,
+            System.IDisposable
     {
         internal X509ExtensionEnumerator() { }
 

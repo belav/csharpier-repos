@@ -379,8 +379,8 @@ namespace System.Net.Http.Functional.Tests
                             server.AcceptConnectionSendResponseAndCloseAsync(
                                 HttpStatusCode.Unauthorized,
                                 additionalHeaders: string.IsNullOrEmpty(authHeadrName)
-                                  ? null
-                                  : new HttpHeaderData[]
+                                    ? null
+                                    : new HttpHeaderData[]
                                     {
                                         new HttpHeaderData(authHeadrName, authHeaderValue)
                                     }
@@ -464,11 +464,11 @@ namespace System.Net.Http.Functional.Tests
                 server =>
                     failDuringHeaders
                         ? server.AcceptConnectionSendCustomResponseAndCloseAsync(
-                              $"HTTP/1.1 200 OK\r\n{LoopbackServer.CorsHeaders}Content-Length: 5\r\n"
-                          )
+                            $"HTTP/1.1 200 OK\r\n{LoopbackServer.CorsHeaders}Content-Length: 5\r\n"
+                        )
                         : server.AcceptConnectionSendCustomResponseAndCloseAsync(
-                              $"HTTP/1.1 200 OK\r\n{LoopbackServer.CorsHeaders}Content-Length: 5\r\n\r\nhe"
-                          )
+                            $"HTTP/1.1 200 OK\r\n{LoopbackServer.CorsHeaders}Content-Length: 5\r\n\r\nhe"
+                        )
             );
         }
 
@@ -1111,8 +1111,8 @@ namespace System.Net.Http.Functional.Tests
                             + $"{newline}"
                     ),
                 dribble
-                  ? new LoopbackServer.Options { StreamWrapper = s => new DribbleStream(s) }
-                  : null
+                    ? new LoopbackServer.Options { StreamWrapper = s => new DribbleStream(s) }
+                    : null
             );
         }
 

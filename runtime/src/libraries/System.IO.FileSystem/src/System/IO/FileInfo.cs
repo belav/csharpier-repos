@@ -199,8 +199,8 @@ namespace System.IO
                 FullPath,
                 Path.GetFullPath(destinationFileName),
                 destinationBackupFileName != null
-                  ? Path.GetFullPath(destinationBackupFileName)
-                  : null,
+                    ? Path.GetFullPath(destinationBackupFileName)
+                    : null,
                 ignoreMetadataErrors
             );
 

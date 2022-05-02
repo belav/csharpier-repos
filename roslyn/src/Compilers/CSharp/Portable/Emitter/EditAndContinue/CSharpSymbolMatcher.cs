@@ -784,7 +784,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 {
                     SymbolKind.NamedType
                     or SymbolKind.ErrorType
-                      => ((NamedTypeSymbol)otherContainer).TypeParameters,
+                        => ((NamedTypeSymbol)otherContainer).TypeParameters,
                     SymbolKind.Method => ((MethodSymbol)otherContainer).TypeParameters,
                     _ => throw ExceptionUtilities.UnexpectedValue(otherContainer.Kind),
                 };
@@ -805,8 +805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 RoslynDebug.AssertNotNull(type);
 
                 return modifier.IsOptional
-                  ? CSharpCustomModifier.CreateOptional(type)
-                  : CSharpCustomModifier.CreateRequired(type);
+                    ? CSharpCustomModifier.CreateOptional(type)
+                    : CSharpCustomModifier.CreateRequired(type);
             }
 
             internal bool TryFindAnonymousType(
@@ -1382,8 +1382,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     this.Visit(((CSharpCustomModifier)modifier).ModifierSymbol);
                 Debug.Assert((object)translatedType != null);
                 return modifier.IsOptional
-                  ? CSharpCustomModifier.CreateOptional(translatedType)
-                  : CSharpCustomModifier.CreateRequired(translatedType);
+                    ? CSharpCustomModifier.CreateOptional(translatedType)
+                    : CSharpCustomModifier.CreateRequired(translatedType);
             }
         }
     }

@@ -15,11 +15,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class CSharpUnboundIdentifiersDiagnosticAnalyzer
         : UnboundIdentifiersDiagnosticAnalyzerBase<
-              SyntaxKind,
-              SimpleNameSyntax,
-              QualifiedNameSyntax,
-              IncompleteMemberSyntax
-          >
+            SyntaxKind,
+            SimpleNameSyntax,
+            QualifiedNameSyntax,
+            IncompleteMemberSyntax
+        >
     {
         private readonly LocalizableString _nameNotInContextMessageFormat =
             new LocalizableResourceString(

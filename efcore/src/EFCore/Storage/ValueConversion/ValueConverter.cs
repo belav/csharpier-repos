@@ -238,15 +238,15 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             var firstConverter =
                 ProviderClrType.IsNullableType() && !secondConverter.ModelClrType.IsNullableType()
                     ? ComposeWith(
-                          (ValueConverter)
-                              Activator.CreateInstance(
-                                  typeof(CastingConverter<,>).MakeGenericType(
-                                      ProviderClrType,
-                                      secondConverter.ModelClrType
-                                  ),
-                                  MappingHints
-                              )!
-                      )
+                        (ValueConverter)
+                            Activator.CreateInstance(
+                                typeof(CastingConverter<,>).MakeGenericType(
+                                    ProviderClrType,
+                                    secondConverter.ModelClrType
+                                ),
+                                MappingHints
+                            )!
+                    )
                     : this;
 
             return (ValueConverter)
@@ -259,8 +259,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     firstConverter,
                     secondConverter,
                     secondConverter.MappingHints == null
-                      ? firstConverter.MappingHints
-                      : secondConverter.MappingHints.With(firstConverter.MappingHints)
+                        ? firstConverter.MappingHints
+                        : secondConverter.MappingHints.With(firstConverter.MappingHints)
                 )!;
         }
     }

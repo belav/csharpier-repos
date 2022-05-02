@@ -54,8 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         )
         {
             return parameters.fixProviderData == null
-              ? _analyzerAndFixerMap.GetOrAdd(workspace, CreateDiagnosticProviderAndFixer)
-              : CreateDiagnosticProviderAndFixer(workspace, parameters);
+                ? _analyzerAndFixerMap.GetOrAdd(workspace, CreateDiagnosticProviderAndFixer)
+                : CreateDiagnosticProviderAndFixer(workspace, parameters);
         }
 
         internal virtual bool ShouldSkipMessageDescriptionVerification(

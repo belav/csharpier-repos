@@ -15,8 +15,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>Represents a tracer for an <see cref="IAuthenticationFilter"/>.</summary>
     internal class AuthenticationFilterTracer
         : FilterTracer,
-          IAuthenticationFilter,
-          IDecorator<IAuthenticationFilter>
+            IAuthenticationFilter,
+            IDecorator<IAuthenticationFilter>
     {
         private const string AuthenticateAsyncMethodName = "AuthenticateAsync";
         private const string ChallengeAsyncMethodName = "ChallengeAsync";

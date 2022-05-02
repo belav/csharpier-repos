@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal class CommonEventWellKnownAttributeData
         : WellKnownAttributeData,
-          ISkipLocalsInitAttributeTarget
+            ISkipLocalsInitAttributeTarget
     {
         private bool _hasSpecialNameAttribute;
         public bool HasSpecialNameAttribute

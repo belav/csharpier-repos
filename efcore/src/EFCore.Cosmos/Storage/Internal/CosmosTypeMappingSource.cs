@@ -48,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             Check.DebugAssert(clrType != null, "ClrType is null");
 
             return _clrTypeMappings.TryGetValue(clrType, out var mapping)
-              ? mapping
-              : (
+                ? mapping
+                : (
                     FindPrimitiveMapping(mappingInfo)
                     ?? FindCollectionMapping(mappingInfo)
                     ?? base.FindMapping(mappingInfo)
@@ -86,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                     FindPrimitiveMapping(elementMappingInfo)
                     ?? FindCollectionMapping(elementMappingInfo);
                 return elementMapping == null
-                  ? null
-                  : new CosmosTypeMapping(
+                    ? null
+                    : new CosmosTypeMapping(
                         clrType,
                         CreateArrayComparer(elementMapping, elementType)
                     );
@@ -107,8 +107,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         FindPrimitiveMapping(elementMappingInfo)
                         ?? FindCollectionMapping(elementMappingInfo);
                     return elementMapping == null
-                      ? null
-                      : new CosmosTypeMapping(
+                        ? null
+                        : new CosmosTypeMapping(
                             clrType,
                             CreateListComparer(elementMapping, elementType, clrType)
                         );
@@ -132,8 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                         FindPrimitiveMapping(elementMappingInfo)
                         ?? FindCollectionMapping(elementMappingInfo);
                     return elementMapping == null
-                      ? null
-                      : new CosmosTypeMapping(
+                        ? null
+                        : new CosmosTypeMapping(
                             clrType,
                             CreateStringDictionaryComparer(elementMapping, elementType, clrType)
                         );
@@ -153,8 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             return (ValueComparer)
                 Activator.CreateInstance(
                     elementType == unwrappedType
-                      ? typeof(SingleDimensionalArrayComparer<>).MakeGenericType(elementType)
-                      : typeof(NullableSingleDimensionalArrayComparer<>).MakeGenericType(
+                        ? typeof(SingleDimensionalArrayComparer<>).MakeGenericType(elementType)
+                        : typeof(NullableSingleDimensionalArrayComparer<>).MakeGenericType(
                             unwrappedType
                         ),
                     elementMapping.Comparer
@@ -173,8 +173,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             return (ValueComparer)
                 Activator.CreateInstance(
                     elementType == unwrappedType
-                      ? typeof(ListComparer<,>).MakeGenericType(elementType, listType)
-                      : typeof(NullableListComparer<,>).MakeGenericType(unwrappedType, listType),
+                        ? typeof(ListComparer<,>).MakeGenericType(elementType, listType)
+                        : typeof(NullableListComparer<,>).MakeGenericType(unwrappedType, listType),
                     elementMapping.Comparer,
                     readOnly
                 )!;
@@ -192,8 +192,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             return (ValueComparer)
                 Activator.CreateInstance(
                     elementType == unwrappedType
-                      ? typeof(StringDictionaryComparer<,>).MakeGenericType(elementType, dictType)
-                      : typeof(NullableStringDictionaryComparer<,>).MakeGenericType(
+                        ? typeof(StringDictionaryComparer<,>).MakeGenericType(elementType, dictType)
+                        : typeof(NullableStringDictionaryComparer<,>).MakeGenericType(
                             unwrappedType,
                             dictType
                         ),

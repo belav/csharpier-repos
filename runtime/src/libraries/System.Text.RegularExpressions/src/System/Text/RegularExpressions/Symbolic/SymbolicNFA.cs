@@ -124,8 +124,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         );
                         // Branch according to nullability of the lookaround condition in the given context
                         transition = transition._look.IsNullableFor(context)
-                          ? transition._first
-                          : transition._second;
+                            ? transition._first
+                            : transition._second;
                         break;
                 }
             }
@@ -180,8 +180,8 @@ namespace System.Text.RegularExpressions.Symbolic
                         // Branch according to nullability of the lookaround condition in the given context
                         todo.Push(
                             transition._look.IsNullableFor(context)
-                              ? transition._first
-                              : transition._second
+                                ? transition._first
+                                : transition._second
                         );
                         break;
 

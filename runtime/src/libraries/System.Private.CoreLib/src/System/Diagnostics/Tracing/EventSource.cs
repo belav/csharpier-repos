@@ -257,8 +257,8 @@ namespace System.Diagnostics.Tracing
                 "System.Diagnostics.Tracing.EventSource.IsSupported",
                 out bool isSupported
             )
-              ? isSupported
-              : true;
+                ? isSupported
+                : true;
 
 #if FEATURE_EVENTSOURCE_XPLAT
 #pragma warning disable CA1823 // field is used to keep listener alive
@@ -464,8 +464,8 @@ namespace System.Diagnostics.Tracing
                 flags
             );
             return (manifestBytes == null)
-              ? null
-              : Encoding.UTF8.GetString(manifestBytes, 0, manifestBytes.Length);
+                ? null
+                : Encoding.UTF8.GetString(manifestBytes, 0, manifestBytes.Length);
         }
 
         // EventListener support
@@ -4811,8 +4811,8 @@ namespace System.Diagnostics.Tracing
             DuplicateSourceNamesSwitch,
             out bool isEnabled
         )
-          ? isEnabled
-          : false;
+            ? isEnabled
+            : false;
 
         // WARNING: Do not depend upon initialized statics during creation of EventSources, as it is possible for creation of an EventSource to trigger
         // creation of yet another EventSource.  When this happens, these statics may not yet be initialized.

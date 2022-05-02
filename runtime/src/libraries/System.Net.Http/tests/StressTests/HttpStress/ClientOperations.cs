@@ -463,8 +463,8 @@ namespace HttpStress
                         ValidateStatusCode(m);
 
                         string checksumMessage = ValidateServerChecksum(m.Headers, checksum)
-                          ? "server checksum matches client checksum"
-                          : "server checksum mismatch";
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
                         ValidateContent(
                             content,
                             await m.Content.ReadAsStringAsync(),
@@ -489,8 +489,8 @@ namespace HttpStress
                         ValidateStatusCode(m);
 
                         string checksumMessage = ValidateServerChecksum(m.Headers, checksum)
-                          ? "server checksum matches client checksum"
-                          : "server checksum mismatch";
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
                         ValidateContent(
                             formData.expected,
                             await m.Content.ReadAsStringAsync(),
@@ -522,8 +522,8 @@ namespace HttpStress
                             checksum,
                             required: false
                         )
-                          ? "server checksum matches client checksum"
-                          : "server checksum mismatch";
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
                         ValidateContent(content, response, checksumMessage);
                     }
                 ),
@@ -608,8 +608,8 @@ namespace HttpStress
                         ValidateStatusCode(m);
 
                         string checksumMessage = ValidateServerChecksum(m.Headers, checksum)
-                          ? "server checksum matches client checksum"
-                          : "server checksum mismatch";
+                            ? "server checksum matches client checksum"
+                            : "server checksum mismatch";
                         ValidateContent(
                             content,
                             await m.Content.ReadAsStringAsync(),

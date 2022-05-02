@@ -41,8 +41,8 @@ namespace System.Threading.Channels
     /// <typeparam name="TResult">Specifies the type of the result.  May be <see cref="VoidResult"/>.</typeparam>
     internal partial class AsyncOperation<TResult>
         : AsyncOperation,
-          IValueTaskSource,
-          IValueTaskSource<TResult>
+            IValueTaskSource,
+            IValueTaskSource<TResult>
     {
         /// <summary>Registration with a provided cancellation token.</summary>
         private readonly CancellationTokenRegistration _registration;
@@ -143,12 +143,12 @@ namespace System.Threading.Channels
             }
 
             return !IsCompleted
-              ? ValueTaskSourceStatus.Pending
-              : _error == null
-                  ? ValueTaskSourceStatus.Succeeded
-                  : _error.SourceException is OperationCanceledException
-                      ? ValueTaskSourceStatus.Canceled
-                      : ValueTaskSourceStatus.Faulted;
+                ? ValueTaskSourceStatus.Pending
+                : _error == null
+                    ? ValueTaskSourceStatus.Succeeded
+                    : _error.SourceException is OperationCanceledException
+                        ? ValueTaskSourceStatus.Canceled
+                        : ValueTaskSourceStatus.Faulted;
         }
 
         /// <summary>Gets whether the operation has completed.</summary>

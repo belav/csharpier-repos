@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return
                 (statement.Kind == BoundKind.ExpressionStatement)
                 && ((ExpressionStatementSyntax)statement.Syntax).SemicolonToken.IsMissing
-              ? ((BoundExpressionStatement)statement).Expression
-              : null;
+                ? ((BoundExpressionStatement)statement).Expression
+                : null;
         }
 
         private static BoundStatement RewriteFieldInitializer(BoundFieldEqualsValue fieldInit)

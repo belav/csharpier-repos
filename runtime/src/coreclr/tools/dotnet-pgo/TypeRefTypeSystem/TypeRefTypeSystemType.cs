@@ -178,8 +178,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
                     _isValueType = false;
                 }
                 return _isValueType.Value
-                  ? (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType)
-                  : (MetadataType)Context.GetWellKnownType(WellKnownType.Object);
+                    ? (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType)
+                    : (MetadataType)Context.GetWellKnownType(WellKnownType.Object);
             }
         }
 

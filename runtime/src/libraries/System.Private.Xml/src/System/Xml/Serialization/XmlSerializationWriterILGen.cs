@@ -2350,10 +2350,10 @@ namespace System.Xml.Serialization
                 element.Any && element.Name.Length == 0
                     ? null
                     : (
-                          element.Form == XmlSchemaForm.Qualified
-                              ? (writeAccessor ? element.Namespace : element.Mapping!.Namespace)
-                              : ""
-                      );
+                        element.Form == XmlSchemaForm.Qualified
+                            ? (writeAccessor ? element.Namespace : element.Mapping!.Namespace)
+                            : ""
+                    );
             if (element.Mapping is NullableMapping)
             {
                 if (source.Type == element.Mapping.TypeDesc!.Type)
@@ -2467,8 +2467,8 @@ namespace System.Xml.Serialization
                     string suffixRaw = mapping.TypeDesc!.XmlEncodingNotRequired ? "Raw" : "";
                     WritePrimitive(
                         element.IsNullable
-                          ? ("WriteNullableStringLiteral" + suffixRaw)
-                          : ("WriteElementString" + suffixRaw),
+                            ? ("WriteNullableStringLiteral" + suffixRaw)
+                            : ("WriteElementString" + suffixRaw),
                         name,
                         ns,
                         GetConvertedDefaultValue(source.Type, element.Default),

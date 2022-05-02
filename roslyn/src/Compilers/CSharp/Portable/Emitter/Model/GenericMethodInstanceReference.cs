@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal sealed class GenericMethodInstanceReference
         : MethodReference,
-          Cci.IGenericMethodInstanceReference
+            Cci.IGenericMethodInstanceReference
     {
         public GenericMethodInstanceReference(MethodSymbol underlyingMethod)
             : base(underlyingMethod) { }

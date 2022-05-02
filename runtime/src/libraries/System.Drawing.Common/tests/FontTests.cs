@@ -1302,8 +1302,8 @@ namespace System.Drawing.Tests
                 Assert.Equal(font.Strikeout ? 1 : 0, logFont.lfStrikeOut);
                 Assert.Equal(
                     SystemFonts.DefaultFont.GdiCharSet <= 2
-                      ? font.GdiCharSet
-                      : SystemFonts.DefaultFont.GdiCharSet,
+                        ? font.GdiCharSet
+                        : SystemFonts.DefaultFont.GdiCharSet,
                     logFont.lfCharSet
                 );
                 Assert.Equal(0, logFont.lfOutPrecision);
@@ -1344,8 +1344,8 @@ namespace System.Drawing.Tests
                 Assert.Equal(0, logFont.lfStrikeOut);
                 Assert.Equal(
                     SystemFonts.DefaultFont.GdiCharSet <= 2
-                      ? font.GdiCharSet
-                      : SystemFonts.DefaultFont.GdiCharSet,
+                        ? font.GdiCharSet
+                        : SystemFonts.DefaultFont.GdiCharSet,
                     logFont.lfCharSet
                 );
                 Assert.Equal(0, logFont.lfOutPrecision);

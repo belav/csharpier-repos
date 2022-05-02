@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class StandaloneAppTest
     : ServerTestBase<BlazorWasmTestAppFixture<StandaloneApp.Program>>,
-      IDisposable
+        IDisposable
 {
     public StandaloneAppTest(
         BrowserFixture browserFixture,

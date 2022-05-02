@@ -457,9 +457,9 @@ namespace System.Net.Test.Common
 
         public static string CorsHeaders = PlatformDetection.IsBrowser
             ? "Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE\r\n"
-              + "Access-Control-Expose-Headers: *\r\n"
-              + "Access-Control-Allow-Headers: *\r\n"
-              + "Access-Control-Allow-Origin: *\r\n"
+                + "Access-Control-Expose-Headers: *\r\n"
+                + "Access-Control-Allow-Headers: *\r\n"
+                + "Access-Control-Allow-Origin: *\r\n"
             : "";
 
         public static string GetHttpResponseHeaders(
@@ -508,8 +508,8 @@ namespace System.Net.Test.Common
             + "\r\n"
             + (
                 string.IsNullOrEmpty(content)
-                  ? ""
-                  : string.Concat(content.Select(c => $"1\r\n{c}\r\n"))
+                    ? ""
+                    : string.Concat(content.Select(c => $"1\r\n{c}\r\n"))
             )
             + $"0\r\n"
             + $"\r\n";

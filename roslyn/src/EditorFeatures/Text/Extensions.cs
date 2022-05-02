@@ -118,7 +118,7 @@ namespace Microsoft.CodeAnalysis.Text
                 typeof(ITextDocument),
                 out ITextDocument textDocument
             )
-              ? textDocument.Encoding
-              : Encoding.UTF8;
+                ? textDocument.Encoding
+                : Encoding.UTF8;
     }
 }

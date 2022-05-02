@@ -14,10 +14,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
 {
     internal partial class CodeStyleSettingsViewModel
         : SettingsViewModelBase<
-              CodeStyleSetting,
-              CodeStyleSettingsViewModel.SettingsSnapshotFactory,
-              CodeStyleSettingsViewModel.SettingsEntriesSnapshot
-          >
+            CodeStyleSetting,
+            CodeStyleSettingsViewModel.SettingsSnapshotFactory,
+            CodeStyleSettingsViewModel.SettingsEntriesSnapshot
+        >
     {
         public CodeStyleSettingsViewModel(
             ISettingsProvider<CodeStyleSetting> data,

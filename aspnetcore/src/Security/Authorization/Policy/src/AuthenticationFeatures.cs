@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Authorization.Policy;
 /// </summary>
 internal sealed class AuthenticationFeatures
     : IAuthenticateResultFeature,
-      IHttpAuthenticationFeature
+        IHttpAuthenticationFeature
 {
     private ClaimsPrincipal? _user;
     private AuthenticateResult? _result;

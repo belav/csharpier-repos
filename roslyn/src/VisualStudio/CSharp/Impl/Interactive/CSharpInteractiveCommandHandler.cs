@@ -24,7 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
     )]
     internal sealed class CSharpInteractiveCommandHandler
         : InteractiveCommandHandler,
-          IExecuteInInteractiveCommandHandler
+            IExecuteInInteractiveCommandHandler
     {
         private readonly CSharpVsInteractiveWindowProvider _interactiveWindowProvider;
 

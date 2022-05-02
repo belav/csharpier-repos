@@ -322,8 +322,8 @@ namespace System.Net.Http
 
             string identity = GetIdentityIfDefaultCredentialsUsed(
                 proxyUri != null
-                  ? _settings._defaultCredentialsUsedForProxy
-                  : _settings._defaultCredentialsUsedForServer
+                    ? _settings._defaultCredentialsUsedForProxy
+                    : _settings._defaultCredentialsUsedForServer
             );
 
             if (proxyUri != null)
@@ -691,8 +691,8 @@ namespace System.Net.Http
         private static string GetIdentityIfDefaultCredentialsUsed(bool defaultCredentialsUsed)
         {
             return defaultCredentialsUsed
-              ? CurrentUserIdentityProvider.GetIdentity()
-              : string.Empty;
+                ? CurrentUserIdentityProvider.GetIdentity()
+                : string.Empty;
         }
 
         internal readonly struct HttpConnectionKey : IEquatable<HttpConnectionKey>

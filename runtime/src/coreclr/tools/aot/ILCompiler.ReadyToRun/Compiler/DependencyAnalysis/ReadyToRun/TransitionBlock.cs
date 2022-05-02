@@ -25,8 +25,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 case TargetArchitecture.X64:
                     return target.OperatingSystem == TargetOS.Windows
-                      ? X64WindowsTransitionBlock.Instance
-                      : X64UnixTransitionBlock.Instance;
+                        ? X64WindowsTransitionBlock.Instance
+                        : X64UnixTransitionBlock.Instance;
 
                 case TargetArchitecture.ARM:
                     if (target.Abi == TargetAbi.CoreRTArmel)
@@ -40,8 +40,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 case TargetArchitecture.ARM64:
                     return target.OperatingSystem == TargetOS.OSX
-                      ? AppleArm64TransitionBlock.Instance
-                      : Arm64TransitionBlock.Instance;
+                        ? AppleArm64TransitionBlock.Instance
+                        : Arm64TransitionBlock.Instance;
 
                 default:
                     throw new NotImplementedException(target.Architecture.ToString());

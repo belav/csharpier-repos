@@ -1278,8 +1278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     displayParts = replaceNode
                         ? symbol.ToDisplayParts(s_typeNameFormatWithGenerics)
                         : (
-                              symbol.ContainingType ?? (ISymbol)symbol.ContainingNamespace
-                          ).ToDisplayParts(s_typeNameFormatWithGenerics);
+                            symbol.ContainingType ?? (ISymbol)symbol.ContainingNamespace
+                        ).ToDisplayParts(s_typeNameFormatWithGenerics);
 
                     rewrittenNode = TryAddTypeArgumentToIdentifierName(rewrittenNode, symbol);
 

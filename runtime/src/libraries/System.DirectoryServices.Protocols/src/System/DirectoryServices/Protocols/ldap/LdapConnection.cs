@@ -82,10 +82,10 @@ namespace System.DirectoryServices.Protocols
             _directoryCredential =
                 (credential != null)
                     ? new NetworkCredential(
-                          credential.UserName,
-                          credential.Password,
-                          credential.Domain
-                      )
+                        credential.UserName,
+                        credential.Password,
+                        credential.Domain
+                    )
                     : null;
 
             _connectionAuthType = authType;
@@ -1213,10 +1213,10 @@ namespace System.DirectoryServices.Protocols
                 _directoryCredential = tempCredential = (
                     newCredential != null
                         ? new NetworkCredential(
-                              newCredential.UserName,
-                              newCredential.Password,
-                              newCredential.Domain
-                          )
+                            newCredential.UserName,
+                            newCredential.Password,
+                            newCredential.Domain
+                        )
                         : null
                 );
             }

@@ -27,7 +27,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 {
     internal abstract partial class AbstractObjectBrowserLibraryManager
         : AbstractLibraryManager,
-          IDisposable
+            IDisposable
     {
         internal readonly VisualStudioWorkspace Workspace;
 

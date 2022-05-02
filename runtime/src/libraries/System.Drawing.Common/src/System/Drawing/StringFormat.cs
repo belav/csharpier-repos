@@ -84,7 +84,7 @@ namespace System.Drawing
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeleteStringFormat(new HandleRef(this, nativeFormat));
+                        Gdip.GdipDeleteStringFormat(new HandleRef(this, nativeFormat));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

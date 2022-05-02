@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime.LanguageServices
             return
                 detector != null
                 && detector.IsDateAndTimeToken(token, syntaxFacts, cancellationToken)
-              ? token
-              : null;
+                ? token
+                : null;
         }
 
         private static SyntaxToken GetToken(

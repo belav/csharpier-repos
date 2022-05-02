@@ -327,10 +327,10 @@ namespace System.Runtime.Serialization.Json
                     (classContract.BaseContract == null)
                         ? 0
                         : WriteMembers(
-                              classContract.BaseContract,
-                              extensionDataLocal,
-                              derivedMostClassContract
-                          );
+                            classContract.BaseContract,
+                            extensionDataLocal,
+                            derivedMostClassContract
+                        );
 
                 int classMemberCount = classContract.Members!.Count;
                 _ilg.Call(
@@ -348,8 +348,8 @@ namespace System.Runtime.Serialization.Json
                     _ilg.Load(_contextArg);
                     _ilg.Call(
                         methodInfo: member.IsGetOnlyCollection
-                          ? XmlFormatGeneratorStatics.StoreIsGetOnlyCollectionMethod
-                          : XmlFormatGeneratorStatics.ResetIsGetOnlyCollectionMethod
+                            ? XmlFormatGeneratorStatics.StoreIsGetOnlyCollectionMethod
+                            : XmlFormatGeneratorStatics.ResetIsGetOnlyCollectionMethod
                     );
 
                     if (!member.EmitDefaultValue)

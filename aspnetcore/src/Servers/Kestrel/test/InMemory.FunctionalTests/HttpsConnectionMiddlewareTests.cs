@@ -1620,8 +1620,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
         Assert.Equal(
             httpProtocols.HasFlag(HttpProtocols.Http2)
-              ? SslApplicationProtocol.Http2
-              : SslApplicationProtocol.Http11,
+                ? SslApplicationProtocol.Http2
+                : SslApplicationProtocol.Http11,
             stream.NegotiatedApplicationProtocol
         );
     }
@@ -1753,8 +1753,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             body == null
                 ? Encoding.UTF8.GetBytes("GET / HTTP/1.0\r\n\r\n")
                 : Encoding.UTF8.GetBytes(
-                      $"POST / HTTP/1.0\r\nContent-Length: {body.Length}\r\n\r\n{body}"
-                  );
+                    $"POST / HTTP/1.0\r\nContent-Length: {body.Length}\r\n\r\n{body}"
+                );
         await stream.WriteAsync(request, 0, request.Length);
         var reader = new StreamReader(stream);
         string line = null;

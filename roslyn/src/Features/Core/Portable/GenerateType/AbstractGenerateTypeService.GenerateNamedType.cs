@@ -357,8 +357,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                                 parameters: c.Parameters,
                                 statements: default,
                                 baseConstructorArguments: c.Parameters.Length == 0
-                                  ? default
-                                  : factory.CreateArguments(c.Parameters)
+                                    ? default
+                                    : factory.CreateArguments(c.Parameters)
                             )
                     );
                 members.AddRange(constructors);
@@ -442,10 +442,10 @@ namespace Microsoft.CodeAnalysis.GenerateType
             private TypeKind DetermineTypeKind()
             {
                 return _state.IsStruct
-                  ? TypeKind.Struct
-                  : _state.IsInterface
-                      ? TypeKind.Interface
-                      : TypeKind.Class;
+                    ? TypeKind.Struct
+                    : _state.IsInterface
+                        ? TypeKind.Interface
+                        : TypeKind.Class;
             }
 
             protected IList<ITypeParameterSymbol> GetAvailableTypeParameters()

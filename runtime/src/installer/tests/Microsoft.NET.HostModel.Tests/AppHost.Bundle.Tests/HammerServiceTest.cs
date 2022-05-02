@@ -13,7 +13,7 @@ namespace AppHost.Bundle.Tests
 {
     public class HammerServiceTest
         : BundleTestBase,
-          IClassFixture<HammerServiceTest.SharedTestState>
+            IClassFixture<HammerServiceTest.SharedTestState>
     {
         private SharedTestState sharedTestState;
 

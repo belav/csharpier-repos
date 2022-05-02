@@ -21,7 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
 {
     internal abstract class AbstractSyncClassViewCommandHandler
         : ForegroundThreadAffinitizedObject,
-          ICommandHandler<SyncClassViewCommandArgs>
+            ICommandHandler<SyncClassViewCommandArgs>
     {
         private const string ClassView = "Class View";
 

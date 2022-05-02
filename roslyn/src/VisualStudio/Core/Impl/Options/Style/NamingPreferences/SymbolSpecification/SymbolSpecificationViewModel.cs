@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 {
     internal class SymbolSpecificationViewModel
         : AbstractNotifyPropertyChanged,
-          INamingStylesInfoDialogViewModel
+            INamingStylesInfoDialogViewModel
     {
         public Guid ID { get; set; }
         public List<SymbolKindViewModel> SymbolKindList { get; set; }
@@ -332,7 +332,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 
         public class SymbolKindViewModel
             : AbstractNotifyPropertyChanged,
-              ISymbolSpecificationViewModelPart
+                ISymbolSpecificationViewModelPart
         {
             public string Name { get; set; }
             public bool IsChecked
@@ -387,18 +387,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             internal SymbolKindOrTypeKind CreateSymbolOrTypeOrMethodKind()
             {
                 return _symbolKind.HasValue
-                  ? new SymbolKindOrTypeKind(_symbolKind.Value)
-                  : _typeKind.HasValue
-                      ? new SymbolKindOrTypeKind(_typeKind.Value)
-                      : _methodKind.HasValue
-                          ? new SymbolKindOrTypeKind(_methodKind.Value)
-                          : throw ExceptionUtilities.Unreachable;
+                    ? new SymbolKindOrTypeKind(_symbolKind.Value)
+                    : _typeKind.HasValue
+                        ? new SymbolKindOrTypeKind(_typeKind.Value)
+                        : _methodKind.HasValue
+                            ? new SymbolKindOrTypeKind(_methodKind.Value)
+                            : throw ExceptionUtilities.Unreachable;
             }
         }
 
         public class AccessibilityViewModel
             : AbstractNotifyPropertyChanged,
-              ISymbolSpecificationViewModelPart
+                ISymbolSpecificationViewModelPart
         {
             internal readonly Accessibility _accessibility;
 
@@ -426,7 +426,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 
         public class ModifierViewModel
             : AbstractNotifyPropertyChanged,
-              ISymbolSpecificationViewModelPart
+                ISymbolSpecificationViewModelPart
         {
             public string Name { get; set; }
 

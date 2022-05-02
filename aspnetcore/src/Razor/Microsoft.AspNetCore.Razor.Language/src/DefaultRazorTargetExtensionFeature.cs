@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorTargetExtensionFeature
     : RazorEngineFeatureBase,
-      IRazorTargetExtensionFeature
+        IRazorTargetExtensionFeature
 {
     public ICollection<ICodeTargetExtension> TargetExtensions { get; } =
         new List<ICodeTargetExtension>();

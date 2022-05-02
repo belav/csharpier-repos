@@ -380,8 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         TypeSymbol nullableFrom = MakeNullableType(convertsFrom);
                         TypeSymbol nullableTo = convertsTo.IsNonNullableValueType()
-                          ? MakeNullableType(convertsTo)
-                          : convertsTo;
+                            ? MakeNullableType(convertsTo)
+                            : convertsTo;
                         Conversion liftedFromConversion = EncompassingExplicitConversion(
                             sourceExpression,
                             source,

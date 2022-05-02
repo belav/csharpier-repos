@@ -587,13 +587,13 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         (i % 2 == 0)
                             ? (
-                                  BitConverter.DoubleToInt64Bits(firstOp[i])
-                                  != BitConverter.DoubleToInt64Bits(result[i])
-                              )
+                                BitConverter.DoubleToInt64Bits(firstOp[i])
+                                != BitConverter.DoubleToInt64Bits(result[i])
+                            )
                             : (
-                                  BitConverter.DoubleToInt64Bits(firstOp[i - 1])
-                                  != BitConverter.DoubleToInt64Bits(result[i])
-                              )
+                                BitConverter.DoubleToInt64Bits(firstOp[i - 1])
+                                != BitConverter.DoubleToInt64Bits(result[i])
+                            )
                     )
                     {
                         succeeded = false;

@@ -206,7 +206,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                                         inCurlies = false;
                                         goto default;
                                     case ','
-                                          when parameters[i + 1] == ' ' && !inQuotes && !inCurlies:
+                                    when parameters[i + 1] == ' ' && !inQuotes && !inCurlies:
                                         _stringBuilder.Append(_eol);
                                         i++;
                                         continue;

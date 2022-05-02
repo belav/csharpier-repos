@@ -443,8 +443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var addRemove = _factory.WellKnownMethod(
                     node.IsAddition
-                      ? WellKnownMember.System_Runtime_InteropServices_ComAwareEventInfo__AddEventHandler
-                      : WellKnownMember.System_Runtime_InteropServices_ComAwareEventInfo__RemoveEventHandler
+                        ? WellKnownMember.System_Runtime_InteropServices_ComAwareEventInfo__AddEventHandler
+                        : WellKnownMember.System_Runtime_InteropServices_ComAwareEventInfo__RemoveEventHandler
                 );
 
                 if ((object)addRemove != null)

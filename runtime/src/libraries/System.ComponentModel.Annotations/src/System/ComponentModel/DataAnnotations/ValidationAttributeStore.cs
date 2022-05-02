@@ -309,8 +309,8 @@ namespace System.ComponentModel.DataAnnotations
                     }
                 }
                 return removedAttribute
-                  ? new AttributeCollection(attributes.ToArray())
-                  : propertyDescriptorAttributes;
+                    ? new AttributeCollection(attributes.ToArray())
+                    : propertyDescriptorAttributes;
             }
         }
 

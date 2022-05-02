@@ -128,8 +128,8 @@ namespace System.Net.Mail
         {
             int id;
             return s_headerDictionary.TryGetValue(name, out id)
-              ? (MailHeaderID)id
-              : MailHeaderID.Unknown;
+                ? (MailHeaderID)id
+                : MailHeaderID.Unknown;
         }
 
         internal static bool IsUserSettable(string name)
@@ -151,8 +151,8 @@ namespace System.Net.Mail
         {
             int index;
             return s_headerDictionary.TryGetValue(name, out index)
-              ? s_headerInfo[index].NormalizedName
-              : name;
+                ? s_headerInfo[index].NormalizedName
+                : name;
         }
 
         internal static bool AllowsUnicode(string name)

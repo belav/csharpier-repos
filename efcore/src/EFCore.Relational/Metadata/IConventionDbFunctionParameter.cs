@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// </remarks>
     public interface IConventionDbFunctionParameter
         : IConventionAnnotatable,
-          IReadOnlyDbFunctionParameter
+            IReadOnlyDbFunctionParameter
     {
         /// <summary>
         ///     The <see cref="IConventionDbFunction" /> to which this parameter belongs.

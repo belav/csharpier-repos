@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract partial class NamespaceSymbol
         : NamespaceOrTypeSymbol,
-          INamespaceSymbolInternal
+            INamespaceSymbolInternal
     {
         // PERF: initialization of the following fields will allocate, so we make them lazy
         private ImmutableArray<NamedTypeSymbol> _lazyTypesMightContainExtensionMethods;
@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return this.NamespaceKind == NamespaceKind.Compilation
-                  ? this.Extent.Compilation
-                  : null;
+                    ? this.Extent.Compilation
+                    : null;
             }
         }
 

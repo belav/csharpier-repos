@@ -446,8 +446,8 @@ namespace System.Threading
             // stored in waitSuccessful.
 
             return (asyncWaitTask != null)
-              ? asyncWaitTask.GetAwaiter().GetResult()
-              : waitSuccessful;
+                ? asyncWaitTask.GetAwaiter().GetResult()
+                : waitSuccessful;
         }
 
         /// <summary>
@@ -676,8 +676,8 @@ namespace System.Threading
                     return (
                         millisecondsTimeout == Timeout.Infinite && !cancellationToken.CanBeCanceled
                     )
-                      ? asyncWaiter
-                      : WaitUntilCountOrTimeoutAsync(
+                        ? asyncWaiter
+                        : WaitUntilCountOrTimeoutAsync(
                             asyncWaiter,
                             millisecondsTimeout,
                             cancellationToken

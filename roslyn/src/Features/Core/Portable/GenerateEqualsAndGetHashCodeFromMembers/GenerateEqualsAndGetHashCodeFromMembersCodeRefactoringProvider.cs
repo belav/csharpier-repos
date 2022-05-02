@@ -374,7 +374,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
         )
         {
             return withDialog
-              ? CreateCodeActionWithDialogAsync(
+                ? CreateCodeActionWithDialogAsync(
                     document,
                     typeDeclaration,
                     containingType,
@@ -383,7 +383,7 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                     generateGetHashCode,
                     cancellationToken
                 )
-              : CreateCodeActionWithoutDialogAsync(
+                : CreateCodeActionWithoutDialogAsync(
                     document,
                     typeDeclaration,
                     containingType,

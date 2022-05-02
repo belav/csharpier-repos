@@ -171,7 +171,7 @@ namespace System.Drawing
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeleteFontFamily(new HandleRef(this, _nativeFamily));
+                        Gdip.GdipDeleteFontFamily(new HandleRef(this, _nativeFamily));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

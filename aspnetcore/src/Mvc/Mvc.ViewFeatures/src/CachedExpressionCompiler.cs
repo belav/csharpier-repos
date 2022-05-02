@@ -70,7 +70,7 @@ internal static class CachedExpressionCompiler
 
                 // model => CapturedConstant
                 case MemberExpression memberExpression
-                      when memberExpression.Expression is ConstantExpression constantExpression:
+                when memberExpression.Expression is ConstantExpression constantExpression:
                     return CompileCapturedConstant(memberExpression, constantExpression);
 
                 // model => ModelType.StaticMember
@@ -79,12 +79,12 @@ internal static class CachedExpressionCompiler
 
                 // model => model.Member
                 case MemberExpression memberExpression
-                      when memberExpression.Expression == expression.Parameters[0]:
+                when memberExpression.Expression == expression.Parameters[0]:
                     return CompileFromSimpleMemberAccess(expression, memberExpression);
 
                 // model => model.Member1.Member2
                 case MemberExpression memberExpression
-                      when IsChainedPropertyAccessor(memberExpression):
+                when IsChainedPropertyAccessor(memberExpression):
                     return CompileForChainedMemberAccess(expression, memberExpression);
 
                 default:

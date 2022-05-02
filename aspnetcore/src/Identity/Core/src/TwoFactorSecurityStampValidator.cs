@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Identity;
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
 public class TwoFactorSecurityStampValidator<TUser>
     : SecurityStampValidator<TUser>,
-      ITwoFactorSecurityStampValidator where TUser : class
+        ITwoFactorSecurityStampValidator where TUser : class
 {
     /// <summary>
     /// Creates a new instance of <see cref="SecurityStampValidator{TUser}"/>.

@@ -22,12 +22,12 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
         TVariableDeclaratorSyntax
     >
         : AbstractObjectCreationExpressionAnalyzer<
-              TExpressionSyntax,
-              TStatementSyntax,
-              TObjectCreationExpressionSyntax,
-              TVariableDeclaratorSyntax,
-              TExpressionStatementSyntax
-          >
+            TExpressionSyntax,
+            TStatementSyntax,
+            TObjectCreationExpressionSyntax,
+            TVariableDeclaratorSyntax,
+            TExpressionStatementSyntax
+        >
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
         where TObjectCreationExpressionSyntax : TExpressionSyntax

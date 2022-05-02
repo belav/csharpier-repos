@@ -590,15 +590,15 @@ namespace {@namespace}
                 {
                     CollectionType.IListOfT => $"{JsonMetadataServicesTypeRef}.CreateIListInfo<",
                     CollectionType.ICollectionOfT
-                      => $"{JsonMetadataServicesTypeRef}.CreateICollectionInfo<",
+                        => $"{JsonMetadataServicesTypeRef}.CreateICollectionInfo<",
                     CollectionType.StackOfT => $"{JsonMetadataServicesTypeRef}.CreateStackInfo<",
                     CollectionType.QueueOfT => $"{JsonMetadataServicesTypeRef}.CreateQueueInfo<",
                     CollectionType.Stack => $"{JsonMetadataServicesTypeRef}.CreateStackInfo<",
                     CollectionType.Queue => $"{JsonMetadataServicesTypeRef}.CreateQueueInfo<",
                     CollectionType.IEnumerableOfT
-                      => $"{JsonMetadataServicesTypeRef}.CreateIEnumerableInfo<",
+                        => $"{JsonMetadataServicesTypeRef}.CreateIEnumerableInfo<",
                     CollectionType.IDictionaryOfTKeyTValue
-                      => $"{JsonMetadataServicesTypeRef}.CreateIDictionaryInfo<",
+                        => $"{JsonMetadataServicesTypeRef}.CreateIDictionaryInfo<",
                     _ => $"{JsonMetadataServicesTypeRef}.Create{collectionType}Info<"
                 };
 
@@ -713,9 +713,9 @@ namespace {@namespace}
                 string elementSerializationLogic =
                     writerMethodToCall == null
                         ? GetSerializeLogicForNonPrimitiveType(
-                              valueTypeGenerationSpec,
-                              valueToWrite
-                          )
+                            valueTypeGenerationSpec,
+                            valueToWrite
+                        )
                         : $"{writerMethodToCall}Value({valueToWrite});";
 
                 string serializationLogic =
@@ -905,9 +905,9 @@ private static {JsonPropertyInfoTypeRef}[] {propInitMethodName}({JsonSerializerC
                     {
                         { DefaultIgnoreCondition: JsonIgnoreCondition.Always } => "null",
                         { CanUseGetter: true }
-                          => $"static (obj) => (({declaringTypeCompilableName})obj).{clrPropertyName}{(memberMetadata.TypeGenerationSpec.CanContainNullableReferenceAnnotations ? "!" : "")}",
+                            => $"static (obj) => (({declaringTypeCompilableName})obj).{clrPropertyName}{(memberMetadata.TypeGenerationSpec.CanContainNullableReferenceAnnotations ? "!" : "")}",
                         { CanUseGetter: false, HasJsonInclude: true }
-                          => @$"static (obj) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.Type.Name, memberMetadata.ClrName)}"")",
+                            => @$"static (obj) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.Type.Name, memberMetadata.ClrName)}"")",
                         _ => "null"
                     };
 
@@ -915,13 +915,13 @@ private static {JsonPropertyInfoTypeRef}[] {propInitMethodName}({JsonSerializerC
                     {
                         { DefaultIgnoreCondition: JsonIgnoreCondition.Always } => "null",
                         { CanUseSetter: true, IsInitOnlySetter: true }
-                          => @$"static (obj, value) => throw new {InvalidOperationExceptionTypeRef}(""{ExceptionMessages.InitOnlyPropertyDeserializationNotSupported}"")",
+                            => @$"static (obj, value) => throw new {InvalidOperationExceptionTypeRef}(""{ExceptionMessages.InitOnlyPropertyDeserializationNotSupported}"")",
                         { CanUseSetter: true } when typeGenerationSpec.IsValueType
-                          => $@"static (obj, value) => {UnsafeTypeRef}.Unbox<{declaringTypeCompilableName}>(obj).{clrPropertyName} = value!",
+                            => $@"static (obj, value) => {UnsafeTypeRef}.Unbox<{declaringTypeCompilableName}>(obj).{clrPropertyName} = value!",
                         { CanUseSetter: true }
-                          => @$"static (obj, value) => (({declaringTypeCompilableName})obj).{clrPropertyName} = value!",
+                            => @$"static (obj, value) => (({declaringTypeCompilableName})obj).{clrPropertyName} = value!",
                         { CanUseSetter: false, HasJsonInclude: true }
-                          => @$"static (obj, value) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.Type.Name, memberMetadata.ClrName)}"")",
+                            => @$"static (obj, value) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.Type.Name, memberMetadata.ClrName)}"")",
                         _ => "null",
                     };
 
@@ -1312,13 +1312,13 @@ private static void {serializeMethodName}({Utf8JsonWriterTypeRef} {WriterVarName
             private string GetEarlyNullCheckSource(bool canBeNull)
             {
                 return canBeNull
-                  ? $@"if ({ValueVarName} == null)
+                    ? $@"if ({ValueVarName} == null)
     {{
         {WriterVarName}.WriteNullValue();
         return;
     }}
 "
-                  : null;
+                    : null;
             }
 
             private string GetSerializeLogicForNonPrimitiveType(

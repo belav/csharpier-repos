@@ -681,13 +681,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                         case ParenthesizedExpressionSyntax paren:
                             return paren.Expression;
                         case IdentifierNameSyntax id
-                              when id.Parent is MemberAccessExpressionSyntax memberAccess
-                                  && memberAccess.Name == node:
+                        when id.Parent is MemberAccessExpressionSyntax memberAccess
+                            && memberAccess.Name == node:
                             node = memberAccess;
                             continue;
                         case ExpressionSyntax expr
-                              when expr.Parent is ConditionalAccessExpressionSyntax cond
-                                  && cond.WhenNotNull == node:
+                        when expr.Parent is ConditionalAccessExpressionSyntax cond
+                            && cond.WhenNotNull == node:
                             node = cond;
                             continue;
                         case ExpressionSyntax expr:

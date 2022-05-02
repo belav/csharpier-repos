@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 )]
 internal class AzureADB2CAccountControllerFeatureProvider
     : IApplicationFeatureProvider<ControllerFeature>,
-      IApplicationFeatureProvider
+        IApplicationFeatureProvider
 {
     public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
     {

@@ -111,8 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 property[RelationalAnnotationNames.RelationalOverrides];
             return
                 tableOverrides != null && tableOverrides.TryGetValue(storeObject, out var overrides)
-              ? (IRelationalPropertyOverrides)overrides
-              : null;
+                ? (IRelationalPropertyOverrides)overrides
+                : null;
         }
 
         /// <summary>

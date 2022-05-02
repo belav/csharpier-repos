@@ -88,11 +88,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                             ),
                             setPriority: set.Priority,
                             applicableRange: set.ApplicableToSpan.HasValue
-                              ? ProtocolConversions.TextSpanToRange(
+                                ? ProtocolConversions.TextSpanToRange(
                                     set.ApplicableToSpan.Value,
                                     documentText
                                 )
-                              : null,
+                                : null,
                             currentSetNumber: currentSetNumber,
                             currentHighestSetNumber: ref currentHighestSetNumber
                         )
@@ -183,11 +183,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                                 codeActionKind,
                                 nestedActionSet.Priority,
                                 applicableRange: nestedActionSet.ApplicableToSpan.HasValue
-                                  ? ProtocolConversions.TextSpanToRange(
+                                    ? ProtocolConversions.TextSpanToRange(
                                         nestedActionSet.ApplicableToSpan.Value,
                                         documentText
                                     )
-                                  : null,
+                                    : null,
                                 nestedSetNumber,
                                 ref currentHighestSetNumber,
                                 currentTitle
@@ -347,7 +347,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             {
                 UnifiedPredefinedSuggestedActionCategoryNames.CodeFix => CodeActionKind.QuickFix,
                 UnifiedPredefinedSuggestedActionCategoryNames.Refactoring
-                  => CodeActionKind.Refactor,
+                    => CodeActionKind.Refactor,
                 UnifiedPredefinedSuggestedActionCategoryNames.StyleFix => CodeActionKind.QuickFix,
                 UnifiedPredefinedSuggestedActionCategoryNames.ErrorFix => CodeActionKind.QuickFix,
                 _ => throw ExceptionUtilities.UnexpectedValue(categoryName)

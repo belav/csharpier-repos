@@ -74,11 +74,11 @@ namespace AutoMapper.UnitTests.Bug
 
         public class Converter<T>
             : ITypeConverter<Source<T>, Destination<T>>,
-              ITypeConverter<OtherSource<T>, OtherDestination<T>>,
-              ITypeConverter<Source<T>, int>,
-              ITypeConverter<int, Destination<T>>,
-              ITypeConverter<OtherSource<T>, Destination<object>>,
-              ITypeConverter<Source<object>, OtherDestination<T>>
+                ITypeConverter<OtherSource<T>, OtherDestination<T>>,
+                ITypeConverter<Source<T>, int>,
+                ITypeConverter<int, Destination<T>>,
+                ITypeConverter<OtherSource<T>, Destination<object>>,
+                ITypeConverter<Source<object>, OtherDestination<T>>
         {
             public static Destination<T> SomeDestination = new Destination<T>();
             public static OtherDestination<T> SomeOtherDestination = new OtherDestination<T>();

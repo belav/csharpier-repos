@@ -234,8 +234,8 @@ namespace System.Net.Sockets.Tests
                     Task connectTask = ConnectAsync(
                         client,
                         useDns
-                          ? new DnsEndPoint("one.one.one.one", 23)
-                          : new IPEndPoint(address, 23)
+                            ? new DnsEndPoint("one.one.one.one", 23)
+                            : new IPEndPoint(address, 23)
                     );
 
                     // Wait a little so the operation is started.

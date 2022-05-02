@@ -77,8 +77,8 @@ public static class JsonPatchExtensions
             {
                 var affectedObjectName = jsonPatchError.AffectedObject.GetType().Name;
                 var key = string.IsNullOrEmpty(prefix)
-                  ? affectedObjectName
-                  : prefix + "." + affectedObjectName;
+                    ? affectedObjectName
+                    : prefix + "." + affectedObjectName;
 
                 modelState.TryAddModelError(key, jsonPatchError.ErrorMessage);
             }

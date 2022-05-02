@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteInheritanceMarginService
         : BrokeredServiceBase,
-          IRemoteInheritanceMarginService
+            IRemoteInheritanceMarginService
     {
         internal sealed class Factory : FactoryBase<IRemoteInheritanceMarginService>
         {

@@ -21,7 +21,7 @@ class Program
 
         return
             obj != null && obj.GetType().AssemblyQualifiedName.StartsWith(expectedObjTypeNamePrefix)
-          ? 100
-          : -1;
+            ? 100
+            : -1;
     }
 }

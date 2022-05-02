@@ -2144,8 +2144,8 @@ namespace System.Xml
         )
         {
             return (name == null)
-              ? new ArgumentNullException(argumentName)
-              : new ArgumentException(SR.Xml_EmptyName, argumentName);
+                ? new ArgumentNullException(argumentName)
+                : new ArgumentException(SR.Xml_EmptyName, argumentName);
         }
     }
 }

@@ -466,8 +466,8 @@ namespace System.Xml.Serialization
                 return null;
             return GetQualifiedName(
                 EscapeName
-                  ? XmlConvert.EncodeLocalName(xmlQualifiedName.Name)
-                  : xmlQualifiedName.Name,
+                    ? XmlConvert.EncodeLocalName(xmlQualifiedName.Name)
+                    : xmlQualifiedName.Name,
                 xmlQualifiedName.Namespace
             );
         }
@@ -1501,8 +1501,8 @@ namespace System.Xml.Serialization
 #endif
 
                 int arrayLength = typeof(ICollection).IsAssignableFrom(type)
-                  ? ((ICollection)o).Count
-                  : -1;
+                    ? ((ICollection)o).Count
+                    : -1;
                 if (_soap12)
                 {
                     _w.WriteAttributeString(
@@ -4561,8 +4561,11 @@ namespace System.Xml.Serialization
                         Writer.Write("if (");
                         Writer.Write(
                             enumUseReflection
-                              ? RaCodeGen.GetStringForEnumLongValue(enumSource!, enumUseReflection)
-                              : enumSource
+                                ? RaCodeGen.GetStringForEnumLongValue(
+                                    enumSource!,
+                                    enumUseReflection
+                                )
+                                : enumSource
                         );
                         Writer.Write(" == ");
                         Writer.Write(enumFullName);
@@ -4667,11 +4670,11 @@ namespace System.Xml.Serialization
                             Writer.Write("if (");
                             Writer.Write(
                                 enumUseReflection
-                                  ? RaCodeGen.GetStringForEnumLongValue(
+                                    ? RaCodeGen.GetStringForEnumLongValue(
                                         enumSource!,
                                         enumUseReflection
                                     )
-                                  : enumSource
+                                    : enumSource
                             );
                             Writer.Write(" == ");
                             Writer.Write(enumFullName);
@@ -4833,10 +4836,10 @@ namespace System.Xml.Serialization
                 element.Any && element.Name.Length == 0
                     ? null
                     : (
-                          element.Form == XmlSchemaForm.Qualified
-                              ? (writeAccessor ? element.Namespace : element.Mapping!.Namespace)
-                              : ""
-                      );
+                        element.Form == XmlSchemaForm.Qualified
+                            ? (writeAccessor ? element.Namespace : element.Mapping!.Namespace)
+                            : ""
+                    );
             if (element.Mapping is NullableMapping)
             {
                 Writer.Write("if (");
@@ -5046,8 +5049,8 @@ namespace System.Xml.Serialization
                     string suffixRaw = mapping.TypeDesc!.XmlEncodingNotRequired ? "Raw" : "";
                     WritePrimitive(
                         element.IsNullable
-                          ? ("WriteNullableString" + suffixNullable + suffixRaw)
-                          : ("WriteElementString" + suffixRaw),
+                            ? ("WriteNullableString" + suffixNullable + suffixRaw)
+                            : ("WriteElementString" + suffixRaw),
                         name,
                         ns,
                         element.Default,

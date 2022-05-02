@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal sealed class SpecializedFieldReference
         : TypeMemberReference,
-          Cci.ISpecializedFieldReference
+            Cci.ISpecializedFieldReference
     {
         private readonly FieldSymbol _underlyingField;
 

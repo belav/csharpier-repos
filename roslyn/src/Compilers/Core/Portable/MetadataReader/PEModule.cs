@@ -1101,8 +1101,8 @@ namespace Microsoft.CodeAnalysis
             return FindTargetAttribute(
                 token,
                 ignoreCase
-                  ? AttributeDescription.CaseInsensitiveExtensionAttribute
-                  : AttributeDescription.CaseSensitiveExtensionAttribute
+                    ? AttributeDescription.CaseInsensitiveExtensionAttribute
+                    : AttributeDescription.CaseSensitiveExtensionAttribute
             ).HasValue;
         }
 
@@ -1859,8 +1859,8 @@ namespace Microsoft.CodeAnalysis
                         out var obsoleteData,
                         s_attributeDeprecatedDataExtractor
                     )
-                      ? obsoleteData
-                      : null;
+                        ? obsoleteData
+                        : null;
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(attributeInfo.SignatureIndex);
@@ -3815,8 +3815,8 @@ namespace Microsoft.CodeAnalysis
 
                 // TODO: Error checking: Throw an error if the table entry cannot be found
                 return constantHandle.IsNil
-                  ? ConstantValue.Bad
-                  : GetConstantValueOrThrow(constantHandle);
+                    ? ConstantValue.Bad
+                    : GetConstantValueOrThrow(constantHandle);
             }
             catch (BadImageFormatException)
             {
@@ -3834,8 +3834,8 @@ namespace Microsoft.CodeAnalysis
 
                 // TODO: Error checking: Throw an error if the table entry cannot be found
                 return constantHandle.IsNil
-                  ? ConstantValue.Bad
-                  : GetConstantValueOrThrow(constantHandle);
+                    ? ConstantValue.Bad
+                    : GetConstantValueOrThrow(constantHandle);
             }
             catch (BadImageFormatException)
             {
@@ -3865,12 +3865,12 @@ namespace Microsoft.CodeAnalysis
         private BlobHandle GetMarshallingDescriptorHandleOrThrow(EntityHandle fieldOrParameterToken)
         {
             return fieldOrParameterToken.Kind == HandleKind.FieldDefinition
-              ? MetadataReader
-                .GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
-                .GetMarshallingDescriptor()
-              : MetadataReader
-                .GetParameter((ParameterHandle)fieldOrParameterToken)
-                .GetMarshallingDescriptor();
+                ? MetadataReader
+                    .GetFieldDefinition((FieldDefinitionHandle)fieldOrParameterToken)
+                    .GetMarshallingDescriptor()
+                : MetadataReader
+                    .GetParameter((ParameterHandle)fieldOrParameterToken)
+                    .GetMarshallingDescriptor();
         }
 
         internal UnmanagedType GetMarshallingType(EntityHandle fieldOrParameterToken)

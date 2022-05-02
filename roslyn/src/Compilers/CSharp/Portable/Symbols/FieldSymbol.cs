@@ -317,8 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             );
             return newOwner.IsDefinition
-              ? this
-              : new SubstitutedFieldSymbol(newOwner as SubstitutedNamedTypeSymbol, this);
+                ? this
+                : new SubstitutedFieldSymbol(newOwner as SubstitutedNamedTypeSymbol, this);
         }
 
         #region Use-Site Diagnostics

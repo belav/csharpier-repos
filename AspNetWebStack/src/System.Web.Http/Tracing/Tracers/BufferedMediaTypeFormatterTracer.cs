@@ -14,8 +14,8 @@ namespace System.Web.Http.Tracing.Tracers
 {
     internal class BufferedMediaTypeFormatterTracer
         : BufferedMediaTypeFormatter,
-          IFormatterTracer,
-          IDecorator<BufferedMediaTypeFormatter>
+            IFormatterTracer,
+            IDecorator<BufferedMediaTypeFormatter>
     {
         private const string OnReadFromStreamMethodName = "ReadFromStream";
         private const string OnWriteToStreamMethodName = "WriteToStream";
@@ -130,8 +130,8 @@ namespace System.Web.Http.Tracing.Tracers
                         SRResources.TraceReadFromStreamMessage,
                         type.Name,
                         contentType == null
-                          ? SRResources.TraceNoneObjectMessage
-                          : contentType.ToString()
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString()
                     );
                 },
                 execute: () =>
@@ -218,8 +218,8 @@ namespace System.Web.Http.Tracing.Tracers
                         FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
                         type.Name,
                         contentType == null
-                          ? SRResources.TraceNoneObjectMessage
-                          : contentType.ToString()
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString()
                     );
                 },
                 execute: () =>

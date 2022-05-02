@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return declarationSyntax is NamespaceDeclarationSyntax namespaceDeclaration
-              ? semanticModel.GetDeclaredSymbol(namespaceDeclaration, cancellationToken)
-              : semanticModel.GetDeclaredSymbol(
+                ? semanticModel.GetDeclaredSymbol(namespaceDeclaration, cancellationToken)
+                : semanticModel.GetDeclaredSymbol(
                     (FileScopedNamespaceDeclarationSyntax)declarationSyntax,
                     cancellationToken
                 );

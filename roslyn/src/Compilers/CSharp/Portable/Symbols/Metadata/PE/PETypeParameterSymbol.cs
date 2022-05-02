@@ -105,8 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 return this.ContainingSymbol.Kind == SymbolKind.Method
-                  ? TypeParameterKind.Method
-                  : TypeParameterKind.Type;
+                    ? TypeParameterKind.Method
+                    : TypeParameterKind.Type;
             }
         }
 
@@ -726,8 +726,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null)
-              ? bounds.ConstraintTypes
-              : ImmutableArray<TypeWithAnnotations>.Empty;
+                ? bounds.ConstraintTypes
+                : ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
@@ -763,8 +763,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     out _,
                     // Filter out [IsUnmanagedAttribute]
                     HasUnmanagedTypeConstraint
-                      ? AttributeDescription.IsUnmanagedAttribute
-                      : default
+                        ? AttributeDescription.IsUnmanagedAttribute
+                        : default
                 );
 
                 ImmutableInterlocked.InterlockedInitialize(

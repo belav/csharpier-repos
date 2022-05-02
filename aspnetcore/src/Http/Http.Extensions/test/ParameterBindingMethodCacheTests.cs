@@ -880,11 +880,11 @@ public class ParameterBindingMethodCacheTests
 
     private class TryParseFromClassAndInterface
         : BaseTryParseClass<TryParseFromClassAndInterface>,
-          ITryParse<TryParseFromClassAndInterface> { }
+            ITryParse<TryParseFromClassAndInterface> { }
 
     private class TryParseFromMultipleInterfaces
         : ITryParse<TryParseFromMultipleInterfaces>,
-          ITryParse2<TryParseFromMultipleInterfaces> { }
+            ITryParse2<TryParseFromMultipleInterfaces> { }
 
     // using wrong T on purpose
     private class TryParseWrongTypeFromInterface : ITryParse<TryParseFromInterface> { }
@@ -1089,11 +1089,11 @@ public class ParameterBindingMethodCacheTests
 
     private class BindAsyncFromClassAndInterface
         : BaseBindAsync<BindAsyncFromClassAndInterface>,
-          IBindAsync<BindAsyncFromClassAndInterface> { }
+            IBindAsync<BindAsyncFromClassAndInterface> { }
 
     private class BindAsyncFromMultipleInterfaces
         : IBindAsync<BindAsyncFromMultipleInterfaces>,
-          IBindAsync2<BindAsyncFromMultipleInterfaces> { }
+            IBindAsync2<BindAsyncFromMultipleInterfaces> { }
 
     // using wrong T on purpose
     private class BindAsyncWrongTypeFromInterface : IBindAsync<BindAsyncFromInterface> { }

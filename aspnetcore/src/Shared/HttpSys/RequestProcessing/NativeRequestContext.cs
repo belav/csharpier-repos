@@ -125,10 +125,10 @@ internal unsafe class NativeRequestContext : IDisposable
         get
         {
             return NativeRequest->pSslInfo == null
-              ? SslStatus.Insecure
-              : NativeRequest->pSslInfo->SslClientCertNegotiated == 0
-                  ? SslStatus.NoClientCert
-                  : SslStatus.ClientCert;
+                ? SslStatus.Insecure
+                : NativeRequest->pSslInfo->SslClientCertNegotiated == 0
+                    ? SslStatus.NoClientCert
+                    : SslStatus.ClientCert;
         }
     }
 

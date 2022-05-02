@@ -116,7 +116,7 @@ namespace Microsoft.Extensions.Options
 {
     public partial class ConfigureNamedOptions<TOptions>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
-          Microsoft.Extensions.Options.IConfigureOptions<TOptions> where TOptions : class
+            Microsoft.Extensions.Options.IConfigureOptions<TOptions> where TOptions : class
     {
         public ConfigureNamedOptions(string name, System.Action<TOptions> action) { }
 
@@ -136,7 +136,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class ConfigureNamedOptions<TOptions, TDep>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
-          Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+            Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
         where TDep : class
     {
@@ -166,7 +166,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
-          Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+            Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
         where TDep2 : class
@@ -202,7 +202,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
-          Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+            Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
         where TDep2 : class
@@ -244,7 +244,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
-          Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+            Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
         where TDep2 : class
@@ -292,7 +292,7 @@ namespace Microsoft.Extensions.Options
 
     public partial class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
-          Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+            Microsoft.Extensions.Options.IConfigureOptions<TOptions>
         where TOptions : class
         where TDep1 : class
         where TDep2 : class
@@ -810,7 +810,7 @@ namespace Microsoft.Extensions.Options
             TOptions
     >
         : Microsoft.Extensions.Options.IOptions<TOptions>,
-          Microsoft.Extensions.Options.IOptionsSnapshot<TOptions> where TOptions : class
+            Microsoft.Extensions.Options.IOptionsSnapshot<TOptions> where TOptions : class
     {
         public OptionsManager(Microsoft.Extensions.Options.IOptionsFactory<TOptions> factory) { }
 

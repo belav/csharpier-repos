@@ -723,10 +723,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             return member.IsIndexer()
-              ? member.MetadataName
-              : member.IsExplicitInterfaceImplementation()
-                  ? ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name)
-                  : member.Name;
+                ? member.MetadataName
+                : member.IsExplicitInterfaceImplementation()
+                    ? ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name)
+                    : member.Name;
         }
     }
 }

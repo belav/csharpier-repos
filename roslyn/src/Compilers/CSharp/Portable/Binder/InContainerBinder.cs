@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var merged = _container as MergedNamespaceSymbol;
                 return ((object)merged != null)
-                  ? merged.GetConstituentForCompilation(this.Compilation)
-                  : _container;
+                    ? merged.GetConstituentForCompilation(this.Compilation)
+                    : _container;
             }
         }
 

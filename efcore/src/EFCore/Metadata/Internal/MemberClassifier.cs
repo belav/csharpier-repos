@@ -166,16 +166,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     (Model)model,
                     out shouldBeOwned
                 )
-              ? targetSequenceType
-              : (propertyInfo == null || propertyInfo.IsCandidateProperty(needsWrite: true))
+                ? targetSequenceType
+                : (propertyInfo == null || propertyInfo.IsCandidateProperty(needsWrite: true))
                 && IsCandidateNavigationPropertyType(
                     targetType,
                     memberInfo,
                     (Model)model,
                     out shouldBeOwned
                 )
-                  ? targetType
-                  : null;
+                    ? targetType
+                    : null;
         }
 
         private bool IsCandidateNavigationPropertyType(

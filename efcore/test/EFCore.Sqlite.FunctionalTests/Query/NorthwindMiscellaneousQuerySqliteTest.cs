@@ -14,8 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindMiscellaneousQuerySqliteTest
         : NorthwindMiscellaneousQueryRelationalTestBase<
-              NorthwindQuerySqliteFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqliteFixture<NoopModelCustomizer>
+        >
     {
         // ReSharper disable once UnusedParameter.Local
         public NorthwindMiscellaneousQuerySqliteTest(

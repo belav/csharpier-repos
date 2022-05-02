@@ -323,12 +323,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                     if (size == null && storeTypeName == null)
                     {
                         return isAnsi
-                          ? isFixedLength
-                              ? _fixedLengthAnsiString
-                              : _variableLengthMaxAnsiString
-                          : isFixedLength
-                              ? _fixedLengthUnicodeString
-                              : _variableLengthMaxUnicodeString;
+                            ? isFixedLength
+                                ? _fixedLengthAnsiString
+                                : _variableLengthMaxAnsiString
+                            : isFixedLength
+                                ? _fixedLengthUnicodeString
+                                : _variableLengthMaxUnicodeString;
                     }
 
                     return new SqlServerStringTypeMapping(
@@ -336,8 +336,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                         size: size,
                         fixedLength: isFixedLength,
                         storeTypePostfix: storeTypeName == null
-                          ? StoreTypePostfix.Size
-                          : StoreTypePostfix.None
+                            ? StoreTypePostfix.Size
+                            : StoreTypePostfix.None
                     );
                 }
 
@@ -357,13 +357,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                     }
 
                     return size == null
-                      ? _variableLengthMaxBinary
-                      : new SqlServerByteArrayTypeMapping(
+                        ? _variableLengthMaxBinary
+                        : new SqlServerByteArrayTypeMapping(
                             size: size,
                             fixedLength: isFixedLength,
                             storeTypePostfix: storeTypeName == null
-                              ? StoreTypePostfix.Size
-                              : StoreTypePostfix.None
+                                ? StoreTypePostfix.Size
+                                : StoreTypePostfix.None
                         );
                 }
             }

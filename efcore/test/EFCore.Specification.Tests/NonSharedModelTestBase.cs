@@ -129,15 +129,15 @@ namespace Microsoft.EntityFrameworkCore
 
             services = usePooling
                 ? services.AddDbContextPool(
-                      typeof(TContext),
-                      (s, b) => ConfigureOptions(s, b, onConfiguring)
-                  )
+                    typeof(TContext),
+                    (s, b) => ConfigureOptions(s, b, onConfiguring)
+                )
                 : services.AddDbContext(
-                      typeof(TContext),
-                      (s, b) => ConfigureOptions(s, b, onConfiguring),
-                      ServiceLifetime.Transient,
-                      ServiceLifetime.Singleton
-                  );
+                    typeof(TContext),
+                    (s, b) => ConfigureOptions(s, b, onConfiguring),
+                    ServiceLifetime.Transient,
+                    ServiceLifetime.Singleton
+                );
 
             _serviceProvider = services.BuildServiceProvider(validateScopes: true);
 

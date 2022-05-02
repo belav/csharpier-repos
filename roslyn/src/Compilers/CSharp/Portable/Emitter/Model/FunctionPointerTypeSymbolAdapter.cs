@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     FunctionPointerTypeSymbol
         :
 #endif
-          IFunctionPointerTypeReference
+            IFunctionPointerTypeReference
     {
         private FunctionPointerMethodSignature? _lazySignature;
         ISignature IFunctionPointerTypeReference.Signature

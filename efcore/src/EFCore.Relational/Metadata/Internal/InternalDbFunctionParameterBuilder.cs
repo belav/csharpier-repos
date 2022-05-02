@@ -25,7 +25,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </remarks>
     public class InternalDbFunctionParameterBuilder
         : AnnotatableBuilder<DbFunctionParameter, IConventionModelBuilder>,
-          IConventionDbFunctionParameterBuilder
+            IConventionDbFunctionParameterBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -154,8 +154,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasStoreType(
                 storeType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -167,8 +167,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetStoreType(
                 storeType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -180,8 +180,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -193,8 +193,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

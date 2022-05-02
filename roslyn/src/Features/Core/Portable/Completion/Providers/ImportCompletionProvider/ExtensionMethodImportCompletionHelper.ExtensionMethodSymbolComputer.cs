@@ -270,11 +270,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 );
 
                 return isOriginatingProject
-                  ? GetExtensionMethodsForSymbolsFromSameCompilation(
+                    ? GetExtensionMethodsForSymbolsFromSameCompilation(
                         matchingMethodSymbols,
                         cancellationToken
                     )
-                  : GetExtensionMethodsForSymbolsFromDifferentCompilation(
+                    : GetExtensionMethodsForSymbolsFromDifferentCompilation(
                         matchingMethodSymbols,
                         cancellationToken
                     );

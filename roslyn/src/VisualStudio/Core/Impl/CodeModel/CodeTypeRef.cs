@@ -29,8 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
     [ComDefaultInterface(typeof(EnvDTE.CodeTypeRef))]
     public sealed class CodeTypeRef
         : AbstractCodeModelObject,
-          EnvDTE.CodeTypeRef,
-          EnvDTE80.CodeTypeRef2
+            EnvDTE.CodeTypeRef,
+            EnvDTE80.CodeTypeRef2
     {
         internal static EnvDTE.CodeTypeRef Create(
             CodeModelState state,

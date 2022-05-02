@@ -285,8 +285,8 @@ namespace System.Data.SqlTypes
         public static SqlBoolean operator ==(SqlInt32 x, SqlInt32 y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.m_value == y.m_value);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value == y.m_value);
         }
 
         public static SqlBoolean operator !=(SqlInt32 x, SqlInt32 y)
@@ -307,15 +307,15 @@ namespace System.Data.SqlTypes
         public static SqlBoolean operator <=(SqlInt32 x, SqlInt32 y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.m_value <= y.m_value);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         public static SqlBoolean operator >=(SqlInt32 x, SqlInt32 y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.m_value >= y.m_value);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------

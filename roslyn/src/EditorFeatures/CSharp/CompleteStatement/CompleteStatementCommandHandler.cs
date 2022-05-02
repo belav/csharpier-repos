@@ -521,7 +521,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
             forStatementSyntax.Condition == null
                 ? false
                 : caretPosition > forStatementSyntax.Condition.SpanStart
-                  && caretPosition <= forStatementSyntax.Condition.Span.End;
+                    && caretPosition <= forStatementSyntax.Condition.Span.End;
 
         private static bool CaretIsInForStatementDeclaration(
             int caretPosition,

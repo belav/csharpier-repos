@@ -436,8 +436,8 @@ namespace System.Net.Quic.Tests
                 Assert.Equal(certificate.Issuer, cert.Issuer);
                 Assert.Equal(
                     expectsError
-                      ? SslPolicyErrors.RemoteCertificateNameMismatch
-                      : SslPolicyErrors.None,
+                        ? SslPolicyErrors.RemoteCertificateNameMismatch
+                        : SslPolicyErrors.None,
                     errors & SslPolicyErrors.RemoteCertificateNameMismatch
                 );
                 return true;

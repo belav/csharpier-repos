@@ -292,8 +292,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         (
                             p,
                             string.IsNullOrEmpty(p.Name)
-                              ? null
-                              : _propertyFactory.FindParameter(
+                                ? null
+                                : _propertyFactory.FindParameter(
                                     (IEntityType)entityType,
                                     p.ParameterType,
                                     p.Name

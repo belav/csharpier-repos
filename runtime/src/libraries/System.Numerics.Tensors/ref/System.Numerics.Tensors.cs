@@ -334,15 +334,15 @@ namespace System.Numerics.Tensors
 
     public abstract partial class Tensor<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.IReadOnlyList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Collections.IStructuralComparable,
-          System.Collections.IStructuralEquatable
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.IReadOnlyList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Collections.IStructuralComparable,
+            System.Collections.IStructuralEquatable
     {
         protected Tensor(System.Array fromArray, bool reverseStride) { }
 

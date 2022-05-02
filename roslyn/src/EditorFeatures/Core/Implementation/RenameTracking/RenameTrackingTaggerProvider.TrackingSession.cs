@@ -335,8 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 }
 
                 return sourceSymbol.Locations.Any(loc => loc == token.GetLocation())
-                  ? TriggerIdentifierKind.RenamableDeclaration
-                  : TriggerIdentifierKind.RenamableReference;
+                    ? TriggerIdentifierKind.RenamableDeclaration
+                    : TriggerIdentifierKind.RenamableReference;
             }
 
             internal bool CanInvokeRename(

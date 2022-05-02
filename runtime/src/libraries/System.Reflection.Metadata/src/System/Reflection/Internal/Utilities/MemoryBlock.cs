@@ -526,8 +526,8 @@ namespace System.Reflection.Internal
 
                     // uncommon non-ascii case --> fall back to slow allocating comparison.
                     return (currentChar > 0x7F)
-                      ? FastComparisonResult.Inconclusive
-                      : FastComparisonResult.Unequal;
+                        ? FastComparisonResult.Inconclusive
+                        : FastComparisonResult.Unequal;
                 }
             }
 
@@ -545,8 +545,8 @@ namespace System.Reflection.Internal
             }
 
             return textTerminated
-              ? FastComparisonResult.BytesStartWithText
-              : FastComparisonResult.TextStartsWithBytes;
+                ? FastComparisonResult.BytesStartWithText
+                : FastComparisonResult.TextStartsWithBytes;
         }
 
         // comparison stops at null terminator, terminator parameter, or end-of-block -- whichever comes first.

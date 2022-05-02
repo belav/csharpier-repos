@@ -1536,10 +1536,10 @@ namespace System.Data
                             (_schFormat != SchemaFormat.Remoting)
                                 ? stNode.Namespace
                                 : (
-                                      col.Table!.DataSet != null
-                                          ? col.Table.DataSet.Namespace
-                                          : col.Table.Namespace
-                                  );
+                                    col.Table!.DataSet != null
+                                        ? col.Table.DataSet.Namespace
+                                        : col.Table.Namespace
+                                );
 
                         // for remoting we need to use columns NS, for other cases it is wrong to get Columns NS, we need to take type's namespace
                         XmlElement schNode = GetSchema(nSpace);
@@ -3553,8 +3553,8 @@ namespace System.Data
                     {
                         throw ExceptionBuilder.MultipleParentRows(
                             tempTable.Namespace.Length == 0
-                              ? tempTable.TableName
-                              : tempTable.Namespace + tempTable.TableName
+                                ? tempTable.TableName
+                                : tempTable.Namespace + tempTable.TableName
                         );
                         // At all times a nested row can only have 0 or 1 parents, never more than 1
                     }

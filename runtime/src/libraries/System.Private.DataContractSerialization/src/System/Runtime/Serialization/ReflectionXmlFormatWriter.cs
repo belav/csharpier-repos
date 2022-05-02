@@ -228,14 +228,14 @@ namespace System.Runtime.Serialization
                 (classContract.BaseContract == null)
                     ? 0
                     : ReflectionWriteMembers(
-                          xmlWriter,
-                          obj,
-                          context,
-                          classContract.BaseContract,
-                          derivedMostClassContract,
-                          childElementIndex,
-                          emptyStringArray
-                      );
+                        xmlWriter,
+                        obj,
+                        context,
+                        classContract.BaseContract,
+                        derivedMostClassContract,
+                        childElementIndex,
+                        emptyStringArray
+                    );
 
             childElementIndex += memberCount;
 

@@ -15,8 +15,8 @@ namespace System.Collections.ObjectModel
     )]
     public class ReadOnlyDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
-          IDictionary,
-          IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IDictionary,
+            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         private readonly IDictionary<TKey, TValue> m_dictionary; // Do not rename (binary serialization)
 
@@ -261,8 +261,8 @@ namespace System.Collections.ObjectModel
         [DebuggerDisplay("Count = {Count}")]
         public sealed class KeyCollection
             : ICollection<TKey>,
-              ICollection,
-              IReadOnlyCollection<TKey>
+                ICollection,
+                IReadOnlyCollection<TKey>
         {
             private readonly ICollection<TKey> _collection;
 
@@ -318,8 +318,8 @@ namespace System.Collections.ObjectModel
         [DebuggerDisplay("Count = {Count}")]
         public sealed class ValueCollection
             : ICollection<TValue>,
-              ICollection,
-              IReadOnlyCollection<TValue>
+                ICollection,
+                IReadOnlyCollection<TValue>
         {
             private readonly ICollection<TValue> _collection;
 

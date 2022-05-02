@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.Razor;
 
 public sealed class DefaultMetadataReferenceFeature
     : RazorEngineFeatureBase,
-      IMetadataReferenceFeature
+        IMetadataReferenceFeature
 {
     public IReadOnlyList<MetadataReference> References { get; set; }
 }

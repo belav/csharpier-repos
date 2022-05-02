@@ -240,8 +240,8 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
                 && compareMethod.Name != nameof(IComparable.CompareTo);
 
             return generateCast
-              ? generator.CastExpression(comparableType, thisExpression)
-              : thisExpression;
+                ? generator.CastExpression(comparableType, thisExpression)
+                : thisExpression;
         }
 
         private static ImmutableArray<IMethodSymbol> GenerateComparisonOperators(
@@ -301,13 +301,13 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             var comparison = kind switch
             {
                 CodeGenerationOperatorKind.LessThan
-                  => generator.LessThanExpression(compareToCall, zero),
+                    => generator.LessThanExpression(compareToCall, zero),
                 CodeGenerationOperatorKind.LessThanOrEqual
-                  => generator.LessThanOrEqualExpression(compareToCall, zero),
+                    => generator.LessThanOrEqualExpression(compareToCall, zero),
                 CodeGenerationOperatorKind.GreaterThan
-                  => generator.GreaterThanExpression(compareToCall, zero),
+                    => generator.GreaterThanExpression(compareToCall, zero),
                 CodeGenerationOperatorKind.GreaterThanOrEqual
-                  => generator.GreaterThanOrEqualExpression(compareToCall, zero),
+                    => generator.GreaterThanOrEqualExpression(compareToCall, zero),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -355,11 +355,11 @@ namespace Microsoft.CodeAnalysis.GenerateComparisonOperators
             {
                 CodeGenerationOperatorKind.LessThan => WellKnownMemberNames.LessThanOperatorName,
                 CodeGenerationOperatorKind.LessThanOrEqual
-                  => WellKnownMemberNames.LessThanOrEqualOperatorName,
+                    => WellKnownMemberNames.LessThanOrEqualOperatorName,
                 CodeGenerationOperatorKind.GreaterThan
-                  => WellKnownMemberNames.GreaterThanOperatorName,
+                    => WellKnownMemberNames.GreaterThanOperatorName,
                 CodeGenerationOperatorKind.GreaterThanOrEqual
-                  => WellKnownMemberNames.GreaterThanOrEqualOperatorName,
+                    => WellKnownMemberNames.GreaterThanOrEqualOperatorName,
                 _ => throw ExceptionUtilities.Unreachable,
             };
 

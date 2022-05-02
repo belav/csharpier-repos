@@ -81,22 +81,22 @@ namespace System.Text.RegularExpressions.Symbolic
                 : a == True
                     ? False
                     : _opCache.GetOrAdd(
-                          (BoolOp.Not, a, null),
-                          static (key, algebra) =>
-                              key.a.IsLeaf
-                                  ? algebra.GetOrCreateBDD(
-                                        algebra.CombineTerminals(BoolOp.Not, key.a.Ordinal, 0),
-                                        null,
-                                        null
-                                    )
-                                  : // multi-terminal case
-                                    algebra.GetOrCreateBDD(
-                                        key.a.Ordinal,
-                                        algebra.Not(key.a.One),
-                                        algebra.Not(key.a.Zero)
-                                    ),
-                          this
-                      );
+                        (BoolOp.Not, a, null),
+                        static (key, algebra) =>
+                            key.a.IsLeaf
+                                ? algebra.GetOrCreateBDD(
+                                    algebra.CombineTerminals(BoolOp.Not, key.a.Ordinal, 0),
+                                    null,
+                                    null
+                                )
+                                : // multi-terminal case
+                                algebra.GetOrCreateBDD(
+                                    key.a.Ordinal,
+                                    algebra.Not(key.a.One),
+                                    algebra.Not(key.a.Zero)
+                                ),
+                        this
+                    );
 
         /// <summary>
         /// Applies the binary Boolean operation op and constructs the BDD recursively from a and b.
@@ -268,8 +268,8 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             Debug.Assert(k >= 0);
             return set.IsLeaf
-              ? set
-              : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, 0 - k);
+                ? set
+                : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, 0 - k);
         }
 
         /// <summary>
@@ -281,8 +281,8 @@ namespace System.Text.RegularExpressions.Symbolic
         {
             Debug.Assert(k >= 0);
             return set.IsLeaf
-              ? set
-              : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, k);
+                ? set
+                : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, k);
         }
 
         /// <summary>
@@ -359,11 +359,11 @@ namespace System.Text.RegularExpressions.Symbolic
             if (mask == 1) // Base case for least significant bit
             {
                 return upper == 0
-                  ? GetOrCreateBDD(maxBit, False, True)
-                  : // lower must also be 0
+                    ? GetOrCreateBDD(maxBit, False, True)
+                    : // lower must also be 0
                     lower == 1
-                      ? GetOrCreateBDD(maxBit, True, False)
-                      : // upper must also be 1
+                        ? GetOrCreateBDD(maxBit, True, False)
+                        : // upper must also be 1
                         True; // Otherwise both 0 and 1 are included
             }
 
@@ -460,7 +460,7 @@ namespace System.Text.RegularExpressions.Symbolic
                     sizeR = set.One.IsFull
                         ? (uint)1 << set.Ordinal
                         : ((uint)1 << (set.Ordinal - 1 - set.One.Ordinal))
-                          * ComputeDomainSizeImpl(sizeCache, set.One);
+                            * ComputeDomainSizeImpl(sizeCache, set.One);
                 }
                 else if (set.Zero.IsFull)
                 {
@@ -468,7 +468,7 @@ namespace System.Text.RegularExpressions.Symbolic
                     sizeR = set.One.IsEmpty
                         ? 0UL
                         : (1UL << (set.Ordinal - 1 - set.One.Ordinal))
-                          * ComputeDomainSizeImpl(sizeCache, set.One);
+                            * ComputeDomainSizeImpl(sizeCache, set.One);
                 }
                 else
                 {
@@ -481,7 +481,7 @@ namespace System.Text.RegularExpressions.Symbolic
                             : set.One == True
                                 ? 1UL << set.Ordinal
                                 : (1UL << (set.Ordinal - 1 - set.One.Ordinal))
-                                  * ComputeDomainSizeImpl(sizeCache, set.One);
+                                    * ComputeDomainSizeImpl(sizeCache, set.One);
                 }
 
                 size = sizeL + sizeR;

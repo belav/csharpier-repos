@@ -8,8 +8,8 @@ namespace System.Resources.Extensions
 {
     public sealed partial class DeserializingResourceReader
         : System.Collections.IEnumerable,
-          System.IDisposable,
-          System.Resources.IResourceReader
+            System.IDisposable,
+            System.Resources.IResourceReader
     {
         public DeserializingResourceReader(System.IO.Stream stream) { }
 
@@ -32,7 +32,7 @@ namespace System.Resources.Extensions
 
     public sealed partial class PreserializedResourceWriter
         : System.IDisposable,
-          System.Resources.IResourceWriter
+            System.Resources.IResourceWriter
     {
         public PreserializedResourceWriter(System.IO.Stream stream) { }
 

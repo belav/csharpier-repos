@@ -16,10 +16,10 @@ namespace System.Security
 #endif
     public partial class PermissionSet
         : ICollection,
-          IEnumerable,
-          IDeserializationCallback,
-          ISecurityEncodable,
-          IStackWalk
+            IEnumerable,
+            IDeserializationCallback,
+            ISecurityEncodable,
+            IStackWalk
     {
         public PermissionSet(PermissionState state) { }
 

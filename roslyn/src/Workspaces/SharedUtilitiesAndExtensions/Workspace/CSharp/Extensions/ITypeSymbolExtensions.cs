@@ -73,9 +73,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 {
                     NullableAnnotation.None => NullableSyntaxAnnotationEx.Oblivious,
                     NullableAnnotation.Annotated
-                      => NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
+                        => NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
                     NullableAnnotation.NotAnnotated
-                      => NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
+                        => NullableSyntaxAnnotationEx.AnnotatedOrNotAnnotated,
                     _ => throw ExceptionUtilities.UnexpectedValue(type.NullableAnnotation),
                 };
 

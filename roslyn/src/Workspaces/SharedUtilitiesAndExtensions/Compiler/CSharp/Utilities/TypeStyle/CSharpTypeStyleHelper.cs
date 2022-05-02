@@ -142,25 +142,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             return node switch
             {
                 VariableDeclarationSyntax variableDeclaration
-                  => ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken)
-                    ? variableDeclaration.Type
-                    : null,
+                    => ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken)
+                        ? variableDeclaration.Type
+                        : null,
                 ForEachStatementSyntax forEachStatement
-                  => ShouldAnalyzeForEachStatement(
-                      forEachStatement,
-                      semanticModel,
-                      cancellationToken
-                  )
-                    ? forEachStatement.Type
-                    : null,
+                    => ShouldAnalyzeForEachStatement(
+                        forEachStatement,
+                        semanticModel,
+                        cancellationToken
+                    )
+                        ? forEachStatement.Type
+                        : null,
                 DeclarationExpressionSyntax declarationExpression
-                  => ShouldAnalyzeDeclarationExpression(
-                      declarationExpression,
-                      semanticModel,
-                      cancellationToken
-                  )
-                    ? declarationExpression.Type
-                    : null,
+                    => ShouldAnalyzeDeclarationExpression(
+                        declarationExpression,
+                        semanticModel,
+                        cancellationToken
+                    )
+                        ? declarationExpression.Type
+                        : null,
                 _ => null,
             };
         }

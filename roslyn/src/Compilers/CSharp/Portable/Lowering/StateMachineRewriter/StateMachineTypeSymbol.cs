@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract class StateMachineTypeSymbol
         : SynthesizedContainer,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private ImmutableArray<CSharpAttributeData> _attributes;
         public readonly MethodSymbol KickoffMethod;
@@ -120,8 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableInterlocked.InterlockedCompareExchange(
                     ref _attributes,
                     builder == null
-                      ? ImmutableArray<CSharpAttributeData>.Empty
-                      : builder.ToImmutableAndFree(),
+                        ? ImmutableArray<CSharpAttributeData>.Empty
+                        : builder.ToImmutableAndFree(),
                     default(ImmutableArray<CSharpAttributeData>)
                 );
             }

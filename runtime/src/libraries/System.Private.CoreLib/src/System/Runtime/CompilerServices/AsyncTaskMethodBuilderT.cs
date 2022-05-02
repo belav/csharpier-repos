@@ -285,7 +285,7 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">Specifies the type of the state machine.</typeparam>
         private sealed class DebugFinalizableAsyncStateMachineBox<TStateMachine>
             : // SOS DumpAsync command depends on this name
-              AsyncStateMachineBox<TStateMachine> where TStateMachine : IAsyncStateMachine
+            AsyncStateMachineBox<TStateMachine> where TStateMachine : IAsyncStateMachine
         {
             ~DebugFinalizableAsyncStateMachineBox()
             {
@@ -304,8 +304,8 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">Specifies the type of the state machine.</typeparam>
         private class AsyncStateMachineBox<TStateMachine>
             : // SOS DumpAsync command depends on this name
-              Task<TResult>,
-              IAsyncStateMachineBox where TStateMachine : IAsyncStateMachine
+            Task<TResult>,
+                IAsyncStateMachineBox where TStateMachine : IAsyncStateMachine
         {
             /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box type.</summary>
             private static readonly ContextCallback s_callback = ExecutionContextCallback;
@@ -449,8 +449,8 @@ namespace System.Runtime.CompilerServices
             return new AsyncStateMachineBox<IAsyncStateMachine>();
 #else
             return AsyncMethodBuilderCore.TrackAsyncMethodCompletion
-              ? CreateDebugFinalizableAsyncStateMachineBox<IAsyncStateMachine>()
-              : new AsyncStateMachineBox<IAsyncStateMachine>();
+                ? CreateDebugFinalizableAsyncStateMachineBox<IAsyncStateMachine>()
+                : new AsyncStateMachineBox<IAsyncStateMachine>();
 #endif
         }
 

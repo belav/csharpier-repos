@@ -145,8 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     );
                     editor.RemoveNode(
                         nextStatement.IsParentKind(SyntaxKind.GlobalStatement)
-                          ? nextStatement.Parent
-                          : nextStatement
+                            ? nextStatement.Parent
+                            : nextStatement
                     );
                 }
             }

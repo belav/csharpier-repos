@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     {
         protected abstract class AbstractReductionRewriter
             : CSharpSyntaxRewriter,
-              IReductionRewriter
+                IReductionRewriter
         {
             private readonly ObjectPool<IReductionRewriter> _pool;
 
@@ -182,8 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 this.CancellationToken.ThrowIfCancellationRequested();
 
                 return token.HasAnnotation(Simplifier.Annotation)
-                  ? simplifier(token, this.SemanticModel, this.OptionSet, this.CancellationToken)
-                  : token;
+                    ? simplifier(token, this.SemanticModel, this.OptionSet, this.CancellationToken)
+                    : token;
             }
 
             public override SyntaxNode VisitElementAccessExpression(

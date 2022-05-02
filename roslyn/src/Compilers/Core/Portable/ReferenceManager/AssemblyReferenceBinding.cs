@@ -103,11 +103,11 @@ namespace Microsoft.CodeAnalysis
             {
                 var displayName = ReferenceIdentity?.GetDisplayName() ?? "";
                 return IsBound
-                  ? displayName
-                    + " -> #"
-                    + DefinitionIndex
-                    + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "")
-                  : "unbound";
+                    ? displayName
+                        + " -> #"
+                        + DefinitionIndex
+                        + (VersionDifference != 0 ? " VersionDiff=" + VersionDifference : "")
+                    : "unbound";
             }
         }
     }

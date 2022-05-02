@@ -84,8 +84,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(namespacesToMerge.Length != 0);
 
             return (namespacesToMerge.Length == 1 && nameOpt == null)
-              ? namespacesToMerge[0]
-              : new MergedNamespaceSymbol(extent, containingNamespace, namespacesToMerge, nameOpt);
+                ? namespacesToMerge[0]
+                : new MergedNamespaceSymbol(
+                    extent,
+                    containingNamespace,
+                    namespacesToMerge,
+                    nameOpt
+                );
         }
 
         // Constructor. Use static Create method to create instances.

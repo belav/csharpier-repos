@@ -147,17 +147,17 @@ namespace System.Text.RegularExpressions
                     rule >= 0
                         ? _strings[rule].AsMemory()
                         : // string lookup
-                          rule < -Specials
+                        rule < -Specials
                             ? match.GroupToStringImpl(-Specials - 1 - rule)
                             : // group lookup
-                              (-Specials - 1 - rule) switch // special insertion patterns
-                              {
-                                  LeftPortion => match.GetLeftSubstring(),
-                                  RightPortion => match.GetRightSubstring(),
-                                  LastGroup => match.LastGroupToStringImpl(),
-                                  WholeString => match.Text.AsMemory(),
-                                  _ => default
-                              };
+                            (-Specials - 1 - rule) switch // special insertion patterns
+                            {
+                                LeftPortion => match.GetLeftSubstring(),
+                                RightPortion => match.GetRightSubstring(),
+                                LastGroup => match.LastGroupToStringImpl(),
+                                WholeString => match.Text.AsMemory(),
+                                _ => default
+                            };
 
                 // Add the segment if it's not empty.  A common case for it being empty
                 // is if the developer is using Regex.Replace as a way to implement
@@ -183,17 +183,17 @@ namespace System.Text.RegularExpressions
                     rule >= 0
                         ? _strings[rule].AsMemory()
                         : // string lookup
-                          rule < -Specials
+                        rule < -Specials
                             ? match.GroupToStringImpl(-Specials - 1 - rule)
                             : // group lookup
-                              (-Specials - 1 - rule) switch // special insertion patterns
-                              {
-                                  LeftPortion => match.GetLeftSubstring(),
-                                  RightPortion => match.GetRightSubstring(),
-                                  LastGroup => match.LastGroupToStringImpl(),
-                                  WholeString => match.Text.AsMemory(),
-                                  _ => default
-                              };
+                            (-Specials - 1 - rule) switch // special insertion patterns
+                            {
+                                LeftPortion => match.GetLeftSubstring(),
+                                RightPortion => match.GetRightSubstring(),
+                                LastGroup => match.LastGroupToStringImpl(),
+                                WholeString => match.Text.AsMemory(),
+                                _ => default
+                            };
 
                 // Add the segment to the list if it's not empty.  A common case for it being
                 // empty is if the developer is using Regex.Replace as a way to implement

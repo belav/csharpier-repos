@@ -305,8 +305,8 @@ namespace Microsoft.CodeAnalysis
                 && kind != SynthesizedLocalKind.UserDefined
                 && kind != SynthesizedLocalKind.With
             )
-              ? LocalVariableAttributes.DebuggerHidden
-              : LocalVariableAttributes.None;
+                ? LocalVariableAttributes.DebuggerHidden
+                : LocalVariableAttributes.None;
         }
     }
 }

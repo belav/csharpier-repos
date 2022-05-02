@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         private readonly struct FormattingContextIntervalIntrospector
             : IIntervalIntrospector<AnchorData>,
-              IIntervalIntrospector<IndentationData>,
-              IIntervalIntrospector<RelativeIndentationData>
+                IIntervalIntrospector<IndentationData>,
+                IIntervalIntrospector<RelativeIndentationData>
         {
             int IIntervalIntrospector<AnchorData>.GetStart(AnchorData value) =>
                 value.TextSpan.Start;

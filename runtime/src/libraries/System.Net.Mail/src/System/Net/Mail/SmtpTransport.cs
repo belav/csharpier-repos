@@ -429,11 +429,11 @@ namespace System.Net.Mail
                             SmtpFailedRecipientException exception =
                                 thisPtr._toCollection.Count == 1
                                     ? (SmtpFailedRecipientException)
-                                          thisPtr._failedRecipientExceptions[0]
+                                        thisPtr._failedRecipientExceptions[0]
                                     : new SmtpFailedRecipientsException(
-                                          thisPtr._failedRecipientExceptions,
-                                          true
-                                      );
+                                        thisPtr._failedRecipientExceptions,
+                                        true
+                                    );
                             exception.fatal = true;
                             thisPtr.InvokeCallback(exception);
                             return;

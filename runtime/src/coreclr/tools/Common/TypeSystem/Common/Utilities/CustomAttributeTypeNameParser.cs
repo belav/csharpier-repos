@@ -82,10 +82,10 @@ namespace Internal.TypeSystem
                 resolver != null
                     ? resolver(genericTypeDefName.ToString(), homeModule, throwIfNotFound)
                     : ResolveCustomAttributeTypeDefinitionName(
-                          genericTypeDefName.ToString(),
-                          homeModule,
-                          throwIfNotFound
-                      );
+                        genericTypeDefName.ToString(),
+                        homeModule,
+                        throwIfNotFound
+                    );
             if (typeDef == null)
                 return null;
 

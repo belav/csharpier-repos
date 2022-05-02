@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             return parameter.Name == parameterName
-              ? parameter
-              : CodeGenerationSymbolFactory.CreateParameterSymbol(
+                ? parameter
+                : CodeGenerationSymbolFactory.CreateParameterSymbol(
                     parameter.GetAttributes(),
                     parameter.RefKind,
                     parameter.IsParams,
@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             return parameter.GetAttributes() == attributes
-              ? parameter
-              : CodeGenerationSymbolFactory.CreateParameterSymbol(
+                ? parameter
+                : CodeGenerationSymbolFactory.CreateParameterSymbol(
                     attributes,
                     parameter.RefKind,
                     parameter.IsParams,

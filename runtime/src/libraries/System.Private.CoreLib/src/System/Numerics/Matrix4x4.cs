@@ -1326,8 +1326,8 @@ namespace System.Numerics
             result.M21 = result.M23 = result.M24 = 0.0f;
 
             float negFarRange = float.IsPositiveInfinity(farPlaneDistance)
-              ? -1.0f
-              : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                ? -1.0f
+                : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
             result.M33 = negFarRange;
             result.M31 = result.M32 = 0.0f;
             result.M34 = -1.0f;
@@ -1384,8 +1384,8 @@ namespace System.Numerics
 
             result.M31 = result.M32 = 0.0f;
             float negFarRange = float.IsPositiveInfinity(farPlaneDistance)
-              ? -1.0f
-              : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                ? -1.0f
+                : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
             result.M33 = negFarRange;
             result.M34 = -1.0f;
 
@@ -1437,8 +1437,8 @@ namespace System.Numerics
             result.M31 = (left + right) / (right - left);
             result.M32 = (top + bottom) / (top - bottom);
             float negFarRange = float.IsPositiveInfinity(farPlaneDistance)
-              ? -1.0f
-              : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+                ? -1.0f
+                : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
             result.M33 = negFarRange;
             result.M34 = -1.0f;
 

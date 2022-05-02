@@ -83,8 +83,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             return CheckTypeAccess(type, symWhere)
-              ? ACCESSERROR.ACCESSERROR_NOERROR
-              : ACCESSERROR.ACCESSERROR_NOACCESS;
+                ? ACCESSERROR.ACCESSERROR_NOERROR
+                : ACCESSERROR.ACCESSERROR_NOACCESS;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -285,8 +285,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return
                 CheckAccess2(swtBad.Sym, swtBad.GetType(), symWhere, typeQual)
                 == ACCESSERROR.ACCESSERROR_NOACCESSTHRU
-              ? ErrorHandling.Error(ErrorCode.ERR_BadProtectedAccess, swtBad, typeQual, symWhere)
-              : ErrorHandling.Error(ErrorCode.ERR_BadAccess, swtBad);
+                ? ErrorHandling.Error(ErrorCode.ERR_BadProtectedAccess, swtBad, typeQual, symWhere)
+                : ErrorHandling.Error(ErrorCode.ERR_BadAccess, swtBad);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

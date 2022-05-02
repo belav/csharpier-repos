@@ -47,13 +47,13 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             hints == null
                 ? this
                 : new RelationalConverterMappingHints(
-                      hints.Size ?? Size,
-                      hints.Precision ?? Precision,
-                      hints.Scale ?? Scale,
-                      hints.IsUnicode ?? IsUnicode,
-                      (hints as RelationalConverterMappingHints)?.IsFixedLength ?? IsFixedLength,
-                      hints.ValueGeneratorFactory ?? ValueGeneratorFactory
-                  );
+                    hints.Size ?? Size,
+                    hints.Precision ?? Precision,
+                    hints.Scale ?? Scale,
+                    hints.IsUnicode ?? IsUnicode,
+                    (hints as RelationalConverterMappingHints)?.IsFixedLength ?? IsFixedLength,
+                    hints.ValueGeneratorFactory ?? ValueGeneratorFactory
+                );
 
         /// <summary>
         ///     Whether or not the mapped data type is fixed length.

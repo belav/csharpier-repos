@@ -28,12 +28,12 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.ChangeSignature)]
     internal class CSharpAddParameterCheckCodeRefactoringProvider
         : AbstractAddParameterCheckCodeRefactoringProvider<
-              BaseTypeDeclarationSyntax,
-              ParameterSyntax,
-              StatementSyntax,
-              ExpressionSyntax,
-              BinaryExpressionSyntax
-          >
+            BaseTypeDeclarationSyntax,
+            ParameterSyntax,
+            StatementSyntax,
+            ExpressionSyntax,
+            BinaryExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

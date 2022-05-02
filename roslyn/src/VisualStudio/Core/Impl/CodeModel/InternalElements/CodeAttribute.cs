@@ -17,9 +17,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeAttribute2))]
     public sealed class CodeAttribute
         : AbstractCodeElement,
-          ICodeElementContainer<CodeAttributeArgument>,
-          EnvDTE.CodeAttribute,
-          EnvDTE80.CodeAttribute2
+            ICodeElementContainer<CodeAttributeArgument>,
+            EnvDTE.CodeAttribute,
+            EnvDTE80.CodeAttribute2
     {
         internal static EnvDTE.CodeAttribute Create(
             CodeModelState state,

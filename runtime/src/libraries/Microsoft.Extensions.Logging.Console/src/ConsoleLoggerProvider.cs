@@ -186,8 +186,8 @@ namespace Microsoft.Extensions.Logging.Console
             }
 
             return _loggers.TryGetValue(name, out ConsoleLogger logger)
-              ? logger
-              : _loggers.GetOrAdd(
+                ? logger
+                : _loggers.GetOrAdd(
                     name,
                     new ConsoleLogger(name, _messageQueue)
                     {

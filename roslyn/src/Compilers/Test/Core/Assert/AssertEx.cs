@@ -296,8 +296,8 @@ namespace Roslyn.Test.Utilities
             var messageBuilder = new StringBuilder();
             messageBuilder.AppendLine(
                 string.IsNullOrEmpty(message)
-                  ? "Actual and expected values differ. Expected shown in baseline of diff:"
-                  : message
+                    ? "Actual and expected values differ. Expected shown in baseline of diff:"
+                    : message
             );
 
             foreach (var line in diff.Lines)
@@ -930,8 +930,8 @@ namespace Roslyn.Test.Utilities
                 comparer: LineComparer.Instance,
                 message: message,
                 itemInspector: escapeQuotes
-                  ? new Func<string, string>(line => line.Replace("\"", "\"\""))
-                  : null,
+                    ? new Func<string, string>(line => line.Replace("\"", "\"\""))
+                    : null,
                 itemSeparator: Environment.NewLine,
                 expectedValueSourcePath: expectedValueSourcePath,
                 expectedValueSourceLine: expectedValueSourceLine

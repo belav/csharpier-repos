@@ -47,8 +47,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
             )
             {
                 return _typeParameters.IsDefault
-                  ? (_typeParameters = DetermineTypeParametersWorker(cancellationToken))
-                  : _typeParameters;
+                    ? (_typeParameters = DetermineTypeParametersWorker(cancellationToken))
+                    : _typeParameters;
             }
 
             protected abstract ImmutableArray<ITypeParameterSymbol> DetermineTypeParametersWorker(
@@ -270,8 +270,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                     isAbstract
                     || State.TypeToGenerateIn.TypeKind == TypeKind.Interface
                     || throwStatement == null
-                  ? default
-                  : ImmutableArray.Create(throwStatement);
+                    ? default
+                    : ImmutableArray.Create(throwStatement);
             }
 
             private async ValueTask<ImmutableArray<IParameterSymbol>> DetermineParametersAsync(

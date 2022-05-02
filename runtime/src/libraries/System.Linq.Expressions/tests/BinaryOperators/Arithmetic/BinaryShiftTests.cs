@@ -203,11 +203,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -219,11 +219,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<byte?>> en = Expression.Lambda<Func<byte?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -250,11 +250,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -266,11 +266,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<byte?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -297,11 +297,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -313,11 +313,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<sbyte?>> en = Expression.Lambda<Func<sbyte?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -349,11 +349,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -365,11 +365,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<sbyte?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -396,11 +396,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -412,11 +412,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<ushort?>> en = Expression.Lambda<Func<ushort?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -448,11 +448,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -464,11 +464,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<ushort?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -495,11 +495,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<short>> e = Expression.Lambda<Func<short>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -511,11 +511,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<short?>> en = Expression.Lambda<Func<short?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -547,11 +547,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -563,11 +563,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<short?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -594,11 +594,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -610,11 +610,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<uint?>> en = Expression.Lambda<Func<uint?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -641,11 +641,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -657,11 +657,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<uint?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -688,11 +688,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -704,11 +704,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<int?>> en = Expression.Lambda<Func<int?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -735,11 +735,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -751,11 +751,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<int?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -782,11 +782,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -798,11 +798,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<ulong?>> en = Expression.Lambda<Func<ulong?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -834,11 +834,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -850,11 +850,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<ulong?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -881,11 +881,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<long>> e = Expression.Lambda<Func<long>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -897,11 +897,11 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<long?>> en = Expression.Lambda<Func<long?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -928,11 +928,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long?)),
                         Expression.Constant(b, typeof(int))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long?)),
                         Expression.Constant(b, typeof(int))
                     )
@@ -944,11 +944,11 @@ namespace System.Linq.Expressions.Tests
 
             e = Expression.Lambda<Func<long?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long?)),
                         Expression.Constant(b, typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long?)),
                         Expression.Constant(b, typeof(int?))
                     )
@@ -963,11 +963,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<T?>> e = Expression.Lambda<Func<T?>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(T)),
                         Expression.Default(typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(T)),
                         Expression.Default(typeof(int?))
                     )
@@ -982,11 +982,11 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<T>> e = Expression.Lambda<Func<T>>(
                 left
-                  ? Expression.LeftShift(
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(T)),
                         Expression.Default(typeof(int?))
                     )
-                  : Expression.RightShift(
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(T)),
                         Expression.Default(typeof(int?))
                     )

@@ -52,12 +52,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 if (source is TemporalAsOfQueryRootExpression asOf)
                 {
                     return source.QueryProvider != null
-                      ? new TemporalAsOfQueryRootExpression(
+                        ? new TemporalAsOfQueryRootExpression(
                             source.QueryProvider,
                             entityType,
                             asOf.PointInTime
                         )
-                      : new TemporalAsOfQueryRootExpression(entityType, asOf.PointInTime);
+                        : new TemporalAsOfQueryRootExpression(entityType, asOf.PointInTime);
                 }
 
                 throw new InvalidOperationException(

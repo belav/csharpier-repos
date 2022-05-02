@@ -85,15 +85,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             }
 
             return !(base.VisitBinary(binaryExpression) is SqlExpression visitedExpression)
-              ? QueryCompilationContext.NotTranslatedExpression
-              : visitedExpression is SqlBinaryExpression sqlBinary
+                ? QueryCompilationContext.NotTranslatedExpression
+                : visitedExpression is SqlBinaryExpression sqlBinary
                 && _arithmeticOperatorTypes.Contains(sqlBinary.OperatorType)
                 && (
                     _dateTimeDataTypes.Contains(GetProviderType(sqlBinary.Left))
                     || _dateTimeDataTypes.Contains(GetProviderType(sqlBinary.Right))
                 )
-                  ? QueryCompilationContext.NotTranslatedExpression
-                  : visitedExpression;
+                    ? QueryCompilationContext.NotTranslatedExpression
+                    : visitedExpression;
         }
 
         /// <summary>
@@ -126,12 +126,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 );
 
                 return isBinaryMaxDataType
-                  ? (Expression)
+                    ? (Expression)
                         Dependencies.SqlExpressionFactory.Convert(
                             dataLengthSqlFunction,
                             typeof(int)
                         )
-                  : dataLengthSqlFunction;
+                    : dataLengthSqlFunction;
             }
 
             return base.VisitUnary(unaryExpression);

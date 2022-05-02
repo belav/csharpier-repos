@@ -56,8 +56,8 @@ namespace System.Diagnostics
         public static ProcessInfo[] GetProcessInfos(string machineName)
         {
             return IsRemoteMachine(machineName)
-              ? NtProcessManager.GetProcessInfos(machineName, isRemoteMachine: true)
-              : NtProcessInfoHelper.GetProcessInfos();
+                ? NtProcessManager.GetProcessInfos(machineName, isRemoteMachine: true)
+                : NtProcessInfoHelper.GetProcessInfos();
         }
 
         /// <summary>Gets the ProcessInfo for the specified process ID on the specified machine.</summary>
@@ -104,8 +104,8 @@ namespace System.Diagnostics
             // and the local machine, unlike Desktop on which we rely on PCs only for
             // remote machines.
             return IsRemoteMachine(machineName)
-              ? NtProcessManager.GetProcessIds(machineName, true)
-              : GetProcessIds();
+                ? NtProcessManager.GetProcessIds(machineName, true)
+                : GetProcessIds();
         }
 
         /// <summary>Gets the IDs of all processes on the current machine.</summary>

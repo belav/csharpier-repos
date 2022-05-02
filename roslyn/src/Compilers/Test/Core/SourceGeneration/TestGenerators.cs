@@ -122,7 +122,7 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
     internal sealed class IncrementalAndSourceCallbackGenerator
         : CallbackGenerator,
-          IIncrementalGenerator
+            IIncrementalGenerator
     {
         private readonly Action<IncrementalGeneratorInitializationContext> _onInit;
 

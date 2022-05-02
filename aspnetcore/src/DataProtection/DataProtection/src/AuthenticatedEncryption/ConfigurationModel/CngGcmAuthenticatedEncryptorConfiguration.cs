@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 [SupportedOSPlatform("windows")]
 public sealed class CngGcmAuthenticatedEncryptorConfiguration
     : AlgorithmConfiguration,
-      IInternalAlgorithmConfiguration
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The name of the algorithm to use for symmetric encryption.

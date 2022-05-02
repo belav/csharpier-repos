@@ -31,7 +31,7 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 /// </summary>
 public class OpenIdConnectHandler
     : RemoteAuthenticationHandler<OpenIdConnectOptions>,
-      IAuthenticationSignOutHandler
+        IAuthenticationSignOutHandler
 {
     private const string NonceProperty = "N";
     private const string HeaderValueEpocDate = "Thu, 01 Jan 1970 00:00:00 GMT";

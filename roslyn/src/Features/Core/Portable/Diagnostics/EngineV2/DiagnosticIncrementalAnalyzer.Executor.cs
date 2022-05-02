@@ -397,15 +397,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         (analyzersToRun.Length == 0)
                             ? null
                             : await AnalyzerHelper
-                                  .CreateCompilationWithAnalyzersAsync(
-                                      project,
-                                      analyzersToRun,
-                                      compilationWithAnalyzers
-                                          .AnalysisOptions
-                                          .ReportSuppressedDiagnostics,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false);
+                                .CreateCompilationWithAnalyzersAsync(
+                                    project,
+                                    analyzersToRun,
+                                    compilationWithAnalyzers
+                                        .AnalysisOptions
+                                        .ReportSuppressedDiagnostics,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
 
                     var result = await ComputeDiagnosticsAsync(
                             compilationWithReducedAnalyzers,

@@ -68,7 +68,7 @@ namespace System.Threading.Tasks
     [DebuggerDisplay("Count = {Count}")]
     internal sealed class MultiProducerMultiConsumerQueue<T>
         : ConcurrentQueue<T>,
-          IProducerConsumerQueue<T>
+            IProducerConsumerQueue<T>
     {
         /// <summary>Enqueues an item into the queue.</summary>
         /// <param name="item">The item to enqueue.</param>

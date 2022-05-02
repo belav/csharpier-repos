@@ -164,8 +164,8 @@ internal readonly struct TextSpan : IEquatable<TextSpan>, IComparable<TextSpan>
         var intersectEnd = Math.Min(End, span.End);
 
         return intersectStart <= intersectEnd
-          ? FromBounds(intersectStart, intersectEnd)
-          : (TextSpan?)null;
+            ? FromBounds(intersectStart, intersectEnd)
+            : (TextSpan?)null;
     }
 
     /// <summary>

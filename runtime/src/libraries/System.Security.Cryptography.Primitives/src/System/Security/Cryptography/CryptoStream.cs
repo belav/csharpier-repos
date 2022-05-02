@@ -207,10 +207,10 @@ namespace System.Security.Cryptography
                 return base.FlushAsync(cancellationToken);
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : !_canWrite
-                  ? Task.CompletedTask
-                  : _stream.FlushAsync(cancellationToken);
+                ? Task.FromCanceled(cancellationToken)
+                : !_canWrite
+                    ? Task.CompletedTask
+                    : _stream.FlushAsync(cancellationToken);
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -418,20 +418,20 @@ namespace System.Security.Cryptography
                 {
                     amountRead = useAsync
                         ? await _stream
-                              .ReadAsync(
-                                  new Memory<byte>(
-                                      tempInputBuffer,
-                                      _inputBufferIndex,
-                                      numWholeBlocksInBytes - _inputBufferIndex
-                                  ),
-                                  cancellationToken
-                              )
-                              .ConfigureAwait(false)
+                            .ReadAsync(
+                                new Memory<byte>(
+                                    tempInputBuffer,
+                                    _inputBufferIndex,
+                                    numWholeBlocksInBytes - _inputBufferIndex
+                                ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
                         : _stream.Read(
-                              tempInputBuffer,
-                              _inputBufferIndex,
-                              numWholeBlocksInBytes - _inputBufferIndex
-                          );
+                            tempInputBuffer,
+                            _inputBufferIndex,
+                            numWholeBlocksInBytes - _inputBufferIndex
+                        );
 
                     int totalInput = _inputBufferIndex + amountRead;
 
@@ -537,20 +537,20 @@ namespace System.Security.Cryptography
                 {
                     amountRead = useAsync
                         ? await _stream
-                              .ReadAsync(
-                                  new Memory<byte>(
-                                      _inputBuffer,
-                                      _inputBufferIndex,
-                                      _inputBlockSize - _inputBufferIndex
-                                  ),
-                                  cancellationToken
-                              )
-                              .ConfigureAwait(false)
+                            .ReadAsync(
+                                new Memory<byte>(
+                                    _inputBuffer,
+                                    _inputBufferIndex,
+                                    _inputBlockSize - _inputBufferIndex
+                                ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
                         : _stream.Read(
-                              _inputBuffer,
-                              _inputBufferIndex,
-                              _inputBlockSize - _inputBufferIndex
-                          );
+                            _inputBuffer,
+                            _inputBufferIndex,
+                            _inputBlockSize - _inputBufferIndex
+                        );
 
                     // first, check to see if we're at the end of the input stream
                     if (amountRead == 0)

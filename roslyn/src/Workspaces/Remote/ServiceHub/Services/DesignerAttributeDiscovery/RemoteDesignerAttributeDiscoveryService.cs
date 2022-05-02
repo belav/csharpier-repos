@@ -11,13 +11,13 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteDesignerAttributeDiscoveryService
         : BrokeredServiceBase,
-          IRemoteDesignerAttributeDiscoveryService
+            IRemoteDesignerAttributeDiscoveryService
     {
         internal sealed class Factory
             : FactoryBase<
-                  IRemoteDesignerAttributeDiscoveryService,
-                  IRemoteDesignerAttributeDiscoveryService.ICallback
-              >
+                IRemoteDesignerAttributeDiscoveryService,
+                IRemoteDesignerAttributeDiscoveryService.ICallback
+            >
         {
             protected override IRemoteDesignerAttributeDiscoveryService CreateService(
                 in ServiceConstructionArguments arguments,

@@ -20,9 +20,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal class Http2OutputProducer
     : IHttpOutputProducer,
-      IHttpOutputAborter,
-      IValueTaskSource<FlushResult>,
-      IDisposable
+        IHttpOutputAborter,
+        IValueTaskSource<FlushResult>,
+        IDisposable
 {
     private int StreamId => _stream.StreamId;
     private readonly Http2FrameWriter _frameWriter;

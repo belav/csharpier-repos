@@ -72,7 +72,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class CommandInterceptionSqlServerTest
             : CommandInterceptionSqlServerTestBase,
-              IClassFixture<CommandInterceptionSqlServerTest.InterceptionSqlServerFixture>
+                IClassFixture<CommandInterceptionSqlServerTest.InterceptionSqlServerFixture>
         {
             public CommandInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
                 : base(fixture) { }
@@ -93,7 +93,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class CommandInterceptionWithDiagnosticsSqlServerTest
             : CommandInterceptionSqlServerTestBase,
-              IClassFixture<CommandInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
+                IClassFixture<CommandInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
         {
             public CommandInterceptionWithDiagnosticsSqlServerTest(
                 InterceptionSqlServerFixture fixture

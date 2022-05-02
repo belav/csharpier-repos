@@ -276,7 +276,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SymbolKind.NetModule:
                 case SymbolKind.RangeVariable:
                 case SymbolKind.Method
-                      when ((MethodSymbol)symbol).MethodKind == MethodKind.LocalFunction:
+                when ((MethodSymbol)symbol).MethodKind == MethodKind.LocalFunction:
                     // These types of symbols are always accessible (if visible).
                     return true;
 
@@ -352,12 +352,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var containingType = type.ContainingType;
             return (object)containingType == null
-              ? IsNonNestedTypeAccessible(
+                ? IsNonNestedTypeAccessible(
                     type.ContainingAssembly,
                     type.DeclaredAccessibility,
                     within
                 )
-              : IsMemberAccessible(
+                : IsMemberAccessible(
                     containingType,
                     type.DeclaredAccessibility,
                     within,
@@ -896,8 +896,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return containingType.TypeKind == TypeKind.Struct
-              ? ErrorCode.ERR_ProtectedInStruct
-              : ErrorCode.WRN_ProtectedInSealed;
+                ? ErrorCode.ERR_ProtectedInStruct
+                : ErrorCode.WRN_ProtectedInSealed;
         }
     }
 }

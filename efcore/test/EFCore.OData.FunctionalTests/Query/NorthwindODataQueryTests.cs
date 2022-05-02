@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindODataQueryTests
         : ODataQueryTestBase,
-          IClassFixture<NorthwindODataQueryTestFixture>
+            IClassFixture<NorthwindODataQueryTestFixture>
     {
         public NorthwindODataQueryTests(NorthwindODataQueryTestFixture fixture) : base(fixture) { }
 

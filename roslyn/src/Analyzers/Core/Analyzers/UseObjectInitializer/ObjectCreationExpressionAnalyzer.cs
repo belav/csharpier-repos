@@ -23,17 +23,17 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
         TVariableDeclaratorSyntax
     >
         : AbstractObjectCreationExpressionAnalyzer<
-              TExpressionSyntax,
-              TStatementSyntax,
-              TObjectCreationExpressionSyntax,
-              TVariableDeclaratorSyntax,
-              Match<
-                  TExpressionSyntax,
-                  TStatementSyntax,
-                  TMemberAccessExpressionSyntax,
-                  TAssignmentStatementSyntax
-              >
-          >
+            TExpressionSyntax,
+            TStatementSyntax,
+            TObjectCreationExpressionSyntax,
+            TVariableDeclaratorSyntax,
+            Match<
+                TExpressionSyntax,
+                TStatementSyntax,
+                TMemberAccessExpressionSyntax,
+                TAssignmentStatementSyntax
+            >
+        >
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
         where TObjectCreationExpressionSyntax : TExpressionSyntax

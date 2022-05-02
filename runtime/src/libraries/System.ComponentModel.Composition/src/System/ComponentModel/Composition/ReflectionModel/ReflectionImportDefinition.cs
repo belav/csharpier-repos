@@ -8,7 +8,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal abstract class ReflectionImportDefinition
         : ContractBasedImportDefinition,
-          ICompositionElement
+            ICompositionElement
     {
         private readonly ICompositionElement? _origin;
 

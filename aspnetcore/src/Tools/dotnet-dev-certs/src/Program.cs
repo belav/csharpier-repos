@@ -430,9 +430,9 @@ internal class Program
             certificates.Count switch
             {
                 1
-                  => $"A {certificateState} certificate was found: {CertificateManager.GetDescription(certificates[0])}",
+                    => $"A {certificateState} certificate was found: {CertificateManager.GetDescription(certificates[0])}",
                 _
-                  => $"{certificates.Count} {certificateState} certificates were found: {CertificateManager.ToCertificateDescription(certificates)}"
+                    => $"{certificates.Count} {certificateState} certificates were found: {CertificateManager.ToCertificateDescription(certificates)}"
             }
         );
     }
@@ -521,8 +521,8 @@ internal class Program
             now.Add(HttpsCertificateValidity),
             exportPath.Value(),
             trust == null
-              ? false
-              : trust.HasValue() && !RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
+                ? false
+                : trust.HasValue() && !RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
             password.HasValue()
                 || (noPassword.HasValue() && format == CertificateKeyExportFormat.Pem),
             password.Value(),

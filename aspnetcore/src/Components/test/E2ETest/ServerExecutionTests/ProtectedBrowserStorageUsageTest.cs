@@ -126,8 +126,8 @@ public class ProtectedBrowserStorageUsageTest
     private void OpenNewSession()
     {
         var modifierKey = RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-          ? Keys.Command
-          : Keys.Control;
+            ? Keys.Command
+            : Keys.Control;
 
         var newTabLink = Browser.Exists(By.Id("new-tab"));
         var action = new Actions(Browser);

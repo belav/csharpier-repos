@@ -1057,8 +1057,8 @@ public class InferParameterBindingInfoConventionTest
 
     private class CustomRequestPredicateAndPropertyFilterProviderAttribute
         : Attribute,
-          IRequestPredicateProvider,
-          IPropertyFilterProvider
+            IRequestPredicateProvider,
+            IPropertyFilterProvider
     {
         public static Func<ActionContext, bool> RequestPredicateStatic => (c) => true;
         public static Func<ModelMetadata, bool> PropertyFilterStatic => (c) => true;

@@ -690,17 +690,17 @@ namespace Microsoft.CodeAnalysis.Remote
                     document = document.Kind switch
                     {
                         TextDocumentKind.Document
-                          => document.Project.Solution
-                              .WithDocumentText(document.Id, sourceText)
-                              .GetDocument(document.Id)!,
+                            => document.Project.Solution
+                                .WithDocumentText(document.Id, sourceText)
+                                .GetDocument(document.Id)!,
                         TextDocumentKind.AnalyzerConfigDocument
-                          => document.Project.Solution
-                              .WithAnalyzerConfigDocumentText(document.Id, sourceText)
-                              .GetAnalyzerConfigDocument(document.Id)!,
+                            => document.Project.Solution
+                                .WithAnalyzerConfigDocumentText(document.Id, sourceText)
+                                .GetAnalyzerConfigDocument(document.Id)!,
                         TextDocumentKind.AdditionalDocument
-                          => document.Project.Solution
-                              .WithAdditionalDocumentText(document.Id, sourceText)
-                              .GetAdditionalDocument(document.Id)!,
+                            => document.Project.Solution
+                                .WithAdditionalDocumentText(document.Id, sourceText)
+                                .GetAdditionalDocument(document.Id)!,
                         _ => throw ExceptionUtilities.UnexpectedValue(document.Kind),
                     };
                 }

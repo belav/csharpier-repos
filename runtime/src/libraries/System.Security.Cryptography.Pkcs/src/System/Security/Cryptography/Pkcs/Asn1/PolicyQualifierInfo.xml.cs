@@ -112,8 +112,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             decoded.PolicyQualifierId = sequenceReader.ReadObjectIdentifier();
             tmpSpan = sequenceReader.ReadEncodedValue();
             decoded.Qualifier = rebindSpan.Overlaps(tmpSpan, out offset)
-              ? rebind.Slice(offset, tmpSpan.Length)
-              : tmpSpan.ToArray();
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
 
             sequenceReader.ThrowIfNotEmpty();
         }

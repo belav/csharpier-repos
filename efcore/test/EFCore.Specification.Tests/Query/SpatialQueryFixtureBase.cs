@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class SpatialQueryFixtureBase
         : SharedStoreFixtureBase<SpatialContext>,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         private GeometryFactory _geometryFactory;
 

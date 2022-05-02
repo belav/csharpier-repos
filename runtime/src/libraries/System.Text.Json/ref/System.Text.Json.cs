@@ -403,10 +403,10 @@ namespace System.Text.Json
 
         public partial struct ArrayEnumerator
             : System.Collections.Generic.IEnumerable<System.Text.Json.JsonElement>,
-              System.Collections.Generic.IEnumerator<System.Text.Json.JsonElement>,
-              System.Collections.IEnumerable,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.Generic.IEnumerator<System.Text.Json.JsonElement>,
+                System.Collections.IEnumerable,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -446,10 +446,10 @@ namespace System.Text.Json
 
         public partial struct ObjectEnumerator
             : System.Collections.Generic.IEnumerable<System.Text.Json.JsonProperty>,
-              System.Collections.Generic.IEnumerator<System.Text.Json.JsonProperty>,
-              System.Collections.IEnumerable,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.Generic.IEnumerator<System.Text.Json.JsonProperty>,
+                System.Collections.IEnumerable,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2184,10 +2184,10 @@ namespace System.Text.Json.Nodes
 {
     public sealed partial class JsonArray
         : System.Text.Json.Nodes.JsonNode,
-          System.Collections.Generic.ICollection<System.Text.Json.Nodes.JsonNode?>,
-          System.Collections.Generic.IEnumerable<System.Text.Json.Nodes.JsonNode?>,
-          System.Collections.Generic.IList<System.Text.Json.Nodes.JsonNode?>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.ICollection<System.Text.Json.Nodes.JsonNode?>,
+            System.Collections.Generic.IEnumerable<System.Text.Json.Nodes.JsonNode?>,
+            System.Collections.Generic.IList<System.Text.Json.Nodes.JsonNode?>,
+            System.Collections.IEnumerable
     {
         public JsonArray(
             System.Text.Json.Nodes.JsonNodeOptions? options =
@@ -2740,16 +2740,16 @@ namespace System.Text.Json.Nodes
 
     public sealed partial class JsonObject
         : System.Text.Json.Nodes.JsonNode,
-          System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  string,
-                  System.Text.Json.Nodes.JsonNode?
-              >>,
-          System.Collections.Generic.IDictionary<string, System.Text.Json.Nodes.JsonNode?>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  System.Text.Json.Nodes.JsonNode?
-              >>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
+                    string,
+                    System.Text.Json.Nodes.JsonNode?
+                >>,
+            System.Collections.Generic.IDictionary<string, System.Text.Json.Nodes.JsonNode?>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    string,
+                    System.Text.Json.Nodes.JsonNode?
+                >>,
+            System.Collections.IEnumerable
     {
         public JsonObject(
             System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<

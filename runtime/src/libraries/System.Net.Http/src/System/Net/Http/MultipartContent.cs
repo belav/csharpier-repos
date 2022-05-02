@@ -365,8 +365,8 @@ namespace System.Net.Http
 #pragma warning disable CA2016
                         // Do not pass a cancellationToken to base.CreateContentReadStreamAsync() as it would trigger an infinite loop => StackOverflow
                         return async
-                          ? await base.CreateContentReadStreamAsync().ConfigureAwait(false)
-                          : base.CreateContentReadStream(cancellationToken);
+                            ? await base.CreateContentReadStreamAsync().ConfigureAwait(false)
+                            : base.CreateContentReadStream(cancellationToken);
 #pragma warning restore CA2016
                     }
                     streams[streamIndex++] = readStream;

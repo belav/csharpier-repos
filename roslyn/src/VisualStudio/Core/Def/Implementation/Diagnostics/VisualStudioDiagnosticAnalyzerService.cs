@@ -249,11 +249,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 command.Text = GetBackgroundAnalysisScope(_workspace) switch
                 {
                     BackgroundAnalysisScope.ActiveFile
-                      => ServicesVSResources.Default_Current_Document,
+                        => ServicesVSResources.Default_Current_Document,
                     BackgroundAnalysisScope.OpenFilesAndProjects
-                      => ServicesVSResources.Default_Open_Documents,
+                        => ServicesVSResources.Default_Open_Documents,
                     BackgroundAnalysisScope.FullSolution
-                      => ServicesVSResources.Default_Entire_Solution,
+                        => ServicesVSResources.Default_Entire_Solution,
                     _ => ServicesVSResources.Default_,
                 };
             }
@@ -407,11 +407,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             var statusBarUpdater =
                 statusBar != null
                     ? new StatusBarUpdater(
-                          statusBar,
-                          _threadingContext,
-                          projectOrSolutionName,
-                          totalProjectCount
-                      )
+                        statusBar,
+                        _threadingContext,
+                        projectOrSolutionName,
+                        totalProjectCount
+                    )
                     : null;
 
             // Force complete analyzer execution in background.
@@ -558,23 +558,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 _statusMessageWhileRunning =
                     projectOrSolutionName != null
                         ? string.Format(
-                              ServicesVSResources.Running_code_analysis_for_0,
-                              projectOrSolutionName
-                          )
+                            ServicesVSResources.Running_code_analysis_for_0,
+                            projectOrSolutionName
+                        )
                         : ServicesVSResources.Running_code_analysis_for_Solution;
                 _statusMesageOnCompleted =
                     projectOrSolutionName != null
                         ? string.Format(
-                              ServicesVSResources.Code_analysis_completed_for_0,
-                              projectOrSolutionName
-                          )
+                            ServicesVSResources.Code_analysis_completed_for_0,
+                            projectOrSolutionName
+                        )
                         : ServicesVSResources.Code_analysis_completed_for_Solution;
                 _statusMesageOnTerminated =
                     projectOrSolutionName != null
                         ? string.Format(
-                              ServicesVSResources.Code_analysis_terminated_before_completion_for_0,
-                              projectOrSolutionName
-                          )
+                            ServicesVSResources.Code_analysis_terminated_before_completion_for_0,
+                            projectOrSolutionName
+                        )
                         : ServicesVSResources.Code_analysis_terminated_before_completion_for_Solution;
 
                 // Set the initial status bar progress and text.

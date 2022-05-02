@@ -1096,25 +1096,25 @@ namespace System.Net.NetworkInformation.Tests
                                 error == null
                                     ? ""
                                     : (
-                                          Environment.NewLine
-                                          + "Error Message: "
-                                          + error.Message
-                                          + Environment.NewLine
-                                          + "Error Inner Exception: "
-                                          + error.InnerException
-                                      )
+                                        Environment.NewLine
+                                        + "Error Message: "
+                                        + error.Message
+                                        + Environment.NewLine
+                                        + "Error Inner Exception: "
+                                        + error.InnerException
+                                    )
                             )
                             + (
                                 reply == null
                                     ? ""
                                     : (
-                                          Environment.NewLine
-                                          + "Reply Address: "
-                                          + reply.Address
-                                          + Environment.NewLine
-                                          + "Reply Status: "
-                                          + reply.Status
-                                      )
+                                        Environment.NewLine
+                                        + "Reply Address: "
+                                        + reply.Address
+                                        + Environment.NewLine
+                                        + "Reply Status: "
+                                        + reply.Status
+                                    )
                             )
                     );
                 }

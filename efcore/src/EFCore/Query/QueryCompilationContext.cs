@@ -236,21 +236,21 @@ namespace Microsoft.EntityFrameworkCore.Query
             _runtimeParameters == null
                 ? query
                 : Expression.Block(
-                      _runtimeParameters
-                          .Select(
-                              kv =>
-                                  Expression.Call(
-                                      QueryContextParameter,
-                                      _queryContextAddParameterMethodInfo,
-                                      Expression.Constant(kv.Key),
-                                      Expression.Convert(
-                                          Expression.Invoke(kv.Value, QueryContextParameter),
-                                          typeof(object)
-                                      )
-                                  )
-                          )
-                          .Append(query)
-                  );
+                    _runtimeParameters
+                        .Select(
+                            kv =>
+                                Expression.Call(
+                                    QueryContextParameter,
+                                    _queryContextAddParameterMethodInfo,
+                                    Expression.Constant(kv.Key),
+                                    Expression.Convert(
+                                        Expression.Invoke(kv.Value, QueryContextParameter),
+                                        typeof(object)
+                                    )
+                                )
+                        )
+                        .Append(query)
+                );
 
         private static readonly MethodInfo _queryContextAddParameterMethodInfo =
             typeof(QueryContext).GetRequiredDeclaredMethod(nameof(QueryContext.AddParameter));

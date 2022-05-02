@@ -302,8 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityType.ClrType,
                 entityType.HasSharedClrType,
                 entityType.BaseType == null
-                  ? null
-                  : model.FindEntityType(entityType.BaseType.Name)!,
+                    ? null
+                    : model.FindEntityType(entityType.BaseType.Name)!,
                 entityType.GetDiscriminatorPropertyName(),
                 entityType.GetChangeTrackingStrategy(),
                 entityType.FindIndexerPropertyInfo(),
@@ -637,8 +637,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual SlimIndex GetIndex(IIndex index, SlimEntityType entityType) =>
             index.Name == null
                 ? entityType.FindIndex(
-                      entityType.FindProperties(index.Properties.Select(p => p.Name))!
-                  )!
+                    entityType.FindProperties(index.Properties.Select(p => p.Name))!
+                )!
                 : entityType.FindIndex(index.Name)!;
 
         /// <summary>
@@ -688,8 +688,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             protected override Expression VisitExtension(Expression extensionExpression) =>
                 extensionExpression is QueryRootExpression queryRootExpression
                     ? new QueryRootExpression(
-                          _model.FindEntityType(queryRootExpression.EntityType.Name)!
-                      )
+                        _model.FindEntityType(queryRootExpression.EntityType.Name)!
+                    )
                     : base.VisitExtension(extensionExpression);
         }
     }

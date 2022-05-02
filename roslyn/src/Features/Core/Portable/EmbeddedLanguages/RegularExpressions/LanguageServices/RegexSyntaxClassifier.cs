@@ -354,8 +354,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                 ClassifyWholeNode(
                     node,
                     node.IsSelfEscape()
-                      ? ClassificationTypeNames.RegexSelfEscapedCharacter
-                      : ClassificationTypeNames.RegexOtherEscape
+                        ? ClassificationTypeNames.RegexSelfEscapedCharacter
+                        : ClassificationTypeNames.RegexOtherEscape
                 );
         }
     }

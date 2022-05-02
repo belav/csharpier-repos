@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Options
 {
     internal sealed class NamingStylePreferenceEditorConfigStorageLocation
         : OptionStorageLocation2,
-          IEditorConfigStorageLocation
+            IEditorConfigStorageLocation
     {
         public bool TryGetOption(
             IReadOnlyDictionary<string, string?> rawOptions,

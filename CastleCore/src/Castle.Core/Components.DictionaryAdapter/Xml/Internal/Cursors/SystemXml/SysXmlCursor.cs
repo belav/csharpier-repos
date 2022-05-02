@@ -142,8 +142,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             IXmlKnownType knownType;
             return knownTypes.TryGet(this, out knownType)
-              ? Try.Success(out type, knownType.ClrType)
-              : Try.Failure(out type);
+                ? Try.Success(out type, knownType.ClrType)
+                : Try.Failure(out type);
         }
 
         private bool Advance()
@@ -501,8 +501,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             var name = knownType.Name;
 
             return name.NamespaceUri != null
-              ? name
-              : name.WithNamespaceUri(parent != null ? parent.NamespaceURI : string.Empty);
+                ? name
+                : name.WithNamespaceUri(parent != null ? parent.NamespaceURI : string.Empty);
         }
 
         public void RemoveAllNext()

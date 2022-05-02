@@ -14,7 +14,7 @@ namespace System.IO.Enumeration
 {
     public unsafe abstract partial class FileSystemEnumerator<TResult>
         : CriticalFinalizerObject,
-          IEnumerator<TResult>
+            IEnumerator<TResult>
     {
         private int _remainingRecursionDepth;
 

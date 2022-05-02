@@ -17,7 +17,7 @@ namespace System.Web.Razor.Tokenizer
 {
     public abstract partial class Tokenizer<TSymbol, TSymbolType>
         : StateMachine<TSymbol>,
-          ITokenizer where TSymbol : SymbolBase<TSymbolType>
+            ITokenizer where TSymbol : SymbolBase<TSymbolType>
     {
         [SuppressMessage(
             "Microsoft.Reliability",

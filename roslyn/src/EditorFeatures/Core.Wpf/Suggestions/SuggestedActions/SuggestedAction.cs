@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// </summary>
     internal abstract partial class SuggestedAction
         : ForegroundThreadAffinitizedObject,
-          ISuggestedAction3,
-          IEquatable<ISuggestedAction>
+            ISuggestedAction3,
+            IEquatable<ISuggestedAction>
     {
         protected readonly SuggestedActionsSourceProvider SourceProvider;
 

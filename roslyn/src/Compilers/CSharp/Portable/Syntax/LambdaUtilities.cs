@@ -101,8 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Select clause is not considered to be lambda if it's reduced,
                     // however to avoid complexity we allow it to be passed in and just return null.
                     return IsReducedSelectOrGroupByClause(selectClause, selectClause.Expression)
-                      ? null
-                      : selectClause.Expression;
+                        ? null
+                        : selectClause.Expression;
 
                 case SyntaxKind.JoinClause:
                     var oldJoin = (JoinClauseSyntax)oldBody.Parent;
@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         oldJoin.LeftExpression == oldBody || oldJoin.RightExpression == oldBody
                     );
                     return (oldJoin.LeftExpression == oldBody)
-                      ? newJoin.LeftExpression
-                      : newJoin.RightExpression;
+                        ? newJoin.LeftExpression
+                        : newJoin.RightExpression;
 
                 case SyntaxKind.GroupClause:
                     var oldGroup = (GroupClauseSyntax)oldBody.Parent;
@@ -121,12 +121,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         oldGroup.GroupExpression == oldBody || oldGroup.ByExpression == oldBody
                     );
                     return (oldGroup.GroupExpression == oldBody)
-                      ? (
+                        ? (
                             IsReducedSelectOrGroupByClause(newGroup, newGroup.GroupExpression)
-                              ? null
-                              : newGroup.GroupExpression
+                                ? null
+                                : newGroup.GroupExpression
                         )
-                      : newGroup.ByExpression;
+                        : newGroup.ByExpression;
 
                 case SyntaxKind.LocalFunctionStatement:
                     return GetLocalFunctionBody((LocalFunctionStatementSyntax)newLambda);
@@ -140,10 +140,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             nestedFunction switch
             {
                 AnonymousFunctionExpressionSyntax anonymousFunctionExpressionSyntax
-                  => anonymousFunctionExpressionSyntax.Body,
+                    => anonymousFunctionExpressionSyntax.Body,
                 LocalFunctionStatementSyntax localFunctionStatementSyntax
-                  => (CSharpSyntaxNode?)localFunctionStatementSyntax.Body
-                      ?? localFunctionStatementSyntax.ExpressionBody!.Expression,
+                    => (CSharpSyntaxNode?)localFunctionStatementSyntax.Body
+                        ?? localFunctionStatementSyntax.ExpressionBody!.Expression,
                 _ => throw ExceptionUtilities.UnexpectedValue(nestedFunction),
             };
 
@@ -534,8 +534,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // To differentiate between nested switch expressions that start at the same offset, use the offset of the `switch` keyword.
             return (node is SwitchExpressionSyntax switchExpression)
-              ? switchExpression.SwitchKeyword.SpanStart
-              : node.SpanStart;
+                ? switchExpression.SwitchKeyword.SpanStart
+                : node.SpanStart;
         }
 
         private static SyntaxNode GetLocalFunctionBody(

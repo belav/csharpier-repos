@@ -561,7 +561,7 @@ namespace System.Net.WebSockets
             // fall back to the fallback path.
             Task lockTask = _sendMutex.EnterAsync(cancellationToken);
             return cancellationToken.CanBeCanceled || !lockTask.IsCompletedSuccessfully
-              ? SendFrameFallbackAsync(
+                ? SendFrameFallbackAsync(
                     opcode,
                     endOfMessage,
                     disableCompression,
@@ -569,7 +569,7 @@ namespace System.Net.WebSockets
                     lockTask,
                     cancellationToken
                 )
-              : SendFrameLockAcquiredNonCancelableAsync(
+                : SendFrameLockAcquiredNonCancelableAsync(
                     opcode,
                     endOfMessage,
                     disableCompression,
@@ -624,10 +624,10 @@ namespace System.Net.WebSockets
                 return new ValueTask(
                     Task.FromException(
                         exc is OperationCanceledException
-                          ? exc
-                          : _state == WebSocketState.Aborted
-                              ? CreateOperationCanceledException(exc)
-                              : new WebSocketException(
+                            ? exc
+                            : _state == WebSocketState.Aborted
+                                ? CreateOperationCanceledException(exc)
+                                : new WebSocketException(
                                     WebSocketError.ConnectionClosedPrematurely,
                                     exc
                                 )
@@ -1047,8 +1047,8 @@ namespace System.Net.WebSockets
                             return GetReceiveResult<TResult>(
                                 count: 0,
                                 messageType: header.Opcode == MessageOpcode.Text
-                                  ? WebSocketMessageType.Text
-                                  : WebSocketMessageType.Binary,
+                                    ? WebSocketMessageType.Text
+                                    : WebSocketMessageType.Binary,
                                 endOfMessage: header.EndOfMessage
                             );
                         }
@@ -1074,8 +1074,8 @@ namespace System.Net.WebSockets
                             int limit = (int)
                                 Math.Min(
                                     header.Compressed
-                                      ? _inflater!.Span.Length
-                                      : payloadBuffer.Length,
+                                        ? _inflater!.Span.Length
+                                        : payloadBuffer.Length,
                                     header.PayloadLength
                                 );
 
@@ -1098,11 +1098,11 @@ namespace System.Net.WebSockets
                                 int numBytesRead = await _stream
                                     .ReadAsync(
                                         header.Compressed
-                                          ? _inflater!.Memory.Slice(
+                                            ? _inflater!.Memory.Slice(
                                                 totalBytesReceived,
                                                 limit - totalBytesReceived
                                             )
-                                          : payloadBuffer.Slice(
+                                            : payloadBuffer.Slice(
                                                 totalBytesReceived,
                                                 limit - totalBytesReceived
                                             ),
@@ -1121,8 +1121,8 @@ namespace System.Net.WebSockets
                             {
                                 _receivedMaskOffsetOffset = ApplyMask(
                                     header.Compressed
-                                      ? _inflater!.Span.Slice(0, totalBytesReceived)
-                                      : payloadBuffer.Span.Slice(0, totalBytesReceived),
+                                        ? _inflater!.Span.Slice(0, totalBytesReceived)
+                                        : payloadBuffer.Span.Slice(0, totalBytesReceived),
                                     header.Mask,
                                     _receivedMaskOffsetOffset
                                 );
@@ -1174,8 +1174,8 @@ namespace System.Net.WebSockets
                         return GetReceiveResult<TResult>(
                             totalBytesReceived,
                             header.Opcode == MessageOpcode.Text
-                              ? WebSocketMessageType.Text
-                              : WebSocketMessageType.Binary,
+                                ? WebSocketMessageType.Text
+                                : WebSocketMessageType.Binary,
                             header.EndOfMessage
                         );
                     }

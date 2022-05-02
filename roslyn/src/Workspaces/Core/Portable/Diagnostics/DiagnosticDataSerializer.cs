@@ -69,10 +69,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                     ? textDocument is Document document
                         ? storage.WriteStreamAsync(document, key, stream, cancellationToken)
                         : storage.WriteStreamAsync(
-                              GetSerializationKeyForNonSourceDocument(textDocument, key),
-                              stream,
-                              cancellationToken
-                          )
+                            GetSerializationKeyForNonSourceDocument(textDocument, key),
+                            stream,
+                            cancellationToken
+                        )
                     : storage.WriteStreamAsync(project, key, stream, cancellationToken);
 
             return await writeTask.ConfigureAwait(false);
@@ -103,9 +103,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                     ? textDocument is Document document
                         ? storage.ReadStreamAsync(document, key, cancellationToken)
                         : storage.ReadStreamAsync(
-                              GetSerializationKeyForNonSourceDocument(textDocument, key),
-                              cancellationToken
-                          )
+                            GetSerializationKeyForNonSourceDocument(textDocument, key),
+                            cancellationToken
+                        )
                     : storage.ReadStreamAsync(project, key, cancellationToken);
 
             using var stream = await readTask.ConfigureAwait(false);
@@ -385,8 +385,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                 document != null
                     ? document.Id
                     : project.Solution
-                      .GetDocumentIdsWithFilePath(originalFile)
-                      .FirstOrDefault(documentId => documentId.ProjectId == project.Id);
+                        .GetDocumentIdsWithFilePath(originalFile)
+                        .FirstOrDefault(documentId => documentId.ProjectId == project.Id);
 
             return new DiagnosticDataLocation(
                 documentId,

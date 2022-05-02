@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                 }
 
                 return Directory.Exists(workspacePath)
-                  ? FindWorkspace(workspacePath!) // IsNullOrEmpty is not annotated on .NET Core 2.1
-                  : FindFile(workspacePath!); // IsNullOrEmpty is not annotated on .NET Core 2.1
+                    ? FindWorkspace(workspacePath!) // IsNullOrEmpty is not annotated on .NET Core 2.1
+                    : FindFile(workspacePath!); // IsNullOrEmpty is not annotated on .NET Core 2.1
             }
 
             var foundSolution = FindMatchingFile(

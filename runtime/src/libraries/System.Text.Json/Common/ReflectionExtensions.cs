@@ -259,8 +259,8 @@ namespace System.Text.Json.Reflection
         {
             Type genericTypeDef = genericType.GetGenericTypeDefinition();
             return sourceGenType
-              ? GetBaseNameFromGenericTypeDef(genericTypeDef)
-              : genericTypeDef.FullName!;
+                ? GetBaseNameFromGenericTypeDef(genericTypeDef)
+                : genericTypeDef.FullName!;
         }
 
         private static string GetBaseNameFromGenericTypeDef(Type genericTypeDef)

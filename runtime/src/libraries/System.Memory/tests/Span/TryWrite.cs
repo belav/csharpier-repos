@@ -628,38 +628,38 @@ namespace System.SpanTests
                     11 => b.AppendFormatted(new FormattableStringWrapper(" "), alignment: 0),
                     12 => b.AppendFormatted(new FormattableStringWrapper(" "), format: "X2"),
                     13
-                      => b.AppendFormatted(
-                          new FormattableStringWrapper(" "),
-                          alignment: 0,
-                          format: "X2"
-                      ),
+                        => b.AppendFormatted(
+                            new FormattableStringWrapper(" "),
+                            alignment: 0,
+                            format: "X2"
+                        ),
                     14 => b.AppendFormatted(new SpanFormattableStringWrapper(" ")),
                     15 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), alignment: 0),
                     16 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), format: "X2"),
                     17
-                      => b.AppendFormatted(
-                          new SpanFormattableStringWrapper(" "),
-                          alignment: 0,
-                          format: "X2"
-                      ),
+                        => b.AppendFormatted(
+                            new SpanFormattableStringWrapper(" "),
+                            alignment: 0,
+                            format: "X2"
+                        ),
                     18 => b.AppendFormatted(new FormattableInt32Wrapper(1)),
                     19 => b.AppendFormatted(new FormattableInt32Wrapper(1), alignment: 0),
                     20 => b.AppendFormatted(new FormattableInt32Wrapper(1), format: "X2"),
                     21
-                      => b.AppendFormatted(
-                          new FormattableInt32Wrapper(1),
-                          alignment: 0,
-                          format: "X2"
-                      ),
+                        => b.AppendFormatted(
+                            new FormattableInt32Wrapper(1),
+                            alignment: 0,
+                            format: "X2"
+                        ),
                     22 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1)),
                     23 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), alignment: 0),
                     24 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), format: "X2"),
                     25
-                      => b.AppendFormatted(
-                          new SpanFormattableInt32Wrapper(1),
-                          alignment: 0,
-                          format: "X2"
-                      ),
+                        => b.AppendFormatted(
+                            new SpanFormattableInt32Wrapper(1),
+                            alignment: 0,
+                            format: "X2"
+                        ),
                     26 => b.AppendFormatted<string>("", alignment: 1),
                     27 => b.AppendFormatted<string>("", alignment: -1),
                     28 => b.AppendFormatted<string>(" ", alignment: 1, format: "X2"),
@@ -727,8 +727,8 @@ namespace System.SpanTests
 
         private sealed class SpanFormattableStringWrapper
             : IFormattable,
-              ISpanFormattable,
-              IHasToStringState
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly string _value;
             public ToStringState ToStringState { get; } = new ToStringState();
@@ -782,8 +782,8 @@ namespace System.SpanTests
 
         private struct SpanFormattableInt32Wrapper
             : IFormattable,
-              ISpanFormattable,
-              IHasToStringState
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly int _value;
             public ToStringState ToStringState { get; }

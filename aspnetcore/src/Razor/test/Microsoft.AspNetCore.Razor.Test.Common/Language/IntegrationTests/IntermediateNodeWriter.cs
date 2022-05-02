@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 // Serializes single IR nodes (shallow).
 public class IntermediateNodeWriter
     : IntermediateNodeVisitor,
-      IExtensionIntermediateNodeVisitor<SectionIntermediateNode>,
-      IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>
+        IExtensionIntermediateNodeVisitor<SectionIntermediateNode>,
+        IExtensionIntermediateNodeVisitor<RouteAttributeExtensionNode>
 {
     private readonly TextWriter _writer;
 

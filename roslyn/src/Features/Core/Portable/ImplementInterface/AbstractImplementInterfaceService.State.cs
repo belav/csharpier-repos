@@ -128,8 +128,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                         state.MembersWithoutExplicitImplementation.Length == 0;
 
                     return !allMembersImplementedExplicitly || !allMembersImplemented
-                      ? state
-                      : null;
+                        ? state
+                        : null;
                 }
                 else
                 {

@@ -14,8 +14,8 @@ namespace System.Xml
 {
     internal sealed partial class XmlSubtreeReader
         : XmlWrappingReader,
-          IXmlLineInfo,
-          IXmlNamespaceResolver
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         public override Task<string> GetValueAsync()
         {

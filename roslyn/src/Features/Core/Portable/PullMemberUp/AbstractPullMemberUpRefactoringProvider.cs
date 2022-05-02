@@ -90,10 +90,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         {
             var containingType = selectedMember.ContainingType;
             var allDestinations = selectedMember.IsKind(SymbolKind.Field)
-              ? containingType.GetBaseTypes().ToImmutableArray()
-              : containingType.AllInterfaces
-                .Concat(containingType.GetBaseTypes())
-                .ToImmutableArray();
+                ? containingType.GetBaseTypes().ToImmutableArray()
+                : containingType.AllInterfaces
+                    .Concat(containingType.GetBaseTypes())
+                    .ToImmutableArray();
 
             return allDestinations.WhereAsArray(
                 destination =>

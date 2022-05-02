@@ -512,8 +512,8 @@ namespace System.Net.Http
                 _incomingBuffer.Discard(FrameHeader.Size);
                 ThrowProtocolError(
                     initialFrame
-                      ? Http2ProtocolErrorCode.ProtocolError
-                      : Http2ProtocolErrorCode.FrameSizeError
+                        ? Http2ProtocolErrorCode.ProtocolError
+                        : Http2ProtocolErrorCode.FrameSizeError
                 );
             }
             _incomingBuffer.Discard(FrameHeader.Size);

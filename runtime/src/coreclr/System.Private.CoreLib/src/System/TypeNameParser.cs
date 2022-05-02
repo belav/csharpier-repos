@@ -305,10 +305,10 @@ namespace System
                         assembly == null
                             ? SR.Format(SR.TypeLoad_ResolveType, OuterMostTypeName)
                             : SR.Format(
-                                  SR.TypeLoad_ResolveTypeFromAssembly,
-                                  OuterMostTypeName,
-                                  assembly.FullName
-                              );
+                                SR.TypeLoad_ResolveTypeFromAssembly,
+                                OuterMostTypeName,
+                                assembly.FullName
+                            );
 
                     throw new TypeLoadException(errorString);
                 }

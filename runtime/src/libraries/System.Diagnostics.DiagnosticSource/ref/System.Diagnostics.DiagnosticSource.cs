@@ -8,8 +8,8 @@ namespace System.Diagnostics
 {
     public partial class DiagnosticListener
         : System.Diagnostics.DiagnosticSource,
-          System.IDisposable,
-          System.IObservable<System.Collections.Generic.KeyValuePair<string, object?>>
+            System.IDisposable,
+            System.IObservable<System.Collections.Generic.KeyValuePair<string, object?>>
     {
         public DiagnosticListener(string name) { }
 

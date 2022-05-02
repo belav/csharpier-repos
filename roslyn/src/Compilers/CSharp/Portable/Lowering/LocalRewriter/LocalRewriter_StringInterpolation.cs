@@ -374,11 +374,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         result == null
                             ? part
                             : _factory.Binary(
-                                  BinaryOperatorKind.StringConcatenation,
-                                  node.Type,
-                                  result,
-                                  part
-                              );
+                                BinaryOperatorKind.StringConcatenation,
+                                node.Type,
+                                result,
+                                part
+                            );
                 }
 
                 // We need to ensure that the result of the interpolated string is not null. If the single part has a non-null constant value
@@ -480,12 +480,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression toStringAndClearCall = toStringAndClear is not null
                 ? BoundCall.Synthesized(syntax, result.HandlerTemp, toStringAndClear)
                 : new BoundBadExpression(
-                      syntax,
-                      LookupResultKind.Empty,
-                      symbols: ImmutableArray<Symbol?>.Empty,
-                      childBoundNodes: ImmutableArray<BoundExpression>.Empty,
-                      type
-                  );
+                    syntax,
+                    LookupResultKind.Empty,
+                    symbols: ImmutableArray<Symbol?>.Empty,
+                    childBoundNodes: ImmutableArray<BoundExpression>.Empty,
+                    type
+                );
 
             return result.WithFinalResult(toStringAndClearCall);
         }

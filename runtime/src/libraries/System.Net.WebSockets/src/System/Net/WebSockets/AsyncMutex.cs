@@ -57,10 +57,10 @@ namespace System.Threading
             // If the mutex is not currently held nor contended, enter immediately.
             // Otherwise, fall back to a more expensive likely-asynchronous wait.
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : Interlocked.Decrement(ref _gate) >= 0
-                  ? Task.CompletedTask
-                  : Contended(cancellationToken);
+                ? Task.FromCanceled(cancellationToken)
+                : Interlocked.Decrement(ref _gate) >= 0
+                    ? Task.CompletedTask
+                    : Contended(cancellationToken);
 
             // Everything that follows is the equivalent of:
             //     return _sem.WaitAsync(cancellationToken);

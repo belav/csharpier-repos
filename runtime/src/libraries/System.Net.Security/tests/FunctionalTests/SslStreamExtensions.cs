@@ -16,8 +16,8 @@ namespace System.Net.Security.Tests
         )
         {
             return async
-              ? stream.AuthenticateAsClientAsync(clientOptions, cancellationToken)
-              : Task.Run(() => stream.AuthenticateAsClient(clientOptions));
+                ? stream.AuthenticateAsClientAsync(clientOptions, cancellationToken)
+                : Task.Run(() => stream.AuthenticateAsClient(clientOptions));
         }
 
         public static Task AuthenticateAsServerAsync(
@@ -28,8 +28,8 @@ namespace System.Net.Security.Tests
         )
         {
             return async
-              ? stream.AuthenticateAsServerAsync(serverOptions, cancellationToken)
-              : Task.Run(() => stream.AuthenticateAsServer(serverOptions));
+                ? stream.AuthenticateAsServerAsync(serverOptions, cancellationToken)
+                : Task.Run(() => stream.AuthenticateAsServer(serverOptions));
         }
     }
 }

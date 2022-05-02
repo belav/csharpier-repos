@@ -19,17 +19,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNullPropagation
     ]
     internal class CSharpUseNullPropagationCodeFixProvider
         : AbstractUseNullPropagationCodeFixProvider<
-              SyntaxKind,
-              ExpressionSyntax,
-              ConditionalExpressionSyntax,
-              BinaryExpressionSyntax,
-              InvocationExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              ConditionalAccessExpressionSyntax,
-              ElementAccessExpressionSyntax,
-              ElementBindingExpressionSyntax,
-              BracketedArgumentListSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            ConditionalExpressionSyntax,
+            BinaryExpressionSyntax,
+            InvocationExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            ConditionalAccessExpressionSyntax,
+            ElementAccessExpressionSyntax,
+            ElementBindingExpressionSyntax,
+            BracketedArgumentListSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

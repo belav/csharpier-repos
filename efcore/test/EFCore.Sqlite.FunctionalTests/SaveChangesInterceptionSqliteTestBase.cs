@@ -33,7 +33,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class SaveChangesInterceptionSqliteTest
             : SaveChangesInterceptionSqliteTestBase,
-              IClassFixture<SaveChangesInterceptionSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<SaveChangesInterceptionSqliteTest.InterceptionSqliteFixture>
         {
             public SaveChangesInterceptionSqliteTest(InterceptionSqliteFixture fixture)
                 : base(fixture) { }
@@ -46,7 +46,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class SaveChangesInterceptionWithDiagnosticsSqliteTest
             : SaveChangesInterceptionSqliteTestBase,
-              IClassFixture<SaveChangesInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<SaveChangesInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
         {
             public SaveChangesInterceptionWithDiagnosticsSqliteTest(
                 InterceptionSqliteFixture fixture

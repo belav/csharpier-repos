@@ -50,165 +50,211 @@ namespace System.CommandLine.Tests.Binding
                     2 => new Func<int, int, Task>((i1, i2) => Received(i1, i2)),
                     3 => new Func<int, int, int, Task>((i1, i2, i3) => Received(i1, i2, i3)),
                     4
-                      => new Func<int, int, int, int, Task>(
-                          (i1, i2, i3, i4) => Received(i1, i2, i3, i4)
-                      ),
+                        => new Func<int, int, int, int, Task>(
+                            (i1, i2, i3, i4) => Received(i1, i2, i3, i4)
+                        ),
                     5
-                      => new Func<int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5) => Received(i1, i2, i3, i4, i5)
-                      ),
+                        => new Func<int, int, int, int, int, Task>(
+                            (i1, i2, i3, i4, i5) => Received(i1, i2, i3, i4, i5)
+                        ),
                     6
-                      => new Func<int, int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5, i6) => Received(i1, i2, i3, i4, i5, i6)
-                      ),
+                        => new Func<int, int, int, int, int, int, Task>(
+                            (i1, i2, i3, i4, i5, i6) => Received(i1, i2, i3, i4, i5, i6)
+                        ),
                     7
-                      => new Func<int, int, int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5, i6, i7) => Received(i1, i2, i3, i4, i5, i6, i7)
-                      ),
+                        => new Func<int, int, int, int, int, int, int, Task>(
+                            (i1, i2, i3, i4, i5, i6, i7) => Received(i1, i2, i3, i4, i5, i6, i7)
+                        ),
                     8
-                      => new Func<int, int, int, int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5, i6, i7, i8) =>
-                              Received(i1, i2, i3, i4, i5, i6, i7, i8)
-                      ),
+                        => new Func<int, int, int, int, int, int, int, int, Task>(
+                            (i1, i2, i3, i4, i5, i6, i7, i8) =>
+                                Received(i1, i2, i3, i4, i5, i6, i7, i8)
+                        ),
                     9
-                      => new Func<int, int, int, int, int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9) =>
-                              Received(i1, i2, i3, i4, i5, i6, i7, i8, i9)
-                      ),
+                        => new Func<int, int, int, int, int, int, int, int, int, Task>(
+                            (i1, i2, i3, i4, i5, i6, i7, i8, i9) =>
+                                Received(i1, i2, i3, i4, i5, i6, i7, i8, i9)
+                        ),
                     10
-                      => new Func<int, int, int, int, int, int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10) =>
-                              Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10)
-                      ),
+                        => new Func<int, int, int, int, int, int, int, int, int, int, Task>(
+                            (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10) =>
+                                Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10)
+                        ),
                     11
-                      => new Func<int, int, int, int, int, int, int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11) =>
-                              Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11)
-                      ),
+                        => new Func<int, int, int, int, int, int, int, int, int, int, int, Task>(
+                            (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11) =>
+                                Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11)
+                        ),
                     12
-                      => new Func<int, int, int, int, int, int, int, int, int, int, int, int, Task>(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12) =>
-                              Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12)
-                      ),
+                        => new Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            Task
+                        >(
+                            (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12) =>
+                                Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12)
+                        ),
                     13
-                      => new Func<
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          Task
-                      >(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13) =>
-                              Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13)
-                      ),
+                        => new Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            Task
+                        >(
+                            (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13) =>
+                                Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13)
+                        ),
                     14
-                      => new Func<
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          Task
-                      >(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14) =>
-                              Received(i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14)
-                      ),
+                        => new Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            Task
+                        >(
+                            (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14) =>
+                                Received(
+                                    i1,
+                                    i2,
+                                    i3,
+                                    i4,
+                                    i5,
+                                    i6,
+                                    i7,
+                                    i8,
+                                    i9,
+                                    i10,
+                                    i11,
+                                    i12,
+                                    i13,
+                                    i14
+                                )
+                        ),
                     15
-                      => new Func<
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          Task
-                      >(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15) =>
-                              Received(
-                                  i1,
-                                  i2,
-                                  i3,
-                                  i4,
-                                  i5,
-                                  i6,
-                                  i7,
-                                  i8,
-                                  i9,
-                                  i10,
-                                  i11,
-                                  i12,
-                                  i13,
-                                  i14,
-                                  i15
-                              )
-                      ),
+                        => new Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            Task
+                        >(
+                            (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15) =>
+                                Received(
+                                    i1,
+                                    i2,
+                                    i3,
+                                    i4,
+                                    i5,
+                                    i6,
+                                    i7,
+                                    i8,
+                                    i9,
+                                    i10,
+                                    i11,
+                                    i12,
+                                    i13,
+                                    i14,
+                                    i15
+                                )
+                        ),
                     16
-                      => new Func<
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          int,
-                          Task
-                      >(
-                          (i1, i2, i3, i4, i5, i6, i7, i8, i9, i10, i11, i12, i13, i14, i15, i16) =>
-                              Received(
-                                  i1,
-                                  i2,
-                                  i3,
-                                  i4,
-                                  i5,
-                                  i6,
-                                  i7,
-                                  i8,
-                                  i9,
-                                  i10,
-                                  i11,
-                                  i12,
-                                  i13,
-                                  i14,
-                                  i15,
-                                  i16
-                              )
-                      ),
+                        => new Func<
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            int,
+                            Task
+                        >(
+                            (
+                                i1,
+                                i2,
+                                i3,
+                                i4,
+                                i5,
+                                i6,
+                                i7,
+                                i8,
+                                i9,
+                                i10,
+                                i11,
+                                i12,
+                                i13,
+                                i14,
+                                i15,
+                                i16
+                            ) =>
+                                Received(
+                                    i1,
+                                    i2,
+                                    i3,
+                                    i4,
+                                    i5,
+                                    i6,
+                                    i7,
+                                    i8,
+                                    i9,
+                                    i10,
+                                    i11,
+                                    i12,
+                                    i13,
+                                    i14,
+                                    i15,
+                                    i16
+                                )
+                        ),
 
                     _ => throw new ArgumentOutOfRangeException()
                 };

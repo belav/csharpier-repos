@@ -439,9 +439,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             var replaceSpan =
                 firstNonWhitespaceOffset != null
                     ? TextSpan.FromBounds(
-                          currentLine.Start,
-                          currentLine.Start + firstNonWhitespaceOffset.Value
-                      )
+                        currentLine.Start,
+                        currentLine.Start + firstNonWhitespaceOffset.Value
+                    )
                     : currentLine.Span;
 
             return new DocumentationCommentSnippet(
@@ -475,9 +475,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             var extraIndent =
                 firstNonWhitespaceOffsetInPreviousXmlText != null
                     ? trimmedPreviousLine.Substring(
-                          0,
-                          firstNonWhitespaceOffsetInPreviousXmlText.Value
-                      )
+                        0,
+                        firstNonWhitespaceOffsetInPreviousXmlText.Value
+                    )
                     : " ";
 
             return firstNonWhitespaceColumn.CreateIndentationString(

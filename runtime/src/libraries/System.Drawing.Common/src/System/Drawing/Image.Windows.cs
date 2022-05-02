@@ -110,7 +110,7 @@ namespace System.Drawing
                     ? Gdip.Ok
                     :
 #endif
-                      Gdip.GdipDisposeImage(new HandleRef(this, nativeImage));
+                    Gdip.GdipDisposeImage(new HandleRef(this, nativeImage));
 #if DEBUG
                 Debug.Assert(
                     status == Gdip.Ok,

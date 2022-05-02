@@ -11,7 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
 {
     internal sealed class LegacyReferenceEqualityComparer
         : IEqualityComparer<object>,
-          IEqualityComparer
+            IEqualityComparer
     {
         private LegacyReferenceEqualityComparer() { }
 

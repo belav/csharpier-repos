@@ -138,11 +138,11 @@ public class CorsService : ICorsService
 
         var allowedMethods = policy.AllowAnyMethod
             ? new[]
-              {
-                  result.IsPreflightRequest
-                      ? headers.AccessControlRequestMethod.ToString()
-                      : context.Request.Method
-              }
+            {
+                result.IsPreflightRequest
+                    ? headers.AccessControlRequestMethod.ToString()
+                    : context.Request.Method
+            }
             : policy.Methods;
         AddHeaderValues(result.AllowedMethods, allowedMethods);
 

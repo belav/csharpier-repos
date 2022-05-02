@@ -341,11 +341,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     (typeDeclaringMember.Type == null)
                         ? row.Name
                         : GetQualifiedMemberName(
-                              row.InspectionContext,
-                              typeDeclaringMember,
-                              row.Name,
-                              FullNameProvider
-                          );
+                            row.InspectionContext,
+                            typeDeclaringMember,
+                            row.Name,
+                            FullNameProvider
+                        );
                 row.Value.SetDataItem(
                     DkmDataCreationDisposition.CreateAlways,
                     new FavoritesDataItem(row.CanFavorite, row.IsFavorite)
@@ -688,10 +688,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     (declaredTypeInfo == declaredTypeInfoNoTupleElementNames)
                         ? declaredTypeName
                         : inspectionContext.GetTypeName(
-                              declaredType,
-                              declaredTypeInfoNoTupleElementNames,
-                              Formatter.NoFormatSpecifiers
-                          );
+                            declaredType,
+                            declaredTypeInfoNoTupleElementNames,
+                            Formatter.NoFormatSpecifiers
+                        );
                 // Generate the runtime type name with no tuple element names and no dynamic.
                 var runtimeTypeName = inspectionContext.GetTypeName(
                     runtimeType,
@@ -827,14 +827,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 if (expansion == null)
                 {
                     expansion = value.HasExceptionThrown()
-                      ? this.GetTypeExpansion(
+                        ? this.GetTypeExpansion(
                             inspectionContext,
                             new TypeAndCustomInfo(value.Type),
                             value,
                             expansionFlags,
                             supportsFavorites: false
                         )
-                      : this.GetTypeExpansion(
+                        : this.GetTypeExpansion(
                             inspectionContext,
                             declaredTypeAndInfo,
                             value,
@@ -856,8 +856,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 childShouldParenthesize: childShouldParenthesize,
                 fullName: fullName,
                 childFullNamePrefixOpt: flags.Includes(DkmEvaluationResultFlags.ExceptionThrown)
-                  ? null
-                  : fullName,
+                    ? null
+                    : fullName,
                 formatSpecifiers: formatSpecifiers,
                 category: category,
                 flags: flags,
@@ -1014,8 +1014,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         useDebuggerDisplay: useDebuggerDisplay,
                         expansionFlags: expansionFlags,
                         childShouldParenthesize: (fullName == null)
-                          ? false
-                          : FullNameProvider.ClrExpressionMayRequireParentheses(
+                            ? false
+                            : FullNameProvider.ClrExpressionMayRequireParentheses(
                                 inspectionContext,
                                 fullName
                             ),
@@ -1355,8 +1355,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 );
                 var elementType = declaredType.GetElementType();
                 return value.IsNull || elementType.IsVoid()
-                  ? null
-                  : new PointerDereferenceExpansion(
+                    ? null
+                    : new PointerDereferenceExpansion(
                         new TypeAndCustomInfo(
                             DkmClrType.Create(declaredTypeAndInfo.ClrType.AppDomain, elementType)
                         )
@@ -1435,8 +1435,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     Formatter.NoFormatSpecifiers
                 );
             return typeDeclaringMember.Type.IsInterface
-              ? $"{typeName}.{memberName}"
-              : $"{memberName} ({typeName})";
+                ? $"{typeName}.{memberName}"
+                : $"{memberName} ({typeName})";
         }
 
         // Track remaining evaluations so that each subsequent evaluation

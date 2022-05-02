@@ -27,10 +27,10 @@ namespace System.CommandLine.Binding
                     return type.GetGenericTypeDefinition() switch
                     {
                         { } enumerable when enumerable == typeof(IEnumerable<>)
-                          => GetEmptyEnumerable(itemType),
+                            => GetEmptyEnumerable(itemType),
                         { } list when list == typeof(List<>) => GetEmptyList(itemType),
                         { } array when array == typeof(IList<>) || array == typeof(ICollection<>)
-                          => CreateEmptyArray(itemType),
+                            => CreateEmptyArray(itemType),
                         _ => null
                     };
                 }
@@ -42,7 +42,7 @@ namespace System.CommandLine.Binding
                     when nonGeneric == typeof(IList)
                         || nonGeneric == typeof(ICollection)
                         || nonGeneric == typeof(IEnumerable)
-                  => CreateEmptyArray(typeof(object)),
+                    => CreateEmptyArray(typeof(object)),
                 _ => type.IsValueType ? Activator.CreateInstance(type) : null
             };
 

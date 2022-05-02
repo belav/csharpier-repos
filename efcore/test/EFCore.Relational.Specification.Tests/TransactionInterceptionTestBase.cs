@@ -91,8 +91,8 @@ namespace Microsoft.EntityFrameworkCore
                 using (
                     var _ = async
                         ? await context.Database.BeginTransactionAsync(
-                              IsolationLevel.ReadUncommitted
-                          )
+                            IsolationLevel.ReadUncommitted
+                        )
                         : context.Database.BeginTransaction(IsolationLevel.ReadUncommitted)
                 )
                 {

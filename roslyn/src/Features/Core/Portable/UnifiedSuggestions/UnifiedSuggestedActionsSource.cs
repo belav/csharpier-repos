@@ -557,10 +557,10 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         {
             var actions = refactoring.CodeActions.WhereAsArray(IsActionAndSpanApplicable);
             return actions.Length == 0
-              ? null
-              : actions.Length == refactoring.CodeActions.Length
-                  ? refactoring
-                  : new CodeRefactoring(refactoring.Provider, actions);
+                ? null
+                : actions.Length == refactoring.CodeActions.Length
+                    ? refactoring
+                    : new CodeRefactoring(refactoring.Provider, actions);
 
             bool IsActionAndSpanApplicable(
                 (CodeAction action, TextSpan? applicableSpan) actionAndSpan
@@ -784,8 +784,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             // offered. Then we can consider inlining any nested actions into the top level list.
             // (but we only do this if the parent of the nested actions isn't invokable itself).
             return currentActionCount + actionSets.Sum(a => a.Actions.Count()) > 3
-              ? actionSets
-              : actionSets.SelectAsArray(InlineActions);
+                ? actionSets
+                : actionSets.SelectAsArray(InlineActions);
         }
 
         private static UnifiedSuggestedActionSet InlineActions(UnifiedSuggestedActionSet actionSet)
@@ -858,8 +858,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             }
 
             return actions.Count == 0
-              ? null
-              : new UnifiedSuggestedActionSet(
+                ? null
+                : new UnifiedSuggestedActionSet(
                     set.CategoryName,
                     actions.ToImmutable(),
                     set.Title,

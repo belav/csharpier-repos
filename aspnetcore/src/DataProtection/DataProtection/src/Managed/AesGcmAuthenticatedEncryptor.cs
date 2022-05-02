@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.DataProtection.Managed;
 // An encryptor that uses AesGcm to do encryption
 internal sealed unsafe class AesGcmAuthenticatedEncryptor
     : IOptimizedAuthenticatedEncryptor,
-      IDisposable
+        IDisposable
 {
     // Having a key modifier ensures with overwhelming probability that no two encryption operations
     // will ever derive the same (encryption subkey, MAC subkey) pair. This limits an attacker's

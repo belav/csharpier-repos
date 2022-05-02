@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.Host
             // and .NET Core Windows. For non-Windows .NET Core scenarios, we can return the TrivialTemporaryStorageService
             // until https://github.com/dotnet/runtime/issues/30878 is fixed.
             return PlatformInformation.IsWindows || PlatformInformation.IsRunningOnMono
-              ? new TemporaryStorageService(textFactory)
-              : TrivialTemporaryStorageService.Instance;
+                ? new TemporaryStorageService(textFactory)
+                : TrivialTemporaryStorageService.Instance;
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Microsoft.CodeAnalysis.Host
 
             private sealed class TemporaryTextStorage
                 : ITemporaryTextStorage,
-                  ITemporaryTextStorageWithName
+                    ITemporaryTextStorageWithName
             {
                 private readonly TemporaryStorageService _service;
                 private SourceHashAlgorithm _checksumAlgorithm;
@@ -374,7 +374,7 @@ namespace Microsoft.CodeAnalysis.Host
 
             private class TemporaryStreamStorage
                 : ITemporaryStreamStorage,
-                  ITemporaryStorageWithName
+                    ITemporaryStorageWithName
             {
                 private readonly TemporaryStorageService _service;
                 private MemoryMappedInfo? _memoryMappedInfo;

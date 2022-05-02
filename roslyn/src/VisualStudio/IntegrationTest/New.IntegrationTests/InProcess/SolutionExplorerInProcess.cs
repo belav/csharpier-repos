@@ -520,10 +520,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 LanguageNames.CSharp => "CSharp",
                 LanguageNames.VisualBasic => "VisualBasic",
                 _
-                  => throw new ArgumentException(
-                      $"'{languageName}' is not supported.",
-                      nameof(languageName)
-                  ),
+                    => throw new ArgumentException(
+                        $"'{languageName}' is not supported.",
+                        nameof(languageName)
+                    ),
             };
         }
 

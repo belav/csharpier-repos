@@ -238,8 +238,8 @@ namespace Microsoft.Extensions.Configuration
         {
             string directoryPath = Path.GetDirectoryName(secretPath);
             PhysicalFileProvider fileProvider = Directory.Exists(directoryPath)
-              ? new PhysicalFileProvider(directoryPath)
-              : null;
+                ? new PhysicalFileProvider(directoryPath)
+                : null;
             return configuration.AddJsonFile(
                 fileProvider,
                 PathHelper.SecretsFileName,

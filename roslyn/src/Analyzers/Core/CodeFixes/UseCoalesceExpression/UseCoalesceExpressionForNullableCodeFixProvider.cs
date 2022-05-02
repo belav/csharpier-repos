@@ -105,13 +105,13 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
                         var coalesceExpression =
                             whenPart == whenTrue
                                 ? g.CoalesceExpression(
-                                      conditionExpression,
-                                      syntaxFacts.WalkDownParentheses(currentWhenTrue)
-                                  )
+                                    conditionExpression,
+                                    syntaxFacts.WalkDownParentheses(currentWhenTrue)
+                                )
                                 : g.CoalesceExpression(
-                                      conditionExpression,
-                                      syntaxFacts.WalkDownParentheses(currentWhenFalse)
-                                  );
+                                    conditionExpression,
+                                    syntaxFacts.WalkDownParentheses(currentWhenFalse)
+                                );
 
                         if (
                             semanticFacts.IsInExpressionTree(

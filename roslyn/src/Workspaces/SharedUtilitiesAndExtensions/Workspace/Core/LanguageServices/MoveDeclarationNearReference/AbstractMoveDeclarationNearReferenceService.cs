@@ -130,8 +130,8 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             var crossesMeaningfulBlock = CrossesMeaningfulBlock(state);
             var warningAnnotation = crossesMeaningfulBlock
                 ? WarningAnnotation.Create(
-                      WorkspaceExtensionsResources.Warning_colon_Declaration_changes_scope_and_may_change_meaning
-                  )
+                    WorkspaceExtensionsResources.Warning_colon_Declaration_changes_scope_and_may_change_meaning
+                )
                 : null;
 
             var canMergeDeclarationAndAssignment = await CanMergeDeclarationAndAssignmentAsync(

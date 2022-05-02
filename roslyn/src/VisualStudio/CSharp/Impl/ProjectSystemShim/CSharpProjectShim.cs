@@ -27,7 +27,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
     /// </remarks>
     internal sealed partial class CSharpProjectShim
         : AbstractLegacyProject,
-          ICodeModelInstanceFactory
+            ICodeModelInstanceFactory
     {
         /// <summary>
         /// This member is used to store a raw array of warning numbers, which is needed to properly implement

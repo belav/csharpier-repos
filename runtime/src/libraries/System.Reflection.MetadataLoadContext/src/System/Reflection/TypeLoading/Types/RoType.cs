@@ -143,8 +143,8 @@ namespace System.Reflection.TypeLoading
 
         internal RoType? GetRoBaseType() =>
             object.ReferenceEquals(_lazyBaseType, Sentinels.RoType)
-              ? (_lazyBaseType = ComputeBaseType())
-              : _lazyBaseType;
+                ? (_lazyBaseType = ComputeBaseType())
+                : _lazyBaseType;
 
         private RoType? ComputeBaseType()
         {
@@ -303,8 +303,8 @@ namespace System.Reflection.TypeLoading
         {
             string? defaultMemberName = GetDefaultMemberName();
             return defaultMemberName != null
-              ? GetMember(defaultMemberName)
-              : Array.Empty<MemberInfo>();
+                ? GetMember(defaultMemberName)
+                : Array.Empty<MemberInfo>();
         }
 
         private string? GetDefaultMemberName()

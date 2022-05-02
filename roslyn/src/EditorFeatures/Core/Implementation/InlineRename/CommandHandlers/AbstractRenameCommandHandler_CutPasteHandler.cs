@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
     internal abstract partial class AbstractRenameCommandHandler
         : IChainedCommandHandler<CutCommandArgs>,
-          IChainedCommandHandler<PasteCommandArgs>
+            IChainedCommandHandler<PasteCommandArgs>
     {
         public CommandState GetCommandState(CutCommandArgs args, Func<CommandState> nextHandler) =>
             nextHandler();

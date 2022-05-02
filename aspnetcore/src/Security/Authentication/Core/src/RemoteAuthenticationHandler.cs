@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Authentication;
 
 public abstract class RemoteAuthenticationHandler<TOptions>
     : AuthenticationHandler<TOptions>,
-      IAuthenticationRequestHandler where TOptions : RemoteAuthenticationOptions, new()
+        IAuthenticationRequestHandler where TOptions : RemoteAuthenticationOptions, new()
 {
     private const string CorrelationProperty = ".xsrf";
     private const string CorrelationMarker = "N";

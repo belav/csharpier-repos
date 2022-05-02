@@ -60,8 +60,8 @@ public class GetOpenApiReferenceMetadata : Task
             {
                 // This case occurs when user overrides the required metadata with an empty string.
                 var type = string.IsNullOrEmpty(item.GetMetadata("SourceProject"))
-                  ? "OpenApiReference"
-                  : "OpenApiProjectReference";
+                    ? "OpenApiReference"
+                    : "OpenApiProjectReference";
 
                 Log.LogError(
                     Resources.FormatInvalidEmptyMetadataValue("CodeGenerator", type, item.ItemSpec)

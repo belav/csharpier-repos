@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor
     // We suppress this as this type *does* override ComputeAdditionalHashCodeParts
     internal sealed class WrappedNavigationBarItem
         : NavigationBarItem,
-          IEquatable<WrappedNavigationBarItem>
+            IEquatable<WrappedNavigationBarItem>
     {
         public readonly RoslynNavigationBarItem UnderlyingItem;
 

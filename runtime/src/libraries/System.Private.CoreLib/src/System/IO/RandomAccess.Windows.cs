@@ -981,8 +981,8 @@ namespace System.IO
                         // Error. Callback will not be invoked.
                         vts.Dispose();
                         return errorCode == Interop.Errors.ERROR_NO_DATA // EOF on a pipe. IO callback will not be called.
-                          ? ValueTask.CompletedTask
-                          : ValueTask.FromException(
+                            ? ValueTask.CompletedTask
+                            : ValueTask.FromException(
                                 SafeFileHandle.OverlappedValueTaskSource.GetIOError(
                                     errorCode,
                                     path: null

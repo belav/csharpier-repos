@@ -378,8 +378,8 @@ namespace System.Xml
                 {
                     case State.Initial:
                         return base.reader.ReadState == ReadState.Closed
-                          ? ReadState.Closed
-                          : ReadState.Initial;
+                            ? ReadState.Closed
+                            : ReadState.Initial;
                     case State.Error:
                         return ReadState.Error;
                     case State.InReadBinary:

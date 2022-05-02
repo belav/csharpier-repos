@@ -15,10 +15,10 @@ namespace System.Collections.Generic
     )]
     public class LinkedList<T>
         : ICollection<T>,
-          ICollection,
-          IReadOnlyCollection<T>,
-          ISerializable,
-          IDeserializationCallback
+            ICollection,
+            IReadOnlyCollection<T>,
+            ISerializable,
+            IDeserializationCallback
     {
         // This LinkedList is a doubly-Linked circular list.
         internal LinkedListNode<T>? head;
@@ -557,9 +557,9 @@ namespace System.Collections.Generic
 
         public struct Enumerator
             : IEnumerator<T>,
-              IEnumerator,
-              ISerializable,
-              IDeserializationCallback
+                IEnumerator,
+                ISerializable,
+                IDeserializationCallback
         {
             private readonly LinkedList<T> _list;
             private LinkedListNode<T>? _node;

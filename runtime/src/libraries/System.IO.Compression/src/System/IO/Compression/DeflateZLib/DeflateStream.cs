@@ -842,8 +842,8 @@ namespace System.IO.Compression
             EnsureNotDisposed();
 
             return cancellationToken.IsCancellationRequested
-              ? ValueTask.FromCanceled(cancellationToken)
-              : Core(buffer, cancellationToken);
+                ? ValueTask.FromCanceled(cancellationToken)
+                : Core(buffer, cancellationToken);
 
             async ValueTask Core(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
             {

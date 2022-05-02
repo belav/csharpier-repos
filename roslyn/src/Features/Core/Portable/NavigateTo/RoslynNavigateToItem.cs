@@ -121,26 +121,26 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 return (_item.DeclaredSymbolInfo.IsPartial, IsNonNestedNamedType()) switch
                 {
                     (true, true)
-                      => string.Format(
-                          FeaturesResources._0_dash_1,
-                          _document.Name,
-                          combinedProjectName
-                      ),
+                        => string.Format(
+                            FeaturesResources._0_dash_1,
+                            _document.Name,
+                            combinedProjectName
+                        ),
                     (true, false)
-                      => string.Format(
-                          FeaturesResources.in_0_1_2,
-                          _item.DeclaredSymbolInfo.ContainerDisplayName,
-                          _document.Name,
-                          combinedProjectName
-                      ),
+                        => string.Format(
+                            FeaturesResources.in_0_1_2,
+                            _item.DeclaredSymbolInfo.ContainerDisplayName,
+                            _document.Name,
+                            combinedProjectName
+                        ),
                     (false, true)
-                      => string.Format(FeaturesResources.project_0, combinedProjectName),
+                        => string.Format(FeaturesResources.project_0, combinedProjectName),
                     (false, false)
-                      => string.Format(
-                          FeaturesResources.in_0_project_1,
-                          _item.DeclaredSymbolInfo.ContainerDisplayName,
-                          combinedProjectName
-                      ),
+                        => string.Format(
+                            FeaturesResources.in_0_project_1,
+                            _item.DeclaredSymbolInfo.ContainerDisplayName,
+                            combinedProjectName
+                        ),
                 };
             }
 

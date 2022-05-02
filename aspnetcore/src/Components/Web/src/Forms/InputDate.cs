@@ -73,14 +73,14 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             InputDateType.Month => ("month", MonthFormat, "year and month"),
             InputDateType.Time => ("time", TimeFormat, "time"),
             _
-              => throw new InvalidOperationException(
-                  $"Unsupported {nameof(InputDateType)} '{Type}'."
-              )
+                => throw new InvalidOperationException(
+                    $"Unsupported {nameof(InputDateType)} '{Type}'."
+                )
         };
 
         _parsingErrorMessage = string.IsNullOrEmpty(ParsingErrorMessage)
-          ? $"The {{0}} field must be a {formatDescription}."
-          : ParsingErrorMessage;
+            ? $"The {{0}} field must be a {formatDescription}."
+            : ParsingErrorMessage;
     }
 
     /// <inheritdoc />
@@ -109,17 +109,17 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         value switch
         {
             DateTime dateTimeValue
-              => BindConverter.FormatValue(dateTimeValue, _format, CultureInfo.InvariantCulture),
+                => BindConverter.FormatValue(dateTimeValue, _format, CultureInfo.InvariantCulture),
             DateTimeOffset dateTimeOffsetValue
-              => BindConverter.FormatValue(
-                  dateTimeOffsetValue,
-                  _format,
-                  CultureInfo.InvariantCulture
-              ),
+                => BindConverter.FormatValue(
+                    dateTimeOffsetValue,
+                    _format,
+                    CultureInfo.InvariantCulture
+                ),
             DateOnly dateOnlyValue
-              => BindConverter.FormatValue(dateOnlyValue, _format, CultureInfo.InvariantCulture),
+                => BindConverter.FormatValue(dateOnlyValue, _format, CultureInfo.InvariantCulture),
             TimeOnly timeOnlyValue
-              => BindConverter.FormatValue(timeOnlyValue, _format, CultureInfo.InvariantCulture),
+                => BindConverter.FormatValue(timeOnlyValue, _format, CultureInfo.InvariantCulture),
             _ => string.Empty, // Handles null for Nullable<DateTime>, etc.
         };
 

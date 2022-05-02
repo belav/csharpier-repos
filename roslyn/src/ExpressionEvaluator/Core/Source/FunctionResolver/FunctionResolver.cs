@@ -19,15 +19,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     internal abstract class FunctionResolver
         : FunctionResolverBase<
-              DkmProcess,
-              DkmClrModuleInstance,
-              DkmRuntimeFunctionResolutionRequest
-          >,
-          IDkmRuntimeFunctionResolver,
-          IDkmModuleInstanceLoadNotification,
-          IDkmModuleInstanceUnloadNotification,
-          IDkmModuleModifiedNotification,
-          IDkmModuleSymbolsLoadedNotification
+            DkmProcess,
+            DkmClrModuleInstance,
+            DkmRuntimeFunctionResolutionRequest
+        >,
+            IDkmRuntimeFunctionResolver,
+            IDkmModuleInstanceLoadNotification,
+            IDkmModuleInstanceUnloadNotification,
+            IDkmModuleModifiedNotification,
+            IDkmModuleSymbolsLoadedNotification
     {
         void IDkmRuntimeFunctionResolver.EnableResolution(
             DkmRuntimeFunctionResolutionRequest request,

@@ -71,8 +71,8 @@ namespace System.Threading.Channels
             _itemDropped = itemDropped;
             _completion = new TaskCompletionSource(
                 runContinuationsAsynchronously
-                  ? TaskCreationOptions.RunContinuationsAsynchronously
-                  : TaskCreationOptions.None
+                    ? TaskCreationOptions.RunContinuationsAsynchronously
+                    : TaskCreationOptions.None
             );
             Reader = new BoundedChannelReader(this);
             Writer = new BoundedChannelWriter(this);
@@ -240,8 +240,8 @@ namespace System.Threading.Channels
                     if (parent._doneWriting != null)
                     {
                         return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
-                          ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
-                          : default;
+                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                            : default;
                     }
 
                     // There were no items available, but there could be in the future, so ensure
@@ -550,8 +550,8 @@ namespace System.Threading.Channels
                     if (parent._doneWriting != null)
                     {
                         return parent._doneWriting != ChannelUtilities.s_doneWritingSentinel
-                          ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
-                          : default;
+                            ? new ValueTask<bool>(Task.FromException<bool>(parent._doneWriting))
+                            : default;
                     }
 
                     // If there's space to write, a write is possible.

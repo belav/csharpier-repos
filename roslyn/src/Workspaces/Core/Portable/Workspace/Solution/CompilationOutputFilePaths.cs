@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public readonly struct CompilationOutputInfo
         : IEquatable<CompilationOutputInfo>,
-          IObjectWritable
+            IObjectWritable
     {
         /// <summary>
         /// Full path to the assembly or module produced by the compilation, or <see langword="null"/> if unknown.

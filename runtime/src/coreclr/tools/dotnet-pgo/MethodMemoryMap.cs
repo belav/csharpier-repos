@@ -182,8 +182,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                     NativeToILMap =
                                         runtimeFunction.DebugInfo != null
                                             ? NativeToILMap.FromR2RBounds(
-                                                  runtimeFunction.DebugInfo.BoundsList
-                                              )
+                                                runtimeFunction.DebugInfo.BoundsList
+                                            )
                                             : null,
                                 }
                             );

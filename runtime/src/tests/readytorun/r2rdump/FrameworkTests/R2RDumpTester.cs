@@ -60,8 +60,8 @@ namespace R2RDumpTests
             // Unset COMPlus_GCName since standalone GC doesnt exist in official "dotnet" deployment
             Environment.SetEnvironmentVariable("COMPlus_GCName", String.Empty);
             string DotNetAbsolutePath = string.IsNullOrEmpty(TestDotNetCmdVar)
-              ? FindExePath("dotnet")
-              : TestDotNetCmdVar;
+                ? FindExePath("dotnet")
+                : TestDotNetCmdVar;
 
             ProcessStartInfo processStartInfo = new ProcessStartInfo
             {

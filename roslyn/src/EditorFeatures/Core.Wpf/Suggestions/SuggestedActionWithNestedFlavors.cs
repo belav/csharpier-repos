@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// </summary>
     internal abstract partial class SuggestedActionWithNestedFlavors
         : SuggestedAction,
-          ISuggestedActionWithFlavors
+            ISuggestedActionWithFlavors
     {
         private readonly SuggestedActionSet _additionalFlavors;
         private ImmutableArray<SuggestedActionSet> _nestedFlavors;

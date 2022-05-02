@@ -38,8 +38,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             return
                 binaryExpression.OperatorType == ExpressionType.Add
                 && binaryExpression.Type == typeof(string)
-              ? " || "
-              : base.GetOperator(binaryExpression);
+                ? " || "
+                : base.GetOperator(binaryExpression);
         }
 
         /// <summary>

@@ -44,8 +44,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new BufferBlock<int>(
-                              new DataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            new DataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new BufferBlock<int>()
             );
         }

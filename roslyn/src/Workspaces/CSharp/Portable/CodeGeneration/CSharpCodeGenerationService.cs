@@ -529,15 +529,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return destination switch
             {
                 MemberDeclarationSyntax member
-                  => Cast<TDeclarationNode>(member.AddAttributeLists(attributeSyntaxList)),
+                    => Cast<TDeclarationNode>(member.AddAttributeLists(attributeSyntaxList)),
                 AccessorDeclarationSyntax accessor
-                  => Cast<TDeclarationNode>(accessor.AddAttributeLists(attributeSyntaxList)),
+                    => Cast<TDeclarationNode>(accessor.AddAttributeLists(attributeSyntaxList)),
                 CompilationUnitSyntax compilationUnit
-                  => Cast<TDeclarationNode>(compilationUnit.AddAttributeLists(attributeSyntaxList)),
+                    => Cast<TDeclarationNode>(
+                        compilationUnit.AddAttributeLists(attributeSyntaxList)
+                    ),
                 ParameterSyntax parameter
-                  => Cast<TDeclarationNode>(parameter.AddAttributeLists(attributeSyntaxList)),
+                    => Cast<TDeclarationNode>(parameter.AddAttributeLists(attributeSyntaxList)),
                 TypeParameterSyntax typeParameter
-                  => Cast<TDeclarationNode>(typeParameter.AddAttributeLists(attributeSyntaxList)),
+                    => Cast<TDeclarationNode>(typeParameter.AddAttributeLists(attributeSyntaxList)),
                 _ => destination,
             };
         }
@@ -793,8 +795,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             else if (destinationMember is LocalFunctionStatementSyntax localFunctionDeclaration)
             {
                 return (localFunctionDeclaration.Body == null)
-                  ? destinationMember
-                  : Cast<TDeclarationNode>(
+                    ? destinationMember
+                    : Cast<TDeclarationNode>(
                         localFunctionDeclaration.AddBodyStatements(
                             StatementGenerator.GenerateStatements(statements).ToArray()
                         )
@@ -803,8 +805,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             else if (destinationMember is AccessorDeclarationSyntax accessorDeclaration)
             {
                 return (accessorDeclaration.Body == null)
-                  ? destinationMember
-                  : Cast<TDeclarationNode>(
+                    ? destinationMember
+                    : Cast<TDeclarationNode>(
                         accessorDeclaration.AddBodyStatements(
                             StatementGenerator.GenerateStatements(statements).ToArray()
                         )
@@ -947,8 +949,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             return destination == CodeGenerationDestination.EnumType
-              ? EnumMemberGenerator.GenerateEnumMemberDeclaration(field, null, options)
-              : FieldGenerator.GenerateFieldDeclaration(field, options);
+                ? EnumMemberGenerator.GenerateEnumMemberDeclaration(field, null, options)
+                : FieldGenerator.GenerateFieldDeclaration(field, options);
         }
 
         public override SyntaxNode CreateMethodDeclaration(
@@ -1078,29 +1080,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration switch
             {
                 BaseTypeDeclarationSyntax typeDeclaration
-                  => Cast<TDeclarationNode>(
-                      typeDeclaration.WithModifiers(
-                          computeNewModifiersList(typeDeclaration.Modifiers)
-                      )
-                  ),
+                    => Cast<TDeclarationNode>(
+                        typeDeclaration.WithModifiers(
+                            computeNewModifiersList(typeDeclaration.Modifiers)
+                        )
+                    ),
                 BaseFieldDeclarationSyntax fieldDeclaration
-                  => Cast<TDeclarationNode>(
-                      fieldDeclaration.WithModifiers(
-                          computeNewModifiersList(fieldDeclaration.Modifiers)
-                      )
-                  ),
+                    => Cast<TDeclarationNode>(
+                        fieldDeclaration.WithModifiers(
+                            computeNewModifiersList(fieldDeclaration.Modifiers)
+                        )
+                    ),
                 BaseMethodDeclarationSyntax methodDeclaration
-                  => Cast<TDeclarationNode>(
-                      methodDeclaration.WithModifiers(
-                          computeNewModifiersList(methodDeclaration.Modifiers)
-                      )
-                  ),
+                    => Cast<TDeclarationNode>(
+                        methodDeclaration.WithModifiers(
+                            computeNewModifiersList(methodDeclaration.Modifiers)
+                        )
+                    ),
                 BasePropertyDeclarationSyntax propertyDeclaration
-                  => Cast<TDeclarationNode>(
-                      propertyDeclaration.WithModifiers(
-                          computeNewModifiersList(propertyDeclaration.Modifiers)
-                      )
-                  ),
+                    => Cast<TDeclarationNode>(
+                        propertyDeclaration.WithModifiers(
+                            computeNewModifiersList(propertyDeclaration.Modifiers)
+                        )
+                    ),
                 _ => declaration,
             };
 

@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteEncapsulateFieldService
         : BrokeredServiceBase,
-          IRemoteEncapsulateFieldService
+            IRemoteEncapsulateFieldService
     {
         internal sealed class Factory : FactoryBase<IRemoteEncapsulateFieldService>
         {

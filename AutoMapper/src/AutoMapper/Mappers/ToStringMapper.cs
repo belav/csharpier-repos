@@ -24,8 +24,8 @@ namespace AutoMapper.Internal.Mappers
             var sourceType = sourceExpression.Type;
             Expression toStringCall = Call(sourceExpression, ExpressionBuilder.ObjectToString);
             return sourceType.IsEnum
-              ? EnumToString(sourceExpression, sourceType, toStringCall)
-              : toStringCall;
+                ? EnumToString(sourceExpression, sourceType, toStringCall)
+                : toStringCall;
         }
 
         private static Expression EnumToString(
@@ -49,8 +49,8 @@ namespace AutoMapper.Internal.Mappers
                 }
             }
             return switchCases != null
-              ? Switch(sourceExpression, toStringCall, null, switchCases)
-              : toStringCall;
+                ? Switch(sourceExpression, toStringCall, null, switchCases)
+                : toStringCall;
         }
     }
 }

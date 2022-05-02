@@ -244,8 +244,8 @@ namespace System.Diagnostics.Tests
                         // All Activities created with "new Activity(...)" will have ActivityTraceFlags is `None`;
                         Assert.Equal(
                             result.Length == 0
-                              ? ActivityTraceFlags.Recorded
-                              : ActivityTraceFlags.None,
+                                ? ActivityTraceFlags.Recorded
+                                : ActivityTraceFlags.None,
                             a.ActivityTraceFlags
                         );
 

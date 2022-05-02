@@ -261,8 +261,8 @@ namespace System.Tests
 
     public class ClassWithNamespacedInterfaces
         : Inner.Interface1,
-          Inner.Interface2,
-          Inner.Interface3 { }
+            Inner.Interface2,
+            Inner.Interface3 { }
 
     public class ClassWithMixedCaseInterfaces : MixedInterface, mixedInterface { }
 

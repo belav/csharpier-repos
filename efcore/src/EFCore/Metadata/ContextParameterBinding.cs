@@ -46,8 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             );
 
             return ServiceType != typeof(DbContext)
-              ? (Expression)Expression.TypeAs(propertyExpression, ServiceType)
-              : propertyExpression;
+                ? (Expression)Expression.TypeAs(propertyExpression, ServiceType)
+                : propertyExpression;
         }
 
         /// <summary>

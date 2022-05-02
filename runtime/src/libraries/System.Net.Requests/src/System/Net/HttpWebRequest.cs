@@ -347,8 +347,8 @@ namespace System.Net
             {
                 Uri hostUri = _hostUri ?? Address;
                 return (_hostUri == null || !_hostHasPort) && Address.IsDefaultPort
-                  ? hostUri.Host
-                  : hostUri.Host + ":" + hostUri.Port;
+                    ? hostUri.Host
+                    : hostUri.Host + ":" + hostUri.Port;
             }
             set
             {
@@ -1097,21 +1097,21 @@ namespace System.Net
 
                 _sendRequestTask = async
                     ? client.SendAsync(
-                          request,
-                          _allowReadStreamBuffering
+                        request,
+                        _allowReadStreamBuffering
                             ? HttpCompletionOption.ResponseContentRead
                             : HttpCompletionOption.ResponseHeadersRead,
-                          _sendRequestCts!.Token
-                      )
+                        _sendRequestCts!.Token
+                    )
                     : Task.FromResult(
-                          client.Send(
-                              request,
-                              _allowReadStreamBuffering
+                        client.Send(
+                            request,
+                            _allowReadStreamBuffering
                                 ? HttpCompletionOption.ResponseContentRead
                                 : HttpCompletionOption.ResponseHeadersRead,
-                              _sendRequestCts!.Token
-                          )
-                      );
+                            _sendRequestCts!.Token
+                        )
+                    );
 
                 HttpResponseMessage responseMessage = await _sendRequestTask.ConfigureAwait(false);
 

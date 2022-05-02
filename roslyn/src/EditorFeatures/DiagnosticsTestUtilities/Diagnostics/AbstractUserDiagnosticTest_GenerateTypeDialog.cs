@@ -62,10 +62,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
         )
         {
             var workspace = TestWorkspace.IsWorkspaceElement(initial)
-              ? TestWorkspace.Create(initial, composition: s_composition)
-              : languageName == LanguageNames.CSharp
-                  ? TestWorkspace.CreateCSharp(initial, composition: s_composition)
-                  : TestWorkspace.CreateVisualBasic(initial, composition: s_composition);
+                ? TestWorkspace.Create(initial, composition: s_composition)
+                : languageName == LanguageNames.CSharp
+                    ? TestWorkspace.CreateCSharp(initial, composition: s_composition)
+                    : TestWorkspace.CreateVisualBasic(initial, composition: s_composition);
 
             var testOptions = new TestParameters();
             var (diagnostics, actions, _) = await GetDiagnosticAndFixesAsync(

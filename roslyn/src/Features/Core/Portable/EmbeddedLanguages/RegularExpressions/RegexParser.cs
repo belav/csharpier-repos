@@ -380,8 +380,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 // that spans from the start of the first node to the end of the last node.
                 final.Add(
                     startTextNode == lastTextNode
-                      ? startTextNode
-                      : new RegexTextNode(
+                        ? startTextNode
+                        : new RegexTextNode(
                             CreateToken(
                                 RegexKind.TextToken,
                                 startTextNode.TextToken.LeadingTrivia,
@@ -546,7 +546,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             if (commaToken != null)
             {
                 return secondNumberToken != null
-                  ? new RegexClosedNumericRangeQuantifierNode(
+                    ? new RegexClosedNumericRangeQuantifierNode(
                         expression,
                         openBraceToken,
                         firstNumberToken,
@@ -554,7 +554,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                         secondNumberToken.Value,
                         closeBraceToken
                     )
-                  : new RegexOpenNumericRangeQuantifierNode(
+                    : new RegexOpenNumericRangeQuantifierNode(
                         expression,
                         openBraceToken,
                         firstNumberToken,
@@ -816,8 +816,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         private TextSpan GetTokenStartPositionSpan(RegexToken token)
         {
             return token.Kind == RegexKind.EndOfFile
-              ? new TextSpan(_lexer.Text.Last().Span.End, 0)
-              : new TextSpan(token.VirtualChars[0].Span.Start, 0);
+                ? new TextSpan(_lexer.Text.Last().Span.End, 0)
+                : new TextSpan(token.VirtualChars[0].Span.Start, 0);
         }
 
         private RegexGroupingNode ParseGroupQuestion(
@@ -1271,8 +1271,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 
             return CreateMissingToken(
                 openToken.Kind == RegexKind.LessThanToken
-                  ? RegexKind.GreaterThanToken
-                  : RegexKind.SingleQuoteToken
+                    ? RegexKind.GreaterThanToken
+                    : RegexKind.SingleQuoteToken
             );
         }
 
@@ -1588,8 +1588,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
 
             var components = new RegexSequenceNode(contents.ToImmutable());
             return caretToken.IsMissing
-              ? new RegexCharacterClassNode(openBracketToken, components, closeBracketToken)
-              : new RegexNegatedCharacterClassNode(
+                ? new RegexCharacterClassNode(openBracketToken, components, closeBracketToken)
+                : new RegexNegatedCharacterClassNode(
                     openBracketToken,
                     caretToken,
                     components,
@@ -2073,8 +2073,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         {
             Debug.Assert(_lexer.Text[_lexer.Position - 1] == '\\');
             return HasOption(_options, RegexOptions.ECMAScript)
-              ? ParsePossibleEcmascriptBackreferenceEscape(backslashToken, allowTriviaAfterEnd)
-              : ParsePossibleRegularBackreferenceEscape(backslashToken, allowTriviaAfterEnd);
+                ? ParsePossibleEcmascriptBackreferenceEscape(backslashToken, allowTriviaAfterEnd)
+                : ParsePossibleRegularBackreferenceEscape(backslashToken, allowTriviaAfterEnd);
         }
 
         private RegexEscapeNode ParsePossibleEcmascriptBackreferenceEscape(

@@ -21,7 +21,7 @@ namespace System.Net.Http
         )
         {
             return isProxyAuth
-              ? SendWithProxyAuthAsync(
+                ? SendWithProxyAuthAsync(
                         request,
                         authUri,
                         async,
@@ -30,8 +30,8 @@ namespace System.Net.Http
                         connectionPool,
                         cancellationToken
                     )
-                .AsTask()
-              : SendWithRequestAuthAsync(
+                    .AsTask()
+                : SendWithRequestAuthAsync(
                         request,
                         async,
                         credentials,
@@ -39,7 +39,7 @@ namespace System.Net.Http
                         connectionPool,
                         cancellationToken
                     )
-                .AsTask();
+                    .AsTask();
         }
 
         public static Task<HttpResponseMessage> SendWithNtProxyAuthAsync(

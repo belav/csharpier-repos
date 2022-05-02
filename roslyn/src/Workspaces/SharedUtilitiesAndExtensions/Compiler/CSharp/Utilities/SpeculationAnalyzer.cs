@@ -26,14 +26,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
     /// </summary>
     internal class SpeculationAnalyzer
         : AbstractSpeculationAnalyzer<
-              ExpressionSyntax,
-              TypeSyntax,
-              AttributeSyntax,
-              ArgumentSyntax,
-              CommonForEachStatementSyntax,
-              ThrowStatementSyntax,
-              Conversion
-          >
+            ExpressionSyntax,
+            TypeSyntax,
+            AttributeSyntax,
+            ArgumentSyntax,
+            CommonForEachStatementSyntax,
+            ThrowStatementSyntax,
+            Conversion
+        >
     {
         /// <summary>
         /// Creates a semantic analyzer for speculative syntax replacement.
@@ -855,11 +855,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             return expression.Kind() switch
             {
                 SyntaxKind.InvocationExpression
-                  => ((InvocationExpressionSyntax)expression).ArgumentList,
+                    => ((InvocationExpressionSyntax)expression).ArgumentList,
                 SyntaxKind.ObjectCreationExpression
-                  => ((ObjectCreationExpressionSyntax)expression).ArgumentList,
+                    => ((ObjectCreationExpressionSyntax)expression).ArgumentList,
                 SyntaxKind.ElementAccessExpression
-                  => ((ElementAccessExpressionSyntax)expression).ArgumentList,
+                    => ((ElementAccessExpressionSyntax)expression).ArgumentList,
                 _ => null,
             };
         }

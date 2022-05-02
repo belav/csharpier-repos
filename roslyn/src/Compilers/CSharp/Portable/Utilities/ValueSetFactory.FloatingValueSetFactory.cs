@@ -38,9 +38,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 value.IsBad
                     ? FloatingValueSet<TFloating, TFloatingTC>.AllValues
                     : FloatingValueSet<TFloating, TFloatingTC>.Related(
-                          relation,
-                          default(TFloatingTC).FromConstantValue(value)
-                      );
+                        relation,
+                        default(TFloatingTC).FromConstantValue(value)
+                    );
 
             bool IValueSetFactory.Related(
                 BinaryOperatorKind relation,

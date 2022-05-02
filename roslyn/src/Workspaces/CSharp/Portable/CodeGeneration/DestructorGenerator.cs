@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 CodeGenerationDestructorInfo.GetStatements(constructor) == null
                     ? default
                     : StatementGenerator.GenerateStatements(
-                          CodeGenerationDestructorInfo.GetStatements(constructor)
-                      );
+                        CodeGenerationDestructorInfo.GetStatements(constructor)
+                    );
 
             return SyntaxFactory.Block(statements);
         }

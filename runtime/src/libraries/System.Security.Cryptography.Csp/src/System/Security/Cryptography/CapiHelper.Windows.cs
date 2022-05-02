@@ -210,8 +210,8 @@ namespace Internal.NativeCrypto
             }
 
             return wszUpgrade != null
-              ? wszUpgrade
-              : // Overwrite the provider name with the upgraded provider name
+                ? wszUpgrade
+                : // Overwrite the provider name with the upgraded provider name
                 providerNameString;
         }
 
@@ -628,8 +628,8 @@ namespace Internal.NativeCrypto
                     case Constants.CLR_ACCESSIBLE:
                     {
                         retVal = CryptGetUserKey(safeProvHandle, keyNumber, out safeKeyHandle)
-                          ? true
-                          : false;
+                            ? true
+                            : false;
                         break;
                     }
                     case Constants.CLR_UNIQUE_CONTAINER:
@@ -952,8 +952,8 @@ namespace Internal.NativeCrypto
             {
                 parameters = new CspParameters(
                     keyType == CspAlgorithmType.Dss
-                      ? DefaultDssProviderType
-                      : DefaultRsaProviderType,
+                        ? DefaultDssProviderType
+                        : DefaultRsaProviderType,
                     null,
                     null,
                     defaultFlags

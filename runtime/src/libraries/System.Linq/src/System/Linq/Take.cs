@@ -60,8 +60,8 @@ namespace System.Linq
             else if (!isEndIndexFromEnd)
             {
                 return startIndex >= endIndex
-                  ? Empty<TSource>()
-                  : TakeRangeIterator(source, startIndex, endIndex);
+                    ? Empty<TSource>()
+                    : TakeRangeIterator(source, startIndex, endIndex);
             }
 
             return TakeRangeFromEndIterator(
@@ -85,8 +85,8 @@ namespace System.Linq
             Debug.Assert(isStartIndexFromEnd || isEndIndexFromEnd);
             Debug.Assert(
                 isStartIndexFromEnd
-                  ? startIndex > 0 && (!isEndIndexFromEnd || startIndex > endIndex)
-                  : startIndex >= 0 && (isEndIndexFromEnd || startIndex < endIndex)
+                    ? startIndex > 0 && (!isEndIndexFromEnd || startIndex > endIndex)
+                    : startIndex >= 0 && (isEndIndexFromEnd || startIndex < endIndex)
             );
 
             // Attempt to extract the count of the source enumerator,
@@ -288,8 +288,8 @@ namespace System.Linq
             }
 
             return count <= 0
-              ? Empty<TSource>()
-              : TakeRangeFromEndIterator(
+                ? Empty<TSource>()
+                : TakeRangeFromEndIterator(
                     source,
                     isStartIndexFromEnd: true,
                     startIndex: count,

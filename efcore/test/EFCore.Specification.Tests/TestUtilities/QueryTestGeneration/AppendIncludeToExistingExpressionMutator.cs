@@ -56,15 +56,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                         IsEnumerableType(propertyType)
                         || propertyType.GetInterfaces().Any(ii => IsEnumerableType(ii))
                             ? ThenIncludeCollectionMethodInfo.MakeGenericMethod(
-                                  entityType,
-                                  propertyElementType,
-                                  navigation.ClrType
-                              )
+                                entityType,
+                                propertyElementType,
+                                navigation.ClrType
+                            )
                             : ThenIncludeReferenceMethodInfo.MakeGenericMethod(
-                                  entityType,
-                                  propertyElementType,
-                                  navigation.ClrType
-                              );
+                                entityType,
+                                propertyElementType,
+                                navigation.ClrType
+                            );
 
                     var injector = new ExpressionInjector(
                         _expressionFinder.FoundExpressions[i],

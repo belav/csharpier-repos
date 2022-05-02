@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
         {
             var expandedNode = GetSyntaxNodeForSubmission(selectionSpan, root);
             return expandedNode != null
-              ? new TextSpan[] { expandedNode.Span }
-              : Array.Empty<TextSpan>();
+                ? new TextSpan[] { expandedNode.Span }
+                : Array.Empty<TextSpan>();
         }
 
         /// <summary>

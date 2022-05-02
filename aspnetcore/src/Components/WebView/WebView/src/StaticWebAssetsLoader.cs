@@ -190,8 +190,8 @@ namespace Microsoft.AspNetCore.Components.WebView
         {
             private static readonly StringComparison FilePathComparison =
                 OperatingSystem.IsWindows()
-                  ? StringComparison.OrdinalIgnoreCase
-                  : StringComparison.Ordinal;
+                    ? StringComparison.OrdinalIgnoreCase
+                    : StringComparison.Ordinal;
 
             public StaticWebAssetsFileProvider(string pathPrefix, string contentRoot)
             {

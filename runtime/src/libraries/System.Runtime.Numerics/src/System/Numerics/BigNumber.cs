@@ -810,10 +810,10 @@ namespace System.Numerics
                     // {0x00-0x07} print as {0-7}
                     sb.Append(
                         head < 10
-                          ? (char)(head + '0')
-                          : format == 'X'
-                              ? (char)((head & 0xF) - 10 + 'A')
-                              : (char)((head & 0xF) - 10 + 'a')
+                            ? (char)(head + '0')
+                            : format == 'X'
+                                ? (char)((head & 0xF) - 10 + 'A')
+                                : (char)((head & 0xF) - 10 + 'a')
                     );
                     cur--;
                 }
@@ -838,10 +838,10 @@ namespace System.Numerics
                 sb.Insert(
                     0,
                     value._sign >= 0
-                      ? '0'
-                      : (format == 'x')
-                          ? 'f'
-                          : 'F',
+                        ? '0'
+                        : (format == 'x')
+                            ? 'f'
+                            : 'F',
                     digits - sb.Length
                 );
             }

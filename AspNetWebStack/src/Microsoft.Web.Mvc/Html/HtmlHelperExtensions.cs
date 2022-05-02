@@ -336,8 +336,8 @@ namespace Microsoft.Web.Mvc.Html
             );
 
             return isChecked.HasValue
-              ? htmlHelper.CheckBox(name, isChecked.Value, htmlAttributes)
-              : htmlHelper.CheckBox(name, htmlAttributes);
+                ? htmlHelper.CheckBox(name, isChecked.Value, htmlAttributes)
+                : htmlHelper.CheckBox(name, htmlAttributes);
         }
 
         [SuppressMessage(
@@ -545,8 +545,8 @@ namespace Microsoft.Web.Mvc.Html
             );
 
             return isChecked.HasValue
-              ? htmlHelper.RadioButton(name, value, isChecked.Value, htmlAttributes)
-              : htmlHelper.RadioButton(name, value, htmlAttributes);
+                ? htmlHelper.RadioButton(name, value, isChecked.Value, htmlAttributes)
+                : htmlHelper.RadioButton(name, value, htmlAttributes);
         }
 
         [SuppressMessage(

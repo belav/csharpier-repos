@@ -41,8 +41,8 @@ public class FileMultipartSection
         FileName = HeaderUtilities
             .RemoveQuotes(
                 _contentDispositionHeader.FileNameStar.HasValue
-                  ? _contentDispositionHeader.FileNameStar
-                  : _contentDispositionHeader.FileName
+                    ? _contentDispositionHeader.FileNameStar
+                    : _contentDispositionHeader.FileName
             )
             .ToString();
     }

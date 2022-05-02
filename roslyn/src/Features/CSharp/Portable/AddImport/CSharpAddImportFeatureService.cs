@@ -408,16 +408,16 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             }
 
             return externAlias != null
-              ? (externAliasString, hasExistingExtern)
-              : (usingDirectiveString, hasExistingUsing);
+                ? (externAliasString, hasExistingExtern)
+                : (usingDirectiveString, hasExistingUsing);
         }
 
         private static string GetUsingDirectiveString(INamespaceOrTypeSymbol namespaceOrTypeSymbol)
         {
             var displayString = namespaceOrTypeSymbol.ToDisplayString();
             return namespaceOrTypeSymbol.IsKind(SymbolKind.Namespace)
-              ? $"using {displayString};"
-              : $"using static {displayString};";
+                ? $"using {displayString};"
+                : $"using static {displayString};";
         }
 
         protected override async Task<Document> AddImportAsync(
@@ -546,8 +546,11 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
 
             var namePiece = SyntaxFactory.IdentifierName(part);
             return index == 0
-              ? namePiece
-              : SyntaxFactory.QualifiedName(CreateNameSyntax(namespaceParts, index - 1), namePiece);
+                ? namePiece
+                : SyntaxFactory.QualifiedName(
+                    CreateNameSyntax(namespaceParts, index - 1),
+                    namePiece
+                );
         }
 
         private static (ExternAliasDirectiveSyntax, bool hasExistingImport) GetExternAliasDirective(
@@ -643,8 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
                 .WithAdditionalAnnotations(Formatter.Annotation);
 
             usingDirective = namespaceOrTypeSymbol.IsKind(SymbolKind.Namespace)
-              ? usingDirective
-              : usingDirective.WithStaticKeyword(SyntaxFactory.Token(SyntaxKind.StaticKeyword));
+                ? usingDirective
+                : usingDirective.WithStaticKeyword(SyntaxFactory.Token(SyntaxKind.StaticKeyword));
 
             return (
                 usingDirective,
@@ -791,8 +794,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         )
         {
             var leftExpression = syntaxFacts.IsMemberAccessExpression(expression)
-              ? syntaxFacts.GetExpressionOfMemberAccessExpression(expression)
-              : syntaxFacts.GetTargetOfMemberBinding(expression);
+                ? syntaxFacts.GetExpressionOfMemberAccessExpression(expression)
+                : syntaxFacts.GetTargetOfMemberBinding(expression);
             if (leftExpression == null)
             {
                 if (expression.IsKind(SyntaxKind.CollectionInitializerExpression))

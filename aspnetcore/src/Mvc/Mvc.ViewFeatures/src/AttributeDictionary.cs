@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// </summary>
 public class AttributeDictionary
     : IDictionary<string, string?>,
-      IReadOnlyDictionary<string, string?>
+        IReadOnlyDictionary<string, string?>
 {
     private List<KeyValuePair<string, string?>>? _items;
 

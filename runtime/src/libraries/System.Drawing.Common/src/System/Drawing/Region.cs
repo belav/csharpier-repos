@@ -106,7 +106,7 @@ namespace System.Drawing
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeleteRegion(new HandleRef(this, NativeRegion));
+                        Gdip.GdipDeleteRegion(new HandleRef(this, NativeRegion));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

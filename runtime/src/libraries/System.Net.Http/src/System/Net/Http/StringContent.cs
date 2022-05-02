@@ -65,6 +65,6 @@ namespace System.Net.Http
             GetType() == typeof(StringContent)
                 ? CreateMemoryStreamForByteArray()
                 : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
-                  null;
+                null;
     }
 }

@@ -689,8 +689,13 @@ internal class CommandLineApplication
     public string GetFullNameAndVersion()
     {
         return ShortVersionGetter == null
-          ? FullName
-          : string.Format(CultureInfo.InvariantCulture, "{0} {1}", FullName, ShortVersionGetter());
+            ? FullName
+            : string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} {1}",
+                FullName,
+                ShortVersionGetter()
+            );
     }
 
     public void ShowRootCommandFullNameAndVersion()

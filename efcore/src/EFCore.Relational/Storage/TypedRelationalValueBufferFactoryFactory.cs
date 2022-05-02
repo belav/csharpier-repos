@@ -195,21 +195,21 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 message =
                     exception is NullReferenceException || Equals(value, DBNull.Value)
                         ? RelationalStrings.ErrorMaterializingPropertyNullReference(
-                              entityType,
-                              propertyName,
-                              expectedType
-                          )
+                            entityType,
+                            propertyName,
+                            expectedType
+                        )
                         : exception is InvalidCastException
                             ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
-                                  entityType,
-                                  propertyName,
-                                  expectedType,
-                                  actualType
-                              )
+                                entityType,
+                                propertyName,
+                                expectedType,
+                                actualType
+                            )
                             : RelationalStrings.ErrorMaterializingProperty(
-                                  entityType,
-                                  propertyName
-                              );
+                                entityType,
+                                propertyName
+                            );
             }
             else
             {
@@ -218,9 +218,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
                         : exception is InvalidCastException
                             ? RelationalStrings.ErrorMaterializingValueInvalidCast(
-                                  expectedType,
-                                  actualType
-                              )
+                                expectedType,
+                                actualType
+                            )
                             : RelationalStrings.ErrorMaterializingValue;
             }
 
@@ -245,8 +245,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             Expression valueExpression = Expression.Call(
                 getMethod.DeclaringType != typeof(DbDataReader)
-                  ? Expression.Convert(dataReaderExpression, getMethod.DeclaringType!)
-                  : dataReaderExpression,
+                    ? Expression.Convert(dataReaderExpression, getMethod.DeclaringType!)
+                    : dataReaderExpression,
                 getMethod,
                 indexExpression
             );

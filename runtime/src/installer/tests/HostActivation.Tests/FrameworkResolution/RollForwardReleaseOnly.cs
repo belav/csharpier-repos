@@ -14,7 +14,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
     /// </summary>
     public class RollForwardReleaseOnly
         : FrameworkResolutionBase,
-          IClassFixture<RollForwardReleaseOnly.SharedTestState>
+            IClassFixture<RollForwardReleaseOnly.SharedTestState>
     {
         private SharedTestState SharedState { get; }
 

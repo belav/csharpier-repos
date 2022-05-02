@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 get
                 {
                     return _useAsReturnValue
-                      ? _variableStyle.ReturnStyle.ParameterBehavior
-                      : _variableStyle.ParameterStyle.ParameterBehavior;
+                        ? _variableStyle.ReturnStyle.ParameterBehavior
+                        : _variableStyle.ParameterStyle.ParameterBehavior;
                 }
             }
 

@@ -1876,8 +1876,8 @@ namespace System.Runtime.Serialization
                     localName.Append(
                         (
                             tempLocalName.Equals("KeyValuePairAdapter")
-                              ? "KeyValuePair"
-                              : tempLocalName
+                                ? "KeyValuePair"
+                                : tempLocalName
                         )
                     );
                 }
@@ -2035,8 +2035,8 @@ namespace System.Runtime.Serialization
         internal static string GetClrTypeFullName(Type type)
         {
             return !type.IsGenericTypeDefinition && type.ContainsGenericParameters
-              ? type.Namespace + "." + type.Name
-              : type.FullName!;
+                ? type.Namespace + "." + type.Name
+                : type.FullName!;
         }
 
         internal static void GetClrNameAndNamespace(
@@ -2067,8 +2067,8 @@ namespace System.Runtime.Serialization
                 Globals.DataContractXsdBaseNamespace,
                 StringComparison.Ordinal
             )
-              ? uriString.Substring(Globals.DataContractXsdBaseNamespace.Length)
-              : uriString;
+                ? uriString.Substring(Globals.DataContractXsdBaseNamespace.Length)
+                : uriString;
         }
 
         private static string? GetGlobalDataContractNamespace(string clrNs, object[] nsAttributes)

@@ -205,8 +205,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     EnqueueWorkItemAsync(
                         document,
                         symbol.ContainingType != null
-                          ? symbol.ContainingType.Locations
-                          : symbol.Locations
+                            ? symbol.ContainingType.Locations
+                            : symbol.Locations
                     );
 
                 private async Task EnqueueWorkItemAsync(

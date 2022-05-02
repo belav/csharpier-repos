@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 // might be able to avoid it if these features aren't needed.
 internal class ComponentComplexAttributeContentPass
     : ComponentIntermediateNodePassBase,
-      IRazorOptimizationPass
+        IRazorOptimizationPass
 {
     // Run before other Component passes
     public override int Order => -1000;

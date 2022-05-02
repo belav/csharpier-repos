@@ -33,7 +33,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class TransactionInterceptionSqliteTest
             : TransactionInterceptionSqliteTestBase,
-              IClassFixture<TransactionInterceptionSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<TransactionInterceptionSqliteTest.InterceptionSqliteFixture>
         {
             public TransactionInterceptionSqliteTest(InterceptionSqliteFixture fixture)
                 : base(fixture) { }
@@ -46,7 +46,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class TransactionInterceptionWithDiagnosticsSqliteTest
             : TransactionInterceptionSqliteTestBase,
-              IClassFixture<TransactionInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<TransactionInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
         {
             public TransactionInterceptionWithDiagnosticsSqliteTest(
                 InterceptionSqliteFixture fixture

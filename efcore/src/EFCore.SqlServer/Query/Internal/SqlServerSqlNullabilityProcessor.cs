@@ -34,8 +34,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         protected override TableExpressionBase Visit(TableExpressionBase tableExpressionBase)
         {
             return tableExpressionBase is TemporalTableExpression temporalTableExpression
-              ? temporalTableExpression
-              : base.Visit(tableExpressionBase);
+                ? temporalTableExpression
+                : base.Visit(tableExpressionBase);
         }
     }
 }

@@ -234,8 +234,8 @@ namespace ILCompiler.DependencyAnalysis
                         _componentModule != null
                             ? _componentModule.PEReader
                             : _nodeFactory.CompilationModuleGroup.CompilationModuleSet
-                              .First()
-                              .PEReader
+                                .First()
+                                .PEReader
                     );
                     headerBuilder = PEHeaderProvider.Create(
                         inputPeReader.PEHeaders.PEHeader.Subsystem,

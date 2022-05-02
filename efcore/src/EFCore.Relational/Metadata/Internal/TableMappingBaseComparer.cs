@@ -16,7 +16,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     // Sealed for perf
     public sealed class TableMappingBaseComparer
         : IEqualityComparer<ITableMappingBase>,
-          IComparer<ITableMappingBase>
+            IComparer<ITableMappingBase>
     {
         private TableMappingBaseComparer() { }
 
@@ -103,8 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             yc.Property.Name
                         );
                         return columnResult != 0
-                          ? columnResult
-                          : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
+                            ? columnResult
+                            : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
                     }
                 )
                 .FirstOrDefault(r => r != 0);

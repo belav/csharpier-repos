@@ -132,21 +132,21 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             var (items, selectedItem) =
                 type.TypeKind == TypeKind.Delegate
                     ? GetDelegateTypeConstructors(
-                          objectCreationExpression,
-                          semanticModel,
-                          structuralTypeDisplayService,
-                          type
-                      )
+                        objectCreationExpression,
+                        semanticModel,
+                        structuralTypeDisplayService,
+                        type
+                    )
                     : GetNormalTypeConstructors(
-                          objectCreationExpression,
-                          semanticModel,
-                          structuralTypeDisplayService,
-                          documentationCommentFormattingService,
-                          type,
-                          within,
-                          options,
-                          cancellationToken
-                      );
+                        objectCreationExpression,
+                        semanticModel,
+                        structuralTypeDisplayService,
+                        documentationCommentFormattingService,
+                        type,
+                        within,
+                        options,
+                        cancellationToken
+                    );
 
             return CreateSignatureHelpItems(
                 items,

@@ -123,8 +123,8 @@ namespace Microsoft.EntityFrameworkCore
                 StoreObjectType.Table
             );
             return table == null
-              ? property.GetDefaultColumnBaseName()
-              : property.GetDefaultColumnName(table.Value);
+                ? property.GetDefaultColumnBaseName()
+                : property.GetDefaultColumnName(table.Value);
         }
 
         /// <summary>
@@ -302,8 +302,8 @@ namespace Microsoft.EntityFrameworkCore
                 .SetColumnName(
                     name,
                     fromDataAnnotation
-                      ? ConfigurationSource.DataAnnotation
-                      : ConfigurationSource.Convention
+                        ? ConfigurationSource.DataAnnotation
+                        : ConfigurationSource.Convention
                 );
 
         /// <summary>
@@ -477,8 +477,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
-              ? sharedTableRootProperty.GetColumnType(storeObject)
-              : property.FindRelationalTypeMapping(storeObject)?.StoreType;
+                ? sharedTableRootProperty.GetColumnType(storeObject)
+                : property.FindRelationalTypeMapping(storeObject)?.StoreType;
         }
 
         /// <summary>
@@ -1062,8 +1062,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
-              ? GetMaxLength(sharedTableRootProperty, storeObject)
-              : null;
+                ? GetMaxLength(sharedTableRootProperty, storeObject)
+                : null;
         }
 
         /// <summary>
@@ -1086,8 +1086,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
-              ? GetPrecision(sharedTableRootProperty, storeObject)
-              : null;
+                ? GetPrecision(sharedTableRootProperty, storeObject)
+                : null;
         }
 
         /// <summary>
@@ -1110,8 +1110,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
-              ? GetScale(sharedTableRootProperty, storeObject)
-              : null;
+                ? GetScale(sharedTableRootProperty, storeObject)
+                : null;
         }
 
         /// <summary>
@@ -1133,8 +1133,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
-              ? IsUnicode(sharedTableRootProperty, storeObject)
-              : null;
+                ? IsUnicode(sharedTableRootProperty, storeObject)
+                : null;
         }
 
         /// <summary>

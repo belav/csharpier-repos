@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class ManyToManyQueryFixtureBase
         : SharedStoreFixtureBase<ManyToManyContext>,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         protected override string StoreName { get; } = "ManyToManyQueryTest";
 

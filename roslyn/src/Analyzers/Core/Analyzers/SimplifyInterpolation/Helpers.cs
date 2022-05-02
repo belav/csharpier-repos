@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             return operation.Syntax switch
             {
                 TConditionalExpressionSyntax { Parent: TParenthesizedExpressionSyntax parent }
-                  => parent,
+                    => parent,
                 var syntax => syntax,
             };
         }
@@ -202,8 +202,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         {
             var sequence = virtualCharService.TryConvertToVirtualChars(formatToken);
             return sequence.IsDefaultOrEmpty
-              ? default
-              : TextSpan.FromBounds(sequence.First().Span.Start, sequence.Last().Span.End);
+                ? default
+                : TextSpan.FromBounds(sequence.First().Span.Start, sequence.Last().Span.End);
         }
 
         private static void UnwrapAlignmentPadding<

@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis.Text
                 {
                     var editorBuffer = this.TryFindEditorTextBuffer();
                     return editorBuffer != null
-                      ? editorBuffer.CurrentSnapshot.AsText()
-                      : _currentText;
+                        ? editorBuffer.CurrentSnapshot.AsText()
+                        : _currentText;
                 }
             }
 

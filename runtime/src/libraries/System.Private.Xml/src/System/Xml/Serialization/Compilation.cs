@@ -965,8 +965,8 @@ namespace System.Xml.Serialization
                 if (alc != null && alc.IsCollectible)
                 {
                     cache = _collectibleCaches.TryGetValue(t.Assembly, out var c) // Clone or create
-                      ? new Dictionary<TempAssemblyCacheKey, TempAssembly>(c)
-                      : new Dictionary<TempAssemblyCacheKey, TempAssembly>();
+                        ? new Dictionary<TempAssemblyCacheKey, TempAssembly>(c)
+                        : new Dictionary<TempAssemblyCacheKey, TempAssembly>();
                     cache[key] = assembly;
                     _collectibleCaches.AddOrUpdate(t.Assembly, cache);
                 }

@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         )
         {
             return containingModule.Module.HasNativeIntegerAttribute(handle, out var transformFlags)
-              ? TransformType(type, transformFlags)
-              : type;
+                ? TransformType(type, transformFlags)
+                : type;
         }
 
         internal static TypeSymbol TransformType(

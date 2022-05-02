@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
     internal abstract partial class AbstractRenameCommandHandler
         : IChainedCommandHandler<BackspaceKeyCommandArgs>,
-          IChainedCommandHandler<DeleteKeyCommandArgs>
+            IChainedCommandHandler<DeleteKeyCommandArgs>
     {
         public CommandState GetCommandState(
             BackspaceKeyCommandArgs args,

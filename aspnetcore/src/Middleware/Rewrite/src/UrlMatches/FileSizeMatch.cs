@@ -14,7 +14,7 @@ internal class FileSizeMatch : UrlMatch
     {
         var fileInfo = context.StaticFileProvider.GetFileInfo(input);
         return fileInfo.Exists && fileInfo.Length > 0
-          ? MatchResults.EmptySuccess
-          : MatchResults.EmptyFailure;
+            ? MatchResults.EmptySuccess
+            : MatchResults.EmptyFailure;
     }
 }

@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var symbol = BindTypeOrAliasOrConstraintKeyword(syntax, diagnostics, out keyword);
             Debug.Assert((keyword != ConstraintContextualKeyword.None) == symbol.IsDefault);
             return (keyword != ConstraintContextualKeyword.None)
-              ? default
-              : UnwrapAlias(symbol, diagnostics, syntax).TypeWithAnnotations;
+                ? default
+                : UnwrapAlias(symbol, diagnostics, syntax).TypeWithAnnotations;
         }
 
         /// <summary>
@@ -1022,8 +1022,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 typesArray,
                 locationsArray,
                 elementNames == null
-                  ? default(ImmutableArray<string>)
-                  : elementNames.ToImmutableAndFree(),
+                    ? default(ImmutableArray<string>)
+                    : elementNames.ToImmutableAndFree(),
                 this.Compilation,
                 this.ShouldCheckConstraints,
                 includeNullability: this.ShouldCheckConstraints && includeNullability,
@@ -1347,14 +1347,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case UsingDirectiveSyntax parent when parent.Name == node: // using nint; using A = nuint;
                     return null;
                 case ArgumentSyntax parent
-                      when // nameof(nint)
-                      (
-                          IsInsideNameof
-                          && parent.Parent?.Parent is InvocationExpressionSyntax invocation
-                          && (
-                              invocation.Expression as IdentifierNameSyntax
-                          )?.Identifier.ContextualKind() == SyntaxKind.NameOfKeyword
-                      ):
+                when // nameof(nint)
+                (
+                    IsInsideNameof
+                    && parent.Parent?.Parent is InvocationExpressionSyntax invocation
+                    && (invocation.Expression as IdentifierNameSyntax)?.Identifier.ContextualKind()
+                        == SyntaxKind.NameOfKeyword
+                ):
                     // Don't bind nameof(nint) or nameof(nuint) so that ERR_NameNotInContext is reported.
                     return null;
             }
@@ -1423,8 +1422,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //  SPEC:   an attribute without a suffix is matched, thus enabling such an ambiguity to be resolved.
 
                 return isVerbatimIdentifier
-                  ? LookupOptions.VerbatimNameAttributeTypeOnly
-                  : LookupOptions.AttributeTypeOnly;
+                    ? LookupOptions.VerbatimNameAttributeTypeOnly
+                    : LookupOptions.AttributeTypeOnly;
             }
             else
             {
@@ -2134,8 +2133,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics,
                 out memberSymbol
             )
-              ? memberSymbol
-              : null;
+                ? memberSymbol
+                : null;
         }
 
         internal static bool TryGetSpecialTypeMember<TSymbol>(
@@ -3249,14 +3248,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (containingAssembly == compilation.SourceAssembly)
             {
                 return (symbol.ContainingModule == compilation.SourceModule)
-                  ? BestSymbolLocation.FromSourceModule
-                  : BestSymbolLocation.FromAddedModule;
+                    ? BestSymbolLocation.FromSourceModule
+                    : BestSymbolLocation.FromAddedModule;
             }
             else
             {
                 return (containingAssembly == containingAssembly.CorLibrary)
-                  ? BestSymbolLocation.FromCorLibrary
-                  : BestSymbolLocation.FromReferencedAssembly;
+                    ? BestSymbolLocation.FromCorLibrary
+                    : BestSymbolLocation.FromReferencedAssembly;
             }
         }
 
@@ -3333,13 +3332,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 || aliasOpt == SyntaxFacts.GetText(SyntaxKind.GlobalKeyword)
                         );
                         return (object)forwardedToAssembly == null
-                          ? diagnostics.Add(
+                            ? diagnostics.Add(
                                 ErrorCode.ERR_GlobalSingleTypeNameNotFound,
                                 location,
                                 whereText,
                                 qualifierOpt
                             )
-                          : diagnostics.Add(
+                            : diagnostics.Add(
                                 ErrorCode.ERR_GlobalSingleTypeNameNotFoundFwd,
                                 location,
                                 whereText,
@@ -3362,13 +3361,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
 
                         return (object)forwardedToAssembly == null
-                          ? diagnostics.Add(
+                            ? diagnostics.Add(
                                 ErrorCode.ERR_DottedTypeNameNotFoundInNS,
                                 location,
                                 whereText,
                                 container
                             )
-                          : diagnostics.Add(
+                            : diagnostics.Add(
                                 ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd,
                                 location,
                                 whereText,
@@ -3407,13 +3406,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             if ((object)forwardedToAssembly != null)
             {
                 return qualifierOpt == null
-                  ? diagnostics.Add(
+                    ? diagnostics.Add(
                         ErrorCode.ERR_SingleTypeNameNotFoundFwd,
                         location,
                         whereText,
                         forwardedToAssembly
                     )
-                  : diagnostics.Add(
+                    : diagnostics.Add(
                         ErrorCode.ERR_DottedTypeNameNotFoundInNSFwd,
                         location,
                         whereText,

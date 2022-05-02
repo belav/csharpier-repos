@@ -58,14 +58,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             var result = IsCancelled
                 ? ExtractInterfaceOptionsResult.Cancelled
                 : new ExtractInterfaceOptionsResult(
-                      isCancelled: false,
-                      includedMembers: (ChosenMembers ?? AllExtractableMembers).AsImmutable(),
-                      interfaceName: ChosenInterfaceName ?? defaultInterfaceName,
-                      fileName: ChosenFileName ?? defaultInterfaceName,
-                      location: SameFile
+                    isCancelled: false,
+                    includedMembers: (ChosenMembers ?? AllExtractableMembers).AsImmutable(),
+                    interfaceName: ChosenInterfaceName ?? defaultInterfaceName,
+                    fileName: ChosenFileName ?? defaultInterfaceName,
+                    location: SameFile
                         ? ExtractInterfaceOptionsResult.ExtractLocation.SameFile
                         : ExtractInterfaceOptionsResult.ExtractLocation.NewFile
-                  );
+                );
 
             return Task.FromResult(result);
         }

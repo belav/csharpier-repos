@@ -43,8 +43,8 @@ namespace System.Net
         {
             // Nothing to do.
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : Task.CompletedTask;
+                ? Task.FromCanceled(cancellationToken)
+                : Task.CompletedTask;
         }
 
         public override long Length

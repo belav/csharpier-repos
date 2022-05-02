@@ -1585,7 +1585,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public class GenericTestTemporalTableBuilder<TEntity>
             : TestTemporalTableBuilder<TEntity>,
-              IInfrastructure<TemporalTableBuilder<TEntity>> where TEntity : class
+                IInfrastructure<TemporalTableBuilder<TEntity>> where TEntity : class
         {
             public GenericTestTemporalTableBuilder(
                 TemporalTableBuilder<TEntity> temporalTableBuilder
@@ -1620,7 +1620,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public class NonGenericTestTemporalTableBuilder<TEntity>
             : TestTemporalTableBuilder<TEntity>,
-              IInfrastructure<TemporalTableBuilder> where TEntity : class
+                IInfrastructure<TemporalTableBuilder> where TEntity : class
         {
             public NonGenericTestTemporalTableBuilder(TemporalTableBuilder temporalTableBuilder)
             {

@@ -77,8 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return _identifierNodeOrToken.IsToken && _identifierNodeOrToken.Parent == null
-                  ? ImmutableArray<Location>.Empty
-                  : ImmutableArray.Create<Location>(_identifierNodeOrToken.GetLocation()!);
+                    ? ImmutableArray<Location>.Empty
+                    : ImmutableArray.Create<Location>(_identifierNodeOrToken.GetLocation()!);
             }
         }
 
@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 return node == null
-                  ? ImmutableArray<SyntaxReference>.Empty
-                  : ImmutableArray.Create<SyntaxReference>(node.GetReference());
+                    ? ImmutableArray<SyntaxReference>.Empty
+                    : ImmutableArray.Create<SyntaxReference>(node.GetReference());
             }
         }
 

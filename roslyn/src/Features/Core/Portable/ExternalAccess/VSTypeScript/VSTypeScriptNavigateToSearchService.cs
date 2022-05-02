@@ -134,15 +134,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                     VSTypeScriptNavigateToMatchKind.Regular => NavigateToMatchKind.Regular,
                     VSTypeScriptNavigateToMatchKind.None => NavigateToMatchKind.None,
                     VSTypeScriptNavigateToMatchKind.CamelCaseExact
-                      => NavigateToMatchKind.CamelCaseExact,
+                        => NavigateToMatchKind.CamelCaseExact,
                     VSTypeScriptNavigateToMatchKind.CamelCasePrefix
-                      => NavigateToMatchKind.CamelCasePrefix,
+                        => NavigateToMatchKind.CamelCasePrefix,
                     VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousPrefix
-                      => NavigateToMatchKind.CamelCaseNonContiguousPrefix,
+                        => NavigateToMatchKind.CamelCaseNonContiguousPrefix,
                     VSTypeScriptNavigateToMatchKind.CamelCaseSubstring
-                      => NavigateToMatchKind.CamelCaseSubstring,
+                        => NavigateToMatchKind.CamelCaseSubstring,
                     VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousSubstring
-                      => NavigateToMatchKind.CamelCaseNonContiguousSubstring,
+                        => NavigateToMatchKind.CamelCaseNonContiguousSubstring,
                     VSTypeScriptNavigateToMatchKind.Fuzzy => NavigateToMatchKind.Fuzzy,
                     _ => throw ExceptionUtilities.UnexpectedValue(_result.MatchKind),
                 };
@@ -191,8 +191,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
                 _navigableItem.ChildItems.IsDefault
                     ? default
                     : _navigableItem.ChildItems.SelectAsArray(
-                          i => (INavigableItem)new WrappedNavigableItem(i)
-                      );
+                        i => (INavigableItem)new WrappedNavigableItem(i)
+                    );
         }
     }
 }

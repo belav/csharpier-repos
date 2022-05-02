@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class RelationalDbFunctionAttributeConvention
         : IModelInitializedConvention,
-          IModelFinalizingConvention
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationalDbFunctionAttributeConvention" />.

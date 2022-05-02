@@ -26,8 +26,8 @@ internal static class DefaultDisplayTemplates
         }
 
         return htmlHelper.ViewData.ModelMetadata.IsNullableValueType
-          ? BooleanTemplateDropDownList(value)
-          : BooleanTemplateCheckbox(value ?? false);
+            ? BooleanTemplateDropDownList(value)
+            : BooleanTemplateCheckbox(value ?? false);
     }
 
     private static IHtmlContent BooleanTemplateCheckbox(bool value)

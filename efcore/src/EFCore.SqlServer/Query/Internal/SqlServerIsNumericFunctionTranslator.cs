@@ -49,7 +49,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _methodInfo.Equals(method)
-              ? _sqlExpressionFactory.Equal(
+                ? _sqlExpressionFactory.Equal(
                     _sqlExpressionFactory.Function(
                         "ISNUMERIC",
                         new[] { arguments[1] },
@@ -59,6 +59,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     ),
                     _sqlExpressionFactory.Constant(1)
                 )
-              : null;
+                : null;
     }
 }

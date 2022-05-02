@@ -184,8 +184,8 @@ namespace System.IO.Tests
             Assert.False(targetInfo.Exists);
 
             string expectedTargetFullName = Path.IsPathFullyQualified(pathToTarget)
-              ? pathToTarget
-              : Path.GetFullPath(Path.Join(Path.GetDirectoryName(linkPath), pathToTarget));
+                ? pathToTarget
+                : Path.GetFullPath(Path.Join(Path.GetDirectoryName(linkPath), pathToTarget));
 
             Assert.Equal(expectedTargetFullName, targetInfo.FullName);
         }

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
     {
         internal class SymbolKeySignatureHelpItem
             : SignatureHelpItem,
-              IEquatable<SymbolKeySignatureHelpItem>
+                IEquatable<SymbolKeySignatureHelpItem>
         {
             public SymbolKey? SymbolKey { get; }
 

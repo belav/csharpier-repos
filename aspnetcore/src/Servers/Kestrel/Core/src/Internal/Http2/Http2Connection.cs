@@ -28,8 +28,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal partial class Http2Connection
     : IHttp2StreamLifetimeHandler,
-      IHttpHeadersHandler,
-      IRequestProcessor
+        IHttpHeadersHandler,
+        IRequestProcessor
 {
     public static ReadOnlySpan<byte> ClientPreface => ClientPrefaceBytes;
 
@@ -558,10 +558,10 @@ internal partial class Http2Connection
             Http2FrameType.RST_STREAM => ProcessRstStreamFrameAsync(),
             Http2FrameType.SETTINGS => ProcessSettingsFrameAsync(payload),
             Http2FrameType.PUSH_PROMISE
-              => throw new Http2ConnectionErrorException(
-                  CoreStrings.Http2ErrorPushPromiseReceived,
-                  Http2ErrorCode.PROTOCOL_ERROR
-              ),
+                => throw new Http2ConnectionErrorException(
+                    CoreStrings.Http2ErrorPushPromiseReceived,
+                    Http2ErrorCode.PROTOCOL_ERROR
+                ),
             Http2FrameType.PING => ProcessPingFrameAsync(payload),
             Http2FrameType.GOAWAY => ProcessGoAwayFrameAsync(),
             Http2FrameType.WINDOW_UPDATE => ProcessWindowUpdateFrameAsync(),
@@ -1031,8 +1031,8 @@ internal partial class Http2Connection
             throw new Http2ConnectionErrorException(
                 CoreStrings.FormatHttp2ErrorSettingsParameterOutOfRange(ex.Parameter),
                 ex.Parameter == Http2SettingsParameter.SETTINGS_INITIAL_WINDOW_SIZE
-                  ? Http2ErrorCode.FLOW_CONTROL_ERROR
-                  : Http2ErrorCode.PROTOCOL_ERROR
+                    ? Http2ErrorCode.FLOW_CONTROL_ERROR
+                    : Http2ErrorCode.PROTOCOL_ERROR
             );
         }
     }

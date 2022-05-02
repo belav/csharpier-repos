@@ -180,7 +180,7 @@ namespace MS.Internal.Xml.XPath
                         : cmpBase > 0
                             ? XmlNodeOrder.After
                             :
-                              /*default*/XmlNodeOrder.Unknown
+                            /*default*/XmlNodeOrder.Unknown
                 );
             }
             return cmp;

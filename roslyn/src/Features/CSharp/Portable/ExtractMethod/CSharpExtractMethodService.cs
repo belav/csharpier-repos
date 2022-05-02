@@ -17,10 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
     [ExportLanguageService(typeof(IExtractMethodService), LanguageNames.CSharp)]
     internal class CSharpExtractMethodService
         : AbstractExtractMethodService<
-              CSharpSelectionValidator,
-              CSharpMethodExtractor,
-              CSharpSelectionResult
-          >
+            CSharpSelectionValidator,
+            CSharpMethodExtractor,
+            CSharpSelectionResult
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

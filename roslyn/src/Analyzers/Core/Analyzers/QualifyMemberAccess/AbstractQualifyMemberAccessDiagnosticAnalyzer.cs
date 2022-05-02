@@ -199,9 +199,9 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
             return operation switch
             {
                 IMemberReferenceOperation memberReferenceOperation
-                  => IsStaticMemberOrIsLocalFunctionHelper(memberReferenceOperation.Member),
+                    => IsStaticMemberOrIsLocalFunctionHelper(memberReferenceOperation.Member),
                 IInvocationOperation invocationOperation
-                  => IsStaticMemberOrIsLocalFunctionHelper(invocationOperation.TargetMethod),
+                    => IsStaticMemberOrIsLocalFunctionHelper(invocationOperation.TargetMethod),
                 _ => throw ExceptionUtilities.UnexpectedValue(operation),
             };
 
@@ -234,9 +234,9 @@ namespace Microsoft.CodeAnalysis.QualifyMemberAccess
             operation switch
             {
                 IMemberReferenceOperation memberReferenceOperation
-                  => GetApplicableOptionFromSymbolKind(memberReferenceOperation.Member.Kind),
+                    => GetApplicableOptionFromSymbolKind(memberReferenceOperation.Member.Kind),
                 IInvocationOperation invocationOperation
-                  => GetApplicableOptionFromSymbolKind(invocationOperation.TargetMethod.Kind),
+                    => GetApplicableOptionFromSymbolKind(invocationOperation.TargetMethod.Kind),
                 _ => throw ExceptionUtilities.UnexpectedValue(operation),
             };
     }

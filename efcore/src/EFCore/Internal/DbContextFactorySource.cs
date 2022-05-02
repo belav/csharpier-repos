@@ -71,8 +71,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
                                 Expression.New(
                                     constructors[0],
                                     isGeneric
-                                      ? optionsParam
-                                      : (Expression)
+                                        ? optionsParam
+                                        : (Expression)
                                             Expression.Convert(
                                                 optionsParam,
                                                 typeof(DbContextOptions)

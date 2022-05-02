@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
     )]
     internal sealed class EditAndContinueLanguageService
         : IManagedHotReloadLanguageService,
-          IEditAndContinueSolutionProvider
+            IEditAndContinueSolutionProvider
     {
         private static readonly ActiveStatementSpanProvider s_noActiveStatementSpanProvider = (
             _,

@@ -178,7 +178,7 @@ namespace Microsoft.Extensions.Hosting
                         args.Any(arg => IsApplicationNameArg(arg)) || assembly.FullName is null
                             ? args
                             : args.Concat(new[] { "--applicationName", assembly.FullName })
-                              .ToArray();
+                                .ToArray();
 
                     var host = hostFactory(args);
                     return GetServiceProvider(host);
@@ -207,7 +207,7 @@ namespace Microsoft.Extensions.Hosting
 
         private sealed class HostingListener
             : IObserver<DiagnosticListener>,
-              IObserver<KeyValuePair<string, object?>>
+                IObserver<KeyValuePair<string, object?>>
         {
             private readonly string[] _args;
             private readonly MethodInfo _entryPoint;

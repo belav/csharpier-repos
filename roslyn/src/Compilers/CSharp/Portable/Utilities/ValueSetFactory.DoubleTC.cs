@@ -89,12 +89,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             string INumericTC<double>.ToString(double value) =>
                 double.IsNaN(value)
-                  ? "NaN"
-                  : value == double.NegativeInfinity
-                      ? "-Inf"
-                      : value == double.PositiveInfinity
-                          ? "Inf"
-                          : FormattableString.Invariant($"{value:G17}");
+                    ? "NaN"
+                    : value == double.NegativeInfinity
+                        ? "-Inf"
+                        : value == double.PositiveInfinity
+                            ? "Inf"
+                            : FormattableString.Invariant($"{value:G17}");
 
             double INumericTC<double>.Prev(double value)
             {

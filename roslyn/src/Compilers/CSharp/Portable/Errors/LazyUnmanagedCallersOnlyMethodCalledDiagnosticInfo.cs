@@ -47,11 +47,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var info = unmanagedCallersOnlyAttributeData is null
                     ? CSDiagnosticInfo.VoidDiagnosticInfo
                     : new CSDiagnosticInfo(
-                          _isDelegateConversion
+                        _isDelegateConversion
                             ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
                             : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
-                          _method
-                      );
+                        _method
+                    );
 
                 Interlocked.CompareExchange(
                     ref _lazyActualUnmanagedCallersOnlyDiagnostic,

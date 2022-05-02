@@ -531,11 +531,11 @@ namespace System.Xml.Tests
                     childListCount == 0
                         ? null
                         : FindElementAndRemoveIt(
-                              curParentSectionName,
-                              0,
-                              childList,
-                              childListCount
-                          );
+                            curParentSectionName,
+                            0,
+                            childList,
+                            childListCount
+                        );
 
                 // child doesn't have a section with the same, just copy it from the parent
                 if (curChildSection == null)

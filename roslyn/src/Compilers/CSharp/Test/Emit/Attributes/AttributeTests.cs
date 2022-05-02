@@ -2208,10 +2208,10 @@ public class Test
                 var fieldAttributesExpected = isFromSource
                     ? new string[0]
                     : new[]
-                      {
-                          "System.Runtime.CompilerServices.CompilerGeneratedAttribute",
-                          "System.Diagnostics.DebuggerBrowsableAttribute(System.Diagnostics.DebuggerBrowsableState.Never)"
-                      };
+                    {
+                        "System.Runtime.CompilerServices.CompilerGeneratedAttribute",
+                        "System.Diagnostics.DebuggerBrowsableAttribute(System.Diagnostics.DebuggerBrowsableState.Never)"
+                    };
 
                 var constantExpected = "1844674407800451891300";
 
@@ -6079,16 +6079,16 @@ public class C
                     VerifyAttributes(
                         x1,
                         isFromSource
-                          ? HighSurrogateCharacter
-                          : UnicodeReplacementCharacter + UnicodeReplacementCharacter
+                            ? HighSurrogateCharacter
+                            : UnicodeReplacementCharacter + UnicodeReplacementCharacter
                     );
 
                     // public const string UnicodeSurrogate2 = ""\uD800\uD800"";
                     VerifyAttributes(
                         x2,
                         isFromSource
-                          ? HighSurrogateCharacter + HighSurrogateCharacter
-                          : UnicodeReplacementCharacter
+                            ? HighSurrogateCharacter + HighSurrogateCharacter
+                            : UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
@@ -6101,8 +6101,8 @@ public class C
                     VerifyAttributes(
                         x4,
                         isFromSource
-                          ? HighSurrogateCharacter + UnicodeLT0800 + HighSurrogateCharacter
-                          : UnicodeReplacementCharacter
+                            ? HighSurrogateCharacter + UnicodeLT0800 + HighSurrogateCharacter
+                            : UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeLT0800
                                 + UnicodeReplacementCharacter
@@ -6113,8 +6113,8 @@ public class C
                     VerifyAttributes(
                         x5,
                         isFromSource
-                          ? HighSurrogateCharacter + UnicodeLT0080 + LowSurrogateCharacter
-                          : UnicodeReplacementCharacter
+                            ? HighSurrogateCharacter + UnicodeLT0080 + LowSurrogateCharacter
+                            : UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeLT0080
                                 + UnicodeReplacementCharacter
@@ -6125,8 +6125,8 @@ public class C
                     VerifyAttributes(
                         x6,
                         isFromSource
-                          ? HighSurrogateCharacter + UnicodeLT0800 + LowSurrogateCharacter
-                          : UnicodeReplacementCharacter
+                            ? HighSurrogateCharacter + UnicodeLT0800 + LowSurrogateCharacter
+                            : UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeLT0800
                                 + UnicodeReplacementCharacter
@@ -6137,8 +6137,8 @@ public class C
                     VerifyAttributes(
                         x7,
                         isFromSource
-                          ? HighSurrogateCharacter + UnicodeLT10000 + LowSurrogateCharacter
-                          : UnicodeReplacementCharacter
+                            ? HighSurrogateCharacter + UnicodeLT10000 + LowSurrogateCharacter
+                            : UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeLT10000
                                 + UnicodeReplacementCharacter
@@ -6149,8 +6149,10 @@ public class C
                     VerifyAttributes(
                         x8,
                         isFromSource
-                          ? HighSurrogateCharacter + HighSurrogateCharacter + LowSurrogateCharacter
-                          : UnicodeReplacementCharacter
+                            ? HighSurrogateCharacter
+                                + HighSurrogateCharacter
+                                + LowSurrogateCharacter
+                            : UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + HighSurrogateCharacter
                                 + LowSurrogateCharacter
@@ -6160,8 +6162,8 @@ public class C
                     VerifyAttributes(
                         x9,
                         isFromSource
-                          ? LowSurrogateCharacter + LowSurrogateCharacter
-                          : UnicodeReplacementCharacter
+                            ? LowSurrogateCharacter + LowSurrogateCharacter
+                            : UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter
                                 + UnicodeReplacementCharacter

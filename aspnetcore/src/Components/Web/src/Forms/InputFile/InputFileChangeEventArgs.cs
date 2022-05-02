@@ -37,9 +37,9 @@ public sealed class InputFileChangeEventArgs : EventArgs
             0 => throw new InvalidOperationException("No file was supplied."),
             1 => _files[0],
             _
-              => throw new InvalidOperationException(
-                  $"More than one file was supplied. Call {nameof(GetMultipleFiles)} to receive multiple files."
-              ),
+                => throw new InvalidOperationException(
+                    $"More than one file was supplied. Call {nameof(GetMultipleFiles)} to receive multiple files."
+                ),
         };
 
     /// <summary>

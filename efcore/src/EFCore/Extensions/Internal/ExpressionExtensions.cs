@@ -63,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
             return comparer.ExtractEqualsBody(
                 comparer.Type != clrType
-                  ? Expression.Convert(currentValueExpression, comparer.Type)
-                  : currentValueExpression,
+                    ? Expression.Convert(currentValueExpression, comparer.Type)
+                    : currentValueExpression,
                 Expression.Default(comparer.Type)
             );
         }
@@ -272,36 +272,36 @@ namespace Microsoft.EntityFrameworkCore.Internal
                     || nonNullableType.IsEnum
                 )
                     ? Expression.Call(
-                          _objectEqualsMethodInfo,
-                          Expression.Call(
-                              EF.PropertyMethod.MakeGenericMethod(typeof(object)),
-                              entityParameterExpression,
-                              Expression.Constant(property.Name, typeof(string))
-                          ),
-                          Expression.Convert(
-                              Expression.Call(
-                                  keyValuesConstantExpression,
-                                  ValueBuffer.GetValueMethod,
-                                  Expression.Constant(i)
-                              ),
-                              typeof(object)
-                          )
-                      )
+                        _objectEqualsMethodInfo,
+                        Expression.Call(
+                            EF.PropertyMethod.MakeGenericMethod(typeof(object)),
+                            entityParameterExpression,
+                            Expression.Constant(property.Name, typeof(string))
+                        ),
+                        Expression.Convert(
+                            Expression.Call(
+                                keyValuesConstantExpression,
+                                ValueBuffer.GetValueMethod,
+                                Expression.Constant(i)
+                            ),
+                            typeof(object)
+                        )
+                    )
                     : Expression.Equal(
-                          Expression.Call(
-                              EF.PropertyMethod.MakeGenericMethod(property.ClrType),
-                              entityParameterExpression,
-                              Expression.Constant(property.Name, typeof(string))
-                          ),
-                          Expression.Convert(
-                              Expression.Call(
-                                  keyValuesConstantExpression,
-                                  ValueBuffer.GetValueMethod,
-                                  Expression.Constant(i)
-                              ),
-                              property.ClrType
-                          )
-                      );
+                        Expression.Call(
+                            EF.PropertyMethod.MakeGenericMethod(property.ClrType),
+                            entityParameterExpression,
+                            Expression.Constant(property.Name, typeof(string))
+                        ),
+                        Expression.Convert(
+                            Expression.Call(
+                                keyValuesConstantExpression,
+                                ValueBuffer.GetValueMethod,
+                                Expression.Constant(i)
+                            ),
+                            property.ClrType
+                        )
+                    );
         }
     }
 }

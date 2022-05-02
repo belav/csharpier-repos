@@ -11,9 +11,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class MoveToNamespaceDialog_InProc
         : AbstractCodeRefactorDialog_InProc<
-              MoveToNamespaceDialog,
-              MoveToNamespaceDialog.TestAccessor
-          >
+            MoveToNamespaceDialog,
+            MoveToNamespaceDialog.TestAccessor
+        >
     {
         private MoveToNamespaceDialog_InProc() { }
 

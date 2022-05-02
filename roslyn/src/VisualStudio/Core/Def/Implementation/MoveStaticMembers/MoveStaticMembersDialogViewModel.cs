@@ -33,8 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             _destinationName = defaultType;
             _existingNames = existingNames;
             PrependedNamespace = string.IsNullOrEmpty(prependedNamespace)
-              ? prependedNamespace
-              : prependedNamespace + ".";
+                ? prependedNamespace
+                : prependedNamespace + ".";
 
             PropertyChanged += MoveMembersToTypeDialogViewModel_PropertyChanged;
             OnDestinationUpdated();

@@ -17,11 +17,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeClass))]
     public sealed class ExternalCodeClass
         : AbstractExternalCodeType,
-          EnvDTE80.CodeClass2,
-          EnvDTE.CodeClass,
-          EnvDTE.CodeType,
-          EnvDTE.CodeElement,
-          EnvDTE80.CodeElement2
+            EnvDTE80.CodeClass2,
+            EnvDTE.CodeClass,
+            EnvDTE.CodeType,
+            EnvDTE.CodeElement,
+            EnvDTE80.CodeElement2
     {
         internal static EnvDTE.CodeClass Create(
             CodeModelState state,

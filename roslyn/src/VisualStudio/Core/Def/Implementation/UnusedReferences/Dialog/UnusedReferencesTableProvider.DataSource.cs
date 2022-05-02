@@ -151,8 +151,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                             content =
                                 ReferenceUpdate.ReferenceInfo.ReferenceType != ReferenceType.Package
                                     ? Path.GetFileName(
-                                          ReferenceUpdate.ReferenceInfo.ItemSpecification
-                                      )
+                                        ReferenceUpdate.ReferenceInfo.ItemSpecification
+                                    )
                                     : ReferenceUpdate.ReferenceInfo.ItemSpecification;
                             break;
                         case UnusedReferencesTableKeyNames.UpdateAction:

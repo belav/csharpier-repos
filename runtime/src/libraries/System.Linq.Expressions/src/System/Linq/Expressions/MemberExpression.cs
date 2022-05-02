@@ -46,8 +46,8 @@ namespace System.Linq.Expressions
         {
             FieldInfo? fi = member as FieldInfo;
             return fi == null
-              ? (MemberExpression)Make(expression, (PropertyInfo)member)
-              : Make(expression, fi);
+                ? (MemberExpression)Make(expression, (PropertyInfo)member)
+                : Make(expression, fi);
         }
 
         /// <summary>

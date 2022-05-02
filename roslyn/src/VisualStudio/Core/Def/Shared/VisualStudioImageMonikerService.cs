@@ -41,7 +41,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
     [Order(Before = DefaultImageMonikerService.Name)]
     internal class VisualStudioImageMonikerService
         : ForegroundThreadAffinitizedObject,
-          IImageMonikerService
+            IImageMonikerService
     {
         public const string Name = nameof(VisualStudioImageMonikerService);
 

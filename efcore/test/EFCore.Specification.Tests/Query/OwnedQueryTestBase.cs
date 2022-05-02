@@ -452,10 +452,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var message = async
                 ? (
-                      await Assert.ThrowsAsync<InvalidOperationException>(
-                          () => asTrackingQuery.ToListAsync()
-                      )
-                  ).Message
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => asTrackingQuery.ToListAsync()
+                    )
+                ).Message
                 : Assert.Throws<InvalidOperationException>(() => asTrackingQuery.ToList()).Message;
             Assert.Empty(context.ChangeTracker.Entries());
             Assert.Equal(CoreStrings.OwnedEntitiesCannotBeTrackedWithoutTheirOwner, message);
@@ -951,12 +951,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             Assert.Equal(
                 CoreStrings.IncludeWithCycle("Client", "Orders"),
                 async
-                  ? (
+                    ? (
                         await Assert.ThrowsAsync<InvalidOperationException>(
                             () => query.ToListAsync()
                         )
                     ).Message
-                  : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message
+                    : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message
             );
         }
 
@@ -1139,8 +1139,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 var query = async
                     ? await ctx.Set<OwnedPerson>()
-                          .Where(p => (int)p.PersonAddress[n] == 38654)
-                          .ToListAsync()
+                        .Where(p => (int)p.PersonAddress[n] == 38654)
+                        .ToListAsync()
                     : ctx.Set<OwnedPerson>().Where(p => (int)p.PersonAddress[n] == 38654).ToList();
 
                 Assert.Single(query);
@@ -1153,7 +1153,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public abstract class OwnedQueryFixtureBase
             : SharedStoreFixtureBase<PoolableDbContext>,
-              IQueryFixtureBase
+                IQueryFixtureBase
         {
             private static void AssertAddress(
                 OwnedAddress expectedAddress,
@@ -2128,9 +2128,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         "LeafType" => _leafAType,
                         "LeafBType" => _leafBType,
                         _
-                          => throw new InvalidOperationException(
-                              $"Indexer property with key {name} is not defined on {nameof(OwnedPerson)}."
-                          ),
+                            => throw new InvalidOperationException(
+                                $"Indexer property with key {name} is not defined on {nameof(OwnedPerson)}."
+                            ),
                     };
                 set
                 {

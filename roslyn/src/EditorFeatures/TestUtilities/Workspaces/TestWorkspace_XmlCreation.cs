@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 parseOptions == null ? null : CreateDocumentationModeAttribute(parseOptions),
                 parseOptions == null ? null : CreateFeaturesAttribute(parseOptions),
                 compilationOptions == null
-                  ? null
-                  : CreateCompilationOptionsElement(compilationOptions),
+                    ? null
+                    : CreateCompilationOptionsElement(compilationOptions),
                 elements
             );
         }
@@ -219,8 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         private static XElement CreateParseOptionsElement(ParseOptions parseOptions)
         {
             return parseOptions == null
-              ? null
-              : new XElement(
+                ? null
+                : new XElement(
                     ParseOptionsElementName,
                     new XAttribute(KindAttributeName, parseOptions.Kind)
                 );

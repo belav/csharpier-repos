@@ -24,8 +24,8 @@ internal static class ErrorMessages
     )
     {
         return process.HasExited
-          ? $@"Project {project.ProjectArguments} failed to {step}.
+            ? $@"Project {project.ProjectArguments} failed to {step}.
 {process.GetFormattedOutput()}"
-          : "";
+            : "";
     }
 }

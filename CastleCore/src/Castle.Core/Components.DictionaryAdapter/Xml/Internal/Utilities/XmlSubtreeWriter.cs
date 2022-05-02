@@ -361,12 +361,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 return ( // Try child writer first
                     null != childWriter && null != (prefix = childWriter.LookupPrefix(ns))
                 )
-                  ? prefix
-                  : ( // Try root writer next
+                    ? prefix
+                    : ( // Try root writer next
                         null != rootWriter && null != (prefix = rootWriter.LookupPrefix(ns))
                     )
-                      ? prefix
-                      : null;
+                        ? prefix
+                        : null;
             }
             catch
             {

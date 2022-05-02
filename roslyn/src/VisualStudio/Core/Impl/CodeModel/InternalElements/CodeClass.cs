@@ -16,9 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeClass2))]
     public sealed class CodeClass
         : AbstractCodeType,
-          EnvDTE.CodeClass,
-          EnvDTE80.CodeClass2,
-          ICodeClassBase
+            EnvDTE.CodeClass,
+            EnvDTE80.CodeClass2,
+            ICodeClassBase
     {
         private static readonly SymbolDisplayFormat s_BaseNameFormat = new SymbolDisplayFormat(
             typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,

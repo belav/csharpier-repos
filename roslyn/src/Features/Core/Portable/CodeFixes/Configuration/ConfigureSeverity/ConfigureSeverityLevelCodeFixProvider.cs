@@ -151,16 +151,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureSeverity
                             solution =>
                                 category != null
                                     ? ConfigurationUpdater.BulkConfigureSeverityAsync(
-                                          value,
-                                          category,
-                                          project,
-                                          cancellationToken
-                                      )
+                                        value,
+                                        category,
+                                        project,
+                                        cancellationToken
+                                    )
                                     : ConfigurationUpdater.BulkConfigureSeverityAsync(
-                                          value,
-                                          project,
-                                          cancellationToken
-                                      ),
+                                        value,
+                                        project,
+                                        cancellationToken
+                                    ),
                             name
                         )
                     );

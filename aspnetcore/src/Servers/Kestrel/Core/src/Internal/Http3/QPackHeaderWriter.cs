@@ -92,8 +92,8 @@ internal static class QPackHeaderWriter
                 enumerator.EncodingSelector,
                 KestrelServerOptions.DefaultHeaderEncodingSelector
             )
-              ? null
-              : enumerator.EncodingSelector(current.Key);
+                ? null
+                : enumerator.EncodingSelector(current.Key);
 
             if (
                 !QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReference(

@@ -1143,8 +1143,8 @@ namespace System.Xml.Xsl
                 get
                 {
                     return TypeCode == XmlTypeCode.None
-                      ? XmlQueryCardinality.None
-                      : XmlQueryCardinality.One;
+                        ? XmlQueryCardinality.None
+                        : XmlQueryCardinality.One;
                 }
             }
 
@@ -2090,9 +2090,9 @@ namespace System.Xml.Xsl
                         card += AddFilteredPrime(
                             list,
                             attributeWildcard.ProcessContentsCorrect
-                                == XmlSchemaContentProcessing.Skip
-                              ? UntypedAttribute
-                              : Attribute,
+                            == XmlSchemaContentProcessing.Skip
+                                ? UntypedAttribute
+                                : Attribute,
                             filter
                         );
                         break;
@@ -2324,8 +2324,8 @@ namespace System.Xml.Xsl
                             card = AddFilteredPrime(
                                 list,
                                 any.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip
-                                  ? UntypedElement
-                                  : Element,
+                                    ? UntypedElement
+                                    : Element,
                                 filter
                             );
                             break;
@@ -2451,14 +2451,14 @@ namespace System.Xml.Xsl
                     right.SchemaType, /* except:*/
                     XmlSchemaDerivationMethod.Empty
                 )
-                  ? left.SchemaType
-                  : XmlSchemaType.IsDerivedFrom(
+                    ? left.SchemaType
+                    : XmlSchemaType.IsDerivedFrom(
                         right.SchemaType,
                         left.SchemaType, /* except:*/
                         XmlSchemaDerivationMethod.Empty
                     )
-                      ? right.SchemaType
-                      : null;
+                        ? right.SchemaType
+                        : null;
                 bool isNillable = left.IsNillable && right.IsNillable;
 
                 if (

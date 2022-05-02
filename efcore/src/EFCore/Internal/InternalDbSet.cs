@@ -27,10 +27,10 @@ namespace Microsoft.EntityFrameworkCore.Internal
     /// </summary>
     public class InternalDbSet<TEntity>
         : DbSet<TEntity>,
-          IQueryable<TEntity>,
-          IAsyncEnumerable<TEntity>,
-          IInfrastructure<IServiceProvider>,
-          IResettableService where TEntity : class
+            IQueryable<TEntity>,
+            IAsyncEnumerable<TEntity>,
+            IInfrastructure<IServiceProvider>,
+            IResettableService where TEntity : class
     {
         private readonly DbContext _context;
         private readonly string? _entityTypeName;
@@ -591,16 +591,16 @@ namespace Microsoft.EntityFrameworkCore.Internal
         )
         {
             return entry.EntityState == EntityState.Detached
-              ? _context
-                .GetDependencies()
-                .EntityGraphAttacher.AttachGraphAsync(
-                    entry,
-                    entityState,
-                    entityState,
-                    forceStateWhenUnknownKey: true,
-                    cancellationToken: cancellationToken
-                )
-              : entry.SetEntityStateAsync(
+                ? _context
+                    .GetDependencies()
+                    .EntityGraphAttacher.AttachGraphAsync(
+                        entry,
+                        entityState,
+                        entityState,
+                        forceStateWhenUnknownKey: true,
+                        cancellationToken: cancellationToken
+                    )
+                : entry.SetEntityStateAsync(
                     entityState,
                     acceptChanges: true,
                     forceStateWhenUnknownKey: entityState,

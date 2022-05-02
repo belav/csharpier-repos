@@ -639,8 +639,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             SyntaxToken openQuote = EatToken(
                 this.CurrentToken.Kind == SyntaxKind.SingleQuoteToken
-                  ? SyntaxKind.SingleQuoteToken
-                  : SyntaxKind.DoubleQuoteToken
+                    ? SyntaxKind.SingleQuoteToken
+                    : SyntaxKind.DoubleQuoteToken
             );
 
             // NOTE: Don't need to save mode, since we're already using a reset point.
@@ -689,8 +689,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var saveMode = this.SetMode(
                     quoteKind == SyntaxKind.SingleQuoteToken
-                      ? LexerMode.XmlCrefQuote
-                      : LexerMode.XmlCrefDoubleQuote
+                        ? LexerMode.XmlCrefQuote
+                        : LexerMode.XmlCrefDoubleQuote
                 );
 
                 cref = this.ParseCrefAttributeValue();
@@ -713,8 +713,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var saveMode = this.SetMode(
                     quoteKind == SyntaxKind.SingleQuoteToken
-                      ? LexerMode.XmlNameQuote
-                      : LexerMode.XmlNameDoubleQuote
+                        ? LexerMode.XmlNameQuote
+                        : LexerMode.XmlNameDoubleQuote
                 );
 
                 identifier = this.ParseNameAttributeValue();
@@ -744,8 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var saveMode = this.SetMode(
                     quoteKind == SyntaxKind.SingleQuoteToken
-                      ? LexerMode.XmlAttributeTextQuote
-                      : LexerMode.XmlAttributeTextDoubleQuote
+                        ? LexerMode.XmlAttributeTextQuote
+                        : LexerMode.XmlAttributeTextDoubleQuote
                 );
 
                 while (
@@ -1091,8 +1091,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // Don't attach any diagnostics to syntax nodes within a documentation comment if the DocumentationMode
             // is not at least Diagnose.
             return Options.DocumentationMode >= DocumentationMode.Diagnose
-              ? base.WithAdditionalDiagnostics<TNode>(node, diagnostics)
-              : node;
+                ? base.WithAdditionalDiagnostics<TNode>(node, diagnostics)
+                : node;
         }
 
         #region Cref
@@ -1441,9 +1441,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 SyntaxToken close = EatToken(closeKind);
 
                 return useSquareBrackets
-                  ? (BaseCrefParameterListSyntax)
+                    ? (BaseCrefParameterListSyntax)
                         SyntaxFactory.CrefBracketedParameterList(open, list, close)
-                  : SyntaxFactory.CrefParameterList(open, list, close);
+                    : SyntaxFactory.CrefParameterList(open, list, close);
             }
             finally
             {
@@ -1587,8 +1587,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 checkForMember
             );
             return typeArgumentsMustBeIdentifiers
-              ? typeWithoutSuffix
-              : ParseCrefTypeSuffix(typeWithoutSuffix);
+                ? typeWithoutSuffix
+                : ParseCrefTypeSuffix(typeWithoutSuffix);
         }
 
         /// <summary>

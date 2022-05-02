@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal abstract class SynthesizedStateMachineMethod
         : SynthesizedImplementationMethod,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly bool _hasMethodBodyDependency;
 
@@ -123,8 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableInterlocked.InterlockedCompareExchange(
                     ref _attributes,
                     builder == null
-                      ? ImmutableArray<CSharpAttributeData>.Empty
-                      : builder.ToImmutableAndFree(),
+                        ? ImmutableArray<CSharpAttributeData>.Empty
+                        : builder.ToImmutableAndFree(),
                     default(ImmutableArray<CSharpAttributeData>)
                 );
             }

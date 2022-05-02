@@ -16,11 +16,11 @@ namespace System.Collections.Immutable
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
     public sealed partial class ImmutableList<T>
         : IImmutableList<T>,
-          IList<T>,
-          IList,
-          IOrderedCollection<T>,
-          IImmutableListQueries<T>,
-          IStrongEnumerable<T, ImmutableList<T>.Enumerator>
+            IList<T>,
+            IList,
+            IOrderedCollection<T>,
+            IImmutableListQueries<T>,
+            IStrongEnumerable<T, ImmutableList<T>.Enumerator>
     {
         /// <summary>
         /// An empty immutable list.

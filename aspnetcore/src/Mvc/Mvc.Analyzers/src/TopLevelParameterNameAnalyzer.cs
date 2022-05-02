@@ -194,8 +194,8 @@ public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
                 attribute.AttributeClass,
                 symbolCache.BindAttribute
             )
-              ? "Prefix"
-              : "Name";
+                ? "Prefix"
+                : "Name";
 
             // All of the built-in attributes (FromQueryAttribute, ModelBinderAttribute etc) only support setting the name via
             // a property. We'll ignore constructor values.

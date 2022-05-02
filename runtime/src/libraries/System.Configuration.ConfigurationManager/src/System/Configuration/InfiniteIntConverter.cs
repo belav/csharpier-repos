@@ -19,8 +19,8 @@ namespace System.Configuration
             ValidateType(value, typeof(int));
 
             return (int)value == int.MaxValue
-              ? "Infinite"
-              : ((int)value).ToString(CultureInfo.InvariantCulture);
+                ? "Infinite"
+                : ((int)value).ToString(CultureInfo.InvariantCulture);
         }
 
         public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)

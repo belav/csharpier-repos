@@ -207,13 +207,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogLevel logLevel = LogLevel.Trace
         ) =>
             TryGetActiveLogger(functionId, out _)
-              ? CreateLogBlock(
+                ? CreateLogBlock(
                     functionId,
                     LogMessage.Create(message ?? "", logLevel),
                     GetNextUniqueBlockId(),
                     token
                 )
-              : EmptyLogBlock.Instance;
+                : EmptyLogBlock.Instance;
 
         /// <summary>
         /// log a start and end pair with a context message that will only be created when it is needed.
@@ -226,13 +226,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogLevel logLevel = LogLevel.Trace
         ) =>
             TryGetActiveLogger(functionId, out _)
-              ? CreateLogBlock(
+                ? CreateLogBlock(
                     functionId,
                     LogMessage.Create(messageGetter, logLevel),
                     GetNextUniqueBlockId(),
                     token
                 )
-              : EmptyLogBlock.Instance;
+                : EmptyLogBlock.Instance;
 
         /// <summary>
         /// log a start and end pair with a context message that requires some arguments to be created when requested.
@@ -246,13 +246,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogLevel logLevel = LogLevel.Trace
         ) =>
             TryGetActiveLogger(functionId, out _)
-              ? CreateLogBlock(
+                ? CreateLogBlock(
                     functionId,
                     LogMessage.Create(messageGetter, arg, logLevel),
                     GetNextUniqueBlockId(),
                     token
                 )
-              : EmptyLogBlock.Instance;
+                : EmptyLogBlock.Instance;
 
         /// <summary>
         /// log a start and end pair with a context message that requires some arguments to be created when requested.
@@ -267,13 +267,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogLevel logLevel = LogLevel.Trace
         ) =>
             TryGetActiveLogger(functionId, out _)
-              ? CreateLogBlock(
+                ? CreateLogBlock(
                     functionId,
                     LogMessage.Create(messageGetter, arg0, arg1, logLevel),
                     GetNextUniqueBlockId(),
                     token
                 )
-              : EmptyLogBlock.Instance;
+                : EmptyLogBlock.Instance;
 
         /// <summary>
         /// log a start and end pair with a context message that requires some arguments to be created when requested.
@@ -289,13 +289,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogLevel logLevel = LogLevel.Trace
         ) =>
             TryGetActiveLogger(functionId, out _)
-              ? CreateLogBlock(
+                ? CreateLogBlock(
                     functionId,
                     LogMessage.Create(messageGetter, arg0, arg1, arg2, logLevel),
                     GetNextUniqueBlockId(),
                     token
                 )
-              : EmptyLogBlock.Instance;
+                : EmptyLogBlock.Instance;
 
         /// <summary>
         /// log a start and end pair with a context message that requires some arguments to be created when requested.
@@ -312,13 +312,13 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             LogLevel logLevel = LogLevel.Trace
         ) =>
             TryGetActiveLogger(functionId, out _)
-              ? CreateLogBlock(
+                ? CreateLogBlock(
                     functionId,
                     LogMessage.Create(messageGetter, arg0, arg1, arg2, arg3, logLevel),
                     GetNextUniqueBlockId(),
                     token
                 )
-              : EmptyLogBlock.Instance;
+                : EmptyLogBlock.Instance;
 
         /// <summary>
         /// log a start and end pair with a context message.
@@ -329,8 +329,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             CancellationToken token
         ) =>
             TryGetActiveLogger(functionId, out _)
-              ? CreateLogBlock(functionId, logMessage, GetNextUniqueBlockId(), token)
-              : EmptyLogBlock.Instance;
+                ? CreateLogBlock(functionId, logMessage, GetNextUniqueBlockId(), token)
+                : EmptyLogBlock.Instance;
 
 #if !CODE_STYLE
         public static Func<FunctionId, bool> GetLoggingChecker(IGlobalOptionService optionService)

@@ -34,8 +34,8 @@ namespace System.Net.Http.Functional.Tests
             Assert.Contains(((int)errorCode).ToString("x"), text);
             Assert.Contains(
                 Enum.IsDefined(typeof(ProtocolErrors), errorCode)
-                  ? errorCode.ToString()
-                  : "(unknown error)",
+                    ? errorCode.ToString()
+                    : "(unknown error)",
                 text
             );
         }

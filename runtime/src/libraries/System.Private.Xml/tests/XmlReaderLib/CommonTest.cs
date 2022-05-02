@@ -2272,8 +2272,8 @@ namespace System.Xml.Tests
                 || IsXPathNavigatorReader()
                 || IsXsltReader()
             )
-              ? TEST_PASS
-              : TEST_FAIL;
+                ? TEST_PASS
+                : TEST_FAIL;
         }
 
         //[Variation("1.Parse input with utf-16 encoding", Param = "charset01.xml")]

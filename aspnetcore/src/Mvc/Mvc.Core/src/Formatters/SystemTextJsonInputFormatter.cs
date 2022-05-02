@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// </summary>
 public partial class SystemTextJsonInputFormatter
     : TextInputFormatter,
-      IInputFormatterExceptionPolicy
+        IInputFormatterExceptionPolicy
 {
     private readonly JsonOptions _jsonOptions;
     private readonly ILogger<SystemTextJsonInputFormatter> _logger;

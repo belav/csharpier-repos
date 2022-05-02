@@ -551,8 +551,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // CS0556: User-defined conversion must convert to or from the enclosing type
                 diagnostics.Add(
                     IsAbstract
-                      ? ErrorCode.ERR_AbstractConversionNotInvolvingContainedType
-                      : ErrorCode.ERR_ConversionNotInvolvingContainedType,
+                        ? ErrorCode.ERR_AbstractConversionNotInvolvingContainedType
+                        : ErrorCode.ERR_ConversionNotInvolvingContainedType,
                     this.Locations[0]
                 );
                 return;
@@ -700,8 +700,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // The parameter of a unary operator must be the containing type
                 diagnostics.Add(
                     IsAbstract
-                      ? ErrorCode.ERR_BadAbstractUnaryOperatorSignature
-                      : ErrorCode.ERR_BadUnaryOperatorSignature,
+                        ? ErrorCode.ERR_BadAbstractUnaryOperatorSignature
+                        : ErrorCode.ERR_BadUnaryOperatorSignature,
                     this.Locations[0]
                 );
             }
@@ -730,8 +730,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // The parameter of a unary operator must be the containing type
                 diagnostics.Add(
                     IsAbstract
-                      ? ErrorCode.ERR_BadAbstractUnaryOperatorSignature
-                      : ErrorCode.ERR_BadUnaryOperatorSignature,
+                        ? ErrorCode.ERR_BadAbstractUnaryOperatorSignature
+                        : ErrorCode.ERR_BadUnaryOperatorSignature,
                     this.Locations[0]
                 );
             }
@@ -788,16 +788,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // CS0559: The parameter type for ++ or -- operator must be the containing type
                 diagnostics.Add(
                     IsAbstract
-                      ? ErrorCode.ERR_BadAbstractIncDecSignature
-                      : ErrorCode.ERR_BadIncDecSignature,
+                        ? ErrorCode.ERR_BadAbstractIncDecSignature
+                        : ErrorCode.ERR_BadIncDecSignature,
                     this.Locations[0]
                 );
             }
             else if (
                 !(
                     parameterType.IsTypeParameter()
-                      ? this.ReturnType.Equals(parameterType, ComparisonForUserDefinedOperators)
-                      : (
+                        ? this.ReturnType.Equals(parameterType, ComparisonForUserDefinedOperators)
+                        : (
                             (
                                 IsAbstract
                                 && IsContainingType(parameterType)
@@ -816,8 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //         or be derived from the parameter type
                 diagnostics.Add(
                     IsAbstract
-                      ? ErrorCode.ERR_BadAbstractIncDecRetType
-                      : ErrorCode.ERR_BadIncDecRetType,
+                        ? ErrorCode.ERR_BadAbstractIncDecRetType
+                        : ErrorCode.ERR_BadIncDecRetType,
                     this.Locations[0]
                 );
             }
@@ -875,8 +875,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //         operand must be int
                 diagnostics.Add(
                     IsAbstract
-                      ? ErrorCode.ERR_BadAbstractShiftOperatorSignature
-                      : ErrorCode.ERR_BadShiftOperatorSignature,
+                        ? ErrorCode.ERR_BadAbstractShiftOperatorSignature
+                        : ErrorCode.ERR_BadShiftOperatorSignature,
                     this.Locations[0]
                 );
             }
@@ -901,8 +901,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // CS0563: One of the parameters of a binary operator must be the containing type
                 diagnostics.Add(
                     IsAbstract
-                      ? ErrorCode.ERR_BadAbstractBinaryOperatorSignature
-                      : ErrorCode.ERR_BadBinaryOperatorSignature,
+                        ? ErrorCode.ERR_BadAbstractBinaryOperatorSignature
+                        : ErrorCode.ERR_BadBinaryOperatorSignature,
                     this.Locations[0]
                 );
             }

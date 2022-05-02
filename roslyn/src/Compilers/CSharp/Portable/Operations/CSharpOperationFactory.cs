@@ -797,8 +797,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     );
                 case BoundObjectInitializerMember boundObjectInitializerMember:
                     return boundObjectInitializerMember.MemberSymbol?.IsStatic == true
-                      ? null
-                      : CreateImplicitReceiver(
+                        ? null
+                        : CreateImplicitReceiver(
                             boundObjectInitializerMember.Syntax,
                             boundObjectInitializerMember.ReceiverType
                         );
@@ -1391,9 +1391,9 @@ namespace Microsoft.CodeAnalysis.Operations
                 memberSymbol?.IsStatic == true
                     ? null
                     : CreateImplicitReceiver(
-                          boundObjectInitializerMember.Syntax,
-                          boundObjectInitializerMember.ReceiverType
-                      );
+                        boundObjectInitializerMember.Syntax,
+                        boundObjectInitializerMember.ReceiverType
+                    );
         }
 
         private IOperation CreateBoundDynamicObjectInitializerMemberOperation(
@@ -1755,9 +1755,9 @@ namespace Microsoft.CodeAnalysis.Operations
                     bool isChecked = conversion.IsNumeric && boundConversion.Checked;
                     IOperation operand = forceOperandImplicitLiteral
                         ? CreateBoundLiteralOperation(
-                              (BoundLiteral)correctedConversionNode.Operand,
-                              @implicit: true
-                          )
+                            (BoundLiteral)correctedConversionNode.Operand,
+                            @implicit: true
+                        )
                         : Create(correctedConversionNode.Operand);
                     return new ConversionOperation(
                         operand,
@@ -2002,8 +2002,8 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             return IsMemberInitializer(boundAssignmentOperator)
-              ? (IOperation)CreateBoundMemberInitializerOperation(boundAssignmentOperator)
-              : CreateBoundAssignmentOperatorOperation(boundAssignmentOperator);
+                ? (IOperation)CreateBoundMemberInitializerOperation(boundAssignmentOperator)
+                : CreateBoundAssignmentOperatorOperation(boundAssignmentOperator);
         }
 
         private static bool IsMemberInitializer(BoundAssignmentOperator boundAssignmentOperator) =>
@@ -2103,8 +2103,8 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             OperationKind operationKind = Helper.IsDecrement(boundIncrementOperator.OperatorKind)
-              ? OperationKind.Decrement
-              : OperationKind.Increment;
+                ? OperationKind.Decrement
+                : OperationKind.Increment;
             bool isPostfix = Helper.IsPostfixIncrementOrDecrement(
                 boundIncrementOperator.OperatorKind
             );
@@ -2260,9 +2260,9 @@ namespace Microsoft.CodeAnalysis.Operations
                 left = currentBinary switch
                 {
                     BoundBinaryOperator binaryOp
-                      => CreateBoundBinaryOperatorOperation(binaryOp, left, right),
+                        => CreateBoundBinaryOperatorOperation(binaryOp, left, right),
                     BoundUserDefinedConditionalLogicalOperator logicalOp
-                      => createBoundUserDefinedConditionalLogicalOperator(logicalOp, left, right),
+                        => createBoundUserDefinedConditionalLogicalOperator(logicalOp, left, right),
                     { Kind: var kind } => throw ExceptionUtilities.UnexpectedValue(kind)
                 };
             }
@@ -2903,14 +2903,14 @@ namespace Microsoft.CodeAnalysis.Operations
                     isAsynchronous: enumeratorInfoOpt.IsAsync,
                     needsDispose: enumeratorInfoOpt.NeedsDisposal,
                     knownToImplementIDisposable: enumeratorInfoOpt.NeedsDisposal
-                      ? compilation.Conversions
-                        .ClassifyImplicitConversionFromType(
-                            enumeratorInfoOpt.GetEnumeratorInfo.Method.ReturnType,
-                            iDisposable,
-                            ref discardedUseSiteInfo
-                        )
-                        .IsImplicit
-                      : false,
+                        ? compilation.Conversions
+                            .ClassifyImplicitConversionFromType(
+                                enumeratorInfoOpt.GetEnumeratorInfo.Method.ReturnType,
+                                iDisposable,
+                                ref discardedUseSiteInfo
+                            )
+                            .IsImplicit
+                        : false,
                     enumeratorInfoOpt.PatternDisposeInfo?.Method.GetPublicSymbol(),
                     BoundNode.GetConversion(
                         enumeratorInfoOpt.CurrentConversion,
@@ -2922,7 +2922,7 @@ namespace Microsoft.CodeAnalysis.Operations
                     ),
                     getEnumeratorArguments: enumeratorInfoOpt.GetEnumeratorInfo
                         is { Method: { IsExtensionMethod: true } } getEnumeratorInfo
-                      ? Operation.SetParentOperation(
+                        ? Operation.SetParentOperation(
                             DeriveArguments(
                                 getEnumeratorInfo.Method,
                                 getEnumeratorInfo.Arguments,
@@ -2934,13 +2934,13 @@ namespace Microsoft.CodeAnalysis.Operations
                             ),
                             null
                         )
-                      : default,
+                        : default,
                     disposeArguments: enumeratorInfoOpt.PatternDisposeInfo is object
-                      ? CreateDisposeArguments(
+                        ? CreateDisposeArguments(
                             enumeratorInfoOpt.PatternDisposeInfo,
                             boundForEachStatement.Syntax
                         )
-                      : default
+                        : default
                 );
             }
             else
@@ -3101,12 +3101,12 @@ namespace Microsoft.CodeAnalysis.Operations
             DisposeOperationInfo disposeOperationInfo =
                 boundUsingStatement.PatternDisposeInfoOpt is object
                     ? new DisposeOperationInfo(
-                          disposeMethod: boundUsingStatement.PatternDisposeInfoOpt.Method.GetPublicSymbol(),
-                          disposeArguments: CreateDisposeArguments(
-                              boundUsingStatement.PatternDisposeInfoOpt,
-                              boundUsingStatement.Syntax
-                          )
-                      )
+                        disposeMethod: boundUsingStatement.PatternDisposeInfoOpt.Method.GetPublicSymbol(),
+                        disposeArguments: CreateDisposeArguments(
+                            boundUsingStatement.PatternDisposeInfoOpt,
+                            boundUsingStatement.Syntax
+                        )
+                    )
                     : default;
             SyntaxNode syntax = boundUsingStatement.Syntax;
             bool isImplicit = boundUsingStatement.WasCompilerGenerated;
@@ -3183,18 +3183,18 @@ namespace Microsoft.CodeAnalysis.Operations
             ILocalSymbol? lockTakenSymbol = legacyMode
                 ? null
                 : new SynthesizedLocal(
-                      (
-                          _semanticModel.GetEnclosingSymbol(boundLockStatement.Syntax.SpanStart)
-                          as IMethodSymbol
-                      ).GetSymbol(),
-                      TypeWithAnnotations.Create(
-                          ((CSharpCompilation)_semanticModel.Compilation).GetSpecialType(
-                              SpecialType.System_Boolean
-                          )
-                      ),
-                      SynthesizedLocalKind.LockTaken,
-                      syntaxOpt: boundLockStatement.Argument.Syntax
-                  ).GetPublicSymbol();
+                    (
+                        _semanticModel.GetEnclosingSymbol(boundLockStatement.Syntax.SpanStart)
+                        as IMethodSymbol
+                    ).GetSymbol(),
+                    TypeWithAnnotations.Create(
+                        ((CSharpCompilation)_semanticModel.Compilation).GetSpecialType(
+                            SpecialType.System_Boolean
+                        )
+                    ),
+                    SynthesizedLocalKind.LockTaken,
+                    syntaxOpt: boundLockStatement.Argument.Syntax
+                ).GetPublicSymbol();
             IOperation lockedValue = Create(boundLockStatement.Argument);
             IOperation body = Create(boundLockStatement.Body);
             SyntaxNode syntax = boundLockStatement.Syntax;
@@ -3319,8 +3319,8 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode declarationSyntax = declarationGroupSyntax.IsKind(
                 SyntaxKind.LocalDeclarationStatement
             )
-              ? ((LocalDeclarationStatementSyntax)declarationGroupSyntax).Declaration
-              : declarationGroupSyntax;
+                ? ((LocalDeclarationStatementSyntax)declarationGroupSyntax).Declaration
+                : declarationGroupSyntax;
 
             bool declarationIsImplicit = boundMultipleLocalDeclarations.WasCompilerGenerated;
             ImmutableArray<IVariableDeclaratorOperation> declarators = CreateVariableDeclarator(
@@ -3361,14 +3361,14 @@ namespace Microsoft.CodeAnalysis.Operations
                     variableDeclaration,
                     isAsynchronous: usingDecl.AwaitOpt is object,
                     disposeInfo: usingDecl.PatternDisposeInfoOpt is object
-                      ? new DisposeOperationInfo(
+                        ? new DisposeOperationInfo(
                             disposeMethod: usingDecl.PatternDisposeInfoOpt.Method.GetPublicSymbol(),
                             disposeArguments: CreateDisposeArguments(
                                 usingDecl.PatternDisposeInfoOpt,
                                 usingDecl.Syntax
                             )
                         )
-                      : default,
+                        : default,
                     _semanticModel,
                     declarationGroupSyntax,
                     isImplicit: boundMultipleLocalDeclarations.WasCompilerGenerated
@@ -3509,8 +3509,8 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             return positionInfo is { } info
-              ? createHandlerInterpolatedStringContent(info)
-              : createNonHandlerInterpolatedStringContent();
+                ? createHandlerInterpolatedStringContent(info)
+                : createNonHandlerInterpolatedStringContent();
 
             ImmutableArray<IInterpolatedStringContentOperation> createNonHandlerInterpolatedStringContent()
             {
@@ -3612,10 +3612,10 @@ namespace Microsoft.CodeAnalysis.Operations
                         {
                             BoundLiteral l => CreateBoundLiteralOperation(l, @implicit: true),
                             BoundConversion { Operand: BoundLiteral } c
-                              => CreateBoundConversionOperation(
-                                  c,
-                                  forceOperandImplicitLiteral: true
-                              ),
+                                => CreateBoundConversionOperation(
+                                    c,
+                                    forceOperandImplicitLiteral: true
+                                ),
                             _ => throw ExceptionUtilities.UnexpectedValue(value.Kind),
                         };
 
@@ -3762,7 +3762,7 @@ namespace Microsoft.CodeAnalysis.Operations
                                     {
                                         Expression: BoundMethodGroup { Name: var name }
                                     }
-                                      => name,
+                                        => name,
                                     { HasErrors: true } => "",
                                     _ => throw ExceptionUtilities.UnexpectedValue(part.Kind)
                                 };
@@ -3771,9 +3771,9 @@ namespace Microsoft.CodeAnalysis.Operations
                                 {
                                     "" => OperationKind.InterpolatedStringAppendInvalid,
                                     BoundInterpolatedString.AppendLiteralMethod
-                                      => OperationKind.InterpolatedStringAppendLiteral,
+                                        => OperationKind.InterpolatedStringAppendLiteral,
                                     BoundInterpolatedString.AppendFormattedMethod
-                                      => OperationKind.InterpolatedStringAppendFormatted,
+                                        => OperationKind.InterpolatedStringAppendFormatted,
                                     _ => throw ExceptionUtilities.UnexpectedValue(methodName)
                                 };
 
@@ -3832,14 +3832,17 @@ namespace Microsoft.CodeAnalysis.Operations
             {
                 >= 0
                 and var index
-                  => (InterpolatedStringArgumentPlaceholderKind.CallsiteArgument, index),
+                    => (InterpolatedStringArgumentPlaceholderKind.CallsiteArgument, index),
                 BoundInterpolatedStringArgumentPlaceholder.InstanceParameter
-                  => (InterpolatedStringArgumentPlaceholderKind.CallsiteReceiver, NonArgumentIndex),
+                    => (
+                        InterpolatedStringArgumentPlaceholderKind.CallsiteReceiver,
+                        NonArgumentIndex
+                    ),
                 BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
-                  => (
-                      InterpolatedStringArgumentPlaceholderKind.TrailingValidityArgument,
-                      NonArgumentIndex
-                  ),
+                    => (
+                        InterpolatedStringArgumentPlaceholderKind.TrailingValidityArgument,
+                        NonArgumentIndex
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(placeholder.ArgumentIndex)
             };
 
@@ -3953,16 +3956,16 @@ namespace Microsoft.CodeAnalysis.Operations
             ImmutableArray<IPatternOperation> deconstructionSubpatterns =
                 boundRecursivePattern.Deconstruction is { IsDefault: false } deconstructions
                     ? deconstructions.SelectAsArray(
-                          (p, fac) => (IPatternOperation)fac.Create(p.Pattern),
-                          this
-                      )
+                        (p, fac) => (IPatternOperation)fac.Create(p.Pattern),
+                        this
+                    )
                     : ImmutableArray<IPatternOperation>.Empty;
             ImmutableArray<IPropertySubpatternOperation> propertySubpatterns =
                 boundRecursivePattern.Properties is { IsDefault: false } properties
                     ? properties.SelectAsArray(
-                          (p, arg) => arg.Fac.CreatePropertySubpattern(p, arg.MatchedType),
-                          (Fac: this, MatchedType: matchedType)
-                      )
+                        (p, arg) => arg.Fac.CreatePropertySubpattern(p, arg.MatchedType),
+                        (Fac: this, MatchedType: matchedType)
+                    )
                     : ImmutableArray<IPropertySubpatternOperation>.Empty;
             return new RecursivePatternOperation(
                 matchedType,
@@ -3985,9 +3988,9 @@ namespace Microsoft.CodeAnalysis.Operations
             ImmutableArray<IPatternOperation> deconstructionSubpatterns =
                 boundITuplePattern.Subpatterns is { IsDefault: false } subpatterns
                     ? subpatterns.SelectAsArray(
-                          (p, fac) => (IPatternOperation)fac.Create(p.Pattern),
-                          this
-                      )
+                        (p, fac) => (IPatternOperation)fac.Create(p.Pattern),
+                        this
+                    )
                     : ImmutableArray<IPatternOperation>.Empty;
 
             return new RecursivePatternOperation(
@@ -4429,12 +4432,12 @@ namespace Microsoft.CodeAnalysis.Operations
                 IOperation? createReceiver() =>
                     symbol?.IsStatic == false
                         ? new InstanceReferenceOperation(
-                              InstanceReferenceKind.PatternInput,
-                              _semanticModel,
-                              nameSyntax!,
-                              receiverType,
-                              isImplicit: true
-                          )
+                            InstanceReferenceKind.PatternInput,
+                            _semanticModel,
+                            nameSyntax!,
+                            receiverType,
+                            isImplicit: true
+                        )
                         : null;
             }
 

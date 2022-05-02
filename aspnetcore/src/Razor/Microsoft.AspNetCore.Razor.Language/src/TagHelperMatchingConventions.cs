@@ -159,8 +159,8 @@ internal static class TagHelperMatchingConventions
             && name.StartsWith(
                 descriptor.IndexerNamePrefix,
                 descriptor.CaseSensitive
-                  ? StringComparison.Ordinal
-                  : StringComparison.OrdinalIgnoreCase
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase
             );
     }
 
@@ -180,8 +180,8 @@ internal static class TagHelperMatchingConventions
             var matchesParameter = parameterName.Equals(
                 descriptor.Name,
                 descriptor.CaseSensitive
-                  ? StringComparison.Ordinal
-                  : StringComparison.OrdinalIgnoreCase
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase
             );
             return (satisfiesBoundAttributeName || satisfiesBoundAttributeIndexer)
                 && matchesParameter;
@@ -315,8 +315,8 @@ internal static class TagHelperMatchingConventions
                 descriptor.Name,
                 attributeName,
                 descriptor.CaseSensitive
-                  ? StringComparison.Ordinal
-                  : StringComparison.OrdinalIgnoreCase
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase
             );
         }
         else if (
@@ -329,8 +329,8 @@ internal static class TagHelperMatchingConventions
                 && attributeName.StartsWith(
                     descriptor.Name,
                     descriptor.CaseSensitive
-                      ? StringComparison.Ordinal
-                      : StringComparison.OrdinalIgnoreCase
+                        ? StringComparison.Ordinal
+                        : StringComparison.OrdinalIgnoreCase
                 );
         }
         else

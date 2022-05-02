@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test;
 
 public class InMemoryUserStoreTest
     : UserManagerSpecificationTestBase<PocoUser, string>,
-      IClassFixture<InMemoryUserStoreTest.Fixture>
+        IClassFixture<InMemoryUserStoreTest.Fixture>
 {
     protected override object CreateTestContext()
     {

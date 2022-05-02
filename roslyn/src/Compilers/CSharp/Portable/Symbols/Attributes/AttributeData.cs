@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int argumentCount =
                 (attributeSyntax.ArgumentList != null)
                     ? attributeSyntax.ArgumentList.Arguments.Count<AttributeArgumentSyntax>(
-                          (arg) => arg.NameEquals == null
-                      )
+                        (arg) => arg.NameEquals == null
+                    )
                     : 0;
             return AttributeData.IsTargetEarlyAttribute(attributeType, argumentCount, description);
         }
@@ -1126,8 +1126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return
                 arguments.Length == 1
                 && arguments[0].TryDecodeValue(SpecialType.System_String, out string? value)
-              ? value
-              : null;
+                ? value
+                : null;
         }
 
         internal static Location GetAttributeArgumentSyntaxLocation(

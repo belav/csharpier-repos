@@ -27,12 +27,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             new(
                 kind,
                 leadingTrivia.IsDefaultOrEmpty
-                  ? ImmutableArray<StackFrameTrivia>.Empty
-                  : leadingTrivia,
+                    ? ImmutableArray<StackFrameTrivia>.Empty
+                    : leadingTrivia,
                 CodeAnalysis.EmbeddedLanguages.VirtualChars.VirtualCharSequence.Create(0, s),
                 trailingTrivia.IsDefaultOrEmpty
-                  ? ImmutableArray<StackFrameTrivia>.Empty
-                  : trailingTrivia,
+                    ? ImmutableArray<StackFrameTrivia>.Empty
+                    : trailingTrivia,
                 ImmutableArray<EmbeddedDiagnostic>.Empty,
                 value: null!
             );
@@ -127,10 +127,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
             var separatedList =
                 parameters.Length == 0
                     ? EmbeddedSeparatedSyntaxNodeList<
-                          StackFrameKind,
-                          StackFrameNode,
-                          StackFrameParameterDeclarationNode
-                      >.Empty
+                        StackFrameKind,
+                        StackFrameNode,
+                        StackFrameParameterDeclarationNode
+                    >.Empty
                     : new(CommaSeparateList(parameters));
 
             return new(openToken, separatedList, closeToken);

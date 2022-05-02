@@ -29,7 +29,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     [Export(typeof(IStreamingFindUsagesPresenter)), Shared]
     internal partial class StreamingFindUsagesPresenter
         : ForegroundThreadAffinitizedObject,
-          IStreamingFindUsagesPresenter
+            IStreamingFindUsagesPresenter
     {
         public const string RoslynFindUsagesTableDataSourceIdentifier = nameof(
             RoslynFindUsagesTableDataSourceIdentifier
@@ -228,13 +228,13 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             }
 
             return supportsReferences
-              ? StartSearchWithReferences(
+                ? StartSearchWithReferences(
                     window,
                     desiredGroupingPriority,
                     includeContainingTypeAndMemberColumns,
                     includeKindColumn
                 )
-              : StartSearchWithoutReferences(
+                : StartSearchWithoutReferences(
                     window,
                     includeContainingTypeAndMemberColumns,
                     includeKindColumn

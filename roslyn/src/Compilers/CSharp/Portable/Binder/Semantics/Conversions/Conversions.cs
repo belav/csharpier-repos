@@ -93,10 +93,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (resolution.IsEmpty || resolution.HasAnyErrors)
                     ? Conversion.NoConversion
                     : ToConversion(
-                          resolution.OverloadResolutionResult,
-                          resolution.MethodGroup,
-                          methodSymbol.ParameterCount
-                      );
+                        resolution.OverloadResolutionResult,
+                        resolution.MethodGroup,
+                        methodSymbol.ParameterCount
+                    );
             resolution.Free();
             return conversion;
         }
@@ -122,10 +122,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (resolution.IsEmpty || resolution.HasAnyErrors)
                     ? Conversion.NoConversion
                     : ToConversion(
-                          resolution.OverloadResolutionResult,
-                          resolution.MethodGroup,
-                          destination.Signature.ParameterCount
-                      );
+                        resolution.OverloadResolutionResult,
+                        resolution.MethodGroup,
+                        destination.Signature.ParameterCount
+                    );
             resolution.Free();
             return conversion;
         }
@@ -161,8 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TypeCompareKind.ConsiderEverything
                 )
             )
-              ? Conversion.InterpolatedString
-              : Conversion.NoConversion;
+                ? Conversion.InterpolatedString
+                : Conversion.NoConversion;
         }
 
         /// <summary>

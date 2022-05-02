@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             var emitOptions = EmitOptions.Default.WithDebugInformationFormat(
                 baseline.HasPortablePdb
-                  ? DebugInformationFormat.PortablePdb
-                  : DebugInformationFormat.Pdb
+                    ? DebugInformationFormat.PortablePdb
+                    : DebugInformationFormat.Pdb
             );
             var runtimeMDVersion = compilation.GetRuntimeMetadataVersion(emitOptions, diagnostics);
             var serializationProperties = compilation.ConstructModuleSerializationProperties(

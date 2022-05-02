@@ -100,8 +100,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public class TestDiagnosticListener
             : ITestDiagnosticListener,
-              IObserver<DiagnosticListener>,
-              IObserver<KeyValuePair<string, object>>
+                IObserver<DiagnosticListener>,
+                IObserver<KeyValuePair<string, object>>
         {
             private readonly DbContextId _contextId;
             private readonly IDisposable _subscription;

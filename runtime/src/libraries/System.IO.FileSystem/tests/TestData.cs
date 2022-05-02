@@ -11,7 +11,7 @@ internal static class TestData
     private static readonly char[] s_invalidFileNameChars = RuntimeInformation.IsOSPlatform(
         OSPlatform.Windows
     )
-      ? new char[]
+        ? new char[]
         {
             '\"',
             '<',
@@ -52,7 +52,7 @@ internal static class TestData
             '*',
             '?'
         }
-      : new char[] { '\0' };
+        : new char[] { '\0' };
 
     public static TheoryData<string> PathsWithInvalidColons
     {

@@ -24,13 +24,13 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
 
             foreach (
                 var cultureSubfolder in string.IsNullOrEmpty(assemblyName.CultureName)
-                  // If no culture is specified, attempt to load directly from
-                  // the known dependency paths.
-                  ? new[] { string.Empty }
-                  // Search for satellite assemblies in culture subdirectories
-                  // of the assembly search directories, but fall back to the
-                  // bare search directory if that fails.
-                  : new[] { assemblyName.CultureName, string.Empty }
+                    // If no culture is specified, attempt to load directly from
+                    // the known dependency paths.
+                    ? new[] { string.Empty }
+                    // Search for satellite assemblies in culture subdirectories
+                    // of the assembly search directories, but fall back to the
+                    // bare search directory if that fails.
+                    : new[] { assemblyName.CultureName, string.Empty }
             )
             {
                 foreach (var extension in s_extensions)

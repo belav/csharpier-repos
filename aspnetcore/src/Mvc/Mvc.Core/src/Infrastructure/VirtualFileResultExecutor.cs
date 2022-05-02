@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// </summary>
 public class VirtualFileResultExecutor
     : FileResultExecutorBase,
-      IActionResultExecutor<VirtualFileResult>
+        IActionResultExecutor<VirtualFileResult>
 {
     private readonly IWebHostEnvironment _hostingEnvironment;
 

@@ -121,8 +121,8 @@ public partial class CancelKeyPressTests
                         Assert.True(tcs.Task.Wait(WaitFailTestTimeoutSeconds * 1000));
                         Assert.Equal(
                             signalInner == SIGINT
-                              ? ConsoleSpecialKey.ControlC
-                              : ConsoleSpecialKey.ControlBreak,
+                                ? ConsoleSpecialKey.ControlC
+                                : ConsoleSpecialKey.ControlBreak,
                             tcs.Task.Result
                         );
                     }

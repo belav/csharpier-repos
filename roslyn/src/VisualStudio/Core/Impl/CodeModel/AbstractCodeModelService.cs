@@ -287,9 +287,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 case SymbolKind.Property:
                     var propertySymbol = (IPropertySymbol)symbol;
                     return propertySymbol.IsWithEvents
-                      ? (EnvDTE.CodeElement)
+                        ? (EnvDTE.CodeElement)
                             ExternalCodeVariable.Create(state, projectId, propertySymbol)
-                      : (EnvDTE.CodeElement)
+                        : (EnvDTE.CodeElement)
                             ExternalCodeProperty.Create(state, projectId, (IPropertySymbol)symbol);
                 default:
                     throw Exceptions.ThrowEFail();
@@ -1497,8 +1497,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             document = document.WithSyntaxRoot(newRoot);
 
             var additionalRules = AddBlankLineToMethodBody(node, newNode)
-              ? SpecializedCollections.SingletonEnumerable(_lineAdjustmentFormattingRule)
-              : null;
+                ? SpecializedCollections.SingletonEnumerable(_lineAdjustmentFormattingRule)
+                : null;
 
             document = FormatAnnotatedNode(
                 document,

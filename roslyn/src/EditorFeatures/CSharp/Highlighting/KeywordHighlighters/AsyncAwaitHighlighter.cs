@@ -81,20 +81,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.KeywordHighlighting.KeywordHighli
             node switch
             {
                 MethodDeclarationSyntax methodDeclaration
-                  => TryAddAsyncModifier(methodDeclaration.Modifiers, spans),
+                    => TryAddAsyncModifier(methodDeclaration.Modifiers, spans),
                 LocalFunctionStatementSyntax localFunction
-                  => TryAddAsyncModifier(localFunction.Modifiers, spans),
+                    => TryAddAsyncModifier(localFunction.Modifiers, spans),
                 AnonymousFunctionExpressionSyntax anonymousFunction
-                  => TryAddAsyncOrAwaitKeyword(anonymousFunction.AsyncKeyword, spans),
+                    => TryAddAsyncOrAwaitKeyword(anonymousFunction.AsyncKeyword, spans),
                 UsingStatementSyntax usingStatement
-                  => TryAddAsyncOrAwaitKeyword(usingStatement.AwaitKeyword, spans),
+                    => TryAddAsyncOrAwaitKeyword(usingStatement.AwaitKeyword, spans),
                 LocalDeclarationStatementSyntax localDeclaration
-                  => localDeclaration.UsingKeyword.Kind() == SyntaxKind.UsingKeyword
-                      && TryAddAsyncOrAwaitKeyword(localDeclaration.AwaitKeyword, spans),
+                    => localDeclaration.UsingKeyword.Kind() == SyntaxKind.UsingKeyword
+                        && TryAddAsyncOrAwaitKeyword(localDeclaration.AwaitKeyword, spans),
                 CommonForEachStatementSyntax forEachStatement
-                  => TryAddAsyncOrAwaitKeyword(forEachStatement.AwaitKeyword, spans),
+                    => TryAddAsyncOrAwaitKeyword(forEachStatement.AwaitKeyword, spans),
                 AwaitExpressionSyntax awaitExpression
-                  => TryAddAsyncOrAwaitKeyword(awaitExpression.AwaitKeyword, spans),
+                    => TryAddAsyncOrAwaitKeyword(awaitExpression.AwaitKeyword, spans),
                 _ => false,
             };
 

@@ -730,8 +730,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             return container.ReadItemStreamAsync(
                 resourceId,
                 string.IsNullOrEmpty(partitionKey)
-                  ? PartitionKey.None
-                  : new PartitionKey(partitionKey),
+                    ? PartitionKey.None
+                    : new PartitionKey(partitionKey),
                 cancellationToken: cancellationToken
             );
         }

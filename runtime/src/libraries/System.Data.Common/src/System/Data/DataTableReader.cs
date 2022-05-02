@@ -727,8 +727,8 @@ namespace System.Data
                 _currentDataRow!.ItemArray,
                 values,
                 _currentDataRow.ItemArray.Length > values.Length
-                  ? values.Length
-                  : _currentDataRow.ItemArray.Length
+                    ? values.Length
+                    : _currentDataRow.ItemArray.Length
             );
             return (
                 _currentDataRow.ItemArray.Length > values.Length

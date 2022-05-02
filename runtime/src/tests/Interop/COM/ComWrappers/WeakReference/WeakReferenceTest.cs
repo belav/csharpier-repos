@@ -103,8 +103,8 @@ namespace ComWrappersTests
         public CustomQueryInterfaceResult GetInterface(ref Guid iid, out IntPtr ppv)
         {
             return inner.QueryInterface(iid, out ppv) == 0
-              ? CustomQueryInterfaceResult.Handled
-              : CustomQueryInterfaceResult.Failed;
+                ? CustomQueryInterfaceResult.Handled
+                : CustomQueryInterfaceResult.Failed;
         }
     }
 

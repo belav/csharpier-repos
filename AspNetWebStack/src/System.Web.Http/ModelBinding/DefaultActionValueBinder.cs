@@ -132,14 +132,14 @@ namespace System.Web.Http.ModelBinding
             pb.Add(
                 parameter =>
                     typeof(HttpContent).IsAssignableFrom(parameter.ParameterType)
-                      ? parameter.BindAsError(
+                        ? parameter.BindAsError(
                             Error.Format(
                                 SRResources.ParameterBindingIllegalType,
                                 parameter.ParameterType.Name,
                                 parameter.ParameterName
                             )
                         )
-                      : null
+                        : null
             );
 
             return pb;

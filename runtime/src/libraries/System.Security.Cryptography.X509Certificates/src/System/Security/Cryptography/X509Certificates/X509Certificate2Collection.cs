@@ -14,7 +14,7 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public class X509Certificate2Collection
         : X509CertificateCollection,
-          IEnumerable<X509Certificate2>
+            IEnumerable<X509Certificate2>
     {
         public X509Certificate2Collection() { }
 

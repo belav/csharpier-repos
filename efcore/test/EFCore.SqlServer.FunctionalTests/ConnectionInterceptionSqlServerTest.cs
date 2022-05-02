@@ -65,7 +65,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ConnectionInterceptionSqlServerTest
             : ConnectionInterceptionSqlServerTestBase,
-              IClassFixture<ConnectionInterceptionSqlServerTest.InterceptionSqlServerFixture>
+                IClassFixture<ConnectionInterceptionSqlServerTest.InterceptionSqlServerFixture>
         {
             public ConnectionInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
                 : base(fixture) { }
@@ -78,7 +78,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ConnectionInterceptionWithDiagnosticsSqlServerTest
             : ConnectionInterceptionSqlServerTestBase,
-              IClassFixture<ConnectionInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
+                IClassFixture<ConnectionInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
         {
             public ConnectionInterceptionWithDiagnosticsSqlServerTest(
                 InterceptionSqlServerFixture fixture

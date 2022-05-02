@@ -478,13 +478,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             return interfacesOrAbstractClasses.First().TypeKind == TypeKind.Interface
-              ? GetInterfacesToImplement(
+                ? GetInterfacesToImplement(
                     classOrStructType,
                     interfacesOrAbstractClasses,
                     allowReimplementation,
                     cancellationToken
                 )
-              : GetAbstractClassesToImplement(interfacesOrAbstractClasses);
+                : GetAbstractClassesToImplement(interfacesOrAbstractClasses);
         }
 
         private static ImmutableArray<INamedTypeSymbol> GetAbstractClassesToImplement(
@@ -721,7 +721,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 IEventSymbol => true,
                 IMethodSymbol { MethodKind: MethodKind.Ordinary, CanBeReferencedByName: true }
-                  => true,
+                    => true,
                 IPropertySymbol { IsWithEvents: false } => true,
                 _ => false,
             };

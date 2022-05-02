@@ -12,7 +12,7 @@ namespace System.ComponentModel.Composition.Factories
     {
         public class MutableComposablePartCatalog
             : ComposablePartCatalog,
-              INotifyComposablePartCatalogChanged
+                INotifyComposablePartCatalogChanged
         {
             private readonly HashSet<ComposablePartDefinition> _definitions;
 

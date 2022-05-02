@@ -15,9 +15,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeDelegate2))]
     public sealed partial class CodeDelegate
         : AbstractCodeType,
-          ICodeElementContainer<CodeParameter>,
-          EnvDTE.CodeDelegate,
-          EnvDTE80.CodeDelegate2
+            ICodeElementContainer<CodeParameter>,
+            EnvDTE.CodeDelegate,
+            EnvDTE80.CodeDelegate2
     {
         internal static EnvDTE.CodeDelegate Create(
             CodeModelState state,

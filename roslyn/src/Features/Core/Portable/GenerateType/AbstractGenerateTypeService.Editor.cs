@@ -624,9 +624,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         .TryAddUsingsOrImportToDocumentAsync(
                             updatedSolution,
                             generateTypeOptionsResult.ExistingDocument.Id
-                                == _semanticDocument.Document.Id
-                              ? newRoot
-                              : null,
+                            == _semanticDocument.Document.Id
+                                ? newRoot
+                                : null,
                             _semanticDocument.Document,
                             _state.SimpleName,
                             includeUsingsOrImports,
@@ -685,15 +685,15 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     var rootNamespaceOfTheProjectGeneratedInto =
                         _targetProjectChangeInLanguage == TargetProjectChangeInLanguage.NoChange
                             ? _service
-                              .GetRootNamespace(
-                                  _generateTypeOptionsResult.Project.CompilationOptions
-                              )
-                              .Trim()
+                                .GetRootNamespace(
+                                    _generateTypeOptionsResult.Project.CompilationOptions
+                                )
+                                .Trim()
                             : _targetLanguageService
-                              .GetRootNamespace(
-                                  _generateTypeOptionsResult.Project.CompilationOptions
-                              )
-                              .Trim();
+                                .GetRootNamespace(
+                                    _generateTypeOptionsResult.Project.CompilationOptions
+                                )
+                                .Trim();
 
                     var defaultNamespace = _generateTypeOptionsResult.DefaultNamespace;
 
@@ -753,10 +753,10 @@ namespace Microsoft.CodeAnalysis.GenerateType
                         if (!string.IsNullOrWhiteSpace(rootNamespaceOfTheProjectGeneratedInto))
                         {
                             includeUsingsOrImports = string.IsNullOrEmpty(includeUsingsOrImports)
-                              ? rootNamespaceOfTheProjectGeneratedInto
-                              : rootNamespaceOfTheProjectGeneratedInto
-                                + "."
-                                + includeUsingsOrImports;
+                                ? rootNamespaceOfTheProjectGeneratedInto
+                                : rootNamespaceOfTheProjectGeneratedInto
+                                    + "."
+                                    + includeUsingsOrImports;
                         }
                     }
 

@@ -18,8 +18,8 @@ namespace System.Globalization
             }
 
             return GlobalizationMode.UseNls
-              ? NlsIsNormalized(strInput, normalizationForm)
-              : IcuIsNormalized(strInput, normalizationForm);
+                ? NlsIsNormalized(strInput, normalizationForm)
+                : IcuIsNormalized(strInput, normalizationForm);
         }
 
         internal static string Normalize(string strInput, NormalizationForm normalizationForm)
@@ -32,8 +32,8 @@ namespace System.Globalization
             }
 
             return GlobalizationMode.UseNls
-              ? NlsNormalize(strInput, normalizationForm)
-              : IcuNormalize(strInput, normalizationForm);
+                ? NlsNormalize(strInput, normalizationForm)
+                : IcuNormalize(strInput, normalizationForm);
         }
     }
 }

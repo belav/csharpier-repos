@@ -199,8 +199,8 @@ namespace Roslyn.Test.Utilities.PDB
                 name,
                 mvid,
                 string.IsNullOrEmpty(externAliases)
-                  ? ImmutableArray<string>.Empty
-                  : externAliases.Split(',').ToImmutableArray(),
+                    ? ImmutableArray<string>.Empty
+                    : externAliases.Split(',').ToImmutableArray(),
                 kind,
                 embedInteropTypes
             );

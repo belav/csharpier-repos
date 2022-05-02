@@ -213,8 +213,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <exception cref="ArgumentNullException"><paramref name="references"/> is null or contains a null reference.</exception>
         private ScriptOptions WithReferences(ImmutableArray<MetadataReference> references) =>
             MetadataReferences.Equals(references)
-              ? this
-              : new ScriptOptions(this)
+                ? this
+                : new ScriptOptions(this)
                 {
                     MetadataReferences = CheckImmutableArray(references, nameof(references))
                 };
@@ -341,8 +341,11 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <exception cref="ArgumentNullException"><paramref name="imports"/> is null or contains a null reference.</exception>
         private ScriptOptions WithImports(ImmutableArray<string> imports) =>
             Imports.Equals(imports)
-              ? this
-              : new ScriptOptions(this) { Imports = CheckImmutableArray(imports, nameof(imports)) };
+                ? this
+                : new ScriptOptions(this)
+                {
+                    Imports = CheckImmutableArray(imports, nameof(imports))
+                };
 
         /// <summary>
         /// Creates a new <see cref="ScriptOptions"/> with the <see cref="Imports"/> changed.

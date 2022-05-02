@@ -2395,9 +2395,9 @@ class C
             ) =>
                 (m == "P")
                     ? CreateErrorValue(
-                          runtime.GetType(typeof(System.Collections.ArrayList)),
-                          "Function evaluation timed out"
-                      )
+                        runtime.GetType(typeof(System.Collections.ArrayList)),
+                        "Function evaluation timed out"
+                    )
                     : null;
             runtime = new DkmClrRuntimeInstance(
                 ReflectionUtilities.GetMscorlibAndSystemCore(GetAssembly(source)),
@@ -2455,9 +2455,9 @@ class C : IEnumerable
             ) =>
                 (m == "Items")
                     ? CreateErrorValue(
-                          runtime.GetType(typeof(object)).MakeArrayType(),
-                          string.Format("Unable to evaluate '{0}'", m)
-                      )
+                        runtime.GetType(typeof(object)).MakeArrayType(),
+                        string.Format("Unable to evaluate '{0}'", m)
+                    )
                     : null;
             runtime = new DkmClrRuntimeInstance(
                 ReflectionUtilities.GetMscorlibAndSystemCore(GetAssembly(source)),

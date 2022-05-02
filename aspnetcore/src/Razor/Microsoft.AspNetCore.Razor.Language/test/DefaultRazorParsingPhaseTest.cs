@@ -111,7 +111,7 @@ public class DefaultRazorParsingPhaseTest
 
     private class MyParserOptionsFeature
         : RazorEngineFeatureBase,
-          IConfigureRazorParserOptionsFeature
+            IConfigureRazorParserOptionsFeature
     {
         public int Order { get; }
 

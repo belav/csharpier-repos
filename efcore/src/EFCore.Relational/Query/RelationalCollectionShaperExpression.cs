@@ -139,16 +139,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             || selfIdentifier != SelfIdentifier
             || innerShaper != InnerShaper
                 ? new RelationalCollectionShaperExpression(
-                      parentIdentifier,
-                      outerIdentifier,
-                      selfIdentifier,
-                      ParentIdentifierValueComparers,
-                      OuterIdentifierValueComparers,
-                      SelfIdentifierValueComparers,
-                      innerShaper,
-                      Navigation,
-                      ElementType
-                  )
+                    parentIdentifier,
+                    outerIdentifier,
+                    selfIdentifier,
+                    ParentIdentifierValueComparers,
+                    OuterIdentifierValueComparers,
+                    SelfIdentifierValueComparers,
+                    innerShaper,
+                    Navigation,
+                    ElementType
+                )
                 : this;
 
         /// <inheritdoc />

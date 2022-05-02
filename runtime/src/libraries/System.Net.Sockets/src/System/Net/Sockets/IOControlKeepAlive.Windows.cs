@@ -56,13 +56,13 @@ namespace System.Net.Sockets
             )
             {
                 return optionName == SocketOptionName.TcpKeepAliveTime
-                  ? MillisecondsToSeconds(ioControlKeepAlive._timeMs)
-                  : MillisecondsToSeconds(ioControlKeepAlive._intervalMs);
+                    ? MillisecondsToSeconds(ioControlKeepAlive._timeMs)
+                    : MillisecondsToSeconds(ioControlKeepAlive._intervalMs);
             }
 
             return optionName == SocketOptionName.TcpKeepAliveTime
-              ? MillisecondsToSeconds(WindowsDefaultTimeMs)
-              : MillisecondsToSeconds(WindowsDefaultIntervalMs);
+                ? MillisecondsToSeconds(WindowsDefaultTimeMs)
+                : MillisecondsToSeconds(WindowsDefaultIntervalMs);
         }
 
         public static SocketError Set(

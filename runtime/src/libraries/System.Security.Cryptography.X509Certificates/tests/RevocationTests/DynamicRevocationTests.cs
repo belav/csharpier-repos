@@ -31,7 +31,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
             || PlatformDetection.IsAndroid
                 ? X509ChainStatusFlags.RevocationStatusUnknown
                 : X509ChainStatusFlags.RevocationStatusUnknown
-                  | X509ChainStatusFlags.OfflineRevocation;
+                    | X509ChainStatusFlags.OfflineRevocation;
 
         // Android will stop checking after the first revocation error, so any revoked certificates
         // after will have RevocationStatusUnknown instead of Revoked

@@ -649,9 +649,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return ((object)methodOpt == null)
-              ? ExprFactory(opName, loweredLeft, loweredRight)
-              : requiresLifted
-                  ? ExprFactory(
+                ? ExprFactory(opName, loweredLeft, loweredRight)
+                : requiresLifted
+                    ? ExprFactory(
                         opName,
                         loweredLeft,
                         loweredRight,
@@ -665,7 +665,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ),
                         _bound.MethodInfo(methodOpt)
                     )
-                  : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
+                    : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
         }
 
         private TypeSymbol PromotedType(TypeSymbol underlying)
@@ -698,8 +698,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var promotedType = e.IsNullableType()
-                  ? _nullableType.Construct(PromotedType(e.GetNullableUnderlyingType()))
-                  : PromotedType(e);
+                    ? _nullableType.Construct(PromotedType(e.GetNullableUnderlyingType()))
+                    : PromotedType(e);
                 if (!TypeSymbol.Equals(promotedType, type, TypeCompareKind.ConsiderEverything2))
                 {
                     return Convert(node, type, isChecked);
@@ -754,8 +754,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return ExprFactory(
                     "Call",
                     method.RequiresInstanceReceiver
-                      ? Visit(node.ReceiverOpt)
-                      : _bound.Null(ExpressionType),
+                        ? Visit(node.ReceiverOpt)
+                        : _bound.Null(ExpressionType),
                     _bound.MethodInfo(method),
                     Expressions(node.Arguments)
                 );
@@ -846,12 +846,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                             : method.ReturnType;
                     var e1 = requireAdditionalCast
                         ? Convert(
-                              Visit(node.Operand),
-                              node.Operand.Type,
-                              method.Parameters[0].Type,
-                              node.Checked,
-                              false
-                          )
+                            Visit(node.Operand),
+                            node.Operand.Type,
+                            method.Parameters[0].Type,
+                            node.Checked,
+                            false
+                        )
                         : Visit(node.Operand);
                     var e2 = ExprFactory(
                         "Convert",
@@ -924,8 +924,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeSymbol.Equals(oldType, newType, TypeCompareKind.ConsiderEverything2)
                 && !isExplicit
             )
-              ? operand
-              : Convert(operand, newType, isChecked);
+                ? operand
+                : Convert(operand, newType, isChecked);
         }
 
         private BoundExpression Convert(BoundExpression expr, TypeSymbol type, bool isChecked)
@@ -1464,8 +1464,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return ((object)node.MethodOpt == null)
-              ? ExprFactory(opname, loweredArg)
-              : ExprFactory(opname, loweredArg, _bound.MethodInfo(node.MethodOpt));
+                ? ExprFactory(opname, loweredArg)
+                : ExprFactory(opname, loweredArg, _bound.MethodInfo(node.MethodOpt));
         }
 
         // ======================================================

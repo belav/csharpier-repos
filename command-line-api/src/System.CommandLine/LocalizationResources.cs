@@ -29,15 +29,15 @@ namespace System.CommandLine
         public virtual string ExpectsOneArgument(SymbolResult symbolResult) =>
             symbolResult is CommandResult
                 ? GetResourceString(
-                      Properties.Resources.CommandExpectsOneArgument,
-                      symbolResult.Token().Value,
-                      symbolResult.Tokens.Count
-                  )
+                    Properties.Resources.CommandExpectsOneArgument,
+                    symbolResult.Token().Value,
+                    symbolResult.Tokens.Count
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionExpectsOneArgument,
-                      symbolResult.Token().Value,
-                      symbolResult.Tokens.Count
-                  );
+                    Properties.Resources.OptionExpectsOneArgument,
+                    symbolResult.Token().Value,
+                    symbolResult.Tokens.Count
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to No argument was provided for Command &apos;{0}&apos;..
@@ -45,13 +45,13 @@ namespace System.CommandLine
         public virtual string NoArgumentProvided(SymbolResult symbolResult) =>
             symbolResult is CommandResult
                 ? GetResourceString(
-                      Properties.Resources.CommandNoArgumentProvided,
-                      symbolResult.Token().Value
-                  )
+                    Properties.Resources.CommandNoArgumentProvided,
+                    symbolResult.Token().Value
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionNoArgumentProvided,
-                      symbolResult.Token().Value
-                  );
+                    Properties.Resources.OptionNoArgumentProvided,
+                    symbolResult.Token().Value
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Command &apos;{0}&apos; expects no more than {1} arguments, but {2} were provided.
@@ -63,17 +63,17 @@ namespace System.CommandLine
         ) =>
             token.Type == TokenType.Command
                 ? GetResourceString(
-                      Properties.Resources.CommandExpectsFewerArguments,
-                      token,
-                      maximumNumberOfValues,
-                      providedNumberOfValues
-                  )
+                    Properties.Resources.CommandExpectsFewerArguments,
+                    token,
+                    maximumNumberOfValues,
+                    providedNumberOfValues
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionExpectsFewerArguments,
-                      token,
-                      maximumNumberOfValues,
-                      providedNumberOfValues
-                  );
+                    Properties.Resources.OptionExpectsFewerArguments,
+                    token,
+                    maximumNumberOfValues,
+                    providedNumberOfValues
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Directory does not exist: {0}.
@@ -111,13 +111,13 @@ namespace System.CommandLine
         public virtual string RequiredArgumentMissing(SymbolResult symbolResult) =>
             symbolResult is CommandResult
                 ? GetResourceString(
-                      Properties.Resources.CommandRequiredArgumentMissing,
-                      symbolResult.Token().Value
-                  )
+                    Properties.Resources.CommandRequiredArgumentMissing,
+                    symbolResult.Token().Value
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionRequiredArgumentMissing,
-                      symbolResult.Token().Value
-                  );
+                    Properties.Resources.OptionRequiredArgumentMissing,
+                    symbolResult.Token().Value
+                );
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Required command was not provided.

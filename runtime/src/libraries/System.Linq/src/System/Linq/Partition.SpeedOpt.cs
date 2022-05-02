@@ -107,8 +107,8 @@ namespace System.Linq
         {
             int minIndex = unchecked(_minIndexInclusive + count);
             return unchecked((uint)minIndex > (uint)_maxIndexInclusive)
-              ? EmptyPartition<TElement>.Instance
-              : new OrderedPartition<TElement>(_source, minIndex, _maxIndexInclusive);
+                ? EmptyPartition<TElement>.Instance
+                : new OrderedPartition<TElement>(_source, minIndex, _maxIndexInclusive);
         }
 
         public IPartition<TElement> Take(int count)
@@ -211,16 +211,16 @@ namespace System.Linq
             {
                 int minIndex = _minIndexInclusive + count;
                 return (uint)minIndex > (uint)_maxIndexInclusive
-                  ? EmptyPartition<TSource>.Instance
-                  : new ListPartition<TSource>(_source, minIndex, _maxIndexInclusive);
+                    ? EmptyPartition<TSource>.Instance
+                    : new ListPartition<TSource>(_source, minIndex, _maxIndexInclusive);
             }
 
             public IPartition<TSource> Take(int count)
             {
                 int maxIndex = unchecked(_minIndexInclusive + count - 1);
                 return unchecked((uint)maxIndex >= (uint)_maxIndexInclusive)
-                  ? this
-                  : new ListPartition<TSource>(_source, _minIndexInclusive, maxIndex);
+                    ? this
+                    : new ListPartition<TSource>(_source, _minIndexInclusive, maxIndex);
             }
 
             public TSource? TryGetElementAt(int index, out bool found)

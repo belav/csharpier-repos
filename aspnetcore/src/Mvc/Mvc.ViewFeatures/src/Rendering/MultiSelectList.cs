@@ -158,8 +158,8 @@ public class MultiSelectList : IEnumerable<SelectListItem>
     private IList<SelectListItem> GetListItems()
     {
         return (!string.IsNullOrEmpty(DataValueField))
-          ? GetListItemsWithValueField()
-          : GetListItemsWithoutValueField();
+            ? GetListItemsWithValueField()
+            : GetListItemsWithoutValueField();
     }
 
     private IList<SelectListItem> GetListItemsWithValueField()

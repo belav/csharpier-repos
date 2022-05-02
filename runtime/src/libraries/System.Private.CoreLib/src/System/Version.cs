@@ -21,10 +21,10 @@ namespace System
     )]
     public sealed class Version
         : ICloneable,
-          IComparable,
-          IComparable<Version?>,
-          IEquatable<Version?>,
-          ISpanFormattable
+            IComparable,
+            IComparable<Version?>,
+            IEquatable<Version?>,
+            ISpanFormattable
     {
         // AssemblyName depends on the order staying the same
         private readonly int _Major; // Do not rename (binary serialization)
@@ -149,18 +149,18 @@ namespace System
         public int CompareTo(Version? value)
         {
             return object.ReferenceEquals(value, this)
-              ? 0
-              : value is null
-                  ? 1
-                  : _Major != value._Major
-                      ? (_Major > value._Major ? 1 : -1)
-                      : _Minor != value._Minor
-                          ? (_Minor > value._Minor ? 1 : -1)
-                          : _Build != value._Build
-                              ? (_Build > value._Build ? 1 : -1)
-                              : _Revision != value._Revision
-                                  ? (_Revision > value._Revision ? 1 : -1)
-                                  : 0;
+                ? 0
+                : value is null
+                    ? 1
+                    : _Major != value._Major
+                        ? (_Major > value._Major ? 1 : -1)
+                        : _Minor != value._Minor
+                            ? (_Minor > value._Minor ? 1 : -1)
+                            : _Build != value._Build
+                                ? (_Build > value._Build ? 1 : -1)
+                                : _Revision != value._Revision
+                                    ? (_Revision > value._Revision ? 1 : -1)
+                                    : 0;
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj)
@@ -403,8 +403,8 @@ namespace System
                             throwOnFailure,
                             out revision
                         )
-                      ? new Version(major, minor, build, revision)
-                      : null;
+                        ? new Version(major, minor, build, revision)
+                        : null;
                 }
                 else
                 {
@@ -415,8 +415,8 @@ namespace System
                         throwOnFailure,
                         out build
                     )
-                      ? new Version(major, minor, build)
-                      : null;
+                        ? new Version(major, minor, build)
+                        : null;
                 }
             }
             else
@@ -428,8 +428,8 @@ namespace System
                     throwOnFailure,
                     out minor
                 )
-                  ? new Version(major, minor)
-                  : null;
+                    ? new Version(major, minor)
+                    : null;
             }
         }
 

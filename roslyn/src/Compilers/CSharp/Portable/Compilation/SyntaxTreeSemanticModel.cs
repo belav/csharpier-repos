@@ -236,8 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ParameterList: { },
                     PrimaryConstructorBaseTypeIfClass: { }
                 } recordDeclaration
-                      when TryGetSynthesizedRecordConstructor(recordDeclaration)
-                          is SynthesizedRecordConstructor:
+                when TryGetSynthesizedRecordConstructor(recordDeclaration)
+                    is SynthesizedRecordConstructor:
                     model = GetOrAddModel(recordDeclaration);
                     break;
                 default:
@@ -490,12 +490,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         Symbol result = bindVarAsAliasFirst
                             ? binder
-                              .BindTypeOrAlias(
-                                  type,
-                                  BindingDiagnosticBag.Discarded,
-                                  basesBeingResolved
-                              )
-                              .Symbol
+                                .BindTypeOrAlias(
+                                    type,
+                                    BindingDiagnosticBag.Discarded,
+                                    basesBeingResolved
+                                )
+                                .Symbol
                             : null;
 
                         // CONSIDER: we might bind "var" twice - once to see if it is an alias and again
@@ -562,8 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var model = this.GetMemberModel(node);
             return model == null
-              ? ImmutableArray<Symbol>.Empty
-              : model.GetMemberGroupWorker(node, options, cancellationToken);
+                ? ImmutableArray<Symbol>.Empty
+                : model.GetMemberGroupWorker(node, options, cancellationToken);
         }
 
         internal override ImmutableArray<IPropertySymbol> GetIndexerGroupWorker(
@@ -577,8 +577,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var model = this.GetMemberModel(node);
             return model == null
-              ? ImmutableArray<IPropertySymbol>.Empty
-              : model.GetIndexerGroupWorker(node, options, cancellationToken);
+                ? ImmutableArray<IPropertySymbol>.Empty
+                : model.GetIndexerGroupWorker(node, options, cancellationToken);
         }
 
         internal override Optional<object> GetConstantValueWorker(
@@ -591,8 +591,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var model = this.GetMemberModel(node);
             return model == null
-              ? default(Optional<object>)
-              : model.GetConstantValueWorker(node, cancellationToken);
+                ? default(Optional<object>)
+                : model.GetConstantValueWorker(node, cancellationToken);
         }
 
         public override QueryClauseInfo GetQueryClauseInfo(
@@ -603,8 +603,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(node);
             var model = this.GetMemberModel(node);
             return (model == null)
-              ? default(QueryClauseInfo)
-              : model.GetQueryClauseInfo(node, cancellationToken);
+                ? default(QueryClauseInfo)
+                : model.GetQueryClauseInfo(node, cancellationToken);
         }
 
         public override SymbolInfo GetSymbolInfo(
@@ -625,8 +625,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(node);
             var model = this.GetMemberModel(node);
             return (model == null)
-              ? CSharpTypeInfo.None
-              : model.GetTypeInfo(node, cancellationToken);
+                ? CSharpTypeInfo.None
+                : model.GetTypeInfo(node, cancellationToken);
         }
 
         public override IPropertySymbol GetDeclaredSymbol(
@@ -637,8 +637,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
             return (model == null)
-              ? null
-              : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+                ? null
+                : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
         public override INamedTypeSymbol GetDeclaredSymbol(
@@ -649,8 +649,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
             return (model == null)
-              ? null
-              : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+                ? null
+                : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
         public override INamedTypeSymbol GetDeclaredSymbol(
@@ -661,8 +661,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
             return (model == null)
-              ? null
-              : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+                ? null
+                : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
         public override ISymbol GetDeclaredSymbol(
@@ -673,8 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(declaratorSyntax);
             var model = this.GetMemberModel(declaratorSyntax);
             return (model == null)
-              ? null
-              : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
+                ? null
+                : model.GetDeclaredSymbol(declaratorSyntax, cancellationToken);
         }
 
         public override IRangeVariableSymbol GetDeclaredSymbol(
@@ -1132,8 +1132,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var memberModel = IsNullableAnalysisEnabledAtSpeculativePosition(position, attribute)
-              ? GetMemberModel(position)
-              : null;
+                ? GetMemberModel(position)
+                : null;
             return AttributeSemanticModel.CreateSpeculative(
                 this,
                 attribute,
@@ -1261,8 +1261,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             expressionBody?.FullSpan.Contains(span) == true
                             || methodDecl.Body?.FullSpan.Contains(span) == true
                         )
-                          ? GetOrAddModel(methodDecl)
-                          : null;
+                            ? GetOrAddModel(methodDecl)
+                            : null;
                     }
 
                     case SyntaxKind.ConstructorDeclaration:
@@ -1275,8 +1275,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             || expressionBody?.FullSpan.Contains(span) == true
                             || constructorDecl.Body?.FullSpan.Contains(span) == true
                         )
-                          ? GetOrAddModel(constructorDecl)
-                          : null;
+                            ? GetOrAddModel(constructorDecl)
+                            : null;
                     }
 
                     case SyntaxKind.RecordDeclaration:
@@ -1290,8 +1290,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 node == baseWithArguments
                                 || baseWithArguments.ArgumentList.FullSpan.Contains(span)
                             )
-                          ? GetOrAddModel(memberDecl)
-                          : null;
+                            ? GetOrAddModel(memberDecl)
+                            : null;
                     }
 
                     case SyntaxKind.DestructorDeclaration:
@@ -1303,8 +1303,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             expressionBody?.FullSpan.Contains(span) == true
                             || destructorDecl.Body?.FullSpan.Contains(span) == true
                         )
-                          ? GetOrAddModel(destructorDecl)
-                          : null;
+                            ? GetOrAddModel(destructorDecl)
+                            : null;
                     }
 
                     case SyntaxKind.GetAccessorDeclaration:
@@ -1319,8 +1319,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             accessorDecl.ExpressionBody?.FullSpan.Contains(span) == true
                             || accessorDecl.Body?.FullSpan.Contains(span) == true
                         )
-                          ? GetOrAddModel(accessorDecl)
-                          : null;
+                            ? GetOrAddModel(accessorDecl)
+                            : null;
                     }
 
                     case SyntaxKind.IndexerDeclaration:
@@ -1352,8 +1352,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var enumDecl = (EnumMemberDeclarationSyntax)memberDecl;
                         return (enumDecl.EqualsValue != null)
-                          ? GetOrAddModelIfContains(enumDecl.EqualsValue, span)
-                          : null;
+                            ? GetOrAddModelIfContains(enumDecl.EqualsValue, span)
+                            : null;
                     }
 
                     case SyntaxKind.PropertyDeclaration:
@@ -1539,8 +1539,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     .GetBinder(node)
                     .WithAdditionalFlags(
                         this.IgnoresAccessibility
-                          ? BinderFlags.IgnoreAccessibility
-                          : BinderFlags.None
+                            ? BinderFlags.IgnoreAccessibility
+                            : BinderFlags.None
                     );
 
             switch (node.Kind())
@@ -2604,8 +2604,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var memberModel = this.GetMemberModel(declarationSyntax);
             return memberModel == null
-              ? null
-              : memberModel.GetDeclaredSymbol(declarationSyntax, cancellationToken);
+                ? null
+                : memberModel.GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
         /// <summary>
@@ -2623,8 +2623,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var memberModel = this.GetMemberModel(declarationSyntax);
             return memberModel == null
-              ? null
-              : memberModel.GetDeclaredSymbol(declarationSyntax, cancellationToken);
+                ? null
+                : memberModel.GetDeclaredSymbol(declarationSyntax, cancellationToken);
         }
 
         /// <summary>
@@ -2785,10 +2785,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (object)method.PartialDefinitionPart == null
                         ? null
                         : GetParameterSymbol(
-                              method.PartialDefinitionPart.Parameters,
-                              parameter,
-                              cancellationToken
-                          )
+                            method.PartialDefinitionPart.Parameters,
+                            parameter,
+                            cancellationToken
+                        )
                 );
         }
 
@@ -2941,9 +2941,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 (object)methodSymbol.PartialDefinitionPart == null
                                     ? null
                                     : this.GetTypeParameterSymbol(
-                                          methodSymbol.PartialDefinitionPart.TypeParameters,
-                                          typeParameter
-                                      )
+                                        methodSymbol.PartialDefinitionPart.TypeParameters,
+                                        typeParameter
+                                    )
                             )
                         ).GetPublicSymbol();
                 }
@@ -3138,16 +3138,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             MemberSemanticModel memberModel = GetMemberModel(node);
             return memberModel == null
-              ? default(AwaitExpressionInfo)
-              : memberModel.GetAwaitExpressionInfo(node);
+                ? default(AwaitExpressionInfo)
+                : memberModel.GetAwaitExpressionInfo(node);
         }
 
         public override ForEachStatementInfo GetForEachStatementInfo(ForEachStatementSyntax node)
         {
             MemberSemanticModel memberModel = GetMemberModel(node);
             return memberModel == null
-              ? default(ForEachStatementInfo)
-              : memberModel.GetForEachStatementInfo(node);
+                ? default(ForEachStatementInfo)
+                : memberModel.GetForEachStatementInfo(node);
         }
 
         public override ForEachStatementInfo GetForEachStatementInfo(
@@ -3156,8 +3156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             MemberSemanticModel memberModel = GetMemberModel(node);
             return memberModel == null
-              ? default(ForEachStatementInfo)
-              : memberModel.GetForEachStatementInfo(node);
+                ? default(ForEachStatementInfo)
+                : memberModel.GetForEachStatementInfo(node);
         }
 
         public override DeconstructionInfo GetDeconstructionInfo(AssignmentExpressionSyntax node)
@@ -3209,12 +3209,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (declaredNode)
             {
                 case CompilationUnitSyntax unit
-                      when SynthesizedSimpleProgramEntryPointSymbol.GetSimpleProgramEntryPoint(
-                          Compilation,
-                          unit,
-                          fallbackToMainEntryPoint: false
-                      )
-                          is SynthesizedSimpleProgramEntryPointSymbol entryPoint:
+                when SynthesizedSimpleProgramEntryPointSymbol.GetSimpleProgramEntryPoint(
+                    Compilation,
+                    unit,
+                    fallbackToMainEntryPoint: false
+                )
+                    is SynthesizedSimpleProgramEntryPointSymbol entryPoint:
                     switch (declaredSymbol.Kind)
                     {
                         case SymbolKind.Namespace:
@@ -3243,8 +3243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
 
                 case RecordDeclarationSyntax recordDeclaration
-                      when TryGetSynthesizedRecordConstructor(recordDeclaration)
-                          is SynthesizedRecordConstructor ctor:
+                when TryGetSynthesizedRecordConstructor(recordDeclaration)
+                    is SynthesizedRecordConstructor ctor:
                     if (recordDeclaration.IsKind(SyntaxKind.RecordDeclaration))
                     {
                         switch (declaredSymbol.Kind)
@@ -3333,9 +3333,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Parent: BaseListSyntax { Parent: RecordDeclarationSyntax recordDeclaration }
                 } baseType
-                      when recordDeclaration.PrimaryConstructorBaseTypeIfClass == declaredNode
-                          && TryGetSynthesizedRecordConstructor(recordDeclaration)
-                              is SynthesizedRecordConstructor ctor:
+                when recordDeclaration.PrimaryConstructorBaseTypeIfClass == declaredNode
+                    && TryGetSynthesizedRecordConstructor(recordDeclaration)
+                        is SynthesizedRecordConstructor ctor:
                     if ((object)declaredSymbol.GetSymbol() == (object)ctor)
                     {
                         // Only 'base arguments list' or nodes below it
@@ -3344,9 +3344,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
 
                 case ParameterSyntax param
-                      when declaredSymbol.Kind == SymbolKind.Property
-                          && param.Parent?.Parent is RecordDeclarationSyntax recordDeclaration
-                          && recordDeclaration.ParameterList == param.Parent:
+                when declaredSymbol.Kind == SymbolKind.Property
+                    && param.Parent?.Parent is RecordDeclarationSyntax recordDeclaration
+                    && recordDeclaration.ParameterList == param.Parent:
                     Debug.Assert(declaredSymbol.GetSymbol() is SynthesizedRecordPropertySymbol);
                     return (node) => false;
             }

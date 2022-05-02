@@ -1704,14 +1704,14 @@ namespace System.Linq
 
     public partial interface IGrouping<out TKey, out TElement>
         : System.Collections.Generic.IEnumerable<TElement>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         TKey Key { get; }
     }
 
     public partial interface ILookup<TKey, TElement>
         : System.Collections.Generic.IEnumerable<System.Linq.IGrouping<TKey, TElement>>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         int Count { get; }
         System.Collections.Generic.IEnumerable<TElement> this[TKey key] { get; }
@@ -1720,7 +1720,7 @@ namespace System.Linq
 
     public partial interface IOrderedEnumerable<out TElement>
         : System.Collections.Generic.IEnumerable<TElement>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         System.Linq.IOrderedEnumerable<TElement> CreateOrderedEnumerable<TKey>(
             System.Func<TElement, TKey> keySelector,
@@ -1731,8 +1731,8 @@ namespace System.Linq
 
     public partial class Lookup<TKey, TElement>
         : System.Collections.Generic.IEnumerable<System.Linq.IGrouping<TKey, TElement>>,
-          System.Collections.IEnumerable,
-          System.Linq.ILookup<TKey, TElement>
+            System.Collections.IEnumerable,
+            System.Linq.ILookup<TKey, TElement>
     {
         internal Lookup() { }
 

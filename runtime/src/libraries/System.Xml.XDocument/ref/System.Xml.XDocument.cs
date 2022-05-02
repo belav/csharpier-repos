@@ -745,7 +745,7 @@ namespace System.Xml.Linq
     [System.Xml.Serialization.XmlSchemaProviderAttribute(null, IsAny = true)]
     public partial class XElement
         : System.Xml.Linq.XContainer,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public XElement(System.Xml.Linq.XElement other) { }
 
@@ -1189,7 +1189,7 @@ namespace System.Xml.Linq
 
     public sealed partial class XName
         : System.IEquatable<System.Xml.Linq.XName>,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         internal XName() { }
 
@@ -1484,7 +1484,7 @@ namespace System.Xml.Linq
 
     public sealed partial class XNodeDocumentOrderComparer
         : System.Collections.Generic.IComparer<System.Xml.Linq.XNode?>,
-          System.Collections.IComparer
+            System.Collections.IComparer
     {
         public XNodeDocumentOrderComparer() { }
 
@@ -1501,7 +1501,7 @@ namespace System.Xml.Linq
 
     public sealed partial class XNodeEqualityComparer
         : System.Collections.Generic.IEqualityComparer<System.Xml.Linq.XNode>,
-          System.Collections.IEqualityComparer
+            System.Collections.IEqualityComparer
     {
         public XNodeEqualityComparer() { }
 

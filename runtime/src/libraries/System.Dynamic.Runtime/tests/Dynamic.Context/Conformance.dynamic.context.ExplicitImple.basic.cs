@@ -142,7 +142,7 @@ namespace Dynamic.Tests
 
     public class TwoExplicitlyImplementedNonGenericInterface1
         : NonGenericInterface1,
-          NonGenericInterface2
+            NonGenericInterface2
     {
         int NonGenericInterface1.Foo() => 0;
 
@@ -151,7 +151,7 @@ namespace Dynamic.Tests
 
     public class TwoExplicitlyImplementedNonGenericInterface2
         : NonGenericInterface1,
-          NonGenericInterface3
+            NonGenericInterface3
     {
         int NonGenericInterface1.Foo() => 0;
 

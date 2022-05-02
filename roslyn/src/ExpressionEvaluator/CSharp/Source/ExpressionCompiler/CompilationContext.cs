@@ -232,8 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     );
 
                     return (syntax is StatementSyntax statementSyntax)
-                      ? BindStatement(binder, statementSyntax, diags, out properties)
-                      : BindExpression(binder, (ExpressionSyntax)syntax, diags, out properties);
+                        ? BindStatement(binder, statementSyntax, diags, out properties)
+                        : BindExpression(binder, (ExpressionSyntax)syntax, diags, out properties);
                 }
             );
 
@@ -842,12 +842,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // (but not System.Type) that the user can expand to see the
             // base type. Instead, we only allow valid C# expressions.
             var expression = IsDeconstruction(syntax)
-              ? binder.BindDeconstruction(
+                ? binder.BindDeconstruction(
                     (AssignmentExpressionSyntax)syntax,
                     bindingDiagnostics,
                     resultIsUsedOverride: true
                 )
-              : binder.BindRValueWithoutTargetType(syntax, bindingDiagnostics);
+                : binder.BindRValueWithoutTargetType(syntax, bindingDiagnostics);
             if (diagnostics.HasAnyErrors())
             {
                 resultProperties = default;
@@ -1566,8 +1566,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             // CONSIDER: We might want to prevent the user from modifying pinned locals -
             // that's pretty dangerous.
             return local.IsConst
-              ? DkmClrCompilationResultFlags.ReadOnlyResult
-              : DkmClrCompilationResultFlags.None;
+                ? DkmClrCompilationResultFlags.ReadOnlyResult
+                : DkmClrCompilationResultFlags.None;
         }
 
         /// <summary>
@@ -1952,8 +1952,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         // A reference to a parameter or local.
                         variableName = fieldName;
                         variableKind = parameterNames.Contains(variableName)
-                          ? DisplayClassVariableKind.Parameter
-                          : DisplayClassVariableKind.Local;
+                            ? DisplayClassVariableKind.Parameter
+                            : DisplayClassVariableKind.Local;
                         Debug.Assert(!field.IsStatic);
                         break;
 
@@ -2187,8 +2187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     )
                     {
                         return desiredTypeParameters.Length == 0
-                          ? candidateMethod
-                          : candidateMethod.Construct(
+                            ? candidateMethod
+                            : candidateMethod.Construct(
                                 candidateSubstitutedSourceType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
                             );
                     }

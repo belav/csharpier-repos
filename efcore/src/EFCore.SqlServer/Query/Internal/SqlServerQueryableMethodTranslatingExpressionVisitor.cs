@@ -65,19 +65,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 var temporalTableExpression = queryRootExpression switch
                 {
                     TemporalAllQueryRootExpression _
-                      => (TemporalTableExpression)new TemporalAllTableExpression(table),
+                        => (TemporalTableExpression)new TemporalAllTableExpression(table),
                     TemporalAsOfQueryRootExpression asOf
-                      => new TemporalAsOfTableExpression(table, asOf.PointInTime),
+                        => new TemporalAsOfTableExpression(table, asOf.PointInTime),
                     TemporalBetweenQueryRootExpression between
-                      => new TemporalBetweenTableExpression(table, between.From, between.To),
+                        => new TemporalBetweenTableExpression(table, between.From, between.To),
                     TemporalContainedInQueryRootExpression containedIn
-                      => new TemporalContainedInTableExpression(
-                          table,
-                          containedIn.From,
-                          containedIn.To
-                      ),
+                        => new TemporalContainedInTableExpression(
+                            table,
+                            containedIn.From,
+                            containedIn.To
+                        ),
                     TemporalFromToQueryRootExpression fromTo
-                      => new TemporalFromToTableExpression(table, fromTo.From, fromTo.To),
+                        => new TemporalFromToTableExpression(table, fromTo.From, fromTo.To),
                     _ => throw new InvalidOperationException(queryRootExpression.Print())
                 };
 

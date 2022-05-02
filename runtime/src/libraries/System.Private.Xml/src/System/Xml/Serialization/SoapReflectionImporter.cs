@@ -287,11 +287,11 @@ namespace System.Xml.Serialization
                         )
                             typeNs = baseAttributes.SoapType.Namespace;
                         TypeDesc valueTypeDesc = string.IsNullOrEmpty(dataType)
-                          ? model.TypeDesc.BaseTypeDesc!
-                          : _typeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
+                            ? model.TypeDesc.BaseTypeDesc!
+                            : _typeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
                         string xsdTypeName = string.IsNullOrEmpty(dataType)
-                          ? model.TypeDesc.BaseTypeDesc!.Name
-                          : dataType;
+                            ? model.TypeDesc.BaseTypeDesc!.Name
+                            : dataType;
                         TypeMapping? baseMapping = GetTypeMapping(
                             xsdTypeName,
                             typeNs,
@@ -942,8 +942,8 @@ namespace System.Xml.Serialization
                 AttributeAccessor attribute = new AttributeAccessor();
                 attribute.Name = Accessor.EscapeQName(
                     a.SoapAttribute == null || a.SoapAttribute.AttributeName.Length == 0
-                      ? accessorName
-                      : a.SoapAttribute.AttributeName
+                        ? accessorName
+                        : a.SoapAttribute.AttributeName
                 );
                 attribute.Namespace =
                     a.SoapAttribute == null || a.SoapAttribute.Namespace == null
@@ -968,8 +968,8 @@ namespace System.Xml.Serialization
                 element.IsSoap = true;
                 element.Name = XmlConvert.EncodeLocalName(
                     a.SoapElement == null || a.SoapElement.ElementName.Length == 0
-                      ? accessorName
-                      : a.SoapElement.ElementName
+                        ? accessorName
+                        : a.SoapElement.ElementName
                 );
                 element.Namespace = ns;
                 element.Form = form;

@@ -54,9 +54,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new BatchBlock<int>(
-                              2,
-                              new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            2,
+                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new BatchBlock<int>(2)
             );
         }
@@ -497,7 +497,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         exceptionalConsume
                             ? (Task)Assert.ThrowsAsync<FormatException>(() => bb.Completion)
                             : (Task)
-                                  Assert.ThrowsAsync<InvalidOperationException>(() => bb.Completion)
+                                Assert.ThrowsAsync<InvalidOperationException>(() => bb.Completion)
                     );
                 }
         }

@@ -261,8 +261,8 @@ public partial class HubConnectionTests
                         {
                             retryContexts.Add(context);
                             return context.PreviousRetryCount == 0
-                              ? TimeSpan.Zero
-                              : (TimeSpan?)null;
+                                ? TimeSpan.Zero
+                                : (TimeSpan?)null;
                         }
                     );
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);
@@ -376,8 +376,8 @@ public partial class HubConnectionTests
                         {
                             retryContexts.Add(context);
                             return context.PreviousRetryCount == 0
-                              ? TimeSpan.Zero
-                              : (TimeSpan?)null;
+                                ? TimeSpan.Zero
+                                : (TimeSpan?)null;
                         }
                     );
                 builder.WithAutomaticReconnect(mockReconnectPolicy.Object);

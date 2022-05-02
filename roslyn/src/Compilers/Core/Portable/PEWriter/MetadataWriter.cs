@@ -829,8 +829,8 @@ namespace Microsoft.Cci
             }
 
             return methodDef != null
-              ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
-              : GetMemberReferenceHandle(methodReference);
+                ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
+                : GetMemberReferenceHandle(methodReference);
         }
 
         public static EventAttributes GetEventAttributes(IEventDefinition eventDef)
@@ -936,8 +936,8 @@ namespace Microsoft.Cci
             }
 
             return fieldDef != null
-              ? (EntityHandle)GetFieldDefinitionHandle(fieldDef)
-              : GetMemberReferenceHandle(fieldReference);
+                ? (EntityHandle)GetFieldDefinitionHandle(fieldDef)
+                : GetMemberReferenceHandle(fieldReference);
         }
 
         internal AssemblyFileHandle GetAssemblyFileHandle(IFileReference fileReference)
@@ -1003,8 +1003,8 @@ namespace Microsoft.Cci
             var mref = (IModuleReference)uref;
             aref = mref.GetContainingAssembly(Context);
             return aref == null || ReferenceEquals(aref, this.module.GetContainingAssembly(Context))
-              ? (EntityHandle)GetAssemblyFileHandle(mref)
-              : GetAssemblyReferenceHandle(aref);
+                ? (EntityHandle)GetAssemblyFileHandle(mref)
+                : GetAssemblyReferenceHandle(aref);
         }
 
         private static uint GetManagedResourceOffset(
@@ -1040,11 +1040,11 @@ namespace Microsoft.Cci
                 (generation == 0) ? namedType.Name : namedType.Name + "#" + generation;
 
             return namedType.MangleName
-              ? MetadataHelpers.ComposeAritySuffixedMetadataName(
+                ? MetadataHelpers.ComposeAritySuffixedMetadataName(
                     unmangledName,
                     namedType.GenericParameterCount
                 )
-              : unmangledName;
+                : unmangledName;
         }
 
         internal MemberReferenceHandle GetMemberReferenceHandle(ITypeMemberReference memberRef)
@@ -1094,8 +1094,8 @@ namespace Microsoft.Cci
             // TODO: special treatment for global fields and methods. Object model support would be nice.
             var containingType = memberRef.GetContainingType(Context);
             return containingType.IsTypeSpecification()
-              ? (EntityHandle)GetTypeSpecificationHandle(containingType)
-              : GetTypeReferenceHandle(containingType);
+                ? (EntityHandle)GetTypeSpecificationHandle(containingType)
+                : GetTypeReferenceHandle(containingType);
         }
 
         internal EntityHandle GetMethodDefinitionOrReferenceHandle(IMethodReference methodReference)
@@ -1111,8 +1111,8 @@ namespace Microsoft.Cci
             }
 
             return methodDef != null
-              ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
-              : GetMemberReferenceHandle(methodReference);
+                ? (EntityHandle)GetMethodDefinitionHandle(methodDef)
+                : GetMemberReferenceHandle(methodReference);
         }
 
         public static MethodAttributes GetMethodAttributes(IMethodDefinition methodDef)
@@ -1345,8 +1345,8 @@ namespace Microsoft.Cci
             IGenericMethodInstanceReference methodSpec =
                 methodReference.AsGenericMethodInstanceReference;
             return methodSpec != null
-              ? (EntityHandle)GetMethodSpecificationHandle(methodSpec)
-              : GetMemberReferenceHandle(methodReference);
+                ? (EntityHandle)GetMethodSpecificationHandle(methodSpec)
+                : GetMemberReferenceHandle(methodReference);
         }
 
         internal EntityHandle GetStandaloneSignatureHandle(ISignature signature)
@@ -1677,8 +1677,8 @@ namespace Microsoft.Cci
         protected static Location GetSymbolLocation(ISymbolInternal symbolOpt)
         {
             return symbolOpt != null && !symbolOpt.Locations.IsDefaultOrEmpty
-              ? symbolOpt.Locations[0]
-              : Location.None;
+                ? symbolOpt.Locations[0]
+                : Location.None;
         }
 
         internal TypeAttributes GetTypeAttributes(ITypeDefinition typeDef)
@@ -1900,8 +1900,8 @@ namespace Microsoft.Cci
             }
 
             return treatRefAsPotentialTypeSpec && typeReference.IsTypeSpecification()
-              ? (EntityHandle)GetTypeSpecificationHandle(typeReference)
-              : GetTypeReferenceHandle(typeReference);
+                ? (EntityHandle)GetTypeSpecificationHandle(typeReference)
+                : GetTypeReferenceHandle(typeReference);
         }
 
         internal EntityHandle GetDefinitionHandle(IDefinition definition)
@@ -2142,8 +2142,8 @@ namespace Microsoft.Cci
                 entryPointHandle =
                     entryPoint != null
                         ? (MethodDefinitionHandle)GetMethodHandle(
-                              (IMethodDefinition)entryPoint.AsDefinition(Context)
-                          )
+                            (IMethodDefinition)entryPoint.AsDefinition(Context)
+                        )
                         : default(MethodDefinitionHandle);
 
                 // debug entry point may be different from PE entry point, it may also be set for libraries
@@ -2624,8 +2624,8 @@ namespace Microsoft.Cci
                     name: typeName,
                     implementation: implementation,
                     typeDefinitionId: exportedType.IsForwarder
-                      ? 0
-                      : MetadataTokens.GetToken(exportedType.Type.TypeDef)
+                        ? 0
+                        : MetadataTokens.GetToken(exportedType.Type.TypeDef)
                 );
             }
         }
@@ -2900,8 +2900,8 @@ namespace Microsoft.Cci
 
                 metadata.AddManifestResource(
                     attributes: resource.IsPublic
-                      ? ManifestResourceAttributes.Public
-                      : ManifestResourceAttributes.Private,
+                        ? ManifestResourceAttributes.Public
+                        : ManifestResourceAttributes.Private,
                     name: GetStringHandleForNameAndCheckLength(resource.Name),
                     implementation: implementation,
                     offset: GetManagedResourceOffset(resource, resourceDataWriter)
@@ -3147,8 +3147,8 @@ namespace Microsoft.Cci
                 metadata.AddTypeDefinition(
                     attributes: GetTypeAttributes(typeDef),
                     @namespace: (namespaceType != null)
-                      ? GetStringHandleForNamespaceAndCheckLength(namespaceType, mangledTypeName)
-                      : default(StringHandle),
+                        ? GetStringHandleForNamespaceAndCheckLength(namespaceType, mangledTypeName)
+                        : default(StringHandle),
                     name: GetStringHandleForNameAndCheckLength(mangledTypeName, typeDef),
                     baseType: (baseType != null) ? GetTypeHandle(baseType) : default(EntityHandle),
                     fieldList: GetFirstFieldDefinitionHandle(typeDef),
@@ -3734,10 +3734,10 @@ namespace Microsoft.Cci
                         writer.Offset = offset;
                         writer.WriteInt32(
                             token == 0
-                              ? MetadataTokens.GetToken(
+                                ? MetadataTokens.GetToken(
                                     ResolveEntityHandleFromPseudoToken(pseudoToken)
                                 )
-                              : token
+                                : token
                         );
                         offset += 4;
                         break;

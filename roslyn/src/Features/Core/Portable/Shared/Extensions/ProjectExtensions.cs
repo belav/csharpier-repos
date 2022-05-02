@@ -12,10 +12,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             // TODO: Get the glyph from the hierarchy
             return project.Language == LanguageNames.CSharp
-              ? Glyph.CSharpProject
-              : project.Language == LanguageNames.VisualBasic
-                  ? Glyph.BasicProject
-                  : Glyph.Assembly;
+                ? Glyph.CSharpProject
+                : project.Language == LanguageNames.VisualBasic
+                    ? Glyph.BasicProject
+                    : Glyph.Assembly;
         }
     }
 }

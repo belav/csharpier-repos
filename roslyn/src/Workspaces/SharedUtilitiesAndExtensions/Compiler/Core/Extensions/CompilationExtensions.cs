@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         {
                             case Utilities.SymbolVisibility.Public:
                             case Utilities.SymbolVisibility.Internal
-                                  when referencedAssembly.GivesAccessTo(compilation.Assembly):
+                            when referencedAssembly.GivesAccessTo(compilation.Assembly):
                                 break;
 
                             default:

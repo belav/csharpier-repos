@@ -19,12 +19,12 @@ namespace Microsoft.CodeAnalysis.Collections
     /// <typeparam name="T">The type of elements stored in the array.</typeparam>
     internal readonly struct SegmentedArray<T>
         : ICloneable,
-          IList,
-          IStructuralComparable,
-          IStructuralEquatable,
-          IList<T>,
-          IReadOnlyList<T>,
-          IEquatable<SegmentedArray<T>>
+            IList,
+            IStructuralComparable,
+            IStructuralEquatable,
+            IList<T>,
+            IReadOnlyList<T>,
+            IEquatable<SegmentedArray<T>>
     {
         /// <summary>
         /// The number of elements in each page of the segmented array of type <typeparamref name="T"/>.

@@ -1072,8 +1072,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     .FirstOrDefault(o => o.CustomerID == "ALFKI")
                                     .Customer != null
                                     ? ss.Set<Order>()
-                                      .FirstOrDefault(o => o.CustomerID == "ALFKI")
-                                      .Customer.City
+                                        .FirstOrDefault(o => o.CustomerID == "ALFKI")
+                                        .Customer.City
                                     : null
                         )
             );

@@ -380,15 +380,15 @@ End Class";
             var workspace =
                 (language == LanguageNames.CSharp)
                     ? TestWorkspace.CreateCSharp(
-                          code,
-                          parseOptions: options,
-                          composition: composition
-                      )
+                        code,
+                        parseOptions: options,
+                        composition: composition
+                    )
                     : TestWorkspace.CreateVisualBasic(
-                          code,
-                          parseOptions: options,
-                          composition: composition
-                      );
+                        code,
+                        parseOptions: options,
+                        composition: composition
+                    );
 
             workspace.TryApplyChanges(
                 workspace.CurrentSolution.WithOptions(

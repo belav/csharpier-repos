@@ -111,8 +111,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             if (sequenceReader.TryReadPrimitiveBitString(out _, out tmpSpan))
             {
                 decoded.SignatureValue = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {

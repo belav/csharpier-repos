@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class IteratorConstructor
         : SynthesizedInstanceConstructor,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly ImmutableArray<ParameterSymbol> _parameters;
 

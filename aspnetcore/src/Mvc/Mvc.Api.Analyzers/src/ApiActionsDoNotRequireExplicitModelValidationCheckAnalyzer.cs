@@ -279,7 +279,7 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer : Diagno
     private static IOperation UnwrapSingleStatementBlock(IOperation statement)
     {
         return statement is IBlockOperation block && block.Operations.Length == 1
-          ? block.Operations[0]
-          : statement;
+            ? block.Operations[0]
+            : statement;
     }
 }

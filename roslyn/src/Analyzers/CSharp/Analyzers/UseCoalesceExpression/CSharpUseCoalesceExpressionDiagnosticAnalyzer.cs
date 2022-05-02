@@ -14,11 +14,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCoalesceExpression
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseCoalesceExpressionDiagnosticAnalyzer
         : AbstractUseCoalesceExpressionDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              ConditionalExpressionSyntax,
-              BinaryExpressionSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            ConditionalExpressionSyntax,
+            BinaryExpressionSyntax
+        >
     {
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 

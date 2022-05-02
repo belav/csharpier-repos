@@ -584,8 +584,8 @@ namespace DllImportGenerator.IntegrationTests
         public void AnsiStringReturn(string value)
         {
             string expected = OperatingSystem.IsWindows()
-              ? ReverseAnsi(value)
-              : ReverseBytes(value, Encoding.UTF8);
+                ? ReverseAnsi(value)
+                : ReverseBytes(value, Encoding.UTF8);
 
             Assert.Equal(expected, NativeExportsNE.Ansi.Reverse_Return(value));
             Assert.Equal(expected, NativeExportsNE.LPStr.Reverse_Return(value));
@@ -605,8 +605,8 @@ namespace DllImportGenerator.IntegrationTests
         {
             string refValue = value;
             string expected = OperatingSystem.IsWindows()
-              ? ReverseAnsi(value)
-              : ReverseBytes(value, Encoding.UTF8);
+                ? ReverseAnsi(value)
+                : ReverseBytes(value, Encoding.UTF8);
 
             NativeExportsNE.Ansi.Reverse_In(in refValue);
             Assert.Equal(value, refValue); // Should not be updated when using 'in'

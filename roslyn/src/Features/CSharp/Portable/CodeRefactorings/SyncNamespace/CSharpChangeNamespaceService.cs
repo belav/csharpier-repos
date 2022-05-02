@@ -26,10 +26,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
     [ExportLanguageService(typeof(IChangeNamespaceService), LanguageNames.CSharp), Shared]
     internal sealed class CSharpChangeNamespaceService
         : AbstractChangeNamespaceService<
-              BaseNamespaceDeclarationSyntax,
-              CompilationUnitSyntax,
-              MemberDeclarationSyntax
-          >
+            BaseNamespaceDeclarationSyntax,
+            CompilationUnitSyntax,
+            MemberDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -524,8 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             if (index == 0)
                 return aliasQualifier == null
-                  ? namePiece
-                  : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
+                    ? namePiece
+                    : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
 
             return SyntaxFactory.QualifiedName(
                 CreateNamespaceAsQualifiedName(namespaceParts, aliasQualifier, index - 1),
@@ -547,8 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             if (index == 0)
             {
                 return aliasQualifier == null
-                  ? namePiece
-                  : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
+                    ? namePiece
+                    : SyntaxFactory.AliasQualifiedName(aliasQualifier, namePiece);
             }
 
             return SyntaxFactory.MemberAccessExpression(

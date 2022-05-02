@@ -146,8 +146,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                             bucket,
                             reference.SourceSpan,
                             reference.IsWrittenTo
-                              ? HighlightSpanKind.WrittenReference
-                              : HighlightSpanKind.Reference,
+                                ? HighlightSpanKind.WrittenReference
+                                : HighlightSpanKind.Reference,
                             reference.SymbolUsageInfo,
                             reference.AdditionalProperties,
                             cancellationToken

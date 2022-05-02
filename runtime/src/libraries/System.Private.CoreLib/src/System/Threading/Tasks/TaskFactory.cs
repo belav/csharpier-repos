@@ -50,7 +50,7 @@ namespace System.Threading.Tasks
                     && (currTask.CreationOptions & TaskCreationOptions.HideScheduler) == 0
                         ? currTask.ExecutingTaskScheduler!
                         : // a "current" task must be executing, which means it must have a scheduler
-                          TaskScheduler.Default
+                        TaskScheduler.Default
                 );
         }
 

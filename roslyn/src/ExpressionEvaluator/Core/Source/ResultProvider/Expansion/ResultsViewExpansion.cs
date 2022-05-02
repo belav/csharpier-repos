@@ -269,11 +269,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 (fullName == null)
                     ? null
                     : fullNameProvider.GetClrObjectCreationExpression(
-                          inspectionContext,
-                          proxyTypeAndInfo.ClrType,
-                          proxyTypeAndInfo.Info,
-                          new[] { fullName }
-                      );
+                        inspectionContext,
+                        proxyTypeAndInfo.ClrType,
+                        proxyTypeAndInfo.Info,
+                        new[] { fullName }
+                    );
             return new EvalResult(
                 ExpansionKind.ResultsView,
                 Resources.ResultsView,

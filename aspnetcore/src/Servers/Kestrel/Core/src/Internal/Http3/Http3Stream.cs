@@ -20,9 +20,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
 internal abstract partial class Http3Stream
     : HttpProtocol,
-      IHttp3Stream,
-      IHttpHeadersHandler,
-      IThreadPoolWorkItem
+        IHttp3Stream,
+        IHttpHeadersHandler,
+        IThreadPoolWorkItem
 {
     private static ReadOnlySpan<byte> AuthorityBytes =>
         new byte[10]

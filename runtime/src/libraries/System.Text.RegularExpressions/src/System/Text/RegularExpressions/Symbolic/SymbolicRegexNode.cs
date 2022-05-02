@@ -1006,8 +1006,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 case SymbolicRegexKind.Singleton:
                     Debug.Assert(_set is not null);
                     deriv = _builder._solver.IsSatisfiable(_builder._solver.And(elem, _set))
-                      ? _builder._epsilon
-                      : _builder._nothing;
+                        ? _builder._epsilon
+                        : _builder._nothing;
                     break;
 
                 case SymbolicRegexKind.Loop:
@@ -2014,16 +2014,16 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 case SymbolicRegexKind.WBAnchor:
                     return (prevKind == CharKind.WordLetter ? contWithNWL : contWithWL)
-                      ? this
-                      :
+                        ? this
+                        :
                         // \b is impossible when the previous character is \w but no continuation matches \W
                         // or the previous character is \W but no continuation matches \w
                         _builder._nothing;
 
                 case SymbolicRegexKind.NWBAnchor:
                     return (prevKind == CharKind.WordLetter ? contWithWL : contWithNWL)
-                      ? this
-                      :
+                        ? this
+                        :
                         // \B is impossible when the previous character is \w but no continuation matches \w
                         // or the previous character is \W but no continuation matches \W
                         _builder._nothing;
@@ -2050,8 +2050,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                     Debug.Assert(left1 is not null && right1 is not null);
                     return left1 == _left && right1 == _right
-                      ? this
-                      : MkConcat(_builder, left1, right1);
+                        ? this
+                        : MkConcat(_builder, left1, right1);
 
                 case SymbolicRegexKind.Or:
                 {

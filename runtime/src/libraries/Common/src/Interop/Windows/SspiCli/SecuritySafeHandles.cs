@@ -545,9 +545,9 @@ namespace System.Net.Security
                             outSecBuffer.token =
                                 outSecBuffer.size > 0
                                     ? new Span<byte>(
-                                          (byte*)outUnmanagedBuffer.pvBuffer,
-                                          outUnmanagedBuffer.cbBuffer
-                                      ).ToArray()
+                                        (byte*)outUnmanagedBuffer.pvBuffer,
+                                        outUnmanagedBuffer.cbBuffer
+                                    ).ToArray()
                                     : null;
 
                             if (
@@ -928,9 +928,9 @@ namespace System.Net.Security
                         outSecBuffer.token =
                             outSecBuffer.size > 0
                                 ? new Span<byte>(
-                                      (byte*)outUnmanagedBuffer[index].pvBuffer,
-                                      outUnmanagedBuffer[0].cbBuffer
-                                  ).ToArray()
+                                    (byte*)outUnmanagedBuffer[index].pvBuffer,
+                                    outUnmanagedBuffer[0].cbBuffer
+                                ).ToArray()
                                 : null;
 
                         if (

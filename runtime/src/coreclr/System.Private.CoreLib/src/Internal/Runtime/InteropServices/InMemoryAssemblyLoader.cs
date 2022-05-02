@@ -20,8 +20,8 @@ namespace Internal.Runtime.InteropServices
                 "System.Runtime.InteropServices.EnableCppCLIHostActivation",
                 out bool isSupported
             )
-              ? isSupported
-              : true;
+                ? isSupported
+                : true;
 #endif
 
         /// <summary>

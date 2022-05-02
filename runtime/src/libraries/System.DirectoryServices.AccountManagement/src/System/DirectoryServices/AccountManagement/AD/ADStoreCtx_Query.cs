@@ -720,7 +720,7 @@ namespace System.DirectoryServices.AccountManagement
                         (index != -1)
                             ? identity.Substring(index + 1)
                             : // +1 to skip the '/'
-                              identity;
+                            identity;
 
                     sb.Append("(samAccountName=");
                     sb.Append(ADUtils.EscapeRFC2254SpecialChars(samAccountName));

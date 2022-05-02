@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return
                 (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
                 && typeof(TNumber) == typeof(decimal)
-              ? new ConverterMappingHints(precision: 20, scale: 0)
-              : default;
+                ? new ConverterMappingHints(precision: 20, scale: 0)
+                : default;
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return Expression.Lambda<Func<TEnum, TNumber>>(
                 Expression.Convert(
                     typeof(TNumber) == typeof(decimal)
-                      ? Expression.Convert(param, typeof(long))
-                      : (Expression)param,
+                        ? Expression.Convert(param, typeof(long))
+                        : (Expression)param,
                     typeof(TNumber)
                 ),
                 param
@@ -112,8 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return Expression.Lambda<Func<TNumber, TEnum>>(
                 Expression.Convert(
                     typeof(TNumber) == typeof(decimal)
-                      ? Expression.Convert(param, typeof(long))
-                      : (Expression)param,
+                        ? Expression.Convert(param, typeof(long))
+                        : (Expression)param,
                     typeof(TEnum)
                 ),
                 param

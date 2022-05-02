@@ -51,10 +51,10 @@ namespace System.Net
 
                     // An optimization for future string comparisons.
                     return string.Equals(name, Kerberos, StringComparison.OrdinalIgnoreCase)
-                      ? Kerberos
-                      : string.Equals(name, NTLM, StringComparison.OrdinalIgnoreCase)
-                          ? NTLM
-                          : name;
+                        ? Kerberos
+                        : string.Equals(name, NTLM, StringComparison.OrdinalIgnoreCase)
+                            ? NTLM
+                            : name;
                 }
             }
             finally

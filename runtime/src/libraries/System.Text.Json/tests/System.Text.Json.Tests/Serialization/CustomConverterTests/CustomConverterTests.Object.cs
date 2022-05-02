@@ -203,8 +203,8 @@ namespace System.Text.Json.Serialization.Tests
                                 case "Address":
                                     string city = reader.GetString();
                                     customer.Address.City = string.IsNullOrEmpty(city)
-                                      ? "NA"
-                                      : city;
+                                        ? "NA"
+                                        : city;
                                     break;
                                 case "Name":
                                     string name = reader.GetString().ToUpper();

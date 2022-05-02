@@ -254,15 +254,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             _sqlExpressionFactory.ApplyTypeMapping(
                                 argument,
                                 typeof(Geometry).IsAssignableFrom(argument.Type)
-                                  ? _typeMappingSource.FindMapping(argument.Type, storeType)
-                                  : _typeMappingSource.FindMapping(argument.Type)
+                                    ? _typeMappingSource.FindMapping(argument.Type, storeType)
+                                    : _typeMappingSource.FindMapping(argument.Type)
                             )
                         );
                     }
 
                     var resultTypeMapping = typeof(Geometry).IsAssignableFrom(method.ReturnType)
-                      ? _typeMappingSource.FindMapping(method.ReturnType, storeType)
-                      : _typeMappingSource.FindMapping(method.ReturnType);
+                        ? _typeMappingSource.FindMapping(method.ReturnType, storeType)
+                        : _typeMappingSource.FindMapping(method.ReturnType);
 
                     var finalArguments = Simplify(typeMappedArguments, isGeography);
 
@@ -319,8 +319,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             _sqlExpressionFactory.ApplyTypeMapping(
                                 argument,
                                 typeof(Geometry).IsAssignableFrom(argument.Type)
-                                  ? _typeMappingSource.FindMapping(argument.Type, storeType)
-                                  : _typeMappingSource.FindMapping(argument.Type)
+                                    ? _typeMappingSource.FindMapping(argument.Type, storeType)
+                                    : _typeMappingSource.FindMapping(argument.Type)
                             )
                         );
                     }

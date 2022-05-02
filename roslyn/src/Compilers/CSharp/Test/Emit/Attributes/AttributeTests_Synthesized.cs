@@ -684,8 +684,8 @@ class C
                     var goo = module.GlobalNamespace.GetMember<MethodSymbol>("C.Goo");
                     AssertEx.SetEqual(
                         options.OptimizationLevel == OptimizationLevel.Debug
-                          ? new[] { "AsyncStateMachineAttribute", "DebuggerStepThroughAttribute" }
-                          : new[] { "AsyncStateMachineAttribute" },
+                            ? new[] { "AsyncStateMachineAttribute", "DebuggerStepThroughAttribute" }
+                            : new[] { "AsyncStateMachineAttribute" },
                         GetAttributeNames(goo.GetAttributes())
                     );
 

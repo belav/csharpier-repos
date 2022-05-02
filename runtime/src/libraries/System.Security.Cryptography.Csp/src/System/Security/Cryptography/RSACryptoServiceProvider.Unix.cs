@@ -70,10 +70,10 @@ namespace System.Security.Cryptography
                 throw new ArgumentNullException(nameof(padding));
 
             return padding == RSAEncryptionPadding.Pkcs1
-              ? Decrypt(data, fOAEP: false)
-              : padding == RSAEncryptionPadding.OaepSHA1
-                  ? Decrypt(data, fOAEP: true)
-                  : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
+                ? Decrypt(data, fOAEP: false)
+                : padding == RSAEncryptionPadding.OaepSHA1
+                    ? Decrypt(data, fOAEP: true)
+                    : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
                     throw PaddingModeNotSupported();
         }
 
@@ -122,10 +122,10 @@ namespace System.Security.Cryptography
                 throw new ArgumentNullException(nameof(padding));
 
             return padding == RSAEncryptionPadding.Pkcs1
-              ? Encrypt(data, fOAEP: false)
-              : padding == RSAEncryptionPadding.OaepSHA1
-                  ? Encrypt(data, fOAEP: true)
-                  : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
+                ? Encrypt(data, fOAEP: false)
+                : padding == RSAEncryptionPadding.OaepSHA1
+                    ? Encrypt(data, fOAEP: true)
+                    : // For compat, this prevents OaepSHA2 options as fOAEP==true will cause Decrypt to use OaepSHA1
                     throw PaddingModeNotSupported();
         }
 
@@ -269,12 +269,12 @@ namespace System.Security.Cryptography
                 : padding != RSASignaturePadding.Pkcs1
                     ? throw PaddingModeNotSupported()
                     : _impl.TrySignData(
-                          data,
-                          destination,
-                          hashAlgorithm,
-                          padding,
-                          out bytesWritten
-                      );
+                        data,
+                        destination,
+                        hashAlgorithm,
+                        padding,
+                        out bytesWritten
+                    );
 
         public byte[] SignData(byte[] buffer, int offset, int count, object halg) =>
             _impl.SignData(
@@ -322,12 +322,12 @@ namespace System.Security.Cryptography
                 : padding != RSASignaturePadding.Pkcs1
                     ? throw PaddingModeNotSupported()
                     : _impl.TrySignHash(
-                          hash,
-                          destination,
-                          hashAlgorithm,
-                          padding,
-                          out bytesWritten
-                      );
+                        hash,
+                        destination,
+                        hashAlgorithm,
+                        padding,
+                        out bytesWritten
+                    );
 
         public byte[] SignHash(byte[] rgbHash, string str)
         {

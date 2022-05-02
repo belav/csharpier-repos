@@ -521,8 +521,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             var (fixedSource, iterations) = testBehaviors switch
             {
                 CodeFixTestBehaviors.None
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     int M()
     {
@@ -530,11 +530,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         return x;
     }
 }",
-                      iterations: 2
-                  ),
+                        iterations: 2
+                    ),
                 CodeFixTestBehaviors.FixOne
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     int M()
     {
@@ -543,8 +543,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         return x;
     }
 }",
-                      iterations: 1
-                  ),
+                        iterations: 1
+                    ),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -589,8 +589,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             var (fixedSource, iterations) = testBehaviors switch
             {
                 CodeFixTestBehaviors.None
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     int M()
     {
@@ -599,11 +599,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         return x;
     }
 }",
-                      iterations: 2
-                  ),
+                        iterations: 2
+                    ),
                 CodeFixTestBehaviors.FixOne
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     int M()
     {
@@ -613,8 +613,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         return x;
     }
 }",
-                      iterations: 1
-                  ),
+                        iterations: 1
+                    ),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -1128,8 +1128,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             var (fixedSource, iterations) = ((UnusedValuePreference)option, testBehaviors) switch
             {
                 (UnusedValuePreference.DiscardVariable, CodeFixTestBehaviors.None)
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     int M(int {|IDE0060:x|}, int {|IDE0060:y|})
     {
@@ -1138,11 +1138,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         return x;
     }
 }",
-                      iterations: 2
-                  ),
+                        iterations: 2
+                    ),
                 (UnusedValuePreference.UnusedLocalVariable, CodeFixTestBehaviors.None)
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     int M(int {|IDE0060:x|}, int {|IDE0060:y|})
     {
@@ -1150,11 +1150,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         return x;
     }
 }",
-                      iterations: 3
-                  ),
+                        iterations: 3
+                    ),
                 (_, CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck)
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     int M(int {|IDE0060:x|}, int {|IDE0060:y|})
     {
@@ -1163,8 +1163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         return x;
     }
 }",
-                      iterations: 1
-                  ),
+                        iterations: 1
+                    ),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -1220,7 +1220,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             var fixedSource = ((UnusedValuePreference)option, testBehaviors) switch
             {
                 (UnusedValuePreference.DiscardVariable, CodeFixTestBehaviors.None)
-                  => @"class C
+                    => @"class C
 {
     int M(int {|IDE0060:x|}, int {|IDE0060:y|})
     {
@@ -1235,7 +1235,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                     UnusedValuePreference.DiscardVariable,
                     CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck
                 )
-                  => @"class C
+                    => @"class C
 {
     int M(int {|IDE0060:x|}, int {|IDE0060:y|})
     {
@@ -1247,7 +1247,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
     int M2() => 0;
 }",
                 (UnusedValuePreference.UnusedLocalVariable, CodeFixTestBehaviors.None)
-                  => @"class C
+                    => @"class C
 {
     int M(int {|IDE0060:x|}, int {|IDE0060:y|})
     {
@@ -1263,7 +1263,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                     UnusedValuePreference.UnusedLocalVariable,
                     CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck
                 )
-                  => @"class C
+                    => @"class C
 {
     int M(int {|IDE0060:x|}, int {|IDE0060:y|})
     {
@@ -1352,7 +1352,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             {
                 UnusedValuePreference.UnusedLocalVariable => source,
                 UnusedValuePreference.DiscardVariable
-                  => $@"class C
+                    => $@"class C
 {{
     void M(int x)
     {{
@@ -1492,7 +1492,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
             {
                 UnusedValuePreference.UnusedLocalVariable => source,
                 UnusedValuePreference.DiscardVariable
-                  => $@"class C
+                    => $@"class C
 {{
     void M(int x)
     {{
@@ -2840,8 +2840,8 @@ class Q
             var (fixedSource, iterations) = testBehaviors switch
             {
                 CodeFixTestBehaviors.None
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     void M(object p)
     {
@@ -2852,11 +2852,11 @@ class Q
         };
     }
 }",
-                      iterations: 2
-                  ),
+                        iterations: 2
+                    ),
                 CodeFixTestBehaviors.FixOne
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     void M(object p)
     {
@@ -2868,8 +2868,8 @@ class Q
         };
     }
 }",
-                      iterations: 1
-                  ),
+                        iterations: 1
+                    ),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -3090,7 +3090,7 @@ class Q
             {
                 CodeFixTestBehaviors.None => batchFixedSource,
                 CodeFixTestBehaviors.FixOne
-                  => @"class C
+                    => @"class C
 {
     bool M(object p1, object p2)
     {
@@ -3224,7 +3224,7 @@ class Q
             {
                 CodeFixTestBehaviors.None => batchFixedSource,
                 CodeFixTestBehaviors.FixOne
-                  => @"class C
+                    => @"class C
 {
     bool M(object p1, object p2)
     {
@@ -3373,7 +3373,7 @@ class Q
             var fixedSource = ((UnusedValuePreference)option, testBehaviors) switch
             {
                 (UnusedValuePreference.DiscardVariable, CodeFixTestBehaviors.None)
-                  => @"class C
+                    => @"class C
 {
     bool M(object p1, object p2)
     {
@@ -3391,7 +3391,7 @@ class Q
                     UnusedValuePreference.DiscardVariable,
                     CodeFixTestBehaviors.FixOne | CodeFixTestBehaviors.SkipFixAllCheck
                 )
-                  => @"class C
+                    => @"class C
 {
     bool M(object p1, object p2)
     {
@@ -3406,7 +3406,7 @@ class Q
     }
 }",
                 (UnusedValuePreference.UnusedLocalVariable, _)
-                  => @"class C
+                    => @"class C
 {
     bool M(object p1, object p2)
     {
@@ -8533,8 +8533,8 @@ class C
             var (fixedSource, iterations) = testBehaviors switch
             {
                 CodeFixTestBehaviors.None
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     void M(object p)
     {
@@ -8546,11 +8546,11 @@ class C
         };
     }
 }",
-                      iterations: 2
-                  ),
+                        iterations: 2
+                    ),
                 CodeFixTestBehaviors.FixOne
-                  => (
-                      @"class C
+                    => (
+                        @"class C
 {
     void M(object p)
     {
@@ -8563,8 +8563,8 @@ class C
         };
     }
 }",
-                      iterations: 1
-                  ),
+                        iterations: 1
+                    ),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 

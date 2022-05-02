@@ -240,14 +240,14 @@ public class KestrelServerOptions
         writer.WriteString(
             nameof(RequestHeaderEncodingSelector),
             RequestHeaderEncodingSelector == DefaultHeaderEncodingSelector
-              ? "default"
-              : "configured"
+                ? "default"
+                : "configured"
         );
         writer.WriteString(
             nameof(ResponseHeaderEncodingSelector),
             ResponseHeaderEncodingSelector == DefaultHeaderEncodingSelector
-              ? "default"
-              : "configured"
+                ? "default"
+                : "configured"
         );
 
         // Limits

@@ -56,8 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return this.MethodKind == MethodKind.EventAdd
-                  ? (SourceMemberMethodSymbol)this.AssociatedEvent.RemoveMethod
-                  : null;
+                    ? (SourceMemberMethodSymbol)this.AssociatedEvent.RemoveMethod
+                    : null;
             }
         }
 

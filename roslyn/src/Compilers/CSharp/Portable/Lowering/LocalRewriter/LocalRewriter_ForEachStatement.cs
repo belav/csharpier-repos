@@ -425,8 +425,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (isImplicit || !(enumeratorInfo.PatternDisposeInfo is null))
             {
                 Conversion receiverConversion = enumeratorType.IsStructType()
-                  ? Conversion.Boxing
-                  : Conversion.ImplicitReference;
+                    ? Conversion.Boxing
+                    : Conversion.ImplicitReference;
 
                 BoundExpression receiver;
                 BoundExpression disposeCall;

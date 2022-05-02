@@ -7,8 +7,8 @@ namespace System.Security.Policy
 {
     public sealed partial class PublisherMembershipCondition
         : ISecurityEncodable,
-          ISecurityPolicyEncodable,
-          IMembershipCondition
+            ISecurityPolicyEncodable,
+            IMembershipCondition
     {
         public PublisherMembershipCondition(X509Certificate certificate) { }
 

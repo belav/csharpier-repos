@@ -19,8 +19,8 @@ namespace System.Dynamic
     /// </summary>
     public sealed class ExpandoObject
         : IDynamicMetaObjectProvider,
-          IDictionary<string, object?>,
-          INotifyPropertyChanged
+            IDictionary<string, object?>,
+            INotifyPropertyChanged
     {
         private static readonly MethodInfo s_expandoTryGetValue = typeof(RuntimeOps).GetMethod(
             nameof(RuntimeOps.ExpandoTryGetValue)

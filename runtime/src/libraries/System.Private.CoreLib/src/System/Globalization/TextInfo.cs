@@ -286,11 +286,11 @@ namespace System.Globalization
                             tempValue =
                                 (toUpper)
                                     ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(
-                                          tempValue
-                                      )
+                                        tempValue
+                                    )
                                     : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(
-                                          tempValue
-                                      );
+                                        tempValue
+                                    );
                             Unsafe.WriteUnaligned<uint>(pDestination + currIdx, tempValue);
 
                             tempValue = Unsafe.ReadUnaligned<uint>(pSource + currIdx + 2);
@@ -301,11 +301,11 @@ namespace System.Globalization
                             tempValue =
                                 (toUpper)
                                     ? Utf16Utility.ConvertAllAsciiCharsInUInt32ToUppercase(
-                                          tempValue
-                                      )
+                                        tempValue
+                                    )
                                     : Utf16Utility.ConvertAllAsciiCharsInUInt32ToLowercase(
-                                          tempValue
-                                      );
+                                        tempValue
+                                    );
                             Unsafe.WriteUnaligned<uint>(pDestination + currIdx + 2, tempValue);
                             currIdx += 4;
                         } while (currIdx <= lastIndexWhereCanReadFourChars);
@@ -972,8 +972,8 @@ namespace System.Globalization
                     default:
                         result.Append(
                             GlobalizationMode.Invariant
-                              ? InvariantModeCasing.ToUpper(input[inputIndex])
-                              : ToUpper(input[inputIndex])
+                                ? InvariantModeCasing.ToUpper(input[inputIndex])
+                                : ToUpper(input[inputIndex])
                         );
                         break;
                 }

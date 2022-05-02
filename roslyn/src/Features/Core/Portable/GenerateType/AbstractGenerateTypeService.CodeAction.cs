@@ -55,10 +55,10 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     return string.Format(
                         FeaturesResources.Generate_0_1_in_new_file,
                         state.IsStruct
-                          ? "struct"
-                          : state.IsInterface
-                              ? "interface"
-                              : "class",
+                            ? "struct"
+                            : state.IsInterface
+                                ? "interface"
+                                : "class",
                         state.Name
                     );
                 }
@@ -66,13 +66,13 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 {
                     return string.Format(
                         isNested
-                          ? FeaturesResources.Generate_nested_0_1
-                          : FeaturesResources.Generate_0_1,
+                            ? FeaturesResources.Generate_nested_0_1
+                            : FeaturesResources.Generate_0_1,
                         state.IsStruct
-                          ? "struct"
-                          : state.IsInterface
-                              ? "interface"
-                              : "class",
+                            ? "struct"
+                            : state.IsInterface
+                                ? "interface"
+                                : "class",
                         state.Name
                     );
                 }
@@ -169,26 +169,26 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 {
                     typeKindValue = state.IsSimpleNameGeneric
                         ? TypeKindOptionsHelper.RemoveOptions(
-                              typeKindValue,
-                              TypeKindOptions.GenericInCompatibleTypes
-                          )
+                            typeKindValue,
+                            TypeKindOptions.GenericInCompatibleTypes
+                        )
                         : typeKindValue;
                     typeKindValue = state.IsMembersWithModule
                         ? TypeKindOptionsHelper.AddOption(typeKindValue, TypeKindOptions.Module)
                         : typeKindValue;
                     typeKindValue = state.IsInterfaceOrEnumNotAllowedInTypeContext
                         ? TypeKindOptionsHelper.RemoveOptions(
-                              typeKindValue,
-                              TypeKindOptions.Interface,
-                              TypeKindOptions.Enum
-                          )
+                            typeKindValue,
+                            TypeKindOptions.Interface,
+                            TypeKindOptions.Enum
+                        )
                         : typeKindValue;
                     typeKindValue = state.IsDelegateAllowed
                         ? typeKindValue
                         : TypeKindOptionsHelper.RemoveOptions(
-                              typeKindValue,
-                              TypeKindOptions.Delegate
-                          );
+                            typeKindValue,
+                            TypeKindOptions.Delegate
+                        );
                     typeKindValue = state.IsEnumNotAllowed
                         ? TypeKindOptionsHelper.RemoveOptions(typeKindValue, TypeKindOptions.Enum)
                         : typeKindValue;
@@ -235,15 +235,15 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 {
                     typeKindValueFinal = state.IsSimpleNameGeneric
                         ? TypeKindOptionsHelper.RemoveOptions(
-                              TypeKindOptions.MemberAccessWithNamespace,
-                              TypeKindOptions.GenericInCompatibleTypes
-                          )
+                            TypeKindOptions.MemberAccessWithNamespace,
+                            TypeKindOptions.GenericInCompatibleTypes
+                        )
                         : TypeKindOptions.MemberAccessWithNamespace;
                     typeKindValueFinal = state.IsEnumNotAllowed
                         ? TypeKindOptionsHelper.RemoveOptions(
-                              typeKindValueFinal,
-                              TypeKindOptions.Enum
-                          )
+                            typeKindValueFinal,
+                            TypeKindOptions.Enum
+                        )
                         : typeKindValueFinal;
                     return true;
                 }

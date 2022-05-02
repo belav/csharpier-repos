@@ -77,8 +77,8 @@ namespace System.Net.NetworkInformation
             IPEndPoint ep = (IPEndPoint)socketConfig.EndPoint;
             AddressFamily addrFamily = ep.Address.AddressFamily;
             SocketType socketType = RawSocketPermissions.CanUseRawSockets(addrFamily)
-              ? SocketType.Raw
-              : SocketType.Dgram; // macOS/iOS has ability to send ICMP echo without RAW
+                ? SocketType.Raw
+                : SocketType.Dgram; // macOS/iOS has ability to send ICMP echo without RAW
 
             Socket socket = new Socket(addrFamily, socketType, socketConfig.ProtocolType);
             socket.ReceiveTimeout = socketConfig.Timeout;

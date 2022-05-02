@@ -118,9 +118,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return (
                 ReturnType: !ContainingAssembly.RuntimeSupportsCovariantReturnsOfClasses
-                    && VirtualCloneInBase() is { } baseClone
-                  ? baseClone.ReturnTypeWithAnnotations
-                  : TypeWithAnnotations.Create(isNullableEnabled: true, ContainingType),
+                && VirtualCloneInBase() is { } baseClone
+                    ? baseClone.ReturnTypeWithAnnotations
+                    : TypeWithAnnotations.Create(isNullableEnabled: true, ContainingType),
                 Parameters: ImmutableArray<ParameterSymbol>.Empty,
                 IsVararg: false,
                 DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty

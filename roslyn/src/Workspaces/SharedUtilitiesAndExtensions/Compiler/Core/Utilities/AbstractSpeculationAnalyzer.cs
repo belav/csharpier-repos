@@ -1032,8 +1032,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             else
             {
                 var bindingOption = IsInNamespaceOrTypeContext(type)
-                  ? SpeculativeBindingOption.BindAsTypeOrNamespace
-                  : SpeculativeBindingOption.BindAsExpression;
+                    ? SpeculativeBindingOption.BindAsTypeOrNamespace
+                    : SpeculativeBindingOption.BindAsExpression;
                 newSymbol = this.OriginalSemanticModel
                     .GetSpeculativeSymbolInfo(type.SpanStart, newType, bindingOption)
                     .Symbol;

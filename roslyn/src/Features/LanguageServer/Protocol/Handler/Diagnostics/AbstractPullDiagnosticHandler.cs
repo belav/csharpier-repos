@@ -270,8 +270,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             // Razor has a separate option for determining if they should be in push or pull mode.
             var diagnosticMode = document.IsRazorDocument()
-              ? InternalDiagnosticsOptions.RazorDiagnosticMode
-              : InternalDiagnosticsOptions.NormalDiagnosticMode;
+                ? InternalDiagnosticsOptions.RazorDiagnosticMode
+                : InternalDiagnosticsOptions.NormalDiagnosticMode;
 
             var isPull = context.GlobalOptions.IsPullDiagnostics(diagnosticMode);
 
@@ -489,7 +489,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // Hidden is translated in ConvertTags to pass along appropriate _ms tags
                 // that will hide the item in a client that knows about those tags.
                 DiagnosticSeverity.Hidden
-                  => LSP.DiagnosticSeverity.Hint,
+                    => LSP.DiagnosticSeverity.Hint,
                 DiagnosticSeverity.Info => LSP.DiagnosticSeverity.Hint,
                 DiagnosticSeverity.Warning => LSP.DiagnosticSeverity.Warning,
                 DiagnosticSeverity.Error => LSP.DiagnosticSeverity.Error,
@@ -523,8 +523,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             result.Add(
                 diagnosticData.CustomTags.Contains(WellKnownDiagnosticTags.Build)
-                  ? VSDiagnosticTags.BuildError
-                  : VSDiagnosticTags.IntellisenseError
+                    ? VSDiagnosticTags.BuildError
+                    : VSDiagnosticTags.IntellisenseError
             );
 
             if (diagnosticData.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary))

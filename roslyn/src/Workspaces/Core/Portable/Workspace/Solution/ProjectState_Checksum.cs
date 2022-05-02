@@ -47,9 +47,9 @@ namespace Microsoft.CodeAnalysis
         private Checksum GetParseOptionsChecksum(ISerializerService serializer) =>
             this.SupportsCompilation
                 ? ChecksumCache.GetOrCreate(
-                      this.ParseOptions,
-                      _ => serializer.CreateParseOptionsChecksum(this.ParseOptions)
-                  )
+                    this.ParseOptions,
+                    _ => serializer.CreateParseOptionsChecksum(this.ParseOptions)
+                )
                 : Checksum.Null;
 
         private async Task<ProjectStateChecksums> ComputeChecksumsAsync(
@@ -91,9 +91,9 @@ namespace Microsoft.CodeAnalysis
                     // these compiler objects doesn't have good place to cache checksum. but rarely ever get changed.
                     var compilationOptionsChecksum = SupportsCompilation
                         ? ChecksumCache.GetOrCreate(
-                              CompilationOptions,
-                              _ => serializer.CreateChecksum(CompilationOptions, cancellationToken)
-                          )
+                            CompilationOptions,
+                            _ => serializer.CreateChecksum(CompilationOptions, cancellationToken)
+                        )
                         : Checksum.Null;
                     cancellationToken.ThrowIfCancellationRequested();
                     var parseOptionsChecksum = GetParseOptionsChecksum(serializer);

@@ -200,8 +200,8 @@ namespace System.Net.Http
                 error,
                 cancellationToken
             )
-              ? CancellationHelper.CreateOperationCanceledException(error, cancellationToken)
-              : new HttpRequestException(
+                ? CancellationHelper.CreateOperationCanceledException(error, cancellationToken)
+                : new HttpRequestException(
                     $"{error.Message} ({host}:{port})",
                     error,
                     RequestRetryType.RetryOnNextProxy

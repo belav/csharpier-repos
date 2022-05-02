@@ -109,8 +109,8 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
 
     private class TestUberPolicy
         : TestMatcherPolicyBase,
-          INodeBuilderPolicy,
-          IEndpointComparerPolicy
+            INodeBuilderPolicy,
+            IEndpointComparerPolicy
     {
         public TestUberPolicy(int order) : base(order) { }
 

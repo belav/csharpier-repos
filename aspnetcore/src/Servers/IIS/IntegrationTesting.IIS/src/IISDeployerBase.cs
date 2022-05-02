@@ -95,8 +95,8 @@ public abstract class IISDeployerBase : ApplicationDeployer
         var basePath = File.Exists(
             Path.Combine(AppContext.BaseDirectory, "x64", "aspnetcorev2.dll")
         )
-          ? ""
-          : @"ANCM\";
+            ? ""
+            : @"ANCM\";
         var arch =
             DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x64
                 ? $@"{basePath}x64\{ancmDllName}"

@@ -224,14 +224,14 @@ namespace Moq
                 return x.BindingType switch
                 {
                     MemberBindingType.Assignment
-                      => this.EqualsMemberAssignment((MemberAssignment)x, (MemberAssignment)y),
+                        => this.EqualsMemberAssignment((MemberAssignment)x, (MemberAssignment)y),
                     MemberBindingType.MemberBinding
-                      => this.EqualsMemberMemberBinding(
-                          (MemberMemberBinding)x,
-                          (MemberMemberBinding)y
-                      ),
+                        => this.EqualsMemberMemberBinding(
+                            (MemberMemberBinding)x,
+                            (MemberMemberBinding)y
+                        ),
                     MemberBindingType.ListBinding
-                      => this.EqualsMemberListBinding((MemberListBinding)x, (MemberListBinding)y),
+                        => this.EqualsMemberListBinding((MemberListBinding)x, (MemberListBinding)y),
                     _ => throw new ArgumentOutOfRangeException(nameof(x)),
                 };
             }

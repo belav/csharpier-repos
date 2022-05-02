@@ -19,11 +19,11 @@ public class FileSystemXmlRepositoryTests
     public void DefaultKeyStorageDirectory_Property()
     {
         var baseDir = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-          ? Path.Combine(
+            ? Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "ASP.NET"
             )
-          : Path.Combine(Environment.GetEnvironmentVariable("HOME"), ".aspnet");
+            : Path.Combine(Environment.GetEnvironmentVariable("HOME"), ".aspnet");
         var expectedDir = new DirectoryInfo(Path.Combine(baseDir, "DataProtection-Keys")).FullName;
 
         // Act

@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [CollectionDefinition(Name)]
 public class PublishedSitesCollection
     : ICollectionFixture<PublishedSitesFixture>,
-      ICollectionFixture<ClientCertificateFixture>
+        ICollectionFixture<ClientCertificateFixture>
 {
     public const string Name = nameof(PublishedSitesCollection);
 }

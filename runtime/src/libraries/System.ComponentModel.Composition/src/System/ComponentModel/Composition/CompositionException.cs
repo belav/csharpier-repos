@@ -86,8 +86,8 @@ namespace System.ComponentModel.Composition
             Requires.NullOrNotNullElements(errors, nameof(errors));
             _errors = new ReadOnlyCollection<CompositionError>(
                 errors == null
-                  ? Array.Empty<CompositionError>()
-                  : errors.ToArray<CompositionError>()
+                    ? Array.Empty<CompositionError>()
+                    : errors.ToArray<CompositionError>()
             );
         }
 

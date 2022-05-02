@@ -15,8 +15,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         )
         {
             return (TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext) != null)
-              ? new TypeMatchModelBinder()
-              : null /* no match */
+                ? new TypeMatchModelBinder()
+                : null /* no match */
             ;
         }
     }

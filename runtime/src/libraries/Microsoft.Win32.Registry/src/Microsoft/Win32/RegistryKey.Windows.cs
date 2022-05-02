@@ -968,10 +968,10 @@ namespace Microsoft.Win32
             }
 
             return type == Interop.Advapi32.RegistryValues.REG_NONE
-              ? RegistryValueKind.None
-              : !Enum.IsDefined(typeof(RegistryValueKind), type)
-                  ? RegistryValueKind.Unknown
-                  : (RegistryValueKind)type;
+                ? RegistryValueKind.None
+                : !Enum.IsDefined(typeof(RegistryValueKind), type)
+                    ? RegistryValueKind.Unknown
+                    : (RegistryValueKind)type;
         }
 
         private unsafe void SetValueCore(string? name, object value, RegistryValueKind valueKind)
@@ -1131,8 +1131,8 @@ namespace Microsoft.Win32
                 case Interop.Errors.ERROR_ACCESS_DENIED:
                     throw str != null
                         ? new UnauthorizedAccessException(
-                              SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
-                          )
+                            SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
+                        )
                         : new UnauthorizedAccessException();
 
                 case Interop.Errors.ERROR_INVALID_HANDLE:
@@ -1165,11 +1165,11 @@ namespace Microsoft.Win32
             throw errorCode switch
             {
                 Interop.Errors.ERROR_ACCESS_DENIED
-                  => str != null
-                      ? new UnauthorizedAccessException(
+                    => str != null
+                        ? new UnauthorizedAccessException(
                             SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
                         )
-                      : new UnauthorizedAccessException(),
+                        : new UnauthorizedAccessException(),
 
                 _ => new IOException(Interop.Kernel32.GetMessage(errorCode), errorCode),
             };

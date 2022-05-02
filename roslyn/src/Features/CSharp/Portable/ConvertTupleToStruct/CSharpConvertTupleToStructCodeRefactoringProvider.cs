@@ -25,17 +25,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTupleToStruct
     ]
     internal class CSharpConvertTupleToStructCodeRefactoringProvider
         : AbstractConvertTupleToStructCodeRefactoringProvider<
-              ExpressionSyntax,
-              NameSyntax,
-              IdentifierNameSyntax,
-              LiteralExpressionSyntax,
-              ObjectCreationExpressionSyntax,
-              TupleExpressionSyntax,
-              ArgumentSyntax,
-              TupleTypeSyntax,
-              TypeDeclarationSyntax,
-              BaseNamespaceDeclarationSyntax
-          >
+            ExpressionSyntax,
+            NameSyntax,
+            IdentifierNameSyntax,
+            LiteralExpressionSyntax,
+            ObjectCreationExpressionSyntax,
+            TupleExpressionSyntax,
+            ArgumentSyntax,
+            TupleTypeSyntax,
+            TypeDeclarationSyntax,
+            BaseNamespaceDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

@@ -37,8 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             solution.GetProjectOfUniqueName(project.UniqueName, out var hierarchy);
 
             return hierarchy.IsCapabilityMatch("CPS")
-              ? new BuildPropertyStorage((IVsBuildPropertyStorage)hierarchy)
-              : new PerConfigurationPropertyStorage(project.ConfigurationManager);
+                ? new BuildPropertyStorage((IVsBuildPropertyStorage)hierarchy)
+                : new PerConfigurationPropertyStorage(project.ConfigurationManager);
         }
 
         public abstract void SetProperty(

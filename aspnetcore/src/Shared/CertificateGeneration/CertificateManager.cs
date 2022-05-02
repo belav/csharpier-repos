@@ -32,14 +32,14 @@ internal abstract class CertificateManager
 
     public static CertificateManager Instance { get; } =
         OperatingSystem.IsWindows()
-          ?
+            ?
 #pragma warning disable CA1416 // Validate platform compatibility
             new WindowsCertificateManager()
-          :
+            :
 #pragma warning restore CA1416 // Validate platform compatibility
             OperatingSystem.IsMacOS()
-              ? new MacOSCertificateManager() as CertificateManager
-              : new UnixCertificateManager();
+                ? new MacOSCertificateManager() as CertificateManager
+                : new UnixCertificateManager();
 
     public static CertificateManagerEventSource Log { get; set; } =
         new CertificateManagerEventSource();

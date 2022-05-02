@@ -107,8 +107,8 @@ namespace System.Configuration
             string configFile = ElementInformation.Source;
 
             sourceFileFullPath = string.IsNullOrEmpty(configFile)
-              ? File
-              : Path.Combine(Path.GetDirectoryName(configFile), File);
+                ? File
+                : Path.Combine(Path.GetDirectoryName(configFile), File);
 
             if (!IO.File.Exists(sourceFileFullPath))
                 return;

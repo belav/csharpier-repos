@@ -531,12 +531,12 @@ namespace Microsoft.CodeAnalysis
             // file path and diagnostic options for that tree.
             var newTreeSource = SupportsSyntaxTree
                 ? CreateLazyFullyParsedTree(
-                      TextAndVersionSource,
-                      Id.ProjectId,
-                      GetSyntaxTreeFilePath(newAttributes),
-                      _options!,
-                      _languageServices
-                  )
+                    TextAndVersionSource,
+                    Id.ProjectId,
+                    GetSyntaxTreeFilePath(newAttributes),
+                    _options!,
+                    _languageServices
+                )
                 : null;
 
             return new DocumentState(
@@ -708,8 +708,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             return oldRoot.IsEquivalentTo(newRoot, topLevel: true)
-              ? oldTreeAndVersion.Version
-              : newTextVersion;
+                ? oldTreeAndVersion.Version
+                : newTextVersion;
         }
 
         // use static method so we don't capture references to this

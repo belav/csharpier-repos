@@ -133,8 +133,8 @@ internal class DataAnnotationsModelValidator : IModelValidator
                         memberName,
                         StringComparison.Ordinal
                     )
-                      ? null
-                      : resultMemberName;
+                        ? null
+                        : resultMemberName;
                     var validationResult = new ModelValidationResult(newMemberName, errorMessage);
 
                     validationResults.Add(validationResult);

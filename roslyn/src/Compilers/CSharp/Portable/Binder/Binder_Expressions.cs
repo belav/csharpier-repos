@@ -362,15 +362,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ? expression
                 : type is null
                     ? BindToNaturalType(
-                          expression,
-                          BindingDiagnosticBag.Discarded,
-                          reportNoTargetType: false
-                      )
+                        expression,
+                        BindingDiagnosticBag.Discarded,
+                        reportNoTargetType: false
+                    )
                     : GenerateConversionForAssignment(
-                          type,
-                          expression,
-                          BindingDiagnosticBag.Discarded
-                      );
+                        type,
+                        expression,
+                        BindingDiagnosticBag.Discarded
+                    );
             return result;
         }
 
@@ -1384,8 +1384,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var args =
                     numElements == 1
                         ? ImmutableArray.Create(
-                              BindValue(arguments[0].Expression, diagnostics, BindValueKind.RValue)
-                          )
+                            BindValue(arguments[0].Expression, diagnostics, BindValueKind.RValue)
+                        )
                         : ImmutableArray<BoundExpression>.Empty;
 
                 return BadExpression(node, args);
@@ -1468,8 +1468,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     shouldCheckConstraints: true,
                     includeNullability: false,
                     errorPositions: disallowInferredNames
-                      ? inferredPositions
-                      : default(ImmutableArray<bool>)
+                        ? inferredPositions
+                        : default(ImmutableArray<bool>)
                 );
             }
             else
@@ -2055,10 +2055,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics.Add(ErrorCode.ERR_ManagedAddr, location, type);
                     return true;
                 case ManagedKind.UnmanagedWithGenerics
-                      when MessageID.IDS_FeatureUnmanagedConstructedTypes.GetFeatureAvailabilityDiagnosticInfo(
-                          compilation
-                      )
-                          is CSDiagnosticInfo diagnosticInfo:
+                when MessageID.IDS_FeatureUnmanagedConstructedTypes.GetFeatureAvailabilityDiagnosticInfo(
+                    compilation
+                )
+                    is CSDiagnosticInfo diagnosticInfo:
                     diagnostics.Add(diagnosticInfo, location);
                     return true;
                 case ManagedKind.Unknown:
@@ -2207,8 +2207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         members,
                         lookupResult,
                         receiver != null
-                          ? BoundMethodGroupFlags.HasImplicitReceiver
-                          : BoundMethodGroupFlags.None,
+                            ? BoundMethodGroupFlags.HasImplicitReceiver
+                            : BoundMethodGroupFlags.None,
                         isError,
                         diagnostics
                     );
@@ -3081,8 +3081,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Error(
                     diagnostics,
                     inStaticContext
-                      ? ErrorCode.ERR_ThisInStaticMeth
-                      : ErrorCode.ERR_ThisInBadContext,
+                        ? ErrorCode.ERR_ThisInStaticMeth
+                        : ErrorCode.ERR_ThisInBadContext,
                     node
                 );
             }
@@ -3145,8 +3145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Error(
                     diagnostics,
                     inStaticContext
-                      ? ErrorCode.ERR_BaseInStaticMeth
-                      : ErrorCode.ERR_BaseInBadContext,
+                        ? ErrorCode.ERR_BaseInStaticMeth
+                        : ErrorCode.ERR_BaseInBadContext,
                     node.Token
                 );
                 hasErrors = true;
@@ -4696,8 +4696,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> arraySizes = sizes.ToImmutableAndFree();
 
             return node.Initializer == null
-              ? new BoundArrayCreation(node, arraySizes, null, type, hasErrors)
-              : BindArrayCreationWithInitializer(
+                ? new BoundArrayCreation(node, arraySizes, null, type, hasErrors)
+                : BindArrayCreationWithInitializer(
                     diagnostics,
                     node,
                     node.Initializer,
@@ -5345,7 +5345,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return node.Initializer == null
-              ? new BoundStackAllocArrayCreation(
+                ? new BoundStackAllocArrayCreation(
                     node,
                     elementType.Type,
                     count,
@@ -5353,7 +5353,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     type,
                     hasErrors: hasErrors
                 )
-              : BindStackAllocWithInitializer(
+                : BindStackAllocWithInitializer(
                     node,
                     node.Initializer,
                     type,
@@ -5422,8 +5422,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return ConstructNamedType(
                     type: spanType,
                     typeSyntax: node.Kind() == SyntaxKind.StackAllocArrayCreationExpression
-                      ? ((StackAllocArrayCreationExpressionSyntax)node).Type
-                      : node,
+                        ? ((StackAllocArrayCreationExpressionSyntax)node).Type
+                        : node,
                     typeArgumentsSyntax: default,
                     typeArguments: ImmutableArray.Create(elementTypeWithAnnotations),
                     basesBeingResolved: null,
@@ -7022,9 +7022,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             var handlerPlaceholders = operand switch
                             {
                                 BoundBinaryOperator { InterpolatedStringHandlerData: { } data }
-                                  => data.ArgumentPlaceholders,
+                                    => data.ArgumentPlaceholders,
                                 BoundInterpolatedString { InterpolationData: { } data }
-                                  => data.ArgumentPlaceholders,
+                                    => data.ArgumentPlaceholders,
                                 _ => throw ExceptionUtilities.UnexpectedValue(operand.Kind)
                             };
 
@@ -7195,8 +7195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return ToBadExpression(
                 boundMember,
                 (valueKind == BindValueKind.RValue)
-                  ? LookupResultKind.NotAValue
-                  : LookupResultKind.NotAVariable
+                    ? LookupResultKind.NotAValue
+                    : LookupResultKind.NotAVariable
             );
         }
 
@@ -7660,8 +7660,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //
                 // A constructor is accessed through an instance of the type being constructed:
                 return allowProtectedConstructorsOfBaseType
-                  ? this.IsAccessible(constructor, ref useSiteInfo, null)
-                  : this.IsSymbolAccessibleConditional(
+                    ? this.IsAccessible(constructor, ref useSiteInfo, null)
+                    : this.IsSymbolAccessibleConditional(
                         constructor,
                         containingType,
                         ref useSiteInfo,
@@ -8157,12 +8157,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initializerOpt == null
                     ? null
                     : BindInitializerExpression(
-                          syntax: initializerOpt,
-                          type: interfaceType,
-                          typeSyntax: typeNode,
-                          isForNewInstance: true,
-                          diagnostics: diagnostics
-                      );
+                        syntax: initializerOpt,
+                        type: interfaceType,
+                        typeSyntax: typeNode,
+                        isForNewInstance: true,
+                        diagnostics: diagnostics
+                    );
 
             var creation = new BoundNoPiaObjectCreationExpression(
                 node,
@@ -8236,12 +8236,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     initializerOpt == null
                         ? null
                         : BindInitializerExpression(
-                              syntax: initializerOpt,
-                              type: typeParameter,
-                              typeSyntax: typeSyntax,
-                              isForNewInstance: true,
-                              diagnostics: diagnostics
-                          );
+                            syntax: initializerOpt,
+                            type: typeParameter,
+                            typeSyntax: typeSyntax,
+                            isForNewInstance: true,
+                            diagnostics: diagnostics
+                        );
                 return new BoundNewT(node, boundInitializerOpt, typeParameter);
             }
 
@@ -9501,8 +9501,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         boundLeft,
                         rightName,
                         lookupResult.Symbols.All(s => s.Kind == SymbolKind.Method)
-                          ? lookupResult.Symbols.SelectAsArray(s_toMethodSymbolFunc)
-                          : ImmutableArray<MethodSymbol>.Empty,
+                            ? lookupResult.Symbols.SelectAsArray(s_toMethodSymbolFunc)
+                            : ImmutableArray<MethodSymbol>.Empty,
                         lookupResult,
                         flags,
                         this
@@ -9755,11 +9755,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node,
                 lookupKind,
                 (object)symbolOpt == null
-                  ? ImmutableArray<Symbol>.Empty
-                  : ImmutableArray.Create(symbolOpt),
+                    ? ImmutableArray<Symbol>.Empty
+                    : ImmutableArray.Create(symbolOpt),
                 boundLeft == null
-                  ? ImmutableArray<BoundExpression>.Empty
-                  : ImmutableArray.Create(BindToTypeForErrorRecovery(boundLeft)),
+                    ? ImmutableArray<BoundExpression>.Empty
+                    : ImmutableArray.Create(BindToTypeForErrorRecovery(boundLeft)),
                 GetNonMethodMemberType(symbolOpt)
             );
         }
@@ -10269,8 +10269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             Error(
                                 diagnostics,
                                 isFixedStatementExpression
-                                  ? ErrorCode.ERR_FixedNotNeeded
-                                  : ErrorCode.ERR_FixedBufferNotFixed,
+                                    ? ErrorCode.ERR_FixedNotNeeded
+                                    : ErrorCode.ERR_FixedBufferNotFixed,
                                 node
                             );
                             hasErrors = hasError = true;
@@ -10581,8 +10581,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (instanceReceiver == true)
                 {
                     ErrorCode errorCode = this.Flags.Includes(BinderFlags.ObjectInitializerMember)
-                      ? ErrorCode.ERR_StaticMemberInObjectInitializer
-                      : ErrorCode.ERR_ObjectProhibited;
+                        ? ErrorCode.ERR_StaticMemberInObjectInitializer
+                        : ErrorCode.ERR_ObjectProhibited;
                     Error(diagnostics, errorCode, node, symbol);
                     resultKind = LookupResultKind.StaticInstanceMismatch;
                     return true;
@@ -10984,7 +10984,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     : arrayType.ElementType;
 
             return hasErrors
-              ? new BoundArrayAccess(
+                ? new BoundArrayAccess(
                     node,
                     BindToTypeForErrorRecovery(expr),
                     convertedArguments
@@ -10993,7 +10993,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     resultType,
                     hasErrors: true
                 )
-              : new BoundArrayAccess(
+                : new BoundArrayAccess(
                     node,
                     expr,
                     convertedArguments.AsImmutableOrNull(),
@@ -11417,8 +11417,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Error(
                     diagnostics,
                     mustHaveAllOptionalParameters
-                      ? ErrorCode.ERR_IndexedPropertyMustHaveAllOptionalParams
-                      : ErrorCode.ERR_IndexedPropertyRequiresParams,
+                        ? ErrorCode.ERR_IndexedPropertyMustHaveAllOptionalParams
+                        : ErrorCode.ERR_IndexedPropertyRequiresParams,
                     syntax,
                     properties[0].ToDisplayString(s_propertyGroupFormat)
                 );
@@ -11966,8 +11966,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 diagnostics.Add(
                     argIsRange
-                      ? ErrorCode.ERR_ImplicitRangeIndexerWithName
-                      : ErrorCode.ERR_ImplicitIndexIndexerWithName,
+                        ? ErrorCode.ERR_ImplicitRangeIndexerWithName
+                        : ErrorCode.ERR_ImplicitIndexIndexerWithName,
                     arguments.Names[0].GetValueOrDefault().Location
                 );
             }
@@ -12503,11 +12503,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var wkDelegateType = returnsVoid
                     ? WellKnownTypes.GetWellKnownActionDelegate(
-                          invokeArgumentCount: parameterTypes.Length
-                      )
+                        invokeArgumentCount: parameterTypes.Length
+                    )
                     : WellKnownTypes.GetWellKnownFunctionDelegate(
-                          invokeArgumentCount: parameterTypes.Length
-                      );
+                        invokeArgumentCount: parameterTypes.Length
+                    );
 
                 if (wkDelegateType != WellKnownType.Unknown)
                 {

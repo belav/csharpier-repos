@@ -946,8 +946,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 var baseDelay = base.GetNextDelay(lastException);
                 return baseDelay != null && _getNextDelay != null
-                  ? _getNextDelay.Invoke(lastException)
-                  : baseDelay;
+                    ? _getNextDelay.Invoke(lastException)
+                    : baseDelay;
             }
 
             public TimeSpan? GetNextDelayBase(Exception lastException)

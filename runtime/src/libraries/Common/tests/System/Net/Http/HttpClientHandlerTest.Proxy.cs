@@ -198,8 +198,8 @@ namespace System.Net.Http.Functional.Tests
             if (cred != null)
             {
                 string expectedAuth = string.IsNullOrEmpty(cred.Domain)
-                  ? $"{cred.UserName}:{cred.Password}"
-                  : $"{cred.Domain}\\{cred.UserName}:{cred.Password}";
+                    ? $"{cred.UserName}:{cred.Password}"
+                    : $"{cred.Domain}\\{cred.UserName}:{cred.Password}";
                 _output.WriteLine($"expectedAuth={expectedAuth}");
                 string expectedAuthHash = Convert.ToBase64String(
                     Encoding.UTF8.GetBytes(expectedAuth)

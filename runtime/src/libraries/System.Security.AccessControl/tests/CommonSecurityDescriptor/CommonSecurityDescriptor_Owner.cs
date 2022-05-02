@@ -83,8 +83,8 @@ namespace System.Security.AccessControl.Tests
             SecurityIdentifier newOwner = (
                 newOwnerStr != null
                     ? new SecurityIdentifier(
-                          Utils.TranslateStringConstFormatSidToStandardFormatSid(newOwnerStr)
-                      )
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(newOwnerStr)
+                    )
                     : null
             );
             SecurityIdentifier group = new SecurityIdentifier(

@@ -31,9 +31,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             var oldType =
                 oldTypeDeclaration != null
                     ? document.SemanticModel.GetDeclaredSymbol(
-                          oldTypeDeclaration,
-                          cancellationToken
-                      )
+                        oldTypeDeclaration,
+                        cancellationToken
+                    )
                     : document.SemanticModel.Compilation.ScriptClass;
             var newNameToken = GenerateUniqueFieldName(
                 document,
@@ -49,10 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
             var newQualifiedName =
                 oldTypeDeclaration != null
                     ? SyntaxFactory.MemberAccessExpression(
-                          SyntaxKind.SimpleMemberAccessExpression,
-                          SyntaxFactory.ParseName(typeDisplayString),
-                          SyntaxFactory.IdentifierName(newNameToken)
-                      )
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        SyntaxFactory.ParseName(typeDisplayString),
+                        SyntaxFactory.IdentifierName(newNameToken)
+                    )
                     : (ExpressionSyntax)SyntaxFactory.IdentifierName(newNameToken);
 
             newQualifiedName = newQualifiedName.WithAdditionalAnnotations(Simplifier.Annotation);
@@ -116,13 +116,13 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
 
                 var insertionIndex = isConstant
                     ? DetermineConstantInsertPosition(
-                          oldCompilationUnit.Members,
-                          newCompilationUnit.Members
-                      )
+                        oldCompilationUnit.Members,
+                        newCompilationUnit.Members
+                    )
                     : DetermineFieldInsertPosition(
-                          oldCompilationUnit.Members,
-                          newCompilationUnit.Members
-                      );
+                        oldCompilationUnit.Members,
+                        newCompilationUnit.Members
+                    );
 
                 var newRoot = newCompilationUnit.WithMembers(
                     newCompilationUnit.Members.Insert(insertionIndex, newFieldDeclaration)

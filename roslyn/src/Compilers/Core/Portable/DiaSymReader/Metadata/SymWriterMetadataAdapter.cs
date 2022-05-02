@@ -85,8 +85,8 @@ namespace Microsoft.DiaSymReader
         public override int GetNestedClassProps(int nestedClass, out int enclosingClass)
         {
             return _metadataProvider.TryGetEnclosingType(nestedClass, out enclosingClass)
-              ? HResult.S_OK
-              : HResult.E_FAIL;
+                ? HResult.S_OK
+                : HResult.E_FAIL;
         }
 
         // The only purpose of this method is to get type name of the method and declaring type token (opaque for SymWriter), everything else is ignored by the SymWriter.

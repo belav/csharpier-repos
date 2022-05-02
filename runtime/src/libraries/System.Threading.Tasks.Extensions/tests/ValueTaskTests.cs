@@ -81,9 +81,9 @@ namespace System.Threading.Tasks.Tests
                     : mode == CtorMode.Task
                         ? new ValueTask<int>(Task.FromResult(42))
                         : new ValueTask<int>(
-                              ManualResetValueTaskSourceFactory.Completed(42, null),
-                              0
-                          );
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        );
             Assert.True(t.IsCompleted);
             Assert.True(t.IsCompletedSuccessfully);
             Assert.False(t.IsFaulted);
@@ -421,8 +421,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask(
                 sync
-                  ? ManualResetValueTaskSourceFactory.Completed(0)
-                  : ManualResetValueTaskSourceFactory.Delay(1, 0),
+                    ? ManualResetValueTaskSourceFactory.Completed(0)
+                    : ManualResetValueTaskSourceFactory.Delay(1, 0),
                 0
             );
             Task t = vt.AsTask();
@@ -440,8 +440,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask<int>(
                 sync
-                  ? ManualResetValueTaskSourceFactory.Completed(42)
-                  : ManualResetValueTaskSourceFactory.Delay(1, 42),
+                    ? ManualResetValueTaskSourceFactory.Completed(42)
+                    : ManualResetValueTaskSourceFactory.Delay(1, 42),
                 0
             );
             Task<int> t = vt.AsTask();
@@ -459,8 +459,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask(
                 sync
-                  ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
-                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
+                    ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
+                    : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
                 0
             );
             Task t = vt.AsTask();
@@ -482,8 +482,8 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask<int>(
                 sync
-                  ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
-                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
+                    ? ManualResetValueTaskSourceFactory.Completed(0, new FormatException())
+                    : ManualResetValueTaskSourceFactory.Delay(1, 0, new FormatException()),
                 0
             );
             Task<int> t = vt.AsTask();
@@ -505,8 +505,15 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask(
                 sync
-                  ? ManualResetValueTaskSourceFactory.Completed(0, new OperationCanceledException())
-                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new OperationCanceledException()),
+                    ? ManualResetValueTaskSourceFactory.Completed(
+                        0,
+                        new OperationCanceledException()
+                    )
+                    : ManualResetValueTaskSourceFactory.Delay(
+                        1,
+                        0,
+                        new OperationCanceledException()
+                    ),
                 0
             );
             Task t = vt.AsTask();
@@ -528,8 +535,15 @@ namespace System.Threading.Tasks.Tests
         {
             var vt = new ValueTask<int>(
                 sync
-                  ? ManualResetValueTaskSourceFactory.Completed(0, new OperationCanceledException())
-                  : ManualResetValueTaskSourceFactory.Delay(1, 0, new OperationCanceledException()),
+                    ? ManualResetValueTaskSourceFactory.Completed(
+                        0,
+                        new OperationCanceledException()
+                    )
+                    : ManualResetValueTaskSourceFactory.Delay(
+                        1,
+                        0,
+                        new OperationCanceledException()
+                    ),
                 0
             );
             Task<int> t = vt.AsTask();
@@ -638,9 +652,9 @@ namespace System.Threading.Tasks.Tests
                     : mode == CtorMode.Task
                         ? new ValueTask<int>(Task.FromResult(42))
                         : new ValueTask<int>(
-                              ManualResetValueTaskSourceFactory.Completed(42, null),
-                              0
-                          );
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        );
 
             int thread = Environment.CurrentManagedThreadId;
 
@@ -780,9 +794,9 @@ namespace System.Threading.Tasks.Tests
                     : mode == CtorMode.Task
                         ? new ValueTask<int>(Task.FromResult(42))
                         : new ValueTask<int>(
-                              ManualResetValueTaskSourceFactory.Completed(42, null),
-                              0
-                          );
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        );
 
             var tcs = new TaskCompletionSource();
             t.GetAwaiter().OnCompleted(() => tcs.SetResult());
@@ -801,9 +815,9 @@ namespace System.Threading.Tasks.Tests
                     : mode == CtorMode.Task
                         ? new ValueTask<int>(Task.FromResult(42))
                         : new ValueTask<int>(
-                              ManualResetValueTaskSourceFactory.Completed(42, null),
-                              0
-                          );
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        );
 
             var tcs = new TaskCompletionSource();
             t.GetAwaiter().UnsafeOnCompleted(() => tcs.SetResult());
@@ -880,9 +894,9 @@ namespace System.Threading.Tasks.Tests
                     : mode == CtorMode.Task
                         ? new ValueTask<int>(Task.FromResult(42))
                         : new ValueTask<int>(
-                              ManualResetValueTaskSourceFactory.Completed(42, null),
-                              0
-                          );
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        );
 
             var tcs = new TaskCompletionSource();
             t.ConfigureAwait(continueOnCapturedContext)
@@ -909,9 +923,9 @@ namespace System.Threading.Tasks.Tests
                     : mode == CtorMode.Task
                         ? new ValueTask<int>(Task.FromResult(42))
                         : new ValueTask<int>(
-                              ManualResetValueTaskSourceFactory.Completed(42, null),
-                              0
-                          );
+                            ManualResetValueTaskSourceFactory.Completed(42, null),
+                            0
+                        );
 
             var tcs = new TaskCompletionSource();
             t.ConfigureAwait(continueOnCapturedContext)
@@ -943,9 +957,9 @@ namespace System.Threading.Tasks.Tests
                                 : mode == CtorMode.Task
                                     ? new ValueTask(Task.CompletedTask)
                                     : new ValueTask(
-                                          ManualResetValueTaskSourceFactory.Completed(0, null),
-                                          0
-                                      );
+                                        ManualResetValueTaskSourceFactory.Completed(0, null),
+                                        0
+                                    );
 
                         t.GetAwaiter().OnCompleted(() => tcs.SetResult());
                     }
@@ -984,16 +998,16 @@ namespace System.Threading.Tasks.Tests
                                 ? new ValueTask<int>(42)
                                 : mode == CtorMode.Task
                                     ? new ValueTask<int>(
-                                          sync
+                                        sync
                                             ? Task.FromResult(42)
                                             : Task.Delay(1).ContinueWith(_ => 42)
-                                      )
+                                    )
                                     : new ValueTask<int>(
-                                          sync
+                                        sync
                                             ? ManualResetValueTaskSourceFactory.Completed(42, null)
                                             : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
-                                          0
-                                      );
+                                        0
+                                    );
 
                         t.GetAwaiter().OnCompleted(() => tcs.SetResult());
                     }
@@ -1042,11 +1056,11 @@ namespace System.Threading.Tasks.Tests
                                 : mode == CtorMode.Task
                                     ? new ValueTask(sync ? Task.CompletedTask : Task.Delay(1))
                                     : new ValueTask(
-                                          sync
+                                        sync
                                             ? ManualResetValueTaskSourceFactory.Completed(0, null)
                                             : ManualResetValueTaskSourceFactory.Delay(42, 0, null),
-                                          0
-                                      );
+                                        0
+                                    );
 
                         t.ConfigureAwait(continueOnCapturedContext)
                             .GetAwaiter()
@@ -1096,16 +1110,16 @@ namespace System.Threading.Tasks.Tests
                                 ? new ValueTask<int>(42)
                                 : mode == CtorMode.Task
                                     ? new ValueTask<int>(
-                                          sync
+                                        sync
                                             ? Task.FromResult(42)
                                             : Task.Delay(1).ContinueWith(_ => 42)
-                                      )
+                                    )
                                     : new ValueTask<int>(
-                                          sync
+                                        sync
                                             ? ManualResetValueTaskSourceFactory.Completed(42, null)
                                             : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
-                                          0
-                                      );
+                                        0
+                                    );
 
                         t.ConfigureAwait(continueOnCapturedContext)
                             .GetAwaiter()

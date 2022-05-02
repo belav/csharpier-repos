@@ -129,10 +129,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             var subNamespace = SubnamespaceFromOutputPath(_projectDir, directoryPath);
             return string.IsNullOrEmpty(subNamespace)
-              ? _rootNamespace
-              : string.IsNullOrEmpty(_rootNamespace)
-                  ? subNamespace
-                  : _rootNamespace + "." + subNamespace;
+                ? _rootNamespace
+                : string.IsNullOrEmpty(_rootNamespace)
+                    ? subNamespace
+                    : _rootNamespace + "." + subNamespace;
         }
 
         // if outputDir is a subfolder of projectDir, then use each subfolder as a subnamespace
@@ -148,14 +148,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var subPath = outputDir.Substring(projectDir.Length);
 
             return !string.IsNullOrWhiteSpace(subPath)
-              ? string.Join(
+                ? string.Join(
                     ".",
                     subPath.Split(
                         new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
                         StringSplitOptions.RemoveEmptyEntries
                     )
                 )
-              : null;
+                : null;
         }
 
         private static string MakeDirRelative(string root, string path)
@@ -177,8 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             var last = path[path.Length - 1];
             return last == Path.DirectorySeparatorChar || last == Path.AltDirectorySeparatorChar
-              ? path
-              : path + Path.DirectorySeparatorChar;
+                ? path
+                : path + Path.DirectorySeparatorChar;
         }
     }
 }

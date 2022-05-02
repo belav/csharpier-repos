@@ -199,8 +199,8 @@ namespace System.Web.WebPages
             )
             {
                 string cssClass = IsValid(field)
-                  ? ValidationHelper.ValidCssClass
-                  : ValidationHelper.InvalidCssClass;
+                    ? ValidationHelper.ValidCssClass
+                    : ValidationHelper.InvalidCssClass;
                 return cssClass == null ? null : new HtmlString(cssClass);
             }
             return null;

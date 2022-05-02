@@ -43,11 +43,11 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 ? value == null
                     ? prefix
                     : string.Join(
-                          Environment.NewLine,
-                          value
-                              .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                              .Select(l => prefix + l)
-                      )
+                        Environment.NewLine,
+                        value
+                            .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                            .Select(l => prefix + l)
+                    )
                 : value;
 
         private static void WriteLine(string? value)

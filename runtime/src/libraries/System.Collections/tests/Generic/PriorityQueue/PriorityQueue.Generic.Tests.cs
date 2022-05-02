@@ -296,7 +296,7 @@ namespace System.Collections.Tests
         /// </summary>
         protected class EnumerablePriorityQueue
             : PriorityQueue<TElement, TPriority>,
-              IEnumerable<(TElement Element, TPriority Priority)>
+                IEnumerable<(TElement Element, TPriority Priority)>
         {
             public EnumerablePriorityQueue(IComparer<TPriority>? comparer) : base(comparer) { }
 

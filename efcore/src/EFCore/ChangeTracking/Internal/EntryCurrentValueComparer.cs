@@ -16,7 +16,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
     /// </summary>
     public class EntryCurrentValueComparer
         : IComparer<IUpdateEntry>,
-          IEqualityComparer<IUpdateEntry>
+            IEqualityComparer<IUpdateEntry>
     {
         private readonly IPropertyBase _property;
         private readonly IComparer _underlyingComparer;

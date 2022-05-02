@@ -15,10 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyBooleanExpression
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpSimplifyConditionalDiagnosticAnalyzer
         : AbstractSimplifyConditionalDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              ConditionalExpressionSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            ConditionalExpressionSyntax
+        >
     {
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 

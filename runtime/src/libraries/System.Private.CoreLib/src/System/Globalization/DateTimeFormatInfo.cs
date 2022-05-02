@@ -1993,8 +1993,8 @@ namespace System.Globalization
         internal string DecimalSeparator =>
             _decimalSeparator ??= new NumberFormatInfo(
                 _cultureData.UseUserOverride
-                  ? CultureData.GetCultureData(_cultureData.CultureName, false)
-                  : _cultureData
+                    ? CultureData.GetCultureData(_cultureData.CultureName, false)
+                    : _cultureData
             ).NumberDecimalSeparator;
 
         // Positive TimeSpan Pattern

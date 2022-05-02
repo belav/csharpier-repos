@@ -67,15 +67,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
 
             var diffResult = useSnapshots
                 ? diffService.DiffSnapshotSpans(
-                      oldTextSnapshot.GetFullSpan(),
-                      newTextSnapshot.GetFullSpan(),
-                      differenceOptions
-                  )
+                    oldTextSnapshot.GetFullSpan(),
+                    newTextSnapshot.GetFullSpan(),
+                    differenceOptions
+                )
                 : diffService.DiffStrings(
-                      oldText.ToString(),
-                      newText.ToString(),
-                      differenceOptions
-                  );
+                    oldText.ToString(),
+                    newText.ToString(),
+                    differenceOptions
+                );
 
             return diffResult.Differences
                 .Select(

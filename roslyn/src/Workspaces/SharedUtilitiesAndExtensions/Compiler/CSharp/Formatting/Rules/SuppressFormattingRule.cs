@@ -463,9 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 );
                 var endToken = endDirective is null
                     ? (
-                          (CompilationUnitSyntax)
-                              structure.SyntaxTree.GetRoot(CancellationToken.None)
-                      ).EndOfFileToken
+                        (CompilationUnitSyntax)structure.SyntaxTree.GetRoot(CancellationToken.None)
+                    ).EndOfFileToken
                     : endDirective.GetFirstToken(includeDirectives: true);
 
                 Debug.Assert(
@@ -594,7 +593,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 ObjectCreationExpressionSyntax objectCreationNode => objectCreationNode.Initializer,
                 ArrayCreationExpressionSyntax arrayCreationNode => arrayCreationNode.Initializer,
                 ImplicitArrayCreationExpressionSyntax implicitArrayNode
-                  => implicitArrayNode.Initializer,
+                    => implicitArrayNode.Initializer,
                 _ => null,
             };
     }

@@ -72,8 +72,8 @@ namespace System.ComponentModel
         )
         {
             return isUnderlyingTypeUInt64
-              ? unchecked((long)Convert.ToUInt64(enumVal, culture))
-              : Convert.ToInt64(enumVal, culture);
+                ? unchecked((long)Convert.ToUInt64(enumVal, culture))
+                : Convert.ToInt64(enumVal, culture);
         }
 
         /// <summary>

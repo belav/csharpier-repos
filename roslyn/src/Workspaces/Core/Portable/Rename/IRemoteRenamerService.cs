@@ -113,21 +113,21 @@ namespace Microsoft.CodeAnalysis.Rename
             result == null
                 ? null
                 : new SerializableSearchResult
-                  {
-                      Locations = result.Locations
-                          .Select(loc => SerializableRenameLocation.Dehydrate(loc))
-                          .ToArray(),
-                      ImplicitLocations = result.ImplicitLocations.IsDefault
-                          ? null
-                          : result.ImplicitLocations
+                {
+                    Locations = result.Locations
+                        .Select(loc => SerializableRenameLocation.Dehydrate(loc))
+                        .ToArray(),
+                    ImplicitLocations = result.ImplicitLocations.IsDefault
+                        ? null
+                        : result.ImplicitLocations
                             .Select(
                                 loc =>
                                     SerializableReferenceLocation.Dehydrate(loc, cancellationToken)
                             )
                             .ToArray(),
-                      ReferencedSymbols = result.ReferencedSymbols.IsDefault
-                          ? null
-                          : result.ReferencedSymbols
+                    ReferencedSymbols = result.ReferencedSymbols.IsDefault
+                        ? null
+                        : result.ReferencedSymbols
                             .Select(
                                 s =>
                                     SerializableSymbolAndProjectId.Dehydrate(
@@ -137,7 +137,7 @@ namespace Microsoft.CodeAnalysis.Rename
                                     )
                             )
                             .ToArray(),
-                  };
+                };
 
         public async Task<RenameLocations.SearchResult> RehydrateAsync(
             Solution solution,

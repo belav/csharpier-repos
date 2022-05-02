@@ -14,8 +14,8 @@ namespace System.Reflection.Emit
                 _methodBuilder.GetModuleBuilder(),
                 _token,
                 _position == 0
-                  ? _methodBuilder.ReturnType
-                  : _methodBuilder.m_parameterTypes![_position - 1],
+                    ? _methodBuilder.ReturnType
+                    : _methodBuilder.m_parameterTypes![_position - 1],
                 defaultValue
             );
         }

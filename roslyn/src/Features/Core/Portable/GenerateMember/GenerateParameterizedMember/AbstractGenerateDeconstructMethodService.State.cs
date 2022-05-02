@@ -23,11 +23,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
     {
         internal new class State
             : AbstractGenerateParameterizedMemberService<
-                  TService,
-                  TSimpleNameSyntax,
-                  TExpressionSyntax,
-                  TInvocationExpressionSyntax
-              >.State
+                TService,
+                TSimpleNameSyntax,
+                TExpressionSyntax,
+                TInvocationExpressionSyntax
+            >.State
         {
             /// <summary>
             /// Make a State instance representing the Deconstruct method we want to generate.

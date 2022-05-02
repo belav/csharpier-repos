@@ -55,8 +55,8 @@ namespace System.Collections.Generic
     )]
     public class SortedList<TKey, TValue>
         : IDictionary<TKey, TValue>,
-          IDictionary,
-          IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IDictionary,
+            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         private TKey[] keys; // Do not rename (binary serialization)
         private TValue[] values; // Do not rename (binary serialization)

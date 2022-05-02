@@ -8676,22 +8676,22 @@ class Test<T> where T : I1<T>
                 Diagnostic(ErrorCode.ERR_BadAbstractStaticMemberAccess, prefixOp + "a" + postfixOp)
                     .WithLocation(21, 13),
                 (prefixOp + postfixOp).Length == 1
-                  ?
+                    ?
                     // (26,78): error CS8927: An expression tree may not contain an access of static abstract interface member
                     //         _ = (System.Linq.Expressions.Expression<System.Action<T>>)((T b) => (-b).ToString());
                     Diagnostic(
                             ErrorCode.ERR_ExpressionTreeContainsAbstractStaticMemberAccess,
                             prefixOp + "b" + postfixOp
                         )
-                    .WithLocation(26, 78)
-                  :
+                        .WithLocation(26, 78)
+                    :
                     // (26,78): error CS0832: An expression tree may not contain an assignment operator
                     //         _ = (System.Linq.Expressions.Expression<System.Action<T>>)((T b) => (b--).ToString());
                     Diagnostic(
                             ErrorCode.ERR_ExpressionTreeContainsAssignment,
                             prefixOp + "b" + postfixOp
                         )
-                    .WithLocation(26, 78)
+                        .WithLocation(26, 78)
             );
         }
 
@@ -9099,14 +9099,14 @@ class Test
             var node =
                 postfixOp != ""
                     ? (ExpressionSyntax)
-                          tree.GetRoot()
-                              .DescendantNodes()
-                              .OfType<PostfixUnaryExpressionSyntax>()
-                              .First()
+                        tree.GetRoot()
+                            .DescendantNodes()
+                            .OfType<PostfixUnaryExpressionSyntax>()
+                            .First()
                     : tree.GetRoot()
-                      .DescendantNodes()
-                      .OfType<PrefixUnaryExpressionSyntax>()
-                      .First();
+                        .DescendantNodes()
+                        .OfType<PrefixUnaryExpressionSyntax>()
+                        .First();
 
             Assert.Equal(prefixOp + "x" + postfixOp, node.ToString());
 
@@ -19202,9 +19202,9 @@ public class C2 : C11<int>, I1<int>
             {
                 ">>" => WellKnownMemberNames.RightShiftOperatorName,
                 _
-                  => OperatorFacts.BinaryOperatorNameFromSyntaxKindIfAny(
-                      SyntaxFactory.ParseToken(op).Kind()
-                  )
+                    => OperatorFacts.BinaryOperatorNameFromSyntaxKindIfAny(
+                        SyntaxFactory.ParseToken(op).Kind()
+                    )
             };
 
         [Theory]
@@ -24465,8 +24465,8 @@ public class C2 : C11<int, int>, I1<C11<int, int>, C1<int, int>>
                 var expectedDisplay =
                     m01.ContainingModule is PEModuleSymbol
                         ? "C11<T, U> C11<T, U>.I1<C11<T, U>, C1<T, U>>."
-                          + opName
-                          + "(C11<T, U> x, C1<T, U> y)"
+                            + opName
+                            + "(C11<T, U> x, C1<T, U> y)"
                         : "C11<T, U> C1<T, U>." + opName + "(C11<T, U> x, C1<T, U> y)";
                 Assert.Equal(expectedDisplay, c1M01.OriginalDefinition.ToTestDisplayString());
 

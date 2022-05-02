@@ -507,8 +507,8 @@ namespace System.Text.Json.Serialization.Metadata
                 key =
                     length > 5
                         ? Unsafe.ReadUnaligned<uint>(ref reference)
-                          | (ulong)Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref reference, 4))
-                              << 32
+                            | (ulong)Unsafe.ReadUnaligned<ushort>(ref Unsafe.Add(ref reference, 4))
+                                << 32
                         : length > 3
                             ? Unsafe.ReadUnaligned<uint>(ref reference)
                             : length > 1

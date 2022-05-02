@@ -18,8 +18,8 @@ namespace System.Globalization.Tests
         {
             var newCulture = new CultureInfo(
                 CultureInfo.CurrentCulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
-                  ? "ar-SA"
-                  : "ja-JP"
+                    ? "ar-SA"
+                    : "ja-JP"
             );
             using (new ThreadCultureChange(newCulture))
             {
@@ -54,8 +54,8 @@ namespace System.Globalization.Tests
                     "ja-JP",
                     StringComparison.OrdinalIgnoreCase
                 )
-                  ? "ar-SA"
-                  : "ja-JP"
+                    ? "ar-SA"
+                    : "ja-JP"
             );
             using (new ThreadCultureChange(null, newUICulture))
             {
@@ -82,12 +82,12 @@ namespace System.Globalization.Tests
                     {
                         CultureInfo newCulture = new CultureInfo(
                             CultureInfo.DefaultThreadCurrentCulture == null
-                                || CultureInfo.DefaultThreadCurrentCulture.Name.Equals(
-                                    "ja-JP",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                              ? "ar-SA"
-                              : "ja-JP"
+                            || CultureInfo.DefaultThreadCurrentCulture.Name.Equals(
+                                "ja-JP",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                                ? "ar-SA"
+                                : "ja-JP"
                         );
                         CultureInfo.DefaultThreadCurrentCulture = newCulture;
 
@@ -113,12 +113,12 @@ namespace System.Globalization.Tests
                     {
                         CultureInfo newUICulture = new CultureInfo(
                             CultureInfo.DefaultThreadCurrentUICulture == null
-                                || CultureInfo.DefaultThreadCurrentUICulture.Name.Equals(
-                                    "ja-JP",
-                                    StringComparison.OrdinalIgnoreCase
-                                )
-                              ? "ar-SA"
-                              : "ja-JP"
+                            || CultureInfo.DefaultThreadCurrentUICulture.Name.Equals(
+                                "ja-JP",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                                ? "ar-SA"
+                                : "ja-JP"
                         );
                         CultureInfo.DefaultThreadCurrentUICulture = newUICulture;
 

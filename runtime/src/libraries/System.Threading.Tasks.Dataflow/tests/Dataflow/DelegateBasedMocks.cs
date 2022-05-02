@@ -48,8 +48,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         )
         {
             return OfferMessageDelegate != null
-              ? OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept)
-              : DataflowMessageStatus.Accepted;
+                ? OfferMessageDelegate(messageHeader, messageValue, source, consumeToAccept)
+                : DataflowMessageStatus.Accepted;
         }
 
         public Task Completion
@@ -72,8 +72,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions)
         {
             return LinkToDelegate != null
-              ? LinkToDelegate(target, linkOptions)
-              : new DelegateDisposable();
+                ? LinkToDelegate(target, linkOptions)
+                : new DelegateDisposable();
         }
 
         public TOutput ConsumeMessage(
@@ -84,8 +84,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             messageConsumed = false;
             return ConsumeMessageDelegate != null
-              ? ConsumeMessageDelegate(messageHeader, target, out messageConsumed)
-              : default(TOutput);
+                ? ConsumeMessageDelegate(messageHeader, target, out messageConsumed)
+                : default(TOutput);
         }
 
         public bool ReserveMessage(
@@ -94,8 +94,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         )
         {
             return ReserveMessageDelegate != null
-              ? ReserveMessageDelegate(messageHeader, target)
-              : true;
+                ? ReserveMessageDelegate(messageHeader, target)
+                : true;
         }
 
         public void ReleaseReservation(
@@ -110,7 +110,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
     internal sealed class DelegateReceivablePropagator<TInput, TOutput>
         : DelegatePropagator<TInput, TOutput>,
-          IReceivableSourceBlock<TOutput>
+            IReceivableSourceBlock<TOutput>
     {
         public delegate bool TryReceiveFunc(Predicate<TOutput> filter, out TOutput item);
         public delegate bool TryReceiveAllFunc(out IList<TOutput> items);
@@ -188,8 +188,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
         {
             return TryExecuteTaskInlineDelegate != null
-              ? TryExecuteTaskInlineDelegate(task, taskWasPreviouslyQueued)
-              : false;
+                ? TryExecuteTaskInlineDelegate(task, taskWasPreviouslyQueued)
+                : false;
         }
 
         protected override Collections.Generic.IEnumerable<Task> GetScheduledTasks()

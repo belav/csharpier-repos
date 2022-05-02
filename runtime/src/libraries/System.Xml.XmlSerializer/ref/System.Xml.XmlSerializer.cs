@@ -1187,8 +1187,8 @@ namespace System.Xml.Serialization
 
     public partial class XmlSchemaEnumerator
         : System.Collections.Generic.IEnumerator<System.Xml.Schema.XmlSchema>,
-          System.Collections.IEnumerator,
-          System.IDisposable
+            System.Collections.IEnumerator,
+            System.IDisposable
     {
         public XmlSchemaEnumerator(System.Xml.Serialization.XmlSchemas list) { }
 
@@ -1383,8 +1383,8 @@ namespace System.Xml.Serialization
 
     public partial class XmlSchemas
         : System.Collections.CollectionBase,
-          System.Collections.Generic.IEnumerable<System.Xml.Schema.XmlSchema>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Xml.Schema.XmlSchema>,
+            System.Collections.IEnumerable
     {
         public XmlSchemas() { }
 

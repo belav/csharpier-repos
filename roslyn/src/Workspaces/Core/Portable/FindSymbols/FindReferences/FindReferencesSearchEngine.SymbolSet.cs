@@ -108,8 +108,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     .ConfigureAwait(false);
 
                 return options.UnidirectionalHierarchyCascade
-                  ? new UnidirectionalSymbolSet(engine, initialSymbols, upSymbols)
-                  : new BidirectionalSymbolSet(engine, initialSymbols, upSymbols);
+                    ? new UnidirectionalSymbolSet(engine, initialSymbols, upSymbols)
+                    : new BidirectionalSymbolSet(engine, initialSymbols, upSymbols);
             }
 
             private static async Task<ISymbol> MapToAppropriateSymbolAsync(

@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // We only care about caching semantic models for internal callers, which use the default 'ignoreAccessibility = false'.
                 return !ignoreAccessibility
-                  ? _semanticModelsMap.GetOrAdd(tree, _createSemanticModel)
-                  : _compilation.CreateSemanticModel(tree, ignoreAccessibility: true);
+                    ? _semanticModelsMap.GetOrAdd(tree, _createSemanticModel)
+                    : _compilation.CreateSemanticModel(tree, ignoreAccessibility: true);
             }
 
             public void ClearCachedSemanticModel(SyntaxTree tree)

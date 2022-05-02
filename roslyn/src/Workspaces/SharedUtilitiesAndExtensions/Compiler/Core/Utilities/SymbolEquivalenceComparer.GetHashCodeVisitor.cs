@@ -85,11 +85,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     SymbolKind.PointerType => CombineHashCodes((IPointerTypeSymbol)x, currentHash),
                     SymbolKind.Property => CombineHashCodes((IPropertySymbol)x, currentHash),
                     SymbolKind.RangeVariable
-                      => CombineHashCodes((IRangeVariableSymbol)x, currentHash),
+                        => CombineHashCodes((IRangeVariableSymbol)x, currentHash),
                     SymbolKind.TypeParameter
-                      => CombineHashCodes((ITypeParameterSymbol)x, currentHash),
+                        => CombineHashCodes((ITypeParameterSymbol)x, currentHash),
                     SymbolKind.Preprocessing
-                      => CombineHashCodes((IPreprocessingSymbol)x, currentHash),
+                        => CombineHashCodes((IPreprocessingSymbol)x, currentHash),
                     _ => -1,
                 };
 
@@ -166,8 +166,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 currentHash = CombineHashCodes(x.Parameters, currentHash, _parameterAggregator);
 
                 return IsConstructedFromSelf(x)
-                  ? currentHash
-                  : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
+                    ? currentHash
+                    : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
             }
 
             private int CombineHashCodes(IModuleSymbol x, int currentHash) =>
@@ -229,8 +229,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 }
 
                 return IsConstructedFromSelf(x) || x.IsUnboundGenericType
-                  ? currentHash
-                  : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
+                    ? currentHash
+                    : CombineHashCodes(x.TypeArguments, currentHash, _symbolAggregator);
             }
 
             private int CombineAnonymousTypeHashCode(INamedTypeSymbol x, int currentHash)

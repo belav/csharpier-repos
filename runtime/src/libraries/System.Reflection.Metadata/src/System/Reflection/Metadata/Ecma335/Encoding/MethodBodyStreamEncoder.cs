@@ -112,10 +112,10 @@ namespace System.Reflection.Metadata.Ecma335
             var regionEncoder =
                 (exceptionRegionCount > 0)
                     ? ExceptionRegionEncoder.SerializeTableHeader(
-                          Builder,
-                          exceptionRegionCount,
-                          hasSmallExceptionRegions
-                      )
+                        Builder,
+                        exceptionRegionCount,
+                        hasSmallExceptionRegions
+                    )
                     : default;
 
             return new MethodBody(bodyOffset, instructions, regionEncoder);
@@ -311,8 +311,8 @@ namespace System.Reflection.Metadata.Ecma335
                 Builder.WriteInt32(codeSize);
                 Builder.WriteInt32(
                     localVariablesSignature.IsNil
-                      ? 0
-                      : MetadataTokens.GetToken(localVariablesSignature)
+                        ? 0
+                        : MetadataTokens.GetToken(localVariablesSignature)
                 );
             }
 

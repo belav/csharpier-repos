@@ -72,8 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual QueryRootExpression UpdateEntityType(IEntityType entityType) =>
             entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
                 ? throw new InvalidOperationException(
-                      CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
-                  )
+                    CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+                )
                 : new QueryRootExpression(entityType);
 
         /// <inheritdoc />

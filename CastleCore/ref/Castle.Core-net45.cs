@@ -16,8 +16,8 @@ namespace Castle.Components.DictionaryAdapter
 {
     public abstract class AbstractDictionaryAdapter
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable
     {
         protected AbstractDictionaryAdapter() { }
 
@@ -103,15 +103,15 @@ namespace Castle.Components.DictionaryAdapter
 
     public class BindingList<T>
         : Castle.Components.DictionaryAdapter.IBindingListSource,
-          Castle.Components.DictionaryAdapter.IBindingList<T>,
-          System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.ComponentModel.ICancelAddNew,
-          System.ComponentModel.IRaiseItemChangedEvents
+            Castle.Components.DictionaryAdapter.IBindingList<T>,
+            System.Collections.Generic.ICollection<T>,
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.ComponentModel.ICancelAddNew,
+            System.ComponentModel.IRaiseItemChangedEvents
     {
         public BindingList() { }
 
@@ -182,10 +182,10 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class ComponentAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
     {
         public ComponentAttribute() { }
 
@@ -202,7 +202,7 @@ namespace Castle.Components.DictionaryAdapter
 
     public class DefaultPropertyGetter
         : Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
     {
         public DefaultPropertyGetter(System.ComponentModel.TypeConverter converter) { }
 
@@ -233,16 +233,16 @@ namespace Castle.Components.DictionaryAdapter
 
     public abstract class DictionaryAdapterBase
         : Castle.Components.DictionaryAdapter.IDictionaryAdapter,
-          Castle.Components.DictionaryAdapter.IDictionaryCreate,
-          Castle.Components.DictionaryAdapter.IDictionaryEdit,
-          Castle.Components.DictionaryAdapter.IDictionaryNotify,
-          Castle.Components.DictionaryAdapter.IDictionaryValidate,
-          System.ComponentModel.IChangeTracking,
-          System.ComponentModel.IDataErrorInfo,
-          System.ComponentModel.IEditableObject,
-          System.ComponentModel.INotifyPropertyChanged,
-          System.ComponentModel.INotifyPropertyChanging,
-          System.ComponentModel.IRevertibleChangeTracking
+            Castle.Components.DictionaryAdapter.IDictionaryCreate,
+            Castle.Components.DictionaryAdapter.IDictionaryEdit,
+            Castle.Components.DictionaryAdapter.IDictionaryNotify,
+            Castle.Components.DictionaryAdapter.IDictionaryValidate,
+            System.ComponentModel.IChangeTracking,
+            System.ComponentModel.IDataErrorInfo,
+            System.ComponentModel.IEditableObject,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.IRevertibleChangeTracking
     {
         public DictionaryAdapterBase(
             Castle.Components.DictionaryAdapter.DictionaryAdapterInstance instance
@@ -535,7 +535,7 @@ namespace Castle.Components.DictionaryAdapter
 
     public abstract class DictionaryBehaviorAttribute
         : System.Attribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior
     {
         public const int DefaultExecutionOrder = 1073741823;
         public const int FirstExecutionOrder = 0;
@@ -550,9 +550,9 @@ namespace Castle.Components.DictionaryAdapter
 
     public class DictionaryValidateGroup
         : Castle.Components.DictionaryAdapter.IDictionaryValidate,
-          System.ComponentModel.IDataErrorInfo,
-          System.ComponentModel.INotifyPropertyChanged,
-          System.IDisposable
+            System.ComponentModel.IDataErrorInfo,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.IDisposable
     {
         public DictionaryValidateGroup(
             object[] groups,
@@ -600,7 +600,7 @@ namespace Castle.Components.DictionaryAdapter
 
     public abstract class DynamicValue<T>
         : Castle.Components.DictionaryAdapter.IDynamicValue,
-          Castle.Components.DictionaryAdapter.IDynamicValue<T>
+            Castle.Components.DictionaryAdapter.IDynamicValue<T>
     {
         protected DynamicValue() { }
 
@@ -611,13 +611,13 @@ namespace Castle.Components.DictionaryAdapter
 
     public class EditableBindingList<T>
         : System.ComponentModel.BindingList<T>,
-          System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.IEnumerable,
-          System.ComponentModel.IChangeTracking,
-          System.ComponentModel.IEditableObject,
-          System.ComponentModel.IRevertibleChangeTracking
+            System.Collections.Generic.ICollection<T>,
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.IEnumerable,
+            System.ComponentModel.IChangeTracking,
+            System.ComponentModel.IEditableObject,
+            System.ComponentModel.IRevertibleChangeTracking
     {
         public EditableBindingList() { }
 
@@ -638,9 +638,9 @@ namespace Castle.Components.DictionaryAdapter
 
     public class EditableList
         : Castle.Components.DictionaryAdapter.EditableList<object>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public EditableList() { }
 
@@ -649,9 +649,9 @@ namespace Castle.Components.DictionaryAdapter
 
     public class EditableList<T>
         : System.Collections.Generic.List<T>,
-          System.ComponentModel.IChangeTracking,
-          System.ComponentModel.IEditableObject,
-          System.ComponentModel.IRevertibleChangeTracking
+            System.ComponentModel.IChangeTracking,
+            System.ComponentModel.IEditableObject,
+            System.ComponentModel.IRevertibleChangeTracking
     {
         public EditableList() { }
 
@@ -725,12 +725,12 @@ namespace Castle.Components.DictionaryAdapter
 
     public interface IBindingList<T>
         : Castle.Components.DictionaryAdapter.IBindingListSource,
-          System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.IEnumerable,
-          System.ComponentModel.ICancelAddNew,
-          System.ComponentModel.IRaiseItemChangedEvents
+            System.Collections.Generic.ICollection<T>,
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.IEnumerable,
+            System.ComponentModel.ICancelAddNew,
+            System.ComponentModel.IRaiseItemChangedEvents
     {
         bool AllowEdit { get; }
         bool AllowNew { get; }
@@ -786,7 +786,7 @@ namespace Castle.Components.DictionaryAdapter
 
     public interface ICollectionProjection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         void Clear();
         void ClearReferences();
@@ -800,15 +800,15 @@ namespace Castle.Components.DictionaryAdapter
 
     public interface IDictionaryAdapter
         : Castle.Components.DictionaryAdapter.IDictionaryCreate,
-          Castle.Components.DictionaryAdapter.IDictionaryEdit,
-          Castle.Components.DictionaryAdapter.IDictionaryNotify,
-          Castle.Components.DictionaryAdapter.IDictionaryValidate,
-          System.ComponentModel.IChangeTracking,
-          System.ComponentModel.IDataErrorInfo,
-          System.ComponentModel.IEditableObject,
-          System.ComponentModel.INotifyPropertyChanged,
-          System.ComponentModel.INotifyPropertyChanging,
-          System.ComponentModel.IRevertibleChangeTracking
+            Castle.Components.DictionaryAdapter.IDictionaryEdit,
+            Castle.Components.DictionaryAdapter.IDictionaryNotify,
+            Castle.Components.DictionaryAdapter.IDictionaryValidate,
+            System.ComponentModel.IChangeTracking,
+            System.ComponentModel.IDataErrorInfo,
+            System.ComponentModel.IEditableObject,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.ComponentModel.INotifyPropertyChanging,
+            System.ComponentModel.IRevertibleChangeTracking
     {
         Castle.Components.DictionaryAdapter.DictionaryAdapterMeta Meta { get; }
         Castle.Components.DictionaryAdapter.DictionaryAdapterInstance This { get; }
@@ -944,8 +944,8 @@ namespace Castle.Components.DictionaryAdapter
 
     public interface IDictionaryEdit
         : System.ComponentModel.IChangeTracking,
-          System.ComponentModel.IEditableObject,
-          System.ComponentModel.IRevertibleChangeTracking
+            System.ComponentModel.IEditableObject,
+            System.ComponentModel.IRevertibleChangeTracking
     {
         bool CanEdit { get; }
         bool IsEditing { get; }
@@ -997,7 +997,7 @@ namespace Castle.Components.DictionaryAdapter
 
     public interface IDictionaryNotify
         : System.ComponentModel.INotifyPropertyChanged,
-          System.ComponentModel.INotifyPropertyChanging
+            System.ComponentModel.INotifyPropertyChanging
     {
         bool CanNotify { get; }
         bool ShouldNotify { get; }
@@ -1128,8 +1128,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class KeyAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
     {
         public KeyAttribute(string key) { }
 
@@ -1145,8 +1145,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class KeyPrefixAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
     {
         public KeyPrefixAttribute() { }
 
@@ -1164,8 +1164,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class KeySubstitutionAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
     {
         public KeySubstitutionAttribute(string oldValue, string newValue) { }
     }
@@ -1176,21 +1176,21 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class ListProjection<T>
         : Castle.Components.DictionaryAdapter.IBindingListSource,
-          Castle.Components.DictionaryAdapter.IBindingList<T>,
-          Castle.Components.DictionaryAdapter.ICollectionAdapterObserver<T>,
-          Castle.Components.DictionaryAdapter.ICollectionProjection,
-          System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.ComponentModel.IBindingList,
-          System.ComponentModel.ICancelAddNew,
-          System.ComponentModel.IChangeTracking,
-          System.ComponentModel.IEditableObject,
-          System.ComponentModel.IRaiseItemChangedEvents,
-          System.ComponentModel.IRevertibleChangeTracking
+            Castle.Components.DictionaryAdapter.IBindingList<T>,
+            Castle.Components.DictionaryAdapter.ICollectionAdapterObserver<T>,
+            Castle.Components.DictionaryAdapter.ICollectionProjection,
+            System.Collections.Generic.ICollection<T>,
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.ComponentModel.IBindingList,
+            System.ComponentModel.ICancelAddNew,
+            System.ComponentModel.IChangeTracking,
+            System.ComponentModel.IEditableObject,
+            System.ComponentModel.IRaiseItemChangedEvents,
+            System.ComponentModel.IRevertibleChangeTracking
     {
         public ListProjection(Castle.Components.DictionaryAdapter.ICollectionAdapter<T> adapter) { }
 
@@ -1266,10 +1266,10 @@ namespace Castle.Components.DictionaryAdapter
 
     public class MemberwiseEqualityHashCodeStrategy
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryEqualityHashCodeStrategy,
-          Castle.Components.DictionaryAdapter.IDictionaryInitializer,
-          System.Collections.Generic.IEqualityComparer<Castle.Components.DictionaryAdapter.IDictionaryAdapter>
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryEqualityHashCodeStrategy,
+            Castle.Components.DictionaryAdapter.IDictionaryInitializer,
+            System.Collections.Generic.IEqualityComparer<Castle.Components.DictionaryAdapter.IDictionaryAdapter>
     {
         public MemberwiseEqualityHashCodeStrategy() { }
 
@@ -1292,8 +1292,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class MultiLevelEditAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryInitializer
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryInitializer
     {
         public MultiLevelEditAttribute() { }
 
@@ -1328,8 +1328,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class NewGuidAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
     {
         public NewGuidAttribute() { }
 
@@ -1350,8 +1350,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class OnDemandAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
     {
         public OnDemandAttribute() { }
 
@@ -1392,9 +1392,9 @@ namespace Castle.Components.DictionaryAdapter
     [System.Diagnostics.DebuggerDisplay("{Property.DeclaringType.FullName,nq}.{PropertyName,nq}")]
     public class PropertyDescriptor
         : Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
+            Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
     {
         protected System.Collections.Generic.List<Castle.Components.DictionaryAdapter.IDictionaryBehavior> dictionaryBehaviors;
 
@@ -1491,8 +1491,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class RemoveIfAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
     {
         public RemoveIfAttribute() { }
 
@@ -1512,10 +1512,10 @@ namespace Castle.Components.DictionaryAdapter
 
     public class SetProjection<T>
         : Castle.Components.DictionaryAdapter.ListProjection<T>,
-          System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.ISet<T>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.ICollection<T>,
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.ISet<T>,
+            System.Collections.IEnumerable
     {
         public SetProjection(Castle.Components.DictionaryAdapter.ICollectionAdapter<T> adapter) { }
 
@@ -1563,8 +1563,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class StringFormatAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter
     {
         public StringFormatAttribute(string format, string properties) { }
 
@@ -1579,9 +1579,9 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class StringListAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
     {
         public StringListAttribute() { }
 
@@ -1596,8 +1596,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class StringStorageAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
     {
         public StringStorageAttribute() { }
 
@@ -1618,8 +1618,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class StringValuesAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertySetter
     {
         public StringValuesAttribute() { }
 
@@ -1632,8 +1632,8 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class SuppressNotificationsAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IPropertyDescriptorInitializer
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IPropertyDescriptorInitializer
     {
         public SuppressNotificationsAttribute() { }
 
@@ -1650,15 +1650,15 @@ namespace Castle.Components.DictionaryAdapter
     )]
     public class TypeKeyPrefixAttribute
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryKeyBuilder
     {
         public TypeKeyPrefixAttribute() { }
     }
 
     public abstract class VirtualObject<TNode>
         : Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.IVirtual<TNode>
+            Castle.Components.DictionaryAdapter.IVirtual<TNode>
     {
         protected VirtualObject() { }
 
@@ -1680,7 +1680,7 @@ namespace Castle.Components.DictionaryAdapter
 
     public sealed class VirtualSite<TNode, TMember>
         : Castle.Components.DictionaryAdapter.IVirtualSite<TNode>,
-          System.IEquatable<Castle.Components.DictionaryAdapter.VirtualSite<TNode, TMember>>
+            System.IEquatable<Castle.Components.DictionaryAdapter.VirtualSite<TNode, TMember>>
     {
         public VirtualSite(
             Castle.Components.DictionaryAdapter.IVirtualTarget<TNode, TMember> target,
@@ -1964,11 +1964,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public interface IXmlCursor
         : Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         void Coerce(System.Type type);
         void Create(System.Type type);
@@ -2006,10 +2006,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public interface IXmlIterator
         : Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         bool MoveNext();
     }
@@ -2046,9 +2046,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public interface IXmlNode
         : Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType
     {
         bool IsAttribute { get; }
         bool IsElement { get; }
@@ -2134,13 +2134,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class SysXmlCursor
         : Castle.Components.DictionaryAdapter.Xml.SysXmlNode,
-          Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IXmlCursor,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.IVirtual,
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IXmlCursor,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         protected static readonly System.StringComparer DefaultComparer;
 
@@ -2224,13 +2224,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class SysXmlNode
         : Castle.Components.DictionaryAdapter.Xml.XmlNodeBase,
-          Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XPath.XPathNavigator>,
-          Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XmlNode>,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.IVirtual,
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XPath.XPathNavigator>,
+            Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XmlNode>,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         protected System.Xml.XmlNode node;
 
@@ -2309,12 +2309,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class SysXmlSubtreeIterator
         : Castle.Components.DictionaryAdapter.Xml.SysXmlNode,
-          Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.IVirtual,
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         public SysXmlSubtreeIterator(
             Castle.Components.DictionaryAdapter.Xml.IXmlNode parent,
@@ -2369,11 +2369,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XPathBehaviorAccessor
         : Castle.Components.DictionaryAdapter.Xml.XmlAccessor,
-          Castle.Components.DictionaryAdapter.Xml.IConfigurable<Castle.Components.DictionaryAdapter.Xml.XPathAttribute>,
-          Castle.Components.DictionaryAdapter.Xml.IConfigurable<Castle.Components.DictionaryAdapter.Xml.XPathFunctionAttribute>,
-          Castle.Components.DictionaryAdapter.Xml.IConfigurable<Castle.Components.DictionaryAdapter.Xml.XPathVariableAttribute>,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIncludedType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIncludedTypeMap
+            Castle.Components.DictionaryAdapter.Xml.IConfigurable<Castle.Components.DictionaryAdapter.Xml.XPathAttribute>,
+            Castle.Components.DictionaryAdapter.Xml.IConfigurable<Castle.Components.DictionaryAdapter.Xml.XPathFunctionAttribute>,
+            Castle.Components.DictionaryAdapter.Xml.IConfigurable<Castle.Components.DictionaryAdapter.Xml.XPathVariableAttribute>,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIncludedType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIncludedTypeMap
     {
         protected XPathBehaviorAccessor(
             System.Type type,
@@ -2475,7 +2475,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
     )]
     public abstract class XPathFunctionAttribute
         : System.Attribute,
-          System.Xml.Xsl.IXsltContextFunction
+            System.Xml.Xsl.IXsltContextFunction
     {
         public static readonly System.Xml.XPath.XPathResultType[] NoArgs;
 
@@ -2495,13 +2495,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XPathNode
         : Castle.Components.DictionaryAdapter.Xml.XmlNodeBase,
-          Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XPath.XPathNavigator>,
-          Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XmlNode>,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.IVirtual,
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XPath.XPathNavigator>,
+            Castle.Components.DictionaryAdapter.Xml.IRealizable<System.Xml.XmlNode>,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         protected System.Xml.XPath.XPathNavigator node;
         protected readonly Castle.Components.DictionaryAdapter.Xml.CompiledXPath xpath;
@@ -2581,13 +2581,13 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XPathReadOnlyCursor
         : Castle.Components.DictionaryAdapter.Xml.XPathNode,
-          Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IXmlCursor,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.IVirtual,
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IXmlCursor,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         public XPathReadOnlyCursor(
             Castle.Components.DictionaryAdapter.Xml.IXmlNode parent,
@@ -2626,7 +2626,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
     )]
     public abstract class XPathVariableAttribute
         : System.Attribute,
-          System.Xml.Xsl.IXsltContextVariable
+            System.Xml.Xsl.IXsltContextVariable
     {
         protected XPathVariableAttribute() { }
 
@@ -2661,8 +2661,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public abstract class XmlAccessor
         : Castle.Components.DictionaryAdapter.Xml.IXmlAccessor,
-          Castle.Components.DictionaryAdapter.Xml.IXmlCollectionAccessor,
-          Castle.Components.DictionaryAdapter.Xml.IXmlPropertyAccessor
+            Castle.Components.DictionaryAdapter.Xml.IXmlCollectionAccessor,
+            Castle.Components.DictionaryAdapter.Xml.IXmlPropertyAccessor
     {
         protected Castle.Components.DictionaryAdapter.Xml.XmlAccessor.States state;
 
@@ -2784,15 +2784,15 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlAdapter
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryCopyStrategy,
-          Castle.Components.DictionaryAdapter.IDictionaryCreateStrategy,
-          Castle.Components.DictionaryAdapter.IDictionaryInitializer,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
-          Castle.Components.DictionaryAdapter.IDictionaryPropertySetter,
-          Castle.Components.DictionaryAdapter.IDictionaryReferenceManager,
-          Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNodeSource
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryCopyStrategy,
+            Castle.Components.DictionaryAdapter.IDictionaryCreateStrategy,
+            Castle.Components.DictionaryAdapter.IDictionaryInitializer,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertyGetter,
+            Castle.Components.DictionaryAdapter.IDictionaryPropertySetter,
+            Castle.Components.DictionaryAdapter.IDictionaryReferenceManager,
+            Castle.Components.DictionaryAdapter.IVirtual,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNodeSource
     {
         public XmlAdapter() { }
 
@@ -2831,8 +2831,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlArrayBehaviorAccessor
         : Castle.Components.DictionaryAdapter.Xml.XmlNodeAccessor,
-          Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlArrayAttribute>,
-          Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlArrayItemAttribute>
+            Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlArrayAttribute>,
+            Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlArrayItemAttribute>
     {
         public XmlArrayBehaviorAccessor(
             string name,
@@ -2888,7 +2888,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlAttributeBehaviorAccessor
         : Castle.Components.DictionaryAdapter.Xml.XmlNodeAccessor,
-          Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlAttributeAttribute>
+            Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlAttributeAttribute>
     {
         public XmlAttributeBehaviorAccessor(
             string name,
@@ -2979,8 +2979,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlContext
         : Castle.Components.DictionaryAdapter.Xml.XmlContextBase,
-          Castle.Components.DictionaryAdapter.Xml.IXmlContext,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNamespaceSource
+            Castle.Components.DictionaryAdapter.Xml.IXmlContext,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNamespaceSource
     {
         protected XmlContext(Castle.Components.DictionaryAdapter.Xml.XmlContext parent) { }
 
@@ -3003,7 +3003,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlContextBase
         : System.Xml.Xsl.XsltContext,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNamespaceSource
+            Castle.Components.DictionaryAdapter.Xml.IXmlNamespaceSource
     {
         public XmlContextBase() { }
 
@@ -3177,8 +3177,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlElementBehaviorAccessor
         : Castle.Components.DictionaryAdapter.Xml.XmlNodeAccessor,
-          Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlElementAttribute>,
-          Castle.Components.DictionaryAdapter.Xml.IXmlBehaviorSemantics<System.Xml.Serialization.XmlElementAttribute>
+            Castle.Components.DictionaryAdapter.Xml.IConfigurable<System.Xml.Serialization.XmlElementAttribute>,
+            Castle.Components.DictionaryAdapter.Xml.IXmlBehaviorSemantics<System.Xml.Serialization.XmlElementAttribute>
     {
         public XmlElementBehaviorAccessor(
             string name,
@@ -3284,8 +3284,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlIncludedTypeSet
         : Castle.Components.DictionaryAdapter.Xml.IXmlIncludedTypeMap,
-          System.Collections.Generic.IEnumerable<Castle.Components.DictionaryAdapter.Xml.IXmlIncludedType>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<Castle.Components.DictionaryAdapter.Xml.IXmlIncludedType>,
+            System.Collections.IEnumerable
     {
         public static readonly System.Collections.Generic.IList<Castle.Components.DictionaryAdapter.Xml.IXmlIncludedType> DefaultEntries;
 
@@ -3308,7 +3308,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlKnownType
         : Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType
     {
         public XmlKnownType(
             Castle.Components.DictionaryAdapter.Xml.XmlName name,
@@ -3339,8 +3339,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlKnownTypeSet
         : Castle.Components.DictionaryAdapter.Xml.IXmlKnownTypeMap,
-          System.Collections.Generic.IEnumerable<Castle.Components.DictionaryAdapter.Xml.IXmlKnownType>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<Castle.Components.DictionaryAdapter.Xml.IXmlKnownType>,
+            System.Collections.IEnumerable
     {
         public XmlKnownTypeSet(System.Type defaultType) { }
 
@@ -3379,10 +3379,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlMetadata
         : Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIncludedType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIncludedTypeMap,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownTypeMap
+            Castle.Components.DictionaryAdapter.Xml.IXmlIncludedType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIncludedTypeMap,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownTypeMap
     {
         protected static readonly System.StringComparer NameComparer;
 
@@ -3440,8 +3440,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlMetadataBehavior
         : Castle.Components.DictionaryAdapter.DictionaryBehaviorAttribute,
-          Castle.Components.DictionaryAdapter.IDictionaryBehavior,
-          Castle.Components.DictionaryAdapter.IDictionaryMetaInitializer
+            Castle.Components.DictionaryAdapter.IDictionaryBehavior,
+            Castle.Components.DictionaryAdapter.IDictionaryMetaInitializer
     {
         public static readonly Castle.Components.DictionaryAdapter.Xml.XmlMetadataBehavior Default;
 
@@ -3504,9 +3504,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public abstract class XmlNodeAccessor
         : Castle.Components.DictionaryAdapter.Xml.XmlAccessor,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownTypeMap
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownTypeMap
     {
         protected static readonly System.StringComparer NameComparer;
 
@@ -3558,7 +3558,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public abstract class XmlNodeBase
         : Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource
     {
         protected System.Type type;
 
@@ -3656,12 +3656,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlSelfCursor
         : Castle.Components.DictionaryAdapter.IVirtual,
-          Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
-          Castle.Components.DictionaryAdapter.Xml.IXmlCursor,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
-          Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
-          Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
-          Castle.Components.DictionaryAdapter.Xml.IXmlNode
+            Castle.Components.DictionaryAdapter.Xml.IRealizableSource,
+            Castle.Components.DictionaryAdapter.Xml.IXmlCursor,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIdentity,
+            Castle.Components.DictionaryAdapter.Xml.IXmlIterator,
+            Castle.Components.DictionaryAdapter.Xml.IXmlKnownType,
+            Castle.Components.DictionaryAdapter.Xml.IXmlNode
     {
         public XmlSelfCursor(
             Castle.Components.DictionaryAdapter.Xml.IXmlNode node,
@@ -4167,7 +4167,7 @@ namespace Castle.Core
     [System.Serializable]
     public class ReferenceEqualityComparer<T>
         : System.Collections.Generic.IEqualityComparer<T>,
-          System.Collections.IEqualityComparer
+            System.Collections.IEqualityComparer
     {
         public static Castle.Core.ReferenceEqualityComparer<T> Instance { get; }
 
@@ -4176,8 +4176,8 @@ namespace Castle.Core
 
     public sealed class ReflectionBasedDictionaryAdapter
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable
     {
         public ReflectionBasedDictionaryAdapter(object target) { }
 
@@ -4207,15 +4207,15 @@ namespace Castle.Core
 
     public sealed class StringObjectDictionaryAdapter
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  string,
-                  object
-              >>,
-          System.Collections.Generic.IDictionary<string, object>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  object
-              >>,
-          System.Collections.IEnumerable
+                string,
+                object
+            >>,
+            System.Collections.Generic.IDictionary<string, object>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    string,
+                    object
+                >>,
+            System.Collections.IEnumerable
     {
         public StringObjectDictionaryAdapter(System.Collections.IDictionary dictionary) { }
 
@@ -4285,7 +4285,7 @@ namespace Castle.Core.Logging
 {
     public abstract class AbstractExtendedLoggerFactory
         : Castle.Core.Logging.IExtendedLoggerFactory,
-          Castle.Core.Logging.ILoggerFactory
+            Castle.Core.Logging.ILoggerFactory
     {
         protected AbstractExtendedLoggerFactory() { }
 
@@ -6256,8 +6256,8 @@ namespace Castle.DynamicProxy.Serialization
     [System.Serializable]
     public class ProxyObjectReference
         : System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.IObjectReference,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.IObjectReference,
+            System.Runtime.Serialization.ISerializable
     {
         protected ProxyObjectReference(
             System.Runtime.Serialization.SerializationInfo info,

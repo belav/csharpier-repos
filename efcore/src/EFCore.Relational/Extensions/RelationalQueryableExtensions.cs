@@ -207,11 +207,11 @@ namespace Microsoft.EntityFrameworkCore
             where TEntity : class =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          source.Expression
-                      )
-                  )
+                    Expression.Call(
+                        AsSingleQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
+                )
                 : source;
 
         internal static readonly MethodInfo AsSingleQueryMethodInfo =
@@ -242,11 +242,11 @@ namespace Microsoft.EntityFrameworkCore
             where TEntity : class =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          source.Expression
-                      )
-                  )
+                    Expression.Call(
+                        AsSplitQueryMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression
+                    )
+                )
                 : source;
 
         internal static readonly MethodInfo AsSplitQueryMethodInfo =

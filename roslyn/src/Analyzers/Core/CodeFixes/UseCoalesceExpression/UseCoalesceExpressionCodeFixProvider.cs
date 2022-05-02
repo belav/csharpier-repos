@@ -165,11 +165,11 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
         )
         {
             return whenPart == whenTrue
-              ? generator.CoalesceExpression(
+                ? generator.CoalesceExpression(
                     conditionalPartLow,
                     syntaxFacts.WalkDownParentheses(currentWhenTrue)
                 )
-              : generator.CoalesceExpression(
+                : generator.CoalesceExpression(
                     conditionalPartLow,
                     syntaxFacts.WalkDownParentheses(currentWhenFalse)
                 );

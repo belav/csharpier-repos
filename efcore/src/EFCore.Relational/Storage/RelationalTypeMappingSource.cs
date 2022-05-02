@@ -38,7 +38,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
     /// </remarks>
     public abstract class RelationalTypeMappingSource
         : TypeMappingSourceBase,
-          IRelationalTypeMappingSource
+            IRelationalTypeMappingSource
     {
         private readonly ConcurrentDictionary<
             (RelationalTypeMappingInfo, Type?, ValueConverter?),

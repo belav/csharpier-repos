@@ -863,11 +863,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var newCategory = useNull
                 ? null
                 : new Category
-                  {
-                      Id = 99,
-                      PrincipalId = 2,
-                      TagId = 778
-                  };
+                {
+                    Id = 99,
+                    PrincipalId = 2,
+                    TagId = 778
+                };
             product.Category = newCategory;
 
             changeDetector.DetectChanges(entry);
@@ -1541,11 +1541,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var newCategory = useNull
                 ? null
                 : new NotifyingCategory
-                  {
-                      Id = 78,
-                      PrincipalId = 2,
-                      TagId = 778
-                  };
+                {
+                    Id = 78,
+                    PrincipalId = 2,
+                    TagId = 778
+                };
 
             product.Category = newCategory;
             product.Category = originalCategory;

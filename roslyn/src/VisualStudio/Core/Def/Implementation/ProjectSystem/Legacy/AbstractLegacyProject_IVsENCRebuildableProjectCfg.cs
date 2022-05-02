@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 
     internal partial class AbstractLegacyProject
         : EncInterop.IVsENCRebuildableProjectCfg2,
-          EncInterop.IVsENCRebuildableProjectCfg4
+            EncInterop.IVsENCRebuildableProjectCfg4
     {
         public int HasCustomMetadataEmitter(out bool value) => throw ExceptionUtilities.Unreachable;
 

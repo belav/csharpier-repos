@@ -185,10 +185,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Check.NotEmpty(name, nameof(name));
 
             return _annotations == null
-              ? null
-              : _annotations.TryGetValue(name, out var annotation)
-                  ? annotation
-                  : null;
+                ? null
+                : _annotations.TryGetValue(name, out var annotation)
+                    ? annotation
+                    : null;
         }
 
         /// <summary>
@@ -317,8 +317,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <returns>The added annotation.</returns>
         protected virtual Annotation AddRuntimeAnnotation(string name, Annotation annotation) =>
             GetOrCreateRuntimeAnnotations().TryAdd(name, annotation)
-              ? annotation
-              : throw new InvalidOperationException(
+                ? annotation
+                : throw new InvalidOperationException(
                     CoreStrings.DuplicateAnnotation(name, ToString())
                 );
 
@@ -417,10 +417,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             Check.NotEmpty(name, nameof(name));
 
             return _runtimeAnnotations == null
-              ? null
-              : _runtimeAnnotations.TryGetValue(name, out var annotation)
-                  ? annotation
-                  : null;
+                ? null
+                : _runtimeAnnotations.TryGetValue(name, out var annotation)
+                    ? annotation
+                    : null;
         }
 
         /// <summary>

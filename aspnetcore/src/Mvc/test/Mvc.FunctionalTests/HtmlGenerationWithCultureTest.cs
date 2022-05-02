@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class HtmlGenerationWithCultureTest
     : LoggedTest,
-      IClassFixture<MvcTestFixture<StartupWithCultureReplace>>
+        IClassFixture<MvcTestFixture<StartupWithCultureReplace>>
 {
     public HtmlGenerationWithCultureTest(
         ITestOutputHelper testOutputHelper,

@@ -421,14 +421,14 @@ namespace System.Security.AccessControl.Tests
             owner =
                 (ownerStr != null)
                     ? new SecurityIdentifier(
-                          Utils.TranslateStringConstFormatSidToStandardFormatSid(ownerStr)
-                      )
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(ownerStr)
+                    )
                     : null;
             group =
                 (groupStr != null)
                     ? new SecurityIdentifier(
-                          Utils.TranslateStringConstFormatSidToStandardFormatSid(groupStr)
-                      )
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(groupStr)
+                    )
                     : null;
 
             rawAcl = (saclStr != null) ? Utils.CreateRawAclFromString(saclStr) : null;

@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class FakeRelationalCommandDiagnosticsLogger
         : FakeDiagnosticsLogger<DbLoggerCategory.Database.Command>,
-          IRelationalCommandDiagnosticsLogger
+            IRelationalCommandDiagnosticsLogger
     {
         public InterceptionResult<DbCommand> CommandCreating(
             IRelationalConnection connection,

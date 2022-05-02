@@ -1768,12 +1768,12 @@ namespace System.Diagnostics.Tests
                             parts[6].Trim() == "Default"
                                 ? Activity.DefaultIdFormat
                                 : (ActivityIdFormat)
-                                      Enum.Parse(typeof(ActivityIdFormat), parts[6].Trim());
+                                    Enum.Parse(typeof(ActivityIdFormat), parts[6].Trim());
                         ActivityIdFormat expectedStartFormat =
                             parts[7].Trim() == "Default"
                                 ? Activity.DefaultIdFormat
                                 : (ActivityIdFormat)
-                                      Enum.Parse(typeof(ActivityIdFormat), parts[7].Trim());
+                                    Enum.Parse(typeof(ActivityIdFormat), parts[7].Trim());
 
                         using ActivitySource aSource = new ActivitySource("FormatIdSource");
                         ActivityTraceId traceId = default;
@@ -1854,11 +1854,11 @@ namespace System.Diagnostics.Tests
                         ActivityContext parentContext = defaultParentContext
                             ? default
                             : new ActivityContext(
-                                  ActivityTraceId.CreateRandom(),
-                                  ActivitySpanId.CreateRandom(),
-                                  default,
-                                  default
-                              );
+                                ActivityTraceId.CreateRandom(),
+                                ActivitySpanId.CreateRandom(),
+                                default,
+                                default
+                            );
 
                         //
                         // Create and Test ActivitySource.CreateActivity
@@ -1867,21 +1867,21 @@ namespace System.Diagnostics.Tests
                         Activity a =
                             parentId == null
                                 ? aSource.CreateActivity(
-                                      "a",
-                                      ActivityKind.Server,
-                                      parentContext,
-                                      default,
-                                      default,
-                                      idToForce
-                                  )
+                                    "a",
+                                    ActivityKind.Server,
+                                    parentContext,
+                                    default,
+                                    default,
+                                    idToForce
+                                )
                                 : aSource.CreateActivity(
-                                      "a",
-                                      ActivityKind.Server,
-                                      parentId,
-                                      default,
-                                      default,
-                                      idToForce
-                                  );
+                                    "a",
+                                    ActivityKind.Server,
+                                    parentId,
+                                    default,
+                                    default,
+                                    idToForce
+                                );
 
                         Assert.NotNull(a);
                         a.Start();
@@ -1906,19 +1906,19 @@ namespace System.Diagnostics.Tests
                         a =
                             parentId == null
                                 ? aSource.StartActivity(
-                                      "a",
-                                      ActivityKind.Server,
-                                      parentContext,
-                                      default,
-                                      default
-                                  )
+                                    "a",
+                                    ActivityKind.Server,
+                                    parentContext,
+                                    default,
+                                    default
+                                )
                                 : aSource.StartActivity(
-                                      "a",
-                                      ActivityKind.Server,
-                                      parentId,
-                                      default,
-                                      default
-                                  );
+                                    "a",
+                                    ActivityKind.Server,
+                                    parentId,
+                                    default,
+                                    default
+                                );
 
                         Assert.NotNull(a);
 

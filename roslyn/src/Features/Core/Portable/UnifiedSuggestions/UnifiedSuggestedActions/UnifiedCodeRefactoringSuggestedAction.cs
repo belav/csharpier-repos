@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
     /// </summary>
     internal class UnifiedCodeRefactoringSuggestedAction
         : UnifiedSuggestedAction,
-          ICodeRefactoringSuggestedAction
+            ICodeRefactoringSuggestedAction
     {
         public CodeRefactoringProvider CodeRefactoringProvider { get; }
 

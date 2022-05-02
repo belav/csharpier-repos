@@ -33,8 +33,8 @@ namespace System.Web.Mvc.Html
             }
 
             return html.ViewContext.ViewData.ModelMetadata.IsNullableValueType
-              ? BooleanTemplateDropDownList(html, value)
-              : BooleanTemplateCheckbox(html, value ?? false);
+                ? BooleanTemplateDropDownList(html, value)
+                : BooleanTemplateCheckbox(html, value ?? false);
         }
 
         private static string BooleanTemplateCheckbox(HtmlHelper html, bool value)

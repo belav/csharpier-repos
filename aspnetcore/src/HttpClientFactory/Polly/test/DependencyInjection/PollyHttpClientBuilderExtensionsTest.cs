@@ -241,8 +241,8 @@ public class PollyHttpClientBuilderExtensionsTest
                 (reg, req) =>
                 {
                     return req.RequestUri.AbsolutePath == "/"
-                      ? reg.Get<IAsyncPolicy<HttpResponseMessage>>("retry")
-                      : reg.Get<IAsyncPolicy<HttpResponseMessage>>("noop");
+                        ? reg.Get<IAsyncPolicy<HttpResponseMessage>>("retry")
+                        : reg.Get<IAsyncPolicy<HttpResponseMessage>>("noop");
                 }
             )
             .ConfigureHttpMessageHandlerBuilder(

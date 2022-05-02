@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     {
         private partial class AsyncSuggestedActionsSource
             : SuggestedActionsSource,
-              IAsyncSuggestedActionsSource
+                IAsyncSuggestedActionsSource
         {
             public AsyncSuggestedActionsSource(
                 IThreadingContext threadingContext,
@@ -133,9 +133,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         var priority = collector.Priority switch
                         {
                             VisualStudio.Utilities.DefaultOrderings.Highest
-                              => CodeActionRequestPriority.High,
+                                => CodeActionRequestPriority.High,
                             VisualStudio.Utilities.DefaultOrderings.Default
-                              => CodeActionRequestPriority.Normal,
+                                => CodeActionRequestPriority.Normal,
                             _ => (CodeActionRequestPriority?)null,
                         };
 

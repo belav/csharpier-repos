@@ -586,7 +586,7 @@ namespace System.DirectoryServices.AccountManagement
                 (index != -1)
                     ? samToMatch.Substring(index + 1)
                     : // +1 to skip the '/'
-                      samToMatch;
+                    samToMatch;
 
             if (de.Properties["Name"].Count > 0 && de.Properties["Name"].Value != null)
             {

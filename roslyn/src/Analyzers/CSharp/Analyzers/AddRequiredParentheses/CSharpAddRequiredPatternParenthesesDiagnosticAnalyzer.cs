@@ -15,10 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp.AddRequiredParentheses
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer
         : AbstractAddRequiredParenthesesDiagnosticAnalyzer<
-              PatternSyntax,
-              BinaryPatternSyntax,
-              SyntaxKind
-          >
+            PatternSyntax,
+            BinaryPatternSyntax,
+            SyntaxKind
+        >
     {
         public CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer()
             : base(CSharpPatternPrecedenceService.Instance) { }

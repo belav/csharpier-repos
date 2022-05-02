@@ -167,15 +167,15 @@ namespace System.Runtime.Serialization
                                         typeNamesEqual
                                             ? dataContract.UnderlyingType.AssemblyQualifiedName
                                             : DataContract.GetClrTypeFullName(
-                                                  dataContract.UnderlyingType
-                                              )
+                                                dataContract.UnderlyingType
+                                            )
                                     ),
                                     (
                                         typeNamesEqual
                                             ? dataContractInSet.UnderlyingType.AssemblyQualifiedName
                                             : DataContract.GetClrTypeFullName(
-                                                  dataContractInSet.UnderlyingType
-                                              )
+                                                dataContractInSet.UnderlyingType
+                                            )
                                     ),
                                     dataContract.StableName.Name,
                                     dataContract.StableName.Namespace

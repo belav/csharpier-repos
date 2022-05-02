@@ -299,10 +299,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             switch (fromSqlExpression.Arguments)
             {
                 case ParameterExpression { Name: not null } parameterExpression
-                      when _parameterValues.TryGetValue(
-                          parameterExpression.Name,
-                          out var parameterValue
-                      ) && parameterValue is object[] parameterValues:
+                when _parameterValues.TryGetValue(parameterExpression.Name, out var parameterValue)
+                    && parameterValue is object[] parameterValues:
                 {
                     substitutions = new string[parameterValues.Length];
                     for (var i = 0; i < parameterValues.Length; i++)
@@ -337,8 +335,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         CosmosStrings.InvalidFromSqlArguments(
                             fromSqlExpression.Arguments.GetType(),
                             fromSqlExpression.Arguments is ConstantExpression constantExpression
-                              ? constantExpression.Value?.GetType()
-                              : null
+                                ? constantExpression.Value?.GetType()
+                                : null
                         )
                     );
             }
@@ -492,8 +490,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             }
 
             return value == null
-              ? null
-              : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
+                ? null
+                : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
         }
 
         /// <summary>

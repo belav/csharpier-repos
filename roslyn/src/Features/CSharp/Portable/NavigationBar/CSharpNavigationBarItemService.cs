@@ -135,8 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                         {
                             var textComparison = x.Text.CompareTo(y.Text);
                             return textComparison != 0
-                              ? textComparison
-                              : x.Grayed.CompareTo(y.Grayed);
+                                ? textComparison
+                                : x.Grayed.CompareTo(y.Grayed);
                         }
                     );
 
@@ -236,9 +236,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             node switch
             {
                 BaseTypeDeclarationSyntax t
-                  => semanticModel.GetDeclaredSymbol(t, cancellationToken),
+                    => semanticModel.GetDeclaredSymbol(t, cancellationToken),
                 DelegateDeclarationSyntax d
-                  => semanticModel.GetDeclaredSymbol(d, cancellationToken),
+                    => semanticModel.GetDeclaredSymbol(d, cancellationToken),
                 _ => null,
             };
 
@@ -286,13 +286,13 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
             if (symbol.Kind == SymbolKind.Field)
             {
                 return symbol.ContainingType.TypeKind == TypeKind.Enum
-                  ? GetSymbolLocation(
+                    ? GetSymbolLocation(
                         solution,
                         symbol,
                         tree,
                         static reference => GetEnumMemberSpan(reference)
                     )
-                  : GetSymbolLocation(
+                    : GetSymbolLocation(
                         solution,
                         symbol,
                         tree,

@@ -323,8 +323,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             var name = tableValuedFunctionExpression.StoreFunction.IsBuiltIn
                 ? tableValuedFunctionExpression.StoreFunction.Name
                 : _sqlGenerationHelper.DelimitIdentifier(
-                      tableValuedFunctionExpression.StoreFunction.Name
-                  );
+                    tableValuedFunctionExpression.StoreFunction.Name
+                );
 
             _relationalCommandBuilder.Append(name).Append("(");
 
@@ -426,8 +426,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         RelationalStrings.InvalidFromSqlArguments(
                             fromSqlExpression.Arguments.GetType(),
                             fromSqlExpression.Arguments is ConstantExpression constantExpression
-                              ? constantExpression.Value?.GetType()
-                              : null
+                                ? constantExpression.Value?.GetType()
+                                : null
                         )
                     );
             }
@@ -479,8 +479,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         i > 0
                             ? span.Slice(i + 1).TrimStart()
                             : throw new InvalidOperationException(
-                                  RelationalStrings.FromSqlNonComposable
-                              );
+                                RelationalStrings.FromSqlNonComposable
+                            );
                     continue;
                 }
 
@@ -492,8 +492,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         i > 0
                             ? span.Slice(i + 2).TrimStart()
                             : throw new InvalidOperationException(
-                                  RelationalStrings.FromSqlNonComposable
-                              );
+                                RelationalStrings.FromSqlNonComposable
+                            );
                     continue;
                 }
 
@@ -1047,9 +1047,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                     IntersectExpression _ => "INTERSECT",
                     UnionExpression _ => "UNION",
                     _
-                      => throw new InvalidOperationException(
-                          CoreStrings.UnknownEntity("SetOperationType")
-                      ),
+                        => throw new InvalidOperationException(
+                            CoreStrings.UnknownEntity("SetOperationType")
+                        ),
                 };
         }
 

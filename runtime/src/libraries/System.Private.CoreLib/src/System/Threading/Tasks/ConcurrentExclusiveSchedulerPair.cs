@@ -659,7 +659,7 @@ namespace System.Threading.Tasks
                 m_tasks =
                     (processingMode == ProcessingMode.ProcessingExclusiveTask)
                         ? (IProducerConsumerQueue<Task>)
-                              new SingleProducerSingleConsumerQueue<Task>()
+                            new SingleProducerSingleConsumerQueue<Task>()
                         : (IProducerConsumerQueue<Task>)new MultiProducerMultiConsumerQueue<Task>();
             }
 
@@ -737,8 +737,8 @@ namespace System.Threading.Tasks
                         // we know the default scheduler will allow it, so we can just execute it here.
                         // Otherwise, delegate to the target scheduler's inlining.
                         return (isDefaultScheduler && !taskWasPreviouslyQueued)
-                          ? TryExecuteTask(task)
-                          : TryExecuteTaskInlineOnTargetScheduler(task);
+                            ? TryExecuteTask(task)
+                            : TryExecuteTaskInlineOnTargetScheduler(task);
                     }
                 }
 

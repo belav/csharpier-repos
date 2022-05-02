@@ -15,8 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeVariable2))]
     public sealed class CodeVariable
         : AbstractCodeMember,
-          EnvDTE.CodeVariable,
-          EnvDTE80.CodeVariable2
+            EnvDTE.CodeVariable,
+            EnvDTE80.CodeVariable2
     {
         internal static EnvDTE.CodeVariable Create(
             CodeModelState state,

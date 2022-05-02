@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public ImmutableArray<LocalSymbol> GetLocals()
             {
                 return (_locals == null)
-                  ? ImmutableArray<LocalSymbol>.Empty
-                  : _locals.ToImmutable();
+                    ? ImmutableArray<LocalSymbol>.Empty
+                    : _locals.ToImmutable();
             }
 
             public ImmutableArray<BoundStatement> GetStatements()
@@ -534,8 +534,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 builder = new BoundSpillSequenceBuilder(
                     lastSpill < newList.Length
-                      ? (newList[lastSpill] as BoundSpillSequenceBuilder)?.Syntax
-                      : null
+                        ? (newList[lastSpill] as BoundSpillSequenceBuilder)?.Syntax
+                        : null
                 );
             }
 
@@ -994,8 +994,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     leftBuilder.AddStatement(
                         _F.If(
                             node.OperatorKind == BinaryOperatorKind.LogicalBoolAnd
-                              ? _F.Local(tmp)
-                              : _F.Not(_F.Local(tmp)),
+                                ? _F.Local(tmp)
+                                : _F.Not(_F.Local(tmp)),
                             UpdateStatement(builder, _F.Assignment(_F.Local(tmp), right))
                         )
                     );

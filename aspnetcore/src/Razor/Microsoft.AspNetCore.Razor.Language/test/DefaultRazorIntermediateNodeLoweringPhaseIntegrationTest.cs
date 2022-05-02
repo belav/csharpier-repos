@@ -604,7 +604,7 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
 
     private class DesignTimeOptionsFeature
         : IConfigureRazorParserOptionsFeature,
-          IConfigureRazorCodeGenerationOptionsFeature
+            IConfigureRazorCodeGenerationOptionsFeature
     {
         private readonly bool _designTime;
 

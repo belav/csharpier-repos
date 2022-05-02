@@ -26,8 +26,8 @@ namespace System.Threading
                 _threadAdjustmentLock.VerifyIsLocked();
 
                 return _numBlockedThreads <= 0
-                  ? _minThreads
-                  : (short)
+                    ? _minThreads
+                    : (short)
                         Math.Min((ushort)(_minThreads + _numBlockedThreads), (ushort)_maxThreads);
             }
         }

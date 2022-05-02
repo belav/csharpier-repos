@@ -20,13 +20,13 @@ namespace System.Web.Mvc
             // anything other than 500, we need to wrap these exceptions ourselves.
             IHttpAsyncHandler asyncHandler = httpHandler as IHttpAsyncHandler;
             return (asyncHandler != null)
-              ? new ServerExecuteHttpHandlerAsyncWrapper(asyncHandler)
-              : new ServerExecuteHttpHandlerWrapper(httpHandler);
+                ? new ServerExecuteHttpHandlerAsyncWrapper(asyncHandler)
+                : new ServerExecuteHttpHandlerWrapper(httpHandler);
         }
 
         private sealed class ServerExecuteHttpHandlerAsyncWrapper
             : ServerExecuteHttpHandlerWrapper,
-              IHttpAsyncHandler
+                IHttpAsyncHandler
         {
             private readonly IHttpAsyncHandler _httpHandler;
 

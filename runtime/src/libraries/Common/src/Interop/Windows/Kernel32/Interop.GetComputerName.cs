@@ -29,8 +29,8 @@ internal static partial class Interop
                 fixed (char* lpBuffer = &MemoryMarshal.GetReference(buffer))
                 {
                     return GetComputerName(lpBuffer, &length) != 0
-                      ? buffer.Slice(0, (int)length).ToString()
-                      : null;
+                        ? buffer.Slice(0, (int)length).ToString()
+                        : null;
                 }
             }
         }

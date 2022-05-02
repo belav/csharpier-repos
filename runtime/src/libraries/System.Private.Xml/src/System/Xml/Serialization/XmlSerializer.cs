@@ -453,8 +453,8 @@ namespace System.Xml.Serialization
                     writer.Init(
                         xmlWriter,
                         namespaces == null || namespaces.Count == 0
-                          ? DefaultNamespaces
-                          : namespaces,
+                            ? DefaultNamespaces
+                            : namespaces,
                         encodingStyle,
                         id,
                         _tempAssembly
@@ -475,8 +475,8 @@ namespace System.Xml.Serialization
                         xmlWriter,
                         o,
                         namespaces == null || namespaces.Count == 0
-                          ? DefaultNamespaces
-                          : namespaces,
+                            ? DefaultNamespaces
+                            : namespaces,
                         encodingStyle,
                         id
                     );

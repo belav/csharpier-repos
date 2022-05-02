@@ -31,8 +31,8 @@ namespace Internal.Cryptography
                 return CngKey.Open(
                     keyHandle,
                     key.IsEphemeral
-                      ? CngKeyHandleOpenOptions.EphemeralKey
-                      : CngKeyHandleOpenOptions.None
+                        ? CngKeyHandleOpenOptions.EphemeralKey
+                        : CngKeyHandleOpenOptions.None
                 );
             }
         }

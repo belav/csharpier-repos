@@ -129,8 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal ArrayTypeSymbol WithElementType(TypeWithAnnotations elementTypeWithAnnotations)
         {
             return ElementTypeWithAnnotations.IsSameAs(elementTypeWithAnnotations)
-              ? this
-              : WithElementTypeCore(elementTypeWithAnnotations);
+                ? this
+                : WithElementTypeCore(elementTypeWithAnnotations);
         }
 
         protected abstract ArrayTypeSymbol WithElementTypeCore(

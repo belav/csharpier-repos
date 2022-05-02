@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     [Name(PredefinedCommandHandlerNames.GoToAdjacentMember)]
     internal class GoToAdjacentMemberCommandHandler
         : ICommandHandler<GoToNextMemberCommandArgs>,
-          ICommandHandler<GoToPreviousMemberCommandArgs>
+            ICommandHandler<GoToPreviousMemberCommandArgs>
     {
         private readonly IOutliningManagerService _outliningManagerService;
 

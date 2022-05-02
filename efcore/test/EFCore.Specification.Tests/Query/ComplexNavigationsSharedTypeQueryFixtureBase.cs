@@ -13,7 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class ComplexNavigationsSharedTypeQueryFixtureBase
         : ComplexNavigationsQueryFixtureBase,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         private ComplexNavigationsWeakData _expectedData;
 
@@ -361,8 +361,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 return typeof(TEntity) == typeof(Level4)
-                  ? (IQueryable<TEntity>)GetLevelFour(_context)
-                  : _context.Set<TEntity>();
+                    ? (IQueryable<TEntity>)GetLevelFour(_context)
+                    : _context.Set<TEntity>();
             }
 
             private static IQueryable<Level1> GetLevelOne(DbContext context) =>

@@ -54,12 +54,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                         || o.Property?.GetValueGenerationStrategy(table)
                             == SqlServerValueGenerationStrategy.IdentityColumn
                 )
-                  ? AppendInsertOperation(
+                    ? AppendInsertOperation(
                         commandStringBuilder,
                         modificationCommands[0],
                         commandPosition
                     )
-                  : AppendInsertOperationWithServerKeys(
+                    : AppendInsertOperationWithServerKeys(
                         commandStringBuilder,
                         modificationCommands[0],
                         modificationCommands[0].ColumnModifications.Where(o => o.IsKey).ToList(),
@@ -97,8 +97,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                     }
 
                     return readOperations.Count == 0
-                      ? ResultSetMapping.NoResultSet
-                      : ResultSetMapping.LastInResultSet;
+                        ? ResultSetMapping.NoResultSet
+                        : ResultSetMapping.LastInResultSet;
                 }
 
                 if (nonIdentityOperations.Count > 1)
@@ -455,10 +455,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                     typeName.Equals("rowversion", StringComparison.OrdinalIgnoreCase)
                     || typeName.Equals("timestamp", StringComparison.OrdinalIgnoreCase)
                 )
-              ? property.IsNullable
-                  ? "varbinary(8)"
-                  : "binary(8)"
-              : typeName!;
+                ? property.IsNullable
+                    ? "varbinary(8)"
+                    : "binary(8)"
+                : typeName!;
         }
 
         // ReSharper disable once ParameterTypeCanBeEnumerable.Local

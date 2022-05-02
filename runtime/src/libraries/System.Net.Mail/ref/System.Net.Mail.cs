@@ -63,7 +63,7 @@ namespace System.Net.Mail
 
     public sealed partial class AlternateViewCollection
         : System.Collections.ObjectModel.Collection<System.Net.Mail.AlternateView>,
-          System.IDisposable
+            System.IDisposable
     {
         internal AlternateViewCollection() { }
 
@@ -183,7 +183,7 @@ namespace System.Net.Mail
 
     public sealed partial class AttachmentCollection
         : System.Collections.ObjectModel.Collection<System.Net.Mail.Attachment>,
-          System.IDisposable
+            System.IDisposable
     {
         internal AttachmentCollection() { }
 
@@ -259,7 +259,7 @@ namespace System.Net.Mail
 
     public sealed partial class LinkedResourceCollection
         : System.Collections.ObjectModel.Collection<System.Net.Mail.LinkedResource>,
-          System.IDisposable
+            System.IDisposable
     {
         internal LinkedResourceCollection() { }
 
@@ -640,7 +640,7 @@ namespace System.Net.Mail
 
     public partial class SmtpException
         : System.Exception,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public SmtpException() { }
 
@@ -676,7 +676,7 @@ namespace System.Net.Mail
 
     public partial class SmtpFailedRecipientException
         : System.Net.Mail.SmtpException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public SmtpFailedRecipientException() { }
 
@@ -724,7 +724,7 @@ namespace System.Net.Mail
 
     public partial class SmtpFailedRecipientsException
         : System.Net.Mail.SmtpFailedRecipientException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public SmtpFailedRecipientsException() { }
 

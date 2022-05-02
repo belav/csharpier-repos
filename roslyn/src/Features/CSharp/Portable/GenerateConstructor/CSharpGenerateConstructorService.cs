@@ -72,8 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
                 typeToGenerateIn = constructorInitializer.IsKind(
                     SyntaxKind.ThisConstructorInitializer
                 )
-                  ? currentType
-                  : currentType.BaseType.OriginalDefinition;
+                    ? currentType
+                    : currentType.BaseType.OriginalDefinition;
                 return typeToGenerateIn != null;
             }
 
@@ -119,8 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
         {
             var simpleName = (SimpleNameSyntax)node;
             var fullName = simpleName.IsRightSideOfQualifiedName()
-              ? (NameSyntax)simpleName.Parent
-              : simpleName;
+                ? (NameSyntax)simpleName.Parent
+                : simpleName;
 
             if (fullName.Parent is ObjectCreationExpressionSyntax objectCreationExpression)
             {
@@ -157,8 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
         {
             var simpleName = (SimpleNameSyntax)node;
             var fullName = simpleName.IsRightSideOfQualifiedName()
-              ? (NameSyntax)simpleName.Parent
-              : simpleName;
+                ? (NameSyntax)simpleName.Parent
+                : simpleName;
 
             if (fullName.Parent is AttributeSyntax attribute)
             {

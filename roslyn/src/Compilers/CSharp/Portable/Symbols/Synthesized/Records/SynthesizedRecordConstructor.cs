@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             this.MakeFlags(
                 MethodKind.Constructor,
                 containingType.IsAbstract
-                  ? DeclarationModifiers.Protected
-                  : DeclarationModifiers.Public,
+                    ? DeclarationModifiers.Protected
+                    : DeclarationModifiers.Public,
                 returnsVoid: true,
                 isExtensionMethod: false,
                 isNullableAnalysisEnabled: false

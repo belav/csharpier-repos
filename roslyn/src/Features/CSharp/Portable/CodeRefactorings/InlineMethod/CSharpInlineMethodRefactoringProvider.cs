@@ -24,11 +24,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
     [Export(typeof(CSharpInlineMethodRefactoringProvider))]
     internal sealed class CSharpInlineMethodRefactoringProvider
         : AbstractInlineMethodRefactoringProvider<
-              BaseMethodDeclarationSyntax,
-              StatementSyntax,
-              ExpressionSyntax,
-              InvocationExpressionSyntax
-          >
+            BaseMethodDeclarationSyntax,
+            StatementSyntax,
+            ExpressionSyntax,
+            InvocationExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -54,11 +54,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
                         // void Callee() { return; }
                         // Refactoring won't be provided for this case.
                         ReturnStatementSyntax returnStatementSyntax
-                          => returnStatementSyntax.Expression,
+                            => returnStatementSyntax.Expression,
                         ExpressionStatementSyntax expressionStatementSyntax
-                          => expressionStatementSyntax.Expression,
+                            => expressionStatementSyntax.Expression,
                         ThrowStatementSyntax throwStatementSyntax
-                          => throwStatementSyntax.Expression,
+                            => throwStatementSyntax.Expression,
                         _ => null
                     };
                 }

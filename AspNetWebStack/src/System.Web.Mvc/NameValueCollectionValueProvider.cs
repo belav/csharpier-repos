@@ -18,8 +18,8 @@ namespace System.Web.Mvc
     )]
     public class NameValueCollectionValueProvider
         : IValueProvider,
-          IUnvalidatedValueProvider,
-          IEnumerableValueProvider
+            IUnvalidatedValueProvider,
+            IEnumerableValueProvider
     {
         private PrefixContainer _prefixContainer;
         private NameValueCollection _collection;
@@ -129,8 +129,8 @@ namespace System.Web.Mvc
             else
             {
                 return (skipValidation)
-                  ? placeholder.UnvalidatedResult
-                  : placeholder.ValidatedResult;
+                    ? placeholder.UnvalidatedResult
+                    : placeholder.ValidatedResult;
             }
         }
 

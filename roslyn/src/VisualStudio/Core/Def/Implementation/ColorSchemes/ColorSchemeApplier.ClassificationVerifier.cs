@@ -245,9 +245,9 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 var fallbackColor = classification switch
                 {
                     ClassificationTypeNames.OperatorOverloaded
-                      => coreThemeColors[ClassificationTypeNames.Operator],
+                        => coreThemeColors[ClassificationTypeNames.Operator],
                     ClassificationTypeNames.ControlKeyword
-                      => coreThemeColors[ClassificationTypeNames.Keyword],
+                        => coreThemeColors[ClassificationTypeNames.Keyword],
                     _ => coreThemeColors[ClassificationTypeNames.Identifier]
                 };
 

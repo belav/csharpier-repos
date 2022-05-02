@@ -798,12 +798,12 @@ namespace System.Net.Quic.Implementations.MsQuic
                 AddressFamily.InterNetwork => QUIC_ADDRESS_FAMILY.INET,
                 AddressFamily.InterNetworkV6 => QUIC_ADDRESS_FAMILY.INET6,
                 _
-                  => throw new ArgumentException(
-                      SR.Format(
-                          SR.net_quic_unsupported_address_family,
-                          _remoteEndPoint.AddressFamily
-                      )
-                  )
+                    => throw new ArgumentException(
+                        SR.Format(
+                            SR.net_quic_unsupported_address_family,
+                            _remoteEndPoint.AddressFamily
+                        )
+                    )
             };
 
             Debug.Assert(_state.StateGCHandle.IsAllocated);

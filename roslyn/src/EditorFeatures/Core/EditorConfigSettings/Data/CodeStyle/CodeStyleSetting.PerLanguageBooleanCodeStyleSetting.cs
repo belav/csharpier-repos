@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 ) && value is not null
                     ? value
                     : _visualStudioOptions.GetOption<CodeStyleOption2<bool>>(
-                          new OptionKey2(_option, LanguageNames.CSharp)
-                      );
+                        new OptionKey2(_option, LanguageNames.CSharp)
+                    );
         }
     }
 }

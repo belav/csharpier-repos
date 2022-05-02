@@ -299,8 +299,8 @@ namespace Microsoft.Data.Sqlite
             {
                 throw new InvalidOperationException(
                     Transaction == null
-                      ? Resources.TransactionRequired
-                      : Resources.TransactionConnectionMismatch
+                        ? Resources.TransactionRequired
+                        : Resources.TransactionConnectionMismatch
                 );
             }
 

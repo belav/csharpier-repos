@@ -18,7 +18,7 @@ namespace Microsoft.CSharp.RuntimeBinder
     /// </summary>
     internal sealed class CSharpInvokeMemberBinder
         : InvokeMemberBinder,
-          ICSharpInvokeOrInvokeMemberBinder
+            ICSharpInvokeOrInvokeMemberBinder
     {
         public BindingFlag BindingFlags => 0;
 

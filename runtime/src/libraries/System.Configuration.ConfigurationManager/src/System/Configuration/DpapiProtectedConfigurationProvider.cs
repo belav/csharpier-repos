@@ -70,8 +70,8 @@ namespace System.Configuration
                 userData: inputData,
                 optionalEntropy: entropyData,
                 scope: UseMachineProtection
-                  ? DataProtectionScope.LocalMachine
-                  : DataProtectionScope.CurrentUser
+                    ? DataProtectionScope.LocalMachine
+                    : DataProtectionScope.CurrentUser
             );
 
             return Convert.ToBase64String(encryptedData);
@@ -89,8 +89,8 @@ namespace System.Configuration
                 encryptedData: inputData,
                 optionalEntropy: entropyData,
                 scope: UseMachineProtection
-                  ? DataProtectionScope.LocalMachine
-                  : DataProtectionScope.CurrentUser
+                    ? DataProtectionScope.LocalMachine
+                    : DataProtectionScope.CurrentUser
             );
 
             return Encoding.Unicode.GetString(decryptedData);

@@ -254,8 +254,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     Environment.NewLine
                     + (
                         string.IsNullOrEmpty(elasticGroupName)
-                          ? " ( Edition = 'basic' )"
-                          : $" ( SERVICE_OBJECTIVE = ELASTIC_POOL ( name = {elasticGroupName} ) )"
+                            ? " ( Edition = 'basic' )"
+                            : $" ( SERVICE_OBJECTIVE = ELASTIC_POOL ( name = {elasticGroupName} ) )"
                     );
             }
             else

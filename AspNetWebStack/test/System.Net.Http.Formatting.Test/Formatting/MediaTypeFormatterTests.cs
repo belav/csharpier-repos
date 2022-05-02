@@ -101,8 +101,8 @@ namespace System.Net.Http.Formatting
                     null,
                     c => MediaTypeFormatter.MaxHttpCollectionKeys,
                     expectedDefaultValue: PlatformInfo.Platform == Platform.Net40
-                      ? 1000
-                      : Int32.MaxValue,
+                        ? 1000
+                        : Int32.MaxValue,
                     minLegalValue: 1,
                     illegalLowerValue: 0,
                     maxLegalValue: null,

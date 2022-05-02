@@ -111,8 +111,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         public static PredefinedType TryGetPredefTypeIndex(string name) =>
             s_typesByName.TryGetValue(name, out PredefinedType type)
-              ? type
-              : PredefinedType.PT_UNDEFINEDINDEX;
+                ? type
+                : PredefinedType.PT_UNDEFINEDINDEX;
 
         private sealed class PredefinedTypeInfo
         {

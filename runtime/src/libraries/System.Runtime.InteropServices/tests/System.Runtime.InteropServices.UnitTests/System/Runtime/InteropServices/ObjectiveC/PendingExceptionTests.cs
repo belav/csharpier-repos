@@ -81,15 +81,16 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr func = msgSend switch
             {
                 MessageSendFunction.MsgSend
-                  => (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, IntPtr>)&MsgSend,
+                    => (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, IntPtr>)&MsgSend,
                 MessageSendFunction.MsgSendFpret
-                  => (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, IntPtr>)&MsgSendFpret,
+                    => (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, IntPtr>)&MsgSendFpret,
                 MessageSendFunction.MsgSendStret
-                  => (IntPtr)(delegate* unmanaged<IntPtr*, IntPtr, IntPtr, void>)&MsgSendStret,
+                    => (IntPtr)(delegate* unmanaged<IntPtr*, IntPtr, IntPtr, void>)&MsgSendStret,
                 MessageSendFunction.MsgSendSuper
-                  => (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, IntPtr>)&MsgSendSuper,
+                    => (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, IntPtr>)&MsgSendSuper,
                 MessageSendFunction.MsgSendSuperStret
-                  => (IntPtr)(delegate* unmanaged<IntPtr*, IntPtr, IntPtr, void>)&MsgSendSuperStret,
+                    => (IntPtr)
+                        (delegate* unmanaged<IntPtr*, IntPtr, IntPtr, void>)&MsgSendSuperStret,
                 _ => throw new Exception($"Unknown {nameof(MessageSendFunction)}"),
             };
 

@@ -259,7 +259,7 @@ WHERE name = '{connection.Database}';";
         private static Func<string, string>? GenerateSchemaFilter(IReadOnlyList<string> schemas)
         {
             return schemas.Count > 0
-              ? (
+                ? (
                     s =>
                     {
                         var schemaFilterBuilder = new StringBuilder();
@@ -270,7 +270,7 @@ WHERE name = '{connection.Database}';";
                         return schemaFilterBuilder.ToString();
                     }
                 )
-              : null;
+                : null;
         }
 
         private static (string? Schema, string Table) Parse(string table)
@@ -296,82 +296,82 @@ WHERE name = '{connection.Database}';";
         ) =>
             schemaFilter != null || tables.Count > 0
                 ? (
-                      (s, t) =>
-                      {
-                          var tableFilterBuilder = new StringBuilder();
+                    (s, t) =>
+                    {
+                        var tableFilterBuilder = new StringBuilder();
 
-                          var openBracket = false;
-                          if (schemaFilter != null)
-                          {
-                              tableFilterBuilder.Append('(').Append(schemaFilter(s));
-                              openBracket = true;
-                          }
+                        var openBracket = false;
+                        if (schemaFilter != null)
+                        {
+                            tableFilterBuilder.Append('(').Append(schemaFilter(s));
+                            openBracket = true;
+                        }
 
-                          if (tables.Count > 0)
-                          {
-                              if (openBracket)
-                              {
-                                  tableFilterBuilder.AppendLine().Append("OR ");
-                              }
-                              else
-                              {
-                                  tableFilterBuilder.Append('(');
-                                  openBracket = true;
-                              }
+                        if (tables.Count > 0)
+                        {
+                            if (openBracket)
+                            {
+                                tableFilterBuilder.AppendLine().Append("OR ");
+                            }
+                            else
+                            {
+                                tableFilterBuilder.Append('(');
+                                openBracket = true;
+                            }
 
-                              var tablesWithoutSchema = tables
-                                  .Where(e => string.IsNullOrEmpty(e.Schema))
-                                  .ToList();
-                              if (tablesWithoutSchema.Count > 0)
-                              {
-                                  tableFilterBuilder.Append(t);
-                                  tableFilterBuilder.Append(" IN (");
-                                  tableFilterBuilder.AppendJoin(
-                                      ", ",
-                                      tablesWithoutSchema.Select(e => EscapeLiteral(e.Table))
-                                  );
-                                  tableFilterBuilder.Append(')');
-                              }
+                            var tablesWithoutSchema = tables
+                                .Where(e => string.IsNullOrEmpty(e.Schema))
+                                .ToList();
+                            if (tablesWithoutSchema.Count > 0)
+                            {
+                                tableFilterBuilder.Append(t);
+                                tableFilterBuilder.Append(" IN (");
+                                tableFilterBuilder.AppendJoin(
+                                    ", ",
+                                    tablesWithoutSchema.Select(e => EscapeLiteral(e.Table))
+                                );
+                                tableFilterBuilder.Append(')');
+                            }
 
-                              var tablesWithSchema = tables
-                                  .Where(e => !string.IsNullOrEmpty(e.Schema))
-                                  .ToList();
-                              if (tablesWithSchema.Count > 0)
-                              {
-                                  if (tablesWithoutSchema.Count > 0)
-                                  {
-                                      tableFilterBuilder.Append(" OR ");
-                                  }
+                            var tablesWithSchema = tables
+                                .Where(e => !string.IsNullOrEmpty(e.Schema))
+                                .ToList();
+                            if (tablesWithSchema.Count > 0)
+                            {
+                                if (tablesWithoutSchema.Count > 0)
+                                {
+                                    tableFilterBuilder.Append(" OR ");
+                                }
 
-                                  tableFilterBuilder.Append(t);
-                                  tableFilterBuilder.Append(" IN (");
-                                  tableFilterBuilder.AppendJoin(
-                                      ", ",
-                                      tablesWithSchema.Select(e => EscapeLiteral(e.Table))
-                                  );
-                                  tableFilterBuilder.Append(") AND (");
-                                  tableFilterBuilder.Append(s);
-                                  tableFilterBuilder.Append(" + N'.' + ");
-                                  tableFilterBuilder.Append(t);
-                                  tableFilterBuilder.Append(") IN (");
-                                  tableFilterBuilder.AppendJoin(
-                                      ", ",
-                                      tablesWithSchema.Select(
-                                          e => EscapeLiteral($"{e.Schema}.{e.Table}")
-                                      )
-                                  );
-                                  tableFilterBuilder.Append(')');
-                              }
-                          }
+                                tableFilterBuilder.Append(t);
+                                tableFilterBuilder.Append(" IN (");
+                                tableFilterBuilder.AppendJoin(
+                                    ", ",
+                                    tablesWithSchema.Select(e => EscapeLiteral(e.Table))
+                                );
+                                tableFilterBuilder.Append(") AND (");
+                                tableFilterBuilder.Append(s);
+                                tableFilterBuilder.Append(" + N'.' + ");
+                                tableFilterBuilder.Append(t);
+                                tableFilterBuilder.Append(") IN (");
+                                tableFilterBuilder.AppendJoin(
+                                    ", ",
+                                    tablesWithSchema.Select(
+                                        e => EscapeLiteral($"{e.Schema}.{e.Table}")
+                                    )
+                                );
+                                tableFilterBuilder.Append(')');
+                            }
+                        }
 
-                          if (openBracket)
-                          {
-                              tableFilterBuilder.Append(')');
-                          }
+                        if (openBracket)
+                        {
+                            tableFilterBuilder.Append(')');
+                        }
 
-                          return tableFilterBuilder.ToString();
-                      }
-                  )
+                        return tableFilterBuilder.ToString();
+                    }
+                )
                 : null;
 
         private static string EscapeLiteral(string s) => $"N'{s.Replace("'", "''")}'";

@@ -19,9 +19,9 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 /// </summary>
 public sealed class HttpMethodMatcherPolicy
     : MatcherPolicy,
-      IEndpointComparerPolicy,
-      INodeBuilderPolicy,
-      IEndpointSelectorPolicy
+        IEndpointComparerPolicy,
+        INodeBuilderPolicy,
+        IEndpointSelectorPolicy
 {
     // Used in tests
     internal static readonly string PreflightHttpMethod = HttpMethods.Options;
@@ -327,8 +327,8 @@ public sealed class HttpMethodMatcherPolicy
         {
             var metadata = e.Metadata.GetMetadata<IHttpMethodMetadata>();
             return metadata == null
-              ? (Array.Empty<string>(), false)
-              : (metadata.HttpMethods, metadata.AcceptCorsPreflight);
+                ? (Array.Empty<string>(), false)
+                : (metadata.HttpMethods, metadata.AcceptCorsPreflight);
         }
     }
 

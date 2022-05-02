@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class ComplexNavigationsODataQueryTests
         : ODataQueryTestBase,
-          IClassFixture<ComplexNavigationsODataQueryTestFixture>
+            IClassFixture<ComplexNavigationsODataQueryTestFixture>
     {
         public ComplexNavigationsODataQueryTests(ComplexNavigationsODataQueryTestFixture fixture)
             : base(fixture) { }

@@ -16,7 +16,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     /// </summary>
     public class DelayLoadMethodCallThunkNodeRange
         : DependencyNodeCore<NodeFactory>,
-          ISymbolDefinitionNode
+            ISymbolDefinitionNode
     {
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool HasDynamicDependencies => false;

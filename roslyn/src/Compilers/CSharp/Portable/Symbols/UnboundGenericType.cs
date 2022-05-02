@@ -32,10 +32,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ((object)originalContainingType == null)
                     ? original
                     : original.AsMember(
-                          originalContainingType.IsGenericType
+                        originalContainingType.IsGenericType
                             ? originalContainingType.AsUnboundGenericType()
                             : originalContainingType
-                      );
+                    );
             if (n == 0)
             {
                 return constructedFrom;

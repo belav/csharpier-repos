@@ -1157,8 +1157,8 @@ namespace System.Xml.Xsl.Runtime
                     CopyNamespaces(
                         navigator,
                         (_depth - 1 == depthStart)
-                          ? XPathNamespaceScope.ExcludeXml
-                          : XPathNamespaceScope.Local
+                            ? XPathNamespaceScope.ExcludeXml
+                            : XPathNamespaceScope.Local
                     );
 
                     StartElementContentUnchecked();

@@ -282,8 +282,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 foreach (var label in section.SwitchLabels)
                 {
                     var labelResult = labelStateMap.TryGetValue(label.Label, out var s1)
-                      ? s1
-                      : (state: UnreachableState(), believedReachable: false);
+                        ? s1
+                        : (state: UnreachableState(), believedReachable: false);
                     SetState(labelResult.state);
                     PendingBranches.Add(new PendingBranch(label, this.State, label.Label));
                 }
@@ -293,8 +293,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.BreakLabel,
                 out var stateAndReachable
             )
-              ? stateAndReachable.state
-              : UnreachableState();
+                ? stateAndReachable.state
+                : UnreachableState();
             labelStateMap.Free();
             return afterSwitchState;
         }
@@ -338,18 +338,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             public static PossiblyConditionalState Create(NullableWalker nullableWalker)
             {
                 return nullableWalker.IsConditionalState
-                  ? new PossiblyConditionalState(
+                    ? new PossiblyConditionalState(
                         nullableWalker.StateWhenTrue,
                         nullableWalker.StateWhenFalse
                     )
-                  : new PossiblyConditionalState(nullableWalker.State);
+                    : new PossiblyConditionalState(nullableWalker.State);
             }
 
             public PossiblyConditionalState Clone()
             {
                 return IsConditionalState
-                  ? new PossiblyConditionalState(StateWhenTrue, StateWhenFalse)
-                  : new PossiblyConditionalState(State);
+                    ? new PossiblyConditionalState(StateWhenTrue, StateWhenFalse)
+                    : new PossiblyConditionalState(State);
             }
         }
 
@@ -385,9 +385,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // We do not extend such courtesy to nested tuple literals.
             var originalInputElementSlots = expression is BoundTupleExpression tuple
                 ? tuple.Arguments.SelectAsArray(
-                      static (a, w) => w.GetSlotForSwitchInputValue(a),
-                      this
-                  )
+                    static (a, w) => w.GetSlotForSwitchInputValue(a),
+                    this
+                )
                 : default;
             var originalInputMap = PooledDictionary<int, BoundExpression>.GetInstance();
             originalInputMap.Add(originalInputSlot, expression);
@@ -437,8 +437,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             evaluation.Input,
                             out var slotAndType
                         )
-                          ? slotAndType
-                          : throw ExceptionUtilities.Unreachable;
+                            ? slotAndType
+                            : throw ExceptionUtilities.Unreachable;
                         Debug.Assert(inputSlot > 0);
 
                         switch (evaluation)
@@ -489,11 +489,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         outputSlot = inputSlot;
                                         break;
                                     case ConversionKind.ExplicitNullable
-                                          when AreNullableAndUnderlyingTypes(
-                                              inputType,
-                                              e.Type,
-                                              out _
-                                          ):
+                                    when AreNullableAndUnderlyingTypes(inputType, e.Type, out _):
                                         outputSlot = GetNullableOfTValueSlot(
                                             inputType,
                                             inputSlot,
@@ -1063,10 +1059,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (
                     inferType
                         ? BestTypeInferrer.InferBestType(
-                              placeholders,
-                              _conversions,
-                              ref discardedUseSiteInfo
-                          )
+                            placeholders,
+                            _conversions,
+                            ref discardedUseSiteInfo
+                        )
                         : null
                 ) ?? node.Type?.SetUnknownNullabilityForReferenceTypes();
 
@@ -1163,14 +1159,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.IsNegated ? node.WhenFalseLabel : node.WhenTrueLabel,
                 out var s1
             )
-              ? s1.state
-              : UnreachableState();
+                ? s1.state
+                : UnreachableState();
             var falseState = labelStateMap.TryGetValue(
                 node.IsNegated ? node.WhenTrueLabel : node.WhenFalseLabel,
                 out var s2
             )
-              ? s2.state
-              : UnreachableState();
+                ? s2.state
+                : UnreachableState();
             labelStateMap.Free();
             SetConditionalState(trueState, falseState);
             SetNotNullResult(node);

@@ -14,23 +14,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             analyzer switch
             {
                 FileContentLoadAnalyzer _
-                  => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis,
+                    => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis,
                 DocumentDiagnosticAnalyzer _
-                  => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
-                      | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis,
+                    => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
+                        | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis,
                 ProjectDiagnosticAnalyzer _ => DiagnosticAnalyzerCategory.ProjectAnalysis,
                 IBuiltInAnalyzer builtInAnalyzer => builtInAnalyzer.GetAnalyzerCategory(),
 
                 // Compiler analyzer supports syntax diagnostics, span-based semantic diagnostics and project level diagnostics.
                 // For a public analyzer it is not possible to know the diagnostic categorization, so return a worst-case categorization.
                 _
-                  => analyzer.IsCompilerAnalyzer()
-                    ? DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
-                      | DiagnosticAnalyzerCategory.SemanticSpanAnalysis
-                      | DiagnosticAnalyzerCategory.ProjectAnalysis
-                    : DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
-                      | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis
-                      | DiagnosticAnalyzerCategory.ProjectAnalysis
+                    => analyzer.IsCompilerAnalyzer()
+                        ? DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
+                            | DiagnosticAnalyzerCategory.SemanticSpanAnalysis
+                            | DiagnosticAnalyzerCategory.ProjectAnalysis
+                        : DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis
+                            | DiagnosticAnalyzerCategory.SemanticDocumentAnalysis
+                            | DiagnosticAnalyzerCategory.ProjectAnalysis
             };
 
         public static bool SupportAnalysisKind(

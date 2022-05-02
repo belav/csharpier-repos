@@ -28,15 +28,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             preference switch
             {
                 NamespaceDeclarationPreference.BlockScoped
-                  => (
-                      CSharpAnalyzersResources.Convert_to_block_scoped_namespace,
-                      nameof(CSharpAnalyzersResources.Convert_to_block_scoped_namespace)
-                  ),
+                    => (
+                        CSharpAnalyzersResources.Convert_to_block_scoped_namespace,
+                        nameof(CSharpAnalyzersResources.Convert_to_block_scoped_namespace)
+                    ),
                 NamespaceDeclarationPreference.FileScoped
-                  => (
-                      CSharpAnalyzersResources.Convert_to_file_scoped_namespace,
-                      nameof(CSharpAnalyzersResources.Convert_to_file_scoped_namespace)
-                  ),
+                    => (
+                        CSharpAnalyzersResources.Convert_to_file_scoped_namespace,
+                        nameof(CSharpAnalyzersResources.Convert_to_file_scoped_namespace)
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(preference),
             };
 

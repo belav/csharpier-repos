@@ -577,9 +577,9 @@ namespace System.Text
                     (chars.Length <= MaxInputElementsPerIteration)
                         ? encoder.GetByteCount(chars, flush)
                         : encoder.GetByteCount(
-                              chars.Slice(0, MaxInputElementsPerIteration),
-                              flush: false /* this isn't the end of the data */
-                          );
+                            chars.Slice(0, MaxInputElementsPerIteration),
+                            flush: false /* this isn't the end of the data */
+                        );
 
                 Span<byte> scratchBuffer = writer.GetSpan(byteCountForThisSlice);
 
@@ -705,9 +705,9 @@ namespace System.Text
                     (bytes.Length <= MaxInputElementsPerIteration)
                         ? decoder.GetCharCount(bytes, flush)
                         : decoder.GetCharCount(
-                              bytes.Slice(0, MaxInputElementsPerIteration),
-                              flush: false /* this isn't the end of the data */
-                          );
+                            bytes.Slice(0, MaxInputElementsPerIteration),
+                            flush: false /* this isn't the end of the data */
+                        );
 
                 Span<char> scratchBuffer = writer.GetSpan(charCountForThisSlice);
 

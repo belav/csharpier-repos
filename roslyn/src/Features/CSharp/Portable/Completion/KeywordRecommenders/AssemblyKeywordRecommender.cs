@@ -37,12 +37,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                     // class Goo {
                     // for these cases is necessary check if they Parent is CompilationUnitSyntax
                     case BaseTypeDeclarationSyntax baseType
-                          when baseType.Parent is CompilationUnitSyntax:
+                    when baseType.Parent is CompilationUnitSyntax:
                     // The case where the parent of attributeList is IncompleteMemberSyntax(See test: ), like:
                     // [$$
                     // for that case is necessary check if they Parent is CompilationUnitSyntax
                     case IncompleteMemberSyntax incompleteMember
-                          when incompleteMember.Parent is CompilationUnitSyntax:
+                    when incompleteMember.Parent is CompilationUnitSyntax:
                         return true;
                 }
             }

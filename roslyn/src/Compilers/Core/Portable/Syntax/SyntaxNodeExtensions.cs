@@ -522,8 +522,8 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return node != null
-              ? oldTree.WithRootAndOptions(node, oldTree.Options).GetRoot()
-              : null;
+                ? oldTree.WithRootAndOptions(node, oldTree.Options).GetRoot()
+                : null;
         }
     }
 }

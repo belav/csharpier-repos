@@ -229,8 +229,8 @@ namespace System.Buffers.Text
 
                     srcIndex += bytesConsumed;
                     return c == Utf8Constants.Colon
-                      ? ComponentParseResult.Colon
-                      : ComponentParseResult.Period;
+                        ? ComponentParseResult.Colon
+                        : ComponentParseResult.Period;
                 }
                 else if (c == Utf8Constants.Period)
                 {

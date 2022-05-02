@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteCompilationAvailableService
         : BrokeredServiceBase,
-          IRemoteCompilationAvailableService
+            IRemoteCompilationAvailableService
     {
         internal sealed class Factory : FactoryBase<IRemoteCompilationAvailableService>
         {

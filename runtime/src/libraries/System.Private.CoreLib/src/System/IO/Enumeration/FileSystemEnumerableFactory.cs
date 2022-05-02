@@ -125,9 +125,13 @@ namespace System.IO.Enumeration
             return options.MatchType switch
             {
                 MatchType.Simple
-                  => FileSystemName.MatchesSimpleExpression(expression.AsSpan(), name, ignoreCase),
+                    => FileSystemName.MatchesSimpleExpression(
+                        expression.AsSpan(),
+                        name,
+                        ignoreCase
+                    ),
                 MatchType.Win32
-                  => FileSystemName.MatchesWin32Expression(expression.AsSpan(), name, ignoreCase),
+                    => FileSystemName.MatchesWin32Expression(expression.AsSpan(), name, ignoreCase),
                 _ => throw new ArgumentOutOfRangeException(nameof(options)),
             };
         }

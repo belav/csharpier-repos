@@ -22,10 +22,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.DocumentationComments
 {
     internal abstract class AbstractDocumentationCommentCommandHandler
         : IChainedCommandHandler<TypeCharCommandArgs>,
-          ICommandHandler<ReturnKeyCommandArgs>,
-          ICommandHandler<InsertCommentCommandArgs>,
-          IChainedCommandHandler<OpenLineAboveCommandArgs>,
-          IChainedCommandHandler<OpenLineBelowCommandArgs>
+            ICommandHandler<ReturnKeyCommandArgs>,
+            ICommandHandler<InsertCommentCommandArgs>,
+            IChainedCommandHandler<OpenLineAboveCommandArgs>,
+            IChainedCommandHandler<OpenLineBelowCommandArgs>
     {
         private readonly IUIThreadOperationExecutor _uiThreadOperationExecutor;
         private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;

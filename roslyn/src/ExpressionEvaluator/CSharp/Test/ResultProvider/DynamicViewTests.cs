@@ -498,9 +498,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 getMemberValue: (_, m) =>
                     (m == "Items")
                         ? CreateErrorValue(
-                              runtime.GetType(typeof(Array)),
-                              "Function evaluation timed out"
-                          )
+                            runtime.GetType(typeof(Array)),
+                            "Function evaluation timed out"
+                        )
                         : null
             );
             var type = new DkmClrType(runtime, (TypeImpl)o.GetType());

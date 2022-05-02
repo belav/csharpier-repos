@@ -931,8 +931,8 @@ namespace Microsoft.EntityFrameworkCore
                 }
 
                 return serviceType == typeof(IServiceScopeFactory)
-                  ? new FakeServiceScopeFactory()
-                  : _realProvider.GetService(serviceType);
+                    ? new FakeServiceScopeFactory()
+                    : _realProvider.GetService(serviceType);
             }
 
             public class FakeServiceScopeFactory : IServiceScopeFactory

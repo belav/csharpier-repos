@@ -56,8 +56,8 @@ internal sealed class RemoteJSDataStream : Stream
             signalRMaximumIncomingBytes > 1024
                 ? (int)Math.Min(signalRMaximumIncomingBytes, 50 * 1024) - 512
                 : throw new ArgumentException(
-                      $"SignalR MaximumIncomingBytes must be at least 1 kb."
-                  );
+                    $"SignalR MaximumIncomingBytes must be at least 1 kb."
+                );
 
         var streamId = runtime.RemoteJSDataStreamNextInstanceId++;
         var remoteJSDataStream = new RemoteJSDataStream(

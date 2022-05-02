@@ -434,8 +434,8 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
                 searchPaths,
                 baseDirectory,
                 gacFileResolver: platformInfo.HasGlobalAssemblyCache
-                  ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
-                  : null,
+                    ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
+                    : null,
                 platformAssemblyPaths: platformInfo.PlatformAssemblyPaths,
                 fileReferenceProvider: (path, properties) =>
                     metadataService.GetReference(path, properties)

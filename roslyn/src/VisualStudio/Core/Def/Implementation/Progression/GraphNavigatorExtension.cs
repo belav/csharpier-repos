@@ -23,7 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
     internal sealed class GraphNavigatorExtension
         : ForegroundThreadAffinitizedObject,
-          IGraphNavigateToItem
+            IGraphNavigateToItem
     {
         private readonly Workspace _workspace;
 

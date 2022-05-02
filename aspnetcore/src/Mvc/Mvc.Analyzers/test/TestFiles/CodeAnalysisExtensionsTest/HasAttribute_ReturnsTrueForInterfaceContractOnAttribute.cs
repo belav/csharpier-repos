@@ -6,7 +6,7 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 
     public class HasAttribute_ReturnsTrueForInterfaceContractOnAttribute
         : Attribute,
-          IHasAttribute_ReturnsTrueForInterfaceContractOnAttribute { }
+            IHasAttribute_ReturnsTrueForInterfaceContractOnAttribute { }
 
     [HasAttribute_ReturnsTrueForInterfaceContractOnAttribute]
     public class HasAttribute_ReturnsTrueForInterfaceContractOnAttributeTest { }

@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed class AsyncConstructor
         : SynthesizedInstanceConstructor,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         internal AsyncConstructor(AsyncStateMachine stateMachineType) : base(stateMachineType) { }
 

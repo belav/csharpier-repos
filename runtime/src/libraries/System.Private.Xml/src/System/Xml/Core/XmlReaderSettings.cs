@@ -92,8 +92,8 @@ namespace System.Xml
         internal XmlResolver? GetXmlResolver_CheckConfig()
         {
             return LocalAppContextSwitches.AllowDefaultResolver || IsXmlResolverSet
-              ? _xmlResolver
-              : null;
+                ? _xmlResolver
+                : null;
         }
 
         public int LineNumberOffset

@@ -19,8 +19,8 @@ internal static class KeyEscrowServiceProviderExtensions
     {
         var escrowSinks = services?.GetService<IEnumerable<IKeyEscrowSink>>()?.ToList();
         return (escrowSinks != null && escrowSinks.Count > 0)
-          ? new AggregateKeyEscrowSink(escrowSinks)
-          : null;
+            ? new AggregateKeyEscrowSink(escrowSinks)
+            : null;
     }
 
     private sealed class AggregateKeyEscrowSink : IKeyEscrowSink

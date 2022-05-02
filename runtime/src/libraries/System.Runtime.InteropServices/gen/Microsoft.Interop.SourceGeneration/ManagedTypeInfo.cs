@@ -98,9 +98,9 @@ namespace Microsoft.Interop
 
     public sealed record SzArrayType(ManagedTypeInfo ElementTypeInfo)
         : ManagedTypeInfo(
-              $"{ElementTypeInfo.FullTypeName}[]",
-              $"{ElementTypeInfo.DiagnosticFormattedName}[]"
-          );
+            $"{ElementTypeInfo.FullTypeName}[]",
+            $"{ElementTypeInfo.DiagnosticFormattedName}[]"
+        );
 
     public sealed record DelegateTypeInfo(string FullTypeName, string DiagnosticFormattedName)
         : ManagedTypeInfo(FullTypeName, DiagnosticFormattedName);

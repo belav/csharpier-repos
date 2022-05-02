@@ -39,9 +39,9 @@ namespace System.Reflection.Metadata.Tests
                     using (
                         var peReader = useStream
                             ? new PEReader(
-                                  new ReadOnlyUnmanagedMemoryStream(peImagePtr, int.MaxValue),
-                                  PEStreamOptions.IsLoadedImage
-                              )
+                                new ReadOnlyUnmanagedMemoryStream(peImagePtr, int.MaxValue),
+                                PEStreamOptions.IsLoadedImage
+                            )
                             : new PEReader(peImagePtr, int.MaxValue, isLoadedImage: true)
                     )
                     {

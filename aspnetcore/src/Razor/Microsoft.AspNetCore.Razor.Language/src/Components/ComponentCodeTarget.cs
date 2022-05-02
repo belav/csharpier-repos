@@ -28,8 +28,8 @@ internal class ComponentCodeTarget : CodeTarget
     public override IntermediateNodeWriter CreateNodeWriter()
     {
         return _options.DesignTime
-          ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter()
-          : new ComponentRuntimeNodeWriter();
+            ? (IntermediateNodeWriter)new ComponentDesignTimeNodeWriter()
+            : new ComponentRuntimeNodeWriter();
     }
 
     public override TExtension GetExtension<TExtension>()

@@ -16,7 +16,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
     public class VirtualResolutionFixupSignature
         : Signature,
-          IEquatable<VirtualResolutionFixupSignature>
+            IEquatable<VirtualResolutionFixupSignature>
     {
         private readonly ReadyToRunFixupKind _fixupKind;
 

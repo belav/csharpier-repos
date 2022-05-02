@@ -26,12 +26,12 @@ namespace System
     )]
     public sealed partial class String
         : IComparable,
-          IEnumerable,
-          IConvertible,
-          IEnumerable<char>,
-          IComparable<string?>,
-          IEquatable<string?>,
-          ICloneable
+            IEnumerable,
+            IConvertible,
+            IEnumerable<char>,
+            IComparable<string?>,
+            IEquatable<string?>,
+            ICloneable
     {
         /// <summary>Maximum length allowed for a string.</summary>
         /// <remarks>Keep in sync with AllocateString in gchelpers.cpp.</remarks>

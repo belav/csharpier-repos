@@ -77,9 +77,9 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             var errorCodeNode = token.Parent switch
             {
                 PragmaWarningDirectiveTriviaSyntax directive
-                  => token.IsKind(SyntaxKind.EndOfDirectiveToken)
-                    ? directive.ErrorCodes.LastOrDefault()
-                    : directive.ErrorCodes.FirstOrDefault(),
+                    => token.IsKind(SyntaxKind.EndOfDirectiveToken)
+                        ? directive.ErrorCodes.LastOrDefault()
+                        : directive.ErrorCodes.FirstOrDefault(),
                 { Parent: PragmaWarningDirectiveTriviaSyntax } node => node,
                 _ => null,
             };
@@ -101,9 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 {
                     RawKind: (int)SyntaxKind.NumericLiteralExpression
                 } literal
-                  => int.TryParse(literal.Token.ValueText, out var errorCodeNumber)
-                    ? $"CS{errorCodeNumber:0000}"
-                    : literal.Token.ValueText,
+                    => int.TryParse(literal.Token.ValueText, out var errorCodeNumber)
+                        ? $"CS{errorCodeNumber:0000}"
+                        : literal.Token.ValueText,
                 _ => null,
             };
             if (errorCode is null)
@@ -142,7 +142,7 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                                 ? arguments.IndexOf(argument) == 1 // Positional argument "checkId"
                                 : argument.NameColon.Name.Identifier.ValueText == "checkId"
                         ) // Named argument "checkId"
-                  => argument,
+                    => argument,
                 _ => null,
             };
 
@@ -203,12 +203,12 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
                 ?? descriptor.Id;
             var idTag = !string.IsNullOrWhiteSpace(descriptor.HelpLinkUri)
                 ? new TaggedText(
-                      TextTags.Text,
-                      descriptor.Id,
-                      TaggedTextStyle.None,
-                      descriptor.HelpLinkUri,
-                      descriptor.HelpLinkUri
-                  )
+                    TextTags.Text,
+                    descriptor.Id,
+                    TaggedTextStyle.None,
+                    descriptor.HelpLinkUri,
+                    descriptor.HelpLinkUri
+                )
                 : new TaggedText(TextTags.Text, descriptor.Id);
             return QuickInfoItem.Create(
                 location,

@@ -20,9 +20,9 @@ namespace Microsoft.CodeAnalysis.Formatting
     /// </summary>
     internal readonly struct TokenData
         : IEqualityComparer<TokenData>,
-          IEquatable<TokenData>,
-          IComparable<TokenData>,
-          IComparer<TokenData>
+            IEquatable<TokenData>,
+            IComparable<TokenData>,
+            IComparer<TokenData>
     {
         public TokenData(TokenStream tokenStream, int indexInStream, SyntaxToken token)
         {

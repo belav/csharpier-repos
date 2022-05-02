@@ -105,11 +105,11 @@ namespace Roslyn.Test.Utilities
 
         public static readonly AssemblyName RuntimeCorLibName = RuntimeUtilities.IsCoreClrRuntime
             ? new AssemblyName(
-                  "netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
-              )
+                "netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51"
+            )
             : new AssemblyName(
-                  "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-              );
+                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+            );
 
         /// <summary>
         /// The array of 7 metadataimagereferences that are required to compile

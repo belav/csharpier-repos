@@ -15,10 +15,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 {
     internal class DocumentPullDiagnosticHandler
         : AbstractPullDiagnosticHandler<
-              VSInternalDocumentDiagnosticsParams,
-              VSInternalDiagnosticReport,
-              VSInternalDiagnosticReport[]
-          >
+            VSInternalDocumentDiagnosticsParams,
+            VSInternalDiagnosticReport,
+            VSInternalDiagnosticReport[]
+        >
     {
         private readonly IDiagnosticAnalyzerService _analyzerService;
 

@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return
                     info.Type == null
                     || info.Type.SpecialType == Microsoft.CodeAnalysis.SpecialType.System_Object
-                  ? info.Type
-                  : info.ConvertedType;
+                    ? info.Type
+                    : info.ConvertedType;
             }
 
             protected override Tuple<SyntaxNode, SyntaxNode> GetFlowAnalysisNodeRange()
@@ -177,9 +177,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 switch (symbol)
                 {
                     case ILocalSymbol localSymbol
-                          when localSymbol.NullableAnnotation == NullableAnnotation.Annotated:
+                    when localSymbol.NullableAnnotation == NullableAnnotation.Annotated:
                     case IParameterSymbol parameterSymbol
-                          when parameterSymbol.NullableAnnotation == NullableAnnotation.Annotated:
+                    when parameterSymbol.NullableAnnotation == NullableAnnotation.Annotated:
 
                         // For local symbols and parameters, we can check what the flow state
                         // for refences to the symbols are and determine if we can change
@@ -211,11 +211,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     operation switch
                     {
                         ILocalReferenceOperation localReference
-                          => localReference.Local.Equals(symbol),
+                            => localReference.Local.Equals(symbol),
                         IParameterReferenceOperation parameterReference
-                          => parameterReference.Parameter.Equals(symbol),
+                            => parameterReference.Parameter.Equals(symbol),
                         IAssignmentOperation assignment
-                          => IsSymbolReferencedByOperation(assignment.Target),
+                            => IsSymbolReferencedByOperation(assignment.Target),
                         _ => false
                     };
             }

@@ -1246,7 +1246,7 @@ namespace System.Net.Http
                             Trace($"Received headers without :status.");
                         throw new Http3ConnectionException(Http3ErrorCode.ProtocolError);
                     case HeaderState.ResponseHeaders
-                          when descriptor.HeaderType.HasFlag(HttpHeaderType.Content):
+                    when descriptor.HeaderType.HasFlag(HttpHeaderType.Content):
                         _response!.Content!.Headers.TryAddWithoutValidation(
                             descriptor,
                             headerValue
@@ -1255,8 +1255,8 @@ namespace System.Net.Http
                     case HeaderState.ResponseHeaders:
                         _response!.Headers.TryAddWithoutValidation(
                             descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
-                              ? descriptor.AsCustomHeader()
-                              : descriptor,
+                                ? descriptor.AsCustomHeader()
+                                : descriptor,
                             headerValue
                         );
                         break;
@@ -1264,8 +1264,8 @@ namespace System.Net.Http
                         _trailingHeaders!.Add(
                             (
                                 descriptor.HeaderType.HasFlag(HttpHeaderType.Request)
-                                  ? descriptor.AsCustomHeader()
-                                  : descriptor,
+                                    ? descriptor.AsCustomHeader()
+                                    : descriptor,
                                 headerValue
                             )
                         );

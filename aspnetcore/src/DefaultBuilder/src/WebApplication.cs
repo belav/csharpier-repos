@@ -19,9 +19,9 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public sealed class WebApplication
     : IHost,
-      IApplicationBuilder,
-      IEndpointRouteBuilder,
-      IAsyncDisposable
+        IApplicationBuilder,
+        IEndpointRouteBuilder,
+        IAsyncDisposable
 {
     internal const string GlobalEndpointRouteBuilderKey = "__GlobalEndpointRouteBuilder";
 

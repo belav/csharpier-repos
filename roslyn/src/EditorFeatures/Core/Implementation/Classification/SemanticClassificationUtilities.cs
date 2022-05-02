@@ -136,8 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             }
 
             var subSpan = subTextSpan.Contains(changedSpan)
-              ? subTextSpan.ToSpan()
-              : member.FullSpan.ToSpan();
+                ? subTextSpan.ToSpan()
+                : member.FullSpan.ToSpan();
 
             var subSpanToTag = new DocumentSnapshotSpan(
                 spanToTag.Document,

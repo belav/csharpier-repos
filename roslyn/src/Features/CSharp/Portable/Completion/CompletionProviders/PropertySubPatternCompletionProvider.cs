@@ -279,8 +279,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         {
                             Parent: PatternSyntax
                         } propertyPatternClause
-                  ? (propertyPatternClause, null)
-                  : default;
+                    ? (propertyPatternClause, null)
+                    : default;
             }
 
             if (token.IsKind(SyntaxKind.DotToken))
@@ -290,8 +290,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return
                     token.Parent is MemberAccessExpressionSyntax memberAccess
                     && IsExtendedPropertyPattern(memberAccess, out var propertyPatternClause)
-                  ? (propertyPatternClause, memberAccess.Expression)
-                  : default;
+                    ? (propertyPatternClause, memberAccess.Expression)
+                    : default;
             }
 
             return default;

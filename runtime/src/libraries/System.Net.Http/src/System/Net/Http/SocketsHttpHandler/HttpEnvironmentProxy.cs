@@ -36,10 +36,10 @@ namespace System.Net.Http
                 return null;
             }
             return uri.Equals(_httpProxy)
-              ? _httpCred
-              : uri.Equals(_httpsProxy)
-                  ? _httpsCred
-                  : null;
+                ? _httpCred
+                : uri.Equals(_httpsProxy)
+                    ? _httpsCred
+                    : null;
         }
 
         public static HttpEnvironmentProxyCredentials? TryCreate(Uri? httpProxy, Uri? httpsProxy)
@@ -273,8 +273,8 @@ namespace System.Net.Http
         public Uri? GetProxy(Uri uri)
         {
             return HttpUtilities.IsSupportedNonSecureScheme(uri.Scheme)
-              ? _httpProxyUri
-              : _httpsProxyUri;
+                ? _httpProxyUri
+                : _httpsProxyUri;
         }
 
         /// <summary>

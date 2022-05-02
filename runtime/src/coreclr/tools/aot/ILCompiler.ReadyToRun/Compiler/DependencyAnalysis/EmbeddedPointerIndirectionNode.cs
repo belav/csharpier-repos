@@ -14,7 +14,7 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public abstract class EmbeddedPointerIndirectionNode<TTarget>
         : EmbeddedObjectNode,
-          ISortableSymbolNode where TTarget : ISortableSymbolNode
+            ISortableSymbolNode where TTarget : ISortableSymbolNode
     {
         private TTarget _targetNode;
 

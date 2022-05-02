@@ -164,11 +164,9 @@ namespace Microsoft.Cci
 
             var peIdProvider = isDeterministic
                 ? new Func<IEnumerable<Blob>, BlobContentId>(
-                      content =>
-                          BlobContentId.FromHash(
-                              CryptographicHashProvider.ComputeSourceHash(content)
-                          )
-                  )
+                    content =>
+                        BlobContentId.FromHash(CryptographicHashProvider.ComputeSourceHash(content))
+                )
                 : null;
 
             // We need to calculate the PDB checksum, so we may as well use the calculated hash for PDB ID regardless of whether deterministic build is requested.
@@ -187,15 +185,14 @@ namespace Microsoft.Cci
                 var portablePdbIdProvider =
                     (context.Module.PdbChecksumAlgorithm.Name != null)
                         ? new Func<IEnumerable<Blob>, BlobContentId>(
-                              content =>
-                                  BlobContentId.FromHash(
-                                      portablePdbContentHash =
-                                          CryptographicHashProvider.ComputeHash(
-                                              context.Module.PdbChecksumAlgorithm,
-                                              content
-                                          )
-                                  )
-                          )
+                            content =>
+                                BlobContentId.FromHash(
+                                    portablePdbContentHash = CryptographicHashProvider.ComputeHash(
+                                        context.Module.PdbChecksumAlgorithm,
+                                        content
+                                    )
+                                )
+                        )
                         : null;
 
                 var portablePdbBlob = new BlobBuilder();

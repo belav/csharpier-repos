@@ -638,8 +638,8 @@ namespace System.IO.Pipelines
         {
             // If _readHead is null then _readTail is also null
             return _readHead is null
-              ? default
-              : new ReadOnlySequence<byte>(_readHead, _readIndex, _readTail!, _readTail!.End);
+                ? default
+                : new ReadOnlySequence<byte>(_readHead, _readIndex, _readTail!, _readTail!.End);
         }
 
         private void AllocateReadTail(int? minimumSize = null)

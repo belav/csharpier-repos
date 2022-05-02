@@ -219,13 +219,13 @@ namespace System.Net.Security
             else
             {
                 return isAsync
-                  ? ForceAuthenticationAsync(
+                    ? ForceAuthenticationAsync(
                         new AsyncReadWriteAdapter(InnerStream, cancellationToken),
                         _context!.IsServer,
                         null,
                         isApm
                     )
-                  : ForceAuthenticationAsync(
+                    : ForceAuthenticationAsync(
                         new SyncReadWriteAdapter(InnerStream),
                         _context!.IsServer,
                         null
@@ -249,16 +249,16 @@ namespace System.Net.Security
             {
                 Task task = isAsync
                     ? ForceAuthenticationAsync(
-                          new AsyncReadWriteAdapter(InnerStream, cancellationToken),
-                          _context!.IsServer,
-                          null,
-                          isApm
-                      )
+                        new AsyncReadWriteAdapter(InnerStream, cancellationToken),
+                        _context!.IsServer,
+                        null,
+                        isApm
+                    )
                     : ForceAuthenticationAsync(
-                          new SyncReadWriteAdapter(InnerStream),
-                          _context!.IsServer,
-                          null
-                      );
+                        new SyncReadWriteAdapter(InnerStream),
+                        _context!.IsServer,
+                        null
+                    );
 
                 await task.ConfigureAwait(false);
 
@@ -627,8 +627,8 @@ namespace System.Net.Security
                     ) // guard against malicious endpoints. We should not see ClientHello on client.
                     {
                         TlsFrameHelper.ProcessingOptions options = NetEventSource.Log.IsEnabled()
-                          ? TlsFrameHelper.ProcessingOptions.All
-                          : TlsFrameHelper.ProcessingOptions.ServerName;
+                            ? TlsFrameHelper.ProcessingOptions.All
+                            : TlsFrameHelper.ProcessingOptions.ServerName;
 
                         // Process SNI from Client Hello message
                         if (

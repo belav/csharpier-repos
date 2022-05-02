@@ -54,20 +54,20 @@ namespace Microsoft.CodeAnalysis.Tools
             using var workspace =
                 formatOptions.WorkspaceType == WorkspaceType.Folder
                     ? OpenFolderWorkspace(
-                          formatOptions.WorkspaceFilePath,
-                          formatOptions.FileMatcher
-                      )
+                        formatOptions.WorkspaceFilePath,
+                        formatOptions.FileMatcher
+                    )
                     : await OpenMSBuildWorkspaceAsync(
-                              formatOptions.WorkspaceFilePath,
-                              formatOptions.WorkspaceType,
-                              formatOptions.NoRestore,
-                              formatOptions.FixCategory != FixCategory.Whitespace,
-                              binaryLogPath,
-                              logWorkspaceWarnings,
-                              logger,
-                              cancellationToken
-                          )
-                          .ConfigureAwait(false);
+                            formatOptions.WorkspaceFilePath,
+                            formatOptions.WorkspaceType,
+                            formatOptions.NoRestore,
+                            formatOptions.FixCategory != FixCategory.Whitespace,
+                            binaryLogPath,
+                            logWorkspaceWarnings,
+                            logger,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
             if (workspace is null)
             {
@@ -365,8 +365,8 @@ namespace Microsoft.CodeAnalysis.Tools
             // If no files are covered by an editorconfig, then return them all. Otherwise only return
             // files that are covered by an editorconfig.
             return documentsCoveredByEditorConfig.Count == 0
-              ? (projectFileCount, documentsNotCoveredByEditorConfig.ToImmutable())
-              : (projectFileCount, documentsCoveredByEditorConfig.ToImmutable());
+                ? (projectFileCount, documentsNotCoveredByEditorConfig.ToImmutable())
+                : (projectFileCount, documentsCoveredByEditorConfig.ToImmutable());
         }
     }
 }

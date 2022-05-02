@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
     [Export(typeof(IForegroundNotificationService))]
     internal class ForegroundNotificationService
         : ForegroundThreadAffinitizedObject,
-          IForegroundNotificationService
+            IForegroundNotificationService
     {
         // how much time we will give notifications to run on the UI thread
         private const int DefaultTimeSliceInMS = 15;

@@ -103,7 +103,7 @@ namespace System.Web.Http.ModelBinding
 
         class HttpValueProviderParameterBindingTestDouble
             : HttpParameterBinding,
-              IValueProviderParameterBinding
+                IValueProviderParameterBinding
         {
             public IEnumerable<ValueProviderFactory> Factories { get; set; }
 

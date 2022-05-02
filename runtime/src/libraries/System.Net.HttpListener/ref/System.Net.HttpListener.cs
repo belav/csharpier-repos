@@ -191,8 +191,8 @@ namespace System.Net
 
     public partial class HttpListenerPrefixCollection
         : System.Collections.Generic.ICollection<string>,
-          System.Collections.Generic.IEnumerable<string>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<string>,
+            System.Collections.IEnumerable
     {
         internal HttpListenerPrefixCollection() { }
 

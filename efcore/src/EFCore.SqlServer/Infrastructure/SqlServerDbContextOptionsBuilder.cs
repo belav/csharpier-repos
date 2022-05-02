@@ -17,9 +17,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     /// </remarks>
     public class SqlServerDbContextOptionsBuilder
         : RelationalDbContextOptionsBuilder<
-              SqlServerDbContextOptionsBuilder,
-              SqlServerOptionsExtension
-          >
+            SqlServerDbContextOptionsBuilder,
+            SqlServerOptionsExtension
+        >
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqlServerDbContextOptionsBuilder" /> class.

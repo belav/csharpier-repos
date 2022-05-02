@@ -986,8 +986,8 @@ namespace System.Linq.Expressions
             // and is legal even if there is no equality operator defined on the
             // type of x.
             return IsNullConstant(left)
-              ? !IsNullConstant(right) && right.Type.IsNullableType()
-              : IsNullConstant(right) && left.Type.IsNullableType();
+                ? !IsNullConstant(right) && right.Type.IsNullableType()
+                : IsNullConstant(right) && left.Type.IsNullableType();
         }
 
         // Note: this has different meaning than ConstantCheck.IsNull
@@ -1179,7 +1179,7 @@ namespace System.Linq.Expressions
                 ExpressionType.LessThanOrEqual => LessThanOrEqual(left, right, liftToNull, method),
                 ExpressionType.GreaterThan => GreaterThan(left, right, liftToNull, method),
                 ExpressionType.GreaterThanOrEqual
-                  => GreaterThanOrEqual(left, right, liftToNull, method),
+                    => GreaterThanOrEqual(left, right, liftToNull, method),
                 ExpressionType.Equal => Equal(left, right, liftToNull, method),
                 ExpressionType.NotEqual => NotEqual(left, right, liftToNull, method),
                 ExpressionType.ExclusiveOr => ExclusiveOr(left, right, method),
@@ -1192,21 +1192,21 @@ namespace System.Linq.Expressions
                 ExpressionType.AndAssign => AndAssign(left, right, method, conversion),
                 ExpressionType.DivideAssign => DivideAssign(left, right, method, conversion),
                 ExpressionType.ExclusiveOrAssign
-                  => ExclusiveOrAssign(left, right, method, conversion),
+                    => ExclusiveOrAssign(left, right, method, conversion),
                 ExpressionType.LeftShiftAssign => LeftShiftAssign(left, right, method, conversion),
                 ExpressionType.ModuloAssign => ModuloAssign(left, right, method, conversion),
                 ExpressionType.MultiplyAssign => MultiplyAssign(left, right, method, conversion),
                 ExpressionType.OrAssign => OrAssign(left, right, method, conversion),
                 ExpressionType.PowerAssign => PowerAssign(left, right, method, conversion),
                 ExpressionType.RightShiftAssign
-                  => RightShiftAssign(left, right, method, conversion),
+                    => RightShiftAssign(left, right, method, conversion),
                 ExpressionType.SubtractAssign => SubtractAssign(left, right, method, conversion),
                 ExpressionType.AddAssignChecked
-                  => AddAssignChecked(left, right, method, conversion),
+                    => AddAssignChecked(left, right, method, conversion),
                 ExpressionType.SubtractAssignChecked
-                  => SubtractAssignChecked(left, right, method, conversion),
+                    => SubtractAssignChecked(left, right, method, conversion),
                 ExpressionType.MultiplyAssignChecked
-                  => MultiplyAssignChecked(left, right, method, conversion),
+                    => MultiplyAssignChecked(left, right, method, conversion),
                 _ => throw Error.UnhandledBinary(binaryType, nameof(binaryType)),
             };
 

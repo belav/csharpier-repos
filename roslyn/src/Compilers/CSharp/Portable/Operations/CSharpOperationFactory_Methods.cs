@@ -135,8 +135,8 @@ namespace Microsoft.CodeAnalysis.Operations
         internal IVariableDeclaratorOperation? CreateVariableDeclarator(BoundLocal? boundLocal)
         {
             return boundLocal == null
-              ? null
-              : new VariableDeclaratorOperation(
+                ? null
+                : new VariableDeclaratorOperation(
                     boundLocal.LocalSymbol.GetPublicSymbol(),
                     initializer: null,
                     ignoredArguments: ImmutableArray<IOperation>.Empty,

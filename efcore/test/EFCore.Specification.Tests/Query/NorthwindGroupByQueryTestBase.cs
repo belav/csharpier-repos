@@ -2545,8 +2545,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             c =>
                                 c.Orders.Any()
-                                  ? c.Orders.GroupBy(o => o.OrderID).Select(g => g.Key).ToArray()
-                                  : Array.Empty<int>()
+                                    ? c.Orders.GroupBy(o => o.OrderID).Select(g => g.Key).ToArray()
+                                    : Array.Empty<int>()
                         ),
                 assertOrder: true,
                 elementAsserter: (e, a) => Assert.True(e.SequenceEqual(a))

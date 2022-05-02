@@ -162,8 +162,8 @@ namespace Microsoft.CodeAnalysis
                     name: name,
                     folders: folders,
                     sourceCodeKind: fileArg.IsScript
-                      ? SourceCodeKind.Script
-                      : SourceCodeKind.Regular,
+                        ? SourceCodeKind.Script
+                        : SourceCodeKind.Regular,
                     loader: new FileTextLoader(absolutePath, commandLineArguments.Encoding),
                     filePath: absolutePath
                 );

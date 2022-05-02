@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     };
 
                     var fullMessage = string.IsNullOrEmpty(title)
-                      ? message
-                      : $"{title}:{Environment.NewLine}{Environment.NewLine}{message}";
+                        ? message
+                        : $"{title}:{Environment.NewLine}{Environment.NewLine}{message}";
 
                     throw new InvalidOperationException($"{severityText} {fullMessage}");
                 };
@@ -558,8 +558,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             foreach (var document in baseDocuments)
             {
                 mappedSpans[string.Empty] = mappedSpans.ContainsKey(string.Empty)
-                  ? mappedSpans[string.Empty]
-                  : ImmutableArray<TextSpan>.Empty;
+                    ? mappedSpans[string.Empty]
+                    : ImmutableArray<TextSpan>.Empty;
                 foreach (var span in document.SelectedSpans)
                 {
                     var snapshotSpan = span.ToSnapshotSpan(
@@ -583,8 +583,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 foreach (var (key, spans) in document.AnnotatedSpans)
                 {
                     mappedSpans[key] = mappedSpans.ContainsKey(key)
-                      ? mappedSpans[key]
-                      : ImmutableArray<TextSpan>.Empty;
+                        ? mappedSpans[key]
+                        : ImmutableArray<TextSpan>.Empty;
 
                     foreach (var span in spans)
                     {

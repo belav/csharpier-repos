@@ -240,16 +240,16 @@ namespace Microsoft.EntityFrameworkCore
 
         public static MethodInfo GetMaxWithoutSelector(Type type) =>
             MaxWithoutSelectorMethods.TryGetValue(type, out var method)
-              ? method
-              : MaxWithoutSelector;
+                ? method
+                : MaxWithoutSelector;
 
         public static MethodInfo GetMaxWithSelector(Type type) =>
             MaxWithSelectorMethods.TryGetValue(type, out var method) ? method : MaxWithSelector;
 
         public static MethodInfo GetMinWithoutSelector(Type type) =>
             MinWithoutSelectorMethods.TryGetValue(type, out var method)
-              ? method
-              : MinWithoutSelector;
+                ? method
+                : MinWithoutSelector;
 
         public static MethodInfo GetMinWithSelector(Type type) =>
             MinWithSelectorMethods.TryGetValue(type, out var method) ? method : MinWithSelector;
@@ -916,8 +916,8 @@ namespace Microsoft.EntityFrameworkCore
                             .SequenceEqual(
                                 parameterGenerator(
                                     mi.IsGenericMethod
-                                      ? mi.GetGenericArguments()
-                                      : Array.Empty<Type>()
+                                        ? mi.GetGenericArguments()
+                                        : Array.Empty<Type>()
                                 )
                             )
                 );

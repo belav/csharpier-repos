@@ -695,29 +695,29 @@ namespace JIT.HardwareIntrinsics.X86
                             i < 4
                                 ? (ushort)Math.Clamp(left[i], ushort.MinValue, ushort.MaxValue)
                                 : (
-                                      i < 8 && i > 3
-                                          ? (ushort)
-                                                Math.Clamp(
-                                                    right[i % 4],
-                                                    ushort.MinValue,
-                                                    ushort.MaxValue
-                                                )
-                                          : (
-                                                i < 12 && i > 7
-                                                    ? (ushort)
-                                                          Math.Clamp(
-                                                              left[i - 4],
-                                                              ushort.MinValue,
-                                                              ushort.MaxValue
-                                                          )
-                                                    : (ushort)
-                                                          Math.Clamp(
-                                                              right[i - 8],
-                                                              ushort.MinValue,
-                                                              ushort.MaxValue
-                                                          )
+                                    i < 8 && i > 3
+                                        ? (ushort)
+                                            Math.Clamp(
+                                                right[i % 4],
+                                                ushort.MinValue,
+                                                ushort.MaxValue
                                             )
-                                  )
+                                        : (
+                                            i < 12 && i > 7
+                                                ? (ushort)
+                                                    Math.Clamp(
+                                                        left[i - 4],
+                                                        ushort.MinValue,
+                                                        ushort.MaxValue
+                                                    )
+                                                : (ushort)
+                                                    Math.Clamp(
+                                                        right[i - 8],
+                                                        ushort.MinValue,
+                                                        ushort.MaxValue
+                                                    )
+                                        )
+                                )
                         )
                     )
                     {

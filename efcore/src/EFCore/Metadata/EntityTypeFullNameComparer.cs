@@ -22,7 +22,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// </remarks>
     public sealed class EntityTypeFullNameComparer
         : IComparer<IReadOnlyEntityType>,
-          IEqualityComparer<IReadOnlyEntityType>
+            IEqualityComparer<IReadOnlyEntityType>
     {
         private EntityTypeFullNameComparer() { }
 

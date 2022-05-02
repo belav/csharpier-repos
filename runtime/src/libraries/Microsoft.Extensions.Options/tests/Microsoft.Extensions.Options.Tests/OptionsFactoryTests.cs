@@ -246,11 +246,11 @@ namespace Microsoft.Extensions.Options.Tests
 
         public class UberSetup
             : IConfigureNamedOptions<FakeOptions>,
-              IConfigureNamedOptions<FakeOptions2>,
-              IPostConfigureOptions<FakeOptions>,
-              IPostConfigureOptions<FakeOptions2>,
-              IValidateOptions<FakeOptions>,
-              IValidateOptions<FakeOptions2>
+                IConfigureNamedOptions<FakeOptions2>,
+                IPostConfigureOptions<FakeOptions>,
+                IPostConfigureOptions<FakeOptions2>,
+                IValidateOptions<FakeOptions>,
+                IValidateOptions<FakeOptions2>
         {
             public void Configure(string name, FakeOptions options) =>
                 options.Message += "[" + name;

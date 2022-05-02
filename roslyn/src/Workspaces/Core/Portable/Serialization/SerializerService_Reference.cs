@@ -775,7 +775,7 @@ namespace Microsoft.CodeAnalysis.Serialization
         [DebuggerDisplay("{" + nameof(Display) + ",nq}")]
         private sealed class SerializedMetadataReference
             : PortableExecutableReference,
-              ISupportTemporaryStorage
+                ISupportTemporaryStorage
         {
             private readonly Metadata _metadata;
             private readonly ImmutableArray<ITemporaryStreamStorage> _storagesOpt;

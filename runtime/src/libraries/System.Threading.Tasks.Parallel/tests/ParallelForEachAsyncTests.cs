@@ -1381,9 +1381,9 @@ namespace System.Threading.Tasks.Tests
 
         private sealed class ThrowsExceptionFromDispose
             : IAsyncEnumerable<int>,
-              IEnumerable<int>,
-              IAsyncEnumerator<int>,
-              IEnumerator<int>
+                IEnumerable<int>,
+                IAsyncEnumerator<int>,
+                IEnumerator<int>
         {
             public int Current => throw new NotImplementedException();
             object IEnumerator.Current => throw new NotImplementedException();

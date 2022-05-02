@@ -90,8 +90,8 @@ public sealed class RelatedAssemblyAttribute : Attribute
         var assemblyName = assembly.GetName().Name;
         // Assembly.Location may be null for a single-file exe. In this case, attempt to look for related parts in the app's base directory
         var assemblyDirectory = string.IsNullOrEmpty(assembly.Location)
-          ? AppContext.BaseDirectory
-          : Path.GetDirectoryName(assembly.Location);
+            ? AppContext.BaseDirectory
+            : Path.GetDirectoryName(assembly.Location);
 
         if (string.IsNullOrEmpty(assemblyDirectory))
         {

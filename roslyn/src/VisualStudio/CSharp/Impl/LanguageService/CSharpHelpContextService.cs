@@ -405,23 +405,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             switch (token.Kind())
             {
                 case SyntaxKind.PrivateKeyword
-                      when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
+                when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
                 case SyntaxKind.ProtectedKeyword
-                      when ModifiersContains(token, syntaxFacts, SyntaxKind.PrivateKeyword):
+                when ModifiersContains(token, syntaxFacts, SyntaxKind.PrivateKeyword):
                     text = "privateprotected_CSharpKeyword";
                     return true;
 
                 case SyntaxKind.ProtectedKeyword
-                      when ModifiersContains(token, syntaxFacts, SyntaxKind.InternalKeyword):
+                when ModifiersContains(token, syntaxFacts, SyntaxKind.InternalKeyword):
                 case SyntaxKind.InternalKeyword
-                      when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
+                when ModifiersContains(token, syntaxFacts, SyntaxKind.ProtectedKeyword):
                     text = "protectedinternal_CSharpKeyword";
                     return true;
 
                 case SyntaxKind.UsingKeyword when token.Parent is UsingDirectiveSyntax:
                     text = token.GetNextToken().IsKind(SyntaxKind.StaticKeyword)
-                      ? "using-static_CSharpKeyword"
-                      : "using_CSharpKeyword";
+                        ? "using-static_CSharpKeyword"
+                        : "using_CSharpKeyword";
                     return true;
                 case SyntaxKind.StaticKeyword when token.Parent is UsingDirectiveSyntax:
                     text = "using-static_CSharpKeyword";

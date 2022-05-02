@@ -93,14 +93,14 @@ internal class DynamicHPackEncoder
             int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
             return index == -1
-              ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(
+                ? HPackEncoder.EncodeLiteralHeaderFieldNeverIndexingNewName(
                     name,
                     value,
                     valueEncoding,
                     buffer,
                     out bytesWritten
                 )
-              : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(
+                : HPackEncoder.EncodeLiteralHeaderFieldNeverIndexing(
                     index,
                     value,
                     valueEncoding,
@@ -117,14 +117,14 @@ internal class DynamicHPackEncoder
         )
         {
             return staticTableIndex == -1
-              ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
                     name,
                     value,
                     valueEncoding,
                     buffer,
                     out bytesWritten
                 )
-              : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
                     staticTableIndex,
                     value,
                     valueEncoding,
@@ -144,14 +144,14 @@ internal class DynamicHPackEncoder
             int index = ResolveDynamicTableIndex(staticTableIndex, name);
 
             return index == -1
-              ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
                     name,
                     value,
                     valueEncoding,
                     buffer,
                     out bytesWritten
                 )
-              : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
+                : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexing(
                     index,
                     value,
                     valueEncoding,
@@ -207,19 +207,19 @@ internal class DynamicHPackEncoder
             bool success =
                 index == -1
                     ? HPackEncoder.EncodeLiteralHeaderFieldIndexingNewName(
-                          name,
-                          value,
-                          valueEncoding,
-                          buffer,
-                          out bytesWritten
-                      )
+                        name,
+                        value,
+                        valueEncoding,
+                        buffer,
+                        out bytesWritten
+                    )
                     : HPackEncoder.EncodeLiteralHeaderFieldIndexing(
-                          index,
-                          value,
-                          valueEncoding,
-                          buffer,
-                          out bytesWritten
-                      );
+                        index,
+                        value,
+                        valueEncoding,
+                        buffer,
+                        out bytesWritten
+                    );
 
             if (success)
             {

@@ -44,8 +44,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
             }
 
             return ReferenceEquals(this, obj)
-              ? true
-              : obj.GetType() == GetType() && Equals((Order)obj);
+                ? true
+                : obj.GetType() == GetType() && Equals((Order)obj);
         }
 
         public override int GetHashCode() => OrderID.GetHashCode();

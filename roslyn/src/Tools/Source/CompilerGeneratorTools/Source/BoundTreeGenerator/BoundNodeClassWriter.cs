@@ -456,8 +456,8 @@ namespace BoundTreeGenerator
                             Write(
                                 "{0}, ",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "null"
+                                    : ToCamelCase(baseField.Name)
                             );
                         Or(
                             (new[] { "hasErrors" }).Concat(
@@ -475,8 +475,8 @@ namespace BoundTreeGenerator
                             Write(
                                 "{0}, ",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "null"
+                                    : ToCamelCase(baseField.Name)
                             );
                         Write("hasErrors");
                     }
@@ -495,8 +495,8 @@ namespace BoundTreeGenerator
                                 "this._{0} = {1};",
                                 field.Name,
                                 FieldNullHandling(node, field.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(field.Name)
+                                    ? "null"
+                                    : ToCamelCase(field.Name)
                             );
                         }
                         else
@@ -505,8 +505,8 @@ namespace BoundTreeGenerator
                                 "this.{0} = {1};",
                                 field.Name,
                                 FieldNullHandling(node, field.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(field.Name)
+                                    ? "null"
+                                    : ToCamelCase(field.Name)
                             );
                         }
                     }
@@ -545,8 +545,8 @@ namespace BoundTreeGenerator
                             Write(
                                 "{0}, ",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "Nothing"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "Nothing"
+                                    : ToCamelCase(baseField.Name)
                             );
                         Or(
                             (new[] { "hasErrors" }).Concat(
@@ -564,8 +564,8 @@ namespace BoundTreeGenerator
                             Write(
                                 "{0}, ",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "Nothing"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "Nothing"
+                                    : ToCamelCase(baseField.Name)
                             );
                         Write("hasErrors");
                     }
@@ -579,8 +579,8 @@ namespace BoundTreeGenerator
                             "Me._{0} = {1}",
                             field.Name,
                             FieldNullHandling(node, field.Name) == NullHandling.Always
-                              ? "Nothing"
-                              : ToCamelCase(field.Name)
+                                ? "Nothing"
+                                : ToCamelCase(field.Name)
                         );
 
                     bool hasValidate = HasValidate(node);
@@ -641,8 +641,8 @@ namespace BoundTreeGenerator
                             Write(
                                 ", {0}",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "null"
+                                    : ToCamelCase(baseField.Name)
                             );
                     }
                     else
@@ -653,8 +653,8 @@ namespace BoundTreeGenerator
                             Write(
                                 ", {0}",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "null"
+                                    : ToCamelCase(baseField.Name)
                             );
                     }
                     Write(")");
@@ -672,8 +672,8 @@ namespace BoundTreeGenerator
                                 "this._{0} = {1};",
                                 field.Name,
                                 FieldNullHandling(node, field.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(field.Name)
+                                    ? "null"
+                                    : ToCamelCase(field.Name)
                             );
                         }
                         else
@@ -682,8 +682,8 @@ namespace BoundTreeGenerator
                                 "this.{0} = {1};",
                                 field.Name,
                                 FieldNullHandling(node, field.Name) == NullHandling.Always
-                                  ? "null"
-                                  : ToCamelCase(field.Name)
+                                    ? "null"
+                                    : ToCamelCase(field.Name)
                             );
                         }
                     }
@@ -716,8 +716,8 @@ namespace BoundTreeGenerator
                             Write(
                                 ", {0}",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "Nothing"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "Nothing"
+                                    : ToCamelCase(baseField.Name)
                             );
                     }
                     else
@@ -728,8 +728,8 @@ namespace BoundTreeGenerator
                             Write(
                                 ", {0}",
                                 FieldNullHandling(node, baseField.Name) == NullHandling.Always
-                                  ? "Nothing"
-                                  : ToCamelCase(baseField.Name)
+                                    ? "Nothing"
+                                    : ToCamelCase(baseField.Name)
                             );
                     }
                     Write(")");
@@ -742,8 +742,8 @@ namespace BoundTreeGenerator
                             "Me._{0} = {1}",
                             field.Name,
                             FieldNullHandling(node, field.Name) == NullHandling.Always
-                              ? "Nothing"
-                              : ToCamelCase(field.Name)
+                                ? "Nothing"
+                                : ToCamelCase(field.Name)
                         );
 
                     if (HasValidate(node))
@@ -1032,10 +1032,10 @@ namespace BoundTreeGenerator
                         "Public {0}ReadOnly Property {2} As {1}",
                         (
                             IsNew(field)
-                              ? "Shadows "
-                              : IsPropertyOverrides(field)
-                                  ? "Overrides "
-                                  : ""
+                                ? "Shadows "
+                                : IsPropertyOverrides(field)
+                                    ? "Overrides "
+                                    : ""
                         ),
                         field.Type,
                         field.Name
@@ -1191,12 +1191,12 @@ namespace BoundTreeGenerator
                             AllSpecifiableFields(node),
                             field =>
                                 IsValueType(field.Type)
-                                  ? string.Format(
+                                    ? string.Format(
                                         "{0} <> Me.{1}",
                                         ToCamelCase(field.Name),
                                         field.Name
                                     )
-                                  : string.Format(
+                                    : string.Format(
                                         "{0} IsNot Me.{1}",
                                         ToCamelCase(field.Name),
                                         field.Name
@@ -1229,12 +1229,12 @@ namespace BoundTreeGenerator
             string wasUpdatedCheck(Field field)
             {
                 var format = TypeIsTypeSymbol(field)
-                  ? "!TypeSymbol.Equals({0}, this.{1}, TypeCompareKind.ConsiderEverything)"
-                  : TypeIsSymbol(field)
-                      ? "!Symbols.SymbolEqualityComparer.ConsiderEverything.Equals({0}, this.{1})"
-                      : IsValueType(field.Type) && field.Type[^1] == '?'
-                          ? "{0}.Equals(this.{1})"
-                          : "{0} != this.{1}";
+                    ? "!TypeSymbol.Equals({0}, this.{1}, TypeCompareKind.ConsiderEverything)"
+                    : TypeIsSymbol(field)
+                        ? "!Symbols.SymbolEqualityComparer.ConsiderEverything.Equals({0}, this.{1})"
+                        : IsValueType(field.Type) && field.Type[^1] == '?'
+                            ? "{0}.Equals(this.{1})"
+                            : "{0} != this.{1}";
 
                 return string.Format(format, ToCamelCase(field.Name), field.Name);
             }

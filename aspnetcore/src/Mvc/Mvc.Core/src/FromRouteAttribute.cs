@@ -18,9 +18,9 @@ namespace Microsoft.AspNetCore.Mvc;
 )]
 public class FromRouteAttribute
     : Attribute,
-      IBindingSourceMetadata,
-      IModelNameProvider,
-      IFromRouteMetadata
+        IBindingSourceMetadata,
+        IModelNameProvider,
+        IFromRouteMetadata
 {
     /// <inheritdoc />
     public BindingSource BindingSource => BindingSource.Path;

@@ -34,8 +34,8 @@ namespace System.Xml.Linq
                 node,
                 nameTable,
                 (node.GetSaveOptionsFromAnnotations() & SaveOptions.OmitDuplicateNamespaces) != 0
-                  ? ReaderOptions.OmitDuplicateNamespaces
-                  : ReaderOptions.None
+                    ? ReaderOptions.OmitDuplicateNamespaces
+                    : ReaderOptions.None
             ) { }
 
         public override int AttributeCount

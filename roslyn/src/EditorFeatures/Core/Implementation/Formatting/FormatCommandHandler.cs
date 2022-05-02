@@ -35,10 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Formatting
     [Order(Before = PredefinedCompletionNames.CompletionCommandHandler)]
     internal partial class FormatCommandHandler
         : ICommandHandler<FormatDocumentCommandArgs>,
-          ICommandHandler<FormatSelectionCommandArgs>,
-          IChainedCommandHandler<PasteCommandArgs>,
-          IChainedCommandHandler<TypeCharCommandArgs>,
-          IChainedCommandHandler<ReturnKeyCommandArgs>
+            ICommandHandler<FormatSelectionCommandArgs>,
+            IChainedCommandHandler<PasteCommandArgs>,
+            IChainedCommandHandler<TypeCharCommandArgs>,
+            IChainedCommandHandler<ReturnKeyCommandArgs>
     {
         private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
         private readonly IEditorOperationsFactoryService _editorOperationsFactoryService;

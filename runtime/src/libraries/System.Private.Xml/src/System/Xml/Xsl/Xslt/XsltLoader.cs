@@ -286,12 +286,12 @@ namespace System.Xml.Xsl.Xslt
                 ISourceLineInfo lineInfo = (
                     ex != null && ex.SourceUri != null
                         ? new SourceLineInfo(
-                              ex.SourceUri,
-                              ex.LineNumber,
-                              ex.LinePosition,
-                              ex.LineNumber,
-                              ex.LinePosition
-                          )
+                            ex.SourceUri,
+                            ex.LineNumber,
+                            ex.LinePosition,
+                            ex.LineNumber,
+                            ex.LinePosition
+                        )
                         : _input.BuildReaderLineInfo()
                 );
                 throw new XslLoadException(e, lineInfo);
@@ -1679,10 +1679,10 @@ namespace System.Xml.Xsl.Xslt
                             {
                                 InstructionFlags instrFlag = (
                                     Ref.Equal(name, _atoms.Param)
-                                      ? InstructionFlags.AllowParam
-                                      : Ref.Equal(name, _atoms.Sort)
-                                          ? InstructionFlags.AllowSort
-                                          :
+                                        ? InstructionFlags.AllowParam
+                                        : Ref.Equal(name, _atoms.Sort)
+                                            ? InstructionFlags.AllowSort
+                                            :
                                             /*else */InstructionFlags.None
                                 );
                                 if (instrFlag != InstructionFlags.None)
@@ -1690,12 +1690,12 @@ namespace System.Xml.Xsl.Xslt
                                     string? error = (
                                         (flags & instrFlag) == 0
                                             ? /*[XT_013]*/
-                                              SR.Xslt_UnexpectedElement
+                                            SR.Xslt_UnexpectedElement
                                             : !atTop
                                                 ? /*[XT_014]*/
-                                                  SR.Xslt_NotAtTop
+                                                SR.Xslt_NotAtTop
                                                 :
-                                                  /*else*/null
+                                                /*else*/null
                                     );
                                     if (error != null)
                                     {
@@ -1711,131 +1711,134 @@ namespace System.Xml.Xsl.Xslt
                                 }
                                 result = (
                                     Ref.Equal(name, _atoms.ApplyImports)
-                                      ? XslApplyImports()
-                                      : Ref.Equal(name, _atoms.ApplyTemplates)
-                                          ? XslApplyTemplates()
-                                          : Ref.Equal(name, _atoms.CallTemplate)
-                                              ? XslCallTemplate()
-                                              : Ref.Equal(name, _atoms.Copy)
-                                                  ? XslCopy()
-                                                  : Ref.Equal(name, _atoms.CopyOf)
-                                                      ? XslCopyOf()
-                                                      : Ref.Equal(name, _atoms.Fallback)
-                                                          ? XslFallback()
-                                                          : Ref.Equal(name, _atoms.If)
-                                                              ? XslIf()
-                                                              : Ref.Equal(name, _atoms.Choose)
-                                                                  ? XslChoose()
-                                                                  : Ref.Equal(name, _atoms.ForEach)
-                                                                      ? XslForEach()
-                                                                      : Ref.Equal(
+                                        ? XslApplyImports()
+                                        : Ref.Equal(name, _atoms.ApplyTemplates)
+                                            ? XslApplyTemplates()
+                                            : Ref.Equal(name, _atoms.CallTemplate)
+                                                ? XslCallTemplate()
+                                                : Ref.Equal(name, _atoms.Copy)
+                                                    ? XslCopy()
+                                                    : Ref.Equal(name, _atoms.CopyOf)
+                                                        ? XslCopyOf()
+                                                        : Ref.Equal(name, _atoms.Fallback)
+                                                            ? XslFallback()
+                                                            : Ref.Equal(name, _atoms.If)
+                                                                ? XslIf()
+                                                                : Ref.Equal(name, _atoms.Choose)
+                                                                    ? XslChoose()
+                                                                    : Ref.Equal(
+                                                                        name,
+                                                                        _atoms.ForEach
+                                                                    )
+                                                                        ? XslForEach()
+                                                                        : Ref.Equal(
                                                                             name,
                                                                             _atoms.Message
                                                                         )
-                                                                          ? XslMessage()
-                                                                          : Ref.Equal(
+                                                                            ? XslMessage()
+                                                                            : Ref.Equal(
                                                                                 name,
                                                                                 _atoms.Number
                                                                             )
-                                                                              ? XslNumber()
-                                                                              : Ref.Equal(
+                                                                                ? XslNumber()
+                                                                                : Ref.Equal(
                                                                                     name,
                                                                                     _atoms.ValueOf
                                                                                 )
-                                                                                  ? XslValueOf()
-                                                                                  : Ref.Equal(
+                                                                                    ? XslValueOf()
+                                                                                    : Ref.Equal(
                                                                                         name,
                                                                                         _atoms.Comment
                                                                                     )
-                                                                                      ? XslComment()
-                                                                                      : Ref.Equal(
+                                                                                        ? XslComment()
+                                                                                        : Ref.Equal(
                                                                                             name,
                                                                                             _atoms.ProcessingInstruction
                                                                                         )
-                                                                                          ? XslProcessingInstruction()
-                                                                                          : Ref.Equal(
+                                                                                            ? XslProcessingInstruction()
+                                                                                            : Ref.Equal(
                                                                                                 name,
                                                                                                 _atoms.Text
                                                                                             )
-                                                                                              ? XslText()
-                                                                                              : Ref.Equal(
+                                                                                                ? XslText()
+                                                                                                : Ref.Equal(
                                                                                                     name,
                                                                                                     _atoms.Element
                                                                                                 )
-                                                                                                  ? XslElement()
-                                                                                                  : Ref.Equal(
+                                                                                                    ? XslElement()
+                                                                                                    : Ref.Equal(
                                                                                                         name,
                                                                                                         _atoms.Attribute
                                                                                                     )
-                                                                                                      ? XslAttribute()
-                                                                                                      : Ref.Equal(
+                                                                                                        ? XslAttribute()
+                                                                                                        : Ref.Equal(
                                                                                                             name,
                                                                                                             _atoms.Variable
                                                                                                         )
-                                                                                                          ? XslVarPar()
-                                                                                                          : Ref.Equal(
+                                                                                                            ? XslVarPar()
+                                                                                                            : Ref.Equal(
                                                                                                                 name,
                                                                                                                 _atoms.Param
                                                                                                             )
-                                                                                                              ? XslVarPar()
-                                                                                                              : Ref.Equal(
+                                                                                                                ? XslVarPar()
+                                                                                                                : Ref.Equal(
                                                                                                                     name,
                                                                                                                     _atoms.Sort
                                                                                                                 )
-                                                                                                                  ? XslSort(
+                                                                                                                    ? XslSort(
                                                                                                                         sortNumber++
                                                                                                                     )
-                                                                                                                  :
+                                                                                                                    :
 #if XSLT2
                                                                                                                     V2
                                                                                                                     && Ref.Equal(
                                                                                                                         name,
                                                                                                                         atoms.AnalyzeString
                                                                                                                     )
-                                                                                                                      ? XslAnalyzeString()
-                                                                                                                      : V2
+                                                                                                                        ? XslAnalyzeString()
+                                                                                                                        : V2
                                                                                                                         && Ref.Equal(
                                                                                                                             name,
                                                                                                                             "namespace"
                                                                                                                         )
-                                                                                                                          ? XslNamespace()
-                                                                                                                          : V2
+                                                                                                                            ? XslNamespace()
+                                                                                                                            : V2
                                                                                                                             && Ref.Equal(
                                                                                                                                 name,
                                                                                                                                 atoms.PerformSort
                                                                                                                             )
-                                                                                                                              ? XslPerformSort()
-                                                                                                                              : V2
+                                                                                                                                ? XslPerformSort()
+                                                                                                                                : V2
                                                                                                                                 && Ref.Equal(
                                                                                                                                     name,
                                                                                                                                     atoms.Document
                                                                                                                                 )
-                                                                                                                                  ? XslDocument()
-                                                                                                                                  : V2
+                                                                                                                                    ? XslDocument()
+                                                                                                                                    : V2
                                                                                                                                     && Ref.Equal(
                                                                                                                                         name,
                                                                                                                                         atoms.ForEachGroup
                                                                                                                                     )
-                                                                                                                                      ? XslForEachGroup()
-                                                                                                                                      : V2
+                                                                                                                                        ? XslForEachGroup()
+                                                                                                                                        : V2
                                                                                                                                         && Ref.Equal(
                                                                                                                                             name,
                                                                                                                                             atoms.NextMatch
                                                                                                                                         )
-                                                                                                                                          ? XslNextMatch()
-                                                                                                                                          : V2
+                                                                                                                                            ? XslNextMatch()
+                                                                                                                                            : V2
                                                                                                                                             && Ref.Equal(
                                                                                                                                                 name,
                                                                                                                                                 atoms.Sequence
                                                                                                                                             )
-                                                                                                                                              ? XslSequence()
-                                                                                                                                              : V2
+                                                                                                                                                ? XslSequence()
+                                                                                                                                                : V2
                                                                                                                                                 && Ref.Equal(
                                                                                                                                                     name,
                                                                                                                                                     atoms.ResultDocument
                                                                                                                                                 )
-                                                                                                                                                  ? XslResultDocument()
-                                                                                                                                                  :
+                                                                                                                                                    ? XslResultDocument()
+                                                                                                                                                    :
 #endif
                                                                                                                                                     /*default:*/LoadUnknownXsltInstruction(
                                                                                                                                                         parentName
@@ -2466,20 +2469,20 @@ namespace System.Xml.Xsl.Xslt
             string localName = _input.LocalName;
             XslNodeType nodeType = (
                 Ref.Equal(localName, _atoms.Variable)
-                  ? XslNodeType.Variable
-                  : Ref.Equal(localName, _atoms.Param)
-                      ? XslNodeType.Param
-                      : Ref.Equal(localName, _atoms.WithParam)
-                          ? XslNodeType.WithParam
-                          : XslNodeType.Unknown
+                    ? XslNodeType.Variable
+                    : Ref.Equal(localName, _atoms.Param)
+                        ? XslNodeType.Param
+                        : Ref.Equal(localName, _atoms.WithParam)
+                            ? XslNodeType.WithParam
+                            : XslNodeType.Unknown
             );
             Debug.Assert(nodeType != XslNodeType.Unknown);
             ContextInfo ctxInfo = _input.GetAttributes(
                 nodeType == XslNodeType.Variable
-                  ? _variableAttributes
-                  : nodeType == XslNodeType.Param
-                      ? _paramAttributes
-                      :
+                    ? _variableAttributes
+                    : nodeType == XslNodeType.Param
+                        ? _paramAttributes
+                        :
                         /*default:*/_withParamAttributes
             );
 

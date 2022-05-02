@@ -541,8 +541,8 @@ namespace System.Web.Mvc
             Predicate<string> newPropertyFilter =
                 (bindAttr != null)
                     ? propertyName =>
-                          bindAttr.IsPropertyAllowed(propertyName)
-                          && bindingContext.PropertyFilter(propertyName)
+                        bindAttr.IsPropertyAllowed(propertyName)
+                        && bindingContext.PropertyFilter(propertyName)
                     : bindingContext.PropertyFilter;
 
             ModelBindingContext newBindingContext = new ModelBindingContext()

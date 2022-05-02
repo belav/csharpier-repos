@@ -2652,11 +2652,11 @@ namespace System.Tests
                     : values.Length == 3
                         ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
                         : string.Concat(
-                              values[0].AsSpan(),
-                              values[1].AsSpan(),
-                              values[2].AsSpan(),
-                              values[3].AsSpan()
-                          );
+                            values[0].AsSpan(),
+                            values[1].AsSpan(),
+                            values[2].AsSpan(),
+                            values[3].AsSpan()
+                        );
 
             if (result.Length == 0)
             {

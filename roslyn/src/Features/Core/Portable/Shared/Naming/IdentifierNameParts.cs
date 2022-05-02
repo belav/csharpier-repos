@@ -54,14 +54,14 @@ namespace Microsoft.CodeAnalysis.Shared.Naming
                     // remove specified prefix
                     var prefix = rule.NamingStyle.Prefix;
                     newBaseName = newBaseName.StartsWith(prefix)
-                      ? newBaseName[prefix.Length..]
-                      : newBaseName;
+                        ? newBaseName[prefix.Length..]
+                        : newBaseName;
 
                     // remove specified suffix
                     var suffix = rule.NamingStyle.Suffix;
                     newBaseName = newBaseName.EndsWith(suffix)
-                      ? newBaseName.Substring(0, newBaseName.Length - suffix.Length)
-                      : newBaseName;
+                        ? newBaseName.Substring(0, newBaseName.Length - suffix.Length)
+                        : newBaseName;
 
                     break;
                 }

@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 /// </summary>
 public class WebAssemblyHostConfiguration
     : IConfiguration,
-      IConfigurationRoot,
-      IConfigurationBuilder
+        IConfigurationRoot,
+        IConfigurationBuilder
 {
     private readonly List<IConfigurationProvider> _providers = new List<IConfigurationProvider>();
     private readonly List<IConfigurationSource> _sources = new List<IConfigurationSource>();

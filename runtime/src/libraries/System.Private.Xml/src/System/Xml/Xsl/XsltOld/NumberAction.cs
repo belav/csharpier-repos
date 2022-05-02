@@ -491,18 +491,18 @@ namespace System.Xml.Xsl.XsltOld
                     frame.StoredOutput = Format(
                         list,
                         _formatAvt == null
-                          ? _formatTokens
-                          : ParseFormat(_formatAvt.Evaluate(processor, frame)),
+                            ? _formatTokens
+                            : ParseFormat(_formatAvt.Evaluate(processor, frame)),
                         _langAvt == null ? _lang : _langAvt.Evaluate(processor, frame),
                         _letterAvt == null
-                          ? _letter
-                          : ParseLetter(_letterAvt.Evaluate(processor, frame)),
+                            ? _letter
+                            : ParseLetter(_letterAvt.Evaluate(processor, frame)),
                         _groupingSepAvt == null
-                          ? _groupingSep
-                          : _groupingSepAvt.Evaluate(processor, frame),
+                            ? _groupingSep
+                            : _groupingSepAvt.Evaluate(processor, frame),
                         _groupingSizeAvt == null
-                          ? _groupingSize
-                          : _groupingSizeAvt.Evaluate(processor, frame)
+                            ? _groupingSize
+                            : _groupingSizeAvt.Evaluate(processor, frame)
                     );
                     goto case OutputNumber;
                 case OutputNumber:

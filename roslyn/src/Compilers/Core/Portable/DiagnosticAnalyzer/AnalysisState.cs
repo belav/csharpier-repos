@@ -400,13 +400,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return compilationEvent switch
             {
                 CompilationStartedEvent
-                  => actionCounts.CompilationActionsCount > 0
-                      || actionCounts.SyntaxTreeActionsCount > 0
-                      || actionCounts.AdditionalFileActionsCount > 0,
+                    => actionCounts.CompilationActionsCount > 0
+                        || actionCounts.SyntaxTreeActionsCount > 0
+                        || actionCounts.AdditionalFileActionsCount > 0,
                 CompilationCompletedEvent => actionCounts.CompilationEndActionsCount > 0,
                 SymbolDeclaredCompilationEvent
-                  => actionCounts.SymbolActionsCount > 0
-                      || actionCounts.HasAnyExecutableCodeActions,
+                    => actionCounts.SymbolActionsCount > 0
+                        || actionCounts.HasAnyExecutableCodeActions,
                 _ => actionCounts.SemanticModelActionsCount > 0
             };
         }

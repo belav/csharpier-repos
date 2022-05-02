@@ -288,8 +288,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         materializeCollectionNavigationExpression.Navigation
                             is INavigation embeddableNavigation
                         && embeddableNavigation.IsEmbedded()
-                      ? base.Visit(materializeCollectionNavigationExpression.Subquery)
-                      : base.VisitExtension(materializeCollectionNavigationExpression);
+                        ? base.Visit(materializeCollectionNavigationExpression.Subquery)
+                        : base.VisitExtension(materializeCollectionNavigationExpression);
 
                 case IncludeExpression includeExpression:
                     if (!_clientEval)
@@ -453,8 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             {
                 Expression updatedMemberExpression = memberExpression.Update(
                     expression != null
-                      ? MatchTypes(expression, memberExpression.Expression.Type)
-                      : expression
+                        ? MatchTypes(expression, memberExpression.Expression.Type)
+                        : expression
                 );
 
                 if (expression?.Type.IsNullableType() == true)
@@ -708,7 +708,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     switch (method.Name)
                     {
                         case nameof(Queryable.AsQueryable)
-                              when genericMethod == QueryableMethods.AsQueryable:
+                        when genericMethod == QueryableMethods.AsQueryable:
                             // Unwrap AsQueryable
                             return visitedSource;
 
@@ -848,8 +848,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                 )
                 && unaryExpression.Type == operand.Type
-              ? operand
-              : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
+                ? operand
+                : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
         }
 
         // TODO: Debugging

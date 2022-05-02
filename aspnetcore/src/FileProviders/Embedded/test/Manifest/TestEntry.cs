@@ -23,15 +23,15 @@ class TestEntry
     public XElement ToXElement() =>
         IsFile
             ? new XElement(
-                  "File",
-                  new XAttribute("Name", Name),
-                  new XElement("ResourcePath", ResourcePath)
-              )
+                "File",
+                new XAttribute("Name", Name),
+                new XElement("ResourcePath", ResourcePath)
+            )
             : new XElement(
-                  "Directory",
-                  new XAttribute("Name", Name),
-                  Children.Select(c => c.ToXElement())
-              );
+                "Directory",
+                new XAttribute("Name", Name),
+                Children.Select(c => c.ToXElement())
+            );
 
     public IEnumerable<TestEntry> GetFiles()
     {

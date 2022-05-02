@@ -87,10 +87,8 @@ namespace Microsoft.CodeAnalysis.Completion
             value.MatchedSpans.IsDefaultOrEmpty
                 ? value
                 : value.WithMatchedSpans(
-                      value.MatchedSpans.SelectAsArray(
-                          s => new TextSpan(s.Start + offset, s.Length)
-                      )
-                  );
+                    value.MatchedSpans.SelectAsArray(s => new TextSpan(s.Start + offset, s.Length))
+                );
 
         private PatternMatch? GetMatchWorker(
             string completionItemText,
@@ -132,8 +130,8 @@ namespace Microsoft.CodeAnalysis.Completion
             }
 
             return match.Value.CompareTo(enUSCultureMatch.Value) < 0
-              ? match.Value
-              : enUSCultureMatch.Value;
+                ? match.Value
+                : enUSCultureMatch.Value;
         }
 
         private PatternMatcher GetPatternMatcher(
@@ -467,11 +465,11 @@ namespace Microsoft.CodeAnalysis.Completion
             var patternMatch =
                 filterText.Length > 0
                     ? completionHelper.GetMatch(
-                          item.FilterText,
-                          filterText,
-                          includeMatchSpans,
-                          CultureInfo.CurrentCulture
-                      )
+                        item.FilterText,
+                        filterText,
+                        includeMatchSpans,
+                        CultureInfo.CurrentCulture
+                    )
                     : null;
 
             var matchedFilterText = MatchesFilterText(

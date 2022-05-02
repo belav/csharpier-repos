@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class SourceTypeParameterSymbolBase
         : TypeParameterSymbol,
-          IAttributeTargetSymbol
+            IAttributeTargetSymbol
     {
         private readonly ImmutableArray<SyntaxReference> _syntaxRefs;
         private readonly ImmutableArray<Location> _locations;
@@ -83,8 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var bounds = this.GetBounds(inProgress);
             return (bounds != null)
-              ? bounds.ConstraintTypes
-              : ImmutableArray<TypeWithAnnotations>.Empty;
+                ? bounds.ConstraintTypes
+                : ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetInterfaces(
@@ -839,8 +839,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var constraintKinds = _owner.GetTypeParameterConstraintKinds();
             return constraintKinds.IsEmpty
-              ? TypeParameterConstraintKind.None
-              : constraintKinds[Ordinal];
+                ? TypeParameterConstraintKind.None
+                : constraintKinds[Ordinal];
         }
     }
 
@@ -874,8 +874,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var overriddenMethod = this.OverriddenMethod;
             return ((object)overriddenMethod != null)
-              ? overriddenMethod.TypeParameters[ordinal]
-              : null;
+                ? overriddenMethod.TypeParameters[ordinal]
+                : null;
         }
 
         public TypeMap TypeMap
@@ -1073,8 +1073,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 TypeParameterSymbol typeParameter = this.OverriddenTypeParameter;
                 return ((object)typeParameter != null)
-                  ? typeParameter.ReferenceTypeConstraintIsNullable
-                  : false;
+                    ? typeParameter.ReferenceTypeConstraintIsNullable
+                    : false;
             }
         }
 

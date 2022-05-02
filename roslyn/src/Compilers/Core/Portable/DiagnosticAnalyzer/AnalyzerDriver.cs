@@ -1668,8 +1668,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     declarationInfoBuilder.Free();
                     return generatedSymbolsBuilder != null
-                      ? generatedSymbolsBuilder.ToImmutable()
-                      : ImmutableHashSet<ISymbol>.Empty;
+                        ? generatedSymbolsBuilder.ToImmutable()
+                        : ImmutableHashSet<ISymbol>.Empty;
                 }
             }
         }
@@ -1763,8 +1763,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             return suppressedAnalyzersBuilder != null
-              ? suppressedAnalyzersBuilder.ToImmutable()
-              : ImmutableHashSet<DiagnosticAnalyzer>.Empty;
+                ? suppressedAnalyzersBuilder.ToImmutable()
+                : ImmutableHashSet<DiagnosticAnalyzer>.Empty;
         }
 
         public bool IsInitialized => _lazyInitializeTask != null;
@@ -2133,7 +2133,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     break;
 
                 case CompilationUnitCompletedEvent compilationUnitCompletedEvent
-                      when !compilationUnitCompletedEvent.FilterSpan.HasValue:
+                when !compilationUnitCompletedEvent.FilterSpan.HasValue:
                     // Clear the semantic model cache only if we have completed analysis for the entire compilation unit,
                     // i.e. the event has a null filter span. Compilation unit completed event with a non-null filter span
                     // indicates a synthesized event for partial analysis of the tree and we avoid clearing the semantic model cache for that case.
@@ -2221,38 +2221,38 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return compilationEvent switch
             {
                 SymbolDeclaredCompilationEvent symbolEvent
-                  => await TryProcessSymbolDeclaredAsync(
-                          symbolEvent,
-                          analysisScope,
-                          analysisState,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await TryProcessSymbolDeclaredAsync(
+                            symbolEvent,
+                            analysisScope,
+                            analysisState,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
 
                 CompilationUnitCompletedEvent completedEvent
-                  => TryProcessCompilationUnitCompleted(
-                      completedEvent,
-                      analysisScope,
-                      analysisState,
-                      cancellationToken
-                  )
-                    ? EventProcessedState.Processed
-                    : EventProcessedState.NotProcessed,
+                    => TryProcessCompilationUnitCompleted(
+                        completedEvent,
+                        analysisScope,
+                        analysisState,
+                        cancellationToken
+                    )
+                        ? EventProcessedState.Processed
+                        : EventProcessedState.NotProcessed,
 
                 CompilationCompletedEvent endEvent
-                  => TryProcessCompilationCompleted(endEvent, analysisScope, analysisState)
-                    ? EventProcessedState.Processed
-                    : EventProcessedState.NotProcessed,
+                    => TryProcessCompilationCompleted(endEvent, analysisScope, analysisState)
+                        ? EventProcessedState.Processed
+                        : EventProcessedState.NotProcessed,
 
                 CompilationStartedEvent startedEvent
-                  => TryProcessCompilationStarted(startedEvent, analysisScope, analysisState)
-                    ? EventProcessedState.Processed
-                    : EventProcessedState.NotProcessed,
+                    => TryProcessCompilationStarted(startedEvent, analysisScope, analysisState)
+                        ? EventProcessedState.Processed
+                        : EventProcessedState.NotProcessed,
 
                 _
-                  => throw new InvalidOperationException(
-                      "Unexpected compilation event of type " + compilationEvent.GetType().Name
-                  )
+                    => throw new InvalidOperationException(
+                        "Unexpected compilation event of type " + compilationEvent.GetType().Name
+                    )
             };
         }
 
@@ -2286,12 +2286,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var perSymbolActions = hasPerSymbolActions
                 ? await GetPerSymbolAnalyzerActionsAsync(
-                          symbol,
-                          analysisScope,
-                          analysisState,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
+                        symbol,
+                        analysisScope,
+                        analysisState,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
                 : EmptyGroupedActions;
 
             if (
@@ -3188,8 +3188,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             return IsGeneratedCodeSymbolMap.TryGetValue(symbol, out bool isGeneratedCodeSymbol)
-              ? isGeneratedCodeSymbol
-              : IsGeneratedCodeSymbolMap.GetOrAdd(symbol, computeIsGeneratedCodeSymbol());
+                ? isGeneratedCodeSymbol
+                : IsGeneratedCodeSymbolMap.GetOrAdd(symbol, computeIsGeneratedCodeSymbol());
 
             bool computeIsGeneratedCodeSymbol()
             {

@@ -184,11 +184,11 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     {
                         CipherMode.ECB => alg.EncryptEcb(textHex.HexToByteArray(), paddingMode),
                         CipherMode.CBC
-                          => alg.EncryptCbc(
-                              textHex.HexToByteArray(),
-                              iv.HexToByteArray(),
-                              paddingMode
-                          ),
+                            => alg.EncryptCbc(
+                                textHex.HexToByteArray(),
+                                iv.HexToByteArray(),
+                                paddingMode
+                            ),
                         _ => throw new NotImplementedException(),
                     };
 

@@ -64,8 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         public Model WithSelectedItem(SignatureHelpItem selectedItem, bool userSelected)
         {
             return selectedItem == this.SelectedItem && userSelected == this.UserSelected
-              ? this
-              : new Model(
+                ? this
+                : new Model(
                     _disconnectedBufferGraph,
                     TextSpan,
                     Provider,
@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         public Model WithSelectedParameter(int? selectedParameter)
         {
             return selectedParameter == this.SelectedParameter
-              ? this
-              : new Model(
+                ? this
+                : new Model(
                     _disconnectedBufferGraph,
                     TextSpan,
                     Provider,

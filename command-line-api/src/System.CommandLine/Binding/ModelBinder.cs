@@ -159,8 +159,8 @@ namespace System.CommandLine.Binding
                 bindingContext.ParseResult.CommandResult.LocalizationResources,
                 out var boundValue
             )
-              ? (true, boundValue?.Value, true)
-              : (false, (object?)null, false);
+                ? (true, boundValue?.Value, true)
+                : (false, (object?)null, false);
         }
 
         private (bool success, object? newInstance, bool anyNonDefaults) InstanceFromSpecificConstructor(

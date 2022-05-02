@@ -784,8 +784,8 @@ namespace Microsoft.CodeAnalysis
         {
             int index;
             return ReferencedAssembliesMap.TryGetValue(reference, out index)
-              ? ReferencedAssemblies[index]
-              : null;
+                ? ReferencedAssemblies[index]
+                : null;
         }
 
         internal int GetReferencedModuleIndex(MetadataReference reference)

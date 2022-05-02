@@ -21,7 +21,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class TempDataInCookiesTest
     : TempDataTestBase,
-      IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+        IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
     private IServiceCollection _serviceCollection;
 

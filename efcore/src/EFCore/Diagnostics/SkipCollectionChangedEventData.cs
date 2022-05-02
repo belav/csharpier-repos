@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
     /// </remarks>
     public class SkipCollectionChangedEventData
         : SkipNavigationEventData,
-          ICollectionChangedEventData
+            ICollectionChangedEventData
     {
         /// <summary>
         ///     Constructs the event payload.

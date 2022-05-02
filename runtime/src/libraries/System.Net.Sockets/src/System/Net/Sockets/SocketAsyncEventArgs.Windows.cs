@@ -180,8 +180,8 @@ namespace System.Net.Sockets
                                 NetEventSource.Info(
                                     thisRef,
                                     canceled
-                                      ? "Socket operation canceled."
-                                      : $"CancelIoEx failed with error '{Marshal.GetLastWin32Error()}'."
+                                        ? "Socket operation canceled."
+                                        : $"CancelIoEx failed with error '{Marshal.GetLastWin32Error()}'."
                                 );
                             }
                         }
@@ -540,8 +540,8 @@ namespace System.Net.Sockets
             PinSocketAddressBuffer();
 
             return _bufferList == null
-              ? DoOperationReceiveFromSingleBuffer(handle, cancellationToken)
-              : DoOperationReceiveFromMultiBuffer(handle);
+                ? DoOperationReceiveFromSingleBuffer(handle, cancellationToken)
+                : DoOperationReceiveFromMultiBuffer(handle);
         }
 
         internal unsafe SocketError DoOperationReceiveFromSingleBuffer(
@@ -758,14 +758,14 @@ namespace System.Net.Sockets
                     );
 
                     return _bufferList == null
-                      ? ProcessIOCPResultWithDeferredAsyncHandling(
+                        ? ProcessIOCPResultWithDeferredAsyncHandling(
                             socketError == SocketError.Success,
                             bytesTransferred,
                             overlapped,
                             _buffer,
                             cancellationToken
                         )
-                      : ProcessIOCPResult(
+                        : ProcessIOCPResult(
                             socketError == SocketError.Success,
                             bytesTransferred,
                             overlapped
@@ -1002,8 +1002,8 @@ namespace System.Net.Sockets
             PinSocketAddressBuffer();
 
             return _bufferList == null
-              ? DoOperationSendToSingleBuffer(handle, cancellationToken)
-              : DoOperationSendToMultiBuffer(handle);
+                ? DoOperationSendToSingleBuffer(handle, cancellationToken)
+                : DoOperationSendToMultiBuffer(handle);
         }
 
         internal unsafe SocketError DoOperationSendToSingleBuffer(
@@ -1458,8 +1458,8 @@ namespace System.Net.Sockets
                     0
                 );
                 return socketError == SocketError.SocketError
-                  ? SocketPal.GetLastSocketError()
-                  : socketError;
+                    ? SocketPal.GetLastSocketError()
+                    : socketError;
             }
             catch (ObjectDisposedException)
             {

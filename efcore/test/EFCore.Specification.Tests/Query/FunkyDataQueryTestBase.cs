@@ -889,7 +889,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public abstract class FunkyDataQueryFixtureBase
             : SharedStoreFixtureBase<FunkyDataContext>,
-              IQueryFixtureBase
+                IQueryFixtureBase
         {
             public Func<DbContext> GetContextCreator() => () => CreateContext();
 

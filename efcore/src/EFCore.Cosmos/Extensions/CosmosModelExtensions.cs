@@ -90,10 +90,10 @@ namespace Microsoft.EntityFrameworkCore
             model.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.Throughput,
                 throughput == null || autoscale == null
-                  ? null
-                  : autoscale.Value
-                      ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                      : ThroughputProperties.CreateManualThroughput(throughput.Value)
+                    ? null
+                    : autoscale.Value
+                        ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                        : ThroughputProperties.CreateManualThroughput(throughput.Value)
             );
 
         /// <summary>
@@ -115,10 +115,10 @@ namespace Microsoft.EntityFrameworkCore
                     .SetOrRemoveAnnotation(
                         CosmosAnnotationNames.Throughput,
                         throughput == null || autoscale == null
-                          ? null
-                          : autoscale.Value
-                              ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                              : ThroughputProperties.CreateManualThroughput(throughput.Value),
+                            ? null
+                            : autoscale.Value
+                                ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                                : ThroughputProperties.CreateManualThroughput(throughput.Value),
                         fromDataAnnotation
                     )
                     ?.Value;

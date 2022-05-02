@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     // Sealed for perf
     public sealed class ForeignKeyConstraintComparer
         : IEqualityComparer<IForeignKeyConstraint>,
-          IComparer<IForeignKeyConstraint>
+            IComparer<IForeignKeyConstraint>
     {
         private ForeignKeyConstraintComparer() { }
 
@@ -70,8 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             result = StringComparer.Ordinal.Compare(x.PrincipalTable.Name, y.PrincipalTable.Name);
             return result != 0
-              ? result
-              : StringComparer.Ordinal.Compare(x.Table.Name, y.Table.Name);
+                ? result
+                : StringComparer.Ordinal.Compare(x.Table.Name, y.Table.Name);
         }
 
         /// <summary>

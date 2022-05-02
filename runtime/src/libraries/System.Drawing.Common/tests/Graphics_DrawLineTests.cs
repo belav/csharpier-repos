@@ -31,7 +31,7 @@ namespace System.Drawing.Tests
                 ValidateImageContent(
                     image,
                     PlatformDetection.IsWindows
-                      ? new byte[]
+                        ? new byte[]
                         {
                             0x8e,
                             0xc2,
@@ -50,7 +50,7 @@ namespace System.Drawing.Tests
                             0xd4,
                             0xad
                         }
-                      : new byte[]
+                        : new byte[]
                         {
                             0x55,
                             0x40,
@@ -97,7 +97,7 @@ namespace System.Drawing.Tests
                 ValidateImageContent(
                     image,
                     PlatformDetection.IsWindows
-                      ? new byte[]
+                        ? new byte[]
                         {
                             0x8e,
                             0xc2,
@@ -116,7 +116,7 @@ namespace System.Drawing.Tests
                             0xd4,
                             0xad
                         }
-                      : new byte[]
+                        : new byte[]
                         {
                             0x55,
                             0x40,

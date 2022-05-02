@@ -374,8 +374,8 @@ namespace System.Text
         {
             Dictionary<int, EncodingInfo>? result = EncodingProvider.GetEncodingListFromProviders();
             return result == null
-              ? EncodingTable.GetEncodings()
-              : EncodingTable.GetEncodings(result);
+                ? EncodingTable.GetEncodings()
+                : EncodingTable.GetEncodings(result);
         }
 
         public virtual byte[] GetPreamble() => Array.Empty<byte>();

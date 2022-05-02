@@ -32,8 +32,8 @@ namespace System.Net.Sockets.Tests
 
         private static SafeSocketHandle Socket(int af, int type, int protocol) =>
             OperatingSystem.IsWindows()
-              ? SocketWindows(af, type, protocol)
-              : SocketUnix(af, type, protocol);
+                ? SocketWindows(af, type, protocol)
+                : SocketUnix(af, type, protocol);
 
         [DllImport("ws2_32.dll", EntryPoint = "socket")]
         private static extern SafeSocketHandle SocketWindows(int af, int type, int protocol);

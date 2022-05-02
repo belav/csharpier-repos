@@ -160,36 +160,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     var conventionsList = symbol.Signature.CallingConvention switch
                     {
                         System.Reflection.Metadata.SignatureCallingConvention.CDecl
-                          => new[] { GetConventionForString("Cdecl") },
+                            => new[] { GetConventionForString("Cdecl") },
                         System.Reflection.Metadata.SignatureCallingConvention.StdCall
-                          => new[] { GetConventionForString("Stdcall") },
+                            => new[] { GetConventionForString("Stdcall") },
                         System.Reflection.Metadata.SignatureCallingConvention.ThisCall
-                          => new[] { GetConventionForString("Thiscall") },
+                            => new[] { GetConventionForString("Thiscall") },
                         System.Reflection.Metadata.SignatureCallingConvention.FastCall
-                          => new[] { GetConventionForString("Fastcall") },
+                            => new[] { GetConventionForString("Fastcall") },
                         System.Reflection.Metadata.SignatureCallingConvention.Unmanaged
-                          =>
-                          // All types that come from CallingConventionTypes start with "CallConv". We don't want the prefix for the actual
-                          // syntax, so strip it off
-                          symbol.Signature.UnmanagedCallingConventionTypes.IsEmpty
-                              ? null
-                              : symbol.Signature.UnmanagedCallingConventionTypes.Select(
+                            =>
+                            // All types that come from CallingConventionTypes start with "CallConv". We don't want the prefix for the actual
+                            // syntax, so strip it off
+                            symbol.Signature.UnmanagedCallingConventionTypes.IsEmpty
+                                ? null
+                                : symbol.Signature.UnmanagedCallingConventionTypes.Select(
                                     type => GetConventionForString(type.Name["CallConv".Length..])
                                 ),
 
                         _
-                          => throw ExceptionUtilities.UnexpectedValue(
-                              symbol.Signature.CallingConvention
-                          ),
+                            => throw ExceptionUtilities.UnexpectedValue(
+                                symbol.Signature.CallingConvention
+                            ),
                     };
 
                     callingConventionSyntax = SyntaxFactory.FunctionPointerCallingConvention(
                         SyntaxFactory.Token(SyntaxKind.UnmanagedKeyword),
                         conventionsList is object
-                          ? SyntaxFactory.FunctionPointerUnmanagedCallingConventionList(
+                            ? SyntaxFactory.FunctionPointerUnmanagedCallingConventionList(
                                 SyntaxFactory.SeparatedList(conventionsList)
                             )
-                          : null
+                            : null
                     );
 
                     static FunctionPointerUnmanagedCallingConventionSyntax GetConventionForString(
@@ -274,9 +274,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                 var typeArguments = symbol.IsUnboundGenericType
                     ? Enumerable.Repeat(
-                          (TypeSyntax)SyntaxFactory.OmittedTypeArgument(),
-                          symbol.TypeArguments.Length
-                      )
+                        (TypeSyntax)SyntaxFactory.OmittedTypeArgument(),
+                        symbol.TypeArguments.Length
+                    )
                     : symbol.TypeArguments.SelectAsArray(t => t.GenerateTypeSyntax());
 
                 return SyntaxFactory.GenericName(

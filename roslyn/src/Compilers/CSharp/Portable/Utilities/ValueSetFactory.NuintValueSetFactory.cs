@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IValueSet IValueSetFactory.Related(BinaryOperatorKind relation, ConstantValue value)
             {
                 return value.IsBad
-                  ? NuintValueSet.AllValues
-                  : Related(relation, default(UIntTC).FromConstantValue(value));
+                    ? NuintValueSet.AllValues
+                    : Related(relation, default(UIntTC).FromConstantValue(value));
             }
 
             bool IValueSetFactory.Related(

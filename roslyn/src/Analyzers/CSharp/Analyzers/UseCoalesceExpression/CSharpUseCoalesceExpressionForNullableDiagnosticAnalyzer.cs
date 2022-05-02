@@ -13,13 +13,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCoalesceExpression
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseCoalesceExpressionForNullableDiagnosticAnalyzer
         : AbstractUseCoalesceExpressionForNullableDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              ConditionalExpressionSyntax,
-              BinaryExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              PrefixUnaryExpressionSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            ConditionalExpressionSyntax,
+            BinaryExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            PrefixUnaryExpressionSyntax
+        >
     {
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
     }

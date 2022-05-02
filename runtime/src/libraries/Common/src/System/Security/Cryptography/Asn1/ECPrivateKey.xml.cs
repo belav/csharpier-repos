@@ -118,8 +118,8 @@ namespace System.Security.Cryptography.Asn1
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
                 decoded.PrivateKey = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {
@@ -161,8 +161,8 @@ namespace System.Security.Cryptography.Asn1
                 if (explicitReader.TryReadPrimitiveBitString(out _, out tmpSpan))
                 {
                     decoded.PublicKey = rebindSpan.Overlaps(tmpSpan, out offset)
-                      ? rebind.Slice(offset, tmpSpan.Length)
-                      : tmpSpan.ToArray();
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {

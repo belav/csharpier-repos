@@ -235,8 +235,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             IOperation rootOperation = operation.GetRootOperation();
             return getControlFlowGraph != null
-              ? getControlFlowGraph(rootOperation)
-              : ControlFlowGraph.CreateCore(
+                ? getControlFlowGraph(rootOperation)
+                : ControlFlowGraph.CreateCore(
                     rootOperation,
                     nameof(rootOperation),
                     cancellationToken

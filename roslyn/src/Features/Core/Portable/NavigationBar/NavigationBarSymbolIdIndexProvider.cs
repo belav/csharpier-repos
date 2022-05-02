@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.NavigationBar
         {
             _nextIds = new Dictionary<SymbolKey, int>(
                 caseSensitive
-                  ? SymbolKey.GetComparer(ignoreCase: true, ignoreAssemblyKeys: false)
-                  : SymbolKey.GetComparer(ignoreCase: false, ignoreAssemblyKeys: false)
+                    ? SymbolKey.GetComparer(ignoreCase: true, ignoreAssemblyKeys: false)
+                    : SymbolKey.GetComparer(ignoreCase: false, ignoreAssemblyKeys: false)
             );
         }
 

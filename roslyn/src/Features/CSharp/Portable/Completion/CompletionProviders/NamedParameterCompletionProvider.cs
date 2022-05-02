@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [Shared]
     internal partial class NamedParameterCompletionProvider
         : LSPCompletionProvider,
-          IEqualityComparer<IParameterSymbol>
+            IEqualityComparer<IParameterSymbol>
     {
         private const string ColonString = ":";
 
@@ -210,40 +210,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return invocableNode switch
             {
                 InvocationExpressionSyntax invocationExpression
-                  => GetInvocationExpressionParameterLists(
-                      semanticModel,
-                      position,
-                      invocationExpression,
-                      cancellationToken
-                  ),
+                    => GetInvocationExpressionParameterLists(
+                        semanticModel,
+                        position,
+                        invocationExpression,
+                        cancellationToken
+                    ),
                 ConstructorInitializerSyntax constructorInitializer
-                  => GetConstructorInitializerParameterLists(
-                      semanticModel,
-                      position,
-                      constructorInitializer,
-                      cancellationToken
-                  ),
+                    => GetConstructorInitializerParameterLists(
+                        semanticModel,
+                        position,
+                        constructorInitializer,
+                        cancellationToken
+                    ),
                 ElementAccessExpressionSyntax elementAccessExpression
-                  => GetElementAccessExpressionParameterLists(
-                      semanticModel,
-                      position,
-                      elementAccessExpression,
-                      cancellationToken
-                  ),
+                    => GetElementAccessExpressionParameterLists(
+                        semanticModel,
+                        position,
+                        elementAccessExpression,
+                        cancellationToken
+                    ),
                 BaseObjectCreationExpressionSyntax objectCreationExpression
-                  => GetObjectCreationExpressionParameterLists(
-                      semanticModel,
-                      position,
-                      objectCreationExpression,
-                      cancellationToken
-                  ),
+                    => GetObjectCreationExpressionParameterLists(
+                        semanticModel,
+                        position,
+                        objectCreationExpression,
+                        cancellationToken
+                    ),
                 PrimaryConstructorBaseTypeSyntax recordBaseType
-                  => GetRecordBaseTypeParameterLists(
-                      semanticModel,
-                      position,
-                      recordBaseType,
-                      cancellationToken
-                  ),
+                    => GetRecordBaseTypeParameterLists(
+                        semanticModel,
+                        position,
+                        recordBaseType,
+                        cancellationToken
+                    ),
                 _ => null,
             };
         }
@@ -420,8 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     // Insert extra colon if committing with '(' only: "method(parameter:(" is preferred to "method(parameter(".
                     // In all other cases, do not add extra colon. Note that colon is already added if committing with ':'.
                     ch == '('
-                      ? selectedItem.GetEntireDisplayText()
-                      : selectedItem.DisplayText
+                        ? selectedItem.GetEntireDisplayText()
+                        : selectedItem.DisplayText
                 )
             );
         }

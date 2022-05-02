@@ -648,78 +648,66 @@ namespace Microsoft.CodeAnalysis
             (filePath == FilePath)
                 ? this
                 : WithAttributes(
-                      Attributes.With(filePath: filePath, version: Version.GetNewerVersion())
-                  );
+                    Attributes.With(filePath: filePath, version: Version.GetNewerVersion())
+                );
 
         public ProjectState WithAssemblyName(string assemblyName) =>
             (assemblyName == AssemblyName)
                 ? this
                 : WithAttributes(
-                      Attributes.With(
-                          assemblyName: assemblyName,
-                          version: Version.GetNewerVersion()
-                      )
-                  );
+                    Attributes.With(assemblyName: assemblyName, version: Version.GetNewerVersion())
+                );
 
         public ProjectState WithOutputFilePath(string? outputFilePath) =>
             (outputFilePath == OutputFilePath)
                 ? this
                 : WithAttributes(
-                      Attributes.With(
-                          outputPath: outputFilePath,
-                          version: Version.GetNewerVersion()
-                      )
-                  );
+                    Attributes.With(outputPath: outputFilePath, version: Version.GetNewerVersion())
+                );
 
         public ProjectState WithOutputRefFilePath(string? outputRefFilePath) =>
             (outputRefFilePath == OutputRefFilePath)
                 ? this
                 : WithAttributes(
-                      Attributes.With(
-                          outputRefPath: outputRefFilePath,
-                          version: Version.GetNewerVersion()
-                      )
-                  );
+                    Attributes.With(
+                        outputRefPath: outputRefFilePath,
+                        version: Version.GetNewerVersion()
+                    )
+                );
 
         public ProjectState WithCompilationOutputInfo(in CompilationOutputInfo info) =>
             (info == CompilationOutputInfo)
                 ? this
                 : WithAttributes(
-                      Attributes.With(
-                          compilationOutputInfo: info,
-                          version: Version.GetNewerVersion()
-                      )
-                  );
+                    Attributes.With(compilationOutputInfo: info, version: Version.GetNewerVersion())
+                );
 
         public ProjectState WithDefaultNamespace(string? defaultNamespace) =>
             (defaultNamespace == DefaultNamespace)
                 ? this
                 : WithAttributes(
-                      Attributes.With(
-                          defaultNamespace: defaultNamespace,
-                          version: Version.GetNewerVersion()
-                      )
-                  );
+                    Attributes.With(
+                        defaultNamespace: defaultNamespace,
+                        version: Version.GetNewerVersion()
+                    )
+                );
 
         public ProjectState WithHasAllInformation(bool hasAllInformation) =>
             (hasAllInformation == HasAllInformation)
                 ? this
                 : WithAttributes(
-                      Attributes.With(
-                          hasAllInformation: hasAllInformation,
-                          version: Version.GetNewerVersion()
-                      )
-                  );
+                    Attributes.With(
+                        hasAllInformation: hasAllInformation,
+                        version: Version.GetNewerVersion()
+                    )
+                );
 
         public ProjectState WithRunAnalyzers(bool runAnalyzers) =>
             (runAnalyzers == RunAnalyzers)
                 ? this
                 : WithAttributes(
-                      Attributes.With(
-                          runAnalyzers: runAnalyzers,
-                          version: Version.GetNewerVersion()
-                      )
-                  );
+                    Attributes.With(runAnalyzers: runAnalyzers, version: Version.GetNewerVersion())
+                );
 
         public ProjectState WithCompilationOptions(CompilationOptions options)
         {
@@ -1067,37 +1055,37 @@ namespace Microsoft.CodeAnalysis
 
             dependentDocumentVersion = recalculateDocumentVersion
                 ? new AsyncLazy<VersionStamp>(
-                      c =>
-                          ComputeLatestDocumentVersionAsync(
-                              newDocumentStates,
-                              newAdditionalDocumentStates,
-                              c
-                          ),
-                      cacheResult: true
-                  )
+                    c =>
+                        ComputeLatestDocumentVersionAsync(
+                            newDocumentStates,
+                            newAdditionalDocumentStates,
+                            c
+                        ),
+                    cacheResult: true
+                )
                 : textChanged
                     ? new AsyncLazy<VersionStamp>(
-                          newDocument.GetTextVersionAsync,
-                          cacheResult: true
-                      )
+                        newDocument.GetTextVersionAsync,
+                        cacheResult: true
+                    )
                     : _lazyLatestDocumentVersion;
 
             dependentSemanticVersion = recalculateSemanticVersion
                 ? new AsyncLazy<VersionStamp>(
-                      c =>
-                          ComputeLatestDocumentTopLevelChangeVersionAsync(
-                              newDocumentStates,
-                              newAdditionalDocumentStates,
-                              c
-                          ),
-                      cacheResult: true
-                  )
+                    c =>
+                        ComputeLatestDocumentTopLevelChangeVersionAsync(
+                            newDocumentStates,
+                            newAdditionalDocumentStates,
+                            c
+                        ),
+                    cacheResult: true
+                )
                 : textChanged
                     ? CreateLazyLatestDocumentTopLevelChangeVersion(
-                          newDocument,
-                          newDocumentStates,
-                          newAdditionalDocumentStates
-                      )
+                        newDocument,
+                        newDocumentStates,
+                        newAdditionalDocumentStates
+                    )
                     : _lazyLatestDocumentTopLevelChangeVersion;
         }
     }

@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (diagnosticModeOption == DiagnosticMode.Default)
             {
                 return globalOptions.GetOption(DiagnosticOptions.LspPullDiagnosticsFeatureFlag)
-                  ? DiagnosticMode.Pull
-                  : DiagnosticMode.Push;
+                    ? DiagnosticMode.Pull
+                    : DiagnosticMode.Push;
             }
 
             // Otherwise, defer to the workspace+option to determine what mode we're in.

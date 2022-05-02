@@ -17,7 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
 {
     internal abstract class AbstractCloudCachePersistentStorageService
         : AbstractPersistentStorageService,
-          ICloudCacheStorageService
+            ICloudCacheStorageService
     {
         private const string StorageExtension = "CloudCache";
 

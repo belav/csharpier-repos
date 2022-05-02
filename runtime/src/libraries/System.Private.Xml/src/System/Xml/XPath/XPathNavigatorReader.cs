@@ -1123,8 +1123,8 @@ namespace System.Xml.XPath
 
     internal sealed class XPathNavigatorReaderWithLIAndSI
         : XPathNavigatorReaderWithLI,
-          System.Xml.IXmlLineInfo,
-          System.Xml.Schema.IXmlSchemaInfo
+            System.Xml.IXmlLineInfo,
+            System.Xml.Schema.IXmlSchemaInfo
     {
         internal XPathNavigatorReaderWithLIAndSI(
             XPathNavigator navToRead,
@@ -1169,7 +1169,7 @@ namespace System.Xml.XPath
 
     internal sealed class XPathNavigatorReaderWithSI
         : XPathNavigatorReader,
-          System.Xml.Schema.IXmlSchemaInfo
+            System.Xml.Schema.IXmlSchemaInfo
     {
         internal XPathNavigatorReaderWithSI(
             XPathNavigator navToRead,

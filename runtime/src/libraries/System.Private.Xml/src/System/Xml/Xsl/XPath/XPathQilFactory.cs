@@ -241,7 +241,7 @@ namespace System.Xml.Xsl.XPath
                             : n.NodeType == QilNodeType.False
                                 ? (QilNode)String("false")
                                 :
-                                  /*default: */(QilNode)Conditional(n, String("true"), String("false"))
+                                /*default: */(QilNode)Conditional(n, String("true"), String("false"))
                     );
                 case XmlTypeCode.Double:
                     return (
@@ -306,7 +306,7 @@ namespace System.Xml.Xsl.XPath
                             : n.NodeType == QilNodeType.False
                                 ? (QilNode)Double(0)
                                 :
-                                  /*default: */(QilNode)Conditional(n, Double(1), Double(0))
+                                /*default: */(QilNode)Conditional(n, Double(1), Double(0))
                     );
                 case XmlTypeCode.Double:
                     return n;

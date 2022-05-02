@@ -104,8 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 );
                 using var itemKey = registryRoot.OpenSubKey(ColorSchemeApplierKey);
                 return itemKey is object
-                  ? (SchemeName)itemKey.GetValue(AppliedColorSchemeName)
-                  : default;
+                    ? (SchemeName)itemKey.GetValue(AppliedColorSchemeName)
+                    : default;
             }
 
             private void SetAppliedColorScheme(SchemeName schemeName)
@@ -127,8 +127,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             {
                 var schemeName = _globalOptions.GetOption(ColorSchemeOptions.ColorScheme);
                 return schemeName != SchemeName.None
-                  ? schemeName
-                  : ColorSchemeOptions.ColorScheme.DefaultValue;
+                    ? schemeName
+                    : ColorSchemeOptions.ColorScheme.DefaultValue;
             }
 
             public void MigrateToColorSchemeSetting()

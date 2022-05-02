@@ -23,7 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     [Export(typeof(IRefactorNotifyService))]
     internal sealed class VsRefactorNotifyService
         : ForegroundThreadAffinitizedObject,
-          IRefactorNotifyService
+            IRefactorNotifyService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

@@ -246,23 +246,23 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ControlFlowBranch? getFallThroughSuccessor(BasicBlockBuilder blockBuilder)
             {
                 return blockBuilder.Kind != BasicBlockKind.Exit
-                  ? getBranch(
+                    ? getBranch(
                         in blockBuilder.FallThrough,
                         blockBuilder,
                         isConditionalSuccessor: false
                     )
-                  : null;
+                    : null;
             }
 
             ControlFlowBranch? getConditionalSuccessor(BasicBlockBuilder blockBuilder)
             {
                 return blockBuilder.HasCondition
-                  ? getBranch(
+                    ? getBranch(
                         in blockBuilder.Conditional,
                         blockBuilder,
                         isConditionalSuccessor: true
                     )
-                  : null;
+                    : null;
             }
 
             ControlFlowBranch getBranch(
@@ -274,8 +274,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 return new ControlFlowBranch(
                     source: builder[source.Ordinal],
                     destination: branch.Destination != null
-                      ? builder[branch.Destination.Ordinal]
-                      : null,
+                        ? builder[branch.Destination.Ordinal]
+                        : null,
                     branch.Kind,
                     isConditionalSuccessor
                 );
@@ -2319,8 +2319,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     IOperation visitedElement = PopOperand();
                     builder.Add(
                         wrapper != null
-                          ? wrapper(visitedElement, i, originalArray)
-                          : (T)visitedElement
+                            ? wrapper(visitedElement, i, originalArray)
+                            : (T)visitedElement
                     );
                 }
                 builder.ReverseContents();
@@ -3311,7 +3311,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             if (!sense)
             {
                 return lastUnary != null
-                  ? new UnaryOperation(
+                    ? new UnaryOperation(
                         lastUnary.OperatorKind,
                         condition,
                         lastUnary.IsLifted,
@@ -3323,7 +3323,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         lastUnary.GetConstantValue(),
                         IsImplicit(lastUnary)
                     )
-                  : new UnaryOperation(
+                    : new UnaryOperation(
                         UnaryOperatorKind.Not,
                         condition,
                         isLifted: false,
@@ -4200,8 +4200,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                 operation.Type.IsReferenceType
                                 && !ITypeSymbolHelpers.IsNullableType(operation.Type)
                             )
-                              ? ConstantValue.Null
-                              : null,
+                                ? ConstantValue.Null
+                                : null,
                             isImplicit: true
                         )
                     )
@@ -4686,8 +4686,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         CurrentBasicBlock,
                         _exit,
                         returnedValue is null
-                          ? ControlFlowBranchSemantics.Regular
-                          : ControlFlowBranchSemantics.Return
+                            ? ControlFlowBranchSemantics.Regular
+                            : ControlFlowBranchSemantics.Return
                     );
                     Debug.Assert(current.BranchValue == null);
                     Debug.Assert(!current.HasCondition);
@@ -4839,8 +4839,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ITypeSymbol iDisposable = isAsynchronous
                 ? _compilation
-                  .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                  .GetITypeSymbol()
+                    .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
+                    .GetITypeSymbol()
                 : _compilation.GetSpecialType(SpecialType.System_IDisposable);
 
             if (resources is IVariableDeclarationGroupOperation declarationGroup)
@@ -5080,17 +5080,17 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     ?? (
                         isAsynchronous
                             ? (IMethodSymbol?)
-                                  _compilation
-                                      .CommonGetWellKnownTypeMember(
-                                          WellKnownMember.System_IAsyncDisposable__DisposeAsync
-                                      )
-                                      ?.GetISymbol()
+                                _compilation
+                                    .CommonGetWellKnownTypeMember(
+                                        WellKnownMember.System_IAsyncDisposable__DisposeAsync
+                                    )
+                                    ?.GetISymbol()
                             : (IMethodSymbol?)
-                                  _compilation
-                                      .CommonGetSpecialTypeMember(
-                                          SpecialMember.System_IDisposable__Dispose
-                                      )
-                                      ?.GetISymbol()
+                                _compilation
+                                    .CommonGetSpecialTypeMember(
+                                        SpecialMember.System_IDisposable__Dispose
+                                    )
+                                    ?.GetISymbol()
                     );
 
                 if (method != null)
@@ -5214,8 +5214,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             var lockRegion = new RegionBuilder(
                 ControlFlowRegionKind.LocalLifetime,
                 locals: lockStatement.LockTakenSymbol != null
-                  ? ImmutableArray.Create(lockStatement.LockTakenSymbol)
-                  : ImmutableArray<ILocalSymbol>.Empty
+                    ? ImmutableArray.Create(lockStatement.LockTakenSymbol)
+                    : ImmutableArray<ILocalSymbol>.Empty
             );
             EnterRegion(lockRegion);
 
@@ -5524,8 +5524,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 bool isAsynchronous = info.IsAsynchronous;
                 var iDisposable = isAsynchronous
                     ? _compilation
-                      .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                      .GetITypeSymbol()
+                        .CommonGetWellKnownType(WellKnownType.System_IAsyncDisposable)
+                        .GetITypeSymbol()
                     : _compilation.GetSpecialType(SpecialType.System_IDisposable);
 
                 AddDisposingFinally(
@@ -8992,8 +8992,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 )
                 {
                     return captured is IFlowCaptureReferenceOperation reference
-                      ? GetCaptureReference(reference.Id.Value, operation)
-                      : OperationCloner.CloneOperation(captured);
+                        ? GetCaptureReference(reference.Id.Value, operation)
+                        : OperationCloner.CloneOperation(captured);
                 }
                 else
                 {
@@ -9136,12 +9136,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 IInstanceReferenceOperation? instance = fieldSymbol.IsStatic
                     ? null
                     : new InstanceReferenceOperation(
-                          InstanceReferenceKind.ContainingTypeInstance,
-                          semanticModel: null,
-                          operation.Syntax,
-                          fieldSymbol.ContainingType,
-                          isImplicit: true
-                      );
+                        InstanceReferenceKind.ContainingTypeInstance,
+                        semanticModel: null,
+                        operation.Syntax,
+                        fieldSymbol.ContainingType,
+                        isImplicit: true
+                    );
                 var fieldRef = new FieldReferenceOperation(
                     fieldSymbol,
                     isDeclaration: false,
@@ -9170,12 +9170,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 var instance = propertySymbol.IsStatic
                     ? null
                     : new InstanceReferenceOperation(
-                          InstanceReferenceKind.ContainingTypeInstance,
-                          semanticModel: null,
-                          operation.Syntax,
-                          propertySymbol.ContainingType,
-                          isImplicit: true
-                      );
+                        InstanceReferenceKind.ContainingTypeInstance,
+                        semanticModel: null,
+                        operation.Syntax,
+                        propertySymbol.ContainingType,
+                        isImplicit: true
+                    );
 
                 ImmutableArray<IArgumentOperation> arguments;
                 if (!propertySymbol.Parameters.IsEmpty)
@@ -9344,8 +9344,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             (IOperation? visitedInstance, ImmutableArray<IArgumentOperation> visitedArguments) =
                 VisitInstanceWithArguments(
                     operation.EventReference.Event.IsStatic
-                      ? null
-                      : operation.EventReference.Instance,
+                        ? null
+                        : operation.EventReference.Instance,
                     operation.Arguments
                 );
             var visitedEventReference = new EventReferenceOperation(
@@ -9965,20 +9965,20 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             var makeException =
                 (matchFailureCtor is null)
                     ? MakeInvalidOperation(
-                          operation.Syntax,
-                          type: _compilation.GetSpecialType(SpecialType.System_Object),
-                          ImmutableArray<IOperation>.Empty
-                      )
+                        operation.Syntax,
+                        type: _compilation.GetSpecialType(SpecialType.System_Object),
+                        ImmutableArray<IOperation>.Empty
+                    )
                     : new ObjectCreationOperation(
-                          matchFailureCtor,
-                          initializer: null,
-                          ImmutableArray<IArgumentOperation>.Empty,
-                          semanticModel: null,
-                          operation.Syntax,
-                          type: matchFailureCtor.ContainingType,
-                          constantValue: null,
-                          isImplicit: true
-                      );
+                        matchFailureCtor,
+                        initializer: null,
+                        ImmutableArray<IArgumentOperation>.Empty,
+                        semanticModel: null,
+                        operation.Syntax,
+                        type: matchFailureCtor.ContainingType,
+                        constantValue: null,
+                        isImplicit: true
+                    );
             LinkThrowStatement(makeException);
             _currentBasicBlock = null;
 
@@ -10133,15 +10133,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 cloned = operation.CloneMethod is null
                     ? MakeInvalidOperation(visitedInstance.Type, visitedInstance)
                     : new InvocationOperation(
-                          operation.CloneMethod,
-                          visitedInstance,
-                          isVirtual: true,
-                          arguments: ImmutableArray<IArgumentOperation>.Empty,
-                          semanticModel: null,
-                          operation.Syntax,
-                          operation.Type,
-                          isImplicit: true
-                      );
+                        operation.CloneMethod,
+                        visitedInstance,
+                        isVirtual: true,
+                        arguments: ImmutableArray<IArgumentOperation>.Empty,
+                        semanticModel: null,
+                        operation.Syntax,
+                        operation.Type,
+                        isImplicit: true
+                    );
             }
 
             return PopStackFrame(

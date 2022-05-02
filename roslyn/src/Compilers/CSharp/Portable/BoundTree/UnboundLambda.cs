@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 return Syntax.Kind() == SyntaxKind.AnonymousMethodExpression
-                  ? MessageID.IDS_AnonMethod
-                  : MessageID.IDS_Lambda;
+                    ? MessageID.IDS_AnonMethod
+                    : MessageID.IDS_Lambda;
             }
         }
 
@@ -215,8 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 returnType,
                 parameterTypes,
                 parameterRefKinds.IsDefault
-                  ? Enumerable.Repeat(RefKind.None, parameterTypes.Length).ToImmutableArray()
-                  : parameterRefKinds,
+                    ? Enumerable.Repeat(RefKind.None, parameterTypes.Length).ToImmutableArray()
+                    : parameterRefKinds,
                 refKind
             );
 
@@ -324,8 +324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bestType,
                 useSiteInfo.Diagnostics.AsImmutableOrEmpty(),
                 useSiteInfo.AccumulatesDependencies
-                  ? useSiteInfo.Dependencies.AsImmutableOrEmpty()
-                  : ImmutableArray<AssemblySymbol>.Empty
+                    ? useSiteInfo.Dependencies.AsImmutableOrEmpty()
+                    : ImmutableArray<AssemblySymbol>.Empty
             );
         }
 
@@ -411,8 +411,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     taskType?.Arity == 0
                         ? taskType
                         : binder.Compilation.GetWellKnownType(
-                              WellKnownType.System_Threading_Tasks_Task
-                          );
+                            WellKnownType.System_Threading_Tasks_Task
+                        );
                 return TypeWithAnnotations.Create(resultType);
             }
 
@@ -429,8 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 taskType?.Arity == 1
                     ? taskType
                     : binder.Compilation.GetWellKnownType(
-                          WellKnownType.System_Threading_Tasks_Task_T
-                      );
+                        WellKnownType.System_Threading_Tasks_Task_T
+                    );
             return TypeWithAnnotations.Create(
                 taskTypeT.Construct(ImmutableArray.Create(bestResultType))
             );
@@ -1270,8 +1270,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     returnType =
                         (forErrorRecovery && returnTypes.Count == 0)
                             ? TypeWithAnnotations.Create(
-                                  this.Binder.Compilation.GetSpecialType(SpecialType.System_Void)
-                              )
+                                this.Binder.Compilation.GetSpecialType(SpecialType.System_Void)
+                            )
                             : TypeWithAnnotations.Create(LambdaSymbol.InferenceFailureReturnType);
                 }
                 returnTypes.Free();
@@ -1928,8 +1928,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 return this.UnboundLambda.Syntax.Kind() == SyntaxKind.AnonymousMethodExpression
-                  ? MessageID.IDS_AnonMethod
-                  : MessageID.IDS_Lambda;
+                    ? MessageID.IDS_AnonMethod
+                    : MessageID.IDS_Lambda;
             }
         }
 
@@ -1987,8 +1987,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(0 <= index && index < _parameterTypesWithAnnotations.Length);
             return _parameterRefKinds.IsDefault
-              ? Microsoft.CodeAnalysis.RefKind.None
-              : _parameterRefKinds[index];
+                ? Microsoft.CodeAnalysis.RefKind.None
+                : _parameterRefKinds[index];
         }
 
         public override TypeWithAnnotations ParameterTypeWithAnnotations(int index)

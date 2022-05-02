@@ -348,7 +348,7 @@ namespace System.Globalization
                         '\uFE63'
                         or // Small Hyphen-Minus
                         '\uFF0D'
-                          => true, // Fullwidth Hyphen-Minus
+                            => true, // Fullwidth Hyphen-Minus
                         _ => false
                     };
             }
@@ -894,9 +894,9 @@ namespace System.Globalization
                 // Default empty format to be "G"; custom format is signified with '\0'.
                 digits = -1;
                 return format.Length == 0 || c == '\0'
-                  ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
+                    ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
                     'G'
-                  : '\0';
+                    : '\0';
             }
 
             internal static unsafe void NumberToString(
@@ -1576,10 +1576,10 @@ namespace System.Globalization
                 section = FindSection(
                     format,
                     dig[0] == 0
-                      ? 2
-                      : number.sign
-                          ? 1
-                          : 0
+                        ? 2
+                        : number.sign
+                            ? 1
+                            : 0
                 );
 
                 while (true)

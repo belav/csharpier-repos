@@ -17,9 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer
         : AbstractRemoveUnnecessaryParenthesesDiagnosticAnalyzer<
-              SyntaxKind,
-              ParenthesizedExpressionSyntax
-          >
+            SyntaxKind,
+            ParenthesizedExpressionSyntax
+        >
     {
         protected override SyntaxKind GetSyntaxKind() => SyntaxKind.ParenthesizedExpression;
 
@@ -93,7 +93,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
                     break;
 
                 case ConstantPatternSyntax constantPattern
-                      when constantPattern.Parent is IsPatternExpressionSyntax isPatternExpression:
+                when constantPattern.Parent is IsPatternExpressionSyntax isPatternExpression:
                     // on the right side of an 'x is const_pattern' expression
                     parentExpression = isPatternExpression;
                     break;

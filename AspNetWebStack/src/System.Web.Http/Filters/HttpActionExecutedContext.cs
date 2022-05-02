@@ -56,8 +56,8 @@ namespace System.Web.Http.Filters
             get
             {
                 return (ActionContext != null && ActionContext.ControllerContext != null)
-                  ? ActionContext.ControllerContext.Request
-                  : null;
+                    ? ActionContext.ControllerContext.Request
+                    : null;
             }
         }
     }

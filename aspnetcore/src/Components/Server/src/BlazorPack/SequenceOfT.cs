@@ -106,13 +106,13 @@ internal class Sequence<T> : IBufferWriter<T>, IDisposable
     public static implicit operator ReadOnlySequence<T>(Sequence<T> sequence)
     {
         return sequence.first != null
-          ? new ReadOnlySequence<T>(
+            ? new ReadOnlySequence<T>(
                 sequence.first,
                 sequence.first.Start,
                 sequence.last,
                 sequence.last.End
             )
-          : ReadOnlySequence<T>.Empty;
+            : ReadOnlySequence<T>.Empty;
     }
 
     /// <summary>

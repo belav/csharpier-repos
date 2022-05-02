@@ -1144,32 +1144,32 @@ namespace System.Xml
             {
                 //for the nodes without value and have no children
                 XmlNodeType.DocumentFragment
-                  => CreateDocumentFragment(),
+                    => CreateDocumentFragment(),
                 XmlNodeType.DocumentType
-                  => CreateDocumentType(dp.Name, dp.PublicId, dp.SystemId, dp.InternalSubset),
+                    => CreateDocumentType(dp.Name, dp.PublicId, dp.SystemId, dp.InternalSubset),
                 XmlNodeType.XmlDeclaration
-                  => CreateXmlDeclaration(dp.Version!, dp.Encoding, dp.Standalone),
+                    => CreateXmlDeclaration(dp.Version!, dp.Encoding, dp.Standalone),
 
                 //for the nodes with value but no children
                 XmlNodeType.Text
-                  => CreateTextNode(dp.Value),
+                    => CreateTextNode(dp.Value),
                 XmlNodeType.CDATA => CreateCDataSection(dp.Value),
                 XmlNodeType.ProcessingInstruction
-                  => CreateProcessingInstruction(dp.Name, dp.Value!),
+                    => CreateProcessingInstruction(dp.Name, dp.Value!),
                 XmlNodeType.Comment => CreateComment(dp.Value),
                 XmlNodeType.Whitespace => CreateWhitespace(dp.Value),
                 XmlNodeType.SignificantWhitespace => CreateSignificantWhitespace(dp.Value),
 
                 //for the nodes that don't have values, but might have children -- only clone the node and leave the children untouched
                 XmlNodeType.Element
-                  => CreateElement(dp.Prefix, dp.LocalName, dp.NamespaceURI),
+                    => CreateElement(dp.Prefix, dp.LocalName, dp.NamespaceURI),
                 XmlNodeType.Attribute => CreateAttribute(dp.Prefix, dp.LocalName, dp.NamespaceURI),
                 XmlNodeType.EntityReference => CreateEntityReference(dp.Name),
 
                 _
-                  => throw new InvalidOperationException(
-                      SR.Format(SR.DataDom_CloneNode, dp.NodeType.ToString())
-                  ),
+                    => throw new InvalidOperationException(
+                        SR.Format(SR.DataDom_CloneNode, dp.NodeType.ToString())
+                    ),
             };
 
         internal static bool IsTextLikeNode(XmlNode n)

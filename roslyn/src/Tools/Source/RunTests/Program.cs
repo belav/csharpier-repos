@@ -161,11 +161,11 @@ namespace RunTests
 
             var result = options.UseHelix
                 ? await testRunner
-                      .RunAllOnHelixAsync(assemblyInfoList, cancellationToken)
-                      .ConfigureAwait(true)
+                    .RunAllOnHelixAsync(assemblyInfoList, cancellationToken)
+                    .ConfigureAwait(true)
                 : await testRunner
-                      .RunAllAsync(assemblyInfoList, cancellationToken)
-                      .ConfigureAwait(true);
+                    .RunAllAsync(assemblyInfoList, cancellationToken)
+                    .ConfigureAwait(true);
             var elapsed = DateTime.Now - start;
 
             ConsoleUtil.WriteLine($"Test execution time: {elapsed}");

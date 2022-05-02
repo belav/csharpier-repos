@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             // jump past that as, for all intents and purposes, we want to consider the 'is' expression
             // as the parent expression of the (y) expression.
             var parentExpression = node.IsParentKind(SyntaxKind.ConstantPattern)
-              ? node.Parent.Parent as ExpressionSyntax
-              : node.Parent as ExpressionSyntax;
+                ? node.Parent.Parent as ExpressionSyntax
+                : node.Parent as ExpressionSyntax;
 
             // Have to be careful if we would remove parens and cause a + and a + to become a ++.
             // (same with - as well).

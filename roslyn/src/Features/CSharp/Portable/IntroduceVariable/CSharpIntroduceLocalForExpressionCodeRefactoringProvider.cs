@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceVariable
     ]
     internal class CSharpIntroduceLocalForExpressionCodeRefactoringProvider
         : AbstractIntroduceLocalForExpressionCodeRefactoringProvider<
-              ExpressionSyntax,
-              StatementSyntax,
-              ExpressionStatementSyntax,
-              LocalDeclarationStatementSyntax
-          >
+            ExpressionSyntax,
+            StatementSyntax,
+            ExpressionStatementSyntax,
+            LocalDeclarationStatementSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

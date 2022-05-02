@@ -1005,7 +1005,7 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                         or BackgroundAnalysisScope.FullSolution,
                     false
                 )
-                  => 1,
+                    => 1,
                 (BackgroundAnalysisScope.OpenFilesAndProjects, true) => 2,
                 (BackgroundAnalysisScope.FullSolution, true) => 4,
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1732,8 +1732,8 @@ class A
 
                 // Report diagnostic in the second callback.
                 var descriptor = CanceledCompilations.Contains(compilation)
-                  ? s_canceledDescriptor
-                  : s_nonCanceledDescriptor;
+                    ? s_canceledDescriptor
+                    : s_nonCanceledDescriptor;
                 reportDiagnostic(Diagnostic.Create(descriptor, analysisLocation));
             }
         }

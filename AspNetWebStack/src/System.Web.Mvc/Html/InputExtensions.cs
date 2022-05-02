@@ -1030,8 +1030,8 @@ namespace System.Web.Mvc.Html
         )
         {
             return dictionary == null
-              ? new RouteValueDictionary()
-              : new RouteValueDictionary(dictionary);
+                ? new RouteValueDictionary()
+                : new RouteValueDictionary(dictionary);
         }
     }
 }

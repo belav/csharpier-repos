@@ -424,10 +424,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal virtual string GetDisplayName(IFieldSymbol symbol) =>
             symbol.IsConst
                 ? (
-                      (symbol.ContainingType.TypeKind == TypeKind.Enum)
-                          ? FeaturesResources.enum_value
-                          : FeaturesResources.const_field
-                  )
+                    (symbol.ContainingType.TypeKind == TypeKind.Enum)
+                        ? FeaturesResources.enum_value
+                        : FeaturesResources.const_field
+                )
                 : FeaturesResources.field;
 
         internal virtual string GetDisplayName(IMethodSymbol symbol) =>
@@ -436,15 +436,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 MethodKind.Constructor => FeaturesResources.constructor,
                 MethodKind.PropertyGet
                 or MethodKind.PropertySet
-                  => FeaturesResources.property_accessor,
+                    => FeaturesResources.property_accessor,
                 MethodKind.EventAdd
                 or MethodKind.EventRaise
                 or MethodKind.EventRemove
-                  => FeaturesResources.event_accessor,
+                    => FeaturesResources.event_accessor,
                 MethodKind.BuiltinOperator
                 or MethodKind.UserDefinedOperator
                 or MethodKind.Conversion
-                  => FeaturesResources.operator_,
+                    => FeaturesResources.operator_,
                 _ => FeaturesResources.method,
             };
 
@@ -823,12 +823,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     (oldTree == null)
                         ? ImmutableArray<UnmappedActiveStatement>.Empty
                         : oldActiveStatementMap.GetOldActiveStatements(
-                              this,
-                              oldTree,
-                              oldText,
-                              oldRoot,
-                              cancellationToken
-                          );
+                            this,
+                            oldTree,
+                            oldText,
+                            oldRoot,
+                            cancellationToken
+                        );
 
                 var newActiveStatements = ImmutableArray.CreateBuilder<ActiveStatement>(
                     oldActiveStatements.Length
@@ -905,15 +905,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 var diagnostic =
                     (e is OutOfMemoryException)
                         ? new RudeEditDiagnostic(
-                              RudeEditKind.SourceFileTooBig,
-                              span: default,
-                              arguments: new[] { newDocument.FilePath }
-                          )
+                            RudeEditKind.SourceFileTooBig,
+                            span: default,
+                            arguments: new[] { newDocument.FilePath }
+                        )
                         : new RudeEditDiagnostic(
-                              RudeEditKind.InternalError,
-                              span: default,
-                              arguments: new[] { newDocument.FilePath, e.ToString() }
-                          );
+                            RudeEditKind.InternalError,
+                            span: default,
+                            arguments: new[] { newDocument.FilePath, e.ToString() }
+                        );
 
                 // Report as "syntax error" - we can't analyze the document
                 return DocumentAnalysisResults.SyntaxErrors(
@@ -1109,8 +1109,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 var adjustedOldStatementStart = oldMember.FullSpan.Contains(
                                     oldStatementSpan.Start
                                 )
-                                  ? oldStatementSpan.Start
-                                  : oldMember.SpanStart;
+                                    ? oldStatementSpan.Start
+                                    : oldMember.SpanStart;
 
                                 // The tracking span might have been moved outside of lambda.
                                 // It is not an error to move the statement - we just ignore it.
@@ -1578,8 +1578,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             diagnostics.Add(
                                 new RudeEditDiagnostic(
                                     isNonLeaf
-                                      ? RudeEditKind.ActiveStatementUpdate
-                                      : RudeEditKind.PartiallyExecutedActiveStatementUpdate,
+                                        ? RudeEditKind.ActiveStatementUpdate
+                                        : RudeEditKind.PartiallyExecutedActiveStatementUpdate,
                                     newSpan
                                 )
                             );
@@ -1626,8 +1626,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             diagnostics.Add(
                                 new RudeEditDiagnostic(
                                     isNonLeaf
-                                      ? RudeEditKind.DeleteActiveStatement
-                                      : RudeEditKind.PartiallyExecutedActiveStatementDelete,
+                                        ? RudeEditKind.DeleteActiveStatement
+                                        : RudeEditKind.PartiallyExecutedActiveStatementDelete,
                                     GetDeletedNodeDiagnosticSpan(match.Matches, oldStatementSyntax),
                                     arguments: new[] { FeaturesResources.code }
                                 )
@@ -1682,8 +1682,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 diagnostics.Add(
                     new RudeEditDiagnostic(
                         (e is OutOfMemoryException)
-                          ? RudeEditKind.MemberBodyTooBig
-                          : RudeEditKind.MemberBodyInternalError,
+                            ? RudeEditKind.MemberBodyTooBig
+                            : RudeEditKind.MemberBodyInternalError,
                         GetBodyDiagnosticSpan(newBody, EditKind.Update),
                         newBody,
                         arguments: new[] { GetBodyDisplayName(newBody) }
@@ -2157,8 +2157,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             diagnostics.Add(
                 new RudeEditDiagnostic(
                     aroundActiveStatement
-                      ? RudeEditKind.InsertAroundActiveStatement
-                      : RudeEditKind.Insert,
+                        ? RudeEditKind.InsertAroundActiveStatement
+                        : RudeEditKind.Insert,
                     GetDiagnosticSpan(insertedSuspensionPoint, EditKind.Insert),
                     insertedSuspensionPoint,
                     new[]
@@ -2996,8 +2996,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     {
                         rudeEditSpan = TextSpan.FromBounds(
                             lastNewToken.HasTrailingTrivia
-                              ? lastNewToken.Span.End
-                              : newTokensEnum.Current.FullSpan.Start,
+                                ? lastNewToken.Span.End
+                                : newTokensEnum.Current.FullSpan.Start,
                             newTokensEnum.Current.SpanStart
                         );
                     }
@@ -3260,7 +3260,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 exact
                     ? s_exactSymbolEqualityComparer
                     : (IEqualityComparer<ITypeSymbol?>)
-                          s_runtimeSymbolEqualityComparer.SignatureTypeEquivalenceComparer
+                        s_runtimeSymbolEqualityComparer.SignatureTypeEquivalenceComparer
             ).Equals(oldType, newType);
 
         protected static bool TypesEquivalent<T>(
@@ -3426,8 +3426,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var oldModel =
                 (oldDocument != null)
                     ? await oldDocument
-                          .GetRequiredSemanticModelAsync(cancellationToken)
-                          .ConfigureAwait(false)
+                        .GetRequiredSemanticModelAsync(cancellationToken)
+                        .ConfigureAwait(false)
                     : null;
             var newModel = await newDocument
                 .GetRequiredSemanticModelAsync(cancellationToken)
@@ -3599,8 +3599,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                                         editScript.Match.OldRoot.SyntaxTree,
                                                         editScript.Match.NewRoot.SyntaxTree
                                                     )
-                                                      ? containingTypeSymbolKey
-                                                      : null
+                                                        ? containingTypeSymbolKey
+                                                        : null
                                                 )
                                             );
                                         }
@@ -3686,8 +3686,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                                     editScript.Match.OldRoot.SyntaxTree,
                                                     editScript.Match.NewRoot.SyntaxTree
                                                 )
-                                                  ? symbolKey
-                                                  : null
+                                                    ? symbolKey
+                                                    : null
                                             )
                                         );
                                     }
@@ -3717,11 +3717,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     if (hasActiveStatement)
                                     {
                                         var newSpan = IsDeclarationWithInitializer(oldDeclaration)
-                                          ? GetDeletedNodeActiveSpan(
+                                            ? GetDeletedNodeActiveSpan(
                                                 editScript.Match.Matches,
                                                 oldDeclaration
                                             )
-                                          : GetDeletedNodeDiagnosticSpan(
+                                            : GetDeletedNodeDiagnosticSpan(
                                                 editScript.Match.Matches,
                                                 oldDeclaration
                                             );
@@ -3933,8 +3933,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                                         ),
                                                         oldSymbol.ToDisplayString(
                                                             diagnosticSpan.IsEmpty
-                                                              ? s_fullyQualifiedMemberDisplayFormat
-                                                              : s_unqualifiedMemberDisplayFormat
+                                                                ? s_fullyQualifiedMemberDisplayFormat
+                                                                : s_unqualifiedMemberDisplayFormat
                                                         )
                                                     )
                                                 }
@@ -4534,8 +4534,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     editScript.Match.OldRoot.SyntaxTree,
                                     editScript.Match.NewRoot.SyntaxTree
                                 )
-                                  ? symbolKey
-                                  : null
+                                    ? symbolKey
+                                    : null
                             )
                         );
                     }
@@ -4608,8 +4608,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                                 editScript.Match.OldRoot.SyntaxTree,
                                                 editScript.Match.NewRoot.SyntaxTree
                                             )
-                                              ? containingTypeSymbolKey
-                                              : null
+                                                ? containingTypeSymbolKey
+                                                : null
                                         )
                                     );
                                 }
@@ -4719,8 +4719,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                     editScript.Match.OldRoot.SyntaxTree,
                                     editScript.Match.NewRoot.SyntaxTree
                                 )
-                                  ? symbolKey
-                                  : null
+                                    ? symbolKey
+                                    : null
                             )
                         );
                     }
@@ -4781,17 +4781,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 return (
                     (oldSymbol != null && oldSymbol.DeclaringSyntaxReferences.Length == 1)
-                      ? GetSymbolDeclarationSyntax(
+                        ? GetSymbolDeclarationSyntax(
                             oldSymbol.DeclaringSyntaxReferences.Single(),
                             cancellationToken
                         )
-                      : oldNode,
+                        : oldNode,
                     (newSymbol != null && newSymbol.DeclaringSyntaxReferences.Length == 1)
-                      ? GetSymbolDeclarationSyntax(
+                        ? GetSymbolDeclarationSyntax(
                             newSymbol.DeclaringSyntaxReferences.Single(),
                             cancellationToken
                         )
-                      : newNode
+                        : newNode
                 );
             }
         }
@@ -5519,8 +5519,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             topMatch.OldRoot.SyntaxTree,
                             topMatch.NewRoot.SyntaxTree
                         )
-                          ? symbolKey
-                          : null
+                            ? symbolKey
+                            : null
                     )
                 );
             }
@@ -5542,8 +5542,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             topMatch.OldRoot.SyntaxTree,
                             topMatch.NewRoot.SyntaxTree
                         )
-                          ? containingTypeSymbolKey
-                          : null
+                            ? containingTypeSymbolKey
+                            : null
                     )
                 );
             }
@@ -5847,7 +5847,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     "System.Runtime.InteropServices.PreserveSigAttribute" => true,
                     "System.Runtime.InteropServices.StructLayoutAttribute" => true,
                     "System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeImportAttribute"
-                      => true,
+                        => true,
                     "System.Security.DynamicSecurityMethodAttribute" => true,
                     "System.SerializableAttribute" => true,
 
@@ -6067,10 +6067,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 or RudeEditKind.ChangeImplicitMainReturnType
                 or RudeEditKind.GenericMethodUpdate
                 or RudeEditKind.GenericTypeUpdate
-                  => Array.Empty<string>(),
+                    => Array.Empty<string>(),
 
                 RudeEditKind.ChangingReloadableTypeNotSupportedByRuntime
-                  => new[] { CreateNewOnMetadataUpdateAttributeName },
+                    => new[] { CreateNewOnMetadataUpdateAttributeName },
 
                 _ => new[] { GetDisplayName(newSymbol) }
             };
@@ -6216,8 +6216,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             diagnostics.Add(
                 new RudeEditDiagnostic(
                     intoStruct
-                      ? RudeEditKind.InsertIntoStruct
-                      : RudeEditKind.InsertIntoClassWithLayout,
+                        ? RudeEditKind.InsertIntoStruct
+                        : RudeEditKind.InsertIntoClassWithLayout,
                     syntax.Span,
                     syntax,
                     new[]
@@ -6299,8 +6299,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             return newNode =>
                 newDeclaration.FullSpan.Contains(newNode.SpanStart)
-                  ? FindDeclarationBodyPartner(newDeclaration, oldDeclaration, newNode)
-                  : null;
+                    ? FindDeclarationBodyPartner(newDeclaration, oldDeclaration, newNode)
+                    : null;
         }
 
         private static Func<SyntaxNode, SyntaxNode?> CreateSyntaxMap(
@@ -6669,8 +6669,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 syntaxMapToUse,
                                 syntaxMapTree: isPartialEdit ? newSyntaxTree : null,
                                 partialType: isPartialEdit
-                                  ? SymbolKey.Create(newType, cancellationToken)
-                                  : null
+                                    ? SymbolKey.Create(newType, cancellationToken)
+                                    : null
                             )
                         );
                     }
@@ -8021,7 +8021,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 && x.Kind switch
                 {
                     TypedConstantKind.Array
-                      => x.Values.SequenceEqual(y.Values, TypedConstantComparer.Instance),
+                        => x.Values.SequenceEqual(y.Values, TypedConstantComparer.Instance),
                     _ => object.Equals(x.Value, y.Value)
                 };
 

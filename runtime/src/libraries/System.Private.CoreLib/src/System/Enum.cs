@@ -416,8 +416,8 @@ namespace System
             int ulValuesLength = ulValues.Length;
             ref ulong start = ref MemoryMarshal.GetArrayDataReference(ulValues);
             return ulValuesLength <= NumberOfValuesThreshold
-              ? SpanHelpers.IndexOf(ref start, ulValue, ulValuesLength)
-              : SpanHelpers.BinarySearch(ref start, ulValuesLength, ulValue);
+                ? SpanHelpers.IndexOf(ref start, ulValue, ulValuesLength)
+                : SpanHelpers.BinarySearch(ref start, ulValuesLength, ulValue);
         }
 
         public static bool IsDefined(Type enumType, object value)
@@ -1518,7 +1518,7 @@ namespace System
                 CorElementType.ELEMENT_TYPE_I1 => Unsafe.As<byte, sbyte>(ref data).GetHashCode(),
                 CorElementType.ELEMENT_TYPE_U1 => data.GetHashCode(),
                 CorElementType.ELEMENT_TYPE_BOOLEAN
-                  => Unsafe.As<byte, bool>(ref data).GetHashCode(),
+                    => Unsafe.As<byte, bool>(ref data).GetHashCode(),
                 CorElementType.ELEMENT_TYPE_I2 => Unsafe.As<byte, short>(ref data).GetHashCode(),
                 CorElementType.ELEMENT_TYPE_U2 => Unsafe.As<byte, ushort>(ref data).GetHashCode(),
                 CorElementType.ELEMENT_TYPE_CHAR => Unsafe.As<byte, char>(ref data).GetHashCode(),

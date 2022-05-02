@@ -17,10 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateEnumMember
     [ExportLanguageService(typeof(IGenerateEnumMemberService), LanguageNames.CSharp), Shared]
     internal partial class CSharpGenerateEnumMemberService
         : AbstractGenerateEnumMemberService<
-              CSharpGenerateEnumMemberService,
-              SimpleNameSyntax,
-              ExpressionSyntax
-          >
+            CSharpGenerateEnumMemberService,
+            SimpleNameSyntax,
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

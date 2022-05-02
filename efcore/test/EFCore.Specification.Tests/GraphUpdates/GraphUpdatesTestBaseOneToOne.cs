@@ -767,8 +767,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Equal(
                             Fixture.ForceClientNoAction
-                              ? EntityState.Unchanged
-                              : EntityState.Modified,
+                                ? EntityState.Unchanged
+                                : EntityState.Modified,
                             context.Entry(orphaned).State
                         );
                     }
@@ -2348,8 +2348,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Equal(
                             Fixture.ForceClientNoAction
-                              ? EntityState.Unchanged
-                              : EntityState.Deleted,
+                                ? EntityState.Unchanged
+                                : EntityState.Deleted,
                             context.Entry(orphaned).State
                         );
                     }
@@ -2530,8 +2530,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Equal(
                             Fixture.ForceClientNoAction
-                              ? EntityState.Unchanged
-                              : EntityState.Deleted,
+                                ? EntityState.Unchanged
+                                : EntityState.Deleted,
                             context.Entry(orphaned).State
                         );
                     }

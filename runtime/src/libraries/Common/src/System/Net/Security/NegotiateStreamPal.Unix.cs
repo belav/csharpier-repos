@@ -36,8 +36,8 @@ namespace System.Net.Security
         {
             SafeDeleteNegoContext negoContext = (SafeDeleteNegoContext)securityContext;
             return negoContext.IsNtlmUsed
-              ? NegotiationInfoClass.NTLM
-              : NegotiationInfoClass.Kerberos;
+                ? NegotiationInfoClass.NTLM
+                : NegotiationInfoClass.Kerberos;
         }
 
         private static byte[] GssWrap(
@@ -395,10 +395,10 @@ namespace System.Net.Security
 
                 SecurityStatusPalErrorCode errorCode = done
                     ? (
-                          negoContext.IsNtlmUsed && resultBuffer.Length > 0
-                              ? SecurityStatusPalErrorCode.OK
-                              : SecurityStatusPalErrorCode.CompleteNeeded
-                      )
+                        negoContext.IsNtlmUsed && resultBuffer.Length > 0
+                            ? SecurityStatusPalErrorCode.OK
+                            : SecurityStatusPalErrorCode.CompleteNeeded
+                    )
                     : SecurityStatusPalErrorCode.ContinueNeeded;
                 return new SecurityStatusPal(errorCode);
             }
@@ -593,8 +593,8 @@ namespace System.Net.Security
             return new Win32Exception(
                 NTE_FAIL,
                 (statusCode.Exception != null)
-                  ? statusCode.Exception.Message
-                  : statusCode.ErrorCode.ToString()
+                    ? statusCode.Exception.Message
+                    : statusCode.ErrorCode.ToString()
             );
         }
 
@@ -636,8 +636,8 @@ namespace System.Net.Security
             try
             {
                 return isEmptyCredential
-                  ? new SafeFreeNegoCredentials(false, string.Empty, string.Empty, string.Empty)
-                  : new SafeFreeNegoCredentials(
+                    ? new SafeFreeNegoCredentials(false, string.Empty, string.Empty, string.Empty)
+                    : new SafeFreeNegoCredentials(
                         ntlmOnly,
                         credential.UserName,
                         credential.Password,

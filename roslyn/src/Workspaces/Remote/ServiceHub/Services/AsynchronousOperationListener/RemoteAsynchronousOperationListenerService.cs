@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteAsynchronousOperationListenerService
         : BrokeredServiceBase,
-          IRemoteAsynchronousOperationListenerService
+            IRemoteAsynchronousOperationListenerService
     {
         internal sealed class Factory : FactoryBase<IRemoteAsynchronousOperationListenerService>
         {

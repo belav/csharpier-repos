@@ -366,7 +366,7 @@ namespace System.Threading
                         elapsedMsSincePreviousBlockingAdjustmentDelay
                         < _previousBlockingAdjustmentDelayMs
                             ? _previousBlockingAdjustmentDelayMs
-                              - elapsedMsSincePreviousBlockingAdjustmentDelay
+                                - elapsedMsSincePreviousBlockingAdjustmentDelay
                             : 1;
                     uint nextDelay = Math.Min(
                         nextDelayForGateActivities,

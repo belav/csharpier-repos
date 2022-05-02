@@ -2889,7 +2889,7 @@ namespace System.Reflection.Tests
 
     public interface IGenericInterfaceInherits<U, V>
         : IGenericInterface<U>,
-          IGenericInterface2<V, U>
+            IGenericInterface2<V, U>
     {
         V ReturnAndSetFieldThree(V newFieldValue);
     }
@@ -3147,10 +3147,10 @@ namespace System.Reflection.Tests
 
     internal struct Int32Impersonator
         : IComparable,
-          IFormattable,
-          IConvertible,
-          IComparable<int>,
-          IEquatable<int>
+            IFormattable,
+            IConvertible,
+            IComparable<int>,
+            IEquatable<int>
     {
         public int CompareTo(object value)
         {

@@ -117,8 +117,8 @@ namespace System.IO
         public static FileSystemInfo GetFileSystemInfo(string fullPath, bool asDirectory)
         {
             return asDirectory
-              ? (FileSystemInfo)new DirectoryInfo(fullPath, null)
-              : (FileSystemInfo)new FileInfo(fullPath, null);
+                ? (FileSystemInfo)new DirectoryInfo(fullPath, null)
+                : (FileSystemInfo)new FileInfo(fullPath, null);
         }
 
         public static DateTimeOffset GetLastAccessTime(string fullPath)

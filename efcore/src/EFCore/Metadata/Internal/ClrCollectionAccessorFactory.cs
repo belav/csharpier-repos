@@ -78,8 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             var memberInfo = GetMostDerivedMemberInfo();
             var propertyType = navigation.IsIndexerProperty()
-              ? navigation.ClrType
-              : memberInfo.GetMemberType();
+                ? navigation.ClrType
+                : memberInfo.GetMemberType();
             var elementType = propertyType.TryGetElementType(typeof(IEnumerable<>));
 
             if (elementType == null)
@@ -127,12 +127,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var fieldInfo = navigation.FieldInfo!;
 
                 return fieldInfo == null
-                  ? propertyInfo
-                  : propertyInfo == null
-                      ? fieldInfo
-                      : fieldInfo.FieldType.IsAssignableFrom(propertyInfo.PropertyType)
-                          ? propertyInfo
-                          : fieldInfo;
+                    ? propertyInfo
+                    : propertyInfo == null
+                        ? fieldInfo
+                        : fieldInfo.FieldType.IsAssignableFrom(propertyInfo.PropertyType)
+                            ? propertyInfo
+                            : fieldInfo;
             }
         }
 

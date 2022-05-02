@@ -26,14 +26,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class RelationshipDiscoveryConvention
         : IEntityTypeAddedConvention,
-          IEntityTypeIgnoredConvention,
-          IEntityTypeBaseTypeChangedConvention,
-          IEntityTypeMemberIgnoredConvention,
-          INavigationRemovedConvention,
-          INavigationAddedConvention,
-          IForeignKeyOwnershipChangedConvention,
-          IForeignKeyNullNavigationSetConvention,
-          IForeignKeyRemovedConvention
+            IEntityTypeIgnoredConvention,
+            IEntityTypeBaseTypeChangedConvention,
+            IEntityTypeMemberIgnoredConvention,
+            INavigationRemovedConvention,
+            INavigationAddedConvention,
+            IForeignKeyOwnershipChangedConvention,
+            IForeignKeyNullNavigationSetConvention,
+            IForeignKeyRemovedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="RelationshipDiscoveryConvention" />.
@@ -1210,13 +1210,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 {
                     Dependencies.Logger.MultipleNavigationProperties(
                         relationshipCandidate.NavigationProperties.Count == 0
-                          ? new[] { new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType) }
-                          : relationshipCandidate.NavigationProperties.Select(
+                            ? new[] { new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType) }
+                            : relationshipCandidate.NavigationProperties.Select(
                                 n => new Tuple<MemberInfo?, Type>(n, entityType.ClrType)
                             ),
                         relationshipCandidate.InverseProperties.Count == 0
-                          ? new[] { new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType) }
-                          : relationshipCandidate.InverseProperties.Select(
+                            ? new[] { new Tuple<MemberInfo?, Type>(null, targetEntityType.ClrType) }
+                            : relationshipCandidate.InverseProperties.Select(
                                 n => new Tuple<MemberInfo?, Type>(n, targetEntityType.ClrType)
                             )
                     );

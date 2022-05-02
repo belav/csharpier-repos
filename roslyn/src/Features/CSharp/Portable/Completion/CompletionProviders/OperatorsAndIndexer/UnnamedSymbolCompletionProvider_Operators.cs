@@ -196,8 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     TextSpan.FromBounds(
                         expressionStart,
                         dotLikeToken.Kind() == SyntaxKind.DotDotToken
-                          ? dotLikeToken.Span.Start + 1
-                          : dotLikeToken.Span.End
+                            ? dotLikeToken.Span.Start + 1
+                            : dotLikeToken.Span.End
                     ),
                     replacement
                 );

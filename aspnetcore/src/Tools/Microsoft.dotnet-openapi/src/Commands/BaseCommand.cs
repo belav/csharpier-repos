@@ -461,9 +461,9 @@ internal abstract class BaseCommand : CommandLineApplication
                     1 or 2 => parts.First(), // It's localhost or somewhere in an Intranet if 1; no www if 2.
                     3 => parts[1], // Grab XYZ in www.XYZ.domain.com or similar.
                     _
-                      => throw new NotImplementedException(
-                          "We don't handle the case that the Host has more than three segments"
-                      ),
+                        => throw new NotImplementedException(
+                            "We don't handle the case that the Host has more than three segments"
+                        ),
                 };
 
                 result = domain + DefaultExtension;

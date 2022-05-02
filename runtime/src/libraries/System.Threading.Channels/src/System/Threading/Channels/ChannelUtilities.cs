@@ -61,10 +61,10 @@ namespace System.Threading.Channels
                     ? Task.FromException<T>(CreateInvalidCompletionException())
                     : error is OperationCanceledException oce
                         ? Task.FromCanceled<T>(
-                              oce.CancellationToken.IsCancellationRequested
+                            oce.CancellationToken.IsCancellationRequested
                                 ? oce.CancellationToken
                                 : new CancellationToken(true)
-                          )
+                        )
                         : Task.FromException<T>(CreateInvalidCompletionException(error));
 
             return new ValueTask<T>(t);

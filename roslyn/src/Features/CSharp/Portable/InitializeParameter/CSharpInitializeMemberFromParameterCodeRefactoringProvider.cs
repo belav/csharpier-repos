@@ -25,11 +25,11 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.Wrapping)]
     internal class CSharpInitializeMemberFromParameterCodeRefactoringProvider
         : AbstractInitializeMemberFromParameterCodeRefactoringProvider<
-              BaseTypeDeclarationSyntax,
-              ParameterSyntax,
-              StatementSyntax,
-              ExpressionSyntax
-          >
+            BaseTypeDeclarationSyntax,
+            ParameterSyntax,
+            StatementSyntax,
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

@@ -15,7 +15,7 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class DefaultHttpControllerTypeResolverTracer
         : DefaultHttpControllerTypeResolver,
-          IDecorator<DefaultHttpControllerTypeResolver>
+            IDecorator<DefaultHttpControllerTypeResolver>
     {
         private readonly DefaultHttpControllerTypeResolver _innerResolver;
         private readonly ITraceWriter _traceWriter;

@@ -141,8 +141,8 @@ namespace Microsoft.Cci
             );
 
             return (result == 0)
-              ? CompareResourceIdentifiers(left.Id, left.Name, right.Id, right.Name)
-              : result;
+                ? CompareResourceIdentifiers(left.Id, left.Name, right.Id, right.Name)
+                : result;
         }
 
         //when comparing a string vs ordinal, the string should always be less than the ordinal. Per the spec,

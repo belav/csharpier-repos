@@ -17,7 +17,7 @@ namespace System.Threading.Tasks.Dataflow
     /// <typeparam name="TOutput">Specifies the type of data supplied by the <see cref="IPropagatorBlock{TInput,TOutput}"/>.</typeparam>
     public interface IPropagatorBlock<in TInput, out TOutput>
         : ITargetBlock<TInput>,
-          ISourceBlock<TOutput>
+            ISourceBlock<TOutput>
     {
         // No additional members beyond those inherited from ITargetBlock<TInput> and ISourceBlock<TOutput>
     }

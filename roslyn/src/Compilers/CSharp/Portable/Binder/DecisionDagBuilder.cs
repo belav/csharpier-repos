@@ -566,8 +566,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _diagnostics.Add(syntax, useSiteInfo);
                 if (
                     input.Type.IsDynamic()
-                      ? type.SpecialType == SpecialType.System_Object
-                      : conversion.IsImplicit
+                        ? type.SpecialType == SpecialType.System_Object
+                        : conversion.IsImplicit
                 )
                 {
                     // type test not needed, only the type cast
@@ -971,8 +971,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int tempIdentifier(BoundDagEvaluation e)
             {
                 return tempIdentifierMap.TryGetValue(e, out int value)
-                  ? value
-                  : tempIdentifierMap[e] = ++nextTempNumber;
+                    ? value
+                    : tempIdentifierMap[e] = ++nextTempNumber;
             }
 #endif
             return boundDecisionDag;
@@ -1250,8 +1250,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             new BoundLeafDecisionDagNode(syntax, label)
                         );
                         return bindings.IsDefaultOrEmpty
-                          ? final
-                          : uniqifyDagNode(
+                            ? final
+                            : uniqifyDagNode(
                                 new BoundWhenDecisionDagNode(syntax, bindings, null, final, null)
                             );
                     }
@@ -1318,8 +1318,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             StateForCase makeNext(Tests remainingTests)
             {
                 return remainingTests.Equals(stateForCase.RemainingTests)
-                  ? stateForCase
-                  : new StateForCase(
+                    ? stateForCase
+                    : new StateForCase(
                         stateForCase.Index,
                         stateForCase.Syntax,
                         remainingTests,
@@ -1743,8 +1743,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 out Conversion conversion
             );
             return (!conversion.Exists && isRuntimeSimilar(expressionType, patternType))
-              ? null // runtime and compile-time test behavior differ. Pretend we don't know what happens.
-              : result;
+                ? null // runtime and compile-time test behavior differ. Pretend we don't know what happens.
+                : result;
 
             static bool isRuntimeSimilar(TypeSymbol expressionType, TypeSymbol patternType)
             {
@@ -1893,10 +1893,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 int tempIdentifier(BoundDagEvaluation? e)
                 {
                     return (e == null)
-                      ? 0
-                      : tempIdentifierMap.TryGetValue(e, out int value)
-                          ? value
-                          : tempIdentifierMap[e] = ++nextTempNumber;
+                        ? 0
+                        : tempIdentifierMap.TryGetValue(e, out int value)
+                            ? value
+                            : tempIdentifierMap[e] = ++nextTempNumber;
                 }
 
                 string tempName(BoundDagTemp t)
@@ -2329,7 +2329,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Tests.Not n => n.Negated, // double negative
                         Tests.AndSequence a => new Not(a),
                         Tests.OrSequence a
-                          => Tests.AndSequence.Create(NegateSequenceElements(a.RemainingTests)), // use demorgan to prefer and sequences
+                            => Tests.AndSequence.Create(NegateSequenceElements(a.RemainingTests)), // use demorgan to prefer and sequences
                         Tests.One o => new Not(o),
                         _ => throw ExceptionUtilities.UnexpectedValue(negated),
                     };

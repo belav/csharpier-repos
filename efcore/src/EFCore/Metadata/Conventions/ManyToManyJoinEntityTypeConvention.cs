@@ -21,9 +21,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class ManyToManyJoinEntityTypeConvention
         : ISkipNavigationAddedConvention,
-          ISkipNavigationInverseChangedConvention,
-          ISkipNavigationForeignKeyChangedConvention,
-          ISkipNavigationRemovedConvention
+            ISkipNavigationInverseChangedConvention,
+            ISkipNavigationForeignKeyChangedConvention,
+            ISkipNavigationRemovedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ManyToManyJoinEntityTypeConvention" />.

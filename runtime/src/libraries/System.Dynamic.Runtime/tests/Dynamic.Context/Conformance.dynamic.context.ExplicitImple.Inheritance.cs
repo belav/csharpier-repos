@@ -116,7 +116,7 @@ namespace Dynamic.Tests
 
     public class ExplicitlyImplementedBaseAndSubInterface
         : BaseInterfaceWithOneMember1,
-          SubInterfaceWithOneMember1
+            SubInterfaceWithOneMember1
     {
         int BaseInterfaceWithOneMember1.Foo() => 0;
 
@@ -161,7 +161,7 @@ namespace Dynamic.Tests
 
     public class ExplicitlyImplementedSubInterfaceWithNewMemberAndSubInterfaceWithNoMembers
         : SubInterfaceWithNewMember,
-          SubInterfaceWithNoMembers
+            SubInterfaceWithNoMembers
     {
         int SubInterfaceWithNewMember.Foo() => 0;
 
@@ -174,7 +174,7 @@ namespace Dynamic.Tests
 
     public class ExplicitlyImplementedInterfaceWithTwoMembersAndEmptyBaseClass
         : EmptyClass,
-          BaseInterfaceWithTwoMembers
+            BaseInterfaceWithTwoMembers
     {
         int BaseInterfaceWithTwoMembers.Foo() => 0;
 
@@ -235,7 +235,7 @@ namespace Dynamic.Tests
 
     public class ExplicitlyImplementedSubInterfaceWithOneMemberAndVirtualBaseClass
         : BaseClassWithVirtualMethod,
-          SubInterfaceWithOneMember2
+            SubInterfaceWithOneMember2
     {
         int SubInterfaceWithOneMember2.Foo() => -1;
 

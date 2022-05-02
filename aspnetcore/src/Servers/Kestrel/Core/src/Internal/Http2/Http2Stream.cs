@@ -22,9 +22,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal abstract partial class Http2Stream
     : HttpProtocol,
-      IThreadPoolWorkItem,
-      IDisposable,
-      IPooledStream
+        IThreadPoolWorkItem,
+        IDisposable,
+        IPooledStream
 {
     private Http2StreamContext _context = default!;
     private Http2OutputProducer _http2Output = default!;

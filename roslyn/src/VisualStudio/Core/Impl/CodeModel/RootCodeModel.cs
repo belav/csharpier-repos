@@ -20,9 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
     [ComDefaultInterface(typeof(EnvDTE.CodeModel))]
     public sealed class RootCodeModel
         : AbstractCodeModelObject,
-          ICodeElementContainer<AbstractExternalCodeElement>,
-          EnvDTE.CodeModel,
-          EnvDTE80.CodeModel2
+            ICodeElementContainer<AbstractExternalCodeElement>,
+            EnvDTE.CodeModel,
+            EnvDTE80.CodeModel2
     {
         internal static EnvDTE.CodeModel Create(
             CodeModelState state,

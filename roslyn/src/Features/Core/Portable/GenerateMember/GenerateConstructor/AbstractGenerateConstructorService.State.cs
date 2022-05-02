@@ -386,10 +386,10 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                         result &= service.IsCaseSensitive
                             ? ctorParameter.Name == parameterName
                             : string.Equals(
-                                  ctorParameter.Name,
-                                  parameterName,
-                                  StringComparison.OrdinalIgnoreCase
-                              );
+                                ctorParameter.Name,
+                                parameterName,
+                                StringComparison.OrdinalIgnoreCase
+                            );
                     }
 
                     if (result == false)
@@ -923,16 +923,16 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
 
                 var members = withFields
                     ? SyntaxGeneratorExtensions.CreateFieldsForParameters(
-                          _parameters,
-                          ParameterToNewFieldMap,
-                          IsContainedInUnsafeType
-                      )
+                        _parameters,
+                        ParameterToNewFieldMap,
+                        IsContainedInUnsafeType
+                    )
                     : withProperties
                         ? SyntaxGeneratorExtensions.CreatePropertiesForParameters(
-                              _parameters,
-                              ParameterToNewPropertyMap,
-                              IsContainedInUnsafeType
-                          )
+                            _parameters,
+                            ParameterToNewPropertyMap,
+                            IsContainedInUnsafeType
+                        )
                         : ImmutableArray<ISymbol>.Empty;
 
                 var semanticModel = await document
@@ -942,15 +942,15 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                     !withFields && !withProperties
                         ? ImmutableArray<SyntaxNode>.Empty
                         : provider
-                          .GetService<SyntaxGenerator>()
-                          .CreateAssignmentStatements(
-                              semanticModel,
-                              _parameters,
-                              _parameterToExistingMemberMap,
-                              withFields ? ParameterToNewFieldMap : ParameterToNewPropertyMap,
-                              addNullChecks: false,
-                              preferThrowExpression: false
-                          );
+                            .GetService<SyntaxGenerator>()
+                            .CreateAssignmentStatements(
+                                semanticModel,
+                                _parameters,
+                                _parameterToExistingMemberMap,
+                                withFields ? ParameterToNewFieldMap : ParameterToNewPropertyMap,
+                                addNullChecks: false,
+                                preferThrowExpression: false
+                            );
 
                 return (members, assignments);
             }

@@ -15,9 +15,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// </summary>
 public class CompositeValueProvider
     : Collection<IValueProvider>,
-      IEnumerableValueProvider,
-      IBindingSourceValueProvider,
-      IKeyRewriterValueProvider
+        IEnumerableValueProvider,
+        IBindingSourceValueProvider,
+        IKeyRewriterValueProvider
 {
     /// <summary>
     /// Initializes a new instance of <see cref="CompositeValueProvider"/>.

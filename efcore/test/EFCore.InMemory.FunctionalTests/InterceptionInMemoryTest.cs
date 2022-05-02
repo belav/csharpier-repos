@@ -39,7 +39,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class SaveChangesInterceptionInMemoryTest
             : SaveChangesInterceptionInMemoryTestBase,
-              IClassFixture<SaveChangesInterceptionInMemoryTest.InterceptionInMemoryFixture>
+                IClassFixture<SaveChangesInterceptionInMemoryTest.InterceptionInMemoryFixture>
         {
             public SaveChangesInterceptionInMemoryTest(InterceptionInMemoryFixture fixture)
                 : base(fixture) { }
@@ -52,7 +52,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class SaveChangesInterceptionWithDiagnosticsInMemoryTest
             : SaveChangesInterceptionInMemoryTestBase,
-              IClassFixture<SaveChangesInterceptionWithDiagnosticsInMemoryTest.InterceptionInMemoryFixture>
+                IClassFixture<SaveChangesInterceptionWithDiagnosticsInMemoryTest.InterceptionInMemoryFixture>
         {
             public SaveChangesInterceptionWithDiagnosticsInMemoryTest(
                 InterceptionInMemoryFixture fixture

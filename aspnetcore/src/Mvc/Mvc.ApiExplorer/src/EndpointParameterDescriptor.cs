@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 internal sealed class EndpointParameterDescriptor
     : ParameterDescriptor,
-      IParameterInfoParameterDescriptor
+        IParameterInfoParameterDescriptor
 {
     public ParameterInfo ParameterInfo { get; set; } = default!;
 }

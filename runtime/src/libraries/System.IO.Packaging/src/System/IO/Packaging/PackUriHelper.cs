@@ -691,8 +691,8 @@ namespace System.IO.Packaging
         /// </summary>
         internal sealed class ValidatedPartUri
             : Uri,
-              IComparable<ValidatedPartUri>,
-              IEquatable<ValidatedPartUri>
+                IComparable<ValidatedPartUri>,
+                IEquatable<ValidatedPartUri>
         {
             //------------------------------------------------------
             //

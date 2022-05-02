@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.Razor;
 
 public sealed class DefaultTagHelperDescriptorProvider
     : RazorEngineFeatureBase,
-      ITagHelperDescriptorProvider
+        ITagHelperDescriptorProvider
 {
     public int Order { get; set; }
 

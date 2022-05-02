@@ -305,7 +305,7 @@ namespace Microsoft.Extensions.Hosting.Internal
 {
     public partial class ApplicationLifetime
         : Microsoft.Extensions.Hosting.IApplicationLifetime,
-          Microsoft.Extensions.Hosting.IHostApplicationLifetime
+            Microsoft.Extensions.Hosting.IHostApplicationLifetime
     {
         public ApplicationLifetime(
             Microsoft.Extensions.Logging.ILogger<Microsoft.Extensions.Hosting.Internal.ApplicationLifetime> logger
@@ -337,7 +337,7 @@ namespace Microsoft.Extensions.Hosting.Internal
     [System.Runtime.Versioning.UnsupportedOSPlatform("tvos")]
     public partial class ConsoleLifetime
         : Microsoft.Extensions.Hosting.IHostLifetime,
-          System.IDisposable
+            System.IDisposable
     {
         public ConsoleLifetime(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Hosting.ConsoleLifetimeOptions> options,
@@ -373,7 +373,7 @@ namespace Microsoft.Extensions.Hosting.Internal
 
     public partial class HostingEnvironment
         : Microsoft.Extensions.Hosting.IHostEnvironment,
-          Microsoft.Extensions.Hosting.IHostingEnvironment
+            Microsoft.Extensions.Hosting.IHostingEnvironment
     {
         public HostingEnvironment() { }
 

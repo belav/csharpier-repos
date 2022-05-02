@@ -5,8 +5,8 @@ namespace System.Security.Policy
 {
     public sealed partial class AllMembershipCondition
         : ISecurityEncodable,
-          ISecurityPolicyEncodable,
-          IMembershipCondition
+            ISecurityPolicyEncodable,
+            IMembershipCondition
     {
         public AllMembershipCondition() { }
 

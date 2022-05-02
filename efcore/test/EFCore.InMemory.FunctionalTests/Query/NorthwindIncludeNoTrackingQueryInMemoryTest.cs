@@ -8,8 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindIncludeNoTrackingQueryInMemoryTest
         : NorthwindIncludeNoTrackingQueryTestBase<
-              NorthwindQueryInMemoryFixture<NoopModelCustomizer>
-          >
+            NorthwindQueryInMemoryFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindIncludeNoTrackingQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,

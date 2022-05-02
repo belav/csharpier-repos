@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Scripting
 
     public sealed class ScriptMetadataResolver
         : MetadataReferenceResolver,
-          IEquatable<ScriptMetadataResolver>
+            IEquatable<ScriptMetadataResolver>
     {
         public static ScriptMetadataResolver Default { get; } =
             new ScriptMetadataResolver(

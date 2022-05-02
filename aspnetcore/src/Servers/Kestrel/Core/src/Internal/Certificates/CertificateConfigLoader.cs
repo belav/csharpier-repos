@@ -206,8 +206,8 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
     {
         var subject = certInfo.Subject!;
         var storeName = string.IsNullOrEmpty(certInfo.Store)
-          ? StoreName.My.ToString()
-          : certInfo.Store;
+            ? StoreName.My.ToString()
+            : certInfo.Store;
         var location = certInfo.Location;
         var storeLocation = StoreLocation.CurrentUser;
         if (!string.IsNullOrEmpty(location))

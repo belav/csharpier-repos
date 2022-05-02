@@ -1923,8 +1923,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 return ReferenceEquals(this, obj)
-                  ? true
-                  : obj.GetType() == GetType() && Equals((OrderCountDTO)obj);
+                    ? true
+                    : obj.GetType() == GetType() && Equals((OrderCountDTO)obj);
             }
 
             private bool Equals(OrderCountDTO other)
@@ -4328,11 +4328,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                         (
                             async
                                 ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                      () => context.Customers.ToListAsync()
-                                  )
+                                    () => context.Customers.ToListAsync()
+                                )
                                 : Assert.Throws<InvalidOperationException>(
-                                      () => context.Customers.ToList()
-                                  )
+                                    () => context.Customers.ToList()
+                                )
                         ).Message
                     );
                 }
@@ -4379,11 +4379,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                         (
                             async
                                 ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                      () => context.Customers.FirstAsync()
-                                  )
+                                    () => context.Customers.FirstAsync()
+                                )
                                 : Assert.Throws<InvalidOperationException>(
-                                      () => context.Customers.First()
-                                  )
+                                    () => context.Customers.First()
+                                )
                         ).Message
                     );
                 }
@@ -5911,8 +5911,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 return ReferenceEquals(this, obj)
-                  ? true
-                  : obj.GetType() == GetType() && Equals((DTO<T>)obj);
+                    ? true
+                    : obj.GetType() == GetType() && Equals((DTO<T>)obj);
             }
 
             private bool Equals(DTO<T> other)
@@ -7828,8 +7828,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var message = async
                 ? (
-                      await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                  ).Message
+                    await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                ).Message
                 : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
             Assert.Equal("Nullable object must have a value.", message);
@@ -7869,9 +7869,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Complex = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault()
                                     != null
                                         ? c.Orders
-                                          .OrderBy(e => e.OrderDate)
-                                          .FirstOrDefault()
-                                          .Customer.Orders.Any(e => e.OrderID < 11000)
+                                            .OrderBy(e => e.OrderDate)
+                                            .FirstOrDefault()
+                                            .Customer.Orders.Any(e => e.OrderID < 11000)
                                         : (bool?)false
                                 }
                         ),
@@ -7935,12 +7935,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     == null
                                         ? null
                                         : new
-                                          {
-                                              c.Orders
-                                                  .OrderBy(o => o.OrderID)
-                                                  .FirstOrDefault()
-                                                  .OrderDate
-                                          }
+                                        {
+                                            c.Orders
+                                                .OrderBy(o => o.OrderID)
+                                                .FirstOrDefault()
+                                                .OrderDate
+                                        }
                                 }
                         ),
                 elementSorter: c => c.CustomerID,
@@ -8023,8 +8023,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     c.CustomerID,
                                     OrderDate = c.Orders.Any()
-                                      ? c.Orders.First().OrderDate
-                                      : default
+                                        ? c.Orders.First().OrderDate
+                                        : default
                                 }
                         ),
                 assertOrder: true,
@@ -8292,8 +8292,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .Select(
                             c =>
                                 c.Orders.Any()
-                                  ? c.Orders.Select(o => o.CustomerID).Distinct().ToArray()
-                                  : Array.Empty<string>()
+                                    ? c.Orders.Select(o => o.CustomerID).Distinct().ToArray()
+                                    : Array.Empty<string>()
                         ),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a)

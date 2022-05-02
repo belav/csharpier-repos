@@ -105,25 +105,25 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     message =
                         (_options & DbContextLoggerOptions.SingleLine) != 0
                             ? messageBuilder
-                              .Append("-> ")
-                              .Append(message)
-                              .Replace(
-                                  Environment.NewLine,
-                                  "",
-                                  preambleLength,
-                                  messageBuilder.Length - preambleLength
-                              )
-                              .ToString()
+                                .Append("-> ")
+                                .Append(message)
+                                .Replace(
+                                    Environment.NewLine,
+                                    "",
+                                    preambleLength,
+                                    messageBuilder.Length - preambleLength
+                                )
+                                .ToString()
                             : messageBuilder
-                              .AppendLine()
-                              .Append(message)
-                              .Replace(
-                                  Environment.NewLine,
-                                  Environment.NewLine + padding,
-                                  preambleLength,
-                                  messageBuilder.Length - preambleLength
-                              )
-                              .ToString();
+                                .AppendLine()
+                                .Append(message)
+                                .Replace(
+                                    Environment.NewLine,
+                                    Environment.NewLine + padding,
+                                    preambleLength,
+                                    messageBuilder.Length - preambleLength
+                                )
+                                .ToString();
                 }
             }
 

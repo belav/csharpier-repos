@@ -15,9 +15,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 {
     internal class ConsumesMatcherPolicy
         : MatcherPolicy,
-          IEndpointComparerPolicy,
-          INodeBuilderPolicy,
-          IEndpointSelectorPolicy
+            IEndpointComparerPolicy,
+            INodeBuilderPolicy,
+            IEndpointSelectorPolicy
     {
         internal const string Http415EndpointDisplayName = "415 HTTP Unsupported Media Type";
         internal const string AnyContentType = "*/*";
@@ -120,8 +120,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                 var contentType = httpContext.Request.ContentType;
                 var mediaType = string.IsNullOrEmpty(contentType)
-                  ? (MediaType?)null
-                  : new MediaType(contentType);
+                    ? (MediaType?)null
+                    : new MediaType(contentType);
 
                 var matched = false;
                 for (var j = 0; j < metadata.ContentTypes.Count; j++)

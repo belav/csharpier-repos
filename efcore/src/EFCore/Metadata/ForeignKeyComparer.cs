@@ -23,7 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// </remarks>
     public sealed class ForeignKeyComparer
         : IEqualityComparer<IReadOnlyForeignKey>,
-          IComparer<IReadOnlyForeignKey>
+            IComparer<IReadOnlyForeignKey>
     {
         private ForeignKeyComparer() { }
 
@@ -60,8 +60,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 y?.PrincipalEntityType
             );
             return result != 0
-              ? result
-              : EntityTypeFullNameComparer.Instance.Compare(
+                ? result
+                : EntityTypeFullNameComparer.Instance.Compare(
                     x?.DeclaringEntityType,
                     y?.DeclaringEntityType
                 );

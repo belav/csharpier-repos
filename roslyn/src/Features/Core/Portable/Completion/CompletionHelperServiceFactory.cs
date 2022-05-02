@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.Completion
                     var caseSensitive = syntaxFacts?.IsCaseSensitive ?? true;
 
                     return caseSensitive
-                      ? _lazyCaseSensitiveInstance
-                      : _lazyCaseInsensitiveInstance;
+                        ? _lazyCaseSensitiveInstance
+                        : _lazyCaseInsensitiveInstance;
                 }
             }
 

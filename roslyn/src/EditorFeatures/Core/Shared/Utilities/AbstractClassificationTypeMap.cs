@@ -62,8 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         private IClassificationType GetClassificationTypeWorker(string name)
         {
             return _identityMap.TryGetValue(name, out var result)
-              ? result
-              : _registryService.GetClassificationType(name);
+                ? result
+                : _registryService.GetClassificationType(name);
         }
     }
 }

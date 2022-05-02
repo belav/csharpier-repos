@@ -42,8 +42,8 @@ namespace Microsoft.EntityFrameworkCore
             ((EntityType)entityType).SetDefiningQuery(
                 definingQuery,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

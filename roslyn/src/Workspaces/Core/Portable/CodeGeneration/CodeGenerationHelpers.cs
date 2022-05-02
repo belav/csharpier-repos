@@ -192,8 +192,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                         }
 
                         return f1.HasConstantValue
-                          ? Comparer<object>.Default.Compare(f1.ConstantValue, f2.ConstantValue)
-                          : f1.Name.CompareTo(f2.Name);
+                            ? Comparer<object>.Default.Compare(f1.ConstantValue, f2.ConstantValue)
+                            : f1.Name.CompareTo(f2.Name);
                     }
                 )
                 .ToList();
@@ -216,8 +216,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 options != null
                 && options.ReuseSyntax
                 && attribute.ApplicationSyntaxReference != null
-              ? attribute.ApplicationSyntaxReference.GetSyntax() as T
-              : null;
+                ? attribute.ApplicationSyntaxReference.GetSyntax() as T
+                : null;
         }
 
         public static int GetInsertionIndex<TDeclaration>(

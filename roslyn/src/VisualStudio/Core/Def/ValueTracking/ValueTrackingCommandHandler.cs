@@ -158,7 +158,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 or IFieldSymbol { IsReadOnly: false }
                 or IEventSymbol
                 or IParameterSymbol
-                  => selectedSymbol,
+                    => selectedSymbol,
 
                 _ => null
             };

@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
         public SeparatedSyntaxList<TNode> ToList()
         {
             return _builder == null
-              ? default(SeparatedSyntaxList<TNode>)
-              : new SeparatedSyntaxList<TNode>(new SyntaxList<GreenNode>(_builder.ToListNode()));
+                ? default(SeparatedSyntaxList<TNode>)
+                : new SeparatedSyntaxList<TNode>(new SyntaxList<GreenNode>(_builder.ToListNode()));
         }
 
         /// <summary>

@@ -61,8 +61,8 @@ namespace System.Buffers
             return new WindowsImplementation<T>(
                 handle: handle,
                 byteOffsetIntoHandle: (placement == PoisonPagePlacement.Before)
-                  ? SystemPageSize /* just after leading poison page */
-                  : checked(
+                    ? SystemPageSize /* just after leading poison page */
+                    : checked(
                         (int)(totalBytesToAllocate - SystemPageSize - cb)
                     ) /* just before trailing poison page */
                 ,

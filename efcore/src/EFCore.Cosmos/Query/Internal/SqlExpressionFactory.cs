@@ -51,9 +51,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             sqlExpression == null || sqlExpression.TypeMapping != null
                 ? sqlExpression
                 : ApplyTypeMapping(
-                      sqlExpression,
-                      _typeMappingSource.FindMapping(sqlExpression.Type, _model)
-                  );
+                    sqlExpression,
+                    _typeMappingSource.FindMapping(sqlExpression.Type, _model)
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

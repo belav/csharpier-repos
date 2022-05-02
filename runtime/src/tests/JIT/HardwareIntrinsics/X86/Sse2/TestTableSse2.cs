@@ -3415,7 +3415,7 @@ namespace IntelHardwareIntrinsicTest
                         + (
                             check != null
                                 ? (string)
-                                      $"->{check(item.Item1, item.Item2, item.Item3, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1)}, "
+                                    $"->{check(item.Item1, item.Item2, item.Item3, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1, ref item.Item4.Item1)}, "
                                 : ", "
                         )
                 );

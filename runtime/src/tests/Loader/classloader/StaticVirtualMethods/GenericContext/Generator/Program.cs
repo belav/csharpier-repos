@@ -275,8 +275,8 @@ namespace VirtualStaticInterfaceMethodTestGen
             )
             {
                 string baseType = constrainedTypeDefinition.ToString().Contains("Valuetype")
-                  ? "[System.Runtime]System.ValueType"
-                  : "[System.Runtime]System.Object";
+                    ? "[System.Runtime]System.ValueType"
+                    : "[System.Runtime]System.Object";
 
                 ClassDesc implClass = new ClassDesc();
                 implClass.BaseType = baseType;

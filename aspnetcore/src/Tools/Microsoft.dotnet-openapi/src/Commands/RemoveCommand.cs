@@ -61,8 +61,8 @@ internal class RemoveCommand : BaseCommand
         {
             var include = item.EvaluatedInclude;
             var sourceUrl = item.HasMetadata(SourceUrlAttrName)
-              ? item.GetMetadataValue(SourceUrlAttrName)
-              : null;
+                ? item.GetMetadataValue(SourceUrlAttrName)
+                : null;
             if (
                 string.Equals(include, sourceFile, StringComparison.OrdinalIgnoreCase)
                 || string.Equals(sourceUrl, sourceFile, StringComparison.OrdinalIgnoreCase)

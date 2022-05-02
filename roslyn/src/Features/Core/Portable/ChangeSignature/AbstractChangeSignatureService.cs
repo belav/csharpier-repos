@@ -131,10 +131,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             return
                 context
                     is ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
-              ? ImmutableArray.Create(
+                ? ImmutableArray.Create(
                     new ChangeSignatureCodeAction(this, changeSignatureAnalyzedSucceedContext)
                 )
-              : ImmutableArray<ChangeSignatureCodeAction>.Empty;
+                : ImmutableArray<ChangeSignatureCodeAction>.Empty;
         }
 
         internal async Task<ChangeSignatureAnalyzedContext> GetChangeSignatureContextAsync(
@@ -268,17 +268,17 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             return context switch
             {
                 ChangeSignatureAnalysisSucceededContext changeSignatureAnalyzedSucceedContext
-                  => await GetChangeSignatureResultAsync(
-                          changeSignatureAnalyzedSucceedContext,
-                          options,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetChangeSignatureResultAsync(
+                            changeSignatureAnalyzedSucceedContext,
+                            options,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 CannotChangeSignatureAnalyzedContext cannotChangeSignatureAnalyzedContext
-                  => new ChangeSignatureResult(
-                      succeeded: false,
-                      changeSignatureFailureKind: cannotChangeSignatureAnalyzedContext.CannotChangeSignatureReason
-                  ),
+                    => new ChangeSignatureResult(
+                        succeeded: false,
+                        changeSignatureFailureKind: cannotChangeSignatureAnalyzedContext.CannotChangeSignatureReason
+                    ),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -1032,8 +1032,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             {
                 separators.Add(
                     i < arguments.SeparatorCount
-                      ? arguments.GetSeparator(i)
-                      : CommaTokenWithElasticSpace()
+                        ? arguments.GetSeparator(i)
+                        : CommaTokenWithElasticSpace()
                 );
             }
 
@@ -1119,20 +1119,20 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
                         // https://github.com/dotnet/roslyn/issues/43354
                         var argument = generateAttributeArguments
                             ? Generator.AttributeArgument(
-                                  name: seenNamedArguments
-                                      || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
+                                name: seenNamedArguments
+                                || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
                                     ? addedParameter.Name
                                     : null,
-                                  expression: expression
-                              )
+                                expression: expression
+                            )
                             : Generator.Argument(
-                                  name: seenNamedArguments
-                                      || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
+                                name: seenNamedArguments
+                                || addedParameter.CallSiteKind == CallSiteKind.ValueWithName
                                     ? addedParameter.Name
                                     : null,
-                                  refKind: RefKind.None,
-                                  expression: expression
-                              );
+                                refKind: RefKind.None,
+                                expression: expression
+                            );
 
                         fullList.Add(argument);
                         separators.Add(CommaTokenWithElasticSpace());

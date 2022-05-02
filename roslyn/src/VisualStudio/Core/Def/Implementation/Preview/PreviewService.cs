@@ -20,8 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
     [ExportWorkspaceServiceFactory(typeof(IPreviewDialogService), ServiceLayer.Host), Shared]
     internal class PreviewDialogService
         : ForegroundThreadAffinitizedObject,
-          IPreviewDialogService,
-          IWorkspaceServiceFactory
+            IPreviewDialogService,
+            IWorkspaceServiceFactory
     {
         private readonly IVsPreviewChangesService _previewChanges;
         private readonly IComponentModel _componentModel;

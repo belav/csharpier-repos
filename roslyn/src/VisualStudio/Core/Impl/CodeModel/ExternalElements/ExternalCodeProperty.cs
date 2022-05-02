@@ -16,9 +16,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeProperty))]
     public sealed class ExternalCodeProperty
         : AbstractExternalCodeMember,
-          ICodeElementContainer<ExternalCodeParameter>,
-          EnvDTE.CodeProperty,
-          EnvDTE80.CodeProperty2
+            ICodeElementContainer<ExternalCodeParameter>,
+            EnvDTE.CodeProperty,
+            EnvDTE80.CodeProperty2
     {
         internal static EnvDTE.CodeProperty Create(
             CodeModelState state,
@@ -159,8 +159,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                 if (symbol.GetMethod != null)
                 {
                     return symbol.SetMethod != null
-                      ? EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadWrite
-                      : EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadOnly;
+                        ? EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadWrite
+                        : EnvDTE80.vsCMPropertyKind.vsCMPropertyKindReadOnly;
                 }
                 else if (symbol.SetMethod != null)
                 {

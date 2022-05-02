@@ -16,7 +16,7 @@ namespace Microsoft.Cci
     /// </summary>
     internal sealed class SymbolEquivalentEqualityComparer
         : IEqualityComparer<IReference?>,
-          IEqualityComparer<INamespace?>
+            IEqualityComparer<INamespace?>
     {
         public static readonly SymbolEquivalentEqualityComparer Instance =
             new SymbolEquivalentEqualityComparer();

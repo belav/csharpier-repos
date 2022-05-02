@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
     [VisualStudio.Utilities.Name(PredefinedCommandHandlerNames.CommentSelection)]
     internal class CommentUncommentSelectionCommandHandler
         : AbstractCommentSelectionBase<Operation>,
-          ICommandHandler<CommentSelectionCommandArgs>,
-          ICommandHandler<UncommentSelectionCommandArgs>
+            ICommandHandler<CommentSelectionCommandArgs>,
+            ICommandHandler<UncommentSelectionCommandArgs>
     {
         [ImportingConstructor]
         [SuppressMessage(

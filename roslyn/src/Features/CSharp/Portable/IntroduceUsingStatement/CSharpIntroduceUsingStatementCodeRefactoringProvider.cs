@@ -24,9 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
     ]
     internal sealed class CSharpIntroduceUsingStatementCodeRefactoringProvider
         : AbstractIntroduceUsingStatementCodeRefactoringProvider<
-              StatementSyntax,
-              LocalDeclarationStatementSyntax
-          >
+            StatementSyntax,
+            LocalDeclarationStatementSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(
@@ -49,10 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
         )
         {
             return parentOfStatementsToSurround is BlockSyntax block
-              ? block.Statements
-              : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
-                  ? switchSection.Statements
-                  : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
+                ? block.Statements
+                : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
+                    ? switchSection.Statements
+                    : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
         }
 
         protected override SyntaxNode WithStatements(
@@ -61,10 +61,10 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
         )
         {
             return parentOfStatementsToSurround is BlockSyntax block
-              ? block.WithStatements(statements) as SyntaxNode
-              : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
-                  ? switchSection.WithStatements(statements)
-                  : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
+                ? block.WithStatements(statements) as SyntaxNode
+                : parentOfStatementsToSurround is SwitchSectionSyntax switchSection
+                    ? switchSection.WithStatements(statements)
+                    : throw ExceptionUtilities.UnexpectedValue(parentOfStatementsToSurround);
         }
 
         protected override StatementSyntax CreateUsingStatement(

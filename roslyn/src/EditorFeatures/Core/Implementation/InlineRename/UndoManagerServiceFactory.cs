@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         internal class InlineRenameUndoManager
             : AbstractInlineRenameUndoManager<InlineRenameUndoManager.BufferUndoState>,
-              IInlineRenameUndoManager
+                IInlineRenameUndoManager
         {
             internal class BufferUndoState
             {

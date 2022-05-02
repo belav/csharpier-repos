@@ -46,8 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             var unescaped = identifier.StartsWith("@", StringComparison.Ordinal)
-              ? identifier.Substring(1)
-              : identifier;
+                ? identifier.Substring(1)
+                : identifier;
 
             var token = SyntaxFactory.Identifier(
                 default,

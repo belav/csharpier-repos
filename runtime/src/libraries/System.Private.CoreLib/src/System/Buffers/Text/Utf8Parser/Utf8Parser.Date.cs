@@ -157,7 +157,7 @@ namespace System.Buffers.Text
                 'l' => TryParseDateTimeOffsetR(source, FlipCase, out value, out bytesConsumed),
                 'O' => TryParseDateTimeOffsetO(source, out value, out bytesConsumed, out _),
                 default(char)
-                  => TryParseDateTimeOffsetDefault(source, out value, out bytesConsumed),
+                    => TryParseDateTimeOffsetDefault(source, out value, out bytesConsumed),
                 'G' => TryParseDateTimeG(source, out DateTime _, out value, out bytesConsumed),
                 _ => ParserHelpers.TryParseThrowFormatException(out value, out bytesConsumed),
             };

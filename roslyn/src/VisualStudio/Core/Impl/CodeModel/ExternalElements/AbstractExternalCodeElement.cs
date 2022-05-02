@@ -18,9 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
 {
     public abstract class AbstractExternalCodeElement
         : AbstractCodeModelObject,
-          ICodeElementContainer<AbstractExternalCodeElement>,
-          EnvDTE.CodeElement,
-          EnvDTE80.CodeElement2
+            ICodeElementContainer<AbstractExternalCodeElement>,
+            EnvDTE.CodeElement,
+            EnvDTE80.CodeElement2
     {
         protected readonly ProjectId ProjectId;
         internal readonly SymbolKey SymbolKey;

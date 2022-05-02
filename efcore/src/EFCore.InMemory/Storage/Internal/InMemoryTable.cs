@@ -323,8 +323,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
                     }
 
                     valueBuffer[index] = entry.IsModified(properties[index])
-                      ? SnapshotValue(properties[index], comparers[index], entry)
-                      : row[index];
+                        ? SnapshotValue(properties[index], comparers[index], entry)
+                        : row[index];
                 }
 
                 if (concurrencyConflicts.Count > 0)

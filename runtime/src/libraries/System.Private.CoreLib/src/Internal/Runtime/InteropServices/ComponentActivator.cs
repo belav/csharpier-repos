@@ -41,8 +41,8 @@ namespace Internal.Runtime.InteropServices
                 "System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting",
                 out bool isSupported
             )
-              ? isSupported
-              : true;
+                ? isSupported
+                : true;
 
         public delegate int ComponentEntryPoint(IntPtr args, int sizeBytes);
 

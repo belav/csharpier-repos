@@ -90,7 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     return IsLikeTupleExpression(o, out tuple);
                 case BoundConversion { Conversion: { Kind: var kind } c, Operand: var o } conversion
-                      when c.IsTupleConversion || c.IsTupleLiteralConversion:
+                when c.IsTupleConversion || c.IsTupleLiteralConversion:
                 {
                     // Push tuple conversions down to the elements.
                     if (!IsLikeTupleExpression(o, out tuple))
@@ -131,15 +131,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
                 case BoundConversion { Conversion: { Kind: var kind }, Operand: var o }
-                      when (
-                          kind == ConversionKind.ImplicitNullable
-                          || kind == ConversionKind.ExplicitNullable
-                      )
-                          && expr.Type is { } exprType
-                          && exprType.IsNullableType()
-                          && exprType
-                              .StrippedType()
-                              .Equals(o.Type, TypeCompareKind.AllIgnoreOptions):
+                when (
+                    kind == ConversionKind.ImplicitNullable
+                    || kind == ConversionKind.ExplicitNullable
+                )
+                    && expr.Type is { } exprType
+                    && exprType.IsNullableType()
+                    && exprType.StrippedType().Equals(o.Type, TypeCompareKind.AllIgnoreOptions):
                     return IsLikeTupleExpression(o, out tuple);
                 default:
                     tuple = null;
@@ -288,11 +286,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // This conversion can be performed lazily, but need not be saved.  It is treated as non-side-effecting.
                     return EvaluateSideEffectingArgumentToTemp(expr, effects, temps);
                 case BoundConversion { Conversion: { Kind: var conversionKind } conversion } bc
-                      when conversionMustBePerformedOnOriginalExpression(bc, conversionKind):
+                when conversionMustBePerformedOnOriginalExpression(bc, conversionKind):
                     // Some conversions cannot be performed on a copy of the argument and must be done early.
                     return EvaluateSideEffectingArgumentToTemp(expr, effects, temps);
                 case BoundConversion { Conversion: { IsUserDefined: true } } conv
-                      when conv.ExplicitCastInCode || enclosingConversionWasExplicit:
+                when conv.ExplicitCastInCode || enclosingConversionWasExplicit:
                     // A user-defined conversion triggered by a cast must be performed early.
                     return EvaluateSideEffectingArgumentToTemp(expr, effects, temps);
                 case BoundConversion conv:
@@ -307,7 +305,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return conv.UpdateOperand(deferredOperand);
                 }
                 case BoundObjectCreationExpression { Arguments: { Length: 0 }, Type: { } eType } _
-                      when eType.IsNullableType():
+                when eType.IsNullableType():
                     return new BoundLiteral(expr.Syntax, ConstantValue.Null, expr.Type);
                 case BoundObjectCreationExpression
                 {
@@ -619,10 +617,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         { IsNullable: true, UnderlyingConversions: var underlying } conversion,
                         Operand: var o
                     }
-                          when expr.Type.IsNullableType()
-                              && o.Type is { }
-                              && o.Type.IsNullableType()
-                              && !underlying[0].IsUserDefined:
+                    when expr.Type.IsNullableType()
+                        && o.Type is { }
+                        && o.Type.IsNullableType()
+                        && !underlying[0].IsUserDefined:
                         // Note that a user-defined conversion from K to Nullable<R> which may translate
                         // a non-null K to a null value gives rise to a lifted conversion from Nullable<K> to Nullable<R> with the same property.
                         // We therefore do not attempt to optimize nullable conversions with an underlying user-defined conversion.
@@ -668,11 +666,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Conversion: { IsNullable: true, UnderlyingConversions: var nested },
                     Operand: var o
                 } conv
-                      when expr.Type is { } exprType
-                          && exprType.IsNullableType()
-                          && o.Type is { }
-                          && o.Type.IsNullableType()
-                          && nested[0] is { IsTupleConversion: true } tupleConversion:
+                when expr.Type is { } exprType
+                    && exprType.IsNullableType()
+                    && o.Type is { }
+                    && o.Type.IsNullableType()
+                    && nested[0] is { IsTupleConversion: true } tupleConversion:
                 {
                     Debug.Assert(expr.Type is { });
                     conv.Conversion.AssertUnderlyingConversionsChecked();
@@ -946,7 +944,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression LowerConversions(BoundExpression expr)
         {
             return (expr is BoundConversion conv)
-              ? MakeConversionNode(
+                ? MakeConversionNode(
                     oldNodeOpt: conv,
                     syntax: conv.Syntax,
                     rewrittenOperand: LowerConversions(conv.Operand),
@@ -956,7 +954,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     constantValueOpt: conv.ConstantValue,
                     rewrittenType: conv.Type
                 )
-              : expr;
+                : expr;
         }
     }
 }

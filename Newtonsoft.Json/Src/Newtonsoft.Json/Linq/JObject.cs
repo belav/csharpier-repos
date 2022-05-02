@@ -55,15 +55,15 @@ namespace Newtonsoft.Json.Linq
     /// </example>
     public partial class JObject
         : JContainer,
-          IDictionary<string, JToken?>,
-          INotifyPropertyChanged
+            IDictionary<string, JToken?>,
+            INotifyPropertyChanged
 #if HAVE_COMPONENT_MODEL
-          ,
-          ICustomTypeDescriptor
+            ,
+            ICustomTypeDescriptor
 #endif
 #if HAVE_INOTIFY_PROPERTY_CHANGING
-          ,
-          INotifyPropertyChanging
+            ,
+            INotifyPropertyChanging
 #endif
     {
         private readonly JPropertyKeyedCollection _properties = new JPropertyKeyedCollection();

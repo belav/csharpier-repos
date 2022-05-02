@@ -9,8 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorDirectiveFeature
     : RazorEngineFeatureBase,
-      IRazorDirectiveFeature,
-      IConfigureRazorParserOptionsFeature
+        IRazorDirectiveFeature,
+        IConfigureRazorParserOptionsFeature
 {
     // To maintain backwards compatibility, adding to this list will default to legacy file kind.
     public ICollection<DirectiveDescriptor> Directives

@@ -24,8 +24,8 @@ namespace System.Net.NetworkInformation
 
     public partial class GatewayIPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.GatewayIPAddressInformation>,
-          System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.GatewayIPAddressInformation>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.GatewayIPAddressInformation>,
+            System.Collections.IEnumerable
     {
         protected internal GatewayIPAddressInformationCollection() { }
 
@@ -159,8 +159,8 @@ namespace System.Net.NetworkInformation
 
     public partial class IPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.IPAddressInformation>,
-          System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.IPAddressInformation>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.IPAddressInformation>,
+            System.Collections.IEnumerable
     {
         internal IPAddressInformationCollection() { }
 
@@ -391,8 +391,8 @@ namespace System.Net.NetworkInformation
 
     public partial class MulticastIPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.MulticastIPAddressInformation>,
-          System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.MulticastIPAddressInformation>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.MulticastIPAddressInformation>,
+            System.Collections.IEnumerable
     {
         protected internal MulticastIPAddressInformationCollection() { }
 
@@ -822,8 +822,8 @@ namespace System.Net.NetworkInformation
 
     public partial class UnicastIPAddressInformationCollection
         : System.Collections.Generic.ICollection<System.Net.NetworkInformation.UnicastIPAddressInformation>,
-          System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.UnicastIPAddressInformation>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Net.NetworkInformation.UnicastIPAddressInformation>,
+            System.Collections.IEnumerable
     {
         protected internal UnicastIPAddressInformationCollection() { }
 

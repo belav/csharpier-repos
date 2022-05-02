@@ -13,7 +13,7 @@ namespace System.ComponentModel.Composition.Hosting
 {
     public partial class FilteredCatalog
         : ComposablePartCatalog,
-          INotifyComposablePartCatalogChanged
+            INotifyComposablePartCatalogChanged
     {
         private readonly Func<ComposablePartDefinition, bool> _filter;
         private ComposablePartCatalog _innerCatalog;

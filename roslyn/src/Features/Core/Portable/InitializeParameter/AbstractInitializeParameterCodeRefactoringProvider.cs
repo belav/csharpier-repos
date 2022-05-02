@@ -241,8 +241,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
             var operation = semanticModel.GetOperation(
                 syntaxFacts.IsAnonymousFunctionExpression(functionDeclaration)
-                  ? functionDeclaration
-                  : functionBody,
+                    ? functionDeclaration
+                    : functionBody,
                 cancellationToken
             );
 

@@ -233,8 +233,8 @@ namespace System.Threading.Tasks.Sources.Tests
                 null,
                 0,
                 flowContext
-                  ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
-                  : ValueTaskSourceOnCompletedFlags.None
+                    ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                    : ValueTaskSourceOnCompletedFlags.None
             );
 
             await tcs.Task;
@@ -262,8 +262,8 @@ namespace System.Threading.Tasks.Sources.Tests
                 null,
                 0,
                 flowContext
-                  ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
-                  : ValueTaskSourceOnCompletedFlags.None
+                    ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                    : ValueTaskSourceOnCompletedFlags.None
             );
 
             mrvts.SetResult(1);
@@ -414,8 +414,8 @@ namespace System.Threading.Tasks.Sources.Tests
                         null,
                         0,
                         captureSyncCtx
-                          ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                          : ValueTaskSourceOnCompletedFlags.None
+                            ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                            : ValueTaskSourceOnCompletedFlags.None
                     );
                     SynchronizationContext.SetSynchronizationContext(null);
 
@@ -469,8 +469,8 @@ namespace System.Threading.Tasks.Sources.Tests
                                 null,
                                 0,
                                 captureTaskScheduler
-                                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                                  : ValueTaskSourceOnCompletedFlags.None
+                                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                    : ValueTaskSourceOnCompletedFlags.None
                             );
                         },
                         CancellationToken.None,
@@ -569,9 +569,9 @@ namespace System.Threading.Tasks.Sources.Tests
 
         private sealed class CountAsyncEnumerable
             : IAsyncEnumerable<int>, // used as the enumerable itself
-              IAsyncEnumerator<int>, // used as the enumerator returned from first call to enumerable's GetAsyncEnumerator
-              IValueTaskSource<bool>, // used as the backing store behind the ValueTask<bool> returned from each MoveNextAsync
-              IAsyncStateMachine // uses existing builder's support for ExecutionContext, optimized awaits, etc.
+                IAsyncEnumerator<int>, // used as the enumerator returned from first call to enumerable's GetAsyncEnumerator
+                IValueTaskSource<bool>, // used as the backing store behind the ValueTask<bool> returned from each MoveNextAsync
+                IAsyncStateMachine // uses existing builder's support for ExecutionContext, optimized awaits, etc.
         {
             // This implementation will generally incur only two allocations of overhead
             // for the entire enumeration:

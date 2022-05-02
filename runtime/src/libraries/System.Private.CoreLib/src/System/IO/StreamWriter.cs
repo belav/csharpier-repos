@@ -335,7 +335,7 @@ namespace System.IO
                 byteBuffer =
                     maxBytesForCharPos <= 1024
                         ? // arbitrary threshold
-                          stackalloc byte[1024]
+                        stackalloc byte[1024]
                         : (_byteBuffer = new byte[_encoding.GetMaxByteCount(_charBuffer.Length)]);
             }
 

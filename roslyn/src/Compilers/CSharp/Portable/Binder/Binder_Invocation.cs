@@ -627,7 +627,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     OutVariablePendingInference outvar => outvar.FailInference(this, diagnostics),
                     BoundDiscardExpression discard when !discard.HasExpressionType()
-                      => discard.FailInference(this, diagnostics),
+                        => discard.FailInference(this, diagnostics),
                     var arg => BindToNaturalType(arg, diagnostics)
                 };
             }
@@ -1431,10 +1431,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node,
                     methodGroup.Name,
                     invokedAsExtensionMethod
-                        && analyzedArguments.Arguments.Count > 0
-                        && (object)methodGroup.Receiver == (object)analyzedArguments.Arguments[0]
-                      ? null
-                      : methodGroup.Receiver,
+                    && analyzedArguments.Arguments.Count > 0
+                    && (object)methodGroup.Receiver == (object)analyzedArguments.Arguments[0]
+                        ? null
+                        : methodGroup.Receiver,
                     GetOriginalMethods(result),
                     methodGroup.ResultKind,
                     methodGroup.TypeArguments.ToImmutable(),
@@ -1656,8 +1656,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     WarnOnAccessOfOffDefault(
                         node.Kind() == SyntaxKind.InvocationExpression
-                          ? ((InvocationExpressionSyntax)node).Expression
-                          : node,
+                            ? ((InvocationExpressionSyntax)node).Expression
+                            : node,
                         receiver,
                         diagnostics
                     );
@@ -1691,11 +1691,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 InvocationExpressionSyntax invocation => invocation.ArgumentList.OpenParenToken,
                 BaseObjectCreationExpressionSyntax objectCreation => objectCreation.NewKeyword,
                 ConstructorInitializerSyntax constructorInitializer
-                  => constructorInitializer.ArgumentList.OpenParenToken,
+                    => constructorInitializer.ArgumentList.OpenParenToken,
                 PrimaryConstructorBaseTypeSyntax primaryConstructorBaseType
-                  => primaryConstructorBaseType.ArgumentList.OpenParenToken,
+                    => primaryConstructorBaseType.ArgumentList.OpenParenToken,
                 ElementAccessExpressionSyntax elementAccess
-                  => elementAccess.ArgumentList.OpenBracketToken,
+                    => elementAccess.ArgumentList.OpenBracketToken,
                 _ => syntax.GetFirstToken()
             };
 
@@ -2141,8 +2141,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         conversion,
                         isCast,
                         isCast
-                          ? new ConversionGroup(conversion, parameter.TypeWithAnnotations)
-                          : null,
+                            ? new ConversionGroup(conversion, parameter.TypeWithAnnotations)
+                            : null,
                         parameterType,
                         diagnostics
                     );
@@ -2269,8 +2269,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var value = q.Value;
                     var replaced = ReplaceTypeOrValueReceiver(value, useType, diagnostics);
                     return (value == replaced)
-                      ? q
-                      : q.Update(
+                        ? q
+                        : q.Update(
                             replaced,
                             q.DefinedSymbol,
                             q.Operation,
@@ -2322,8 +2322,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     constructedMethods.Add(
                         m.ConstructedFrom == m && m.Arity == typeArgumentsWithAnnotations.Length
-                          ? m.Construct(typeArgumentsWithAnnotations)
-                          : m
+                            ? m.Construct(typeArgumentsWithAnnotations)
+                            : m
                     );
                 }
 

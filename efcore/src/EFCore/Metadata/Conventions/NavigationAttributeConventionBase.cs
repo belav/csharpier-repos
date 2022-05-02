@@ -22,13 +22,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <typeparam name="TAttribute">The attribute type to look for.</typeparam>
     public abstract class NavigationAttributeConventionBase<TAttribute>
         : IEntityTypeAddedConvention,
-          IEntityTypeIgnoredConvention,
-          IEntityTypeRemovedConvention,
-          IEntityTypeBaseTypeChangedConvention,
-          IEntityTypeMemberIgnoredConvention,
-          INavigationAddedConvention,
-          ISkipNavigationAddedConvention,
-          IForeignKeyPrincipalEndChangedConvention where TAttribute : Attribute
+            IEntityTypeIgnoredConvention,
+            IEntityTypeRemovedConvention,
+            IEntityTypeBaseTypeChangedConvention,
+            IEntityTypeMemberIgnoredConvention,
+            INavigationAddedConvention,
+            ISkipNavigationAddedConvention,
+            IForeignKeyPrincipalEndChangedConvention where TAttribute : Attribute
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NavigationAttributeConventionBase{TAttribute}" />.
@@ -374,8 +374,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             return
                 targetClrType != null
                 && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
-              ? targetClrType
-              : null;
+                ? targetClrType
+                : null;
         }
 
         private Type? FindCandidateNavigationWithAttributePropertyType(
@@ -426,8 +426,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             return Attribute.IsDefined(memberInfo, typeof(TCustomAttribute), inherit: true)
-              ? memberInfo.GetCustomAttributes<TCustomAttribute>(true)
-              : Enumerable.Empty<TCustomAttribute>();
+                ? memberInfo.GetCustomAttributes<TCustomAttribute>(true)
+                : Enumerable.Empty<TCustomAttribute>();
         }
 
         /// <summary>

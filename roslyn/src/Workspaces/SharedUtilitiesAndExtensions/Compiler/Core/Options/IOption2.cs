@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Options
     /// </summary>
     internal interface IOption2 : IEquatable<IOption2?>
 #if !CODE_STYLE
-          ,
-          IOption
+            ,
+            IOption
 #endif
     {
         OptionDefinition OptionDefinition { get; }

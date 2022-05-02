@@ -418,23 +418,23 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
             return exception switch
             {
                 CosmosException { StatusCode: HttpStatusCode.PreconditionFailed }
-                  => new DbUpdateConcurrencyException(
-                      CosmosStrings.UpdateConflict(id),
-                      exception,
-                      new[] { entry }
-                  ),
+                    => new DbUpdateConcurrencyException(
+                        CosmosStrings.UpdateConflict(id),
+                        exception,
+                        new[] { entry }
+                    ),
                 CosmosException { StatusCode: HttpStatusCode.Conflict }
-                  => new DbUpdateException(
-                      CosmosStrings.UpdateConflict(id),
-                      exception,
-                      new[] { entry }
-                  ),
+                    => new DbUpdateException(
+                        CosmosStrings.UpdateConflict(id),
+                        exception,
+                        new[] { entry }
+                    ),
                 _
-                  => new DbUpdateException(
-                      CosmosStrings.UpdateStoreException(id),
-                      exception,
-                      new[] { entry }
-                  )
+                    => new DbUpdateException(
+                        CosmosStrings.UpdateStoreException(id),
+                        exception,
+                        new[] { entry }
+                    )
             };
         }
     }

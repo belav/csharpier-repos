@@ -46,8 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
     [Export(typeof(IExperiment))]
     internal sealed class KeybindingResetDetector
         : ForegroundThreadAffinitizedObject,
-          IExperiment,
-          IOleCommandTarget
+            IExperiment,
+            IOleCommandTarget
     {
         // Flight info
         private const string InternalFlightName = "keybindgoldbarint";

@@ -129,10 +129,10 @@ public static class HttpProtocol
             { Major: 1, Minor: 0 } => Http10,
             { Major: 0, Minor: 9 } => Http09,
             _
-              => throw new ArgumentOutOfRangeException(
-                  nameof(version),
-                  "Version doesn't map to a known HTTP protocol."
-              )
+                => throw new ArgumentOutOfRangeException(
+                    nameof(version),
+                    "Version doesn't map to a known HTTP protocol."
+                )
         };
     }
 }

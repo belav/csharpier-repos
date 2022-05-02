@@ -119,8 +119,8 @@ namespace ILCompiler.DependencyAnalysis
                         _codegenNodeFactory,
                         new FieldFixupSignature(
                             _verifyTypeAndFieldLayout
-                              ? ReadyToRunFixupKind.Verify_FieldOffset
-                              : ReadyToRunFixupKind.Check_FieldOffset,
+                                ? ReadyToRunFixupKind.Verify_FieldOffset
+                                : ReadyToRunFixupKind.Check_FieldOffset,
                             key,
                             _codegenNodeFactory
                         )
@@ -174,8 +174,8 @@ namespace ILCompiler.DependencyAnalysis
                         _codegenNodeFactory,
                         _codegenNodeFactory.TypeSignature(
                             _verifyTypeAndFieldLayout
-                              ? ReadyToRunFixupKind.Verify_TypeLayout
-                              : ReadyToRunFixupKind.Check_TypeLayout,
+                                ? ReadyToRunFixupKind.Verify_TypeLayout
+                                : ReadyToRunFixupKind.Check_TypeLayout,
                             key
                         )
                     );
@@ -218,8 +218,8 @@ namespace ILCompiler.DependencyAnalysis
                         _codegenNodeFactory,
                         _codegenNodeFactory.MethodSignature(
                             key.IsIndirect
-                              ? ReadyToRunFixupKind.IndirectPInvokeTarget
-                              : ReadyToRunFixupKind.PInvokeTarget,
+                                ? ReadyToRunFixupKind.IndirectPInvokeTarget
+                                : ReadyToRunFixupKind.PInvokeTarget,
                             key.MethodWithToken,
                             isInstantiatingStub: false
                         )
@@ -546,8 +546,8 @@ namespace ILCompiler.DependencyAnalysis
             return _virtualFunctionOverrideCache.GetOrAdd(
                 _codegenNodeFactory.VirtualResolutionFixupSignature(
                     _verifyTypeAndFieldLayout
-                      ? ReadyToRunFixupKind.Verify_VirtualFunctionOverride
-                      : ReadyToRunFixupKind.Check_VirtualFunctionOverride,
+                        ? ReadyToRunFixupKind.Verify_VirtualFunctionOverride
+                        : ReadyToRunFixupKind.Check_VirtualFunctionOverride,
                     declMethod,
                     implType,
                     implMethod

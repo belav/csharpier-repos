@@ -1243,17 +1243,15 @@ namespace System.Threading.Tasks
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
                     : parallelOptions.CancellationToken.UnsafeRegister(
-                          (o) =>
-                          {
-                              // Record our cancellation before stopping processing
-                              oce = new OperationCanceledException(
-                                  parallelOptions.CancellationToken
-                              );
-                              // Cause processing to stop
-                              sharedPStateFlags.Cancel();
-                          },
-                          state: null
-                      );
+                        (o) =>
+                        {
+                            // Record our cancellation before stopping processing
+                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
+                            // Cause processing to stop
+                            sharedPStateFlags.Cancel();
+                        },
+                        state: null
+                    );
 
             // ETW event for Parallel For begin
             int forkJoinContextID = 0;
@@ -1587,17 +1585,15 @@ namespace System.Threading.Tasks
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
                     : parallelOptions.CancellationToken.UnsafeRegister(
-                          (o) =>
-                          {
-                              // Record our cancellation before stopping processing
-                              oce = new OperationCanceledException(
-                                  parallelOptions.CancellationToken
-                              );
-                              // Cause processing to stop
-                              sharedPStateFlags.Cancel();
-                          },
-                          state: null
-                      );
+                        (o) =>
+                        {
+                            // Record our cancellation before stopping processing
+                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
+                            // Cause processing to stop
+                            sharedPStateFlags.Cancel();
+                        },
+                        state: null
+                    );
 
             // ETW event for Parallel For begin
             int forkJoinContextID = 0;
@@ -3832,17 +3828,15 @@ namespace System.Threading.Tasks
                 (!parallelOptions.CancellationToken.CanBeCanceled)
                     ? default(CancellationTokenRegistration)
                     : parallelOptions.CancellationToken.UnsafeRegister(
-                          (o) =>
-                          {
-                              // Record our cancellation before stopping processing
-                              oce = new OperationCanceledException(
-                                  parallelOptions.CancellationToken
-                              );
-                              // Cause processing to stop
-                              sharedPStateFlags.Cancel();
-                          },
-                          state: null
-                      );
+                        (o) =>
+                        {
+                            // Record our cancellation before stopping processing
+                            oce = new OperationCanceledException(parallelOptions.CancellationToken);
+                            // Cause processing to stop
+                            sharedPStateFlags.Cancel();
+                        },
+                        state: null
+                    );
 
             // Get our dynamic partitioner -- depends on whether source is castable to OrderablePartitioner
             // Also, do some error checking.

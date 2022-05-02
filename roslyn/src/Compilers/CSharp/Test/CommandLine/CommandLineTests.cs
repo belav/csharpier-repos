@@ -3475,8 +3475,8 @@ print Goodbye, World";
                     var mdProvider = isEmbeddedPdb
                         ? peReader.ReadEmbeddedPortablePdbDebugDirectoryData(entry)
                         : MetadataReaderProvider.FromPortablePdbStream(
-                              File.OpenRead(Path.Combine(dir.Path, "embed.pdb"))
-                          )
+                            File.OpenRead(Path.Combine(dir.Path, "embed.pdb"))
+                        )
                 )
                 {
                     var mdReader = mdProvider.GetMetadataReader();
@@ -8758,7 +8758,7 @@ class Test { static void Main() {} }"
         {
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-              ? ProcessUtilities.Run(
+                ? ProcessUtilities.Run(
                     "cmd",
                     $@"/C echo  ^
 class A                                                 ^
@@ -8768,7 +8768,7 @@ class A                                                 ^
 }} | {s_CSharpCompilerExecutable} /nologo /t:exe -".Replace(Environment.NewLine, string.Empty),
                     workingDirectory: tempDir
                 )
-              : ProcessUtilities.Run(
+                : ProcessUtilities.Run(
                     "/usr/bin/env",
                     $@"sh -c ""echo  \
 class A                                                               \
@@ -8791,13 +8791,13 @@ class A                                                               \
             );
 
             string output = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-              ? ProcessUtilities.RunAndGetOutput(
+                ? ProcessUtilities.RunAndGetOutput(
                     "cmd.exe",
                     $@"/C ""{s_DotnetCscRun} -.exe""",
                     expectedRetCode: 0,
                     startFolder: tempDir
                 )
-              : ProcessUtilities.RunAndGetOutput(
+                : ProcessUtilities.RunAndGetOutput(
                     "sh",
                     $@"-c ""{s_DotnetCscRun} -.exe""",
                     expectedRetCode: 0,
@@ -8813,7 +8813,7 @@ class A                                                               \
             var name = Guid.NewGuid().ToString() + ".dll";
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-              ? ProcessUtilities.Run(
+                ? ProcessUtilities.Run(
                     "cmd",
                     $@"/C echo  ^
 class A                                                 ^
@@ -8825,7 +8825,7 @@ class A                                                 ^
                     ),
                     workingDirectory: tempDir
                 )
-              : ProcessUtilities.Run(
+                : ProcessUtilities.Run(
                     "/usr/bin/env",
                     $@"sh -c ""echo  \
 class A                                                               \
@@ -8858,11 +8858,11 @@ class A                                                               \
         {
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-              ? ProcessUtilities.Run(
+                ? ProcessUtilities.Run(
                     "cmd",
                     $@"/C echo Console.WriteLine(""Hello World!"") | {s_CSharpScriptExecutable} -"
                 )
-              : ProcessUtilities.Run(
+                : ProcessUtilities.Run(
                     "/usr/bin/env",
                     $@"sh -c ""echo Console.WriteLine\(\\\""Hello World\!\\\""\) | {s_CSharpScriptExecutable} -""",
                     workingDirectory: tempDir,
@@ -8901,12 +8901,12 @@ class A                                                               \
 
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-              ? ProcessUtilities.Run(
+                ? ProcessUtilities.Run(
                     "cmd",
                     $@"/C ""{s_CSharpCompilerExecutable} /nologo /t:exe -""",
                     workingDirectory: tempDir
                 )
-              : ProcessUtilities.Run(
+                : ProcessUtilities.Run(
                     "/usr/bin/env",
                     $@"sh -c ""{s_CSharpCompilerExecutable} /nologo /t:exe -""",
                     workingDirectory: tempDir
@@ -8924,7 +8924,7 @@ class A                                                               \
         {
             string tempDir = Temp.CreateDirectory().Path;
             ProcessResult result = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-              ? ProcessUtilities.Run(
+                ? ProcessUtilities.Run(
                     "cmd",
                     $@"/C echo  ^
 class A                                                 ^
@@ -8933,7 +8933,7 @@ class A                                                 ^
         System.Console.WriteLine(""Hello World!"");     ^
 }} | {s_CSharpCompilerExecutable} /nologo - /t:exe -".Replace(Environment.NewLine, string.Empty)
                 )
-              : ProcessUtilities.Run(
+                : ProcessUtilities.Run(
                     "/usr/bin/env",
                     $@"sh -c ""echo  \
 class A                                                               \

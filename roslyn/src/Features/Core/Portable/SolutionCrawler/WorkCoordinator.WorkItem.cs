@@ -135,8 +135,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         isLowPriority,
                         activeMember: null,
                         analyzer == null
-                          ? ImmutableHashSet.Create<IIncrementalAnalyzer>()
-                          : ImmutableHashSet.Create(analyzer),
+                            ? ImmutableHashSet.Create<IIncrementalAnalyzer>()
+                            : ImmutableHashSet.Create(analyzer),
                         retry: false,
                         asyncToken
                     ) { }

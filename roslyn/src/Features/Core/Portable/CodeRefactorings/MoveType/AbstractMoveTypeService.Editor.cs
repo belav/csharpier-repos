@@ -76,18 +76,18 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 operationKind switch
                 {
                     MoveTypeOperationKind.MoveType
-                      => new MoveTypeEditor(service, state, fileName, cancellationToken),
+                        => new MoveTypeEditor(service, state, fileName, cancellationToken),
                     MoveTypeOperationKind.RenameType
-                      => new RenameTypeEditor(service, state, fileName, cancellationToken),
+                        => new RenameTypeEditor(service, state, fileName, cancellationToken),
                     MoveTypeOperationKind.RenameFile
-                      => new RenameFileEditor(service, state, fileName, cancellationToken),
+                        => new RenameFileEditor(service, state, fileName, cancellationToken),
                     MoveTypeOperationKind.MoveTypeNamespaceScope
-                      => new MoveTypeNamespaceScopeEditor(
-                          service,
-                          state,
-                          fileName,
-                          cancellationToken
-                      ),
+                        => new MoveTypeNamespaceScopeEditor(
+                            service,
+                            state,
+                            fileName,
+                            cancellationToken
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(operationKind),
                 };
         }

@@ -323,11 +323,11 @@ namespace System.Globalization
         ) =>
             GlobalizationMode.Invariant
                 ? InvariantModeCasing.CompareStringIgnoreCase(
-                      ref MemoryMarshal.GetReference(string1),
-                      string1.Length,
-                      ref MemoryMarshal.GetReference(string2),
-                      string2.Length
-                  )
+                    ref MemoryMarshal.GetReference(string1),
+                    string1.Length,
+                    ref MemoryMarshal.GetReference(string2),
+                    string2.Length
+                )
                 : CompareStringCore(string1, string2, CompareOptions.IgnoreCase);
 
         /// <summary>
@@ -590,8 +590,8 @@ namespace System.Globalization
             throw new ArgumentException(
                 paramName: nameof(options),
                 message: ((options & CompareOptions.Ordinal) != 0)
-                  ? SR.Argument_CompareOptionOrdinal
-                  : SR.Argument_InvalidFlag
+                    ? SR.Argument_CompareOptionOrdinal
+                    : SR.Argument_InvalidFlag
             );
         }
 

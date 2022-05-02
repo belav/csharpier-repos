@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed partial class RemoteProcessTelemetryService
         : BrokeredServiceBase,
-          IRemoteProcessTelemetryService
+            IRemoteProcessTelemetryService
     {
         internal sealed class Factory : FactoryBase<IRemoteProcessTelemetryService>
         {

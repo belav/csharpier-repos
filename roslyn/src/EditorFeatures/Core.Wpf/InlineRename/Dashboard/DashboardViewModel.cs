@@ -124,8 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             else
             {
                 _errorText = string.IsNullOrEmpty(session.ReplacementText)
-                  ? null
-                  : EditorFeaturesResources.The_new_name_is_not_a_valid_identifier;
+                    ? null
+                    : EditorFeaturesResources.The_new_name_is_not_a_valid_identifier;
             }
 
             UpdateSeverity();
@@ -201,9 +201,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _session.FileRenameInfo switch
             {
                 InlineRenameFileRenameInfo.TypeDoesNotMatchFileName
-                  => EditorFeaturesResources.Rename_file_name_doesnt_match,
+                    => EditorFeaturesResources.Rename_file_name_doesnt_match,
                 InlineRenameFileRenameInfo.TypeWithMultipleLocations
-                  => EditorFeaturesResources.Rename_file_partial_type,
+                    => EditorFeaturesResources.Rename_file_partial_type,
                 _ => EditorFeaturesResources.Rename_symbols_file
             };
 
@@ -251,11 +251,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get
             {
                 return _resolvableConflictCount >= 1
-                  ? string.Format(
+                    ? string.Format(
                         EditorFeaturesResources._0_conflict_s_will_be_resolved,
                         _resolvableConflictCount
                     )
-                  : null;
+                    : null;
             }
         }
 
@@ -269,11 +269,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get
             {
                 return _unresolvableConflictCount >= 1
-                  ? string.Format(
+                    ? string.Format(
                         EditorFeaturesResources._0_unresolvable_conflict_s,
                         _unresolvableConflictCount
                     )
-                  : null;
+                    : null;
             }
         }
 

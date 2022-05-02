@@ -70,8 +70,8 @@ public class BrowserManagerConfiguration
         Combine(
             GetContextOptions(browser.ToString()),
             ContextOptions.TryGetValue(contextName, out var context)
-              ? context
-              : throw new InvalidOperationException("Invalid context name")
+                ? context
+                : throw new InvalidOperationException("Invalid context name")
         );
 
     public BrowserContextOptions GetContextOptions(
@@ -133,8 +133,8 @@ public class BrowserManagerConfiguration
                 browserKind,
                 LoadBrowserLaunchOptions(browser),
                 defaultContextOptionsSection.Exists()
-                  ? LoadContextOptions(defaultContextOptionsSection)
-                  : null
+                    ? LoadContextOptions(defaultContextOptionsSection)
+                    : null
             );
 
             BrowserOptions.Add(browserName, browserOptions);
@@ -386,11 +386,11 @@ public class BrowserManagerConfiguration
         {
             false => Array.Empty<string>(),
             true
-              => configuration
-                  .Get<Dictionary<string, bool>>()
-                  .Where(kvp => kvp.Value == true)
-                  .Select(kvp => kvp.Key)
-                  .ToArray()
+                => configuration
+                    .Get<Dictionary<string, bool>>()
+                    .Where(kvp => kvp.Value == true)
+                    .Select(kvp => kvp.Key)
+                    .ToArray()
         };
 
     private static BrowserContextOptions Combine(
@@ -404,30 +404,30 @@ public class BrowserManagerConfiguration
             RecordVideo =
                 overrideOptions?.RecordVideo != default
                     ? new()
-                      {
-                          Dir = overrideOptions.RecordVideo.Dir,
-                          Size = overrideOptions.RecordVideo.Size?.Clone()
-                      }
+                    {
+                        Dir = overrideOptions.RecordVideo.Dir,
+                        Size = overrideOptions.RecordVideo.Size?.Clone()
+                    }
                     : defaultOptions != default
                         ? new()
-                          {
-                              Dir = defaultOptions.RecordVideo.Dir,
-                              Size = defaultOptions.RecordVideo.Size?.Clone()
-                          }
+                        {
+                            Dir = defaultOptions.RecordVideo.Dir,
+                            Size = defaultOptions.RecordVideo.Size?.Clone()
+                        }
                         : default,
             RecordHar =
                 overrideOptions?.RecordHar != default
                     ? new()
-                      {
-                          Path = overrideOptions.RecordHar.Path,
-                          OmitContent = overrideOptions.RecordHar.OmitContent
-                      }
+                    {
+                        Path = overrideOptions.RecordHar.Path,
+                        OmitContent = overrideOptions.RecordHar.OmitContent
+                    }
                     : defaultOptions?.RecordHar != default
                         ? new()
-                          {
-                              Path = defaultOptions.RecordHar.Path,
-                              OmitContent = defaultOptions.RecordHar.OmitContent
-                          }
+                        {
+                            Path = defaultOptions.RecordHar.Path,
+                            OmitContent = defaultOptions.RecordHar.OmitContent
+                        }
                         : default,
             ExtraHTTPHeaders =
                 overrideOptions?.ExtraHTTPHeaders != default

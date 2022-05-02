@@ -134,16 +134,16 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             frame switch
             {
                 IgnoredFrame ignoredFrame
-                  => new IgnoredFrameViewModel(ignoredFrame, _formatMap, _classificationTypeMap),
+                    => new IgnoredFrameViewModel(ignoredFrame, _formatMap, _classificationTypeMap),
                 ParsedStackFrame stackFrame
-                  => new StackFrameViewModel(
-                      stackFrame,
-                      _threadingContext,
-                      _workspace,
-                      _formatMap,
-                      _classificationTypeMap,
-                      _streamingFindUsagesPresenter
-                  ),
+                    => new StackFrameViewModel(
+                        stackFrame,
+                        _threadingContext,
+                        _workspace,
+                        _formatMap,
+                        _classificationTypeMap,
+                        _streamingFindUsagesPresenter
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(frame)
             };
     }

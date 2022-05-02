@@ -1419,7 +1419,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             g =>
                                 null != g.LeaderNickname
                                     ? EF.Property<string>(g, "LeaderNickname").Length
-                                      != EF.Property<string>(g, "LeaderNickname").Length
+                                        != EF.Property<string>(g, "LeaderNickname").Length
                                     : (bool?)null
                         )
             );
@@ -1502,9 +1502,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         "AssignedCity"
                     ) != null
                         ? EF.Property<string>(
-                              EF.Property<Gear>(t.Gear.Tag, "Gear").AssignedCity,
-                              "Name"
-                          )
+                            EF.Property<Gear>(t.Gear.Tag, "Gear").AssignedCity,
+                            "Name"
+                        )
                         : null
             );
         }
@@ -5727,30 +5727,30 @@ namespace Microsoft.EntityFrameworkCore.Query
                     orderby t.Note, g.Nickname descending
                     select g != null
                         ? g.Squad.Members
-                          .Where(m => m.HasSoulPatch)
-                          .OrderBy(m => m.Nickname)
-                          .Select(
-                              m =>
-                                  new
-                                  {
-                                      m.Nickname,
-                                      AutomaticWeapons = m.Weapons
-                                          .Where(w => w.IsAutomatic)
-                                          .ToList()
-                                  }
-                          )
-                          .ToList()
+                            .Where(m => m.HasSoulPatch)
+                            .OrderBy(m => m.Nickname)
+                            .Select(
+                                m =>
+                                    new
+                                    {
+                                        m.Nickname,
+                                        AutomaticWeapons = m.Weapons
+                                            .Where(w => w.IsAutomatic)
+                                            .ToList()
+                                    }
+                            )
+                            .ToList()
                         : Enumerable
-                          .Empty<int>()
-                          .Select(
-                              x =>
-                                  new
-                                  {
-                                      Nickname = (string)null,
-                                      AutomaticWeapons = new List<Weapon>()
-                                  }
-                          )
-                          .ToList(),
+                            .Empty<int>()
+                            .Select(
+                                x =>
+                                    new
+                                    {
+                                        Nickname = (string)null,
+                                        AutomaticWeapons = new List<Weapon>()
+                                    }
+                            )
+                            .ToList(),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
                     AssertCollection(
@@ -5801,29 +5801,29 @@ namespace Microsoft.EntityFrameworkCore.Query
                             w =>
                                 w.Owner != null
                                     ? w.Owner.Squad.Members
-                                      .OrderByDescending(m => m.FullName)
-                                      .Select(
-                                          m =>
-                                              new
-                                              {
-                                                  Weapons = m.Weapons
-                                                      .Where(ww => !ww.IsAutomatic)
-                                                      .OrderBy(ww => ww.Id)
-                                                      .ToList(),
-                                                  m.Rank
-                                              }
-                                      )
-                                      .ToList()
+                                        .OrderByDescending(m => m.FullName)
+                                        .Select(
+                                            m =>
+                                                new
+                                                {
+                                                    Weapons = m.Weapons
+                                                        .Where(ww => !ww.IsAutomatic)
+                                                        .OrderBy(ww => ww.Id)
+                                                        .ToList(),
+                                                    m.Rank
+                                                }
+                                        )
+                                        .ToList()
                                     : Enumerable
-                                      .Empty<int>()
-                                      .Select(
-                                          x =>
-                                              new
-                                              {
-                                                  Weapons = new List<Weapon>(),
-                                                  Rank = default(MilitaryRank)
-                                              }
-                                      )
+                                        .Empty<int>()
+                                        .Select(
+                                            x =>
+                                                new
+                                                {
+                                                    Weapons = new List<Weapon>(),
+                                                    Rank = default(MilitaryRank)
+                                                }
+                                        )
                         ),
                 assertOrder: true,
                 elementAsserter: (e, a) =>
@@ -8670,8 +8670,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 {
                                     Items = t.Gear != null
                                         ? t.Gear.Weapons
-                                          .Select(w => new { w.Owner.Nickname })
-                                          .ToList()
+                                            .Select(w => new { w.Owner.Nickname })
+                                            .ToList()
                                         : null
                                 }
                         ),
@@ -9266,7 +9266,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                             g =>
                                 g.HasSoulPatch == prm
                                     ? ss.Set<Weapon>().Where(w => w.Id == g.SquadId).Single().Name
-                                      == prm2
+                                        == prm2
                                     : g.CityOfBirthName == prm3
                         )
             );
@@ -10594,11 +10594,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10621,11 +10621,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10639,11 +10639,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10668,11 +10668,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10696,11 +10696,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10723,11 +10723,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10755,11 +10755,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10776,11 +10776,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10813,11 +10813,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10854,11 +10854,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10884,11 +10884,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10923,11 +10923,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )
@@ -10983,11 +10983,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     x.Note,
                                     Nullable = x.GearNickName != null
                                         ? new
-                                          {
-                                              x.Gear.Nickname,
-                                              x.Gear.SquadId,
-                                              x.Gear.HasSoulPatch
-                                          }
+                                        {
+                                            x.Gear.Nickname,
+                                            x.Gear.SquadId,
+                                            x.Gear.HasSoulPatch
+                                        }
                                         : null
                                 }
                         )

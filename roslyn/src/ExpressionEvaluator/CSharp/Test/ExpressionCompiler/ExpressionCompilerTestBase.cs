@@ -241,8 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     new MetadataContextId(mvid),
                     out CSharpMetadataContext context
                 )
-              ? context
-              : default;
+                ? context
+                : default;
         }
 
         internal static MetadataContext<CSharpMetadataContext> SetMetadataContext(
@@ -451,8 +451,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 source,
                 parseOptions: SyntaxHelpers.ParseOptions,
                 options: (outputKind == OutputKind.DynamicallyLinkedLibrary)
-                  ? TestOptions.DebugDll
-                  : TestOptions.DebugExe
+                    ? TestOptions.DebugDll
+                    : TestOptions.DebugExe
             );
 
             return Evaluate(
@@ -584,13 +584,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                 (parameterTypeNames == null)
                     ? candidates.FirstOrDefault()
                     : candidates.FirstOrDefault(
-                          c =>
-                              parameterTypeNames.SequenceEqual(
-                                  ((MethodSymbol)c).Parameters.Select(
-                                      p => p.TypeWithAnnotations.Type.Name
-                                  )
-                              )
-                      );
+                        c =>
+                            parameterTypeNames.SequenceEqual(
+                                ((MethodSymbol)c).Parameters.Select(
+                                    p => p.TypeWithAnnotations.Type.Name
+                                )
+                            )
+                    );
 
             Assert.False(
                 methodOrType == null,

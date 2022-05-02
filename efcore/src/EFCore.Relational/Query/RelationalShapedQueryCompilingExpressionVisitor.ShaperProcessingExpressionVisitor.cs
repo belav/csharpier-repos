@@ -183,8 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _parentVisitor = parentVisitor;
                 _resultCoordinatorParameter = Expression.Parameter(
                     splitQuery
-                      ? typeof(SplitQueryResultCoordinator)
-                      : typeof(SingleQueryResultCoordinator),
+                        ? typeof(SplitQueryResultCoordinator)
+                        : typeof(SingleQueryResultCoordinator),
                     "resultCoordinator"
                 );
                 _executionStrategyParameter = splitQuery
@@ -328,15 +328,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                     relationalCommandCache = _generateCommandCache
                         ? new RelationalCommandCache(
-                              _parentVisitor.Dependencies.MemoryCache,
-                              _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                              _parentVisitor
-                                  .RelationalDependencies
-                                  .RelationalParameterBasedSqlProcessorFactory,
-                              _selectExpression,
-                              _readerColumns,
-                              _parentVisitor._useRelationalNulls
-                          )
+                            _parentVisitor.Dependencies.MemoryCache,
+                            _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
+                            _parentVisitor
+                                .RelationalDependencies
+                                .RelationalParameterBasedSqlProcessorFactory,
+                            _selectExpression,
+                            _readerColumns,
+                            _parentVisitor._useRelationalNulls
+                        )
                         : null;
 
                     return Expression.Lambda(
@@ -455,15 +455,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                     relationalCommandCache = _generateCommandCache
                         ? new RelationalCommandCache(
-                              _parentVisitor.Dependencies.MemoryCache,
-                              _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
-                              _parentVisitor
-                                  .RelationalDependencies
-                                  .RelationalParameterBasedSqlProcessorFactory,
-                              _selectExpression,
-                              _readerColumns,
-                              _parentVisitor._useRelationalNulls
-                          )
+                            _parentVisitor.Dependencies.MemoryCache,
+                            _parentVisitor.RelationalDependencies.QuerySqlGeneratorFactory,
+                            _parentVisitor
+                                .RelationalDependencies
+                                .RelationalParameterBasedSqlProcessorFactory,
+                            _selectExpression,
+                            _readerColumns,
+                            _parentVisitor._useRelationalNulls
+                        )
                         : null;
 
                     collectionId = _collectionId;
@@ -864,13 +864,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Expression.Constant(
                                         relatedDataLoaders?.Compile(),
                                         _isAsync
-                                          ? typeof(Func<
+                                            ? typeof(Func<
                                                 QueryContext,
                                                 IExecutionStrategy,
                                                 SplitQueryResultCoordinator,
                                                 Task
                                             >)
-                                          : typeof(Action<
+                                            : typeof(Action<
                                                 QueryContext,
                                                 IExecutionStrategy,
                                                 SplitQueryResultCoordinator
@@ -1177,13 +1177,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Expression.Constant(
                                         relatedDataLoaders?.Compile(),
                                         _isAsync
-                                          ? typeof(Func<
+                                            ? typeof(Func<
                                                 QueryContext,
                                                 IExecutionStrategy,
                                                 SplitQueryResultCoordinator,
                                                 Task
                                             >)
-                                          : typeof(Action<
+                                            : typeof(Action<
                                                 QueryContext,
                                                 IExecutionStrategy,
                                                 SplitQueryResultCoordinator
@@ -1222,7 +1222,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                     var projectionIndex =
                         property == null
                             ? entityTypeIdentifyingExpressionOffsets[mappingParameter]
-                              + methodCallExpression.Arguments[1].GetConstantValue<int>()
+                                + methodCallExpression.Arguments[1].GetConstantValue<int>()
                             : _materializationContextBindings[mappingParameter][property];
                     var projection = _selectExpression.Projection[projectionIndex];
 
@@ -1259,27 +1259,27 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     navigation.IsCollection
                         ? AddToCollectionNavigation(
-                              entityParameter,
-                              relatedEntityParameter,
-                              navigation
-                          )
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
                         : AssignReferenceNavigation(
-                              entityParameter,
-                              relatedEntityParameter,
-                              navigation
-                          )
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
                 };
 
                 if (inverseNavigation != null)
                 {
                     expressions.Add(
                         inverseNavigation.IsCollection
-                          ? AddToCollectionNavigation(
+                            ? AddToCollectionNavigation(
                                 relatedEntityParameter,
                                 entityParameter,
                                 inverseNavigation
                             )
-                          : AssignReferenceNavigation(
+                            : AssignReferenceNavigation(
                                 relatedEntityParameter,
                                 entityParameter,
                                 inverseNavigation
@@ -1352,8 +1352,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 Expression valueExpression = Expression.Call(
                     getMethod.DeclaringType != typeof(DbDataReader)
-                      ? Expression.Convert(dbDataReader, getMethod.DeclaringType!)
-                      : dbDataReader,
+                        ? Expression.Convert(dbDataReader, getMethod.DeclaringType!)
+                        : dbDataReader,
                     getMethod,
                     indexExpression
                 );
@@ -1388,10 +1388,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                             bufferedColumnType,
                             nullable,
                             _indexMapParameter != null
-                              ? (
+                                ? (
                                     (ColumnExpression)_selectExpression.Projection[index].Expression
                                 ).Name
-                              : null,
+                                : null,
                             property,
                             Expression
                                 .Lambda(
@@ -1520,21 +1520,21 @@ namespace Microsoft.EntityFrameworkCore.Query
                     message =
                         exception is NullReferenceException || Equals(value, DBNull.Value)
                             ? RelationalStrings.ErrorMaterializingPropertyNullReference(
-                                  entityType,
-                                  propertyName,
-                                  expectedType
-                              )
+                                entityType,
+                                propertyName,
+                                expectedType
+                            )
                             : exception is InvalidCastException
                                 ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
-                                      entityType,
-                                      propertyName,
-                                      expectedType,
-                                      actualType
-                                  )
+                                    entityType,
+                                    propertyName,
+                                    expectedType,
+                                    actualType
+                                )
                                 : RelationalStrings.ErrorMaterializingProperty(
-                                      entityType,
-                                      propertyName
-                                  );
+                                    entityType,
+                                    propertyName
+                                );
                 }
                 else
                 {
@@ -1543,9 +1543,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
                             : exception is InvalidCastException
                                 ? RelationalStrings.ErrorMaterializingValueInvalidCast(
-                                      expectedType,
-                                      actualType
-                                  )
+                                    expectedType,
+                                    actualType
+                                )
                                 : RelationalStrings.ErrorMaterializingValue;
                 }
 

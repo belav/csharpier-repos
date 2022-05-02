@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
     {
         internal abstract class CommonEmbeddedField
             : CommonEmbeddedMember<TFieldSymbol>,
-              Cci.IFieldDefinition
+                Cci.IFieldDefinition
         {
             public readonly TEmbeddedType ContainingType;
 

@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
         /// </summary>
         private class SeparatedSyntaxListCodeActionComputer
             : AbstractCodeActionComputer<
-                  AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
-              >
+                AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
+            >
         {
             private readonly TListSyntax _listSyntax;
             private readonly SeparatedSyntaxList<TListItemSyntax> _listItems;
@@ -81,13 +81,13 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             {
                 result.Add(
                     wrappingStyle == WrappingStyle.WrapFirst_IndentRest
-                      ? Edit.UpdateBetween(
+                        ? Edit.UpdateBetween(
                             _listSyntax.GetFirstToken(),
                             NewLineTrivia,
                             _singleIndentationTrivia,
                             _listItems[0]
                         )
-                      : Edit.DeleteBetween(_listSyntax.GetFirstToken(), _listItems[0])
+                        : Edit.DeleteBetween(_listSyntax.GetFirstToken(), _listItems[0])
                 );
             }
 
@@ -113,8 +113,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             private SyntaxTrivia GetIndentationTrivia(WrappingStyle wrappingStyle)
             {
                 return wrappingStyle == WrappingStyle.UnwrapFirst_AlignRest
-                  ? _afterOpenTokenIndentationTrivia
-                  : _singleIndentationTrivia;
+                    ? _afterOpenTokenIndentationTrivia
+                    : _singleIndentationTrivia;
             }
 
             protected override async Task<

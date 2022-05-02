@@ -130,8 +130,8 @@ public abstract class ProtectedBrowserStorage
         var protectedJson = await GetProtectedJsonAsync(key);
 
         return protectedJson == null
-          ? new ProtectedBrowserStorageResult<TValue>(false, default)
-          : new ProtectedBrowserStorageResult<TValue>(
+            ? new ProtectedBrowserStorageResult<TValue>(false, default)
+            : new ProtectedBrowserStorageResult<TValue>(
                 true,
                 Unprotect<TValue>(purpose, protectedJson)
             );

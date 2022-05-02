@@ -73,9 +73,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 simpleValue =
                     favoritesInfo.SimpleDisplayString != null
                         ? new DebuggerDisplayItemInfo(
-                              favoritesInfo.SimpleDisplayString,
-                              m_targetType
-                          )
+                            favoritesInfo.SimpleDisplayString,
+                            m_targetType
+                        )
                         : null;
             }
 

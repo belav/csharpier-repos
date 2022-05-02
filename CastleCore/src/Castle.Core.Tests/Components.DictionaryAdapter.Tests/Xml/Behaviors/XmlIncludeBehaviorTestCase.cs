@@ -77,10 +77,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         public class IncludedByDeclaringType
             : BaseTestCase<
-                  IncludedByDeclaringType.IFoo,
-                  IncludedByDeclaringType.IA,
-                  IncludedByDeclaringType.IB
-              >
+                IncludedByDeclaringType.IFoo,
+                IncludedByDeclaringType.IA,
+                IncludedByDeclaringType.IB
+            >
         {
             [XmlInclude(typeof(IB))]
             public interface IFoo
@@ -116,10 +116,10 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
         public class IncludedByDeclaredType
             : BaseTestCase<
-                  IncludedByDeclaredType.IFoo,
-                  IncludedByDeclaredType.IA,
-                  IncludedByDeclaredType.IB
-              >
+                IncludedByDeclaredType.IFoo,
+                IncludedByDeclaredType.IA,
+                IncludedByDeclaredType.IB
+            >
         {
             public interface IFoo
             {

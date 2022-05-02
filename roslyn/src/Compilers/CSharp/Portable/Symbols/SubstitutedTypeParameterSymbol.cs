@@ -56,8 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return
                     ContainingSymbol.OriginalDefinition
                     != _underlyingTypeParameter.ContainingSymbol.OriginalDefinition
-                  ? this
-                  : _underlyingTypeParameter.OriginalDefinition;
+                    ? this
+                    : _underlyingTypeParameter.OriginalDefinition;
             }
         }
 

@@ -7,7 +7,7 @@ namespace System.Runtime.InteropServices.CustomMarshalers
 {
     internal sealed class EnumeratorViewOfEnumVariant
         : ICustomAdapter,
-          System.Collections.IEnumerator
+            System.Collections.IEnumerator
     {
         private readonly IEnumVARIANT _enumVariantObject;
         private bool _fetchedLastObject;

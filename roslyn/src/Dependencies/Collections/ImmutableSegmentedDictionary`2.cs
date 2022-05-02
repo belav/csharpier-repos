@@ -69,10 +69,10 @@ namespace Microsoft.CodeAnalysis.Collections
     /// </devremarks>
     internal readonly partial struct ImmutableSegmentedDictionary<TKey, TValue>
         : IImmutableDictionary<TKey, TValue>,
-          IDictionary<TKey, TValue>,
-          IReadOnlyDictionary<TKey, TValue>,
-          IDictionary,
-          IEquatable<ImmutableSegmentedDictionary<TKey, TValue>> where TKey : notnull
+            IDictionary<TKey, TValue>,
+            IReadOnlyDictionary<TKey, TValue>,
+            IDictionary,
+            IEquatable<ImmutableSegmentedDictionary<TKey, TValue>> where TKey : notnull
     {
         public static readonly ImmutableSegmentedDictionary<TKey, TValue> Empty =
             new(new SegmentedDictionary<TKey, TValue>());

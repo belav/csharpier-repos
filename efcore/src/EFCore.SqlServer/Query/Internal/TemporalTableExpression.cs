@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public abstract class TemporalTableExpression
         : TableExpressionBase,
-          IClonableTableExpressionBase
+            IClonableTableExpressionBase
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

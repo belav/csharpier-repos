@@ -402,7 +402,7 @@ namespace System.Text.Json.Serialization.Tests
 
         public class MockedAsyncEnumerable<TElement>
             : IAsyncEnumerable<TElement>,
-              IEnumerable<TElement>
+                IEnumerable<TElement>
         {
             private readonly IEnumerable<TElement> _source;
             private readonly TimeSpan _delay;

@@ -12,8 +12,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 internal static class Constants
 {
     public static readonly string UserAgent = OperatingSystem.IsBrowser()
-      ? "X-SignalR-User-Agent"
-      : "User-Agent";
+        ? "X-SignalR-User-Agent"
+        : "User-Agent";
     public static readonly string UserAgentHeader = GetUserAgentHeader();
 
     private static string GetUserAgentHeader()

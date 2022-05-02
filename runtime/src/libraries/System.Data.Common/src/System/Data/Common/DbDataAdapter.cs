@@ -907,8 +907,8 @@ namespace System.Data.Common
                         {
                             Debug.Assert(DbType.Int32 == parameter.DbType, "unexpected DbType");
                             parameter.Value = ADP.IsNull(parameter.Value)
-                              ? s_parameterValueNullValue
-                              : s_parameterValueNonNullValue;
+                                ? s_parameterValueNullValue
+                                : s_parameterValueNonNullValue;
                         }
                     }
                 }

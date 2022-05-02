@@ -215,30 +215,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             owningNode switch
             {
                 BaseFieldDeclarationSyntax
-                  => SyntaxFactory.ParseCompilationUnit(
-                      WrapInType(textToParse),
-                      options: (CSharpParseOptions)tree.Options
-                  ),
+                    => SyntaxFactory.ParseCompilationUnit(
+                        WrapInType(textToParse),
+                        options: (CSharpParseOptions)tree.Options
+                    ),
                 BaseMethodDeclarationSyntax
-                  => SyntaxFactory.ParseCompilationUnit(
-                      WrapInType(textToParse),
-                      options: (CSharpParseOptions)tree.Options
-                  ),
+                    => SyntaxFactory.ParseCompilationUnit(
+                        WrapInType(textToParse),
+                        options: (CSharpParseOptions)tree.Options
+                    ),
                 BasePropertyDeclarationSyntax
-                  => SyntaxFactory.ParseCompilationUnit(
-                      WrapInType(textToParse),
-                      options: (CSharpParseOptions)tree.Options
-                  ),
+                    => SyntaxFactory.ParseCompilationUnit(
+                        WrapInType(textToParse),
+                        options: (CSharpParseOptions)tree.Options
+                    ),
                 StatementSyntax
-                  => SyntaxFactory.ParseStatement(
-                      textToParse,
-                      options: (CSharpParseOptions)tree.Options
-                  ),
+                    => SyntaxFactory.ParseStatement(
+                        textToParse,
+                        options: (CSharpParseOptions)tree.Options
+                    ),
                 UsingDirectiveSyntax
-                  => SyntaxFactory.ParseCompilationUnit(
-                      textToParse,
-                      options: (CSharpParseOptions)tree.Options
-                  ),
+                    => SyntaxFactory.ParseCompilationUnit(
+                        textToParse,
+                        options: (CSharpParseOptions)tree.Options
+                    ),
                 _ => null,
             };
 

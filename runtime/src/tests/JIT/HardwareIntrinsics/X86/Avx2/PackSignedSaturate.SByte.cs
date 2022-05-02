@@ -693,29 +693,25 @@ namespace JIT.HardwareIntrinsics.X86
                             i < 8
                                 ? (sbyte)Math.Clamp(left[i], sbyte.MinValue, sbyte.MaxValue)
                                 : (
-                                      i < 16 && i > 7
-                                          ? (sbyte)
-                                                Math.Clamp(
-                                                    right[i % 8],
-                                                    sbyte.MinValue,
-                                                    sbyte.MaxValue
-                                                )
-                                          : (
-                                                i < 24 && i > 15
-                                                    ? (sbyte)
-                                                          Math.Clamp(
-                                                              left[i - 8],
-                                                              sbyte.MinValue,
-                                                              sbyte.MaxValue
-                                                          )
-                                                    : (sbyte)
-                                                          Math.Clamp(
-                                                              right[i - 16],
-                                                              sbyte.MinValue,
-                                                              sbyte.MaxValue
-                                                          )
-                                            )
-                                  )
+                                    i < 16 && i > 7
+                                        ? (sbyte)
+                                            Math.Clamp(right[i % 8], sbyte.MinValue, sbyte.MaxValue)
+                                        : (
+                                            i < 24 && i > 15
+                                                ? (sbyte)
+                                                    Math.Clamp(
+                                                        left[i - 8],
+                                                        sbyte.MinValue,
+                                                        sbyte.MaxValue
+                                                    )
+                                                : (sbyte)
+                                                    Math.Clamp(
+                                                        right[i - 16],
+                                                        sbyte.MinValue,
+                                                        sbyte.MaxValue
+                                                    )
+                                        )
+                                )
                         )
                     )
                     {

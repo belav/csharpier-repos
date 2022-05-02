@@ -34,7 +34,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 {
     internal abstract class AbstractOptionPreviewViewModel
         : AbstractNotifyPropertyChanged,
-          IDisposable
+            IDisposable
     {
         private readonly IComponentModel _componentModel;
         private IWpfTextViewHost _textViewHost;

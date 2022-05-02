@@ -394,8 +394,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                             solution,
                             symbol,
                             symbol.IsInterfaceType()
-                              ? InheritanceRelationship.ImplementedInterface
-                              : InheritanceRelationship.BaseType,
+                                ? InheritanceRelationship.ImplementedInterface
+                                : InheritanceRelationship.BaseType,
                             cancellationToken
                         ),
                     cancellationToken

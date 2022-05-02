@@ -336,11 +336,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 {
                     var changeRange = await ComputeChangedRangeAsync().ConfigureAwait(false);
                     return changeRange != null
-                      ? currentSnapshot.GetSpan(
+                        ? currentSnapshot.GetSpan(
                             changeRange.Value.Span.Start,
                             changeRange.Value.NewLength
                         )
-                      : currentSnapshot.GetFullSpan();
+                        : currentSnapshot.GetFullSpan();
                 }
 
                 ValueTask<TextChangeRange?> ComputeChangedRangeAsync()

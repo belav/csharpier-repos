@@ -28,8 +28,8 @@ namespace Microsoft.VisualBasic
 
     public sealed partial class Collection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public Collection() { }
 

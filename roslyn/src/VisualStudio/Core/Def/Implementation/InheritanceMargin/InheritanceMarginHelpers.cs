@@ -181,18 +181,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             var displayContent = relationship switch
             {
                 InheritanceRelationship.ImplementedInterface
-                  => ServicesVSResources.Implemented_interfaces,
+                    => ServicesVSResources.Implemented_interfaces,
                 InheritanceRelationship.BaseType => ServicesVSResources.Base_Types,
                 InheritanceRelationship.DerivedType => ServicesVSResources.Derived_types,
                 InheritanceRelationship.InheritedInterface
-                  => ServicesVSResources.Inherited_interfaces,
+                    => ServicesVSResources.Inherited_interfaces,
                 InheritanceRelationship.ImplementingType => ServicesVSResources.Implementing_types,
                 InheritanceRelationship.ImplementedMember
-                  => ServicesVSResources.Implemented_members,
+                    => ServicesVSResources.Implemented_members,
                 InheritanceRelationship.OverriddenMember => ServicesVSResources.Overridden_members,
                 InheritanceRelationship.OverridingMember => ServicesVSResources.Overriding_members,
                 InheritanceRelationship.ImplementingMember
-                  => ServicesVSResources.Implementing_members,
+                    => ServicesVSResources.Implementing_members,
                 _ => throw ExceptionUtilities.UnexpectedValue(relationship)
             };
 

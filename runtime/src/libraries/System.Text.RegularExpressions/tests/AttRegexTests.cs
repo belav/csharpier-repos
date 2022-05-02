@@ -428,7 +428,7 @@ namespace System.Text.RegularExpressions.Tests
                         nonBacktracking && nonBacktrackingCaptures != null
                             ? nonBacktrackingCaptures
                             : // nonBacktrackingCaptures value overrides the expected result in NonBacktracking mode
-                              captures;
+                            captures;
 
                     if (expected == "BADBR")
                     {

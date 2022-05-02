@@ -18,8 +18,8 @@ namespace Roslyn.Test.Utilities
 {
     internal sealed class MockSymUnmanagedReader
         : ISymUnmanagedReader,
-          ISymUnmanagedReader2,
-          ISymUnmanagedReader3
+            ISymUnmanagedReader2,
+            ISymUnmanagedReader3
     {
         private readonly ImmutableDictionary<int, MethodDebugInfoBytes> _methodDebugInfoMap;
 

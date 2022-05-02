@@ -138,8 +138,8 @@ namespace System.Net.Sockets
         {
             SocketError result;
             return s_nativeErrorToSocketError.TryGetValue(errno, out result)
-              ? result
-              : SocketError.SocketError; // unknown native error, just treat it as a generic SocketError
+                ? result
+                : SocketError.SocketError; // unknown native error, just treat it as a generic SocketError
         }
 
         internal static Interop.Error GetNativeErrorForSocketError(SocketError error)

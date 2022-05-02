@@ -197,7 +197,7 @@ namespace System.Drawing
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeleteFont(new HandleRef(this, _nativeFont));
+                        Gdip.GdipDeleteFont(new HandleRef(this, _nativeFont));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

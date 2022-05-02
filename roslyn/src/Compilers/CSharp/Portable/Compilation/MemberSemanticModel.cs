@@ -1246,13 +1246,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     disposeMethod = enumeratorInfoOpt.IsAsync
                         ? (MethodSymbol)
-                              Compilation.GetWellKnownTypeMember(
-                                  WellKnownMember.System_IAsyncDisposable__DisposeAsync
-                              )
+                            Compilation.GetWellKnownTypeMember(
+                                WellKnownMember.System_IAsyncDisposable__DisposeAsync
+                            )
                         : (MethodSymbol)
-                              Compilation.GetSpecialTypeMember(
-                                  SpecialMember.System_IDisposable__Dispose
-                              );
+                            Compilation.GetSpecialTypeMember(
+                                SpecialMember.System_IDisposable__Dispose
+                            );
                 }
             }
 
@@ -1331,12 +1331,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (bound.Cast == null)
                     ? SymbolInfo.None
                     : GetSymbolInfoForNode(
-                          SymbolInfoOptions.DefaultOptions,
-                          bound.Cast,
-                          bound.Cast,
-                          boundNodeForSyntacticParent: null,
-                          binderOpt: null
-                      );
+                        SymbolInfoOptions.DefaultOptions,
+                        bound.Cast,
+                        bound.Cast,
+                        boundNodeForSyntacticParent: null,
+                        binderOpt: null
+                    );
             var operationInfo = GetSymbolInfoForQuery(bound);
             return new QueryClauseInfo(castInfo: castInfo, operationInfo: operationInfo);
         }
@@ -1501,8 +1501,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _nodeMapLock.AssertCanRead();
                 return _guardedIOperationNodeMap.TryGetValue(node, out var operation)
-                  ? operation
-                  : null;
+                    ? operation
+                    : null;
             }
         }
 
@@ -1712,8 +1712,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ConstantValue constantValue = boundExpr.ConstantValue;
             return constantValue == null || constantValue.IsBad
-              ? default(Optional<object>)
-              : new Optional<object>(constantValue.Value);
+                ? default(Optional<object>)
+                : new Optional<object>(constantValue.Value);
         }
 
         internal override SymbolInfo GetCollectionInitializerSymbolInfoWorker(
@@ -1932,8 +1932,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(_nodeMapLock.IsWriteLockHeld || _nodeMapLock.IsReadLockHeld);
             ImmutableArray<BoundNode> result;
             return _guardedBoundNodeMap.TryGetValue(node, out result)
-              ? result
-              : default(ImmutableArray<BoundNode>);
+                ? result
+                : default(ImmutableArray<BoundNode>);
         }
 
         /// <summary>
@@ -1943,8 +1943,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             ImmutableArray<BoundNode> result;
             return _guardedBoundNodeMap.TryGetValue(node, out result)
-              ? result
-              : default(ImmutableArray<BoundNode>);
+                ? result
+                : default(ImmutableArray<BoundNode>);
         }
 
         // Adds every syntax/bound pair in a tree rooted at the given bound node to the map, and the
@@ -1973,8 +1973,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ImmutableArray<BoundNode> result;
             return _guardedBoundNodeMap.TryGetValue(syntax, out result)
-              ? result
-              : default(ImmutableArray<BoundNode>);
+                ? result
+                : default(ImmutableArray<BoundNode>);
         }
 
         protected void UnguardedAddBoundTreeForStandaloneSyntax(

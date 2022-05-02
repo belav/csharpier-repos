@@ -74,8 +74,8 @@ class Program : CommandLineApplication
         var inputPath = Path.Combine(Directory.GetCurrentDirectory(), "Baseline.xml");
         var input = XDocument.Load(inputPath);
         var sources = _sources.HasValue()
-          ? _sources.Values.Select(s => s.TrimEnd('/'))
-          : _defaultSources;
+            ? _sources.Values.Select(s => s.TrimEnd('/'))
+            : _defaultSources;
         var packageSources = sources.Select(s => new PackageSource(s));
         var providers = Repository.Provider.GetCoreV3(); // Get v2 and v3 API support
         var sourceRepositories = packageSources.Select(ps => new SourceRepository(ps, providers));
@@ -107,8 +107,8 @@ class Program : CommandLineApplication
         }
 
         var output = _output.HasValue()
-          ? _output.Value()
-          : Path.Combine(Directory.GetCurrentDirectory(), "Baseline.Designer.props");
+            ? _output.Value()
+            : Path.Combine(Directory.GetCurrentDirectory(), "Baseline.Designer.props");
 
         var packageCache =
             Environment.GetEnvironmentVariable("NUGET_PACKAGES")

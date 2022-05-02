@@ -57,14 +57,14 @@ public sealed class AuthenticatedEncryptorDescriptor : IAuthenticatedEncryptorDe
         var validationElement =
             (AuthenticatedEncryptorFactory.IsGcmAlgorithm(Configuration.EncryptionAlgorithm))
                 ? (object)
-                      new XComment(
-                          " AES-GCM includes a 128-bit authentication tag, no extra validation algorithm required. "
-                      )
+                    new XComment(
+                        " AES-GCM includes a 128-bit authentication tag, no extra validation algorithm required. "
+                    )
                 : (object)
-                      new XElement(
-                          "validation",
-                          new XAttribute("algorithm", Configuration.ValidationAlgorithm)
-                      );
+                    new XElement(
+                        "validation",
+                        new XAttribute("algorithm", Configuration.ValidationAlgorithm)
+                    );
 
         var outerElement = new XElement(
             "descriptor",

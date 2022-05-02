@@ -72,16 +72,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new JoinBlock<int, string>(
-                              new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new JoinBlock<int, string>()
             );
             DataflowTestHelpers.TestToString(
                 nameFormat =>
                     nameFormat != null
                         ? new JoinBlock<int, string, double>(
-                              new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new JoinBlock<int, string, double>()
             );
         }

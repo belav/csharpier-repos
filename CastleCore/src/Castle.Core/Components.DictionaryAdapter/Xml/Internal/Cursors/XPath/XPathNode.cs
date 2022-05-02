@@ -20,9 +20,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XPathNode
         : XmlNodeBase,
-          IXmlNode,
-          IRealizable<XPathNavigator>,
-          IRealizable<XmlNode>
+            IXmlNode,
+            IRealizable<XPathNavigator>,
+            IRealizable<XmlNode>
     {
         protected XPathNavigator node;
         protected readonly CompiledXPath xpath;
@@ -227,8 +227,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         )
         {
             return flags.SupportsMutation()
-              ? (IXmlCursor)new XPathMutableCursor(this, path, includedTypes, namespaces, flags)
-              : (IXmlCursor)new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);
+                ? (IXmlCursor)new XPathMutableCursor(this, path, includedTypes, namespaces, flags)
+                : (IXmlCursor)new XPathReadOnlyCursor(this, path, includedTypes, namespaces, flags);
         }
 
         public virtual object Evaluate(CompiledXPath path)

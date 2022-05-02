@@ -121,30 +121,30 @@ public class JSComponentInterop
                 parameterValue = parameterInfo.Kind switch
                 {
                     ParameterKind.Value
-                      => JsonSerializer.Deserialize(
-                          parameterJsonValue,
-                          parameterInfo.Type,
-                          jsonOptions
-                      ),
+                        => JsonSerializer.Deserialize(
+                            parameterJsonValue,
+                            parameterInfo.Type,
+                            jsonOptions
+                        ),
                     ParameterKind.EventCallbackWithNoParameters
-                      => CreateEventCallbackWithNoParameters(
-                          JsonSerializer.Deserialize<IJSObjectReference>(
-                              parameterJsonValue,
-                              jsonOptions
-                          )
-                      ),
+                        => CreateEventCallbackWithNoParameters(
+                            JsonSerializer.Deserialize<IJSObjectReference>(
+                                parameterJsonValue,
+                                jsonOptions
+                            )
+                        ),
                     ParameterKind.EventCallbackWithSingleParameter
-                      => CreateEventCallbackWithSingleParameter(
-                          parameterInfo.Type,
-                          JsonSerializer.Deserialize<IJSObjectReference>(
-                              parameterJsonValue,
-                              jsonOptions
-                          )
-                      ),
+                        => CreateEventCallbackWithSingleParameter(
+                            parameterInfo.Type,
+                            JsonSerializer.Deserialize<IJSObjectReference>(
+                                parameterJsonValue,
+                                jsonOptions
+                            )
+                        ),
                     var x
-                      => throw new InvalidOperationException(
-                          $"Invalid {nameof(ParameterKind)} '{x}'."
-                      )
+                        => throw new InvalidOperationException(
+                            $"Invalid {nameof(ParameterKind)} '{x}'."
+                        )
                 };
             }
             else
@@ -204,7 +204,7 @@ public class JSComponentInterop
         {
             var x when x == typeof(EventCallback) => ParameterKind.EventCallbackWithNoParameters,
             var x when x.IsGenericType && x.GetGenericTypeDefinition() == typeof(EventCallback<>)
-              => ParameterKind.EventCallbackWithSingleParameter,
+                => ParameterKind.EventCallbackWithSingleParameter,
             _ => ParameterKind.Value,
         };
 
@@ -215,8 +215,8 @@ public class JSComponentInterop
         var callback = jsObjectReference is null
             ? null
             : new Func<Task>(
-                  () => jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName).AsTask()
-              );
+                () => jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName).AsTask()
+            );
         return new(null, callback);
     }
 
@@ -228,8 +228,8 @@ public class JSComponentInterop
         var callback = jsObjectReference is null
             ? null
             : new Func<object, Task>(
-                  value => jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName, value).AsTask()
-              );
+                value => jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName, value).AsTask()
+            );
         return Activator.CreateInstance(eventCallbackType, null, callback)!;
     }
 

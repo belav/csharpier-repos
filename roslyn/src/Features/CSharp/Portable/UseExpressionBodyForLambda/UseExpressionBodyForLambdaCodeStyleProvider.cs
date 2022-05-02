@@ -26,9 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
 {
     internal partial class UseExpressionBodyForLambdaCodeStyleProvider
         : AbstractCodeStyleProvider<
-              ExpressionBodyPreference,
-              UseExpressionBodyForLambdaCodeStyleProvider
-          >
+            ExpressionBodyPreference,
+            UseExpressionBodyForLambdaCodeStyleProvider
+        >
     {
         private static readonly LocalizableString UseExpressionBodyTitle =
             new LocalizableResourceString(
@@ -176,8 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
         {
             var expressionBody = GetBodyAsExpression(currentDeclaration);
             return expressionBody == null
-              ? WithExpressionBody(currentDeclaration)
-              : WithBlockBody(semanticModel, originalDeclaration, currentDeclaration);
+                ? WithExpressionBody(currentDeclaration)
+                : WithBlockBody(semanticModel, originalDeclaration, currentDeclaration);
         }
 
         private static LambdaExpressionSyntax WithExpressionBody(LambdaExpressionSyntax declaration)

@@ -176,9 +176,9 @@ namespace System.Net.Test.Common
                     (false, true) => (streamA, streamB),
                     (true, false) => (streamB, streamA),
                     _
-                      => throw new Exception(
-                          "Expected one unidirectional and one bidirectional stream; received something else."
-                      )
+                        => throw new Exception(
+                            "Expected one unidirectional and one bidirectional stream; received something else."
+                        )
                 };
             }
             catch

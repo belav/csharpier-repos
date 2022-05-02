@@ -66,10 +66,10 @@ namespace System.Globalization.Tests
             SetValue(string.IsNullOrEmpty(entry.Trim()) ? fallbackValue : entry);
             SetSuccess(
                 useValueForStatus
-                  ? Value
-                  : string.IsNullOrEmpty(statusValue.Trim())
-                      ? statusFallbackValue
-                      : statusValue
+                    ? Value
+                    : string.IsNullOrEmpty(statusValue.Trim())
+                        ? statusFallbackValue
+                        : statusValue
             );
         }
 

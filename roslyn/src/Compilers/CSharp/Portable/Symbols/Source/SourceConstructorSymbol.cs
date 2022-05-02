@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             var methodKind = syntax.Modifiers.Any(SyntaxKind.StaticKeyword)
-              ? MethodKind.StaticConstructor
-              : MethodKind.Constructor;
+                ? MethodKind.StaticConstructor
+                : MethodKind.Constructor;
             return new SourceConstructorSymbol(
                 containingType,
                 syntax.Identifier.GetLocation(),
@@ -237,8 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool IsNullableAnalysisEnabled()
         {
             return _hasThisInitializer
-              ? flags.IsNullableAnalysisEnabled
-              : (
+                ? flags.IsNullableAnalysisEnabled
+                : (
                     (SourceMemberContainerTypeSymbol)ContainingType
                 ).IsNullableEnabledForConstructorsAndInitializers(IsStatic);
         }

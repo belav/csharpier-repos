@@ -583,8 +583,8 @@ namespace System.Threading
                     SpinWait(spinCount);
                     _spinLock.Enter(
                         upgradingToWrite
-                          ? EnterSpinLockReason.UpgradeToWrite
-                          : EnterSpinLockReason.EnterWrite
+                            ? EnterSpinLockReason.UpgradeToWrite
+                            : EnterSpinLockReason.EnterWrite
                     );
                     continue;
                 }
@@ -980,8 +980,8 @@ namespace System.Threading
             var newEvent = new EventWaitHandle(
                 false,
                 enterLockType == EnterLockType.Read
-                  ? EventResetMode.ManualReset
-                  : EventResetMode.AutoReset
+                    ? EventResetMode.ManualReset
+                    : EventResetMode.AutoReset
             );
 
             EnterSpinLockReason enterMyLockReason;

@@ -2373,8 +2373,8 @@ class C(int X, int Y)
                         N(SyntaxKind.ColonToken);
                         N(
                             withBaseArguments
-                              ? SyntaxKind.PrimaryConstructorBaseType
-                              : SyntaxKind.SimpleBaseType
+                                ? SyntaxKind.PrimaryConstructorBaseType
+                                : SyntaxKind.SimpleBaseType
                         );
                         {
                             N(SyntaxKind.IdentifierName);

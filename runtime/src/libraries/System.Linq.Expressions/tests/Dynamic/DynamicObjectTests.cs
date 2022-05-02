@@ -270,8 +270,8 @@ namespace System.Dynamic.Tests
                     binder.Name.Equals(
                         "Power",
                         binder.IgnoreCase
-                          ? StringComparison.OrdinalIgnoreCase
-                          : StringComparison.Ordinal
+                            ? StringComparison.OrdinalIgnoreCase
+                            : StringComparison.Ordinal
                     )
                     && args.Length == 2
                 )

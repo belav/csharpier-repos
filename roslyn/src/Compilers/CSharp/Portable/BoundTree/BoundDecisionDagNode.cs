@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundLeafDecisionDagNode node:
                     builder.Append(
                         node.Label is GeneratedLabelSymbol generated
-                          ? $"leaf {generated.NameNoSequence} `{node.Syntax}`"
-                          : $"leaf `{node.Label.Name}`"
+                            ? $"leaf {generated.NameNoSequence} `{node.Syntax}`"
+                            : $"leaf `{node.Label.Name}`"
                     );
                     break;
                 default:

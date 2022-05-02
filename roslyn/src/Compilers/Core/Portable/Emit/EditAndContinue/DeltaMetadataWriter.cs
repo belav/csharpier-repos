@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 debugMetadataOpt: (
                     context.Module.DebugInformationFormat == DebugInformationFormat.PortablePdb
                 )
-                  ? new MetadataBuilder()
-                  : null,
+                    ? new MetadataBuilder()
+                    : null,
                 dynamicAnalysisDataWriterOpt: null,
                 context: context,
                 messageProvider: messageProvider,

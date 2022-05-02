@@ -412,9 +412,9 @@ namespace CSharpSyntaxGenerator
             {
                 "bool" => "WriteBoolean",
                 _
-                  => throw new InvalidOperationException(
-                      $"Type '{type}' not supported for object reader serialization."
-                  ),
+                    => throw new InvalidOperationException(
+                        $"Type '{type}' not supported for object reader serialization."
+                    ),
             };
 
         private string GetReaderMethod(string type) =>
@@ -422,9 +422,9 @@ namespace CSharpSyntaxGenerator
             {
                 "bool" => "ReadBoolean",
                 _
-                  => throw new InvalidOperationException(
-                      $"Type '{type}' not supported for object reader serialization."
-                  ),
+                    => throw new InvalidOperationException(
+                        $"Type '{type}' not supported for object reader serialization."
+                    ),
             };
 
         private void WriteCtorBody(List<Field> valueFields, List<Field> nodeFields)
@@ -540,10 +540,10 @@ namespace CSharpSyntaxGenerator
                                         ? "Microsoft.CodeAnalysis.Syntax.InternalSyntax.SyntaxList<SyntaxToken>"
                                         : IsNodeList(f.Type)
                                             ? "Microsoft.CodeAnalysis.Syntax.InternalSyntax."
-                                              + f.Type
+                                                + f.Type
                                             : IsSeparatedNodeList(f.Type)
                                                 ? "Microsoft.CodeAnalysis.Syntax.InternalSyntax."
-                                                  + f.Type
+                                                    + f.Type
                                                 : f.Type;
 
                             return $"{type} {CamelCase(f.Name)}";
@@ -875,9 +875,9 @@ namespace CSharpSyntaxGenerator
                             var type = f.Type switch
                             {
                                 "SyntaxNodeOrTokenList"
-                                  => "Microsoft.CodeAnalysis.Syntax.InternalSyntax.SyntaxList<CSharpSyntaxNode>",
+                                    => "Microsoft.CodeAnalysis.Syntax.InternalSyntax.SyntaxList<CSharpSyntaxNode>",
                                 _ when IsSeparatedNodeList(f.Type) || IsNodeList(f.Type)
-                                  => $"Microsoft.CodeAnalysis.Syntax.InternalSyntax.{f.Type}",
+                                    => $"Microsoft.CodeAnalysis.Syntax.InternalSyntax.{f.Type}",
                                 _ => GetFieldType(f, green: true),
                             };
 
@@ -2027,8 +2027,8 @@ namespace CSharpSyntaxGenerator
                     nd.Fields.Select(
                         f =>
                             factoryWithNoAutoCreatableTokenFields.Contains(f)
-                              ? CamelCase(f.Name)
-                              : GetDefaultValue(nd, f)
+                                ? CamelCase(f.Name)
+                                : GetDefaultValue(nd, f)
                     )
                 )
             );

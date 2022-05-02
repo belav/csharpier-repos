@@ -756,21 +756,21 @@ namespace System.Xml
             return xntInt switch
             {
                 (int)XPathNodeType.Root
-                  => (
-                      xntChildInt == (int)XPathNodeType.Element
-                      || xntChildInt == (int)XPathNodeType.Comment
-                      || xntChildInt == (int)XPathNodeType.ProcessingInstruction
-                  ),
+                    => (
+                        xntChildInt == (int)XPathNodeType.Element
+                        || xntChildInt == (int)XPathNodeType.Comment
+                        || xntChildInt == (int)XPathNodeType.ProcessingInstruction
+                    ),
 
                 (int)XPathNodeType.Element
-                  => (
-                      xntChildInt == (int)XPathNodeType.Element
-                      || xntChildInt == (int)XPathNodeType.Text
-                      || xntChildInt == (int)XPathNodeType.Comment
-                      || xntChildInt == (int)XPathNodeType.Whitespace
-                      || xntChildInt == (int)XPathNodeType.SignificantWhitespace
-                      || xntChildInt == (int)XPathNodeType.ProcessingInstruction
-                  ),
+                    => (
+                        xntChildInt == (int)XPathNodeType.Element
+                        || xntChildInt == (int)XPathNodeType.Text
+                        || xntChildInt == (int)XPathNodeType.Comment
+                        || xntChildInt == (int)XPathNodeType.Whitespace
+                        || xntChildInt == (int)XPathNodeType.SignificantWhitespace
+                        || xntChildInt == (int)XPathNodeType.ProcessingInstruction
+                    ),
 
                 _ => false,
             };
@@ -784,10 +784,10 @@ namespace System.Xml
             {
                 (int)XPathNodeType.Root => c.ColumnMapping == MappingType.Element,
                 (int)XPathNodeType.Element
-                  => (
-                      c.ColumnMapping == MappingType.Element
-                      || c.ColumnMapping == MappingType.SimpleContent
-                  ),
+                    => (
+                        c.ColumnMapping == MappingType.Element
+                        || c.ColumnMapping == MappingType.SimpleContent
+                    ),
                 _ => false,
             };
         }
@@ -1778,8 +1778,8 @@ namespace System.Xml
                 // If we are on the Text column, we should always have _fOnValue == true
                 Debug.Assert(
                     (_column.ColumnMapping == MappingType.SimpleContent)
-                      ? (_fOnValue == true)
-                      : true
+                        ? (_fOnValue == true)
+                        : true
                 );
             }
             if (_column == null)

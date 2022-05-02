@@ -196,12 +196,12 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             )
             {
                 return op is IBlockOperation block
-                  ? ParseIfStatementSequence(
+                    ? ParseIfStatementSequence(
                         block.Operations.AsSpan(),
                         sections,
                         out defaultBodyOpt
                     )
-                  : ParseIfStatement(op, sections, out defaultBodyOpt);
+                    : ParseIfStatement(op, sections, out defaultBodyOpt);
             }
 
             private AnalyzedSwitchSection? ParseSwitchSection(IConditionalOperation operation)
@@ -283,9 +283,9 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 return (op.LeftOperand, op.RightOperand) switch
                 {
                     var (e, v) when IsConstant(v) && CheckTargetExpression(e)
-                      => ConstantResult.Right,
+                        => ConstantResult.Right,
                     var (v, e) when IsConstant(v) && CheckTargetExpression(e)
-                      => ConstantResult.Left,
+                        => ConstantResult.Left,
                     _ => ConstantResult.None,
                 };
             }
@@ -311,36 +311,36 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 switch (operation)
                 {
                     case IBinaryOperation { OperatorKind: ConditionalAnd } op
-                          when Supports(Feature.RangePattern)
-                              && GetRangeBounds(op)
-                                  is
-                                  (TExpressionSyntax lower, TExpressionSyntax higher):
+                    when Supports(Feature.RangePattern)
+                        && GetRangeBounds(op)
+                            is
+                            (TExpressionSyntax lower, TExpressionSyntax higher):
                         return new AnalyzedPattern.Range(lower, higher);
 
                     case IBinaryOperation { OperatorKind: BinaryOperatorKind.Equals } op:
                         return DetermineConstant(op) switch
                         {
                             ConstantResult.Left when op.LeftOperand.Syntax is TExpressionSyntax left
-                              => new AnalyzedPattern.Constant(left),
+                                => new AnalyzedPattern.Constant(left),
                             ConstantResult.Right
                                 when op.RightOperand.Syntax is TExpressionSyntax right
-                              => new AnalyzedPattern.Constant(right),
+                                => new AnalyzedPattern.Constant(right),
                             _ => null
                         };
 
                     case IBinaryOperation { OperatorKind: NotEquals } op
-                          when Supports(Feature.InequalityPattern):
+                    when Supports(Feature.InequalityPattern):
                         return ParseRelationalPattern(op);
 
                     case IBinaryOperation op
-                          when Supports(Feature.RelationalPattern)
-                              && IsRelationalOperator(op.OperatorKind):
+                    when Supports(Feature.RelationalPattern)
+                        && IsRelationalOperator(op.OperatorKind):
                         return ParseRelationalPattern(op);
 
                     // Check this below the cases that produce Relational/Ranges.  We would prefer to use those if
                     // available before utilizing a CaseGuard.
                     case IBinaryOperation { OperatorKind: ConditionalAnd } op
-                          when Supports(Feature.AndPattern | Feature.CaseGuard):
+                    when Supports(Feature.AndPattern | Feature.CaseGuard):
                     {
                         var leftPattern = ParsePattern(op.LeftOperand, guards);
                         if (leftPattern == null)
@@ -370,15 +370,15 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                     }
 
                     case IIsTypeOperation op
-                          when Supports(Feature.IsTypePattern)
-                              && CheckTargetExpression(op.ValueOperand)
-                              && op.Syntax is TIsExpressionSyntax node:
+                    when Supports(Feature.IsTypePattern)
+                        && CheckTargetExpression(op.ValueOperand)
+                        && op.Syntax is TIsExpressionSyntax node:
                         return new AnalyzedPattern.Type(node);
 
                     case IIsPatternOperation op
-                          when Supports(Feature.SourcePattern)
-                              && CheckTargetExpression(op.Value)
-                              && op.Pattern.Syntax is TPatternSyntax pattern:
+                    when Supports(Feature.SourcePattern)
+                        && CheckTargetExpression(op.Value)
+                        && op.Pattern.Syntax is TPatternSyntax pattern:
                         return new AnalyzedPattern.Source(pattern);
 
                     case IParenthesizedOperation op:
@@ -393,9 +393,9 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 return DetermineConstant(op) switch
                 {
                     ConstantResult.Left when op.LeftOperand.Syntax is TExpressionSyntax left
-                      => new AnalyzedPattern.Relational(Flip(op.OperatorKind), left),
+                        => new AnalyzedPattern.Relational(Flip(op.OperatorKind), left),
                     ConstantResult.Right when op.RightOperand.Syntax is TExpressionSyntax right
-                      => new AnalyzedPattern.Relational(op.OperatorKind, right),
+                        => new AnalyzedPattern.Relational(op.OperatorKind, right),
                     _ => null
                 };
             }
@@ -435,10 +435,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 {
                     ({ Kind: BoundKind.Lower } low, { Kind: BoundKind.Higher } high)
                         when CheckTargetExpression(low.Expression, high.Expression)
-                      => (low.Value.Syntax, high.Value.Syntax),
+                        => (low.Value.Syntax, high.Value.Syntax),
                     ({ Kind: BoundKind.Higher } high, { Kind: BoundKind.Lower } low)
                         when CheckTargetExpression(low.Expression, high.Expression)
-                      => (low.Value.Syntax, high.Value.Syntax),
+                        => (low.Value.Syntax, high.Value.Syntax),
                     _ => default
                 };
 
@@ -455,16 +455,16 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 {
                     // 5 <= i
                     LessThanOrEqual when IsConstant(op.LeftOperand)
-                      => (BoundKind.Lower, op.RightOperand, op.LeftOperand),
+                        => (BoundKind.Lower, op.RightOperand, op.LeftOperand),
                     // i <= 5
                     LessThanOrEqual when IsConstant(op.RightOperand)
-                      => (BoundKind.Higher, op.LeftOperand, op.RightOperand),
+                        => (BoundKind.Higher, op.LeftOperand, op.RightOperand),
                     // 5 >= i
                     GreaterThanOrEqual when IsConstant(op.LeftOperand)
-                      => (BoundKind.Higher, op.RightOperand, op.LeftOperand),
+                        => (BoundKind.Higher, op.RightOperand, op.LeftOperand),
                     // i >= 5
                     GreaterThanOrEqual when IsConstant(op.RightOperand)
-                      => (BoundKind.Lower, op.LeftOperand, op.RightOperand),
+                        => (BoundKind.Lower, op.LeftOperand, op.RightOperand),
                     _ => default
                 };
             }
@@ -503,8 +503,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             {
                 // Constants do not propagate to conversions
                 return operation is IConversionOperation op
-                  ? IsConstant(op.Operand)
-                  : operation.ConstantValue.HasValue;
+                    ? IsConstant(op.Operand)
+                    : operation.ConstantValue.HasValue;
             }
 
             private bool CheckTargetExpression(IOperation operation)

@@ -430,17 +430,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.Modulo => PREDEFMETH.PM_EXPRESSION_MODULO,
                 ExpressionKind.Divide => PREDEFMETH.PM_EXPRESSION_DIVIDE,
                 ExpressionKind.Multiply
-                  => expr.isChecked()
-                    ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED
-                    : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
+                    => expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED
+                        : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
                 ExpressionKind.Subtract
-                  => expr.isChecked()
-                    ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED
-                    : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
+                    => expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED
+                        : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
                 ExpressionKind.Add
-                  => expr.isChecked()
-                    ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED
-                    : PREDEFMETH.PM_EXPRESSION_ADD,
+                    => expr.isChecked()
+                        ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED
+                        : PREDEFMETH.PM_EXPRESSION_ADD,
 
                 _ => throw Error.InternalCompilerError(),
             };
@@ -536,8 +536,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     break;
                 case ExpressionKind.Negate:
                     pdm = expr.isChecked()
-                      ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED
-                      : PREDEFMETH.PM_EXPRESSION_NEGATE;
+                        ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED
+                        : PREDEFMETH.PM_EXPRESSION_NEGATE;
                     break;
                 default:
                     throw Error.InternalCompilerError();
@@ -598,19 +598,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 case ExpressionKind.DelegateSubtract:
                 case ExpressionKind.Subtract:
                     pdm = expr.isChecked()
-                      ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED_USER_DEFINED
-                      : PREDEFMETH.PM_EXPRESSION_SUBTRACT_USER_DEFINED;
+                        ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_SUBTRACT_USER_DEFINED;
                     break;
                 case ExpressionKind.DelegateAdd:
                 case ExpressionKind.Add:
                     pdm = expr.isChecked()
-                      ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED_USER_DEFINED
-                      : PREDEFMETH.PM_EXPRESSION_ADD_USER_DEFINED;
+                        ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_ADD_USER_DEFINED;
                     break;
                 case ExpressionKind.Multiply:
                     pdm = expr.isChecked()
-                      ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED_USER_DEFINED
-                      : PREDEFMETH.PM_EXPRESSION_MULTIPLY_USER_DEFINED;
+                        ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_MULTIPLY_USER_DEFINED;
                     break;
                 default:
                     throw Error.InternalCompilerError();
@@ -691,8 +691,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 case ExpressionKind.DecimalNegate:
                 case ExpressionKind.Negate:
                     pdm = expr.isChecked()
-                      ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED_USER_DEFINED
-                      : PREDEFMETH.PM_EXPRESSION_NEGATE_USER_DEFINED;
+                        ? PREDEFMETH.PM_EXPRESSION_NEGATECHECKED_USER_DEFINED
+                        : PREDEFMETH.PM_EXPRESSION_NEGATE_USER_DEFINED;
                     break;
 
                 case ExpressionKind.Inc:
@@ -739,10 +739,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.Eq => PREDEFMETH.PM_EXPRESSION_EQUAL_USER_DEFINED,
                 ExpressionKind.NotEq => PREDEFMETH.PM_EXPRESSION_NOTEQUAL_USER_DEFINED,
                 ExpressionKind.LessThanOrEqual
-                  => PREDEFMETH.PM_EXPRESSION_LESSTHANOREQUAL_USER_DEFINED,
+                    => PREDEFMETH.PM_EXPRESSION_LESSTHANOREQUAL_USER_DEFINED,
                 ExpressionKind.LessThan => PREDEFMETH.PM_EXPRESSION_LESSTHAN_USER_DEFINED,
                 ExpressionKind.GreaterThanOrEqual
-                  => PREDEFMETH.PM_EXPRESSION_GREATERTHANOREQUAL_USER_DEFINED,
+                    => PREDEFMETH.PM_EXPRESSION_GREATERTHANOREQUAL_USER_DEFINED,
                 ExpressionKind.GreaterThan => PREDEFMETH.PM_EXPRESSION_GREATERTHAN_USER_DEFINED,
                 _ => throw Error.InternalCompilerError(),
             };
@@ -841,8 +841,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr typeofInner = CreateTypeOf(fDontLiftReturnType ? CType : pMethodReturnType);
             Expr methodInfo = ExprFactory.CreateMethodInfo(method);
             PREDEFMETH pdmInner = arg.isChecked()
-              ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED_USER_DEFINED
-              : PREDEFMETH.PM_EXPRESSION_CONVERT_USER_DEFINED;
+                ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED_USER_DEFINED
+                : PREDEFMETH.PM_EXPRESSION_CONVERT_USER_DEFINED;
             Expr callUserDefinedConversion = GenerateCall(
                 pdmInner,
                 target,
@@ -856,8 +856,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             PREDEFMETH pdmOuter = arg.isChecked()
-              ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED
-              : PREDEFMETH.PM_EXPRESSION_CONVERT;
+                ? PREDEFMETH.PM_EXPRESSION_CONVERTCHECKED
+                : PREDEFMETH.PM_EXPRESSION_CONVERT;
             Expr typeofOuter = CreateTypeOf(CType);
             return GenerateCall(pdmOuter, callUserDefinedConversion, typeofOuter);
         }

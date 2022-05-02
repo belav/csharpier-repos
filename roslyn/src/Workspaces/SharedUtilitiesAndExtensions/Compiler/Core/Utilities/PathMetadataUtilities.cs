@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             var constructedNamespace = parts.All(syntaxFacts.IsValidIdentifier)
-              ? string.Join(".", parts)
-              : null;
+                ? string.Join(".", parts)
+                : null;
 
             if (constructedNamespace is null)
             {

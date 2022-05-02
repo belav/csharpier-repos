@@ -903,8 +903,8 @@ namespace System.Linq.Expressions.Interpreter
                             // right null, left not, true
                             _instructions.EmitLoad(
                                 node.NodeType == ExpressionType.Equal
-                                  ? AstUtils.BoxedFalse
-                                  : AstUtils.BoxedTrue,
+                                    ? AstUtils.BoxedFalse
+                                    : AstUtils.BoxedTrue,
                                 typeof(bool)
                             );
                             _instructions.EmitBranch(end, hasResult: false, hasValue: true);
@@ -1046,8 +1046,8 @@ namespace System.Linq.Expressions.Interpreter
         private static bool IsNullComparison(Expression left, Expression right)
         {
             return IsNullConstant(left)
-              ? !IsNullConstant(right) && right.Type.IsNullableType()
-              : IsNullConstant(right) && left.Type.IsNullableType();
+                ? !IsNullConstant(right) && right.Type.IsNullableType()
+                : IsNullConstant(right) && left.Type.IsNullableType();
         }
 
         private static bool IsNullConstant(Expression e)

@@ -41,21 +41,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class ForeignKeyPropertyDiscoveryConvention
         : IEntityTypeMemberIgnoredConvention,
-          IEntityTypePrimaryKeyChangedConvention,
-          IForeignKeyAddedConvention,
-          IForeignKeyPropertiesChangedConvention,
-          IForeignKeyPrincipalEndChangedConvention,
-          IForeignKeyUniquenessChangedConvention,
-          IForeignKeyRequirednessChangedConvention,
-          IKeyAddedConvention,
-          IKeyRemovedConvention,
-          INavigationAddedConvention,
-          ISkipNavigationForeignKeyChangedConvention,
-          ISkipNavigationInverseChangedConvention,
-          IPropertyAddedConvention,
-          IPropertyNullabilityChangedConvention,
-          IPropertyFieldChangedConvention,
-          IModelFinalizingConvention
+            IEntityTypePrimaryKeyChangedConvention,
+            IForeignKeyAddedConvention,
+            IForeignKeyPropertiesChangedConvention,
+            IForeignKeyPrincipalEndChangedConvention,
+            IForeignKeyUniquenessChangedConvention,
+            IForeignKeyRequirednessChangedConvention,
+            IKeyAddedConvention,
+            IKeyRemovedConvention,
+            INavigationAddedConvention,
+            ISkipNavigationForeignKeyChangedConvention,
+            ISkipNavigationInverseChangedConvention,
+            IPropertyAddedConvention,
+            IPropertyNullabilityChangedConvention,
+            IPropertyFieldChangedConvention,
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ForeignKeyPropertyDiscoveryConvention" />.
@@ -189,8 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
                 batch.Dispose();
                 return foreignKeyReference.Object is null || !foreignKeyReference.Object.IsInModel
-                  ? null
-                  : foreignKeyReference.Object.Builder;
+                    ? null
+                    : foreignKeyReference.Object.Builder;
             }
 
             var invertible = true;
@@ -420,8 +420,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (foreignKey.Properties.SequenceEqual(foreignKeyProperties))
             {
                 return conflictingFKCount > 1
-                  ? ((ForeignKey)foreignKey).Builder.ReuniquifyImplicitProperties(true)
-                  : relationshipBuilder;
+                    ? ((ForeignKey)foreignKey).Builder.ReuniquifyImplicitProperties(true)
+                    : relationshipBuilder;
             }
 
             if (conflictingFKCount > 0)
@@ -523,8 +523,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     dependentEntityType,
                     shouldThrow: false
                 )
-              ? dependentPkProperties
-              : null;
+                ? dependentPkProperties
+                : null;
         }
 
         private bool TryFindMatchingProperties(
@@ -613,8 +613,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         dependentEntityType.DisplayName()
                         + (
                             string.IsNullOrEmpty(dependentNavigationSpec)
-                              ? string.Empty
-                              : "." + dependentNavigationSpec
+                                ? string.Empty
+                                : "." + dependentNavigationSpec
                         );
 
                     var principalNavigationSpec = onDependent
@@ -624,8 +624,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                         principalEntityType.DisplayName()
                         + (
                             string.IsNullOrEmpty(principalNavigationSpec)
-                              ? string.Empty
-                              : "." + principalNavigationSpec
+                                ? string.Empty
+                                : "." + principalNavigationSpec
                         );
 
                     Dependencies.Logger.IncompatibleMatchingForeignKeyProperties(
@@ -1100,14 +1100,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                                             conflictingForeignKey.DependentToPrincipal == null
                                                 ? ""
                                                 : "."
-                                                  + conflictingForeignKey.DependentToPrincipal.Name
+                                                    + conflictingForeignKey
+                                                        .DependentToPrincipal
+                                                        .Name
                                         ),
                                     conflictingForeignKey.PrincipalEntityType.DisplayName()
                                         + (
                                             conflictingForeignKey.PrincipalToDependent == null
                                                 ? ""
                                                 : "."
-                                                  + conflictingForeignKey.PrincipalToDependent.Name
+                                                    + conflictingForeignKey
+                                                        .PrincipalToDependent
+                                                        .Name
                                         ),
                                     foreignKey.DeclaringEntityType.DisplayName()
                                         + (

@@ -549,12 +549,12 @@ namespace System.Runtime.Serialization
                     (classContract.BaseContract == null)
                         ? 0
                         : ReadMembers(
-                              classContract.BaseContract,
-                              requiredMembers,
-                              memberLabels,
-                              memberIndexLocal,
-                              requiredIndexLocal
-                          );
+                            classContract.BaseContract,
+                            requiredMembers,
+                            memberLabels,
+                            memberIndexLocal,
+                            requiredIndexLocal
+                        );
 
                 for (int i = 0; i < classContract.Members!.Count; i++, memberCount++)
                 {

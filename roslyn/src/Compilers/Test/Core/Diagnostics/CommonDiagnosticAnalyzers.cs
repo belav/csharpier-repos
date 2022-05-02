@@ -549,8 +549,8 @@ namespace Microsoft.CodeAnalysis
                             ? ""
                             : @",
               ""justification"": """
-                              + (justification)
-                              + @""""
+                                + (justification)
+                                + @""""
                     )
                     + @"
             }

@@ -65,8 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -96,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -123,8 +123,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -155,8 +155,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -185,8 +185,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -212,8 +212,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -243,8 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -329,8 +329,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToListAsync()
-                          )
+                            () => query.ToListAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToList())
                 ).Message
             );
@@ -1566,10 +1566,10 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
             Assert.Equal(
                 RelationalStrings.QueryFromSqlInsideExists,
                 async
-                  ? (
+                    ? (
                         await Assert.ThrowsAsync<InvalidOperationException>(() => query.AnyAsync())
                     ).Message
-                  : Assert.Throws<InvalidOperationException>(() => query.Any()).Message
+                    : Assert.Throws<InvalidOperationException>(() => query.Any()).Message
             );
         }
 
@@ -1589,10 +1589,10 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
             Assert.Equal(
                 RelationalStrings.QueryFromSqlInsideExists,
                 async
-                  ? (
+                    ? (
                         await Assert.ThrowsAsync<InvalidOperationException>(() => query.AnyAsync())
                     ).Message
-                  : Assert.Throws<InvalidOperationException>(() => query.Any()).Message
+                    : Assert.Throws<InvalidOperationException>(() => query.Any()).Message
             );
         }
 

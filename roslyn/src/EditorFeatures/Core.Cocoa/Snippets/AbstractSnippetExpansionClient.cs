@@ -25,7 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 {
     internal abstract class AbstractSnippetExpansionClient
         : ForegroundThreadAffinitizedObject,
-          IExpansionClient
+            IExpansionClient
     {
         protected readonly IExpansionServiceProvider ExpansionServiceProvider;
         protected readonly IContentType LanguageServiceGuid;

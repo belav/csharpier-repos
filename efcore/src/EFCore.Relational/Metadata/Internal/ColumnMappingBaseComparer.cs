@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public sealed class ColumnMappingBaseComparer
         : IEqualityComparer<IColumnMappingBase>,
-          IComparer<IColumnMappingBase>
+            IComparer<IColumnMappingBase>
     {
         private ColumnMappingBaseComparer() { }
 

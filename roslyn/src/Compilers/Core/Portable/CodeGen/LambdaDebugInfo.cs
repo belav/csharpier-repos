@@ -64,10 +64,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal string GetDebuggerDisplay()
         {
             return ClosureOrdinal == StaticClosureOrdinal
-              ? $"({LambdaId.GetDebuggerDisplay()} @{SyntaxOffset}, static)"
-              : ClosureOrdinal == ThisOnlyClosureOrdinal
-                  ? $"(#{LambdaId.GetDebuggerDisplay()} @{SyntaxOffset}, this)"
-                  : $"({LambdaId.GetDebuggerDisplay()} @{SyntaxOffset} in {ClosureOrdinal})";
+                ? $"({LambdaId.GetDebuggerDisplay()} @{SyntaxOffset}, static)"
+                : ClosureOrdinal == ThisOnlyClosureOrdinal
+                    ? $"(#{LambdaId.GetDebuggerDisplay()} @{SyntaxOffset}, this)"
+                    : $"({LambdaId.GetDebuggerDisplay()} @{SyntaxOffset} in {ClosureOrdinal})";
         }
     }
 }

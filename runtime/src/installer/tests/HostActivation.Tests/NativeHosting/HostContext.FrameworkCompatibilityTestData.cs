@@ -153,18 +153,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         isCompatibleVersion = rollForward switch
                         {
                             Constants.RollForwardSetting.LatestPatch
-                              => requestedVersion.Major == exactVersion.Major
-                                  && requestedVersion.Minor == exactVersion.Minor
-                                  && requestedVersion.Build <= exactVersion.Build,
+                                => requestedVersion.Major == exactVersion.Major
+                                    && requestedVersion.Minor == exactVersion.Minor
+                                    && requestedVersion.Build <= exactVersion.Build,
                             Constants.RollForwardSetting.Minor
                             or Constants.RollForwardSetting.LatestMinor
-                              => requestedVersion.Major == exactVersion.Major
-                                  && requestedVersion.Minor <= exactVersion.Minor,
+                                => requestedVersion.Major == exactVersion.Major
+                                    && requestedVersion.Minor <= exactVersion.Minor,
                             Constants.RollForwardSetting.Major
                             or Constants.RollForwardSetting.LatestMajor
-                              => requestedVersion.Major <= exactVersion.Major,
+                                => requestedVersion.Major <= exactVersion.Major,
                             Constants.RollForwardSetting.Disable
-                              => requestedVersion == exactVersion,
+                                => requestedVersion == exactVersion,
                             _ => null
                         };
                     }

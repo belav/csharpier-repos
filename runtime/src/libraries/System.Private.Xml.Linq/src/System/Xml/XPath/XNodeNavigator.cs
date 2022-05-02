@@ -205,8 +205,8 @@ namespace System.Xml.XPath
                         case XmlNodeType.Attribute:
                             XAttribute attribute = (XAttribute)_source;
                             return attribute.IsNamespaceDeclaration
-                              ? XPathNodeType.Namespace
-                              : XPathNodeType.Attribute;
+                                ? XPathNodeType.Namespace
+                                : XPathNodeType.Attribute;
                         case XmlNodeType.Document:
                             return XPathNodeType.Root;
                         case XmlNodeType.Comment:

@@ -532,7 +532,7 @@ public class CascadingParameterStateTest
 
     class CascadingValueTypeDerivedClass
         : CascadingValueTypeBaseClass,
-          ICascadingValueTypeDerivedClassInterface { }
+            ICascadingValueTypeDerivedClassInterface { }
 
     interface ICascadingValueTypeDerivedClassInterface { }
 }

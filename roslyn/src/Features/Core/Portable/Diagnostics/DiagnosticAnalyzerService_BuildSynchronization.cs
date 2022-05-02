@@ -25,13 +25,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
         {
             return _map.TryGetValue(workspace, out var analyzer)
-              ? analyzer.SynchronizeWithBuildAsync(
+                ? analyzer.SynchronizeWithBuildAsync(
                     diagnostics,
                     postBuildAndErrorListRefreshTaskQueue,
                     onBuildCompleted,
                     cancellationToken
                 )
-              : default;
+                : default;
         }
     }
 }

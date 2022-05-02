@@ -79,10 +79,10 @@ namespace System.Net.Http
             else
             {
                 return async
-                  ? new ValueTask<HttpResponseMessage>(
+                    ? new ValueTask<HttpResponseMessage>(
                         _innerHandler.SendAsync(request, cancellationToken)
                     )
-                  : new ValueTask<HttpResponseMessage>(
+                    : new ValueTask<HttpResponseMessage>(
                         _innerHandler.Send(request, cancellationToken)
                     );
             }
@@ -129,10 +129,10 @@ namespace System.Net.Http
                 try
                 {
                     return async
-                      ? await _innerHandler
+                        ? await _innerHandler
                             .SendAsync(request, cancellationToken)
                             .ConfigureAwait(false)
-                      : _innerHandler.Send(request, cancellationToken);
+                        : _innerHandler.Send(request, cancellationToken);
                 }
                 finally
                 {
@@ -190,8 +190,8 @@ namespace System.Net.Http
             {
                 response = async
                     ? await _innerHandler
-                          .SendAsync(request, cancellationToken)
-                          .ConfigureAwait(false)
+                        .SendAsync(request, cancellationToken)
+                        .ConfigureAwait(false)
                     : _innerHandler.Send(request, cancellationToken);
                 return response;
             }

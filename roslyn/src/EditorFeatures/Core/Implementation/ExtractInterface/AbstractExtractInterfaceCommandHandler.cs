@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ExtractInterface
 
         public CommandState GetCommandState(ExtractInterfaceCommandArgs args) =>
             IsAvailable(args.SubjectBuffer, out _)
-              ? CommandState.Available
-              : CommandState.Unspecified;
+                ? CommandState.Available
+                : CommandState.Unspecified;
 
         public bool ExecuteCommand(
             ExtractInterfaceCommandArgs args,

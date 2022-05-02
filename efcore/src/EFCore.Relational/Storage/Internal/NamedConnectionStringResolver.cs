@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
     /// </summary>
     public class NamedConnectionStringResolver
         : NamedConnectionStringResolverBase,
-          INamedConnectionStringResolver
+            INamedConnectionStringResolver
     {
         private readonly IDbContextOptions _options;
 

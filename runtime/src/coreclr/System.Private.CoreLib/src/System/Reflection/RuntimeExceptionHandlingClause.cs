@@ -65,8 +65,8 @@ namespace System.Reflection
                         _catchMetadataToken,
                         declaringType?.GetGenericArguments(),
                         _methodBody._methodBase is MethodInfo
-                          ? _methodBody._methodBase.GetGenericArguments()
-                          : null
+                            ? _methodBody._methodBase.GetGenericArguments()
+                            : null
                     );
                 }
 

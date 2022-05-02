@@ -370,8 +370,8 @@ namespace System.Reflection.Context.Delegation
         {
             // Unfortunately we cannot directly call the protected GetMethodImpl on _typeInfo.
             return (types == null)
-              ? _typeInfo.GetMethod(name, bindingAttr)
-              : _typeInfo.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
+                ? _typeInfo.GetMethod(name, bindingAttr)
+                : _typeInfo.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
         }
 
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)

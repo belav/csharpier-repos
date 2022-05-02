@@ -18,8 +18,8 @@ namespace Microsoft.Extensions.Configuration
     /// </summary>
     public sealed class ConfigurationManager
         : IConfigurationBuilder,
-          IConfigurationRoot,
-          IDisposable
+            IConfigurationRoot,
+            IDisposable
     {
         private readonly ConfigurationSources _sources;
         private readonly ConfigurationBuilderProperties _properties;

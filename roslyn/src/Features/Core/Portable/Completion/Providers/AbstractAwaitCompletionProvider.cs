@@ -187,8 +187,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 var description = appendConfigureAwait
                     ? ImmutableArray.Create(
-                          new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, tooltip)
-                      )
+                        new SymbolDisplayPart(SymbolDisplayPartKind.Text, null, tooltip)
+                    )
                     : RecommendedKeyword.CreateDisplayParts(displayText, tooltip);
 
                 return CommonCompletionItem.Create(
@@ -269,8 +269,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 // remove any text after dot, including the dot token and optionally append .ConfigureAwait(false)
                 var replacementText = properties.ContainsKey(AppendConfigureAwait)
-                  ? $".{nameof(Task.ConfigureAwait)}({_falseKeyword})"
-                  : "";
+                    ? $".{nameof(Task.ConfigureAwait)}({_falseKeyword})"
+                    : "";
 
                 builder.Add(
                     new TextChange(
@@ -340,8 +340,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                                 syntaxContext.SemanticModel.Compilation,
                                 symbol
                             )
-                              ? DotAwaitContext.AwaitAndConfigureAwait
-                              : DotAwaitContext.AwaitOnly;
+                                ? DotAwaitContext.AwaitAndConfigureAwait
+                                : DotAwaitContext.AwaitOnly;
                         }
                     }
                 }

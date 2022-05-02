@@ -15,9 +15,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
     public class ClassWithLifetimeConcerns
         : IContract1,
-          IContract2,
-          IDisposable,
-          IPartImportsSatisfiedNotification
+            IContract2,
+            IDisposable,
+            IPartImportsSatisfiedNotification
     {
         public void Dispose() { }
 

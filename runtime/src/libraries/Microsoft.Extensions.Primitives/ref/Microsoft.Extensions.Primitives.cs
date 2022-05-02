@@ -96,7 +96,7 @@ namespace Microsoft.Extensions.Primitives
 
     public readonly partial struct StringSegment
         : System.IEquatable<Microsoft.Extensions.Primitives.StringSegment>,
-          System.IEquatable<string?>
+            System.IEquatable<string?>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -344,7 +344,7 @@ namespace Microsoft.Extensions.Primitives
 
     public partial class StringSegmentComparer
         : System.Collections.Generic.IComparer<Microsoft.Extensions.Primitives.StringSegment>,
-          System.Collections.Generic.IEqualityComparer<Microsoft.Extensions.Primitives.StringSegment>
+            System.Collections.Generic.IEqualityComparer<Microsoft.Extensions.Primitives.StringSegment>
     {
         internal StringSegmentComparer() { }
 
@@ -381,7 +381,7 @@ namespace Microsoft.Extensions.Primitives
 
     public readonly partial struct StringTokenizer
         : System.Collections.Generic.IEnumerable<Microsoft.Extensions.Primitives.StringSegment>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -416,8 +416,8 @@ namespace Microsoft.Extensions.Primitives
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<Microsoft.Extensions.Primitives.StringSegment>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -449,14 +449,14 @@ namespace Microsoft.Extensions.Primitives
 
     public readonly partial struct StringValues
         : System.Collections.Generic.ICollection<string?>,
-          System.Collections.Generic.IEnumerable<string?>,
-          System.Collections.Generic.IList<string?>,
-          System.Collections.Generic.IReadOnlyCollection<string?>,
-          System.Collections.Generic.IReadOnlyList<string?>,
-          System.Collections.IEnumerable,
-          System.IEquatable<Microsoft.Extensions.Primitives.StringValues>,
-          System.IEquatable<string?>,
-          System.IEquatable<string?[]>
+            System.Collections.Generic.IEnumerable<string?>,
+            System.Collections.Generic.IList<string?>,
+            System.Collections.Generic.IReadOnlyCollection<string?>,
+            System.Collections.Generic.IReadOnlyList<string?>,
+            System.Collections.IEnumerable,
+            System.IEquatable<Microsoft.Extensions.Primitives.StringValues>,
+            System.IEquatable<string?>,
+            System.IEquatable<string?[]>
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -769,8 +769,8 @@ namespace Microsoft.Extensions.Primitives
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<string?>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;

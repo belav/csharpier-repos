@@ -70,10 +70,10 @@ namespace System.Configuration
                 BaseConfigurationRecord.OverrideModeAllow => OverrideMode.Allow,
                 BaseConfigurationRecord.OverrideModeDeny => OverrideMode.Deny,
                 _
-                  => throw new ConfigurationErrorsException(
-                      SR.Config_section_override_mode_attribute_invalid,
-                      xmlUtil
-                  ),
+                    => throw new ConfigurationErrorsException(
+                        SR.Config_section_override_mode_attribute_invalid,
+                        xmlUtil
+                    ),
             };
 
         internal static bool CanUseSameLocationTag(OverrideModeSetting x, OverrideModeSetting y)

@@ -17,8 +17,8 @@ namespace System.Drawing
     public sealed partial class Pen : MarshalByRefObject, ICloneable, IDisposable
 #pragma warning disable SA1001
 #if FEATURE_SYSTEM_EVENTS
-          ,
-          ISystemColorTracker
+            ,
+            ISystemColorTracker
 #endif
 #pragma warning restore SA1001
     {
@@ -164,7 +164,7 @@ namespace System.Drawing
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeletePen(new HandleRef(this, NativePen));
+                        Gdip.GdipDeletePen(new HandleRef(this, NativePen));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

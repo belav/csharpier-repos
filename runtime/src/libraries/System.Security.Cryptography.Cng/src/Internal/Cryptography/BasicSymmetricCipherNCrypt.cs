@@ -57,25 +57,25 @@ namespace Internal.Cryptography
                 {
                     errorCode = _encrypting
                         ? Interop.NCrypt.NCryptEncrypt(
-                              keyHandle,
-                              input,
-                              input.Length,
-                              null,
-                              output,
-                              output.Length,
-                              out numBytesWritten,
-                              AsymmetricPaddingMode.None
-                          )
+                            keyHandle,
+                            input,
+                            input.Length,
+                            null,
+                            output,
+                            output.Length,
+                            out numBytesWritten,
+                            AsymmetricPaddingMode.None
+                        )
                         : Interop.NCrypt.NCryptDecrypt(
-                              keyHandle,
-                              input,
-                              input.Length,
-                              null,
-                              output,
-                              output.Length,
-                              out numBytesWritten,
-                              AsymmetricPaddingMode.None
-                          );
+                            keyHandle,
+                            input,
+                            input.Length,
+                            null,
+                            output,
+                            output.Length,
+                            out numBytesWritten,
+                            AsymmetricPaddingMode.None
+                        );
                 }
             }
             if (errorCode != ErrorCode.ERROR_SUCCESS)

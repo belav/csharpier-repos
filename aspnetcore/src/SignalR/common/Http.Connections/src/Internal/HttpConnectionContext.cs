@@ -22,17 +22,17 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal;
 
 internal class HttpConnectionContext
     : ConnectionContext,
-      IConnectionIdFeature,
-      IConnectionItemsFeature,
-      IConnectionTransportFeature,
-      IConnectionUserFeature,
-      IConnectionHeartbeatFeature,
-      ITransferFormatFeature,
-      IHttpContextFeature,
-      IHttpTransportFeature,
-      IConnectionInherentKeepAliveFeature,
-      IConnectionLifetimeFeature,
-      IConnectionLifetimeNotificationFeature
+        IConnectionIdFeature,
+        IConnectionItemsFeature,
+        IConnectionTransportFeature,
+        IConnectionUserFeature,
+        IConnectionHeartbeatFeature,
+        ITransferFormatFeature,
+        IHttpContextFeature,
+        IHttpTransportFeature,
+        IConnectionInherentKeepAliveFeature,
+        IConnectionLifetimeFeature,
+        IConnectionLifetimeNotificationFeature
 {
     private readonly HttpConnectionDispatcherOptions _options;
 

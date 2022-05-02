@@ -205,8 +205,8 @@ namespace System.Linq
                 }
 
                 return !onlyIfCheap || _source is ICollection<TSource>
-                  ? _source.Count() + _appendCount + _prependCount
-                  : -1;
+                    ? _source.Count() + _appendCount + _prependCount
+                    : -1;
             }
         }
     }

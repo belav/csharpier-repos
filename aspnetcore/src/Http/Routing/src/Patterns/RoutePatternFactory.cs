@@ -492,11 +492,11 @@ public static class RoutePatternFactory
             rawText,
             updatedDefaults ?? EmptyDictionary,
             updatedParameterPolicies != null
-              ? updatedParameterPolicies.ToDictionary(
+                ? updatedParameterPolicies.ToDictionary(
                     kvp => kvp.Key,
                     kvp => (IReadOnlyList<RoutePatternParameterPolicyReference>)kvp.Value.ToArray()
                 )
-              : EmptyPoliciesDictionary,
+                : EmptyPoliciesDictionary,
             requiredValues ?? EmptyDictionary,
             (IReadOnlyList<RoutePatternParameterPart>?)parameters
                 ?? Array.Empty<RoutePatternParameterPart>(),

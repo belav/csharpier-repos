@@ -47,8 +47,8 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             var folder = symbolResult.GetValueForOption<bool>("--folder");
             var noRestore = symbolResult.GetOptionResult("--no-restore");
             return folder && noRestore != null
-              ? Resources.Cannot_specify_the_folder_option_with_no_restore
-              : null;
+                ? Resources.Cannot_specify_the_folder_option_with_no_restore
+                : null;
         }
 
         internal static string? EnsureFolderNotSpecifiedWhenLoggingBinlog(
@@ -58,8 +58,8 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
             var folder = symbolResult.GetValueForOption<bool>("--folder");
             var binarylog = symbolResult.GetOptionResult("--binarylog");
             return folder && binarylog is not null && !binarylog.IsImplicit
-              ? Resources.Cannot_specify_the_folder_option_when_writing_a_binary_log
-              : null;
+                ? Resources.Cannot_specify_the_folder_option_when_writing_a_binary_log
+                : null;
         }
 
         private class FormatWhitespaceHandler : ICommandHandler

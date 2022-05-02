@@ -202,7 +202,7 @@ namespace Microsoft.Extensions.Logging
 
     public partial class LoggerFactory
         : Microsoft.Extensions.Logging.ILoggerFactory,
-          System.IDisposable
+            System.IDisposable
     {
         public LoggerFactory() { }
 

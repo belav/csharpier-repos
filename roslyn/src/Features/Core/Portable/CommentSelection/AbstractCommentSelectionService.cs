@@ -45,14 +45,14 @@ namespace Microsoft.CodeAnalysis.CommentSelection
         ) =>
             Task.FromResult(
                 SupportsBlockComment
-                  ? new CommentSelectionInfo(
+                    ? new CommentSelectionInfo(
                         true,
                         SupportsBlockComment,
                         SingleLineCommentString,
                         BlockCommentStartString,
                         BlockCommentEndString
                     )
-                  : new CommentSelectionInfo(
+                    : new CommentSelectionInfo(
                         true,
                         SupportsBlockComment,
                         SingleLineCommentString,

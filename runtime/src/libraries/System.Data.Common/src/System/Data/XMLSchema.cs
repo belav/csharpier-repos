@@ -2227,8 +2227,8 @@ namespace System.Data
                 typeNode = (XmlSchemaAnnotated?)
                     _schemaTypes![
                         isAttr
-                          ? ((XmlSchemaAttribute)node).SchemaTypeName
-                          : ((XmlSchemaElement)node).SchemaTypeName
+                            ? ((XmlSchemaAttribute)node).SchemaTypeName
+                            : ((XmlSchemaElement)node).SchemaTypeName
                     ];
             return typeNode;
         }

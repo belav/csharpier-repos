@@ -126,8 +126,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                         // Determine the character kind of c
                         cKind = IsNewline(c_pred)
-                          ? CharKind.Newline
-                          : (IsWordchar(c_pred) ? CharKind.WordLetter : CharKind.General);
+                            ? CharKind.Newline
+                            : (IsWordchar(c_pred) ? CharKind.WordLetter : CharKind.General);
 
                         // Construct the combined context of previous and c kind
                         uint context = CharKind.Context(prevCharKind, cKind);

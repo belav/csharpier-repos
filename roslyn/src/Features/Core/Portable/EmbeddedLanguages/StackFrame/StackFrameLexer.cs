@@ -470,11 +470,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 '\\' => StackFrameKind.BackslashToken,
                 '/' => StackFrameKind.ForwardSlashToken,
                 _
-                  => IsBlank(ch)
-                    ? StackFrameKind.WhitespaceTrivia
-                    : IsNumber(ch)
-                        ? StackFrameKind.NumberToken
-                        : StackFrameKind.SkippedTextTrivia
+                    => IsBlank(ch)
+                        ? StackFrameKind.WhitespaceTrivia
+                        : IsNumber(ch)
+                            ? StackFrameKind.NumberToken
+                            : StackFrameKind.SkippedTextTrivia
             };
 
         private static bool IsNumber(VirtualChar ch) => ch.Value is >= '0' and <= '9';

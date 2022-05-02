@@ -165,12 +165,12 @@ public class UrlMatchingTree
             {
                 var result = x.Entry.Precedence.CompareTo(y.Entry.Precedence);
                 return result == 0
-                  ? string.Compare(
+                    ? string.Compare(
                         x.Entry.RouteTemplate.TemplateText,
                         y.Entry.RouteTemplate.TemplateText,
                         StringComparison.Ordinal
                     )
-                  : result;
+                    : result;
             }
         );
     }

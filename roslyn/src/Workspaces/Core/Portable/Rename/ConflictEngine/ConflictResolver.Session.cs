@@ -589,8 +589,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                             complexifiedLocationSpanForThisDocument.Contains(
                                                 originalLocation
                                             )
-                                              ? RelatedLocationType.ResolvedReferenceConflict
-                                              : RelatedLocationType.NoConflict,
+                                                ? RelatedLocationType.ResolvedReferenceConflict
+                                                : RelatedLocationType.NoConflict,
                                             isReference: true
                                         )
                                     );
@@ -631,12 +631,12 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                         originalLocation,
                                         documentId,
                                         complexifiedTarget != null
-                                          ? RelatedLocationType.PossiblyResolvableConflict
-                                          : RelatedLocationType.UnresolvableConflict,
+                                            ? RelatedLocationType.PossiblyResolvableConflict
+                                            : RelatedLocationType.UnresolvableConflict,
                                         isReference: conflictAnnotation.IsRenameLocation,
                                         complexifiedTargetSpan: complexifiedTarget != null
-                                          ? complexifiedTarget.Span
-                                          : default
+                                            ? complexifiedTarget.Span
+                                            : default
                                     )
                                 );
                             }
@@ -1042,9 +1042,9 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                     // get the renamed symbol in complexified new solution
                     var start = _documentOfRenameSymbolHasBeenRenamed
                         ? conflictResolution.GetAdjustedTokenStartingPosition(
-                              _renameSymbolDeclarationLocation.SourceSpan.Start,
-                              _documentIdOfRenameSymbolDeclaration
-                          )
+                            _renameSymbolDeclarationLocation.SourceSpan.Start,
+                            _documentIdOfRenameSymbolDeclaration
+                        )
                         : _renameSymbolDeclarationLocation.SourceSpan.Start;
 
                     var document = conflictResolution.CurrentSolution.GetRequiredDocument(

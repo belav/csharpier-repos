@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.AddImport
 {
     internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
         : IAddImportFeatureService,
-          IEqualityComparer<PortableExecutableReference> where TSimpleNameSyntax : SyntaxNode
+            IEqualityComparer<PortableExecutableReference> where TSimpleNameSyntax : SyntaxNode
     {
         protected abstract bool CanAddImport(
             SyntaxNode node,
@@ -962,19 +962,19 @@ namespace Microsoft.CodeAnalysis.AddImport
             fixData.Kind switch
             {
                 AddImportFixKind.ProjectSymbol
-                  => new ProjectSymbolReferenceCodeAction(document, fixData),
+                    => new ProjectSymbolReferenceCodeAction(document, fixData),
                 AddImportFixKind.MetadataSymbol
-                  => new MetadataSymbolReferenceCodeAction(document, fixData),
+                    => new MetadataSymbolReferenceCodeAction(document, fixData),
                 AddImportFixKind.ReferenceAssemblySymbol
-                  => new AssemblyReferenceCodeAction(document, fixData),
+                    => new AssemblyReferenceCodeAction(document, fixData),
                 AddImportFixKind.PackageSymbol
-                  => installerService?.IsInstalled(
-                      document.Project.Solution.Workspace,
-                      document.Project.Id,
-                      fixData.PackageName
-                  ) == false
-                      ? new ParentInstallPackageCodeAction(document, fixData, installerService)
-                      : null,
+                    => installerService?.IsInstalled(
+                        document.Project.Solution.Workspace,
+                        document.Project.Id,
+                        fixData.PackageName
+                    ) == false
+                        ? new ParentInstallPackageCodeAction(document, fixData, installerService)
+                        : null,
                 _ => throw ExceptionUtilities.Unreachable,
             };
 

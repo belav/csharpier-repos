@@ -345,8 +345,8 @@ namespace System.Net.NetworkInformation.Tests
                 Assert.Equal(
                     (await receivedTask).PacketInformation.Interface,
                     ipv6
-                      ? NetworkInterface.IPv6LoopbackInterfaceIndex
-                      : NetworkInterface.LoopbackInterfaceIndex
+                        ? NetworkInterface.IPv6LoopbackInterfaceIndex
+                        : NetworkInterface.LoopbackInterfaceIndex
                 );
             }
         }

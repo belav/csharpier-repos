@@ -115,7 +115,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         protected class ParameterVariableSymbol
             : NotMovableVariableSymbol,
-              IComparable<ParameterVariableSymbol>
+                IComparable<ParameterVariableSymbol>
         {
             private readonly IParameterSymbol _parameterSymbol;
 
@@ -343,7 +343,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
         protected class QueryVariableSymbol
             : NotMovableVariableSymbol,
-              IComparable<QueryVariableSymbol>
+                IComparable<QueryVariableSymbol>
         {
             private readonly IRangeVariableSymbol _symbol;
 

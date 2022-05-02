@@ -42,8 +42,8 @@ namespace System.Web.Http.WebHost.Routing
         )
         {
             return dictionary == null
-              ? new RouteValueDictionary()
-              : new RouteValueDictionary(dictionary);
+                ? new RouteValueDictionary()
+                : new RouteValueDictionary(dictionary);
         }
     }
 }

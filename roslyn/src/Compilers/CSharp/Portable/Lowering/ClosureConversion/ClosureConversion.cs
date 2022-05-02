@@ -1004,8 +1004,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TypeCompareKind.ConsiderEverything2
                 )
             )
-              ? node
-              : FramePointer(node.Syntax, _topLevelMethod.ContainingType); // technically, not the correct static type
+                ? node
+                : FramePointer(node.Syntax, _topLevelMethod.ContainingType); // technically, not the correct static type
         }
 
         /// <summary>
@@ -1911,12 +1911,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var result0 = wasInExpressionLambda
                     ? node
                     : ExpressionLambdaRewriter.RewriteLambda(
-                          node,
-                          CompilationState,
-                          TypeMap,
-                          RecursionDepth,
-                          Diagnostics
-                      );
+                        node,
+                        CompilationState,
+                        TypeMap,
+                        RecursionDepth,
+                        Diagnostics
+                    );
                 _inExpressionLambda = wasInExpressionLambda;
                 return result0;
             }
@@ -2016,8 +2016,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // If we are generating the field into a display class created exclusively for the lambda the lambdaOrdinal itself is unique already,
                                 // no need to include the top-level method ordinal in the field name.
                                 (closureKind == ClosureKind.General)
-                                  ? -1
-                                  : topLevelMethodId.Ordinal,
+                                    ? -1
+                                    : topLevelMethodId.Ordinal,
                                 topLevelMethodId.Generation,
                                 lambdaId.Ordinal,
                                 lambdaId.Generation

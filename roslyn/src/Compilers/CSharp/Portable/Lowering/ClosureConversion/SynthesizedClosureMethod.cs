@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class SynthesizedClosureMethod
         : SynthesizedMethodBaseSymbol,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly ImmutableArray<NamedTypeSymbol> _structEnvironments;
 
@@ -41,14 +41,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 blockSyntax,
                 originalMethod.DeclaringSyntaxReferences[0].GetLocation(),
                 originalMethod is LocalFunctionSymbol
-                  ? MakeName(
+                    ? MakeName(
                         topLevelMethod.Name,
                         originalMethod.Name,
                         topLevelMethodId,
                         closureKind,
                         lambdaId
                     )
-                  : MakeName(topLevelMethod.Name, topLevelMethodId, closureKind, lambdaId),
+                    : MakeName(topLevelMethod.Name, topLevelMethodId, closureKind, lambdaId),
                 MakeDeclarationModifiers(closureKind, originalMethod)
             )
         {

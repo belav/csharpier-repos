@@ -115,8 +115,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             }
 
             return _typeMapping.Contains(instance.Type)
-              ? _sqlExpressionFactory.Convert(instance, typeof(string))
-              : null;
+                ? _sqlExpressionFactory.Convert(instance, typeof(string))
+                : null;
         }
     }
 }

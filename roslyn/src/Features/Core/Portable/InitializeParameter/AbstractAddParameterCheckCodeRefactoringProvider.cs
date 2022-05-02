@@ -29,11 +29,11 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         TBinaryExpressionSyntax
     >
         : AbstractInitializeParameterCodeRefactoringProvider<
-              TTypeDeclarationSyntax,
-              TParameterSyntax,
-              TStatementSyntax,
-              TExpressionSyntax
-          >
+            TTypeDeclarationSyntax,
+            TParameterSyntax,
+            TStatementSyntax,
+            TExpressionSyntax
+        >
         where TTypeDeclarationSyntax : SyntaxNode
         where TParameterSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
@@ -686,8 +686,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 {
                     var statementIndex = blockStatementOpt.Operations.IndexOf(checkStatement);
                     return statementIndex > 0
-                      ? blockStatementOpt.Operations[statementIndex - 1].Syntax
-                      : null;
+                        ? blockStatementOpt.Operations[statementIndex - 1].Syntax
+                        : null;
                 }
             }
 
@@ -849,17 +849,17 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             var text = methodName switch
             {
                 nameof(string.IsNullOrEmpty)
-                  => new LocalizableResourceString(
-                      nameof(FeaturesResources._0_cannot_be_null_or_empty),
-                      FeaturesResources.ResourceManager,
-                      typeof(FeaturesResources)
-                  ).ToString(),
+                    => new LocalizableResourceString(
+                        nameof(FeaturesResources._0_cannot_be_null_or_empty),
+                        FeaturesResources.ResourceManager,
+                        typeof(FeaturesResources)
+                    ).ToString(),
                 nameof(string.IsNullOrWhiteSpace)
-                  => new LocalizableResourceString(
-                      nameof(FeaturesResources._0_cannot_be_null_or_whitespace),
-                      FeaturesResources.ResourceManager,
-                      typeof(FeaturesResources)
-                  ).ToString(),
+                    => new LocalizableResourceString(
+                        nameof(FeaturesResources._0_cannot_be_null_or_whitespace),
+                        FeaturesResources.ResourceManager,
+                        typeof(FeaturesResources)
+                    ).ToString(),
                 _ => throw ExceptionUtilities.Unreachable,
             };
 

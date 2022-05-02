@@ -22,7 +22,7 @@ namespace System.Web.Http.Tracing.Tracers
     )]
     internal class ExceptionFilterAttributeTracer
         : ExceptionFilterAttribute,
-          IDecorator<ExceptionFilterAttribute>
+            IDecorator<ExceptionFilterAttribute>
     {
         private readonly ExceptionFilterAttribute _innerFilter;
         private readonly ITraceWriter _traceStore;

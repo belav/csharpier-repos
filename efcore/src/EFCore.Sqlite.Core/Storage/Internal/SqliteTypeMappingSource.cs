@@ -131,8 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
             var mapping = base.FindMapping(mappingInfo) ?? FindRawMapping(mappingInfo);
 
             return mapping != null && mappingInfo.StoreTypeName != null
-              ? mapping.Clone(mappingInfo.StoreTypeName, null)
-              : mapping;
+                ? mapping.Clone(mappingInfo.StoreTypeName, null)
+                : mapping;
         }
 
         private RelationalTypeMapping? FindRawMapping(RelationalTypeMappingInfo mappingInfo)

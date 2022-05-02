@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
 {
     internal abstract class AbstractBraceCompletionServiceFactory
         : ForegroundThreadAffinitizedObject,
-          IBraceCompletionServiceFactory
+            IBraceCompletionServiceFactory
     {
         private readonly ImmutableArray<IBraceCompletionService> _braceCompletionServices;
 

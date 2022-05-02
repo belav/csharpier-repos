@@ -71,9 +71,9 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 
             var compilerDiagnostics = !fixableCompilerDiagnostics.IsEmpty
                 ? compilation
-                  .GetDiagnostics(cancellationToken)
-                  .Where(diagnostic => fixableCompilerDiagnostics.Contains(diagnostic.Id))
-                  .ToImmutableArray()
+                    .GetDiagnostics(cancellationToken)
+                    .Where(diagnostic => fixableCompilerDiagnostics.Contains(diagnostic.Id))
+                    .ToImmutableArray()
                 : ImmutableArray<Diagnostic>.Empty;
 
             ImmutableArray<Diagnostic> diagnostics;

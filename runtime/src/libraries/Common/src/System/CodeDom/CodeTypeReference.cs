@@ -337,8 +337,8 @@ namespace System.Runtime.Serialization
 
                 string returnType = _baseType;
                 return _needsFixup && TypeArguments.Count > 0
-                  ? $"{returnType}`{(uint)TypeArguments.Count}"
-                  : returnType;
+                    ? $"{returnType}`{(uint)TypeArguments.Count}"
+                    : returnType;
             }
             set
             {

@@ -333,10 +333,10 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
 
             var expression = syntaxFacts.GetExpressionOfInvocationExpression(invocation);
             var nameNode = syntaxFacts.IsIdentifierName(expression)
-              ? expression
-              : syntaxFacts.IsSimpleMemberAccessExpression(expression)
-                  ? syntaxFacts.GetNameOfMemberAccessExpression(expression)
-                  : null;
+                ? expression
+                : syntaxFacts.IsSimpleMemberAccessExpression(expression)
+                    ? syntaxFacts.GetNameOfMemberAccessExpression(expression)
+                    : null;
 
             if (!syntaxFacts.IsIdentifierName(nameNode))
             {

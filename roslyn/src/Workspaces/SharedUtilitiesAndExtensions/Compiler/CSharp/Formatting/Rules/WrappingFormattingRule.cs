@@ -88,15 +88,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return node switch
             {
                 SwitchSectionSyntax switchSection
-                  => (
-                      switchSection.GetFirstToken(includeZeroWidth: true),
-                      switchSection.GetLastToken(includeZeroWidth: true)
-                  ),
+                    => (
+                        switchSection.GetFirstToken(includeZeroWidth: true),
+                        switchSection.GetLastToken(includeZeroWidth: true)
+                    ),
                 AnonymousMethodExpressionSyntax anonymousMethod
-                  => (
-                      anonymousMethod.DelegateKeyword,
-                      anonymousMethod.GetLastToken(includeZeroWidth: true)
-                  ),
+                    => (
+                        anonymousMethod.DelegateKeyword,
+                        anonymousMethod.GetLastToken(includeZeroWidth: true)
+                    ),
                 _ => default,
             };
         }

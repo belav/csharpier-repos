@@ -12,16 +12,16 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Util
             {
                 StringComparison.CurrentCulture => StringComparer.CurrentCulture,
                 StringComparison.CurrentCultureIgnoreCase
-                  => StringComparer.CurrentCultureIgnoreCase,
+                    => StringComparer.CurrentCultureIgnoreCase,
                 StringComparison.Ordinal => StringComparer.Ordinal,
                 StringComparison.OrdinalIgnoreCase => StringComparer.OrdinalIgnoreCase,
                 StringComparison.InvariantCulture => StringComparer.InvariantCulture,
                 StringComparison.InvariantCultureIgnoreCase
-                  => StringComparer.InvariantCultureIgnoreCase,
+                    => StringComparer.InvariantCultureIgnoreCase,
                 _
-                  => throw new InvalidOperationException(
-                      SR.Format(SR.UnexpectedStringComparisonType, comparisonType)
-                  )
+                    => throw new InvalidOperationException(
+                        SR.Format(SR.UnexpectedStringComparisonType, comparisonType)
+                    )
             };
     }
 }

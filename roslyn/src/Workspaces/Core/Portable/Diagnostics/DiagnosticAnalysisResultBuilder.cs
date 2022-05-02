@@ -253,8 +253,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         )
         {
             return map == null
-              ? ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty
-              : map.ToImmutableDictionary(kv => kv.Key, kv => kv.Value.ToImmutableArray());
+                ? ImmutableDictionary<DocumentId, ImmutableArray<DiagnosticData>>.Empty
+                : map.ToImmutableDictionary(kv => kv.Key, kv => kv.Value.ToImmutableArray());
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class ChangeSignatureDialog_InProc
         : AbstractCodeRefactorDialog_InProc<
-              ChangeSignatureDialog,
-              ChangeSignatureDialog.TestAccessor
-          >
+            ChangeSignatureDialog,
+            ChangeSignatureDialog.TestAccessor
+        >
     {
         private ChangeSignatureDialog_InProc() { }
 

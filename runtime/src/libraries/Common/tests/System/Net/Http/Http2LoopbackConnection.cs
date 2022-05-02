@@ -266,8 +266,8 @@ namespace System.Net.Test.Common
 
                 bool processed = await TryProcessExpectedPingFrameAsync(pingFrame);
                 return processed
-                  ? await ReadFrameAsync(cancellationToken).ConfigureAwait(false)
-                  : pingFrame;
+                    ? await ReadFrameAsync(cancellationToken).ConfigureAwait(false)
+                    : pingFrame;
             }
 
             // Construct the correct frame type and return it.

@@ -94,7 +94,7 @@ namespace System.Reflection.Metadata.Ecma335
 
                 // debug tables
                 TableIndex.Document
-                  => reader.DocumentTable.RowSize,
+                    => reader.DocumentTable.RowSize,
                 TableIndex.MethodDebugInformation => reader.MethodDebugInformationTable.RowSize,
                 TableIndex.LocalScope => reader.LocalScopeTable.RowSize,
                 TableIndex.LocalVariable => reader.LocalVariableTable.RowSize,
@@ -182,7 +182,7 @@ namespace System.Reflection.Metadata.Ecma335
 
                 // debug tables
                 TableIndex.Document
-                  => reader.DocumentTable.Block,
+                    => reader.DocumentTable.Block,
                 TableIndex.MethodDebugInformation => reader.MethodDebugInformationTable.Block,
                 TableIndex.LocalScope => reader.LocalScopeTable.Block,
                 TableIndex.LocalVariable => reader.LocalVariableTable.Block,
@@ -422,7 +422,7 @@ namespace System.Reflection.Metadata.Ecma335
                     {
                         TypeRefSignatureTreatment.ProjectedToClass => SignatureTypeKind.Class,
                         TypeRefSignatureTreatment.ProjectedToValueType
-                          => SignatureTypeKind.ValueType,
+                            => SignatureTypeKind.ValueType,
                         TypeRefSignatureTreatment.None => typeKind,
                         _ => throw ExceptionUtilities.UnexpectedValue(treatment),
                     };

@@ -470,9 +470,9 @@ namespace System.Net
                     OP.Encrypt => secModule.EncryptMessage(context, ref sdcInOut, sequenceNumber),
                     OP.Decrypt => secModule.DecryptMessage(context, ref sdcInOut, sequenceNumber),
                     OP.MakeSignature
-                      => secModule.MakeSignature(context, ref sdcInOut, sequenceNumber),
+                        => secModule.MakeSignature(context, ref sdcInOut, sequenceNumber),
                     _ /* OP.VerifySignature */
-                      => secModule.VerifySignature(context, ref sdcInOut, sequenceNumber),
+                        => secModule.VerifySignature(context, ref sdcInOut, sequenceNumber),
                 };
 
                 // Marshalling back returned sizes / data.
@@ -547,8 +547,12 @@ namespace System.Net
                     NetEventSource.Error(
                         null,
                         errorCode == Interop.SspiCli.SEC_I_RENEGOTIATE
-                          ? SR.Format(SR.event_OperationReturnedSomething, op, "SEC_I_RENEGOTIATE")
-                          : SR.Format(SR.net_log_operation_failed_with_error, op, $"0x{0:X}")
+                            ? SR.Format(
+                                SR.event_OperationReturnedSomething,
+                                op,
+                                "SEC_I_RENEGOTIATE"
+                            )
+                            : SR.Format(SR.net_log_operation_failed_with_error, op, $"0x{0:X}")
                     );
                 }
 

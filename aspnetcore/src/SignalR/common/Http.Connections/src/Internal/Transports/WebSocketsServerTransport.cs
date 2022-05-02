@@ -301,8 +301,8 @@ internal partial class WebSocketsServerTransport : IHttpTransport
                     // We're done sending, send the close frame to the client if the websocket is still open
                     await socket.CloseOutputAsync(
                         error != null
-                          ? WebSocketCloseStatus.InternalServerError
-                          : WebSocketCloseStatus.NormalClosure,
+                            ? WebSocketCloseStatus.InternalServerError
+                            : WebSocketCloseStatus.NormalClosure,
                         "",
                         CancellationToken.None
                     );

@@ -12,9 +12,9 @@ namespace Microsoft.CodeAnalysis.Collections
 {
     internal sealed class OrderedSet<T>
         : IEnumerable<T>,
-          IReadOnlySet<T>,
-          IReadOnlyList<T>,
-          IOrderedReadOnlySet<T>
+            IReadOnlySet<T>,
+            IReadOnlyList<T>,
+            IOrderedReadOnlySet<T>
     {
         private readonly HashSet<T> _set;
         private readonly ArrayBuilder<T> _list;

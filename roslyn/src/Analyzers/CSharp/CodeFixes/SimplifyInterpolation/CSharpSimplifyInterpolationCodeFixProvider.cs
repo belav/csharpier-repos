@@ -23,12 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyInterpolation
     ]
     internal class CSharpSimplifyInterpolationCodeFixProvider
         : AbstractSimplifyInterpolationCodeFixProvider<
-              InterpolationSyntax,
-              ExpressionSyntax,
-              InterpolationAlignmentClauseSyntax,
-              InterpolationFormatClauseSyntax,
-              InterpolatedStringExpressionSyntax
-          >
+            InterpolationSyntax,
+            ExpressionSyntax,
+            InterpolationAlignmentClauseSyntax,
+            InterpolationFormatClauseSyntax,
+            InterpolatedStringExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

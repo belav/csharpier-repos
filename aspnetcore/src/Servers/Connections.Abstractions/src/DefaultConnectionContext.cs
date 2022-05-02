@@ -18,12 +18,12 @@ namespace Microsoft.AspNetCore.Connections;
 /// </summary>
 public class DefaultConnectionContext
     : ConnectionContext,
-      IConnectionIdFeature,
-      IConnectionItemsFeature,
-      IConnectionTransportFeature,
-      IConnectionUserFeature,
-      IConnectionLifetimeFeature,
-      IConnectionEndPointFeature
+        IConnectionIdFeature,
+        IConnectionItemsFeature,
+        IConnectionTransportFeature,
+        IConnectionUserFeature,
+        IConnectionLifetimeFeature,
+        IConnectionEndPointFeature
 {
     private readonly CancellationTokenSource _connectionClosedTokenSource =
         new CancellationTokenSource();

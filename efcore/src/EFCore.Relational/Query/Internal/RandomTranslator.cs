@@ -50,14 +50,14 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         )
         {
             return _methodInfo.Equals(method)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     "RAND",
                     Array.Empty<SqlExpression>(),
                     nullable: false,
                     argumentsPropagateNullability: Array.Empty<bool>(),
                     method.ReturnType
                 )
-              : null;
+                : null;
         }
     }
 }

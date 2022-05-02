@@ -156,8 +156,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             );
 
             return topLevelNamespaceSymbol.IsGlobalNamespace
-              ? wrappedType
-              : CodeGenerationSymbolFactory.CreateNamespaceSymbol(
+                ? wrappedType
+                : CodeGenerationSymbolFactory.CreateNamespaceSymbol(
                     topLevelNamespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat),
                     null,
                     new[] { wrappedType }

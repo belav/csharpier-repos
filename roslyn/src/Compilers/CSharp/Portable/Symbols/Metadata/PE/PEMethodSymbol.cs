@@ -428,10 +428,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             thisParameter = IsStatic
                 ? null
                 : _uncommonFields?._lazyThisParameter
-                  ?? InterlockedOperations.Initialize(
-                      ref AccessUncommonFields()._lazyThisParameter,
-                      new ThisParameterSymbol(this)
-                  );
+                    ?? InterlockedOperations.Initialize(
+                        ref AccessUncommonFields()._lazyThisParameter,
+                        new ThisParameterSymbol(this)
+                    );
             return true;
         }
 
@@ -465,8 +465,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         // do not cache the result, the compiler doesn't use this (it's only exposed through public API):
         public override DllImportData GetDllImportData() =>
             HasFlag(MethodAttributes.PinvokeImpl)
-              ? _containingType.ContainingPEModule.Module.GetDllImportData(_handle)
-              : null;
+                ? _containingType.ContainingPEModule.Module.GetDllImportData(_handle)
+                : null;
 
         internal override bool ReturnValueIsMarshalledExplicitly =>
             ReturnTypeParameter.IsMarshalledExplicitly;
@@ -710,8 +710,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 }
 
                 return _packedFlags.DoesNotReturn
-                  ? FlowAnalysisAnnotations.DoesNotReturn
-                  : FlowAnalysisAnnotations.None;
+                    ? FlowAnalysisAnnotations.DoesNotReturn
+                    : FlowAnalysisAnnotations.None;
             }
         }
 
@@ -1090,8 +1090,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 bool checkForExtension = isExtensionAlreadySet
                     ? _packedFlags.IsExtensionMethod
                     : this.MethodKind == MethodKind.Ordinary
-                      && IsValidExtensionMethodSignature()
-                      && _containingType.MightContainExtensionMethods;
+                        && IsValidExtensionMethodSignature()
+                        && _containingType.MightContainExtensionMethods;
 
                 bool isReadOnlyAlreadySet = _packedFlags.IsReadOnlyPopulated;
                 bool checkForIsReadOnly = isReadOnlyAlreadySet
@@ -1148,11 +1148,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 var attributeData = uncommonFields._lazyCustomAttributes;
                 return attributeData.IsDefault
-                  ? InterlockedOperations.Initialize(
+                    ? InterlockedOperations.Initialize(
                         ref uncommonFields._lazyCustomAttributes,
                         ImmutableArray<CSharpAttributeData>.Empty
                     )
-                  : attributeData;
+                    : attributeData;
             }
         }
 
@@ -1172,8 +1172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     _handle,
                     out byte arg
                 )
-                  ? arg
-                  : _containingType.GetNullableContextValue();
+                    ? arg
+                    : _containingType.GetNullableContextValue();
                 _packedFlags.SetNullableContext(value);
             }
             return value;
@@ -1278,8 +1278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             == MethodAttributes.RTSpecialName
                         && _name.Equals(
                             this.IsStatic
-                              ? WellKnownMemberNames.StaticConstructorName
-                              : WellKnownMemberNames.InstanceConstructorName
+                                ? WellKnownMemberNames.StaticConstructorName
+                                : WellKnownMemberNames.InstanceConstructorName
                         )
                         && this.ReturnsVoid
                         && this.Arity == 0
@@ -1326,8 +1326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         case WellKnownMemberNames.RightShiftOperatorName:
                         case WellKnownMemberNames.SubtractionOperatorName:
                             return IsValidUserDefinedOperatorSignature(2)
-                              ? MethodKind.UserDefinedOperator
-                              : MethodKind.Ordinary;
+                                ? MethodKind.UserDefinedOperator
+                                : MethodKind.Ordinary;
                         case WellKnownMemberNames.DecrementOperatorName:
                         case WellKnownMemberNames.FalseOperatorName:
                         case WellKnownMemberNames.IncrementOperatorName:
@@ -1337,13 +1337,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         case WellKnownMemberNames.UnaryNegationOperatorName:
                         case WellKnownMemberNames.UnaryPlusOperatorName:
                             return IsValidUserDefinedOperatorSignature(1)
-                              ? MethodKind.UserDefinedOperator
-                              : MethodKind.Ordinary;
+                                ? MethodKind.UserDefinedOperator
+                                : MethodKind.Ordinary;
                         case WellKnownMemberNames.ImplicitConversionName:
                         case WellKnownMemberNames.ExplicitConversionName:
                             return IsValidUserDefinedOperatorSignature(1)
-                              ? MethodKind.Conversion
-                              : MethodKind.Ordinary;
+                                ? MethodKind.Conversion
+                                : MethodKind.Ordinary;
 
                         //case WellKnownMemberNames.ConcatenateOperatorName:
                         //case WellKnownMemberNames.ExponentOperatorName:
@@ -1512,8 +1512,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 return IsExplicitClassOverride
-                  ? AccessUncommonFields()._lazyExplicitClassOverride
-                  : null;
+                    ? AccessUncommonFields()._lazyExplicitClassOverride
+                    : null;
             }
         }
 
@@ -1670,11 +1670,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 var result = uncommonFields._lazyConditionalAttributeSymbols;
                 return result.IsDefault
-                  ? InterlockedOperations.Initialize(
+                    ? InterlockedOperations.Initialize(
                         ref uncommonFields._lazyConditionalAttributeSymbols,
                         ImmutableArray<string>.Empty
                     )
-                  : result;
+                    : result;
             }
         }
 
@@ -1716,12 +1716,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     var result = uncommonFields._lazyObsoleteAttributeData;
                     return ReferenceEquals(result, ObsoleteAttributeData.Uninitialized)
-                      ? InterlockedOperations.Initialize(
+                        ? InterlockedOperations.Initialize(
                             ref uncommonFields._lazyObsoleteAttributeData,
                             null,
                             ObsoleteAttributeData.Uninitialized
                         )
-                      : result;
+                        : result;
                 }
             }
         }

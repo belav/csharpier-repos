@@ -441,8 +441,8 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
         // under normal circumstances, but to avoid creating a new failure scenario, allow for
         // that edge case here too.
         return methodInfo == null
-          ? typeof(EventArgs)
-          : EventArgsTypeCache.GetEventArgsType(methodInfo);
+            ? typeof(EventArgs)
+            : EventArgsTypeCache.GetEventArgsType(methodInfo);
     }
 
     internal void InstantiateChildComponentOnFrame(ref RenderTreeFrame frame, int parentComponentId)
@@ -596,15 +596,15 @@ public abstract partial class Renderer : IDisposable, IAsyncDisposable
 
     private ComponentState GetRequiredComponentState(int componentId) =>
         _componentStateById.TryGetValue(componentId, out var componentState)
-          ? componentState
-          : throw new ArgumentException(
+            ? componentState
+            : throw new ArgumentException(
                 $"The renderer does not have a component with ID {componentId}."
             );
 
     private ComponentState GetOptionalComponentState(int componentId) =>
         _componentStateById.TryGetValue(componentId, out var componentState)
-          ? componentState
-          : null;
+            ? componentState
+            : null;
 
     private ComponentState GetRequiredRootComponentState(int componentId)
     {

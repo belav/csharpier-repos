@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindODataQueryTestFixture
         : NorthwindQuerySqlServerFixture<NoopModelCustomizer>,
-          IODataQueryTestFixture
+            IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 

@@ -334,11 +334,11 @@ namespace System.Net.Http
                     {
                         addresses = async
                             ? await Dns.GetHostAddressesAsync(
-                                      host,
-                                      AddressFamily.InterNetwork,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false)
+                                    host,
+                                    AddressFamily.InterNetwork,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
                             : Dns.GetHostAddresses(host, AddressFamily.InterNetwork);
                     }
                     catch (Exception ex)

@@ -89,7 +89,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
                 CosmosException cosmosException => IsTransient(cosmosException.StatusCode),
                 HttpException httpException => IsTransient(httpException.Response.StatusCode),
                 WebException webException
-                  => IsTransient(((HttpWebResponse)webException.Response!).StatusCode),
+                    => IsTransient(((HttpWebResponse)webException.Response!).StatusCode),
                 _ => false
             };
 
@@ -108,8 +108,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
         {
             var baseDelay = base.GetNextDelay(lastException);
             return baseDelay == null
-              ? null
-              : (CallOnWrappedException(lastException, GetDelayFromException) ?? baseDelay);
+                ? null
+                : (CallOnWrappedException(lastException, GetDelayFromException) ?? baseDelay);
         }
 
         private static TimeSpan? GetDelayFromException(Exception exception)

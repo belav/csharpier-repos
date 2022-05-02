@@ -97,11 +97,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         ) =>
             projection != Projection || innerShaper != InnerShaper
                 ? new CollectionResultShaperExpression(
-                      projection,
-                      innerShaper,
-                      Navigation,
-                      ElementType
-                  )
+                    projection,
+                    innerShaper,
+                    Navigation,
+                    ElementType
+                )
                 : this;
 
         /// <inheritdoc />

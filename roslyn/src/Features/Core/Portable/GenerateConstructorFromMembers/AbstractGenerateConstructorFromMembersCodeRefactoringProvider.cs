@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
     /// </summary>
     internal abstract partial class AbstractGenerateConstructorFromMembersCodeRefactoringProvider
         : AbstractGenerateFromMembersCodeRefactoringProvider,
-          IIntentProvider
+            IIntentProvider
     {
         private const string AddNullChecksId = nameof(AddNullChecksId);
 
@@ -153,8 +153,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                         .GetOperationsAsync(options: options, cancellationToken)
                         .ConfigureAwait(false);
                     return operations == null
-                      ? ImmutableArray<CodeActionOperation>.Empty
-                      : operations.ToImmutableArray();
+                        ? ImmutableArray<CodeActionOperation>.Empty
+                        : operations.ToImmutableArray();
                 }
                 else
                 {

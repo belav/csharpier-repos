@@ -143,18 +143,18 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                     var codeAction =
                         state.DelegatedConstructor != null
                             ? new ConstructorDelegatingCodeAction(
-                                  _service,
-                                  _document,
-                                  state,
-                                  addNullChecks
-                              )
+                                _service,
+                                _document,
+                                state,
+                                addNullChecks
+                            )
                             : (CodeAction)
-                                  new FieldDelegatingCodeAction(
-                                      _service,
-                                      _document,
-                                      state,
-                                      addNullChecks
-                                  );
+                                new FieldDelegatingCodeAction(
+                                    _service,
+                                    _document,
+                                    state,
+                                    addNullChecks
+                                );
 
                     return await codeAction
                         .GetOperationsAsync(cancellationToken)

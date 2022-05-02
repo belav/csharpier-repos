@@ -11,8 +11,8 @@ namespace Moq.Language.Flow
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface ICallbackResult
         : ICallBase,
-          ICallBaseResult,
-          IThrows,
-          IThrowsResult,
-          IFluentInterface { }
+            ICallBaseResult,
+            IThrows,
+            IThrowsResult,
+            IFluentInterface { }
 }

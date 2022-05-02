@@ -612,8 +612,8 @@ namespace System.Xml.Tests
                 DataReader.Close();
             }
             return (IsCharCheckingReader() && (param == 7 || param == 8) || IsSubtreeReader())
-              ? TEST_PASS
-              : TEST_FAIL;
+                ? TEST_PASS
+                : TEST_FAIL;
         }
 
         //[Variation("XmlReader[-1]",  Param = 1)]
@@ -858,8 +858,8 @@ namespace System.Xml.Tests
                 CError.Compare(
                     DataReader.CanReadValueChunk,
                     (IsCharCheckingReader() || IsCustomReader() || IsXmlTextReader())
-                      ? false
-                      : true,
+                        ? false
+                        : true,
                     "CanReadValueChunk"
                 );
                 CError.Compare(DataReader.Depth, 1, "Depth");
@@ -1509,8 +1509,8 @@ namespace System.Xml.Tests
                 DataReader.Close();
             }
             return ((IsCharCheckingReader() && param >= 1 && param <= 6) || IsSubtreeReader())
-              ? TEST_PASS
-              : TEST_FAIL;
+                ? TEST_PASS
+                : TEST_FAIL;
         }
 
         //[Variation(Desc = "DataReader.Settings.LineNumberOffset - readonly",  Param = 1)]

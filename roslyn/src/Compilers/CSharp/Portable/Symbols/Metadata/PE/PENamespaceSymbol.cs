@@ -129,8 +129,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ImmutableArray<PENamedTypeSymbol> t;
 
             return lazyTypes.TryGetValue(name, out t)
-              ? StaticCast<NamedTypeSymbol>.From(t)
-              : ImmutableArray<NamedTypeSymbol>.Empty;
+                ? StaticCast<NamedTypeSymbol>.From(t)
+                : ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         public sealed override ImmutableArray<NamedTypeSymbol> GetTypeMembers(

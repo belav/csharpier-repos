@@ -196,8 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 Debug.Assert(this.IsStatic);
                 return this.IsGenericMethod
-                  ? Cci.CallingConvention.Generic
-                  : Cci.CallingConvention.Default;
+                    ? Cci.CallingConvention.Generic
+                    : Cci.CallingConvention.Default;
             }
         }
 
@@ -305,7 +305,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     internal partial class PlaceholderMethodSymbol
         :
 #endif
-          Cci.ISignature
+        Cci.ISignature
     {
         bool Cci.ISignature.ReturnValueIsByRef
         {

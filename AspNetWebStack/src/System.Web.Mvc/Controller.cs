@@ -24,14 +24,14 @@ namespace System.Web.Mvc
     )]
     public abstract class Controller
         : ControllerBase,
-          IActionFilter,
-          IAuthenticationFilter,
-          IAuthorizationFilter,
-          IDisposable,
-          IExceptionFilter,
-          IResultFilter,
-          IAsyncController,
-          IAsyncManagerContainer
+            IActionFilter,
+            IAuthenticationFilter,
+            IAuthorizationFilter,
+            IDisposable,
+            IExceptionFilter,
+            IResultFilter,
+            IAsyncController,
+            IAsyncManagerContainer
     {
         private static readonly object _executeTag = new object();
         private static readonly object _executeCoreTag = new object();

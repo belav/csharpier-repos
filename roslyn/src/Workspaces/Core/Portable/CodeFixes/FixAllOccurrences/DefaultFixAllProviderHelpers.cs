@@ -36,14 +36,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             var solution = fixAllContext.Scope switch
             {
                 FixAllScope.Document
-                  => await GetDocumentFixesAsync(fixAllContext, fixAllContextsAsync)
-                      .ConfigureAwait(false),
+                    => await GetDocumentFixesAsync(fixAllContext, fixAllContextsAsync)
+                        .ConfigureAwait(false),
                 FixAllScope.Project
-                  => await GetProjectFixesAsync(fixAllContext, fixAllContextsAsync)
-                      .ConfigureAwait(false),
+                    => await GetProjectFixesAsync(fixAllContext, fixAllContextsAsync)
+                        .ConfigureAwait(false),
                 FixAllScope.Solution
-                  => await GetSolutionFixesAsync(fixAllContext, fixAllContextsAsync)
-                      .ConfigureAwait(false),
+                    => await GetSolutionFixesAsync(fixAllContext, fixAllContextsAsync)
+                        .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(fixAllContext.Scope),
             };
 

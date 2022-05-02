@@ -863,8 +863,8 @@ namespace System.Net.Http.Functional.Tests
                 var req = new HttpRequestMessage(
                     HttpMethod.Post,
                     version.Major == 2
-                      ? Configuration.Http.Http2RemoteEchoServer
-                      : Configuration.Http.RemoteEchoServer
+                        ? Configuration.Http.Http2RemoteEchoServer
+                        : Configuration.Http.RemoteEchoServer
                 )
                 {
                     Content = new StringContent("Test String", Encoding.UTF8),

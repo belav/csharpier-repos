@@ -100,11 +100,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 {
                     Pattern: DeclarationPatternSyntax or ConstantPatternSyntax
                 } isPattern
-                  => isPattern.IsKeyword.GetLocation(),
+                    => isPattern.IsKeyword.GetLocation(),
 
                 // Look for the form: !(x is Y)
                 BinaryExpressionSyntax(SyntaxKind.IsExpression) { Right: TypeSyntax } isExpression
-                  => isExpression.OperatorToken.GetLocation(),
+                    => isExpression.OperatorToken.GetLocation(),
 
                 _ => null
             };

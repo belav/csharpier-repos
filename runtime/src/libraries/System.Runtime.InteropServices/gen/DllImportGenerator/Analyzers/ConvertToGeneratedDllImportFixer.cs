@@ -389,21 +389,21 @@ namespace Microsoft.Interop.Analyzers
             ITypeSymbol? callingConventionType = callingConvention switch
             {
                 CallingConvention.Cdecl
-                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                      $"System.Runtime.CompilerServices.CallConvCdecl"
-                  ),
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvCdecl"
+                    ),
                 CallingConvention.StdCall
-                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                      $"System.Runtime.CompilerServices.CallConvStdcall"
-                  ),
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvStdcall"
+                    ),
                 CallingConvention.ThisCall
-                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                      $"System.Runtime.CompilerServices.CallConvThiscall"
-                  ),
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvThiscall"
+                    ),
                 CallingConvention.FastCall
-                  => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
-                      $"System.Runtime.CompilerServices.CallConvFastcall"
-                  ),
+                    => editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
+                        $"System.Runtime.CompilerServices.CallConvFastcall"
+                    ),
                 _ => null
             };
 

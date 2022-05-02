@@ -631,7 +631,7 @@ public static class PageConventionCollectionExtensions
 
     private class ParameterModelBaseConventionAdapter
         : IPageConvention,
-          IParameterModelBaseConvention
+            IParameterModelBaseConvention
     {
         private readonly IParameterModelBaseConvention _convention;
 

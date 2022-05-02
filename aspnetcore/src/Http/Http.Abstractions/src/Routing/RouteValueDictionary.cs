@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Routing;
 /// </summary>
 public class RouteValueDictionary
     : IDictionary<string, object?>,
-      IReadOnlyDictionary<string, object?>
+        IReadOnlyDictionary<string, object?>
 {
     // 4 is a good default capacity here because that leaves enough space for area/controller/action/id
     private readonly int DefaultCapacity = 4;

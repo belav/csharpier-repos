@@ -23,12 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     TypeParameterSymbol
         :
 #endif
-          Cci.IGenericParameterReference,
-          Cci.IGenericMethodParameterReference,
-          Cci.IGenericTypeParameterReference,
-          Cci.IGenericParameter,
-          Cci.IGenericMethodParameter,
-          Cci.IGenericTypeParameter
+            Cci.IGenericParameterReference,
+            Cci.IGenericMethodParameterReference,
+            Cci.IGenericTypeParameterReference,
+            Cci.IGenericParameter,
+            Cci.IGenericMethodParameter,
+            Cci.IGenericTypeParameter
     {
         bool Cci.ITypeReference.IsEnum
         {

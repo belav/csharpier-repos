@@ -39,16 +39,16 @@ namespace Internal.Cryptography
             ReadOnlySpan<byte> source = data.AsSpan(offset, count);
 
             return hashAlgorithm == HashAlgorithmName.SHA256
-              ? SHA256.HashData(source)
-              : hashAlgorithm == HashAlgorithmName.SHA1
-                  ? SHA1.HashData(source)
-                  : hashAlgorithm == HashAlgorithmName.SHA512
-                      ? SHA512.HashData(source)
-                      : hashAlgorithm == HashAlgorithmName.SHA384
-                          ? SHA384.HashData(source)
-                          : hashAlgorithm == HashAlgorithmName.MD5
-                              ? MD5.HashData(source)
-                              : throw new CryptographicException(
+                ? SHA256.HashData(source)
+                : hashAlgorithm == HashAlgorithmName.SHA1
+                    ? SHA1.HashData(source)
+                    : hashAlgorithm == HashAlgorithmName.SHA512
+                        ? SHA512.HashData(source)
+                        : hashAlgorithm == HashAlgorithmName.SHA384
+                            ? SHA384.HashData(source)
+                            : hashAlgorithm == HashAlgorithmName.MD5
+                                ? MD5.HashData(source)
+                                : throw new CryptographicException(
                                     SR.Cryptography_UnknownHashAlgorithm,
                                     hashAlgorithm.Name
                                 );
@@ -87,16 +87,16 @@ namespace Internal.Cryptography
             Debug.Assert(!string.IsNullOrEmpty(hashAlgorithm.Name));
 
             return hashAlgorithm == HashAlgorithmName.SHA256
-              ? SHA256.TryHashData(source, destination, out bytesWritten)
-              : hashAlgorithm == HashAlgorithmName.SHA1
-                  ? SHA1.TryHashData(source, destination, out bytesWritten)
-                  : hashAlgorithm == HashAlgorithmName.SHA512
-                      ? SHA512.TryHashData(source, destination, out bytesWritten)
-                      : hashAlgorithm == HashAlgorithmName.SHA384
-                          ? SHA384.TryHashData(source, destination, out bytesWritten)
-                          : hashAlgorithm == HashAlgorithmName.MD5
-                              ? MD5.TryHashData(source, destination, out bytesWritten)
-                              : throw new CryptographicException(
+                ? SHA256.TryHashData(source, destination, out bytesWritten)
+                : hashAlgorithm == HashAlgorithmName.SHA1
+                    ? SHA1.TryHashData(source, destination, out bytesWritten)
+                    : hashAlgorithm == HashAlgorithmName.SHA512
+                        ? SHA512.TryHashData(source, destination, out bytesWritten)
+                        : hashAlgorithm == HashAlgorithmName.SHA384
+                            ? SHA384.TryHashData(source, destination, out bytesWritten)
+                            : hashAlgorithm == HashAlgorithmName.MD5
+                                ? MD5.TryHashData(source, destination, out bytesWritten)
+                                : throw new CryptographicException(
                                     SR.Cryptography_UnknownHashAlgorithm,
                                     hashAlgorithm.Name
                                 );
@@ -124,8 +124,8 @@ namespace Internal.Cryptography
                             : hashAlgorithmName == HashAlgorithmName.MD5
                                 ? MD5.Create()
                                 : throw new CryptographicException(
-                                      SR.Cryptography_UnknownHashAlgorithm,
-                                      hashAlgorithmName.Name
-                                  );
+                                    SR.Cryptography_UnknownHashAlgorithm,
+                                    hashAlgorithmName.Name
+                                );
     }
 }

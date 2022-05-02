@@ -82,17 +82,20 @@ namespace Internal.Cryptography.Pal.Windows
                 return (CryptMsgType)msgTypeAsInt switch
                 {
                     CryptMsgType.CMSG_DATA
-                      => Oid.FromOidValue(Oids.Pkcs7Data, OidGroup.ExtensionOrAttribute),
+                        => Oid.FromOidValue(Oids.Pkcs7Data, OidGroup.ExtensionOrAttribute),
                     CryptMsgType.CMSG_SIGNED
-                      => Oid.FromOidValue(Oids.Pkcs7Signed, OidGroup.ExtensionOrAttribute),
+                        => Oid.FromOidValue(Oids.Pkcs7Signed, OidGroup.ExtensionOrAttribute),
                     CryptMsgType.CMSG_ENVELOPED
-                      => Oid.FromOidValue(Oids.Pkcs7Enveloped, OidGroup.ExtensionOrAttribute),
+                        => Oid.FromOidValue(Oids.Pkcs7Enveloped, OidGroup.ExtensionOrAttribute),
                     CryptMsgType.CMSG_SIGNED_AND_ENVELOPED
-                      => Oid.FromOidValue(Oids.Pkcs7SignedEnveloped, OidGroup.ExtensionOrAttribute),
+                        => Oid.FromOidValue(
+                            Oids.Pkcs7SignedEnveloped,
+                            OidGroup.ExtensionOrAttribute
+                        ),
                     CryptMsgType.CMSG_HASHED
-                      => Oid.FromOidValue(Oids.Pkcs7Hashed, OidGroup.ExtensionOrAttribute),
+                        => Oid.FromOidValue(Oids.Pkcs7Hashed, OidGroup.ExtensionOrAttribute),
                     CryptMsgType.CMSG_ENCRYPTED
-                      => Oid.FromOidValue(Oids.Pkcs7Encrypted, OidGroup.ExtensionOrAttribute),
+                        => Oid.FromOidValue(Oids.Pkcs7Encrypted, OidGroup.ExtensionOrAttribute),
                     _ => throw ErrorCode.CRYPT_E_INVALID_MSG_TYPE.ToCryptographicException(),
                 };
             }

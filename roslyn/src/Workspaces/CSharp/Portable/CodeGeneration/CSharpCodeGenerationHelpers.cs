@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         ) where TDeclarationSyntax : MemberDeclarationSyntax
         {
             return members.Count == 1
-              ? result.WithAdditionalAnnotations(Formatter.Annotation)
-              : result;
+                ? result.WithAdditionalAnnotations(Formatter.Annotation)
+                : result;
         }
 
         internal static void AddAccessibilityModifiers(
@@ -295,7 +295,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     SyntaxKind.EnumDeclaration => CodeGenerationDestination.EnumType,
                     SyntaxKind.InterfaceDeclaration => CodeGenerationDestination.InterfaceType,
                     SyntaxKind.FileScopedNamespaceDeclaration
-                      => CodeGenerationDestination.Namespace,
+                        => CodeGenerationDestination.Namespace,
                     SyntaxKind.NamespaceDeclaration => CodeGenerationDestination.Namespace,
                     SyntaxKind.StructDeclaration => CodeGenerationDestination.StructType,
                     _ => CodeGenerationDestination.Unspecified,
@@ -326,9 +326,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 out var comment,
                 cancellationToken
             )
-              ? node.WithPrependedLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(comment))
-                .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
-              : node;
+                ? node.WithPrependedLeadingTrivia(SyntaxFactory.ParseLeadingTrivia(comment))
+                    .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
+                : node;
             return result;
         }
 

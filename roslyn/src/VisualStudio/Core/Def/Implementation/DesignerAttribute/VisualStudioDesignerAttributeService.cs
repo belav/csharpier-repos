@@ -31,9 +31,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     internal class VisualStudioDesignerAttributeService
         : ForegroundThreadAffinitizedObject,
-          IDesignerAttributeListener,
-          IEventListener<object>,
-          IDisposable
+            IDesignerAttributeListener,
+            IEventListener<object>,
+            IDisposable
     {
         private readonly VisualStudioWorkspaceImpl _workspace;
 
@@ -226,11 +226,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
                 cpsUpdateService == null
                     ? NotifyLegacyProjectSystemAsync(projectId, data, cancellationToken)
                     : NotifyCpsProjectSystemAsync(
-                          projectId,
-                          cpsUpdateService,
-                          data,
-                          cancellationToken
-                      );
+                        projectId,
+                        cpsUpdateService,
+                        data,
+                        cancellationToken
+                    );
 
             await task.ConfigureAwait(false);
         }
@@ -289,8 +289,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             )
             {
                 var currentStringValue = string.IsNullOrEmpty(currentValue as string)
-                  ? null
-                  : (string)currentValue;
+                    ? null
+                    : (string)currentValue;
                 if (
                     string.Equals(
                         currentStringValue,

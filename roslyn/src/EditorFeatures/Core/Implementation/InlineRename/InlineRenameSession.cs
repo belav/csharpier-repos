@@ -36,8 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
     internal partial class InlineRenameSession
         : ForegroundThreadAffinitizedObject,
-          IInlineRenameSession,
-          IFeatureController
+            IInlineRenameSession,
+            IFeatureController
     {
         private readonly Workspace _workspace;
         private readonly InlineRenameService _renameService;

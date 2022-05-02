@@ -10,9 +10,9 @@ namespace System.Web.Http.SelfHost.Channels
 {
     internal class HttpMessageEncodingReplyChannel
         : LayeredChannel<IReplyChannel>,
-          IReplyChannel,
-          IChannel,
-          ICommunicationObject
+            IReplyChannel,
+            IChannel,
+            ICommunicationObject
     {
         public HttpMessageEncodingReplyChannel(
             ChannelManagerBase channelManager,
@@ -118,8 +118,8 @@ namespace System.Web.Http.SelfHost.Channels
         private static RequestContext WrapRequestContext(RequestContext innerContext)
         {
             return (innerContext != null)
-              ? new HttpMessageEncodingRequestContext(innerContext)
-              : (RequestContext)null;
+                ? new HttpMessageEncodingRequestContext(innerContext)
+                : (RequestContext)null;
         }
     }
 }

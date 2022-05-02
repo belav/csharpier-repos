@@ -66,8 +66,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                     LoggerFactory,
                     DeploymentParameters,
                     contentRoot: DeploymentParameters.PublishApplicationBeforeDeployment
-                      ? DeploymentParameters.PublishedApplicationRootPath
-                      : DeploymentParameters.ApplicationPath,
+                        ? DeploymentParameters.PublishedApplicationRootPath
+                        : DeploymentParameters.ApplicationPath,
                     hostShutdownToken: hostExitToken
                 );
             }

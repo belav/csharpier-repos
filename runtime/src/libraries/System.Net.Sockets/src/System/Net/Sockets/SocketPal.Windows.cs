@@ -190,8 +190,8 @@ namespace System.Net.Sockets
         {
             SocketError errorCode = Interop.Winsock.getsockname(handle, buffer, nameLen);
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static SocketError GetAvailable(SafeSocketHandle handle, out int available)
@@ -204,8 +204,8 @@ namespace System.Net.Sockets
             );
             available = value;
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static unsafe SocketError GetPeerName(
@@ -218,8 +218,8 @@ namespace System.Net.Sockets
             {
                 SocketError errorCode = Interop.Winsock.getpeername(handle, rawBuffer, ref nameLen);
                 return errorCode == SocketError.SocketError
-                  ? GetLastSocketError()
-                  : SocketError.Success;
+                    ? GetLastSocketError()
+                    : SocketError.Success;
             }
         }
 
@@ -232,16 +232,16 @@ namespace System.Net.Sockets
         {
             SocketError errorCode = Interop.Winsock.bind(handle, buffer, nameLen);
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static SocketError Listen(SafeSocketHandle handle, int backlog)
         {
             SocketError errorCode = Interop.Winsock.listen(handle, backlog);
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static SocketError Accept(
@@ -280,8 +280,8 @@ namespace System.Net.Sockets
                 IntPtr.Zero
             );
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static SocketError Send(
@@ -616,11 +616,11 @@ namespace System.Net.Sockets
             IPAddress address =
                 controlBuffer->length != UIntPtr.Zero
                     ? new IPAddress(
-                          new ReadOnlySpan<byte>(
-                              controlBuffer->address,
-                              Interop.Winsock.IPv6AddressLength
-                          )
-                      )
+                        new ReadOnlySpan<byte>(
+                            controlBuffer->address,
+                            Interop.Winsock.IPv6AddressLength
+                        )
+                    )
                     : IPAddress.IPv6None;
 
             return new IPPacketInformation(address, (int)controlBuffer->index);
@@ -817,8 +817,8 @@ namespace System.Net.Sockets
                 IntPtr.Zero
             );
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static unsafe SocketError SetSockOpt(
@@ -851,8 +851,8 @@ namespace System.Net.Sockets
                 );
             }
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static unsafe SocketError SetSockOpt(
@@ -885,8 +885,8 @@ namespace System.Net.Sockets
                     optionValue != null ? optionValue.Length : 0
                 );
                 return errorCode == SocketError.SocketError
-                  ? GetLastSocketError()
-                  : SocketError.Success;
+                    ? GetLastSocketError()
+                    : SocketError.Success;
             }
         }
 
@@ -907,8 +907,8 @@ namespace System.Net.Sockets
                     optionValue.Length
                 );
                 return errorCode == SocketError.SocketError
-                  ? GetLastSocketError()
-                  : SocketError.Success;
+                    ? GetLastSocketError()
+                    : SocketError.Success;
             }
         }
 
@@ -959,8 +959,8 @@ namespace System.Net.Sockets
                 Interop.Winsock.IPMulticastRequest.Size
             );
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static SocketError SetIPv6MulticastOption(
@@ -983,8 +983,8 @@ namespace System.Net.Sockets
                 Interop.Winsock.IPv6MulticastRequest.Size
             );
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static SocketError SetLingerOption(SafeSocketHandle handle, LingerOption optionValue)
@@ -1002,8 +1002,8 @@ namespace System.Net.Sockets
                 4
             );
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static void SetIPProtectionLevel(
@@ -1051,8 +1051,8 @@ namespace System.Net.Sockets
 
             optionValue = tmpOptionValue;
             return errorCode == SocketError.SocketError
-              ? GetLastSocketError()
-              : SocketError.Success;
+                ? GetLastSocketError()
+                : SocketError.Success;
         }
 
         public static unsafe SocketError GetSockOpt(
@@ -1085,8 +1085,8 @@ namespace System.Net.Sockets
                     ref optionLength
                 );
                 return errorCode == SocketError.SocketError
-                  ? GetLastSocketError()
-                  : SocketError.Success;
+                    ? GetLastSocketError()
+                    : SocketError.Success;
             }
         }
 
@@ -1111,8 +1111,8 @@ namespace System.Net.Sockets
                     ref optionLength
                 );
                 return errorCode == SocketError.SocketError
-                  ? GetLastSocketError()
-                  : SocketError.Success;
+                    ? GetLastSocketError()
+                    : SocketError.Success;
             }
         }
 
@@ -1307,8 +1307,8 @@ namespace System.Net.Sockets
                     ref leaseRead,
                     out var tmp
                 )
-                  ? stackalloc IntPtr[StackThreshold]
-                  : tmp;
+                    ? stackalloc IntPtr[StackThreshold]
+                    : tmp;
                 Socket.SocketListToFileDescriptorSet(
                     checkRead,
                     readfileDescriptorSet,
@@ -1319,8 +1319,8 @@ namespace System.Net.Sockets
                     ref leaseWrite,
                     out tmp
                 )
-                  ? stackalloc IntPtr[StackThreshold]
-                  : tmp;
+                    ? stackalloc IntPtr[StackThreshold]
+                    : tmp;
                 Socket.SocketListToFileDescriptorSet(
                     checkWrite,
                     writefileDescriptorSet,
@@ -1331,8 +1331,8 @@ namespace System.Net.Sockets
                     ref leaseError,
                     out tmp
                 )
-                  ? stackalloc IntPtr[StackThreshold]
-                  : tmp;
+                    ? stackalloc IntPtr[StackThreshold]
+                    : tmp;
                 Socket.SocketListToFileDescriptorSet(
                     checkError,
                     errfileDescriptorSet,

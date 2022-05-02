@@ -118,10 +118,10 @@ namespace System.Net.NetworkInformation
                 address.AddressFamily == AddressFamily.InterNetwork
                     ?
 #pragma warning disable CS0618 // IPAddress.Address is obsoleted, but it's the most efficient way to get the Int32 IPv4 address
-                      new IPAddress(address.Address)
+                    new IPAddress(address.Address)
                     :
 #pragma warning restore CS0618
-                      new IPAddress(address.GetAddressBytes(), address.ScopeId);
+                    new IPAddress(address.GetAddressBytes(), address.ScopeId);
 
             return addressSnapshot;
         }

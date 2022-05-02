@@ -64,8 +64,8 @@ public class UserSecretsTestFixture : IDisposable
             Path.Combine(Path.GetTempPath(), "usersecretstest", Guid.NewGuid().ToString())
         );
         var prop = string.IsNullOrEmpty(userSecretsId)
-          ? string.Empty
-          : $"<UserSecretsId>{userSecretsId}</UserSecretsId>";
+            ? string.Empty
+            : $"<UserSecretsId>{userSecretsId}</UserSecretsId>";
 
         File.WriteAllText(
             Path.Combine(projectPath.FullName, "TestProject.csproj"),

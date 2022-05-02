@@ -142,17 +142,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             ppEnum =
                 dwFlags == (uint)_LIB_LISTFLAGS.LLF_NONE
                     ? CreateEnum(
-                          ref _objectBrowserEnumNodes,
-                          _basePresentationNodes,
-                          isCanonical: false,
-                          isObjectBrowser: true
-                      )
+                        ref _objectBrowserEnumNodes,
+                        _basePresentationNodes,
+                        isCanonical: false,
+                        isObjectBrowser: true
+                    )
                     : CreateEnum(
-                          ref _classViewEnumNodes,
-                          _basePresentationNodes,
-                          isCanonical: false,
-                          isObjectBrowser: false
-                      );
+                        ref _classViewEnumNodes,
+                        _basePresentationNodes,
+                        isCanonical: false,
+                        isObjectBrowser: false
+                    );
 
             return VSConstants.S_OK;
         }

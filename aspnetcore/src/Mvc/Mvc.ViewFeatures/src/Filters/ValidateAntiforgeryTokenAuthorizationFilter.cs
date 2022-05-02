@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
 internal class ValidateAntiforgeryTokenAuthorizationFilter
     : IAsyncAuthorizationFilter,
-      IAntiforgeryPolicy
+        IAntiforgeryPolicy
 {
     private readonly IAntiforgery _antiforgery;
     private readonly ILogger _logger;

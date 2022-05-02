@@ -1852,14 +1852,14 @@ public class UserManagerTest
 
     private class EmptyStore
         : IUserPasswordStore<PocoUser>,
-          IUserClaimStore<PocoUser>,
-          IUserLoginStore<PocoUser>,
-          IUserEmailStore<PocoUser>,
-          IUserPhoneNumberStore<PocoUser>,
-          IUserLockoutStore<PocoUser>,
-          IUserTwoFactorStore<PocoUser>,
-          IUserRoleStore<PocoUser>,
-          IUserSecurityStampStore<PocoUser>
+            IUserClaimStore<PocoUser>,
+            IUserLoginStore<PocoUser>,
+            IUserEmailStore<PocoUser>,
+            IUserPhoneNumberStore<PocoUser>,
+            IUserLockoutStore<PocoUser>,
+            IUserTwoFactorStore<PocoUser>,
+            IUserRoleStore<PocoUser>,
+            IUserSecurityStampStore<PocoUser>
     {
         public Task<IList<Claim>> GetClaimsAsync(
             PocoUser user,
@@ -2313,13 +2313,13 @@ public class UserManagerTest
 
     private class NotImplementedStore
         : IUserPasswordStore<PocoUser>,
-          IUserClaimStore<PocoUser>,
-          IUserLoginStore<PocoUser>,
-          IUserRoleStore<PocoUser>,
-          IUserEmailStore<PocoUser>,
-          IUserPhoneNumberStore<PocoUser>,
-          IUserLockoutStore<PocoUser>,
-          IUserTwoFactorStore<PocoUser>
+            IUserClaimStore<PocoUser>,
+            IUserLoginStore<PocoUser>,
+            IUserRoleStore<PocoUser>,
+            IUserEmailStore<PocoUser>,
+            IUserPhoneNumberStore<PocoUser>,
+            IUserLockoutStore<PocoUser>,
+            IUserTwoFactorStore<PocoUser>
     {
         public Task<IList<Claim>> GetClaimsAsync(
             PocoUser user,

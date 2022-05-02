@@ -44,8 +44,8 @@ namespace Microsoft.Win32.SafeHandles
                 if (supportsRandomAccess == NullableBool.Undefined)
                 {
                     _supportsRandomAccess = supportsRandomAccess = GetCanSeek()
-                      ? NullableBool.True
-                      : NullableBool.False;
+                        ? NullableBool.True
+                        : NullableBool.False;
                 }
 
                 return supportsRandomAccess == NullableBool.True;
@@ -573,8 +573,8 @@ namespace Microsoft.Win32.SafeHandles
                     throw new IOException(
                         SR.Format(
                             errorInfo.Error == Interop.Error.EFBIG
-                              ? SR.IO_FileTooLarge_Path_AllocationSize
-                              : SR.IO_DiskFull_Path_AllocationSize,
+                                ? SR.IO_FileTooLarge_Path_AllocationSize
+                                : SR.IO_DiskFull_Path_AllocationSize,
                             path,
                             preallocationSize
                         )

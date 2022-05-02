@@ -29,7 +29,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
     [Export(typeof(ColorSchemeApplier))]
     internal sealed partial class ColorSchemeApplier
         : ForegroundThreadAffinitizedObject,
-          IDisposable
+            IDisposable
     {
         private const string ColorThemeValueName = "Microsoft.VisualStudio.ColorTheme";
         private const string ColorThemeNewValueName = "Microsoft.VisualStudio.ColorThemeNew";
@@ -170,8 +170,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             // If this is a supported theme then, use the users configured scheme, otherwise fallback to the VS 2017.
             // Custom themes would be based on the MEF exported color information for classifications which matches the VS 2017 theme.
             var configuredColorScheme = IsSupportedTheme()
-              ? _settings.GetConfiguredColorScheme()
-              : SchemeName.VisualStudio2017;
+                ? _settings.GetConfiguredColorScheme()
+                : SchemeName.VisualStudio2017;
 
             if (appliedColorScheme == configuredColorScheme)
             {

@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Components.Server;
 /// </summary>
 public abstract class RevalidatingServerAuthenticationStateProvider
     : ServerAuthenticationStateProvider,
-      IDisposable
+        IDisposable
 {
     private readonly ILogger _logger;
     private CancellationTokenSource _loopCancellationTokenSource = new CancellationTokenSource();

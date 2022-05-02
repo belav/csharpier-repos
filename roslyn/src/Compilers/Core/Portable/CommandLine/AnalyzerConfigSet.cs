@@ -357,11 +357,11 @@ namespace Microsoft.CodeAnalysis
 
                 result = new AnalyzerConfigOptionsResult(
                     treeOptionsBuilder.Count > 0
-                      ? treeOptionsBuilder.ToImmutable()
-                      : SyntaxTree.EmptyDiagnosticOptions,
+                        ? treeOptionsBuilder.ToImmutable()
+                        : SyntaxTree.EmptyDiagnosticOptions,
                     analyzerOptionsBuilder.Count > 0
-                      ? analyzerOptionsBuilder.ToImmutable()
-                      : AnalyzerConfigOptions.EmptyDictionary,
+                        ? analyzerOptionsBuilder.ToImmutable()
+                        : AnalyzerConfigOptions.EmptyDictionary,
                     diagnosticBuilder.ToImmutableAndFree()
                 );
 

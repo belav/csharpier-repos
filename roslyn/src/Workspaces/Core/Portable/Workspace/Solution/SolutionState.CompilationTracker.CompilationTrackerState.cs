@@ -87,8 +87,8 @@ namespace Microsoft.CodeAnalysis
                 public CompilationTrackerGeneratorInfo WithDocumentsAreFinalAndFrozen()
                 {
                     return DocumentsAreFinalAndFrozen
-                      ? this
-                      : new(
+                        ? this
+                        : new(
                             Documents,
                             Driver,
                             documentsAreFinal: true,
@@ -191,12 +191,12 @@ namespace Microsoft.CodeAnalysis
                     // DeclarationState now. We'll pass false for generatedDocumentsAreFinal because this is being called
                     // if our referenced projects are changing, so we'll have to rerun to consume changes.
                     return intermediateProjects.Length == 0
-                      ? new AllSyntaxTreesParsedState(
+                        ? new AllSyntaxTreesParsedState(
                             solutionServices,
                             compilation,
                             generatorInfo.WithDocumentsAreFinal(false)
                         )
-                      : new InProgressState(
+                        : new InProgressState(
                             compilation,
                             generatorInfo,
                             compilationWithGeneratedDocuments,
@@ -214,8 +214,8 @@ namespace Microsoft.CodeAnalysis
                         && !services.Workspace.Options.GetOption(
                             WorkspaceConfigurationOptions.DisableCompilationTrackerWeakCompilationReferences
                         )
-                      ? new WeakValueSource<Compilation>(compilation)
-                      : new ConstantValueSource<Optional<Compilation>>(compilation);
+                        ? new WeakValueSource<Compilation>(compilation)
+                        : new ConstantValueSource<Optional<Compilation>>(compilation);
                 }
             }
 

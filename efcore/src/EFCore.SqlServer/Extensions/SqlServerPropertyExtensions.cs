@@ -246,10 +246,10 @@ namespace Microsoft.EntityFrameworkCore
             // Support pre-6.0 IdentitySeed annotations, which contained an int rather than a long
             var annotation = property.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
             return annotation is null
-              ? null
-              : annotation.Value is int intValue
-                  ? intValue
-                  : (long?)annotation.Value;
+                ? null
+                : annotation.Value is int intValue
+                    ? intValue
+                    : (long?)annotation.Value;
         }
 
         /// <summary>
@@ -277,8 +277,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var sharedProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedProperty == null
-              ? property.DeclaringEntityType.Model.GetIdentitySeed()
-              : sharedProperty.GetIdentitySeed(storeObject);
+                ? property.DeclaringEntityType.Model.GetIdentitySeed()
+                : sharedProperty.GetIdentitySeed(storeObject);
         }
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace Microsoft.EntityFrameworkCore
             (property is RuntimeProperty)
                 ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
                 : (int?)property[SqlServerAnnotationNames.IdentityIncrement]
-                  ?? property.DeclaringEntityType.Model.GetIdentityIncrement();
+                    ?? property.DeclaringEntityType.Model.GetIdentityIncrement();
 
         /// <summary>
         ///     Returns the identity increment.
@@ -358,8 +358,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var sharedProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedProperty == null
-              ? property.DeclaringEntityType.Model.GetIdentityIncrement()
-              : sharedProperty.GetIdentityIncrement(storeObject);
+                ? property.DeclaringEntityType.Model.GetIdentityIncrement()
+                : sharedProperty.GetIdentityIncrement(storeObject);
         }
 
         /// <summary>
@@ -475,8 +475,8 @@ namespace Microsoft.EntityFrameworkCore
                     sharedTableRootProperty.GetValueGenerationStrategy(storeObject)
                         == SqlServerValueGenerationStrategy.IdentityColumn
                     && !property.GetContainingForeignKeys().Any(fk => !fk.IsBaseLinking())
-                  ? SqlServerValueGenerationStrategy.IdentityColumn
-                  : SqlServerValueGenerationStrategy.None;
+                    ? SqlServerValueGenerationStrategy.IdentityColumn
+                    : SqlServerValueGenerationStrategy.None;
             }
 
             if (
@@ -510,8 +510,8 @@ namespace Microsoft.EntityFrameworkCore
             return
                 modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
                 && IsCompatibleWithValueGeneration(property)
-              ? SqlServerValueGenerationStrategy.IdentityColumn
-              : SqlServerValueGenerationStrategy.None;
+                ? SqlServerValueGenerationStrategy.IdentityColumn
+                : SqlServerValueGenerationStrategy.None;
         }
 
         private static SqlServerValueGenerationStrategy GetDefaultValueGenerationStrategy(
@@ -533,8 +533,8 @@ namespace Microsoft.EntityFrameworkCore
             return
                 modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
                 && IsCompatibleWithValueGeneration(property, storeObject, typeMappingSource)
-              ? SqlServerValueGenerationStrategy.IdentityColumn
-              : SqlServerValueGenerationStrategy.None;
+                ? SqlServerValueGenerationStrategy.IdentityColumn
+                : SqlServerValueGenerationStrategy.None;
         }
 
         /// <summary>
@@ -694,8 +694,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
             return sharedTableRootProperty != null
-              ? sharedTableRootProperty.IsSparse(storeObject)
-              : null;
+                ? sharedTableRootProperty.IsSparse(storeObject)
+                : null;
         }
 
         /// <summary>

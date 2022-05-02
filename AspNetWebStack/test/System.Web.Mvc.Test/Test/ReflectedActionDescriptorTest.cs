@@ -602,8 +602,8 @@ namespace System.Web.Mvc.Test
         )]
         private class KeyedActionFilterAttribute
             : KeyedFilterAttribute,
-              IActionFilter,
-              IResultFilter
+                IActionFilter,
+                IResultFilter
         {
             public void OnActionExecuting(ActionExecutingContext filterContext)
             {

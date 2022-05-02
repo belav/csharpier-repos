@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             internal sealed class RecoverableSyntaxTree
                 : CSharpSyntaxTree,
-                  IRecoverableSyntaxTree<CompilationUnitSyntax>,
-                  ICachedObjectOwner
+                    IRecoverableSyntaxTree<CompilationUnitSyntax>,
+                    ICachedObjectOwner
             {
                 private readonly RecoverableSyntaxRoot<CompilationUnitSyntax> _recoverableRoot;
                 private readonly SyntaxTreeInfo _info;

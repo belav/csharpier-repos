@@ -37,7 +37,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ConnectionInterceptionSqliteTest
             : ConnectionInterceptionSqliteTestBase,
-              IClassFixture<ConnectionInterceptionSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<ConnectionInterceptionSqliteTest.InterceptionSqliteFixture>
         {
             public ConnectionInterceptionSqliteTest(InterceptionSqliteFixture fixture)
                 : base(fixture) { }
@@ -50,7 +50,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ConnectionInterceptionWithDiagnosticsSqliteTest
             : ConnectionInterceptionSqliteTestBase,
-              IClassFixture<ConnectionInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<ConnectionInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
         {
             public ConnectionInterceptionWithDiagnosticsSqliteTest(
                 InterceptionSqliteFixture fixture

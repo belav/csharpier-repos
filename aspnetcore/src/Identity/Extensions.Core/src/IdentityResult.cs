@@ -61,8 +61,8 @@ public class IdentityResult
     public override string ToString()
     {
         return Succeeded
-          ? "Succeeded"
-          : string.Format(
+            ? "Succeeded"
+            : string.Format(
                 CultureInfo.InvariantCulture,
                 "{0} : {1}",
                 "Failed",

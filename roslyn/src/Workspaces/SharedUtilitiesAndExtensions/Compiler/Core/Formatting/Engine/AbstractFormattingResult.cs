@@ -96,9 +96,9 @@ namespace Microsoft.CodeAnalysis.Formatting
                     (change.Span == span)
                         ? originalString
                         : originalString.Substring(
-                              change.Span.Start - span.Start,
-                              change.Span.Length
-                          );
+                            change.Span.Start - span.Start,
+                            change.Span.Length
+                        );
                 list.Add(change.SimpleDiff(oldText));
             }
         }

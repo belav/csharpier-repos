@@ -73,7 +73,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             if (_memberToFunctionName.TryGetValue(member, out var functionName) && instance != null)
             {
                 return returnType == typeof(bool)
-                  ? _sqlExpressionFactory.Case(
+                    ? _sqlExpressionFactory.Case(
                         new[]
                         {
                             new CaseWhenClause(
@@ -89,7 +89,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                         },
                         null
                     )
-                  : _sqlExpressionFactory.Function(
+                    : _sqlExpressionFactory.Function(
                         functionName,
                         new[] { instance },
                         nullable: true,

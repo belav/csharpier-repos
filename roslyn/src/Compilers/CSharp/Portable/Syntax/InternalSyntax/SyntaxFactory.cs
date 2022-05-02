@@ -156,8 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 && kind <= SyntaxToken.LastTokenWithWellKnownText
                 && text == defaultText
                 && valueText == defaultText
-              ? Token(leading, kind, trailing)
-              : SyntaxToken.WithValue(kind, leading, text, valueText, trailing);
+                ? Token(leading, kind, trailing)
+                : SyntaxToken.WithValue(kind, leading, text, valueText, trailing);
         }
 
         internal static SyntaxToken MissingToken(SyntaxKind kind)

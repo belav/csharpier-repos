@@ -294,9 +294,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 descriptor.DefaultSeverity,
                 descriptor.IsEnabledByDefault,
                 warningLevel: effectiveSeverity.WithDefaultSeverity(descriptor.DefaultSeverity)
-                    == ReportDiagnostic.Error
-                  ? 0
-                  : 1,
+                == ReportDiagnostic.Error
+                    ? 0
+                    : 1,
                 effectiveSeverity == ReportDiagnostic.Suppress,
                 descriptor.Title,
                 descriptor.Description,
@@ -396,12 +396,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 var messageFormat = _messageFormat.ToString(formatProvider);
                 return messageFormat != null
-                  ? (
+                    ? (
                         _formatArguments.Length > 0
                             ? string.Format(formatProvider, messageFormat, _formatArguments)
                             : messageFormat
                     )
-                  : string.Empty;
+                    : string.Empty;
             }
 
             protected override bool AreEqual(object? other)

@@ -279,11 +279,11 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
 
             return
                 lastIndex != -1 && syntaxFactsService.IsEndOfLineTrivia(trailingTrivia[lastIndex])
-              ? (
+                ? (
                     sameLine: trailingTrivia.RemoveAt(lastIndex),
                     endOfLine: new SyntaxTriviaList(trailingTrivia[lastIndex])
                 )
-              : (sameLine: trailingTrivia, endOfLine: SyntaxTriviaList.Empty);
+                : (sameLine: trailingTrivia, endOfLine: SyntaxTriviaList.Empty);
         }
 
         private static TStatementSyntax FindSiblingStatementContainingLastUsage(

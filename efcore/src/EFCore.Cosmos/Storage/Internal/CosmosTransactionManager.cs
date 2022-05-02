@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
     /// </summary>
     public class CosmosTransactionManager
         : IDbContextTransactionManager,
-          ITransactionEnlistmentManager
+            ITransactionEnlistmentManager
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

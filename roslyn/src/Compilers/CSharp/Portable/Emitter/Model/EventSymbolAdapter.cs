@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     EventSymbol
         :
 #endif
-          Cci.IEventDefinition
+            Cci.IEventDefinition
     {
         #region IEventDefinition Members
 

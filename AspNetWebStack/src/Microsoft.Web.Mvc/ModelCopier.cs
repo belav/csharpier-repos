@@ -50,9 +50,9 @@ namespace Microsoft.Web.Mvc
                         (isDirectlyAssignable)
                             ? false
                             : (
-                                  Nullable.GetUnderlyingType(fromProperty.PropertyType)
-                                  == toProperty.PropertyType
-                              );
+                                Nullable.GetUnderlyingType(fromProperty.PropertyType)
+                                == toProperty.PropertyType
+                            );
 
                     if (isDirectlyAssignable || liftedValueType)
                     {

@@ -27,11 +27,11 @@ namespace Castle.Components.DictionaryAdapter
     [DebuggerTypeProxy(typeof(ListProjectionDebugView<>))]
     public class ListProjection<T>
         : IBindingList<T>, // Castle
-          IBindingList, // System
-          IEditableObject,
-          IRevertibleChangeTracking,
-          ICollectionProjection,
-          ICollectionAdapterObserver<T>
+            IBindingList, // System
+            IEditableObject,
+            IRevertibleChangeTracking,
+            ICollectionProjection,
+            ICollectionAdapterObserver<T>
     {
         private readonly ICollectionAdapter<T> adapter;
         private int addNewIndex = NoIndex;

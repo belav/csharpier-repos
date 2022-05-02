@@ -909,8 +909,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                                 (true, true) => Extensions.ComplexArrayReceiverTypeName, // complex array type, e.g. "T[,]"
                                 (true, false) => Extensions.ComplexReceiverTypeName, // complex non-array type, e.g. "T"
                                 (false, true)
-                                  => parameterTypeInfo.Name
-                                      + Extensions.ArrayReceiverTypeNameSuffix, // simple array type, e.g. "int[][,]"
+                                    => parameterTypeInfo.Name
+                                        + Extensions.ArrayReceiverTypeNameSuffix, // simple array type, e.g. "int[][,]"
                                 (false, false) => parameterTypeInfo.Name // simple non-array type, e.g. "int"
                             };
 

@@ -244,8 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 return !this.OriginalIndexersOpt.IsDefault
-                  ? LookupResultKind.OverloadResolutionFailure
-                  : base.ResultKind;
+                    ? LookupResultKind.OverloadResolutionFailure
+                    : base.ResultKind;
             }
         }
     }

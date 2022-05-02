@@ -149,8 +149,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             {
                 var leftUnit = EqualityUnit.Create(left);
                 return (leftIndex == rightIndex)
-                  ? leftUnit.WithEqualValues(right)
-                  : leftUnit.WithNotEqualValues(right);
+                    ? leftUnit.WithEqualValues(right)
+                    : leftUnit.WithNotEqualValues(right);
             }
         }
     }

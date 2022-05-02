@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 {
     public class ResolveComponentDependencies
         : ComponentDependencyResolutionBase,
-          IClassFixture<ResolveComponentDependencies.SharedTestState>
+            IClassFixture<ResolveComponentDependencies.SharedTestState>
     {
         private readonly SharedTestState sharedTestState;
 
@@ -80,8 +80,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string nameWOExtensionCaseChanged =
                 (
                     Char.IsUpper(nameWOExtension[0])
-                      ? nameWOExtension[0].ToString().ToLower()
-                      : nameWOExtension[0].ToString().ToUpper()
+                        ? nameWOExtension[0].ToString().ToLower()
+                        : nameWOExtension[0].ToString().ToUpper()
                 ) + nameWOExtension.Substring(1);
             string changeFile = Path.Combine(
                 Path.GetDirectoryName(fileName),
@@ -162,8 +162,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string nameWOExtensionCaseChanged =
                 (
                     Char.IsUpper(nameWOExtension[0])
-                      ? nameWOExtension[0].ToString().ToLower()
-                      : nameWOExtension[0].ToString().ToUpper()
+                        ? nameWOExtension[0].ToString().ToLower()
+                        : nameWOExtension[0].ToString().ToUpper()
                 ) + nameWOExtension.Substring(1);
             string changeFile = Path.Combine(
                 Path.GetDirectoryName(fileName),
@@ -245,8 +245,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             string nameWOExtensionCaseChanged =
                 (
                     Char.IsUpper(nameWOExtension[0])
-                      ? nameWOExtension[0].ToString().ToLower()
-                      : nameWOExtension[0].ToString().ToUpper()
+                        ? nameWOExtension[0].ToString().ToLower()
+                        : nameWOExtension[0].ToString().ToUpper()
                 ) + nameWOExtension.Substring(1);
             string changeFile = Path.Combine(
                 Path.GetDirectoryName(fileName),

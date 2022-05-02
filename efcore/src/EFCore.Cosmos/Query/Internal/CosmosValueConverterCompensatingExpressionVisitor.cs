@@ -42,11 +42,11 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             return extensionExpression switch
             {
                 ShapedQueryExpression shapedQueryExpression
-                  => VisitShapedQueryExpression(shapedQueryExpression),
+                    => VisitShapedQueryExpression(shapedQueryExpression),
                 ReadItemExpression readItemExpression => readItemExpression,
                 SelectExpression selectExpression => VisitSelect(selectExpression),
                 SqlConditionalExpression sqlConditionalExpression
-                  => VisitSqlConditional(sqlConditionalExpression),
+                    => VisitSqlConditional(sqlConditionalExpression),
                 _ => base.VisitExtension(extensionExpression),
             };
         }
@@ -56,7 +56,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var selectExpression = shapedQueryExpression.QueryExpression;
             var updatedSelectExpression = Visit(selectExpression);
             return updatedSelectExpression != selectExpression
-              ? shapedQueryExpression.Update(
+                ? shapedQueryExpression.Update(
                     updatedSelectExpression,
                     ReplacingExpressionVisitor.Replace(
                         selectExpression,
@@ -64,7 +64,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         shapedQueryExpression.ShaperExpression
                     )
                 )
-              : shapedQueryExpression;
+                : shapedQueryExpression;
         }
 
         private Expression VisitSelect(SelectExpression selectExpression)
@@ -99,7 +99,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var offset = (SqlExpression)Visit(selectExpression.Offset);
 
             return changed
-              ? selectExpression.Update(
+                ? selectExpression.Update(
                     projections,
                     fromExpression,
                     predicate,
@@ -107,7 +107,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     limit,
                     offset
                 )
-              : selectExpression;
+                : selectExpression;
         }
 
         private Expression VisitSqlConditional(SqlConditionalExpression sqlConditionalExpression)

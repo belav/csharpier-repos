@@ -468,13 +468,13 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 parseOptions: s_parseOptions,
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: ExecutionConditionUtil.IsMonoOrCoreClr
-                  ? @"
+                    ? @"
 I.M
 Program.Main"
-                  : null,
+                    : null,
                 verify: ExecutionConditionUtil.IsMonoOrCoreClr
-                  ? Verification.Passes
-                  : Verification.Skipped
+                    ? Verification.Passes
+                    : Verification.Skipped
             );
         }
 

@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class GearsOfWarODataQueryTests
         : ODataQueryTestBase,
-          IClassFixture<GearsOfWarODataQueryTestFixture>
+            IClassFixture<GearsOfWarODataQueryTestFixture>
     {
         public GearsOfWarODataQueryTests(GearsOfWarODataQueryTestFixture fixture) : base(fixture)
         { }

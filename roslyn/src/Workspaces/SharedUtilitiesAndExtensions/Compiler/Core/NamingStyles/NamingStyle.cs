@@ -226,14 +226,14 @@ namespace Microsoft.CodeAnalysis.NamingStyles
                 failureReason =
                     Prefix == string.Empty
                         ? string.Format(
-                              CompilerExtensionsResources.Prefix_0_is_not_expected,
-                              prefix
-                          )
+                            CompilerExtensionsResources.Prefix_0_is_not_expected,
+                            prefix
+                        )
                         : string.Format(
-                              CompilerExtensionsResources.Prefix_0_does_not_match_expected_prefix_1,
-                              prefix,
-                              Prefix
-                          );
+                            CompilerExtensionsResources.Prefix_0_does_not_match_expected_prefix_1,
+                            prefix,
+                            Prefix
+                        );
                 return false;
             }
 

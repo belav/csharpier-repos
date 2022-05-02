@@ -63,10 +63,10 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 extensionConfiguration == null
                     ? b => b.ApplyConfiguration()
                     : b =>
-                      {
-                          b.ApplyConfiguration();
-                          extensionConfiguration(b);
-                      };
+                    {
+                        b.ApplyConfiguration();
+                        extensionConfiguration(b);
+                    };
 
             _storeContext = new TestStoreContext(this);
 
@@ -142,16 +142,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             exception switch
             {
                 HttpRequestException re
-                  => re.InnerException is SocketException // Exception in Mac/Linux
-                      || (
-                          re.InnerException is IOException ioException
-                          && ioException.InnerException is SocketException
-                      ), // Exception in Windows
+                    => re.InnerException is SocketException // Exception in Mac/Linux
+                        || (
+                            re.InnerException is IOException ioException
+                            && ioException.InnerException is SocketException
+                        ), // Exception in Windows
                 _
-                  => exception.Message.Contains(
-                      "The input authorization token can't serve the request. Please check that the expected payload is built as per the protocol, and check the key being used.",
-                      StringComparison.Ordinal
-                  ),
+                    => exception.Message.Contains(
+                        "The input authorization token can't serve the request. Please check that the expected payload is built as per the protocol, and check the key being used.",
+                        StringComparison.Ordinal
+                    ),
             };
 
         protected override void Initialize(
@@ -285,8 +285,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                                 await container.DeleteItemAsync<object>(
                                     item.Id,
                                     item.PartitionKey == null
-                                      ? PartitionKey.None
-                                      : new PartitionKey(item.PartitionKey)
+                                        ? PartitionKey.None
+                                        : new PartitionKey(item.PartitionKey)
                                 );
                             }
                         }

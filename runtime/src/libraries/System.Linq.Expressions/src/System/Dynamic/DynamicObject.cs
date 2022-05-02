@@ -550,12 +550,12 @@ namespace System.Dynamic
             {
                 if (!object.ReferenceEquals(parameters, s_noArgs))
                     return arg1 != null
-                      ? new Expression[] { Constant(binder), arg0, arg1 }
-                      : new Expression[] { Constant(binder), arg0 };
+                        ? new Expression[] { Constant(binder), arg0, arg1 }
+                        : new Expression[] { Constant(binder), arg0 };
                 else
                     return arg1 != null
-                      ? new Expression[] { Constant(binder), arg1 }
-                      : new Expression[] { Constant(binder) };
+                        ? new Expression[] { Constant(binder), arg1 }
+                        : new Expression[] { Constant(binder) };
             }
 
             private static ConstantExpression Constant<TBinder>(TBinder binder)
@@ -737,11 +737,11 @@ namespace System.Dynamic
                         new TrueReadOnlyCollection<ParameterExpression>(result, callArgs),
                         new TrueReadOnlyCollection<Expression>(
                             method != DynamicObject_TryBinaryOperation
-                              ? Expression.Assign(
+                                ? Expression.Assign(
                                     callArgs,
                                     Expression.NewArrayInit(typeof(object), callArgsValue)
                                 )
-                              : Expression.Assign(callArgs, callArgsValue[0]),
+                                : Expression.Assign(callArgs, callArgsValue[0]),
                             Expression.Condition(
                                 Expression.Call(
                                     GetLimitedSelf(),
@@ -750,8 +750,8 @@ namespace System.Dynamic
                                 ),
                                 Expression.Block(
                                     method != DynamicObject_TryBinaryOperation
-                                      ? ReferenceArgAssign(callArgs, args)
-                                      : AstUtils.Empty,
+                                        ? ReferenceArgAssign(callArgs, args)
+                                        : AstUtils.Empty,
                                     resultMO.Expression
                                 ),
                                 fallbackResult.Expression,

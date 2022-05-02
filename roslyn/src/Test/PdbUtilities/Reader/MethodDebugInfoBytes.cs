@@ -57,15 +57,15 @@ namespace Roslyn.Test.Utilities
                     importStringGroups == null
                         ? default(ImmutableArray<ISymUnmanagedNamespace>)
                         : importStringGroups
-                          .SelectMany(
-                              names =>
-                                  names.Select(
-                                      name =>
-                                          (ISymUnmanagedNamespace)
-                                              new MockSymUnmanagedNamespace(name)
-                                  )
-                          )
-                          .ToImmutableArray();
+                            .SelectMany(
+                                names =>
+                                    names.Select(
+                                        name =>
+                                            (ISymUnmanagedNamespace)
+                                                new MockSymUnmanagedNamespace(name)
+                                    )
+                            )
+                            .ToImmutableArray();
                 var childScope = new MockSymUnmanagedScope(
                     default(ImmutableArray<ISymUnmanagedScope>),
                     namespaces,

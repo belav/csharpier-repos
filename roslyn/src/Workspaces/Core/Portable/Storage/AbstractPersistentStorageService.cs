@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.Storage
         )
         {
             return solutionKey.FilePath == null
-              ? new(NoOpPersistentStorage.GetOrThrow(Configuration.ThrowOnFailure))
-              : GetStorageWorkerAsync(solutionKey, cancellationToken);
+                ? new(NoOpPersistentStorage.GetOrThrow(Configuration.ThrowOnFailure))
+                : GetStorageWorkerAsync(solutionKey, cancellationToken);
         }
 
         internal async ValueTask<IChecksummedPersistentStorage> GetStorageWorkerAsync(

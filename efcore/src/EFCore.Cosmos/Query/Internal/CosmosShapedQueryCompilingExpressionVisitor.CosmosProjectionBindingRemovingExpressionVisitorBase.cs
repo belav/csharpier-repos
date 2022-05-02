@@ -659,27 +659,27 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 {
                     navigation.IsCollection
                         ? AddToCollectionNavigation(
-                              entityParameter,
-                              relatedEntityParameter,
-                              navigation
-                          )
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
                         : AssignReferenceNavigation(
-                              entityParameter,
-                              relatedEntityParameter,
-                              navigation
-                          )
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
                 };
 
                 if (inverseNavigation != null)
                 {
                     expressions.Add(
                         inverseNavigation.IsCollection
-                          ? AddToCollectionNavigation(
+                            ? AddToCollectionNavigation(
                                 relatedEntityParameter,
                                 entityParameter,
                                 inverseNavigation
                             )
-                          : AssignReferenceNavigation(
+                            : AssignReferenceNavigation(
                                 relatedEntityParameter,
                                 entityParameter,
                                 inverseNavigation
@@ -973,9 +973,9 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 type == typeof(JToken)
                     ? jTokenExpression
                     : Expression.Call(
-                          _toObjectMethodInfo.MakeGenericMethod(type),
-                          jTokenExpression
-                      );
+                        _toObjectMethodInfo.MakeGenericMethod(type),
+                        jTokenExpression
+                    );
 
             private static T SafeToObject<T>(JToken token) =>
                 token == null || token.Type == JTokenType.Null ? default : token.ToObject<T>();

@@ -15,8 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// </summary>
 public abstract class JQueryValueProvider
     : BindingSourceValueProvider,
-      IEnumerableValueProvider,
-      IKeyRewriterValueProvider
+        IEnumerableValueProvider,
+        IKeyRewriterValueProvider
 {
     private readonly IDictionary<string, StringValues> _values;
     private PrefixContainer? _prefixContainer;

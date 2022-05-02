@@ -442,8 +442,8 @@ namespace System.Threading.Tasks.Dataflow
         [DebuggerTypeProxy(typeof(SendAsyncSource<>.DebugView))]
         private sealed class SendAsyncSource<TOutput>
             : TaskCompletionSource<bool>,
-              ISourceBlock<TOutput>,
-              IDebuggerDisplay
+                ISourceBlock<TOutput>,
+                IDebuggerDisplay
         {
             /// <summary>The target to offer to.</summary>
             private readonly ITargetBlock<TOutput> _target;
@@ -1423,8 +1423,8 @@ namespace System.Threading.Tasks.Dataflow
         [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
         private sealed class ReceiveTarget<T>
             : TaskCompletionSource<T>,
-              ITargetBlock<T>,
-              IDebuggerDisplay
+                ITargetBlock<T>,
+                IDebuggerDisplay
         {
             /// <summary>Cached delegate used in ReceiveCoreByLinking on the created timer.  Passed the ReceiveTarget as the argument.</summary>
             /// <remarks>The C# compiler will not cache this delegate by default due to it being a generic method on a non-generic class.</remarks>
@@ -1895,8 +1895,8 @@ namespace System.Threading.Tasks.Dataflow
         [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
         private sealed class OutputAvailableAsyncTarget<T>
             : TaskCompletionSource<bool>,
-              ITargetBlock<T>,
-              IDebuggerDisplay
+                ITargetBlock<T>,
+                IDebuggerDisplay
         {
             /// <summary>
             /// Cached continuation delegate that unregisters from cancellation and
@@ -2047,8 +2047,8 @@ namespace System.Threading.Tasks.Dataflow
         [DebuggerTypeProxy(typeof(EncapsulatingPropagator<,>.DebugView))]
         private sealed class EncapsulatingPropagator<TInput, TOutput>
             : IPropagatorBlock<TInput, TOutput>,
-              IReceivableSourceBlock<TOutput>,
-              IDebuggerDisplay
+                IReceivableSourceBlock<TOutput>,
+                IDebuggerDisplay
         {
             /// <summary>The target half.</summary>
             private readonly ITargetBlock<TInput> _target;
@@ -2799,8 +2799,8 @@ namespace System.Threading.Tasks.Dataflow
         [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
         private sealed class ChooseTarget<T>
             : TaskCompletionSource<T>,
-              ITargetBlock<T>,
-              IDebuggerDisplay
+                ITargetBlock<T>,
+                IDebuggerDisplay
         {
             /// <summary>
             /// Delegate used to invoke the action for a branch when that branch is activated
@@ -2991,8 +2991,8 @@ namespace System.Threading.Tasks.Dataflow
                     _source
                 );
                 return sourceCompletionTask != null && sourceCompletionTask.IsFaulted
-                  ? sourceCompletionTask.Exception
-                  : null;
+                    ? sourceCompletionTask.Exception
+                    : null;
             }
 
             /// <summary>Subscribes the observer to the source.</summary>

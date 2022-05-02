@@ -22,12 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
                     : (options.ParseOptions is CSharpParseOptions existing)
                         ? existing
                         : throw new InvalidOperationException(
-                              string.Format(
-                                  ScriptingResources.CannotSetLanguageSpecificOption,
-                                  LanguageNames.CSharp,
-                                  nameof(LanguageVersion)
-                              )
-                          );
+                            string.Format(
+                                ScriptingResources.CannotSetLanguageSpecificOption,
+                                LanguageNames.CSharp,
+                                nameof(LanguageVersion)
+                            )
+                        );
 
             return options.WithParseOptions(parseOptions.WithLanguageVersion(languageVersion));
         }

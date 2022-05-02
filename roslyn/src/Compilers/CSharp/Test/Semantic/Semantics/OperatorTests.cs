@@ -3540,25 +3540,25 @@ class C
                                 child.Text switch
                                 {
                                     "@operator"
-                                      => ((BinaryOperatorSignature)child.Value).Kind.ToString(),
+                                        => ((BinaryOperatorSignature)child.Value).Kind.ToString(),
                                     "leftConversion"
                                     or "finalConversion"
-                                      => (
-                                          child.Children.SingleOrDefault() is TreeDumperNode node
-                                              ? (
+                                        => (
+                                            child.Children.SingleOrDefault() is TreeDumperNode node
+                                                ? (
                                                     node.Text switch
                                                     {
                                                         "conversion"
-                                                          => node.Children.ElementAt(1).Value,
+                                                            => node.Children.ElementAt(1).Value,
                                                         "valuePlaceholder" => Conversion.Identity,
                                                         _
-                                                          => throw ExceptionUtilities.UnexpectedValue(
-                                                              node.Text
-                                                          )
+                                                            => throw ExceptionUtilities.UnexpectedValue(
+                                                                node.Text
+                                                            )
                                                     }
                                                 )
-                                              : Conversion.NoConversion
-                                      ).ToString(),
+                                                : Conversion.NoConversion
+                                        ).ToString(),
                                     _ => child.Value.ToString()
                                 }
                             )
@@ -8671,8 +8671,8 @@ class Module1
             {
                 Assert.Equal(
                     leftType.IsDynamic() || rightType.IsDynamic()
-                      ? CandidateReason.LateBound
-                      : CandidateReason.None,
+                        ? CandidateReason.LateBound
+                        : CandidateReason.None,
                     info1.CandidateReason
                 );
                 Assert.Equal(0, info1.CandidateSymbols.Length);

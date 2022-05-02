@@ -37,12 +37,12 @@ public class IdentityUserContext<TUser> : IdentityUserContext<TUser, string>
 /// <typeparam name="TKey">The type of the primary key for users and roles.</typeparam>
 public class IdentityUserContext<TUser, TKey>
     : IdentityUserContext<
-          TUser,
-          TKey,
-          IdentityUserClaim<TKey>,
-          IdentityUserLogin<TKey>,
-          IdentityUserToken<TKey>
-      >
+        TUser,
+        TKey,
+        IdentityUserClaim<TKey>,
+        IdentityUserLogin<TKey>,
+        IdentityUserToken<TKey>
+    >
     where TUser : IdentityUser<TKey>
     where TKey : IEquatable<TKey>
 {

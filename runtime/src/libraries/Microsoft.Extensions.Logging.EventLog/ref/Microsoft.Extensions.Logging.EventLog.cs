@@ -38,8 +38,8 @@ namespace Microsoft.Extensions.Logging.EventLog
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("EventLog")]
     public partial class EventLogLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
-          Microsoft.Extensions.Logging.ISupportExternalScope,
-          System.IDisposable
+            Microsoft.Extensions.Logging.ISupportExternalScope,
+            System.IDisposable
     {
         public EventLogLoggerProvider() { }
 

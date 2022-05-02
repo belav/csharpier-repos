@@ -167,15 +167,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             method.MethodKind != MethodKind.Ordinary
                 ? null
                 : method.ContainingType
-                  .GetMembers(method.Name)
-                  .OfType<IMethodSymbol>()
-                  .Where(
-                      m =>
-                          IsPublicInstance(m)
-                          && m.Parameters.Length == 1
-                          && m.Parameters[0].Type.Equals(parameterType)
-                          && m.ReturnType.Equals(method.ReturnType)
-                  )
-                  .FirstOrDefault();
+                    .GetMembers(method.Name)
+                    .OfType<IMethodSymbol>()
+                    .Where(
+                        m =>
+                            IsPublicInstance(m)
+                            && m.Parameters.Length == 1
+                            && m.Parameters[0].Type.Equals(parameterType)
+                            && m.ReturnType.Equals(method.ReturnType)
+                    )
+                    .FirstOrDefault();
     }
 }

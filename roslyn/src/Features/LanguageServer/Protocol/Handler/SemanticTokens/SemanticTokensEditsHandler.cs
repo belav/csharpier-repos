@@ -20,9 +20,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
     /// </summary>
     internal class SemanticTokensEditsHandler
         : IRequestHandler<
-              LSP.SemanticTokensDeltaParams,
-              SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>
-          >
+            LSP.SemanticTokensDeltaParams,
+            SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>
+        >
     {
         private readonly SemanticTokensCache _tokensCache;
 

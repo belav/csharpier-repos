@@ -181,8 +181,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                         && x.WorkspaceVersion == y.WorkspaceVersion
                         && x.SolutionChecksum == y.SolutionChecksum
                     )
-                      ? 0
-                      : 1;
+                        ? 0
+                        : 1;
                 }
             );
         }

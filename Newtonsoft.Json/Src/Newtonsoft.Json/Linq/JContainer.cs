@@ -49,17 +49,17 @@ namespace Newtonsoft.Json.Linq
     /// </summary>
     public abstract partial class JContainer
         : JToken,
-          IList<JToken>
+            IList<JToken>
 #if HAVE_COMPONENT_MODEL
-          ,
-          ITypedList,
-          IBindingList
+            ,
+            ITypedList,
+            IBindingList
 #endif
-          ,
-          IList
+            ,
+            IList
 #if HAVE_INOTIFY_COLLECTION_CHANGED
-          ,
-          INotifyCollectionChanged
+            ,
+            INotifyCollectionChanged
 #endif
     {
 #if HAVE_COMPONENT_MODEL

@@ -65,8 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
         public virtual string GetId(IUpdateEntry entry) =>
             _idProperty is null
                 ? throw new InvalidOperationException(
-                      CosmosStrings.NoIdProperty(_entityType.DisplayName())
-                  )
+                    CosmosStrings.NoIdProperty(_entityType.DisplayName())
+                )
                 : (string)entry.GetCurrentProviderValue(_idProperty)!;
 
         /// <summary>
@@ -337,14 +337,14 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
                         embeddedDocument =
                             embeddedDocument != null
                                 ? embeddedDocumentSource.UpdateDocument(
-                                      embeddedDocument,
-                                      embeddedEntry,
-                                      embeddedOrdinal
-                                  ) ?? embeddedDocument
+                                    embeddedDocument,
+                                    embeddedEntry,
+                                    embeddedOrdinal
+                                ) ?? embeddedDocument
                                 : embeddedDocumentSource.CreateDocument(
-                                      embeddedEntry,
-                                      embeddedOrdinal
-                                  );
+                                    embeddedEntry,
+                                    embeddedOrdinal
+                                );
 
                         array.Add(embeddedDocument);
                         embeddedOrdinal++;
@@ -380,8 +380,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Update.Internal
         {
             var value = entry.GetCurrentProviderValue(property);
             return value == null
-              ? null
-              : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
+                ? null
+                : (value as JToken) ?? JToken.FromObject(value, CosmosClientWrapper.Serializer);
         }
     }
 }

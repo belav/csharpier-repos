@@ -19,8 +19,8 @@ public static class TestResources
 
     private const int MutexTimeout = 120 * 1000;
     private static readonly Mutex importPfxMutex = OperatingSystem.IsWindows()
-      ? new Mutex(initiallyOwned: false, "Global\\KestrelTests.Certificates.LoadPfxCertificate")
-      : null;
+        ? new Mutex(initiallyOwned: false, "Global\\KestrelTests.Certificates.LoadPfxCertificate")
+        : null;
 
     public static X509Certificate2 GetTestCertificate(string certName = "testCert.pfx")
     {

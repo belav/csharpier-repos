@@ -63,12 +63,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
             && property.GetValueGenerationStrategy()
                 == SqlServerValueGenerationStrategy.SequenceHiLo
                 ? _sequenceFactory.Create(
-                      property,
-                      Cache.GetOrAddSequenceState(property, _connection),
-                      _connection,
-                      _rawSqlCommandBuilder,
-                      _commandLogger
-                  )
+                    property,
+                    Cache.GetOrAddSequenceState(property, _connection),
+                    _connection,
+                    _rawSqlCommandBuilder,
+                    _commandLogger
+                )
                 : base.Select(property, entityType);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
         public override ValueGenerator Create(IProperty property, IEntityType entityType) =>
             property.ClrType.UnwrapNullableType() == typeof(Guid)
                 ? property.ValueGenerated == ValueGenerated.Never
-                  || property.GetDefaultValueSql() != null
+                || property.GetDefaultValueSql() != null
                     ? new TemporaryGuidValueGenerator()
                     : new SequentialGuidValueGenerator()
                 : base.Create(property, entityType);

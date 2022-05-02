@@ -92,8 +92,8 @@ readonly struct QueryStringEnumerable
             // If the value is short, it's cheap to check up front if it really needs decoding. If it doesn't,
             // then we can save some allocations.
             return chars.Length < 16 && chars.Span.IndexOfAny('%', '+') < 0
-              ? chars
-              : Uri.UnescapeDataString(SpanHelper.ReplacePlusWithSpace(chars.Span)).AsMemory();
+                ? chars
+                : Uri.UnescapeDataString(SpanHelper.ReplacePlusWithSpace(chars.Span)).AsMemory();
         }
     }
 

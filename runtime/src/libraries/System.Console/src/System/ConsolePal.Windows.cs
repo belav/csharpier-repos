@@ -187,8 +187,8 @@ namespace System
             Stream inputStream = OpenStandardInput();
             return SyncTextReader.GetSynchronizedTextReader(
                 inputStream == Stream.Null
-                  ? StreamReader.Null
-                  : new StreamReader(
+                    ? StreamReader.Null
+                    : new StreamReader(
                         stream: inputStream,
                         encoding: new ConsoleEncoding(Console.InputEncoding),
                         detectEncodingFromByteOrderMarks: false,
@@ -524,11 +524,11 @@ namespace System
                     out succeeded
                 );
                 return succeeded
-                  ? ColorAttributeToConsoleColor(
+                    ? ColorAttributeToConsoleColor(
                         (Interop.Kernel32.Color)csbi.wAttributes
                             & Interop.Kernel32.Color.BackgroundMask
                     )
-                  : ConsoleColor.Black; // for code that may be used from Windows app w/ no console
+                    : ConsoleColor.Black; // for code that may be used from Windows app w/ no console
             }
             set
             {
@@ -570,11 +570,11 @@ namespace System
 
                 // For code that may be used from Windows app w/ no console
                 return succeeded
-                  ? ColorAttributeToConsoleColor(
+                    ? ColorAttributeToConsoleColor(
                         (Interop.Kernel32.Color)csbi.wAttributes
                             & Interop.Kernel32.Color.ForegroundMask
                     )
-                  : ConsoleColor.Gray;
+                    : ConsoleColor.Gray;
             }
             set
             {

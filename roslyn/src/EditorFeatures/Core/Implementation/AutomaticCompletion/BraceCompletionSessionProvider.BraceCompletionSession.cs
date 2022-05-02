@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
         // modified it little bit so that we can use it as base class.
         private class BraceCompletionSession
             : ForegroundThreadAffinitizedObject,
-              IBraceCompletionSession
+                IBraceCompletionSession
         {
             #region Private Members
 

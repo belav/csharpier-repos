@@ -116,14 +116,14 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (string.IsNullOrEmpty(typeName))
             {
                 return isArray
-                  ? FindSymbols.Extensions.ComplexArrayReceiverTypeName
-                  : FindSymbols.Extensions.ComplexReceiverTypeName;
+                    ? FindSymbols.Extensions.ComplexArrayReceiverTypeName
+                    : FindSymbols.Extensions.ComplexReceiverTypeName;
             }
             else
             {
                 return isArray
-                  ? typeName + FindSymbols.Extensions.ArrayReceiverTypeNameSuffix
-                  : typeName;
+                    ? typeName + FindSymbols.Extensions.ArrayReceiverTypeNameSuffix
+                    : typeName;
             }
         }
 
@@ -370,8 +370,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     );
 
                     return string.IsNullOrEmpty(fullyQualifiedContainerName)
-                      ? namespaceName
-                      : fullyQualifiedContainerName + "." + namespaceName;
+                        ? namespaceName
+                        : fullyQualifiedContainerName + "." + namespaceName;
                 }
                 else
                 {

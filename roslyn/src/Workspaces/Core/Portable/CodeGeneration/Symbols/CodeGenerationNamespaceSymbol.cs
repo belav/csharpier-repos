@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationNamespaceSymbol
         : CodeGenerationNamespaceOrTypeSymbol,
-          INamespaceSymbol
+            INamespaceSymbol
     {
         private readonly IList<INamespaceOrTypeSymbol> _members;
 

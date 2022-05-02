@@ -16,7 +16,7 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class HttpControllerSelectorTracer
         : IHttpControllerSelector,
-          IDecorator<IHttpControllerSelector>
+            IDecorator<IHttpControllerSelector>
     {
         private const string SelectControllerMethodName = "SelectController";
 

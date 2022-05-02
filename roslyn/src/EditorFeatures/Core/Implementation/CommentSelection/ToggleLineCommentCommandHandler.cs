@@ -33,9 +33,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommentSelection
     [VisualStudio.Utilities.Name(PredefinedCommandHandlerNames.ToggleLineComment)]
     internal class ToggleLineCommentCommandHandler
         :
-          // Value tuple to represent that there is no distinct command to be passed in.
-          AbstractCommentSelectionBase<ValueTuple>,
-          ICommandHandler<ToggleLineCommentCommandArgs>
+        // Value tuple to represent that there is no distinct command to be passed in.
+        AbstractCommentSelectionBase<ValueTuple>,
+            ICommandHandler<ToggleLineCommentCommandArgs>
     {
         private static readonly CommentSelectionResult s_emptyCommentSelectionResult =
             new(new List<TextChange>(), new List<CommentTrackingSpan>(), Operation.Uncomment);

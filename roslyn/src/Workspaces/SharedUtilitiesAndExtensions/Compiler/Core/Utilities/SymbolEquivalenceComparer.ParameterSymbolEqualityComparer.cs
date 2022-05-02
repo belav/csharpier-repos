@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         )
         {
             return distinguishRefFromOut
-              ? rk1 == rk2
-              : (rk1 == RefKind.None) == (rk2 == RefKind.None);
+                ? rk1 == rk2
+                : (rk1 == RefKind.None) == (rk2 == RefKind.None);
         }
     }
 }

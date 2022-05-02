@@ -135,7 +135,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // This node will be rewritten with MakePropertyAssignment when rewriting the enclosing BoundAssignmentOperator.
 
                 return oldNodeOpt != null
-                  ? oldNodeOpt.Update(
+                    ? oldNodeOpt.Update(
                         rewrittenReceiver,
                         indexer,
                         arguments,
@@ -146,7 +146,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         defaultArguments,
                         type
                     )
-                  : new BoundIndexerAccess(
+                    : new BoundIndexerAccess(
                         syntax,
                         rewrittenReceiver,
                         indexer,
@@ -277,8 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 out var receiverStore,
                 // Store the receiver as a ref local if it's a value type to ensure side effects are propagated
                 receiver.Type.IsReferenceType
-                  ? RefKind.None
-                  : RefKind.Ref
+                    ? RefKind.None
+                    : RefKind.Ref
             );
             locals.Add(receiverLocal.LocalSymbol);
             sideeffects.Add(receiverStore);

@@ -759,8 +759,8 @@ namespace System.Data.ProviderBase
 
             var pendingGetConnection = new PendingGetConnection(
                 CreationTimeout == 0
-                  ? Timeout.Infinite
-                  : ADP.TimerCurrent() + ADP.TimerFromSeconds(CreationTimeout / 1000),
+                    ? Timeout.Infinite
+                    : ADP.TimerCurrent() + ADP.TimerFromSeconds(CreationTimeout / 1000),
                 owningObject,
                 retry,
                 userOptions

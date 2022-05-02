@@ -962,8 +962,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     typeof(TContext),
                     typeof(TContext),
                     lifetime == ServiceLifetime.Transient
-                      ? ServiceLifetime.Transient
-                      : ServiceLifetime.Scoped
+                        ? ServiceLifetime.Transient
+                        : ServiceLifetime.Scoped
                 )
             );
 

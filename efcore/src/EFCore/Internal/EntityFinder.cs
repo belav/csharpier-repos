@@ -60,11 +60,11 @@ namespace Microsoft.EntityFrameworkCore.Internal
             keyValues == null || keyValues.Any(v => v == null)
                 ? null
                 : (
-                      FindTracked(keyValues!, out var keyProperties)
-                      ?? _queryRoot.FirstOrDefault(
-                          BuildLambda(keyProperties, new ValueBuffer(keyValues))
-                      )
-                  );
+                    FindTracked(keyValues!, out var keyProperties)
+                    ?? _queryRoot.FirstOrDefault(
+                        BuildLambda(keyProperties, new ValueBuffer(keyValues))
+                    )
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -92,8 +92,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
             var tracked = FindTracked(keyValues!, out var keyProperties);
             return tracked != null
-              ? new ValueTask<TEntity?>(tracked)
-              : new ValueTask<TEntity?>(
+                ? new ValueTask<TEntity?>(tracked)
+                : new ValueTask<TEntity?>(
                     _queryRoot.FirstOrDefaultAsync(
                         BuildLambda(keyProperties, new ValueBuffer(keyValues)),
                         cancellationToken
@@ -119,8 +119,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
 
             var tracked = FindTracked(keyValues!, out var keyProperties);
             return tracked != null
-              ? new ValueTask<object?>(tracked)
-              : new ValueTask<object?>(
+                ? new ValueTask<object?>(tracked)
+                : new ValueTask<object?>(
                     _queryRoot.FirstOrDefaultAsync(
                         BuildObjectLambda(keyProperties, new ValueBuffer(keyValues)),
                         cancellationToken
@@ -373,13 +373,13 @@ namespace Microsoft.EntityFrameworkCore.Internal
         private IQueryable BuildQueryRoot(IEntityType entityType) =>
             entityType.FindOwnership() is IForeignKey ownership
                 ? BuildQueryRoot(
-                      ownership.PrincipalEntityType,
-                      entityType,
-                      ownership.PrincipalToDependent!.Name
-                  )
+                    ownership.PrincipalEntityType,
+                    entityType,
+                    ownership.PrincipalToDependent!.Name
+                )
                 : entityType.HasSharedClrType
                     ? (IQueryable)
-                          _setCache.GetOrAddSet(_setSource, entityType.Name, entityType.ClrType)
+                        _setCache.GetOrAddSet(_setSource, entityType.Name, entityType.ClrType)
                     : (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.ClrType);
 
         private IQueryable BuildQueryRoot(

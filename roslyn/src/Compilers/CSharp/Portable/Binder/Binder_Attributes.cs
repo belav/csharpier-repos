@@ -823,9 +823,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 resultKind = resultKind.WorseResultKind(
                     memberResolutionResult.IsValid
-                        && !IsConstructorAccessible(memberResolutionResult.Member, ref useSiteInfo)
-                      ? LookupResultKind.Inaccessible
-                      : LookupResultKind.OverloadResolutionFailure
+                    && !IsConstructorAccessible(memberResolutionResult.Member, ref useSiteInfo)
+                        ? LookupResultKind.Inaccessible
+                        : LookupResultKind.OverloadResolutionFailure
                 );
                 constructorArguments = BuildArgumentsForErrorRecovery(
                     boundConstructorArguments,
@@ -1121,9 +1121,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         (parameterType.SpecialType == SpecialType.System_Single)
                             ? (float)line
                             : Binder.DoUncheckedConversion(
-                                  parameterType.SpecialType,
-                                  ConstantValue.Create(line)
-                              );
+                                parameterType.SpecialType,
+                                ConstantValue.Create(line)
+                            );
                 }
                 else
                 {
@@ -1245,8 +1245,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return
                     argumentsToParams.IsDefault
                     || parameter.CallerArgumentExpressionParameterIndex == -1
-                  ? parameter.CallerArgumentExpressionParameterIndex
-                  : argumentsToParams.IndexOf(parameter.CallerArgumentExpressionParameterIndex);
+                    ? parameter.CallerArgumentExpressionParameterIndex
+                    : argumentsToParams.IndexOf(parameter.CallerArgumentExpressionParameterIndex);
             }
         }
 

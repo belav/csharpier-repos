@@ -93,14 +93,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 );
 
                 return dbFunction.IsBuiltIn
-                  ? _sqlExpressionFactory.Function(
+                    ? _sqlExpressionFactory.Function(
                         dbFunction.Name,
                         arguments,
                         dbFunction.IsNullable,
                         argumentsPropagateNullability,
                         method.ReturnType.UnwrapNullableType()
                     )
-                  : _sqlExpressionFactory.Function(
+                    : _sqlExpressionFactory.Function(
                         dbFunction.Schema,
                         dbFunction.Name,
                         arguments,

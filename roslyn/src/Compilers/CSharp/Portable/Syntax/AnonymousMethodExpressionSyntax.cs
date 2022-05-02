@@ -24,12 +24,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             body is BlockSyntax block
                 ? Update(asyncKeyword, delegateKeyword, parameterList, block, null)
                 : Update(
-                      asyncKeyword,
-                      delegateKeyword,
-                      parameterList,
-                      null,
-                      (ExpressionSyntax)body
-                  );
+                    asyncKeyword,
+                    delegateKeyword,
+                    parameterList,
+                    null,
+                    (ExpressionSyntax)body
+                );
 
         public override SyntaxToken AsyncKeyword =>
             this.Modifiers.FirstOrDefault(SyntaxKind.AsyncKeyword);

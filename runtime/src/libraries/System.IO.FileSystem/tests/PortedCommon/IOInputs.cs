@@ -21,8 +21,8 @@ internal static class IOInputs
 
     // Same as MaxPath on Unix
     public static readonly int MaxLongPath = OperatingSystem.IsWindows()
-      ? MaxExtendedPath
-      : MaxPath;
+        ? MaxExtendedPath
+        : MaxPath;
 
     // Windows specific, this is the maximum length that can be passed to APIs taking directory names, such as Directory.CreateDirectory & Directory.Move.
     // Does not include the trailing \0.

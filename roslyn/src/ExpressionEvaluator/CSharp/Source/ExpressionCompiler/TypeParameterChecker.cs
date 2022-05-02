@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         {
             ParameterSymbol thisParameter;
             return method.GetSymbol().TryGetThisParameter(out thisParameter)
-              ? thisParameter.GetPublicSymbol()
-              : null;
+                ? thisParameter.GetPublicSymbol()
+                : null;
         }
 
         private class BlockChecker : BoundTreeWalkerWithStackGuard

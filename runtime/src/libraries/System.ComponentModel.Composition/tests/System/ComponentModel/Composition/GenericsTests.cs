@@ -117,7 +117,7 @@ namespace System.ComponentModel.Composition
         [Export(typeof(IExport<,>))]
         public class SelfExportWithExportFactoryPropertyImport<T1, T2>
             : IExport<T1, T2>,
-              IPartWithImport
+                IPartWithImport
         {
             [Import]
             ExportFactory<IImport<T1, T2>> Value { get; set; }
@@ -143,7 +143,7 @@ namespace System.ComponentModel.Composition
         [Export(typeof(IExport<,>))]
         public class SelfExportWithExportFactoryParameterImport<T1, T2>
             : IExport<T1, T2>,
-              IPartWithImport
+                IPartWithImport
         {
             [ImportingConstructor]
             SelfExportWithExportFactoryParameterImport(ExportFactory<IImport<T1, T2>> value)
@@ -162,7 +162,7 @@ namespace System.ComponentModel.Composition
         [Export(typeof(IExport<,>))]
         public class SelfExportWithCollectionPropertyImport<T1, T2>
             : IExport<T1, T2>,
-              IPartWithImport
+                IPartWithImport
         {
             [ImportMany]
             IEnumerable<IImport<T1, T2>> Value { get; set; }
@@ -176,7 +176,7 @@ namespace System.ComponentModel.Composition
         [Export(typeof(IExport<,>))]
         public class SelfExportWithLazyCollectionPropertyImport<T1, T2>
             : IExport<T1, T2>,
-              IPartWithImport
+                IPartWithImport
         {
             [ImportMany]
             IEnumerable<Lazy<IImport<T1, T2>>> Value { get; set; }
@@ -207,7 +207,7 @@ namespace System.ComponentModel.Composition
         [Export(typeof(IExport<,>))]
         public class SelfExportWithPropertyImportWithContractInferred<T1, T2>
             : IExport<T1, T2>,
-              IPartWithImport
+                IPartWithImport
         {
             [Import]
             IImport<T1, T2> Value { get; set; }

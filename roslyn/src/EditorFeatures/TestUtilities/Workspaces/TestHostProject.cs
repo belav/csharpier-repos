@@ -410,8 +410,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             }
 
             return this.CompilationOptions == null
-              ? ""
-              : Path.Combine(
+                ? ""
+                : Path.Combine(
                     outputFilePath,
                     this.AssemblyName + GetDefaultExtension(this.CompilationOptions.OutputKind)
                 );

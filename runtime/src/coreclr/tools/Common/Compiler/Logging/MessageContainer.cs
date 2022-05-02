@@ -148,7 +148,7 @@ namespace ILCompiler.Logging
                 EventPseudoDesc @event => @event.OwningType,
 #endif
                 _
-                  => null,
+                    => null,
             };
 
             ModuleDesc declaringAssembly = (declaringType as MetadataType)?.Module;

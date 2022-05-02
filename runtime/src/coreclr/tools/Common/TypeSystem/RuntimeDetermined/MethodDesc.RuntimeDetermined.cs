@@ -155,8 +155,8 @@ namespace Internal.TypeSystem
             }
 
             return (clone == null)
-              ? method
-              : Context.GetInstantiatedMethod(
+                ? method
+                : Context.GetInstantiatedMethod(
                     method.GetMethodDefinition(),
                     new Instantiation(clone)
                 );

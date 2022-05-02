@@ -116,8 +116,8 @@ namespace Microsoft.CodeAnalysis
                 _baseDirectory
             );
             return (normalizedPath == null || _pathMap.IsDefaultOrEmpty)
-              ? normalizedPath
-              : PathUtilities.NormalizePathPrefix(normalizedPath, _pathMap);
+                ? normalizedPath
+                : PathUtilities.NormalizePathPrefix(normalizedPath, _pathMap);
         }
 
         public override string? ResolveReference(string path, string? baseFilePath)

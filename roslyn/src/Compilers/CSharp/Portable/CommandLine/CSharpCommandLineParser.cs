@@ -1887,8 +1887,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 languageVersion: languageVersion,
                 preprocessorSymbols: defines.ToImmutableAndFree(),
                 documentationMode: parseDocumentationComments
-                  ? DocumentationMode.Diagnose
-                  : DocumentationMode.None,
+                    ? DocumentationMode.Diagnose
+                    : DocumentationMode.None,
                 kind: IsScriptCommandLineParser ? SourceCodeKind.Script : SourceCodeKind.Regular,
                 features: parsedFeatures
             );

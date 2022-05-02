@@ -23,8 +23,8 @@ namespace System.Collections.Specialized
     /// </devdoc>
     public abstract class NameObjectCollectionBase
         : ICollection,
-          ISerializable,
-          IDeserializationCallback
+            ISerializable,
+            IDeserializationCallback
     {
         private bool _readOnly;
         private ArrayList _entriesArray;
