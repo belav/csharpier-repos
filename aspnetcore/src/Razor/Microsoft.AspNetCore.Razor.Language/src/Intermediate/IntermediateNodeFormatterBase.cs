@@ -134,8 +134,8 @@ internal class IntermediateNodeFormatterBase : IntermediateNodeFormatter
     {
         var typeName = node.GetType().Name;
         return typeName.EndsWith(nameof(IntermediateNode), StringComparison.Ordinal)
-          ? new StringSegment(typeName, 0, typeName.Length - nameof(IntermediateNode).Length)
-          : typeName;
+            ? new StringSegment(typeName, 0, typeName.Length - nameof(IntermediateNode).Length)
+            : typeName;
     }
 
     private string EscapeNewlines(string content)

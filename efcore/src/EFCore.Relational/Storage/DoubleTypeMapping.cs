@@ -64,8 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 && !literal.Contains(".")
                 && !double.IsNaN(doubleValue)
                 && !double.IsInfinity(doubleValue)
-              ? literal + ".0"
-              : literal;
+                ? literal + ".0"
+                : literal;
         }
     }
 }

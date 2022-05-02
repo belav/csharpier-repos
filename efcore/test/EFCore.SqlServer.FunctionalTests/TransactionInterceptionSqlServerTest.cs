@@ -34,7 +34,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class TransactionInterceptionSqlServerTest
             : TransactionInterceptionSqlServerTestBase,
-              IClassFixture<TransactionInterceptionSqlServerTest.InterceptionSqlServerFixture>
+                IClassFixture<TransactionInterceptionSqlServerTest.InterceptionSqlServerFixture>
         {
             public TransactionInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
                 : base(fixture) { }
@@ -50,7 +50,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class TransactionInterceptionWithDiagnosticsSqlServerTest
             : TransactionInterceptionSqlServerTestBase,
-              IClassFixture<TransactionInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
+                IClassFixture<TransactionInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
         {
             public TransactionInterceptionWithDiagnosticsSqlServerTest(
                 InterceptionSqlServerFixture fixture

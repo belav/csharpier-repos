@@ -493,16 +493,16 @@ namespace System.Xml.Tests
             catch (ArgumentException e)
             {
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             catch (XmlException e)
             {
                 CError.WriteLine(e.LineNumber);
                 CError.WriteLine(e.LinePosition);
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             return exceptionType == null ? TEST_PASS : TEST_FAIL;
         }

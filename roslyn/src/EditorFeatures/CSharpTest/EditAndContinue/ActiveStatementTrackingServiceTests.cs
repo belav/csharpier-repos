@@ -191,20 +191,20 @@ class C
                 document.Name switch
                 {
                     "1.cs"
-                      => ImmutableArray.Create(
-                          new ActiveStatementSpan(
-                              0,
-                              span21,
-                              ActiveStatementFlags.NonLeafFrame,
-                              unmappedDocumentId: null
-                          ),
-                          new ActiveStatementSpan(
-                              1,
-                              span22,
-                              ActiveStatementFlags.LeafFrame,
-                              unmappedDocumentId: null
-                          )
-                      ),
+                        => ImmutableArray.Create(
+                            new ActiveStatementSpan(
+                                0,
+                                span21,
+                                ActiveStatementFlags.NonLeafFrame,
+                                unmappedDocumentId: null
+                            ),
+                            new ActiveStatementSpan(
+                                1,
+                                span22,
+                                ActiveStatementFlags.LeafFrame,
+                                unmappedDocumentId: null
+                            )
+                        ),
                     "2.cs" => ImmutableArray<ActiveStatementSpan>.Empty,
                     _ => throw ExceptionUtilities.Unreachable
                 };

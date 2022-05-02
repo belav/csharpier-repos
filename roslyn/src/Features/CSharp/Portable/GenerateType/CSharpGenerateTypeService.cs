@@ -31,13 +31,13 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
     [ExportLanguageService(typeof(IGenerateTypeService), LanguageNames.CSharp), Shared]
     internal class CSharpGenerateTypeService
         : AbstractGenerateTypeService<
-              CSharpGenerateTypeService,
-              SimpleNameSyntax,
-              ObjectCreationExpressionSyntax,
-              ExpressionSyntax,
-              TypeDeclarationSyntax,
-              ArgumentSyntax
-          >
+            CSharpGenerateTypeService,
+            SimpleNameSyntax,
+            ObjectCreationExpressionSyntax,
+            ExpressionSyntax,
+            TypeDeclarationSyntax,
+            ArgumentSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -605,8 +605,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
             if (memberGroup.Length != 0)
             {
                 return memberGroup.ElementAt(0).IsKind(SymbolKind.Method)
-                  ? (IMethodSymbol)memberGroup.ElementAt(0)
-                  : null;
+                    ? (IMethodSymbol)memberGroup.ElementAt(0)
+                    : null;
             }
 
             var expressionType = semanticModel.GetTypeInfo(expression, cancellationToken).Type;
@@ -744,8 +744,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateType
                         semanticModel,
                         cancellationToken
                     )
-                      ? Accessibility.Public
-                      : Accessibility.Internal;
+                        ? Accessibility.Public
+                        : Accessibility.Internal;
                 }
             }
 

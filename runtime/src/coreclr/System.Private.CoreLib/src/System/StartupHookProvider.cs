@@ -19,8 +19,8 @@ namespace System
 
         private static bool IsSupported =>
             AppContext.TryGetSwitch("System.StartupHookProvider.IsSupported", out bool isSupported)
-              ? isSupported
-              : true;
+                ? isSupported
+                : true;
 
         private struct StartupHookNameOrPath
         {

@@ -29,8 +29,8 @@ namespace System.Data
             }
 
             return destinationType == typeof(string)
-              ? Array.Empty<DataColumn>().GetType().Name
-              : base.ConvertTo(context, culture, value, destinationType);
+                ? Array.Empty<DataColumn>().GetType().Name
+                : base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

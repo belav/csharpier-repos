@@ -36,9 +36,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             var factory = key.GetPrincipalKeyValueFactory<TKey>();
 
             return typeof(TKey).IsNullableType()
-              ? sensitiveLoggingEnabled =>
+                ? sensitiveLoggingEnabled =>
                     new NullableKeyIdentityMap<TKey>(key, factory, sensitiveLoggingEnabled)
-              : sensitiveLoggingEnabled =>
+                : sensitiveLoggingEnabled =>
                     new IdentityMap<TKey>(key, factory, sensitiveLoggingEnabled);
         }
     }

@@ -29,8 +29,8 @@ namespace System
             {
                 long range = (long)maxValue - minValue;
                 return range <= int.MaxValue
-                  ? (int)(_prng.Sample() * range) + minValue
-                  : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
+                    ? (int)(_prng.Sample() * range) + minValue
+                    : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
             }
 
             public override long NextInt64()
@@ -119,8 +119,8 @@ namespace System
             {
                 long range = (long)maxValue - minValue;
                 return range <= int.MaxValue
-                  ? (int)(_parent.Sample() * range) + minValue
-                  : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
+                    ? (int)(_parent.Sample() * range) + minValue
+                    : (int)((long)(_prng.GetSampleForLargeRange() * range) + minValue);
             }
 
             public override long NextInt64()

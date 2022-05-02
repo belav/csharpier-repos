@@ -458,33 +458,33 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
         private sealed class ActionWithBoundArgument<TArg>
             : AbstractDelegateWithBoundArgument<
-                  ActionWithBoundArgument<TArg>,
-                  TArg,
-                  Action<TArg>,
-                  Action
-              >
+                ActionWithBoundArgument<TArg>,
+                TArg,
+                Action<TArg>,
+                Action
+            >
         {
             protected override Action Bind() => () => UnboundDelegate(Argument);
         }
 
         private sealed class ActionWithBoundArgument<T1, TArg>
             : AbstractDelegateWithBoundArgument<
-                  ActionWithBoundArgument<T1, TArg>,
-                  TArg,
-                  Action<T1, TArg>,
-                  Action<T1>
-              >
+                ActionWithBoundArgument<T1, TArg>,
+                TArg,
+                Action<T1, TArg>,
+                Action<T1>
+            >
         {
             protected override Action<T1> Bind() => arg1 => UnboundDelegate(arg1, Argument);
         }
 
         private sealed class ActionWithBoundArgument<T1, T2, TArg>
             : AbstractDelegateWithBoundArgument<
-                  ActionWithBoundArgument<T1, T2, TArg>,
-                  TArg,
-                  Action<T1, T2, TArg>,
-                  Action<T1, T2>
-              >
+                ActionWithBoundArgument<T1, T2, TArg>,
+                TArg,
+                Action<T1, T2, TArg>,
+                Action<T1, T2>
+            >
         {
             protected override Action<T1, T2> Bind() =>
                 (arg1, arg2) => UnboundDelegate(arg1, arg2, Argument);
@@ -492,11 +492,11 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
         private sealed class ActionWithBoundArgument<T1, T2, T3, TArg>
             : AbstractDelegateWithBoundArgument<
-                  ActionWithBoundArgument<T1, T2, T3, TArg>,
-                  TArg,
-                  Action<T1, T2, T3, TArg>,
-                  Action<T1, T2, T3>
-              >
+                ActionWithBoundArgument<T1, T2, T3, TArg>,
+                TArg,
+                Action<T1, T2, T3, TArg>,
+                Action<T1, T2, T3>
+            >
         {
             protected override Action<T1, T2, T3> Bind() =>
                 (arg1, arg2, arg3) => UnboundDelegate(arg1, arg2, arg3, Argument);
@@ -504,33 +504,33 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
         private sealed class FuncWithBoundArgument<TArg, TResult>
             : AbstractDelegateWithBoundArgument<
-                  FuncWithBoundArgument<TArg, TResult>,
-                  TArg,
-                  Func<TArg, TResult>,
-                  Func<TResult>
-              >
+                FuncWithBoundArgument<TArg, TResult>,
+                TArg,
+                Func<TArg, TResult>,
+                Func<TResult>
+            >
         {
             protected override Func<TResult> Bind() => () => UnboundDelegate(Argument);
         }
 
         private sealed class FuncWithBoundArgument<T1, TArg, TResult>
             : AbstractDelegateWithBoundArgument<
-                  FuncWithBoundArgument<T1, TArg, TResult>,
-                  TArg,
-                  Func<T1, TArg, TResult>,
-                  Func<T1, TResult>
-              >
+                FuncWithBoundArgument<T1, TArg, TResult>,
+                TArg,
+                Func<T1, TArg, TResult>,
+                Func<T1, TResult>
+            >
         {
             protected override Func<T1, TResult> Bind() => arg1 => UnboundDelegate(arg1, Argument);
         }
 
         private sealed class FuncWithBoundArgument<T1, T2, TArg, TResult>
             : AbstractDelegateWithBoundArgument<
-                  FuncWithBoundArgument<T1, T2, TArg, TResult>,
-                  TArg,
-                  Func<T1, T2, TArg, TResult>,
-                  Func<T1, T2, TResult>
-              >
+                FuncWithBoundArgument<T1, T2, TArg, TResult>,
+                TArg,
+                Func<T1, T2, TArg, TResult>,
+                Func<T1, T2, TResult>
+            >
         {
             protected override Func<T1, T2, TResult> Bind() =>
                 (arg1, arg2) => UnboundDelegate(arg1, arg2, Argument);
@@ -538,11 +538,11 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 
         private sealed class FuncWithBoundArgument<T1, T2, T3, TArg, TResult>
             : AbstractDelegateWithBoundArgument<
-                  FuncWithBoundArgument<T1, T2, T3, TArg, TResult>,
-                  TArg,
-                  Func<T1, T2, T3, TArg, TResult>,
-                  Func<T1, T2, T3, TResult>
-              >
+                FuncWithBoundArgument<T1, T2, T3, TArg, TResult>,
+                TArg,
+                Func<T1, T2, T3, TArg, TResult>,
+                Func<T1, T2, T3, TResult>
+            >
         {
             protected override Func<T1, T2, T3, TResult> Bind() =>
                 (arg1, arg2, arg3) => UnboundDelegate(arg1, arg2, arg3, Argument);

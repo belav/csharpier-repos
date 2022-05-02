@@ -14,8 +14,8 @@ namespace Microsoft.AspNetCore.Hosting;
 #pragma warning disable CS0618 // Type or member is obsolete
 internal class ApplicationLifetime
     : IApplicationLifetime,
-      Extensions.Hosting.IApplicationLifetime,
-      IHostApplicationLifetime
+        Extensions.Hosting.IApplicationLifetime,
+        IHostApplicationLifetime
 #pragma warning restore CS0618 // Type or member is obsolete
 {
     private readonly CancellationTokenSource _startedSource = new CancellationTokenSource();

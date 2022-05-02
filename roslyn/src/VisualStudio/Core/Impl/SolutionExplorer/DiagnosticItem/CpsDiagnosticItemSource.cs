@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 {
     internal partial class CpsDiagnosticItemSource
         : BaseDiagnosticAndGeneratorItemSource,
-          INotifyPropertyChanged
+            INotifyPropertyChanged
     {
         private readonly IVsHierarchyItem _item;
         private readonly string _projectDirectoryPath;

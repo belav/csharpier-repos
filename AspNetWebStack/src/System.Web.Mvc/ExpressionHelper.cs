@@ -16,8 +16,8 @@ namespace System.Web.Mvc
         public static string GetExpressionText(string expression)
         {
             return String.Equals(expression, "model", StringComparison.OrdinalIgnoreCase)
-              ? String.Empty // If it's exactly "model", then give them an empty string, to replicate the lambda behavior
-              : expression;
+                ? String.Empty // If it's exactly "model", then give them an empty string, to replicate the lambda behavior
+                : expression;
         }
 
         public static string GetExpressionText(LambdaExpression expression)

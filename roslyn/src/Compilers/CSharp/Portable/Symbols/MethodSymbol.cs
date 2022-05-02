@@ -760,8 +760,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public MethodSymbol ReduceExtensionMethod()
         {
             return (this.IsExtensionMethod && this.MethodKind != MethodKind.ReducedExtension)
-              ? ReducedExtensionMethodSymbol.Create(this)
-              : null;
+                ? ReducedExtensionMethodSymbol.Create(this)
+                : null;
         }
 
         /// <summary>
@@ -971,8 +971,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ref result,
                     this.ReturnTypeWithAnnotations,
                     IsInitOnly
-                      ? AllowedRequiredModifierType.System_Runtime_CompilerServices_IsExternalInit
-                      : AllowedRequiredModifierType.None
+                        ? AllowedRequiredModifierType.System_Runtime_CompilerServices_IsExternalInit
+                        : AllowedRequiredModifierType.None
                 )
                 || DeriveUseSiteInfoFromCustomModifiers(
                     ref result,

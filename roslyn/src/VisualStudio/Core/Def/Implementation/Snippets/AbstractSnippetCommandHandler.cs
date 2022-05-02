@@ -30,12 +30,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
     internal abstract class AbstractSnippetCommandHandler
         : ForegroundThreadAffinitizedObject,
-          ICommandHandler<TabKeyCommandArgs>,
-          ICommandHandler<BackTabKeyCommandArgs>,
-          ICommandHandler<ReturnKeyCommandArgs>,
-          ICommandHandler<EscapeKeyCommandArgs>,
-          ICommandHandler<InsertSnippetCommandArgs>,
-          IChainedCommandHandler<AutomaticLineEnderCommandArgs>
+            ICommandHandler<TabKeyCommandArgs>,
+            ICommandHandler<BackTabKeyCommandArgs>,
+            ICommandHandler<ReturnKeyCommandArgs>,
+            ICommandHandler<EscapeKeyCommandArgs>,
+            ICommandHandler<InsertSnippetCommandArgs>,
+            IChainedCommandHandler<AutomaticLineEnderCommandArgs>
     {
         protected readonly SignatureHelpControllerProvider SignatureHelpControllerProvider;
         protected readonly IEditorCommandHandlerServiceFactory EditorCommandHandlerServiceFactory;

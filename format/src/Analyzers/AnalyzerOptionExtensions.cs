@@ -164,8 +164,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 diagnosticCategory,
                 out var reportSeverity
             )
-              ? reportSeverity.ToSeverity()
-              : DiagnosticSeverity.Hidden;
+                ? reportSeverity.ToSeverity()
+                : DiagnosticSeverity.Hidden;
         }
 
         /// <summary>

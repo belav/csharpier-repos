@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var activeStatementCount = Math.Max(
                 OldStatements.Length,
                 (newActiveStatementMarkers.Length == 0)
-                  ? -1
-                  : newActiveStatementMarkers.Max(m => m.Id)
+                    ? -1
+                    : newActiveStatementMarkers.Max(m => m.Id)
             );
 
             var newMappedSpans = new ArrayBuilder<SourceFileSpan>();
@@ -107,8 +107,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 newMappedRegions[ordinal] =
                     (ordinal < newExceptionRegionMarkers.Length)
                         ? newExceptionRegionMarkers[ordinal].SelectAsArray(
-                              span => (SourceFileSpan)newTree.GetMappedLineSpan(span)
-                          )
+                            span => (SourceFileSpan)newTree.GetMappedLineSpan(span)
+                        )
                         : ImmutableArray<SourceFileSpan>.Empty;
             }
 
@@ -149,17 +149,17 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                             (flags != null)
                                 ? flags[ordinal]
                                 : (
-                                      (ordinal == 0)
-                                          ? ActiveStatementFlags.LeafFrame
-                                          : ActiveStatementFlags.NonLeafFrame
-                                  ) | ActiveStatementFlags.MethodUpToDate;
+                                    (ordinal == 0)
+                                        ? ActiveStatementFlags.LeafFrame
+                                        : ActiveStatementFlags.NonLeafFrame
+                                ) | ActiveStatementFlags.MethodUpToDate;
 
                         var exceptionRegions =
                             (ordinal < exceptionRegionMarkers.Length)
                                 ? exceptionRegionMarkers[ordinal].SelectAsArray(
-                                      unmappedRegionSpan =>
-                                          (SourceFileSpan)tree.GetMappedLineSpan(unmappedRegionSpan)
-                                  )
+                                    unmappedRegionSpan =>
+                                        (SourceFileSpan)tree.GetMappedLineSpan(unmappedRegionSpan)
+                                )
                                 : ImmutableArray<SourceFileSpan>.Empty;
 
                         var unmappedActiveStatement = new UnmappedActiveStatement(
@@ -239,8 +239,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                                                 : statement.Ordinal + 1
                                         ),
                                     version: (methodVersions != null)
-                                      ? methodVersions[statement.Ordinal]
-                                      : 1
+                                        ? methodVersions[statement.Ordinal]
+                                        : 1
                                 )
                             ),
                             ilOffset: (ilOffsets != null) ? ilOffsets[statement.Ordinal] : 0

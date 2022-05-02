@@ -208,13 +208,13 @@ public class IISExpressDeployer : IISDeployerBase
                 PrepareConfig(contentRoot, port);
 
                 var parameters = string.IsNullOrEmpty(DeploymentParameters.ServerConfigLocation)
-                  ? string.Format(
+                    ? string.Format(
                         CultureInfo.InvariantCulture,
                         "/port:{0} /path:\"{1}\" /trace:error /systray:false",
                         uri.Port,
                         contentRoot
                     )
-                  : string.Format(
+                    : string.Format(
                         CultureInfo.InvariantCulture,
                         "/site:{0} /config:{1} /trace:error /systray:false",
                         DeploymentParameters.SiteName,

@@ -2129,8 +2129,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(elementSyntax.Attributes.Count == 1);
             XmlAttributeSyntax attributeSyntax = (XmlAttributeSyntax)elementSyntax.Attributes[0];
             return attributeSyntax.Kind() == SyntaxKind.XmlCrefAttribute
-              ? ((XmlCrefAttributeSyntax)attributeSyntax).Cref
-              : null;
+                ? ((XmlCrefAttributeSyntax)attributeSyntax).Cref
+                : null;
         }
 
         /// <summary>
@@ -2801,8 +2801,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         CSharpSyntaxNode? grandparent = parent.Parent;
                         return grandparent != null && grandparent.Kind() == SyntaxKind.QualifiedCref
-                          ? grandparent
-                          : parent;
+                            ? grandparent
+                            : parent;
                     }
 
                     break;
@@ -3527,12 +3527,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             body is BlockSyntax block
                 ? SimpleLambdaExpression(asyncKeyword, parameter, arrowToken, block, null)
                 : SimpleLambdaExpression(
-                      asyncKeyword,
-                      parameter,
-                      arrowToken,
-                      null,
-                      (ExpressionSyntax)body
-                  );
+                    asyncKeyword,
+                    parameter,
+                    arrowToken,
+                    null,
+                    (ExpressionSyntax)body
+                );
 
         public static ParenthesizedLambdaExpressionSyntax ParenthesizedLambdaExpression(
             CSharpSyntaxNode body
@@ -3554,19 +3554,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) =>
             body is BlockSyntax block
                 ? ParenthesizedLambdaExpression(
-                      asyncKeyword,
-                      parameterList,
-                      arrowToken,
-                      block,
-                      null
-                  )
+                    asyncKeyword,
+                    parameterList,
+                    arrowToken,
+                    block,
+                    null
+                )
                 : ParenthesizedLambdaExpression(
-                      asyncKeyword,
-                      parameterList,
-                      arrowToken,
-                      null,
-                      (ExpressionSyntax)body
-                  );
+                    asyncKeyword,
+                    parameterList,
+                    arrowToken,
+                    null,
+                    (ExpressionSyntax)body
+                );
 
         public static AnonymousMethodExpressionSyntax AnonymousMethodExpression(
             CSharpSyntaxNode body
@@ -3578,12 +3578,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) =>
             body is BlockSyntax block
                 ? AnonymousMethodExpression(
-                      default(SyntaxTokenList),
-                      SyntaxFactory.Token(SyntaxKind.DelegateKeyword),
-                      parameterList,
-                      block,
-                      null
-                  )
+                    default(SyntaxTokenList),
+                    SyntaxFactory.Token(SyntaxKind.DelegateKeyword),
+                    parameterList,
+                    block,
+                    null
+                )
                 : throw new ArgumentException(nameof(body));
 
         public static AnonymousMethodExpressionSyntax AnonymousMethodExpression(
@@ -3594,12 +3594,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) =>
             body is BlockSyntax block
                 ? AnonymousMethodExpression(
-                      asyncKeyword,
-                      delegateKeyword,
-                      parameterList,
-                      block,
-                      null
-                  )
+                    asyncKeyword,
+                    delegateKeyword,
+                    parameterList,
+                    block,
+                    null
+                )
                 : throw new ArgumentException(nameof(body));
 
         // BACK COMPAT OVERLOAD DO NOT MODIFY

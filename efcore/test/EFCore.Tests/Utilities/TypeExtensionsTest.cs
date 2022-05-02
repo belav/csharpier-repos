@@ -438,7 +438,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         private class MultipleImplementor<TRandom, TElement>
             : IObservable<TRandom>,
-              IEnumerable<TElement> where TRandom : Random
+                IEnumerable<TElement> where TRandom : Random
         {
             public IEnumerator<TElement> GetEnumerator()
             {

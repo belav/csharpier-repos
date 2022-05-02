@@ -213,8 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 data,
                 out var intialTriggerLocation
             )
-              ? intialTriggerLocation.Snapshot
-              : data.Snapshot;
+                ? intialTriggerLocation.Snapshot
+                : data.Snapshot;
 
             var document = snapshotForDocument?.TextBuffer
                 .AsTextContainer()
@@ -653,8 +653,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 hardSelect ? UpdateSelectionHint.Selected : UpdateSelectionHint.SoftSelected,
                 centerSelection: true,
                 uniqueItem: moreThanOneMatchWithSamePriority
-                  ? null
-                  : bestMatchResult.GetValueOrDefault().EditorCompletionItem
+                    ? null
+                    : bestMatchResult.GetValueOrDefault().EditorCompletionItem
             );
         }
 
@@ -776,8 +776,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 n =>
                     n.WithAvailability(
                         n.Filter is CompletionExpander
-                          ? true
-                          : textFilteredFilters.Contains(n.Filter)
+                            ? true
+                            : textFilteredFilters.Contains(n.Filter)
                     )
             );
         }

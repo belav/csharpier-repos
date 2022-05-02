@@ -27,9 +27,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class EntityType
         : TypeBase,
-          IMutableEntityType,
-          IConventionEntityType,
-          IRuntimeEntityType
+            IMutableEntityType,
+            IConventionEntityType,
+            IRuntimeEntityType
     {
         private const string DynamicProxyGenAssemblyName = "DynamicProxyGenAssembly2";
 
@@ -761,8 +761,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             return
                 _primaryKey != null
                 && PropertyListComparer.Instance.Compare(_primaryKey.Properties, properties) == 0
-              ? _primaryKey
-              : null;
+                ? _primaryKey
+                : null;
         }
 
         /// <summary>
@@ -928,8 +928,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Key? FindDeclaredKey(IReadOnlyList<IReadOnlyProperty> properties) =>
             _keys.TryGetValue(Check.NotEmpty(properties, nameof(properties)), out var key)
-              ? key
-              : null;
+                ? key
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1215,12 +1215,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(properties, nameof(properties));
 
             return _baseType != null
-              ? _foreignKeys.Count == 0
-                  ? _baseType.FindForeignKeys(properties)
-                  : _baseType
-                    .FindForeignKeys(properties)
-                    .Concat(FindDeclaredForeignKeys(properties))
-              : FindDeclaredForeignKeys(properties);
+                ? _foreignKeys.Count == 0
+                    ? _baseType.FindForeignKeys(properties)
+                    : _baseType
+                        .FindForeignKeys(properties)
+                        .Concat(FindDeclaredForeignKeys(properties))
+                : FindDeclaredForeignKeys(properties);
         }
 
         /// <summary>
@@ -1339,8 +1339,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotEmpty(properties, nameof(properties));
 
             return _foreignKeys.Count == 0
-              ? Enumerable.Empty<ForeignKey>()
-              : _foreignKeys.Where(
+                ? Enumerable.Empty<ForeignKey>()
+                : _foreignKeys.Where(
                     fk => PropertyListComparer.Instance.Equals(fk.Properties, properties)
                 );
         }
@@ -1410,16 +1410,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<ForeignKey>()
                 : (IEnumerable<ForeignKey>)
-                      GetDerivedTypes()
-                          .Select(
-                              et =>
-                                  et.FindDeclaredForeignKey(
-                                      properties,
-                                      principalKey,
-                                      principalEntityType
-                                  )
-                          )
-                          .Where(fk => fk != null);
+                    GetDerivedTypes()
+                        .Select(
+                            et =>
+                                et.FindDeclaredForeignKey(
+                                    properties,
+                                    principalKey,
+                                    principalEntityType
+                                )
+                        )
+                        .Where(fk => fk != null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1448,7 +1448,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindForeignKey(properties, principalKey, principalEntityType))
                 : ToEnumerable(FindForeignKey(properties, principalKey, principalEntityType))
-                  .Concat(FindDerivedForeignKeys(properties, principalKey, principalEntityType));
+                    .Concat(FindDerivedForeignKeys(properties, principalKey, principalEntityType));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1560,8 +1560,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ? (DeclaredReferencingForeignKeys?.Count ?? 0) == 0
                     ? _baseType.GetReferencingForeignKeys()
                     : _baseType
-                      .GetReferencingForeignKeys()
-                      .Concat(GetDeclaredReferencingForeignKeys())
+                        .GetReferencingForeignKeys()
+                        .Concat(GetDeclaredReferencingForeignKeys())
                 : GetDeclaredReferencingForeignKeys();
 
         /// <summary>
@@ -1702,8 +1702,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     memberInfo,
                     this,
                     pointsToPrincipal
-                      ? foreignKey.PrincipalEntityType
-                      : foreignKey.DeclaringEntityType,
+                        ? foreignKey.PrincipalEntityType
+                        : foreignKey.DeclaringEntityType,
                     !pointsToPrincipal && !foreignKey.IsUnique,
                     shouldThrow: true
                 );
@@ -1754,8 +1754,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Navigation? FindDeclaredNavigation(string name) =>
             _navigations.TryGetValue(Check.NotEmpty(name, nameof(name)), out var navigation)
-              ? navigation
-              : null;
+                ? navigation
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1787,8 +1787,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotNull(name, nameof(name));
 
             return _directlyDerivedTypes.Count == 0
-              ? Enumerable.Empty<Navigation>()
-              : (IEnumerable<Navigation>)
+                ? Enumerable.Empty<Navigation>()
+                : (IEnumerable<Navigation>)
                     GetDerivedTypes()
                         .Select(et => et.FindDeclaredNavigation(name))
                         .Where(n => n != null);
@@ -1996,8 +1996,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual SkipNavigation? FindDeclaredSkipNavigation(string name) =>
             _skipNavigations.TryGetValue(Check.NotEmpty(name, nameof(name)), out var navigation)
-              ? navigation
-              : null;
+                ? navigation
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2030,8 +2030,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotNull(name, nameof(name));
 
             return _directlyDerivedTypes.Count == 0
-              ? Enumerable.Empty<SkipNavigation>()
-              : (IEnumerable<SkipNavigation>)
+                ? Enumerable.Empty<SkipNavigation>()
+                : (IEnumerable<SkipNavigation>)
                     GetDerivedTypes()
                         .Select(et => et.FindDeclaredSkipNavigation(name))
                         .Where(n => n != null);
@@ -2049,7 +2049,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindDeclaredSkipNavigation(name))
                 : ToEnumerable(FindDeclaredSkipNavigation(name))
-                  .Concat(FindDerivedSkipNavigations(name));
+                    .Concat(FindDerivedSkipNavigations(name));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2154,8 +2154,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 ? (DeclaredReferencingSkipNavigations?.Count ?? 0) == 0
                     ? _baseType.GetReferencingSkipNavigations()
                     : _baseType
-                      .GetReferencingSkipNavigations()
-                      .Concat(GetDeclaredReferencingSkipNavigations())
+                        .GetReferencingSkipNavigations()
+                        .Concat(GetDeclaredReferencingSkipNavigations())
                 : GetDeclaredReferencingSkipNavigations();
 
         /// <summary>
@@ -2392,8 +2392,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Check.NotEmpty(properties, nameof(properties)),
                 out var index
             )
-              ? index
-              : null;
+                ? index
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2403,8 +2403,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Index? FindDeclaredIndex(string name) =>
             _namedIndexes.TryGetValue(Check.NotEmpty(name, nameof(name)), out var index)
-              ? index
-              : null;
+                ? index
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2418,9 +2418,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<Index>()
                 : (IEnumerable<Index>)
-                      GetDerivedTypes()
-                          .Select(et => et.FindDeclaredIndex(properties))
-                          .Where(i => i != null);
+                    GetDerivedTypes()
+                        .Select(et => et.FindDeclaredIndex(properties))
+                        .Where(i => i != null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2432,9 +2432,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? Enumerable.Empty<Index>()
                 : (IEnumerable<Index>)
-                      GetDerivedTypes()
-                          .Select(et => et.FindDeclaredIndex(Check.NotEmpty(name, nameof(name))))
-                          .Where(i => i != null);
+                    GetDerivedTypes()
+                        .Select(et => et.FindDeclaredIndex(Check.NotEmpty(name, nameof(name))))
+                        .Where(i => i != null);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2459,7 +2459,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindIndex(Check.NotEmpty(name, nameof(name))))
                 : ToEnumerable(FindIndex(Check.NotEmpty(name, nameof(name))))
-                  .Concat(FindDerivedIndexes(name));
+                    .Concat(FindDerivedIndexes(name));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2750,8 +2750,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Property? FindDeclaredProperty(string name) =>
             _properties.TryGetValue(Check.NotEmpty(name, nameof(name)), out var property)
-              ? property
-              : null;
+                ? property
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2783,8 +2783,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotNull(propertyName, nameof(propertyName));
 
             return _directlyDerivedTypes.Count == 0
-              ? Enumerable.Empty<Property>()
-              : (IEnumerable<Property>)
+                ? Enumerable.Empty<Property>()
+                : (IEnumerable<Property>)
                     GetDerivedTypes()
                         .Select(et => et.FindDeclaredProperty(propertyName))
                         .Where(p => p != null);
@@ -2800,7 +2800,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindDeclaredProperty(propertyName))
                 : ToEnumerable(FindDeclaredProperty(propertyName))
-                  .Concat(FindDerivedProperties(propertyName));
+                    .Concat(FindDerivedProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2812,7 +2812,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindProperty(propertyName))
                 : ToEnumerable(FindProperty(propertyName))
-                  .Concat(FindDerivedProperties(propertyName));
+                    .Concat(FindDerivedProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3210,8 +3210,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual ServiceProperty? FindDeclaredServiceProperty(string name) =>
             _serviceProperties.TryGetValue(Check.NotEmpty(name, nameof(name)), out var property)
-              ? property
-              : null;
+                ? property
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3226,8 +3226,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Check.NotNull(propertyName, nameof(propertyName));
 
             return _directlyDerivedTypes.Count == 0
-              ? Enumerable.Empty<ServiceProperty>()
-              : (IEnumerable<ServiceProperty>)
+                ? Enumerable.Empty<ServiceProperty>()
+                : (IEnumerable<ServiceProperty>)
                     GetDerivedTypes()
                         .Select(et => et.FindDeclaredServiceProperty(propertyName))
                         .Where(p => p != null);
@@ -3245,7 +3245,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindDeclaredServiceProperty(propertyName))
                 : ToEnumerable(FindDeclaredServiceProperty(propertyName))
-                  .Concat(FindDerivedServiceProperties(propertyName));
+                    .Concat(FindDerivedServiceProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3259,7 +3259,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _directlyDerivedTypes.Count == 0
                 ? ToEnumerable(FindServiceProperty(propertyName))
                 : ToEnumerable(FindServiceProperty(propertyName))
-                  .Concat(FindDerivedServiceProperties(propertyName));
+                    .Concat(FindDerivedServiceProperties(propertyName));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3354,8 +3354,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var ignoredSource = FindDeclaredIgnoredConfigurationSource(name);
 
             return BaseType == null
-              ? ignoredSource
-              : BaseType.FindIgnoredConfigurationSource(name).Max(ignoredSource);
+                ? ignoredSource
+                : BaseType.FindIgnoredConfigurationSource(name).Max(ignoredSource);
         }
 
         /// <summary>
@@ -3782,8 +3782,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             configurationSource
                         )?.Value
                 ) == property?.Name
-              ? property
-              : (Property?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
+                ? property
+                : (Property?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
         }
 
         private void CheckDiscriminatorProperty(Property? property)
@@ -3889,19 +3889,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             get =>
                 IsReadOnly && !ClrType.IsAbstract
                     ? NonCapturingLazyInitializer.EnsureInitialized(
-                          ref _constructorBinding,
-                          this,
-                          static entityType =>
-                          {
-                              ((IModel)entityType.Model)
-                                  .GetModelDependencies()
-                                  .ConstructorBindingFactory.GetBindings(
-                                      (IReadOnlyEntityType)entityType,
-                                      out entityType._constructorBinding,
-                                      out entityType._serviceOnlyConstructorBinding
-                                  );
-                          }
-                      )
+                        ref _constructorBinding,
+                        this,
+                        static entityType =>
+                        {
+                            ((IModel)entityType.Model)
+                                .GetModelDependencies()
+                                .ConstructorBindingFactory.GetBindings(
+                                    (IReadOnlyEntityType)entityType,
+                                    out entityType._constructorBinding,
+                                    out entityType._serviceOnlyConstructorBinding
+                                );
+                        }
+                    )
                     : _constructorBinding;
             set => SetConstructorBinding(value, ConfigurationSource.Explicit);
         }
@@ -4164,8 +4164,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetDiscriminatorProperty(
                 (Property?)property,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4193,8 +4193,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetChangeTrackingStrategy(
                 changeTrackingStrategy,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4221,8 +4221,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetQueryFilter(
                 queryFilter,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4266,8 +4266,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetBaseType(
                 (EntityType?)entityType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4281,8 +4281,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsKeyless(
                 keyless,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4310,8 +4310,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPrimaryKey(
                 properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4374,8 +4374,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddKey(
                 properties.Cast<Property>().ToList(),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4551,13 +4551,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (Key)principalKey,
                 (EntityType)principalEntityType,
                 setComponentConfigurationSource
-                  ? fromDataAnnotation
-                      ? ConfigurationSource.DataAnnotation
-                      : ConfigurationSource.Convention
-                  : null,
+                    ? fromDataAnnotation
+                        ? ConfigurationSource.DataAnnotation
+                        : ConfigurationSource.Convention
+                    : null,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -4930,8 +4930,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 collection,
                 onDependent,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5118,8 +5118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddIndex(
                 properties as IReadOnlyList<Property> ?? properties.Cast<Property>().ToList(),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5138,8 +5138,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 properties as IReadOnlyList<Property> ?? properties.Cast<Property>().ToList(),
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5359,8 +5359,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddProperty(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5395,13 +5395,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 name,
                 propertyType,
                 setTypeConfigurationSource
-                  ? fromDataAnnotation
-                      ? ConfigurationSource.DataAnnotation
-                      : ConfigurationSource.Convention
-                  : null,
+                    ? fromDataAnnotation
+                        ? ConfigurationSource.DataAnnotation
+                        : ConfigurationSource.Convention
+                    : null,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5443,13 +5443,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 propertyType,
                 memberInfo,
                 setTypeConfigurationSource
-                  ? fromDataAnnotation
-                      ? ConfigurationSource.DataAnnotation
-                      : ConfigurationSource.Convention
-                  : null,
+                    ? fromDataAnnotation
+                        ? ConfigurationSource.DataAnnotation
+                        : ConfigurationSource.Convention
+                    : null,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5665,8 +5665,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddServiceProperty(
                 memberInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

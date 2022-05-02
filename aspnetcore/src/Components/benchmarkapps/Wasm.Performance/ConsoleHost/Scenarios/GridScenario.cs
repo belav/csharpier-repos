@@ -23,9 +23,9 @@ internal class GridScenario : ComponentRenderingScenarioBase
     protected override async Task ExecuteAsync(ConsoleHostRenderer renderer, int numCycles)
     {
         var gridType = _gridTypeOption.HasValue()
-          ? (GridRendering.RenderMode)
+            ? (GridRendering.RenderMode)
                 Enum.Parse(typeof(GridRendering.RenderMode), _gridTypeOption.Value(), true)
-          : GridRendering.RenderMode.FastGrid;
+            : GridRendering.RenderMode.FastGrid;
 
         for (var i = 0; i < numCycles; i++)
         {

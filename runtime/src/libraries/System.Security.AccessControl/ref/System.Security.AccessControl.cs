@@ -832,7 +832,7 @@ namespace System.Security.AccessControl
 
     public abstract partial class GenericAcl
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public static readonly byte AclRevision;
         public static readonly byte AclRevisionDS;
@@ -1430,7 +1430,7 @@ namespace System.Security.AccessControl
 
     public sealed partial class PrivilegeNotHeldException
         : System.UnauthorizedAccessException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public PrivilegeNotHeldException() { }
 
@@ -1707,7 +1707,7 @@ namespace System.Security.Policy
 {
     public sealed partial class Evidence
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public Evidence() { }
 

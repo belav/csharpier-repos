@@ -388,8 +388,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 block != null
                     ? accessor.WithBody(block)
                     : accessor
-                      .WithExpressionBody(expressionBody)
-                      .WithSemicolonToken(semicolonToken);
+                        .WithExpressionBody(expressionBody)
+                        .WithSemicolonToken(semicolonToken);
 
             return WithAccessorList(
                 declaration,

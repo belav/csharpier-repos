@@ -64,8 +64,8 @@ namespace System.Collections.ObjectModel
 
     public partial class ObservableCollection<T>
         : System.Collections.ObjectModel.Collection<T>,
-          System.Collections.Specialized.INotifyCollectionChanged,
-          System.ComponentModel.INotifyPropertyChanged
+            System.Collections.Specialized.INotifyCollectionChanged,
+            System.ComponentModel.INotifyPropertyChanged
     {
         public ObservableCollection() { }
 
@@ -119,22 +119,22 @@ namespace System.Collections.ObjectModel
 
     public partial class ReadOnlyDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IDictionary<TKey, TValue>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable where TKey : notnull
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IDictionary<TKey, TValue>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.ICollection,
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable where TKey : notnull
     {
         public ReadOnlyDictionary(System.Collections.Generic.IDictionary<TKey, TValue> dictionary)
         { }
@@ -319,10 +319,10 @@ namespace System.Collections.ObjectModel
 
         public sealed partial class KeyCollection
             : System.Collections.Generic.ICollection<TKey>,
-              System.Collections.Generic.IEnumerable<TKey>,
-              System.Collections.Generic.IReadOnlyCollection<TKey>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<TKey>,
+                System.Collections.Generic.IReadOnlyCollection<TKey>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             internal KeyCollection() { }
 
@@ -374,10 +374,10 @@ namespace System.Collections.ObjectModel
 
         public sealed partial class ValueCollection
             : System.Collections.Generic.ICollection<TValue>,
-              System.Collections.Generic.IEnumerable<TValue>,
-              System.Collections.Generic.IReadOnlyCollection<TValue>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<TValue>,
+                System.Collections.Generic.IReadOnlyCollection<TValue>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             internal ValueCollection() { }
 
@@ -430,8 +430,8 @@ namespace System.Collections.ObjectModel
 
     public partial class ReadOnlyObservableCollection<T>
         : System.Collections.ObjectModel.ReadOnlyCollection<T>,
-          System.Collections.Specialized.INotifyCollectionChanged,
-          System.ComponentModel.INotifyPropertyChanged
+            System.Collections.Specialized.INotifyCollectionChanged,
+            System.ComponentModel.INotifyPropertyChanged
     {
         public ReadOnlyObservableCollection(
             System.Collections.ObjectModel.ObservableCollection<T> list

@@ -53,8 +53,8 @@ namespace System.Runtime.Versioning
                 if (_fullName == null)
                 {
                     _fullName = string.IsNullOrEmpty(Profile)
-                      ? $"{Identifier}{ComponentSeparator + VersionKey + KeyValueSeparator + VersionValuePrefix}{Version}"
-                      : $"{Identifier}{ComponentSeparator + VersionKey + KeyValueSeparator + VersionValuePrefix}{Version}{ComponentSeparator + ProfileKey + KeyValueSeparator}{Profile}";
+                        ? $"{Identifier}{ComponentSeparator + VersionKey + KeyValueSeparator + VersionValuePrefix}{Version}"
+                        : $"{Identifier}{ComponentSeparator + VersionKey + KeyValueSeparator + VersionValuePrefix}{Version}{ComponentSeparator + ProfileKey + KeyValueSeparator}{Profile}";
                 }
 
                 Debug.Assert(_fullName != null);

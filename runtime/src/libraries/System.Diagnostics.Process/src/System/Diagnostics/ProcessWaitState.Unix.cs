@@ -303,15 +303,15 @@ namespace System.Diagnostics
                                 _waitInProgress == null
                                     ? WaitForExitAsync()
                                     : _waitInProgress
-                                      .ContinueWith(
-                                          (_, state) =>
-                                              ((ProcessWaitState)state!).WaitForExitAsync(),
-                                          this,
-                                          CancellationToken.None,
-                                          TaskContinuationOptions.None,
-                                          TaskScheduler.Default
-                                      )
-                                      .Unwrap();
+                                        .ContinueWith(
+                                            (_, state) =>
+                                                ((ProcessWaitState)state!).WaitForExitAsync(),
+                                            this,
+                                            CancellationToken.None,
+                                            TaskContinuationOptions.None,
+                                            TaskScheduler.Default
+                                        )
+                                        .Unwrap();
                         }
                     }
                 }
@@ -456,15 +456,15 @@ namespace System.Diagnostics
                         millisecondsTimeout == Timeout.Infinite
                             ? Timeout.Infinite
                             : (int)
-                                  Math.Max(
-                                      millisecondsTimeout
-                                          - (
-                                              (Stopwatch.GetTimestamp() - startTime)
-                                              / (double)Stopwatch.Frequency
-                                              * 1000
-                                          ),
-                                      0
-                                  );
+                                Math.Max(
+                                    millisecondsTimeout
+                                        - (
+                                            (Stopwatch.GetTimestamp() - startTime)
+                                            / (double)Stopwatch.Frequency
+                                            * 1000
+                                        ),
+                                    0
+                                );
 
                     lock (_gate)
                     {

@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteFindUsagesService)), Shared]
     internal sealed class FindUsagesServerCallbackDispatcher
         : RemoteServiceCallbackDispatcher,
-          IRemoteFindUsagesService.ICallback
+            IRemoteFindUsagesService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

@@ -1036,7 +1036,7 @@ namespace System.DirectoryServices
 
     public partial class DirectoryServicesCOMException
         : System.Runtime.InteropServices.COMException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public DirectoryServicesCOMException() { }
 
@@ -1554,8 +1554,8 @@ namespace System.DirectoryServices
 
     public partial class PropertyCollection
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable
     {
         internal PropertyCollection() { }
 
@@ -1788,8 +1788,8 @@ namespace System.DirectoryServices
 
     public partial class SchemaNameCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         internal SchemaNameCollection() { }
 
@@ -1901,9 +1901,9 @@ namespace System.DirectoryServices
 
     public partial class SearchResultCollection
         : System.MarshalByRefObject,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.IDisposable
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.IDisposable
     {
         internal SearchResultCollection() { }
 
@@ -2079,7 +2079,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
     public partial class ActiveDirectoryObjectNotFoundException
         : System.Exception,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public ActiveDirectoryObjectNotFoundException() { }
 
@@ -2115,7 +2115,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
     public partial class ActiveDirectoryOperationException
         : System.Exception,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public ActiveDirectoryOperationException() { }
 
@@ -2725,7 +2725,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
     public partial class ActiveDirectoryServerDownException
         : System.Exception,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public ActiveDirectoryServerDownException() { }
 
@@ -4600,7 +4600,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
     public partial class ForestTrustCollisionException
         : System.DirectoryServices.ActiveDirectory.ActiveDirectoryOperationException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public ForestTrustCollisionException() { }
 
@@ -5623,7 +5623,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
     public partial class SyncFromAllServersOperationException
         : System.DirectoryServices.ActiveDirectory.ActiveDirectoryOperationException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public SyncFromAllServersOperationException() { }
 

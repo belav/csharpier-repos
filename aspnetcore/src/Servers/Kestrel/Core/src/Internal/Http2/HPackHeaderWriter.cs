@@ -167,8 +167,8 @@ internal static class HPackHeaderWriter
                 headersEnumerator.EncodingSelector,
                 KestrelServerOptions.DefaultHeaderEncodingSelector
             )
-              ? null
-              : headersEnumerator.EncodingSelector(name);
+                ? null
+                : headersEnumerator.EncodingSelector(name);
 
             var hint = ResolveHeaderEncodingHint(staticTableId, name);
 

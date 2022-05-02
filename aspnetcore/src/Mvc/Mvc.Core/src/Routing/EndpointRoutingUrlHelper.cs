@@ -89,8 +89,8 @@ internal class EndpointRoutingUrlHelper : UrlHelperBase
             routeName: null,
             values,
             fragment: urlActionContext.Fragment == null
-              ? FragmentString.Empty
-              : new FragmentString("#" + urlActionContext.Fragment)
+                ? FragmentString.Empty
+                : new FragmentString("#" + urlActionContext.Fragment)
         );
         return GenerateUrl(urlActionContext.Protocol, urlActionContext.Host, path);
     }
@@ -108,8 +108,8 @@ internal class EndpointRoutingUrlHelper : UrlHelperBase
             routeContext.RouteName,
             routeContext.Values,
             fragment: routeContext.Fragment == null
-              ? FragmentString.Empty
-              : new FragmentString("#" + routeContext.Fragment)
+                ? FragmentString.Empty
+                : new FragmentString("#" + routeContext.Fragment)
         );
         return GenerateUrl(routeContext.Protocol, routeContext.Host, path);
     }

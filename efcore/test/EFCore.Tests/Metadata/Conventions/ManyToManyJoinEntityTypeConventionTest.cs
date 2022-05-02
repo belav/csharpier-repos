@@ -431,8 +431,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             CreateManyToManyConvention().ProcessSkipNavigationAdded(skipNavBuilder, context);
             return context.ShouldStopProcessing()
-              ? (InternalSkipNavigationBuilder)context.Result
-              : skipNavBuilder;
+                ? (InternalSkipNavigationBuilder)context.Result
+                : skipNavBuilder;
         }
 
         private ManyToManyJoinEntityTypeConvention CreateManyToManyConvention() =>

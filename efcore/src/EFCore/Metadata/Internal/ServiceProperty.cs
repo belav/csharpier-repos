@@ -19,9 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class ServiceProperty
         : PropertyBase,
-          IMutableServiceProperty,
-          IConventionServiceProperty,
-          IServiceProperty
+            IMutableServiceProperty,
+            IConventionServiceProperty,
+            IServiceProperty
     {
         private ServiceParameterBinding? _parameterBinding;
         private InternalServicePropertyBuilder? _builder;
@@ -117,21 +117,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             get =>
                 IsReadOnly
                     ? NonCapturingLazyInitializer.EnsureInitialized(
-                          ref _parameterBinding,
-                          (IServiceProperty)this,
-                          static property =>
-                          {
-                              var entityType = property.DeclaringEntityType;
-                              var factory = entityType.Model
-                                  .GetModelDependencies()
-                                  .ParameterBindingFactories.FindFactory(
-                                      property.ClrType,
-                                      property.Name
-                                  )!;
-                              return (ServiceParameterBinding)
-                                  factory.Bind(entityType, property.ClrType, property.Name);
-                          }
-                      )
+                        ref _parameterBinding,
+                        (IServiceProperty)this,
+                        static property =>
+                        {
+                            var entityType = property.DeclaringEntityType;
+                            var factory = entityType.Model
+                                .GetModelDependencies()
+                                .ParameterBindingFactories.FindFactory(
+                                    property.ClrType,
+                                    property.Name
+                                )!;
+                            return (ServiceParameterBinding)
+                                factory.Bind(entityType, property.ClrType, property.Name);
+                        }
+                    )
                     : _parameterBinding;
 #pragma warning restore CS8766 // Nullability of reference types in return type doesn't match implicitly implemented member (possibly because of nullability attributes).
             set => SetParameterBinding(value, ConfigurationSource.Explicit);
@@ -170,8 +170,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetParameterBinding(
                 parameterBinding,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

@@ -153,9 +153,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 symbol == null
                     ? null
                     : CodeAnalysis.CSharp.SymbolDisplay.ToDisplayString(
-                          symbol,
-                          SymbolDisplayFormat.MinimallyQualifiedFormat
-                      );
+                        symbol,
+                        SymbolDisplayFormat.MinimallyQualifiedFormat
+                    );
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
                 IFieldSymbol symbol

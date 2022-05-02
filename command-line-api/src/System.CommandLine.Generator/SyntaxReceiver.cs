@@ -221,9 +221,9 @@ namespace System.CommandLine.Generator
                 INamedTypeSymbol namedType => FromNamedTypeSymbol(namedType),
                 IMethodSymbol methodSymbol => FromTypeSymbol(methodSymbol.ReturnType),
                 _
-                  => throw new NotImplementedException(
-                      $"Cannot convert from '{argumentSymbol?.Kind}' {argumentSymbol?.ToDisplayString()}"
-                  )
+                    => throw new NotImplementedException(
+                        $"Cannot convert from '{argumentSymbol?.Kind}' {argumentSymbol?.ToDisplayString()}"
+                    )
             };
 
             Parameter FromNamedTypeSymbol(INamedTypeSymbol namedTypeSymbol)
@@ -258,9 +258,9 @@ namespace System.CommandLine.Generator
                 {
                     INamedTypeSymbol namedType => FromNamedTypeSymbol(namedType),
                     _
-                      => throw new NotImplementedException(
-                          $"Cannot convert from type symbol '{typeSymbol?.Kind}' {typeSymbol?.ToDisplayString()}"
-                      )
+                        => throw new NotImplementedException(
+                            $"Cannot convert from type symbol '{typeSymbol?.Kind}' {typeSymbol?.ToDisplayString()}"
+                        )
                 };
             }
         }

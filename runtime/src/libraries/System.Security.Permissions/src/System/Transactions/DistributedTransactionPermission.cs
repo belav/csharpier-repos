@@ -15,7 +15,7 @@ namespace System.Transactions
 #endif
     public sealed class DistributedTransactionPermission
         : CodeAccessPermission,
-          IUnrestrictedPermission
+            IUnrestrictedPermission
     {
         public DistributedTransactionPermission(PermissionState state) { }
 

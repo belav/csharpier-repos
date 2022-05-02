@@ -296,14 +296,14 @@ namespace System.Web.Http.Controllers
                 IEnumerable<CandidateActionWithParams> actionsWithParameters =
                     (subRoutes == null)
                         ? GetInitialCandidateWithParameterListForRegularRoutes(
-                              controllerContext,
-                              ignoreVerbs
-                          )
+                            controllerContext,
+                            ignoreVerbs
+                        )
                         : GetInitialCandidateWithParameterListForDirectRoutes(
-                              controllerContext,
-                              subRoutes,
-                              ignoreVerbs
-                          );
+                            controllerContext,
+                            subRoutes,
+                            ignoreVerbs
+                        );
 
                 // Make sure the action parameter matches the route and query parameters.
                 List<CandidateActionWithParams> actionsFoundByParams =

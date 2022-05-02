@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return new CSharpParseOptions(
                     languageVersion: langVersion,
                     preprocessorSymbols: metadata.TryGetValue("define", out var defines)
-                      ? defines.Split(',')
-                      : null
+                        ? defines.Split(',')
+                        : null
                 );
             }
 

@@ -303,8 +303,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (charIndex < 0)
-                      ? ExceptionArgument.charIndex
-                      : ExceptionArgument.charCount,
+                        ? ExceptionArgument.charIndex
+                        : ExceptionArgument.charCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -373,8 +373,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (charIndex < 0)
-                      ? ExceptionArgument.charIndex
-                      : ExceptionArgument.charCount,
+                        ? ExceptionArgument.charIndex
+                        : ExceptionArgument.charCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -428,8 +428,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (charCount < 0)
-                      ? ExceptionArgument.charCount
-                      : ExceptionArgument.byteCount,
+                        ? ExceptionArgument.charCount
+                        : ExceptionArgument.byteCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -629,8 +629,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (byteIndex < 0)
-                      ? ExceptionArgument.byteIndex
-                      : ExceptionArgument.byteCount,
+                        ? ExceptionArgument.byteIndex
+                        : ExceptionArgument.byteCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -684,8 +684,8 @@ namespace System.Text
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(
                     argument: (byteCount < 0)
-                      ? ExceptionArgument.byteCount
-                      : ExceptionArgument.charCount,
+                        ? ExceptionArgument.byteCount
+                        : ExceptionArgument.charCount,
                     resource: ExceptionResource.ArgumentOutOfRange_NeedNonNegNum
                 );
             }
@@ -986,8 +986,8 @@ namespace System.Text
             // If there's an error, it's because the destination was too small.
 
             return value.TryEncodeToUtf8(bytes, out bytesWritten)
-              ? OperationStatus.Done
-              : OperationStatus.DestinationTooSmall;
+                ? OperationStatus.Done
+                : OperationStatus.DestinationTooSmall;
         }
 
         internal sealed override OperationStatus DecodeFirstRune(
@@ -1070,7 +1070,7 @@ namespace System.Text
             GetType() != typeof(UTF8Encoding)
                 ? new ReadOnlySpan<byte>(GetPreamble())
                 : // in case a derived UTF8Encoding overrode GetPreamble
-                  _emitUTF8Identifier
+                _emitUTF8Identifier
                     ? PreambleSpan
                     : default;
 

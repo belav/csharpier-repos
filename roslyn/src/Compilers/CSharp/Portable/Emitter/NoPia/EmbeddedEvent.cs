@@ -145,8 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
                             );
                             diagnostics.Add(
                                 syntaxNodeOpt == null
-                                  ? NoLocation.Singleton
-                                  : syntaxNodeOpt.Location,
+                                    ? NoLocation.Singleton
+                                    : syntaxNodeOpt.Location,
                                 useSiteInfo.Diagnostics
                             );
 

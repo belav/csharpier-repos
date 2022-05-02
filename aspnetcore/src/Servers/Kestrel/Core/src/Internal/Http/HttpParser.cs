@@ -472,8 +472,8 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler>
     {
         throw GetInvalidRequestException(
             IsTlsHandshake(requestLine)
-              ? RequestRejectionReason.TlsOverHttpError
-              : RequestRejectionReason.InvalidRequestLine,
+                ? RequestRejectionReason.TlsOverHttpError
+                : RequestRejectionReason.InvalidRequestLine,
             requestLine
         );
     }
@@ -497,7 +497,7 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler>
         KestrelBadHttpRequestException.GetException(
             reason,
             _showErrorDetails
-              ? headerLine.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
-              : string.Empty
+                ? headerLine.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
+                : string.Empty
         );
 }

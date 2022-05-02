@@ -221,22 +221,22 @@ namespace System
                 DateTime start =
                     rule.DateStart.Kind == DateTimeKind.Utc
                         ?
-                          // At the daylight start we didn't start the daylight saving yet then we convert to Local time
-                          // by adding the _baseUtcOffset to the UTC time
-                          new DateTime(
-                              rule.DateStart.Ticks + _baseUtcOffset.Ticks,
-                              DateTimeKind.Unspecified
-                          )
+                        // At the daylight start we didn't start the daylight saving yet then we convert to Local time
+                        // by adding the _baseUtcOffset to the UTC time
+                        new DateTime(
+                            rule.DateStart.Ticks + _baseUtcOffset.Ticks,
+                            DateTimeKind.Unspecified
+                        )
                         : rule.DateStart;
                 DateTime end =
                     rule.DateEnd.Kind == DateTimeKind.Utc
                         ?
-                          // At the daylight saving end, the UTC time is mapped to local time which is already shifted by the daylight delta
-                          // we calculate the local time by adding _baseUtcOffset + DaylightDelta to the UTC time
-                          new DateTime(
-                              rule.DateEnd.Ticks + _baseUtcOffset.Ticks + rule.DaylightDelta.Ticks,
-                              DateTimeKind.Unspecified
-                          )
+                        // At the daylight saving end, the UTC time is mapped to local time which is already shifted by the daylight delta
+                        // we calculate the local time by adding _baseUtcOffset + DaylightDelta to the UTC time
+                        new DateTime(
+                            rule.DateEnd.Ticks + _baseUtcOffset.Ticks + rule.DaylightDelta.Ticks,
+                            DateTimeKind.Unspecified
+                        )
                         : rule.DateEnd;
 
                 if (start.Year == end.Year || !rule.NoDaylightTransitions)
@@ -245,17 +245,17 @@ namespace System
                     // Also, rule.NoDaylightTransitions be false in case the rule was created from a POSIX time zone string and having a DST transition. We can represent this in one rule too
                     TransitionTime startTransition = rule.NoDaylightTransitions
                         ? TransitionTime.CreateFixedDateRule(
-                              GetTimeOnlyInMillisecondsPrecision(start),
-                              start.Month,
-                              start.Day
-                          )
+                            GetTimeOnlyInMillisecondsPrecision(start),
+                            start.Month,
+                            start.Day
+                        )
                         : rule.DaylightTransitionStart;
                     TransitionTime endTransition = rule.NoDaylightTransitions
                         ? TransitionTime.CreateFixedDateRule(
-                              GetTimeOnlyInMillisecondsPrecision(end),
-                              end.Month,
-                              end.Day
-                          )
+                            GetTimeOnlyInMillisecondsPrecision(end),
+                            end.Month,
+                            end.Day
+                        )
                         : rule.DaylightTransitionEnd;
                     rulesList.Add(
                         AdjustmentRule.CreateAdjustmentRule(
@@ -795,10 +795,10 @@ namespace System
 
                 AdjustmentRule? r = !string.IsNullOrEmpty(futureTransitionsPosixFormat)
                     ? TZif_CreateAdjustmentRuleForPosixFormat(
-                          futureTransitionsPosixFormat,
-                          startTransitionDate,
-                          timeZoneBaseUtcOffset
-                      )
+                        futureTransitionsPosixFormat,
+                        startTransitionDate,
+                        timeZoneBaseUtcOffset
+                    )
                     : null;
 
                 if (r == null)
@@ -1388,8 +1388,8 @@ namespace System
         {
             int lastIndex = zoneAbbreviations.IndexOf('\0', index);
             return lastIndex > 0
-              ? zoneAbbreviations.Substring(index, lastIndex - index)
-              : zoneAbbreviations.Substring(index);
+                ? zoneAbbreviations.Substring(index, lastIndex - index)
+                : zoneAbbreviations.Substring(index);
         }
 
         // Converts a span of bytes into a long - always using standard byte order (Big Endian)

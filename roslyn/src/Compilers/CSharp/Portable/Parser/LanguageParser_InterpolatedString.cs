@@ -116,13 +116,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Debug.Assert(closeQuoteMissing || originalText[closeQuoteIndex] == '"');
             var closeQuote = closeQuoteMissing
                 ? SyntaxFactory
-                  .MissingToken(SyntaxKind.InterpolatedStringEndToken)
-                  .TokenWithTrailingTrivia(originalToken.GetTrailingTrivia())
+                    .MissingToken(SyntaxKind.InterpolatedStringEndToken)
+                    .TokenWithTrailingTrivia(originalToken.GetTrailingTrivia())
                 : SyntaxFactory.Token(
-                      null,
-                      SyntaxKind.InterpolatedStringEndToken,
-                      originalToken.GetTrailingTrivia()
-                  );
+                    null,
+                    SyntaxKind.InterpolatedStringEndToken,
+                    originalToken.GetTrailingTrivia()
+                );
             var builder = _pool.Allocate<InterpolatedStringContentSyntax>();
 
             if (interpolations.Count == 0)
@@ -152,8 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     var text = Substring(
                         originalText,
                         (i == 0)
-                          ? (openQuoteIndex + 1)
-                          : (interpolations[i - 1].CloseBracePosition + 1),
+                            ? (openQuoteIndex + 1)
+                            : (interpolations[i - 1].CloseBracePosition + 1),
                         interpolation.OpenBracePosition - 1
                     );
                     if (text.Length > 0)
@@ -220,8 +220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 text,
                 interpolation.OpenBracePosition,
                 interpolation.HasColon
-                  ? interpolation.ColonPosition - 1
-                  : interpolation.CloseBracePosition - 1
+                    ? interpolation.ColonPosition - 1
+                    : interpolation.CloseBracePosition - 1
             );
             using (
                 var tempLexer = new Lexer(

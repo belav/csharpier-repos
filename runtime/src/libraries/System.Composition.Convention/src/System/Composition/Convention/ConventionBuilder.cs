@@ -281,8 +281,8 @@ namespace System.Composition.Convention
                 appliedAttributes = member.GetCustomAttributes<Attribute>(false);
 
             return cachedAttributes == null
-              ? appliedAttributes
-              : appliedAttributes.Concat(cachedAttributes);
+                ? appliedAttributes
+                : appliedAttributes.Concat(cachedAttributes);
         }
 
         private List<Attribute> ReadMemberCustomAttributes(

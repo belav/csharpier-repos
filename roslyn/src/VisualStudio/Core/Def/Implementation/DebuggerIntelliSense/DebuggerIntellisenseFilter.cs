@@ -21,8 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 {
     internal class DebuggerIntelliSenseFilter
         : AbstractVsTextViewFilter,
-          IDisposable,
-          IFeatureController
+            IDisposable,
+            IFeatureController
     {
         private readonly IFeatureServiceFactory _featureServiceFactory;
         private AbstractDebuggerIntelliSenseContext _context;

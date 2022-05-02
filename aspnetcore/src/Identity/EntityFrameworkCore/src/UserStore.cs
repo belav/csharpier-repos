@@ -72,16 +72,16 @@ public class UserStore<TUser, TRole, TContext> : UserStore<TUser, TRole, TContex
 /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
 public class UserStore<TUser, TRole, TContext, TKey>
     : UserStore<
-          TUser,
-          TRole,
-          TContext,
-          TKey,
-          IdentityUserClaim<TKey>,
-          IdentityUserRole<TKey>,
-          IdentityUserLogin<TKey>,
-          IdentityUserToken<TKey>,
-          IdentityRoleClaim<TKey>
-      >
+        TUser,
+        TRole,
+        TContext,
+        TKey,
+        IdentityUserClaim<TKey>,
+        IdentityUserRole<TKey>,
+        IdentityUserLogin<TKey>,
+        IdentityUserToken<TKey>,
+        IdentityRoleClaim<TKey>
+    >
     where TUser : IdentityUser<TKey>
     where TRole : IdentityRole<TKey>
     where TContext : DbContext
@@ -120,7 +120,7 @@ public class UserStore<
     TRoleClaim
 >
     : UserStoreBase<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TUserToken, TRoleClaim>,
-      IProtectedUserStore<TUser>
+        IProtectedUserStore<TUser>
     where TUser : IdentityUser<TKey>
     where TRole : IdentityRole<TKey>
     where TContext : DbContext

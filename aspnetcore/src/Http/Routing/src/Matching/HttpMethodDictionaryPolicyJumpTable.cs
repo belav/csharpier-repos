@@ -49,12 +49,12 @@ internal sealed class HttpMethodDictionaryPolicyJumpTable : PolicyJumpTable
                 accessControlRequestMethod.ToString(),
                 out destination
             )
-              ? destination
-              : _corsPreflightExitDestination;
+                ? destination
+                : _corsPreflightExitDestination;
         }
 
         return _destinations != null && _destinations.TryGetValue(httpMethod, out destination)
-          ? destination
-          : _exitDestination;
+            ? destination
+            : _exitDestination;
     }
 }

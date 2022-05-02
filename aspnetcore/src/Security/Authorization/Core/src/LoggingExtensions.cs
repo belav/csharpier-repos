@@ -29,8 +29,8 @@ internal static partial class LoggingExtensions
         var reason = failure.FailCalled
             ? "Fail() was explicitly called."
             : "These requirements were not met:"
-              + Environment.NewLine
-              + string.Join(Environment.NewLine, failure.FailedRequirements);
+                + Environment.NewLine
+                + string.Join(Environment.NewLine, failure.FailedRequirements);
 
         UserAuthorizationFailed(logger, reason);
     }

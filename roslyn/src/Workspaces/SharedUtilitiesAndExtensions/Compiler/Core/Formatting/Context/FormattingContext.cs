@@ -253,8 +253,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 var effectiveBaseToken = operation.Option.IsOn(
                     IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
                 )
-                  ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
-                  : operation.BaseToken;
+                    ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
+                    : operation.BaseToken;
                 var inseparableRegionStartingPosition = effectiveBaseToken.FullSpan.Start;
                 var relativeIndentationGetter = new Lazy<int>(
                     () =>
@@ -273,8 +273,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                             operation.Option.IsOn(
                                 IndentBlockOption.RelativeToFirstTokenOnBaseTokenLine
                             )
-                              ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
-                              : operation.BaseToken
+                                ? _tokenStream.FirstTokenOfBaseTokenLine(operation.BaseToken)
+                                : operation.BaseToken
                         );
 
                         return baseIndentation + indentationDelta;

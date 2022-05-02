@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             )
             {
                 return syntax.IsFeatureEnabled(MessageID.IDS_FeatureInferredDelegateType)
-                  ? new Lazy(binder, calculateDelegate)
-                  : null;
+                    ? new Lazy(binder, calculateDelegate)
+                    : null;
             }
 
             private Lazy(

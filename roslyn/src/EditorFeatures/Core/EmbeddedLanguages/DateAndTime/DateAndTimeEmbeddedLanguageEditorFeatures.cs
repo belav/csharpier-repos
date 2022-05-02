@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
 {
     internal sealed class DateAndTimeEmbeddedLanguageEditorFeatures
         : DateAndTimeEmbeddedLanguageFeatures,
-          IEmbeddedLanguageEditorFeatures
+            IEmbeddedLanguageEditorFeatures
     {
         public IBraceMatcher BraceMatcher { get; }
 

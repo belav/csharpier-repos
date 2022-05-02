@@ -380,10 +380,10 @@ internal static partial class Interop
                 string compression = TestServer.ResponseHeaders.Contains(
                     "Content-Encoding: deflate"
                 )
-                  ? "deflate"
-                  : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
-                      ? "gzip"
-                      : null;
+                    ? "deflate"
+                    : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
+                        ? "gzip"
+                        : null;
 
                 if (compression == null)
                 {
@@ -554,8 +554,8 @@ internal static partial class Interop
                         TestControl.WinHttpWriteData.Wait();
                         fakeHandle.InvokeCallback(
                             aborted
-                              ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
-                              : Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
+                                ? Interop.WinHttp.ERROR_WINHTTP_OPERATION_CANCELLED
+                                : Interop.WinHttp.WINHTTP_CALLBACK_STATUS_REQUEST_ERROR,
                             asyncResult
                         );
                     }

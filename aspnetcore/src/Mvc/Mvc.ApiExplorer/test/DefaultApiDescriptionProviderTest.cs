@@ -2601,9 +2601,9 @@ public class DefaultApiDescriptionProviderTest
 
     private class ContentTypeAttribute
         : Attribute,
-          IFilterMetadata,
-          IApiResponseMetadataProvider,
-          IApiRequestMetadataProvider
+            IFilterMetadata,
+            IApiResponseMetadataProvider,
+            IApiRequestMetadataProvider
     {
         public ContentTypeAttribute(string mediaType)
         {

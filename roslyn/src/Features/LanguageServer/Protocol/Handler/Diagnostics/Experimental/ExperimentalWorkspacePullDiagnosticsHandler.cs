@@ -21,10 +21,10 @@ using WorkspaceDocumentDiagnosticReport = SumType<
 
 internal class ExperimentalWorkspacePullDiagnosticsHandler
     : AbstractPullDiagnosticHandler<
-          WorkspaceDiagnosticParams,
-          WorkspaceDiagnosticReport,
-          WorkspaceDiagnosticReport?
-      >
+        WorkspaceDiagnosticParams,
+        WorkspaceDiagnosticReport,
+        WorkspaceDiagnosticReport?
+    >
 {
     private readonly IDiagnosticAnalyzerService _analyzerService;
 
@@ -56,20 +56,20 @@ internal class ExperimentalWorkspacePullDiagnosticsHandler
         var itemToReport =
             diagnostics == null
                 ? new WorkspaceDocumentDiagnosticReport(
-                      new WorkspaceUnchangedDocumentDiagnosticReport(
-                          identifier.Uri,
-                          resultId,
-                          version: null
-                      )
-                  )
+                    new WorkspaceUnchangedDocumentDiagnosticReport(
+                        identifier.Uri,
+                        resultId,
+                        version: null
+                    )
+                )
                 : new WorkspaceDocumentDiagnosticReport(
-                      new WorkspaceFullDocumentDiagnosticReport(
-                          identifier.Uri,
-                          diagnostics,
-                          version: null,
-                          resultId
-                      )
-                  );
+                    new WorkspaceFullDocumentDiagnosticReport(
+                        identifier.Uri,
+                        diagnostics,
+                        version: null,
+                        resultId
+                    )
+                );
         return new WorkspaceDiagnosticReport(new[] { itemToReport });
     }
 

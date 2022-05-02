@@ -193,7 +193,7 @@ namespace System.Xml.Xsl.XPath
                 op == XPathOperator.Or
                     ? _f.Or(left, right)
                     :
-                      /*default*/_f.And(left, right)
+                    /*default*/_f.And(left, right)
             );
         }
 
@@ -274,16 +274,16 @@ namespace System.Xml.Xsl.XPath
                 op == XPathOperator.Lt
                     ? XPathOperator.Gt
                     : // '<'  --> '>'
-                      op == XPathOperator.Le
+                    op == XPathOperator.Le
                         ? XPathOperator.Ge
                         : // '<=' --> '>='
-                          op == XPathOperator.Gt
+                        op == XPathOperator.Gt
                             ? XPathOperator.Lt
                             : // '>'  --> '<'
-                              op == XPathOperator.Ge
+                            op == XPathOperator.Ge
                                 ? XPathOperator.Le
                                 : // '>=' --> '<='
-                                  /*default:*/op
+                                /*default:*/op
             );
         }
 
@@ -374,10 +374,10 @@ namespace System.Xml.Xsl.XPath
                     || rightType.TypeCode == XmlTypeCode.Boolean
                         ? XmlTypeCode.Boolean
                         : leftType.TypeCode == XmlTypeCode.Double
-                          || rightType.TypeCode == XmlTypeCode.Double
+                        || rightType.TypeCode == XmlTypeCode.Double
                             ? XmlTypeCode.Double
                             :
-                              /*default:*/XmlTypeCode.String
+                            /*default:*/XmlTypeCode.String
                 );
                 return CompareValues(op, left, right, compType);
             }
@@ -536,14 +536,14 @@ namespace System.Xml.Xsl.XPath
                     filter.Body = _f.And(
                         filter.Body,
                         name != null && nsUri != null
-                          ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
-                          : // ns:bar || bar
+                            ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
+                            : // ns:bar || bar
                             nsUri != null
-                              ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
-                              : // ns:*
+                                ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
+                                : // ns:*
                                 name != null
-                                  ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
-                                  : // *:foo
+                                    ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
+                                    : // *:foo
                                     /*name  == nsUri == null*/_f.True() // *
                     );
                     return filter;
@@ -553,14 +553,14 @@ namespace System.Xml.Xsl.XPath
             return _f.Filter(
                 itr = _f.For(qilAxis),
                 name != null && nsUri != null
-                  ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
-                  : // ns:bar || bar
+                    ? _f.Eq(_f.NameOf(itr), _f.QName(name, nsUri))
+                    : // ns:bar || bar
                     nsUri != null
-                      ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
-                      : // ns:*
+                        ? _f.Eq(_f.NamespaceUriOf(itr), _f.String(nsUri))
+                        : // ns:*
                         name != null
-                          ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
-                          : // *:foo
+                            ? _f.Eq(_f.LocalNameOf(itr), _f.String(name))
+                            : // *:foo
                             /*name  == nsUri == null*/_f.True() // *
             );
         }
@@ -848,24 +848,24 @@ namespace System.Xml.Xsl.XPath
                             );
                         case FuncId.LocalName:
                             return args.Count == 0
-                              ? _f.LocalNameOf(GetCurrentNode())
-                              : LocalNameOfFirstNode(args[0]);
+                                ? _f.LocalNameOf(GetCurrentNode())
+                                : LocalNameOfFirstNode(args[0]);
                         case FuncId.NamespaceUri:
                             return args.Count == 0
-                              ? _f.NamespaceUriOf(GetCurrentNode())
-                              : NamespaceOfFirstNode(args[0]);
+                                ? _f.NamespaceUriOf(GetCurrentNode())
+                                : NamespaceOfFirstNode(args[0]);
                         case FuncId.Name:
                             return args.Count == 0
-                              ? NameOf(GetCurrentNode())
-                              : NameOfFirstNode(args[0]);
+                                ? NameOf(GetCurrentNode())
+                                : NameOfFirstNode(args[0]);
                         case FuncId.String:
                             return args.Count == 0
-                              ? _f.XPathNodeValue(GetCurrentNode())
-                              : _f.ConvertToString(args[0]);
+                                ? _f.XPathNodeValue(GetCurrentNode())
+                                : _f.ConvertToString(args[0]);
                         case FuncId.Number:
                             return args.Count == 0
-                              ? _f.XsltConvert(_f.XPathNodeValue(GetCurrentNode()), T.DoubleX)
-                              : _f.ConvertToNumber(args[0]);
+                                ? _f.XsltConvert(_f.XPathNodeValue(GetCurrentNode()), T.DoubleX)
+                                : _f.ConvertToNumber(args[0]);
                         case FuncId.Boolean:
                             return _f.ConvertToBoolean(args[0]);
                         case FuncId.True:
@@ -886,8 +886,8 @@ namespace System.Xml.Xsl.XPath
                             return _f.InvokeSubstringAfter(args[0], args[1]);
                         case FuncId.Substring:
                             return args.Count == 2
-                              ? _f.InvokeSubstring(args[0], args[1])
-                              : _f.InvokeSubstring(args[0], args[1], args[2]);
+                                ? _f.InvokeSubstring(args[0], args[1])
+                                : _f.InvokeSubstring(args[0], args[1], args[2]);
                         case FuncId.StringLength:
                             return _f.XsltConvert(
                                 _f.StrLength(
@@ -1336,7 +1336,7 @@ namespace System.Xml.Xsl.XPath
                     XsltAnnotation.Write(n)[0] = (
                         stop
                             ? /*any object*/
-                              fixupCurrent
+                            fixupCurrent
                             : null
                     );
                 }

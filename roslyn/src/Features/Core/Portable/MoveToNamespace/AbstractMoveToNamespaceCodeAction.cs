@@ -110,9 +110,9 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             analysisResult.Container switch
             {
                 MoveToNamespaceAnalysisResult.ContainerType.NamedType
-                  => new MoveTypeToNamespaceCodeAction(changeNamespaceService, analysisResult),
+                    => new MoveTypeToNamespaceCodeAction(changeNamespaceService, analysisResult),
                 MoveToNamespaceAnalysisResult.ContainerType.Namespace
-                  => new MoveItemsToNamespaceCodeAction(changeNamespaceService, analysisResult),
+                    => new MoveItemsToNamespaceCodeAction(changeNamespaceService, analysisResult),
                 _ => throw ExceptionUtilities.UnexpectedValue(analysisResult.Container)
             };
     }

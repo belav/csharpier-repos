@@ -263,8 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 arity,
                 syntax,
                 typeArgumentListSyntax: arity == 0
-                  ? null
-                  : ((GenericNameSyntax)nameSyntax!).TypeArgumentList,
+                    ? null
+                    : ((GenericNameSyntax)nameSyntax!).TypeArgumentList,
                 parameterListSyntax: syntax.Parameters,
                 ambiguityWinner: out ambiguityWinner,
                 diagnostics: diagnostics
@@ -994,8 +994,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             parameters: parameterSymbols,
                             // This specific comparer only looks for varargs.
                             callingConvention: candidateMethodIsVararg
-                              ? Microsoft.Cci.CallingConvention.ExtraArguments
-                              : Microsoft.Cci.CallingConvention.HasThis,
+                                ? Microsoft.Cci.CallingConvention.ExtraArguments
+                                : Microsoft.Cci.CallingConvention.HasThis,
                             // These are ignored by this specific MemberSignatureComparer.
                             containingType: null,
                             name: null,
@@ -1293,8 +1293,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             SyntaxNode? parentSyntax = syntax.Parent; // Could be null when speculating.
             return parentSyntax == null || parentSyntax.IsKind(SyntaxKind.XmlCrefAttribute)
-              ? syntax
-              : (CrefSyntax)parentSyntax;
+                ? syntax
+                : (CrefSyntax)parentSyntax;
         }
     }
 }

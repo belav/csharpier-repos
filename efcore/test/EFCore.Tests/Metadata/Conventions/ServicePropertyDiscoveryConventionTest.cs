@@ -240,8 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 .ProcessEntityTypeAdded(entityType.Builder, context);
 
             return context.ShouldStopProcessing()
-              ? (EntityType)context.Result!.Metadata
-              : entityType;
+                ? (EntityType)context.Result!.Metadata
+                : entityType;
         }
 
         private ServicePropertyDiscoveryConvention CreateServicePropertyDiscoveryConvention() =>

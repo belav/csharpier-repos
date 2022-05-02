@@ -394,33 +394,33 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 scenario == Scenario.ConfigMultiple
                     ? sharedState.RuntimeConfigPath
                     : testData.ExistingContext switch
-                      {
-                          ExistingContextType.FrameworkDependent => sharedState.AppPath,
-                          ExistingContextType.SelfContained_NoIncludedFrameworks
+                    {
+                        ExistingContextType.FrameworkDependent => sharedState.AppPath,
+                        ExistingContextType.SelfContained_NoIncludedFrameworks
                             => sharedState.SelfContainedAppPath,
-                          ExistingContextType.SelfContained_WithIncludedFrameworks
+                        ExistingContextType.SelfContained_WithIncludedFrameworks
                             => sharedState.SelfContainedWithIncludedFrameworksAppPath,
-                          _
+                        _
                             => throw new Exception(
                                 $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
                             )
-                      };
+                    };
 
             string hostfxrPath =
                 scenario == Scenario.NonContextMixedDotnet
                     ? sharedState.HostFxrPath // Imitating dotnet - always use the non-self-contained hostfxr
                     : testData.ExistingContext switch
-                      {
-                          ExistingContextType.FrameworkDependent => sharedState.HostFxrPath,
-                          ExistingContextType.SelfContained_NoIncludedFrameworks
+                    {
+                        ExistingContextType.FrameworkDependent => sharedState.HostFxrPath,
+                        ExistingContextType.SelfContained_NoIncludedFrameworks
                             => sharedState.SelfContainedHostFxrPath,
-                          ExistingContextType.SelfContained_WithIncludedFrameworks
+                        ExistingContextType.SelfContained_WithIncludedFrameworks
                             => sharedState.SelfContainedWithIncludedFrameworksHostFxrPath,
-                          _
+                        _
                             => throw new Exception(
                                 $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
                             )
-                      };
+                    };
 
             string[] args =
             {

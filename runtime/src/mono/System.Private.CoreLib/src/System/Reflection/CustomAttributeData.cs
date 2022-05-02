@@ -111,13 +111,13 @@ namespace System.Reflection
 
             this.ctorArgs = Array.AsReadOnly<CustomAttributeTypedArgument>(
                 ctor_args != null
-                  ? UnboxValues<CustomAttributeTypedArgument>(ctor_args)
-                  : Array.Empty<CustomAttributeTypedArgument>()
+                    ? UnboxValues<CustomAttributeTypedArgument>(ctor_args)
+                    : Array.Empty<CustomAttributeTypedArgument>()
             );
             this.namedArgs = Array.AsReadOnly<CustomAttributeNamedArgument>(
                 named_args != null
-                  ? UnboxValues<CustomAttributeNamedArgument>(named_args)
-                  : Array.Empty<CustomAttributeNamedArgument>()
+                    ? UnboxValues<CustomAttributeNamedArgument>(named_args)
+                    : Array.Empty<CustomAttributeNamedArgument>()
             );
 
             lazyData = null;

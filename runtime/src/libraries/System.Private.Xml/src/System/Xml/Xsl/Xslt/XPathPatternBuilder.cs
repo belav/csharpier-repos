@@ -121,13 +121,13 @@ namespace System.Xml.Xsl.Xslt
                 name != null && nsUri != null
                     ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
                     : // ns:bar || bar
-                      nsUri != null
+                    nsUri != null
                         ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
                         : // ns:*
-                          name != null
+                        name != null
                             ? f.Eq(f.LocalNameOf(itr), f.String(name))
                             : // *:foo
-                              /*name  == nsUri == null*/f.True() // *
+                            /*name  == nsUri == null*/f.True() // *
             );
 
             XmlNodeKindFlags intersection = XPathBuilder.AxisTypeMask(
@@ -140,10 +140,10 @@ namespace System.Xml.Xsl.Xslt
                 intersection == 0
                     ? f.False()
                     : // input & required doesn't intersect
-                      intersection == itr.XmlType.NodeKinds
+                    intersection == itr.XmlType.NodeKinds
                         ? f.True()
                         : // input is subset of required
-                          /*else*/f.IsType(itr, T.NodeChoice(intersection))
+                        /*else*/f.IsType(itr, T.NodeChoice(intersection))
             );
 
             QilLoop filter = f.BaseFactory.Filter(itr, f.And(typeTest, nameTest));

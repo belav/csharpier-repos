@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if ((object)accessor1 == null)
             {
                 return ((object)accessor2 == null)
-                  ? Accessibility.NotApplicable
-                  : accessor2.DeclaredAccessibility;
+                    ? Accessibility.NotApplicable
+                    : accessor2.DeclaredAccessibility;
             }
             else if ((object)accessor2 == null)
             {
@@ -99,8 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 (minAccessibility == Accessibility.Protected)
                 && (maxAccessibility == Accessibility.Internal)
             )
-              ? Accessibility.ProtectedOrInternal
-              : maxAccessibility;
+                ? Accessibility.ProtectedOrInternal
+                : maxAccessibility;
         }
     }
 }

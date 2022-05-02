@@ -306,8 +306,8 @@ namespace System.Net.Sockets
             ThrowIfDisposed();
 
             return _active
-              ? _clientSocket.EndSend(asyncResult)
-              : _clientSocket.EndSendTo(asyncResult);
+                ? _clientSocket.EndSend(asyncResult)
+                : _clientSocket.EndSendTo(asyncResult);
         }
 
         private void ValidateDatagram(byte[] datagram, int bytes, IPEndPoint? endPoint)
@@ -538,8 +538,8 @@ namespace System.Net.Sockets
             // Set Time To Live (TTL).
             _clientSocket.SetSocketOption(
                 (_family == AddressFamily.InterNetwork)
-                  ? SocketOptionLevel.IP
-                  : SocketOptionLevel.IPv6,
+                    ? SocketOptionLevel.IP
+                    : SocketOptionLevel.IPv6,
                 SocketOptionName.MulticastTimeToLive,
                 timeToLive
             );
@@ -741,8 +741,8 @@ namespace System.Net.Sockets
                     new ArraySegment<byte>(_buffer, 0, MaxUDPSize),
                     SocketFlags.None,
                     _family == AddressFamily.InterNetwork
-                      ? IPEndPointStatics.Any
-                      : IPEndPointStatics.IPv6Any
+                        ? IPEndPointStatics.Any
+                        : IPEndPointStatics.IPv6Any
                 )
             );
 
@@ -777,8 +777,8 @@ namespace System.Net.Sockets
                     _buffer,
                     SocketFlags.None,
                     _family == AddressFamily.InterNetwork
-                      ? IPEndPointStatics.Any
-                      : IPEndPointStatics.IPv6Any,
+                        ? IPEndPointStatics.Any
+                        : IPEndPointStatics.IPv6Any,
                     cancellationToken
                 )
             );

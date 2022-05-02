@@ -61,8 +61,8 @@ namespace Newtonsoft.Json.Converters
             {
                 writer.WritePropertyName(
                     (resolver != null)
-                      ? resolver.GetResolvedPropertyName(table.TableName)
-                      : table.TableName
+                        ? resolver.GetResolvedPropertyName(table.TableName)
+                        : table.TableName
                 );
 
                 converter.WriteJson(writer, table, serializer);

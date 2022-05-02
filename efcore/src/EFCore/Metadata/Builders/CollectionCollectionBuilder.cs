@@ -426,11 +426,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     joinEntityName,
                     joinEntityType,
                     configureRight != null
-                      ? e => configureRight(new EntityTypeBuilder(e)).Metadata
-                      : null,
+                        ? e => configureRight(new EntityTypeBuilder(e)).Metadata
+                        : null,
                     configureLeft != null
-                      ? e => configureLeft(new EntityTypeBuilder(e)).Metadata
-                      : null
+                        ? e => configureLeft(new EntityTypeBuilder(e)).Metadata
+                        : null
                 )
             );
 
@@ -496,19 +496,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                     newJoinEntityType =
                         joinEntityName == null
                             ? ModelBuilder
-                              .Entity(
-                                  joinEntityType,
-                                  ConfigurationSource.Explicit,
-                                  shouldBeOwned: false
-                              )!
-                              .Metadata
+                                .Entity(
+                                    joinEntityType,
+                                    ConfigurationSource.Explicit,
+                                    shouldBeOwned: false
+                                )!
+                                .Metadata
                             : ModelBuilder
-                              .SharedTypeEntity(
-                                  joinEntityName,
-                                  joinEntityType,
-                                  ConfigurationSource.Explicit
-                              )!
-                              .Metadata;
+                                .SharedTypeEntity(
+                                    joinEntityName,
+                                    joinEntityType,
+                                    ConfigurationSource.Explicit
+                                )!
+                                .Metadata;
                 }
             }
 
@@ -516,16 +516,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 configureRight != null
                     ? configureRight(newJoinEntityType)
                     : GetOrCreateSkipNavigationForeignKey(
-                          (SkipNavigation)RightNavigation,
-                          newJoinEntityType
-                      );
+                        (SkipNavigation)RightNavigation,
+                        newJoinEntityType
+                    );
             var leftForeignKey =
                 configureLeft != null
                     ? configureLeft(newJoinEntityType)
                     : GetOrCreateSkipNavigationForeignKey(
-                          (SkipNavigation)LeftNavigation,
-                          newJoinEntityType
-                      );
+                        (SkipNavigation)LeftNavigation,
+                        newJoinEntityType
+                    );
 
             ((SkipNavigation)RightNavigation).Builder.HasForeignKey(
                 (ForeignKey)rightForeignKey,

@@ -354,8 +354,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 "[Converter.FromString]!InternalPrimitiveTypeE.Invalid "
             );
             return code != InternalPrimitiveTypeE.Invalid
-              ? Convert.ChangeType(value, ToTypeCode(code), CultureInfo.InvariantCulture)
-              : value;
+                ? Convert.ChangeType(value, ToTypeCode(code), CultureInfo.InvariantCulture)
+                : value;
         }
     }
 }

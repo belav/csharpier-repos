@@ -254,14 +254,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             return key switch
             {
                 RSA rsa
-                  => new CertificateRequest(x500dn, rsa, hashAlgorithm, RSASignaturePadding.Pkcs1),
+                    => new CertificateRequest(
+                        x500dn,
+                        rsa,
+                        hashAlgorithm,
+                        RSASignaturePadding.Pkcs1
+                    ),
                 ECDsa ecdsa => new CertificateRequest(x500dn, ecdsa, hashAlgorithm),
                 ECDiffieHellman ecdh
-                  => new CertificateRequest(x500dn, new PublicKey(ecdh), hashAlgorithm),
+                    => new CertificateRequest(x500dn, new PublicKey(ecdh), hashAlgorithm),
                 _
-                  => throw new InvalidOperationException(
-                      $"Had no handler for key of type {key?.GetType().FullName ?? "null"}"
-                  )
+                    => throw new InvalidOperationException(
+                        $"Had no handler for key of type {key?.GetType().FullName ?? "null"}"
+                    )
             };
         }
 

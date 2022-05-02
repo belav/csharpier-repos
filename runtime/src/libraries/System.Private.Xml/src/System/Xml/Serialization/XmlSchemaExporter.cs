@@ -1071,8 +1071,8 @@ namespace System.Xml.Serialization
                     }
                     long val = XmlCustomFormatter.ToEnum((string)value, values, em.TypeName, false);
                     return val != 0
-                      ? XmlCustomFormatter.FromEnum(val, names, ids, mapping.TypeDesc!.FullName)
-                      : null;
+                        ? XmlCustomFormatter.FromEnum(val, names, ids, mapping.TypeDesc!.FullName)
+                        : null;
                 }
                 else
                 {

@@ -88,8 +88,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             entry == null
                 ? "<None>"
                 : entry.Metadata.DisplayName()
-                  + ":"
-                  + entry.Property(entry.Metadata.FindPrimaryKey().Properties[0].Name).CurrentValue;
+                    + ":"
+                    + entry
+                        .Property(entry.Metadata.FindPrimaryKey().Properties[0].Name)
+                        .CurrentValue;
 
         [ConditionalTheory]
         [InlineData(false, false)]
@@ -279,10 +281,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         sweet,
                         node =>
                             node.Entry.State = node.Entry.Metadata.IsOwned()
-                              ? node.SourceEntry.State
-                              : node.Entry.IsKeySet
-                                  ? EntityState.Unchanged
-                                  : EntityState.Added
+                                ? node.SourceEntry.State
+                                : node.Entry.IsKeySet
+                                    ? EntityState.Unchanged
+                                    : EntityState.Added
                     )
                 );
             }
@@ -938,14 +940,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             {
                 Assert.Equal(
                     trackNewDependents
-                      ? new List<string>
+                        ? new List<string>
                         {
                             "<None> -----> Category:1",
                             "Category:1 ---Products--> Product:1",
                             "Category:1 ---Products--> Product:2",
                             "Category:1 ---Products--> Product:3"
                         }
-                      : new List<string> { "<None> -----> Category:1" },
+                        : new List<string> { "<None> -----> Category:1" },
                     TrackGraph()
                 );
 

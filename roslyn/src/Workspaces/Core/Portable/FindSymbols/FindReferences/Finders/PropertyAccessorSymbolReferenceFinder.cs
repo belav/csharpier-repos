@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             return
                 options.AssociatePropertyReferencesWithSpecificAccessor
                 || symbol.AssociatedSymbol == null
-              ? SpecializedTasks.EmptyImmutableArray<ISymbol>()
-              : Task.FromResult(ImmutableArray.Create(symbol.AssociatedSymbol));
+                ? SpecializedTasks.EmptyImmutableArray<ISymbol>()
+                : Task.FromResult(ImmutableArray.Create(symbol.AssociatedSymbol));
         }
 
         protected override async Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(

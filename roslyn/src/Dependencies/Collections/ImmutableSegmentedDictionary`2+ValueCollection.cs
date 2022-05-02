@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.Collections
     {
         public readonly partial struct ValueCollection
             : IReadOnlyCollection<TValue>,
-              ICollection<TValue>,
-              ICollection
+                ICollection<TValue>,
+                ICollection
         {
             private readonly ImmutableSegmentedDictionary<TKey, TValue> _dictionary;
 

@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Routing;
 
 internal sealed class RouteValuesAddressScheme
     : IEndpointAddressScheme<RouteValuesAddress>,
-      IDisposable
+        IDisposable
 {
     private readonly DataSourceDependentCache<StateEntry> _cache;
 

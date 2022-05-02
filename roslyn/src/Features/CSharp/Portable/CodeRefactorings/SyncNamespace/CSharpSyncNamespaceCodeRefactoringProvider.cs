@@ -27,10 +27,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.SyncNamespace
     ]
     internal sealed class CSharpSyncNamespaceCodeRefactoringProvider
         : AbstractSyncNamespaceCodeRefactoringProvider<
-              BaseNamespaceDeclarationSyntax,
-              CompilationUnitSyntax,
-              MemberDeclarationSyntax
-          >
+            BaseNamespaceDeclarationSyntax,
+            CompilationUnitSyntax,
+            MemberDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

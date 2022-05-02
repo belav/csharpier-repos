@@ -72,7 +72,7 @@ namespace Microsoft.CodeAnalysis.AddImport
             var symbolSearchService =
                 searchReferenceAssemblies || searchNuGetPackages
                     ? _symbolSearchService
-                      ?? solution.Workspace.Services.GetService<ISymbolSearchService>()
+                        ?? solution.Workspace.Services.GetService<ISymbolSearchService>()
                     : null;
 
             var installerService = GetPackageInstallerService(document);

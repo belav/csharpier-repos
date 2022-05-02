@@ -8,9 +8,9 @@ namespace System.Numerics
 {
     public readonly partial struct BigInteger
         : System.IComparable,
-          System.IComparable<System.Numerics.BigInteger>,
-          System.IEquatable<System.Numerics.BigInteger>,
-          System.ISpanFormattable
+            System.IComparable<System.Numerics.BigInteger>,
+            System.IEquatable<System.Numerics.BigInteger>,
+            System.ISpanFormattable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -807,7 +807,7 @@ namespace System.Numerics
 
     public readonly partial struct Complex
         : System.IEquatable<System.Numerics.Complex>,
-          System.IFormattable
+            System.IFormattable
     {
         private readonly int _dummyPrimitive;
         public static readonly System.Numerics.Complex ImaginaryOne;

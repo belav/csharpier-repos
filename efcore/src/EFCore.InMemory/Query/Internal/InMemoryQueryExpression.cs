@@ -1646,8 +1646,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             var methodCallExpression = (MethodCallExpression)expression;
 
             return methodCallExpression.Type.IsNullableType()
-              ? methodCallExpression
-              : Call(
+                ? methodCallExpression
+                : Call(
                     ExpressionExtensions.ValueBufferTryReadValueMethod.MakeGenericMethod(
                         methodCallExpression.Type.MakeNullable()
                     ),

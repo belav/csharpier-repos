@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Components.Routing;
 
 internal sealed class QueryParameterNameComparer
     : IComparer<ReadOnlyMemory<char>>,
-      IEqualityComparer<ReadOnlyMemory<char>>
+        IEqualityComparer<ReadOnlyMemory<char>>
 {
     public static readonly QueryParameterNameComparer Instance = new();
 

@@ -28,7 +28,7 @@ namespace Microsoft.Extensions.Configuration
 
     public partial class ChainedConfigurationProvider
         : Microsoft.Extensions.Configuration.IConfigurationProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public ChainedConfigurationProvider(
             Microsoft.Extensions.Configuration.ChainedConfigurationSource source
@@ -86,8 +86,8 @@ namespace Microsoft.Extensions.Configuration
 
     public sealed partial class ConfigurationManager
         : Microsoft.Extensions.Configuration.IConfigurationBuilder,
-          Microsoft.Extensions.Configuration.IConfigurationRoot,
-          System.IDisposable
+            Microsoft.Extensions.Configuration.IConfigurationRoot,
+            System.IDisposable
     {
         public ConfigurationManager() { }
 
@@ -258,8 +258,8 @@ namespace Microsoft.Extensions.Configuration
 
     public partial class ConfigurationRoot
         : Microsoft.Extensions.Configuration.IConfiguration,
-          Microsoft.Extensions.Configuration.IConfigurationRoot,
-          System.IDisposable
+            Microsoft.Extensions.Configuration.IConfigurationRoot,
+            System.IDisposable
     {
         public ConfigurationRoot(
             System.Collections.Generic.IList<Microsoft.Extensions.Configuration.IConfigurationProvider> providers
@@ -297,7 +297,7 @@ namespace Microsoft.Extensions.Configuration
 
     public partial class ConfigurationSection
         : Microsoft.Extensions.Configuration.IConfiguration,
-          Microsoft.Extensions.Configuration.IConfigurationSection
+            Microsoft.Extensions.Configuration.IConfigurationSection
     {
         public ConfigurationSection(
             Microsoft.Extensions.Configuration.IConfigurationRoot root,
@@ -398,11 +398,11 @@ namespace Microsoft.Extensions.Configuration.Memory
 {
     public partial class MemoryConfigurationProvider
         : Microsoft.Extensions.Configuration.ConfigurationProvider,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  string?
-              >>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    string,
+                    string?
+                >>,
+            System.Collections.IEnumerable
     {
         public MemoryConfigurationProvider(
             Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource source

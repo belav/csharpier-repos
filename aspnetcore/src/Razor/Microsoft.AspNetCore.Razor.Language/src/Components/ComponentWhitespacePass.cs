@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentWhitespacePass
     : ComponentIntermediateNodePassBase,
-      IRazorDirectiveClassifierPass
+        IRazorDirectiveClassifierPass
 {
     protected override void ExecuteCore(
         RazorCodeDocument codeDocument,

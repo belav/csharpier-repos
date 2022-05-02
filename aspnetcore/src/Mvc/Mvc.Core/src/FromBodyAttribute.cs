@@ -17,9 +17,9 @@ namespace Microsoft.AspNetCore.Mvc;
 )]
 public class FromBodyAttribute
     : Attribute,
-      IBindingSourceMetadata,
-      IConfigureEmptyBodyBehavior,
-      IFromBodyMetadata
+        IBindingSourceMetadata,
+        IConfigureEmptyBodyBehavior,
+        IFromBodyMetadata
 {
     /// <inheritdoc />
     public BindingSource BindingSource => BindingSource.Body;

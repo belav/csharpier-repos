@@ -26,7 +26,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         private class WorkspaceUndoTransaction
             : ForegroundThreadAffinitizedObject,
-              IWorkspaceGlobalUndoTransaction
+                IWorkspaceGlobalUndoTransaction
         {
             private readonly ITextUndoHistoryRegistry _undoHistoryRegistry;
             private readonly IVsLinkedUndoTransactionManager _undoManager;

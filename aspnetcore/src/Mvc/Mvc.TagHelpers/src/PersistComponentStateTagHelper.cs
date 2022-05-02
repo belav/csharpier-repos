@@ -63,26 +63,26 @@ public class PersistComponentStateTagHelper : TagHelper
         var store = PersistenceMode switch
         {
             null
-              => ComponentRenderer.GetPersistStateRenderMode(ViewContext) switch
-              {
-                  InvokedRenderModes.Mode.None => null,
-                  InvokedRenderModes.Mode.WebAssembly => new PrerenderComponentApplicationStore(),
-                  InvokedRenderModes.Mode.Server
-                    => new ProtectedPrerenderComponentApplicationStore(
-                        services.GetRequiredService<IDataProtectionProvider>()
-                    ),
-                  InvokedRenderModes.Mode.ServerAndWebAssembly
-                    => throw new InvalidOperationException(
-                        Resources.FormatPersistComponentStateTagHelper_FailedToInferComponentPersistenceMode(
-                            PersistenceModeName
-                        )
-                    ),
-                  _ => throw new InvalidOperationException("Invalid InvokedRenderMode.")
-              },
+                => ComponentRenderer.GetPersistStateRenderMode(ViewContext) switch
+                {
+                    InvokedRenderModes.Mode.None => null,
+                    InvokedRenderModes.Mode.WebAssembly => new PrerenderComponentApplicationStore(),
+                    InvokedRenderModes.Mode.Server
+                        => new ProtectedPrerenderComponentApplicationStore(
+                            services.GetRequiredService<IDataProtectionProvider>()
+                        ),
+                    InvokedRenderModes.Mode.ServerAndWebAssembly
+                        => throw new InvalidOperationException(
+                            Resources.FormatPersistComponentStateTagHelper_FailedToInferComponentPersistenceMode(
+                                PersistenceModeName
+                            )
+                        ),
+                    _ => throw new InvalidOperationException("Invalid InvokedRenderMode.")
+                },
             TagHelpers.PersistenceMode.Server
-              => new ProtectedPrerenderComponentApplicationStore(
-                  services.GetRequiredService<IDataProtectionProvider>()
-              ),
+                => new ProtectedPrerenderComponentApplicationStore(
+                    services.GetRequiredService<IDataProtectionProvider>()
+                ),
             TagHelpers.PersistenceMode.WebAssembly => new PrerenderComponentApplicationStore(),
             _ => throw new InvalidOperationException("Invalid persistence mode.")
         };

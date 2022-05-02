@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
     internal sealed class EditAndContinueDiagnosticAnalyzer
         : DocumentDiagnosticAnalyzer,
-          IBuiltInAnalyzer
+            IBuiltInAnalyzer
     {
         private static readonly ImmutableArray<DiagnosticDescriptor> s_supportedDiagnostics =
             EditAndContinueDiagnosticDescriptors.GetDescriptors();

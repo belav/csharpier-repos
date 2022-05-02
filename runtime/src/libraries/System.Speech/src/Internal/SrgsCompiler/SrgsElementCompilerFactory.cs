@@ -283,8 +283,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 {
                     // Garbage transition is optional whereas Wildcard is not.  So we need additional epsilon transition.
                     OneOf oneOf = pronunciation.Contains(';')
-                      ? new OneOf(parent._rule, _backend)
-                      : null;
+                        ? new OneOf(parent._rule, _backend)
+                        : null;
 
                     for (
                         int iCurPron = 0, iDeliminator = 0;

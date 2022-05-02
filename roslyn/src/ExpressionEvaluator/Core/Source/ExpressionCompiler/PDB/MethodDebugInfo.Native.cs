@@ -572,8 +572,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 {
                     string name = constant.GetName();
                     localNames[name] = localNames.ContainsKey(name)
-                      ? LocalKind.DuplicateName
-                      : LocalKind.ConstantName;
+                        ? LocalKind.DuplicateName
+                        : LocalKind.ConstantName;
                 }
             }
         }

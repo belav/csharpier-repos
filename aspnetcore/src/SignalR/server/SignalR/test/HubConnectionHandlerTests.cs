@@ -4673,7 +4673,7 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
 
     private class DelayRequirement
         : AuthorizationHandler<DelayRequirement, HubInvocationContext>,
-          IAuthorizationRequirement
+            IAuthorizationRequirement
     {
         private readonly TcsService _tcsService;
 

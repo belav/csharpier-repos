@@ -13,14 +13,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseObjectInitializerDiagnosticAnalyzer
         : AbstractUseObjectInitializerDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              StatementSyntax,
-              ObjectCreationExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              ExpressionStatementSyntax,
-              VariableDeclaratorSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            StatementSyntax,
+            ObjectCreationExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            ExpressionStatementSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         protected override bool FadeOutOperatorToken => true;
 

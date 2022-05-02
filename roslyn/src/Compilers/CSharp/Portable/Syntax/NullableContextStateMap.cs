@@ -170,17 +170,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 {
                     SyntaxKind.None => new NullableContextState(position, setting, setting),
                     SyntaxKind.WarningsKeyword
-                      => new NullableContextState(
-                          position,
-                          warningsState: setting,
-                          annotationsState: previousContext.AnnotationsState
-                      ),
+                        => new NullableContextState(
+                            position,
+                            warningsState: setting,
+                            annotationsState: previousContext.AnnotationsState
+                        ),
                     SyntaxKind.AnnotationsKeyword
-                      => new NullableContextState(
-                          position,
-                          warningsState: previousContext.WarningsState,
-                          annotationsState: setting
-                      ),
+                        => new NullableContextState(
+                            position,
+                            warningsState: previousContext.WarningsState,
+                            annotationsState: setting
+                        ),
                     var kind => throw ExceptionUtilities.UnexpectedValue(kind)
                 };
 

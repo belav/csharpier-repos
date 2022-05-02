@@ -716,25 +716,25 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var trueExpr = targetTyped
                 ? CreateConversion(
-                      source.Consequence.Syntax,
-                      source.Consequence,
-                      underlyingConversions[0],
-                      isCast: false,
-                      conversionGroupOpt: null,
-                      destination,
-                      diagnostics
-                  )
+                    source.Consequence.Syntax,
+                    source.Consequence,
+                    underlyingConversions[0],
+                    isCast: false,
+                    conversionGroupOpt: null,
+                    destination,
+                    diagnostics
+                )
                 : GenerateConversionForAssignment(destination, source.Consequence, diagnostics);
             var falseExpr = targetTyped
                 ? CreateConversion(
-                      source.Alternative.Syntax,
-                      source.Alternative,
-                      underlyingConversions[1],
-                      isCast: false,
-                      conversionGroupOpt: null,
-                      destination,
-                      diagnostics
-                  )
+                    source.Alternative.Syntax,
+                    source.Alternative,
+                    underlyingConversions[1],
+                    isCast: false,
+                    conversionGroupOpt: null,
+                    destination,
+                    diagnostics
+                )
                 : GenerateConversionForAssignment(destination, source.Alternative, diagnostics);
             var constantValue = FoldConditionalOperator(condition, trueExpr, falseExpr);
             hasErrors |= constantValue?.IsBad == true;
@@ -800,27 +800,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var oldValue = oldCase.Value;
                 var newValue = targetTyped
                     ? binder.CreateConversion(
-                          oldValue.Syntax,
-                          oldValue,
-                          underlyingConversions[i],
-                          isCast: false,
-                          conversionGroupOpt: null,
-                          destination,
-                          diagnostics
-                      )
+                        oldValue.Syntax,
+                        oldValue,
+                        underlyingConversions[i],
+                        isCast: false,
+                        conversionGroupOpt: null,
+                        destination,
+                        diagnostics
+                    )
                     : binder.GenerateConversionForAssignment(destination, oldValue, diagnostics);
                 var newCase =
                     (oldValue == newValue)
                         ? oldCase
                         : new BoundSwitchExpressionArm(
-                              oldCase.Syntax,
-                              oldCase.Locals,
-                              oldCase.Pattern,
-                              oldCase.WhenClause,
-                              newValue,
-                              oldCase.Label,
-                              oldCase.HasErrors
-                          );
+                            oldCase.Syntax,
+                            oldCase.Locals,
+                            oldCase.Pattern,
+                            oldCase.WhenClause,
+                            newValue,
+                            oldCase.Label,
+                            oldCase.HasErrors
+                        );
                 builder.Add(newCase);
             }
 
@@ -1962,15 +1962,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 { RefKind: RefKind.None, ReturnsVoid: true } => method.ReturnsVoid,
                 { RefKind: var destinationRefKind }
-                  => hasConversion(
-                      delegateType.TypeKind,
-                      Conversions,
-                      methodReturnType,
-                      delegateReturnType,
-                      method.RefKind,
-                      destinationRefKind,
-                      ref useSiteInfo
-                  ),
+                    => hasConversion(
+                        delegateType.TypeKind,
+                        Conversions,
+                        methodReturnType,
+                        delegateReturnType,
+                        method.RefKind,
+                        destinationRefKind,
+                        ref useSiteInfo
+                    ),
             };
 
             if (!returnsMatch)
@@ -2901,8 +2901,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             value.DoubleValue,
                             out _
                         )
-                          ? value.DoubleValue
-                          : 0D;
+                            ? value.DoubleValue
+                            : 0D;
                         switch (destinationType)
                         {
                             case SpecialType.System_Byte:
@@ -2935,8 +2935,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 return (
                                     value.Discriminator == ConstantValueTypeDiscriminator.Single
                                 )
-                                  ? (decimal)(float)doubleValue
-                                  : (decimal)doubleValue;
+                                    ? (decimal)(float)doubleValue
+                                    : (decimal)doubleValue;
                             default:
                                 throw ExceptionUtilities.UnexpectedValue(destinationType);
                         }
@@ -2946,8 +2946,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             value.DecimalValue,
                             out _
                         )
-                          ? value.DecimalValue
-                          : 0m;
+                            ? value.DecimalValue
+                            : 0m;
                         switch (destinationType)
                         {
                             case SpecialType.System_Byte:
@@ -3008,12 +3008,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             // convert it to one of those and then check the bounds on that.
             var canonicalValue = CanonicalizeConstant(value);
             return canonicalValue is decimal
-              ? CheckConstantBounds(
+                ? CheckConstantBounds(
                     destinationType,
                     (decimal)canonicalValue,
                     out maySucceedAtRuntime
                 )
-              : CheckConstantBounds(
+                : CheckConstantBounds(
                     destinationType,
                     (double)canonicalValue,
                     out maySucceedAtRuntime

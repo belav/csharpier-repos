@@ -36,7 +36,7 @@ public interface TestType_IGoodbyeService
 // Demonstrates interface implementing multiple other interfaces
 public interface TestType_IHelloAndGoodbyeService
     : TestType_IHelloService,
-      TestType_IGoodbyeService { }
+        TestType_IGoodbyeService { }
 
 // Deliberately contains method with same signature of TestType_IHelloService (see TestType_IHelloService1And2).
 public interface TestType_IHelloService2
@@ -143,7 +143,7 @@ internal class TestType_InternalProxyInternalBaseType
 
 internal class TestType_InternalProxyImplementingInterfaceWithGenericArgumentBeingNonPublicExternalType
     : DispatchProxy,
-      TestType_InternalInterfaceWithNonPublicExternalGenericArgument
+        TestType_InternalInterfaceWithNonPublicExternalGenericArgument
 {
     public TestType_IExternalNonPublicHiService GetInnerService() =>
         throw new InvalidOperationException();

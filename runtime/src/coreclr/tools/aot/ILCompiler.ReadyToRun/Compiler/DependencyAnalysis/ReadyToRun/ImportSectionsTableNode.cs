@@ -7,7 +7,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
     public class ImportSectionsTableNode
         : ArrayOfEmbeddedDataNode<ImportSectionNode>,
-          ISignatureEmitter
+            ISignatureEmitter
     {
         private readonly NodeFactory _r2rFactory;
 

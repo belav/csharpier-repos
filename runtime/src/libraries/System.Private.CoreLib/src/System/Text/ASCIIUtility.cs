@@ -95,8 +95,8 @@ namespace System.Text
             // this method is running.
 
             return (Sse2.IsSupported || AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
-              ? GetIndexOfFirstNonAsciiByte_Intrinsified(pBuffer, bufferLength)
-              : GetIndexOfFirstNonAsciiByte_Default(pBuffer, bufferLength);
+                ? GetIndexOfFirstNonAsciiByte_Intrinsified(pBuffer, bufferLength)
+                : GetIndexOfFirstNonAsciiByte_Default(pBuffer, bufferLength);
         }
 
         private static unsafe nuint GetIndexOfFirstNonAsciiByte_Default(
@@ -713,8 +713,8 @@ namespace System.Text
             // this method is running.
 
             return (Sse2.IsSupported)
-              ? GetIndexOfFirstNonAsciiChar_Sse2(pBuffer, bufferLength)
-              : GetIndexOfFirstNonAsciiChar_Default(pBuffer, bufferLength);
+                ? GetIndexOfFirstNonAsciiChar_Sse2(pBuffer, bufferLength)
+                : GetIndexOfFirstNonAsciiChar_Default(pBuffer, bufferLength);
         }
 
         private static unsafe nuint GetIndexOfFirstNonAsciiChar_Default(

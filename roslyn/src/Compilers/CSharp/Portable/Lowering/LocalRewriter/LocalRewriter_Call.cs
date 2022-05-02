@@ -605,7 +605,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             switch (argIndex)
                             {
                                 case BoundInterpolatedStringArgumentPlaceholder.InstanceParameter
-                                      when receiverAssignedToTemp:
+                                when receiverAssignedToTemp:
                                     Debug.Assert(
                                         visitedReceiver != null && requiresInstanceReceiver
                                     );
@@ -651,8 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                         visitedArgument,
                                         out store,
                                         refKind: paramRefKind == RefKind.In
-                                          ? RefKind.In
-                                          : argRefKind
+                                            ? RefKind.In
+                                            : argRefKind
                                     );
                                     temps.Add(local.LocalSymbol);
                                     visitedArgumentsBuilder[argIndex] = _factory.Sequence(

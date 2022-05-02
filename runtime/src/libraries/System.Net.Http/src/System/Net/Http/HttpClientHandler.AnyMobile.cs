@@ -483,8 +483,8 @@ namespace System.Net.Http
                     _socketHandler!.SslOptions.RemoteCertificateValidationCallback =
                         value != null
                             ? new ConnectHelper.CertificateCallbackMapper(
-                                  value
-                              ).ForSocketsHttpHandler
+                                value
+                            ).ForSocketsHttpHandler
                             : null;
                 }
             }

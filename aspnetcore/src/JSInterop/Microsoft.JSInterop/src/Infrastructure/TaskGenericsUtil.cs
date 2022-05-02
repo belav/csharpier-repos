@@ -35,8 +35,8 @@ internal static class TaskGenericsUtil
             {
                 var resultType = GetTaskResultType(taskInstanceType);
                 return resultType == null
-                  ? new VoidTaskResultGetter()
-                  : (ITaskResultGetter)
+                    ? new VoidTaskResultGetter()
+                    : (ITaskResultGetter)
                         Activator.CreateInstance(
                             typeof(TaskResultGetter<>).MakeGenericType(resultType)
                         )!;

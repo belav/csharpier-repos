@@ -260,12 +260,12 @@ namespace Microsoft.EntityFrameworkCore.Design
                 IForeignKey foreignKey => GenerateFluentApiCalls(foreignKey, annotations),
                 INavigation navigation => GenerateFluentApiCalls(navigation, annotations),
                 ISkipNavigation skipNavigation
-                  => GenerateFluentApiCalls(skipNavigation, annotations),
+                    => GenerateFluentApiCalls(skipNavigation, annotations),
                 IIndex index => GenerateFluentApiCalls(index, annotations),
                 _
-                  => throw new ArgumentException(
-                      RelationalStrings.UnhandledAnnotatableType(annotatable.GetType())
-                  )
+                    => throw new ArgumentException(
+                        RelationalStrings.UnhandledAnnotatableType(annotatable.GetType())
+                    )
             };
 
         /// <summary>
@@ -305,9 +305,9 @@ namespace Microsoft.EntityFrameworkCore.Design
                 IEntityType entityType => GenerateDataAnnotationAttributes(entityType, annotations),
                 IProperty property => GenerateDataAnnotationAttributes(property, annotations),
                 _
-                  => throw new ArgumentException(
-                      RelationalStrings.UnhandledAnnotatableType(annotatable.GetType())
-                  )
+                    => throw new ArgumentException(
+                        RelationalStrings.UnhandledAnnotatableType(annotatable.GetType())
+                    )
             };
     }
 }

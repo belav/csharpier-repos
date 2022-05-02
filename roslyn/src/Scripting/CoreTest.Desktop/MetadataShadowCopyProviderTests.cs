@@ -30,17 +30,17 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
             IsRunningOnMono
                 ? ImmutableArray<string>.Empty
                 : ImmutableArray.Create(
-                      FileUtilities.NormalizeDirectoryPath(
-                          Environment.GetFolderPath(Environment.SpecialFolder.Windows)
-                      ),
-                      FileUtilities.NormalizeDirectoryPath(
-                          Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)
-                      ),
-                      FileUtilities.NormalizeDirectoryPath(
-                          Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)
-                      ),
-                      FileUtilities.NormalizeDirectoryPath(RuntimeEnvironment.GetRuntimeDirectory())
-                  );
+                    FileUtilities.NormalizeDirectoryPath(
+                        Environment.GetFolderPath(Environment.SpecialFolder.Windows)
+                    ),
+                    FileUtilities.NormalizeDirectoryPath(
+                        Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)
+                    ),
+                    FileUtilities.NormalizeDirectoryPath(
+                        Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86)
+                    ),
+                    FileUtilities.NormalizeDirectoryPath(RuntimeEnvironment.GetRuntimeDirectory())
+                );
 
         public MetadataShadowCopyProviderTests()
         {

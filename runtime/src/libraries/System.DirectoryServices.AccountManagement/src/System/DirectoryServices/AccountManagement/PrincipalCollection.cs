@@ -10,9 +10,9 @@ namespace System.DirectoryServices.AccountManagement
 {
     public class PrincipalCollection
         : ICollection<Principal>,
-          ICollection,
-          IEnumerable<Principal>,
-          IEnumerable
+            ICollection,
+            IEnumerable<Principal>,
+            IEnumerable
     {
         //
         // ICollection

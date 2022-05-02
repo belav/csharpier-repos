@@ -44,7 +44,7 @@ namespace System.IO
 
     public partial class FileSystemWatcher
         : System.ComponentModel.Component,
-          System.ComponentModel.ISupportInitialize
+            System.ComponentModel.ISupportInitialize
     {
         public FileSystemWatcher() { }
 

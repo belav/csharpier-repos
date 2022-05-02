@@ -17,11 +17,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class CSharpSimplifyThisOrMeDiagnosticAnalyzer
         : AbstractSimplifyThisOrMeDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              ThisExpressionSyntax,
-              MemberAccessExpressionSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            ThisExpressionSyntax,
+            MemberAccessExpressionSyntax
+        >
     {
         protected override string GetLanguageName() => LanguageNames.CSharp;
 

@@ -20,8 +20,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlArrayBehaviorAccessor
         : XmlNodeAccessor,
-          IConfigurable<XmlArrayAttribute>,
-          IConfigurable<XmlArrayItemAttribute>
+            IConfigurable<XmlArrayAttribute>,
+            IConfigurable<XmlArrayItemAttribute>
     {
         private readonly ItemAccessor itemAccessor;
 
@@ -70,8 +70,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         private class ItemAccessor
             : XmlNodeAccessor,
-              IConfigurable<XmlArrayItemAttribute>,
-              IXmlBehaviorSemantics<XmlArrayItemAttribute>
+                IConfigurable<XmlArrayItemAttribute>,
+                IXmlBehaviorSemantics<XmlArrayItemAttribute>
         {
             private List<XmlArrayItemAttribute> attributes;
 

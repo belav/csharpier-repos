@@ -1370,8 +1370,8 @@ namespace System.Xml.Tests
                 w.Dispose();
                 VerifyOutput(
                     nsHandling == NamespaceHandling.OmitDuplicates
-                      ? "<A xmlns:p=\"ns1\"><B"
-                      : "<A xmlns:p=\"ns1\"><B xmlns:p=\"ns1\""
+                        ? "<A xmlns:p=\"ns1\"><B"
+                        : "<A xmlns:p=\"ns1\"><B xmlns:p=\"ns1\""
                 );
             }
             return;

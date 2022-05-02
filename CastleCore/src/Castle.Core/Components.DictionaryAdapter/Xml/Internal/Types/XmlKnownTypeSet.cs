@@ -74,8 +74,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             {
                 bool bit;
                 bits[knownType] = bits.TryGetValue(knownType, out bit)
-                  ? false // another by same name; can't add a default
-                  : knownType.XsiType != XmlName.Empty; // first   by this name; can   add a default, if not already in default form
+                    ? false // another by same name; can't add a default
+                    : knownType.XsiType != XmlName.Empty; // first   by this name; can   add a default, if not already in default form
             }
 
             foreach (var pair in bits)

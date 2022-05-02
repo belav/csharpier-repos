@@ -206,8 +206,8 @@ namespace System.Collections.Immutable
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             return this.IsEmpty
-              ? Enumerable.Empty<T>().GetEnumerator()
-              : new EnumeratorObject(this);
+                ? Enumerable.Empty<T>().GetEnumerator()
+                : new EnumeratorObject(this);
         }
 
         /// <summary>

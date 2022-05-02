@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
     /// </remarks>
     internal readonly struct VirtualChar
         : IEquatable<VirtualChar>,
-          IComparable<VirtualChar>,
-          IComparable<char>
+            IComparable<VirtualChar>,
+            IComparable<char>
     {
         /// <summary>
         /// The value of this <see cref="VirtualChar"/> as a <see cref="Rune"/> if such a represention is possible.

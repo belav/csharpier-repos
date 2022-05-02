@@ -278,17 +278,17 @@ namespace System.Text.RegularExpressions.Generator
             Debug.Assert(minRequiredLength >= 0);
             string clause = !rtl
                 ? minRequiredLength switch
-                  {
-                      0 => "if (runtextpos <= runtextend)",
-                      1 => "if (runtextpos < runtextend)",
-                      _ => $"if (runtextpos < runtextend - {minRequiredLength - 1})"
-                  }
+                {
+                    0 => "if (runtextpos <= runtextend)",
+                    1 => "if (runtextpos < runtextend)",
+                    _ => $"if (runtextpos < runtextend - {minRequiredLength - 1})"
+                }
                 : minRequiredLength switch
-                  {
-                      0 => "if (runtextpos >= runtextbeg)",
-                      1 => "if (runtextpos > runtextbeg)",
-                      _ => $"if (runtextpos - {minRequiredLength - 1} > runtextbeg)"
-                  };
+                {
+                    0 => "if (runtextpos >= runtextbeg)",
+                    1 => "if (runtextpos > runtextbeg)",
+                    _ => $"if (runtextpos - {minRequiredLength - 1} > runtextbeg)"
+                };
             using (EmitBlock(writer, clause))
             {
                 EmitAnchors();
@@ -326,8 +326,8 @@ namespace System.Text.RegularExpressions.Generator
             writer.WriteLine("ReturnFalse:");
             writer.WriteLine(
                 !rm.Code.RightToLeft
-                  ? "base.runtextpos = runtextend;"
-                  : "base.runtextpos = runtextbeg;"
+                    ? "base.runtextpos = runtextend;"
+                    : "base.runtextpos = runtextbeg;"
             );
             writer.WriteLine("return false;");
 
@@ -732,11 +732,11 @@ namespace System.Text.RegularExpressions.Generator
                     string indexOf = setCharsCount switch
                     {
                         1
-                          => $"global::System.MemoryExtensions.IndexOf({span}, {Literal(setChars[0])})",
+                            => $"global::System.MemoryExtensions.IndexOf({span}, {Literal(setChars[0])})",
                         2
-                          => $"global::System.MemoryExtensions.IndexOfAny({span}, {Literal(setChars[0])}, {Literal(setChars[1])})",
+                            => $"global::System.MemoryExtensions.IndexOfAny({span}, {Literal(setChars[0])}, {Literal(setChars[1])})",
                         _
-                          => $"global::System.MemoryExtensions.IndexOfAny({span}, {Literal(setChars[0])}, {Literal(setChars[1])}, {Literal(setChars[2])})",
+                            => $"global::System.MemoryExtensions.IndexOfAny({span}, {Literal(setChars[0])}, {Literal(setChars[1])}, {Literal(setChars[2])})",
                     };
 
                     if (needLoop)
@@ -1141,8 +1141,12 @@ namespace System.Text.RegularExpressions.Generator
                                         Debug.Assert(node.Type is RegexNode.Multi);
                                         Debug.Assert(node.Str!.Length >= 2);
                                         return node.Str!.Length == 2
-                                          ? new RegexNode(RegexNode.One, node.Options, node.Str![1])
-                                          : new RegexNode(
+                                            ? new RegexNode(
+                                                RegexNode.One,
+                                                node.Options,
+                                                node.Str![1]
+                                            )
+                                            : new RegexNode(
                                                 RegexNode.Multi,
                                                 node.Options,
                                                 node.Str!.Substring(1)
@@ -1591,8 +1595,8 @@ namespace System.Text.RegularExpressions.Generator
                     EmitBlock(
                         writer,
                         emitLengthCheck
-                          ? $"if ({SpanLengthCheck(1, offset)} || {expr})"
-                          : $"if ({expr})"
+                            ? $"if ({SpanLengthCheck(1, offset)} || {expr})"
+                            : $"if ({expr})"
                     )
                 )
                 {
@@ -1657,8 +1661,8 @@ namespace System.Text.RegularExpressions.Generator
                                 EmitBlock(
                                     writer,
                                     node.Type == RegexNode.Beginning
-                                      ? "if (runtextpos != runtextbeg)"
-                                      : "if (runtextpos != runtextstart)"
+                                        ? "if (runtextpos != runtextbeg)"
+                                        : "if (runtextpos != runtextstart)"
                                 )
                             )
                             {
@@ -2082,8 +2086,8 @@ namespace System.Text.RegularExpressions.Generator
                     {
                         writer.WriteLine(
                             textSpanPos > 0
-                              ? $"{iterationLocal} = {textSpanLocal}.Length - {textSpanPos};"
-                              : $"{iterationLocal} = {textSpanLocal}.Length;"
+                                ? $"{iterationLocal} = {textSpanLocal}.Length - {textSpanPos};"
+                                : $"{iterationLocal} = {textSpanLocal}.Length;"
                         );
                     }
                 }
@@ -2108,15 +2112,15 @@ namespace System.Text.RegularExpressions.Generator
                     }
                     writer.WriteLine(
                         numSetChars == 2
-                          ? $", {Literal(setChars[0])}, {Literal(setChars[1])});"
-                          : $", {Literal(setChars[0])}, {Literal(setChars[1])}, {Literal(setChars[2])});"
+                            ? $", {Literal(setChars[0])}, {Literal(setChars[1])});"
+                            : $", {Literal(setChars[0])}, {Literal(setChars[1])}, {Literal(setChars[2])});"
                     );
                     using (EmitBlock(writer, $"if ({iterationLocal} == -1)"))
                     {
                         writer.WriteLine(
                             textSpanPos > 0
-                              ? $"{iterationLocal} = {textSpanLocal}.Length - {textSpanPos};"
-                              : $"{iterationLocal} = {textSpanLocal}.Length;"
+                                ? $"{iterationLocal} = {textSpanLocal}.Length - {textSpanPos};"
+                                : $"{iterationLocal} = {textSpanLocal}.Length;"
                         );
                     }
                 }
@@ -2277,8 +2281,8 @@ namespace System.Text.RegularExpressions.Generator
                     EmitBlock(
                         writer,
                         maxIterations == int.MaxValue
-                          ? "while (true)"
-                          : $"while ({iterationLocal} < {maxIterations})"
+                            ? "while (true)"
+                            : $"while ({iterationLocal} < {maxIterations})"
                     )
                 )
                 {
@@ -2571,8 +2575,8 @@ namespace System.Text.RegularExpressions.Generator
                             writer.WriteLine($"{Stacked} = {PopStack()};");
                             writer.WriteLine(
                                 Operand(1) != -1
-                                  ? $"base.TransferCapture({Operand(0)}, {Operand(1)}, {Stacked}, runtextpos);"
-                                  : $"base.Capture({Operand(0)}, {Stacked}, runtextpos);"
+                                    ? $"base.TransferCapture({Operand(0)}, {Operand(1)}, {Stacked}, runtextpos);"
+                                    : $"base.Capture({Operand(0)}, {Stacked}, runtextpos);"
                             );
                             PushTrack(Stacked);
                             TrackUnique(Operand(0) != -1 && Operand(1) != -1 ? Capback2 : Capback);
@@ -3008,8 +3012,8 @@ namespace System.Text.RegularExpressions.Generator
                             EmitBlock(
                                 writer,
                                 !IsRightToLeft()
-                                  ? $"if (runtextend - runtextpos < {Length})"
-                                  : $"if (runtextpos - runtextbeg < {Length})"
+                                    ? $"if (runtextend - runtextpos < {Length})"
+                                    : $"if (runtextpos - runtextbeg < {Length})"
                             )
                         )
                         {
@@ -3040,8 +3044,8 @@ namespace System.Text.RegularExpressions.Generator
                                 EmitBlock(
                                     writer,
                                     !IsRightToLeft()
-                                      ? $"if ({ToLowerIfNeeded(hasTextInfo, options, $"runtext[{Index} - {Length}]", IsCaseInsensitive())} != {ToLowerIfNeeded(hasTextInfo, options, $"runtext[runtextpos - {Length}--]", IsCaseInsensitive())})"
-                                      : $"if ({ToLowerIfNeeded(hasTextInfo, options, $"runtext[{Index} + --{Length}]", IsCaseInsensitive())} != {ToLowerIfNeeded(hasTextInfo, options, $"runtext[runtextpos + {Length}]", IsCaseInsensitive())})"
+                                        ? $"if ({ToLowerIfNeeded(hasTextInfo, options, $"runtext[{Index} - {Length}]", IsCaseInsensitive())} != {ToLowerIfNeeded(hasTextInfo, options, $"runtext[runtextpos - {Length}--]", IsCaseInsensitive())})"
+                                        : $"if ({ToLowerIfNeeded(hasTextInfo, options, $"runtext[{Index} + --{Length}]", IsCaseInsensitive())} != {ToLowerIfNeeded(hasTextInfo, options, $"runtext[runtextpos + {Length}]", IsCaseInsensitive())})"
                                 )
                             )
                             {
@@ -3203,16 +3207,16 @@ namespace System.Text.RegularExpressions.Generator
                             {
                                 writer.WriteLine(
                                     !IsRightToLeft()
-                                      ? $"{Len} = runtextend - runtextpos; // length"
-                                      : $"{Len} = runtextpos - runtextbeg; // length"
+                                        ? $"{Len} = runtextend - runtextpos; // length"
+                                        : $"{Len} = runtextpos - runtextbeg; // length"
                                 );
                             }
                             else
                             {
                                 writer.WriteLine(
                                     !IsRightToLeft()
-                                      ? $"{Len} = global::System.Math.Min(runtextend - runtextpos, {c}); // length"
-                                      : $"{Len} = global::System.Math.Min(runtextpos - runtextbeg, {c}); // length"
+                                        ? $"{Len} = global::System.Math.Min(runtextend - runtextpos, {c}); // length"
+                                        : $"{Len} = global::System.Math.Min(runtextpos - runtextbeg, {c}); // length"
                                 );
                             }
 
@@ -3409,16 +3413,16 @@ namespace System.Text.RegularExpressions.Generator
                             {
                                 writer.WriteLine(
                                     !IsRightToLeft()
-                                      ? $"{C} = runtextend - runtextpos; // count"
-                                      : $"{C} = runtextpos - runtextbeg; // count"
+                                        ? $"{C} = runtextend - runtextpos; // count"
+                                        : $"{C} = runtextpos - runtextbeg; // count"
                                 );
                             }
                             else
                             {
                                 writer.WriteLine(
                                     !IsRightToLeft()
-                                      ? $"{C} = global::System.Math.Min(runtextend - runtextpos, {count}); // count"
-                                      : $"{C} = global::System.Math.Min(runtextpos - runtextbeg, {count}); // count"
+                                        ? $"{C} = global::System.Math.Min(runtextend - runtextpos, {count}); // count"
+                                        : $"{C} = global::System.Math.Min(runtextpos - runtextbeg, {count}); // count"
                                 );
                             }
 
@@ -3744,8 +3748,8 @@ namespace System.Text.RegularExpressions.Generator
 
         private static string ToLower(bool hasTextInfo, RegexOptions options, string expression) =>
             UseToLowerInvariant(hasTextInfo, options)
-              ? $"char.ToLowerInvariant({expression})"
-              : $"textInfo.ToLower({expression})";
+                ? $"char.ToLowerInvariant({expression})"
+                : $"textInfo.ToLower({expression})";
 
         private static string ToLowerIfNeeded(
             bool hasTextInfo,
@@ -3860,8 +3864,8 @@ namespace System.Text.RegularExpressions.Generator
             {
                 bool invert = RegexCharClass.IsNegated(charClass);
                 return lowInclusive == highInclusive
-                  ? $"({chExpr} {(invert ? "!=" : "==")} {Literal(lowInclusive)})"
-                  : $"(((uint){chExpr}) - {Literal(lowInclusive)} {(invert ? ">" : "<=")} (uint)({Literal(highInclusive)} - {Literal(lowInclusive)}))";
+                    ? $"({chExpr} {(invert ? "!=" : "==")} {Literal(lowInclusive)})"
+                    : $"(((uint){chExpr}) - {Literal(lowInclusive)} {(invert ? ">" : "<=")} (uint)({Literal(highInclusive)} - {Literal(lowInclusive)}))";
             }
 
             // Next if the character class contains nothing but a single Unicode category, we can calle char.GetUnicodeCategory and
@@ -3911,8 +3915,8 @@ namespace System.Text.RegularExpressions.Generator
                     // extend the analysis to produce a known lower-bound and compare against
                     // that rather than always using 128 as the pivot point.)
                     return invariant
-                      ? $"((ch = {chExpr}) >= 128 && global::System.Text.RegularExpressions.RegexRunner.CharInClass(char.ToLowerInvariant((char)ch), {Literal(charClass)}))"
-                      : $"((ch = {chExpr}) >= 128 && global::System.Text.RegularExpressions.RegexRunner.CharInClass((char)ch, {Literal(charClass)}))";
+                        ? $"((ch = {chExpr}) >= 128 && global::System.Text.RegularExpressions.RegexRunner.CharInClass(char.ToLowerInvariant((char)ch), {Literal(charClass)}))"
+                        : $"((ch = {chExpr}) >= 128 && global::System.Text.RegularExpressions.RegexRunner.CharInClass((char)ch, {Literal(charClass)}))";
                 }
 
                 if (analysis.AllAsciiContained)
@@ -3921,8 +3925,8 @@ namespace System.Text.RegularExpressions.Generator
                     // if the class were the negated example from case 1 above:
                     // [^\p{IsGreek}\p{IsGreekExtended}].
                     return invariant
-                      ? $"((ch = {chExpr}) < 128 || global::System.Text.RegularExpressions.RegexRunner.CharInClass(char.ToLowerInvariant((char)ch), {Literal(charClass)}))"
-                      : $"((ch = {chExpr}) < 128 || global::System.Text.RegularExpressions.RegexRunner.CharInClass((char)ch, {Literal(charClass)}))";
+                        ? $"((ch = {chExpr}) < 128 || global::System.Text.RegularExpressions.RegexRunner.CharInClass(char.ToLowerInvariant((char)ch), {Literal(charClass)}))"
+                        : $"((ch = {chExpr}) < 128 || global::System.Text.RegularExpressions.RegexRunner.CharInClass((char)ch, {Literal(charClass)}))";
                 }
             }
 
@@ -3983,8 +3987,8 @@ namespace System.Text.RegularExpressions.Generator
             // characters other than that some might be included, for example if the character class
             // were [\w\d], so since ch >= 128, we need to fall back to calling CharInClass.
             return invariant
-              ? $"((ch = {chExpr}) < 128 ? ({Literal(bitVectorString)}[ch >> 4] & (1 << (ch & 0xF))) != 0 : CharInClass(char.ToLowerInvariant((char)ch), {Literal(charClass)}))"
-              : $"((ch = {chExpr}) < 128 ? ({Literal(bitVectorString)}[ch >> 4] & (1 << (ch & 0xF))) != 0 : CharInClass((char)ch, {Literal(charClass)}))";
+                ? $"((ch = {chExpr}) < 128 ? ({Literal(bitVectorString)}[ch >> 4] & (1 << (ch & 0xF))) != 0 : CharInClass(char.ToLowerInvariant((char)ch), {Literal(charClass)}))"
+                : $"((ch = {chExpr}) < 128 ? ({Literal(bitVectorString)}[ch >> 4] & (1 << (ch & 0xF))) != 0 : CharInClass((char)ch, {Literal(charClass)}))";
         }
 
         private static string Literal(char c) => SymbolDisplay.FormatLiteral(c, quote: true);
@@ -4022,14 +4026,14 @@ namespace System.Text.RegularExpressions.Generator
 
             writer.WriteLine(
                 value == 1
-                  ? $"{variable}++;"
-                  : value == -1
-                      ? $"{variable}--;"
-                      : value > 0
-                          ? $"{variable} += {value};"
-                          : value < 0 && value > int.MinValue
-                              ? $"{variable} -= {-value};"
-                              : $"{variable} += {value.ToString(CultureInfo.InvariantCulture)};"
+                    ? $"{variable}++;"
+                    : value == -1
+                        ? $"{variable}--;"
+                        : value > 0
+                            ? $"{variable} += {value};"
+                            : value < 0 && value > int.MinValue
+                                ? $"{variable} -= {-value};"
+                                : $"{variable} += {value.ToString(CultureInfo.InvariantCulture)};"
             );
         }
 

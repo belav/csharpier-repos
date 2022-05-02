@@ -33,9 +33,9 @@ namespace Internal.Cryptography
                 HashAlgorithmNames.SHA384 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha384,
                 HashAlgorithmNames.SHA512 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha512,
                 _
-                  => throw new CryptographicException(
-                      SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
-                  )
+                    => throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                    )
             };
 
         internal static class OneShotHashProvider

@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers;
 /// </summary>
 public class ControllerBoundPropertyDescriptor
     : ParameterDescriptor,
-      IPropertyInfoParameterDescriptor
+        IPropertyInfoParameterDescriptor
 {
     /// <summary>
     /// Gets or sets the <see cref="System.Reflection.PropertyInfo"/> for this property.

@@ -139,8 +139,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
                         Task.FromResult(
                             new ReferenceCount(
                                 progress.SearchCap > 0
-                                  ? Math.Min(progress.ReferencesCount, progress.SearchCap)
-                                  : progress.ReferencesCount,
+                                    ? Math.Min(progress.ReferencesCount, progress.SearchCap)
+                                    : progress.ReferencesCount,
                                 progress.SearchCapReached,
                                 projectVersion.ToString()
                             )
@@ -386,12 +386,12 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 ?.ToDisplayString(MethodDisplayFormat);
 
             return !string.IsNullOrEmpty(fullName)
-              ? new ReferenceMethodDescriptor(
+                ? new ReferenceMethodDescriptor(
                     fullName,
                     document.FilePath,
                     document.Project.OutputFilePath
                 )
-              : null;
+                : null;
         }
 
         public Task<ImmutableArray<ReferenceMethodDescriptor>?> FindReferenceMethodsAsync(

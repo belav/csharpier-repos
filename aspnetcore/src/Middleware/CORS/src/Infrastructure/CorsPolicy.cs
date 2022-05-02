@@ -154,8 +154,8 @@ public class CorsPolicy
         builder.Append(", PreflightMaxAge: ");
         builder.Append(
             PreflightMaxAge.HasValue
-              ? PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
-              : "null"
+                ? PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                : "null"
         );
         builder.Append(", SupportsCredentials: ");
         builder.Append(SupportsCredentials);

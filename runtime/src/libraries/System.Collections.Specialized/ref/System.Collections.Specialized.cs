@@ -141,8 +141,8 @@ namespace System.Collections.Specialized
 
     public partial class HybridDictionary
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable
     {
         public HybridDictionary() { }
 
@@ -212,8 +212,8 @@ namespace System.Collections.Specialized
 
     public partial interface IOrderedDictionary
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable
     {
         object? this[int index] { get; set; }
         new System.Collections.IDictionaryEnumerator GetEnumerator();
@@ -223,8 +223,8 @@ namespace System.Collections.Specialized
 
     public partial class ListDictionary
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable
     {
         public ListDictionary() { }
 
@@ -290,9 +290,9 @@ namespace System.Collections.Specialized
 
     public abstract partial class NameObjectCollectionBase
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable
+            System.Collections.IEnumerable,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable
     {
         protected NameObjectCollectionBase() { }
 
@@ -413,7 +413,7 @@ namespace System.Collections.Specialized
 
         public partial class KeysCollection
             : System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.IEnumerable
         {
             internal KeysCollection() { }
 
@@ -552,11 +552,11 @@ namespace System.Collections.Specialized
 
     public partial class OrderedDictionary
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable,
-          System.Collections.Specialized.IOrderedDictionary,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable,
+            System.Collections.Specialized.IOrderedDictionary,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Runtime.Serialization.ISerializable
     {
         public OrderedDictionary() { }
 
@@ -656,8 +656,8 @@ namespace System.Collections.Specialized
 
     public partial class StringCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public StringCollection() { }
 

@@ -1902,11 +1902,11 @@ public class HubConnectionTests : FunctionalTestBase
             "json" => "A possible object cycle was detected.",
             "newtonsoft-json" => "A possible object cycle was detected.",
             "messagepack"
-              => "Failed to serialize Microsoft.AspNetCore.SignalR.Client.FunctionalTests.TestHub+Unserializable value.",
+                => "Failed to serialize Microsoft.AspNetCore.SignalR.Client.FunctionalTests.TestHub+Unserializable value.",
             var x
-              => throw new Exception(
-                  $"The test does not have an exception string for the protocol '{x}'!"
-              ),
+                => throw new Exception(
+                    $"The test does not have an exception string for the protocol '{x}'!"
+                ),
         };
 
         var protocol = HubProtocols[protocolName];
@@ -1985,11 +1985,11 @@ public class HubConnectionTests : FunctionalTestBase
             "json" => "A possible object cycle was detected.",
             "newtonsoft-json" => "A possible object cycle was detected.",
             "messagepack"
-              => "Failed to serialize Microsoft.AspNetCore.SignalR.Client.FunctionalTests.TestHub+Unserializable value.",
+                => "Failed to serialize Microsoft.AspNetCore.SignalR.Client.FunctionalTests.TestHub+Unserializable value.",
             var x
-              => throw new Exception(
-                  $"The test does not have an exception string for the protocol '{x}'!"
-              ),
+                => throw new Exception(
+                    $"The test does not have an exception string for the protocol '{x}'!"
+                ),
         };
 
         var protocol = HubProtocols[protocolName];

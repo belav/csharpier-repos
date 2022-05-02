@@ -23,10 +23,10 @@ namespace Microsoft.CodeAnalysis.Serialization
                 DocumentStateChecksums _ => WellKnownSynchronizationKind.DocumentState,
                 ChecksumCollection _ => WellKnownSynchronizationKind.ChecksumCollection,
                 SolutionInfo.SolutionAttributes _
-                  => WellKnownSynchronizationKind.SolutionAttributes,
+                    => WellKnownSynchronizationKind.SolutionAttributes,
                 ProjectInfo.ProjectAttributes _ => WellKnownSynchronizationKind.ProjectAttributes,
                 DocumentInfo.DocumentAttributes _
-                  => WellKnownSynchronizationKind.DocumentAttributes,
+                    => WellKnownSynchronizationKind.DocumentAttributes,
                 CompilationOptions _ => WellKnownSynchronizationKind.CompilationOptions,
                 ParseOptions _ => WellKnownSynchronizationKind.ParseOptions,
                 ProjectReference _ => WellKnownSynchronizationKind.ProjectReference,
@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Serialization
                 SourceText _ => WellKnownSynchronizationKind.SourceText,
                 OptionSet _ => WellKnownSynchronizationKind.OptionSet,
                 SourceGeneratedDocumentIdentity _
-                  => WellKnownSynchronizationKind.SourceGeneratedDocumentIdentity,
+                    => WellKnownSynchronizationKind.SourceGeneratedDocumentIdentity,
                 _ => throw ExceptionUtilities.UnexpectedValue(value),
             };
 

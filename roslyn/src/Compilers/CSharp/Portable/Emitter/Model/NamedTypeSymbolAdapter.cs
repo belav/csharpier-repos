@@ -27,16 +27,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     NamedTypeSymbol
         :
 #endif
-          Cci.ITypeReference,
-          Cci.ITypeDefinition,
-          Cci.INamedTypeReference,
-          Cci.INamedTypeDefinition,
-          Cci.INamespaceTypeReference,
-          Cci.INamespaceTypeDefinition,
-          Cci.INestedTypeReference,
-          Cci.INestedTypeDefinition,
-          Cci.IGenericTypeInstanceReference,
-          Cci.ISpecializedNestedTypeReference
+            Cci.ITypeReference,
+            Cci.ITypeDefinition,
+            Cci.INamedTypeReference,
+            Cci.INamedTypeDefinition,
+            Cci.INamespaceTypeReference,
+            Cci.INamespaceTypeDefinition,
+            Cci.INestedTypeReference,
+            Cci.INestedTypeDefinition,
+            Cci.IGenericTypeInstanceReference,
+            Cci.ISpecializedNestedTypeReference
     {
         bool Cci.ITypeReference.IsEnum
         {
@@ -315,12 +315,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             return ((object)baseType != null)
-              ? moduleBeingBuilt.Translate(
+                ? moduleBeingBuilt.Translate(
                     baseType,
                     syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
                     diagnostics: context.Diagnostics
                 )
-              : null;
+                : null;
         }
 
         IEnumerable<Cci.IEventDefinition> Cci.ITypeDefinition.GetEvents(EmitContext context)

@@ -260,10 +260,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             var valueExpression =
                 (condition.ConstantValue == null)
                     ? new BoundSequencePointExpression(
-                          syntax: null,
-                          expression: factory.Local(local),
-                          type: condition.Type
-                      )
+                        syntax: null,
+                        expression: factory.Local(local),
+                        type: condition.Type
+                    )
                     : condition;
 
             return new BoundSequence(

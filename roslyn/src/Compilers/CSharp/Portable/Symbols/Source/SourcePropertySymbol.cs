@@ -157,8 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Binder.CheckFeatureAvailability(
                     syntax,
                     (hasGetAccessor && !hasSetAccessor)
-                      ? MessageID.IDS_FeatureReadonlyAutoImplementedProperties
-                      : MessageID.IDS_FeatureAutoImplementedProperties,
+                        ? MessageID.IDS_FeatureReadonlyAutoImplementedProperties
+                        : MessageID.IDS_FeatureAutoImplementedProperties,
                     diagnostics,
                     location
                 );

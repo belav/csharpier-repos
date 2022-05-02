@@ -47,8 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         /// </summary>
         internal static string? GetLanguageName(this ITextBuffer buffer) =>
             Workspace.TryGetWorkspace(buffer.AsTextContainer(), out var workspace)
-              ? workspace.Services.GetLanguageServices(buffer.ContentType)?.Language
-              : null;
+                ? workspace.Services.GetLanguageServices(buffer.ContentType)?.Language
+                : null;
 
         /// <summary>
         /// A cache of host services -> (language name -> content type name).

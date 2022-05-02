@@ -16,7 +16,7 @@ namespace ILCompiler
 {
     public partial class CompilerTypeSystemContext
         : MetadataTypeSystemContext,
-          IMetadataStringDecoderProvider
+            IMetadataStringDecoderProvider
     {
         private readonly MetadataRuntimeInterfacesAlgorithm _metadataRuntimeInterfacesAlgorithm =
             new MetadataRuntimeInterfacesAlgorithm();

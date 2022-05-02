@@ -17,9 +17,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
     [TestDictionaryValidator]
     public interface IName
         : IDictionaryAdapter,
-          IDictionaryNotify,
-          IDictionaryCreate,
-          IDictionaryValidate
+            IDictionaryNotify,
+            IDictionaryCreate,
+            IDictionaryValidate
     {
         string FirstName { get; }
         string LastName { get; }

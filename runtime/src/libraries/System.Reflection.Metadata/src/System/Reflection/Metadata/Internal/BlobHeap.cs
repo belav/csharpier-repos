@@ -458,8 +458,8 @@ namespace System.Reflection.Metadata.Ecma335
                         .Equals(
                             other,
                             ignoreCase
-                              ? StringComparison.OrdinalIgnoreCase
-                              : StringComparison.Ordinal
+                                ? StringComparison.OrdinalIgnoreCase
+                                : StringComparison.Ordinal
                         );
                 }
 

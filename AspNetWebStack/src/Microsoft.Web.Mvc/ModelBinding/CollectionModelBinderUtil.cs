@@ -77,9 +77,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 modelMetadata
             );
             return (typeArguments != null)
-              ? (IExtensibleModelBinder)
+                ? (IExtensibleModelBinder)
                     Activator.CreateInstance(openBinderType.MakeGenericType(typeArguments))
-              : null;
+                : null;
         }
 
         [SuppressMessage(

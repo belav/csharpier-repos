@@ -236,8 +236,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsChar()
-              : HandleReadValue(reader.ReadElementContentAsChar(), context);
+                ? reader.ReadElementContentAsChar()
+                : HandleReadValue(reader.ReadElementContentAsChar(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -294,8 +294,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsBoolean()
-              : HandleReadValue(reader.ReadElementContentAsBoolean(), context);
+                ? reader.ReadElementContentAsBoolean()
+                : HandleReadValue(reader.ReadElementContentAsBoolean(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -346,8 +346,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsSignedByte()
-              : HandleReadValue(reader.ReadElementContentAsSignedByte(), context);
+                ? reader.ReadElementContentAsSignedByte()
+                : HandleReadValue(reader.ReadElementContentAsSignedByte(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -398,8 +398,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsUnsignedByte()
-              : HandleReadValue(reader.ReadElementContentAsUnsignedByte(), context);
+                ? reader.ReadElementContentAsUnsignedByte()
+                : HandleReadValue(reader.ReadElementContentAsUnsignedByte(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -450,8 +450,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsShort()
-              : HandleReadValue(reader.ReadElementContentAsShort(), context);
+                ? reader.ReadElementContentAsShort()
+                : HandleReadValue(reader.ReadElementContentAsShort(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -502,8 +502,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsUnsignedShort()
-              : HandleReadValue(reader.ReadElementContentAsUnsignedShort(), context);
+                ? reader.ReadElementContentAsUnsignedShort()
+                : HandleReadValue(reader.ReadElementContentAsUnsignedShort(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -616,8 +616,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsInt()
-              : HandleReadValue(reader.ReadElementContentAsInt(), context);
+                ? reader.ReadElementContentAsInt()
+                : HandleReadValue(reader.ReadElementContentAsInt(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -668,8 +668,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsUnsignedInt()
-              : HandleReadValue(reader.ReadElementContentAsUnsignedInt(), context);
+                ? reader.ReadElementContentAsUnsignedInt()
+                : HandleReadValue(reader.ReadElementContentAsUnsignedInt(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -719,8 +719,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsLong()
-              : HandleReadValue(reader.ReadElementContentAsLong(), context);
+                ? reader.ReadElementContentAsLong()
+                : HandleReadValue(reader.ReadElementContentAsLong(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -805,8 +805,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsUnsignedLong()
-              : HandleReadValue(reader.ReadElementContentAsUnsignedLong(), context);
+                ? reader.ReadElementContentAsUnsignedLong()
+                : HandleReadValue(reader.ReadElementContentAsUnsignedLong(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -857,8 +857,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsFloat()
-              : HandleReadValue(reader.ReadElementContentAsFloat(), context);
+                ? reader.ReadElementContentAsFloat()
+                : HandleReadValue(reader.ReadElementContentAsFloat(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -909,8 +909,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsDouble()
-              : HandleReadValue(reader.ReadElementContentAsDouble(), context);
+                ? reader.ReadElementContentAsDouble()
+                : HandleReadValue(reader.ReadElementContentAsDouble(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -961,8 +961,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsDecimal()
-              : HandleReadValue(reader.ReadElementContentAsDecimal(), context);
+                ? reader.ReadElementContentAsDecimal()
+                : HandleReadValue(reader.ReadElementContentAsDecimal(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -1013,8 +1013,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsDateTime()
-              : HandleReadValue(reader.ReadElementContentAsDateTime(), context);
+                ? reader.ReadElementContentAsDateTime()
+                : HandleReadValue(reader.ReadElementContentAsDateTime(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -1375,8 +1375,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsTimeSpan()
-              : HandleReadValue(reader.ReadElementContentAsTimeSpan(), context);
+                ? reader.ReadElementContentAsTimeSpan()
+                : HandleReadValue(reader.ReadElementContentAsTimeSpan(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -1432,8 +1432,8 @@ namespace System.Runtime.Serialization
         )
         {
             return (context == null)
-              ? reader.ReadElementContentAsGuid()
-              : HandleReadValue(reader.ReadElementContentAsGuid(), context);
+                ? reader.ReadElementContentAsGuid()
+                : HandleReadValue(reader.ReadElementContentAsGuid(), context);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

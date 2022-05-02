@@ -141,9 +141,9 @@ internal sealed class ParameterBindingMethodCache
                 var dateTimeStyles = type switch
                 {
                     Type t when t == typeof(DateTime)
-                      => DateTimeStyles.AdjustToUniversal | DateTimeStyles.AllowWhiteSpaces,
+                        => DateTimeStyles.AdjustToUniversal | DateTimeStyles.AllowWhiteSpaces,
                     Type t when t == typeof(DateTimeOffset)
-                      => DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces,
+                        => DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces,
                     _ => DateTimeStyles.AllowWhiteSpaces
                 };
 

@@ -86,8 +86,8 @@ namespace Microsoft.Interop
             )
             {
                 InstanceIdentifier = ParseToken(paramSymbol.Name).IsReservedKeyword()
-                  ? $"@{paramSymbol.Name}"
-                  : paramSymbol.Name,
+                    ? $"@{paramSymbol.Name}"
+                    : paramSymbol.Name,
                 RefKind = paramSymbol.RefKind,
                 RefKindSyntax = RefKindToSyntax(paramSymbol.RefKind),
                 ByValueContentsMarshalKind = GetByValueContentsMarshalKind(

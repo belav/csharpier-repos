@@ -53,7 +53,7 @@ namespace System.Diagnostics
     [System.ComponentModel.DefaultEventAttribute("EntryWritten")]
     public partial class EventLog
         : System.ComponentModel.Component,
-          System.ComponentModel.ISupportInitialize
+            System.ComponentModel.ISupportInitialize
     {
         public EventLog() { }
 
@@ -305,7 +305,7 @@ namespace System.Diagnostics
     [System.ComponentModel.ToolboxItemAttribute(false)]
     public sealed partial class EventLogEntry
         : System.ComponentModel.Component,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         internal EventLogEntry() { }
 
@@ -388,7 +388,7 @@ namespace System.Diagnostics
 
     public partial class EventLogEntryCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal EventLogEntryCollection() { }
 

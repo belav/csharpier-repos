@@ -131,16 +131,16 @@ namespace Roslyn.Utilities
         public OneOrMany<TResult> Select<TResult>(Func<T, TResult> selector) where TResult : notnull
         {
             return HasOne
-              ? OneOrMany.Create(selector(_one))
-              : OneOrMany.Create(_many.SelectAsArray(selector));
+                ? OneOrMany.Create(selector(_one))
+                : OneOrMany.Create(_many.SelectAsArray(selector));
         }
 
         public OneOrMany<TResult> Select<TResult, TArg>(Func<T, TArg, TResult> selector, TArg arg)
             where TResult : notnull
         {
             return HasOne
-              ? OneOrMany.Create(selector(_one, arg))
-              : OneOrMany.Create(_many.SelectAsArray(selector, arg));
+                ? OneOrMany.Create(selector(_one, arg))
+                : OneOrMany.Create(_many.SelectAsArray(selector, arg));
         }
 
         public T? FirstOrDefault(Func<T, bool> predicate)

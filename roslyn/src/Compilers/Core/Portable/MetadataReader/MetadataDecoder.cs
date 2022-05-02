@@ -1938,8 +1938,8 @@ namespace Microsoft.CodeAnalysis
                         out s,
                         ref argReader
                     )
-                      ? TypedConstantKind.Primitive
-                      : TypedConstantKind.Error;
+                        ? TypedConstantKind.Primitive
+                        : TypedConstantKind.Error;
 
                     return CreateTypedConstant(type, kind, s);
 
@@ -1949,8 +1949,8 @@ namespace Microsoft.CodeAnalysis
                         out typeName,
                         ref argReader
                     )
-                      ? (typeName != null ? GetTypeSymbolForSerializedType(typeName) : null)
-                      : GetUnsupportedMetadataTypeSymbol();
+                        ? (typeName != null ? GetTypeSymbolForSerializedType(typeName) : null)
+                        : GetUnsupportedMetadataTypeSymbol();
 
                     return CreateTypedConstant(type, TypedConstantKind.Type, serializedType);
 
@@ -1962,8 +1962,8 @@ namespace Microsoft.CodeAnalysis
         private static TypedConstantKind GetPrimitiveOrEnumTypedConstantKind(TypeSymbol type)
         {
             return (type.TypeKind == TypeKind.Enum)
-              ? TypedConstantKind.Enum
-              : TypedConstantKind.Primitive;
+                ? TypedConstantKind.Enum
+                : TypedConstantKind.Primitive;
         }
 
         /// <exception cref="UnsupportedSignatureContent">If the encoded named argument is invalid.</exception>
@@ -2011,11 +2011,11 @@ namespace Microsoft.CodeAnalysis
             TypedConstant value =
                 typeCode == SerializationTypeCode.SZArray
                     ? DecodeCustomAttributeElementArrayOrThrow(
-                          ref argReader,
-                          elementTypeCode,
-                          elementType,
-                          type
-                      )
+                        ref argReader,
+                        elementTypeCode,
+                        elementType,
+                        type
+                    )
                     : DecodeCustomAttributeElementOrThrow(ref argReader, typeCode, type);
 
             return (
@@ -2941,8 +2941,8 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(type == HandleKind.MethodDefinition || type == HandleKind.MemberReference);
 
             return type == HandleKind.MethodDefinition
-              ? FindMethodSymbolInType(container, (MethodDefinitionHandle)memberToken)
-              : GetMethodSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
+                ? FindMethodSymbolInType(container, (MethodDefinitionHandle)memberToken)
+                : GetMethodSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
         }
 
         internal FieldSymbol GetFieldSymbolForFieldDefOrMemberRef(
@@ -2954,8 +2954,8 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(type == HandleKind.FieldDefinition || type == HandleKind.MemberReference);
 
             return type == HandleKind.FieldDefinition
-              ? FindFieldSymbolInType(container, (FieldDefinitionHandle)memberToken)
-              : GetFieldSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
+                ? FindFieldSymbolInType(container, (FieldDefinitionHandle)memberToken)
+                : GetFieldSymbolForMemberRef((MemberReferenceHandle)memberToken, container);
         }
 
         /// <summary>

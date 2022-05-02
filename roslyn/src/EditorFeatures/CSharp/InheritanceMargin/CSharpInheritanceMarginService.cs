@@ -70,17 +70,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InheritanceMargin
             {
                 MethodDeclarationSyntax methodDeclarationNode => methodDeclarationNode.Identifier,
                 PropertyDeclarationSyntax propertyDeclarationNode
-                  => propertyDeclarationNode.Identifier,
+                    => propertyDeclarationNode.Identifier,
                 EventDeclarationSyntax eventDeclarationNode => eventDeclarationNode.Identifier,
                 VariableDeclaratorSyntax variableDeclaratorNode
-                  => variableDeclaratorNode.Identifier,
+                    => variableDeclaratorNode.Identifier,
                 TypeDeclarationSyntax baseTypeDeclarationNode => baseTypeDeclarationNode.Identifier,
                 IndexerDeclarationSyntax indexerDeclarationNode
-                  => indexerDeclarationNode.ThisKeyword,
+                    => indexerDeclarationNode.ThisKeyword,
                 OperatorDeclarationSyntax operatorDeclarationNode
-                  => operatorDeclarationNode.OperatorToken,
+                    => operatorDeclarationNode.OperatorToken,
                 ConversionOperatorDeclarationSyntax conversionOperatorDeclarationNode
-                  => conversionOperatorDeclarationNode.Type.GetFirstToken(),
+                    => conversionOperatorDeclarationNode.Type.GetFirstToken(),
                 // Shouldn't reach here since the input declaration nodes are coming from GetMembers() method above
                 _ => throw ExceptionUtilities.UnexpectedValue(declarationNode),
             };

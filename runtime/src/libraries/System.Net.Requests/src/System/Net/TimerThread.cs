@@ -601,13 +601,13 @@ namespace System.Net
                             int newNow = Environment.TickCount;
                             int waitDuration = haveNextTick
                                 ? (int)(
-                                      IsTickBetween(now, nextTick, newNow)
+                                    IsTickBetween(now, nextTick, newNow)
                                         ? Math.Min(
-                                              unchecked((uint)(nextTick - newNow)),
-                                              (uint)(int.MaxValue - TickCountResolution)
-                                          ) + TickCountResolution
+                                            unchecked((uint)(nextTick - newNow)),
+                                            (uint)(int.MaxValue - TickCountResolution)
+                                        ) + TickCountResolution
                                         : 0
-                                  )
+                                )
                                 : ThreadIdleTimeoutMilliseconds;
 
                             if (NetEventSource.Log.IsEnabled())

@@ -1170,9 +1170,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             bool isValidForEnum = info.typeRaw1.IsEnumType
                 ? info.typeRaw2 == info.typeRaw1.UnderlyingEnumType
-                  && info.ValidForEnumAndUnderlyingType()
+                    && info.ValidForEnumAndUnderlyingType()
                 : info.typeRaw1 == info.typeRaw2.UnderlyingEnumType
-                  && info.ValidForUnderlyingTypeAndEnum();
+                    && info.ValidForUnderlyingTypeAndEnum();
 
             if (isValidForEnum)
             {
@@ -2917,8 +2917,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
 
             CType typeDest = kind.IsRelational()
-              ? GetPredefindType(PredefinedType.PT_BOOL)
-              : typeOp;
+                ? GetPredefindType(PredefinedType.PT_BOOL)
+                : typeOp;
 
             ExprOperator exprRes = ExprFactory.CreateOperator(kind, typeDest, op1, op2);
             exprRes.Flags |= flags;
@@ -3014,8 +3014,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // Allocate the result expression.
             CType typeDest = kind.IsRelational()
-              ? GetPredefindType(PredefinedType.PT_BOOL)
-              : op1.Type;
+                ? GetPredefindType(PredefinedType.PT_BOOL)
+                : op1.Type;
 
             ExprOperator exprRes = ExprFactory.CreateOperator(kind, typeDest, op1, op2);
             exprRes.Flags &= ~EXPRFLAG.EXF_CHECKOVERFLOW;
@@ -3064,8 +3064,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // Bad arg types - report error to user.
             return op2 != null
-              ? ErrorHandling.Error(ErrorCode.ERR_AmbigBinaryOps, strOp, op1.Type, op2.Type)
-              : ErrorHandling.Error(ErrorCode.ERR_AmbigUnaryOp, strOp, op1.Type);
+                ? ErrorHandling.Error(ErrorCode.ERR_AmbigBinaryOps, strOp, op1.Type, op2.Type)
+                : ErrorHandling.Error(ErrorCode.ERR_AmbigUnaryOp, strOp, op1.Type);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

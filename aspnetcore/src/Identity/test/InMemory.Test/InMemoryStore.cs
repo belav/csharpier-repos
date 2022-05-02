@@ -13,9 +13,9 @@ namespace Microsoft.AspNetCore.Identity.InMemory;
 
 public class InMemoryStore<TUser, TRole>
     : InMemoryUserStore<TUser>,
-      IUserRoleStore<TUser>,
-      IQueryableRoleStore<TRole>,
-      IRoleClaimStore<TRole>
+        IUserRoleStore<TUser>,
+        IQueryableRoleStore<TRole>,
+        IRoleClaimStore<TRole>
     where TRole : PocoRole
     where TUser : PocoUser
 {

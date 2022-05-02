@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
     internal abstract partial class AbstractRenameCommandHandler
         : ICommandHandler<WordDeleteToStartCommandArgs>,
-          ICommandHandler<WordDeleteToEndCommandArgs>
+            ICommandHandler<WordDeleteToEndCommandArgs>
     {
         public CommandState GetCommandState(WordDeleteToStartCommandArgs args) => GetCommandState();
 
@@ -70,8 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                     subjectBuffer.Delete(
                         deleteToStart
-                          ? Span.FromBounds(span.Start, end)
-                          : Span.FromBounds(start, span.End)
+                            ? Span.FromBounds(span.Start, end)
+                            : Span.FromBounds(start, span.End)
                     );
 
                     return true;

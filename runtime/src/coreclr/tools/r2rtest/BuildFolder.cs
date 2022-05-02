@@ -369,8 +369,8 @@ namespace R2RTest
                         string.Format(
                             "{0,9} |",
                             jittedMethodsPerModule != null
-                              ? jittedMethodsPerModule.Count.ToString()
-                              : ""
+                                ? jittedMethodsPerModule.Count.ToString()
+                                : ""
                         )
                     );
                 }

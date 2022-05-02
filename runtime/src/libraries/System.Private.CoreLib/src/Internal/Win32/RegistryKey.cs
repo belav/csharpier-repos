@@ -95,9 +95,9 @@ namespace Internal.Win32
                 name,
                 0,
                 writable
-                  ? Interop.Advapi32.RegistryOperations.KEY_READ
+                    ? Interop.Advapi32.RegistryOperations.KEY_READ
                         | Interop.Advapi32.RegistryOperations.KEY_WRITE
-                  : Interop.Advapi32.RegistryOperations.KEY_READ,
+                    : Interop.Advapi32.RegistryOperations.KEY_READ,
                 out SafeRegistryHandle result
             );
 

@@ -2170,8 +2170,8 @@ public class ControllerActionDescriptorProviderTests
     )]
     private class RouteAndConstraintAttribute
         : Attribute,
-          IActionConstraintMetadata,
-          IRouteTemplateProvider
+            IActionConstraintMetadata,
+            IRouteTemplateProvider
     {
         public RouteAndConstraintAttribute(string template)
         {

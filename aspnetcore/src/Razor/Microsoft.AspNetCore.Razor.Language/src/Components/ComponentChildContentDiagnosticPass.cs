@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentChildContentDiagnosticPass
     : ComponentIntermediateNodePassBase,
-      IRazorOptimizationPass
+        IRazorOptimizationPass
 {
     // Runs after components/eventhandlers/ref/bind/templates. We want to validate every component
     // and it's usage of ChildContent.

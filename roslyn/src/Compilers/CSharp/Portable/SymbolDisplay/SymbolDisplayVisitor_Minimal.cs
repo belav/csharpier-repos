@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // then that's all we need to add.  Otherwise, we will add the minimally qualified
             // version of our parent, and then add ourselves to that.
             var symbols = ShouldRestrictMinimallyQualifyLookupToNamespacesAndTypes()
-              ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
-              : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
+                ? semanticModelOpt.LookupNamespacesAndTypes(positionOpt, name: symbol.Name)
+                : semanticModelOpt.LookupSymbols(positionOpt, name: symbol.Name);
             var firstSymbol = symbols.OfType<ISymbol>().FirstOrDefault();
             if (symbols.Length != 1 || firstSymbol == null || !firstSymbol.Equals(symbol))
             {
@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbol.ContainingNamespace == null
                         ? null
                         : semanticModelOpt.Compilation.GetCompilationNamespace(
-                              symbol.ContainingNamespace
-                          );
+                            symbol.ContainingNamespace
+                        );
                 if (containingNamespace != null)
                 {
                     if (containingNamespace.IsGlobalNamespace)
@@ -154,8 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             symbol.ContainingNamespace == null
                                 ? null
                                 : semanticModelOpt.Compilation.GetCompilationNamespace(
-                                      symbol.ContainingNamespace
-                                  );
+                                    symbol.ContainingNamespace
+                                );
                         if (containingNamespace != null)
                         {
                             if (containingNamespace.IsGlobalNamespace)
@@ -280,14 +280,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             token.Parent switch
             {
                 FromClauseSyntax fromClause when fromClause.Identifier == token
-                  => fromClause.Parent as QueryBodySyntax
-                      ?? ((QueryExpressionSyntax)fromClause.Parent).Body,
+                    => fromClause.Parent as QueryBodySyntax
+                        ?? ((QueryExpressionSyntax)fromClause.Parent).Body,
                 LetClauseSyntax letClause when letClause.Identifier == token
-                  => letClause.Parent as QueryBodySyntax,
+                    => letClause.Parent as QueryBodySyntax,
                 JoinClauseSyntax joinClause when joinClause.Identifier == token
-                  => joinClause.Parent as QueryBodySyntax,
+                    => joinClause.Parent as QueryBodySyntax,
                 QueryContinuationSyntax continuation when continuation.Identifier == token
-                  => continuation.Body,
+                    => continuation.Body,
                 _ => null
             };
 
@@ -323,8 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static IEnumerable<T> GetAncestorsOrThis<T>(SyntaxNode node) where T : SyntaxNode
         {
             return node == null
-              ? SpecializedCollections.EmptyEnumerable<T>()
-              : node.AncestorsAndSelf().OfType<T>();
+                ? SpecializedCollections.EmptyEnumerable<T>()
+                : node.AncestorsAndSelf().OfType<T>();
         }
 
         private IDictionary<INamespaceOrTypeSymbol, IAliasSymbol> AliasMap

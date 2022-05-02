@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                     // Avoid ContinueWith overheads for a 0 delay or if race conditions resulted
                     // in the delay task being complete by the time we checked.
                     return t.Status == TaskStatus.RanToCompletion
-                      ? SpecializedTasks.True
-                      : Task.FromCanceled<bool>(cancellationToken);
+                        ? SpecializedTasks.True
+                        : Task.FromCanceled<bool>(cancellationToken);
                 }
 
                 return t.ContinueWith(

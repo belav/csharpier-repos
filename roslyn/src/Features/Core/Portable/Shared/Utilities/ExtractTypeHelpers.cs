@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 newDocument.Project.CompilationOptions
             );
             var index = rootNamespace.IsEmpty()
-              ? -1
-              : containingNamespaceDisplay.IndexOf(rootNamespace);
+                ? -1
+                : containingNamespaceDisplay.IndexOf(rootNamespace);
             // if we did find the root namespace as the first element, then we remove it
             // this may leave us with an extra "." character at the start, but when we split it shouldn't matter
             var namespaceWithoutRoot =

@@ -86,9 +86,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 equalityComparerType == null
                     ? factory.GenericName(nameof(EqualityComparer<int>), type)
                     : generatorInternal.Type(
-                          equalityComparerType.Construct(type),
-                          typeContext: false
-                      );
+                        equalityComparerType.Construct(type),
+                        typeContext: false
+                    );
 
             return factory.MemberAccessExpression(
                 typeExpression,

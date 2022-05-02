@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// </summary>
 public class PhysicalFileResultExecutor
     : FileResultExecutorBase,
-      IActionResultExecutor<PhysicalFileResult>
+        IActionResultExecutor<PhysicalFileResult>
 {
     /// <summary>
     /// Initializes a new instance of <see cref="PhysicalFileResultExecutor"/>.

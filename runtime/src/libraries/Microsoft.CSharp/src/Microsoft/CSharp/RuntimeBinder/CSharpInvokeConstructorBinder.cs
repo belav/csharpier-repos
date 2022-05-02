@@ -12,7 +12,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 {
     internal sealed class CSharpInvokeConstructorBinder
         : DynamicMetaObjectBinder,
-          ICSharpInvokeOrInvokeMemberBinder
+            ICSharpInvokeOrInvokeMemberBinder
     {
         public BindingFlag BindingFlags => 0;
 

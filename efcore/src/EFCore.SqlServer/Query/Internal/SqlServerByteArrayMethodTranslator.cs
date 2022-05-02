@@ -54,15 +54,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
                 var value = arguments[1] is SqlConstantExpression constantValue
                     ? (SqlExpression)
-                          _sqlExpressionFactory.Constant(
-                              new[] { (byte)constantValue.Value! },
-                              sourceTypeMapping
-                          )
+                        _sqlExpressionFactory.Constant(
+                            new[] { (byte)constantValue.Value! },
+                            sourceTypeMapping
+                        )
                     : _sqlExpressionFactory.Convert(
-                          arguments[1],
-                          typeof(byte[]),
-                          sourceTypeMapping
-                      );
+                        arguments[1],
+                        typeof(byte[]),
+                        sourceTypeMapping
+                    );
 
                 return _sqlExpressionFactory.GreaterThan(
                     _sqlExpressionFactory.Function(

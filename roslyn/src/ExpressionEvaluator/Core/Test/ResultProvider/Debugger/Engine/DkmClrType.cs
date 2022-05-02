@@ -135,8 +135,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                         (typeArgs.Length == 0)
                             ? s_emptyTypes
                             : new ReadOnlyCollection<DkmClrType>(
-                                  typeArgs.Select(t => DkmClrType.Create(_appDomain, t)).ToArray()
-                              );
+                                typeArgs.Select(t => DkmClrType.Create(_appDomain, t)).ToArray()
+                            );
                     Interlocked.CompareExchange(ref _lazyGenericArguments, genericArgs, null);
                 }
                 return _lazyGenericArguments;
@@ -172,10 +172,10 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             result =
                 proxyAttribute != null
                     ? string.Format(
-                          "{0} (Proxy = {1})",
-                          result,
-                          proxyAttribute.ProxyType.GetLmrType().ToString()
-                      )
+                        "{0} (Proxy = {1})",
+                        result,
+                        proxyAttribute.ProxyType.GetLmrType().ToString()
+                    )
                     : result;
             return result;
         }

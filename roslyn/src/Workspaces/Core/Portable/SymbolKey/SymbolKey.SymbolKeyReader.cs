@@ -458,18 +458,18 @@ namespace Microsoft.CodeAnalysis
                     SymbolKeyType.Alias => AliasSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.BodyLevel => BodyLevelSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.ConstructedMethod
-                      => ConstructedMethodSymbolKey.Resolve(this, out failureReason),
+                        => ConstructedMethodSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.NamedType => NamedTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.ErrorType => ErrorTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Field => FieldSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.FunctionPointer
-                      => FunctionPointerTypeSymbolKey.Resolve(this, out failureReason),
+                        => FunctionPointerTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.DynamicType
-                      => DynamicTypeSymbolKey.Resolve(this, out failureReason),
+                        => DynamicTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Method => MethodSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Namespace => NamespaceSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.PointerType
-                      => PointerTypeSymbolKey.Resolve(this, out failureReason),
+                        => PointerTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Parameter => ParameterSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Property => PropertySymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.ArrayType => ArrayTypeSymbolKey.Resolve(this, out failureReason),
@@ -478,15 +478,15 @@ namespace Microsoft.CodeAnalysis
                     SymbolKeyType.Module => ModuleSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.Event => EventSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.ReducedExtensionMethod
-                      => ReducedExtensionMethodSymbolKey.Resolve(this, out failureReason),
+                        => ReducedExtensionMethodSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.TypeParameter
-                      => TypeParameterSymbolKey.Resolve(this, out failureReason),
+                        => TypeParameterSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.AnonymousType
-                      => AnonymousTypeSymbolKey.Resolve(this, out failureReason),
+                        => AnonymousTypeSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.AnonymousFunctionOrDelegate
-                      => AnonymousFunctionOrDelegateSymbolKey.Resolve(this, out failureReason),
+                        => AnonymousFunctionOrDelegateSymbolKey.Resolve(this, out failureReason),
                     SymbolKeyType.TypeParameterOrdinal
-                      => TypeParameterOrdinalSymbolKey.Resolve(this, out failureReason),
+                        => TypeParameterOrdinalSymbolKey.Resolve(this, out failureReason),
                     _ => throw new NotImplementedException(),
                 };
 

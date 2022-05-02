@@ -433,28 +433,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             declaration?.Kind() switch
             {
                 SyntaxKind.DelegateDeclaration
-                  => ((DelegateDeclarationSyntax)declaration).ParameterList,
+                    => ((DelegateDeclarationSyntax)declaration).ParameterList,
                 SyntaxKind.MethodDeclaration
-                  => ((MethodDeclarationSyntax)declaration).ParameterList,
+                    => ((MethodDeclarationSyntax)declaration).ParameterList,
                 SyntaxKind.OperatorDeclaration
-                  => ((OperatorDeclarationSyntax)declaration).ParameterList,
+                    => ((OperatorDeclarationSyntax)declaration).ParameterList,
                 SyntaxKind.ConversionOperatorDeclaration
-                  => ((ConversionOperatorDeclarationSyntax)declaration).ParameterList,
+                    => ((ConversionOperatorDeclarationSyntax)declaration).ParameterList,
                 SyntaxKind.ConstructorDeclaration
-                  => ((ConstructorDeclarationSyntax)declaration).ParameterList,
+                    => ((ConstructorDeclarationSyntax)declaration).ParameterList,
                 SyntaxKind.DestructorDeclaration
-                  => ((DestructorDeclarationSyntax)declaration).ParameterList,
+                    => ((DestructorDeclarationSyntax)declaration).ParameterList,
                 SyntaxKind.IndexerDeclaration
-                  => ((IndexerDeclarationSyntax)declaration).ParameterList,
+                    => ((IndexerDeclarationSyntax)declaration).ParameterList,
                 SyntaxKind.ParenthesizedLambdaExpression
-                  => ((ParenthesizedLambdaExpressionSyntax)declaration).ParameterList,
+                    => ((ParenthesizedLambdaExpressionSyntax)declaration).ParameterList,
                 SyntaxKind.LocalFunctionStatement
-                  => ((LocalFunctionStatementSyntax)declaration).ParameterList,
+                    => ((LocalFunctionStatementSyntax)declaration).ParameterList,
                 SyntaxKind.AnonymousMethodExpression
-                  => ((AnonymousMethodExpressionSyntax)declaration).ParameterList,
+                    => ((AnonymousMethodExpressionSyntax)declaration).ParameterList,
                 SyntaxKind.RecordDeclaration
                 or SyntaxKind.RecordStructDeclaration
-                  => ((RecordDeclarationSyntax)declaration).ParameterList,
+                    => ((RecordDeclarationSyntax)declaration).ParameterList,
                 _ => null,
             };
 

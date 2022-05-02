@@ -362,8 +362,8 @@ namespace System.Xml
                             {
                                 node.AppendChildForLoad(
                                     direct
-                                      ? new XmlText(string.Empty)
-                                      : _doc!.CreateTextNode(string.Empty),
+                                        ? new XmlText(string.Empty)
+                                        : _doc!.CreateTextNode(string.Empty),
                                     _doc!
                                 );
                             }

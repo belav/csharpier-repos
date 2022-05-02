@@ -89,8 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         SyntaxKind.PropertyDeclaration,
                         SyntaxKind.IndexerDeclaration
                     )
-                      ? ((ArrowExpressionClauseSyntax)node).Expression
-                      : null;
+                        ? ((ArrowExpressionClauseSyntax)node).Expression
+                        : null;
                     break;
 
                 default:
@@ -344,7 +344,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 MethodDeclarationSyntax method => method.Modifiers.Any(SyntaxKind.AsyncKeyword),
                 LocalFunctionStatementSyntax localFunction
-                  => localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
+                    => localFunction.Modifiers.Any(SyntaxKind.AsyncKeyword),
                 _ => false
             };
         }

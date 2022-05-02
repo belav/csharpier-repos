@@ -299,8 +299,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
 
                 return filteredActionsBuilderOpt != null
-                  ? filteredActionsBuilderOpt.ToImmutableAndFree()
-                  : symbolStartActions;
+                    ? filteredActionsBuilderOpt.ToImmutableAndFree()
+                    : symbolStartActions;
             }
         }
 

@@ -48,13 +48,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _methodInfo.Equals(method)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     "NEWID",
                     Array.Empty<SqlExpression>(),
                     nullable: false,
                     argumentsPropagateNullability: Array.Empty<bool>(),
                     method.ReturnType
                 )
-              : null;
+                : null;
     }
 }

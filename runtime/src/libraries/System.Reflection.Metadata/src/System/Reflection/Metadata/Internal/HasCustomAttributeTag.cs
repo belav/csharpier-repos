@@ -117,46 +117,46 @@ namespace System.Reflection.Metadata.Ecma335
             return (tokenType >> TokenTypeIds.RowIdBitCount) switch
             {
                 TokenTypeIds.MethodDef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | MethodDef,
+                    => rowId << NumberOfBits | MethodDef,
                 TokenTypeIds.FieldDef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | Field,
+                    => rowId << NumberOfBits | Field,
                 TokenTypeIds.TypeRef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | TypeRef,
+                    => rowId << NumberOfBits | TypeRef,
                 TokenTypeIds.TypeDef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | TypeDef,
+                    => rowId << NumberOfBits | TypeDef,
                 TokenTypeIds.ParamDef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | Param,
+                    => rowId << NumberOfBits | Param,
                 TokenTypeIds.InterfaceImpl >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | InterfaceImpl,
+                    => rowId << NumberOfBits | InterfaceImpl,
                 TokenTypeIds.MemberRef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | MemberRef,
+                    => rowId << NumberOfBits | MemberRef,
                 TokenTypeIds.Module >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | Module,
                 TokenTypeIds.DeclSecurity >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | DeclSecurity,
+                    => rowId << NumberOfBits | DeclSecurity,
                 TokenTypeIds.Property >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | Property,
+                    => rowId << NumberOfBits | Property,
                 TokenTypeIds.Event >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | Event,
                 TokenTypeIds.Signature >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | StandAloneSig,
+                    => rowId << NumberOfBits | StandAloneSig,
                 TokenTypeIds.ModuleRef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | ModuleRef,
+                    => rowId << NumberOfBits | ModuleRef,
                 TokenTypeIds.TypeSpec >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | TypeSpec,
+                    => rowId << NumberOfBits | TypeSpec,
                 TokenTypeIds.Assembly >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | Assembly,
+                    => rowId << NumberOfBits | Assembly,
                 TokenTypeIds.AssemblyRef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | AssemblyRef,
+                    => rowId << NumberOfBits | AssemblyRef,
                 TokenTypeIds.File >> TokenTypeIds.RowIdBitCount => rowId << NumberOfBits | File,
                 TokenTypeIds.ExportedType >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | ExportedType,
+                    => rowId << NumberOfBits | ExportedType,
                 TokenTypeIds.ManifestResource >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | ManifestResource,
+                    => rowId << NumberOfBits | ManifestResource,
                 TokenTypeIds.GenericParam >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | GenericParam,
+                    => rowId << NumberOfBits | GenericParam,
                 TokenTypeIds.GenericParamConstraint >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | GenericParamConstraint,
+                    => rowId << NumberOfBits | GenericParamConstraint,
                 TokenTypeIds.MethodSpec >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | MethodSpec,
+                    => rowId << NumberOfBits | MethodSpec,
 
                 _ => 0,
             };

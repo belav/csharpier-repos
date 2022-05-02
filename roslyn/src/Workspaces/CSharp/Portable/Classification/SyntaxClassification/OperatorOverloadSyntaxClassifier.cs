@@ -51,12 +51,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             syntax switch
             {
                 AssignmentExpressionSyntax assignmentExpression
-                  => assignmentExpression.OperatorToken.Span,
+                    => assignmentExpression.OperatorToken.Span,
                 BinaryExpressionSyntax binaryExpression => binaryExpression.OperatorToken.Span,
                 PrefixUnaryExpressionSyntax prefixUnaryExpression
-                  => prefixUnaryExpression.OperatorToken.Span,
+                    => prefixUnaryExpression.OperatorToken.Span,
                 PostfixUnaryExpressionSyntax postfixUnaryExpression
-                  => postfixUnaryExpression.OperatorToken.Span,
+                    => postfixUnaryExpression.OperatorToken.Span,
                 _ => default,
             };
     }

@@ -54,14 +54,14 @@ namespace Newtonsoft.Json.Linq
     /// </summary>
     public abstract partial class JToken
         : IJEnumerable<JToken>,
-          IJsonLineInfo
+            IJsonLineInfo
 #if HAVE_ICLONEABLE
-          ,
-          ICloneable
+            ,
+            ICloneable
 #endif
 #if HAVE_DYNAMIC
-          ,
-          IDynamicMetaObjectProvider
+            ,
+            IDynamicMetaObjectProvider
 #endif
     {
         private static JTokenEqualityComparer? _equalityComparer;
@@ -695,8 +695,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (bool?)Convert.ToBoolean(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (bool?)Convert.ToBoolean(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -758,8 +758,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (DateTime?)Convert.ToDateTime(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (DateTime?)Convert.ToDateTime(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
 #if HAVE_DATE_TIME_OFFSET
@@ -835,8 +835,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (decimal?)Convert.ToDecimal(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (decimal?)Convert.ToDecimal(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -870,8 +870,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (double?)Convert.ToDouble(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (double?)Convert.ToDouble(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -905,8 +905,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (char?)Convert.ToChar(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (char?)Convert.ToChar(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1111,8 +1111,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (int?)Convert.ToInt32(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (int?)Convert.ToInt32(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1146,8 +1146,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (short?)Convert.ToInt16(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (short?)Convert.ToInt16(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1182,8 +1182,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (ushort?)Convert.ToUInt16(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (ushort?)Convert.ToUInt16(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1217,8 +1217,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (byte?)Convert.ToByte(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (byte?)Convert.ToByte(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1253,8 +1253,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (sbyte?)Convert.ToSByte(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (sbyte?)Convert.ToSByte(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1316,8 +1316,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (long?)Convert.ToInt64(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (long?)Convert.ToInt64(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1351,8 +1351,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (float?)Convert.ToSingle(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (float?)Convert.ToSingle(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1415,8 +1415,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (uint?)Convert.ToUInt32(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (uint?)Convert.ToUInt32(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1451,8 +1451,8 @@ namespace Newtonsoft.Json.Linq
 #endif
 
             return (v.Value != null)
-              ? (ulong?)Convert.ToUInt64(v.Value, CultureInfo.InvariantCulture)
-              : null;
+                ? (ulong?)Convert.ToUInt64(v.Value, CultureInfo.InvariantCulture)
+                : null;
         }
 
         /// <summary>
@@ -1685,8 +1685,8 @@ namespace Newtonsoft.Json.Linq
             }
 
             return (v.Value is Guid guid)
-              ? guid
-              : new Guid(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
+                ? guid
+                : new Guid(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -1723,8 +1723,8 @@ namespace Newtonsoft.Json.Linq
             }
 
             return (v.Value is Guid guid)
-              ? guid
-              : new Guid(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
+                ? guid
+                : new Guid(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -1746,8 +1746,10 @@ namespace Newtonsoft.Json.Linq
             }
 
             return (v.Value is TimeSpan span)
-              ? span
-              : ConvertUtils.ParseTimeSpan(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
+                ? span
+                : ConvertUtils.ParseTimeSpan(
+                    Convert.ToString(v.Value, CultureInfo.InvariantCulture)
+                );
         }
 
         /// <summary>
@@ -1779,8 +1781,10 @@ namespace Newtonsoft.Json.Linq
             }
 
             return (v.Value is TimeSpan span)
-              ? span
-              : ConvertUtils.ParseTimeSpan(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
+                ? span
+                : ConvertUtils.ParseTimeSpan(
+                    Convert.ToString(v.Value, CultureInfo.InvariantCulture)
+                );
         }
 
         /// <summary>
@@ -1812,8 +1816,8 @@ namespace Newtonsoft.Json.Linq
             }
 
             return (v.Value is Uri uri)
-              ? uri
-              : new Uri(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
+                ? uri
+                : new Uri(Convert.ToString(v.Value, CultureInfo.InvariantCulture));
         }
 
 #if HAVE_BIG_INTEGER
@@ -2314,8 +2318,8 @@ namespace Newtonsoft.Json.Linq
                         catch (Exception ex)
                         {
                             Type enumType = objectType.IsEnum()
-                              ? objectType
-                              : Nullable.GetUnderlyingType(objectType);
+                                ? objectType
+                                : Nullable.GetUnderlyingType(objectType);
                             throw new ArgumentException(
                                 "Could not convert '{0}' to {1}.".FormatWith(
                                     CultureInfo.InvariantCulture,
@@ -2330,8 +2334,8 @@ namespace Newtonsoft.Json.Linq
                     if (Type == JTokenType.Integer)
                     {
                         Type enumType = objectType.IsEnum()
-                          ? objectType
-                          : Nullable.GetUnderlyingType(objectType);
+                            ? objectType
+                            : Nullable.GetUnderlyingType(objectType);
                         return Enum.ToObject(enumType, ((JValue)this).Value);
                     }
                 }

@@ -81,8 +81,8 @@ namespace System.Net.Http.Functional.Tests
                     from i in Enumerable.Range(0, numRequests)
                     select client.GetAsync(
                         secure
-                          ? Configuration.Http.RemoteEchoServer
-                          : Configuration.Http.SecureRemoteEchoServer
+                            ? Configuration.Http.RemoteEchoServer
+                            : Configuration.Http.SecureRemoteEchoServer
                     )
                 );
             }

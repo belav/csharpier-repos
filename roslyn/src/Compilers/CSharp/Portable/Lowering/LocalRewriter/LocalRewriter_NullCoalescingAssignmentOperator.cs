@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight = VisitExpression(node.RightOperand);
 
             return node.IsNullableValueTypeAssignment
-              ? rewriteNullCoalescingAssignmentForValueType()
-              : rewriteNullCoalscingAssignmentStandard();
+                ? rewriteNullCoalescingAssignmentForValueType()
+                : rewriteNullCoalscingAssignmentStandard();
 
             BoundExpression rewriteNullCoalscingAssignmentStandard()
             {
@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(conditionalExpression.Type is { });
 
                 return (temps.Count == 0 && stores.Count == 0)
-                  ? conditionalExpression
-                  : new BoundSequence(
+                    ? conditionalExpression
+                    : new BoundSequence(
                         syntax,
                         temps.ToImmutableAndFree(),
                         stores.ToImmutableAndFree(),

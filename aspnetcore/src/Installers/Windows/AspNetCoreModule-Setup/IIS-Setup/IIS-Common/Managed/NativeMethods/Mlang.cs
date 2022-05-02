@@ -107,9 +107,9 @@ namespace Microsoft.Web.Management.PInvoke.MLang
         ]
         public class CMLangStringClass
             : IMLangString,
-              CMLangString,
-              IMLangStringWStr,
-              IMLangStringAStr
+                CMLangString,
+                IMLangStringWStr,
+                IMLangStringAStr
         {
             // Methods
             [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
@@ -360,13 +360,13 @@ namespace Microsoft.Web.Management.PInvoke.MLang
         ]
         public class CMultiLanguageClass
             : IMultiLanguage,
-              CMultiLanguage,
-              IMLangCodePages,
-              IMLangFontLink,
-              IMLangLineBreakConsole,
-              IMultiLanguage2,
-              IMLangFontLink2,
-              IMultiLanguage3
+                CMultiLanguage,
+                IMLangCodePages,
+                IMLangFontLink,
+                IMLangLineBreakConsole,
+                IMultiLanguage2,
+                IMLangFontLink2,
+                IMultiLanguage3
         {
             // Methods
             [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]

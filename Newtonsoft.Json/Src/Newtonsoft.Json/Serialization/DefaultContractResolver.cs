@@ -1343,11 +1343,11 @@ namespace Newtonsoft.Json.Serialization
                 Type expectedParameterType =
                     (contract.DictionaryKeyType != null && contract.DictionaryValueType != null)
                         ? typeof(IEnumerable<>).MakeGenericType(
-                              typeof(KeyValuePair<,>).MakeGenericType(
-                                  contract.DictionaryKeyType,
-                                  contract.DictionaryValueType
-                              )
-                          )
+                            typeof(KeyValuePair<,>).MakeGenericType(
+                                contract.DictionaryKeyType,
+                                contract.DictionaryValueType
+                            )
+                        )
                         : typeof(IDictionary);
 
                 if (parameters.Length == 0)
@@ -2016,9 +2016,9 @@ namespace Newtonsoft.Json.Serialization
                 property.ItemConverter =
                     propertyAttribute.ItemConverterType != null
                         ? JsonTypeReflector.CreateJsonConverterInstance(
-                              propertyAttribute.ItemConverterType,
-                              propertyAttribute.ItemConverterParameters
-                          )
+                            propertyAttribute.ItemConverterType,
+                            propertyAttribute.ItemConverterParameters
+                        )
                         : null;
                 property.ItemReferenceLoopHandling = propertyAttribute._itemReferenceLoopHandling;
                 property.ItemTypeNameHandling = propertyAttribute._itemTypeNameHandling;

@@ -93,40 +93,38 @@ namespace Microsoft.Interop
                         (SafeHandleMarshallingInfo)info.MarshallingAttributeInfo
                     ).AccessibleDefaultConstructor
                         ? ObjectCreationExpression(
-                              info.ManagedType.Syntax,
-                              ArgumentList(),
-                              initializer: null
-                          )
+                            info.ManagedType.Syntax,
+                            ArgumentList(),
+                            initializer: null
+                        )
                         : CastExpression(
-                              info.ManagedType.Syntax,
-                              InvocationExpression(
-                                      MemberAccessExpression(
-                                          SyntaxKind.SimpleMemberAccessExpression,
-                                          ParseTypeName(TypeNames.System_Activator),
-                                          IdentifierName("CreateInstance")
-                                      )
-                                  )
-                                  .WithArgumentList(
-                                      ArgumentList(
-                                          SeparatedList(
-                                              new[]
-                                              {
-                                                  Argument(
-                                                      TypeOfExpression(info.ManagedType.Syntax)
-                                                  ),
-                                                  Argument(
-                                                          LiteralExpression(
-                                                              SyntaxKind.TrueLiteralExpression
-                                                          )
-                                                      )
-                                                      .WithNameColon(
-                                                          NameColon(IdentifierName("nonPublic"))
-                                                      )
-                                              }
-                                          )
-                                      )
-                                  )
-                          );
+                            info.ManagedType.Syntax,
+                            InvocationExpression(
+                                    MemberAccessExpression(
+                                        SyntaxKind.SimpleMemberAccessExpression,
+                                        ParseTypeName(TypeNames.System_Activator),
+                                        IdentifierName("CreateInstance")
+                                    )
+                                )
+                                .WithArgumentList(
+                                    ArgumentList(
+                                        SeparatedList(
+                                            new[]
+                                            {
+                                                Argument(TypeOfExpression(info.ManagedType.Syntax)),
+                                                Argument(
+                                                        LiteralExpression(
+                                                            SyntaxKind.TrueLiteralExpression
+                                                        )
+                                                    )
+                                                    .WithNameColon(
+                                                        NameColon(IdentifierName("nonPublic"))
+                                                    )
+                                            }
+                                        )
+                                    )
+                                )
+                        );
 
                     if (info.IsManagedReturnPosition)
                     {

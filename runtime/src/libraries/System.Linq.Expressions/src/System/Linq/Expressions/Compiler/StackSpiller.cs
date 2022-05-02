@@ -284,7 +284,7 @@ namespace System.Linq.Expressions.Compiler
 
             return cr.Finish(
                 cr.Rewrite
-                  ? BinaryExpression.Create(
+                    ? BinaryExpression.Create(
                         node.NodeType,
                         cr[0]!,
                         cr[1]!,
@@ -292,7 +292,7 @@ namespace System.Linq.Expressions.Compiler
                         node.Method,
                         (LambdaExpression?)cr[2]
                     )
-                  : expr
+                    : expr
             );
         }
 

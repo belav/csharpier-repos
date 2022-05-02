@@ -14,14 +14,14 @@ namespace System.Net.Http.Headers
         {
             Http2EncodedName = http2StaticTableIndex.HasValue
                 ? HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingToAllocatedArray(
-                      http2StaticTableIndex.GetValueOrDefault()
-                  )
+                    http2StaticTableIndex.GetValueOrDefault()
+                )
                 : HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewNameToAllocatedArray(Name);
 
             Http3EncodedName = http3StaticTableIndex.HasValue
                 ? QPack.QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(
-                      http3StaticTableIndex.GetValueOrDefault()
-                  )
+                    http3StaticTableIndex.GetValueOrDefault()
+                )
                 : QPack.QPackEncoder.EncodeLiteralHeaderFieldWithoutNameReferenceToArray(Name);
         }
 

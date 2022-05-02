@@ -354,13 +354,13 @@ namespace Roslyn.Test.Utilities
             var workspace = languageName switch
             {
                 LanguageNames.CSharp
-                  => TestWorkspace.CreateCSharp(markups, composition: Composition),
+                    => TestWorkspace.CreateCSharp(markups, composition: Composition),
                 LanguageNames.VisualBasic
-                  => TestWorkspace.CreateVisualBasic(markups, composition: Composition),
+                    => TestWorkspace.CreateVisualBasic(markups, composition: Composition),
                 _
-                  => throw new ArgumentException(
-                      $"language name {languageName} is not valid for a test workspace"
-                  ),
+                    => throw new ArgumentException(
+                        $"language name {languageName} is not valid for a test workspace"
+                    ),
             };
 
             return CreateTestLspServerAsync(workspace);

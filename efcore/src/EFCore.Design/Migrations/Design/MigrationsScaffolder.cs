@@ -159,9 +159,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             var downOperations =
                 upOperations.Count > 0
                     ? Dependencies.MigrationsModelDiffer.GetDifferences(
-                          Dependencies.Model.GetRelationalModel(),
-                          lastModel
-                      )
+                        Dependencies.Model.GetRelationalModel(),
+                        lastModel
+                    )
                     : new List<MigrationOperation>();
             var migrationId = Dependencies.MigrationsIdGenerator.GenerateId(migrationName);
             var modelSnapshotNamespace = overrideNamespace
@@ -232,10 +232,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             rootNamespace ??= string.Empty;
 
             return @namespace == rootNamespace
-              ? string.Empty
-              : @namespace.StartsWith(rootNamespace + '.', StringComparison.Ordinal)
-                  ? @namespace.Substring(rootNamespace.Length + 1)
-                  : @namespace;
+                ? string.Empty
+                : @namespace.StartsWith(rootNamespace + '.', StringComparison.Ordinal)
+                    ? @namespace.Substring(rootNamespace.Length + 1)
+                    : @namespace;
         }
 
         /// <summary>
@@ -324,8 +324,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                         {
                             Dependencies.Migrator.Migrate(
                                 migrations.Count > 1
-                                  ? migrations[migrations.Count - 2].GetId()
-                                  : Migration.InitialDatabase
+                                    ? migrations[migrations.Count - 2].GetId()
+                                    : Migration.InitialDatabase
                             );
                         }
                         else
@@ -377,8 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                     model =
                         migrations.Count > 1
                             ? Dependencies.SnapshotModelProcessor.Process(
-                                  migrations[migrations.Count - 2].TargetModel
-                              )
+                                migrations[migrations.Count - 2].TargetModel
+                            )
                             : null;
                 }
                 else

@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
 internal class TlsConnectionFeature
     : ITlsConnectionFeature,
-      ITlsApplicationProtocolFeature,
-      ITlsHandshakeFeature
+        ITlsApplicationProtocolFeature,
+        ITlsHandshakeFeature
 {
     private readonly SslStream _sslStream;
     private X509Certificate2? _clientCert;

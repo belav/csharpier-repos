@@ -48,7 +48,7 @@ namespace System.Security.Cryptography
 
     public sealed partial class AsnEncodedDataCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public AsnEncodedDataCollection() { }
 
@@ -117,7 +117,7 @@ namespace System.Security.Cryptography
 
     public partial class FromBase64Transform
         : System.IDisposable,
-          System.Security.Cryptography.ICryptoTransform
+            System.Security.Cryptography.ICryptoTransform
     {
         public FromBase64Transform() { }
 
@@ -212,7 +212,7 @@ namespace System.Security.Cryptography
 
     public sealed partial class OidCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public OidCollection() { }
 
@@ -353,7 +353,7 @@ namespace System.Security.Cryptography
 
     public partial class ToBase64Transform
         : System.IDisposable,
-          System.Security.Cryptography.ICryptoTransform
+            System.Security.Cryptography.ICryptoTransform
     {
         public ToBase64Transform() { }
 

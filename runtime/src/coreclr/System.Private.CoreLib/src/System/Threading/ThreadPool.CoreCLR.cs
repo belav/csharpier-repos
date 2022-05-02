@@ -238,9 +238,9 @@ namespace System.Threading
         private static bool GetEnableWorkerTracking() =>
             UsePortableThreadPool
                 ? AppContextConfigHelper.GetBooleanConfig(
-                      "System.Threading.ThreadPool.EnableWorkerTracking",
-                      false
-                  )
+                    "System.Threading.ThreadPool.EnableWorkerTracking",
+                    false
+                )
                 : GetEnableWorkerTrackingNative();
 
         [MethodImpl(MethodImplOptions.InternalCall)]

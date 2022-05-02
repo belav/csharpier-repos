@@ -102,8 +102,8 @@ namespace Tracing.Tests.GCEvents
                 );
 
                 return GCStartStopResult && GCRestartEEStartStopResult && GCSuspendEEStartStopResult
-                  ? 100
-                  : -1;
+                    ? 100
+                    : -1;
             };
         };
     }

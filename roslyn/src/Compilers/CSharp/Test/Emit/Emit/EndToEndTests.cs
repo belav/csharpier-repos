@@ -116,9 +116,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Debug) => 250, // 225,
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Release) => 700, // 620
                 _
-                  => throw new Exception(
-                      $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
-                  )
+                    => throw new Exception(
+                        $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             // <path>\xunit.console.exe "<path>\CSharpCompilerEmitTest\Roslyn.Compilers.CSharp.Emit.UnitTests.dll"  -noshadow -verbose -class "Microsoft.CodeAnalysis.CSharp.UnitTests.Emit.EndToEndTests"
@@ -182,9 +182,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Debug) => 270, // 170
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Release) => 730, // 730
                 _
-                  => throw new Exception(
-                      $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
-                  )
+                    => throw new Exception(
+                        $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             // Un-comment loop below and use above commands to figure out the new limits
@@ -275,9 +275,9 @@ public class Test
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Debug) => 200,
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Release) => 780,
                 _
-                  => throw new Exception(
-                      $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
-                  )
+                    => throw new Exception(
+                        $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             RunTest(nestingLevel, runTest);
@@ -335,9 +335,9 @@ public class Test
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Debug) => 180,
                 (ExecutionArchitecture.x64, ExecutionConfiguration.Release) => 480,
                 _
-                  => throw new Exception(
-                      $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
-                  )
+                    => throw new Exception(
+                        $"Unexpected configuration {ExecutionConditionUtil.Architecture} {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             RunTest(n, runTest);

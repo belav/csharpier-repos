@@ -16,16 +16,16 @@ namespace System.Globalization.Tests
         {
             var newCurrentCulture = new CultureInfo(
                 CultureInfo.CurrentCulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
-                  ? "en-US"
-                  : "ja-JP"
+                    ? "en-US"
+                    : "ja-JP"
             );
             var newCurrentUICulture = new CultureInfo(
                 CultureInfo.CurrentUICulture.Name.Equals(
                     "ja-JP",
                     StringComparison.OrdinalIgnoreCase
                 )
-                  ? "en-US"
-                  : "ja-JP"
+                    ? "en-US"
+                    : "ja-JP"
             );
             using (new ThreadCultureChange(newCurrentCulture, newCurrentUICulture))
             {
@@ -47,16 +47,16 @@ namespace System.Globalization.Tests
         {
             var newCurrentCulture = new CultureInfo(
                 CultureInfo.CurrentCulture.Name.Equals("ja-JP", StringComparison.OrdinalIgnoreCase)
-                  ? "en-US"
-                  : "ja-JP"
+                    ? "en-US"
+                    : "ja-JP"
             );
             var newCurrentUICulture = new CultureInfo(
                 CultureInfo.CurrentUICulture.Name.Equals(
                     "ja-JP",
                     StringComparison.OrdinalIgnoreCase
                 )
-                  ? "en-US"
-                  : "ja-JP"
+                    ? "en-US"
+                    : "ja-JP"
             );
             using (new ThreadCultureChange(newCurrentCulture, newCurrentUICulture))
             {

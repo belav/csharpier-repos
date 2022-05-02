@@ -12,7 +12,7 @@ namespace System.IO.Enumeration
     /// <typeparam name="TResult">The type of the result produced by this file system enumerator.</typeparam>
     public unsafe abstract partial class FileSystemEnumerator<TResult>
         : CriticalFinalizerObject,
-          IEnumerator<TResult>
+            IEnumerator<TResult>
     {
         private int _remainingRecursionDepth;
 

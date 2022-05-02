@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case SyntaxKind.RecursivePattern:
                 case SyntaxKind.DiscardPattern:
                 case SyntaxKind.VarPattern
-                      when ((VarPatternSyntax)node).Designation.Kind
-                          == SyntaxKind.ParenthesizedVariableDesignation:
+                when ((VarPatternSyntax)node).Designation.Kind
+                    == SyntaxKind.ParenthesizedVariableDesignation:
                     return this.CheckFeatureAvailability(
                         node,
                         MessageID.IDS_FeatureRecursivePatterns
@@ -51,10 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 ConstantPatternSyntax cp
                     when ConvertExpressionToType(cp.Expression, out NameSyntax type)
-                  => type,
+                    => type,
                 TypePatternSyntax tp => tp.Type,
                 DiscardPatternSyntax dp
-                  => _syntaxFactory.IdentifierName(ConvertToIdentifier(dp.UnderscoreToken)),
+                    => _syntaxFactory.IdentifierName(ConvertToIdentifier(dp.UnderscoreToken)),
                 var p => p,
             };
         }
@@ -573,9 +573,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         out ExpressionSyntax expr,
                         permitTypeArguments
                     )
-                  => expr,
+                    => expr,
                 DiscardPatternSyntax dp
-                  => _syntaxFactory.IdentifierName(ConvertToIdentifier(dp.UnderscoreToken)),
+                    => _syntaxFactory.IdentifierName(ConvertToIdentifier(dp.UnderscoreToken)),
                 var p => p,
             };
         }
@@ -606,8 +606,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         out var leftExpr,
                         permitTypeArguments: true
                     )
-                      ? leftExpr
-                      : left;
+                        ? leftExpr
+                        : left;
                     expr = _syntaxFactory.MemberAccessExpression(
                         SyntaxKind.SimpleMemberAccessExpression,
                         newLeft,
@@ -763,12 +763,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 exprColon = expr is IdentifierNameSyntax identifierName
                     ? _syntaxFactory.NameColon(identifierName, colon)
                     : _syntaxFactory.ExpressionColon(
-                          CheckFeatureAvailability(
-                              expr,
-                              MessageID.IDS_FeatureExtendedPropertyPatterns
-                          ),
-                          colon
-                      );
+                        CheckFeatureAvailability(
+                            expr,
+                            MessageID.IDS_FeatureExtendedPropertyPatterns
+                        ),
+                        colon
+                    );
 
                 pattern = ParsePattern(Precedence.Conditional);
             }

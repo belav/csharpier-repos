@@ -686,8 +686,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     DefineLocal(
                         local,
                         !declaringReferences.IsEmpty
-                          ? (CSharpSyntaxNode)declaringReferences[0].GetSyntax()
-                          : block.Syntax
+                            ? (CSharpSyntaxNode)declaringReferences[0].GetSyntax()
+                            : block.Syntax
                     );
                 }
             }
@@ -812,8 +812,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 var unexpectedTemp = this.EmitAddress(
                     expressionOpt,
                     this._method.RefKind == RefKind.RefReadOnly
-                      ? AddressKind.ReadOnlyStrict
-                      : AddressKind.Writeable
+                        ? AddressKind.ReadOnlyStrict
+                        : AddressKind.Writeable
                 );
                 Debug.Assert(unexpectedTemp == null, "ref-returning a temp?");
             }
@@ -1006,15 +1006,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 var exceptionType =
                     ((object)catchBlock.ExceptionTypeOpt != null)
                         ? _module.Translate(
-                              catchBlock.ExceptionTypeOpt,
-                              catchBlock.Syntax,
-                              _diagnostics
-                          )
+                            catchBlock.ExceptionTypeOpt,
+                            catchBlock.Syntax,
+                            _diagnostics
+                        )
                         : _module.GetSpecialType(
-                              SpecialType.System_Object,
-                              catchBlock.Syntax,
-                              _diagnostics
-                          );
+                            SpecialType.System_Object,
+                            catchBlock.Syntax,
+                            _diagnostics
+                        );
 
                 _builder.OpenLocalScope(ScopeType.Catch, exceptionType);
 
@@ -1564,8 +1564,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 // We can't declare a reference to void, so if the pointed-at type is void, use native int
                 // (represented here by IntPtr) instead.
                 translatedType = pointedAtType.IsVoidType()
-                  ? _module.GetSpecialType(SpecialType.System_IntPtr, syntaxNode, _diagnostics)
-                  : _module.Translate(pointedAtType, syntaxNode, _diagnostics);
+                    ? _module.GetSpecialType(SpecialType.System_IntPtr, syntaxNode, _diagnostics)
+                    : _module.Translate(pointedAtType, syntaxNode, _diagnostics);
             }
             else
             {

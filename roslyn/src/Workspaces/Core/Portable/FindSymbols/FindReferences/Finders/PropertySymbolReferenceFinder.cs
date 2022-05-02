@@ -71,26 +71,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 .ConfigureAwait(false);
 
             var forEachDocuments = IsForEachProperty(symbol)
-              ? await FindDocumentsWithForEachStatementsAsync(project, documents, cancellationToken)
+                ? await FindDocumentsWithForEachStatementsAsync(
+                        project,
+                        documents,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false)
-              : ImmutableArray<Document>.Empty;
+                : ImmutableArray<Document>.Empty;
 
             var elementAccessDocument = symbol.IsIndexer
                 ? await FindDocumentWithElementAccessExpressionsAsync(
-                          project,
-                          documents,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
+                        project,
+                        documents,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
                 : ImmutableArray<Document>.Empty;
 
             var indexerMemberCrefDocument = symbol.IsIndexer
                 ? await FindDocumentWithIndexerMemberCrefAsync(
-                          project,
-                          documents,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
+                        project,
+                        documents,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
                 : ImmutableArray<Document>.Empty;
 
             var documentsWithGlobalAttributes = await FindDocumentsWithGlobalAttributesAsync(
@@ -154,24 +158,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             }
 
             var forEachReferences = IsForEachProperty(symbol)
-              ? await FindReferencesInForEachStatementsAsync(
+                ? await FindReferencesInForEachStatementsAsync(
                         symbol,
                         document,
                         semanticModel,
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-              : ImmutableArray<FinderLocation>.Empty;
+                : ImmutableArray<FinderLocation>.Empty;
 
             var indexerReferences = symbol.IsIndexer
                 ? await FindIndexerReferencesAsync(
-                          symbol,
-                          document,
-                          semanticModel,
-                          options,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
+                        symbol,
+                        document,
+                        semanticModel,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
                 : ImmutableArray<FinderLocation>.Empty;
 
             var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(

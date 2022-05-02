@@ -11,8 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindQueryFiltersQuerySqlServerTest
         : NorthwindQueryFiltersQueryTestBase<
-              NorthwindQuerySqlServerFixture<NorthwindQueryFiltersCustomizer>
-          >
+            NorthwindQuerySqlServerFixture<NorthwindQueryFiltersCustomizer>
+        >
     {
         public NorthwindQueryFiltersQuerySqlServerTest(
             NorthwindQuerySqlServerFixture<NorthwindQueryFiltersCustomizer> fixture,

@@ -1470,8 +1470,8 @@ namespace System.Threading.Tasks
         internal static Task? InternalCurrentIfAttached(TaskCreationOptions creationOptions)
         {
             return (creationOptions & TaskCreationOptions.AttachedToParent) != 0
-              ? InternalCurrent
-              : null;
+                ? InternalCurrent
+                : null;
         }
 
         /// <summary>
@@ -3214,7 +3214,7 @@ namespace System.Threading.Tasks
         /// <summary>Task that's completed when another task, timeout, or cancellation token triggers.</summary>
         private protected sealed class CancellationPromise<TResult>
             : Task<TResult>,
-              ITaskCompletionAction
+                ITaskCompletionAction
         {
             /// <summary>The source task.  It's stored so that we can remove the continuation from it upon timeout or cancellation.</summary>
             private readonly Task _task;
@@ -3288,16 +3288,16 @@ namespace System.Threading.Tasks
                 bool set = completingTask.Status switch
                 {
                     TaskStatus.Canceled
-                      => TrySetCanceled(
-                          completingTask.CancellationToken,
-                          completingTask.GetCancellationExceptionDispatchInfo()
-                      ),
+                        => TrySetCanceled(
+                            completingTask.CancellationToken,
+                            completingTask.GetCancellationExceptionDispatchInfo()
+                        ),
                     TaskStatus.Faulted
-                      => TrySetException(completingTask.GetExceptionDispatchInfos()),
+                        => TrySetException(completingTask.GetExceptionDispatchInfos()),
                     _
-                      => completingTask is Task<TResult> taskTResult
-                          ? TrySetResult(taskTResult.Result)
-                          : TrySetResult(),
+                        => completingTask is Task<TResult> taskTResult
+                            ? TrySetResult(taskTResult.Result)
+                            : TrySetResult(),
                 };
 
                 if (set)
@@ -3358,8 +3358,8 @@ namespace System.Threading.Tasks
                 Task? currentTask = Task.InternalCurrent;
                 log.TaskWaitBegin(
                     currentTask != null
-                      ? currentTask.m_taskScheduler!.Id
-                      : TaskScheduler.Default.Id,
+                        ? currentTask.m_taskScheduler!.Id
+                        : TaskScheduler.Default.Id,
                     currentTask != null ? currentTask.Id : 0,
                     this.Id,
                     TplEventSource.TaskWaitBehavior.Synchronous,
@@ -6766,9 +6766,9 @@ namespace System.Threading.Tasks
         {
             Debug.Assert(tasks != null, "Expected a non-null tasks array");
             return (tasks.Length == 0)
-              ? // take shortcut if there are no tasks upon which to wait
+                ? // take shortcut if there are no tasks upon which to wait
                 Task.CompletedTask
-              : new WhenAllPromise(tasks);
+                : new WhenAllPromise(tasks);
         }
 
         // A Task that gets completed when all of its constituent tasks complete.
@@ -7039,9 +7039,14 @@ namespace System.Threading.Tasks
         {
             Debug.Assert(tasks != null, "Expected a non-null tasks array");
             return (tasks.Length == 0)
-              ? // take shortcut if there are no tasks upon which to wait
-                new Task<TResult[]>(false, Array.Empty<TResult>(), TaskCreationOptions.None, default)
-              : new WhenAllPromise<TResult>(tasks);
+                ? // take shortcut if there are no tasks upon which to wait
+                new Task<TResult[]>(
+                    false,
+                    Array.Empty<TResult>(),
+                    TaskCreationOptions.None,
+                    default
+                )
+                : new WhenAllPromise<TResult>(tasks);
         }
 
         // A Task<T> that gets completed when all of its constituent tasks complete.
@@ -7979,9 +7984,9 @@ namespace System.Threading.Tasks
                 case TaskStatus.RanToCompletion:
                     ProcessInnerTask(
                         task is Task<Task<TResult>> taskOfTaskOfTResult
-                          ? // it's either a Task<Task> or Task<Task<TResult>>
+                            ? // it's either a Task<Task> or Task<Task<TResult>>
                             taskOfTaskOfTResult.Result
-                          : ((Task<Task>)task).Result
+                            : ((Task<Task>)task).Result
                     );
                     break;
             }

@@ -117,8 +117,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 TypeManager
                     .GetPredefAgg(
                         method.IsConstructor()
-                          ? PredefinedType.PT_CONSTRUCTORINFO
-                          : PredefinedType.PT_METHODINFO
+                            ? PredefinedType.PT_CONSTRUCTORINFO
+                            : PredefinedType.PT_METHODINFO
                     )
                     .getThisType(),
                 method,
@@ -269,8 +269,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert(arg1 != null);
             Debug.Assert(exprKind.IsUnaryOperator() == (arg2 == null));
             return exprKind.IsUnaryOperator()
-              ? (ExprOperator)CreateUnaryOp(exprKind, type, arg1)
-              : CreateBinop(exprKind, type, arg1, arg2);
+                ? (ExprOperator)CreateUnaryOp(exprKind, type, arg1)
+                : CreateBinop(exprKind, type, arg1, arg2);
         }
 
         public static ExprBinOp CreateUserDefinedBinop(

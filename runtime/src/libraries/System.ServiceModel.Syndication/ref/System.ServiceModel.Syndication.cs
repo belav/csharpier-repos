@@ -12,7 +12,7 @@ namespace System.ServiceModel.Syndication
     )]
     public partial class Atom10FeedFormatter
         : System.ServiceModel.Syndication.SyndicationFeedFormatter,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public Atom10FeedFormatter() { }
 
@@ -116,7 +116,7 @@ namespace System.ServiceModel.Syndication
     )]
     public partial class Atom10ItemFormatter
         : System.ServiceModel.Syndication.SyndicationItemFormatter,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public Atom10ItemFormatter() { }
 
@@ -191,7 +191,7 @@ namespace System.ServiceModel.Syndication
     )]
     public partial class AtomPub10CategoriesDocumentFormatter
         : System.ServiceModel.Syndication.CategoriesDocumentFormatter,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public AtomPub10CategoriesDocumentFormatter() { }
 
@@ -244,7 +244,7 @@ namespace System.ServiceModel.Syndication
     )]
     public partial class AtomPub10ServiceDocumentFormatter
         : System.ServiceModel.Syndication.ServiceDocumentFormatter,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public AtomPub10ServiceDocumentFormatter() { }
 
@@ -574,7 +574,7 @@ namespace System.ServiceModel.Syndication
     [System.Xml.Serialization.XmlRootAttribute(ElementName = "rss", Namespace = "")]
     public partial class Rss20FeedFormatter
         : System.ServiceModel.Syndication.SyndicationFeedFormatter,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public Rss20FeedFormatter() { }
 
@@ -688,7 +688,7 @@ namespace System.ServiceModel.Syndication
     [System.Xml.Serialization.XmlRootAttribute(ElementName = "item", Namespace = "")]
     public partial class Rss20ItemFormatter
         : System.ServiceModel.Syndication.SyndicationItemFormatter,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
     {
         public Rss20ItemFormatter() { }
 
@@ -752,7 +752,7 @@ namespace System.ServiceModel.Syndication
     [System.Xml.Serialization.XmlRootAttribute(ElementName = "item", Namespace = "")]
     public partial class Rss20ItemFormatter<TSyndicationItem>
         : System.ServiceModel.Syndication.Rss20ItemFormatter,
-          System.Xml.Serialization.IXmlSerializable
+            System.Xml.Serialization.IXmlSerializable
         where TSyndicationItem : System.ServiceModel.Syndication.SyndicationItem, new()
     {
         public Rss20ItemFormatter() { }

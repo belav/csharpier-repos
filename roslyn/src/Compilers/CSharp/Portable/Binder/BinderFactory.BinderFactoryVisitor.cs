@@ -478,8 +478,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case SyntaxKind.ConstructorDeclaration:
                         return (
                             baseMethodDeclarationSyntax.Modifiers.Any(SyntaxKind.StaticKeyword)
-                              ? WellKnownMemberNames.StaticConstructorName
-                              : WellKnownMemberNames.InstanceConstructorName
+                                ? WellKnownMemberNames.StaticConstructorName
+                                : WellKnownMemberNames.InstanceConstructorName
                         );
                     case SyntaxKind.DestructorDeclaration:
                         return WellKnownMemberNames.DestructorName;
@@ -1073,10 +1073,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var extraInfo = inUsing
                     ? (
-                          inScript
-                              ? NodeUsage.CompilationUnitScriptUsings
-                              : NodeUsage.CompilationUnitUsings
-                      )
+                        inScript
+                            ? NodeUsage.CompilationUnitScriptUsings
+                            : NodeUsage.CompilationUnitUsings
+                    )
                     : (inScript ? NodeUsage.CompilationUnitScript : NodeUsage.Normal); // extra info for the cache.
                 var key = CreateBinderCacheKey(compilationUnit, extraInfo);
 
@@ -1374,16 +1374,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     result =
                         (object)memberSyntax == null
                             ? MakeCrefBinderInternal(
-                                  crefSyntax,
-                                  VisitCore(parent.Parent),
-                                  inParameterOrReturnType
-                              )
+                                crefSyntax,
+                                VisitCore(parent.Parent),
+                                inParameterOrReturnType
+                            )
                             : MakeCrefBinder(
-                                  crefSyntax,
-                                  memberSyntax,
-                                  _factory,
-                                  inParameterOrReturnType
-                              );
+                                crefSyntax,
+                                memberSyntax,
+                                _factory,
+                                inParameterOrReturnType
+                            );
 
                     binderCache.TryAdd(key, result);
                 }

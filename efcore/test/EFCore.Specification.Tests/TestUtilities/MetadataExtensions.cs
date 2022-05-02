@@ -191,19 +191,19 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 );
                 var clonedNavigation = navigation.IsOnDependent
                     ? (
-                          navigation.GetIdentifyingMemberInfo() != null
-                              ? targetForeignKey.SetDependentToPrincipal(
-                                    navigation.GetIdentifyingMemberInfo()
-                                )
-                              : targetForeignKey.SetDependentToPrincipal(navigation.Name)
-                      )
+                        navigation.GetIdentifyingMemberInfo() != null
+                            ? targetForeignKey.SetDependentToPrincipal(
+                                navigation.GetIdentifyingMemberInfo()
+                            )
+                            : targetForeignKey.SetDependentToPrincipal(navigation.Name)
+                    )
                     : (
-                          navigation.GetIdentifyingMemberInfo() != null
-                              ? targetForeignKey.SetPrincipalToDependent(
-                                    navigation.GetIdentifyingMemberInfo()
-                                )
-                              : targetForeignKey.SetPrincipalToDependent(navigation.Name)
-                      );
+                        navigation.GetIdentifyingMemberInfo() != null
+                            ? targetForeignKey.SetPrincipalToDependent(
+                                navigation.GetIdentifyingMemberInfo()
+                            )
+                            : targetForeignKey.SetPrincipalToDependent(navigation.Name)
+                    );
                 navigation
                     .GetAnnotations()
                     .ForEach(annotation => clonedNavigation[annotation.Name] = annotation.Value);

@@ -115,14 +115,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             }
 
             return _typeMapping.TryGetValue(instance.Type, out var storeType)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     "CONVERT",
                     new[] { _sqlExpressionFactory.Fragment(storeType), instance },
                     nullable: true,
                     argumentsPropagateNullability: new[] { false, true },
                     typeof(string)
                 )
-              : null;
+                : null;
         }
     }
 }

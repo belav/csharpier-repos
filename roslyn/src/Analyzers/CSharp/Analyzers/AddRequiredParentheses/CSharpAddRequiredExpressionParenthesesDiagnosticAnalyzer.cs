@@ -16,10 +16,10 @@ namespace Microsoft.CodeAnalysis.CSharp.AddRequiredParentheses
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpAddRequiredExpressionParenthesesDiagnosticAnalyzer
         : AbstractAddRequiredParenthesesDiagnosticAnalyzer<
-              ExpressionSyntax,
-              ExpressionSyntax,
-              SyntaxKind
-          >
+            ExpressionSyntax,
+            ExpressionSyntax,
+            SyntaxKind
+        >
     {
         public CSharpAddRequiredExpressionParenthesesDiagnosticAnalyzer()
             : base(CSharpExpressionPrecedenceService.Instance) { }

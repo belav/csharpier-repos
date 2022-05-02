@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
     public abstract class ExpressionCompiler
         : IDkmClrExpressionCompiler,
-          IDkmClrExpressionCompilerCallback,
-          IDkmModuleModifiedNotification,
-          IDkmModuleInstanceUnloadNotification,
-          IDkmLanguageFrameDecoder,
-          IDkmLanguageInstructionDecoder
+            IDkmClrExpressionCompilerCallback,
+            IDkmModuleModifiedNotification,
+            IDkmModuleInstanceUnloadNotification,
+            IDkmLanguageFrameDecoder,
+            IDkmLanguageInstructionDecoder
     {
         // Need to support IDkmLanguageFrameDecoder and IDkmLanguageInstructionDecoder
         // See https://github.com/dotnet/roslyn/issues/22620
@@ -285,8 +285,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 return MakeAssemblyReferencesKind.DirectReferencesOnly;
             }
             return _useReferencedAssembliesOnly
-              ? MakeAssemblyReferencesKind.AllReferences
-              : MakeAssemblyReferencesKind.AllAssemblies;
+                ? MakeAssemblyReferencesKind.AllReferences
+                : MakeAssemblyReferencesKind.AllAssemblies;
         }
 
         /// <remarks>

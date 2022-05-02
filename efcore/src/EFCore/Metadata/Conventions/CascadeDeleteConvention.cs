@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class CascadeDeleteConvention
         : IForeignKeyAddedConvention,
-          IForeignKeyRequirednessChangedConvention
+            IForeignKeyRequirednessChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CascadeDeleteConvention" />.

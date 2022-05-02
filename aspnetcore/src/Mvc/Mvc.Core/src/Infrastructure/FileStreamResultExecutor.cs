@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// </summary>
 public class FileStreamResultExecutor
     : FileResultExecutorBase,
-      IActionResultExecutor<FileStreamResult>
+        IActionResultExecutor<FileStreamResult>
 {
     /// <summary>
     /// Initializes a new <see cref="FileStreamResultExecutor"/>.

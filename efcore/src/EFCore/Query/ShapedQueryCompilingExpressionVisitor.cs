@@ -109,14 +109,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                     case ResultCardinality.Single:
                         return QueryCompilationContext.IsAsync
-                          ? Expression.Call(
+                            ? Expression.Call(
                                 _singleAsyncMethodInfo.MakeGenericMethod(
                                     serverEnumerable.Type.GetSequenceType()
                                 ),
                                 serverEnumerable,
                                 _cancellationTokenParameter
                             )
-                          : Expression.Call(
+                            : Expression.Call(
                                 EnumerableMethods.SingleWithoutPredicate.MakeGenericMethod(
                                     serverEnumerable.Type.GetSequenceType()
                                 ),
@@ -125,14 +125,14 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                     case ResultCardinality.SingleOrDefault:
                         return QueryCompilationContext.IsAsync
-                          ? Expression.Call(
+                            ? Expression.Call(
                                 _singleOrDefaultAsyncMethodInfo.MakeGenericMethod(
                                     serverEnumerable.Type.GetSequenceType()
                                 ),
                                 serverEnumerable,
                                 _cancellationTokenParameter
                             )
-                          : Expression.Call(
+                            : Expression.Call(
                                 EnumerableMethods.SingleOrDefaultWithoutPredicate.MakeGenericMethod(
                                     serverEnumerable.Type.GetSequenceType()
                                 ),

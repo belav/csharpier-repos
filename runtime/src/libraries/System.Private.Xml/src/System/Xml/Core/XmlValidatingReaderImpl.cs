@@ -16,8 +16,8 @@ namespace System.Xml
 {
     internal sealed partial class XmlValidatingReaderImpl
         : XmlReader,
-          IXmlLineInfo,
-          IXmlNamespaceResolver
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         //
         // Private helper types
@@ -399,8 +399,8 @@ namespace System.Xml
             get
             {
                 return (_parsingFunction == ParsingFunction.Init)
-                  ? ReadState.Initial
-                  : _coreReader.ReadState;
+                    ? ReadState.Initial
+                    : _coreReader.ReadState;
             }
         }
 

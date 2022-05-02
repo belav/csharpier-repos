@@ -30,9 +30,9 @@ namespace Microsoft.Win32.SafeHandles
         /// </summary>
         internal sealed class ThreadPoolValueTaskSource
             : IThreadPoolWorkItem,
-              IValueTaskSource<int>,
-              IValueTaskSource<long>,
-              IValueTaskSource
+                IValueTaskSource<int>,
+                IValueTaskSource<long>,
+                IValueTaskSource
         {
             private readonly SafeFileHandle _fileHandle;
             private ManualResetValueTaskSourceCore<long> _source;

@@ -81,7 +81,7 @@ namespace ILCompiler.DependencyAnalysis
 
         private class SimpleEmbeddedPointerIndirectionNode
             : EmbeddedPointerIndirectionNode<TTarget>,
-              ISimpleEmbeddedPointerIndirectionNode<TTarget>
+                ISimpleEmbeddedPointerIndirectionNode<TTarget>
         {
             protected ArrayOfEmbeddedPointersNode<TTarget> _parentNode;
 
@@ -125,7 +125,7 @@ namespace ILCompiler.DependencyAnalysis
 
         private class EmbeddedPointerIndirectionWithSymbolNode
             : SimpleEmbeddedPointerIndirectionNode,
-              ISymbolDefinitionNode
+                ISymbolDefinitionNode
         {
             private int _id;
 

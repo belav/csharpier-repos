@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Utilities
 {
     internal abstract class StringSliceComparer
         : IComparer<ReadOnlyMemory<char>>,
-          IEqualityComparer<ReadOnlyMemory<char>>
+            IEqualityComparer<ReadOnlyMemory<char>>
     {
         public static readonly StringSliceComparer Ordinal = new OrdinalComparer();
         public static readonly StringSliceComparer OrdinalIgnoreCase =

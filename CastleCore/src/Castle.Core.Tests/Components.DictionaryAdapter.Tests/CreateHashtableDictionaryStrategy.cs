@@ -19,8 +19,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
 
     public class CreateHashtableStrategy
         : DictionaryBehaviorAttribute,
-          IDictionaryInitializer,
-          IDictionaryCreateStrategy
+            IDictionaryInitializer,
+            IDictionaryCreateStrategy
     {
         public void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors)
         {

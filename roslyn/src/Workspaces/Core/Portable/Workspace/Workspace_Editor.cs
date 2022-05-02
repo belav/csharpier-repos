@@ -279,8 +279,8 @@ namespace Microsoft.CodeAnalysis
 
         private DocumentId? GetDocumentIdInCurrentContext_NoLock(SourceTextContainer container) =>
             _bufferToDocumentInCurrentContextMap.TryGetValue(container, out var documentId)
-              ? documentId
-              : null;
+                ? documentId
+                : null;
 
         /// <summary>
         /// Finds the <see cref="DocumentId"/> related to the given <see cref="DocumentId"/> that
@@ -592,8 +592,8 @@ namespace Microsoft.CodeAnalysis
             // if the supplied text is the same as the previous text, then also use same version
             // otherwise use new version
             return oldText.ContentEquals(newText)
-              ? TextAndVersion.Create(newText, version, filePath)
-              : TextAndVersion.Create(newText, version.GetNewerVersion(), filePath);
+                ? TextAndVersion.Create(newText, version, filePath)
+                : TextAndVersion.Create(newText, version.GetNewerVersion(), filePath);
         }
 
         private void SignupForTextChanges(

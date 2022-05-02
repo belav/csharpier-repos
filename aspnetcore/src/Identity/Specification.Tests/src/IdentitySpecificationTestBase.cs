@@ -151,8 +151,8 @@ public abstract class IdentitySpecificationTestBase<TUser, TRole, TKey>
 
     private class AlwaysBadValidator
         : IUserValidator<TUser>,
-          IRoleValidator<TRole>,
-          IPasswordValidator<TUser>
+            IRoleValidator<TRole>,
+            IPasswordValidator<TUser>
     {
         public static readonly IdentityError ErrorMessage = new IdentityError
         {

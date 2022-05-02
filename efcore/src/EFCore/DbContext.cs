@@ -60,9 +60,9 @@ namespace Microsoft.EntityFrameworkCore
     /// </remarks>
     public class DbContext
         : IInfrastructure<IServiceProvider>,
-          IDbContextDependencies,
-          IDbSetCache,
-          IDbContextPoolable
+            IDbContextDependencies,
+            IDbSetCache,
+            IDbContextPoolable
     {
         private readonly DbContextOptions _options;
 
@@ -762,8 +762,8 @@ namespace Microsoft.EntityFrameworkCore
                 var entitiesSaved = interceptionResult.HasResult
                     ? interceptionResult.Result
                     : await DbContextDependencies.StateManager
-                          .SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken)
-                          .ConfigureAwait(false);
+                        .SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken)
+                        .ConfigureAwait(false);
 
                 var result = await DbContextDependencies.UpdateLogger
                     .SaveChangesCompletedAsync(this, entitiesSaved, cancellationToken)
@@ -1154,14 +1154,14 @@ namespace Microsoft.EntityFrameworkCore
         )
         {
             return entry.EntityState == EntityState.Detached
-              ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
+                ? DbContextDependencies.EntityGraphAttacher.AttachGraphAsync(
                     entry,
                     entityState,
                     entityState,
                     forceStateWhenUnknownKey: true,
                     cancellationToken: cancellationToken
                 )
-              : entry.SetEntityStateAsync(
+                : entry.SetEntityStateAsync(
                     entityState,
                     acceptChanges: true,
                     forceStateWhenUnknownKey: entityState,

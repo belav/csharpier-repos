@@ -62,14 +62,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     .Append(" = ")
                     .Append(
                         (parameter.Value == DBNull.Value || parameter.Value == null)
-                          ? "NULL"
-                          : parameter.Value is SqlBytes sqlBytes
-                              ? new SqlServerByteArrayTypeMapping(typeName).GenerateSqlLiteral(
+                            ? "NULL"
+                            : parameter.Value is SqlBytes sqlBytes
+                                ? new SqlServerByteArrayTypeMapping(typeName).GenerateSqlLiteral(
                                     sqlBytes.Value
                                 )
-                              : typeMapping != null
-                                  ? typeMapping.GenerateSqlLiteral(parameter.Value)
-                                  : parameter.Value.ToString()
+                                : typeMapping != null
+                                    ? typeMapping.GenerateSqlLiteral(parameter.Value)
+                                    : parameter.Value.ToString()
                     )
                     .AppendLine(";");
             }
@@ -159,11 +159,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         SqlDbType.Date => builder.Append("date"),
                         SqlDbType.DateTime => builder.Append("datetime"),
                         SqlDbType.DateTime2
-                          => builder.Append("datetime2").AppendPrecision(parameter),
+                            => builder.Append("datetime2").AppendPrecision(parameter),
                         SqlDbType.DateTimeOffset
-                          => builder.Append("datetimeoffset").AppendPrecision(parameter),
+                            => builder.Append("datetimeoffset").AppendPrecision(parameter),
                         SqlDbType.Decimal
-                          => builder.Append("decimal").AppendPrecisionAndScale(parameter),
+                            => builder.Append("decimal").AppendPrecisionAndScale(parameter),
                         SqlDbType.Float => builder.Append("float").AppendSize(parameter),
                         SqlDbType.Image => builder.Append("image"),
                         SqlDbType.Int => builder.Append("int"),
@@ -183,7 +183,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         SqlDbType.Udt => builder.Append(sqlParameter.UdtTypeName),
                         SqlDbType.UniqueIdentifier => builder.Append("uniqueIdentifier"),
                         SqlDbType.VarBinary
-                          => builder.Append("varbinary").AppendSizeOrMax(parameter),
+                            => builder.Append("varbinary").AppendSizeOrMax(parameter),
                         SqlDbType.VarChar => builder.Append("varchar").AppendSizeOrMax(parameter),
                         SqlDbType.Variant => builder.Append("sql_variant"),
                         SqlDbType.Xml => builder.Append("xml"),

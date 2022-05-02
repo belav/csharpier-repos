@@ -10,8 +10,8 @@ namespace System.Configuration
                 "System.Configuration.ConfigurationManager.EnableUnsafeBinaryFormatterInPropertyValueSerialization",
                 out bool isEnabled
             )
-              ? isEnabled
-              : false;
+                ? isEnabled
+                : false;
 
         public virtual string Name { get; set; }
         public virtual bool IsReadOnly { get; set; }

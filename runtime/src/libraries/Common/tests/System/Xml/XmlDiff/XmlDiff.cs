@@ -344,32 +344,32 @@ namespace System.Xml.XmlDiff
                                         "SourceLineNum",
                                         string.Empty,
                                         (sourceElem != null)
-                                          ? sourceElem.EndLineNumber.ToString()
-                                          : "-1"
+                                            ? sourceElem.EndLineNumber.ToString()
+                                            : "-1"
                                     );
                                     _Writer.WriteAttributeString(
                                         string.Empty,
                                         "SourceLinePos",
                                         string.Empty,
                                         (sourceElem != null)
-                                          ? sourceElem.EndLinePosition.ToString()
-                                          : "-1"
+                                            ? sourceElem.EndLinePosition.ToString()
+                                            : "-1"
                                     );
                                     _Writer.WriteAttributeString(
                                         string.Empty,
                                         "TargetLineNum",
                                         string.Empty,
                                         (targetElem != null)
-                                          ? targetElem.EndLineNumber.ToString()
-                                          : "-1"
+                                            ? targetElem.EndLineNumber.ToString()
+                                            : "-1"
                                     );
                                     _Writer.WriteAttributeString(
                                         string.Empty,
                                         "TargetLinePos",
                                         string.Empty,
                                         (targetElem != null)
-                                          ? targetElem.EndLineNumber.ToString()
-                                          : "-1"
+                                            ? targetElem.EndLineNumber.ToString()
+                                            : "-1"
                                     );
                                     _Writer.WriteStartElement(string.Empty, "Diff", string.Empty);
                                     _Writer.WriteAttributeString(

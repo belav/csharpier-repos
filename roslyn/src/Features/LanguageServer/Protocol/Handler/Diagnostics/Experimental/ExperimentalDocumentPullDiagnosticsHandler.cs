@@ -28,10 +28,10 @@ using DocumentDiagnosticPartialReport = SumType<
 
 internal class ExperimentalDocumentPullDiagnosticsHandler
     : AbstractPullDiagnosticHandler<
-          DocumentDiagnosticParams,
-          DocumentDiagnosticPartialReport,
-          DocumentDiagnosticReport?
-      >
+        DocumentDiagnosticParams,
+        DocumentDiagnosticPartialReport,
+        DocumentDiagnosticReport?
+    >
 {
     private readonly IDiagnosticAnalyzerService _analyzerService;
 
@@ -65,8 +65,8 @@ internal class ExperimentalDocumentPullDiagnosticsHandler
             diagnostics == null
                 ? new DocumentDiagnosticReport(new UnchangedDocumentDiagnosticReport(resultId))
                 : new DocumentDiagnosticReport(
-                      new FullDocumentDiagnosticReport(resultId, diagnostics)
-                  );
+                    new FullDocumentDiagnosticReport(resultId, diagnostics)
+                );
         return report;
     }
 

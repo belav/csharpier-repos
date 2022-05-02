@@ -195,17 +195,17 @@ namespace System.Net.Security
             SafeFreeCredentials cred =
                 !UseNewCryptoApi || policy == EncryptionPolicy.NoEncryption
                     ? AcquireCredentialsHandleSchannelCred(
-                          certificateContext,
-                          protocols,
-                          policy,
-                          isServer
-                      )
+                        certificateContext,
+                        protocols,
+                        policy,
+                        isServer
+                    )
                     : AcquireCredentialsHandleSchCredentials(
-                          certificateContext,
-                          protocols,
-                          policy,
-                          isServer
-                      );
+                        certificateContext,
+                        protocols,
+                        policy,
+                        isServer
+                    );
             if (
                 certificateContext != null
                 && certificateContext.Trust != null

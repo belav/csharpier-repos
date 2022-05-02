@@ -107,7 +107,7 @@ namespace MS.Internal.Xml.XPath
                         : _scanner.Kind == XPathScanner.LexKind.Ne
                             ? Operator.Op.NE
                             :
-                              /*default :*/Operator.Op.INVALID
+                            /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -136,7 +136,7 @@ namespace MS.Internal.Xml.XPath
                                 : _scanner.Kind == XPathScanner.LexKind.Ge
                                     ? Operator.Op.GE
                                     :
-                                      /*default :*/Operator.Op.INVALID
+                                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -161,7 +161,7 @@ namespace MS.Internal.Xml.XPath
                         : _scanner.Kind == XPathScanner.LexKind.Minus
                             ? Operator.Op.MINUS
                             :
-                              /*default :*/Operator.Op.INVALID
+                            /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -188,7 +188,7 @@ namespace MS.Internal.Xml.XPath
                             : TestOp("mod")
                                 ? Operator.Op.MOD
                                 :
-                                  /*default :*/Operator.Op.INVALID
+                                /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -401,8 +401,8 @@ namespace MS.Internal.Xml.XPath
                     axisType == Axis.AxisType.Attribute
                         ? XPathNodeType.Attribute
                         :
-                          //                    axisType == Axis.AxisType.Namespace ? XPathNodeType.Namespace : // No Idea why it's this way but otherwise Axes doesn't work
-                          /* default: */XPathNodeType.Element
+                        //                    axisType == Axis.AxisType.Namespace ? XPathNodeType.Namespace : // No Idea why it's this way but otherwise Axes doesn't work
+                        /* default: */XPathNodeType.Element
                 );
 
                 opnd = ParseNodeTest(qyInput, axisType, nodeType);
@@ -442,7 +442,7 @@ namespace MS.Internal.Xml.XPath
                                         : _scanner.Name == "processing-instruction"
                                             ? XPathNodeType.ProcessingInstruction
                                             :
-                                              /* default: */XPathNodeType.Root
+                                            /* default: */XPathNodeType.Root
                         );
                         Debug.Assert(nodeType != XPathNodeType.Root);
                         NextLex();
@@ -781,7 +781,7 @@ namespace MS.Internal.Xml.XPath
                 axisType == Axis.AxisType.Attribute
                     ? XPathNodeType.Attribute
                     :
-                      /* default: */XPathNodeType.Element
+                    /* default: */XPathNodeType.Element
             );
 
             opnd = ParseNodeTest(qyInput, axisType, nodeType);

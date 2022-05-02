@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateEnumMember
         TExpressionSyntax
     >
         : AbstractGenerateMemberService<TSimpleNameSyntax, TExpressionSyntax>,
-          IGenerateEnumMemberService
+            IGenerateEnumMemberService
         where TService : AbstractGenerateEnumMemberService<
                 TService,
                 TSimpleNameSyntax,

@@ -963,8 +963,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 .Select(
                     pi =>
                         primaryKeyPropertyGroups.ContainsKey(pi)
-                          ? primaryKeyPropertyGroups[pi]
-                          : null
+                            ? primaryKeyPropertyGroups[pi]
+                            : null
                 )
                 // ReSharper disable once RedundantEnumerableCastCall
                 .Where(e => e != null)

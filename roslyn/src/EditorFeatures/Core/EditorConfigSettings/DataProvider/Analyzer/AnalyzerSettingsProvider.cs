@@ -18,11 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
 {
     internal class AnalyzerSettingsProvider
         : SettingsProviderBase<
-              AnalyzerSetting,
-              AnalyzerSettingsUpdater,
-              AnalyzerSetting,
-              DiagnosticSeverity
-          >
+            AnalyzerSetting,
+            AnalyzerSettingsUpdater,
+            AnalyzerSetting,
+            DiagnosticSeverity
+        >
     {
         private readonly IDiagnosticAnalyzerService _analyzerService;
 
@@ -105,8 +105,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
                             );
                             var settingLocation = new SettingLocation(
                                 isEditorconfig
-                                  ? LocationKind.EditorConfig
-                                  : LocationKind.VisualStudio,
+                                    ? LocationKind.EditorConfig
+                                    : LocationKind.VisualStudio,
                                 FileName
                             );
                             var severity = selectedDiagnostic.GetEffectiveSeverity(

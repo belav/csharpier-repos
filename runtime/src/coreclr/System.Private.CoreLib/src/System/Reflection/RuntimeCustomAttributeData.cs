@@ -710,10 +710,10 @@ namespace System.Reflection
                 CustomAttributeEncoding.Double => typeof(double),
                 CustomAttributeEncoding.Object => typeof(object),
                 _
-                  => throw new ArgumentException(
-                      SR.Format(SR.Arg_EnumIllegalVal, (int)encodedType),
-                      nameof(encodedType)
-                  ),
+                    => throw new ArgumentException(
+                        SR.Format(SR.Arg_EnumIllegalVal, (int)encodedType),
+                        nameof(encodedType)
+                    ),
             };
         }
 
@@ -1191,8 +1191,8 @@ namespace System.Reflection
 
             if (type.GetElementType() is not null)
                 return (caType.IsValueType)
-                  ? Array.Empty<object>()
-                  : CreateAttributeArrayHelper(caType, 0);
+                    ? Array.Empty<object>()
+                    : CreateAttributeArrayHelper(caType, 0);
 
             if (type.IsGenericType && !type.IsGenericTypeDefinition)
                 type = (type.GetGenericTypeDefinition() as RuntimeType)!;
@@ -1870,8 +1870,8 @@ namespace System.Reflection
                 RuntimeMethodHandle.IsCAVisibleFromDecoratedType(
                     new QCallTypeHandle(ref attributeTypeHandle),
                     ctorWithParameters is not null
-                      ? ctorWithParameters.Value
-                      : RuntimeMethodHandleInternal.EmptyHandle,
+                        ? ctorWithParameters.Value
+                        : RuntimeMethodHandleInternal.EmptyHandle,
                     new QCallTypeHandle(ref parentTypeHandle),
                     new QCallModule(ref decoratedModule)
                 ) != Interop.BOOL.FALSE;
@@ -2460,8 +2460,8 @@ namespace System.Reflection
             RuntimeType? safeArrayUserDefinedType = string.IsNullOrEmpty(
                 safeArrayUserDefinedTypeName
             )
-              ? null
-              : RuntimeTypeHandle.GetTypeByNameUsingCARules(safeArrayUserDefinedTypeName, scope);
+                ? null
+                : RuntimeTypeHandle.GetTypeByNameUsingCARules(safeArrayUserDefinedTypeName, scope);
             RuntimeType? marshalTypeRef = null;
 
             try

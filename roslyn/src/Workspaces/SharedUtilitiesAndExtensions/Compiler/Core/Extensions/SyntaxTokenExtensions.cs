@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<T> GetAncestors<T>(this SyntaxToken token) where T : SyntaxNode
         {
             return token.Parent != null
-              ? token.Parent.AncestorsAndSelf().OfType<T>()
-              : SpecializedCollections.EmptyEnumerable<T>();
+                ? token.Parent.AncestorsAndSelf().OfType<T>()
+                : SpecializedCollections.EmptyEnumerable<T>();
         }
 
         public static IEnumerable<SyntaxNode> GetAncestors(
@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             return token.Parent != null
-              ? token.Parent.AncestorsAndSelf().Where(predicate)
-              : SpecializedCollections.EmptyEnumerable<SyntaxNode>();
+                ? token.Parent.AncestorsAndSelf().Where(predicate)
+                : SpecializedCollections.EmptyEnumerable<SyntaxNode>();
         }
 
         public static SyntaxNode? GetCommonRoot(this SyntaxToken token1, SyntaxToken token2)
@@ -109,11 +109,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             );
 
             return nextToken.RawKind == 0
-              ? (
+                ? (
                     (ICompilationUnitSyntax)
                         token.Parent!.SyntaxTree!.GetRoot(CancellationToken.None)
                 ).EndOfFileToken
-              : nextToken;
+                : nextToken;
         }
 
         public static SyntaxToken WithoutTrivia(this SyntaxToken token)

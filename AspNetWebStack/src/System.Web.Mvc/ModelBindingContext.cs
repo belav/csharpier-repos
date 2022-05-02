@@ -131,7 +131,7 @@ namespace System.Web.Mvc
         // Used to wrap an IValueProvider in an IUnvalidatedValueProvider
         private sealed class UnvalidatedValueProviderWrapper
             : IValueProvider,
-              IUnvalidatedValueProvider
+                IUnvalidatedValueProvider
         {
             private readonly IValueProvider _backingProvider;
 

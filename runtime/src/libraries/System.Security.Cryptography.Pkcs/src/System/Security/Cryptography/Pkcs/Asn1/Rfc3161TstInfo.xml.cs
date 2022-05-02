@@ -183,8 +183,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             );
             tmpSpan = sequenceReader.ReadIntegerBytes();
             decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset)
-              ? rebind.Slice(offset, tmpSpan.Length)
-              : tmpSpan.ToArray();
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             decoded.GenTime = sequenceReader.ReadGeneralizedTime();
 
             if (
@@ -221,8 +221,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 tmpSpan = sequenceReader.ReadIntegerBytes();
                 decoded.Nonce = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
 
             if (

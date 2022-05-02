@@ -55,28 +55,28 @@ internal static partial class Interop
                     errorMessage =
                         (majorError != null && minorError != null)
                             ? SR.Format(
-                                  SR.net_gssapi_operation_failed_detailed,
-                                  majorError,
-                                  minorError
-                              )
+                                SR.net_gssapi_operation_failed_detailed,
+                                majorError,
+                                minorError
+                            )
                             : SR.Format(
-                                  SR.net_gssapi_operation_failed,
-                                  majorStatus.ToString("x"),
-                                  minorStatus.ToString("x")
-                              );
+                                SR.net_gssapi_operation_failed,
+                                majorStatus.ToString("x"),
+                                minorStatus.ToString("x")
+                            );
                 }
                 else
                 {
                     errorMessage =
                         (majorError != null)
                             ? SR.Format(
-                                  SR.net_gssapi_operation_failed_detailed_majoronly,
-                                  majorError
-                              )
+                                SR.net_gssapi_operation_failed_detailed_majoronly,
+                                majorError
+                            )
                             : SR.Format(
-                                  SR.net_gssapi_operation_failed_majoronly,
-                                  majorStatus.ToString("x")
-                              );
+                                SR.net_gssapi_operation_failed_majoronly,
+                                majorStatus.ToString("x")
+                            );
                 }
 
                 if (!string.IsNullOrEmpty(helpText))
@@ -98,8 +98,8 @@ internal static partial class Interop
                         ? DisplayMinorStatus(out minStat, status, ref displayBuffer)
                         : DisplayMajorStatus(out minStat, status, ref displayBuffer);
                     return (Status.GSS_S_COMPLETE != displayCallStatus)
-                      ? null
-                      : Marshal.PtrToStringAnsi(displayBuffer._data);
+                        ? null
+                        : Marshal.PtrToStringAnsi(displayBuffer._data);
                 }
                 finally
                 {

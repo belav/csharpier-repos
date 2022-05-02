@@ -253,8 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
                 CancellationToken.None
             );
             return items == null
-              ? null
-              : new SignatureHelpState(
+                ? null
+                : new SignatureHelpState(
                     items.ArgumentIndex,
                     items.ArgumentCount,
                     items.ArgumentName,

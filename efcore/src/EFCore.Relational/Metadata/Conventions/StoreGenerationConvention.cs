@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class StoreGenerationConvention
         : IPropertyAnnotationChangedConvention,
-          IModelFinalizingConvention
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="StoreGenerationConvention" />.

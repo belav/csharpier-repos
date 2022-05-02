@@ -23,7 +23,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 /// </summary>
 public class DatabaseErrorPageMiddleware
     : IObserver<DiagnosticListener>,
-      IObserver<KeyValuePair<string, object?>>
+        IObserver<KeyValuePair<string, object?>>
 {
     private static readonly AsyncLocal<DiagnosticHolder> _localDiagnostic =
         new AsyncLocal<DiagnosticHolder>();

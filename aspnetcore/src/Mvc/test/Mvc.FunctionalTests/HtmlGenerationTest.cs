@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class HtmlGenerationTest
     : IClassFixture<MvcTestFixture<HtmlGenerationWebSite.Startup>>,
-      IClassFixture<MvcEncodedTestFixture<HtmlGenerationWebSite.Startup>>
+        IClassFixture<MvcEncodedTestFixture<HtmlGenerationWebSite.Startup>>
 {
     private static readonly Assembly _resourcesAssembly = typeof(HtmlGenerationTest)
         .GetTypeInfo()

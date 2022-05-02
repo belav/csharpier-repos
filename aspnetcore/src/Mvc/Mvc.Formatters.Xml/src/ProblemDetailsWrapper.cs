@@ -92,8 +92,8 @@ public class ProblemDetailsWrapper : IXmlSerializable, IUnwrappable
 
             case "status":
                 ProblemDetails.Status = string.IsNullOrEmpty(value)
-                  ? (int?)null
-                  : int.Parse(value, CultureInfo.InvariantCulture);
+                    ? (int?)null
+                    : int.Parse(value, CultureInfo.InvariantCulture);
                 break;
 
             case "title":

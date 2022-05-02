@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteDocumentHighlightsService
         : BrokeredServiceBase,
-          IRemoteDocumentHighlightsService
+            IRemoteDocumentHighlightsService
     {
         internal sealed class Factory : FactoryBase<IRemoteDocumentHighlightsService>
         {

@@ -66,9 +66,9 @@ namespace Microsoft.Cci
 
             var dynamicAnalysisDataWriterOpt = emitTestCoverageData
                 ? new DynamicAnalysisDataWriter(
-                      context.Module.DebugDocumentCount,
-                      context.Module.HintNumberOfMethodDefinitions
-                  )
+                    context.Module.DebugDocumentCount,
+                    context.Module.HintNumberOfMethodDefinitions
+                )
                 : null;
 
             return new FullMetadataWriter(

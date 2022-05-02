@@ -855,7 +855,7 @@ namespace System.Xml.Linq
                 sbyte sbyteValue => XmlConvert.ToString(sbyteValue),
                 bool boolValue => XmlConvert.ToString(boolValue),
                 DateTime dtValue
-                  => XmlConvert.ToString(dtValue, XmlDateTimeSerializationMode.RoundtripKind),
+                    => XmlConvert.ToString(dtValue, XmlDateTimeSerializationMode.RoundtripKind),
                 DateTimeOffset dtoValue => XmlConvert.ToString(dtoValue),
                 TimeSpan tsValue => XmlConvert.ToString(tsValue),
                 XObject => throw new ArgumentException(SR.Argument_XObjectValue),

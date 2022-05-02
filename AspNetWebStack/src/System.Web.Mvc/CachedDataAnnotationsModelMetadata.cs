@@ -38,8 +38,8 @@ namespace System.Web.Mvc
         protected override bool ComputeConvertEmptyStringToNull()
         {
             return PrototypeCache.DisplayFormat != null
-              ? PrototypeCache.DisplayFormat.ConvertEmptyStringToNull
-              : base.ComputeConvertEmptyStringToNull();
+                ? PrototypeCache.DisplayFormat.ConvertEmptyStringToNull
+                : base.ComputeConvertEmptyStringToNull();
         }
 
         protected override string ComputeDataTypeName()
@@ -60,15 +60,15 @@ namespace System.Web.Mvc
         protected override string ComputeDescription()
         {
             return PrototypeCache.Display != null
-              ? PrototypeCache.Display.GetDescription()
-              : base.ComputeDescription();
+                ? PrototypeCache.Display.GetDescription()
+                : base.ComputeDescription();
         }
 
         protected override string ComputeDisplayFormatString()
         {
             return PrototypeCache.DisplayFormat != null
-              ? PrototypeCache.DisplayFormat.DataFormatString
-              : base.ComputeDisplayFormatString();
+                ? PrototypeCache.DisplayFormat.DataFormatString
+                : base.ComputeDisplayFormatString();
         }
 
         protected override string ComputeDisplayName()
@@ -134,15 +134,15 @@ namespace System.Web.Mvc
         protected override bool ComputeHideSurroundingHtml()
         {
             return PrototypeCache.HiddenInput != null
-              ? !PrototypeCache.HiddenInput.DisplayValue
-              : base.ComputeHideSurroundingHtml();
+                ? !PrototypeCache.HiddenInput.DisplayValue
+                : base.ComputeHideSurroundingHtml();
         }
 
         protected override bool ComputeHtmlEncode()
         {
             return (PrototypeCache.DisplayFormat != null)
-              ? PrototypeCache.DisplayFormat.HtmlEncode
-              : base.ComputeHtmlEncode();
+                ? PrototypeCache.DisplayFormat.HtmlEncode
+                : base.ComputeHtmlEncode();
         }
 
         protected override bool ComputeIsReadOnly()
@@ -168,8 +168,8 @@ namespace System.Web.Mvc
         protected override string ComputeNullDisplayText()
         {
             return PrototypeCache.DisplayFormat != null
-              ? PrototypeCache.DisplayFormat.NullDisplayText
-              : base.ComputeNullDisplayText();
+                ? PrototypeCache.DisplayFormat.NullDisplayText
+                : base.ComputeNullDisplayText();
         }
 
         protected override int ComputeOrder()
@@ -187,22 +187,22 @@ namespace System.Web.Mvc
         protected override string ComputeShortDisplayName()
         {
             return PrototypeCache.Display != null
-              ? PrototypeCache.Display.GetShortName()
-              : base.ComputeShortDisplayName();
+                ? PrototypeCache.Display.GetShortName()
+                : base.ComputeShortDisplayName();
         }
 
         protected override bool ComputeShowForDisplay()
         {
             return PrototypeCache.ScaffoldColumn != null
-              ? PrototypeCache.ScaffoldColumn.Scaffold
-              : base.ComputeShowForDisplay();
+                ? PrototypeCache.ScaffoldColumn.Scaffold
+                : base.ComputeShowForDisplay();
         }
 
         protected override bool ComputeShowForEdit()
         {
             return PrototypeCache.ScaffoldColumn != null
-              ? PrototypeCache.ScaffoldColumn.Scaffold
-              : base.ComputeShowForEdit();
+                ? PrototypeCache.ScaffoldColumn.Scaffold
+                : base.ComputeShowForEdit();
         }
 
         protected override string ComputeSimpleDisplayText()
@@ -256,8 +256,8 @@ namespace System.Web.Mvc
         protected override string ComputeWatermark()
         {
             return PrototypeCache.Display != null
-              ? PrototypeCache.Display.GetPrompt()
-              : base.ComputeWatermark();
+                ? PrototypeCache.Display.GetPrompt()
+                : base.ComputeWatermark();
         }
 
         private static void ValidateDisplayColumnAttribute(

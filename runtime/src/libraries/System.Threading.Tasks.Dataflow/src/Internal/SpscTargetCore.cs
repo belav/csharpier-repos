@@ -127,8 +127,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             // If we're not required to go back to the source to consume the offered message, try fast path.
             return !consumeToAccept && Post(messageValue)
-              ? DataflowMessageStatus.Accepted
-              : OfferMessage_Slow(messageHeader, messageValue, source, consumeToAccept);
+                ? DataflowMessageStatus.Accepted
+                : OfferMessage_Slow(messageHeader, messageValue, source, consumeToAccept);
         }
 
         /// <summary>Implements the slow path for OfferMessage.</summary>
@@ -481,8 +481,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 get
                 {
                     return _target._activeConsumer != null && !_target.Completion.IsCompleted
-                      ? 1
-                      : 0;
+                        ? 1
+                        : 0;
                 }
             }
 

@@ -58,7 +58,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
     [System.Runtime.Versioning.UnsupportedOSPlatform("tvos")]
     public partial class SystemdLifetime
         : Microsoft.Extensions.Hosting.IHostLifetime,
-          System.IDisposable
+            System.IDisposable
     {
         public SystemdLifetime(
             Microsoft.Extensions.Hosting.IHostEnvironment environment,

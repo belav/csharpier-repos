@@ -525,9 +525,9 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         i == 3
                             ? BitConverter.SingleToInt32Bits(result[i])
-                              != BitConverter.SingleToInt32Bits(0.0f)
+                                != BitConverter.SingleToInt32Bits(0.0f)
                             : BitConverter.SingleToInt32Bits(result[i])
-                              != BitConverter.SingleToInt32Bits(left[i])
+                                != BitConverter.SingleToInt32Bits(left[i])
                     )
                     {
                         succeeded = false;

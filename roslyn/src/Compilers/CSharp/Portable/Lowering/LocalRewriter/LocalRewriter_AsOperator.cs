@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Debug.Assert(constantValue.IsNull);
                     BoundExpression result = rewrittenType.IsNullableType()
-                      ? new BoundDefaultExpression(syntax, rewrittenType)
-                      : MakeLiteral(syntax, constantValue, rewrittenType);
+                        ? new BoundDefaultExpression(syntax, rewrittenType)
+                        : MakeLiteral(syntax, constantValue, rewrittenType);
 
                     if (rewrittenOperand.ConstantValue != null)
                     {

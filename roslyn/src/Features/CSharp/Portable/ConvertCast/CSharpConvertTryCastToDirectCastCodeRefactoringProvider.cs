@@ -28,10 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
     ]
     internal partial class CSharpConvertTryCastToDirectCastCodeRefactoringProvider
         : AbstractConvertCastCodeRefactoringProvider<
-              TypeSyntax,
-              BinaryExpressionSyntax,
-              CastExpressionSyntax
-          >
+            TypeSyntax,
+            BinaryExpressionSyntax,
+            CastExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

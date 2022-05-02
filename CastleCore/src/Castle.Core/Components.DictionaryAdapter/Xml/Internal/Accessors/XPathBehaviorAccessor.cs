@@ -19,11 +19,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XPathBehaviorAccessor
         : XmlAccessor,
-          IXmlIncludedType,
-          IXmlIncludedTypeMap,
-          IConfigurable<XPathAttribute>,
-          IConfigurable<XPathVariableAttribute>,
-          IConfigurable<XPathFunctionAttribute>
+            IXmlIncludedType,
+            IXmlIncludedTypeMap,
+            IConfigurable<XPathAttribute>,
+            IConfigurable<XPathVariableAttribute>,
+            IConfigurable<XPathFunctionAttribute>
     {
         private CompiledXPath path;
         private XmlIncludedTypeSet includedTypes;
@@ -128,8 +128,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         )
         {
             return SelectsNodes
-              ? base.GetPropertyValue(parentNode, parentObject, references, orStub)
-              : Evaluate(parentNode);
+                ? base.GetPropertyValue(parentNode, parentObject, references, orStub)
+                : Evaluate(parentNode);
         }
 
         private object GetDefaultPropertyValue(
@@ -140,8 +140,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         )
         {
             return defaultAccessor != null
-              ? defaultAccessor.GetPropertyValue(parentNode, parentObject, references, orStub)
-              : null;
+                ? defaultAccessor.GetPropertyValue(parentNode, parentObject, references, orStub)
+                : null;
         }
 
         private object Evaluate(IXmlNode node)
@@ -203,8 +203,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public bool TryGet(Type clrType, out IXmlIncludedType includedType)
         {
             return clrType == this.ClrType
-              ? Try.Success(out includedType, this)
-              : includedTypes.TryGet(clrType, out includedType);
+                ? Try.Success(out includedType, this)
+                : includedTypes.TryGet(clrType, out includedType);
         }
 
         private class DefaultAccessor : XPathBehaviorAccessor

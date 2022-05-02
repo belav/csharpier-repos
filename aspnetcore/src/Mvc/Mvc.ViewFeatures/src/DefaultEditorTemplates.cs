@@ -32,8 +32,8 @@ internal static class DefaultEditorTemplates
         }
 
         return htmlHelper.ViewData.ModelMetadata.IsNullableValueType
-          ? BooleanTemplateDropDownList(htmlHelper, value)
-          : BooleanTemplateCheckbox(htmlHelper, value ?? false);
+            ? BooleanTemplateDropDownList(htmlHelper, value)
+            : BooleanTemplateCheckbox(htmlHelper, value ?? false);
     }
 
     private static IHtmlContent BooleanTemplateCheckbox(IHtmlHelper htmlHelper, bool value)

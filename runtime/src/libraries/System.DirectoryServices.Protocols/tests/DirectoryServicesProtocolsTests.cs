@@ -830,8 +830,12 @@ namespace System.DirectoryServices.Protocols.Tests
             LdapDirectoryIdentifier directoryIdentifier = string.IsNullOrEmpty(
                 LdapConfiguration.Configuration.Port
             )
-              ? new LdapDirectoryIdentifier(LdapConfiguration.Configuration.ServerName, true, false)
-              : new LdapDirectoryIdentifier(
+                ? new LdapDirectoryIdentifier(
+                    LdapConfiguration.Configuration.ServerName,
+                    true,
+                    false
+                )
+                : new LdapDirectoryIdentifier(
                     LdapConfiguration.Configuration.ServerName,
                     int.Parse(
                         LdapConfiguration.Configuration.Port,

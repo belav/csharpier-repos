@@ -575,8 +575,8 @@ public class ApkBuilder
     {
         string defaultKey = Path.Combine(OutputDir, "debug.keystore");
         string signingKey = string.IsNullOrEmpty(KeyStorePath)
-          ? defaultKey
-          : Path.Combine(KeyStorePath, "debug.keystore");
+            ? defaultKey
+            : Path.Combine(KeyStorePath, "debug.keystore");
 
         if (!File.Exists(signingKey))
         {
@@ -687,8 +687,8 @@ public class ApkBuilder
             .Select(
                 file =>
                     int.TryParse(Path.GetFileName(file).Replace("android-", ""), out int apiLevel)
-                      ? apiLevel
-                      : -1
+                        ? apiLevel
+                        : -1
             )
             .OrderByDescending(v => v)
             .FirstOrDefault()

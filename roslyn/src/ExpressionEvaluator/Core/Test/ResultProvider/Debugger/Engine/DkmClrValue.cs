@@ -152,8 +152,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                 || typeCode != TypeCode.DateTime
                 || typeCode != TypeCode.Object
             )
-              ? rawValue
-              : null;
+                ? rawValue
+                : null;
         }
 
         public string GetValueString(

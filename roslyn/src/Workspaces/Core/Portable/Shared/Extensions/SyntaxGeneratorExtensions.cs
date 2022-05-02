@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 parameters: constructor.Parameters,
                 statements: default,
                 baseConstructorArguments: constructor.Parameters.Length == 0
-                  ? default
-                  : factory.CreateArguments(constructor.Parameters)
+                    ? default
+                    : factory.CreateArguments(constructor.Parameters)
             );
         }
 
@@ -59,15 +59,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             var newMembers = generateProperties
                 ? CreatePropertiesForParameters(
-                      parameters,
-                      parameterToNewMemberMap,
-                      isContainedInUnsafeType
-                  )
+                    parameters,
+                    parameterToNewMemberMap,
+                    isContainedInUnsafeType
+                )
                 : CreateFieldsForParameters(
-                      parameters,
-                      parameterToNewMemberMap,
-                      isContainedInUnsafeType
-                  );
+                    parameters,
+                    parameterToNewMemberMap,
+                    isContainedInUnsafeType
+                );
             var statements = factory
                 .CreateAssignmentStatements(
                     semanticModel,
@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var constructor = CodeGenerationSymbolFactory.CreateConstructorSymbol(
                 attributes: default,
                 accessibility: containingTypeOpt.IsAbstractClass()
-                  ? Accessibility.Protected
-                  : Accessibility.Public,
+                    ? Accessibility.Protected
+                    : Accessibility.Public,
                 modifiers: new DeclarationModifiers(
                     isUnsafe: !isContainedInUnsafeType
                         && parameters.Any(p => p.RequiresUnsafeModifier())
@@ -95,8 +95,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     containingTypeOpt,
                     parameterToExistingMemberMap
                 )
-                  ? ImmutableArray<SyntaxNode>.Empty
-                  : default
+                    ? ImmutableArray<SyntaxNode>.Empty
+                    : default
             );
 
             return newMembers.Concat(constructor);
@@ -285,11 +285,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var condition = factory.SyntaxGeneratorInternal.SupportsPatterns(
                 semanticModel.SyntaxTree.Options
             )
-              ? factory.SyntaxGeneratorInternal.IsPatternExpression(
+                ? factory.SyntaxGeneratorInternal.IsPatternExpression(
                     identifier,
                     factory.SyntaxGeneratorInternal.ConstantPattern(nullExpr)
                 )
-              : factory.ReferenceEqualsExpression(identifier, nullExpr);
+                : factory.ReferenceEqualsExpression(identifier, nullExpr);
             return condition;
         }
 
@@ -505,29 +505,29 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         getName == null
                             ? null
                             : codeFactory.ReturnStatement(
-                                  codeFactory.InvocationExpression(
-                                      codeFactory.MemberAccessExpression(
-                                          codeFactory.BaseExpression(),
-                                          codeFactory.IdentifierName(getName)
-                                      ),
-                                      codeFactory.CreateArguments(overriddenProperty.Parameters)
-                                  )
-                              );
+                                codeFactory.InvocationExpression(
+                                    codeFactory.MemberAccessExpression(
+                                        codeFactory.BaseExpression(),
+                                        codeFactory.IdentifierName(getName)
+                                    ),
+                                    codeFactory.CreateArguments(overriddenProperty.Parameters)
+                                )
+                            );
 
                     setBody =
                         setName == null
                             ? null
                             : codeFactory.ExpressionStatement(
-                                  codeFactory.InvocationExpression(
-                                      codeFactory.MemberAccessExpression(
-                                          codeFactory.BaseExpression(),
-                                          codeFactory.IdentifierName(setName)
-                                      ),
-                                      codeFactory.CreateArguments(
-                                          overriddenProperty.SetMethod.GetParameters()
-                                      )
-                                  )
-                              );
+                                codeFactory.InvocationExpression(
+                                    codeFactory.MemberAccessExpression(
+                                        codeFactory.BaseExpression(),
+                                        codeFactory.IdentifierName(setName)
+                                    ),
+                                    codeFactory.CreateArguments(
+                                        overriddenProperty.SetMethod.GetParameters()
+                                    )
+                                )
+                            );
                 }
                 else
                 {
@@ -738,8 +738,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     codeFactory.MemberAccessExpression(
                         codeFactory.BaseExpression(),
                         typeParams.IsDefaultOrEmpty
-                          ? codeFactory.IdentifierName(overriddenMethod.Name)
-                          : codeFactory.GenericName(overriddenMethod.Name, typeParams)
+                            ? codeFactory.IdentifierName(overriddenMethod.Name)
+                            : codeFactory.GenericName(overriddenMethod.Name, typeParams)
                     ),
                     codeFactory.CreateArguments(overriddenMethod.GetParameters())
                 );
@@ -758,8 +758,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     ),
                     modifiers: modifiers,
                     statements: overriddenMethod.ReturnsVoid
-                      ? ImmutableArray.Create(codeFactory.ExpressionStatement(body))
-                      : ImmutableArray.Create(codeFactory.ReturnStatement(body))
+                        ? ImmutableArray.Create(codeFactory.ExpressionStatement(body))
+                        : ImmutableArray.Create(codeFactory.ReturnStatement(body))
                 );
             }
         }
@@ -786,8 +786,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var invocationExpression = generator.InvocationExpression(through, arguments);
 
             return method.ReturnsVoid
-              ? generator.ExpressionStatement(invocationExpression)
-              : generator.ReturnStatement(invocationExpression);
+                ? generator.ExpressionStatement(invocationExpression)
+                : generator.ReturnStatement(invocationExpression);
         }
 
         public static SyntaxNode CreateDelegateThroughExpression(
@@ -873,8 +873,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 var classOrStructType = throughMember.ContainingType;
                 return classOrStructType.IsGenericType
-                  ? factory.GenericName(classOrStructType.Name, classOrStructType.TypeArguments)
-                  : factory.IdentifierName(classOrStructType.Name);
+                    ? factory.GenericName(classOrStructType.Name, classOrStructType.TypeArguments)
+                    : factory.IdentifierName(classOrStructType.Name);
             }
         }
 
@@ -896,9 +896,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var expression = property.IsIndexer
                     ? throughExpression
                     : generator.MemberAccessExpression(
-                          throughExpression,
-                          generator.IdentifierName(property.Name)
-                      );
+                        throughExpression,
+                        generator.IdentifierName(property.Name)
+                    );
 
                 if (property.Parameters.Length > 0)
                 {
@@ -912,8 +912,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             return preferAutoProperties
-              ? default
-              : generator.CreateThrowNotImplementedStatementBlock(compilation);
+                ? default
+                : generator.CreateThrowNotImplementedStatementBlock(compilation);
         }
 
         public static ImmutableArray<SyntaxNode> GetSetAccessorStatements(
@@ -934,9 +934,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var expression = property.IsIndexer
                     ? throughExpression
                     : generator.MemberAccessExpression(
-                          throughExpression,
-                          generator.IdentifierName(property.Name)
-                      );
+                        throughExpression,
+                        generator.IdentifierName(property.Name)
+                    );
 
                 if (property.Parameters.Length > 0)
                 {
@@ -955,8 +955,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             return preferAutoProperties
-              ? default
-              : generator.CreateThrowNotImplementedStatementBlock(compilation);
+                ? default
+                : generator.CreateThrowNotImplementedStatementBlock(compilation);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal class CommonMethodWellKnownAttributeData
         : WellKnownAttributeData,
-          ISecurityAttributeTarget
+            ISecurityAttributeTarget
     {
         public CommonMethodWellKnownAttributeData(bool preserveSigFirstWriteWins)
         {

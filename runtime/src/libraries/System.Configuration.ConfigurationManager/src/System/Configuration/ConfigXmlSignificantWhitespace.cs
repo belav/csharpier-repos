@@ -8,7 +8,7 @@ namespace System.Configuration
 {
     internal sealed class ConfigXmlSignificantWhitespace
         : XmlSignificantWhitespace,
-          IConfigErrorInfo
+            IConfigErrorInfo
     {
         private string _filename;
         private int _line;

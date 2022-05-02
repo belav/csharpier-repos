@@ -23,7 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     internal sealed class VisualStudioWorkspaceServiceHubConnector
         : IEventListener<object>,
-          IEventListenerStoppable
+            IEventListenerStoppable
     {
         private readonly IAsynchronousOperationListenerProvider _listenerProvider;
         private readonly IGlobalOptionService _globalOptions;

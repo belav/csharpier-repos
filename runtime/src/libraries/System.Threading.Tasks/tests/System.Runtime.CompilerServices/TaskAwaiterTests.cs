@@ -274,8 +274,8 @@ namespace System.Threading.Tasks.Tests
 
                         var tcs = runContinuationsAsynchronously
                             ? new TaskCompletionSource(
-                                  TaskCreationOptions.RunContinuationsAsynchronously
-                              )
+                                TaskCreationOptions.RunContinuationsAsynchronously
+                            )
                             : new TaskCompletionSource();
 
                         var tl = new ThreadLocal<int>();

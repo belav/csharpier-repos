@@ -66,11 +66,11 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     var coalesced =
                         collection.Count > CoalesceDifferenceCount
                             ? new NormalizedSnapshotSpanCollection(
-                                  snapshot.GetSpanFromBounds(
-                                      collection.First().Start,
-                                      collection.Last().End
-                                  )
-                              )
+                                snapshot.GetSpanFromBounds(
+                                    collection.First().Start,
+                                    collection.Last().End
+                                )
+                            )
                             : collection;
 
                     foreach (var span in coalesced)

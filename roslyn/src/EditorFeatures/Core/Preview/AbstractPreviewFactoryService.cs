@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     internal abstract class AbstractPreviewFactoryService<TDifferenceViewer>
         : ForegroundThreadAffinitizedObject,
-          IPreviewFactoryService where TDifferenceViewer : IDifferenceViewer
+            IPreviewFactoryService where TDifferenceViewer : IDifferenceViewer
     {
         private const double DefaultZoomLevel = 0.75;
         private readonly ITextViewRoleSet _previewRoleSet;
@@ -795,9 +795,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     conflictSpans.Count == 0 && warningSpans.Count == 0
                         ? null
                         : string.Join(
-                              Environment.NewLine,
-                              conflictDescriptions.Concat(warningDescriptions)
-                          );
+                            Environment.NewLine,
+                            conflictDescriptions.Concat(warningDescriptions)
+                        );
                 allSpans = new NormalizedSpanCollection(
                     conflictSpans.Concat(warningSpans).Concat(changedSpans)
                 );

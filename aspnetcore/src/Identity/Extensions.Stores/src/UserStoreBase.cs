@@ -21,17 +21,17 @@ namespace Microsoft.AspNetCore.Identity;
 /// <typeparam name="TUserToken">The type representing a user token.</typeparam>
 public abstract class UserStoreBase<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
     : IUserLoginStore<TUser>,
-      IUserClaimStore<TUser>,
-      IUserPasswordStore<TUser>,
-      IUserSecurityStampStore<TUser>,
-      IUserEmailStore<TUser>,
-      IUserLockoutStore<TUser>,
-      IUserPhoneNumberStore<TUser>,
-      IQueryableUserStore<TUser>,
-      IUserTwoFactorStore<TUser>,
-      IUserAuthenticationTokenStore<TUser>,
-      IUserAuthenticatorKeyStore<TUser>,
-      IUserTwoFactorRecoveryCodeStore<TUser>
+        IUserClaimStore<TUser>,
+        IUserPasswordStore<TUser>,
+        IUserSecurityStampStore<TUser>,
+        IUserEmailStore<TUser>,
+        IUserLockoutStore<TUser>,
+        IUserPhoneNumberStore<TUser>,
+        IQueryableUserStore<TUser>,
+        IUserTwoFactorStore<TUser>,
+        IUserAuthenticationTokenStore<TUser>,
+        IUserAuthenticatorKeyStore<TUser>,
+        IUserTwoFactorRecoveryCodeStore<TUser>
     where TUser : IdentityUser<TKey>
     where TKey : IEquatable<TKey>
     where TUserClaim : IdentityUserClaim<TKey>, new()

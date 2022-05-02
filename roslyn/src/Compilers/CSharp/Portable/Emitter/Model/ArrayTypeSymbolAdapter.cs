@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     ArrayTypeSymbol
         :
 #endif
-          Cci.IArrayTypeReference
+            Cci.IArrayTypeReference
     {
         Cci.ITypeReference Cci.IArrayTypeReference.GetElementType(EmitContext context)
         {

@@ -659,22 +659,22 @@ namespace System.Data
         ) =>
             column.Length == 0
                 ? _Argument(
-                      SR.Format(
-                          SR.DataColumn_DefaultValueDataType1,
-                          defaultType.FullName,
-                          columnType.FullName
-                      ),
-                      inner
-                  )
+                    SR.Format(
+                        SR.DataColumn_DefaultValueDataType1,
+                        defaultType.FullName,
+                        columnType.FullName
+                    ),
+                    inner
+                )
                 : _Argument(
-                      SR.Format(
-                          SR.DataColumn_DefaultValueDataType,
-                          column,
-                          defaultType.FullName,
-                          columnType.FullName
-                      ),
-                      inner
-                  );
+                    SR.Format(
+                        SR.DataColumn_DefaultValueDataType,
+                        column,
+                        defaultType.FullName,
+                        columnType.FullName
+                    ),
+                    inner
+                );
 
         public static Exception DefaultValueColumnDataType(
             string column,
@@ -1065,12 +1065,12 @@ namespace System.Data
             length == 0
                 ? _Argument(SR.DataIndex_FindWithoutSortOrder)
                 : _Argument(
-                      SR.Format(
-                          SR.DataIndex_KeyLength,
-                          (length).ToString(CultureInfo.InvariantCulture),
-                          (keyLength).ToString(CultureInfo.InvariantCulture)
-                      )
-                  );
+                    SR.Format(
+                        SR.DataIndex_KeyLength,
+                        (length).ToString(CultureInfo.InvariantCulture),
+                        (keyLength).ToString(CultureInfo.InvariantCulture)
+                    )
+                );
 
         public static Exception RemovePrimaryKey(DataTable table) =>
             table.TableName.Length == 0

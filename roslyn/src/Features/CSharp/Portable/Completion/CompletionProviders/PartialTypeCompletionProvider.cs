@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 cancellationToken,
                 out var declaration
             )
-              ? declaration
-              : null;
+                ? declaration
+                : null;
 
         protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
             INamedTypeSymbol symbol,

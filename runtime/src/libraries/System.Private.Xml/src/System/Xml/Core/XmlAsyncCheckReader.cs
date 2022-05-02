@@ -999,7 +999,7 @@ namespace System.Xml
 
     internal class XmlAsyncCheckReaderWithLineInfoNS
         : XmlAsyncCheckReaderWithLineInfo,
-          IXmlNamespaceResolver
+            IXmlNamespaceResolver
     {
         private readonly IXmlNamespaceResolver _readerAsIXmlNamespaceResolver;
 
@@ -1030,7 +1030,7 @@ namespace System.Xml
 
     internal sealed class XmlAsyncCheckReaderWithLineInfoNSSchema
         : XmlAsyncCheckReaderWithLineInfoNS,
-          IXmlSchemaInfo
+            IXmlSchemaInfo
     {
         private readonly IXmlSchemaInfo _readerAsIXmlSchemaInfo;
 

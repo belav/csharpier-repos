@@ -323,8 +323,8 @@ namespace System.Diagnostics.Metrics
                     {
                         // checking currentHistograms first because avoiding unexpected increment of TimeSeries count.
                         return (!CheckHistogramAllowed() || !CheckTimeSeriesAllowed())
-                          ? null
-                          : new ExponentialHistogramAggregator(s_defaultHistogramConfig);
+                            ? null
+                            : new ExponentialHistogramAggregator(s_defaultHistogramConfig);
                     }
                 };
             }

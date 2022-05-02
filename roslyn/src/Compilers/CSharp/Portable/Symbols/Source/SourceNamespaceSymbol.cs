@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             ImmutableArray<NamespaceOrTypeSymbol> members;
             return this.GetNameToMembersMap().TryGetValue(name, out members)
-              ? members.Cast<NamespaceOrTypeSymbol, Symbol>()
-              : ImmutableArray<Symbol>.Empty;
+                ? members.Cast<NamespaceOrTypeSymbol, Symbol>()
+                : ImmutableArray<Symbol>.Empty;
         }
 
         internal override ImmutableArray<NamedTypeSymbol> GetTypeMembersUnordered()
@@ -212,8 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             ImmutableArray<NamedTypeSymbol> members;
             return this.GetNameToTypeMembersMap().TryGetValue(name, out members)
-              ? members
-              : ImmutableArray<NamedTypeSymbol>.Empty;
+                ? members
+                : ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name, int arity)
@@ -626,8 +626,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         members = hasNamespaces
                             ? builder.ToImmutable()
                             : StaticCast<NamespaceOrTypeSymbol>.From(
-                                  builder.ToDowncastedImmutable<NamedTypeSymbol>()
-                              );
+                                builder.ToDowncastedImmutable<NamedTypeSymbol>()
+                            );
 
                         builder.Free();
                     }
@@ -638,10 +638,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             symbol.Kind == SymbolKind.Namespace
                                 ? ImmutableArray.Create<NamespaceOrTypeSymbol>(symbol)
                                 : StaticCast<NamespaceOrTypeSymbol>.From(
-                                      ImmutableArray.Create<NamedTypeSymbol>(
-                                          (NamedTypeSymbol)symbol
-                                      )
-                                  );
+                                    ImmutableArray.Create<NamedTypeSymbol>((NamedTypeSymbol)symbol)
+                                );
                     }
 
                     result.Add(kvp.Key, members);

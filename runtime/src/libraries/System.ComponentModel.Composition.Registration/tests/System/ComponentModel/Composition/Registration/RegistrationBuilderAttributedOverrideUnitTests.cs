@@ -224,8 +224,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         public class InheritedExportOnBaseClassDeclaration
             : BaseWithInheritedExport,
-              IContractA,
-              IContractB { }
+                IContractA,
+                IContractB { }
 
         [Fact]
         public void ExportInterfaceConvention_InheritedExportOnBaseClassDeclaration_ConventionApplied()

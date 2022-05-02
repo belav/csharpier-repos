@@ -494,15 +494,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             entityType.IsInModel
                 ? entityType
                 : FindEntityType(entityType.Name)
-                  ?? (
-                      entityType.HasSharedClrType
-                          ? entityType.FindOwnership() is ForeignKey ownership
-                              ? FindActualEntityType(ownership.PrincipalEntityType)
-                                ?.FindNavigation(ownership.PrincipalToDependent!.Name)
-                                ?.TargetEntityType
-                              : null
-                          : null
-                  );
+                    ?? (
+                        entityType.HasSharedClrType
+                            ? entityType.FindOwnership() is ForeignKey ownership
+                                ? FindActualEntityType(ownership.PrincipalEntityType)
+                                    ?.FindNavigation(ownership.PrincipalToDependent!.Name)
+                                    ?.TargetEntityType
+                                : null
+                            : null
+                    );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -512,10 +512,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Type? FindClrType(string name) =>
             _entityTypes.TryGetValue(name, out var entityType)
-              ? entityType.HasSharedClrType
-                  ? null
-                  : entityType.ClrType
-              : null;
+                ? entityType.HasSharedClrType
+                    ? null
+                    : entityType.ClrType
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -527,8 +527,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var result = GetEntityTypes(GetDisplayName(type));
             return _sharedTypes.TryGetValue(type, out var existingTypes)
-              ? result.Concat(existingTypes.Types)
-              : result;
+                ? result.Concat(existingTypes.Types)
+                : result;
         }
 
         /// <summary>
@@ -660,8 +660,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Check.NotEmpty(name, nameof(name)),
                 out var ignoredConfigurationSource
             )
-              ? ignoredConfigurationSource
-              : null;
+                ? ignoredConfigurationSource
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -836,8 +836,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual ConfigurationSource? FindIsSharedConfigurationSource(Type type) =>
             _sharedTypes.TryGetValue(type, out var existingTypes)
-              ? existingTypes.ConfigurationSource
-              : null;
+                ? existingTypes.ConfigurationSource
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1195,8 +1195,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1224,8 +1224,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetChangeTrackingStrategy(
                 changeTrackingStrategy,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1427,8 +1427,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 name,
                 owned: false,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1453,8 +1453,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 type,
                 owned: false,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1484,8 +1484,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 type,
                 owned: false,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1526,8 +1526,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 definingNavigationName,
                 (EntityType)definingEntityType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1568,8 +1568,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 definingNavigationName,
                 (EntityType)definingEntityType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1597,8 +1597,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 name,
                 owned: true,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1626,8 +1626,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 type,
                 owned: true,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1657,8 +1657,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 type,
                 owned: true,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1792,8 +1792,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddShared(
                 type,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1816,8 +1816,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddOwned(
                 type,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1841,8 +1841,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddIgnored(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1866,8 +1866,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddIgnored(
                 type,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

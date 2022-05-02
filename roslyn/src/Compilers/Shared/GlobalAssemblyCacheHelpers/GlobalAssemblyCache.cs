@@ -37,15 +37,15 @@ namespace Microsoft.CodeAnalysis
         public static readonly ImmutableArray<ProcessorArchitecture> CurrentArchitectures =
             (IntPtr.Size == 4)
                 ? ImmutableArray.Create(
-                      ProcessorArchitecture.None,
-                      ProcessorArchitecture.MSIL,
-                      ProcessorArchitecture.X86
-                  )
+                    ProcessorArchitecture.None,
+                    ProcessorArchitecture.MSIL,
+                    ProcessorArchitecture.X86
+                )
                 : ImmutableArray.Create(
-                      ProcessorArchitecture.None,
-                      ProcessorArchitecture.MSIL,
-                      ProcessorArchitecture.Amd64
-                  );
+                    ProcessorArchitecture.None,
+                    ProcessorArchitecture.MSIL,
+                    ProcessorArchitecture.Amd64
+                );
 
         /// <summary>
         /// Enumerates assemblies in the GAC returning those that match given partial name and

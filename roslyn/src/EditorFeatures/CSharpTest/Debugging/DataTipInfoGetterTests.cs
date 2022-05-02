@@ -65,8 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Debugging
             var testHostDocument = workspace.Documents.Single();
             var position = testHostDocument.CursorPosition.Value;
             var expectedSpan = testHostDocument.SelectedSpans.Any()
-              ? testHostDocument.SelectedSpans.Single()
-              : (TextSpan?)null;
+                ? testHostDocument.SelectedSpans.Single()
+                : (TextSpan?)null;
 
             await continuation(
                 workspace.CurrentSolution.Projects.First().Documents.First(),

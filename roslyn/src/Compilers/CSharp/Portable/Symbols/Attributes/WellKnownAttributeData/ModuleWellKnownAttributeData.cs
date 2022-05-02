@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class ModuleWellKnownAttributeData
         : CommonModuleWellKnownAttributeData,
-          ISkipLocalsInitAttributeTarget
+            ISkipLocalsInitAttributeTarget
     {
         #region SkipLocalsInitAttribute
         private bool _hasSkipLocalsInitAttribute;

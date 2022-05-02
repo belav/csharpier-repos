@@ -29,7 +29,7 @@ namespace AutoMapper.Internal
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IGlobalConfigurationExpression
         : IMapperConfigurationExpression,
-          IProfileExpressionInternal
+            IProfileExpressionInternal
     {
         Func<Type, object> ServiceCtor { get; }
         IReadOnlyCollection<IProfileConfiguration> Profiles { get; }

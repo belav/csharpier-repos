@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Tools.Perf
             else
             {
                 workspaceType = workspacePath.EndsWith(".sln")
-                  ? WorkspaceType.Solution
-                  : WorkspaceType.Project;
+                    ? WorkspaceType.Solution
+                    : WorkspaceType.Project;
             }
 
             return (workspacePath, workspaceType);

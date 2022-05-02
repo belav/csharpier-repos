@@ -1201,13 +1201,13 @@ namespace System.Xml.Tests
             string expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                     ? string.Format(
-                          "2002-12-30T23:15:55.1-0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      )
+                        "2002-12-30T23:15:55.1-0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    )
                     : string.Format(
-                          "2002-12-30T23:15:55.1+0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      );
+                        "2002-12-30T23:15:55.1+0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    );
             CError.Equals(
                 XmlConvert.ToString(dt, XmlDateTimeSerializationMode.Local),
                 expDateTime,
@@ -1218,13 +1218,13 @@ namespace System.Xml.Tests
             expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                     ? string.Format(
-                          "0001-01-01T23:59:59.9999999-0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      )
+                        "0001-01-01T23:59:59.9999999-0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    )
                     : string.Format(
-                          "0001-01-01T23:59:59.9999999+0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      );
+                        "0001-01-01T23:59:59.9999999+0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    );
             CError.Equals(
                 XmlConvert.ToString(dt, XmlDateTimeSerializationMode.Local),
                 expDateTime,
@@ -1236,13 +1236,13 @@ namespace System.Xml.Tests
             expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                     ? string.Format(
-                          "2002-12-30T23:15:55-0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      )
+                        "2002-12-30T23:15:55-0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    )
                     : string.Format(
-                          "2002-12-30T23:15:55+0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      );
+                        "2002-12-30T23:15:55+0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    );
             CError.Equals(
                 XmlConvert.ToString(dt, XmlDateTimeSerializationMode.Local),
                 expDateTime,
@@ -1267,13 +1267,13 @@ namespace System.Xml.Tests
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                         ? string.Format(
-                              "2002-12-30T23:15:55-0{0}:00",
-                              Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dtLocal).Hours)
-                          )
+                            "2002-12-30T23:15:55-0{0}:00",
+                            Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dtLocal).Hours)
+                        )
                         : string.Format(
-                              "2002-12-31T16:15:55+0{0}:00",
-                              Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dtLocal).Hours)
-                          );
+                            "2002-12-31T16:15:55+0{0}:00",
+                            Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dtLocal).Hours)
+                        );
                 CError.Equals(
                     XmlConvert.ToString(dt, XmlDateTimeSerializationMode.Local),
                     expDateTime,
@@ -1295,13 +1295,13 @@ namespace System.Xml.Tests
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                         ? string.Format(
-                              "2002-12-30T23:15:55-0{0}:00",
-                              Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                          )
+                            "2002-12-30T23:15:55-0{0}:00",
+                            Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                        )
                         : string.Format(
-                              "2002-12-31T16:15:55+0{0}:00",
-                              Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                          );
+                            "2002-12-31T16:15:55+0{0}:00",
+                            Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                        );
                 CError.Equals(
                     XmlConvert.ToString(dt, XmlDateTimeSerializationMode.Local),
                     expDateTime,
@@ -1317,13 +1317,13 @@ namespace System.Xml.Tests
             expDateTime =
                 (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                     ? string.Format(
-                          "2002-12-31T07:15:55-0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      )
+                        "2002-12-31T07:15:55-0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    )
                     : string.Format(
-                          "2002-12-31T07:15:55+0{0}:00",
-                          Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                      );
+                        "2002-12-31T07:15:55+0{0}:00",
+                        Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                    );
             CError.Equals(
                 XmlConvert.ToString(dt, XmlDateTimeSerializationMode.Local),
                 expDateTime,
@@ -1364,13 +1364,13 @@ namespace System.Xml.Tests
                 expDateTime =
                     (TimeZoneInfo.Local.GetUtcOffset(dt).Hours < 0)
                         ? string.Format(
-                              "2002-12-30T23:15:55-0{0}:00",
-                              Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                          )
+                            "2002-12-30T23:15:55-0{0}:00",
+                            Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                        )
                         : string.Format(
-                              "2002-12-31T16:15:55+0{0}:00",
-                              Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
-                          );
+                            "2002-12-31T16:15:55+0{0}:00",
+                            Math.Abs(TimeZoneInfo.Local.GetUtcOffset(dt).Hours)
+                        );
                 CError.Equals(
                     XmlConvert.ToString(dt, XmlDateTimeSerializationMode.RoundtripKind),
                     expDateTime,

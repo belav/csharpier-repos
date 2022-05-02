@@ -8,8 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindSetOperationsQuerySqliteTest
         : NorthwindSetOperationsQueryRelationalTestBase<
-              NorthwindQuerySqliteFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqliteFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindSetOperationsQuerySqliteTest(
             NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,

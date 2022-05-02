@@ -61,17 +61,17 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
                 return node switch
                 {
                     MethodDeclarationSyntax method
-                      => method
-                          .WithBody(block)
-                          .WithExpressionBody(null)
-                          .WithSemicolonToken(default),
+                        => method
+                            .WithBody(block)
+                            .WithExpressionBody(null)
+                            .WithSemicolonToken(default),
                     LocalFunctionStatementSyntax localFunction
-                      => localFunction
-                          .WithBody(block)
-                          .WithExpressionBody(null)
-                          .WithSemicolonToken(default),
+                        => localFunction
+                            .WithBody(block)
+                            .WithExpressionBody(null)
+                            .WithSemicolonToken(default),
                     AnonymousFunctionExpressionSyntax anonymousFunction
-                      => anonymousFunction.WithBody(block).WithExpressionBody(null),
+                        => anonymousFunction.WithBody(block).WithExpressionBody(null),
                     _ => throw ExceptionUtilities.Unreachable
                 };
             }
@@ -86,27 +86,27 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
             methodLikeNode switch
             {
                 MethodDeclarationSyntax method
-                  => RemoveAsyncModifierHelpers.WithoutAsyncModifier(method, method.ReturnType),
+                    => RemoveAsyncModifierHelpers.WithoutAsyncModifier(method, method.ReturnType),
                 LocalFunctionStatementSyntax localFunction
-                  => RemoveAsyncModifierHelpers.WithoutAsyncModifier(
-                      localFunction,
-                      localFunction.ReturnType
-                  ),
+                    => RemoveAsyncModifierHelpers.WithoutAsyncModifier(
+                        localFunction,
+                        localFunction.ReturnType
+                    ),
                 AnonymousMethodExpressionSyntax method
-                  => AnnotateBlock(
-                      generator,
-                      RemoveAsyncModifierHelpers.WithoutAsyncModifier(method)
-                  ),
+                    => AnnotateBlock(
+                        generator,
+                        RemoveAsyncModifierHelpers.WithoutAsyncModifier(method)
+                    ),
                 ParenthesizedLambdaExpressionSyntax lambda
-                  => AnnotateBlock(
-                      generator,
-                      RemoveAsyncModifierHelpers.WithoutAsyncModifier(lambda)
-                  ),
+                    => AnnotateBlock(
+                        generator,
+                        RemoveAsyncModifierHelpers.WithoutAsyncModifier(lambda)
+                    ),
                 SimpleLambdaExpressionSyntax lambda
-                  => AnnotateBlock(
-                      generator,
-                      RemoveAsyncModifierHelpers.WithoutAsyncModifier(lambda)
-                  ),
+                    => AnnotateBlock(
+                        generator,
+                        RemoveAsyncModifierHelpers.WithoutAsyncModifier(lambda)
+                    ),
                 _ => methodLikeNode,
             };
 

@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 /// </summary>
 public class ErrorPageTests
     : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWebSite.Startup>>,
-      IDisposable
+        IDisposable
 {
     private static readonly string PreserveCompilationContextMessage = HtmlEncoder.Default.Encode(
         "One or more compilation references may be missing. "

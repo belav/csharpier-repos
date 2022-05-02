@@ -90,11 +90,11 @@ namespace CoreclrTestLib
                         "XHARNESS_CLI_PATH"
                     );
                     string dotnetCmd = string.IsNullOrEmpty(dotnetCmd_raw)
-                      ? "dotnet"
-                      : dotnetCmd_raw;
+                        ? "dotnet"
+                        : dotnetCmd_raw;
                     string xharnessCmd = string.IsNullOrEmpty(xharnessCmd_raw)
-                      ? "xharness"
-                      : $"exec {xharnessCmd_raw}";
+                        ? "xharness"
+                        : $"exec {xharnessCmd_raw}";
                     string appExtension = platform == "android" ? "apk" : "app";
 
                     string cmdStr = $"{dotnetCmd} {xharnessCmd} {platform} {action}";

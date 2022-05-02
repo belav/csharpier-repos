@@ -265,14 +265,14 @@ internal static partial class Interop
                 )
                 {
                     return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
-                      ? RsaEncryptPkcs(
+                        ? RsaEncryptPkcs(
                             publicKey,
                             innerSource,
                             innerSource.Length,
                             out outputHandle,
                             out errorHandle
                         )
-                      : RsaEncryptOaep(
+                        : RsaEncryptOaep(
                             publicKey,
                             innerSource,
                             innerSource.Length,
@@ -346,14 +346,14 @@ internal static partial class Interop
                 )
                 {
                     return padding.Mode == RSAEncryptionPaddingMode.Pkcs1
-                      ? RsaDecryptPkcs(
+                        ? RsaDecryptPkcs(
                             privateKey,
                             innerSource,
                             innerSource.Length,
                             out outputHandle,
                             out errorHandle
                         )
-                      : RsaDecryptOaep(
+                        : RsaDecryptOaep(
                             privateKey,
                             innerSource,
                             innerSource.Length,
@@ -473,8 +473,8 @@ internal static partial class Interop
                             : hashAlgorithmName == HashAlgorithmName.SHA512
                                 ? PAL_HashAlgorithm.Sha512
                                 : throw new CryptographicException(
-                                      SR.Cryptography_UnknownHashAlgorithm,
-                                      hashAlgorithmName.Name
-                                  );
+                                    SR.Cryptography_UnknownHashAlgorithm,
+                                    hashAlgorithmName.Name
+                                );
     }
 }

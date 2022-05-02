@@ -63,8 +63,8 @@ namespace System.Threading.Tasks.Tests
 
                     var tcs = new TaskCompletionSource<Task>(
                         useRunContinuationsAsynchronously
-                          ? TaskCreationOptions.RunContinuationsAsynchronously
-                          : TaskCreationOptions.None
+                            ? TaskCreationOptions.RunContinuationsAsynchronously
+                            : TaskCreationOptions.None
                     );
 
                     Task cont = getIntermediateContinuation(tcs.Task)

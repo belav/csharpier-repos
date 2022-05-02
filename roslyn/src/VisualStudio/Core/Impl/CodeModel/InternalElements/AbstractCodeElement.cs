@@ -20,9 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     /// </summary>
     public abstract class AbstractCodeElement
         : AbstractCodeModelObject,
-          ICodeElementContainer<AbstractCodeElement>,
-          EnvDTE.CodeElement,
-          EnvDTE80.CodeElement2
+            ICodeElementContainer<AbstractCodeElement>,
+            EnvDTE.CodeElement,
+            EnvDTE80.CodeElement2
     {
         private readonly ComHandle<EnvDTE.FileCodeModel, FileCodeModel> _fileCodeModel;
         private readonly int? _nodeKind;

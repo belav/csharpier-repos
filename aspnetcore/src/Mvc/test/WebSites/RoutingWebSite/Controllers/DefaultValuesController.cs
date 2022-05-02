@@ -21,8 +21,8 @@ public class DefaultValuesController : Controller
     {
         return _generator.Generate(
             id == null
-              ? "/DefaultValuesRoute/DefaultValues"
-              : "/DefaultValuesRoute/DefaultValues/DefaultParameter/Index/" + id
+                ? "/DefaultValuesRoute/DefaultValues"
+                : "/DefaultValuesRoute/DefaultValues/DefaultParameter/Index/" + id
         );
     }
 
@@ -30,8 +30,8 @@ public class DefaultValuesController : Controller
     {
         return _generator.Generate(
             id == "17"
-              ? "/DefaultValuesRoute/DefaultValues"
-              : "/DefaultValuesRoute/DefaultValues/OptionalParameter/Index/" + id
+                ? "/DefaultValuesRoute/DefaultValues"
+                : "/DefaultValuesRoute/DefaultValues/OptionalParameter/Index/" + id
         );
     }
 }

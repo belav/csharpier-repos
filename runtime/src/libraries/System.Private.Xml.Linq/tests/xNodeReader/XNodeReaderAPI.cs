@@ -74,8 +74,8 @@ namespace CoreXml.Test.XLinq
                         TestLog.Compare(
                             r.NodeType,
                             (nodeType == XmlNodeType.Text && count == 0)
-                              ? XmlNodeType.Whitespace
-                              : nodeType,
+                                ? XmlNodeType.Whitespace
+                                : nodeType,
                             "r.NodeType"
                         ); //
                         switch (nodeType)

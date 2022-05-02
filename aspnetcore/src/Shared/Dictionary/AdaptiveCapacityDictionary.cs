@@ -16,7 +16,7 @@ namespace Microsoft.AspNetCore.Internal;
 /// </summary>
 internal class AdaptiveCapacityDictionary<TKey, TValue>
     : IDictionary<TKey, TValue>,
-      IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+        IReadOnlyDictionary<TKey, TValue> where TKey : notnull
 {
     // Threshold for size of array to use.
     private const int DefaultArrayThreshold = 10;

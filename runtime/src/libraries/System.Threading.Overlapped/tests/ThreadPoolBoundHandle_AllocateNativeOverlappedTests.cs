@@ -233,10 +233,10 @@ public partial class ThreadPoolBoundHandleTests
         {
             NativeOverlapped* overlapped = useUnsafe
                 ? handle.UnsafeAllocateNativeOverlapped(
-                      (_, __, ___) => { },
-                      new object(),
-                      new byte[256]
-                  )
+                    (_, __, ___) => { },
+                    new object(),
+                    new byte[256]
+                )
                 : handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]);
 
             Assert.Equal(IntPtr.Zero, overlapped->InternalLow);
@@ -262,10 +262,10 @@ public partial class ThreadPoolBoundHandleTests
             using (
                 PreAllocatedOverlapped preAlloc = useUnsafe
                     ? PreAllocatedOverlapped.UnsafeCreate(
-                          (_, __, ___) => { },
-                          new object(),
-                          new byte[256]
-                      )
+                        (_, __, ___) => { },
+                        new object(),
+                        new byte[256]
+                    )
                     : new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256])
             )
             {
@@ -295,10 +295,10 @@ public partial class ThreadPoolBoundHandleTests
         {
             NativeOverlapped* overlapped = useUnsafe
                 ? handle.UnsafeAllocateNativeOverlapped(
-                      (_, __, ___) => { },
-                      new object(),
-                      new byte[256]
-                  )
+                    (_, __, ___) => { },
+                    new object(),
+                    new byte[256]
+                )
                 : handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]);
             overlapped->OffsetHigh = 1;
             overlapped->OffsetLow = 1;
@@ -306,15 +306,15 @@ public partial class ThreadPoolBoundHandleTests
 
             overlapped = useUnsafe
                 ? handle.UnsafeAllocateNativeOverlapped(
-                      (errorCode, numBytes, overlap) => { },
-                      new object(),
-                      new byte[256]
-                  )
+                    (errorCode, numBytes, overlap) => { },
+                    new object(),
+                    new byte[256]
+                )
                 : handle.AllocateNativeOverlapped(
-                      (errorCode, numBytes, overlap) => { },
-                      new object(),
-                      new byte[256]
-                  );
+                    (errorCode, numBytes, overlap) => { },
+                    new object(),
+                    new byte[256]
+                );
 
             Assert.Equal(IntPtr.Zero, overlapped->InternalLow);
             Assert.Equal(IntPtr.Zero, overlapped->InternalHigh);
@@ -339,10 +339,10 @@ public partial class ThreadPoolBoundHandleTests
         {
             PreAllocatedOverlapped preAlloc = useUnsafe
                 ? PreAllocatedOverlapped.UnsafeCreate(
-                      (_, __, ___) => { },
-                      new object(),
-                      new byte[256]
-                  )
+                    (_, __, ___) => { },
+                    new object(),
+                    new byte[256]
+                )
                 : new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256]);
 
             NativeOverlapped* overlapped = handle.AllocateNativeOverlapped(preAlloc);

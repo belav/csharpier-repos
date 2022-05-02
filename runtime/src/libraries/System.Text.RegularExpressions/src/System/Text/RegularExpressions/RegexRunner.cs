@@ -492,22 +492,22 @@ namespace System.Text.RegularExpressions
                 // Use a hashtabled Match object if the capture numbers are sparse
                 runmatch = runregex!.caps is null
                     ? new Match(
-                          runregex,
-                          runregex.capsize,
-                          runtext!,
-                          runtextbeg,
-                          runtextend - runtextbeg,
-                          runtextstart
-                      )
+                        runregex,
+                        runregex.capsize,
+                        runtext!,
+                        runtextbeg,
+                        runtextend - runtextbeg,
+                        runtextstart
+                    )
                     : new MatchSparse(
-                          runregex,
-                          runregex.caps,
-                          runregex.capsize,
-                          runtext!,
-                          runtextbeg,
-                          runtextend - runtextbeg,
-                          runtextstart
-                      );
+                        runregex,
+                        runregex.caps,
+                        runregex.capsize,
+                        runtext!,
+                        runtextbeg,
+                        runtextend - runtextbeg,
+                        runtextstart
+                    );
             }
             else
             {

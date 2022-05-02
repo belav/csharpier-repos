@@ -16,7 +16,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class DiscriminatorConvention
         : IEntityTypeBaseTypeChangedConvention,
-          IEntityTypeRemovedConvention
+            IEntityTypeRemovedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="DiscriminatorConvention" />.

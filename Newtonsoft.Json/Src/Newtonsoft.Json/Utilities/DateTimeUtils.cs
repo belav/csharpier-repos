@@ -951,8 +951,8 @@ namespace Newtonsoft.Json.Utilities
                     chars,
                     0,
                     (format == DateFormatHandling.IsoDateFormat)
-                      ? value.DateTime
-                      : value.UtcDateTime,
+                        ? value.DateTime
+                        : value.UtcDateTime,
                     value.Offset,
                     DateTimeKind.Local,
                     format

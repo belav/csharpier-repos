@@ -23,8 +23,8 @@ namespace System.Collections.ObjectModel
     )]
     public class ObservableCollection<T>
         : Collection<T>,
-          INotifyCollectionChanged,
-          INotifyPropertyChanged
+            INotifyCollectionChanged,
+            INotifyPropertyChanged
     {
         private SimpleMonitor? _monitor; // Lazily allocated only when a subclass calls BlockReentrancy() or during serialization. Do not rename (binary serialization)
 

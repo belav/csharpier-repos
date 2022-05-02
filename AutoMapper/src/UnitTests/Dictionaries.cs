@@ -283,7 +283,7 @@ namespace AutoMapper.UnitTests
             // (which wraps a nongeneric PersistentMap).
             public class GenericWrappedDictionary<TKey, TValue>
                 : System.Collections.Generic.IDictionary<TKey, TValue>,
-                  System.Collections.IDictionary
+                    System.Collections.IDictionary
             {
                 System.Collections.IDictionary inner = new Dictionary<TKey, TValue>();
 

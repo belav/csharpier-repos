@@ -254,8 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         private static string FormatStringChar(char c)
         {
             return (CharUnicodeInfo.GetUnicodeCategory(c) == UnicodeCategory.Control)
-              ? $"\\u{((int)c).ToString("x4")}"
-              : c.ToString();
+                ? $"\\u{((int)c).ToString("x4")}"
+                : c.ToString();
         }
 
         [Fact]

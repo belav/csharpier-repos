@@ -478,8 +478,8 @@ End Module";
             );
 
             var expectedResult = namedSpans.ContainsKey("r")
-              ? namedSpans["r"] as IEnumerable<TextSpan>
-              : SpecializedCollections.EmptyEnumerable<TextSpan>();
+                ? namedSpans["r"] as IEnumerable<TextSpan>
+                : SpecializedCollections.EmptyEnumerable<TextSpan>();
 
             VerifyRange(
                 codeWithoutMarker,

@@ -86,8 +86,8 @@ namespace System.Net.Http
                     {
                         connection.Trace(
                             drained
-                              ? "Connection drain succeeded"
-                              : $"Connection drain failed when MaxResponseDrainSize={connection._pool.Settings._maxResponseDrainSize} bytes or MaxResponseDrainTime=={connection._pool.Settings._maxResponseDrainTime} exceeded"
+                                ? "Connection drain succeeded"
+                                : $"Connection drain failed when MaxResponseDrainSize={connection._pool.Settings._maxResponseDrainSize} bytes or MaxResponseDrainTime=={connection._pool.Settings._maxResponseDrainTime} exceeded"
                         );
                     }
                 }

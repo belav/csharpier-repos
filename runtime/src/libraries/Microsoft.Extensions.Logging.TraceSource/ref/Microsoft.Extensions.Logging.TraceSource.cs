@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.Logging.TraceSource
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("TraceSource")]
     public partial class TraceSourceLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public TraceSourceLoggerProvider(System.Diagnostics.SourceSwitch rootSourceSwitch) { }
 

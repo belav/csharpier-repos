@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
     [Name(PredefinedCommandHandlerNames.NavigateToHighlightedReference)]
     internal partial class NavigateToHighlightReferenceCommandHandler
         : ICommandHandler<NavigateToNextHighlightedReferenceCommandArgs>,
-          ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
+            ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
     {
         private readonly IOutliningManagerService _outliningManagerService;
         private readonly IViewTagAggregatorFactoryService _tagAggregatorFactory;

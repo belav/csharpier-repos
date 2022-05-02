@@ -94,8 +94,8 @@ namespace Wasm.Build.Tests
             AddItemsPropertiesToProject(
                 projectFile,
                 extraProperties: nativeRelink
-                  ? string.Empty
-                  : "<RunAOTCompilation>true</RunAOTCompilation>"
+                    ? string.Empty
+                    : "<RunAOTCompilation>true</RunAOTCompilation>"
             );
 
             // build with -p:DeployOnBuild=true, and that will trigger a publish

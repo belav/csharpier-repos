@@ -21,7 +21,7 @@ namespace Microsoft.AspNetCore.Identity;
 /// <typeparam name="TRoleClaim">The type of the class representing a role claim.</typeparam>
 public abstract class RoleStoreBase<TRole, TKey, TUserRole, TRoleClaim>
     : IQueryableRoleStore<TRole>,
-      IRoleClaimStore<TRole>
+        IRoleClaimStore<TRole>
     where TRole : IdentityRole<TKey>
     where TKey : IEquatable<TKey>
     where TUserRole : IdentityUserRole<TKey>, new()

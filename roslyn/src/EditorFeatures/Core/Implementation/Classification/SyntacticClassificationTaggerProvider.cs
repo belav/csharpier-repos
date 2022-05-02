@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
     [TagType(typeof(IClassificationTag))]
     internal partial class SyntacticClassificationTaggerProvider
         : ForegroundThreadAffinitizedObject,
-          ITaggerProvider
+            ITaggerProvider
     {
         private readonly IAsynchronousOperationListener _listener;
         private readonly SyntacticClassificationTypeMap _typeMap;

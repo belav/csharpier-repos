@@ -12,7 +12,7 @@ namespace System.Reflection.TypeLoading.Ecma
     //
     internal sealed partial class EcmaModule
         : ISignatureTypeProvider<RoType, TypeContext>,
-          ICustomAttributeTypeProvider<RoType>
+            ICustomAttributeTypeProvider<RoType>
     {
         //
         // ISignatureTypeProvider

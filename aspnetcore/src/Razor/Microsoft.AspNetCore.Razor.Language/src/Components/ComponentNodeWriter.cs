@@ -222,8 +222,8 @@ internal abstract class ComponentNodeWriter : IntermediateNodeWriter, ITemplateT
                     context.CodeWriter.WriteStartInstanceMethodInvocation(
                         ComponentsApi.RenderTreeBuilder.BuilderParameter,
                         capture.IsComponentCapture
-                          ? ComponentsApi.RenderTreeBuilder.AddComponentReferenceCapture
-                          : ComponentsApi.RenderTreeBuilder.AddElementReferenceCapture
+                            ? ComponentsApi.RenderTreeBuilder.AddComponentReferenceCapture
+                            : ComponentsApi.RenderTreeBuilder.AddElementReferenceCapture
                     );
                     context.CodeWriter.Write(parameter.SeqName);
                     context.CodeWriter.Write(", ");

@@ -31,7 +31,7 @@ namespace System.Runtime.CompilerServices
         [StructLayout(LayoutKind.Auto)]
         public readonly struct ConfiguredValueTaskAwaiter
             : ICriticalNotifyCompletion,
-              IStateMachineBoxAwareAwaiter
+                IStateMachineBoxAwareAwaiter
         {
             /// <summary>The value being awaited.</summary>
             private readonly ValueTask _value;
@@ -110,8 +110,8 @@ namespace System.Runtime.CompilerServices
                             continuation,
                             _value._token,
                             _value._continueOnCapturedContext
-                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                              : ValueTaskSourceOnCompletedFlags.None
+                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else
@@ -145,8 +145,8 @@ namespace System.Runtime.CompilerServices
                             box,
                             _value._token,
                             _value._continueOnCapturedContext
-                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                              : ValueTaskSourceOnCompletedFlags.None
+                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else
@@ -182,7 +182,7 @@ namespace System.Runtime.CompilerServices
         [StructLayout(LayoutKind.Auto)]
         public readonly struct ConfiguredValueTaskAwaiter
             : ICriticalNotifyCompletion,
-              IStateMachineBoxAwareAwaiter
+                IStateMachineBoxAwareAwaiter
         {
             /// <summary>The value being awaited.</summary>
             private readonly ValueTask<TResult> _value;
@@ -265,8 +265,8 @@ namespace System.Runtime.CompilerServices
                             continuation,
                             _value._token,
                             _value._continueOnCapturedContext
-                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                              : ValueTaskSourceOnCompletedFlags.None
+                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else
@@ -302,8 +302,8 @@ namespace System.Runtime.CompilerServices
                             box,
                             _value._token,
                             _value._continueOnCapturedContext
-                              ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
-                              : ValueTaskSourceOnCompletedFlags.None
+                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                : ValueTaskSourceOnCompletedFlags.None
                         );
                 }
                 else

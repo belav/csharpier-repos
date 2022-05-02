@@ -94,21 +94,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return location switch
                 {
                     TriviaLocation.BeforeBeginningOfSpan
-                      => callsite
-                          .GetFirstToken(includeZeroWidth: true)
-                          .GetPreviousToken(includeZeroWidth: true),
+                        => callsite
+                            .GetFirstToken(includeZeroWidth: true)
+                            .GetPreviousToken(includeZeroWidth: true),
                     TriviaLocation.AfterEndOfSpan
-                      => callsite
-                          .GetLastToken(includeZeroWidth: true)
-                          .GetNextToken(includeZeroWidth: true),
+                        => callsite
+                            .GetLastToken(includeZeroWidth: true)
+                            .GetNextToken(includeZeroWidth: true),
                     TriviaLocation.AfterBeginningOfSpan
-                      => body != null
-                          ? body.OpenBraceToken.GetNextToken(includeZeroWidth: true)
-                          : expressionBody.ArrowToken.GetNextToken(includeZeroWidth: true),
+                        => body != null
+                            ? body.OpenBraceToken.GetNextToken(includeZeroWidth: true)
+                            : expressionBody.ArrowToken.GetNextToken(includeZeroWidth: true),
                     TriviaLocation.BeforeEndOfSpan
-                      => body != null
-                          ? body.CloseBraceToken.GetPreviousToken(includeZeroWidth: true)
-                          : semicolonToken,
+                        => body != null
+                            ? body.CloseBraceToken.GetPreviousToken(includeZeroWidth: true)
+                            : semicolonToken,
                     _ => throw ExceptionUtilities.UnexpectedValue(location)
                 };
             }
@@ -135,8 +135,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     )
                     {
                         return (location == TriviaLocation.AfterBeginningOfSpan)
-                          ? SpecializedCollections.SingletonEnumerable(SyntaxFactory.ElasticMarker)
-                          : SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
+                            ? SpecializedCollections.SingletonEnumerable(
+                                SyntaxFactory.ElasticMarker
+                            )
+                            : SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
                     }
                 }
                 else
@@ -147,17 +149,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     )
                     {
                         return (location == TriviaLocation.AfterBeginningOfSpan)
-                          ? SpecializedCollections.SingletonEnumerable(SyntaxFactory.ElasticMarker)
-                          : SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
+                            ? SpecializedCollections.SingletonEnumerable(
+                                SyntaxFactory.ElasticMarker
+                            )
+                            : SpecializedCollections.EmptyEnumerable<SyntaxTrivia>();
                     }
                 }
 
                 var previousTriviaPair = triviaMap.ContainsKey(tokenPair.PreviousToken)
-                  ? triviaMap[tokenPair.PreviousToken]
-                  : default;
+                    ? triviaMap[tokenPair.PreviousToken]
+                    : default;
                 var nextTriviaPair = triviaMap.ContainsKey(tokenPair.NextToken)
-                  ? triviaMap[tokenPair.NextToken]
-                  : default;
+                    ? triviaMap[tokenPair.NextToken]
+                    : default;
 
                 var trailingTrivia =
                     previousTriviaPair.TrailingTrivia
@@ -171,21 +175,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return location switch
                 {
                     TriviaLocation.BeforeBeginningOfSpan
-                      => FilterBeforeBeginningOfSpan(tokenPair, list),
+                        => FilterBeforeBeginningOfSpan(tokenPair, list),
                     TriviaLocation.AfterEndOfSpan
-                      => FilterTriviaList(list.Concat(tokenPair.NextToken.LeadingTrivia)),
+                        => FilterTriviaList(list.Concat(tokenPair.NextToken.LeadingTrivia)),
                     TriviaLocation.AfterBeginningOfSpan
-                      => FilterTriviaList(
-                          AppendTrailingTrivia(tokenPair)
-                              .Concat(list)
-                              .Concat(tokenPair.NextToken.LeadingTrivia)
-                      ),
+                        => FilterTriviaList(
+                            AppendTrailingTrivia(tokenPair)
+                                .Concat(list)
+                                .Concat(tokenPair.NextToken.LeadingTrivia)
+                        ),
                     TriviaLocation.BeforeEndOfSpan
-                      => FilterTriviaList(
-                          tokenPair.PreviousToken.TrailingTrivia
-                              .Concat(list)
-                              .Concat(tokenPair.NextToken.LeadingTrivia)
-                      ),
+                        => FilterTriviaList(
+                            tokenPair.PreviousToken.TrailingTrivia
+                                .Concat(list)
+                                .Concat(tokenPair.NextToken.LeadingTrivia)
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(location),
                 };
             }
@@ -197,17 +201,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return method switch
                 {
                     MethodDeclarationSyntax methodDeclaration
-                      => (
-                          methodDeclaration.Body,
-                          methodDeclaration.ExpressionBody,
-                          methodDeclaration.SemicolonToken
-                      ),
+                        => (
+                            methodDeclaration.Body,
+                            methodDeclaration.ExpressionBody,
+                            methodDeclaration.SemicolonToken
+                        ),
                     LocalFunctionStatementSyntax localFunctionDeclaration
-                      => (
-                          localFunctionDeclaration.Body,
-                          localFunctionDeclaration.ExpressionBody,
-                          localFunctionDeclaration.SemicolonToken
-                      ),
+                        => (
+                            localFunctionDeclaration.Body,
+                            localFunctionDeclaration.ExpressionBody,
+                            localFunctionDeclaration.SemicolonToken
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(method)
                 };
             }

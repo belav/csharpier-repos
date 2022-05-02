@@ -144,8 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -174,8 +174,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -242,8 +242,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -289,8 +289,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -335,8 +335,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -377,11 +377,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.MinAsync(mep => mep.UnitPrice)
-                          )
+                            () => query.MinAsync(mep => mep.UnitPrice)
+                        )
                         : Assert.Throws<InvalidOperationException>(
-                              () => query.Min(mep => mep.UnitPrice)
-                          )
+                            () => query.Min(mep => mep.UnitPrice)
+                        )
                 ).Message
             );
         }
@@ -420,8 +420,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -454,8 +454,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -514,8 +514,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );
@@ -573,8 +573,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 (
                     async
                         ? await Assert.ThrowsAsync<InvalidOperationException>(
-                              () => query.ToArrayAsync()
-                          )
+                            () => query.ToArrayAsync()
+                        )
                         : Assert.Throws<InvalidOperationException>(() => query.ToArray())
                 ).Message
             );

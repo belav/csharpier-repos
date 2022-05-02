@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
     {
         internal abstract class CommonEmbeddedEvent
             : CommonEmbeddedMember<TEventSymbol>,
-              Cci.IEventDefinition
+                Cci.IEventDefinition
         {
             private readonly TEmbeddedMethod _adder;
             private readonly TEmbeddedMethod _remover;

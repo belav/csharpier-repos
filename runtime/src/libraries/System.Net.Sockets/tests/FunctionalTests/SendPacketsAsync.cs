@@ -1187,12 +1187,12 @@ namespace System.Net.Sockets.Tests
             bufferType switch
             {
                 BufferType.ByteArray
-                  => new ElementWithMemoryManager(new SendPacketsElement(new byte[size]), null),
+                    => new ElementWithMemoryManager(new SendPacketsElement(new byte[size]), null),
                 BufferType.ManagedMemory
-                  => new ElementWithMemoryManager(
-                      new SendPacketsElement(new ReadOnlyMemory<byte>(new byte[size])),
-                      null
-                  ),
+                    => new ElementWithMemoryManager(
+                        new SendPacketsElement(new ReadOnlyMemory<byte>(new byte[size])),
+                        null
+                    ),
                 BufferType.NativeMemory => CreateElementForNativeBuffer(size, 0, size),
                 _ => throw new InvalidOperationException()
             };
@@ -1206,17 +1206,17 @@ namespace System.Net.Sockets.Tests
             bufferType switch
             {
                 BufferType.ByteArray
-                  => new ElementWithMemoryManager(
-                      new SendPacketsElement(new byte[size], offset, count),
-                      null
-                  ),
+                    => new ElementWithMemoryManager(
+                        new SendPacketsElement(new byte[size], offset, count),
+                        null
+                    ),
                 BufferType.ManagedMemory
-                  => new ElementWithMemoryManager(
-                      new SendPacketsElement(
-                          new ReadOnlyMemory<byte>(new byte[size], offset, count)
-                      ),
-                      null
-                  ),
+                    => new ElementWithMemoryManager(
+                        new SendPacketsElement(
+                            new ReadOnlyMemory<byte>(new byte[size], offset, count)
+                        ),
+                        null
+                    ),
                 BufferType.NativeMemory => CreateElementForNativeBuffer(size, offset, count),
                 _ => throw new InvalidOperationException()
             };

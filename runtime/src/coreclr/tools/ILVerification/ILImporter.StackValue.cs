@@ -263,8 +263,8 @@ namespace Internal.IL
                         + TypeToStringForByRef(Type);
                 case StackValueKind.ObjRef:
                     return (Type != null)
-                      ? "ref '" + Type.ToString() + "'"
-                      : "Nullobjref 'NullReference'";
+                        ? "ref '" + Type.ToString() + "'"
+                        : "Nullobjref 'NullReference'";
                 case StackValueKind.ValueType:
                     return "value '" + Type.ToString() + "'";
                 default:

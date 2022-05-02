@@ -1006,8 +1006,8 @@ namespace Microsoft.CodeAnalysis
             var siblings = parent.ChildNodesAndTokens();
 
             return siblings.Count < 8
-              ? GetNextSiblingFromStart(siblings)
-              : GetNextSiblingWithSearch(siblings);
+                ? GetNextSiblingFromStart(siblings)
+                : GetNextSiblingWithSearch(siblings);
         }
 
         public SyntaxNodeOrToken GetPreviousSibling()

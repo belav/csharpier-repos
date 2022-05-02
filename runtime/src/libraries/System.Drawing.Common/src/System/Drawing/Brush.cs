@@ -50,7 +50,7 @@ namespace System.Drawing
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeleteBrush(new HandleRef(this, _nativeBrush));
+                        Gdip.GdipDeleteBrush(new HandleRef(this, _nativeBrush));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

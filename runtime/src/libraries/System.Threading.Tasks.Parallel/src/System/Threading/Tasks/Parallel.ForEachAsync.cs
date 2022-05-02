@@ -454,7 +454,7 @@ namespace System.Threading.Tasks
         /// <typeparam name="TSource">Specifies the type of data being enumerated.</typeparam>
         private abstract class ForEachAsyncState<TSource>
             : TaskCompletionSource,
-              IThreadPoolWorkItem
+                IThreadPoolWorkItem
         {
             /// <summary>The caller-provided cancellation token.</summary>
             private readonly CancellationToken _externalCancellationToken;
@@ -629,7 +629,7 @@ namespace System.Threading.Tasks
         /// <typeparam name="TSource">Specifies the type of data being enumerated.</typeparam>
         private sealed class SyncForEachAsyncState<TSource>
             : ForEachAsyncState<TSource>,
-              IDisposable
+                IDisposable
         {
             public readonly IEnumerator<TSource> Enumerator;
 
@@ -658,7 +658,7 @@ namespace System.Threading.Tasks
         /// <typeparam name="TSource">Specifies the type of data being enumerated.</typeparam>
         private sealed class AsyncForEachAsyncState<TSource>
             : ForEachAsyncState<TSource>,
-              IAsyncDisposable
+                IAsyncDisposable
         {
             public readonly SemaphoreSlim Lock = new SemaphoreSlim(1, 1);
             public readonly IAsyncEnumerator<TSource> Enumerator;

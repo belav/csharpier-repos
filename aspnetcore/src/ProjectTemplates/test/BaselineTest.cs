@@ -171,7 +171,7 @@ public class BaselineTest : LoggedTest
                     "uld" => "uld",
                     "language" => argSegments[1].Replace("#", "Sharp"),
                     "support-pages-and-views" when argSegments[1] == "true"
-                      => "supportpagesandviewstrue",
+                        => "supportpagesandviewstrue",
                     _ => ""
                 };
             }

@@ -13,7 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class CompositeKeysQueryFixtureBase
         : SharedStoreFixtureBase<CompositeKeysContext>,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         private CompositeKeysDefaultData _expectedData;
 

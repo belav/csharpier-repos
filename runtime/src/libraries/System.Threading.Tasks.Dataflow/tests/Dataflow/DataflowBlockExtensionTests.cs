@@ -1632,23 +1632,23 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 var t =
                     chooseTestCase < 3
                         ? DataflowBlock.Choose(
-                              source1,
-                              i => intValue = i,
-                              source2,
-                              s => stringValue = s
-                          )
+                            source1,
+                            i => intValue = i,
+                            source2,
+                            s => stringValue = s
+                        )
                         : DataflowBlock.Choose(
-                              source1,
-                              i => usedScheduler = TaskScheduler.Current,
-                              source2,
-                              s => usedScheduler = TaskScheduler.Current,
-                              new DataflowBlockOptions
-                              {
-                                  TaskScheduler = requestedScheduler,
-                                  MaxMessagesPerTask = 1,
-                                  CancellationToken = cts.Token
-                              }
-                          );
+                            source1,
+                            i => usedScheduler = TaskScheduler.Current,
+                            source2,
+                            s => usedScheduler = TaskScheduler.Current,
+                            new DataflowBlockOptions
+                            {
+                                TaskScheduler = requestedScheduler,
+                                MaxMessagesPerTask = 1,
+                                CancellationToken = cts.Token
+                            }
+                        );
 
                 switch (chooseTestCase)
                 {
@@ -1885,27 +1885,27 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 var t =
                     chooseTestCase < 7
                         ? DataflowBlock.Choose(
-                              source1,
-                              i => intValue = i,
-                              source2,
-                              s => stringValue = s,
-                              source3,
-                              d => doubleValue = d
-                          )
+                            source1,
+                            i => intValue = i,
+                            source2,
+                            s => stringValue = s,
+                            source3,
+                            d => doubleValue = d
+                        )
                         : DataflowBlock.Choose(
-                              source1,
-                              i => usedScheduler = TaskScheduler.Current,
-                              source2,
-                              s => usedScheduler = TaskScheduler.Current,
-                              source3,
-                              d => usedScheduler = TaskScheduler.Current,
-                              new DataflowBlockOptions
-                              {
-                                  TaskScheduler = requestedScheduler,
-                                  MaxMessagesPerTask = 1,
-                                  CancellationToken = cts.Token
-                              }
-                          );
+                            source1,
+                            i => usedScheduler = TaskScheduler.Current,
+                            source2,
+                            s => usedScheduler = TaskScheduler.Current,
+                            source3,
+                            d => usedScheduler = TaskScheduler.Current,
+                            new DataflowBlockOptions
+                            {
+                                TaskScheduler = requestedScheduler,
+                                MaxMessagesPerTask = 1,
+                                CancellationToken = cts.Token
+                            }
+                        );
 
                 switch (chooseTestCase)
                 {
@@ -2110,14 +2110,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         n == 2
                             ? DataflowBlock.Choose(sources[0], nop, sources[1], nop, options)
                             : DataflowBlock.Choose(
-                                  sources[0],
-                                  nop,
-                                  sources[1],
-                                  nop,
-                                  sources[2],
-                                  nop,
-                                  options
-                              );
+                                sources[0],
+                                nop,
+                                sources[1],
+                                nop,
+                                sources[2],
+                                nop,
+                                options
+                            );
 
                     if (!cancelBeforeChoose)
                         cts.Cancel();

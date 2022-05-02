@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentInjectDirectivePass
     : IntermediateNodePassBase,
-      IRazorDirectiveClassifierPass
+        IRazorDirectiveClassifierPass
 {
     protected override void ExecuteCore(
         RazorCodeDocument codeDocument,

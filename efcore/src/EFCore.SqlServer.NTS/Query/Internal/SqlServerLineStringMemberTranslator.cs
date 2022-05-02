@@ -93,8 +93,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 }
 
                 var resultTypeMapping = typeof(Geometry).IsAssignableFrom(returnType)
-                  ? _typeMappingSource.FindMapping(returnType, storeType)
-                  : _typeMappingSource.FindMapping(returnType);
+                    ? _typeMappingSource.FindMapping(returnType, storeType)
+                    : _typeMappingSource.FindMapping(returnType);
 
                 return _sqlExpressionFactory.Function(
                     instance,

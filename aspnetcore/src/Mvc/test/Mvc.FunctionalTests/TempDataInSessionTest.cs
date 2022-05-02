@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class TempDataInSessionTest
     : TempDataTestBase,
-      IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider>>
+        IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider>>
 {
     public TempDataInSessionTest(
         MvcTestFixture<BasicWebSite.StartupWithSessionTempDataProvider> fixture

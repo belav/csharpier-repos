@@ -30,9 +30,9 @@ public class AccessTokenNotAvailableException : Exception
     )
         : base(
             message: "Unable to provision an access token for the requested scopes: " + scopes
-                != null
-              ? $"'{string.Join(", ", scopes ?? Array.Empty<string>())}'"
-              : "(default scopes)"
+            != null
+                ? $"'{string.Join(", ", scopes ?? Array.Empty<string>())}'"
+                : "(default scopes)"
         )
     {
         _tokenResult = tokenResult;

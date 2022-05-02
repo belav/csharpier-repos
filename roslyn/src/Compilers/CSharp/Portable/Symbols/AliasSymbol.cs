@@ -336,10 +336,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamespaceOrTypeSymbol symbol = this.IsExtern
                     ? ResolveExternAliasTarget(newDiagnostics)
                     : ResolveAliasTarget(
-                          ((UsingDirectiveSyntax)_directive.GetSyntax()).Name,
-                          newDiagnostics,
-                          basesBeingResolved
-                      );
+                        ((UsingDirectiveSyntax)_directive.GetSyntax()).Name,
+                        newDiagnostics,
+                        basesBeingResolved
+                    );
 
                 if ((object?)Interlocked.CompareExchange(ref _aliasTarget, symbol, null) == null)
                 {

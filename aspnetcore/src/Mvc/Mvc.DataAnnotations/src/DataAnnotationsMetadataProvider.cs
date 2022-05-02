@@ -20,8 +20,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// </summary>
 internal class DataAnnotationsMetadataProvider
     : IBindingMetadataProvider,
-      IDisplayMetadataProvider,
-      IValidationMetadataProvider
+        IDisplayMetadataProvider,
+        IValidationMetadataProvider
 {
     // The [Nullable] attribute is synthesized by the compiler. It's best to just compare the type name.
     private const string NullableAttributeFullTypeName =

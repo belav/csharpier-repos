@@ -112,8 +112,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 
         private static IsPatternExpressionSyntax RewriteWorker(BinaryExpressionSyntax binary) =>
             binary.Right.IsKind(SyntaxKind.NullLiteralExpression)
-              ? Rewrite(binary, binary.Left, binary.Right)
-              : Rewrite(binary, binary.Right, binary.Left);
+                ? Rewrite(binary, binary.Left, binary.Right)
+                : Rewrite(binary, binary.Right, binary.Left);
 
         private static IsPatternExpressionSyntax Rewrite(
             BinaryExpressionSyntax binary,

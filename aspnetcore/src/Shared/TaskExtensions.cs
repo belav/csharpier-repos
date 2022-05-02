@@ -202,6 +202,6 @@ static class TaskExtensions
 
     private static string CreateMessage(TimeSpan timeout, string filePath, int lineNumber) =>
         string.IsNullOrEmpty(filePath)
-          ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
-          : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
+            ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
+            : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
 }

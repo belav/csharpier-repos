@@ -1262,16 +1262,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // need to synthesize setter
                 MethodSymbol overriddenAccessor = this.GetOwnOrInheritedSetMethod();
                 return (object)overriddenAccessor == null
-                  ? null
-                  : new SynthesizedSealedPropertyAccessor(this, overriddenAccessor);
+                    ? null
+                    : new SynthesizedSealedPropertyAccessor(this, overriddenAccessor);
             }
             else if (SetMethod is object)
             {
                 // need to synthesize getter
                 MethodSymbol overriddenAccessor = this.GetOwnOrInheritedGetMethod();
                 return (object)overriddenAccessor == null
-                  ? null
-                  : new SynthesizedSealedPropertyAccessor(this, overriddenAccessor);
+                    ? null
+                    : new SynthesizedSealedPropertyAccessor(this, overriddenAccessor);
             }
             else
             {

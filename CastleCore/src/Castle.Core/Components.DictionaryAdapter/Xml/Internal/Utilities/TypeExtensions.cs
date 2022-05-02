@@ -24,8 +24,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public static Type NonNullable(this Type type)
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
-              ? type.GetGenericArguments()[0]
-              : type;
+                ? type.GetGenericArguments()[0]
+                : type;
         }
 
         public static Type GetCollectionItemType(this Type type)

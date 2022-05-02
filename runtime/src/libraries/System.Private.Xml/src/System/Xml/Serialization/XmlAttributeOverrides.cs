@@ -67,8 +67,8 @@ namespace System.Xml.Serialization
                 return
                     _types.TryGetValue(type, out members)
                     && members.TryGetValue(member, out attributes)
-                  ? attributes
-                  : null;
+                    ? attributes
+                    : null;
             }
         }
     }

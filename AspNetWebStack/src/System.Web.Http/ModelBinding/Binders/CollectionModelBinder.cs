@@ -107,11 +107,11 @@ namespace System.Web.Http.ModelBinding.Binders
             List<TElement> boundCollection =
                 (valueProviderResult != null)
                     ? BindSimpleCollection(
-                          actionContext,
-                          bindingContext,
-                          valueProviderResult.RawValue,
-                          valueProviderResult.Culture
-                      )
+                        actionContext,
+                        bindingContext,
+                        valueProviderResult.RawValue,
+                        valueProviderResult.Culture
+                    )
                     : BindComplexCollection(actionContext, bindingContext);
 
             bool retVal = CreateOrReplaceCollection(actionContext, bindingContext, boundCollection);

@@ -21,7 +21,7 @@ namespace System.Linq.Parallel
     /// <typeparam name="TSortKey"></typeparam>
     internal sealed class SortQueryOperator<TInputOutput, TSortKey>
         : UnaryQueryOperator<TInputOutput, TInputOutput>,
-          IOrderedEnumerable<TInputOutput>
+            IOrderedEnumerable<TInputOutput>
     {
         private readonly Func<TInputOutput, TSortKey> _keySelector; // Key selector used when sorting.
         private readonly IComparer<TSortKey> _comparer; // Key comparison logic to use during sorting.

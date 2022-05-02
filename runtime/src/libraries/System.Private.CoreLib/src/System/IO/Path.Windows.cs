@@ -167,11 +167,11 @@ namespace System.IO
                         : length == 2
                             ? JoinInternal(basePath.AsSpan(0, 4), path.AsSpan(), @"\".AsSpan())
                             : JoinInternal(
-                                  basePath.AsSpan(0, 4),
-                                  path.AsSpan(0, 2),
-                                  @"\".AsSpan(),
-                                  path.AsSpan(2)
-                              );
+                                basePath.AsSpan(0, 4),
+                                path.AsSpan(0, 2),
+                                @"\".AsSpan(),
+                                path.AsSpan(2)
+                            );
                 }
             }
             else
@@ -187,11 +187,11 @@ namespace System.IO
             // them properly. As such we need to manually remove segments and not use GetFullPath().
 
             return PathInternal.IsDevice(combinedPath.AsSpan())
-              ? PathInternal.RemoveRelativeSegments(
+                ? PathInternal.RemoveRelativeSegments(
                     combinedPath,
                     PathInternal.GetRootLength(combinedPath.AsSpan())
                 )
-              : GetFullPathInternal(combinedPath);
+                : GetFullPathInternal(combinedPath);
         }
 
         // Gets the full path without argument validation
@@ -354,8 +354,8 @@ namespace System.IO
 
             ReadOnlySpan<char> pathToTrim = root.Slice(startOffset);
             return Path.EndsInDirectorySeparator(pathToTrim)
-              ? pathToTrim.Slice(0, pathToTrim.Length - 1)
-              : pathToTrim;
+                ? pathToTrim.Slice(0, pathToTrim.Length - 1)
+                : pathToTrim;
         }
 
         /// <summary>

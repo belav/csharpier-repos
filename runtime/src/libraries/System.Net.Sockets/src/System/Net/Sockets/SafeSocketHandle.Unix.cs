@@ -329,8 +329,8 @@ namespace System.Net.Sockets
                 NetEventSource.Info(
                     this,
                     remappedError
-                      ? $"handle:{handle}, close():ECONNRESET, but treating it as SUCCESS"
-                      : $"handle:{handle}, close():{errorCode}"
+                        ? $"handle:{handle}, close():ECONNRESET, but treating it as SUCCESS"
+                        : $"handle:{handle}, close():{errorCode}"
                 );
             }
 

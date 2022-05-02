@@ -60,8 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         block.OpenBraceToken.GetAllTrivia().IsEmpty()
                         && block.CloseBraceToken.GetAllTrivia().IsEmpty()
                     )
-                      ? ImmutableArray<StatementSyntax>.Empty
-                      : ImmutableArray.Create<StatementSyntax>(block);
+                        ? ImmutableArray<StatementSyntax>.Empty
+                        : ImmutableArray.Create<StatementSyntax>(block);
                 }
 
                 // okay transfer asset attached to block to statements

@@ -313,8 +313,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private static MethodInfo GetNonIndexerGetMethod(PropertyInfo property)
         {
             return (property.GetIndexParameters().Length == 0)
-              ? property.GetGetMethod(nonPublic: true)
-              : null;
+                ? property.GetGetMethod(nonPublic: true)
+                : null;
         }
 
         internal static bool IsBoolean(this Type type)

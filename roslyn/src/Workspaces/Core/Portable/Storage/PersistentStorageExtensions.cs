@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.Storage
 
         public static StorageDatabase GetPersistentStorageDatabase(this OptionSet options) =>
             options.GetOption(StorageOptions.CloudCacheFeatureFlag)
-              ? StorageDatabase.CloudCache
-              : options.GetOption(StorageOptions.Database);
+                ? StorageDatabase.CloudCache
+                : options.GetOption(StorageOptions.Database);
 
         public static IChecksummedPersistentStorageService GetPersistentStorageService(
             this HostWorkspaceServices services,
@@ -35,12 +35,12 @@ namespace Microsoft.CodeAnalysis.Storage
             {
 #if !DOTNET_BUILD_FROM_SOURCE
                 StorageDatabase.SQLite
-                  => services.GetService<SQLitePersistentStorageService>()
-                      ?? NoOpPersistentStorageService.GetOrThrow(configuration),
+                    => services.GetService<SQLitePersistentStorageService>()
+                        ?? NoOpPersistentStorageService.GetOrThrow(configuration),
 #endif
                 StorageDatabase.CloudCache
-                  => services.GetService<ICloudCacheStorageService>()
-                      ?? NoOpPersistentStorageService.GetOrThrow(configuration),
+                    => services.GetService<ICloudCacheStorageService>()
+                        ?? NoOpPersistentStorageService.GetOrThrow(configuration),
                 _ => NoOpPersistentStorageService.GetOrThrow(configuration),
             };
         }

@@ -144,8 +144,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             // Ids of all projects whose binaries were successfully updated during the session.
                             map["ProjectIdsWithAppliedChanges"] = editSessionData.Committed
                                 ? editSessionData.ProjectsWithValidDelta.Select(
-                                      id => new PiiValue(id.ToString("B").ToUpperInvariant())
-                                  )
+                                    id => new PiiValue(id.ToString("B").ToUpperInvariant())
+                                )
                                 : "";
                         }
                     )

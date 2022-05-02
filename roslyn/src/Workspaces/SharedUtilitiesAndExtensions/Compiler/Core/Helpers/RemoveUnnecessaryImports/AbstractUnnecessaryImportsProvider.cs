@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
     internal abstract class AbstractUnnecessaryImportsProvider<T>
         : IUnnecessaryImportsProvider,
-          IEqualityComparer<T> where T : SyntaxNode
+            IEqualityComparer<T> where T : SyntaxNode
     {
         public ImmutableArray<SyntaxNode> GetUnnecessaryImports(
             SemanticModel model,

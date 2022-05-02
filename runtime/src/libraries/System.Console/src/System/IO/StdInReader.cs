@@ -521,7 +521,7 @@ namespace System.IO
                                     : ConsolePal.s_veol2Character != ConsolePal.s_posixDisableValue
                                         ? ConsolePal.s_veol2Character
                                         : ConsolePal.s_veofCharacter
-                                          != ConsolePal.s_posixDisableValue
+                                        != ConsolePal.s_posixDisableValue
                                             ? ConsolePal.s_veofCharacter
                                             : 0
                             ),

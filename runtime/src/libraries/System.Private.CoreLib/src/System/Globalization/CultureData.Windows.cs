@@ -267,16 +267,16 @@ namespace System.Globalization
             string userOverride = GetLocaleInfoFromLCType(
                 _sWindowsName,
                 shortFormat
-                  ? Interop.Kernel32.LOCALE_SSHORTTIME
-                  : Interop.Kernel32.LOCALE_STIMEFORMAT,
+                    ? Interop.Kernel32.LOCALE_SSHORTTIME
+                    : Interop.Kernel32.LOCALE_STIMEFORMAT,
                 useUserOverride: true
             );
 
             Debug.Assert(!string.IsNullOrEmpty(userOverride));
 
             return userOverride != icuFormatString
-              ? new string[] { userOverride, icuFormatString }
-              : new string[] { userOverride };
+                ? new string[] { userOverride, icuFormatString }
+                : new string[] { userOverride };
         }
 
         private int GetAnsiCodePage(string cultureName) =>

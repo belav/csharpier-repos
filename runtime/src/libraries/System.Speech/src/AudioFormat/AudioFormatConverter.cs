@@ -318,7 +318,7 @@ namespace System.Speech.Internal
             }
 
             return waveEx != null
-              ? new SpeechAudioFormatInfo(
+                ? new SpeechAudioFormatInfo(
                     (EncodingFormat)waveEx.wFormatTag,
                     (int)waveEx.nSamplesPerSec,
                     waveEx.wBitsPerSample,
@@ -327,7 +327,7 @@ namespace System.Speech.Internal
                     waveEx.nBlockAlign,
                     extra
                 )
-              : null;
+                : null;
         }
 
         private enum StreamFormat

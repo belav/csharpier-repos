@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis
     [StructLayout(LayoutKind.Auto)]
     public readonly partial struct SyntaxTriviaList
         : IEquatable<SyntaxTriviaList>,
-          IReadOnlyList<SyntaxTrivia>
+            IReadOnlyList<SyntaxTrivia>
     {
         public static SyntaxTriviaList Empty => default(SyntaxTriviaList);
 

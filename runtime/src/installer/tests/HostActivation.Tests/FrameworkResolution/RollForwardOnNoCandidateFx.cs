@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
     public class RollForwardOnNoCandidateFx
         : FrameworkResolutionBase,
-          IClassFixture<RollForwardOnNoCandidateFx.SharedTestState>
+            IClassFixture<RollForwardOnNoCandidateFx.SharedTestState>
     {
         private SharedTestState SharedState { get; }
 

@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var oldFieldTypes = TypeDescriptor.Fields.SelectAsArray(f => f.TypeWithAnnotations);
                 var newFieldTypes = map.SubstituteTypes(oldFieldTypes);
                 return (oldFieldTypes == newFieldTypes)
-                  ? this
-                  : new AnonymousTypePublicSymbol(
+                    ? this
+                    : new AnonymousTypePublicSymbol(
                         Manager,
                         TypeDescriptor.WithNewFieldsTypes(newFieldTypes)
                     );

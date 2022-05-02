@@ -199,8 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 new TextChange(
                     selectedItem.Span,
                     ch is '(' or '[' or '<'
-                      ? selectedItem.DisplayText
-                      : SymbolCompletionItem.GetInsertionText(selectedItem)
+                        ? selectedItem.DisplayText
+                        : SymbolCompletionItem.GetInsertionText(selectedItem)
                 )
             );
         }

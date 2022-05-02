@@ -150,9 +150,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Metho
                 BinaryOperatorKind.Concatenate => "concatenate",
                 BinaryOperatorKind.AddDelegate => "adddelegate",
                 _
-                  => throw new InvalidOperationException(
-                      "Invalid BinaryOperatorKind: " + kind.ToString()
-                  ),
+                    => throw new InvalidOperationException(
+                        "Invalid BinaryOperatorKind: " + kind.ToString()
+                    ),
             };
 
         private static string GetVariableKindText(VariableKind kind) =>

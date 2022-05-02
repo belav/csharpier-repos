@@ -191,12 +191,12 @@ namespace System.Net.Http.Functional.Tests
                     HttpClientHandler handler = CreateHttpClientHandler();
                     Task serverTask = result
                         ? server.AcceptConnectionPerformAuthenticationAndCloseAsync(
-                              serverAuthenticateHeader
-                          )
+                            serverAuthenticateHeader
+                        )
                         : server.AcceptConnectionSendResponseAndCloseAsync(
-                              HttpStatusCode.Unauthorized,
-                              serverAuthenticateHeader
-                          );
+                            HttpStatusCode.Unauthorized,
+                            serverAuthenticateHeader
+                        );
 
                     await TestHelper.WhenAllCompletedOrAnyFailedWithTimeout(
                         TestHelper.PassingTestTimeoutMilliseconds,

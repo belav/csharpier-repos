@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 [StructLayout(LayoutKind.Auto)]
 internal readonly struct SyntaxTriviaList
     : IEquatable<SyntaxTriviaList>,
-      IReadOnlyList<SyntaxTrivia>
+        IReadOnlyList<SyntaxTrivia>
 {
     public static SyntaxTriviaList Empty => default(SyntaxTriviaList);
 

@@ -29,26 +29,28 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                     Key.Down => TrySelectItem(GetNextItem(expandNode: false), navigate: true),
                     Key.Up => TrySelectItem(GetPreviousItem(), navigate: true),
                     Key.F8
-                      => e.KeyboardDevice.Modifiers == ModifierKeys.Shift
-                          ? TrySelectItem(GetPreviousItem(), navigate: true)
-                          : TrySelectItem(GetNextItem(expandNode: true), navigate: true),
+                        => e.KeyboardDevice.Modifiers == ModifierKeys.Shift
+                            ? TrySelectItem(GetPreviousItem(), navigate: true)
+                            : TrySelectItem(GetNextItem(expandNode: true), navigate: true),
                     Key.Enter
-                      => TrySelectItem(
-                          ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
-                          navigate: true
-                      ),
+                        => TrySelectItem(
+                            ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
+                            navigate: true
+                        ),
                     Key.Right
-                      => TrySetExpanded(
-                          ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
-                          true
-                      ),
+                        => TrySetExpanded(
+                            ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
+                            true
+                        ),
                     Key.Left
-                      => TrySetExpanded(
-                          ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
-                          false
-                      ),
+                        => TrySetExpanded(
+                            ValueTrackingTreeView.SelectedItem as TreeViewItemBase,
+                            false
+                        ),
                     Key.Space
-                      => TryToggleExpanded(ValueTrackingTreeView.SelectedItem as TreeViewItemBase),
+                        => TryToggleExpanded(
+                            ValueTrackingTreeView.SelectedItem as TreeViewItemBase
+                        ),
                     _ => false
                 };
 

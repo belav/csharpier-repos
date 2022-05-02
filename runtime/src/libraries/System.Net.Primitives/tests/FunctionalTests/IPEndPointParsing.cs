@@ -179,13 +179,13 @@ namespace System.Net.Primitives.Functional.Tests
                 ); // trailing colon
                 InvalidPortHelper(
                     isIPv4
-                      ? $"{address}:{portNumber}:{portNumber}"
-                      : $"[{address}]:{portNumber}]:{portNumber}"
+                        ? $"{address}:{portNumber}:{portNumber}"
+                        : $"[{address}]:{portNumber}]:{portNumber}"
                 ); // double port
                 InvalidPortHelper(
                     isIPv4
-                      ? $"{address}:{portNumber}a{portNumber}"
-                      : $"[{address}]:{portNumber}a{portNumber}"
+                        ? $"{address}:{portNumber}a{portNumber}"
+                        : $"[{address}]:{portNumber}a{portNumber}"
                 ); // character in the middle of numbers
 
                 string addressAndPort = isIPv4

@@ -22,10 +22,10 @@ internal struct SyntaxList<TNode> : IEquatable<SyntaxList<TNode>> where TNode : 
         get
         {
             return (_node == null)
-              ? 0
-              : _node.IsList
-                  ? _node.SlotCount
-                  : 1;
+                ? 0
+                : _node.IsList
+                    ? _node.SlotCount
+                    : 1;
         }
     }
 

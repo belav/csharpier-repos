@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteDiagnosticAnalyzerService
         : BrokeredServiceBase,
-          IRemoteDiagnosticAnalyzerService
+            IRemoteDiagnosticAnalyzerService
     {
         internal sealed class Factory : FactoryBase<IRemoteDiagnosticAnalyzerService>
         {
@@ -69,12 +69,12 @@ namespace Microsoft.CodeAnalysis.Remote
                         var document =
                             arguments.DocumentId != null
                                 ? solution.GetTextDocument(arguments.DocumentId)
-                                  ?? await solution
-                                      .GetSourceGeneratedDocumentAsync(
-                                          arguments.DocumentId,
-                                          cancellationToken
-                                      )
-                                      .ConfigureAwait(false)
+                                    ?? await solution
+                                        .GetSourceGeneratedDocumentAsync(
+                                            arguments.DocumentId,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false)
                                 : null;
                         var documentSpan = arguments.DocumentSpan;
                         var documentAnalysisKind = arguments.DocumentAnalysisKind;

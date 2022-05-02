@@ -7221,8 +7221,8 @@ class Test
                     CompileAndVerify(
                         app_compilation,
                         symbolValidator: IEvent_ref.Properties.EmbedInteropTypes
-                          ? metadataValidator
-                          : null,
+                            ? metadataValidator
+                            : null,
                         expectedOutput: @"E01
 E02"
                     );

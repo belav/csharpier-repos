@@ -41,8 +41,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 "Microsoft.Extensions.DependencyInjection.VerifyOpenGenericServiceTrimmability",
                 out bool verifyOpenGenerics
             )
-              ? verifyOpenGenerics
-              : false;
+                ? verifyOpenGenerics
+                : false;
 
         internal ServiceProvider(
             ICollection<ServiceDescriptor> serviceDescriptors,

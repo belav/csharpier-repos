@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.AddImport
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteMissingImportDiscoveryService)), Shared]
     internal sealed class RemoteMissingImportDiscoveryServiceCallbackDispatcher
         : RemoteServiceCallbackDispatcher,
-          IRemoteMissingImportDiscoveryService.ICallback
+            IRemoteMissingImportDiscoveryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

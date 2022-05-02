@@ -17,22 +17,22 @@ namespace System.Collections.Immutable
 #if NET5_0_OR_GREATER
     public sealed partial class ImmutableHashSet<T>
         : IImmutableSet<T>,
-          IHashKeyCollection<T>,
-          IReadOnlyCollection<T>,
-          ICollection<T>,
-          ISet<T>,
-          IReadOnlySet<T>,
-          ICollection,
-          IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
+            IHashKeyCollection<T>,
+            IReadOnlyCollection<T>,
+            ICollection<T>,
+            ISet<T>,
+            IReadOnlySet<T>,
+            ICollection,
+            IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
 #else
     public sealed partial class ImmutableHashSet<T>
         : IImmutableSet<T>,
-          IHashKeyCollection<T>,
-          IReadOnlyCollection<T>,
-          ICollection<T>,
-          ISet<T>,
-          ICollection,
-          IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
+            IHashKeyCollection<T>,
+            IReadOnlyCollection<T>,
+            ICollection<T>,
+            ISet<T>,
+            ICollection,
+            IStrongEnumerable<T, ImmutableHashSet<T>.Enumerator>
 #endif
     {
         /// <summary>
@@ -1089,8 +1089,8 @@ namespace System.Collections.Immutable
         )
         {
             return (root != _root)
-              ? new ImmutableHashSet<T>(root, _equalityComparer, adjustedCountIfDifferentRoot)
-              : this;
+                ? new ImmutableHashSet<T>(root, _equalityComparer, adjustedCountIfDifferentRoot)
+                : this;
         }
 
         /// <summary>

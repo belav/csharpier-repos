@@ -46,17 +46,17 @@ namespace System.Text.RegularExpressions
                 _findFirstCharMode = (_code.LeadingAnchor, code.RightToLeft) switch
                 {
                     (RegexPrefixAnalyzer.Beginning, false)
-                      => FindFirstCharMode.LeadingAnchor_LeftToRight_Beginning,
+                        => FindFirstCharMode.LeadingAnchor_LeftToRight_Beginning,
                     (RegexPrefixAnalyzer.Beginning, true)
-                      => FindFirstCharMode.LeadingAnchor_RightToLeft_Beginning,
+                        => FindFirstCharMode.LeadingAnchor_RightToLeft_Beginning,
                     (RegexPrefixAnalyzer.Start, false)
-                      => FindFirstCharMode.LeadingAnchor_LeftToRight_Start,
+                        => FindFirstCharMode.LeadingAnchor_LeftToRight_Start,
                     (RegexPrefixAnalyzer.Start, true)
-                      => FindFirstCharMode.LeadingAnchor_RightToLeft_Start,
+                        => FindFirstCharMode.LeadingAnchor_RightToLeft_Start,
                     (RegexPrefixAnalyzer.End, false)
-                      => FindFirstCharMode.LeadingAnchor_LeftToRight_End,
+                        => FindFirstCharMode.LeadingAnchor_LeftToRight_End,
                     (RegexPrefixAnalyzer.End, true)
-                      => FindFirstCharMode.LeadingAnchor_RightToLeft_End,
+                        => FindFirstCharMode.LeadingAnchor_RightToLeft_End,
                     (_, false) => FindFirstCharMode.LeadingAnchor_LeftToRight_EndZ,
                     (_, true) => FindFirstCharMode.LeadingAnchor_RightToLeft_EndZ,
                 };
@@ -74,21 +74,21 @@ namespace System.Text.RegularExpressions
                 _findFirstCharMode = (code.RightToLeft, caseInsensitive, isSet) switch
                 {
                     (false, false, false)
-                      => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseSensitive_Singleton,
+                        => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseSensitive_Singleton,
                     (false, false, true)
-                      => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseSensitive_Set,
+                        => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseSensitive_Set,
                     (false, true, false)
-                      => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseInsensitive_Singleton,
+                        => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseInsensitive_Singleton,
                     (false, true, true)
-                      => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseInsensitive_Set,
+                        => FindFirstCharMode.LeadingCharClass_LeftToRight_CaseInsensitive_Set,
                     (true, false, false)
-                      => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseSensitive_Singleton,
+                        => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseSensitive_Singleton,
                     (true, false, true)
-                      => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseSensitive_Set,
+                        => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseSensitive_Set,
                     (true, true, false)
-                      => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseInsensitive_Singleton,
+                        => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseInsensitive_Singleton,
                     (true, true, true)
-                      => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseInsensitive_Set,
+                        => FindFirstCharMode.LeadingCharClass_RightToLeft_CaseInsensitive_Set,
                 };
             }
             else
@@ -193,8 +193,8 @@ namespace System.Text.RegularExpressions
             {
                 Debug.WriteLine(
                     newpos < 0
-                      ? $"       Backtracking (back2) to code position {-newpos}"
-                      : $"       Backtracking to code position {newpos}"
+                        ? $"       Backtracking (back2) to code position {-newpos}"
+                        : $"       Backtracking to code position {newpos}"
                 );
             }
 #endif

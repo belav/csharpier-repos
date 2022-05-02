@@ -381,15 +381,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             properties.Count == 1
                 ? target.CreateEFPropertyExpression(properties[0], makeNullable)
                 : Expression.NewArrayInit(
-                      typeof(object),
-                      properties.Select(
-                          p =>
-                              Expression.Convert(
-                                  target.CreateEFPropertyExpression(p, makeNullable),
-                                  typeof(object)
-                              )
-                      )
-                  );
+                    typeof(object),
+                    properties.Select(
+                        p =>
+                            Expression.Convert(
+                                target.CreateEFPropertyExpression(p, makeNullable),
+                                typeof(object)
+                            )
+                    )
+                );
 
         /// <summary>
         ///     <para>

@@ -82,9 +82,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 (MessageFormat == null)
                     ? ""
                     : string.Format(
-                          MessageFormat,
-                          Args?.Select(a => (object)a).ToArray() ?? Array.Empty<object>()
-                      );
+                        MessageFormat,
+                        Args?.Select(a => (object)a).ToArray() ?? Array.Empty<object>()
+                    );
         }
 
         private readonly Entry[] _log;

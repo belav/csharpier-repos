@@ -452,35 +452,35 @@ namespace System.Net.Sockets.Tests
                         EndPoint ep = server.LocalEndPoint;
                         Assert.False(
                             receiveFrom
-                              ? client
-                                .BeginReceiveFrom(
-                                    new byte[1],
-                                    0,
-                                    1,
-                                    SocketFlags.None,
-                                    ref ep,
-                                    iar =>
-                                    {
-                                        client.EndReceiveFrom(iar, ref ep);
-                                        tcs.SetResult(asyncLocal.Value);
-                                    },
-                                    null
-                                )
-                                .CompletedSynchronously
-                              : client
-                                .BeginReceive(
-                                    new byte[1],
-                                    0,
-                                    1,
-                                    SocketFlags.None,
-                                    iar =>
-                                    {
-                                        client.EndReceive(iar);
-                                        tcs.SetResult(asyncLocal.Value);
-                                    },
-                                    null
-                                )
-                                .CompletedSynchronously
+                                ? client
+                                    .BeginReceiveFrom(
+                                        new byte[1],
+                                        0,
+                                        1,
+                                        SocketFlags.None,
+                                        ref ep,
+                                        iar =>
+                                        {
+                                            client.EndReceiveFrom(iar, ref ep);
+                                            tcs.SetResult(asyncLocal.Value);
+                                        },
+                                        null
+                                    )
+                                    .CompletedSynchronously
+                                : client
+                                    .BeginReceive(
+                                        new byte[1],
+                                        0,
+                                        1,
+                                        SocketFlags.None,
+                                        iar =>
+                                        {
+                                            client.EndReceive(iar);
+                                            tcs.SetResult(asyncLocal.Value);
+                                        },
+                                        null
+                                    )
+                                    .CompletedSynchronously
                         );
                     }
                     finally
@@ -617,34 +617,34 @@ namespace System.Net.Sockets.Tests
                     {
                         pending = sendTo
                             ? !client
-                                  .BeginSendTo(
-                                      buffer,
-                                      0,
-                                      buffer.Length,
-                                      SocketFlags.None,
-                                      server.LocalEndPoint,
-                                      iar =>
-                                      {
-                                          client.EndSendTo(iar);
-                                          tcs.SetResult(asyncLocal.Value);
-                                      },
-                                      null
-                                  )
-                                  .CompletedSynchronously
+                                .BeginSendTo(
+                                    buffer,
+                                    0,
+                                    buffer.Length,
+                                    SocketFlags.None,
+                                    server.LocalEndPoint,
+                                    iar =>
+                                    {
+                                        client.EndSendTo(iar);
+                                        tcs.SetResult(asyncLocal.Value);
+                                    },
+                                    null
+                                )
+                                .CompletedSynchronously
                             : !client
-                                  .BeginSend(
-                                      buffer,
-                                      0,
-                                      buffer.Length,
-                                      SocketFlags.None,
-                                      iar =>
-                                      {
-                                          client.EndSend(iar);
-                                          tcs.SetResult(asyncLocal.Value);
-                                      },
-                                      null
-                                  )
-                                  .CompletedSynchronously;
+                                .BeginSend(
+                                    buffer,
+                                    0,
+                                    buffer.Length,
+                                    SocketFlags.None,
+                                    iar =>
+                                    {
+                                        client.EndSend(iar);
+                                        tcs.SetResult(asyncLocal.Value);
+                                    },
+                                    null
+                                )
+                                .CompletedSynchronously;
                     }
                     finally
                     {

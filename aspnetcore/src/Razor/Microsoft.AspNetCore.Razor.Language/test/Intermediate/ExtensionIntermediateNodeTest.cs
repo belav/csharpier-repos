@@ -75,7 +75,7 @@ public class ExtensionIntermediateNodeTest
 
     private class SpecialVisitor
         : IntermediateNodeVisitor,
-          IExtensionIntermediateNodeVisitor<TestExtensionIntermediateNode>
+            IExtensionIntermediateNodeVisitor<TestExtensionIntermediateNode>
     {
         public bool WasStandardMethodCalled { get; private set; }
         public bool WasSpecificMethodCalled { get; private set; }

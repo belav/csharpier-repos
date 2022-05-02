@@ -838,7 +838,7 @@ namespace System.Collections.Generic
         [DebuggerTypeProxy(typeof(PriorityQueueDebugView<,>))]
         public sealed class UnorderedItemsCollection
             : IReadOnlyCollection<(TElement Element, TPriority Priority)>,
-              ICollection
+                ICollection
         {
             internal readonly PriorityQueue<TElement, TPriority> _queue;
 

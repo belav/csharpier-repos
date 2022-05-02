@@ -277,8 +277,8 @@ namespace System.Security.Cryptography.Xml
                         Counter =
                             (pgenCounterNode != null)
                                 ? Utils.ConvertByteArrayToInt(
-                                      Convert.FromBase64String(pgenCounterNode.InnerText)
-                                  )
+                                    Convert.FromBase64String(pgenCounterNode.InnerText)
+                                )
                                 : 0
                     }
                 );

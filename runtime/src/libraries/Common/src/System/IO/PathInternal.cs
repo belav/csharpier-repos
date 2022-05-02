@@ -275,7 +275,7 @@ namespace System.IO
 
         internal static string GetLinkTargetFullPath(string path, string pathToTarget) =>
             IsPartiallyQualified(pathToTarget.AsSpan())
-              ? Path.Join(Path.GetDirectoryName(path.AsSpan()), pathToTarget.AsSpan())
-              : pathToTarget;
+                ? Path.Join(Path.GetDirectoryName(path.AsSpan()), pathToTarget.AsSpan())
+                : pathToTarget;
     }
 }

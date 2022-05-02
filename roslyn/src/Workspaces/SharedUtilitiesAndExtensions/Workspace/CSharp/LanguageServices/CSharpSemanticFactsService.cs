@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class CSharpSemanticFactsService
         : AbstractSemanticFactsService,
-          ISemanticFactsService
+            ISemanticFactsService
     {
         internal static readonly CSharpSemanticFactsService Instance = new();
 
@@ -82,8 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (semanticModel.Compilation as CSharpCompilation)?.LanguageVersion
                     >= LanguageVersion.CSharp8;
                 return isLanguageVersionGreaterOrEqualToCSharp8
-                  ? !SyntaxFacts.IsAnonymousOrLocalFunction(node)
-                  : !SyntaxFacts.IsLocalFunctionStatement(node);
+                    ? !SyntaxFacts.IsAnonymousOrLocalFunction(node)
+                    : !SyntaxFacts.IsLocalFunctionStatement(node);
             }
         }
 

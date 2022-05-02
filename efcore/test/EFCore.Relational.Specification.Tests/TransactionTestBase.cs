@@ -1192,8 +1192,8 @@ namespace Microsoft.EntityFrameworkCore
                 () =>
                     context.Database.BeginTransaction(
                         DirtyReadsOccur
-                          ? IsolationLevel.ReadUncommitted
-                          : IsolationLevel.Unspecified
+                            ? IsolationLevel.ReadUncommitted
+                            : IsolationLevel.Unspecified
                     )
             );
             Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
@@ -1655,8 +1655,8 @@ namespace Microsoft.EntityFrameworkCore
             public override bool Equals(object obj)
             {
                 return !(obj is TransactionCustomer otherCustomer)
-                  ? false
-                  : Id == otherCustomer.Id && Name == otherCustomer.Name;
+                    ? false
+                    : Id == otherCustomer.Id && Name == otherCustomer.Name;
             }
 
             public override string ToString() => "Id = " + Id + ", Name = " + Name;

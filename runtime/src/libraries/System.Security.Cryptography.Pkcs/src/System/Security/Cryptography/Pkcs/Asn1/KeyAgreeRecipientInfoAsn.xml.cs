@@ -147,8 +147,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 if (explicitReader.TryReadPrimitiveOctetString(out tmpSpan))
                 {
                     decoded.Ukm = rebindSpan.Overlaps(tmpSpan, out offset)
-                      ? rebind.Slice(offset, tmpSpan.Length)
-                      : tmpSpan.ToArray();
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {

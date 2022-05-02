@@ -41,10 +41,10 @@ namespace System.Data
     )]
     public class DataTable
         : MarshalByValueComponent,
-          IListSource,
-          ISupportInitializeNotification,
-          ISerializable,
-          IXmlSerializable
+            IListSource,
+            ISupportInitializeNotification,
+            ISerializable,
+            IXmlSerializable
     {
         private DataSet? _dataSet;
         private DataView? _defaultView;
@@ -1919,8 +1919,8 @@ namespace System.Data
             }
 
             return (null == nestedParents) || (nestedParents.Count == 0)
-              ? Array.Empty<DataRelation>()
-              : nestedParents.ToArray();
+                ? Array.Empty<DataRelation>()
+                : nestedParents.ToArray();
         }
 
         internal int NestedParentsCount
@@ -8414,8 +8414,8 @@ namespace System.Data
                             dc,
                             version,
                             dc.DataExpression == null
-                              ? dc.DefaultValue
-                              : dc.DataExpression.Evaluate(row, version)
+                                ? dc.DefaultValue
+                                : dc.DataExpression.Evaluate(row, version)
                         );
                     }
                 }

@@ -68,8 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                     // TODO(jmarolf): Should we expose duplicate options if the user has a different setting in VB vs. C#?
                     //                Today this code will choose whatever option is set for C# as the default.
                     : _visualStudioOptions.GetOption<CodeStyleOption2<T>>(
-                          new OptionKey2(_option, LanguageNames.CSharp)
-                      );
+                        new OptionKey2(_option, LanguageNames.CSharp)
+                    );
         }
     }
 }

@@ -42,8 +42,8 @@ namespace System.Runtime.Serialization.Json
             // this has become a normal method
             JsonReadWriteDelegates? result;
             return JsonReadWriteDelegates.GetJsonDelegates().TryGetValue(c, out result)
-              ? result
-              : null;
+                ? result
+                : null;
         }
 
         internal static JsonReadWriteDelegates GetReadWriteDelegatesFromGeneratedAssembly(
@@ -183,8 +183,8 @@ namespace System.Runtime.Serialization.Json
                 _traditionalDataContract = traditionalDataContract;
                 AddCollectionItemContractsToKnownDataContracts();
                 _typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
-                  ? traditionalDataContract.Name.Value
-                  : string.Concat(
+                    ? traditionalDataContract.Name.Value
+                    : string.Concat(
                         traditionalDataContract.Name.Value,
                         JsonGlobals.NameValueSeparatorString,
                         XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(

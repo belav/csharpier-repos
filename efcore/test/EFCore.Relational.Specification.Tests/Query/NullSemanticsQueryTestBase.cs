@@ -1290,10 +1290,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 prm1
                                     ? (prm2 ? (e.BoolA ? e.StringA.StartsWith("A") : false) : true)
                                     : (
-                                          e.BoolB
-                                              ? list.Contains(e.StringA)
-                                              : list.Contains(e.StringB)
-                                      )
+                                        e.BoolB
+                                            ? list.Contains(e.StringA)
+                                            : list.Contains(e.StringB)
+                                    )
                         )
                         .Select(e => e.Id)
             );
@@ -3317,10 +3317,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                 x.NullableBoolA == null
                                     ? x.BoolA == x.BoolB
                                     : (
-                                          x.NullableBoolC == null
-                                              ? x.NullableBoolA != x.NullableBoolC
-                                              : x.NullableBoolC != x.NullableBoolA
-                                      )
+                                        x.NullableBoolC == null
+                                            ? x.NullableBoolA != x.NullableBoolC
+                                            : x.NullableBoolC != x.NullableBoolA
+                                    )
                         )
             );
         }

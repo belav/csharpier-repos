@@ -21,10 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousType
     ]
     internal class CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider
         : AbstractConvertAnonymousTypeToTupleCodeRefactoringProvider<
-              ExpressionSyntax,
-              TupleExpressionSyntax,
-              AnonymousObjectCreationExpressionSyntax
-          >
+            ExpressionSyntax,
+            TupleExpressionSyntax,
+            AnonymousObjectCreationExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(
@@ -72,10 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousType
             nameEquals == null
                 ? null
                 : SyntaxFactory.NameColon(
-                      nameEquals.Name,
-                      SyntaxFactory
-                          .Token(SyntaxKind.ColonToken)
-                          .WithTriviaFrom(nameEquals.EqualsToken)
-                  );
+                    nameEquals.Name,
+                    SyntaxFactory
+                        .Token(SyntaxKind.ColonToken)
+                        .WithTriviaFrom(nameEquals.EqualsToken)
+                );
     }
 }

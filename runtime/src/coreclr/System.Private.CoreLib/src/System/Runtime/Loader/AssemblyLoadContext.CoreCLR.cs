@@ -308,12 +308,12 @@ namespace System.Runtime.Loader
         private static RuntimeAssembly? GetRuntimeAssembly(Assembly? asm)
         {
             return asm == null
-              ? null
-              : asm is RuntimeAssembly rtAssembly
-                  ? rtAssembly
-                  : asm is System.Reflection.Emit.AssemblyBuilder ab
-                      ? ab.InternalAssembly
-                      : null;
+                ? null
+                : asm is RuntimeAssembly rtAssembly
+                    ? rtAssembly
+                    : asm is System.Reflection.Emit.AssemblyBuilder ab
+                        ? ab.InternalAssembly
+                        : null;
         }
 
         // Assembly load runtime activity name

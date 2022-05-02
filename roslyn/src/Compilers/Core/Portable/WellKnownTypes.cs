@@ -699,8 +699,8 @@ namespace Microsoft.CodeAnalysis
             return (
                 invokeArgumentCount <= WellKnownType.System_Func_TMax - WellKnownType.System_Func_T
             )
-              ? (WellKnownType)((int)WellKnownType.System_Func_T + invokeArgumentCount)
-              : WellKnownType.Unknown;
+                ? (WellKnownType)((int)WellKnownType.System_Func_T + invokeArgumentCount)
+                : WellKnownType.Unknown;
         }
 
         // returns WellKnownType.Unknown if given arity isn't available:
@@ -712,8 +712,8 @@ namespace Microsoft.CodeAnalysis
                 invokeArgumentCount
                 <= WellKnownType.System_Action_TMax - WellKnownType.System_Action
             )
-              ? (WellKnownType)((int)WellKnownType.System_Action + invokeArgumentCount)
-              : WellKnownType.Unknown;
+                ? (WellKnownType)((int)WellKnownType.System_Action + invokeArgumentCount)
+                : WellKnownType.Unknown;
         }
     }
 }

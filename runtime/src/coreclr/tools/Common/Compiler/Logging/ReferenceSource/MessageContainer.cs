@@ -11,7 +11,7 @@ namespace Mono.Linker
 {
     public readonly struct MessageContainer
         : IComparable<MessageContainer>,
-          IEquatable<MessageContainer>
+            IEquatable<MessageContainer>
     {
         public static readonly MessageContainer Empty;
 

@@ -1119,15 +1119,15 @@ namespace System.Data
             if (record == _oldRecord)
             {
                 return (_newRecord != -1)
-                  ? DataViewRowState.ModifiedOriginal
-                  : DataViewRowState.Deleted;
+                    ? DataViewRowState.ModifiedOriginal
+                    : DataViewRowState.Deleted;
             }
 
             if (record == _newRecord)
             {
                 return (_oldRecord != -1)
-                  ? DataViewRowState.ModifiedCurrent
-                  : DataViewRowState.Added;
+                    ? DataViewRowState.ModifiedCurrent
+                    : DataViewRowState.Added;
             }
 
             return DataViewRowState.None;

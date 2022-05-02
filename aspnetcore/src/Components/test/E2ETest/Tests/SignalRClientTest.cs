@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class SignalRClientTest
     : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>,
-      IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>
+        IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>
 {
     private readonly ServerFixture _apiServerFixture;
 

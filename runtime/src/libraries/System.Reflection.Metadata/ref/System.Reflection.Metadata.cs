@@ -318,8 +318,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct AssemblyFileHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.AssemblyFileHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.AssemblyFileHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.AssemblyFileHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -344,8 +344,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.AssemblyFileHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.AssemblyFileHandle Current
@@ -474,8 +474,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct AssemblyReferenceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.AssemblyReferenceHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.AssemblyReferenceHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.AssemblyReferenceHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -501,8 +501,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.AssemblyReferenceHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -702,10 +702,10 @@ namespace System.Reflection.Metadata
 
         public partial struct Blobs
             : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.Blob>,
-              System.Collections.Generic.IEnumerator<System.Reflection.Metadata.Blob>,
-              System.Collections.IEnumerable,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.Generic.IEnumerator<System.Reflection.Metadata.Blob>,
+                System.Collections.IEnumerable,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -1433,8 +1433,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct CustomAttributeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.CustomAttributeHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.CustomAttributeHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.CustomAttributeHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1460,8 +1460,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.CustomAttributeHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -1660,8 +1660,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct CustomDebugInformationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.CustomDebugInformationHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.CustomDebugInformationHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.CustomDebugInformationHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1687,8 +1687,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.CustomDebugInformationHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -1819,8 +1819,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct DeclarativeSecurityAttributeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1846,8 +1846,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.DeclarativeSecurityAttributeHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -1964,8 +1964,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct DocumentHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.DocumentHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.DocumentHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.DocumentHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -1991,8 +1991,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.DocumentHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2257,8 +2257,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct EventDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.EventDefinitionHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.EventDefinitionHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.EventDefinitionHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2284,8 +2284,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.EventDefinitionHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2456,8 +2456,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct ExportedTypeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ExportedTypeHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ExportedTypeHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ExportedTypeHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -2482,8 +2482,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ExportedTypeHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.ExportedTypeHandle Current
@@ -2633,8 +2633,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct FieldDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.FieldDefinitionHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.FieldDefinitionHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.FieldDefinitionHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2660,8 +2660,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.FieldDefinitionHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2807,9 +2807,9 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct GenericParameterConstraintHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.GenericParameterConstraintHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.GenericParameterConstraintHandle>,
-          System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.GenericParameterConstraintHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.GenericParameterConstraintHandle>,
+            System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.GenericParameterConstraintHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -2838,8 +2838,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.GenericParameterConstraintHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.GenericParameterConstraintHandle Current
@@ -2933,9 +2933,9 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct GenericParameterHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.GenericParameterHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.GenericParameterHandle>,
-          System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.GenericParameterHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.GenericParameterHandle>,
+            System.Collections.Generic.IReadOnlyList<System.Reflection.Metadata.GenericParameterHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -2964,8 +2964,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.GenericParameterHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.GenericParameterHandle Current
@@ -3095,9 +3095,9 @@ namespace System.Reflection.Metadata
 
     public sealed partial class HandleComparer
         : System.Collections.Generic.IComparer<System.Reflection.Metadata.EntityHandle>,
-          System.Collections.Generic.IComparer<System.Reflection.Metadata.Handle>,
-          System.Collections.Generic.IEqualityComparer<System.Reflection.Metadata.EntityHandle>,
-          System.Collections.Generic.IEqualityComparer<System.Reflection.Metadata.Handle>
+            System.Collections.Generic.IComparer<System.Reflection.Metadata.Handle>,
+            System.Collections.Generic.IEqualityComparer<System.Reflection.Metadata.EntityHandle>,
+            System.Collections.Generic.IEqualityComparer<System.Reflection.Metadata.Handle>
     {
         internal HandleComparer() { }
 
@@ -3198,7 +3198,7 @@ namespace System.Reflection.Metadata
 
     public partial interface ICustomAttributeTypeProvider<TType>
         : System.Reflection.Metadata.ISimpleTypeProvider<TType>,
-          System.Reflection.Metadata.ISZArrayTypeProvider<TType>
+            System.Reflection.Metadata.ISZArrayTypeProvider<TType>
     {
         TType GetSystemType();
         TType GetTypeFromSerializedName(string name);
@@ -3491,7 +3491,7 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct ImportDefinitionCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ImportDefinition>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
 
@@ -3512,8 +3512,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ImportDefinition>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.ImportDefinition Current
@@ -3570,8 +3570,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct ImportScopeCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ImportScopeHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ImportScopeHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ImportScopeHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -3597,8 +3597,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ImportScopeHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -3779,8 +3779,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct InterfaceImplementationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.InterfaceImplementationHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.InterfaceImplementationHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.InterfaceImplementationHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -3806,8 +3806,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.InterfaceImplementationHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -3833,8 +3833,8 @@ namespace System.Reflection.Metadata
 
     public partial interface ISignatureTypeProvider<TType, TGenericContext>
         : System.Reflection.Metadata.IConstructedTypeProvider<TType>,
-          System.Reflection.Metadata.ISimpleTypeProvider<TType>,
-          System.Reflection.Metadata.ISZArrayTypeProvider<TType>
+            System.Reflection.Metadata.ISimpleTypeProvider<TType>,
+            System.Reflection.Metadata.ISZArrayTypeProvider<TType>
     {
         TType GetFunctionPointerType(System.Reflection.Metadata.MethodSignature<TType> signature);
         TType GetGenericMethodParameter(TGenericContext genericContext, int index);
@@ -3956,8 +3956,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct LocalConstantHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.LocalConstantHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalConstantHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalConstantHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -3983,8 +3983,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalConstantHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -4120,8 +4120,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct LocalScopeHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.LocalScopeHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalScopeHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalScopeHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -4147,8 +4147,8 @@ namespace System.Reflection.Metadata
 
         public partial struct ChildrenEnumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalScopeHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -4173,8 +4173,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalScopeHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -4294,8 +4294,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct LocalVariableHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.LocalVariableHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalVariableHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.LocalVariableHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -4321,8 +4321,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.LocalVariableHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -4444,8 +4444,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct ManifestResourceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ManifestResourceHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ManifestResourceHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ManifestResourceHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -4470,8 +4470,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ManifestResourceHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.ManifestResourceHandle Current
@@ -4612,8 +4612,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct MemberReferenceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MemberReferenceHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MemberReferenceHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MemberReferenceHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -4638,8 +4638,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MemberReferenceHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.MemberReferenceHandle Current
@@ -5446,8 +5446,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct MethodDebugInformationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MethodDebugInformationHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodDebugInformationHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodDebugInformationHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -5473,8 +5473,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MethodDebugInformationHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -5641,8 +5641,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct MethodDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MethodDefinitionHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodDefinitionHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodDefinitionHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -5668,8 +5668,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MethodDefinitionHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -5787,8 +5787,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct MethodImplementationHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.MethodImplementationHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodImplementationHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.MethodImplementationHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -5813,8 +5813,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.MethodImplementationHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.MethodImplementationHandle Current
@@ -6363,8 +6363,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct ParameterHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.ParameterHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ParameterHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.ParameterHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -6390,8 +6390,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.ParameterHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -6625,8 +6625,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct PropertyDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.PropertyDefinitionHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.PropertyDefinitionHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.PropertyDefinitionHandle>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -6652,8 +6652,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.PropertyDefinitionHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -6751,7 +6751,7 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct SequencePointCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.SequencePoint>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
 
@@ -6772,8 +6772,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.SequencePoint>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.SequencePoint Current
@@ -7311,8 +7311,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct TypeDefinitionHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeDefinitionHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.TypeDefinitionHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.TypeDefinitionHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -7337,8 +7337,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.TypeDefinitionHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.TypeDefinitionHandle Current
@@ -7473,8 +7473,8 @@ namespace System.Reflection.Metadata
 
     public readonly partial struct TypeReferenceHandleCollection
         : System.Collections.Generic.IEnumerable<System.Reflection.Metadata.TypeReferenceHandle>,
-          System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.TypeReferenceHandle>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<System.Reflection.Metadata.TypeReferenceHandle>,
+            System.Collections.IEnumerable
     {
         private readonly int _dummyPrimitive;
         public int Count
@@ -7499,8 +7499,8 @@ namespace System.Reflection.Metadata
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Reflection.Metadata.TypeReferenceHandle>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private int _dummyPrimitive;
             public System.Reflection.Metadata.TypeReferenceHandle Current

@@ -499,8 +499,8 @@ namespace System.Security.Cryptography.Xml
 
     public sealed partial class EncryptionPropertyCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public EncryptionPropertyCollection() { }
 
@@ -854,8 +854,8 @@ namespace System.Security.Cryptography.Xml
 
     public sealed partial class ReferenceList
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public ReferenceList() { }
 

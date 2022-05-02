@@ -150,7 +150,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             return Expression
                 .Lambda<Func<IUpdateEntry, TProperty>>(
                     originalValuesIndex >= 0
-                      ? Expression.Call(
+                        ? Expression.Call(
                             entryParameter,
                             InternalEntityEntry.ReadOriginalValueMethod.MakeGenericMethod(
                                 typeof(TProperty)
@@ -158,7 +158,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             Expression.Constant(property),
                             Expression.Constant(originalValuesIndex)
                         )
-                      : Expression.Block(
+                        : Expression.Block(
                             Expression.Throw(
                                 Expression.Constant(
                                     new InvalidOperationException(
@@ -189,7 +189,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             return Expression
                 .Lambda<Func<IUpdateEntry, TProperty>>(
                     relationshipIndex >= 0
-                      ? Expression.Call(
+                        ? Expression.Call(
                             entryParameter,
                             InternalEntityEntry.ReadRelationshipSnapshotValueMethod.MakeGenericMethod(
                                 typeof(TProperty)
@@ -197,7 +197,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             Expression.Constant(propertyBase),
                             Expression.Constant(relationshipIndex)
                         )
-                      : Expression.Call(
+                        : Expression.Call(
                             entryParameter,
                             InternalEntityEntry.GetCurrentValueMethod.MakeGenericMethod(
                                 typeof(TProperty)

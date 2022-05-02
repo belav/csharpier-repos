@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.Logging.Debug
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("Debug")]
     public partial class DebugLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public DebugLoggerProvider() { }
 

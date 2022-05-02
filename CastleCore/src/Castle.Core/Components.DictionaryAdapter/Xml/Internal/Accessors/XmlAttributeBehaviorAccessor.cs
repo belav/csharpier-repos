@@ -19,7 +19,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
     public class XmlAttributeBehaviorAccessor
         : XmlNodeAccessor,
-          IConfigurable<XmlAttributeAttribute>
+            IConfigurable<XmlAttributeAttribute>
     {
         internal static readonly XmlAccessorFactory<XmlAttributeBehaviorAccessor> Factory = (
             name,

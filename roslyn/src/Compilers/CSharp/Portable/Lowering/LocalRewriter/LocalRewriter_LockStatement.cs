@@ -248,8 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return this.Instrument
-              ? _instrumenter.InstrumentLockTargetCapture(original, lockTargetCapture)
-              : lockTargetCapture;
+                ? _instrumenter.InstrumentLockTargetCapture(original, lockTargetCapture)
+                : lockTargetCapture;
         }
     }
 }

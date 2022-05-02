@@ -15,10 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpPreferFrameworkTypeDiagnosticAnalyzer
         : PreferFrameworkTypeDiagnosticAnalyzerBase<
-              SyntaxKind,
-              ExpressionSyntax,
-              PredefinedTypeSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            PredefinedTypeSyntax
+        >
     {
         protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get; } =
             ImmutableArray.Create(SyntaxKind.PredefinedType);

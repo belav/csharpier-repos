@@ -24,12 +24,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     MethodSymbol
         :
 #endif
-          Cci.ITypeMemberReference,
-          Cci.IMethodReference,
-          Cci.IGenericMethodInstanceReference,
-          Cci.ISpecializedMethodReference,
-          Cci.ITypeDefinitionMember,
-          Cci.IMethodDefinition
+            Cci.ITypeMemberReference,
+            Cci.IMethodReference,
+            Cci.IGenericMethodInstanceReference,
+            Cci.ISpecializedMethodReference,
+            Cci.ITypeDefinitionMember,
+            Cci.IMethodDefinition
     {
         Cci.IGenericMethodInstanceReference Cci.IMethodReference.AsGenericMethodInstanceReference
         {

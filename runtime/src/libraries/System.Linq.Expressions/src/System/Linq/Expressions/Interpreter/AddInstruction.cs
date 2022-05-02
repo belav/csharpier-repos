@@ -58,8 +58,8 @@ namespace System.Linq.Expressions.Interpreter
                         right == null
                             ? null
                             : ScriptingRuntimeHelpers.Int32ToObject(
-                                  unchecked((int)left + (int)right)
-                              );
+                                unchecked((int)left + (int)right)
+                            );
                 }
 
                 frame.StackIndex = index - 1;
@@ -248,8 +248,8 @@ namespace System.Linq.Expressions.Interpreter
                         right == null
                             ? null
                             : ScriptingRuntimeHelpers.Int32ToObject(
-                                  checked((int)left + (int)right)
-                              );
+                                checked((int)left + (int)right)
+                            );
                 }
 
                 frame.StackIndex = index - 1;

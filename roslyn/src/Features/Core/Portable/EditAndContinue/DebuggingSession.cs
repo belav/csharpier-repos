@@ -1285,14 +1285,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         var id =
                             (oldProject != null)
                                 ? await GetChangedDocumentContainingUnmappedActiveStatementAsync(
-                                          activeStatementsMap,
-                                          LastCommittedSolution,
-                                          oldProject,
-                                          newProject,
-                                          baseActiveStatement,
-                                          linkedTokenSource.Token
-                                      )
-                                      .ConfigureAwait(false)
+                                        activeStatementsMap,
+                                        LastCommittedSolution,
+                                        oldProject,
+                                        newProject,
+                                        baseActiveStatement,
+                                        linkedTokenSource.Token
+                                    )
+                                    .ConfigureAwait(false)
                                 : null;
 
                         Interlocked.CompareExchange(ref documentId, id, null);

@@ -39,19 +39,19 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
             current switch
             {
                 ParenthesizedExpressionSyntax p
-                  => CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
-                      p,
-                      semanticModel,
-                      cancellationToken,
-                      out _,
-                      out _
-                  ),
+                    => CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
+                        p,
+                        semanticModel,
+                        cancellationToken,
+                        out _,
+                        out _
+                    ),
                 ParenthesizedPatternSyntax p
-                  => CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
-                      p,
-                      out _,
-                      out _
-                  ),
+                    => CSharpRemoveUnnecessaryPatternParenthesesDiagnosticAnalyzer.CanRemoveParenthesesHelper(
+                        p,
+                        out _,
+                        out _
+                    ),
                 _ => false,
             };
     }

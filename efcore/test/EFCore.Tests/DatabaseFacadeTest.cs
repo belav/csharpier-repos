@@ -142,8 +142,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(
                 transaction,
                 async
-                  ? await context.Database.BeginTransactionAsync()
-                  : context.Database.BeginTransaction()
+                    ? await context.Database.BeginTransactionAsync()
+                    : context.Database.BeginTransaction()
             );
         }
 

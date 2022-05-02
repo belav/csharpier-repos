@@ -121,8 +121,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             return item != Item || subquery != Subquery || values != Values
-              ? new InExpression(item, values, subquery, IsNegated, TypeMapping)
-              : this;
+                ? new InExpression(item, values, subquery, IsNegated, TypeMapping)
+                : this;
         }
 
         /// <inheritdoc />

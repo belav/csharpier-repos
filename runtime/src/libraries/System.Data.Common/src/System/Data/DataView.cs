@@ -27,9 +27,9 @@ namespace System.Data
     )]
     public class DataView
         : MarshalByValueComponent,
-          IBindingListView,
-          System.ComponentModel.ITypedList,
-          ISupportInitializeNotification
+            IBindingListView,
+            System.ComponentModel.ITypedList,
+            ISupportInitializeNotification
     {
         private DataViewManager? _dataViewManager;
         private DataTable? _table;
@@ -1395,8 +1395,8 @@ namespace System.Data
             }
 
             return recordIndex == _index!.RecordCount
-              ? _addNewRow!.GetDefaultRecord()
-              : _index.GetRecord(recordIndex);
+                ? _addNewRow!.GetDefaultRecord()
+                : _index.GetRecord(recordIndex);
         }
 
         /// <exception cref="IndexOutOfRangeException"></exception>
@@ -1880,23 +1880,23 @@ namespace System.Data
             DataRelationPropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                  ? new ListChangedEventArgs(
+                    ? new ListChangedEventArgs(
                         ListChangedType.PropertyDescriptorAdded,
                         new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
                     )
-                  : e.Action == CollectionChangeAction.Refresh
-                      ? new ListChangedEventArgs(
+                    : e.Action == CollectionChangeAction.Refresh
+                        ? new ListChangedEventArgs(
                             ListChangedType.PropertyDescriptorChanged,
                             NullProp
                         )
-                      : e.Action == CollectionChangeAction.Remove
-                          ? new ListChangedEventArgs(
+                        : e.Action == CollectionChangeAction.Remove
+                            ? new ListChangedEventArgs(
                                 ListChangedType.PropertyDescriptorDeleted,
                                 new DataRelationPropertyDescriptor(
                                     (System.Data.DataRelation)e.Element!
                                 )
                             )
-                          :
+                            :
                             /*default*/null! // TODO: This will cause an NRE
             );
         }
@@ -1906,23 +1906,23 @@ namespace System.Data
             DataRelationPropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                  ? new ListChangedEventArgs(
+                    ? new ListChangedEventArgs(
                         ListChangedType.PropertyDescriptorAdded,
                         new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
                     )
-                  : e.Action == CollectionChangeAction.Refresh
-                      ? new ListChangedEventArgs(
+                    : e.Action == CollectionChangeAction.Refresh
+                        ? new ListChangedEventArgs(
                             ListChangedType.PropertyDescriptorChanged,
                             NullProp
                         )
-                      : e.Action == CollectionChangeAction.Remove
-                          ? new ListChangedEventArgs(
+                        : e.Action == CollectionChangeAction.Remove
+                            ? new ListChangedEventArgs(
                                 ListChangedType.PropertyDescriptorDeleted,
                                 new DataRelationPropertyDescriptor(
                                     (System.Data.DataRelation)e.Element!
                                 )
                             )
-                          :
+                            :
                             /*default*/null! // TODO: This will cause an NRE
             );
         }
@@ -1932,21 +1932,21 @@ namespace System.Data
             DataColumnPropertyDescriptor? NullProp = null;
             OnListChanged(
                 e.Action == CollectionChangeAction.Add
-                  ? new ListChangedEventArgs(
+                    ? new ListChangedEventArgs(
                         ListChangedType.PropertyDescriptorAdded,
                         new DataColumnPropertyDescriptor((System.Data.DataColumn)e.Element!)
                     )
-                  : e.Action == CollectionChangeAction.Refresh
-                      ? new ListChangedEventArgs(
+                    : e.Action == CollectionChangeAction.Refresh
+                        ? new ListChangedEventArgs(
                             ListChangedType.PropertyDescriptorChanged,
                             NullProp
                         )
-                      : e.Action == CollectionChangeAction.Remove
-                          ? new ListChangedEventArgs(
+                        : e.Action == CollectionChangeAction.Remove
+                            ? new ListChangedEventArgs(
                                 ListChangedType.PropertyDescriptorDeleted,
                                 new DataColumnPropertyDescriptor((System.Data.DataColumn)e.Element!)
                             )
-                          :
+                            :
                             /*default*/null! // TODO: This will cause an NRE
             );
         }

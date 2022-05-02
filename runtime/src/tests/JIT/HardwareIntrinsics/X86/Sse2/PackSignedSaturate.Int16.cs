@@ -693,10 +693,7 @@ namespace JIT.HardwareIntrinsics.X86
                             (i < 4)
                                 ? (short)Math.Min(Math.Max(left[i], short.MinValue), short.MaxValue)
                                 : (short)
-                                      Math.Min(
-                                          Math.Max(right[i % 4], short.MinValue),
-                                          short.MaxValue
-                                      )
+                                    Math.Min(Math.Max(right[i % 4], short.MinValue), short.MaxValue)
                         )
                     )
                     {

@@ -35,8 +35,8 @@ namespace System.Collections.Tests
     [Serializable]
     public class EquatableBackwardsOrder
         : IEquatable<EquatableBackwardsOrder>,
-          IComparable<EquatableBackwardsOrder>,
-          IComparable
+            IComparable<EquatableBackwardsOrder>,
+            IComparable
     {
         private int _value;
 
@@ -167,9 +167,9 @@ namespace System.Collections.Tests
     [Serializable]
     public struct SimpleInt
         : IStructuralComparable,
-          IStructuralEquatable,
-          IComparable,
-          IComparable<SimpleInt>
+            IStructuralEquatable,
+            IComparable,
+            IComparable<SimpleInt>
     {
         private int _val;
 

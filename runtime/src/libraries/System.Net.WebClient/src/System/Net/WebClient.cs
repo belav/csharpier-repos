@@ -1332,8 +1332,8 @@ namespace System.Net
                     : address;
 
             return string.Equals(uri.Scheme, Uri.UriSchemeFtp, StringComparison.Ordinal)
-              ? "STOR"
-              : "POST";
+                ? "STOR"
+                : "POST";
         }
 
         [return: NotNullIfNotNull("str")]
@@ -2356,17 +2356,17 @@ namespace System.Net
                                     : progress.TotalBytesToSend == 0
                                         ? 50
                                         : (int)(
-                                              (50 * progress.BytesSent) / progress.TotalBytesToSend
-                                          )
+                                            (50 * progress.BytesSent) / progress.TotalBytesToSend
+                                        )
                                 : progress.TotalBytesToSend < 0
                                     ? 50
                                     : progress.TotalBytesToReceive == 0
                                         ? 100
                                         : (int)(
-                                              (50 * progress.BytesReceived)
-                                                  / progress.TotalBytesToReceive
-                                              + 50
-                                          );
+                                            (50 * progress.BytesReceived)
+                                                / progress.TotalBytesToReceive
+                                            + 50
+                                        );
                         asyncOp.Post(
                             _reportUploadProgressChanged!,
                             new UploadProgressChangedEventArgs(
@@ -2388,8 +2388,8 @@ namespace System.Net
                             : progress.TotalBytesToReceive == 0
                                 ? 100
                                 : (int)(
-                                      (100 * progress.BytesReceived) / progress.TotalBytesToReceive
-                                  );
+                                    (100 * progress.BytesReceived) / progress.TotalBytesToReceive
+                                );
                     asyncOp.Post(
                         _reportDownloadProgressChanged!,
                         new DownloadProgressChangedEventArgs(

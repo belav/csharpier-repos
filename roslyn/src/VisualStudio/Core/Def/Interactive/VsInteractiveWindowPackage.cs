@@ -26,7 +26,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
 {
     internal abstract partial class VsInteractiveWindowPackage<TVsInteractiveWindowProvider>
         : AsyncPackage,
-          IVsToolWindowFactory where TVsInteractiveWindowProvider : VsInteractiveWindowProvider
+            IVsToolWindowFactory where TVsInteractiveWindowProvider : VsInteractiveWindowProvider
     {
         protected abstract void InitializeMenuCommands(OleMenuCommandService menuCommandService);
 

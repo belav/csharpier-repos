@@ -270,8 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                             firstChar == '_'
                                 ? EntityTypeSuffix + variableName[1..]
                                 : char.ToUpperInvariant(firstChar)
-                                  + variableName[(variableName[0] == '@' ? 2 : 1)..]
-                                  + EntityTypeSuffix;
+                                    + variableName[(variableName[0] == '@' ? 2 : 1)..]
+                                    + EntityTypeSuffix;
 
                         entityTypeIds[entityType] = (variableName, entityClassName);
 
@@ -1013,13 +1013,13 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                         .Append(", ")
                         .Append(
                             propertyInfo.GetAccessors().Any()
-                              ? "BindingFlags.Public"
-                              : "BindingFlags.NonPublic"
+                                ? "BindingFlags.Public"
+                                : "BindingFlags.NonPublic"
                         )
                         .Append(
                             propertyInfo.IsStatic()
-                              ? " | BindingFlags.Static"
-                              : " | BindingFlags.Instance"
+                                ? " | BindingFlags.Static"
+                                : " | BindingFlags.Instance"
                         )
                         .Append(" | BindingFlags.DeclaredOnly)");
                 }

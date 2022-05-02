@@ -10,9 +10,9 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 
 internal sealed class AcceptsMatcherPolicy
     : MatcherPolicy,
-      IEndpointComparerPolicy,
-      INodeBuilderPolicy,
-      IEndpointSelectorPolicy
+        IEndpointComparerPolicy,
+        INodeBuilderPolicy,
+        IEndpointSelectorPolicy
 {
     internal const string Http415EndpointDisplayName = "415 HTTP Unsupported Media Type";
     internal const string AnyContentType = "*/*";
@@ -111,8 +111,8 @@ internal sealed class AcceptsMatcherPolicy
 
             var contentType = httpContext.Request.ContentType;
             var mediaType = string.IsNullOrEmpty(contentType)
-              ? (ReadOnlyMediaTypeHeaderValue?)null
-              : new(contentType);
+                ? (ReadOnlyMediaTypeHeaderValue?)null
+                : new(contentType);
 
             var matched = false;
             for (var j = 0; j < metadata.ContentTypes?.Count; j++)
@@ -329,8 +329,8 @@ internal sealed class AcceptsMatcherPolicy
     {
         var mediaType = (string)e.State;
         return !string.IsNullOrEmpty(mediaType)
-          ? new ReadOnlyMediaTypeHeaderValue(mediaType)
-          : default;
+            ? new ReadOnlyMediaTypeHeaderValue(mediaType)
+            : default;
     }
 
     private static int GetScore(ReadOnlyMediaTypeHeaderValue mediaType)

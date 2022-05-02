@@ -19,8 +19,8 @@ internal static class BasicTestAppAuthenticationWebDriverExtensions
     )
     {
         var basePath = baseUri.LocalPath.EndsWith("/", StringComparison.Ordinal)
-          ? baseUri.LocalPath
-          : baseUri.LocalPath + "/";
+            ? baseUri.LocalPath
+            : baseUri.LocalPath + "/";
         var authenticationPageUrl = $"{basePath}Authentication";
         var baseRelativeUri =
             usernameOrNull == null

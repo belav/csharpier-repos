@@ -103,7 +103,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             return _globalOptions.GetOption(
                 SuggestionsOptions.AsynchronousQuickActionsDisableFeatureFlag
             )
-              ? new SyncSuggestedActionsSource(
+                ? new SyncSuggestedActionsSource(
                     _threadingContext,
                     _globalOptions,
                     this,
@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     textBuffer,
                     _suggestedActionCategoryRegistry
                 )
-              : new AsyncSuggestedActionsSource(
+                : new AsyncSuggestedActionsSource(
                     _threadingContext,
                     _globalOptions,
                     this,

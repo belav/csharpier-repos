@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 {
     internal abstract partial class AbstractInProcLanguageClient
         : ILanguageClient,
-          ILanguageServerFactory,
-          ICapabilitiesProvider
+            ILanguageServerFactory,
+            ICapabilitiesProvider
     {
         private readonly string? _diagnosticsClientName;
         private readonly IThreadingContext _threadingContext;

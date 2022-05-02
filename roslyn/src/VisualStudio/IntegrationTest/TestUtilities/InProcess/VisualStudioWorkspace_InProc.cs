@@ -93,8 +93,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                             ),
                             new CodeStyleOption2<NamespaceDeclarationPreference>(
                                 value
-                                  ? NamespaceDeclarationPreference.FileScoped
-                                  : NamespaceDeclarationPreference.BlockScoped,
+                                    ? NamespaceDeclarationPreference.FileScoped
+                                    : NamespaceDeclarationPreference.BlockScoped,
                                 NotificationOption2.Suggestion
                             )
                         )
@@ -306,8 +306,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         .GetConverter(option.Type)
                         .ConvertFromString(valueString);
                     var optionKey = string.IsNullOrWhiteSpace(language)
-                      ? new OptionKey(option)
-                      : new OptionKey(option, language);
+                        ? new OptionKey(option)
+                        : new OptionKey(option, language);
 
                     SetOption(optionKey, value);
                 }

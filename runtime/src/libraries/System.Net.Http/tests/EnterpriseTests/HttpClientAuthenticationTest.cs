@@ -40,8 +40,8 @@ namespace System.Net.Http.Enterprise.Tests
                         }
                         using var handler = new HttpClientHandler();
                         handler.Credentials = string.IsNullOrEmpty(useDomain)
-                          ? EnterpriseTestConfiguration.ValidNetworkCredentials
-                          : EnterpriseTestConfiguration.ValidDomainNetworkCredentials;
+                            ? EnterpriseTestConfiguration.ValidNetworkCredentials
+                            : EnterpriseTestConfiguration.ValidDomainNetworkCredentials;
                         using var client = new HttpClient(handler);
 
                         using HttpResponseMessage response = client

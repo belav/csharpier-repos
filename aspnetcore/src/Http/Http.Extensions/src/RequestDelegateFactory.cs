@@ -326,11 +326,11 @@ public static partial class RequestDelegateFactory
         var responseWritingMethodCall =
             factoryContext.ParamCheckExpressions.Count > 0
                 ? CreateParamCheckingResponseWritingMethodCall(
-                      methodInfo,
-                      targetExpression,
-                      arguments,
-                      factoryContext
-                  )
+                    methodInfo,
+                    targetExpression,
+                    arguments,
+                    factoryContext
+                )
                 : CreateResponseWritingMethodCall(methodInfo, targetExpression, arguments);
 
         if (factoryContext.UsingTempSourceString)
@@ -1209,40 +1209,40 @@ public static partial class RequestDelegateFactory
         Expression tryParseExpression = isNotNullable
             ? Expression.IfThen(Expression.Not(tryParseCall), failBlock)
             : Expression.Block(
-                  new[] { parsedValue },
-                  Expression.IfThenElse(
-                      tryParseCall,
-                      Expression.Assign(
-                          argument,
-                          Expression.Convert(parsedValue, parameter.ParameterType)
-                      ),
-                      failBlock
-                  )
-              );
+                new[] { parsedValue },
+                Expression.IfThenElse(
+                    tryParseCall,
+                    Expression.Assign(
+                        argument,
+                        Expression.Convert(parsedValue, parameter.ParameterType)
+                    ),
+                    failBlock
+                )
+            );
 
         var ifNotNullTryParse = !parameter.HasDefaultValue
             ? Expression.IfThen(TempSourceStringNotNullExpr, tryParseExpression)
             : Expression.IfThenElse(
-                  TempSourceStringNotNullExpr,
-                  tryParseExpression,
-                  Expression.Assign(argument, Expression.Constant(parameter.DefaultValue))
-              );
+                TempSourceStringNotNullExpr,
+                tryParseExpression,
+                Expression.Assign(argument, Expression.Constant(parameter.DefaultValue))
+            );
 
         var fullParamCheckBlock = !isOptional
             ? Expression.Block(
-                  // tempSourceString = httpContext.RequestValue["id"];
-                  Expression.Assign(TempSourceStringExpr, valueExpression),
-                  // if (tempSourceString == null) { ... } only produced when parameter is required
-                  checkRequiredParaseableParameterBlock,
-                  // if (tempSourceString != null) { ... }
-                  ifNotNullTryParse
-              )
+                // tempSourceString = httpContext.RequestValue["id"];
+                Expression.Assign(TempSourceStringExpr, valueExpression),
+                // if (tempSourceString == null) { ... } only produced when parameter is required
+                checkRequiredParaseableParameterBlock,
+                // if (tempSourceString != null) { ... }
+                ifNotNullTryParse
+            )
             : Expression.Block(
-                  // tempSourceString = httpContext.RequestValue["id"];
-                  Expression.Assign(TempSourceStringExpr, valueExpression),
-                  // if (tempSourceString != null) { ... }
-                  ifNotNullTryParse
-              );
+                // tempSourceString = httpContext.RequestValue["id"];
+                Expression.Assign(TempSourceStringExpr, valueExpression),
+                // if (tempSourceString != null) { ... }
+                ifNotNullTryParse
+            );
 
         factoryContext.ExtraLocals.Add(argument);
         factoryContext.ParamCheckExpressions.Add(fullParamCheckBlock);

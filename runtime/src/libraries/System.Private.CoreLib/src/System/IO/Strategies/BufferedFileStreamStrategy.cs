@@ -219,10 +219,10 @@ namespace System.IO.Strategies
                     n =
                         arraySegment.Array != null
                             ? _strategy.Read(
-                                  arraySegment.Array,
-                                  arraySegment.Offset,
-                                  arraySegment.Count
-                              )
+                                arraySegment.Array,
+                                arraySegment.Offset,
+                                arraySegment.Count
+                            )
                             : _strategy.Read(destination);
 
                     // Throw away read buffer.
@@ -275,10 +275,10 @@ namespace System.IO.Strategies
                     int moreBytesRead =
                         arraySegment.Array != null
                             ? _strategy.Read(
-                                  arraySegment.Array,
-                                  arraySegment.Offset + n,
-                                  arraySegment.Count - n
-                              )
+                                arraySegment.Array,
+                                arraySegment.Offset + n,
+                                arraySegment.Count - n
+                            )
                             : _strategy.Read(destination.Slice(n));
 
                     n += moreBytesRead;
@@ -339,8 +339,8 @@ namespace System.IO.Strategies
             );
 
             return readResult.IsCompletedSuccessfully
-              ? LastSyncCompletedReadTask(readResult.Result)
-              : readResult.AsTask();
+                ? LastSyncCompletedReadTask(readResult.Result)
+                : readResult.AsTask();
 
             Task<int> LastSyncCompletedReadTask(int val)
             {
@@ -1016,8 +1016,8 @@ namespace System.IO.Strategies
             EnsureCanRead();
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled<int>(cancellationToken)
-              : CopyToAsyncCore(destination, bufferSize, cancellationToken);
+                ? Task.FromCanceled<int>(cancellationToken)
+                : CopyToAsyncCore(destination, bufferSize, cancellationToken);
         }
 
         private async Task CopyToAsyncCore(

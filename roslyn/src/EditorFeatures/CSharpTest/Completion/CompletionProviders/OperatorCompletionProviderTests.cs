@@ -137,8 +137,8 @@ public class Program
         {
             var verifyAction = isOffered
                 ? new Func<string, Task>(
-                      markup => VerifyItemExistsAsync(markup, "+", inlineDescription: "x + y")
-                  )
+                    markup => VerifyItemExistsAsync(markup, "+", inlineDescription: "x + y")
+                )
                 : new Func<string, Task>(markup => VerifyNoItemsExistAsync(markup));
             await verifyAction(
                 @$"

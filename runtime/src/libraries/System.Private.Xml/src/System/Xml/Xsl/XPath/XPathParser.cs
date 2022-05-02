@@ -253,7 +253,7 @@ namespace System.Xml.Xsl.XPath
                     : axis == XPathAxis.Namespace
                         ? XPathNodeType.Namespace
                         :
-                          /*else*/XPathNodeType.Element
+                        /*else*/XPathNodeType.Element
             );
         }
 

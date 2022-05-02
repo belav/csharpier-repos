@@ -114,14 +114,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                     var category = isExtensionMethod
                         ? loggerParameters[0].ParameterType.GenericTypeArguments[0]
                         : loggerMethod.DeclaringType!
-                              .GetInterfaces()
-                              .Single(
-                                  i =>
-                                      i.IsGenericType
-                                      && i.GetGenericTypeDefinition()
-                                          == typeof(IDiagnosticsLogger<>)
-                              )
-                              .GetGenericArguments()[0];
+                            .GetInterfaces()
+                            .Single(
+                                i =>
+                                    i.IsGenericType
+                                    && i.GetGenericTypeDefinition() == typeof(IDiagnosticsLogger<>)
+                            )
+                            .GetGenericArguments()[0];
 
                     if (category.ContainsGenericParameters)
                     {
@@ -138,8 +137,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
                     var diagnosticLogger = scopeServiceProvider.GetRequiredService(
                         isExtensionMethod
-                          ? typeof(IDiagnosticsLogger<>).MakeGenericType(category)
-                          : loggerMethod.DeclaringType
+                            ? typeof(IDiagnosticsLogger<>).MakeGenericType(category)
+                            : loggerMethod.DeclaringType
                     );
 
                     var args = new object[loggerParameters.Length];

@@ -7,8 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindQueryFiltersQueryInMemoryTest
         : NorthwindQueryFiltersQueryTestBase<
-              NorthwindQueryInMemoryFixture<NorthwindQueryFiltersCustomizer>
-          >
+            NorthwindQueryInMemoryFixture<NorthwindQueryFiltersCustomizer>
+        >
     {
         public NorthwindQueryFiltersQueryInMemoryTest(
             NorthwindQueryInMemoryFixture<NorthwindQueryFiltersCustomizer> fixture,

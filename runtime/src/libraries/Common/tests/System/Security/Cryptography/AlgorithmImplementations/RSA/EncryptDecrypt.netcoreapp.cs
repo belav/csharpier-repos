@@ -13,16 +13,16 @@ namespace System.Security.Cryptography.Rsa.Tests
             TryWithOutputArray(
                 dest =>
                     rsa.TryEncrypt(data, dest, padding, out int bytesWritten)
-                      ? (true, bytesWritten)
-                      : (false, 0)
+                        ? (true, bytesWritten)
+                        : (false, 0)
             );
 
         protected override byte[] Decrypt(RSA rsa, byte[] data, RSAEncryptionPadding padding) =>
             TryWithOutputArray(
                 dest =>
                     rsa.TryDecrypt(data, dest, padding, out int bytesWritten)
-                      ? (true, bytesWritten)
-                      : (false, 0)
+                        ? (true, bytesWritten)
+                        : (false, 0)
             );
 
         private static byte[] TryWithOutputArray(Func<byte[], (bool, int)> func)

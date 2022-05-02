@@ -50,7 +50,7 @@ internal class ConditionalTheoryDiscoverer : TheoryDiscoverer
     {
         var skipReason = testMethod.EvaluateSkipConditions();
         return skipReason != null
-          ? new[]
+            ? new[]
             {
                 new SkippedTestCase(
                     skipReason,
@@ -60,7 +60,7 @@ internal class ConditionalTheoryDiscoverer : TheoryDiscoverer
                     testMethod
                 )
             }
-          : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
+            : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
     }
 
     protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(
@@ -86,14 +86,19 @@ internal class ConditionalTheoryDiscoverer : TheoryDiscoverer
         }
 
         return skipReason != null
-          ? base.CreateTestCasesForSkippedDataRow(
+            ? base.CreateTestCasesForSkippedDataRow(
                 discoveryOptions,
                 testMethod,
                 theoryAttribute,
                 dataRow,
                 skipReason
             )
-          : base.CreateTestCasesForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
+            : base.CreateTestCasesForDataRow(
+                discoveryOptions,
+                testMethod,
+                theoryAttribute,
+                dataRow
+            );
     }
 
     protected override IEnumerable<IXunitTestCase> CreateTestCasesForSkippedDataRow(

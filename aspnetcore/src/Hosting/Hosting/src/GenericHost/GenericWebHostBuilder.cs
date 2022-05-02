@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Hosting;
 
 internal sealed class GenericWebHostBuilder
     : IWebHostBuilder,
-      ISupportsStartup,
-      ISupportsUseDefaultServiceProvider
+        ISupportsStartup,
+        ISupportsUseDefaultServiceProvider
 {
     private readonly IHostBuilder _builder;
     private readonly IConfiguration _config;

@@ -149,8 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.ConditionalExpressionInStringI
                     conditional.ColonToken,
                     conditional.WhenFalse.GetFirstToken()
                 )
-                  ? conditional.WhenFalse.GetLastToken()
-                  : conditional.ColonToken;
+                    ? conditional.WhenFalse.GetLastToken()
+                    : conditional.ColonToken;
 
                 var closeParenPosition = endToken.Span.End;
                 var textWithCloseParenthesis = sourceText.Replace(closeParenPosition, 0, ")");

@@ -86,7 +86,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         /// </summary>
         internal sealed class GroupingComparer
             : IEqualityComparer<TodoCommentData>,
-              IEqualityComparer<TodoTableItem>
+                IEqualityComparer<TodoTableItem>
         {
             public static readonly GroupingComparer Instance = new();
 

@@ -62,9 +62,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new WriteOnceBlock<int>(
-                              i => i,
-                              new DataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            i => i,
+                            new DataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new WriteOnceBlock<int>(i => i)
             );
         }

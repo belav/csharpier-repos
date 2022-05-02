@@ -363,7 +363,7 @@ namespace Microsoft.Extensions.DependencyModel
 
     public partial class DependencyContextJsonReader
         : Microsoft.Extensions.DependencyModel.IDependencyContextReader,
-          System.IDisposable
+            System.IDisposable
     {
         public DependencyContextJsonReader() { }
 

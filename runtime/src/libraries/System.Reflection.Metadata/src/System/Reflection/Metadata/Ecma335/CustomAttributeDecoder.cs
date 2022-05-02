@@ -197,8 +197,8 @@ namespace System.Reflection.Metadata.Ecma335
                     EntityHandle handle = signatureReader.ReadTypeHandle();
                     info.Type = GetTypeFromHandle(handle);
                     info.TypeCode = _provider.IsSystemType(info.Type)
-                      ? SerializationTypeCode.Type
-                      : (SerializationTypeCode)_provider.GetUnderlyingEnumType(info.Type);
+                        ? SerializationTypeCode.Type
+                        : (SerializationTypeCode)_provider.GetUnderlyingEnumType(info.Type);
                     break;
 
                 case SignatureTypeCode.SZArray:
@@ -408,9 +408,9 @@ namespace System.Reflection.Metadata.Ecma335
             handle.Kind switch
             {
                 HandleKind.TypeDefinition
-                  => _provider.GetTypeFromDefinition(_reader, (TypeDefinitionHandle)handle, 0),
+                    => _provider.GetTypeFromDefinition(_reader, (TypeDefinitionHandle)handle, 0),
                 HandleKind.TypeReference
-                  => _provider.GetTypeFromReference(_reader, (TypeReferenceHandle)handle, 0),
+                    => _provider.GetTypeFromReference(_reader, (TypeReferenceHandle)handle, 0),
                 _ => throw new BadImageFormatException(SR.NotTypeDefOrRefHandle),
             };
     }

@@ -168,8 +168,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 tmpSpan = sequenceReader.ReadEncodedValue();
                 decoded.SignedAttributes = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
 
             System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
@@ -181,8 +181,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
                 decoded.SignatureValue = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {

@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
     /// </remarks>
     public interface IRelationalConnection
         : IRelationalTransactionManager,
-          IDisposable,
-          IAsyncDisposable
+            IDisposable,
+            IAsyncDisposable
     {
         /// <summary>
         ///     Gets or sets the connection string for the database.

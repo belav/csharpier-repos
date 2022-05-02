@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal class CommonTypeWellKnownAttributeData
         : WellKnownAttributeData,
-          ISecurityAttributeTarget
+            ISecurityAttributeTarget
     {
         #region SpecialNameAttribute
         private bool _hasSpecialNameAttribute;

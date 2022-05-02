@@ -31,13 +31,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
     ]
     internal partial class CSharpUseConditionalExpressionForAssignmentCodeFixProvider
         : AbstractUseConditionalExpressionForAssignmentCodeFixProvider<
-              StatementSyntax,
-              IfStatementSyntax,
-              LocalDeclarationStatementSyntax,
-              VariableDeclaratorSyntax,
-              ExpressionSyntax,
-              ConditionalExpressionSyntax
-          >
+            StatementSyntax,
+            IfStatementSyntax,
+            LocalDeclarationStatementSyntax,
+            VariableDeclaratorSyntax,
+            ExpressionSyntax,
+            ConditionalExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

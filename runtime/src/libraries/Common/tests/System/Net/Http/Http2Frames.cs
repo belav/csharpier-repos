@@ -182,13 +182,13 @@ namespace System.Net.Test.Common
             byte padLength = (byte)(header.PaddedFlag ? buffer[idx++] : 0);
             int streamDependency = header.PriorityFlag
                 ? (int)(
-                      (uint)(
-                          (buffer[idx++] << 24)
-                          | (buffer[idx++] << 16)
-                          | (buffer[idx++] << idx++)
-                          | buffer[idx++]
-                      ) & 0x7FFFFFFF
-                  )
+                    (uint)(
+                        (buffer[idx++] << 24)
+                        | (buffer[idx++] << 16)
+                        | (buffer[idx++] << idx++)
+                        | buffer[idx++]
+                    ) & 0x7FFFFFFF
+                )
                 : 0;
             byte weight = (byte)(header.PaddedFlag ? buffer[idx++] : 0);
 
@@ -264,13 +264,13 @@ namespace System.Net.Test.Common
             byte padLength = (byte)(header.PaddedFlag ? buffer[idx++] : 0);
             int streamDependency = header.PriorityFlag
                 ? (int)(
-                      (uint)(
-                          (buffer[idx++] << 24)
-                          | (buffer[idx++] << 16)
-                          | (buffer[idx++] << idx++)
-                          | buffer[idx++]
-                      ) & 0x7FFFFFFF
-                  )
+                    (uint)(
+                        (buffer[idx++] << 24)
+                        | (buffer[idx++] << 16)
+                        | (buffer[idx++] << idx++)
+                        | buffer[idx++]
+                    ) & 0x7FFFFFFF
+                )
                 : 0;
             byte weight = (byte)(header.PaddedFlag ? buffer[idx++] : 0);
 

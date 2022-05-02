@@ -164,7 +164,7 @@ namespace System.ComponentModel
 
     public partial class AttributeCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public static readonly System.ComponentModel.AttributeCollection Empty;
 
@@ -460,12 +460,12 @@ namespace System.ComponentModel
             T
     >
         : System.Collections.ObjectModel.Collection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.ComponentModel.IBindingList,
-          System.ComponentModel.ICancelAddNew,
-          System.ComponentModel.IRaiseItemChangedEvents
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.ComponentModel.IBindingList,
+            System.ComponentModel.ICancelAddNew,
+            System.ComponentModel.IRaiseItemChangedEvents
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
@@ -1568,8 +1568,8 @@ namespace System.ComponentModel
 
     public partial class EventDescriptorCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public static readonly System.ComponentModel.EventDescriptorCollection Empty;
 
@@ -1831,8 +1831,8 @@ namespace System.ComponentModel
 
     public partial interface IBindingList
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         bool AllowEdit { get; }
         bool AllowNew { get; }
@@ -1857,9 +1857,9 @@ namespace System.ComponentModel
 
     public partial interface IBindingListView
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.ComponentModel.IBindingList
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.ComponentModel.IBindingList
     {
         string? Filter
         {
@@ -2491,8 +2491,8 @@ namespace System.ComponentModel
 
     public partial class ListSortDescriptionCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public ListSortDescriptionCollection() { }
 
@@ -2619,8 +2619,8 @@ namespace System.ComponentModel
     [System.ComponentModel.TypeConverterAttribute(typeof(System.ComponentModel.ComponentConverter))]
     public partial class MarshalByValueComponent
         : System.ComponentModel.IComponent,
-          System.IDisposable,
-          System.IServiceProvider
+            System.IDisposable,
+            System.IServiceProvider
     {
         public MarshalByValueComponent() { }
 
@@ -3313,9 +3313,9 @@ namespace System.ComponentModel
 
     public partial class NestedContainer
         : System.ComponentModel.Container,
-          System.ComponentModel.IContainer,
-          System.ComponentModel.INestedContainer,
-          System.IDisposable
+            System.ComponentModel.IContainer,
+            System.ComponentModel.INestedContainer,
+            System.IDisposable
     {
         public NestedContainer(System.ComponentModel.IComponent owner) { }
 
@@ -3647,9 +3647,9 @@ namespace System.ComponentModel
 
     public partial class PropertyDescriptorCollection
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public static readonly System.ComponentModel.PropertyDescriptorCollection Empty;
 
@@ -4660,7 +4660,7 @@ namespace System.ComponentModel
 
         public partial class StandardValuesCollection
             : System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.IEnumerable
         {
             public StandardValuesCollection(System.Collections.ICollection? values) { }
 
@@ -5752,7 +5752,7 @@ namespace System.ComponentModel.Design
 
     public partial class DesignerCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public DesignerCollection(System.Collections.IList? designers) { }
 
@@ -5864,8 +5864,8 @@ namespace System.ComponentModel.Design
         )]
         public sealed partial class DesignerOptionCollection
             : System.Collections.ICollection,
-              System.Collections.IEnumerable,
-              System.Collections.IList
+                System.Collections.IEnumerable,
+                System.Collections.IList
         {
             internal DesignerOptionCollection() { }
 
@@ -6233,7 +6233,7 @@ namespace System.ComponentModel.Design
 
     public partial interface IDesignerHost
         : System.ComponentModel.Design.IServiceContainer,
-          System.IServiceProvider
+            System.IServiceProvider
     {
         System.ComponentModel.IContainer Container { get; }
         bool InTransaction { get; }
@@ -6381,7 +6381,7 @@ namespace System.ComponentModel.Design
 
     public partial interface IRootDesigner
         : System.ComponentModel.Design.IDesigner,
-          System.IDisposable
+            System.IDisposable
     {
         System.ComponentModel.Design.ViewTechnology[] SupportedTechnologies { get; }
         object GetView(System.ComponentModel.Design.ViewTechnology technology);
@@ -6421,7 +6421,7 @@ namespace System.ComponentModel.Design
 
     public partial interface ITreeDesigner
         : System.ComponentModel.Design.IDesigner,
-          System.IDisposable
+            System.IDisposable
     {
         System.Collections.ICollection Children { get; }
         System.ComponentModel.Design.IDesigner? Parent { get; }
@@ -6611,8 +6611,8 @@ namespace System.ComponentModel.Design
 
     public partial class ServiceContainer
         : System.ComponentModel.Design.IServiceContainer,
-          System.IDisposable,
-          System.IServiceProvider
+            System.IDisposable,
+            System.IServiceProvider
     {
         public ServiceContainer() { }
 
@@ -6872,8 +6872,8 @@ namespace System.ComponentModel.Design.Serialization
 
     public partial interface IDesignerLoaderHost
         : System.ComponentModel.Design.IDesignerHost,
-          System.ComponentModel.Design.IServiceContainer,
-          System.IServiceProvider
+            System.ComponentModel.Design.IServiceContainer,
+            System.IServiceProvider
     {
         void EndLoad(
             string baseClassName,
@@ -6885,9 +6885,9 @@ namespace System.ComponentModel.Design.Serialization
 
     public partial interface IDesignerLoaderHost2
         : System.ComponentModel.Design.IDesignerHost,
-          System.ComponentModel.Design.IServiceContainer,
-          System.ComponentModel.Design.Serialization.IDesignerLoaderHost,
-          System.IServiceProvider
+            System.ComponentModel.Design.IServiceContainer,
+            System.ComponentModel.Design.Serialization.IDesignerLoaderHost,
+            System.IServiceProvider
     {
         bool CanReloadWithErrors { get; set; }
         bool IgnoreErrorsDuringReload { get; set; }
@@ -7552,7 +7552,7 @@ namespace System.Timers
     [System.ComponentModel.DefaultPropertyAttribute("Interval")]
     public partial class Timer
         : System.ComponentModel.Component,
-          System.ComponentModel.ISupportInitialize
+            System.ComponentModel.ISupportInitialize
     {
         public Timer() { }
 

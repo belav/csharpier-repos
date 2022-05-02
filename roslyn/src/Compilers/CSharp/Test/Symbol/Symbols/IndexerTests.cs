@@ -3053,10 +3053,10 @@ class C
         )
         {
             return node == null
-              ? SpecializedCollections.EmptyEnumerable<ElementAccessExpressionSyntax>()
-              : node.DescendantNodesAndSelf()
-                .Where(s => s.IsKind(SyntaxKind.ElementAccessExpression))
-                .Cast<ElementAccessExpressionSyntax>();
+                ? SpecializedCollections.EmptyEnumerable<ElementAccessExpressionSyntax>()
+                : node.DescendantNodesAndSelf()
+                    .Where(s => s.IsKind(SyntaxKind.ElementAccessExpression))
+                    .Cast<ElementAccessExpressionSyntax>();
         }
 
         [Fact]

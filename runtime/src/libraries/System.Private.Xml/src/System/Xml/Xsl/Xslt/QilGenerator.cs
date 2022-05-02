@@ -1010,9 +1010,9 @@ namespace System.Xml.Xsl.Xslt
                 {
                     nsUri = isValid
                         ? ResolvePrefix( /*ignoreDefaultNs:*/
-                              false,
-                              prefix
-                          )
+                            false,
+                            prefix
+                        )
                         : _compiler.CreatePhantomNamespace();
                 }
                 else
@@ -1087,9 +1087,9 @@ namespace System.Xml.Xsl.Xslt
                 {
                     nsUri = isValid
                         ? ResolvePrefix( /*ignoreDefaultNs:*/
-                              true,
-                              prefix
-                          )
+                            true,
+                            prefix
+                        )
                         : _compiler.CreatePhantomNamespace();
                 }
                 else
@@ -1882,9 +1882,9 @@ namespace System.Xml.Xsl.Xslt
                             );
                             nsUri = isValid
                                 ? ResolvePrefix( /*ignoreDefaultNs:*/
-                                      true,
-                                      prefix
-                                  )
+                                    true,
+                                    prefix
+                                )
                                 : _compiler.CreatePhantomNamespace();
 
                             if (nsUri.Length == 0)
@@ -1917,8 +1917,8 @@ namespace System.Xml.Xsl.Xslt
                                 _f.Eq(dt, _f.String(DtText)),
                                 _f.True(),
                                 fwdCompat
-                                  ? _f.True()
-                                  : _f.Loop(
+                                    ? _f.True()
+                                    : _f.Loop(
                                         qname = _f.Let(
                                             ResolveQNameDynamic( /*ignoreDefaultNs:*/
                                                 true,
@@ -2012,8 +2012,8 @@ namespace System.Xml.Xsl.Xslt
                             _f.Eq(i, _f.String(value1)),
                             _f.String("1"),
                             fwdCompat
-                              ? _f.String("0")
-                              : _f.Conditional(
+                                ? _f.String("0")
+                                : _f.Conditional(
                                     _f.Eq(i, _f.String(value0)),
                                     _f.String("0"),
                                     _f.Error(
@@ -2403,8 +2403,8 @@ namespace System.Xml.Xsl.Xslt
                             ),
                             i,
                             fwdCompat
-                              ? _f.String(Default)
-                              : _f.Error(
+                                ? _f.String(Default)
+                                : _f.Error(
                                     _lastScope!.SourceLine,
                                     SR.Xslt_BistateAttribute,
                                     "letter-value",
@@ -2452,8 +2452,8 @@ namespace System.Xml.Xsl.Xslt
                         _f.Eq(_f.StrLength(i), _f.Int32(1)),
                         i,
                         fwdCompat
-                          ? _f.String(string.Empty)
-                          : _f.Error(
+                            ? _f.String(string.Empty)
+                            : _f.Error(
                                 _lastScope!.SourceLine,
                                 SR.Xslt_CharAttribute,
                                 "grouping-separator"

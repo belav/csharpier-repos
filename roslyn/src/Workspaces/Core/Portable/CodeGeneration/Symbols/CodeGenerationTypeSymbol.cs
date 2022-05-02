@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal abstract class CodeGenerationTypeSymbol
         : CodeGenerationNamespaceOrTypeSymbol,
-          ITypeSymbol
+            ITypeSymbol
     {
         public SpecialType SpecialType { get; protected set; }
 

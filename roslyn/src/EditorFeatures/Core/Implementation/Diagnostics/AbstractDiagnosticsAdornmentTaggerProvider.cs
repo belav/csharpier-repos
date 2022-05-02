@@ -74,11 +74,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             var diagnosticIdTextRun = navigationAction is null
                 ? new ClassifiedTextRun(ClassificationTypeNames.Text, diagnostic.Id)
                 : new ClassifiedTextRun(
-                      ClassificationTypeNames.Text,
-                      diagnostic.Id,
-                      navigationAction,
-                      tooltip
-                  );
+                    ClassificationTypeNames.Text,
+                    diagnostic.Id,
+                    navigationAction,
+                    tooltip
+                );
 
             return new ContainerElement(
                 ContainerElementStyle.Wrapped,

@@ -129,8 +129,8 @@ namespace System.Web.Mvc.Async
         {
             string methodName = methodInfo.Name;
             return (IsAsyncSuffixedMethod(methodInfo))
-              ? methodName.Substring(0, methodName.Length - "Async".Length)
-              : methodName;
+                ? methodName.Substring(0, methodName.Length - "Async".Length)
+                : methodName;
         }
 
         private bool IsAsyncSuffixedMethod(MethodInfo methodInfo)

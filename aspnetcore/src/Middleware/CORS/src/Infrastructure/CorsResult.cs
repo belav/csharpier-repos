@@ -89,8 +89,8 @@ public class CorsResult
         builder.Append(", PreflightMaxAge: ");
         builder.Append(
             PreflightMaxAge.HasValue
-              ? PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
-              : "null"
+                ? PreflightMaxAge.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                : "null"
         );
         builder.Append(", AllowOrigin: ");
         builder.Append(AllowedOrigin);

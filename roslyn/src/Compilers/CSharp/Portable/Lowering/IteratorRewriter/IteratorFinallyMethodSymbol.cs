@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class IteratorFinallyMethodSymbol
         : SynthesizedInstanceMethodSymbol,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly IteratorStateMachine _stateMachineType;
         private readonly string _name;

@@ -78,9 +78,9 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             var hasGetPrefix = HasGetPrefix(methodName);
             var propertyName = hasGetPrefix
                 ? NameGenerator.GenerateUniqueName(
-                      methodName[GetPrefix.Length..],
-                      n => !methodSymbol.ContainingType.GetMembers(n).Any()
-                  )
+                    methodName[GetPrefix.Length..],
+                    n => !methodSymbol.ContainingType.GetMembers(n).Any()
+                )
                 : methodName;
             var nameChanged = hasGetPrefix;
 
@@ -225,8 +225,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
                 setMethod == null
                     ? SpecializedCollections.EmptyEnumerable<ReferencedSymbol>()
                     : await SymbolFinder
-                          .FindReferencesAsync(setMethod, originalSolution, cancellationToken)
-                          .ConfigureAwait(false);
+                        .FindReferencesAsync(setMethod, originalSolution, cancellationToken)
+                        .ConfigureAwait(false);
 
             // Get the warnings we'd like to put at the definition site.
             var definitionWarning = GetDefinitionIssues(getMethodReferences);

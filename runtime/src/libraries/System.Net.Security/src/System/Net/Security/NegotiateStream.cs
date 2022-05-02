@@ -514,7 +514,7 @@ namespace System.Net.Security
             _context!.IsDelegationFlag && _context.ProtocolName != NegotiationInfoClass.NTLM
                 ? TokenImpersonationLevel.Delegation
                 : // We should suppress the delegate flag in NTLM case.
-                  _context.IsIdentifyFlag
+                _context.IsIdentifyFlag
                     ? TokenImpersonationLevel.Identification
                     : TokenImpersonationLevel.Impersonation;
 
@@ -1098,7 +1098,7 @@ namespace System.Net.Security
                     _context.IsServer
                         ? ReceiveBlobAsync(adapter)
                         : // server should listen for a client blob
-                          SendBlobAsync(adapter, message: null)
+                        SendBlobAsync(adapter, message: null)
                 ).ConfigureAwait(false); // client should send the first blob
             }
             catch (Exception e)
@@ -1344,8 +1344,8 @@ namespace System.Net.Security
             {
                 exception = new InvalidCredentialException(
                     IsServer
-                      ? SR.net_auth_bad_client_creds
-                      : SR.net_auth_bad_client_creds_or_target_mismatch,
+                        ? SR.net_auth_bad_client_creds
+                        : SR.net_auth_bad_client_creds_or_target_mismatch,
                     exception
                 );
             }
@@ -1421,9 +1421,9 @@ namespace System.Net.Security
             throw e.NativeErrorCode switch
             {
                 (int)SecurityStatusPalErrorCode.LogonDenied
-                  => new InvalidCredentialException(SR.net_auth_bad_client_creds, e),
+                    => new InvalidCredentialException(SR.net_auth_bad_client_creds, e),
                 ERROR_TRUST_FAILURE
-                  => new AuthenticationException(SR.net_auth_context_expectation_remote, e),
+                    => new AuthenticationException(SR.net_auth_context_expectation_remote, e),
                 _ => new AuthenticationException(SR.net_auth_alert, e)
             };
         }

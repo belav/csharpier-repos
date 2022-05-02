@@ -69,8 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             }
 
             return changed
-              ? new TableValuedFunctionQueryRootExpression(EntityType, Function, arguments)
-              : this;
+                ? new TableValuedFunctionQueryRootExpression(EntityType, Function, arguments)
+                : this;
         }
 
         /// <summary>
@@ -82,8 +82,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public override QueryRootExpression UpdateEntityType(IEntityType entityType) =>
             entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
                 ? throw new InvalidOperationException(
-                      CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
-                  )
+                    CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+                )
                 : new TableValuedFunctionQueryRootExpression(entityType, Function, Arguments);
 
         /// <summary>

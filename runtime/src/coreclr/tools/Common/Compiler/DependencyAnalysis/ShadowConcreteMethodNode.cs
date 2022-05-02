@@ -21,8 +21,8 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public class ShadowConcreteMethodNode
         : DependencyNodeCore<NodeFactory>,
-          IMethodNode,
-          ISymbolNodeWithLinkage
+            IMethodNode,
+            ISymbolNodeWithLinkage
     {
         /// <summary>
         /// Gets the canonical method body that defines the dependencies of this node.

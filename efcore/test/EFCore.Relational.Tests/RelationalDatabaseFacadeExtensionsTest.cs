@@ -294,8 +294,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 migrations,
                 async
-                  ? await context.Database.GetAppliedMigrationsAsync()
-                  : context.Database.GetAppliedMigrations()
+                    ? await context.Database.GetAppliedMigrationsAsync()
+                    : context.Database.GetAppliedMigrations()
             );
         }
 
@@ -367,8 +367,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 new[] { "00000000000003_Three" },
                 async
-                  ? await context.Database.GetPendingMigrationsAsync()
-                  : context.Database.GetPendingMigrations()
+                    ? await context.Database.GetPendingMigrationsAsync()
+                    : context.Database.GetPendingMigrations()
             );
         }
     }

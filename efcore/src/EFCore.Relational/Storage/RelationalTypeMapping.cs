@@ -616,8 +616,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns>The method to use to read the value.</returns>
         public static MethodInfo GetDataReaderMethod(Type type) =>
             _getXMethods.TryGetValue(type, out var method)
-              ? method
-              : _getFieldValueMethod.MakeGenericMethod(type);
+                ? method
+                : _getFieldValueMethod.MakeGenericMethod(type);
 
         /// <summary>
         ///     Gets a custom expression tree for reading the value from the input data reader

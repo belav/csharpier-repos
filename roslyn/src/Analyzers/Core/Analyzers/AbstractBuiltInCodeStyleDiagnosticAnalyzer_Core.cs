@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 {
     internal abstract partial class AbstractBuiltInCodeStyleDiagnosticAnalyzer
         : DiagnosticAnalyzer,
-          IBuiltInAnalyzer
+            IBuiltInAnalyzer
     {
         protected readonly string? DescriptorId;
 

@@ -172,8 +172,8 @@ namespace Internal.Cryptography.Pal
                         SafeX509StackHandle toAdd = cert.SubjectName.RawData.ContentsEqual(
                             cert.IssuerName.RawData
                         )
-                          ? customTrust
-                          : untrusted;
+                            ? customTrust
+                            : untrusted;
                         AddToStackAndUpRef(
                             ((OpenSslX509CertificateReader)cert.Pal!).SafeHandle,
                             toAdd

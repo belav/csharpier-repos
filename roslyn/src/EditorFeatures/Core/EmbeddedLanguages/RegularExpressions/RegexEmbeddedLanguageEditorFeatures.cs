@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
 {
     internal sealed class RegexEmbeddedLanguageEditorFeatures
         : RegexEmbeddedLanguage,
-          IEmbeddedLanguageEditorFeatures
+            IEmbeddedLanguageEditorFeatures
     {
         public IBraceMatcher BraceMatcher { get; }
 

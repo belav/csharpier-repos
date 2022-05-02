@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.Logging.EventSource
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("EventSource")]
     public partial class EventSourceLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public EventSourceLoggerProvider(
             Microsoft.Extensions.Logging.EventSource.LoggingEventSource eventSource

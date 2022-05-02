@@ -36,8 +36,8 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
         var error = SocketError;
 
         return error == SocketError.Success
-          ? new ValueTask<int>(bytesTransferred)
-          : ValueTask.FromException<int>(CreateException(error));
+            ? new ValueTask<int>(bytesTransferred)
+            : ValueTask.FromException<int>(CreateException(error));
     }
 
     public void Reset()
@@ -70,8 +70,8 @@ internal sealed class SocketSender : SocketAwaitableEventArgs
         var error = SocketError;
 
         return error == SocketError.Success
-          ? new ValueTask<int>(bytesTransferred)
-          : ValueTask.FromException<int>(CreateException(error));
+            ? new ValueTask<int>(bytesTransferred)
+            : ValueTask.FromException<int>(CreateException(error));
     }
 
     private void SetBufferList(in ReadOnlySequence<byte> buffer)

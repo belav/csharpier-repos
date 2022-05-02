@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 {
     internal class SourceGeneratedFileItemSource
         : Shell.IAttachedCollectionSource,
-          ISupportExpansionEvents
+            ISupportExpansionEvents
     {
         private readonly SourceGeneratorItem _parentGeneratorItem;
         private readonly Workspace _workspace;
@@ -323,7 +323,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         /// </summary>
         private sealed class BulkObservableCollectionWithInit<T>
             : BulkObservableCollection<T>,
-              ISupportInitializeNotification
+                ISupportInitializeNotification
         {
             public bool IsInitialized { get; private set; } = false;
 

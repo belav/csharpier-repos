@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
     [ExportLanguageService(typeof(IReplaceMethodWithPropertyService), LanguageNames.CSharp), Shared]
     internal class CSharpReplaceMethodWithPropertyService
         : AbstractReplaceMethodWithPropertyService<MethodDeclarationSyntax>,
-          IReplaceMethodWithPropertyService
+            IReplaceMethodWithPropertyService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

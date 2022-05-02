@@ -148,8 +148,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             //      not >= 0   ->    < 0
 
             return syntaxFacts.IsAnyPattern(expressionOrPattern)
-              ? generatorInternal.NotPattern(expressionOrPattern)
-              : generator.LogicalNotExpression(expressionOrPattern);
+                ? generatorInternal.NotPattern(expressionOrPattern)
+                : generator.LogicalNotExpression(expressionOrPattern);
         }
 
         private static SyntaxNode GetNegationOfBinaryExpression(
@@ -215,19 +215,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 is BinaryOperatorKind.Equals
                     or BinaryOperatorKind.NotEquals
                 ? generatorInternal.NegateEquality(
-                      generator,
-                      expressionNode,
-                      leftOperand,
-                      negatedKind,
-                      rightOperand
-                  )
+                    generator,
+                    expressionNode,
+                    leftOperand,
+                    negatedKind,
+                    rightOperand
+                )
                 : NegateRelational(
-                      generator,
-                      binaryOperation,
-                      leftOperand,
-                      negatedKind,
-                      rightOperand
-                  );
+                    generator,
+                    binaryOperation,
+                    leftOperand,
+                    negatedKind,
+                    rightOperand
+                );
             newBinaryExpressionSyntax = newBinaryExpressionSyntax.WithTriviaFrom(expressionNode);
 
             var newToken = syntaxFacts.GetOperatorTokenOfBinaryExpression(
@@ -274,10 +274,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             );
 
             var newPattern = syntaxFacts.IsAndPattern(pattern)
-              ? generatorInternal.OrPattern(newLeft, newRight)
-              : syntaxFacts.IsOrPattern(pattern)
-                  ? generatorInternal.AndPattern(newLeft, newRight)
-                  : throw ExceptionUtilities.UnexpectedValue(pattern.RawKind);
+                ? generatorInternal.OrPattern(newLeft, newRight)
+                : syntaxFacts.IsOrPattern(pattern)
+                    ? generatorInternal.AndPattern(newLeft, newRight)
+                    : throw ExceptionUtilities.UnexpectedValue(pattern.RawKind);
 
             newPattern = newPattern.WithTriviaFrom(pattern);
 
@@ -399,23 +399,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return operationKind switch
             {
                 BinaryOperatorKind.LessThanOrEqual
-                  => IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
-                    ? generator.ValueEqualsExpression(leftOperand, rightOperand)
-                    : generator.LessThanOrEqualExpression(leftOperand, rightOperand),
+                    => IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
+                        ? generator.ValueEqualsExpression(leftOperand, rightOperand)
+                        : generator.LessThanOrEqualExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.GreaterThanOrEqual
-                  => IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
-                    ? generator.ValueEqualsExpression(leftOperand, rightOperand)
-                    : generator.GreaterThanOrEqualExpression(leftOperand, rightOperand),
+                    => IsSpecialCaseBinaryExpression(binaryOperation, operationKind)
+                        ? generator.ValueEqualsExpression(leftOperand, rightOperand)
+                        : generator.GreaterThanOrEqualExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.LessThan
-                  => generator.LessThanExpression(leftOperand, rightOperand),
+                    => generator.LessThanExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.GreaterThan
-                  => generator.GreaterThanExpression(leftOperand, rightOperand),
+                    => generator.GreaterThanExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.Or => generator.BitwiseOrExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.And => generator.BitwiseAndExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.ConditionalOr
-                  => generator.LogicalOrExpression(leftOperand, rightOperand),
+                    => generator.LogicalOrExpression(leftOperand, rightOperand),
                 BinaryOperatorKind.ConditionalAnd
-                  => generator.LogicalAndExpression(leftOperand, rightOperand),
+                    => generator.LogicalAndExpression(leftOperand, rightOperand),
                 _ => throw ExceptionUtilities.UnexpectedValue(operationKind),
             };
         }
@@ -439,15 +439,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return operationKind switch
             {
                 BinaryOperatorKind.LessThanOrEqual when rightOperand.IsNumericLiteral()
-                  => CanSimplifyToLengthEqualsZeroExpression(
-                      leftOperand,
-                      (ILiteralOperation)rightOperand
-                  ),
+                    => CanSimplifyToLengthEqualsZeroExpression(
+                        leftOperand,
+                        (ILiteralOperation)rightOperand
+                    ),
                 BinaryOperatorKind.GreaterThanOrEqual when leftOperand.IsNumericLiteral()
-                  => CanSimplifyToLengthEqualsZeroExpression(
-                      rightOperand,
-                      (ILiteralOperation)leftOperand
-                  ),
+                    => CanSimplifyToLengthEqualsZeroExpression(
+                        rightOperand,
+                        (ILiteralOperation)leftOperand
+                    ),
                 _ => false,
             };
         }
@@ -455,8 +455,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static IOperation RemoveImplicitConversion(IOperation operation)
         {
             return operation is IConversionOperation conversion && conversion.IsImplicit
-              ? RemoveImplicitConversion(conversion.Operand)
-              : operation;
+                ? RemoveImplicitConversion(conversion.Operand)
+                : operation;
         }
 
         private static bool CanSimplifyToLengthEqualsZeroExpression(

@@ -317,8 +317,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         {
             return
                 Test.TestGetMethod(new MemberClass()) + Test.TestSetMethod(new MemberClass()) == 0
-              ? 0
-              : 1;
+                ? 0
+                : 1;
         }
 
         public static int TestGetMethod(MemberClass mc)
@@ -1606,8 +1606,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         {
             return
                 Test.TestGetMethod(new MemberClass()) + Test.TestSetMethod(new MemberClass()) == 0
-              ? 0
-              : 1;
+                ? 0
+                : 1;
         }
 
         public static int TestGetMethod(MemberClass mc)

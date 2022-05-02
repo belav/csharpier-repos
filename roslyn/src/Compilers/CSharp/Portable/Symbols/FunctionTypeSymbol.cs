@@ -137,8 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 _delegateType.MergeEquivalentTypes(otherType._delegateType, variance);
 
             return (object)_delegateType == delegateType
-              ? this
-              : otherType.WithDelegateType(delegateType);
+                ? this
+                : otherType.WithDelegateType(delegateType);
         }
 
         internal override TypeSymbol SetNullabilityForReferenceTypes(
@@ -153,8 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private FunctionTypeSymbol WithDelegateType(NamedTypeSymbol delegateType)
         {
             return (object)_delegateType == delegateType
-              ? this
-              : new FunctionTypeSymbol(delegateType);
+                ? this
+                : new FunctionTypeSymbol(delegateType);
         }
 
         internal override IEnumerable<(MethodSymbol Body, MethodSymbol Implemented)> SynthesizedInterfaceMethodImpls() =>

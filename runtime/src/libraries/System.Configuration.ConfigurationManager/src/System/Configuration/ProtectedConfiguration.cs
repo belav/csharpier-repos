@@ -14,8 +14,8 @@ namespace System.Configuration
                         BaseConfigurationRecord.ReservedSectionProtectedConfiguration
                     ) as ProtectedConfigurationSection;
                 return config == null
-                  ? new ProtectedConfigurationProviderCollection()
-                  : config.GetAllProviders();
+                    ? new ProtectedConfigurationProviderCollection()
+                    : config.GetAllProviders();
             }
         }
 

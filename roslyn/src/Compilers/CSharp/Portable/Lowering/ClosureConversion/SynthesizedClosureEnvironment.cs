@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class SynthesizedClosureEnvironment
         : SynthesizedContainer,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly MethodSymbol _topLevelMethod;
         internal readonly SyntaxNode ScopeSyntaxOpt;

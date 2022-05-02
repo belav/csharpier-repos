@@ -341,8 +341,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
         )
         {
             var alternateSymbolKind = TypeKind.Class.Equals(symbolKind)
-              ? TypeKind.Interface
-              : TypeKind.Class;
+                ? TypeKind.Interface
+                : TypeKind.Class;
             var alternateAccessibility =
                 accessibility == Accessibility.Public
                     ? Accessibility.Protected

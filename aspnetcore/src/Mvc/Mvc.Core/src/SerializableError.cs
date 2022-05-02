@@ -47,8 +47,8 @@ public sealed class SerializableError : Dictionary<string, object>
                         error =>
                         {
                             return string.IsNullOrEmpty(error.ErrorMessage)
-                              ? Resources.SerializableError_DefaultError
-                              : error.ErrorMessage;
+                                ? Resources.SerializableError_DefaultError
+                                : error.ErrorMessage;
                         }
                     )
                     .ToArray();

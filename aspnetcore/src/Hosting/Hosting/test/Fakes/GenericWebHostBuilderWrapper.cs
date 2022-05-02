@@ -11,8 +11,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests.Fakes;
 
 public class GenericWebHostBuilderWrapper
     : IWebHostBuilder,
-      ISupportsStartup,
-      ISupportsUseDefaultServiceProvider
+        ISupportsStartup,
+        ISupportsUseDefaultServiceProvider
 {
     private readonly GenericWebHostBuilder _builder;
     private readonly HostBuilder _hostBuilder;

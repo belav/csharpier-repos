@@ -20,12 +20,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
         TInvocationExpressionSyntax
     >
         : AbstractGenerateParameterizedMemberService<
-              TService,
-              TSimpleNameSyntax,
-              TExpressionSyntax,
-              TInvocationExpressionSyntax
-          >,
-          IGenerateConversionService
+            TService,
+            TSimpleNameSyntax,
+            TExpressionSyntax,
+            TInvocationExpressionSyntax
+        >,
+            IGenerateConversionService
         where TService : AbstractGenerateConversionService<
                 TService,
                 TSimpleNameSyntax,

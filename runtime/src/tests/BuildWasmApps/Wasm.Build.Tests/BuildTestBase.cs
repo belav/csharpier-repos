@@ -38,8 +38,8 @@ namespace Wasm.Build.Tests
         protected static int s_defaultPerTestTimeoutMs = RuntimeInformation.IsOSPlatform(
             OSPlatform.Windows
         )
-          ? 30 * 60 * 1000
-          : 15 * 60 * 1000;
+            ? 30 * 60 * 1000
+            : 15 * 60 * 1000;
         protected static BuildEnvironment s_buildEnv;
         private const string s_runtimePackPathPattern =
             "\\*\\* MicrosoftNetCoreAppRuntimePackDir : ([^ ]*)";
@@ -746,8 +746,8 @@ namespace Wasm.Build.Tests
                     Assert.False(
                         File.Exists(path),
                         label != null
-                          ? $"{label}: {path} should not exist"
-                          : $"{path} should not exist"
+                            ? $"{label}: {path} should not exist"
+                            : $"{path} should not exist"
                     );
                 }
             }

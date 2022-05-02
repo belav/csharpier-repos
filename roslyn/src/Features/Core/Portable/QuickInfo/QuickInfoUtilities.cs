@@ -213,9 +213,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             var nullableMessage = flowState switch
             {
                 NullableFlowState.MaybeNull
-                  => string.Format(FeaturesResources._0_may_be_null_here, symbol.Name),
+                    => string.Format(FeaturesResources._0_may_be_null_here, symbol.Name),
                 NullableFlowState.NotNull
-                  => string.Format(FeaturesResources._0_is_not_null_here, symbol.Name),
+                    => string.Format(FeaturesResources._0_is_not_null_here, symbol.Name),
                 _ => null
             };
 

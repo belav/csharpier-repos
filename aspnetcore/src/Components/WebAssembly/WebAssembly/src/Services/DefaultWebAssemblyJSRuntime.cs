@@ -48,8 +48,8 @@ internal sealed class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
             assemblyName,
             methodIdentifier,
             dotNetObjectId == null
-              ? default
-              : long.Parse(dotNetObjectId, CultureInfo.InvariantCulture),
+                ? default
+                : long.Parse(dotNetObjectId, CultureInfo.InvariantCulture),
             callId: null
         );
         return DotNetDispatcher.Invoke(Instance, callInfo, argsJson);

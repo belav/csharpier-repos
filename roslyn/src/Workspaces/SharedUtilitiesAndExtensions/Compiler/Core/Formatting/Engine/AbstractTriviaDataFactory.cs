@@ -114,14 +114,14 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             return useTriviaAsItIs
-              ? new Whitespace(
+                ? new Whitespace(
                     this.Options,
                     lineBreaks,
                     indentation,
                     elastic,
                     language: this.TreeInfo.Root.Language
                 )
-              : new ModifiedWhitespace(
+                : new ModifiedWhitespace(
                     this.Options,
                     lineBreaks,
                     indentation,

@@ -124,14 +124,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             || selectExpression != SelectExpression
             || innerShaper != InnerShaper
                 ? new RelationalSplitCollectionShaperExpression(
-                      parentIdentifier,
-                      childIdentifier,
-                      IdentifierValueComparers,
-                      selectExpression,
-                      innerShaper,
-                      Navigation,
-                      ElementType
-                  )
+                    parentIdentifier,
+                    childIdentifier,
+                    IdentifierValueComparers,
+                    selectExpression,
+                    innerShaper,
+                    Navigation,
+                    ElementType
+                )
                 : this;
 
         /// <inheritdoc />

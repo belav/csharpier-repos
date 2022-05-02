@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 /// </summary>
 public class RolesAuthorizationRequirement
     : AuthorizationHandler<RolesAuthorizationRequirement>,
-      IAuthorizationRequirement
+        IAuthorizationRequirement
 {
     /// <summary>
     /// Creates a new instance of <see cref="RolesAuthorizationRequirement"/>.

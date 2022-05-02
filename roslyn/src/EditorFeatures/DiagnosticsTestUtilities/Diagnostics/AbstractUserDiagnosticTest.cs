@@ -346,7 +346,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(testDriver, diagnosticIds);
 
             return diagnostic.Location.IsInSource
-              ? new FixAllState(
+                ? new FixAllState(
                     fixAllProvider,
                     document,
                     fixer,
@@ -355,7 +355,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     diagnosticIds,
                     fixAllDiagnosticProvider
                 )
-              : new FixAllState(
+                : new FixAllState(
                     fixAllProvider,
                     document.Project,
                     fixer,

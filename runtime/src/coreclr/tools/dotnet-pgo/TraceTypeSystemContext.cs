@@ -22,8 +22,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 {
     class TraceTypeSystemContext
         : MetadataTypeSystemContext,
-          IMetadataStringDecoderProvider,
-          IAssemblyResolver
+            IMetadataStringDecoderProvider,
+            IAssemblyResolver
     {
         private readonly PgoTraceProcess _pgoTraceProcess;
         private readonly ModuleLoadLogger _moduleLoadLogger;

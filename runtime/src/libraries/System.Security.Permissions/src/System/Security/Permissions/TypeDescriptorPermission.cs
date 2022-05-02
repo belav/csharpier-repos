@@ -12,7 +12,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class TypeDescriptorPermission
         : CodeAccessPermission,
-          IUnrestrictedPermission
+            IUnrestrictedPermission
     {
         public TypeDescriptorPermission(PermissionState state) { }
 

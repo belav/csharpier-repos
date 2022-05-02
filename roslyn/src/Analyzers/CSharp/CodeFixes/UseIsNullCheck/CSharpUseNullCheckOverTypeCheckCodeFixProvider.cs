@@ -72,10 +72,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
                 {
                     // Replace 'x is object' with 'x is not null'
                     BinaryExpressionSyntax binary
-                      => IsPatternExpression(
-                          expression: binary.Left,
-                          pattern: UnaryPattern(s_nullConstantPattern)
-                      ),
+                        => IsPatternExpression(
+                            expression: binary.Left,
+                            pattern: UnaryPattern(s_nullConstantPattern)
+                        ),
                     UnaryPatternSyntax => s_nullConstantPattern,
                     // The analyzer reports diagnostic only on BinaryExpressionSyntax and UnaryPatternSyntax.
                     _ => throw ExceptionUtilities.Unreachable

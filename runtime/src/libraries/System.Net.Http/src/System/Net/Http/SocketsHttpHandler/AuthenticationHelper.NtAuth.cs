@@ -62,8 +62,8 @@ namespace System.Net.Http
         )
         {
             return isProxyAuth
-              ? connection.SendAsyncCore(request, async, cancellationToken)
-              : pool.SendWithNtProxyAuthAsync(connection, request, async, cancellationToken);
+                ? connection.SendAsyncCore(request, async, cancellationToken)
+                : pool.SendWithNtProxyAuthAsync(connection, request, async, cancellationToken);
         }
 
         private static bool ProxySupportsConnectionAuth(HttpResponseMessage response)

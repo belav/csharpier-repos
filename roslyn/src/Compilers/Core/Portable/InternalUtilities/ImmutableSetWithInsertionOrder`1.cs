@@ -60,8 +60,8 @@ namespace Roslyn.Utilities
             }
 
             return this.Count == 1
-              ? Empty
-              : new ImmutableSetWithInsertionOrder<T>(modifiedMap, _nextElementValue);
+                ? Empty
+                : new ImmutableSetWithInsertionOrder<T>(modifiedMap, _nextElementValue);
         }
 
         public IEnumerable<T> InInsertionOrder

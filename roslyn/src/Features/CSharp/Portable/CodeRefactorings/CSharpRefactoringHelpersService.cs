@@ -22,10 +22,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
     [ExportLanguageService(typeof(IRefactoringHelpersService), LanguageNames.CSharp), Shared]
     internal class CSharpRefactoringHelpersService
         : AbstractRefactoringHelpersService<
-              ExpressionSyntax,
-              ArgumentSyntax,
-              ExpressionStatementSyntax
-          >
+            ExpressionSyntax,
+            ArgumentSyntax,
+            ExpressionStatementSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

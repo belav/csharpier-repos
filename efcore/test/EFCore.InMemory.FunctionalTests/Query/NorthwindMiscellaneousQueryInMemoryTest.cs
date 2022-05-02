@@ -96,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var message = async
                 ? (
-                      await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
-                  ).Message
+                    await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+                ).Message
                 : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
             Assert.Equal("Sequence contains no elements", message);

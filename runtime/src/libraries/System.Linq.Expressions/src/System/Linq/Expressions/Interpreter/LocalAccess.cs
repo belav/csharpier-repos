@@ -32,8 +32,8 @@ namespace System.Linq.Expressions.Interpreter
         )
         {
             return cookie == null
-              ? InstructionName + "(" + _index + ")"
-              : InstructionName + "(" + cookie + ": " + _index + ")";
+                ? InstructionName + "(" + _index + ")"
+                : InstructionName + "(" + cookie + ": " + _index + ")";
         }
     }
 
@@ -350,8 +350,8 @@ namespace System.Linq.Expressions.Interpreter
                 try
                 {
                     frame.Data[_index] = _type.IsNullableType()
-                      ? Activator.CreateInstance(_type)
-                      : RuntimeHelpers.GetUninitializedObject(_type);
+                        ? Activator.CreateInstance(_type)
+                        : RuntimeHelpers.GetUninitializedObject(_type);
                 }
                 catch (TargetInvocationException e)
                 {
@@ -393,8 +393,8 @@ namespace System.Linq.Expressions.Interpreter
                 try
                 {
                     value = _type.IsNullableType()
-                      ? Activator.CreateInstance(_type)
-                      : RuntimeHelpers.GetUninitializedObject(_type);
+                        ? Activator.CreateInstance(_type)
+                        : RuntimeHelpers.GetUninitializedObject(_type);
                 }
                 catch (TargetInvocationException e)
                 {

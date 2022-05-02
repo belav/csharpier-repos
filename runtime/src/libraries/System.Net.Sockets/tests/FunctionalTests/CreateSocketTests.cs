@@ -198,16 +198,16 @@ namespace System.Net.Sockets.Tests
                                             ? listener.AcceptAsync().GetAwaiter().GetResult()
                                             : acceptApi == 2
                                                 ? Task.Factory
-                                                  .FromAsync(
-                                                      listener.BeginAccept,
-                                                      listener.EndAccept,
-                                                      null
-                                                  )
-                                                  .GetAwaiter()
-                                                  .GetResult()
+                                                    .FromAsync(
+                                                        listener.BeginAccept,
+                                                        listener.EndAccept,
+                                                        null
+                                                    )
+                                                    .GetAwaiter()
+                                                    .GetResult()
                                                 : throw new Exception(
-                                                      $"Unexpected {nameof(acceptApi)}: {acceptApi}"
-                                                  );
+                                                    $"Unexpected {nameof(acceptApi)}: {acceptApi}"
+                                                );
 
                                 // Get streams for the client and server, and create a pipe that we'll use
                                 // to communicate with a child process.
@@ -503,8 +503,8 @@ namespace System.Net.Sockets.Tests
             listener.Bind(
                 new IPEndPoint(
                     addressFamily == AddressFamily.InterNetwork
-                      ? IPAddress.Loopback
-                      : IPAddress.IPv6Loopback,
+                        ? IPAddress.Loopback
+                        : IPAddress.IPv6Loopback,
                     0
                 )
             );
@@ -583,8 +583,8 @@ namespace System.Net.Sockets.Tests
 
                         using var listenerCopy = new Socket(
                             shareSafeHandle
-                              ? listener.SafeHandle
-                              : new SafeSocketHandle(listener.Handle, ownsHandle: false)
+                                ? listener.SafeHandle
+                                : new SafeSocketHandle(listener.Handle, ownsHandle: false)
                         );
                         Assert.False(listenerCopy.Connected);
                         // This will throw if _isListening is set internally. (before reaching any real code)

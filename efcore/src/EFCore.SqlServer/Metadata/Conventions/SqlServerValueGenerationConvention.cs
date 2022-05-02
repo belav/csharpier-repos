@@ -181,8 +181,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     entityType.GetPeriodStartPropertyName() == property.Name
                     || entityType.GetPeriodEndPropertyName() == property.Name
                 )
-              ? ValueGenerated.OnAddOrUpdate
-              : null;
+                ? ValueGenerated.OnAddOrUpdate
+                : null;
         }
     }
 }

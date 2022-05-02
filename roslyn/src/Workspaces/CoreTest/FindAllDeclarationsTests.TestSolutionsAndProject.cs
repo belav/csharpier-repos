@@ -169,59 +169,59 @@ namespace Microsoft.CodeAnalysis.UnitTests
             solutionKind switch
             {
                 SolutionKind.SingleClass
-                  => CreateWorkspaceWithSingleProjectSolution(
-                      testHost,
-                      new[] { SingleClass },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithSingleProjectSolution(
+                        testHost,
+                        new[] { SingleClass },
+                        out solution
+                    ),
                 SolutionKind.SingleClassWithSingleMethod
-                  => CreateWorkspaceWithSingleProjectSolution(
-                      testHost,
-                      new[] { SingleClassWithSingleMethod },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithSingleProjectSolution(
+                        testHost,
+                        new[] { SingleClassWithSingleMethod },
+                        out solution
+                    ),
                 SolutionKind.SingleClassWithSingleProperty
-                  => CreateWorkspaceWithSingleProjectSolution(
-                      testHost,
-                      new[] { SingleClassWithSingleProperty },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithSingleProjectSolution(
+                        testHost,
+                        new[] { SingleClassWithSingleProperty },
+                        out solution
+                    ),
                 SolutionKind.SingleClassWithSingleField
-                  => CreateWorkspaceWithSingleProjectSolution(
-                      testHost,
-                      new[] { SingleClassWithSingleField },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithSingleProjectSolution(
+                        testHost,
+                        new[] { SingleClassWithSingleField },
+                        out solution
+                    ),
                 SolutionKind.TwoProjectsEachWithASingleClassWithSingleMethod
-                  => CreateWorkspaceWithMultipleProjectSolution(
-                      testHost,
-                      new[] { SingleClassWithSingleMethod, SingleClassWithSingleMethod },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithMultipleProjectSolution(
+                        testHost,
+                        new[] { SingleClassWithSingleMethod, SingleClassWithSingleMethod },
+                        out solution
+                    ),
                 SolutionKind.TwoProjectsEachWithASingleClassWithSingleProperty
-                  => CreateWorkspaceWithMultipleProjectSolution(
-                      testHost,
-                      new[] { SingleClassWithSingleProperty, SingleClassWithSingleProperty },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithMultipleProjectSolution(
+                        testHost,
+                        new[] { SingleClassWithSingleProperty, SingleClassWithSingleProperty },
+                        out solution
+                    ),
                 SolutionKind.TwoProjectsEachWithASingleClassWithSingleField
-                  => CreateWorkspaceWithMultipleProjectSolution(
-                      testHost,
-                      new[] { SingleClassWithSingleField, SingleClassWithSingleField },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithMultipleProjectSolution(
+                        testHost,
+                        new[] { SingleClassWithSingleField, SingleClassWithSingleField },
+                        out solution
+                    ),
                 SolutionKind.NestedClass
-                  => CreateWorkspaceWithSingleProjectSolution(
-                      testHost,
-                      new[] { NestedClass },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithSingleProjectSolution(
+                        testHost,
+                        new[] { NestedClass },
+                        out solution
+                    ),
                 SolutionKind.TwoNamespacesWithIdenticalClasses
-                  => CreateWorkspaceWithSingleProjectSolution(
-                      testHost,
-                      new[] { Namespace1, Namespace2 },
-                      out solution
-                  ),
+                    => CreateWorkspaceWithSingleProjectSolution(
+                        testHost,
+                        new[] { Namespace1, Namespace2 },
+                        out solution
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(solutionKind),
             };
 

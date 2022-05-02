@@ -138,8 +138,8 @@ namespace System.Net.Http
             : this(
                 method,
                 string.IsNullOrEmpty(requestUri)
-                  ? null
-                  : new Uri(requestUri, UriKind.RelativeOrAbsolute)
+                    ? null
+                    : new Uri(requestUri, UriKind.RelativeOrAbsolute)
             ) { }
 
         public override string ToString()

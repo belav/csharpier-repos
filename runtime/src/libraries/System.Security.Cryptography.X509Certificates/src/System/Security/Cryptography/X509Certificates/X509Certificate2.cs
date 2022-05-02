@@ -1000,37 +1000,37 @@ namespace System.Security.Cryptography.X509Certificates
                 return keyAlgorithm switch
                 {
                     Oids.Rsa
-                      => ExtractKeyFromPem<RSA>(
-                          keyPem,
-                          s_RsaPublicKeyPrivateKeyLabels,
-                          RSA.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromPem<RSA>(
+                            keyPem,
+                            s_RsaPublicKeyPrivateKeyLabels,
+                            RSA.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     Oids.Dsa when Helpers.IsDSASupported
-                      => ExtractKeyFromPem<DSA>(
-                          keyPem,
-                          s_DsaPublicKeyPrivateKeyLabels,
-                          DSA.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromPem<DSA>(
+                            keyPem,
+                            s_DsaPublicKeyPrivateKeyLabels,
+                            DSA.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     Oids.EcPublicKey when IsECDsa(certificate)
-                      => ExtractKeyFromPem<ECDsa>(
-                          keyPem,
-                          s_EcPublicKeyPrivateKeyLabels,
-                          ECDsa.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromPem<ECDsa>(
+                            keyPem,
+                            s_EcPublicKeyPrivateKeyLabels,
+                            ECDsa.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     Oids.EcPublicKey when IsECDiffieHellman(certificate)
-                      => ExtractKeyFromPem<ECDiffieHellman>(
-                          keyPem,
-                          s_EcPublicKeyPrivateKeyLabels,
-                          ECDiffieHellman.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromPem<ECDiffieHellman>(
+                            keyPem,
+                            s_EcPublicKeyPrivateKeyLabels,
+                            ECDiffieHellman.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     _
-                      => throw new CryptographicException(
-                          SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)
-                      ),
+                        => throw new CryptographicException(
+                            SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)
+                        ),
                 };
             }
         }
@@ -1091,37 +1091,37 @@ namespace System.Security.Cryptography.X509Certificates
                 return keyAlgorithm switch
                 {
                     Oids.Rsa
-                      => ExtractKeyFromEncryptedPem<RSA>(
-                          keyPem,
-                          password,
-                          RSA.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromEncryptedPem<RSA>(
+                            keyPem,
+                            password,
+                            RSA.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     Oids.Dsa when Helpers.IsDSASupported
-                      => ExtractKeyFromEncryptedPem<DSA>(
-                          keyPem,
-                          password,
-                          DSA.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromEncryptedPem<DSA>(
+                            keyPem,
+                            password,
+                            DSA.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     Oids.EcPublicKey when IsECDsa(certificate)
-                      => ExtractKeyFromEncryptedPem<ECDsa>(
-                          keyPem,
-                          password,
-                          ECDsa.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromEncryptedPem<ECDsa>(
+                            keyPem,
+                            password,
+                            ECDsa.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     Oids.EcPublicKey when IsECDiffieHellman(certificate)
-                      => ExtractKeyFromEncryptedPem<ECDiffieHellman>(
-                          keyPem,
-                          password,
-                          ECDiffieHellman.Create,
-                          certificate.CopyWithPrivateKey
-                      ),
+                        => ExtractKeyFromEncryptedPem<ECDiffieHellman>(
+                            keyPem,
+                            password,
+                            ECDiffieHellman.Create,
+                            certificate.CopyWithPrivateKey
+                        ),
                     _
-                      => throw new CryptographicException(
-                          SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)
-                      ),
+                        => throw new CryptographicException(
+                            SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm)
+                        ),
                 };
             }
         }
@@ -1368,9 +1368,9 @@ namespace System.Security.Cryptography.X509Certificates
             oid.Value switch
             {
                 Oids.BasicConstraints
-                  => X509Pal.Instance.SupportsLegacyBasicConstraintsExtension
-                      ? new X509BasicConstraintsExtension()
-                      : null,
+                    => X509Pal.Instance.SupportsLegacyBasicConstraintsExtension
+                        ? new X509BasicConstraintsExtension()
+                        : null,
                 Oids.BasicConstraints2 => new X509BasicConstraintsExtension(),
                 Oids.KeyUsage => new X509KeyUsageExtension(),
                 Oids.EnhancedKeyUsage => new X509EnhancedKeyUsageExtension(),

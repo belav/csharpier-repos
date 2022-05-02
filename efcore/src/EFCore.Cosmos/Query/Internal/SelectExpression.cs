@@ -187,10 +187,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             return _partitionKeyValue switch
             {
                 ConstantExpression constantExpression
-                  => GetString(_partitionKeyValueConverter, constantExpression.Value),
+                    => GetString(_partitionKeyValueConverter, constantExpression.Value),
                 ParameterExpression parameterExpression
                     when parameterValues.TryGetValue(parameterExpression.Name, out var value)
-                  => GetString(_partitionKeyValueConverter, value),
+                    => GetString(_partitionKeyValueConverter, value),
                 _ => null
             };
 
@@ -335,12 +335,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 Predicate == null
                     ? expression
                     : new SqlBinaryExpression(
-                          ExpressionType.AndAlso,
-                          Predicate,
-                          expression,
-                          typeof(bool),
-                          expression.TypeMapping
-                      );
+                        ExpressionType.AndAlso,
+                        Predicate,
+                        expression,
+                        typeof(bool),
+                        expression.TypeMapping
+                    );
         }
 
         /// <summary>

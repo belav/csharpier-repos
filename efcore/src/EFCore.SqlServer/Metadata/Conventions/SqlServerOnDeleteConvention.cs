@@ -19,7 +19,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class SqlServerOnDeleteConvention
         : CascadeDeleteConvention,
-          ISkipNavigationForeignKeyChangedConvention
+            ISkipNavigationForeignKeyChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="SqlServerOnDeleteConvention" />.

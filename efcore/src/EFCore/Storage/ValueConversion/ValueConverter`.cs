@@ -83,8 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             var compiled = convertExpression.Compile();
 
             return convertsNulls
-              ? v => compiled((TIn)v!)
-              : v => v == null ? null : compiled(Sanitize<TIn>(v));
+                ? v => compiled((TIn)v!)
+                : v => v == null ? null : compiled(Sanitize<TIn>(v));
         }
 
         private static T Sanitize<T>(object value)

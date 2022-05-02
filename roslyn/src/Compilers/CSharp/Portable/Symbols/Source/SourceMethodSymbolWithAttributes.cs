@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class SourceMethodSymbolWithAttributes
         : SourceMethodSymbol,
-          IAttributeTargetSymbol
+            IAttributeTargetSymbol
     {
         private CustomAttributesBag<CSharpAttributeData> _lazyCustomAttributesBag;
         private CustomAttributesBag<CSharpAttributeData> _lazyReturnTypeCustomAttributesBag;
@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 case LocalFunctionStatementSyntax localFunction:
                     return (CSharpSyntaxNode?)localFunction.Body ?? localFunction.ExpressionBody;
                 case CompilationUnitSyntax _
-                      when this is SynthesizedSimpleProgramEntryPointSymbol entryPoint:
+                when this is SynthesizedSimpleProgramEntryPointSymbol entryPoint:
                     return (CSharpSyntaxNode)entryPoint.ReturnTypeSyntax;
                 case RecordDeclarationSyntax recordDecl:
                     Debug.Assert(recordDecl.IsKind(SyntaxKind.RecordDeclaration));
@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return (this.syntaxReferenceOpt == null)
-                  ? null
-                  : (CSharpSyntaxNode)this.syntaxReferenceOpt.GetSyntax();
+                    ? null
+                    : (CSharpSyntaxNode)this.syntaxReferenceOpt.GetSyntax();
             }
         }
 
@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return (this.syntaxReferenceOpt == null)
-                  ? ImmutableArray<SyntaxReference>.Empty
-                  : ImmutableArray.Create(this.syntaxReferenceOpt);
+                    ? ImmutableArray<SyntaxReference>.Empty
+                    : ImmutableArray.Create(this.syntaxReferenceOpt);
             }
         }
 
@@ -523,8 +523,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
             Debug.Assert(!forceComplete);
             return earlyData?.UnmanagedCallersOnlyAttributePresent == true
-              ? UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound
-              : null;
+                ? UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound
+                : null;
 
 #if DEBUG // Can remove ifdefs and replace with Conditional after https://github.com/dotnet/roslyn/issues/47463 is fixed
             static void verifyDataConsistent(
@@ -1495,11 +1495,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         var returnTypeSyntax = this.SyntaxNode switch
                         {
                             MethodDeclarationSyntax { ReturnType: var methodReturnType }
-                              => methodReturnType,
+                                => methodReturnType,
                             LocalFunctionStatementSyntax { ReturnType: var localReturnType }
-                              => localReturnType,
+                                => localReturnType,
                             ParenthesizedLambdaExpressionSyntax { ReturnType: { } lambdaReturnType }
-                              => lambdaReturnType,
+                                => lambdaReturnType,
                             var unexpected => throw ExceptionUtilities.UnexpectedValue(unexpected)
                         };
 

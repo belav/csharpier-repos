@@ -68,8 +68,8 @@ namespace System.Threading
 
                 return new WaitableObject(
                     resetMode == EventResetMode.ManualReset
-                      ? WaitableObjectType.ManualResetEvent
-                      : WaitableObjectType.AutoResetEvent,
+                        ? WaitableObjectType.ManualResetEvent
+                        : WaitableObjectType.AutoResetEvent,
                     initiallySignaled ? 1 : 0,
                     1,
                     null,

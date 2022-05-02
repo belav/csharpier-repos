@@ -12,8 +12,8 @@ namespace System
             "System.Resources.UseSystemResourceKeys",
             out bool usingResourceKeys
         )
-          ? usingResourceKeys
-          : false;
+            ? usingResourceKeys
+            : false;
 
         // This method is used to decide if we need to append the exception message parameters to the message when calling SR.Format.
         // by default it returns the value of System.Resources.UseSystemResourceKeys AppContext switch or false if not specified.
@@ -48,8 +48,8 @@ namespace System
             string resourceString = GetResourceString(resourceKey);
 
             return resourceKey == resourceString || resourceString == null
-              ? defaultString
-              : resourceString;
+                ? defaultString
+                : resourceString;
         }
 
         internal static string Format(string resourceFormat, object? p1)

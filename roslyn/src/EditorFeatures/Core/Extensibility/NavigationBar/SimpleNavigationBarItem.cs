@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     internal sealed class SimpleNavigationBarItem
         : NavigationBarItem,
-          IEquatable<SimpleNavigationBarItem>
+            IEquatable<SimpleNavigationBarItem>
     {
         public SimpleNavigationBarItem(
             ITextVersion textVersion,

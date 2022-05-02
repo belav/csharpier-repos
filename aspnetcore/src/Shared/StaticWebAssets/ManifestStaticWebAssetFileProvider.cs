@@ -14,8 +14,8 @@ namespace Microsoft.AspNetCore.StaticWebAssets;
 internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
 {
     private static readonly StringComparison _fsComparison = OperatingSystem.IsWindows()
-      ? StringComparison.OrdinalIgnoreCase
-      : StringComparison.Ordinal;
+        ? StringComparison.OrdinalIgnoreCase
+        : StringComparison.Ordinal;
 
     private static readonly IEqualityComparer<IFileInfo> _nameComparer = new FileNameComparer();
 
@@ -115,8 +115,8 @@ internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
                     foreach (var result in contentRoot.GetDirectoryContents(candidateDirectoryPath))
                     {
                         var fileCandidate = string.IsNullOrEmpty(candidateDirectoryPath)
-                          ? result.Name
-                          : $"{candidateDirectoryPath}/{result.Name}";
+                            ? result.Name
+                            : $"{candidateDirectoryPath}/{result.Name}";
                         if (
                             result.Exists
                             && (result.IsDirectory || matcher.Match(fileCandidate).HasMatches)
@@ -162,8 +162,8 @@ internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
 
                     files.Add(
                         string.Equals(child.Key, match.Path, _fsComparison)
-                          ? file
-                          :
+                            ? file
+                            :
                             // This means that this file was mapped, there is a chance that we added it to the list
                             // of files by one of the patterns, so we need to replace it with the mapped file.
                             new StaticWebAssetsFileInfo(child.Key, file)
@@ -345,8 +345,8 @@ internal sealed class ManifestStaticWebAssetFileProvider : IFileProvider
     internal sealed class StaticWebAssetManifest
     {
         internal static readonly StringComparer PathComparer = OperatingSystem.IsWindows()
-          ? StringComparer.OrdinalIgnoreCase
-          : StringComparer.Ordinal;
+            ? StringComparer.OrdinalIgnoreCase
+            : StringComparer.Ordinal;
 
         public string[] ContentRoots { get; set; } = Array.Empty<string>();
 

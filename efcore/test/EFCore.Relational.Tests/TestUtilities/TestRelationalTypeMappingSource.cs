@@ -263,8 +263,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                     return
                         storeTypeName != null
                         && !mapping.StoreType.Equals(storeTypeName, StringComparison.Ordinal)
-                      ? mapping.Clone(storeTypeName, mapping.Size)
-                      : mapping;
+                        ? mapping.Clone(storeTypeName, mapping.Size)
+                        : mapping;
                 }
             }
 
@@ -272,8 +272,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 storeTypeName != null
                 && _simpleNameMappings.TryGetValue(storeTypeName, out var mappingFromName)
                 && (clrType == null || mappingFromName.ClrType == clrType)
-              ? mappingFromName
-              : null;
+                ? mappingFromName
+                : null;
         }
 
         protected override string ParseStoreTypeName(

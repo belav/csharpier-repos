@@ -1637,12 +1637,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // TODO: uncomment when fixing https://github.com/dotnet/roslyn/issues/5325
                 //return sourceCodeKind == SourceCodeKind.Regular ? ".cs" : ".csx";
                 LanguageNames.CSharp
-                  => ".cs",
+                    => ".cs",
 
                 // TODO: uncomment when fixing https://github.com/dotnet/roslyn/issues/5325
                 //return sourceCodeKind == SourceCodeKind.Regular ? ".vb" : ".vbx";
                 LanguageNames.VisualBasic
-                  => ".vb",
+                    => ".vb",
                 _ => throw new InvalidOperationException(),
             };
         }

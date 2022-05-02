@@ -8,15 +8,15 @@ namespace System.Collections.Immutable
 {
     public partial interface IImmutableDictionary<TKey, TValue>
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.IEnumerable
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.IEnumerable
     {
         System.Collections.Immutable.IImmutableDictionary<TKey, TValue> Add(TKey key, TValue value);
         System.Collections.Immutable.IImmutableDictionary<TKey, TValue> AddRange(
@@ -46,9 +46,9 @@ namespace System.Collections.Immutable
 
     public partial interface IImmutableList<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.IReadOnlyList<T>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.IReadOnlyList<T>,
+            System.Collections.IEnumerable
     {
         System.Collections.Immutable.IImmutableList<T> Add(T value);
         System.Collections.Immutable.IImmutableList<T> AddRange(
@@ -93,7 +93,7 @@ namespace System.Collections.Immutable
 
     public partial interface IImmutableQueue<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         bool IsEmpty { get; }
         System.Collections.Immutable.IImmutableQueue<T> Clear();
@@ -104,8 +104,8 @@ namespace System.Collections.Immutable
 
     public partial interface IImmutableSet<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.IEnumerable
     {
         System.Collections.Immutable.IImmutableSet<T> Add(T value);
         System.Collections.Immutable.IImmutableSet<T> Clear();
@@ -134,7 +134,7 @@ namespace System.Collections.Immutable
 
     public partial interface IImmutableStack<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         bool IsEmpty { get; }
         System.Collections.Immutable.IImmutableStack<T> Clear();
@@ -328,17 +328,17 @@ namespace System.Collections.Immutable
 
     public readonly partial struct ImmutableArray<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.IReadOnlyList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Collections.Immutable.IImmutableList<T>,
-          System.Collections.IStructuralComparable,
-          System.Collections.IStructuralEquatable,
-          System.IEquatable<System.Collections.Immutable.ImmutableArray<T>>
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.IReadOnlyList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Collections.Immutable.IImmutableList<T>,
+            System.Collections.IStructuralComparable,
+            System.Collections.IStructuralEquatable,
+            System.IEquatable<System.Collections.Immutable.ImmutableArray<T>>
     {
         private readonly T[] array;
         private readonly object _dummy;
@@ -899,11 +899,11 @@ namespace System.Collections.Immutable
 
         public sealed partial class Builder
             : System.Collections.Generic.ICollection<T>,
-              System.Collections.Generic.IEnumerable<T>,
-              System.Collections.Generic.IList<T>,
-              System.Collections.Generic.IReadOnlyCollection<T>,
-              System.Collections.Generic.IReadOnlyList<T>,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<T>,
+                System.Collections.Generic.IList<T>,
+                System.Collections.Generic.IReadOnlyCollection<T>,
+                System.Collections.Generic.IReadOnlyList<T>,
+                System.Collections.IEnumerable
         {
             internal Builder() { }
 
@@ -1332,23 +1332,23 @@ namespace System.Collections.Immutable
 
     public sealed partial class ImmutableDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IDictionary<TKey, TValue>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable,
-          System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IDictionary<TKey, TValue>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.ICollection,
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable,
+            System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
     {
         internal ImmutableDictionary() { }
 
@@ -1689,22 +1689,22 @@ namespace System.Collections.Immutable
 
         public sealed partial class Builder
             : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.Generic.IDictionary<TKey, TValue>,
-              System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-              System.Collections.ICollection,
-              System.Collections.IDictionary,
-              System.Collections.IEnumerable
+                    TKey,
+                    TValue
+                >>,
+                System.Collections.Generic.IDictionary<TKey, TValue>,
+                System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                        TKey,
+                        TValue
+                    >>,
+                System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                        TKey,
+                        TValue
+                    >>,
+                System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+                System.Collections.ICollection,
+                System.Collections.IDictionary,
+                System.Collections.IEnumerable
         {
             internal Builder() { }
 
@@ -1905,11 +1905,11 @@ namespace System.Collections.Immutable
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                    TKey,
+                    TValue
+                >>,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2026,22 +2026,22 @@ namespace System.Collections.Immutable
 #if NET5_0_OR_GREATER
     public sealed partial class ImmutableHashSet<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.ISet<T>,
-          System.Collections.Generic.IReadOnlySet<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.Immutable.IImmutableSet<T>
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.ISet<T>,
+            System.Collections.Generic.IReadOnlySet<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.Immutable.IImmutableSet<T>
 #else
     public sealed partial class ImmutableHashSet<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.ISet<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.Immutable.IImmutableSet<T>
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.ISet<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.Immutable.IImmutableSet<T>
 #endif
     {
         internal ImmutableHashSet() { }
@@ -2265,10 +2265,10 @@ namespace System.Collections.Immutable
 
         public sealed partial class Builder
             : System.Collections.Generic.ICollection<T>,
-              System.Collections.Generic.IEnumerable<T>,
-              System.Collections.Generic.IReadOnlyCollection<T>,
-              System.Collections.Generic.ISet<T>,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<T>,
+                System.Collections.Generic.IReadOnlyCollection<T>,
+                System.Collections.Generic.ISet<T>,
+                System.Collections.IEnumerable
         {
             internal Builder() { }
 
@@ -2373,8 +2373,8 @@ namespace System.Collections.Immutable
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2709,14 +2709,14 @@ namespace System.Collections.Immutable
 
     public sealed partial class ImmutableList<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.IReadOnlyList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Collections.Immutable.IImmutableList<T>
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.IReadOnlyList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Collections.Immutable.IImmutableList<T>
     {
         internal ImmutableList() { }
 
@@ -3172,13 +3172,13 @@ namespace System.Collections.Immutable
 
         public sealed partial class Builder
             : System.Collections.Generic.ICollection<T>,
-              System.Collections.Generic.IEnumerable<T>,
-              System.Collections.Generic.IList<T>,
-              System.Collections.Generic.IReadOnlyCollection<T>,
-              System.Collections.Generic.IReadOnlyList<T>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable,
-              System.Collections.IList
+                System.Collections.Generic.IEnumerable<T>,
+                System.Collections.Generic.IList<T>,
+                System.Collections.Generic.IReadOnlyCollection<T>,
+                System.Collections.Generic.IReadOnlyList<T>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable,
+                System.Collections.IList
         {
             internal Builder() { }
 
@@ -3459,8 +3459,8 @@ namespace System.Collections.Immutable
         )]
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -3519,8 +3519,8 @@ namespace System.Collections.Immutable
 
     public sealed partial class ImmutableQueue<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable,
-          System.Collections.Immutable.IImmutableQueue<T>
+            System.Collections.IEnumerable,
+            System.Collections.Immutable.IImmutableQueue<T>
     {
         internal ImmutableQueue() { }
 
@@ -3811,23 +3811,23 @@ namespace System.Collections.Immutable
 
     public sealed partial class ImmutableSortedDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IDictionary<TKey, TValue>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable,
-          System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IDictionary<TKey, TValue>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.ICollection,
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable,
+            System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
     {
         internal ImmutableSortedDictionary() { }
 
@@ -4181,22 +4181,22 @@ namespace System.Collections.Immutable
 
         public sealed partial class Builder
             : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.Generic.IDictionary<TKey, TValue>,
-              System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-              System.Collections.ICollection,
-              System.Collections.IDictionary,
-              System.Collections.IEnumerable
+                    TKey,
+                    TValue
+                >>,
+                System.Collections.Generic.IDictionary<TKey, TValue>,
+                System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                        TKey,
+                        TValue
+                    >>,
+                System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                        TKey,
+                        TValue
+                    >>,
+                System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+                System.Collections.ICollection,
+                System.Collections.IDictionary,
+                System.Collections.IEnumerable
         {
             internal Builder() { }
 
@@ -4408,11 +4408,11 @@ namespace System.Collections.Immutable
         )]
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
-                      TKey,
-                      TValue
-                  >>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                    TKey,
+                    TValue
+                >>,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -4529,28 +4529,28 @@ namespace System.Collections.Immutable
 #if NET5_0_OR_GREATER
     public sealed partial class ImmutableSortedSet<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.IReadOnlyList<T>,
-          System.Collections.Generic.ISet<T>,
-          System.Collections.Generic.IReadOnlySet<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Collections.Immutable.IImmutableSet<T>
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.IReadOnlyList<T>,
+            System.Collections.Generic.ISet<T>,
+            System.Collections.Generic.IReadOnlySet<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Collections.Immutable.IImmutableSet<T>
 #else
     public sealed partial class ImmutableSortedSet<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.Generic.IReadOnlyList<T>,
-          System.Collections.Generic.ISet<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList,
-          System.Collections.Immutable.IImmutableSet<T>
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.Generic.IReadOnlyList<T>,
+            System.Collections.Generic.ISet<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList,
+            System.Collections.Immutable.IImmutableSet<T>
 #endif
     {
         internal ImmutableSortedSet() { }
@@ -4846,11 +4846,11 @@ namespace System.Collections.Immutable
 
         public sealed partial class Builder
             : System.Collections.Generic.ICollection<T>,
-              System.Collections.Generic.IEnumerable<T>,
-              System.Collections.Generic.IReadOnlyCollection<T>,
-              System.Collections.Generic.ISet<T>,
-              System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.Generic.IEnumerable<T>,
+                System.Collections.Generic.IReadOnlyCollection<T>,
+                System.Collections.Generic.ISet<T>,
+                System.Collections.ICollection,
+                System.Collections.IEnumerable
         {
             internal Builder() { }
 
@@ -4990,8 +4990,8 @@ namespace System.Collections.Immutable
         )]
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<T>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -5050,8 +5050,8 @@ namespace System.Collections.Immutable
 
     public sealed partial class ImmutableStack<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable,
-          System.Collections.Immutable.IImmutableStack<T>
+            System.Collections.IEnumerable,
+            System.Collections.Immutable.IImmutableStack<T>
     {
         internal ImmutableStack() { }
 

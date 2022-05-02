@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
     [IntentProvider(WellKnownIntents.AddConstructorParameter, LanguageNames.CSharp)]
     internal partial class AddConstructorParametersFromMembersCodeRefactoringProvider
         : AbstractGenerateFromMembersCodeRefactoringProvider,
-          IIntentProvider
+            IIntentProvider
     {
         [ImportingConstructor]
         [SuppressMessage(

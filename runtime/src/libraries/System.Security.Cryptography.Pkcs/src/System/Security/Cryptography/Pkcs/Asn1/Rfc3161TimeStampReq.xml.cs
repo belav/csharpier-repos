@@ -181,8 +181,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 tmpSpan = sequenceReader.ReadIntegerBytes();
                 decoded.Nonce = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
 
             if (

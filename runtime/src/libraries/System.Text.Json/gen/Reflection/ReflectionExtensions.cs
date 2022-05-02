@@ -26,8 +26,8 @@ namespace System.Text.Json.Reflection
         )
         {
             return index < customAttributeData.ConstructorArguments.Count
-              ? (TValue)customAttributeData.ConstructorArguments[index].Value!
-              : default!;
+                ? (TValue)customAttributeData.ConstructorArguments[index].Value!
+                : default!;
         }
 
         public static bool IsInitOnly(this MethodInfo method)

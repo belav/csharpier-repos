@@ -25,9 +25,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class DbFunction
         : ConventionAnnotatable,
-          IMutableDbFunction,
-          IConventionDbFunction,
-          IRuntimeDbFunction
+            IMutableDbFunction,
+            IConventionDbFunction,
+            IRuntimeDbFunction
     {
         private readonly List<DbFunctionParameter> _parameters;
         private string? _schema;
@@ -131,8 +131,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 parameters == null
                     ? new List<DbFunctionParameter>()
                     : parameters
-                      .Select(p => new DbFunctionParameter(this, p.Name, p.Type))
-                      .ToList();
+                        .Select(p => new DbFunctionParameter(this, p.Name, p.Type))
+                        .ToList();
 
             if (IsScalar)
             {
@@ -576,22 +576,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             get =>
                 IsReadOnly && IsScalar
                     ? NonCapturingLazyInitializer.EnsureInitialized(
-                          ref _typeMapping,
-                          this,
-                          static dbFunction =>
-                          {
-                              var relationalTypeMappingSource = (IRelationalTypeMappingSource)
-                                  ((IModel)dbFunction.Model)
-                                      .GetModelDependencies()
-                                      .TypeMappingSource;
-                              return !string.IsNullOrEmpty(dbFunction._storeType)
+                        ref _typeMapping,
+                        this,
+                        static dbFunction =>
+                        {
+                            var relationalTypeMappingSource = (IRelationalTypeMappingSource)
+                                ((IModel)dbFunction.Model).GetModelDependencies().TypeMappingSource;
+                            return !string.IsNullOrEmpty(dbFunction._storeType)
                                 ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
                                 : relationalTypeMappingSource.FindMapping(
-                                      dbFunction.ReturnType,
-                                      (IModel)dbFunction.Model
-                                  )!;
-                          }
-                      )
+                                    dbFunction.ReturnType,
+                                    (IModel)dbFunction.Model
+                                )!;
+                        }
+                    )
                     : _typeMapping;
             set => SetTypeMapping(value, ConfigurationSource.Explicit);
         }
@@ -780,8 +778,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetName(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -790,8 +788,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetSchema(
                 schema,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -800,8 +798,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsBuiltIn(
                 builtIn,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -810,8 +808,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsNullable(
                 nullable,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -820,8 +818,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetStoreType(
                 storeType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -833,8 +831,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetTypeMapping(
                 returnTypeMapping,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -846,8 +844,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetTranslation(
                 translation,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />

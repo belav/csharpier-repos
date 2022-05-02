@@ -537,8 +537,8 @@ namespace Microsoft.CodeAnalysis
             var newProjectIds = ProjectIds.ToImmutableArray().Add(projectId);
             var newStateMap = _projectIdToProjectStateMap.Add(projectId, projectState);
             var newLanguages = RemoteSupportedLanguages.IsSupported(projectState.Language)
-              ? _remoteSupportedLanguages.Add(projectState.Language)
-              : _remoteSupportedLanguages;
+                ? _remoteSupportedLanguages.Add(projectState.Language)
+                : _remoteSupportedLanguages;
 
             var newDependencyGraph = _dependencyGraph
                 .WithAdditionalProject(projectId)
@@ -1882,11 +1882,11 @@ namespace Microsoft.CodeAnalysis
             return ForkProject(
                 newProject,
                 newProject.CompilationOptions != null
-                  ? new CompilationAndGeneratorDriverTranslationAction.ProjectCompilationOptionsAction(
+                    ? new CompilationAndGeneratorDriverTranslationAction.ProjectCompilationOptionsAction(
                         newProject,
                         isAnalyzerConfigChange: true
                     )
-                  : null
+                    : null
             );
         }
 
@@ -1956,8 +1956,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             return _filePathToDocumentIdsMap.TryGetValue(filePath!, out var documentIds)
-              ? documentIds
-              : ImmutableArray<DocumentId>.Empty;
+                ? documentIds
+                : ImmutableArray<DocumentId>.Empty;
         }
 
         private static ProjectDependencyGraph CreateDependencyGraph(
@@ -2251,10 +2251,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return project.SupportsCompilation
-              ? GetCompilationTracker(project.Id)
-                .GetCompilationAsync(this, cancellationToken)
-                .AsNullable()
-              : SpecializedTasks.Null<Compilation>();
+                ? GetCompilationTracker(project.Id)
+                    .GetCompilationAsync(this, cancellationToken)
+                    .AsNullable()
+                : SpecializedTasks.Null<Compilation>();
         }
 
         /// <summary>
@@ -2268,11 +2268,11 @@ namespace Microsoft.CodeAnalysis
             // return HasAllInformation when compilation is not supported.
             // regardless whether project support compilation or not, if projectInfo is not complete, we can't guarantee its reference completeness
             return project.SupportsCompilation
-              ? this.GetCompilationTracker(project.Id)
-                .HasSuccessfullyLoadedAsync(this, cancellationToken)
-              : project.HasAllInformation
-                  ? SpecializedTasks.True
-                  : SpecializedTasks.False;
+                ? this.GetCompilationTracker(project.Id)
+                    .HasSuccessfullyLoadedAsync(this, cancellationToken)
+                : project.HasAllInformation
+                    ? SpecializedTasks.True
+                    : SpecializedTasks.False;
         }
 
         /// <summary>
@@ -2286,9 +2286,9 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return project.SupportsCompilation
-              ? GetCompilationTracker(project.Id)
-                .GetSourceGeneratedDocumentStatesAsync(this, cancellationToken)
-              : new(TextDocumentStates<SourceGeneratedDocumentState>.Empty);
+                ? GetCompilationTracker(project.Id)
+                    .GetSourceGeneratedDocumentStatesAsync(this, cancellationToken)
+                : new(TextDocumentStates<SourceGeneratedDocumentState>.Empty);
         }
 
         /// <summary>

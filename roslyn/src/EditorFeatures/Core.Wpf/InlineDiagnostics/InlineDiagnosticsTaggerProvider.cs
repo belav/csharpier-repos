@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             if (diagnostic.Severity == DiagnosticSeverity.Error)
             {
                 return diagnostic.CustomTags.Contains(WellKnownDiagnosticTags.EditAndContinue)
-                  ? EditAndContinueErrorTypeDefinition.Name
-                  : PredefinedErrorTypeNames.SyntaxError;
+                    ? EditAndContinueErrorTypeDefinition.Name
+                    : PredefinedErrorTypeNames.SyntaxError;
             }
             else if (diagnostic.Severity == DiagnosticSeverity.Warning)
             {

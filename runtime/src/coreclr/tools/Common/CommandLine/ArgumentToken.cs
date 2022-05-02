@@ -73,8 +73,8 @@ namespace Internal.CommandLine
         public override string ToString()
         {
             return HasValue
-              ? string.Format(@"{0}{1}:{2}", Modifier, Name, Value)
-              : string.Format(@"{0}{1}", Modifier, Name);
+                ? string.Format(@"{0}{1}:{2}", Modifier, Name, Value)
+                : string.Format(@"{0}{1}", Modifier, Name);
         }
     }
 }

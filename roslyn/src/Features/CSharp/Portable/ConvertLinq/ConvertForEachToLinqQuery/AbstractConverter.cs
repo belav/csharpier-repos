@@ -48,12 +48,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
         )
         {
             return convertToQuery
-              ? CreateQueryExpression(
+                ? CreateQueryExpression(
                     selectExpression,
                     leadingTokensForSelect,
                     trailingTokensForSelect
                 )
-              : CreateLinqInvocationOrSimpleExpression(
+                : CreateLinqInvocationOrSimpleExpression(
                     selectExpression,
                     leadingTokensForSelect,
                     trailingTokensForSelect
@@ -156,12 +156,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                         .KeepCommentsAndAddElasticMarkers(),
                     type: forEachStatement.Type.IsVar ? null : forEachStatement.Type,
                     identifier: forEachStatement.Type.IsVar
-                      ? forEachStatement.Identifier.WithPrependedLeadingTrivia(
+                        ? forEachStatement.Identifier.WithPrependedLeadingTrivia(
                             SyntaxNodeOrTokenExtensions
                                 .GetTrivia(forEachStatement.Type.GetFirstToken())
                                 .FilterComments(addElasticMarker: false)
                         )
-                      : forEachStatement.Identifier,
+                        : forEachStatement.Identifier,
                     inKeyword: forEachStatement.InKeyword.KeepCommentsAndAddElasticMarkers(),
                     expression: forEachStatement.Expression
                 )

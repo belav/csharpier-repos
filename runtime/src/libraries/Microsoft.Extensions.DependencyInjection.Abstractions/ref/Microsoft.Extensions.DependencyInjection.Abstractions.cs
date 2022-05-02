@@ -71,8 +71,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public readonly partial struct AsyncServiceScope
         : Microsoft.Extensions.DependencyInjection.IServiceScope,
-          System.IAsyncDisposable,
-          System.IDisposable
+            System.IAsyncDisposable,
+            System.IDisposable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -99,9 +99,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public partial interface IServiceCollection
         : System.Collections.Generic.ICollection<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
-          System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
-          System.Collections.Generic.IList<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
-          System.Collections.IEnumerable { }
+            System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
+            System.Collections.Generic.IList<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
+            System.Collections.IEnumerable { }
 
     public partial interface IServiceProviderFactory<TContainerBuilder>
         where TContainerBuilder : notnull
@@ -139,10 +139,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public partial class ServiceCollection
         : Microsoft.Extensions.DependencyInjection.IServiceCollection,
-          System.Collections.Generic.ICollection<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
-          System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
-          System.Collections.Generic.IList<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.ICollection<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
+            System.Collections.Generic.IEnumerable<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
+            System.Collections.Generic.IList<Microsoft.Extensions.DependencyInjection.ServiceDescriptor>,
+            System.Collections.IEnumerable
     {
         public ServiceCollection() { }
 

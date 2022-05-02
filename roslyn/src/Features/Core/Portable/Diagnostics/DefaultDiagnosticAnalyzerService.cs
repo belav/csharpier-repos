@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     )]
     internal partial class DefaultDiagnosticAnalyzerService
         : IIncrementalAnalyzerProvider,
-          IDiagnosticUpdateSource
+            IDiagnosticUpdateSource
     {
         private readonly DiagnosticAnalyzerInfoCache _analyzerInfoCache;
 
@@ -358,7 +358,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             private class DefaultUpdateArgsId
                 : BuildToolId.Base<int, DocumentId>,
-                  ISupportLiveUpdate
+                    ISupportLiveUpdate
             {
                 private readonly string _workspaceKind;
 

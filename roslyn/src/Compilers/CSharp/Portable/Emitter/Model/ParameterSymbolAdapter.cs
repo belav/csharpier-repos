@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     ParameterSymbol
         :
 #endif
-          Cci.IParameterTypeInformation,
-          Cci.IParameterDefinition
+            Cci.IParameterTypeInformation,
+            Cci.IParameterDefinition
     {
         ImmutableArray<Cci.ICustomModifier> Cci.IParameterTypeInformation.CustomModifiers
         {

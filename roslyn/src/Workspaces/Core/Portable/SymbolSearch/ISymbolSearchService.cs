@@ -110,8 +110,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
     [DataContract]
     internal sealed class PackageWithAssemblyResult
         : PackageResult,
-          IEquatable<PackageWithAssemblyResult?>,
-          IComparable<PackageWithAssemblyResult?>
+            IEquatable<PackageWithAssemblyResult?>,
+            IComparable<PackageWithAssemblyResult?>
     {
         [DataMember(Order = 2)]
         public readonly string? Version;

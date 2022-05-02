@@ -114,7 +114,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <inheritdoc />
         public override string ToString() =>
             _memberChain.Any()
-              ? string.Join(".", _memberChain.Select(mi => mi.Name))
-              : "EmptyProjectionMember";
+                ? string.Join(".", _memberChain.Select(mi => mi.Name))
+                : "EmptyProjectionMember";
     }
 }

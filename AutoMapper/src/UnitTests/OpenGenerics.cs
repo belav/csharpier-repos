@@ -206,10 +206,10 @@ namespace AutoMapper.UnitTests
 
         private class KeyResolver<TKeySource, TValueSource, TKeyDestination>
             : IValueResolver<
-                  KeyValuePair<TKeySource, TValueSource>,
-                  Destination<TKeyDestination, string>,
-                  string
-              >
+                KeyValuePair<TKeySource, TValueSource>,
+                Destination<TKeyDestination, string>,
+                string
+            >
         {
             public string Resolve(
                 KeyValuePair<TKeySource, TValueSource> source,
@@ -221,10 +221,10 @@ namespace AutoMapper.UnitTests
 
         private class ValueResolver<TKeySource, TValueSource, TKeyDestination, TValueDestination>
             : IValueResolver<
-                  KeyValuePair<TKeySource, TValueSource>,
-                  Destination<TKeyDestination, TValueDestination>,
-                  string
-              >
+                KeyValuePair<TKeySource, TValueSource>,
+                Destination<TKeyDestination, TValueDestination>,
+                string
+            >
         {
             public string Resolve(
                 KeyValuePair<TKeySource, TValueSource> source,
@@ -304,11 +304,11 @@ namespace AutoMapper.UnitTests
 
         private class Resolver<TKey, TValue, TDestinatonKey>
             : IMemberValueResolver<
-                  KeyValuePair<TKey, TValue>,
-                  Destination<TDestinatonKey, string>,
-                  int,
-                  string
-              >
+                KeyValuePair<TKey, TValue>,
+                Destination<TDestinatonKey, string>,
+                int,
+                string
+            >
         {
             public string Resolve(
                 KeyValuePair<TKey, TValue> source,
@@ -321,11 +321,11 @@ namespace AutoMapper.UnitTests
 
         private class Resolver<TKey, TValue, TDestinatonKey, TDestinatonValue>
             : IMemberValueResolver<
-                  KeyValuePair<TKey, TValue>,
-                  Destination<TDestinatonKey, TDestinatonValue>,
-                  int,
-                  string
-              >
+                KeyValuePair<TKey, TValue>,
+                Destination<TDestinatonKey, TDestinatonValue>,
+                int,
+                string
+            >
         {
             public string Resolve(
                 KeyValuePair<TKey, TValue> source,

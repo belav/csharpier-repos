@@ -135,8 +135,8 @@ namespace BenchmarksGame
             internal static TreeNode Create(int d)
             {
                 return d == 1
-                  ? new TreeNode(new TreeNode(), new TreeNode())
-                  : new TreeNode(Create(d - 1), Create(d - 1));
+                    ? new TreeNode(new TreeNode(), new TreeNode())
+                    : new TreeNode(Create(d - 1), Create(d - 1));
             }
 
             internal int Check()

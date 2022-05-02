@@ -96,9 +96,7 @@ namespace System.Drawing.Imaging
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDisposeImageAttributes(
-                              new HandleRef(this, nativeImageAttributes)
-                          );
+                        Gdip.GdipDisposeImageAttributes(new HandleRef(this, nativeImageAttributes));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

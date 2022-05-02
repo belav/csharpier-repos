@@ -8,7 +8,7 @@ namespace Microsoft.EntityFrameworkCore
 {
     public class TwoDatabasesSqliteTest
         : TwoDatabasesTestBase,
-          IClassFixture<TwoDatabasesSqliteTest.TwoDatabasesFixture>
+            IClassFixture<TwoDatabasesSqliteTest.TwoDatabasesFixture>
     {
         public TwoDatabasesSqliteTest(TwoDatabasesFixture fixture) : base(fixture) { }
 

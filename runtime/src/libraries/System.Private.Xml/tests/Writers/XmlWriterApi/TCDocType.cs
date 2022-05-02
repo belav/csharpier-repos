@@ -23,10 +23,10 @@ namespace System.Xml.Tests
             }
 
             string exp = utils.IsIndent()
-              ? "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]>"
-                + Environment.NewLine
-                + "<ROOT />"
-              : "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]><ROOT />";
+                ? "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]>"
+                    + Environment.NewLine
+                    + "<ROOT />"
+                : "<!DOCTYPE ROOT PUBLIC \"publicid\" \"sysid\"[<!ENTITY e 'abc'>]><ROOT />";
             Assert.True(utils.CompareString(exp));
         }
 
@@ -42,8 +42,8 @@ namespace System.Xml.Tests
                 w.WriteEndElement();
             }
             string exp = utils.IsIndent()
-              ? "<!DOCTYPE test [<!ENTITY e 'abc'>]>" + Environment.NewLine + "<Root />"
-              : "<!DOCTYPE test [<!ENTITY e 'abc'>]><Root />";
+                ? "<!DOCTYPE test [<!ENTITY e 'abc'>]>" + Environment.NewLine + "<Root />"
+                : "<!DOCTYPE test [<!ENTITY e 'abc'>]><Root />";
             Assert.True(utils.CompareString(exp));
         }
 
@@ -92,8 +92,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                          ? WriteState.Start
-                          : WriteState.Error,
+                            ? WriteState.Start
+                            : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;
@@ -104,8 +104,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                          ? WriteState.Start
-                          : WriteState.Error,
+                            ? WriteState.Start
+                            : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;
@@ -129,8 +129,8 @@ namespace System.Xml.Tests
                 w.WriteEndElement();
             }
             string exp = utils.IsIndent()
-              ? "<!DOCTYPE Root []>]>" + Environment.NewLine + "<Root />"
-              : "<!DOCTYPE Root []>]><Root />";
+                ? "<!DOCTYPE Root []>]>" + Environment.NewLine + "<Root />"
+                : "<!DOCTYPE Root []>]><Root />";
             Assert.True(utils.CompareString(exp));
         }
 

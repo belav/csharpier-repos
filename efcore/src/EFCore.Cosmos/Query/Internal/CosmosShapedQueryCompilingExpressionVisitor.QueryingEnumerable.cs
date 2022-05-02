@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
     {
         private sealed class QueryingEnumerable<T>
             : IEnumerable<T>,
-              IAsyncEnumerable<T>,
-              IQueryingEnumerable
+                IAsyncEnumerable<T>,
+                IQueryingEnumerable
         {
             private readonly CosmosQueryContext _cosmosQueryContext;
             private readonly ISqlExpressionFactory _sqlExpressionFactory;

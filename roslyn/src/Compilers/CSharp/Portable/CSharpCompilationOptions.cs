@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     public sealed class CSharpCompilationOptions
         : CompilationOptions,
-          IEquatable<CSharpCompilationOptions>
+            IEquatable<CSharpCompilationOptions>
     {
         /// <summary>
         /// Allow unsafe regions (i.e. unsafe modifiers on members and unsafe blocks).
@@ -339,8 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal CSharpCompilationOptions WithTopLevelBinderFlags(BinderFlags flags)
         {
             return (flags == TopLevelBinderFlags)
-              ? this
-              : new CSharpCompilationOptions(this) { TopLevelBinderFlags = flags };
+                ? this
+                : new CSharpCompilationOptions(this) { TopLevelBinderFlags = flags };
         }
 
         internal override ImmutableArray<string> GetImports() => Usings;
@@ -928,7 +928,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     this.Usings == null
                         ? other.Usings == null
                         : this.Usings.SequenceEqual(other.Usings, StringComparer.Ordinal)
-                          && this.NullableContextOptions == other.NullableContextOptions
+                            && this.NullableContextOptions == other.NullableContextOptions
                 );
         }
 

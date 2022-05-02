@@ -49,7 +49,7 @@ namespace AutoMapper
     /// <typeparam name="TDestination">Destination type</typeparam>
     public interface IMappingExpression<TSource, TDestination>
         : IMappingExpressionBase<TSource, TDestination, IMappingExpression<TSource, TDestination>>,
-          IProjectionExpression<TSource, TDestination, IMappingExpression<TSource, TDestination>>
+            IProjectionExpression<TSource, TDestination, IMappingExpression<TSource, TDestination>>
     {
         /// <summary>
         /// Customize configuration for a path inside the destination object.

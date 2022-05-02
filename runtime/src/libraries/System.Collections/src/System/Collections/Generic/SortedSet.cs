@@ -49,12 +49,12 @@ namespace System.Collections.Generic
     )]
     public partial class SortedSet<T>
         : ISet<T>,
-          ICollection<T>,
-          ICollection,
-          IReadOnlyCollection<T>,
-          IReadOnlySet<T>,
-          ISerializable,
-          IDeserializationCallback
+            ICollection<T>,
+            ICollection,
+            IReadOnlyCollection<T>,
+            IReadOnlySet<T>,
+            ISerializable,
+            IDeserializationCallback
     {
         #region Local variables/constants
 
@@ -1061,11 +1061,11 @@ namespace System.Collections.Generic
                     root.Right =
                         size % 2 == 0
                             ? ConstructRootFromSortedArray(
-                                  arr,
-                                  midpt + 2,
-                                  endIndex,
-                                  new Node(arr[midpt + 1], NodeColor.Red)
-                              )
+                                arr,
+                                midpt + 2,
+                                endIndex,
+                                new Node(arr[midpt + 1], NodeColor.Red)
+                            )
                             : ConstructRootFromSortedArray(arr, midpt + 1, endIndex, null);
                     break;
             }
@@ -1813,8 +1813,8 @@ namespace System.Collections.Generic
 
                 bool currentIsLeftChild = Left == current;
                 return IsNonNullRed(sibling.Left)
-                  ? (currentIsLeftChild ? TreeRotation.RightLeft : TreeRotation.Right)
-                  : (currentIsLeftChild ? TreeRotation.Left : TreeRotation.LeftRight);
+                    ? (currentIsLeftChild ? TreeRotation.RightLeft : TreeRotation.Right)
+                    : (currentIsLeftChild ? TreeRotation.Left : TreeRotation.LeftRight);
             }
 
             /// <summary>
@@ -1976,9 +1976,9 @@ namespace System.Collections.Generic
 
         public struct Enumerator
             : IEnumerator<T>,
-              IEnumerator,
-              ISerializable,
-              IDeserializationCallback
+                IEnumerator,
+                ISerializable,
+                IDeserializationCallback
         {
             private readonly SortedSet<T> _tree;
             private readonly int _version;

@@ -180,8 +180,8 @@ namespace System.Resources.Extensions.Tests
         internal static string GetClrTypeFullName(Type type)
         {
             return type.IsArray
-              ? GetClrTypeFullNameForArray(type)
-              : GetClrTypeFullNameForNonArrayTypes(type);
+                ? GetClrTypeFullNameForArray(type)
+                : GetClrTypeFullNameForNonArrayTypes(type);
         }
 
         private static string GetClrTypeFullNameForArray(Type type)

@@ -84,9 +84,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 (emitOptions.OutputNameOverride == null)
                     ? sourceAssembly.MetadataName
                     : FileNameUtilities.ChangeExtension(
-                          emitOptions.OutputNameOverride,
-                          extension: null
-                      );
+                        emitOptions.OutputNameOverride,
+                        extension: null
+                    );
 
             AssemblyOrModuleSymbolToModuleRefMap.Add(sourceAssembly, this);
         }

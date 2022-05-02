@@ -92,7 +92,7 @@ namespace System.Formats.Cbor.Tests
                         break;
 
                     case string[] expectedChunks
-                          when CborWriterTests.Helpers.IsIndefiniteLengthByteString(expectedChunks):
+                    when CborWriterTests.Helpers.IsIndefiniteLengthByteString(expectedChunks):
                         byte[][] expectedByteChunks = expectedChunks
                             .Skip(1)
                             .Select(ch => ch.HexToByteArray())
@@ -139,19 +139,19 @@ namespace System.Formats.Cbor.Tests
                         break;
 
                     case object[] nested
-                          when CborWriterTests.Helpers.IsCborMapRepresentation(nested):
+                    when CborWriterTests.Helpers.IsCborMapRepresentation(nested):
                         VerifyMap(reader, nested, expectDefiniteLengthCollections);
                         break;
 
                     case object[] nested
-                          when CborWriterTests.Helpers.IsEncodedValueRepresentation(nested):
+                    when CborWriterTests.Helpers.IsEncodedValueRepresentation(nested):
                         string expectedHexEncoding = (string)nested[1];
                         string actualHexEncoding = reader.ReadEncodedValue().ByteArrayToHex();
                         Assert.Equal(expectedHexEncoding, actualHexEncoding);
                         break;
 
                     case object[] nested
-                          when CborWriterTests.Helpers.IsTaggedValueRepresentation(nested):
+                    when CborWriterTests.Helpers.IsTaggedValueRepresentation(nested):
                         CborTag expectedTag = (CborTag)nested[0];
                         object expectedNestedValue = nested[1];
                         Assert.Equal(CborReaderState.Tag, reader.PeekState());

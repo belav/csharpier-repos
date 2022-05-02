@@ -1117,10 +1117,10 @@ namespace System.Xml.Serialization
                     object? rre =
                         fixupIndex >= 0
                             ? ReadReferencingElement(
-                                  mapping.TypeName,
-                                  mapping.Namespace,
-                                  out fixup!.Ids![fixupIndex]
-                              )
+                                mapping.TypeName,
+                                mapping.Namespace,
+                                out fixup!.Ids![fixupIndex]
+                            )
                             : ReadReferencedElement(mapping.TypeName, mapping.Namespace);
 
                     if (!mapping.TypeDesc!.IsValueType || rre != null)
@@ -1476,12 +1476,12 @@ namespace System.Xml.Serialization
                         "TimeSpan" => XmlConvert.ToTimeSpan(value),
                         "DateTimeOffset" => XmlConvert.ToDateTimeOffset(value),
                         _
-                          => throw new InvalidOperationException(
-                              SR.Format(
-                                  SR.XmlInternalErrorDetails,
-                                  $"unknown FormatterName: {mapping.TypeDesc.FormatterName}"
-                              )
-                          ),
+                            => throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlInternalErrorDetails,
+                                    $"unknown FormatterName: {mapping.TypeDesc.FormatterName}"
+                                )
+                            ),
                     };
                     return retObj;
                 }
@@ -1637,14 +1637,14 @@ namespace System.Xml.Serialization
             type.IsValueType
                 ? null
                 : type.GetConstructor(
-                      BindingFlags.Public
-                          | BindingFlags.NonPublic
-                          | BindingFlags.Instance
-                          | BindingFlags.DeclaredOnly,
-                      null,
-                      Type.EmptyTypes,
-                      null
-                  );
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly,
+                    null,
+                    Type.EmptyTypes,
+                    null
+                );
 
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
         private object? WriteEncodedStructMethod(StructMapping structMapping)
@@ -2376,8 +2376,8 @@ namespace System.Xml.Serialization
                             Reader,
                             attribute.Name,
                             attribute.Form == XmlSchemaForm.Qualified
-                              ? attribute.Namespace
-                              : string.Empty
+                                ? attribute.Namespace
+                                : string.Empty
                         );
                     }
 

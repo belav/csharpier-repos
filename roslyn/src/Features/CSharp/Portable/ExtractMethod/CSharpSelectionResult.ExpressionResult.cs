@@ -151,8 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
                 // always try to use type that is more specific than object type if possible.
                 return !info.Type.IsObjectType()
-                  ? info.GetTypeWithAnnotatedNullability()
-                  : info.GetConvertedTypeWithAnnotatedNullability();
+                    ? info.GetTypeWithAnnotatedNullability()
+                    : info.GetConvertedTypeWithAnnotatedNullability();
             }
         }
 

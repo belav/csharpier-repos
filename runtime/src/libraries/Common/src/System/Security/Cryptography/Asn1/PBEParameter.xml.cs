@@ -95,8 +95,8 @@ namespace System.Security.Cryptography.Asn1
             if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan))
             {
                 decoded.Salt = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else
             {

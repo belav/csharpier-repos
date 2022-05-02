@@ -561,8 +561,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     // No spacing between the calling convention specifier and the opening angle
                     // delegate* unmanaged[Cdecl]<
                     case SyntaxKind.CloseBracketToken
-                          when previousParentKind
-                              == SyntaxKind.FunctionPointerUnmanagedCallingConventionList:
+                    when previousParentKind
+                        == SyntaxKind.FunctionPointerUnmanagedCallingConventionList:
                         return CreateAdjustSpacesOperation(
                             0,
                             AdjustSpacesOption.ForceSpacesIfOnSingleLine

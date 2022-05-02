@@ -788,12 +788,12 @@ namespace System.Data
                 (0 != (DataViewRowState.CurrentRows & oldState))
                     ? ReplaceNewRecordForCompare
                     : // Added/ModifiedCurrent/Unchanged
-                      (
-                          (0 != (DataViewRowState.OriginalRows & oldState))
-                              ? ReplaceOldRecordForCompare
-                              : // Deleted/ModififedOriginal
-                                DoNotReplaceCompareRecord
-                      )
+                    (
+                        (0 != (DataViewRowState.OriginalRows & oldState))
+                            ? ReplaceOldRecordForCompare
+                            : // Deleted/ModififedOriginal
+                            DoNotReplaceCompareRecord
+                    )
             ); // None
         }
 

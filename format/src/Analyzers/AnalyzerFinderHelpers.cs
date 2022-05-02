@@ -40,8 +40,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                 .Select(
                     type =>
                         type.TryCreateInstance<DiagnosticAnalyzer>(out var instance)
-                          ? instance
-                          : null
+                            ? instance
+                            : null
                 )
                 .OfType<DiagnosticAnalyzer>()
                 .ToImmutableArray();

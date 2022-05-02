@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class GearsOfWarODataQueryTestFixture
         : GearsOfWarQuerySqlServerFixture,
-          IODataQueryTestFixture
+            IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 

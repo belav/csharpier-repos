@@ -17,8 +17,8 @@ public class DefaultAuthorizationEvaluator : IAuthorizationEvaluator
         context.HasSucceeded
             ? AuthorizationResult.Success()
             : AuthorizationResult.Failed(
-                  context.HasFailed
+                context.HasFailed
                     ? AuthorizationFailure.Failed(context.FailureReasons)
                     : AuthorizationFailure.Failed(context.PendingRequirements)
-              );
+            );
 }

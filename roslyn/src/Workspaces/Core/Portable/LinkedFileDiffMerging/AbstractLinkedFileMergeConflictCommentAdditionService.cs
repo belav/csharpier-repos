@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis
 {
     internal abstract class AbstractLinkedFileMergeConflictCommentAdditionService
         : IMergeConflictHandler,
-          ILanguageService,
-          ILinkedFileMergeConflictCommentAdditionService
+            ILanguageService,
+            ILinkedFileMergeConflictCommentAdditionService
     {
         internal abstract string GetConflictCommentText(
             string header,
@@ -161,11 +161,11 @@ namespace Microsoft.CodeAnalysis
             }
 
             return startLine <= endLine
-              ? text.GetSubText(
+                ? text.GetSubText(
                         TextSpan.FromBounds(text.Lines[startLine].Start, text.Lines[endLine].End)
                     )
-                .ToString()
-              : null;
+                    .ToString()
+                : null;
         }
     }
 }

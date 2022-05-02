@@ -78,10 +78,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         ) =>
             projectionBindingExpression != ProjectionBindingExpression
                 ? new CollectionResultExpression(
-                      projectionBindingExpression,
-                      Navigation,
-                      ElementType
-                  )
+                    projectionBindingExpression,
+                    Navigation,
+                    ElementType
+                )
                 : this;
 
         /// <inheritdoc />

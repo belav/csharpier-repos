@@ -517,12 +517,12 @@ namespace System.Runtime.Serialization.Json
                     (classContract.BaseContract == null)
                         ? 0
                         : ReadMembers(
-                              classContract.BaseContract,
-                              expectedElements,
-                              memberLabels,
-                              throwDuplicateMemberLabel,
-                              memberIndexLocal
-                          );
+                            classContract.BaseContract,
+                            expectedElements,
+                            memberLabels,
+                            throwDuplicateMemberLabel,
+                            memberIndexLocal
+                        );
 
                 for (int i = 0; i < classContract.Members!.Count; i++, memberCount++)
                 {

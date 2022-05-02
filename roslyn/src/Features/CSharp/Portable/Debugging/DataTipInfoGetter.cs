@@ -40,8 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 if (token.Parent is not ExpressionSyntax expression)
                 {
                     return token.IsKind(SyntaxKind.IdentifierToken)
-                      ? new DebugDataTipInfo(token.Span, text: null)
-                      : default;
+                        ? new DebugDataTipInfo(token.Span, text: null)
+                        : default;
                 }
 
                 if (expression.IsAnyLiteralExpression())
@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                         .ConfigureAwait(false);
                     var type = semanticModel.GetTypeInfo(expression, cancellationToken).Type;
                     return type == null
-                      ? default
-                      : new DebugDataTipInfo(expression.Span, type.ToNameDisplayString());
+                        ? default
+                        : new DebugDataTipInfo(expression.Span, type.ToNameDisplayString());
                 }
 
                 if (expression.IsRightSideOfDotOrArrow())

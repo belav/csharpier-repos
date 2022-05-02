@@ -234,8 +234,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     // always stay the same, and the data will always be valid for our ID.  So there is no
                     // safety issue here.
                     return TryGetRowId(connection, database, dataId, out var writeCacheRowId)
-                      ? readColumn(data, connection, database, writeCacheRowId)
-                      : default;
+                        ? readColumn(data, connection, database, writeCacheRowId)
+                        : default;
                 }
             }
 
@@ -438,8 +438,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 // not to the internal ROWID.
                 using var resettableStatement = connection.GetResettableStatement(
                     database == Database.WriteCache
-                      ? _select_rowid_from_writecache_table_where_0
-                      : _select_rowid_from_main_table_where_0
+                        ? _select_rowid_from_writecache_table_where_0
+                        : _select_rowid_from_main_table_where_0
                 );
 
                 var statement = resettableStatement.Statement;

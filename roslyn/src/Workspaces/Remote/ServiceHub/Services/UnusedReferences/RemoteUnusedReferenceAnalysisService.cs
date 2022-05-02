@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteUnusedReferenceAnalysisService
         : BrokeredServiceBase,
-          IRemoteUnusedReferenceAnalysisService
+            IRemoteUnusedReferenceAnalysisService
     {
         internal sealed class Factory : FactoryBase<IRemoteUnusedReferenceAnalysisService>
         {

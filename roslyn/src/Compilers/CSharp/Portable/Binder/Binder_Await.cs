@@ -216,21 +216,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             info = method.IsImplicitlyDeclared
                                 ?
-                                  // The await expression occurred in a query expression:
-                                  new CSDiagnosticInfo(ErrorCode.ERR_BadAwaitInQuery)
+                                // The await expression occurred in a query expression:
+                                new CSDiagnosticInfo(ErrorCode.ERR_BadAwaitInQuery)
                                 : new CSDiagnosticInfo(
-                                      ErrorCode.ERR_BadAwaitWithoutAsyncLambda,
-                                      ((LambdaSymbol)method).MessageID.Localize()
-                                  );
+                                    ErrorCode.ERR_BadAwaitWithoutAsyncLambda,
+                                    ((LambdaSymbol)method).MessageID.Localize()
+                                );
                         }
                         else
                         {
                             info = method.ReturnsVoid
                                 ? new CSDiagnosticInfo(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod)
                                 : new CSDiagnosticInfo(
-                                      ErrorCode.ERR_BadAwaitWithoutAsyncMethod,
-                                      method.ReturnType
-                                  );
+                                    ErrorCode.ERR_BadAwaitWithoutAsyncMethod,
+                                    method.ReturnType
+                                );
                         }
                         break;
                 }

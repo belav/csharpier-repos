@@ -177,8 +177,8 @@ public class TestModelMetadataProvider : DefaultModelMetadataProvider
 
     private class TestModelMetadataDetailsProvider
         : IBindingMetadataProvider,
-          IDisplayMetadataProvider,
-          IValidationMetadataProvider
+            IDisplayMetadataProvider,
+            IValidationMetadataProvider
     {
         public List<MetadataBuilder> Builders { get; } = new List<MetadataBuilder>();
 

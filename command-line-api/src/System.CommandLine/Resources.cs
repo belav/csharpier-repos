@@ -17,26 +17,26 @@ namespace System.CommandLine
         public virtual string ExpectsOneArgument(SymbolResult symbolResult) =>
             symbolResult is CommandResult
                 ? GetResourceString(
-                      Properties.Resources.CommandExpectsOneArgument,
-                      symbolResult.Token().Value,
-                      symbolResult.Tokens.Count
-                  )
+                    Properties.Resources.CommandExpectsOneArgument,
+                    symbolResult.Token().Value,
+                    symbolResult.Tokens.Count
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionExpectsOneArgument,
-                      symbolResult.Token().Value,
-                      symbolResult.Tokens.Count
-                  );
+                    Properties.Resources.OptionExpectsOneArgument,
+                    symbolResult.Token().Value,
+                    symbolResult.Tokens.Count
+                );
 
         public virtual string NoArgumentProvided(SymbolResult symbolResult) =>
             symbolResult is CommandResult
                 ? GetResourceString(
-                      Properties.Resources.CommandNoArgumentProvided,
-                      symbolResult.Token().Value
-                  )
+                    Properties.Resources.CommandNoArgumentProvided,
+                    symbolResult.Token().Value
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionNoArgumentProvided,
-                      symbolResult.Token().Value
-                  );
+                    Properties.Resources.OptionNoArgumentProvided,
+                    symbolResult.Token().Value
+                );
 
         public virtual string ExpectsFewerArguments(
             Token token,
@@ -45,17 +45,17 @@ namespace System.CommandLine
         ) =>
             token.Type == TokenType.Command
                 ? GetResourceString(
-                      Properties.Resources.CommandExpectsFewerArguments,
-                      token,
-                      maximumNumberOfValues,
-                      providedNumberOfValues
-                  )
+                    Properties.Resources.CommandExpectsFewerArguments,
+                    token,
+                    maximumNumberOfValues,
+                    providedNumberOfValues
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionExpectsFewerArguments,
-                      token,
-                      maximumNumberOfValues,
-                      providedNumberOfValues
-                  );
+                    Properties.Resources.OptionExpectsFewerArguments,
+                    token,
+                    maximumNumberOfValues,
+                    providedNumberOfValues
+                );
 
         public virtual string DirectoryDoesNotExist(string path) =>
             GetResourceString(Properties.Resources.DirectoryDoesNotExist, path);
@@ -75,13 +75,13 @@ namespace System.CommandLine
         public virtual string RequiredArgumentMissing(SymbolResult symbolResult) =>
             symbolResult is CommandResult
                 ? GetResourceString(
-                      Properties.Resources.CommandRequiredArgumentMissing,
-                      symbolResult.Token().Value
-                  )
+                    Properties.Resources.CommandRequiredArgumentMissing,
+                    symbolResult.Token().Value
+                )
                 : GetResourceString(
-                      Properties.Resources.OptionRequiredArgumentMissing,
-                      symbolResult.Token().Value
-                  );
+                    Properties.Resources.OptionRequiredArgumentMissing,
+                    symbolResult.Token().Value
+                );
 
         public virtual string RequiredCommandWasNotProvided() =>
             GetResourceString(Properties.Resources.RequiredCommandWasNotProvided);

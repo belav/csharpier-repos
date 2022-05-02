@@ -1265,8 +1265,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
 
             return context.ShouldStopProcessing()
-              ? (InternalForeignKeyBuilder)context.Result
-              : relationshipBuilder;
+                ? (InternalForeignKeyBuilder)context.Result
+                : relationshipBuilder;
         }
 
         private InternalForeignKeyBuilder RunForeignKeyAttributeConvention(
@@ -1285,8 +1285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
 
             return context.ShouldStopProcessing()
-              ? (InternalForeignKeyBuilder)context.Result?.Metadata.ForeignKey.Builder
-              : relationshipBuilder;
+                ? (InternalForeignKeyBuilder)context.Result?.Metadata.ForeignKey.Builder
+                : relationshipBuilder;
         }
 
         private void RunRequiredNavigationAttributeConvention(

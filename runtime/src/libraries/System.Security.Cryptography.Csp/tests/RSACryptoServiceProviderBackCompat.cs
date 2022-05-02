@@ -184,11 +184,11 @@ namespace System.Security.Cryptography.Csp.Tests
                 verified = useLegacyVerify
                     ? rsa.VerifyHash(dataHash, "SHA256", signature)
                     : rsa.VerifyHash(
-                          dataHash,
-                          signature,
-                          HashAlgorithmName.SHA256,
-                          RSASignaturePadding.Pkcs1
-                      );
+                        dataHash,
+                        signature,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
             }
 
             Assert.True(verified);

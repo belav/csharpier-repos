@@ -17,8 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class NonNullableNavigationConvention
         : NonNullableConventionBase,
-          INavigationAddedConvention,
-          IForeignKeyPrincipalEndChangedConvention
+            INavigationAddedConvention,
+            IForeignKeyPrincipalEndChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NonNullableNavigationConvention" />.

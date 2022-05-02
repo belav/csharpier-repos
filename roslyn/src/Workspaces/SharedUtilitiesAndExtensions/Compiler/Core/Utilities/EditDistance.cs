@@ -183,8 +183,8 @@ namespace Roslyn.Utilities
         )
         {
             return source.Length <= target.Length
-              ? GetEditDistanceWorker(source, target, threshold)
-              : GetEditDistanceWorker(target, source, threshold);
+                ? GetEditDistanceWorker(source, target, threshold)
+                : GetEditDistanceWorker(target, source, threshold);
         }
 
         private static int GetEditDistanceWorker(

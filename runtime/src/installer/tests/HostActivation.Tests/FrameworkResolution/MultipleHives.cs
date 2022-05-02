@@ -11,7 +11,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
     public class MultipleHives
         : FrameworkResolutionBase,
-          IClassFixture<MultipleHives.SharedTestState>
+            IClassFixture<MultipleHives.SharedTestState>
     {
         private SharedTestState SharedState { get; }
 

@@ -861,8 +861,8 @@ namespace System
             // doing the concatenation again, but this time with a defensive copy. This
             // fall back should be extremely rare.
             return copiedLength == totalLength
-              ? result
-              : JoinCore(separator, values.ToArray().AsSpan());
+                ? result
+                : JoinCore(separator, values.ToArray().AsSpan());
         }
 
         public string PadLeft(int totalWidth) => PadLeft(totalWidth, ' ');
@@ -959,8 +959,8 @@ namespace System
                 throw new ArgumentOutOfRangeException(
                     nameof(startIndex),
                     startIndex < 0
-                      ? SR.ArgumentOutOfRange_StartIndex
-                      : SR.ArgumentOutOfRange_StartIndexLargerThanLength
+                        ? SR.ArgumentOutOfRange_StartIndex
+                        : SR.ArgumentOutOfRange_StartIndexLargerThanLength
                 );
 
             return Substring(0, startIndex);
@@ -1689,8 +1689,8 @@ namespace System
                     (candidate.Length == 0)
                     && ((options & StringSplitOptions.RemoveEmptyEntries) != 0)
                 )
-                  ? Array.Empty<string>()
-                  : new string[] { candidate };
+                    ? Array.Empty<string>()
+                    : new string[] { candidate };
             }
 
             string[] result =
@@ -2342,10 +2342,10 @@ namespace System
         {
             int len = end - start + 1;
             return len == Length
-              ? this
-              : len == 0
-                  ? string.Empty
-                  : InternalSubString(start, len);
+                ? this
+                : len == 0
+                    ? string.Empty
+                    : InternalSubString(start, len);
         }
     }
 }

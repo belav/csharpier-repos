@@ -37,17 +37,17 @@ namespace System.Xml.Tests
             expected[1] =
                 (insertType == InsertType.InsertBefore)
                     ? (
-                          firstChild.OuterXml
-                          + newChild.OuterXml
-                          + refChild.OuterXml
-                          + lastChild.OuterXml
-                      )
+                        firstChild.OuterXml
+                        + newChild.OuterXml
+                        + refChild.OuterXml
+                        + lastChild.OuterXml
+                    )
                     : (
-                          firstChild.OuterXml
-                          + refChild.OuterXml
-                          + newChild.OuterXml
-                          + lastChild.OuterXml
-                      );
+                        firstChild.OuterXml
+                        + refChild.OuterXml
+                        + newChild.OuterXml
+                        + lastChild.OuterXml
+                    );
 
             // insertion
             var insertDelegate = TestHelper.CreateInsertBeforeOrAfter(insertType);

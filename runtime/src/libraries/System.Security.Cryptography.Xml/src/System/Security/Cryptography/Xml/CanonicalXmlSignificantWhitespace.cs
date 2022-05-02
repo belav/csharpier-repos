@@ -9,7 +9,7 @@ namespace System.Security.Cryptography.Xml
     // the class that provides node subset state and canonicalization function to XmlSignificantWhitespace
     internal sealed class CanonicalXmlSignificantWhitespace
         : XmlSignificantWhitespace,
-          ICanonicalizableNode
+            ICanonicalizableNode
     {
         private bool _isInNodeSet;
 

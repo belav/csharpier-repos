@@ -29,11 +29,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
                 if (bool.TryParse(value, out var boolValue))
                 {
                     return boolValue
-                      ? new CodeStyleOption2<ExpressionBodyPreference>(
+                        ? new CodeStyleOption2<ExpressionBodyPreference>(
                             ExpressionBodyPreference.WhenPossible,
                             notification
                         )
-                      : new CodeStyleOption2<ExpressionBodyPreference>(
+                        : new CodeStyleOption2<ExpressionBodyPreference>(
                             ExpressionBodyPreference.Never,
                             notification
                         );
@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
                 ExpressionBodyPreference.Never => $"false{notificationString}",
                 ExpressionBodyPreference.WhenPossible => $"true{notificationString}",
                 ExpressionBodyPreference.WhenOnSingleLine
-                  => $"when_on_single_line{notificationString}",
+                    => $"when_on_single_line{notificationString}",
                 _ => throw new NotSupportedException(),
             };
         }
@@ -87,15 +87,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
                 return value switch
                 {
                     "inside_namespace"
-                      => new CodeStyleOption2<AddImportPlacement>(
-                          AddImportPlacement.InsideNamespace,
-                          notification
-                      ),
+                        => new CodeStyleOption2<AddImportPlacement>(
+                            AddImportPlacement.InsideNamespace,
+                            notification
+                        ),
                     "outside_namespace"
-                      => new CodeStyleOption2<AddImportPlacement>(
-                          AddImportPlacement.OutsideNamespace,
-                          notification
-                      ),
+                        => new CodeStyleOption2<AddImportPlacement>(
+                            AddImportPlacement.OutsideNamespace,
+                            notification
+                        ),
                     _ => throw new NotSupportedException(),
                 };
             }
@@ -179,11 +179,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
                 if (bool.TryParse(value, out var boolValue))
                 {
                     return boolValue
-                      ? new CodeStyleOption2<PreferBracesPreference>(
+                        ? new CodeStyleOption2<PreferBracesPreference>(
                             PreferBracesPreference.Always,
                             notificationOption
                         )
-                      : new CodeStyleOption2<PreferBracesPreference>(
+                        : new CodeStyleOption2<PreferBracesPreference>(
                             PreferBracesPreference.None,
                             notificationOption
                         );

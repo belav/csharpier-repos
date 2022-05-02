@@ -26,13 +26,11 @@ namespace Microsoft.EntityFrameworkCore
                 async c =>
                     async
                         ? await c.Products
-                              .FromSqlRaw(
-                                  NormalizeDelimitersInRawString("select * from [Products]")
-                              )
-                              .ToListAsync()
+                            .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
+                            .ToListAsync()
                         : c.Products
-                          .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
-                          .ToList()
+                            .FromSqlRaw(NormalizeDelimitersInRawString("select * from [Products]"))
+                            .ToList()
             );
     }
 }

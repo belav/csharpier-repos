@@ -369,8 +369,8 @@ namespace System.IO.Tests
             {
                 return base.Read(
                     destination.Length > 10
-                      ? destination.Slice(0, destination.Length - 3)
-                      : destination
+                        ? destination.Slice(0, destination.Length - 3)
+                        : destination
                 );
             }
         }

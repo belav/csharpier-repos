@@ -89,9 +89,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new TransformManyBlock<int, int>(
-                              DataflowTestHelpers.ToEnumerable,
-                              new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            DataflowTestHelpers.ToEnumerable,
+                            new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable)
             );
         }
@@ -285,16 +285,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                     };
                                     TransformManyBlock<int, int> tb = sync
                                         ? new TransformManyBlock<int, int>(
-                                              i => Enumerable.Repeat(i, elementsPerItem),
-                                              options
-                                          )
+                                            i => Enumerable.Repeat(i, elementsPerItem),
+                                            options
+                                        )
                                         : new TransformManyBlock<int, int>(
-                                              i =>
-                                                  Task.Run(
-                                                      () => Enumerable.Repeat(i, elementsPerItem)
-                                                  ),
-                                              options
-                                          );
+                                            i =>
+                                                Task.Run(
+                                                    () => Enumerable.Repeat(i, elementsPerItem)
+                                                ),
+                                            options
+                                        );
 
                                     await Task.WhenAll(
                                         Task.Run(
@@ -483,14 +483,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     Func<TransformManyBlock<int, int>> func = sync
                         ? (Func<TransformManyBlock<int, int>>)(
-                              () => new TransformManyBlock<int, int>(i => new[] { i * 2 })
-                          )
+                            () => new TransformManyBlock<int, int>(i => new[] { i * 2 })
+                        )
                         : (Func<TransformManyBlock<int, int>>)(
-                              () =>
-                                  new TransformManyBlock<int, int>(
-                                      i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
-                                  )
-                          );
+                            () =>
+                                new TransformManyBlock<int, int>(
+                                    i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
+                                )
+                        );
                     var network = DataflowTestHelpers.Chain<TransformManyBlock<int, int>, int>(
                         4,
                         func
@@ -520,14 +520,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     Func<TransformManyBlock<int, int>> func = sync
                         ? (Func<TransformManyBlock<int, int>>)(
-                              () => new TransformManyBlock<int, int>(i => new[] { i * 2 })
-                          )
+                            () => new TransformManyBlock<int, int>(i => new[] { i * 2 })
+                        )
                         : (Func<TransformManyBlock<int, int>>)(
-                              () =>
-                                  new TransformManyBlock<int, int>(
-                                      i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
-                                  )
-                          );
+                            () =>
+                                new TransformManyBlock<int, int>(
+                                    i => Task.Run(() => Enumerable.Repeat(i * 2, 1))
+                                )
+                        );
                     var network = DataflowTestHelpers.Chain<TransformManyBlock<int, int>, int>(
                         4,
                         func
@@ -838,9 +838,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             transform = sync
                                 ? new TransformManyBlock<int, int>(body, dbo)
                                 : new TransformManyBlock<int, int>(
-                                      i => Task.Run(() => body(i)),
-                                      dbo
-                                  );
+                                    i => Task.Run(() => body(i)),
+                                    dbo
+                                );
 
                             TransformBlock<int, int> verifier = new TransformBlock<int, int>(
                                 i =>

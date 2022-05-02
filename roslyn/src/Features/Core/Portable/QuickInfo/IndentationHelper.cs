@@ -148,9 +148,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
                     indentationColumn = indentationColumn.HasValue
                         ? Math.Min(
-                              indentationColumn.Value,
-                              line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize)
-                          )
+                            indentationColumn.Value,
+                            line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize)
+                        )
                         : line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize);
                 }
             }

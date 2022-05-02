@@ -435,7 +435,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class CustomersDataTable
             : global::System.Data.DataTable,
-              global::System.Collections.IEnumerable
+                global::System.Collections.IEnumerable
         {
             private global::System.Data.DataColumn columnCustomerID;
 

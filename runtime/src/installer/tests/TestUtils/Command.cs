@@ -31,8 +31,8 @@ namespace Microsoft.DotNet.Cli.Build.Framework
 
         // Priority order of runnable suffixes to look for and run
         private static readonly string[] RunnableSuffixes = OperatingSystem.IsWindows()
-          ? new string[] { ".exe", ".cmd", ".bat" }
-          : new string[] { string.Empty };
+            ? new string[] { ".exe", ".cmd", ".bat" }
+            : new string[] { string.Empty };
 
         private Command(string executable, string args)
         {

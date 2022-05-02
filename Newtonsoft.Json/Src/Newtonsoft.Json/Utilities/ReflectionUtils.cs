@@ -901,22 +901,22 @@ namespace Newtonsoft.Json.Utilities
                     return attributes;
                 case Assembly a:
                     return (attributeType != null)
-                      ? Attribute.GetCustomAttributes(a, attributeType)
-                      : Attribute.GetCustomAttributes(a);
+                        ? Attribute.GetCustomAttributes(a, attributeType)
+                        : Attribute.GetCustomAttributes(a);
                 case MemberInfo mi:
                     return (attributeType != null)
-                      ? Attribute.GetCustomAttributes(mi, attributeType, inherit)
-                      : Attribute.GetCustomAttributes(mi, inherit);
+                        ? Attribute.GetCustomAttributes(mi, attributeType, inherit)
+                        : Attribute.GetCustomAttributes(mi, inherit);
 #if !PORTABLE40
                 case Module m:
                     return (attributeType != null)
-                      ? Attribute.GetCustomAttributes(m, attributeType, inherit)
-                      : Attribute.GetCustomAttributes(m, inherit);
+                        ? Attribute.GetCustomAttributes(m, attributeType, inherit)
+                        : Attribute.GetCustomAttributes(m, inherit);
 #endif
                 case ParameterInfo p:
                     return (attributeType != null)
-                      ? Attribute.GetCustomAttributes(p, attributeType, inherit)
-                      : Attribute.GetCustomAttributes(p, inherit);
+                        ? Attribute.GetCustomAttributes(p, attributeType, inherit)
+                        : Attribute.GetCustomAttributes(p, inherit);
                 default:
 #if !PORTABLE40
                     ICustomAttributeProvider customAttributeProvider =
@@ -950,24 +950,24 @@ namespace Newtonsoft.Json.Utilities
             {
                 case Type t:
                     return (attributeType != null)
-                      ? t.GetTypeInfo().GetCustomAttributes(attributeType, inherit).ToArray()
-                      : t.GetTypeInfo().GetCustomAttributes(inherit).ToArray();
+                        ? t.GetTypeInfo().GetCustomAttributes(attributeType, inherit).ToArray()
+                        : t.GetTypeInfo().GetCustomAttributes(inherit).ToArray();
                 case Assembly a:
                     return (attributeType != null)
-                      ? a.GetCustomAttributes(attributeType).ToArray()
-                      : a.GetCustomAttributes().ToArray();
+                        ? a.GetCustomAttributes(attributeType).ToArray()
+                        : a.GetCustomAttributes().ToArray();
                 case MemberInfo memberInfo:
                     return (attributeType != null)
-                      ? memberInfo.GetCustomAttributes(attributeType, inherit).ToArray()
-                      : memberInfo.GetCustomAttributes(inherit).ToArray();
+                        ? memberInfo.GetCustomAttributes(attributeType, inherit).ToArray()
+                        : memberInfo.GetCustomAttributes(inherit).ToArray();
                 case Module module:
                     return (attributeType != null)
-                      ? module.GetCustomAttributes(attributeType).ToArray()
-                      : module.GetCustomAttributes().ToArray();
+                        ? module.GetCustomAttributes(attributeType).ToArray()
+                        : module.GetCustomAttributes().ToArray();
                 case ParameterInfo parameterInfo:
                     return (attributeType != null)
-                      ? parameterInfo.GetCustomAttributes(attributeType, inherit).ToArray()
-                      : parameterInfo.GetCustomAttributes(inherit).ToArray();
+                        ? parameterInfo.GetCustomAttributes(attributeType, inherit).ToArray()
+                        : parameterInfo.GetCustomAttributes(inherit).ToArray();
             }
 
             throw new Exception(

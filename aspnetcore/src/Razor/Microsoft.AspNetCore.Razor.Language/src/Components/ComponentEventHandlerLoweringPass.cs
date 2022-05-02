@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentEventHandlerLoweringPass
     : ComponentIntermediateNodePassBase,
-      IRazorOptimizationPass
+        IRazorOptimizationPass
 {
     public override int Order => 50;
 

@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     [ProvidesMethod(LSP.VSInternalMethods.OnAutoInsertName)]
     internal class OnAutoInsertHandler
         : AbstractStatelessRequestHandler<
-              LSP.VSInternalDocumentOnAutoInsertParams,
-              LSP.VSInternalDocumentOnAutoInsertResponseItem?
-          >
+            LSP.VSInternalDocumentOnAutoInsertParams,
+            LSP.VSInternalDocumentOnAutoInsertResponseItem?
+        >
     {
         private readonly ImmutableArray<IBraceCompletionService> _csharpBraceCompletionServices;
         private readonly ImmutableArray<IBraceCompletionService> _visualBasicBraceCompletionServices;
@@ -150,19 +150,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var result =
                 autoInsertParams.Character == "\n"
                     ? service.GetDocumentationCommentSnippetOnEnterTyped(
-                          syntaxTree,
-                          sourceText,
-                          position,
-                          options,
-                          cancellationToken
-                      )
+                        syntaxTree,
+                        sourceText,
+                        position,
+                        options,
+                        cancellationToken
+                    )
                     : service.GetDocumentationCommentSnippetOnCharacterTyped(
-                          syntaxTree,
-                          sourceText,
-                          position,
-                          options,
-                          cancellationToken
-                      );
+                        syntaxTree,
+                        sourceText,
+                        position,
+                        options,
+                        cancellationToken
+                    );
 
             if (result == null)
             {
@@ -328,9 +328,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 LanguageNames.CSharp => _csharpBraceCompletionServices,
                 LanguageNames.VisualBasic => _visualBasicBraceCompletionServices,
                 _
-                  => throw new ArgumentException(
-                      $"Language {document.Project.Language} is not recognized for OnAutoInsert"
-                  )
+                    => throw new ArgumentException(
+                        $"Language {document.Project.Language} is not recognized for OnAutoInsert"
+                    )
             };
 
             foreach (var service in servicesForDocument)

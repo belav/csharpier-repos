@@ -49,9 +49,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             cast switch
             {
                 CastExpressionSyntax castExpression
-                  => IsUnnecessaryCast(castExpression, semanticModel, cancellationToken),
+                    => IsUnnecessaryCast(castExpression, semanticModel, cancellationToken),
                 BinaryExpressionSyntax binaryExpression
-                  => IsUnnecessaryAsCast(binaryExpression, semanticModel, cancellationToken),
+                    => IsUnnecessaryAsCast(binaryExpression, semanticModel, cancellationToken),
                 _ => false,
             };
 

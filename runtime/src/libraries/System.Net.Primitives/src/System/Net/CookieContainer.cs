@@ -1157,11 +1157,11 @@ namespace System.Net
 
             optCookie2 = cookies.IsOtherVersionSeen
                 ? (
-                      Cookie.SpecialAttributeLiteral
-                      + CookieFields.VersionAttributeName
-                      + Cookie.EqualsLiteral
-                      + Cookie.MaxSupportedVersionString
-                  )
+                    Cookie.SpecialAttributeLiteral
+                    + CookieFields.VersionAttributeName
+                    + Cookie.EqualsLiteral
+                    + Cookie.MaxSupportedVersionString
+                )
                 : string.Empty;
 
             return StringBuilderCache.GetStringAndRelease(builder);

@@ -17,9 +17,9 @@ namespace Microsoft.AspNetCore.Mvc;
 )]
 public class FromQueryAttribute
     : Attribute,
-      IBindingSourceMetadata,
-      IModelNameProvider,
-      IFromQueryMetadata
+        IBindingSourceMetadata,
+        IModelNameProvider,
+        IFromQueryMetadata
 {
     /// <inheritdoc />
     public BindingSource BindingSource => BindingSource.Query;

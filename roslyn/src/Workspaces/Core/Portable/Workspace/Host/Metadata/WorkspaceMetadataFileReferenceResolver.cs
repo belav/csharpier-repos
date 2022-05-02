@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal sealed class WorkspaceMetadataFileReferenceResolver
         : MetadataReferenceResolver,
-          IEquatable<WorkspaceMetadataFileReferenceResolver>
+            IEquatable<WorkspaceMetadataFileReferenceResolver>
     {
         private readonly IMetadataService _metadataService;
         internal readonly RelativePathResolver PathResolver;

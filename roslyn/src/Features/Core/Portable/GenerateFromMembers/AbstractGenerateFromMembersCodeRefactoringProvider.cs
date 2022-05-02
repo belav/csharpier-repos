@@ -90,7 +90,7 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
                 // Can use non const fields and properties with setters in them.
                 IFieldSymbol field => IsViableField(field) && !field.IsConst,
                 IPropertySymbol property
-                  => IsViableProperty(property) && property.IsWritableInConstructor(),
+                    => IsViableProperty(property) && property.IsWritableInConstructor(),
                 _ => false,
             };
 

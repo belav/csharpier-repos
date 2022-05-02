@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     previousOne = ValueTuple.Create(
                         previousOne.Item1,
                         previousOne.Item2.Span.End < currentOne.Item2.Span.End
-                          ? currentOne.Item2
-                          : previousOne.Item2
+                            ? currentOne.Item2
+                            : previousOne.Item2
                     );
                     continue;
                 }

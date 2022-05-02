@@ -139,8 +139,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
             tmpSpan = sequenceReader.ReadEncodedValue();
             decoded.Subject = rebindSpan.Overlaps(tmpSpan, out offset)
-              ? rebind.Slice(offset, tmpSpan.Length)
-              : tmpSpan.ToArray();
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn.Decode(
                 ref sequenceReader,
                 rebind,

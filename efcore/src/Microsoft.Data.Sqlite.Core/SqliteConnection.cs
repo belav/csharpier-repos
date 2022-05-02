@@ -443,8 +443,8 @@ namespace Microsoft.Data.Sqlite
                 name,
                 null,
                 comparison != null
-                  ? (_, s1, s2) => comparison(s1, s2)
-                  : (Func<object?, string, string, int>?)null
+                    ? (_, s1, s2) => comparison(s1, s2)
+                    : (Func<object?, string, string, int>?)null
             );
 
         /// <summary>

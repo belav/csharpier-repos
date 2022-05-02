@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class NullSemanticsQueryFixtureBase
         : SharedStoreFixtureBase<NullSemanticsContext>,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         public Func<DbContext> GetContextCreator() => () => CreateContext();
 

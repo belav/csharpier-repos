@@ -724,8 +724,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                 var expectedMsg = isMono
                     ? "Document Type Declaration (DTD) is prohibited in this XML.  Line 1, position 10."
                     : "For security reasons DTD is prohibited in this XML document. "
-                      + "To enable DTD processing set the DtdProcessing property on XmlReaderSettings "
-                      + "to Parse and pass the settings into XmlReader.Create method.";
+                        + "To enable DTD processing set the DtdProcessing property on XmlReaderSettings "
+                        + "to Parse and pass the settings into XmlReader.Create method.";
 
                 var exception = Assert.Throws<System.Xml.XmlException>(
                     () => xmlConfigSrc.Load(TestStreamHelpers.StringToStream(xml))

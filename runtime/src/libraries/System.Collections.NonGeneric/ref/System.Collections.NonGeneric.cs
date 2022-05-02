@@ -53,8 +53,8 @@ namespace System.Collections
 
     public abstract partial class CollectionBase
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         protected CollectionBase() { }
 
@@ -150,8 +150,8 @@ namespace System.Collections
 
     public abstract partial class DictionaryBase
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable
     {
         protected DictionaryBase() { }
 
@@ -246,8 +246,8 @@ namespace System.Collections
 
     public partial class Queue
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.ICloneable
+            System.Collections.IEnumerable,
+            System.ICloneable
     {
         public Queue() { }
 
@@ -316,7 +316,7 @@ namespace System.Collections
 
     public abstract partial class ReadOnlyCollectionBase
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         protected ReadOnlyCollectionBase() { }
 
@@ -347,9 +347,9 @@ namespace System.Collections
 
     public partial class SortedList
         : System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable,
-          System.ICloneable
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable,
+            System.ICloneable
     {
         public SortedList() { }
 
@@ -485,8 +485,8 @@ namespace System.Collections
 
     public partial class Stack
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.ICloneable
+            System.Collections.IEnumerable,
+            System.ICloneable
     {
         public Stack() { }
 

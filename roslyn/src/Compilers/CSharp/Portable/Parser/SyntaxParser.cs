@@ -1165,15 +1165,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 var kw = token.IsMissing
                     ? SyntaxFactory.MissingToken(
-                          token.LeadingTrivia.Node,
-                          token.ContextualKind,
-                          token.TrailingTrivia.Node
-                      )
+                        token.LeadingTrivia.Node,
+                        token.ContextualKind,
+                        token.TrailingTrivia.Node
+                    )
                     : SyntaxFactory.Token(
-                          token.LeadingTrivia.Node,
-                          token.ContextualKind,
-                          token.TrailingTrivia.Node
-                      );
+                        token.LeadingTrivia.Node,
+                        token.ContextualKind,
+                        token.TrailingTrivia.Node
+                    );
                 var d = token.GetDiagnostics();
                 if (d != null && d.Length > 0)
                 {
@@ -1225,8 +1225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 case MessageID.IDS_FeatureModuleAttrLoc:
                     return availableVersion >= LanguageVersion.CSharp2
-                      ? node
-                      : this.AddError(node, ErrorCode.WRN_NonECMAFeature, feature.Localize());
+                        ? node
+                        : this.AddError(node, ErrorCode.WRN_NonECMAFeature, feature.Localize());
             }
 
             var info = feature.GetFeatureAvailabilityDiagnosticInfo(this.Options);

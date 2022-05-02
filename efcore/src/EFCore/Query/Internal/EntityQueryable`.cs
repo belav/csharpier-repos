@@ -22,8 +22,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
     /// </summary>
     public class EntityQueryable<TResult>
         : IOrderedQueryable<TResult>,
-          IAsyncEnumerable<TResult>,
-          IListSource
+            IAsyncEnumerable<TResult>,
+            IListSource
     {
         private readonly IAsyncQueryProvider _queryProvider;
 

@@ -110,47 +110,47 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 switch (_termState & (TerminatorState)i)
                 {
                     case TerminatorState.IsNamespaceMemberStartOrStop
-                          when this.IsNamespaceMemberStartOrStop():
+                    when this.IsNamespaceMemberStartOrStop():
                     case TerminatorState.IsAttributeDeclarationTerminator
-                          when this.IsAttributeDeclarationTerminator():
+                    when this.IsAttributeDeclarationTerminator():
                     case TerminatorState.IsPossibleAggregateClauseStartOrStop
-                          when this.IsPossibleAggregateClauseStartOrStop():
+                    when this.IsPossibleAggregateClauseStartOrStop():
                     case TerminatorState.IsPossibleMemberStartOrStop
-                          when this.IsPossibleMemberStartOrStop():
+                    when this.IsPossibleMemberStartOrStop():
                     case TerminatorState.IsEndOfReturnType when this.IsEndOfReturnType():
                     case TerminatorState.IsEndOfParameterList when this.IsEndOfParameterList():
                     case TerminatorState.IsEndOfFieldDeclaration
-                          when this.IsEndOfFieldDeclaration():
+                    when this.IsEndOfFieldDeclaration():
                     case TerminatorState.IsPossibleEndOfVariableDeclaration
-                          when this.IsPossibleEndOfVariableDeclaration():
+                    when this.IsPossibleEndOfVariableDeclaration():
                     case TerminatorState.IsEndOfTypeArgumentList
-                          when this.IsEndOfTypeArgumentList():
+                    when this.IsEndOfTypeArgumentList():
                     case TerminatorState.IsPossibleStatementStartOrStop
-                          when this.IsPossibleStatementStartOrStop():
+                    when this.IsPossibleStatementStartOrStop():
                     case TerminatorState.IsEndOfFixedStatement when this.IsEndOfFixedStatement():
                     case TerminatorState.IsEndOfTryBlock when this.IsEndOfTryBlock():
                     case TerminatorState.IsEndOfCatchClause when this.IsEndOfCatchClause():
                     case TerminatorState.IsEndOfFilterClause when this.IsEndOfFilterClause():
                     case TerminatorState.IsEndOfCatchBlock when this.IsEndOfCatchBlock():
                     case TerminatorState.IsEndOfDoWhileExpression
-                          when this.IsEndOfDoWhileExpression():
+                    when this.IsEndOfDoWhileExpression():
                     case TerminatorState.IsEndOfForStatementArgument
-                          when this.IsEndOfForStatementArgument():
+                    when this.IsEndOfForStatementArgument():
                     case TerminatorState.IsEndOfDeclarationClause
-                          when this.IsEndOfDeclarationClause():
+                    when this.IsEndOfDeclarationClause():
                     case TerminatorState.IsEndOfArgumentList when this.IsEndOfArgumentList():
                     case TerminatorState.IsSwitchSectionStart when this.IsPossibleSwitchSection():
                     case TerminatorState.IsEndOfTypeParameterList
-                          when this.IsEndOfTypeParameterList():
+                    when this.IsEndOfTypeParameterList():
                     case TerminatorState.IsEndOfMethodSignature when this.IsEndOfMethodSignature():
                     case TerminatorState.IsEndOfNameInExplicitInterface
-                          when this.IsEndOfNameInExplicitInterface():
+                    when this.IsEndOfNameInExplicitInterface():
                     case TerminatorState.IsEndOfFunctionPointerParameterList
-                          when this.IsEndOfFunctionPointerParameterList(errored: false):
+                    when this.IsEndOfFunctionPointerParameterList(errored: false):
                     case TerminatorState.IsEndOfFunctionPointerParameterListErrored
-                          when this.IsEndOfFunctionPointerParameterList(errored: true):
+                    when this.IsEndOfFunctionPointerParameterList(errored: true):
                     case TerminatorState.IsEndOfFunctionPointerCallingConvention
-                          when this.IsEndOfFunctionPointerCallingConvention():
+                    when this.IsEndOfFunctionPointerCallingConvention():
                     case TerminatorState.IsEndOfRecordSignature when this.IsEndOfRecordSignature():
                         return true;
                 }
@@ -538,8 +538,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 token = this.AddError(
                                     token,
                                     IsScript
-                                      ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
-                                      : ErrorCode.ERR_EOFExpected
+                                        ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
+                                        : ErrorCode.ERR_EOFExpected
                                 );
 
                                 this.AddSkippedNamespaceText(
@@ -711,8 +711,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                     skippedToken = this.AddError(
                                         skippedToken,
                                         IsScript
-                                          ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
-                                          : ErrorCode.ERR_EOFExpected
+                                            ? ErrorCode.ERR_GlobalDefinitionOrStatementExpected
+                                            : ErrorCode.ERR_EOFExpected
                                     );
 
                                     // do not report the error multiple times for subsequent tokens:
@@ -1491,8 +1491,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             modTok = CheckFeatureAvailability(
                                 modTok,
                                 isPartialType
-                                  ? MessageID.IDS_FeaturePartialTypes
-                                  : MessageID.IDS_FeaturePartialMethod
+                                    ? MessageID.IDS_FeaturePartialTypes
+                                    : MessageID.IDS_FeaturePartialMethod
                             );
                         }
                         else if (nextToken.Kind == SyntaxKind.NamespaceKeyword)
@@ -2306,8 +2306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 list.Add(
                     argumentList is object
-                      ? _syntaxFactory.PrimaryConstructorBaseType(firstType, argumentList)
-                      : (BaseTypeSyntax)_syntaxFactory.SimpleBaseType(firstType)
+                        ? _syntaxFactory.PrimaryConstructorBaseType(firstType, argumentList)
+                        : (BaseTypeSyntax)_syntaxFactory.SimpleBaseType(firstType)
                 );
 
                 // any additional types
@@ -2387,9 +2387,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             var where = this.EatContextualToken(SyntaxKind.WhereKeyword);
             var name = !IsTrueIdentifier()
                 ? this.AddError(
-                      this.CreateMissingIdentifierName(),
-                      ErrorCode.ERR_IdentifierExpected
-                  )
+                    this.CreateMissingIdentifierName(),
+                    ErrorCode.ERR_IdentifierExpected
+                )
                 : this.ParseIdentifierName();
 
             var colon = this.EatToken(SyntaxKind.ColonToken);
@@ -3233,14 +3233,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     case null:
                     case SyntaxKind.LocalFunctionStatement:
                     case SyntaxKind.ExpressionStatement
-                          when !isScript
-                              &&
-                              // Do not parse a single identifier as an expression statement in a Simple Program, this could be a beginning of a keyword and
-                              // we want completion to offer it.
-                              ((ExpressionStatementSyntax)statement)
-                                  is var exprStatement
-                              && exprStatement.Expression.Kind == SyntaxKind.IdentifierName
-                              && exprStatement.SemicolonToken.IsMissing:
+                    when !isScript
+                        &&
+                        // Do not parse a single identifier as an expression statement in a Simple Program, this could be a beginning of a keyword and
+                        // we want completion to offer it.
+                        ((ExpressionStatementSyntax)statement)
+                            is var exprStatement
+                        && exprStatement.Expression.Kind == SyntaxKind.IdentifierName
+                        && exprStatement.SemicolonToken.IsMissing:
 
                         return false;
 
@@ -4695,8 +4695,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 ref openBrace,
                                 builder,
                                 isEvent
-                                  ? ErrorCode.ERR_AddOrRemoveExpected
-                                  : ErrorCode.ERR_GetOrSetExpected
+                                    ? ErrorCode.ERR_AddOrRemoveExpected
+                                    : ErrorCode.ERR_GetOrSetExpected
                             ) == PostSkipAction.Abort
                         )
                         {
@@ -5085,8 +5085,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         accessorName = this.AddError(
                             accessorName,
                             isEvent
-                              ? ErrorCode.ERR_AddOrRemoveExpected
-                              : ErrorCode.ERR_GetOrSetExpected
+                                ? ErrorCode.ERR_AddOrRemoveExpected
+                                : ErrorCode.ERR_GetOrSetExpected
                         );
                     }
                     else
@@ -5174,8 +5174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             this.EatToken(
                 SyntaxKind.SemicolonToken,
                 IsFeatureEnabled(MessageID.IDS_FeatureExpressionBodiedAccessor)
-                  ? ErrorCode.ERR_SemiOrLBraceOrArrowExpected
-                  : ErrorCode.ERR_SemiOrLBraceExpected
+                    ? ErrorCode.ERR_SemiOrLBraceOrArrowExpected
+                    : ErrorCode.ERR_SemiOrLBraceExpected
             );
 
         private SyntaxKind GetAccessorKind(SyntaxToken accessorName)
@@ -7186,8 +7186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     return ScanTypeArgumentListKind.DefiniteTypeArgumentList;
 
                 case SyntaxKind.GreaterThanToken
-                      when ((options & NameOptions.AfterIs) != 0)
-                          && this.PeekToken(1).Kind != SyntaxKind.GreaterThanToken:
+                when ((options & NameOptions.AfterIs) != 0)
+                    && this.PeekToken(1).Kind != SyntaxKind.GreaterThanToken:
                     // This token is added to 7.5.4.2 Grammar Ambiguities in C#7 for the special case in which
                     // the possible generic is following an `is` keyword, e.g. `e is A<B> > C`.
                     // We test one further token ahead because a right-shift operator `>>` looks like a pair of greater-than
@@ -8298,16 +8298,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 switch (this.CurrentToken.Kind)
                 {
                     case SyntaxKind.QuestionToken
-                          when lastTokenOfType.Kind != SyntaxKind.QuestionToken
-                              && // don't allow `Type??`
-                              lastTokenOfType.Kind != SyntaxKind.AsteriskToken
-                              && // don't allow `Type*?`
-                              !isFunctionPointer: // don't allow `delegate*<...>?`
+                    when lastTokenOfType.Kind != SyntaxKind.QuestionToken
+                        && // don't allow `Type??`
+                        lastTokenOfType.Kind != SyntaxKind.AsteriskToken
+                        && // don't allow `Type*?`
+                        !isFunctionPointer: // don't allow `delegate*<...>?`
                         lastTokenOfType = this.EatToken();
                         result = ScanTypeFlags.NullableType;
                         break;
                     case SyntaxKind.AsteriskToken
-                          when lastTokenOfType.Kind != SyntaxKind.CloseBracketToken: // don't allow `Type[]*`
+                    when lastTokenOfType.Kind != SyntaxKind.CloseBracketToken: // don't allow `Type[]*`
                         // Check for pointer type(s)
                         switch (mode)
                         {
@@ -8986,8 +8986,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     token = this.AddError(
                         token,
                         mode == ParseTypeMode.Parameter
-                          ? ErrorCode.ERR_NoVoidParameter
-                          : ErrorCode.ERR_NoVoidHere
+                            ? ErrorCode.ERR_NoVoidParameter
+                            : ErrorCode.ERR_NoVoidHere
                     );
                 }
 
@@ -9012,8 +9012,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return this.AddError(
                 this.CreateMissingIdentifierName(),
                 mode == ParseTypeMode.NewExpression
-                  ? ErrorCode.ERR_BadNewExpr
-                  : ErrorCode.ERR_TypeExpected
+                    ? ErrorCode.ERR_BadNewExpr
+                    : ErrorCode.ERR_TypeExpected
             );
         }
 
@@ -9505,8 +9505,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Debug.Assert(this.CurrentToken.ContextualKind == SyntaxKind.AwaitKeyword);
             SyntaxToken awaitToken = this.EatContextualToken(SyntaxKind.AwaitKeyword);
             return feature != MessageID.None
-              ? CheckFeatureAvailability(awaitToken, feature)
-              : awaitToken;
+                ? CheckFeatureAvailability(awaitToken, feature)
+                : awaitToken;
         }
 
         private bool IsPossibleAwaitUsing() =>
@@ -10103,11 +10103,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             CSharpSyntaxNode openBrace =
                 isAccessorBody && this.CurrentToken.Kind != SyntaxKind.OpenBraceToken
                     ? this.AddError(
-                          SyntaxFactory.MissingToken(SyntaxKind.OpenBraceToken),
-                          IsFeatureEnabled(MessageID.IDS_FeatureExpressionBodiedAccessor)
+                        SyntaxFactory.MissingToken(SyntaxKind.OpenBraceToken),
+                        IsFeatureEnabled(MessageID.IDS_FeatureExpressionBodiedAccessor)
                             ? ErrorCode.ERR_SemiOrLBraceOrArrowExpected
                             : ErrorCode.ERR_SemiOrLBraceExpected
-                      )
+                    )
                     : this.EatToken(SyntaxKind.OpenBraceToken);
 
             var statements = _pool.Allocate<StatementSyntax>();
@@ -10118,10 +10118,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 (SyntaxToken)openBrace,
                 // Force creation a many-children list, even if only 1, 2, or 3 elements in the statement list.
                 IsLargeEnoughNonEmptyStatementList(statements)
-                  ? new SyntaxList<StatementSyntax>(
+                    ? new SyntaxList<StatementSyntax>(
                         SyntaxList.List(((SyntaxListBuilder)statements).ToArray())
                     )
-                  : statements,
+                    : statements,
                 this.EatToken(SyntaxKind.CloseBraceToken)
             );
 
@@ -11029,8 +11029,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         )
         {
             return IsPossibleDeclarationExpression(mode, permitTupleDesignation)
-              ? this.ParseDeclarationExpression(mode, feature)
-              : this.ParseSubExpression(Precedence.Expression);
+                ? this.ParseDeclarationExpression(mode, feature)
+                : this.ParseSubExpression(Precedence.Expression);
         }
 
         private bool IsPossibleDeclarationExpression(
@@ -12670,8 +12670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var result = ParseThrowExpression();
                 // we parse a throw expression even at the wrong precedence for better recovery
                 return (precedence <= Precedence.Coalescing)
-                  ? result
-                  : this.AddError(result, ErrorCode.ERR_InvalidExprTerm, SyntaxFacts.GetText(tk));
+                    ? result
+                    : this.AddError(result, ErrorCode.ERR_InvalidExprTerm, SyntaxFacts.GetText(tk));
             }
             else if (this.IsPossibleDeconstructionLeft(precedence))
             {
@@ -13834,10 +13834,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 expression =
                     (refKindKeyword?.Kind == SyntaxKind.OutKeyword)
                         ? ParseExpressionOrDeclaration(
-                              ParseTypeMode.Normal,
-                              feature: MessageID.IDS_FeatureOutVar,
-                              permitTupleDesignation: false
-                          )
+                            ParseTypeMode.Normal,
+                            feature: MessageID.IDS_FeatureOutVar,
+                            permitTupleDesignation: false
+                        )
                         : ParseSubExpression(Precedence.Expression);
             }
 
@@ -14323,7 +14323,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             or SyntaxKind.AmpersandToken
                             or SyntaxKind.AsteriskToken
                             or SyntaxKind.DotDotToken
-                              => true,
+                                => true,
                             var tk => CanFollowCast(tk)
                         };
 
@@ -14766,9 +14766,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
 
             return type is null
-              ? (ExpressionSyntax)
+                ? (ExpressionSyntax)
                     _syntaxFactory.ImplicitObjectCreationExpression(@new, argumentList, initializer)
-              : (ExpressionSyntax)
+                : (ExpressionSyntax)
                     _syntaxFactory.ObjectCreationExpression(@new, type, argumentList, initializer);
         }
 
@@ -14909,15 +14909,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 openBrace = CheckFeatureAvailability(
                     openBrace,
                     isObjectInitializer
-                      ? MessageID.IDS_FeatureObjectInitializer
-                      : MessageID.IDS_FeatureCollectionInitializer
+                        ? MessageID.IDS_FeatureObjectInitializer
+                        : MessageID.IDS_FeatureCollectionInitializer
                 );
 
                 var closeBrace = this.EatToken(SyntaxKind.CloseBraceToken);
                 return _syntaxFactory.InitializerExpression(
                     isObjectInitializer
-                      ? SyntaxKind.ObjectInitializerExpression
-                      : SyntaxKind.CollectionInitializerExpression,
+                        ? SyntaxKind.ObjectInitializerExpression
+                        : SyntaxKind.CollectionInitializerExpression,
                     openBrace,
                     initializers,
                     closeBrace

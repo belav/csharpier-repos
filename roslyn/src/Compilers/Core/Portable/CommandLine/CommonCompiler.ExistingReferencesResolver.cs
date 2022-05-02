@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal sealed class ExistingReferencesResolver
             : MetadataReferenceResolver,
-              IEquatable<ExistingReferencesResolver>
+                IEquatable<ExistingReferencesResolver>
         {
             private readonly MetadataReferenceResolver _resolver;
             private readonly ImmutableArray<MetadataReference> _availableReferences;

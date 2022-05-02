@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class InternalIndexBuilder
         : AnnotatableBuilder<Index, InternalModelBuilder>,
-          IConventionIndexBuilder
+            IConventionIndexBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,10 +76,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Metadata.Name == null
                     ? entityTypeBuilder.HasIndex(properties, Metadata.GetConfigurationSource())
                     : entityTypeBuilder.HasIndex(
-                          properties,
-                          Metadata.Name,
-                          Metadata.GetConfigurationSource()
-                      );
+                        properties,
+                        Metadata.Name,
+                        Metadata.GetConfigurationSource()
+                    );
             newIndexBuilder?.MergeAnnotationsFrom(Metadata);
 
             var isUniqueConfigurationSource = Metadata.GetIsUniqueConfigurationSource();
@@ -112,8 +112,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsUnique(
                 unique,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -126,8 +126,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsUnique(
                 unique,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

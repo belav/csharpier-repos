@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
     /// </summary>
     public class DesignTimeConnectionStringResolver
         : NamedConnectionStringResolverBase,
-          IDesignTimeConnectionStringResolver
+            IDesignTimeConnectionStringResolver
     {
         private readonly Func<IServiceProvider>? _applicationServiceProviderAccessor;
 

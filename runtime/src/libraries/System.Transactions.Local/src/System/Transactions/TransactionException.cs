@@ -320,12 +320,12 @@ namespace System.Transactions
         internal TransactionAbortedException(Exception? innerException, Guid distributedTxId)
             : base(
                 IncludeDistributedTxId(distributedTxId)
-                  ? SR.Format(
+                    ? SR.Format(
                         SR.DistributedTxIDInTransactionException,
                         SR.TransactionAborted,
                         distributedTxId
                     )
-                  : SR.TransactionAborted,
+                    : SR.TransactionAborted,
                 innerException
             ) { }
 

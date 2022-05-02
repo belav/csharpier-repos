@@ -32,9 +32,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
     internal sealed partial class SettingsEditorPane
         : WindowPane,
-          IOleComponent,
-          IVsDeferredDocView,
-          IVsLinkedUndoClient
+            IOleComponent,
+            IVsDeferredDocView,
+            IVsLinkedUndoClient
     {
         private readonly IVsEditorAdaptersFactoryService _vsEditorAdaptersFactoryService;
         private readonly IThreadingContext _threadingContext;

@@ -140,10 +140,10 @@ namespace System.Reflection.PortableExecutable
                 ResourceSectionName => SerializeResourceSection(location),
                 RelocationSectionName => SerializeRelocationSection(location),
                 _
-                  => throw new ArgumentException(
-                      SR.Format(SR.UnknownSectionName, name),
-                      nameof(name)
-                  ),
+                    => throw new ArgumentException(
+                        SR.Format(SR.UnknownSectionName, name),
+                        nameof(name)
+                    ),
             };
 
         private BlobBuilder SerializeTextSection(SectionLocation location)

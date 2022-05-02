@@ -29,15 +29,15 @@ namespace System.Net.Http
         )
         {
             return ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Date)
-              ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding)
-              : ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Server)
-                  ? GetOrAddCachedValue(
+                ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding)
+                : ReferenceEquals(descriptor.KnownHeader, KnownHeaders.Server)
+                    ? GetOrAddCachedValue(
                         ref _lastServerHeaderValue,
                         descriptor,
                         value,
                         valueEncoding
                     )
-                  : descriptor.GetHeaderValue(value, valueEncoding);
+                    : descriptor.GetHeaderValue(value, valueEncoding);
 
             static string GetOrAddCachedValue(
                 [NotNull] ref string? cache,

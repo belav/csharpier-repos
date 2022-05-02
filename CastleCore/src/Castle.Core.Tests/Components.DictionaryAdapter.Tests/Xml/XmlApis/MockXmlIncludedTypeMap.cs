@@ -47,15 +47,15 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         public bool TryGet(XmlName xsiType, out IXmlIncludedType includedType)
         {
             return (xsiType == Default.XsiType)
-              ? Try.Success(out includedType, Default)
-              : includedTypes.TryGet(xsiType, out includedType);
+                ? Try.Success(out includedType, Default)
+                : includedTypes.TryGet(xsiType, out includedType);
         }
 
         public bool TryGet(Type clrType, out IXmlIncludedType includedType)
         {
             return (clrType == Default.ClrType)
-              ? Try.Success(out includedType, Default)
-              : includedTypes.TryGet(clrType, out includedType);
+                ? Try.Success(out includedType, Default)
+                : includedTypes.TryGet(clrType, out includedType);
         }
     }
 }

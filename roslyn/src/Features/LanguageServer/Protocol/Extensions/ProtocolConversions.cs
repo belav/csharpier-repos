@@ -271,8 +271,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 .ConfigureAwait(false);
 
             return location == null
-              ? null
-              : new LSP.VSInternalLocation
+                ? null
+                : new LSP.VSInternalLocation
                 {
                     Uri = location.Uri,
                     Range = location.Range,

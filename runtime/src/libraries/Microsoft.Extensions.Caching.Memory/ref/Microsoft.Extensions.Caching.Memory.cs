@@ -73,7 +73,7 @@ namespace Microsoft.Extensions.Caching.Memory
 {
     public partial class MemoryCache
         : Microsoft.Extensions.Caching.Memory.IMemoryCache,
-          System.IDisposable
+            System.IDisposable
     {
         public MemoryCache(
             Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions> optionsAccessor

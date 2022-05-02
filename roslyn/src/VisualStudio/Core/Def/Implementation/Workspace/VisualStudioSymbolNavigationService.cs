@@ -35,7 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     [ExportWorkspaceService(typeof(ISymbolNavigationService), ServiceLayer.Host), Shared]
     internal partial class VisualStudioSymbolNavigationService
         : ForegroundThreadAffinitizedObject,
-          ISymbolNavigationService
+            ISymbolNavigationService
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IGlobalOptionService _globalOptions;

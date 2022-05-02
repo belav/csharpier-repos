@@ -41,7 +41,7 @@ namespace Microsoft.Interop
                         { Type: IPointerTypeSymbol ptr } => true,
                         { Type: IFunctionPointerTypeSymbol } => true,
                         not { Type: { SpecialType: SpecialType.None } }
-                          => IsSpecialTypeBlittable(field.Type.SpecialType),
+                            => IsSpecialTypeBlittable(field.Type.SpecialType),
                         // Assume that type parameters that can be blittable are blittable.
                         // We'll re-evaluate blittability for generic fields of generic types at instantation time.
                         { Type: ITypeParameterSymbol } => true,
@@ -75,7 +75,7 @@ namespace Microsoft.Interop
                 or SpecialType.System_Double
                 or SpecialType.System_IntPtr
                 or SpecialType.System_UIntPtr
-                  => true,
+                    => true,
                 _ => false
             };
 
@@ -210,7 +210,7 @@ namespace Microsoft.Interop
                 or SpecialType.System_UInt64
                 or SpecialType.System_IntPtr
                 or SpecialType.System_UIntPtr
-                  => true,
+                    => true,
                 _ => false
             };
         }

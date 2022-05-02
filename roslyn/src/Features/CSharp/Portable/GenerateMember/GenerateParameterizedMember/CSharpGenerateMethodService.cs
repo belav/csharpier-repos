@@ -26,11 +26,11 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
     ]
     internal sealed class CSharpGenerateMethodService
         : AbstractGenerateMethodService<
-              CSharpGenerateMethodService,
-              SimpleNameSyntax,
-              ExpressionSyntax,
-              InvocationExpressionSyntax
-          >
+            CSharpGenerateMethodService,
+            SimpleNameSyntax,
+            ExpressionSyntax,
+            InvocationExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

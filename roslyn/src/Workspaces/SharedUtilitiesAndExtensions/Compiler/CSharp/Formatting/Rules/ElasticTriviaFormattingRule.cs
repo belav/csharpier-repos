@@ -102,7 +102,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 ObjectCreationExpressionSyntax objectCreationNode => objectCreationNode.Initializer,
                 ArrayCreationExpressionSyntax arrayCreationNode => arrayCreationNode.Initializer,
                 ImplicitArrayCreationExpressionSyntax implicitArrayNode
-                  => implicitArrayNode.Initializer,
+                    => implicitArrayNode.Initializer,
                 _ => null,
             };
 
@@ -408,8 +408,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         )
                         || currentToken.Kind() == SyntaxKind.OpenBraceToken
                     )
-                      ? 1
-                      : 0;
+                        ? 1
+                        : 0;
 
                 case SyntaxKind.CloseBracketToken:
                     // Assembly and module-level attributes followed by non-attributes should have a blank line after

@@ -233,8 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected string Dump()
         {
             return IsConditionalState
-              ? $"true: {Dump(this.StateWhenTrue)} false: {Dump(this.StateWhenFalse)}"
-              : Dump(this.State);
+                ? $"true: {Dump(this.StateWhenTrue)} false: {Dump(this.StateWhenFalse)}"
+                : Dump(this.State);
         }
 
 #if DEBUG
@@ -495,8 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var method = _symbol as MethodSymbol;
                 return (object)method == null
-                  ? ImmutableArray<ParameterSymbol>.Empty
-                  : method.Parameters;
+                    ? ImmutableArray<ParameterSymbol>.Empty
+                    : method.Parameters;
             }
         }
 
@@ -973,8 +973,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(!IsConditionalState);
                 SetConditionalState(
                     patternMatchesNull(pattern)
-                      ? (State, stateWhenNotNull)
-                      : (stateWhenNotNull, State)
+                        ? (State, stateWhenNotNull)
+                        : (stateWhenNotNull, State)
                 );
             }
             else if (IsConditionalState)
@@ -1074,10 +1074,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // both subpatterns must have the same bool test for the test to propagate out
                             var leftNullTest = isBoolTest(binary.Left);
                             return leftNullTest is null
-                              ? null
-                              : leftNullTest != isBoolTest(binary.Right)
-                                  ? null
-                                  : leftNullTest;
+                                ? null
+                                : leftNullTest != isBoolTest(binary.Right)
+                                    ? null
+                                    : leftNullTest;
                         }
 
                         // `(a != null && a.b(out x)) is true and true` matches `true`
@@ -1174,7 +1174,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     null => (null, false, false),
                     { } d
-                      => (d.Construction, d.UsesBoolReturns, d.HasTrailingHandlerValidityParameter)
+                        => (
+                            d.Construction,
+                            d.UsesBoolReturns,
+                            d.HasTrailingHandlerValidityParameter
+                        )
                 };
 
             VisitRvalue(construction);
@@ -1561,8 +1565,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected static RefKind GetRefKind(ImmutableArray<RefKind> refKindsOpt, int index)
         {
             return refKindsOpt.IsDefault || refKindsOpt.Length <= index
-              ? RefKind.None
-              : refKindsOpt[index];
+                ? RefKind.None
+                : refKindsOpt[index];
         }
 
         protected virtual void WriteArgument(
@@ -2566,8 +2570,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var isNullConstant = binary.Right.ConstantValue?.IsNull == true;
                 SetConditionalState(
                     isNullConstant == isEquals(binary)
-                      ? (State, stateWhenNotNull)
-                      : (stateWhenNotNull, State)
+                        ? (State, stateWhenNotNull)
+                        : (stateWhenNotNull, State)
                 );
 
                 if (stack.Count == 0)
@@ -2630,8 +2634,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var isNullConstant = binary.Left.ConstantValue?.IsNull == true;
                     SetConditionalState(
                         isNullConstant == isEquals(binary)
-                          ? (State, stateWhenNotNull)
-                          : (stateWhenNotNull, State)
+                            ? (State, stateWhenNotNull)
+                            : (stateWhenNotNull, State)
                     );
 
                     return true;
@@ -2650,8 +2654,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Visit(binary.Right);
                     SetConditionalState(
                         isEquals(binary) == rightConstant.BooleanValue
-                          ? (stateWhenTrue, stateWhenFalse)
-                          : (stateWhenFalse, stateWhenTrue)
+                            ? (stateWhenTrue, stateWhenFalse)
+                            : (stateWhenFalse, stateWhenTrue)
                     );
 
                     return true;
@@ -3004,7 +3008,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Conversion: Conversion conversion,
                     Operand: BoundConditionalAccess ca
                 } when CanPropagateStateWhenNotNull(conversion)
-                  => ca,
+                    => ca,
                 _ => null
             };
 

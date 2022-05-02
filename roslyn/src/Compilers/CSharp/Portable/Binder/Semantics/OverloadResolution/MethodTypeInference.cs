@@ -463,8 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(0 <= index && index < _formalParameterTypes.Length);
             return _formalParameterRefKinds.IsDefault
-              ? RefKind.None
-              : _formalParameterRefKinds[index];
+                ? RefKind.None
+                : _formalParameterRefKinds[index];
         }
 
         private ImmutableArray<TypeWithAnnotations> GetResults(out bool inferredFromFunctionType)
@@ -621,8 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var fixedArguments = _methodTypeParameters.SelectAsArray(
                 static (typeParameter, i, self) =>
                     self.IsUnfixed(i)
-                      ? TypeWithAnnotations.Create(typeParameter)
-                      : self._fixedResults[i].Type,
+                        ? TypeWithAnnotations.Create(typeParameter)
+                        : self._fixedResults[i].Type,
                 this
             );
             TypeMap typeMap = new TypeMap(
@@ -1603,9 +1603,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             CallingConventionInfo callingConventionInfo = isFunctionPointerResolution
                 ? new CallingConventionInfo(
-                      method.CallingConvention,
-                      ((FunctionPointerMethodSymbol)method).GetCallingConventionModifiers()
-                  )
+                    method.CallingConvention,
+                    ((FunctionPointerMethodSymbol)method).GetCallingConventionModifiers()
+                )
                 : default;
             BoundMethodGroup originalMethodGroup =
                 source as BoundMethodGroup ?? ((BoundUnconvertedAddressOfOperator)source).Operand;
@@ -2126,7 +2126,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (null, null) => true,
                 ({ } sourceModifiers, { } targetModifiers)
                     when sourceModifiers.SetEquals(targetModifiers)
-                  => true,
+                    => true,
                 _ => false
             };
         }
@@ -2145,9 +2145,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (true, false) or (false, true) => false,
                     (true, true) => true,
                     _
-                      => sourceSignature.ParameterRefKinds.SequenceEqual(
-                          targetSignature.ParameterRefKinds
-                      )
+                        => sourceSignature.ParameterRefKinds.SequenceEqual(
+                            targetSignature.ParameterRefKinds
+                        )
                 };
         }
 

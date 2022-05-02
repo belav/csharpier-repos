@@ -507,8 +507,8 @@ namespace Internal.Cryptography.Pal
                 _certContext,
                 MapNameType(nameType),
                 forIssuer
-                  ? Interop.Crypt32.CertNameFlags.CERT_NAME_ISSUER_FLAG
-                  : Interop.Crypt32.CertNameFlags.None,
+                    ? Interop.Crypt32.CertNameFlags.CERT_NAME_ISSUER_FLAG
+                    : Interop.Crypt32.CertNameFlags.None,
                 Interop.Crypt32.CertNameStringType.CERT_X500_NAME_STR
                     | Interop.Crypt32.CertNameStringType.CERT_NAME_STR_REVERSE_FLAG
             );
@@ -637,8 +637,8 @@ namespace Internal.Cryptography.Pal
                 _certContext,
                 Interop.Crypt32.CertNameType.CERT_NAME_RDN_TYPE,
                 issuer
-                  ? Interop.Crypt32.CertNameFlags.CERT_NAME_ISSUER_FLAG
-                  : Interop.Crypt32.CertNameFlags.None,
+                    ? Interop.Crypt32.CertNameFlags.CERT_NAME_ISSUER_FLAG
+                    : Interop.Crypt32.CertNameFlags.None,
                 Interop.Crypt32.CertNameStringType.CERT_X500_NAME_STR
                     | (reverse ? Interop.Crypt32.CertNameStringType.CERT_NAME_STR_REVERSE_FLAG : 0)
             );

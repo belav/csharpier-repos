@@ -238,9 +238,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     && _commandLineArgumentsForCommandLine.OutputFileName != null
                 )
                     ? Path.Combine(
-                          _commandLineArgumentsForCommandLine.OutputDirectory,
-                          _commandLineArgumentsForCommandLine.OutputFileName
-                      )
+                        _commandLineArgumentsForCommandLine.OutputDirectory,
+                        _commandLineArgumentsForCommandLine.OutputFileName
+                    )
                     : _commandLineArgumentsForCommandLine.OutputFileName;
 
             _project.CompilationOutputAssemblyFilePath =

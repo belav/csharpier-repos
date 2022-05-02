@@ -45,8 +45,8 @@ namespace System
                     out TIME_ZONE_INFORMATION timeZoneInformation
                 );
                 return result == Interop.Kernel32.TIME_ZONE_ID_INVALID
-                  ? CreateCustomTimeZone(LocalId, TimeSpan.Zero, LocalId, LocalId)
-                  : GetLocalTimeZoneFromWin32Data(timeZoneInformation, dstDisabled: false);
+                    ? CreateCustomTimeZone(LocalId, TimeSpan.Zero, LocalId, LocalId)
+                    : GetLocalTimeZoneFromWin32Data(timeZoneInformation, dstDisabled: false);
             }
 
             private volatile OffsetAndRule? _oneYearLocalFromUtc;

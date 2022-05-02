@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive
 {
     internal sealed class TestInteractiveEvaluator
         : IInteractiveEvaluator,
-          IResettableInteractiveEvaluator
+            IResettableInteractiveEvaluator
     {
         internal event EventHandler<string> OnExecute;
 

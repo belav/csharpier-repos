@@ -23,8 +23,8 @@ internal class PhotinoWebViewManager : WebViewManager
     internal static readonly string BlazorAppScheme = RuntimeInformation.IsOSPlatform(
         OSPlatform.Windows
     )
-      ? "http"
-      : "app";
+        ? "http"
+        : "app";
 
     internal static readonly string AppBaseUri = $"{BlazorAppScheme}://0.0.0.0/";
 

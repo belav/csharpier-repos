@@ -131,14 +131,14 @@ namespace System.Web.Http.WebHost
                 string messageDetails =
                     (mediaType != null)
                         ? Error.Format(
-                              SRResources.Serialize_Response_Failed_MediaType,
-                              responseContent.GetType().Name,
-                              mediaType
-                          )
+                            SRResources.Serialize_Response_Failed_MediaType,
+                            responseContent.GetType().Name,
+                            mediaType
+                        )
                         : Error.Format(
-                              SRResources.Serialize_Response_Failed,
-                              responseContent.GetType().Name
-                          );
+                            SRResources.Serialize_Response_Failed,
+                            responseContent.GetType().Name
+                        );
 
                 errorResponse = request.CreateErrorResponse(
                     HttpStatusCode.InternalServerError,

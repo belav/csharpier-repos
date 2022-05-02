@@ -38,8 +38,8 @@ namespace System.Net.Security
         {
             Debug.Assert(kind == ChannelBindingKind.Endpoint || kind == ChannelBindingKind.Unique);
             return kind == ChannelBindingKind.Endpoint
-              ? s_tlsServerEndPointByteArray
-              : s_tlsUniqueByteArray;
+                ? s_tlsServerEndPointByteArray
+                : s_tlsUniqueByteArray;
         }
 
         internal SafeChannelBindingHandle(ChannelBindingKind kind)

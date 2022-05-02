@@ -24,8 +24,8 @@ namespace System.Threading.Tasks.Dataflow
     [DebuggerTypeProxy(typeof(BufferBlock<>.DebugView))]
     public sealed class BufferBlock<T>
         : IPropagatorBlock<T, T>,
-          IReceivableSourceBlock<T>,
-          IDebuggerDisplay
+            IReceivableSourceBlock<T>,
+            IDebuggerDisplay
     {
         /// <summary>The core logic for the buffer block.</summary>
         private readonly SourceCore<T> _source;
@@ -605,8 +605,8 @@ namespace System.Threading.Tasks.Dataflow
                 get
                 {
                     return _bufferBlock._boundingState != null
-                      ? _bufferBlock._boundingState.PostponedMessages
-                      : null;
+                        ? _bufferBlock._boundingState.PostponedMessages
+                        : null;
                 }
             }
 
@@ -622,8 +622,8 @@ namespace System.Threading.Tasks.Dataflow
                 get
                 {
                     return _bufferBlock._boundingState != null
-                      ? _bufferBlock._boundingState.TaskForInputProcessing
-                      : null;
+                        ? _bufferBlock._boundingState.TaskForInputProcessing
+                        : null;
                 }
             }
 

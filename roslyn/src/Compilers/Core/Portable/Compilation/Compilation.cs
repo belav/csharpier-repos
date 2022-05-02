@@ -3202,8 +3202,8 @@ namespace Microsoft.CodeAnalysis
                         moduleBeingBuilt,
                         new SimpleEmitStreamProvider(peStream),
                         (metadataPEStream != null)
-                          ? new SimpleEmitStreamProvider(metadataPEStream)
-                          : null,
+                            ? new SimpleEmitStreamProvider(metadataPEStream)
+                            : null,
                         (pdbStream != null) ? new SimpleEmitStreamProvider(pdbStream) : null,
                         rebuildData,
                         testData?.SymWriterFactory,
@@ -3492,10 +3492,10 @@ namespace Microsoft.CodeAnalysis
             {
                 var signKind = IsRealSigned
                     ? (
-                          SignUsingBuilder
-                              ? EmitStreamSignKind.SignedWithBuilder
-                              : EmitStreamSignKind.SignedWithFile
-                      )
+                        SignUsingBuilder
+                            ? EmitStreamSignKind.SignedWithBuilder
+                            : EmitStreamSignKind.SignedWithFile
+                    )
                     : EmitStreamSignKind.None;
                 emitPeStream = new EmitStream(
                     peStreamProvider,
@@ -3506,10 +3506,10 @@ namespace Microsoft.CodeAnalysis
                     metadataPEStreamProvider == null
                         ? null
                         : new EmitStream(
-                              metadataPEStreamProvider,
-                              signKind,
-                              Options.StrongNameProvider
-                          );
+                            metadataPEStreamProvider,
+                            signKind,
+                            Options.StrongNameProvider
+                        );
                 metadataDiagnostics = DiagnosticBag.GetInstance();
 
                 if (
@@ -3537,12 +3537,9 @@ namespace Microsoft.CodeAnalysis
                     || pdbStreamProvider == null
                         ? null
                         : (Func<Stream?>)(
-                              () =>
-                                  ConditionalGetOrCreateStream(
-                                      pdbStreamProvider,
-                                      metadataDiagnostics
-                                  )
-                          );
+                            () =>
+                                ConditionalGetOrCreateStream(pdbStreamProvider, metadataDiagnostics)
+                        );
 
                 try
                 {
@@ -3776,11 +3773,10 @@ namespace Microsoft.CodeAnalysis
                 (moduleBeingBuilt.DebugInformationFormat != DebugInformationFormat.Pdb)
                     ? null
                     : new Cci.PdbWriter(
-                          pdbFilePath
-                              ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb"),
-                          testSymWriterFactory,
-                          hashAlgorithmNameOpt: default
-                      );
+                        pdbFilePath ?? FileNameUtilities.ChangeExtension(SourceModule.Name, "pdb"),
+                        testSymWriterFactory,
+                        hashAlgorithmNameOpt: default
+                    );
 
             using (nativePdbWriter)
             {
@@ -3818,8 +3814,8 @@ namespace Microsoft.CodeAnalysis
                     nativePdbWriter?.WriteTo(pdbStream);
 
                     return diagnostics.HasAnyErrors()
-                      ? null
-                      : writer.GetDelta(this, encId, metadataSizes);
+                        ? null
+                        : writer.GetDelta(this, encId, metadataSizes);
                 }
                 catch (SymUnmanagedWriterException e)
                 {

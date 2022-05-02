@@ -146,8 +146,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                     baseDirectory: workingDirectory,
                     packageResolver: null,
                     gacFileResolver: s_currentPlatformInfo.HasGlobalAssemblyCache
-                      ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
-                      : null,
+                        ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
+                        : null,
                     s_currentPlatformInfo.PlatformAssemblyPaths,
                     (path, properties) =>
                         new ShadowCopyReference(
@@ -984,8 +984,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
                 writer.WriteLine(
                     uniqueDirectories.Count == 1
-                      ? InteractiveHostResources.Searched_in_directory_colon
-                      : InteractiveHostResources.Searched_in_directories_colon
+                        ? InteractiveHostResources.Searched_in_directory_colon
+                        : InteractiveHostResources.Searched_in_directories_colon
                 );
 
                 foreach (string directory in directories)
@@ -1014,15 +1014,15 @@ namespace Microsoft.CodeAnalysis.Interactive
                                 var task =
                                     (state == null)
                                         ? script.RunAsync(
-                                              serviceState.Globals,
-                                              catchException: e => true,
-                                              cancellationToken: CancellationToken.None
-                                          )
+                                            serviceState.Globals,
+                                            catchException: e => true,
+                                            cancellationToken: CancellationToken.None
+                                        )
                                         : script.RunFromAsync(
-                                              state,
-                                              catchException: e => true,
-                                              cancellationToken: CancellationToken.None
-                                          );
+                                            state,
+                                            catchException: e => true,
+                                            cancellationToken: CancellationToken.None
+                                        );
 
                                 var newState = await task.ConfigureAwait(false);
 

@@ -179,9 +179,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 { IsDirectlyExcludedFromCodeCoverage: true } => true,
                 { AssociatedSymbol: PropertySymbol { IsDirectlyExcludedFromCodeCoverage: true } }
-                  => true,
+                    => true,
                 { AssociatedSymbol: EventSymbol { IsDirectlyExcludedFromCodeCoverage: true } }
-                  => true,
+                    => true,
                 _ => false
             };
         }

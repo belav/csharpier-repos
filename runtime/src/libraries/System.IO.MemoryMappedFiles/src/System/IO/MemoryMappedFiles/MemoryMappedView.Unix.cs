@@ -236,9 +236,9 @@ namespace System.IO.MemoryMappedFiles
 
                 case MemoryMappedFileAccess.CopyOnWrite:
                     return forVerification
-                      ? Interop.Sys.MemoryMappedProtections.PROT_READ
-                      : Interop.Sys.MemoryMappedProtections.PROT_READ
-                        | Interop.Sys.MemoryMappedProtections.PROT_WRITE;
+                        ? Interop.Sys.MemoryMappedProtections.PROT_READ
+                        : Interop.Sys.MemoryMappedProtections.PROT_READ
+                            | Interop.Sys.MemoryMappedProtections.PROT_WRITE;
             }
         }
     }

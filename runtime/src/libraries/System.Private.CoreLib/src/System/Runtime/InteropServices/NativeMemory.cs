@@ -51,8 +51,8 @@ namespace System.Runtime.InteropServices
                 ((elementSize >= multiplyNoOverflow) || (elementCount >= multiplyNoOverflow))
                 && (elementSize > 0)
                 && ((nuint.MaxValue / elementSize) < elementCount)
-              ? nuint.MaxValue
-              : (elementCount * elementSize);
+                ? nuint.MaxValue
+                : (elementCount * elementSize);
         }
     }
 }

@@ -88,10 +88,10 @@ public class TargetPickerUi
         }
 
         var matchingTabs = string.IsNullOrEmpty(targetApplicationUrl)
-          ? availableTabs.ToList()
-          : availableTabs
-            .Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal))
-            .ToList();
+            ? availableTabs.ToList()
+            : availableTabs
+                .Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal))
+                .ToList();
 
         if (matchingTabs.Count == 1)
         {
@@ -104,8 +104,8 @@ public class TargetPickerUi
             await context.Response.WriteAsync("<h1>No inspectable pages found</h1>");
 
             var suffix = string.IsNullOrEmpty(targetApplicationUrl)
-              ? string.Empty
-              : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
+                ? string.Empty
+                : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
             await context.Response.WriteAsync(
                 $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
             );

@@ -19,12 +19,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeFunction2))]
     public partial class CodeFunction
         : AbstractCodeMember,
-          ICodeElementContainer<CodeParameter>,
-          ICodeElementContainer<CodeAttribute>,
-          EnvDTE.CodeFunction,
-          EnvDTE80.CodeFunction2,
-          IMethodXML,
-          IMethodXML2
+            ICodeElementContainer<CodeParameter>,
+            ICodeElementContainer<CodeAttribute>,
+            EnvDTE.CodeFunction,
+            EnvDTE80.CodeFunction2,
+            IMethodXML,
+            IMethodXML2
     {
         internal static EnvDTE.CodeFunction Create(
             CodeModelState state,

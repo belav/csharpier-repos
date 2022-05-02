@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
     /// </summary>
     public class CompositePrincipalKeyValueFactory
         : CompositeValueFactory,
-          IPrincipalKeyValueFactory<object[]>
+            IPrincipalKeyValueFactory<object[]>
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

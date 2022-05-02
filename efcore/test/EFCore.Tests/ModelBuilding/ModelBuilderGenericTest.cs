@@ -186,7 +186,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class GenericTestEntityTypeBuilder<TEntity>
             : TestEntityTypeBuilder<TEntity>,
-              IInfrastructure<EntityTypeBuilder<TEntity>> where TEntity : class
+                IInfrastructure<EntityTypeBuilder<TEntity>> where TEntity : class
         {
             public GenericTestEntityTypeBuilder(EntityTypeBuilder<TEntity> entityTypeBuilder)
             {
@@ -611,7 +611,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class GenericTestOwnedEntityTypeBuilder<TEntity>
             : TestOwnedEntityTypeBuilder<TEntity>,
-              IInfrastructure<OwnedEntityTypeBuilder<TEntity>> where TEntity : class
+                IInfrastructure<OwnedEntityTypeBuilder<TEntity>> where TEntity : class
         {
             public GenericTestOwnedEntityTypeBuilder(
                 OwnedEntityTypeBuilder<TEntity> ownedEntityTypeBuilder
@@ -627,7 +627,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class GenericTestPropertyBuilder<TProperty>
             : TestPropertyBuilder<TProperty>,
-              IInfrastructure<PropertyBuilder<TProperty>>
+                IInfrastructure<PropertyBuilder<TProperty>>
         {
             public GenericTestPropertyBuilder(PropertyBuilder<TProperty> propertyBuilder)
             {
@@ -783,7 +783,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class GenericTestKeyBuilder<TEntity>
             : TestKeyBuilder<TEntity>,
-              IInfrastructure<KeyBuilder<TEntity>>
+                IInfrastructure<KeyBuilder<TEntity>>
         {
             public GenericTestKeyBuilder(KeyBuilder<TEntity> keyBuilder)
             {
@@ -804,7 +804,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public class GenericTestIndexBuilder<TEntity>
             : TestIndexBuilder<TEntity>,
-              IInfrastructure<IndexBuilder<TEntity>>
+                IInfrastructure<IndexBuilder<TEntity>>
         {
             public GenericTestIndexBuilder(IndexBuilder<TEntity> indexBuilder)
             {
@@ -1471,7 +1471,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class GenericTestOwnershipBuilder<TEntity, TDependentEntity>
             : TestOwnershipBuilder<TEntity, TDependentEntity>,
-              IInfrastructure<OwnershipBuilder<TEntity, TDependentEntity>>
+                IInfrastructure<OwnershipBuilder<TEntity, TDependentEntity>>
             where TEntity : class
             where TDependentEntity : class
         {
@@ -1521,7 +1521,7 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         protected class GenericTestOwnedNavigationBuilder<TEntity, TDependentEntity>
             : TestOwnedNavigationBuilder<TEntity, TDependentEntity>,
-              IInfrastructure<OwnedNavigationBuilder<TEntity, TDependentEntity>>
+                IInfrastructure<OwnedNavigationBuilder<TEntity, TDependentEntity>>
             where TEntity : class
             where TDependentEntity : class
         {

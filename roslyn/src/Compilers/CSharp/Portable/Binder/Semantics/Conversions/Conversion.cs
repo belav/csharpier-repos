@@ -955,8 +955,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (conversionResult.Results.IsDefaultOrEmpty)
                         {
                             return this.Kind == ConversionKind.NoConversion
-                              ? LookupResultKind.Empty
-                              : LookupResultKind.Viable;
+                                ? LookupResultKind.Empty
+                                : LookupResultKind.Viable;
                         }
                         else
                         {

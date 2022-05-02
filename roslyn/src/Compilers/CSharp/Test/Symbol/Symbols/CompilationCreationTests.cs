@@ -4487,8 +4487,8 @@ System.Diagnostics.Process.GetCurrentProcess();
             )
             {
                 var path = reference.EndsWith("-resolve", StringComparison.Ordinal)
-                  ? _targetDll
-                  : reference;
+                    ? _targetDll
+                    : reference;
                 return ImmutableArray.Create(MetadataReference.CreateFromFile(path, properties));
             }
 

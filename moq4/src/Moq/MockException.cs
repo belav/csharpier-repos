@@ -104,8 +104,8 @@ namespace Moq
 
                 message.AppendLine(
                     mock == rootMock
-                      ? $"   {mock} ({expression.Parameters[0].Name}):"
-                      : $"   {mock}:"
+                        ? $"   {mock} ({expression.Parameters[0].Name}):"
+                        : $"   {mock}:"
                 );
 
                 var invocations = mock.MutableInvocations.ToArray();

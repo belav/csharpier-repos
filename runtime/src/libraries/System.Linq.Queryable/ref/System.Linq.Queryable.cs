@@ -23,13 +23,13 @@ namespace System.Linq
 
     public partial class EnumerableQuery<T>
         : System.Linq.EnumerableQuery,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable,
-          System.Linq.IOrderedQueryable,
-          System.Linq.IOrderedQueryable<T>,
-          System.Linq.IQueryable,
-          System.Linq.IQueryable<T>,
-          System.Linq.IQueryProvider
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.IEnumerable,
+            System.Linq.IOrderedQueryable,
+            System.Linq.IOrderedQueryable<T>,
+            System.Linq.IQueryable,
+            System.Linq.IQueryable<T>,
+            System.Linq.IQueryProvider
     {
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "Enumerating in-memory collections as IQueryable can require unreferenced code because expressions referencing IQueryable extension methods can get rebound to IEnumerable extension methods. The IEnumerable extension methods could be trimmed causing the application to fail at runtime."

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal sealed class SynthesizedLambdaCacheFieldSymbol
         : SynthesizedFieldSymbolBase,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly TypeWithAnnotations _type;
         private readonly MethodSymbol _topLevelMethod;

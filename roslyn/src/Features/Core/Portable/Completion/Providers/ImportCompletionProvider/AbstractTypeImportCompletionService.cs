@@ -42,8 +42,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.ImportCompletion
         public Task WarmUpCacheAsync(Project? project, CancellationToken cancellationToken)
         {
             return project is null
-              ? Task.CompletedTask
-              : GetCacheEntriesAsync(project, forceCacheCreation: true, cancellationToken);
+                ? Task.CompletedTask
+                : GetCacheEntriesAsync(project, forceCacheCreation: true, cancellationToken);
         }
 
         public async Task<ImmutableArray<ImmutableArray<CompletionItem>>?> GetAllTopLevelTypesAsync(

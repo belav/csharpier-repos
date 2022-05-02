@@ -15,8 +15,8 @@ namespace System.Collections.Generic
     )]
     public class SortedDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
-          IDictionary,
-          IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IDictionary,
+            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         [NonSerialized]
         private KeyCollection? _keys;
@@ -575,8 +575,8 @@ namespace System.Collections.Generic
         [DebuggerDisplay("Count = {Count}")]
         public sealed class KeyCollection
             : ICollection<TKey>,
-              ICollection,
-              IReadOnlyCollection<TKey>
+                ICollection,
+                IReadOnlyCollection<TKey>
         {
             private readonly SortedDictionary<TKey, TValue> _dictionary;
 
@@ -779,8 +779,8 @@ namespace System.Collections.Generic
         [DebuggerDisplay("Count = {Count}")]
         public sealed class ValueCollection
             : ICollection<TValue>,
-              ICollection,
-              IReadOnlyCollection<TValue>
+                ICollection,
+                IReadOnlyCollection<TValue>
         {
             private readonly SortedDictionary<TKey, TValue> _dictionary;
 

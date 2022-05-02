@@ -209,8 +209,8 @@ namespace System.Management
                 return (
                     (propertyFlavor & (int)tag_WBEM_FLAVOR_TYPE.WBEM_FLAVOR_ORIGIN_PROPAGATED) != 0
                 )
-                  ? false
-                  : true;
+                    ? false
+                    : true;
             }
         }
 
@@ -378,22 +378,22 @@ namespace System.Management
                         CimType.UInt16 => (ushort)((int)wmiValue),
                         CimType.UInt32 => (uint)((int)wmiValue),
                         CimType.UInt64
-                          => Convert.ToUInt64(
-                              (string)wmiValue,
-                              (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(typeof(ulong))
-                          ),
+                            => Convert.ToUInt64(
+                                (string)wmiValue,
+                                (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(typeof(ulong))
+                            ),
                         CimType.SInt64
-                          => Convert.ToInt64(
-                              (string)wmiValue,
-                              (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(typeof(long))
-                          ),
+                            => Convert.ToInt64(
+                                (string)wmiValue,
+                                (IFormatProvider)CultureInfo.CurrentCulture.GetFormat(typeof(long))
+                            ),
                         CimType.Char16 => (char)((short)wmiValue),
                         CimType.Object
-                          => new ManagementBaseObject(
-                              new IWbemClassObjectFreeThreaded(
-                                  Marshal.GetIUnknownForObject(wmiValue)
-                              )
-                          ),
+                            => new ManagementBaseObject(
+                                new IWbemClassObjectFreeThreaded(
+                                    Marshal.GetIUnknownForObject(wmiValue)
+                                )
+                            ),
                         _ => wmiValue,
                     };
                 }

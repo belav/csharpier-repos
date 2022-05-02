@@ -20,9 +20,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class SkipNavigation
         : PropertyBase,
-          IMutableSkipNavigation,
-          IConventionSkipNavigation,
-          IRuntimeSkipNavigation
+            IMutableSkipNavigation,
+            IConventionSkipNavigation,
+            IRuntimeSkipNavigation
     {
         private ConfigurationSource? _foreignKeyConfigurationSource;
         private ConfigurationSource? _inverseConfigurationSource;
@@ -211,13 +211,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _foreignKeyConfigurationSource = null;
 
                 return isChanging
-                  ? (ForeignKey?)
+                    ? (ForeignKey?)
                         DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
                             Builder,
                             foreignKey,
                             oldForeignKey
                         )
-                  : foreignKey;
+                    : foreignKey;
             }
 
             var expectedEntityType = IsOnDependent
@@ -227,17 +227,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 var message = IsOnDependent
                     ? CoreStrings.SkipNavigationForeignKeyWrongDependentType(
-                          foreignKey.Properties.Format(),
-                          DeclaringEntityType.DisplayName(),
-                          Name,
-                          expectedEntityType.DisplayName()
-                      )
+                        foreignKey.Properties.Format(),
+                        DeclaringEntityType.DisplayName(),
+                        Name,
+                        expectedEntityType.DisplayName()
+                    )
                     : CoreStrings.SkipNavigationForeignKeyWrongPrincipalType(
-                          foreignKey.Properties.Format(),
-                          DeclaringEntityType.DisplayName(),
-                          Name,
-                          expectedEntityType.DisplayName()
-                      );
+                        foreignKey.Properties.Format(),
+                        DeclaringEntityType.DisplayName(),
+                        Name,
+                        expectedEntityType.DisplayName()
+                    );
                 throw new InvalidOperationException(message);
             }
 
@@ -258,13 +258,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return isChanging
-              ? (ForeignKey?)
+                ? (ForeignKey?)
                     DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationForeignKeyChanged(
                         Builder,
                         foreignKey,
                         oldForeignKey!
                     )
-              : foreignKey;
+                : foreignKey;
         }
 
         /// <summary>
@@ -310,13 +310,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 _inverseConfigurationSource = null;
 
                 return isChanging
-                  ? (SkipNavigation?)
+                    ? (SkipNavigation?)
                         DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
                             Builder,
                             inverse!,
                             oldInverse!
                         )
-                  : inverse;
+                    : inverse;
             }
 
             if (inverse.DeclaringEntityType != TargetEntityType)
@@ -351,13 +351,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UpdateInverseConfigurationSource(configurationSource);
 
             return isChanging
-              ? (SkipNavigation?)
+                ? (SkipNavigation?)
                     DeclaringEntityType.Model.ConventionDispatcher.OnSkipNavigationInverseChanged(
                         Builder,
                         inverse,
                         oldInverse!
                     )
-              : inverse;
+                : inverse;
         }
 
         /// <summary>
@@ -522,8 +522,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetForeignKey(
                 (ForeignKey?)foreignKey,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -549,8 +549,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetInverse(
                 (SkipNavigation?)inverse,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

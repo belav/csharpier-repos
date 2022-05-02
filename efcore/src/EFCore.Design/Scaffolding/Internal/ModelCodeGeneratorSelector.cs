@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
     /// </summary>
     public class ModelCodeGeneratorSelector
         : LanguageBasedSelector<IModelCodeGenerator>,
-          IModelCodeGeneratorSelector
+            IModelCodeGeneratorSelector
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

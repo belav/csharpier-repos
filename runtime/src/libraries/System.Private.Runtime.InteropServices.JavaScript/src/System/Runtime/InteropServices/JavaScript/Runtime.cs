@@ -111,9 +111,9 @@ namespace System.Runtime.InteropServices.JavaScript
                 objForRuntimeType == null
                     ? MethodBase.GetMethodFromHandle(tmp.handle)
                     : MethodBase.GetMethodFromHandle(
-                          tmp.handle,
-                          Type.GetTypeHandle(objForRuntimeType)
-                      );
+                        tmp.handle,
+                        Type.GetTypeHandle(objForRuntimeType)
+                    );
             if (mb == null)
                 return string.Empty;
 

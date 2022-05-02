@@ -1309,8 +1309,8 @@ namespace System.Net.Http
 
     public partial class MultipartContent
         : System.Net.Http.HttpContent,
-          System.Collections.Generic.IEnumerable<System.Net.Http.HttpContent>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Net.Http.HttpContent>,
+            System.Collections.IEnumerable
     {
         public MultipartContent() { }
 
@@ -2137,8 +2137,8 @@ namespace System.Net.Http.Headers
 
     public readonly partial struct HeaderStringValues
         : System.Collections.Generic.IEnumerable<string>,
-          System.Collections.Generic.IReadOnlyCollection<string>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IReadOnlyCollection<string>,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2169,8 +2169,8 @@ namespace System.Net.Http.Headers
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<string>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2254,10 +2254,10 @@ namespace System.Net.Http.Headers
 
     public abstract partial class HttpHeaders
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  System.Collections.Generic.IEnumerable<string>
-              >>,
-          System.Collections.IEnumerable
+                string,
+                System.Collections.Generic.IEnumerable<string>
+            >>,
+            System.Collections.IEnumerable
     {
         protected HttpHeaders() { }
 
@@ -2330,18 +2330,18 @@ namespace System.Net.Http.Headers
 
     public readonly partial struct HttpHeadersNonValidated
         : System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  System.Net.Http.Headers.HeaderStringValues
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  string,
-                  System.Net.Http.Headers.HeaderStringValues
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<
-              string,
-              System.Net.Http.Headers.HeaderStringValues
-          >,
-          System.Collections.IEnumerable
+                string,
+                System.Net.Http.Headers.HeaderStringValues
+            >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    string,
+                    System.Net.Http.Headers.HeaderStringValues
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<
+                string,
+                System.Net.Http.Headers.HeaderStringValues
+            >,
+            System.Collections.IEnumerable
     {
         private readonly object _dummy;
         private readonly int _dummyPrimitive;
@@ -2420,11 +2420,11 @@ namespace System.Net.Http.Headers
 
         public partial struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
-                      string,
-                      System.Net.Http.Headers.HeaderStringValues
-                  >>,
-              System.Collections.IEnumerator,
-              System.IDisposable
+                    string,
+                    System.Net.Http.Headers.HeaderStringValues
+                >>,
+                System.Collections.IEnumerator,
+                System.IDisposable
         {
             private object _dummy;
             private int _dummyPrimitive;
@@ -2453,8 +2453,8 @@ namespace System.Net.Http.Headers
 
     public sealed partial class HttpHeaderValueCollection<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable where T : class
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.IEnumerable where T : class
     {
         internal HttpHeaderValueCollection() { }
 
@@ -2805,7 +2805,7 @@ namespace System.Net.Http.Headers
 
     public sealed partial class MediaTypeWithQualityHeaderValue
         : System.Net.Http.Headers.MediaTypeHeaderValue,
-          System.ICloneable
+            System.ICloneable
     {
         public MediaTypeWithQualityHeaderValue(string mediaType)
             : base(default(System.Net.Http.Headers.MediaTypeHeaderValue)) { }
@@ -2896,7 +2896,7 @@ namespace System.Net.Http.Headers
 
     public partial class NameValueWithParametersHeaderValue
         : System.Net.Http.Headers.NameValueHeaderValue,
-          System.ICloneable
+            System.ICloneable
     {
         protected NameValueWithParametersHeaderValue(
             System.Net.Http.Headers.NameValueWithParametersHeaderValue source
@@ -3342,7 +3342,7 @@ namespace System.Net.Http.Headers
 
     public sealed partial class TransferCodingWithQualityHeaderValue
         : System.Net.Http.Headers.TransferCodingHeaderValue,
-          System.ICloneable
+            System.ICloneable
     {
         public TransferCodingWithQualityHeaderValue(string value)
             : base(default(System.Net.Http.Headers.TransferCodingHeaderValue)) { }

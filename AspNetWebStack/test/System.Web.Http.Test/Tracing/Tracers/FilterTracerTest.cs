@@ -440,10 +440,10 @@ namespace System.Web.Http.Tracing.Tracers
         // Test filter class that exposes all filter behaviors will cause separate filters for each
         class TestFilterAllBehaviors
             : IActionFilter,
-              IExceptionFilter,
-              IAuthorizationFilter,
-              IAuthenticationFilter,
-              IOverrideFilter
+                IExceptionFilter,
+                IAuthorizationFilter,
+                IAuthenticationFilter,
+                IOverrideFilter
         {
             Task<Net.Http.HttpResponseMessage> IActionFilter.ExecuteActionFilterAsync(
                 Controllers.HttpActionContext actionContext,

@@ -715,16 +715,16 @@ namespace System.Data
                     DataTable parent = _IgnoreNSforTableLookup
                         ? _dataSet.Tables[relation.ParentTable.TableName]!
                         : _dataSet.Tables[
-                              relation.ParentTable.TableName,
-                              relation.ParentTable.Namespace
-                          ]!;
+                            relation.ParentTable.TableName,
+                            relation.ParentTable.Namespace
+                        ]!;
 
                     DataTable child = _IgnoreNSforTableLookup
                         ? _dataSet.Tables[relation.ChildTable.TableName]!
                         : _dataSet.Tables[
-                              relation.ChildTable.TableName,
-                              relation.ChildTable.Namespace
-                          ]!;
+                            relation.ChildTable.TableName,
+                            relation.ChildTable.Namespace
+                        ]!;
 
                     DataColumn[] parentColumns = new DataColumn[
                         relation.ParentKey.ColumnsReference.Length

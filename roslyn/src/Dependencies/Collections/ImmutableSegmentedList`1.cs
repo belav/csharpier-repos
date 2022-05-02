@@ -70,10 +70,10 @@ namespace Microsoft.CodeAnalysis.Collections
     /// </devremarks>
     internal readonly partial struct ImmutableSegmentedList<T>
         : IImmutableList<T>,
-          IReadOnlyList<T>,
-          IList<T>,
-          IList,
-          IEquatable<ImmutableSegmentedList<T>>
+            IReadOnlyList<T>,
+            IList<T>,
+            IList,
+            IEquatable<ImmutableSegmentedList<T>>
     {
         /// <inheritdoc cref="ImmutableList{T}.Empty"/>
         public static readonly ImmutableSegmentedList<T> Empty = new(new SegmentedList<T>());

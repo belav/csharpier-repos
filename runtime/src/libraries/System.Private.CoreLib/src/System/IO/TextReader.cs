@@ -265,8 +265,8 @@ namespace System.IO
         ) =>
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
-                  ? ReadAsync(array.Array!, array.Offset, array.Count)
-                  : Task<int>.Factory.StartNew(
+                    ? ReadAsync(array.Array!, array.Offset, array.Count)
+                    : Task<int>.Factory.StartNew(
                         static state =>
                         {
                             var t = (TupleSlim<TextReader, Memory<char>>)state!;
@@ -324,8 +324,8 @@ namespace System.IO
         ) =>
             new ValueTask<int>(
                 MemoryMarshal.TryGetArray(buffer, out ArraySegment<char> array)
-                  ? ReadBlockAsync(array.Array!, array.Offset, array.Count)
-                  : Task<int>.Factory.StartNew(
+                    ? ReadBlockAsync(array.Array!, array.Offset, array.Count)
+                    : Task<int>.Factory.StartNew(
                         static state =>
                         {
                             var t = (TupleSlim<TextReader, Memory<char>>)state!;

@@ -28,13 +28,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
 
             return y == null
-              ? false
-              : PropertyListComparer.Instance.Equals(x.Properties, y.Properties)
-                && (
-                    !_compareAnnotations
-                    || x.GetAnnotations()
-                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
-                );
+                ? false
+                : PropertyListComparer.Instance.Equals(x.Properties, y.Properties)
+                    && (
+                        !_compareAnnotations
+                        || x.GetAnnotations()
+                            .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                    );
         }
 
         public int GetHashCode(IReadOnlyKey obj) =>

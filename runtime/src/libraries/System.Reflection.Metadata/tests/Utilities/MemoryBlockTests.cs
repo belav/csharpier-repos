@@ -442,8 +442,8 @@ namespace System.Reflection.Metadata.Tests
         {
             int heapEnd = heapValue.IndexOf('\0');
             return (heapEnd < 0)
-              ? heapValue.Substring(offset)
-              : heapValue.Substring(offset, heapEnd - offset);
+                ? heapValue.Substring(offset)
+                : heapValue.Substring(offset, heapEnd - offset);
         }
 
         [Fact]

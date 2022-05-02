@@ -2840,10 +2840,10 @@ namespace TestNamespace
                 annotation.Name switch
                 {
                     "Custom:EntityAnnotation"
-                      => new AttributeCodeFragment(
-                          typeof(CustomEntityDataAnnotationAttribute),
-                          new object[] { annotation.Value as string }
-                      ),
+                        => new AttributeCodeFragment(
+                            typeof(CustomEntityDataAnnotationAttribute),
+                            new object[] { annotation.Value as string }
+                        ),
                     _ => base.GenerateDataAnnotation(entityType, annotation)
                 };
 
@@ -2854,10 +2854,10 @@ namespace TestNamespace
                 annotation.Name switch
                 {
                     "Custom:PropertyAnnotation"
-                      => new AttributeCodeFragment(
-                          typeof(CustomPropertyDataAnnotationAttribute),
-                          new object[] { annotation.Value as string }
-                      ),
+                        => new AttributeCodeFragment(
+                            typeof(CustomPropertyDataAnnotationAttribute),
+                            new object[] { annotation.Value as string }
+                        ),
                     _ => base.GenerateDataAnnotation(property, annotation)
                 };
         }

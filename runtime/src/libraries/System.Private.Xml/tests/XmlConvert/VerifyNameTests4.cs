@@ -762,16 +762,16 @@ namespace System.Xml.Tests
             catch (ArgumentNullException e)
             {
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             catch (XmlException e)
             {
                 CError.WriteLine(e.LineNumber);
                 CError.WriteLine(e.LinePosition);
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             return exceptionType == null ? TEST_PASS : TEST_FAIL;
         }
@@ -792,16 +792,16 @@ namespace System.Xml.Tests
             catch (ArgumentNullException e)
             {
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             catch (XmlException e)
             {
                 CError.WriteLine(e.LineNumber);
                 CError.WriteLine(e.LinePosition);
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             return exceptionType == null ? TEST_PASS : TEST_FAIL;
         }
@@ -867,16 +867,16 @@ namespace System.Xml.Tests
             catch (ArgumentNullException e)
             {
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             catch (XmlException e)
             {
                 CError.WriteLine(e.LineNumber);
                 CError.WriteLine(e.LinePosition);
                 return (exceptionType != null && e.GetType().Name == exceptionType.Name)
-                  ? TEST_PASS
-                  : TEST_FAIL;
+                    ? TEST_PASS
+                    : TEST_FAIL;
             }
             return exceptionType == null ? TEST_PASS : TEST_FAIL;
         }

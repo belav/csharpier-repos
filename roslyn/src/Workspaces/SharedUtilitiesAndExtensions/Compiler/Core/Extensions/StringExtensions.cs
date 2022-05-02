@@ -57,8 +57,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var lastOffset = lineText.GetLastNonWhitespaceOffset();
 
             return lastOffset.HasValue && lastOffset.Value < lineText.Length
-              ? lineText.Substring(lastOffset.Value + 1)
-              : string.Empty;
+                ? lineText.Substring(lastOffset.Value + 1)
+                : string.Empty;
         }
 
         public static int GetTextColumn(this string text, int tabSize, int initialColumn)

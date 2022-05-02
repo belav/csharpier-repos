@@ -20,7 +20,7 @@ namespace System.Collections.Immutable
         /// </remarks>
         internal sealed class Comparers
             : IEqualityComparer<HashBucket>,
-              IEqualityComparer<KeyValuePair<TKey, TValue>>
+                IEqualityComparer<KeyValuePair<TKey, TValue>>
         {
             /// <summary>
             /// The default instance to use when all the comparers used are their default values.
@@ -170,8 +170,8 @@ namespace System.Collections.Immutable
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
                 return keyComparer == Default.KeyComparer && valueComparer == Default.ValueComparer
-                  ? Default
-                  : new Comparers(keyComparer, valueComparer);
+                    ? Default
+                    : new Comparers(keyComparer, valueComparer);
             }
 
             /// <summary>
@@ -185,8 +185,8 @@ namespace System.Collections.Immutable
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
                 return _valueComparer == valueComparer
-                  ? this
-                  : Get(this.KeyComparer, valueComparer);
+                    ? this
+                    : Get(this.KeyComparer, valueComparer);
             }
         }
     }

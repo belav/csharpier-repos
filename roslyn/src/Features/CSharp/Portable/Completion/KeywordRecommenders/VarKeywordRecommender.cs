@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         )
         {
             return IsValidContext(context)
-              ? ImmutableArray.Create(new RecommendedKeyword("var"))
-              : ImmutableArray<RecommendedKeyword>.Empty;
+                ? ImmutableArray.Create(new RecommendedKeyword("var"))
+                : ImmutableArray<RecommendedKeyword>.Empty;
         }
     }
 }

@@ -44,13 +44,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var loc =
                 DeclaringSyntaxReferences.Length != 0
                     ? " @ "
-                      + string.Join(
-                          ", ",
-                          System.Linq.Enumerable.Select(
-                              DeclaringSyntaxReferences,
-                              r => r.GetLocation().GetLineSpan()
-                          )
-                      )
+                        + string.Join(
+                            ", ",
+                            System.Linq.Enumerable.Select(
+                                DeclaringSyntaxReferences,
+                                r => r.GetLocation().GetLineSpan()
+                            )
+                        )
                     : null;
             return "SymbolDeclaredCompilationEvent("
                 + name

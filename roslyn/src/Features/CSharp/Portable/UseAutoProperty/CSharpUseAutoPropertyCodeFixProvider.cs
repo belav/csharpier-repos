@@ -28,12 +28,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
     ]
     internal class CSharpUseAutoPropertyCodeFixProvider
         : AbstractUseAutoPropertyCodeFixProvider<
-              TypeDeclarationSyntax,
-              PropertyDeclarationSyntax,
-              VariableDeclaratorSyntax,
-              ConstructorDeclarationSyntax,
-              ExpressionSyntax
-          >
+            TypeDeclarationSyntax,
+            PropertyDeclarationSyntax,
+            VariableDeclaratorSyntax,
+            ConstructorDeclarationSyntax,
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

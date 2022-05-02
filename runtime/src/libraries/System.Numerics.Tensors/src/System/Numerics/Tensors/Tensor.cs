@@ -146,10 +146,10 @@ namespace System.Numerics.Tensors
     // When we cross-compile for frameworks that expose ICloneable this must implement ICloneable as well.
     public abstract class Tensor<T>
         : IList,
-          IList<T>,
-          IReadOnlyList<T>,
-          IStructuralComparable,
-          IStructuralEquatable
+            IList<T>,
+            IReadOnlyList<T>,
+            IStructuralComparable,
+            IStructuralEquatable
     {
         internal static T Zero
         {

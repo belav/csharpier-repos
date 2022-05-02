@@ -3795,8 +3795,8 @@ namespace System.Xml
                 {
                     if (!BinaryPrimitives.TryReadUInt16LittleEndian(data, out ushort value))
                         return _xmlspacePreserve
-                          ? XmlNodeType.SignificantWhitespace
-                          : XmlNodeType.Whitespace;
+                            ? XmlNodeType.SignificantWhitespace
+                            : XmlNodeType.Whitespace;
                     if (value > byte.MaxValue || !XmlCharType.IsWhiteSpace((char)value))
                         break;
                     data = data.Slice(2); // we consumed one ANSI whitespace char
@@ -4142,11 +4142,11 @@ namespace System.Xml
             return _token switch
             {
                 BinXmlToken.XSD_KATMAI_DATEOFFSET
-                  => BinXmlDateTime.XsdKatmaiDateOffsetToDateTimeOffset(_data, _tokDataPos),
+                    => BinXmlDateTime.XsdKatmaiDateOffsetToDateTimeOffset(_data, _tokDataPos),
                 BinXmlToken.XSD_KATMAI_DATETIMEOFFSET
-                  => BinXmlDateTime.XsdKatmaiDateTimeOffsetToDateTimeOffset(_data, _tokDataPos),
+                    => BinXmlDateTime.XsdKatmaiDateTimeOffsetToDateTimeOffset(_data, _tokDataPos),
                 BinXmlToken.XSD_KATMAI_TIMEOFFSET
-                  => BinXmlDateTime.XsdKatmaiTimeOffsetToDateTimeOffset(_data, _tokDataPos),
+                    => BinXmlDateTime.XsdKatmaiTimeOffsetToDateTimeOffset(_data, _tokDataPos),
                 _ => throw ThrowUnexpectedToken(_token),
             };
         }
@@ -4691,8 +4691,8 @@ namespace System.Xml
                     Array.Copy(_data, _tokDataPos, data, 0, _tokLen);
                     value = GetValueConverter(
                             token == BinXmlToken.XSD_BINHEX
-                              ? XmlTypeCode.HexBinary
-                              : XmlTypeCode.Base64Binary
+                                ? XmlTypeCode.HexBinary
+                                : XmlTypeCode.Base64Binary
                         )
                         .ChangeType(data, returnType, namespaceResolver);
                     break;

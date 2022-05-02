@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             return SyntaxFactory.LocalDeclarationStatement(
                 isConst
-                  ? SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.ConstKeyword))
-                  : default,
+                    ? SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.ConstKeyword))
+                    : default,
                 VariableDeclaration(type, name, initializer)
             );
         }
@@ -76,8 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                         name,
                         argumentList: null,
                         expression == null
-                          ? null
-                          : SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
+                            ? null
+                            : SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
                     )
                 )
             );
@@ -115,9 +115,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             expressionOrPattern switch
             {
                 ExpressionSyntax expression
-                  => expression.Parenthesize(includeElasticTrivia, addSimplifierAnnotation),
+                    => expression.Parenthesize(includeElasticTrivia, addSimplifierAnnotation),
                 PatternSyntax pattern
-                  => pattern.Parenthesize(includeElasticTrivia, addSimplifierAnnotation),
+                    => pattern.Parenthesize(includeElasticTrivia, addSimplifierAnnotation),
                 var other => other,
             };
 
@@ -197,12 +197,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 // ref kind syntax when generating for the return parameter vs other parameters.
                 // The return parameter must use ref readonly, like regular methods.
                 RefKind.In when !forFunctionPointerReturnParameter
-                  => SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.InKeyword)),
+                    => SyntaxFactory.TokenList(SyntaxFactory.Token(SyntaxKind.InKeyword)),
                 RefKind.RefReadOnly when forFunctionPointerReturnParameter
-                  => SyntaxFactory.TokenList(
-                      SyntaxFactory.Token(SyntaxKind.RefKeyword),
-                      SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)
-                  ),
+                    => SyntaxFactory.TokenList(
+                        SyntaxFactory.Token(SyntaxKind.RefKeyword),
+                        SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword)
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(refKind),
             };
 

@@ -138,10 +138,10 @@ namespace System.Diagnostics.Tracing
             unchecked
             {
                 return (byte)settingValue1 == settingValue1
-                  ? (byte)settingValue1
-                  : (byte)settingValue2 == settingValue2
-                      ? (byte)settingValue2
-                      : defaultValue;
+                    ? (byte)settingValue1
+                    : (byte)settingValue2 == settingValue2
+                        ? (byte)settingValue2
+                        : defaultValue;
             }
         }
 
@@ -196,7 +196,7 @@ namespace System.Diagnostics.Tracing
                 EventSourceFieldFormat.Unsigned => TraceLoggingDataType.UInt8,
 #endif
                 _
-                  => MakeDataType(native, format),
+                    => MakeDataType(native, format),
             };
         }
 
@@ -222,7 +222,7 @@ namespace System.Diagnostics.Tracing
                 EventSourceFieldFormat.Unsigned => TraceLoggingDataType.UInt16,
 #endif
                 _
-                  => MakeDataType(native, format),
+                    => MakeDataType(native, format),
             };
         }
 
@@ -250,7 +250,7 @@ namespace System.Diagnostics.Tracing
                 EventSourceFieldFormat.NTStatus => TraceLoggingDataType.NTStatus,
 #endif
                 EventFieldFormat.HResult
-                  => TraceLoggingDataType.HResult,
+                    => TraceLoggingDataType.HResult,
 #if false
                 case EventSourceFieldFormat.Signed:
                     return TraceLoggingDataType.Int32;
@@ -258,7 +258,7 @@ namespace System.Diagnostics.Tracing
                     return TraceLoggingDataType.UInt32;
 #endif
                 _
-                  => MakeDataType(native, format),
+                    => MakeDataType(native, format),
             };
         }
 
@@ -283,7 +283,7 @@ namespace System.Diagnostics.Tracing
                 EventSourceFieldFormat.Unsigned => TraceLoggingDataType.UInt64,
 #endif
                 _
-                  => MakeDataType(native, format),
+                    => MakeDataType(native, format),
             };
         }
 
@@ -307,7 +307,7 @@ namespace System.Diagnostics.Tracing
                 EventSourceFieldFormat.Unsigned => UIntPtrType,
 #endif
                 _
-                  => MakeDataType(native, format),
+                    => MakeDataType(native, format),
             };
         }
 
@@ -320,19 +320,19 @@ namespace System.Diagnostics.Tracing
                 TraceLoggingDataType.Boolean8
                 or TraceLoggingDataType.Int8
                 or TraceLoggingDataType.UInt8
-                  => Format8(format, nativeFormat),
+                    => Format8(format, nativeFormat),
                 TraceLoggingDataType.Char16
                 or TraceLoggingDataType.Int16
                 or TraceLoggingDataType.UInt16
-                  => Format16(format, nativeFormat),
+                    => Format16(format, nativeFormat),
                 TraceLoggingDataType.Int32
                 or TraceLoggingDataType.UInt32
                 or TraceLoggingDataType.Float
-                  => Format32(format, nativeFormat),
+                    => Format32(format, nativeFormat),
                 TraceLoggingDataType.Int64
                 or TraceLoggingDataType.UInt64
                 or TraceLoggingDataType.Double
-                  => Format64(format, nativeFormat),
+                    => Format64(format, nativeFormat),
                 _ => MakeDataType(nativeFormat, format),
             };
 

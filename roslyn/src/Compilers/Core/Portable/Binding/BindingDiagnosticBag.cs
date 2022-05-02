@@ -74,8 +74,8 @@ namespace Microsoft.CodeAnalysis
             : this(
                 usePool ? DiagnosticBag.GetInstance() : new DiagnosticBag(),
                 usePool
-                  ? PooledHashSet<TAssemblySymbol>.GetInstance()
-                  : new HashSet<TAssemblySymbol>()
+                    ? PooledHashSet<TAssemblySymbol>.GetInstance()
+                    : new HashSet<TAssemblySymbol>()
             ) { }
 
         internal bool AccumulatesDependencies => DependenciesBag is object;

@@ -603,8 +603,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var cartItem = async
                 ? await query.FirstOrDefaultAsync(
-                      ci => ci.CartId == shoppingCartId && ci.CartItemId == id
-                  )
+                    ci => ci.CartId == shoppingCartId && ci.CartItemId == id
+                )
                 : query.FirstOrDefault(ci => ci.CartId == shoppingCartId && ci.CartItemId == id);
 
             Assert.Null(cartItem);

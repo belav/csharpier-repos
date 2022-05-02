@@ -274,8 +274,8 @@ public class TestMatrix : IEnumerable<object[]>
                 RuntimeInformation.OSArchitecture == Architecture.Arm
                 || RuntimeInformation.OSArchitecture == Architecture.X86
             )
-              ? $"Cannot run {arch} on your current system."
-              : null;
+                ? $"Cannot run {arch} on your current system."
+                : null;
         }
 
         // No x86 runtimes available on MacOS or Linux.

@@ -1717,7 +1717,7 @@ value:1,alignment:2:format:Y";
                 (useDefaultParameters, useBoolReturns, constructorBoolArg) switch
                 {
                     (useDefaultParameters: false, useBoolReturns: false, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size       80 (0x50)
   .maxstack  4
@@ -1755,7 +1755,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: false, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size       84 (0x54)
   .maxstack  4
@@ -1797,7 +1797,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: false, useBoolReturns: true, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size       92 (0x5c)
   .maxstack  4
@@ -1842,7 +1842,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: true, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size       96 (0x60)
   .maxstack  4
@@ -1891,7 +1891,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: false, useBoolReturns: false, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size       84 (0x54)
   .maxstack  4
@@ -1933,7 +1933,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: false, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size       88 (0x58)
   .maxstack  4
@@ -1979,7 +1979,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: false, useBoolReturns: true, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size       96 (0x60)
   .maxstack  4
@@ -2028,7 +2028,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: true, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size      100 (0x64)
   .maxstack  4
@@ -2187,7 +2187,7 @@ value:1,alignment:2:format:Y";
                 (useDefaultParameters, useBoolReturns, constructorBoolArg) switch
                 {
                     (useDefaultParameters: false, useBoolReturns: false, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size       89 (0x59)
   .maxstack  4
@@ -2226,7 +2226,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: false, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size       93 (0x5d)
   .maxstack  4
@@ -2269,7 +2269,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: false, useBoolReturns: true, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size      101 (0x65)
   .maxstack  4
@@ -2315,7 +2315,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: true, constructorBoolArg: false)
-                      => @"
+                        => @"
 {
   // Code size      105 (0x69)
   .maxstack  4
@@ -2365,7 +2365,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: false, useBoolReturns: false, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size       93 (0x5d)
   .maxstack  4
@@ -2408,7 +2408,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: false, useBoolReturns: true, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size      105 (0x69)
   .maxstack  4
@@ -2458,7 +2458,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: false, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size       97 (0x61)
   .maxstack  4
@@ -2505,7 +2505,7 @@ value:1,alignment:2:format:Y";
 }
 ",
                     (useDefaultParameters: true, useBoolReturns: true, constructorBoolArg: true)
-                      => @"
+                        => @"
 {
   // Code size      109 (0x6d)
   .maxstack  4
@@ -2657,7 +2657,7 @@ Task<int> Hole() => Task.FromResult(1);";
             verifier.VerifyIL(
                 "Program.<<Main>$>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
                 !expression.Contains("+")
-                  ? @"
+                    ? @"
 {
   // Code size      164 (0xa4)
   .maxstack  3
@@ -2734,7 +2734,7 @@ Task<int> Hole() => Task.FromResult(1);";
   IL_00a3:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size      174 (0xae)
   .maxstack  3
@@ -3146,7 +3146,7 @@ Console.WriteLine("
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 expression.Contains('+')
-                  ? @"
+                    ? @"
 {
   // Code size       34 (0x22)
   .maxstack  3
@@ -3163,7 +3163,7 @@ Console.WriteLine("
   IL_0021:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       24 (0x18)
   .maxstack  2
@@ -3211,7 +3211,7 @@ Console.WriteLine("
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 expression.Contains('+')
-                  ? @"
+                    ? @"
 {
   // Code size       34 (0x22)
   .maxstack  2
@@ -3228,7 +3228,7 @@ Console.WriteLine("
   IL_0021:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       24 (0x18)
   .maxstack  2
@@ -4803,8 +4803,8 @@ public class CustomHandler
                 compilation,
                 expectedOutput: ExecutionConditionUtil.IsMonoOrCoreClr ? expectedOutput : null,
                 verify: ExecutionConditionUtil.IsMonoOrCoreClr
-                  ? Verification.Passes
-                  : Verification.Skipped
+                    ? Verification.Passes
+                    : Verification.Skipped
             );
 
         [Theory]
@@ -4846,7 +4846,7 @@ format:f"
                 (type, useBoolReturns) switch
                 {
                     (type: "struct", useBoolReturns: true)
-                      => @"
+                        => @"
 {
   // Code size       67 (0x43)
   .maxstack  4
@@ -4879,7 +4879,7 @@ format:f"
 }
 ",
                     (type: "struct", useBoolReturns: false)
-                      => @"
+                        => @"
 {
   // Code size       61 (0x3d)
   .maxstack  4
@@ -4908,7 +4908,7 @@ format:f"
 }
 ",
                     (type: "class", useBoolReturns: true)
-                      => @"
+                        => @"
 {
   // Code size       55 (0x37)
   .maxstack  4
@@ -4937,7 +4937,7 @@ format:f"
 }
 ",
                     (type: "class", useBoolReturns: false)
-                      => @"
+                        => @"
 {
   // Code size       47 (0x2f)
   .maxstack  5
@@ -5197,7 +5197,7 @@ literal:Literal"
             verifier.VerifyIL(
                 @"<top-level-statements-entry-point>",
                 expression.Contains('+')
-                  ? @"
+                    ? @"
 {
   // Code size       37 (0x25)
   .maxstack  2
@@ -5212,7 +5212,7 @@ literal:Literal"
   IL_0024:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -5938,7 +5938,7 @@ class C
             verifier.VerifyIL(
                 @"Program.<>c.<<Main>$>b__0_0()",
                 !expression.Contains('+')
-                  ? @"
+                    ? @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -5949,7 +5949,7 @@ class C
   IL_0010:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       27 (0x1b)
   .maxstack  2
@@ -6271,7 +6271,7 @@ public partial struct CustomHandler
             verifier.VerifyIL(
                 @"Program.<>c.<<Main>$>b__0_0(bool)",
                 !expression.Contains('+')
-                  ? @"
+                    ? @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -6290,7 +6290,7 @@ public partial struct CustomHandler
   IL_0022:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       45 (0x2d)
   .maxstack  2
@@ -6612,7 +6612,7 @@ public partial struct CustomHandler
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 !expression.Contains('+')
-                  ? @"
+                    ? @"
 {
   // Code size       56 (0x38)
   .maxstack  2
@@ -6635,7 +6635,7 @@ public partial struct CustomHandler
   IL_0037:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       66 (0x42)
   .maxstack  2
@@ -6990,7 +6990,7 @@ public partial struct CustomHandler
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 !expression.Contains('+')
-                  ? @"
+                    ? @"
 {
   // Code size       59 (0x3b)
   .maxstack  2
@@ -7017,7 +7017,7 @@ public partial struct CustomHandler
   IL_003a:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       69 (0x45)
   .maxstack  2
@@ -9135,7 +9135,7 @@ literal:text
                 verifier.VerifyIL(
                     "<top-level-statements-entry-point>",
                     extraConstructorArg == ""
-                      ? @"
+                        ? @"
 {
   // Code size       36 (0x24)
   .maxstack  4
@@ -9161,7 +9161,7 @@ literal:text
   IL_0023:  ret
 }
 "
-                      : @"
+                        : @"
 {
   // Code size       43 (0x2b)
   .maxstack  4
@@ -9786,29 +9786,29 @@ public partial struct CustomHandler
             var expectedDiagnostics =
                 extraConstructorArg == ""
                     ? new DiagnosticDescription[]
-                      {
-                          // (1,5): error CS1503: Argument 3: cannot convert from 'int' to 'string'
-                          // C.M(1, $"");
-                          Diagnostic(ErrorCode.ERR_BadArgType, "1")
-                              .WithArguments("3", "int", "string")
-                              .WithLocation(1, 5)
-                      }
+                    {
+                        // (1,5): error CS1503: Argument 3: cannot convert from 'int' to 'string'
+                        // C.M(1, $"");
+                        Diagnostic(ErrorCode.ERR_BadArgType, "1")
+                            .WithArguments("3", "int", "string")
+                            .WithLocation(1, 5)
+                    }
                     : new DiagnosticDescription[]
-                      {
-                          // (1,5): error CS1503: Argument 3: cannot convert from 'int' to 'string'
-                          // C.M(1, $"");
-                          Diagnostic(ErrorCode.ERR_BadArgType, "1")
-                              .WithArguments("3", "int", "string")
-                              .WithLocation(1, 5),
-                          // (1,8): error CS7036: There is no argument given that corresponds to the required formal parameter 'success' of 'CustomHandler.CustomHandler(int, int, string, out bool)'
-                          // C.M(1, $"");
-                          Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, expression)
-                              .WithArguments(
-                                  "success",
-                                  "CustomHandler.CustomHandler(int, int, string, out bool)"
-                              )
-                              .WithLocation(1, 8)
-                      };
+                    {
+                        // (1,5): error CS1503: Argument 3: cannot convert from 'int' to 'string'
+                        // C.M(1, $"");
+                        Diagnostic(ErrorCode.ERR_BadArgType, "1")
+                            .WithArguments("3", "int", "string")
+                            .WithLocation(1, 5),
+                        // (1,8): error CS7036: There is no argument given that corresponds to the required formal parameter 'success' of 'CustomHandler.CustomHandler(int, int, string, out bool)'
+                        // C.M(1, $"");
+                        Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, expression)
+                            .WithArguments(
+                                "success",
+                                "CustomHandler.CustomHandler(int, int, string, out bool)"
+                            )
+                            .WithLocation(1, 8)
+                    };
 
             var comp = CreateCompilation(
                 new[] { code, executableCode, InterpolatedStringHandlerArgumentAttribute, handler }
@@ -9952,7 +9952,7 @@ literal:2"
                 verifier.VerifyIL(
                     "<top-level-statements-entry-point>",
                     extraConstructorArg == ""
-                      ? @"
+                        ? @"
 {
   // Code size       39 (0x27)
   .maxstack  5
@@ -9976,7 +9976,7 @@ literal:2"
   IL_0026:  ret
 }
 "
-                      : @"
+                        : @"
 {
   // Code size       46 (0x2e)
   .maxstack  5
@@ -10115,7 +10115,7 @@ literal:literal
                 verifier.VerifyIL(
                     "<top-level-statements-entry-point>",
                     (extraConstructorArg == "")
-                      ? @"
+                        ? @"
 {
   // Code size       44 (0x2c)
   .maxstack  7
@@ -10146,7 +10146,7 @@ literal:literal
   IL_002b:  ret
 }
 "
-                      : @"
+                        : @"
 {
   // Code size       52 (0x34)
   .maxstack  7
@@ -10262,7 +10262,7 @@ o in M
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       67 (0x43)
   .maxstack  8
@@ -10306,7 +10306,7 @@ o in M
   IL_0042:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       76 (0x4c)
   .maxstack  9
@@ -10448,7 +10448,7 @@ literal:literal
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       45 (0x2d)
   .maxstack  7
@@ -10476,7 +10476,7 @@ literal:literal
   IL_002c:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       52 (0x34)
   .maxstack  7
@@ -10612,7 +10612,7 @@ literal:literal
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       56 (0x38)
   .maxstack  9
@@ -10648,7 +10648,7 @@ literal:literal
   IL_0037:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       65 (0x41)
   .maxstack  9
@@ -10774,7 +10774,7 @@ literal:literal
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       43 (0x2b)
   .maxstack  7
@@ -10799,7 +10799,7 @@ literal:literal
   IL_002a:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       50 (0x32)
   .maxstack  7
@@ -10900,7 +10900,7 @@ public struct CustomHandler
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       19 (0x13)
   .maxstack  4
@@ -10913,7 +10913,7 @@ public struct CustomHandler
   IL_0012:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       21 (0x15)
   .maxstack  5
@@ -10991,7 +10991,7 @@ public struct CustomHandler
                 )
                 .VerifyDiagnostics(
                     (extraConstructorArg == "")
-                      ? new[]
+                        ? new[]
                         {
                             // (1,12): error CS7036: There is no argument given that corresponds to the required formal parameter 'i' of 'CustomHandler.CustomHandler(int, int, int)'
                             // C.M(1, "", $"");
@@ -11004,7 +11004,7 @@ public struct CustomHandler
                                 .WithArguments("3", "out")
                                 .WithLocation(1, 12)
                         }
-                      : new[]
+                        : new[]
                         {
                             // (1,12): error CS7036: There is no argument given that corresponds to the required formal parameter 'i' of 'CustomHandler.CustomHandler(int, int, int, out bool)'
                             // C.M(1, "", $"");
@@ -11102,7 +11102,7 @@ literal:literal
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       52 (0x34)
   .maxstack  8
@@ -11132,7 +11132,7 @@ literal:literal
   IL_0033:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       59 (0x3b)
   .maxstack  8
@@ -11247,7 +11247,7 @@ literal:literal
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       52 (0x34)
   .maxstack  8
@@ -11277,7 +11277,7 @@ literal:literal
   IL_0033:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       59 (0x3b)
   .maxstack  8
@@ -11394,7 +11394,7 @@ literal:literal
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 (extraConstructorArg == "")
-                  ? @"
+                    ? @"
 {
   // Code size       51 (0x33)
   .maxstack  9
@@ -11428,7 +11428,7 @@ literal:literal
   IL_0032:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       59 (0x3b)
   .maxstack  9
@@ -11625,7 +11625,7 @@ public partial struct CustomHandler
 
             comp.VerifyDiagnostics(
                 extraConstructorArg != ""
-                  ? new[]
+                    ? new[]
                     {
                         // (6,15): error CS7036: There is no argument given that corresponds to the required formal parameter 'success' of 'CustomHandler.CustomHandler(int, int, ref C, out bool)'
                         // GetC(ref c).M($"literal");
@@ -11641,7 +11641,7 @@ public partial struct CustomHandler
                             .WithArguments("3", "ref")
                             .WithLocation(6, 15)
                     }
-                  : new[]
+                    : new[]
                     {
                         // (6,15): error CS1620: Argument 3 must be passed with the 'ref' keyword
                         // GetC(ref c).M($"literal");
@@ -11751,13 +11751,13 @@ public partial struct CustomHandler
                 symbolValidator: validator,
                 sourceSymbolValidator: validator,
                 verify: ExecutionConditionUtil.IsMonoOrCoreClr
-                  ? Verification.Passes
-                  : Verification.Skipped
+                    ? Verification.Passes
+                    : Verification.Skipped
             );
             verifier.VerifyIL(
                 "<top-level-statements-entry-point>",
                 refness == "in"
-                  ? @"
+                    ? @"
 {
   // Code size       46 (0x2e)
   .maxstack  4
@@ -11786,7 +11786,7 @@ public partial struct CustomHandler
   IL_002d:  ret
 }
 "
-                  : @"
+                    : @"
 {
   // Code size       48 (0x30)
   .maxstack  5
@@ -12521,7 +12521,7 @@ format:
                 (useBoolReturns, validityParameter) switch
                 {
                     (useBoolReturns: false, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       85 (0x55)
   .maxstack  6
@@ -12572,7 +12572,7 @@ format:
 }
 ",
                     (useBoolReturns: false, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       95 (0x5f)
   .maxstack  6
@@ -12627,7 +12627,7 @@ format:
 }
 ",
                     (useBoolReturns: true, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       91 (0x5b)
   .maxstack  6
@@ -12682,7 +12682,7 @@ format:
 }
 ",
                     (useBoolReturns: true, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       97 (0x61)
   .maxstack  6
@@ -12838,7 +12838,7 @@ GetInt2
                 (useBoolReturns, validityParameter) switch
                 {
                     (useBoolReturns: false, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       72 (0x48)
   .maxstack  7
@@ -12882,7 +12882,7 @@ GetInt2
 }
 ",
                     (useBoolReturns: false, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       81 (0x51)
   .maxstack  6
@@ -12933,7 +12933,7 @@ GetInt2
 }
 ",
                     (useBoolReturns: true, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       78 (0x4e)
   .maxstack  7
@@ -12981,7 +12981,7 @@ GetInt2
 }
 ",
                     (useBoolReturns: true, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       83 (0x53)
   .maxstack  7
@@ -13127,7 +13127,7 @@ GetInt2
                 (useBoolReturns, validityParameter) switch
                 {
                     (useBoolReturns: false, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       72 (0x48)
   .maxstack  7
@@ -13171,7 +13171,7 @@ GetInt2
 }
 ",
                     (useBoolReturns: false, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       81 (0x51)
   .maxstack  6
@@ -13222,7 +13222,7 @@ GetInt2
 }
 ",
                     (useBoolReturns: true, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       78 (0x4e)
   .maxstack  7
@@ -13270,7 +13270,7 @@ GetInt2
 }
 ",
                     (useBoolReturns: true, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       83 (0x53)
   .maxstack  7
@@ -13572,7 +13572,7 @@ format:
                 (useBoolReturns, validityParameter) switch
                 {
                     (useBoolReturns: false, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       59 (0x3b)
   .maxstack  6
@@ -13607,7 +13607,7 @@ format:
 }
 ",
                     (useBoolReturns: false, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       77 (0x4d)
   .maxstack  6
@@ -13656,7 +13656,7 @@ format:
 }
 ",
                     (useBoolReturns: true, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       68 (0x44)
   .maxstack  5
@@ -13699,7 +13699,7 @@ format:
 }
 ",
                     (useBoolReturns: true, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       87 (0x57)
   .maxstack  6
@@ -14356,7 +14356,7 @@ public partial class CustomHandler
                 (useBoolReturns, validityParameter) switch
                 {
                     (useBoolReturns: false, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       27 (0x1b)
   .maxstack  5
@@ -14380,7 +14380,7 @@ public partial class CustomHandler
 }
 ",
                     (useBoolReturns: false, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       31 (0x1f)
   .maxstack  6
@@ -14407,7 +14407,7 @@ public partial class CustomHandler
 }
 ",
                     (useBoolReturns: true, validityParameter: false)
-                      => @"
+                        => @"
 {
   // Code size       27 (0x1b)
   .maxstack  5
@@ -14431,7 +14431,7 @@ public partial class CustomHandler
 }
 ",
                     (useBoolReturns: true, validityParameter: true)
-                      => @"
+                        => @"
 {
   // Code size       31 (0x1f)
   .maxstack  6

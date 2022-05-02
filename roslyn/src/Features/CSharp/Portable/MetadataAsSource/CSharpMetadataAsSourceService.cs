@@ -191,16 +191,17 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
             return node switch
             {
                 CompilationUnitSyntax compilationUnit
-                  => (TSyntax)
-                      (object)
-                          compilationUnit.WithMembers(
-                              AddNullableRegions(compilationUnit.Members, cancellationToken)
-                          ),
+                    => (TSyntax)
+                        (object)
+                            compilationUnit.WithMembers(
+                                AddNullableRegions(compilationUnit.Members, cancellationToken)
+                            ),
                 NamespaceDeclarationSyntax ns
-                  => (TSyntax)
-                      (object)ns.WithMembers(AddNullableRegions(ns.Members, cancellationToken)),
+                    => (TSyntax)
+                        (object)ns.WithMembers(AddNullableRegions(ns.Members, cancellationToken)),
                 TypeDeclarationSyntax type
-                  => (TSyntax)(object)AddNullableRegionsAroundTypeMembers(type, cancellationToken),
+                    => (TSyntax)
+                        (object)AddNullableRegionsAroundTypeMembers(type, cancellationToken),
                 _ => node,
             };
         }

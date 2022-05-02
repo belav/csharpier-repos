@@ -113,8 +113,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                     _cancellationToken
                 );
                 return symbol == null
-                  ? ImmutableArray<ISymbol>.Empty
-                  : ImmutableArray.Create<ISymbol>(symbol);
+                    ? ImmutableArray<ISymbol>.Empty
+                    : ImmutableArray.Create<ISymbol>(symbol);
             }
             else if (_context.IsNamespaceDeclarationNameContext)
             {
@@ -131,19 +131,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             return node switch
             {
                 MemberAccessExpressionSyntax(SyntaxKind.SimpleMemberAccessExpression) memberAccess
-                  => GetSymbolsOffOfExpression(memberAccess.Expression),
+                    => GetSymbolsOffOfExpression(memberAccess.Expression),
                 MemberAccessExpressionSyntax(SyntaxKind.PointerMemberAccessExpression) memberAccess
-                  => GetSymbolsOffOfDereferencedExpression(memberAccess.Expression),
+                    => GetSymbolsOffOfDereferencedExpression(memberAccess.Expression),
 
                 // This code should be executing only if the cursor is between two dots in a dotdot token.
                 RangeExpressionSyntax rangeExpression
-                  => GetSymbolsOffOfExpression(rangeExpression.LeftOperand),
+                    => GetSymbolsOffOfExpression(rangeExpression.LeftOperand),
                 QualifiedNameSyntax qualifiedName => GetSymbolsOffOfName(qualifiedName.Left),
                 AliasQualifiedNameSyntax aliasName => GetSymbolsOffOffAlias(aliasName.Alias),
                 MemberBindingExpressionSyntax _
-                  => GetSymbolsOffOfConditionalReceiver(
-                      node.GetParentConditionalAccessExpression()!.Expression
-                  ),
+                    => GetSymbolsOffOfConditionalReceiver(
+                        node.GetParentConditionalAccessExpression()!.Expression
+                    ),
                 _ => default,
             };
         }
@@ -353,8 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
             {
                 return new RecommendedSymbols(
                     usingDirective.StaticKeyword.IsKind(SyntaxKind.StaticKeyword)
-                      ? symbols.WhereAsArray(s => !s.IsDelegateType() && !s.IsInterfaceType())
-                      : symbols.WhereAsArray(s => s.IsNamespace())
+                        ? symbols.WhereAsArray(s => !s.IsDelegateType() && !s.IsInterfaceType())
+                        : symbols.WhereAsArray(s => s.IsNamespace())
                 );
             }
 
@@ -641,8 +641,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations
                 out _,
                 out var container
             )
-              ? container
-              : semanticModel.GetTypeInfo(originalExpression, _cancellationToken).Type;
+                ? container
+                : semanticModel.GetTypeInfo(originalExpression, _cancellationToken).Type;
         }
 
         private void AddIndexers(ITypeSymbol container, ArrayBuilder<ISymbol> symbols)

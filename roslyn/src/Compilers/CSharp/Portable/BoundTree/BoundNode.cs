@@ -241,9 +241,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _attributes |= value.Annotation switch
                 {
                     CodeAnalysis.NullableAnnotation.Annotated
-                      => BoundNodeAttributes.TopLevelAnnotated,
+                        => BoundNodeAttributes.TopLevelAnnotated,
                     CodeAnalysis.NullableAnnotation.NotAnnotated
-                      => BoundNodeAttributes.TopLevelNotAnnotated,
+                        => BoundNodeAttributes.TopLevelNotAnnotated,
                     CodeAnalysis.NullableAnnotation.None => BoundNodeAttributes.TopLevelNone,
                     var a => throw ExceptionUtilities.UnexpectedValue(a),
                 };
@@ -280,9 +280,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var annotation = (_attributes & BoundNodeAttributes.TopLevelAnnotationMask) switch
                 {
                     BoundNodeAttributes.TopLevelAnnotated
-                      => CodeAnalysis.NullableAnnotation.Annotated,
+                        => CodeAnalysis.NullableAnnotation.Annotated,
                     BoundNodeAttributes.TopLevelNotAnnotated
-                      => CodeAnalysis.NullableAnnotation.NotAnnotated,
+                        => CodeAnalysis.NullableAnnotation.NotAnnotated,
                     BoundNodeAttributes.TopLevelNone => CodeAnalysis.NullableAnnotation.None,
                     var mask => throw ExceptionUtilities.UnexpectedValue(mask)
                 };
@@ -438,7 +438,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     goto default;
 
                 case BoundValuePlaceholder valuePlaceholder
-                      when (object)valuePlaceholder == placeholder:
+                when (object)valuePlaceholder == placeholder:
                     return Conversion.Identity;
 
                 default:

@@ -166,8 +166,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             return
                 !formattedSourceText.ContentEquals(originalSourceText)
                 || !formattedSourceText.Encoding?.Equals(originalSourceText.Encoding) == true
-              ? (originalSourceText, formattedSourceText)
-              : (originalSourceText, null);
+                ? (originalSourceText, formattedSourceText)
+                : (originalSourceText, null);
         }
 
         /// <summary>
@@ -281,10 +281,10 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                     : isAdd
                         ? string.Format(Resources.Insert_0, textChange)
                         : string.Format(
-                              Resources.Replace_0_characters_with_1,
-                              change.Span.Length,
-                              textChange
-                          );
+                            Resources.Replace_0_characters_with_1,
+                            change.Span.Length,
+                            textChange
+                        );
                 return $" {message}";
             }
         }

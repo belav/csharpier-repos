@@ -66,11 +66,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var isMaybeNull = memberInfo switch
             {
                 FieldInfo f
-                  => f.CustomAttributes.Any(a => a.AttributeType == typeof(MaybeNullAttribute)),
+                    => f.CustomAttributes.Any(a => a.AttributeType == typeof(MaybeNullAttribute)),
                 PropertyInfo p
-                  => p.GetMethod?.ReturnParameter?.CustomAttributes?.Any(
-                      a => a.AttributeType == typeof(MaybeNullAttribute)
-                  ) == true,
+                    => p.GetMethod?.ReturnParameter?.CustomAttributes?.Any(
+                        a => a.AttributeType == typeof(MaybeNullAttribute)
+                    ) == true,
                 _ => false
             };
 

@@ -15,7 +15,7 @@ namespace System.Xaml.Permissions
 #endif
     public sealed partial class XamlLoadPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public XamlLoadPermission(
             System.Collections.Generic.IEnumerable<System.Xaml.Permissions.XamlAccessLevel> allowedAccess

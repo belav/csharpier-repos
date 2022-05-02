@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal class CommonParameterWellKnownAttributeData
         : WellKnownAttributeData,
-          IMarshalAsAttributeTarget
+            IMarshalAsAttributeTarget
     {
         #region OutAttribute
         private bool _hasOutAttribute;

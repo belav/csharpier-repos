@@ -112,14 +112,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             using var scope = services.CreateScope();
             var scaffolder = scope.ServiceProvider.GetRequiredService<IMigrationsScaffolder>();
             var migration = string.IsNullOrEmpty(@namespace)
-              // TODO: Honor _nullable (issue #18950)
-              ? scaffolder.ScaffoldMigration(
+                // TODO: Honor _nullable (issue #18950)
+                ? scaffolder.ScaffoldMigration(
                     name,
                     _rootNamespace ?? string.Empty,
                     subNamespace,
                     _language
                 )
-              : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
+                : scaffolder.ScaffoldMigration(name, null, @namespace, _language);
             return scaffolder.Save(_projectDir, migration, outputDir);
         }
 
@@ -136,14 +136,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var subPath = outputDir.Substring(_projectDir.Length);
 
             return !string.IsNullOrWhiteSpace(subPath)
-              ? string.Join(
+                ? string.Join(
                     ".",
                     subPath.Split(
                         new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
                         StringSplitOptions.RemoveEmptyEntries
                     )
                 )
-              : null;
+                : null;
         }
 
         /// <summary>

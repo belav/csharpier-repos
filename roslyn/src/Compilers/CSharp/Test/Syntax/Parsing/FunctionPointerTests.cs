@@ -218,8 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
                         {
                             N(
                                 convention == "managed"
-                                  ? SyntaxKind.ManagedKeyword
-                                  : SyntaxKind.UnmanagedKeyword
+                                    ? SyntaxKind.ManagedKeyword
+                                    : SyntaxKind.UnmanagedKeyword
                             );
                         }
                         N(SyntaxKind.FunctionPointerParameterList);

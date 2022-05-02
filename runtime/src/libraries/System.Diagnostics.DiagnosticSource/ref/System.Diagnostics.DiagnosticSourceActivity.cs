@@ -370,10 +370,10 @@ namespace System.Diagnostics
 
         public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
-                      string,
-                      object?
-                  >>,
-              System.Collections.IEnumerator
+                    string,
+                    object?
+                >>,
+                System.Collections.IEnumerator
         {
             public System.Collections.Generic.KeyValuePair<string, object?> Current
             {
@@ -1080,13 +1080,13 @@ namespace System.Diagnostics
     )]
     public struct TagList
         : System.Collections.Generic.IList<System.Collections.Generic.KeyValuePair<
-                  string,
-                  object?
-              >>,
-          System.Collections.Generic.IReadOnlyList<System.Collections.Generic.KeyValuePair<
-                  string,
-                  object?
-              >>
+                string,
+                object?
+            >>,
+            System.Collections.Generic.IReadOnlyList<System.Collections.Generic.KeyValuePair<
+                    string,
+                    object?
+                >>
     {
         public TagList(
             System.ReadOnlySpan<System.Collections.Generic.KeyValuePair<string, object?>> tagList
@@ -1183,10 +1183,10 @@ namespace System.Diagnostics
 
         public struct Enumerator
             : System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<
-                      string,
-                      object?
-                  >>,
-              System.Collections.IEnumerator
+                    string,
+                    object?
+                >>,
+                System.Collections.IEnumerator
         {
             public System.Collections.Generic.KeyValuePair<string, object?> Current => throw null;
             object System.Collections.IEnumerator.Current => throw null;

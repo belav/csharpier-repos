@@ -480,7 +480,7 @@ namespace System.Web.Http.WebHost
             bool isBuffered = httpResponseBase.BufferOutput;
 
             return isBuffered
-              ? WriteBufferedResponseContentAsync(
+                ? WriteBufferedResponseContentAsync(
                     httpContextBase,
                     request,
                     response,
@@ -488,7 +488,7 @@ namespace System.Web.Http.WebHost
                     exceptionHandler,
                     cancellationToken
                 )
-              : WriteStreamedResponseContentAsync(
+                : WriteStreamedResponseContentAsync(
                     httpContextBase,
                     request,
                     response,

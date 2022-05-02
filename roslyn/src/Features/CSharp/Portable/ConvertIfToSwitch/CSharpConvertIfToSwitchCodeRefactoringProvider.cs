@@ -22,11 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
     ]
     internal sealed partial class CSharpConvertIfToSwitchCodeRefactoringProvider
         : AbstractConvertIfToSwitchCodeRefactoringProvider<
-              IfStatementSyntax,
-              ExpressionSyntax,
-              BinaryExpressionSyntax,
-              PatternSyntax
-          >
+            IfStatementSyntax,
+            ExpressionSyntax,
+            BinaryExpressionSyntax,
+            PatternSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -49,11 +49,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertIfToSwitch
                 | (version >= LanguageVersion.CSharp8 ? Feature.SwitchExpression : 0)
                 | (
                     version.IsCSharp9OrAbove()
-                      ? Feature.RelationalPattern
-                        | Feature.OrPattern
-                        | Feature.AndPattern
-                        | Feature.TypePattern
-                      : 0
+                        ? Feature.RelationalPattern
+                            | Feature.OrPattern
+                            | Feature.AndPattern
+                            | Feature.TypePattern
+                        : 0
                 );
             return new CSharpAnalyzer(syntaxFacts, features);
         }

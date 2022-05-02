@@ -67,8 +67,8 @@ namespace BuildBoss
             {
                 repositoryDirectory = FindRepositoryRoot(
                     (solutionFiles.Count > 0)
-                      ? Path.GetDirectoryName(solutionFiles[0])
-                      : AppContext.BaseDirectory
+                        ? Path.GetDirectoryName(solutionFiles[0])
+                        : AppContext.BaseDirectory
                 );
 
                 if (repositoryDirectory == null)

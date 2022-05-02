@@ -1304,12 +1304,12 @@ static class D
             {
                 string text = crefSyntax.ToString();
                 string arguments = text.Contains("C()")
-                  ? "C()"
-                  : text.Contains("C")
-                      ? "C"
-                      : text.Contains("D()")
-                          ? "D()"
-                          : "D";
+                    ? "C()"
+                    : text.Contains("C")
+                        ? "C"
+                        : text.Contains("D()")
+                            ? "D()"
+                            : "D";
                 Assert.Null(
                     GetReferencedSymbol(
                         crefSyntax,

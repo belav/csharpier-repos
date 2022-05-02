@@ -1058,12 +1058,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             return result.IsValid
-              ? MemberAnalysisResult.ExpandedForm(
+                ? MemberAnalysisResult.ExpandedForm(
                     result.ArgsToParamsOpt,
                     result.ConversionsOpt,
                     hasAnyRefOmittedArgument: false
                 )
-              : result;
+                : result;
         }
 
         private void AddMemberToCandidateSet<TMember>(
@@ -1219,16 +1219,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             var normalResult =
                 (allowUnexpandedForm || !IsValidParams(leastOverriddenMember))
                     ? IsMemberApplicableInNormalForm(
-                          member,
-                          leastOverriddenMember,
-                          typeArguments,
-                          arguments,
-                          isMethodGroupConversion: isMethodGroupConversion,
-                          allowRefOmittedArguments: allowRefOmittedArguments,
-                          inferWithDynamic: inferWithDynamic,
-                          completeResults: completeResults,
-                          useSiteInfo: ref useSiteInfo
-                      )
+                        member,
+                        leastOverriddenMember,
+                        typeArguments,
+                        arguments,
+                        isMethodGroupConversion: isMethodGroupConversion,
+                        allowRefOmittedArguments: allowRefOmittedArguments,
+                        inferWithDynamic: inferWithDynamic,
+                        completeResults: completeResults,
+                        useSiteInfo: ref useSiteInfo
+                    )
                     : default(MemberResolutionResult<TMember>);
 
             var result = normalResult;
@@ -2959,14 +2959,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     if (refKind1 == RefKind.None)
                     {
                         return conv1.Kind == ConversionKind.Identity
-                          ? BetterResult.Left
-                          : BetterResult.Neither;
+                            ? BetterResult.Left
+                            : BetterResult.Neither;
                     }
                     else
                     {
                         return conv2.Kind == ConversionKind.Identity
-                          ? BetterResult.Right
-                          : BetterResult.Neither;
+                            ? BetterResult.Right
+                            : BetterResult.Neither;
                     }
                 }
                 else if (refKind1 == RefKind.Ref)
@@ -3820,25 +3820,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool hasAnyRefOmittedArgument;
             EffectiveParameters effectiveParameters = expanded
                 ? GetEffectiveParametersInExpandedForm(
-                      method,
-                      argumentCount,
-                      argToParamMap,
-                      argumentRefKinds,
-                      isMethodGroupConversion,
-                      allowRefOmittedArguments,
-                      binder,
-                      out hasAnyRefOmittedArgument
-                  )
+                    method,
+                    argumentCount,
+                    argToParamMap,
+                    argumentRefKinds,
+                    isMethodGroupConversion,
+                    allowRefOmittedArguments,
+                    binder,
+                    out hasAnyRefOmittedArgument
+                )
                 : GetEffectiveParametersInNormalForm(
-                      method,
-                      argumentCount,
-                      argToParamMap,
-                      argumentRefKinds,
-                      isMethodGroupConversion,
-                      allowRefOmittedArguments,
-                      binder,
-                      out hasAnyRefOmittedArgument
-                  );
+                    method,
+                    argumentCount,
+                    argToParamMap,
+                    argumentRefKinds,
+                    isMethodGroupConversion,
+                    allowRefOmittedArguments,
+                    binder,
+                    out hasAnyRefOmittedArgument
+                );
             parameterTypes = effectiveParameters.ParameterTypes;
             parameterRefKinds = effectiveParameters.ParameterRefKinds;
         }
@@ -4039,8 +4039,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 types.Add(
                     parm == parameters.Length - 1
-                      ? ((ArrayTypeSymbol)type.Type).ElementTypeWithAnnotations
-                      : type
+                        ? ((ArrayTypeSymbol)type.Type).ElementTypeWithAnnotations
+                        : type
                 );
 
                 var argRefKind = hasAnyRefArg ? argumentRefKinds[arg] : RefKind.None;
@@ -4261,14 +4261,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
             return result.Result.IsValid
-              ? result.WithResult(
+                ? result.WithResult(
                     MemberAnalysisResult.ExpandedForm(
                         result.Result.ArgsToParamsOpt,
                         result.Result.ConversionsOpt,
                         hasAnyRefOmittedArgument
                     )
                 )
-              : result;
+                : result;
         }
 
         private MemberResolutionResult<TMember> IsApplicable<TMember>(
@@ -4741,16 +4741,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var conversion = forExtensionMethodThisArg
                     ? Conversions.ClassifyImplicitExtensionMethodThisArgConversion(
-                          argument,
-                          argument.Type,
-                          parameterType,
-                          ref useSiteInfo
-                      )
+                        argument,
+                        argument.Type,
+                        parameterType,
+                        ref useSiteInfo
+                    )
                     : Conversions.ClassifyImplicitConversionFromExpression(
-                          argument,
-                          parameterType,
-                          ref useSiteInfo
-                      );
+                        argument,
+                        parameterType,
+                        ref useSiteInfo
+                    );
                 Debug.Assert(
                     (!conversion.Exists) || conversion.IsImplicit,
                     "ClassifyImplicitConversion should only return implicit conversions"

@@ -1352,8 +1352,8 @@ namespace System.Linq.Expressions.Tests
             Assert.All(copyToTest, Assert.Null); // assert partial copy didn't happen before exception
             AssertExtensions.Throws<ArgumentException>(
                 parCount >= 1 && parCount <= 3 && name == null && !tailCall
-                  ? null
-                  : "destinationArray",
+                    ? null
+                    : "destinationArray",
                 () => parameters.CopyTo(copyToTest, 2)
             );
             Assert.All(copyToTest, Assert.Null);

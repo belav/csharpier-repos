@@ -1510,22 +1510,20 @@ namespace System.Text.RegularExpressions
                         // Coalescing a loop with its same type
                         case Oneloop when nextNode.Type == Oneloop && currentNode.Ch == nextNode.Ch:
                         case Oneloopatomic
-                              when nextNode.Type == Oneloopatomic && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == Oneloopatomic && currentNode.Ch == nextNode.Ch:
                         case Onelazy when nextNode.Type == Onelazy && currentNode.Ch == nextNode.Ch:
                         case Notoneloop
-                              when nextNode.Type == Notoneloop && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == Notoneloop && currentNode.Ch == nextNode.Ch:
                         case Notoneloopatomic
-                              when nextNode.Type == Notoneloopatomic
-                                  && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == Notoneloopatomic && currentNode.Ch == nextNode.Ch:
                         case Notonelazy
-                              when nextNode.Type == Notonelazy && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == Notonelazy && currentNode.Ch == nextNode.Ch:
                         case Setloop
-                              when nextNode.Type == Setloop && currentNode.Str == nextNode.Str:
+                        when nextNode.Type == Setloop && currentNode.Str == nextNode.Str:
                         case Setloopatomic
-                              when nextNode.Type == Setloopatomic
-                                  && currentNode.Str == nextNode.Str:
+                        when nextNode.Type == Setloopatomic && currentNode.Str == nextNode.Str:
                         case Setlazy
-                              when nextNode.Type == Setlazy && currentNode.Str == nextNode.Str:
+                        when nextNode.Type == Setlazy && currentNode.Str == nextNode.Str:
                             if (
                                 CanCombineCounts(
                                     currentNode.M,
@@ -1551,17 +1549,17 @@ namespace System.Text.RegularExpressions
                         // Coalescing a loop with an additional item of the same type
                         case Oneloop when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
                         case Oneloopatomic
-                              when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
                         case Onelazy when nextNode.Type == One && currentNode.Ch == nextNode.Ch:
                         case Notoneloop
-                              when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
                         case Notoneloopatomic
-                              when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
                         case Notonelazy
-                              when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
+                        when nextNode.Type == Notone && currentNode.Ch == nextNode.Ch:
                         case Setloop when nextNode.Type == Set && currentNode.Str == nextNode.Str:
                         case Setloopatomic
-                              when nextNode.Type == Set && currentNode.Str == nextNode.Str:
+                        when nextNode.Type == Set && currentNode.Str == nextNode.Str:
                         case Setlazy when nextNode.Type == Set && currentNode.Str == nextNode.Str:
                             if (CanCombineCounts(currentNode.M, currentNode.N, 1, 1))
                             {
@@ -1577,26 +1575,26 @@ namespace System.Text.RegularExpressions
 
                         // Coalescing an individual item with a loop.
                         case One
-                              when (
-                                  nextNode.Type == Oneloop
-                                  || nextNode.Type == Oneloopatomic
-                                  || nextNode.Type == Onelazy
-                              )
-                                  && currentNode.Ch == nextNode.Ch:
+                        when (
+                            nextNode.Type == Oneloop
+                            || nextNode.Type == Oneloopatomic
+                            || nextNode.Type == Onelazy
+                        )
+                            && currentNode.Ch == nextNode.Ch:
                         case Notone
-                              when (
-                                  nextNode.Type == Notoneloop
-                                  || nextNode.Type == Notoneloopatomic
-                                  || nextNode.Type == Notonelazy
-                              )
-                                  && currentNode.Ch == nextNode.Ch:
+                        when (
+                            nextNode.Type == Notoneloop
+                            || nextNode.Type == Notoneloopatomic
+                            || nextNode.Type == Notonelazy
+                        )
+                            && currentNode.Ch == nextNode.Ch:
                         case Set
-                              when (
-                                  nextNode.Type == Setloop
-                                  || nextNode.Type == Setloopatomic
-                                  || nextNode.Type == Setlazy
-                              )
-                                  && currentNode.Str == nextNode.Str:
+                        when (
+                            nextNode.Type == Setloop
+                            || nextNode.Type == Setloopatomic
+                            || nextNode.Type == Setlazy
+                        )
+                            && currentNode.Str == nextNode.Str:
                             if (CanCombineCounts(1, 1, nextNode.M, nextNode.N))
                             {
                                 currentNode.Type = nextNode.Type;
@@ -1830,14 +1828,14 @@ namespace System.Text.RegularExpressions
                         case Multi when node.Ch != subsequent.Str![0]:
                         case Set when !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
                         case Setlazy
-                              when subsequent.M > 0
-                                  && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
                         case Setloop
-                              when subsequent.M > 0
-                                  && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
                         case Setloopatomic
-                              when subsequent.M > 0
-                                  && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
                         case End:
                         case EndZ when node.Ch != '\n':
                         case Eol when node.Ch != '\n':
@@ -1867,40 +1865,40 @@ namespace System.Text.RegularExpressions
                     {
                         case One when !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
                         case Onelazy
-                              when subsequent.M > 0
-                                  && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
                         case Oneloop
-                              when subsequent.M > 0
-                                  && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
                         case Oneloopatomic
-                              when subsequent.M > 0
-                                  && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.CharInClass(subsequent.Ch, node.Str!):
                         case Multi when !RegexCharClass.CharInClass(subsequent.Str![0], node.Str!):
                         case Set when !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
                         case Setlazy
-                              when subsequent.M > 0
-                                  && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
                         case Setloop
-                              when subsequent.M > 0
-                                  && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
                         case Setloopatomic
-                              when subsequent.M > 0
-                                  && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
+                        when subsequent.M > 0
+                            && !RegexCharClass.MayOverlap(node.Str!, subsequent.Str!):
                         case End:
                         case EndZ when !RegexCharClass.CharInClass('\n', node.Str!):
                         case Eol when !RegexCharClass.CharInClass('\n', node.Str!):
                         case Boundary
-                              when node.Str == RegexCharClass.WordClass
-                                  || node.Str == RegexCharClass.DigitClass:
+                        when node.Str == RegexCharClass.WordClass
+                            || node.Str == RegexCharClass.DigitClass:
                         case NonBoundary
-                              when node.Str == RegexCharClass.NotWordClass
-                                  || node.Str == RegexCharClass.NotDigitClass:
+                        when node.Str == RegexCharClass.NotWordClass
+                            || node.Str == RegexCharClass.NotDigitClass:
                         case ECMABoundary
-                              when node.Str == RegexCharClass.ECMAWordClass
-                                  || node.Str == RegexCharClass.ECMADigitClass:
+                        when node.Str == RegexCharClass.ECMAWordClass
+                            || node.Str == RegexCharClass.ECMADigitClass:
                         case NonECMABoundary
-                              when node.Str == RegexCharClass.NotECMAWordClass
-                                  || node.Str == RegexCharClass.NotDigitClass:
+                        when node.Str == RegexCharClass.NotECMAWordClass
+                            || node.Str == RegexCharClass.NotDigitClass:
                             return true;
                     }
                     break;
@@ -2056,7 +2054,7 @@ namespace System.Text.RegularExpressions
                     or Setloop
                     or Setlazy
                     or Setloopatomic when node.M == node.N
-                      => true,
+                        => true,
                     _ => false,
                 };
 
@@ -2412,7 +2410,7 @@ namespace System.Text.RegularExpressions
                 or Setlazy
                 or Loop
                 or Lazyloop when !IsAtomicByParent() && M != N
-                  => true,
+                    => true,
                 Alternate => !IsAtomicByParent(),
                 Ref or Testref or Testgroup => true,
                 _ => false,
@@ -2531,16 +2529,16 @@ namespace System.Text.RegularExpressions
                 case Lazyloop:
                     sb.Append(
                         (M == 0 && N == int.MaxValue)
-                          ? "*"
-                          : (M == 0 && N == 1)
-                              ? "?"
-                              : (M == 1 && N == int.MaxValue)
-                                  ? "+"
-                                  : (N == int.MaxValue)
-                                      ? $"{{{M}, *}}"
-                                      : (N == M)
-                                          ? $"{{{M}}}"
-                                          : $"{{{M}, {N}}}"
+                            ? "*"
+                            : (M == 0 && N == 1)
+                                ? "?"
+                                : (M == 1 && N == int.MaxValue)
+                                    ? "+"
+                                    : (N == int.MaxValue)
+                                        ? $"{{{M}, *}}"
+                                        : (N == M)
+                                            ? $"{{{M}}}"
+                                            : $"{{{M}, {N}}}"
                     );
                     break;
             }

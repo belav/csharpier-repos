@@ -16,13 +16,13 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteSymbolSearchUpdateService
         : BrokeredServiceBase,
-          IRemoteSymbolSearchUpdateService
+            IRemoteSymbolSearchUpdateService
     {
         internal sealed class Factory
             : FactoryBase<
-                  IRemoteSymbolSearchUpdateService,
-                  IRemoteSymbolSearchUpdateService.ICallback
-              >
+                IRemoteSymbolSearchUpdateService,
+                IRemoteSymbolSearchUpdateService.ICallback
+            >
         {
             protected override IRemoteSymbolSearchUpdateService CreateService(
                 in ServiceConstructionArguments arguments,

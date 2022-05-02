@@ -223,10 +223,10 @@ namespace System.Security.Cryptography
                 return base.FlushAsync(cancellationToken);
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : !_canWrite
-                  ? Task.CompletedTask
-                  : _stream.FlushAsync(cancellationToken);
+                ? Task.FromCanceled(cancellationToken)
+                : !_canWrite
+                    ? Task.CompletedTask
+                    : _stream.FlushAsync(cancellationToken);
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -407,20 +407,20 @@ namespace System.Security.Cryptography
                         // we have in _inputBuffer.
                         bytesRead = useAsync
                             ? await _stream
-                                  .ReadAsync(
-                                      new Memory<byte>(
-                                          tempInputBuffer,
-                                          _inputBufferIndex,
-                                          numWholeBlocksInBytes - _inputBufferIndex
-                                      ),
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false)
+                                .ReadAsync(
+                                    new Memory<byte>(
+                                        tempInputBuffer,
+                                        _inputBufferIndex,
+                                        numWholeBlocksInBytes - _inputBufferIndex
+                                    ),
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
                             : _stream.Read(
-                                  tempInputBuffer,
-                                  _inputBufferIndex,
-                                  numWholeBlocksInBytes - _inputBufferIndex
-                              );
+                                tempInputBuffer,
+                                _inputBufferIndex,
+                                numWholeBlocksInBytes - _inputBufferIndex
+                            );
                         eof = bytesRead == 0;
 
                         // If we got enough data to form at least one block, transform as much as we can.
@@ -540,20 +540,20 @@ namespace System.Security.Cryptography
                     {
                         bytesRead = useAsync
                             ? await _stream
-                                  .ReadAsync(
-                                      new Memory<byte>(
-                                          _inputBuffer,
-                                          _inputBufferIndex,
-                                          _inputBlockSize - _inputBufferIndex
-                                      ),
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false)
+                                .ReadAsync(
+                                    new Memory<byte>(
+                                        _inputBuffer,
+                                        _inputBufferIndex,
+                                        _inputBlockSize - _inputBufferIndex
+                                    ),
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
                             : _stream.Read(
-                                  _inputBuffer,
-                                  _inputBufferIndex,
-                                  _inputBlockSize - _inputBufferIndex
-                              );
+                                _inputBuffer,
+                                _inputBufferIndex,
+                                _inputBlockSize - _inputBufferIndex
+                            );
                         if (bytesRead <= 0)
                         {
                             break;

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
         TExpressionSyntax
     >
         : AbstractGenerateMemberService<TSimpleNameSyntax, TExpressionSyntax>,
-          IGenerateVariableService
+            IGenerateVariableService
         where TService : AbstractGenerateVariableService<
                 TService,
                 TSimpleNameSyntax,

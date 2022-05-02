@@ -161,11 +161,11 @@ namespace Microsoft.CodeAnalysis
 
             // only include projects contained in the solution:
             var referencedProjectIds = projectReferences.IsEmpty()
-              ? ImmutableHashSet<ProjectId>.Empty
-              : projectReferences
-                .Where(r => _projectIds.Contains(r.ProjectId))
-                .Select(r => r.ProjectId)
-                .ToImmutableHashSet();
+                ? ImmutableHashSet<ProjectId>.Empty
+                : projectReferences
+                    .Where(r => _projectIds.Contains(r.ProjectId))
+                    .Select(r => r.ProjectId)
+                    .ToImmutableHashSet();
 
             var referencesMap = referencedProjectIds.IsEmpty
                 ? _referencesMap.Remove(projectId)

@@ -40,10 +40,10 @@ namespace Microsoft.DotNet.Cli.Build.Framework
                 c < 0
                     ? color
                     : // unknown, just use it
-                      _boldRecursion > 0
+                    _boldRecursion > 0
                         ? (ConsoleColor)(c | Light)
                         : // ensure color is light
-                          (ConsoleColor)(c & ~Light); // ensure color is dark
+                        (ConsoleColor)(c & ~Light); // ensure color is dark
         }
 
         private void SetBold(bool bold)

@@ -904,8 +904,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             Check.NotEmpty(navigationName, nameof(navigationName));
 
             return Metadata.ClrType == Model.DefaultPropertyBagType
-              ? HasOne(navigationName, null) // Path only used by pre 3.0 snapshots
-              : HasOne(
+                ? HasOne(navigationName, null) // Path only used by pre 3.0 snapshots
+                : HasOne(
                     Metadata.GetNavigationMemberInfo(navigationName).GetMemberType(),
                     navigationName
                 );
@@ -1099,10 +1099,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 navigationName == null
                     ? null
                     : Builder.ModelBuilder.Metadata.FindEntityType(
-                          relatedTypeName,
-                          navigationName,
-                          Builder.Metadata
-                      )
+                        relatedTypeName,
+                        navigationName,
+                        Builder.Metadata
+                    )
             )
             ?? Builder.ModelBuilder
                 .Entity(relatedTypeName, ConfigurationSource.Explicit, shouldBeOwned: false)!
@@ -1123,10 +1123,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
                 navigationName == null || !Builder.ModelBuilder.Metadata.IsShared(relatedType)
                     ? null
                     : Builder.ModelBuilder.Metadata.FindEntityType(
-                          relatedType,
-                          navigationName,
-                          Builder.Metadata
-                      )
+                        relatedType,
+                        navigationName,
+                        Builder.Metadata
+                    )
             )
             ?? Builder.ModelBuilder
                 .Entity(relatedType, ConfigurationSource.Explicit, shouldBeOwned: false)!

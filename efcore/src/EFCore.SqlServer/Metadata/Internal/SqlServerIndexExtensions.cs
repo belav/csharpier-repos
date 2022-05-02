@@ -144,17 +144,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             index.GetIncludeProperties() == null
                 ? "{}"
                 : "{'"
-                  + string.Join(
-                      "', '",
-                      index
-                          .GetIncludeProperties()!
-                          .Select(
-                              p =>
-                                  index.DeclaringEntityType
-                                      .FindProperty(p)
-                                      ?.GetColumnName(storeObject)
-                          )
-                  )
-                  + "'}";
+                    + string.Join(
+                        "', '",
+                        index
+                            .GetIncludeProperties()!
+                            .Select(
+                                p =>
+                                    index.DeclaringEntityType
+                                        .FindProperty(p)
+                                        ?.GetColumnName(storeObject)
+                            )
+                    )
+                    + "'}";
     }
 }

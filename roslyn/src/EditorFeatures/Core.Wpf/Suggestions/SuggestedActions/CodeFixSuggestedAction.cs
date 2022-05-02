@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// </summary>
     internal sealed class CodeFixSuggestedAction
         : SuggestedActionWithNestedFlavors,
-          ICodeFixSuggestedAction,
-          ITelemetryDiagnosticID<string>
+            ICodeFixSuggestedAction,
+            ITelemetryDiagnosticID<string>
     {
         public CodeFix CodeFix { get; }
 

@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class GlobalAuthorizationFilterUseMvcTest
     : GlobalAuthorizationFilterTestBase,
-      IClassFixture<MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc>>
+        IClassFixture<
+            MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc>
+        >
 {
     public GlobalAuthorizationFilterUseMvcTest(
         MvcTestFixture<SecurityWebSite.StartupWithGlobalDenyAnonymousFilterWithUseMvc> fixture

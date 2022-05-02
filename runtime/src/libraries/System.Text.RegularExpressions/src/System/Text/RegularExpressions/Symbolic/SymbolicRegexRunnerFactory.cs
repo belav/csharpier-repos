@@ -34,8 +34,8 @@ namespace System.Text.RegularExpressions.Symbolic
                     SR.Format(
                         SR.NotSupported_NonBacktrackingConflictingOption,
                         (options & RegexOptions.RightToLeft) != 0
-                          ? nameof(RegexOptions.RightToLeft)
-                          : nameof(RegexOptions.ECMAScript)
+                            ? nameof(RegexOptions.RightToLeft)
+                            : nameof(RegexOptions.ECMAScript)
                     )
                 );
             }

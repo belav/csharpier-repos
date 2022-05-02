@@ -13,8 +13,8 @@ namespace Microsoft.CodeAnalysis.Collections
     {
         public sealed partial class Builder
             : IDictionary<TKey, TValue>,
-              IReadOnlyDictionary<TKey, TValue>,
-              IDictionary
+                IReadOnlyDictionary<TKey, TValue>,
+                IDictionary
         {
             /// <summary>
             /// The immutable collection this builder is based on.

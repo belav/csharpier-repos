@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteSymbolFinderService
         : BrokeredServiceBase,
-          IRemoteSymbolFinderService
+            IRemoteSymbolFinderService
     {
         internal sealed class Factory
             : FactoryBase<IRemoteSymbolFinderService, IRemoteSymbolFinderService.ICallback>
@@ -83,9 +83,9 @@ namespace Microsoft.CodeAnalysis.Remote
                     var documents = documentArgs.IsDefault
                         ? null
                         : documentArgs
-                          .Select(solution.GetDocument)
-                          .WhereNotNull()
-                          .ToImmutableHashSet();
+                            .Select(solution.GetDocument)
+                            .WhereNotNull()
+                            .ToImmutableHashSet();
 
                     await SymbolFinder
                         .FindReferencesInCurrentProcessAsync(
@@ -314,7 +314,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private sealed class FindLiteralReferencesProgressCallback
             : IStreamingFindLiteralReferencesProgress,
-              IStreamingProgressTracker
+                IStreamingProgressTracker
         {
             private readonly RemoteCallback<IRemoteSymbolFinderService.ICallback> _callback;
             private readonly RemoteServiceCallbackId _callbackId;
@@ -364,7 +364,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
         private sealed class FindReferencesProgressCallback
             : IStreamingFindReferencesProgress,
-              IStreamingProgressTracker
+                IStreamingProgressTracker
         {
             private readonly Solution _solution;
             private readonly RemoteCallback<IRemoteSymbolFinderService.ICallback> _callback;

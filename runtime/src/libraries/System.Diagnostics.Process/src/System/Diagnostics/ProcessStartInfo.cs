@@ -90,8 +90,8 @@ namespace System.Diagnostics
                         new Dictionary<string, string?>(
                             envVars.Count,
                             OperatingSystem.IsWindows()
-                              ? StringComparer.OrdinalIgnoreCase
-                              : StringComparer.Ordinal
+                                ? StringComparer.OrdinalIgnoreCase
+                                : StringComparer.Ordinal
                         )
                     );
 

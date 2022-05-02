@@ -262,8 +262,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
                     // Add Simplifier annotation to remove superfluous parenthesis after transformation:
                     // (1 + 1) + "a" -> $"{1 + 1}a"
                     var otherExpression = syntaxFacts.IsParenthesizedExpression(piece)
-                      ? piece.WithAdditionalAnnotations(Simplifier.Annotation)
-                      : piece;
+                        ? piece.WithAdditionalAnnotations(Simplifier.Annotation)
+                        : piece;
                     content.Add(generator.Interpolation(otherExpression.WithoutTrivia()));
                 }
                 // Update this variable to be true every time we encounter a new string literal expression

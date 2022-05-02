@@ -37,17 +37,17 @@ namespace System.Text.Encodings.Web
 
             _innerEncoder = allowMinimalJsonEscaping
                 ? new OptimizedInboxTextEncoder(
-                      EscaperImplementation.SingletonMinimallyEscaped,
-                      settings.GetAllowedCodePointsBitmap(),
-                      forbidHtmlSensitiveCharacters: false,
-                      extraCharactersToEscape: stackalloc char[] { '\"', '\\' }
-                  )
+                    EscaperImplementation.SingletonMinimallyEscaped,
+                    settings.GetAllowedCodePointsBitmap(),
+                    forbidHtmlSensitiveCharacters: false,
+                    extraCharactersToEscape: stackalloc char[] { '\"', '\\' }
+                )
                 : new OptimizedInboxTextEncoder(
-                      EscaperImplementation.Singleton,
-                      settings.GetAllowedCodePointsBitmap(),
-                      forbidHtmlSensitiveCharacters: true,
-                      extraCharactersToEscape: stackalloc char[] { '\\', '`' }
-                  );
+                    EscaperImplementation.Singleton,
+                    settings.GetAllowedCodePointsBitmap(),
+                    forbidHtmlSensitiveCharacters: true,
+                    extraCharactersToEscape: stackalloc char[] { '\\', '`' }
+                );
         }
 
         public override int MaxOutputCharactersPerInputCharacter => 6; // "\uXXXX" for a single char ("\uXXXX\uYYYY" [12 chars] for supplementary scalar value)

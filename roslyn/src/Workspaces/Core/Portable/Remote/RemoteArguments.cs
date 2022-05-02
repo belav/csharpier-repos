@@ -56,8 +56,8 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             return alias == null
-              ? null
-              : Dehydrate(document.Project.Solution, alias, cancellationToken);
+                ? null
+                : Dehydrate(document.Project.Solution, alias, cancellationToken);
         }
 
         public static SerializableSymbolAndProjectId Dehydrate(

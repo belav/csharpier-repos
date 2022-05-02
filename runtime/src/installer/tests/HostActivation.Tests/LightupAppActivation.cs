@@ -10,7 +10,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 {
     public class LightupAppActivation
         : IClassFixture<LightupAppActivation.SharedTestState>,
-          IDisposable
+            IDisposable
     {
         private SharedTestState sharedTestState;
 

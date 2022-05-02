@@ -20,8 +20,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class MediaTypeFormatterTracer
         : MediaTypeFormatter,
-          IFormatterTracer,
-          IDecorator<MediaTypeFormatter>
+            IFormatterTracer,
+            IDecorator<MediaTypeFormatter>
     {
         private const string ReadFromStreamAsyncMethodName = "ReadFromStreamAsync";
         private const string WriteToStreamAsyncMethodName = "WriteToStreamAsync";
@@ -175,8 +175,8 @@ namespace System.Web.Http.Tracing.Tracers
                             MediaTypeFormatterTracer.ActualMediaTypeFormatter(formatter),
                             InnerFormatter
                         )
-                          ? SRResources.TraceGetPerRequestFormatterEndMessage
-                          : SRResources.TraceGetPerRequestFormatterEndMessageNew;
+                            ? SRResources.TraceGetPerRequestFormatterEndMessage
+                            : SRResources.TraceGetPerRequestFormatterEndMessageNew;
 
                         tr.Message = Error.Format(formatMessage, formatter.GetType().Name);
                     }
@@ -275,12 +275,12 @@ namespace System.Web.Http.Tracing.Tracers
                 (formatterLogger == null)
                     ? null
                     : new FormatterLoggerTraceWrapper(
-                          formatterLogger,
-                          TraceWriter,
-                          Request,
-                          InnerFormatter.GetType().Name,
-                          ReadFromStreamAsyncMethodName
-                      );
+                        formatterLogger,
+                        TraceWriter,
+                        Request,
+                        InnerFormatter.GetType().Name,
+                        ReadFromStreamAsyncMethodName
+                    );
 
             return TraceWriter.TraceBeginEndAsync<object>(
                 Request,
@@ -294,8 +294,8 @@ namespace System.Web.Http.Tracing.Tracers
                         SRResources.TraceReadFromStreamMessage,
                         type.Name,
                         contentType == null
-                          ? SRResources.TraceNoneObjectMessage
-                          : contentType.ToString()
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString()
                     );
                 },
                 execute: () =>
@@ -387,8 +387,8 @@ namespace System.Web.Http.Tracing.Tracers
                         FormattingUtilities.ValueToString(value, CultureInfo.CurrentCulture),
                         type.Name,
                         contentType == null
-                          ? SRResources.TraceNoneObjectMessage
-                          : contentType.ToString()
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString()
                     );
                 },
                 execute: () =>

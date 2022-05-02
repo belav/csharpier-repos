@@ -797,8 +797,8 @@ namespace System.ComponentModel.Composition.Hosting
                 .SingleOrDefault();
 
             return (export != null)
-              ? ExportServices.CreateStronglyTypedLazyOfTM<T, TMetadataView>(export)
-              : null;
+                ? ExportServices.CreateStronglyTypedLazyOfTM<T, TMetadataView>(export)
+                : null;
         }
 
         private Lazy<T>? GetExportCore<T>(string? contractName)

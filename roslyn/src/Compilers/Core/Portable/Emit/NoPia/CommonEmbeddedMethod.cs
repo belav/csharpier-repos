@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
     {
         internal abstract class CommonEmbeddedMethod
             : CommonEmbeddedMember<TMethodSymbol>,
-              Cci.IMethodDefinition
+                Cci.IMethodDefinition
         {
             public readonly TEmbeddedType ContainingType;
             private readonly ImmutableArray<TEmbeddedTypeParameter> _typeParameters;

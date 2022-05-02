@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var typeInfo = semanticModel.GetTypeInfo(decl.Type, cancellationToken);
                 return typeInfo.Type?.IsErrorType() == false
-                  ? typeInfo.Type
-                  : semanticModel.Compilation.ObjectType;
+                    ? typeInfo.Type
+                    : semanticModel.Compilation.ObjectType;
             }
             else
             {

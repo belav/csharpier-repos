@@ -133,8 +133,8 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 return operation.Parent.IsAnyCompoundAssignment()
-                  ? ValueUsageInfo.ReadWrite
-                  : ValueUsageInfo.Write;
+                    ? ValueUsageInfo.ReadWrite
+                    : ValueUsageInfo.Write;
             }
             else if (operation.Parent is IIncrementOrDecrementOperation)
             {
@@ -198,8 +198,8 @@ namespace Microsoft.CodeAnalysis
             )
             {
                 return (reDimClauseOperation.Parent as IReDimOperation)?.Preserve == true
-                  ? ValueUsageInfo.ReadWrite
-                  : ValueUsageInfo.Write;
+                    ? ValueUsageInfo.ReadWrite
+                    : ValueUsageInfo.Write;
             }
             else if (operation.Parent is IDeclarationExpressionOperation declarationExpression)
             {

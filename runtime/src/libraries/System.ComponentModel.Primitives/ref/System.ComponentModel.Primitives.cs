@@ -132,8 +132,8 @@ namespace System.ComponentModel
     [System.ComponentModel.DesignerCategoryAttribute("Component")]
     public partial class Component
         : System.MarshalByRefObject,
-          System.ComponentModel.IComponent,
-          System.IDisposable
+            System.ComponentModel.IComponent,
+            System.IDisposable
     {
         public Component() { }
 

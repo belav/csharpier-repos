@@ -12,10 +12,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseCompoundAssignmentDiagnosticAnalyzer
         : AbstractUseCompoundAssignmentDiagnosticAnalyzer<
-              SyntaxKind,
-              AssignmentExpressionSyntax,
-              BinaryExpressionSyntax
-          >
+            SyntaxKind,
+            AssignmentExpressionSyntax,
+            BinaryExpressionSyntax
+        >
     {
         public CSharpUseCompoundAssignmentDiagnosticAnalyzer()
             : base(CSharpSyntaxFacts.Instance, Utilities.Kinds) { }

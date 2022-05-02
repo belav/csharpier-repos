@@ -5310,37 +5310,37 @@ class C
             {
                 analysisResult = syntax
                     ? await compilationWithAnalyzers.GetAnalysisResultAsync(
-                          tree1,
-                          analyzersToQuery,
-                          CancellationToken.None
-                      )
+                        tree1,
+                        analyzersToQuery,
+                        CancellationToken.None
+                    )
                     : await compilationWithAnalyzers.GetAnalysisResultAsync(
-                          semanticModel1,
-                          filterSpan: null,
-                          analyzersToQuery,
-                          CancellationToken.None
-                      );
+                        semanticModel1,
+                        filterSpan: null,
+                        analyzersToQuery,
+                        CancellationToken.None
+                    );
             }
             else
             {
                 analysisResult = syntax
                     ? await compilationWithAnalyzers.GetAnalysisResultAsync(
-                          tree1,
-                          CancellationToken.None
-                      )
+                        tree1,
+                        CancellationToken.None
+                    )
                     : await compilationWithAnalyzers.GetAnalysisResultAsync(
-                          semanticModel1,
-                          filterSpan: null,
-                          CancellationToken.None
-                      );
+                        semanticModel1,
+                        filterSpan: null,
+                        CancellationToken.None
+                    );
             }
 
             var diagnosticsMap = syntax
                 ? analysisResult.SyntaxDiagnostics
                 : analysisResult.SemanticDiagnostics;
             var diagnostics = diagnosticsMap.TryGetValue(tree1, out var value)
-              ? value
-              : ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>>.Empty;
+                ? value
+                : ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>>.Empty;
 
             foreach (var analyzer in allAnalyzers)
             {

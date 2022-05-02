@@ -23,11 +23,11 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
     [ExportLanguageService(typeof(IGenerateConversionService), LanguageNames.CSharp), Shared]
     internal partial class CSharpGenerateConversionService
         : AbstractGenerateConversionService<
-              CSharpGenerateConversionService,
-              SimpleNameSyntax,
-              ExpressionSyntax,
-              InvocationExpressionSyntax
-          >
+            CSharpGenerateConversionService,
+            SimpleNameSyntax,
+            ExpressionSyntax,
+            InvocationExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

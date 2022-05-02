@@ -59,8 +59,8 @@ internal class TestUtils
         {
             headers.CacheControl.Public = true;
             headers.CacheControl.MaxAge = string.IsNullOrEmpty(expires)
-              ? TimeSpan.FromSeconds(10)
-              : (TimeSpan?)null;
+                ? TimeSpan.FromSeconds(10)
+                : (TimeSpan?)null;
         }
         headers.Date = DateTimeOffset.UtcNow;
         headers.Headers["X-Value"] = guid;
@@ -254,8 +254,8 @@ internal class TestUtils
             next,
             Options.Create(options),
             testSink == null
-              ? (ILoggerFactory)NullLoggerFactory.Instance
-              : new TestLoggerFactory(testSink, true),
+                ? (ILoggerFactory)NullLoggerFactory.Instance
+                : new TestLoggerFactory(testSink, true),
             policyProvider,
             cache,
             keyProvider

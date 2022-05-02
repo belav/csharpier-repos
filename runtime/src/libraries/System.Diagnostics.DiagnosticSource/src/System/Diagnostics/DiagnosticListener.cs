@@ -28,8 +28,8 @@ namespace System.Diagnostics
     /// </summary>
     public partial class DiagnosticListener
         : DiagnosticSource,
-          IObservable<KeyValuePair<string, object?>>,
-          IDisposable
+            IObservable<KeyValuePair<string, object?>>,
+            IDisposable
     {
         /// <summary>
         /// When you subscribe to this you get callbacks for all NotificationListeners in the appdomain
@@ -126,8 +126,8 @@ namespace System.Diagnostics
         )
         {
             return isEnabled == null
-              ? SubscribeInternal(observer, null, null, null, null)
-              : SubscribeInternal(
+                ? SubscribeInternal(observer, null, null, null, null)
+                : SubscribeInternal(
                     observer,
                     name => IsEnabled(name, null, null),
                     isEnabled,

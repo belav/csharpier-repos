@@ -288,8 +288,8 @@ namespace System.Net.Http
                     Sha256,
                     StringComparison.OrdinalIgnoreCase
                 )
-                  ? SHA256.Create()
-                  : (HashAlgorithm)MD5.Create()
+                    ? SHA256.Create()
+                    : (HashAlgorithm)MD5.Create()
             )
 #pragma warning restore CA5351
             {

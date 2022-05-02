@@ -79,8 +79,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             {
                 var assemblyFilePath = Path.Combine(msbuildToolsPath, assemblyName + ".dll");
                 var assembly = File.Exists(assemblyFilePath)
-                  ? Assembly.LoadFrom(assemblyFilePath)
-                  : null;
+                    ? Assembly.LoadFrom(assemblyFilePath)
+                    : null;
 
                 if (assembly != null)
                 {

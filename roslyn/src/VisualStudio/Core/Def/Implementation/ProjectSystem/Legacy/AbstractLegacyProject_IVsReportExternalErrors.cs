@@ -14,7 +14,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 {
     internal partial class AbstractLegacyProject
         : IVsReportExternalErrors,
-          IVsLanguageServiceBuildErrorReporter2
+            IVsLanguageServiceBuildErrorReporter2
     {
         private readonly ProjectExternalErrorReporter _externalErrorReporter;
 

@@ -37,8 +37,8 @@ namespace Castle.DynamicProxy
             {
                 strongNamedOrNotIndicator = "";
                 assemblyToBeVisibleTo = ReferencesCastleCore(targetAssembly)
-                  ? "InternalsVisible.ToDynamicProxyGenAssembly2"
-                  : '"' + InternalsVisible.ToDynamicProxyGenAssembly2 + '"';
+                    ? "InternalsVisible.ToDynamicProxyGenAssembly2"
+                    : '"' + InternalsVisible.ToDynamicProxyGenAssembly2 + '"';
             }
 
             var instructionsFormat =

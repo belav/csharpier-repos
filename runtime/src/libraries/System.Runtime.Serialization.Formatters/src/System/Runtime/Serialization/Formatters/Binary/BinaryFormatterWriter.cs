@@ -146,7 +146,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 objectId < 0
                     ? typeNameInfo.NIname
                     : // Nested Object
-                      nameInfo.NIname; // Non-Nested
+                    nameInfo.NIname; // Non-Nested
 
             if (_objectMapTable == null)
             {

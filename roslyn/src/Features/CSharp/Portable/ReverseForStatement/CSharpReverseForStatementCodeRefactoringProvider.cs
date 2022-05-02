@@ -119,11 +119,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ReverseForStatement
             {
                 SpecialType.System_Byte => IsUnsignedBoundary(startValue, endValue, byte.MaxValue),
                 SpecialType.System_UInt16
-                  => IsUnsignedBoundary(startValue, endValue, ushort.MaxValue),
+                    => IsUnsignedBoundary(startValue, endValue, ushort.MaxValue),
                 SpecialType.System_UInt32
-                  => IsUnsignedBoundary(startValue, endValue, uint.MaxValue),
+                    => IsUnsignedBoundary(startValue, endValue, uint.MaxValue),
                 SpecialType.System_UInt64
-                  => IsUnsignedBoundary(startValue, endValue, ulong.MaxValue),
+                    => IsUnsignedBoundary(startValue, endValue, ulong.MaxValue),
                 _ => false,
             };
         }
@@ -370,7 +370,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReverseForStatement
                 var newStart = equals
                     ? end
                     : (ExpressionSyntax)
-                          generator.SubtractExpression(end, generator.LiteralExpression(1));
+                        generator.SubtractExpression(end, generator.LiteralExpression(1));
 
                 editor.ReplaceNode(variable.Initializer!.Value, Reduce(newStart));
                 editor.ReplaceNode(condition, Reduce(Invert(variable, condition, start)));
@@ -470,8 +470,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReverseForStatement
         )
         {
             var (left, right) = IsVariableReference(variable, condition.Left)
-              ? (condition.Left, operand)
-              : (operand, condition.Right);
+                ? (condition.Left, operand)
+                : (operand, condition.Right);
 
             var newOperatorKind = condition.Kind()
                 is SyntaxKind.LessThanExpression

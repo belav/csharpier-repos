@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 if (successorSet.TryGetValue(to, out var edges))
                 {
                     return edges is IEnumerable<TEdge> edgeList
-                      ? edgeList
-                      : (new[] { (TEdge)edges! });
+                        ? edgeList
+                        : (new[] { (TEdge)edges! });
                 }
             }
 
@@ -499,12 +499,12 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         public override IEnumerable<TVertex> GetOutgoingNeighbors(TVertex from) =>
             _successorMap.TryGetValue(from, out var successorSet)
-              ? successorSet.Keys
-              : Enumerable.Empty<TVertex>();
+                ? successorSet.Keys
+                : Enumerable.Empty<TVertex>();
 
         public override IEnumerable<TVertex> GetIncomingNeighbors(TVertex to) =>
             _predecessorMap.TryGetValue(to, out var predecessors)
-              ? predecessors
-              : Enumerable.Empty<TVertex>();
+                ? predecessors
+                : Enumerable.Empty<TVertex>();
     }
 }

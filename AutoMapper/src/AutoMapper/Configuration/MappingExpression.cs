@@ -10,7 +10,7 @@ namespace AutoMapper.Configuration
 
     public class MappingExpression
         : MappingExpressionBase<object, object, IMappingExpression>,
-          IMappingExpression
+            IMappingExpression
     {
         public MappingExpression(in TypePair types, MemberList memberList) : base(memberList, types)
         { }
@@ -94,7 +94,7 @@ namespace AutoMapper.Configuration
 
         public class MemberConfigurationExpression
             : MemberConfigurationExpression<object, object, object>,
-              IMemberConfigurationExpression
+                IMemberConfigurationExpression
         {
             public MemberConfigurationExpression(MemberInfo destinationMember, Type sourceType)
                 : base(destinationMember, sourceType) { }
@@ -188,8 +188,8 @@ namespace AutoMapper.Configuration
 
     public class MappingExpression<TSource, TDestination>
         : MappingExpressionBase<TSource, TDestination, IMappingExpression<TSource, TDestination>>,
-          IMappingExpression<TSource, TDestination>,
-          IProjectionExpression<TSource, TDestination>
+            IMappingExpression<TSource, TDestination>,
+            IProjectionExpression<TSource, TDestination>
     {
         public MappingExpression(MemberList memberList, bool projection = false) : base(memberList)
         {
@@ -259,8 +259,8 @@ namespace AutoMapper.Configuration
                     var bodyIsCastToObject =
                         e.Body.NodeType == ExpressionType.Convert && e.Body.Type == typeof(object);
                     return bodyIsCastToObject
-                      ? Expression.Lambda(((UnaryExpression)e.Body).Operand, e.Parameters)
-                      : e;
+                        ? Expression.Lambda(((UnaryExpression)e.Body).Operand, e.Parameters)
+                        : e;
                 }
             );
 

@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteConvertTupleToStructCodeRefactoringService
         : BrokeredServiceBase,
-          IRemoteConvertTupleToStructCodeRefactoringService
+            IRemoteConvertTupleToStructCodeRefactoringService
     {
         internal sealed class Factory
             : FactoryBase<IRemoteConvertTupleToStructCodeRefactoringService>

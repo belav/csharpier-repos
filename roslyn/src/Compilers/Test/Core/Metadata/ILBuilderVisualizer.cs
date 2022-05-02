@@ -71,8 +71,8 @@ namespace Roslyn.Test.Utilities
             return string.Format(
                 "\"{0}\"",
                 symbol == null
-                  ? (object)reference
-                  : symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+                    ? (object)reference
+                    : symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
             );
         }
 
@@ -82,8 +82,8 @@ namespace Roslyn.Test.Utilities
                 ((type as ISymbolInternal) ?? (type as Cci.IReference)?.GetInternalSymbol())
                 is ISymbolInternal symbol
             )
-              ? symbol.GetISymbol().ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
-              : type.ToString();
+                ? symbol.GetISymbol().ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+                : type.ToString();
         }
 
         /// <summary>

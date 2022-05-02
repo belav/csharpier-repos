@@ -1595,7 +1595,7 @@ namespace System.Web.Mvc.Async.Test
 
             private class AuthenticationFilterChallengeSetsResultAttribute
                 : FilterAttribute,
-                  IAuthenticationFilter
+                    IAuthenticationFilter
             {
                 public void OnAuthentication(AuthenticationContext filterContext) { }
 
@@ -1609,7 +1609,7 @@ namespace System.Web.Mvc.Async.Test
 
             private class AuthenticationFilterReturnsResultAttribute
                 : FilterAttribute,
-                  IAuthenticationFilter
+                    IAuthenticationFilter
             {
                 public void OnAuthentication(AuthenticationContext filterContext)
                 {
@@ -1623,7 +1623,7 @@ namespace System.Web.Mvc.Async.Test
 
             private class AuthorizationFilterReturnsResultAttribute
                 : FilterAttribute,
-                  IAuthorizationFilter
+                    IAuthorizationFilter
             {
                 public void OnAuthorization(AuthorizationContext filterContext)
                 {
@@ -1633,14 +1633,14 @@ namespace System.Web.Mvc.Async.Test
 
             private class CustomExceptionFilterDoesNotHandleErrorAttribute
                 : FilterAttribute,
-                  IExceptionFilter
+                    IExceptionFilter
             {
                 public void OnException(ExceptionContext filterContext) { }
             }
 
             private class CustomExceptionFilterHandlesErrorAttribute
                 : FilterAttribute,
-                  IExceptionFilter
+                    IExceptionFilter
             {
                 public void OnException(ExceptionContext filterContext)
                 {

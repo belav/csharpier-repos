@@ -139,8 +139,8 @@ internal static partial class Interop
             get
             {
                 return _rawErrno == -1
-                  ? (_rawErrno = Interop.Sys.ConvertErrorPalToPlatform(_error))
-                  : _rawErrno;
+                    ? (_rawErrno = Interop.Sys.ConvertErrorPalToPlatform(_error))
+                    : _rawErrno;
             }
         }
 

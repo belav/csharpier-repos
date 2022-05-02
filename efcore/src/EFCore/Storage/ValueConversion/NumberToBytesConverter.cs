@@ -90,28 +90,28 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             var param = Expression.Parameter(typeof(TNumber), "v");
 
             var input = typeof(TNumber).IsNullableType()
-              ? Expression.Convert(param, type)
-              : (Expression)param;
+                ? Expression.Convert(param, type)
+                : (Expression)param;
 
             var output =
                 type == typeof(byte)
                     ? Expression.NewArrayInit(typeof(byte), input)
                     : type == typeof(sbyte)
                         ? Expression.NewArrayInit(
-                              typeof(byte),
-                              Expression.Convert(input, typeof(byte))
-                          )
+                            typeof(byte),
+                            Expression.Convert(input, typeof(byte))
+                        )
                         : type == typeof(decimal)
                             ? Expression.Call(_toBytesMethod, input)
                             : EnsureEndian(
-                                  Expression.Call(
-                                      typeof(BitConverter).GetMethod(
-                                          nameof(BitConverter.GetBytes),
-                                          new[] { type }
-                                      )!,
-                                      input
-                                  )
-                              );
+                                Expression.Call(
+                                    typeof(BitConverter).GetMethod(
+                                        nameof(BitConverter.GetBytes),
+                                        new[] { type }
+                                    )!,
+                                    input
+                                )
+                            );
 
             if (typeof(TNumber).IsNullableType())
             {
@@ -138,20 +138,20 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     ? Expression.ArrayAccess(param, Expression.Constant(0))
                     : type == typeof(sbyte)
                         ? Expression.Convert(
-                              Expression.ArrayAccess(param, Expression.Constant(0)),
-                              typeof(sbyte)
-                          )
+                            Expression.ArrayAccess(param, Expression.Constant(0)),
+                            typeof(sbyte)
+                        )
                         : type == typeof(decimal)
                             ? Expression.Call(_toDecimalMethod, param)
                             : (Expression)
-                                  Expression.Call(
-                                      typeof(BitConverter).GetMethod(
-                                          "To" + type.Name,
-                                          new[] { typeof(byte[]), typeof(int) }
-                                      )!,
-                                      EnsureEndian(HandleEmptyArray(param)),
-                                      Expression.Constant(0)
-                                  );
+                                Expression.Call(
+                                    typeof(BitConverter).GetMethod(
+                                        "To" + type.Name,
+                                        new[] { typeof(byte[]), typeof(int) }
+                                    )!,
+                                    EnsureEndian(HandleEmptyArray(param)),
+                                    Expression.Constant(0)
+                                );
 
             if (typeof(TNumber).IsNullableType())
             {
@@ -243,21 +243,21 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             var type = typeof(TNumber).UnwrapNullableType();
 
             return type == typeof(decimal)
-              ? 16
-              : (
+                ? 16
+                : (
                     type == typeof(long) || type == typeof(ulong) || type == typeof(double)
                         ? 8
                         : (
-                              type == typeof(int) || type == typeof(uint) || type == typeof(float)
-                                  ? 4
-                                  : (
-                                        type == typeof(short)
-                                        || type == typeof(ushort)
-                                        || type == typeof(char)
-                                            ? 2
-                                            : 1
-                                    )
-                          )
+                            type == typeof(int) || type == typeof(uint) || type == typeof(float)
+                                ? 4
+                                : (
+                                    type == typeof(short)
+                                    || type == typeof(ushort)
+                                    || type == typeof(char)
+                                        ? 2
+                                        : 1
+                                )
+                        )
                 );
         }
 

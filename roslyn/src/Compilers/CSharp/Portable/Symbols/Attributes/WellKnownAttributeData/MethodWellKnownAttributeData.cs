@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class MethodWellKnownAttributeData
         : CommonMethodWellKnownAttributeData,
-          ISkipLocalsInitAttributeTarget,
-          IMemberNotNullAttributeTarget
+            ISkipLocalsInitAttributeTarget,
+            IMemberNotNullAttributeTarget
     {
         private bool _hasDoesNotReturnAttribute;
         public bool HasDoesNotReturnAttribute

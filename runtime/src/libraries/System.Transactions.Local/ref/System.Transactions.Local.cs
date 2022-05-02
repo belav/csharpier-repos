@@ -9,7 +9,7 @@ namespace System.Transactions
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     public sealed partial class CommittableTransaction
         : System.Transactions.Transaction,
-          System.IAsyncResult
+            System.IAsyncResult
     {
         public CommittableTransaction() { }
 
@@ -176,7 +176,7 @@ namespace System.Transactions
 
     public partial class Transaction
         : System.IDisposable,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         internal Transaction() { }
 

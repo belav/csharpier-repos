@@ -32,8 +32,8 @@ using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestExceptio
 
 internal abstract partial class IISHttpContext
     : NativeRequestContext,
-      IThreadPoolWorkItem,
-      IDisposable
+        IThreadPoolWorkItem,
+        IDisposable
 {
     private const int MinAllocBufferSize = 2048;
 
@@ -428,8 +428,8 @@ internal abstract partial class IISHttpContext
     {
         // Verifies we have sent the statuscode before writing a header
         var reasonPhrase = string.IsNullOrEmpty(ReasonPhrase)
-          ? ReasonPhrases.GetReasonPhrase(StatusCode)
-          : ReasonPhrase;
+            ? ReasonPhrases.GetReasonPhrase(StatusCode)
+            : ReasonPhrase;
 
         // This copies data into the underlying buffer
         NativeMethods.HttpSetResponseStatusCode(
@@ -806,7 +806,7 @@ internal abstract partial class IISHttpContext
     )
     {
         return success
-          ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
-          : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
+            ? NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_CONTINUE
+            : NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
     }
 }

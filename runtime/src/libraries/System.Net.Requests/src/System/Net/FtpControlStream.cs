@@ -1290,8 +1290,8 @@ namespace System.Net
         private string FormatFtpCommand(string command, string? parameter)
         {
             return string.IsNullOrEmpty(parameter)
-              ? command + "\r\n"
-              : command + " " + parameter + "\r\n";
+                ? command + "\r\n"
+                : command + " " + parameter + "\r\n";
         }
 
         /// <summary>

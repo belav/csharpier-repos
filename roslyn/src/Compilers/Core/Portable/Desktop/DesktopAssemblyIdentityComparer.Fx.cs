@@ -46,9 +46,9 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class FrameworkRetargetingDictionary
             : Dictionary<
-                  FrameworkRetargetingDictionary.Key,
-                  List<FrameworkRetargetingDictionary.Value>
-              >
+                FrameworkRetargetingDictionary.Key,
+                List<FrameworkRetargetingDictionary.Value>
+            >
         {
             public FrameworkRetargetingDictionary() { }
 

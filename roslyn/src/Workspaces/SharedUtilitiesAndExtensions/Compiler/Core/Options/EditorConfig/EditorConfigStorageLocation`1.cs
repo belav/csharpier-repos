@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Options
     /// </summary>
     internal sealed class EditorConfigStorageLocation<T>
         : OptionStorageLocation2,
-          IEditorConfigStorageLocation2
+            IEditorConfigStorageLocation2
     {
         public string KeyName { get; }
 

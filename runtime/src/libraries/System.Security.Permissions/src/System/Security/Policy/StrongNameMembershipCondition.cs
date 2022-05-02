@@ -14,8 +14,8 @@ namespace System.Security.Policy
 #endif
     public sealed partial class StrongNameMembershipCondition
         : ISecurityEncodable,
-          ISecurityPolicyEncodable,
-          IMembershipCondition
+            ISecurityPolicyEncodable,
+            IMembershipCondition
     {
         public StrongNameMembershipCondition(
             StrongNamePublicKeyBlob blob,

@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     {
         private abstract class AbstractWrappedNamespaceOrTypeSymbol
             : AbstractWrappedSymbol,
-              INamespaceOrTypeSymbol
+                INamespaceOrTypeSymbol
         {
             private readonly INamespaceOrTypeSymbol _symbol;
 

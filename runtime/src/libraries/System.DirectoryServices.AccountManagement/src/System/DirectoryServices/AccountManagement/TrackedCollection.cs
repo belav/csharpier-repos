@@ -10,9 +10,9 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal sealed class TrackedCollection<T>
         : ICollection<T>,
-          ICollection,
-          IEnumerable<T>,
-          IEnumerable
+            ICollection,
+            IEnumerable<T>,
+            IEnumerable
     {
         //
         // ICollection

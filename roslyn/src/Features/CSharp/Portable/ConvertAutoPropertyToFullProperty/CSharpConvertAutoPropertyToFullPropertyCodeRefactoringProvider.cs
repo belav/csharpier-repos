@@ -33,9 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAutoPropertyToFullProperty
     ]
     internal class CSharpConvertAutoPropertyToFullPropertyCodeRefactoringProvider
         : AbstractConvertAutoPropertyToFullPropertyCodeRefactoringProvider<
-              PropertyDeclarationSyntax,
-              TypeDeclarationSyntax
-          >
+            PropertyDeclarationSyntax,
+            TypeDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

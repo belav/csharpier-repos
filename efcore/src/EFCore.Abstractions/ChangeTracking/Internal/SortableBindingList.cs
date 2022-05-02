@@ -130,8 +130,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var rightValue = _prop.GetValue(right);
 
                 return _direction == ListSortDirection.Ascending
-                  ? _comparer.Compare(leftValue, rightValue)
-                  : _comparer.Compare(rightValue, leftValue);
+                    ? _comparer.Compare(leftValue, rightValue)
+                    : _comparer.Compare(rightValue, leftValue);
             }
 
             public static bool CanSort(Type type) =>

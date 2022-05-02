@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentScriptTagPass
     : ComponentIntermediateNodePassBase,
-      IRazorDocumentClassifierPass
+        IRazorDocumentClassifierPass
 {
     // Run as soon as possible after the Component rewrite pass
     public override int Order => 5;

@@ -28,8 +28,8 @@ namespace System.Web.Helpers.Claims
         {
             TClaimsIdentity castClaimsIdentity = identity as TClaimsIdentity;
             return (castClaimsIdentity != null)
-              ? new ClaimsIdentityImpl<TClaimsIdentity, TClaim>(castClaimsIdentity)
-              : null;
+                ? new ClaimsIdentityImpl<TClaimsIdentity, TClaim>(castClaimsIdentity)
+                : null;
         }
 
         private sealed class ClaimsIdentityImpl<TClaimsIdentity, TClaim> : ClaimsIdentity

@@ -54,13 +54,13 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _memberToFunctionName.TryGetValue(member, out var functionName)
-              ? _sqlExpressionFactory.Function(
+                ? _sqlExpressionFactory.Function(
                     functionName,
                     new[] { instance! },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
                     returnType
                 )
-              : null;
+                : null;
     }
 }

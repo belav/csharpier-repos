@@ -120,8 +120,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         );
 
                         return binaryExpression.NodeType == ExpressionType.Equal
-                          ? Expression.Not(result)
-                          : result;
+                            ? Expression.Not(result)
+                            : result;
                     }
                 }
             }
@@ -192,11 +192,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var body = Visit(lambdaExpression.Body);
 
             return body.Type != lambdaExpression.Body.Type
-              ? Expression.Lambda(
+                ? Expression.Lambda(
                     Expression.Convert(body, lambdaExpression.Body.Type),
                     lambdaExpression.Parameters
                 )
-              : lambdaExpression.Update(body, lambdaExpression.Parameters)!;
+                : lambdaExpression.Update(body, lambdaExpression.Parameters)!;
         }
 
         /// <summary>
@@ -210,9 +210,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var expression =
                 memberExpression.Expression != null
                     ? MatchExpressionType(
-                          Visit(memberExpression.Expression),
-                          memberExpression.Expression.Type
-                      )
+                        Visit(memberExpression.Expression),
+                        memberExpression.Expression.Type
+                    )
                     : null;
 
             var visitedExpression = memberExpression.Update(expression);
@@ -271,8 +271,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 return newArgument is ConstantExpression
-                  ? result
-                  : Expression.OrElse(
+                    ? result
+                    : Expression.OrElse(
                         Expression.Equal(newArgument, Expression.Constant(string.Empty)),
                         result
                     );
@@ -389,13 +389,13 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             )
             {
                 return textCompareConstantExpression.Value is bool boolValue && boolValue
-                  ? Expression.Call(
+                    ? Expression.Call(
                         _stringCompareWithComparisonMethod,
                         visited.Arguments[0],
                         visited.Arguments[1],
                         Expression.Constant(StringComparison.OrdinalIgnoreCase)
                     )
-                  : Expression.Call(
+                    : Expression.Call(
                         _stringCompareWithoutComparisonMethod,
                         visited.Arguments[0],
                         visited.Arguments[1]
@@ -489,8 +489,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 );
 
                 return newArgument is ConstantExpression
-                  ? result
-                  : Expression.AndAlso(
+                    ? result
+                    : Expression.AndAlso(
                         Expression.NotEqual(newArgument, Expression.Constant(string.Empty)),
                         result
                     );
@@ -532,7 +532,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     return true;
 
                 case MethodCallExpression methodCallExpression
-                      when methodCallExpression.Method.Name == nameof(object.Equals):
+                when methodCallExpression.Method.Name == nameof(object.Equals):
                 {
                     negated = false;
                     if (
@@ -650,11 +650,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     return Expression.Condition(
                         conditionalExpression.Test,
                         binaryTest.NodeType == ExpressionType.Equal
-                          ? nullExpression
-                          : nonNullExpression,
+                            ? nullExpression
+                            : nonNullExpression,
                         binaryTest.NodeType == ExpressionType.Equal
-                          ? nonNullExpression
-                          : nullExpression
+                            ? nonNullExpression
+                            : nullExpression
                     );
                 }
             }

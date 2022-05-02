@@ -24,7 +24,7 @@ namespace System.Web.Http.Tracing.Tracers
     )]
     internal class ActionFilterAttributeTracer
         : ActionFilterAttribute,
-          IDecorator<ActionFilterAttribute>
+            IDecorator<ActionFilterAttribute>
     {
         private readonly ActionFilterAttribute _innerFilter;
         private readonly ITraceWriter _traceWriter;

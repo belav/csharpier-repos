@@ -456,9 +456,9 @@ namespace System.Data.Odbc
     )]
     public sealed partial class OdbcDataAdapter
         : System.Data.Common.DbDataAdapter,
-          System.Data.IDataAdapter,
-          System.Data.IDbDataAdapter,
-          System.ICloneable
+            System.Data.IDataAdapter,
+            System.Data.IDbDataAdapter,
+            System.ICloneable
     {
         public OdbcDataAdapter() { }
 
@@ -785,7 +785,7 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcErrorCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal OdbcErrorCollection() { }
 
@@ -916,9 +916,9 @@ namespace System.Data.Odbc
 
     public sealed partial class OdbcParameter
         : System.Data.Common.DbParameter,
-          System.Data.IDataParameter,
-          System.Data.IDbDataParameter,
-          System.ICloneable
+            System.Data.IDataParameter,
+            System.Data.IDbDataParameter,
+            System.ICloneable
     {
         public OdbcParameter() { }
 

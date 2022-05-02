@@ -35,8 +35,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Internal.PickMembers
                 title,
                 members,
                 options.IsDefault
-                  ? default
-                  : options.SelectAsArray(o => new OmniSharpPickMembersOption(o)),
+                    ? default
+                    : options.SelectAsArray(o => new OmniSharpPickMembersOption(o)),
                 selectAll: true
             );
             return new(

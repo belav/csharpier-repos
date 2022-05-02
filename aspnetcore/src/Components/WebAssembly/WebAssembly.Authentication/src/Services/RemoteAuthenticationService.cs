@@ -24,8 +24,8 @@ public class RemoteAuthenticationService<
     TProviderOptions
 >
     : AuthenticationStateProvider,
-      IRemoteAuthenticationService<TRemoteAuthenticationState>,
-      IAccessTokenProvider
+        IRemoteAuthenticationService<TRemoteAuthenticationState>,
+        IAccessTokenProvider
     where TRemoteAuthenticationState : RemoteAuthenticationState
     where TProviderOptions : new()
     where TAccount : RemoteUserAccount

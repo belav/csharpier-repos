@@ -40,20 +40,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression result =
                 oldNodeOpt != null
                     ? oldNodeOpt.Update(
-                          rewrittenReceiver,
-                          fieldSymbol,
-                          constantValueOpt,
-                          resultKind,
-                          type
-                      )
+                        rewrittenReceiver,
+                        fieldSymbol,
+                        constantValueOpt,
+                        resultKind,
+                        type
+                    )
                     : new BoundFieldAccess(
-                          syntax,
-                          rewrittenReceiver,
-                          fieldSymbol,
-                          constantValueOpt,
-                          resultKind,
-                          type
-                      );
+                        syntax,
+                        rewrittenReceiver,
+                        fieldSymbol,
+                        constantValueOpt,
+                        resultKind,
+                        type
+                    );
 
             if (fieldSymbol.IsFixedSizeBuffer)
             {

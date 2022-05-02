@@ -43,11 +43,11 @@ namespace System.Reflection.Metadata.Ecma335
             return (tokenType >> TokenTypeIds.RowIdBitCount) switch
             {
                 TokenTypeIds.TypeDef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | TypeDef,
+                    => rowId << NumberOfBits | TypeDef,
                 TokenTypeIds.MethodDef >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | MethodDef,
+                    => rowId << NumberOfBits | MethodDef,
                 TokenTypeIds.Assembly >> TokenTypeIds.RowIdBitCount
-                  => rowId << NumberOfBits | Assembly,
+                    => rowId << NumberOfBits | Assembly,
                 _ => 0,
             };
         }

@@ -967,7 +967,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 NavigateToItemKind.Constant
                 or NavigateToItemKind.EnumItem
                 or NavigateToItemKind.Field
-                  => CodeNodeCategories.Field,
+                    => CodeNodeCategories.Field,
                 _ => null,
             };
 
@@ -1037,67 +1037,67 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 or Glyph.ClassProtected
                 or Glyph.ClassPrivate
                 or Glyph.ClassInternal
-                  => "Class",
+                    => "Class",
                 Glyph.ConstantPublic
                 or Glyph.ConstantProtected
                 or Glyph.ConstantPrivate
                 or Glyph.ConstantInternal
-                  => "Field",
+                    => "Field",
                 Glyph.DelegatePublic
                 or Glyph.DelegateProtected
                 or Glyph.DelegatePrivate
                 or Glyph.DelegateInternal
-                  => "Delegate",
+                    => "Delegate",
                 Glyph.EnumPublic
                 or Glyph.EnumProtected
                 or Glyph.EnumPrivate
                 or Glyph.EnumInternal
-                  => "Enum",
+                    => "Enum",
                 Glyph.EnumMemberPublic
                 or Glyph.EnumMemberProtected
                 or Glyph.EnumMemberPrivate
                 or Glyph.EnumMemberInternal
-                  => "EnumMember",
+                    => "EnumMember",
                 Glyph.ExtensionMethodPublic
                 or Glyph.ExtensionMethodProtected
                 or Glyph.ExtensionMethodPrivate
                 or Glyph.ExtensionMethodInternal
-                  => "Method",
+                    => "Method",
                 Glyph.EventPublic
                 or Glyph.EventProtected
                 or Glyph.EventPrivate
                 or Glyph.EventInternal
-                  => "Event",
+                    => "Event",
                 Glyph.FieldPublic
                 or Glyph.FieldProtected
                 or Glyph.FieldPrivate
                 or Glyph.FieldInternal
-                  => "Field",
+                    => "Field",
                 Glyph.InterfacePublic
                 or Glyph.InterfaceProtected
                 or Glyph.InterfacePrivate
                 or Glyph.InterfaceInternal
-                  => "Interface",
+                    => "Interface",
                 Glyph.MethodPublic
                 or Glyph.MethodProtected
                 or Glyph.MethodPrivate
                 or Glyph.MethodInternal
-                  => "Method",
+                    => "Method",
                 Glyph.ModulePublic
                 or Glyph.ModuleProtected
                 or Glyph.ModulePrivate
                 or Glyph.ModuleInternal
-                  => "Module",
+                    => "Module",
                 Glyph.PropertyPublic
                 or Glyph.PropertyProtected
                 or Glyph.PropertyPrivate
                 or Glyph.PropertyInternal
-                  => "Property",
+                    => "Property",
                 Glyph.StructurePublic
                 or Glyph.StructureProtected
                 or Glyph.StructurePrivate
                 or Glyph.StructureInternal
-                  => "Structure",
+                    => "Structure",
                 _ => null,
             };
 

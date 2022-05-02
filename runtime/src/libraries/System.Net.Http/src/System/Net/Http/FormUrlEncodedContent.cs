@@ -77,6 +77,6 @@ namespace System.Net.Http
             GetType() == typeof(FormUrlEncodedContent)
                 ? CreateMemoryStreamForByteArray()
                 : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
-                  null;
+                null;
     }
 }

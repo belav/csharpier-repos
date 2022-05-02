@@ -9,7 +9,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
     public class RollForwardSettings
         : FrameworkResolutionBase,
-          IClassFixture<RollForwardSettings.SharedTestState>
+            IClassFixture<RollForwardSettings.SharedTestState>
     {
         private const string MiddleWare = "MiddleWare";
 

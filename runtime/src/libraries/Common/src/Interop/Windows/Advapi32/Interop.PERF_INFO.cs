@@ -68,8 +68,8 @@ internal static partial class Interop
                 (instance.NameLength == 0)
                     ? default
                     : MemoryMarshal.Cast<byte, char>(
-                          data.Slice(instance.NameOffset, instance.NameLength - sizeof(char))
-                      ); // NameLength includes the null-terminator
+                        data.Slice(instance.NameOffset, instance.NameLength - sizeof(char))
+                    ); // NameLength includes the null-terminator
         }
 
         [StructLayout(LayoutKind.Sequential)]

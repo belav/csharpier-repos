@@ -9,10 +9,10 @@ namespace System.Collections.Concurrent
     [System.Runtime.Versioning.UnsupportedOSPlatform("browser")]
     public partial class BlockingCollection<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.IDisposable
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.IDisposable
     {
         public BlockingCollection() { }
 
@@ -268,10 +268,10 @@ namespace System.Collections.Concurrent
 
     public partial class ConcurrentBag<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public ConcurrentBag() { }
 
@@ -339,22 +339,22 @@ namespace System.Collections.Concurrent
 
     public partial class ConcurrentDictionary<TKey, TValue>
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IDictionary<TKey, TValue>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
-                  TKey,
-                  TValue
-              >>,
-          System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
-          System.Collections.ICollection,
-          System.Collections.IDictionary,
-          System.Collections.IEnumerable where TKey : notnull
+                TKey,
+                TValue
+            >>,
+            System.Collections.Generic.IDictionary<TKey, TValue>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyCollection<System.Collections.Generic.KeyValuePair<
+                    TKey,
+                    TValue
+                >>,
+            System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
+            System.Collections.ICollection,
+            System.Collections.IDictionary,
+            System.Collections.IEnumerable where TKey : notnull
     {
         public ConcurrentDictionary() { }
 
@@ -624,10 +624,10 @@ namespace System.Collections.Concurrent
 
     public partial class ConcurrentQueue<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public ConcurrentQueue() { }
 
@@ -702,10 +702,10 @@ namespace System.Collections.Concurrent
 
     public partial class ConcurrentStack<T>
         : System.Collections.Concurrent.IProducerConsumerCollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IReadOnlyCollection<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IReadOnlyCollection<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public ConcurrentStack() { }
 
@@ -801,8 +801,8 @@ namespace System.Collections.Concurrent
 
     public partial interface IProducerConsumerCollection<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         void CopyTo(T[] array, int index);
         T[] ToArray();

@@ -1357,9 +1357,9 @@ namespace System.Web.Http.WebHost
                             t == typeof(HttpError)
                                 ? null
                                 : new ContentNegotiationResult(
-                                      f.First(),
-                                      JsonMediaTypeFormatter.DefaultMediaType
-                                  );
+                                    f.First(),
+                                    JsonMediaTypeFormatter.DefaultMediaType
+                                );
                         return result;
                     }
                 );

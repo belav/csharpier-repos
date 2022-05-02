@@ -208,8 +208,8 @@ namespace System.Net
             socketError = GetSocketErrorForNativeError(error);
             nativeErrorCode = error;
             return socketError == SocketError.Success
-              ? Marshal.PtrToStringAnsi((IntPtr)buffer)
-              : null;
+                ? Marshal.PtrToStringAnsi((IntPtr)buffer)
+                : null;
         }
 
         public static string GetHostName() => Interop.Sys.GetHostName();

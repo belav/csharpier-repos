@@ -43,8 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                                     )
                                 )
                                 && (bool)result
-                              ? 1
-                              : -1;
+                                ? 1
+                                : -1;
                         }
                     );
                 }

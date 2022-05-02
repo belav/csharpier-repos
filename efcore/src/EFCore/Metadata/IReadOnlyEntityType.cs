@@ -251,10 +251,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </returns>
         IReadOnlyEntityType? LeastDerivedType(IReadOnlyEntityType otherEntityType) =>
             IsAssignableFrom(Check.NotNull(otherEntityType, nameof(otherEntityType)))
-              ? this
-              : otherEntityType.IsAssignableFrom(this)
-                  ? otherEntityType
-                  : null;
+                ? this
+                : otherEntityType.IsAssignableFrom(this)
+                    ? otherEntityType
+                    : null;
 
         /// <summary>
         ///     Gets primary key for this entity type. Returns <see langword="null" /> if no primary key is defined.

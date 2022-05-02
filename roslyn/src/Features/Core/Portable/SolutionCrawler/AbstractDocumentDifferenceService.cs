@@ -221,8 +221,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             var lengthDelta = range.NewLength - range.Span.Length;
 
             return (oldMember.Span.Length + lengthDelta) == newMember.Span.Length
-              ? newMember
-              : null;
+                ? newMember
+                : null;
         }
     }
 }

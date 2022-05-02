@@ -1586,32 +1586,32 @@ namespace System.Linq.Expressions
             {
                 1 => DynamicExpression.Make(returnType, delegateType, binder, arguments[0]),
                 2
-                  => DynamicExpression.Make(
-                      returnType,
-                      delegateType,
-                      binder,
-                      arguments[0],
-                      arguments[1]
-                  ),
+                    => DynamicExpression.Make(
+                        returnType,
+                        delegateType,
+                        binder,
+                        arguments[0],
+                        arguments[1]
+                    ),
                 3
-                  => DynamicExpression.Make(
-                      returnType,
-                      delegateType,
-                      binder,
-                      arguments[0],
-                      arguments[1],
-                      arguments[2]
-                  ),
+                    => DynamicExpression.Make(
+                        returnType,
+                        delegateType,
+                        binder,
+                        arguments[0],
+                        arguments[1],
+                        arguments[2]
+                    ),
                 4
-                  => DynamicExpression.Make(
-                      returnType,
-                      delegateType,
-                      binder,
-                      arguments[0],
-                      arguments[1],
-                      arguments[2],
-                      arguments[3]
-                  ),
+                    => DynamicExpression.Make(
+                        returnType,
+                        delegateType,
+                        binder,
+                        arguments[0],
+                        arguments[1],
+                        arguments[2],
+                        arguments[3]
+                    ),
                 _ => DynamicExpression.Make(returnType, delegateType, binder, arguments),
             };
         }

@@ -252,8 +252,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
                 var namespacePrefix = @namespace.Substring(0, containingText.Length);
 
                 return syntaxFacts.StringComparer.Equals(containingText, namespacePrefix)
-                  ? @namespace[(relativeTo.Length + 1)..]
-                  : null;
+                    ? @namespace[(relativeTo.Length + 1)..]
+                    : null;
             }
         }
     }

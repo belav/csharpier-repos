@@ -8,7 +8,7 @@ namespace System.Web.Mvc
 {
     internal sealed class ViewUserControlControlBuilder
         : FileLevelUserControlBuilder,
-          IMvcControlBuilder
+            IMvcControlBuilder
     {
         public string Inherits { get; set; }
 

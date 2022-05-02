@@ -122,9 +122,9 @@ namespace Internal.TypeSystem
 
             public class MethodForRuntimeDeterminedTypeKeyHashtable
                 : LockFreeReaderHashtable<
-                      MethodForRuntimeDeterminedTypeKey,
-                      MethodForRuntimeDeterminedType
-                  >
+                    MethodForRuntimeDeterminedTypeKey,
+                    MethodForRuntimeDeterminedType
+                >
             {
                 protected override int GetKeyHashCode(MethodForRuntimeDeterminedTypeKey key)
                 {

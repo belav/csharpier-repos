@@ -179,8 +179,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             return
                 result == QueryCompilationContext.NotTranslatedExpression
                 || _entityReferenceFindingExpressionVisitor.Find(result)
-              ? null
-              : result;
+                ? null
+                : result;
         }
 
         /// <summary>
@@ -665,11 +665,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     TryRewriteEntityEquality(
                         ExpressionType.Equal,
                         left == QueryCompilationContext.NotTranslatedExpression
-                          ? methodCallExpression.Object
-                          : left,
+                            ? methodCallExpression.Object
+                            : left,
                         right == QueryCompilationContext.NotTranslatedExpression
-                          ? methodCallExpression.Arguments[0]
-                          : right,
+                            ? methodCallExpression.Arguments[0]
+                            : right,
                         equalsMethod: true,
                         out var result
                     )
@@ -715,11 +715,11 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     TryRewriteEntityEquality(
                         ExpressionType.Equal,
                         left == QueryCompilationContext.NotTranslatedExpression
-                          ? methodCallExpression.Arguments[0]
-                          : left,
+                            ? methodCallExpression.Arguments[0]
+                            : left,
                         right == QueryCompilationContext.NotTranslatedExpression
-                          ? methodCallExpression.Arguments[1]
-                          : right,
+                            ? methodCallExpression.Arguments[1]
+                            : right,
                         equalsMethod: true,
                         out var result
                     )
@@ -750,8 +750,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     TryRewriteContainsEntity(
                         enumerable,
                         item == QueryCompilationContext.NotTranslatedExpression
-                          ? methodCallExpression.Arguments[1]
-                          : item,
+                            ? methodCallExpression.Arguments[1]
+                            : item,
                         out var result
                     )
                 )
@@ -778,8 +778,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     TryRewriteContainsEntity(
                         enumerable,
                         item == QueryCompilationContext.NotTranslatedExpression
-                          ? methodCallExpression.Arguments[0]
-                          : item,
+                            ? methodCallExpression.Arguments[0]
+                            : item,
                         out var result
                     )
                 )
@@ -1180,8 +1180,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         && !type.IsNullableType()
                         && result.Type.UnwrapNullableType() == type
                     )
-                  ? Expression.Convert(result, type)
-                  : result;
+                    ? Expression.Convert(result, type)
+                    : result;
             }
 
             if (entityReferenceExpression.SubqueryEntity != null)
@@ -1272,8 +1272,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
         private static Expression ConvertToNonNullable(Expression expression) =>
             expression.Type.IsNullableType()
-              ? Expression.Convert(expression, expression.Type.UnwrapNullableType())
-              : expression;
+                ? Expression.Convert(expression, expression.Type.UnwrapNullableType())
+                : expression;
 
         private IProperty? FindProperty(Expression expression)
         {
@@ -1355,9 +1355,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     break;
 
                 case MethodCallExpression methodCallExpression
-                      when methodCallExpression.Method.IsGenericMethod
-                          && methodCallExpression.Method.GetGenericMethodDefinition()
-                              == _getParameterValueMethodInfo:
+                when methodCallExpression.Method.IsGenericMethod
+                    && methodCallExpression.Method.GetGenericMethodDefinition()
+                        == _getParameterValueMethodInfo:
                     var parameterName = methodCallExpression.Arguments[
                         1
                     ].GetConstantValue<string>();
@@ -1428,12 +1428,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     throw new InvalidOperationException(
                         CoreStrings.EntityEqualityOnKeylessEntityNotSupported(
                             nodeType == ExpressionType.Equal
-                              ? equalsMethod
-                                  ? nameof(object.Equals)
-                                  : "=="
-                              : equalsMethod
-                                  ? "!" + nameof(object.Equals)
-                                  : "!=",
+                                ? equalsMethod
+                                    ? nameof(object.Equals)
+                                    : "=="
+                                : equalsMethod
+                                    ? "!" + nameof(object.Equals)
+                                    : "!=",
                             entityType1.DisplayName()
                         )
                     );
@@ -1485,12 +1485,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 throw new InvalidOperationException(
                     CoreStrings.EntityEqualityOnKeylessEntityNotSupported(
                         nodeType == ExpressionType.Equal
-                          ? equalsMethod
-                              ? nameof(object.Equals)
-                              : "=="
-                          : equalsMethod
-                              ? "!" + nameof(object.Equals)
-                              : "!=",
+                            ? equalsMethod
+                                ? nameof(object.Equals)
+                                : "=="
+                            : equalsMethod
+                                ? "!" + nameof(object.Equals)
+                                : "!=",
                         entityType.DisplayName()
                     )
                 );
@@ -1507,12 +1507,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 throw new InvalidOperationException(
                     CoreStrings.EntityEqualityOnCompositeKeyEntitySubqueryNotSupported(
                         nodeType == ExpressionType.Equal
-                          ? equalsMethod
-                              ? nameof(object.Equals)
-                              : "=="
-                          : equalsMethod
-                              ? "!" + nameof(object.Equals)
-                              : "!=",
+                            ? equalsMethod
+                                ? nameof(object.Equals)
+                                : "=="
+                            : equalsMethod
+                                ? "!" + nameof(object.Equals)
+                                : "!=",
                         entityType.DisplayName()
                     )
                 );
@@ -1546,15 +1546,15 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 case ConstantExpression constantExpression:
                     return Expression.Constant(
                         constantExpression.Value is null
-                          ? null
-                          : property.GetGetter().GetClrValue(constantExpression.Value),
+                            ? null
+                            : property.GetGetter().GetClrValue(constantExpression.Value),
                         property.ClrType.MakeNullable()
                     );
 
                 case MethodCallExpression methodCallExpression
-                      when methodCallExpression.Method.IsGenericMethod
-                          && methodCallExpression.Method.GetGenericMethodDefinition()
-                              == _getParameterValueMethodInfo:
+                when methodCallExpression.Method.IsGenericMethod
+                    && methodCallExpression.Method.GetGenericMethodDefinition()
+                        == _getParameterValueMethodInfo:
                     var parameterName = methodCallExpression.Arguments[
                         1
                     ].GetConstantValue<string>();
@@ -1580,13 +1580,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     );
 
                 case MemberInitExpression memberInitExpression
-                      when memberInitExpression.Bindings.SingleOrDefault(
-                          mb => mb.Member.Name == property.Name
-                      )
-                          is MemberAssignment memberAssignment:
+                when memberInitExpression.Bindings.SingleOrDefault(
+                    mb => mb.Member.Name == property.Name
+                )
+                    is MemberAssignment memberAssignment:
                     return memberAssignment.Expression.Type.IsNullableType()
-                      ? memberAssignment.Expression
-                      : Expression.Convert(
+                        ? memberAssignment.Expression
+                        : Expression.Convert(
                             memberAssignment.Expression,
                             property.ClrType.MakeNullable()
                         );
@@ -1595,7 +1595,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     return CreatePropertyAccessExpression(GetValue(newExpression), property);
 
                 case MemberInitExpression memberInitExpression
-                      when CanEvaluate(memberInitExpression):
+                when CanEvaluate(memberInitExpression):
                     return CreatePropertyAccessExpression(GetValue(memberInitExpression), property);
 
                 default:
@@ -1611,8 +1611,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         {
             var baseParameter = context.ParameterValues[baseParameterName];
             return baseParameter == null
-              ? (T?)(object?)null
-              : (T?)property.GetGetter().GetClrValue(baseParameter);
+                ? (T?)(object?)null
+                : (T?)property.GetGetter().GetClrValue(baseParameter);
         }
 
         private static List<TProperty?>? ParameterListValueExtractor<TEntity, TProperty>(
@@ -1755,8 +1755,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 singleEscapeCharacter == null
                     ? _defaultEscapeRegexCharsPattern
                     : BuildEscapeRegexCharsPattern(
-                          _regexSpecialChars.Where(c => c != singleEscapeCharacter)
-                      );
+                        _regexSpecialChars.Where(c => c != singleEscapeCharacter)
+                    );
 
             var regexPattern = Regex.Replace(
                 pattern,
@@ -1885,8 +1885,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     .FirstOrDefault(et => et.ClrType == type);
 
                 return derivedEntityType == null
-                  ? QueryCompilationContext.NotTranslatedExpression
-                  : new EntityReferenceExpression(this, derivedEntityType);
+                    ? QueryCompilationContext.NotTranslatedExpression
+                    : new EntityReferenceExpression(this, derivedEntityType);
             }
         }
     }

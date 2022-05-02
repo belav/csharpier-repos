@@ -409,8 +409,8 @@ namespace Roslyn.Test.Utilities
             sb.Append(" ");
             sb.Append(
                 (attributes & MethodImplAttributes.Unmanaged) == MethodImplAttributes.Unmanaged
-                  ? "unmanaged"
-                  : "managed"
+                    ? "unmanaged"
+                    : "managed"
             );
 
             if ((attributes & MethodImplAttributes.PreserveSig) != 0)

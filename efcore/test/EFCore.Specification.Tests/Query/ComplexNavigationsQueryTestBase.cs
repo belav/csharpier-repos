@@ -1277,10 +1277,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Inner =
                                         e.OneToOne_Optional_FK1 != null
                                             ? new MyInnerDto
-                                              {
-                                                  Id = e.OneToOne_Optional_FK1.Id,
-                                                  Name = e.OneToOne_Optional_FK1.Name
-                                              }
+                                            {
+                                                Id = e.OneToOne_Optional_FK1.Id,
+                                                Name = e.OneToOne_Optional_FK1.Name
+                                            }
                                             : null
                                 }
                         ),
@@ -4707,14 +4707,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         ) == null
                                             ? null
                                             : l1.OneToOne_Optional_FK1
-                                              .OneToOne_Optional_FK2
-                                              .OneToOne_Optional_FK3
+                                                .OneToOne_Optional_FK2
+                                                .OneToOne_Optional_FK3
                                     ) == null
                                         ? null
                                         : l1.OneToOne_Optional_FK1
-                                          .OneToOne_Optional_FK2
-                                          .OneToOne_Optional_FK3
-                                          .Name
+                                            .OneToOne_Optional_FK2
+                                            .OneToOne_Optional_FK3
+                                            .Name
                                 ) == "L4 01"
                         )
             );
@@ -4736,13 +4736,13 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         : l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2 == null
                                             ? null
                                             : l1.OneToOne_Optional_FK1
-                                                  .OneToOne_Optional_FK2
-                                                  .OneToOne_Optional_FK3 == null
+                                                .OneToOne_Optional_FK2
+                                                .OneToOne_Optional_FK3 == null
                                                 ? null
                                                 : l1.OneToOne_Optional_FK1
-                                                  .OneToOne_Optional_FK2
-                                                  .OneToOne_Optional_FK3
-                                                  .Name
+                                                    .OneToOne_Optional_FK2
+                                                    .OneToOne_Optional_FK3
+                                                    .Name
                                 ) == "L4 01"
                         )
             );
@@ -5138,10 +5138,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                                         l1.OneToOne_Optional_FK1 == null
                                             ? null
                                             : new Level2Dto
-                                              {
-                                                  Id = l1.OneToOne_Optional_FK1.Id,
-                                                  Name = l1.OneToOne_Optional_FK1.Name,
-                                              }
+                                            {
+                                                Id = l1.OneToOne_Optional_FK1.Id,
+                                                Name = l1.OneToOne_Optional_FK1.Name,
+                                            }
                                 }
                         )
                         .OrderBy(e => e.Level2.Name)
@@ -5195,22 +5195,22 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     Level2 = l1.OneToOne_Optional_FK1 == null
                                         ? null
                                         : new
-                                          {
-                                              l1.OneToOne_Optional_FK1.Id,
-                                              l1.OneToOne_Optional_FK1.Name,
-                                              Level3 = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2
-                                              == null
-                                                  ? null
-                                                  : new
-                                                    {
-                                                        l1.OneToOne_Optional_FK1
-                                                            .OneToOne_Optional_FK2
-                                                            .Id,
-                                                        l1.OneToOne_Optional_FK1
-                                                            .OneToOne_Optional_FK2
-                                                            .Name
-                                                    }
-                                          }
+                                        {
+                                            l1.OneToOne_Optional_FK1.Id,
+                                            l1.OneToOne_Optional_FK1.Name,
+                                            Level3 = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2
+                                            == null
+                                                ? null
+                                                : new
+                                                {
+                                                    l1.OneToOne_Optional_FK1
+                                                        .OneToOne_Optional_FK2
+                                                        .Id,
+                                                    l1.OneToOne_Optional_FK1
+                                                        .OneToOne_Optional_FK2
+                                                        .Name
+                                                }
+                                        }
                                 }
                         )
                         .Where(e => e.Level2.Level3.Name != "L"),

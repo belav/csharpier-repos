@@ -106,8 +106,8 @@ namespace System.Net.Http.Functional.Tests
             return TaskTimeoutExtensions.WhenAllOrAnyFailed(
                 tasks,
                 PlatformDetection.IsArmProcess || PlatformDetection.IsArm64Process
-                  ? PassingTestTimeoutMilliseconds * 5
-                  : PassingTestTimeoutMilliseconds
+                    ? PassingTestTimeoutMilliseconds * 5
+                    : PassingTestTimeoutMilliseconds
             );
         }
 

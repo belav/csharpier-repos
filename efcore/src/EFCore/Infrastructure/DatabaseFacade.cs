@@ -19,8 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     /// </summary>
     public class DatabaseFacade
         : IInfrastructure<IServiceProvider>,
-          IDatabaseFacadeDependenciesAccessor,
-          IResettableService
+            IDatabaseFacadeDependenciesAccessor,
+            IResettableService
     {
         private readonly DbContext _context;
         private IDatabaseFacadeDependencies? _dependencies;

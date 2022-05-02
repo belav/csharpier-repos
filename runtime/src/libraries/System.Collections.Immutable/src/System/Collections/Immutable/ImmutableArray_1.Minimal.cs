@@ -35,8 +35,8 @@ namespace System.Collections.Immutable
     [NonVersionable] // Applies to field layout
     public partial struct ImmutableArray<T>
         : IEnumerable<T>,
-          IEquatable<ImmutableArray<T>>,
-          IImmutableArray
+            IEquatable<ImmutableArray<T>>,
+            IImmutableArray
     {
         /// <summary>
         /// An empty (initialized) instance of <see cref="ImmutableArray{T}"/>.

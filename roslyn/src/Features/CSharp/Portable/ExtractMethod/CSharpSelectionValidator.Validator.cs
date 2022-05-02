@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             node switch
             {
                 ExpressionSyntax expression
-                  => CheckExpression(semanticModel, expression, cancellationToken),
+                    => CheckExpression(semanticModel, expression, cancellationToken),
                 BlockSyntax block => CheckBlock(block),
                 StatementSyntax statement => CheckStatement(statement),
                 GlobalStatementSyntax _ => CheckGlobalStatement(),

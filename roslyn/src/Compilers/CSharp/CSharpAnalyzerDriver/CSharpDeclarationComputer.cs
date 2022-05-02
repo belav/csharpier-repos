@@ -552,9 +552,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // TODO: use 'model.GetDeclaredSymbol(expressionBody)' when compiler is fixed to return the getter symbol for it.
             var declaredAccessor = getSymbol
                 ? (
-                      model.GetDeclaredSymbol(declarationWithExpressionBody, cancellationToken)
-                      as IPropertySymbol
-                  )?.GetMethod
+                    model.GetDeclaredSymbol(declarationWithExpressionBody, cancellationToken)
+                    as IPropertySymbol
+                )?.GetMethod
                 : null;
 
             return new DeclarationInfo(

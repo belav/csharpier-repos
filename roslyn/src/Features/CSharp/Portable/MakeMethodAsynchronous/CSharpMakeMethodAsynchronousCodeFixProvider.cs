@@ -142,16 +142,16 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
                     newReturnType = knownTypes._iAsyncEnumerableOfTTypeOpt is null
                         ? MakeGenericType("IAsyncEnumerable", methodSymbol.ReturnType)
                         : knownTypes._iAsyncEnumerableOfTTypeOpt
-                          .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
-                          .GenerateTypeSyntax();
+                            .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
+                            .GenerateTypeSyntax();
                 }
                 else if (IsIEnumerator(returnType, knownTypes) && IsIterator(methodSymbol))
                 {
                     newReturnType = knownTypes._iAsyncEnumeratorOfTTypeOpt is null
                         ? MakeGenericType("IAsyncEnumerator", methodSymbol.ReturnType)
                         : knownTypes._iAsyncEnumeratorOfTTypeOpt
-                          .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
-                          .GenerateTypeSyntax();
+                            .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
+                            .GenerateTypeSyntax();
                 }
                 else if (IsIAsyncEnumerableOrEnumerator(returnType, knownTypes))
                 {

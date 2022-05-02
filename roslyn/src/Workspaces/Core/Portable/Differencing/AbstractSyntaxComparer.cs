@@ -137,8 +137,8 @@ namespace Microsoft.CodeAnalysis.Differencing
                         ? _newRootChildren
                         : null;
             return (rootChildren != null)
-              ? EnumerateDescendants(rootChildren)
-              : EnumerateDescendants(node);
+                ? EnumerateDescendants(rootChildren)
+                : EnumerateDescendants(node);
         }
 
         private IEnumerable<SyntaxNode> EnumerateDescendants(IEnumerable<SyntaxNode> nodes)

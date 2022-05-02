@@ -32,18 +32,18 @@ public class SharedFxTests
         _sharedFxRoot = string.IsNullOrEmpty(
             Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH")
         )
-          ? Path.Combine(
+            ? Path.Combine(
                 TestData.GetTestDataValue("SharedFrameworkLayoutRoot"),
                 "shared",
                 "Microsoft.AspNetCore.App",
                 TestData.GetTestDataValue("RuntimePackageVersion")
             )
-          : Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH");
+            : Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH");
         _expectedVersionFileName = string.IsNullOrEmpty(
             Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH")
         )
-          ? ".version"
-          : "Microsoft.AspNetCore.App.versions.txt";
+            ? ".version"
+            : "Microsoft.AspNetCore.App.versions.txt";
     }
 
     [Fact]
@@ -335,8 +335,8 @@ public class SharedFxTests
                     var fileParts = filePath.Split('/');
                     var fileName = fileParts[fileParts.Length - 1];
                     return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                      ? fileName.Substring(0, fileName.Length - 4)
-                      : fileName;
+                        ? fileName.Substring(0, fileName.Length - 4)
+                        : fileName;
                 }
             )
             .ToHashSet();

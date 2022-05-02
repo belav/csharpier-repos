@@ -311,8 +311,8 @@ namespace System.Web.Http.ModelBinding
                 .GetValues(key)
                 .FirstOrDefault();
             return result == null
-              ? null
-              : new ValueProviderResult(result, result, CultureInfo.CurrentCulture);
+                ? null
+                : new ValueProviderResult(result, result, CultureInfo.CurrentCulture);
         }
     }
 }

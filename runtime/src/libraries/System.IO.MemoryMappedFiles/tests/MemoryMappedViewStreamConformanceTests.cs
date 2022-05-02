@@ -67,9 +67,9 @@ namespace System.IO.MemoryMappedFiles.Tests
         protected override MemoryMappedFile CreateFile(int length) =>
             MemoryMappedFilesTestBase.MapNamesSupported
                 ? MemoryMappedFile.CreateNew(
-                      MemoryMappedFilesTestBase.CreateUniqueMapName(),
-                      length
-                  )
+                    MemoryMappedFilesTestBase.CreateUniqueMapName(),
+                    length
+                )
                 : null;
     }
 
@@ -91,12 +91,12 @@ namespace System.IO.MemoryMappedFiles.Tests
         protected override MemoryMappedFile CreateFile(int length) =>
             MemoryMappedFilesTestBase.MapNamesSupported
                 ? MemoryMappedFile.CreateFromFile(
-                      Path.Combine(TestDirectory, Guid.NewGuid().ToString("N")),
-                      FileMode.CreateNew,
-                      MemoryMappedFilesTestBase.CreateUniqueMapName(),
-                      length,
-                      MemoryMappedFileAccess.ReadWrite
-                  )
+                    Path.Combine(TestDirectory, Guid.NewGuid().ToString("N")),
+                    FileMode.CreateNew,
+                    MemoryMappedFilesTestBase.CreateUniqueMapName(),
+                    length,
+                    MemoryMappedFileAccess.ReadWrite
+                )
                 : null;
     }
 }

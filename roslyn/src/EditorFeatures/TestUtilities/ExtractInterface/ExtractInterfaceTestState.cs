@@ -44,17 +44,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ExtractInterface
             var workspace =
                 languageName == LanguageNames.CSharp
                     ? TestWorkspace.CreateCSharp(
-                          markup,
-                          composition: Composition,
-                          compilationOptions: compilationOptions,
-                          parseOptions: parseOptions
-                      )
+                        markup,
+                        composition: Composition,
+                        compilationOptions: compilationOptions,
+                        parseOptions: parseOptions
+                    )
                     : TestWorkspace.CreateVisualBasic(
-                          markup,
-                          composition: Composition,
-                          compilationOptions: compilationOptions,
-                          parseOptions: parseOptions
-                      );
+                        markup,
+                        composition: Composition,
+                        compilationOptions: compilationOptions,
+                        parseOptions: parseOptions
+                    );
 
             if (options != null)
             {

@@ -552,10 +552,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             (PropertySaveBehavior?)this[CoreAnnotationNames.AfterSaveBehavior]
             ?? (
                 IsKey()
-                  ? PropertySaveBehavior.Throw
-                  : ValueGenerated.ForUpdate()
-                      ? PropertySaveBehavior.Ignore
-                      : PropertySaveBehavior.Save
+                    ? PropertySaveBehavior.Throw
+                    : ValueGenerated.ForUpdate()
+                        ? PropertySaveBehavior.Ignore
+                        : PropertySaveBehavior.Save
             );
 
         /// <summary>
@@ -784,11 +784,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             converter != null
             && converter.ModelClrType.UnwrapNullableType() != ClrType.UnwrapNullableType()
                 ? CoreStrings.ConverterPropertyMismatch(
-                      converter.ModelClrType.ShortDisplayName(),
-                      DeclaringEntityType.DisplayName(),
-                      Name,
-                      ClrType.ShortDisplayName()
-                  )
+                    converter.ModelClrType.ShortDisplayName(),
+                    DeclaringEntityType.DisplayName(),
+                    Name,
+                    ClrType.ShortDisplayName()
+                )
                 : null;
 
         /// <summary>
@@ -838,13 +838,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             get =>
                 IsReadOnly
                     ? NonCapturingLazyInitializer.EnsureInitialized(
-                          ref _typeMapping,
-                          (IProperty)this,
-                          static property =>
-                              property.DeclaringEntityType.Model
-                                  .GetModelDependencies()
-                                  .TypeMappingSource.FindMapping(property)!
-                      )
+                        ref _typeMapping,
+                        (IProperty)this,
+                        static property =>
+                            property.DeclaringEntityType.Model
+                                .GetModelDependencies()
+                                .TypeMappingSource.FindMapping(property)!
+                    )
                     : _typeMapping;
             set => SetTypeMapping(value, ConfigurationSource.Explicit);
         }
@@ -999,11 +999,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual string? CheckValueComparer(ValueComparer? comparer) =>
             comparer != null && comparer.Type.UnwrapNullableType() != ClrType.UnwrapNullableType()
                 ? CoreStrings.ComparerPropertyMismatch(
-                      comparer.Type.ShortDisplayName(),
-                      DeclaringEntityType.DisplayName(),
-                      Name,
-                      ClrType.ShortDisplayName()
-                  )
+                    comparer.Type.ShortDisplayName(),
+                    DeclaringEntityType.DisplayName(),
+                    Name,
+                    ClrType.ShortDisplayName()
+                )
                 : null;
 
         /// <summary>
@@ -1272,8 +1272,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetTypeMapping(
                 typeMapping,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1410,8 +1410,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsNullable(
                 nullable,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1428,8 +1428,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueGenerated(
                 valueGenerated,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1446,8 +1446,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsConcurrencyToken(
                 concurrencyToken,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1471,8 +1471,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetMaxLength(
                 maxLength,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1496,8 +1496,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPrecision(
                 precision,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1520,8 +1520,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetScale(
                 scale,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1545,8 +1545,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsUnicode(
                 unicode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1573,8 +1573,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetBeforeSaveBehavior(
                 beforeSaveBehavior,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1601,8 +1601,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetAfterSaveBehavior(
                 afterSaveBehavior,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1630,8 +1630,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueGeneratorFactory(
                 valueGeneratorFactory,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1658,8 +1658,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueGeneratorFactory(
                 valueGeneratorFactory,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1686,8 +1686,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueConverter(
                 converter,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1711,8 +1711,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueConverter(
                 converterType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1739,8 +1739,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetProviderClrType(
                 providerClrType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1767,8 +1767,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueComparer(
                 comparer,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -1792,8 +1792,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetValueComparer(
                 comparerType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

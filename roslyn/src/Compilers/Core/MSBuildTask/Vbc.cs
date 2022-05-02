@@ -1368,8 +1368,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                             // If we are design-time then we do not want to continue the build at
                             // this time.
                             return hostObjectSuccessfullyInitialized
-                              ? HostObjectInitializationStatus.NoActionReturnSuccess
-                              : HostObjectInitializationStatus.NoActionReturnFailure;
+                                ? HostObjectInitializationStatus.NoActionReturnSuccess
+                                : HostObjectInitializationStatus.NoActionReturnFailure;
                         }
 
                         if (!this.HostCompilerSupportsAllParameters)
@@ -1400,8 +1400,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                         if (hostObjectSuccessfullyInitialized)
                         {
                             return vbcHostObject.IsUpToDate()
-                              ? HostObjectInitializationStatus.NoActionReturnSuccess
-                              : HostObjectInitializationStatus.UseHostObjectToExecute;
+                                ? HostObjectInitializationStatus.NoActionReturnSuccess
+                                : HostObjectInitializationStatus.UseHostObjectToExecute;
                         }
                         else
                         {

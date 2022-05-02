@@ -199,8 +199,8 @@ namespace Microsoft.EntityFrameworkCore
 
             var existingThroughput = (ThroughputProperties?)existingAnnotation.Value;
             return autoscale
-              ? existingThroughput?.Throughput == throughput
-              : existingThroughput?.AutoscaleMaxThroughput == throughput;
+                ? existingThroughput?.Throughput == throughput
+                : existingThroughput?.AutoscaleMaxThroughput == throughput;
         }
     }
 }

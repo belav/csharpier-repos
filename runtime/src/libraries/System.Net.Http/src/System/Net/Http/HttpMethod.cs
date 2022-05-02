@@ -162,8 +162,8 @@ namespace System.Net.Http
         public static bool operator ==(HttpMethod? left, HttpMethod? right)
         {
             return left is null || right is null
-              ? ReferenceEquals(left, right)
-              : left.Equals(right);
+                ? ReferenceEquals(left, right)
+                : left.Equals(right);
         }
 
         public static bool operator !=(HttpMethod? left, HttpMethod? right)
@@ -194,12 +194,12 @@ namespace System.Net.Http
                     'h' => s_headMethod,
                     'o' => s_optionsMethod,
                     'p'
-                      => method._method.Length switch
-                      {
-                          3 => s_putMethod,
-                          4 => s_postMethod,
-                          _ => s_patchMethod,
-                      },
+                        => method._method.Length switch
+                        {
+                            3 => s_putMethod,
+                            4 => s_postMethod,
+                            _ => s_patchMethod,
+                        },
                     't' => s_traceMethod,
                     _ => null,
                 };

@@ -38,7 +38,7 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
     [ExportWorkspaceService(typeof(ISymbolSearchService), ServiceLayer.Host), Shared]
     internal partial class VisualStudioSymbolSearchService
         : AbstractDelayStartedService,
-          ISymbolSearchService
+            ISymbolSearchService
     {
         private readonly SemaphoreSlim _gate = new(initialCount: 1);
 
@@ -173,8 +173,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             foreach (var package in allPackages)
             {
                 var resultList = _installerService.GetInstalledVersions(package.PackageName).Any()
-                  ? packagesUsedInOtherProjects
-                  : packagesNotUsedInOtherProjects;
+                    ? packagesUsedInOtherProjects
+                    : packagesNotUsedInOtherProjects;
 
                 resultList.Add(package);
             }

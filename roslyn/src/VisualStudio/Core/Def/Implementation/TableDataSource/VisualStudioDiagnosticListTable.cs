@@ -124,8 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 }
 
                 return _errorList.AreOtherErrorSourceEntriesShown
-                  ? _liveTableSource
-                  : _buildTableSource;
+                    ? _liveTableSource
+                    : _buildTableSource;
             }
 
             /// this is for test only

@@ -81,8 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 AddPunctuation(
                     type.NullableAnnotation == CodeAnalysis.NullableAnnotation.Annotated
-                      ? SyntaxKind.QuestionToken
-                      : SyntaxKind.ExclamationToken
+                        ? SyntaxKind.QuestionToken
+                        : SyntaxKind.ExclamationToken
                 );
             }
         }
@@ -307,8 +307,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     namespaceSymbol.Accept(this.NotFirstVisitor);
                     AddPunctuation(
                         namespaceSymbol.IsGlobalNamespace
-                          ? SyntaxKind.ColonColonToken
-                          : SyntaxKind.DotToken
+                            ? SyntaxKind.ColonColonToken
+                            : SyntaxKind.DotToken
                     );
                 }
             }

@@ -87,8 +87,8 @@ namespace System.Net
 
     public partial class WebHeaderCollection
         : System.Collections.Specialized.NameValueCollection,
-          System.Collections.IEnumerable,
-          System.Runtime.Serialization.ISerializable
+            System.Collections.IEnumerable,
+            System.Runtime.Serialization.ISerializable
     {
         public WebHeaderCollection() { }
 

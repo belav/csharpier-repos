@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal readonly struct SuppressIntervalIntrospector
         : IIntervalIntrospector<SuppressSpacingData>,
-          IIntervalIntrospector<SuppressWrappingData>
+            IIntervalIntrospector<SuppressWrappingData>
     {
         int IIntervalIntrospector<SuppressSpacingData>.GetStart(SuppressSpacingData value) =>
             value.TextSpan.Start;

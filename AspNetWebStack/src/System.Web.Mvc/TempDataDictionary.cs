@@ -82,9 +82,9 @@ namespace System.Web.Mvc
             _data =
                 (providerDictionary != null)
                     ? new Dictionary<string, object>(
-                          providerDictionary,
-                          StringComparer.OrdinalIgnoreCase
-                      )
+                        providerDictionary,
+                        StringComparer.OrdinalIgnoreCase
+                    )
                     : new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             _initialKeys = new HashSet<string>(_data.Keys, StringComparer.OrdinalIgnoreCase);
             _retainedKeys.Clear();

@@ -22,11 +22,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class SqlServerIndexConvention
         : IEntityTypeBaseTypeChangedConvention,
-          IIndexAddedConvention,
-          IIndexUniquenessChangedConvention,
-          IIndexAnnotationChangedConvention,
-          IPropertyNullabilityChangedConvention,
-          IPropertyAnnotationChangedConvention
+            IIndexAddedConvention,
+            IIndexUniquenessChangedConvention,
+            IIndexAnnotationChangedConvention,
+            IPropertyNullabilityChangedConvention,
+            IPropertyAnnotationChangedConvention
     {
         private readonly ISqlGenerationHelper _sqlGenerationHelper;
 

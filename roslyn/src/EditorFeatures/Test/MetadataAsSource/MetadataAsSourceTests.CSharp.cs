@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -60,7 +60,7 @@ public class [|C|]
     public C();
 }}",
                     false
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -106,7 +106,7 @@ namespace System.Runtime.CompilerServices
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -117,7 +117,7 @@ public class [|C|]
     public int Property {{ get; init; }}
 }}",
                     false
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -159,7 +159,7 @@ public class [|C|]
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -173,7 +173,7 @@ public class [|C|]
     public C();
 }}",
                     false
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -216,7 +216,7 @@ public class [|C|]
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+                        => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // System.ValueTuple.dll
 #endregion
 
@@ -243,7 +243,7 @@ namespace System
     }}
 }}",
                     false
-                      => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+                        => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // System.ValueTuple.dll
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -462,7 +462,7 @@ namespace System
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 #endregion
 
@@ -473,7 +473,7 @@ public class [|C|]
     public void F();
 }}",
                     false
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {CodeAnalysisResources.InMemoryAssembly}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion

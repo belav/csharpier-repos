@@ -49,7 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     StandardTableKeyNames.DocumentName => _mappedSpanResult.FilePath,
                     StandardTableKeyNames.Line => _mappedSpanResult.LinePositionSpan.Start.Line,
                     StandardTableKeyNames.Column
-                      => _mappedSpanResult.LinePositionSpan.Start.Character,
+                        => _mappedSpanResult.LinePositionSpan.Start.Character,
                     StandardTableKeyNames.ProjectName => GetProjectName(),
                     StandardTableKeyNames.ProjectGuid => _boxedProjectGuid,
                     StandardTableKeyNames.Text => _lineText.ToString().Trim(),

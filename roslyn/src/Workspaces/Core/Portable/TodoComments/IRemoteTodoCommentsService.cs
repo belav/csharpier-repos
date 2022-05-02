@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.TodoComments
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteTodoCommentsDiscoveryService)), Shared]
     internal sealed class RemoteTodoCommentsDiscoveryCallbackDispatcher
         : RemoteServiceCallbackDispatcher,
-          IRemoteTodoCommentsDiscoveryService.ICallback
+            IRemoteTodoCommentsDiscoveryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

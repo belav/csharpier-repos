@@ -17,12 +17,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
     internal sealed class CSharpInstructionDecoder
         : InstructionDecoder<
-              CSharpCompilation,
-              MethodSymbol,
-              PEModuleSymbol,
-              TypeSymbol,
-              TypeParameterSymbol
-          >
+            CSharpCompilation,
+            MethodSymbol,
+            PEModuleSymbol,
+            TypeSymbol,
+            TypeParameterSymbol
+        >
     {
         // This string was not localized in the old EE.  We'll keep it that way
         // so as not to break consumers who may have been parsing frame names...
@@ -193,8 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var kind = GetMakeAssemblyReferencesKind();
             var contextId = MetadataContextId.GetContextId(moduleVersionId, kind);
             var assemblyContexts = previous.Matches(metadataBlocks)
-              ? previous.AssemblyContexts
-              : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
+                ? previous.AssemblyContexts
+                : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
             CSharpMetadataContext previousContext;
             assemblyContexts.TryGetValue(contextId, out previousContext);
 

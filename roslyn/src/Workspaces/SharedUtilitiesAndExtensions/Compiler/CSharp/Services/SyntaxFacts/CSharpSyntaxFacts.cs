@@ -1225,8 +1225,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                         if (structure is BranchingDirectiveTriviaSyntax branch)
                         {
                             return !branch.IsActive || !branch.BranchTaken
-                              ? TextSpan.FromBounds(branch.FullSpan.Start, position)
-                              : default;
+                                ? TextSpan.FromBounds(branch.FullSpan.Start, position)
+                                : default;
                         }
                     }
                 }
@@ -1559,9 +1559,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 BlockSyntax block => block.Statements,
                 SwitchSectionSyntax switchSection => switchSection.Statements,
                 CompilationUnitSyntax compilationUnit
-                  => compilationUnit.Members
-                      .OfType<GlobalStatementSyntax>()
-                      .SelectAsArray(globalStatement => globalStatement.Statement),
+                    => compilationUnit.Members
+                        .OfType<GlobalStatementSyntax>()
+                        .SelectAsArray(globalStatement => globalStatement.Statement),
                 _ => throw ExceptionUtilities.UnexpectedValue(node),
             };
         }

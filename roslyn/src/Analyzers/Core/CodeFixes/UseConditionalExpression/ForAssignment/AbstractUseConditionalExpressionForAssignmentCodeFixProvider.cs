@@ -30,11 +30,11 @@ namespace Microsoft.CodeAnalysis.UseConditionalExpression
         TConditionalExpressionSyntax
     >
         : AbstractUseConditionalExpressionCodeFixProvider<
-              TStatementSyntax,
-              TIfStatementSyntax,
-              TExpressionSyntax,
-              TConditionalExpressionSyntax
-          >
+            TStatementSyntax,
+            TIfStatementSyntax,
+            TExpressionSyntax,
+            TConditionalExpressionSyntax
+        >
         where TStatementSyntax : SyntaxNode
         where TIfStatementSyntax : TStatementSyntax
         where TLocalDeclarationStatementSyntax : TStatementSyntax

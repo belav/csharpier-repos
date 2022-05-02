@@ -37,9 +37,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (null, not null) => -1,
                 (null, null) => 0,
                 (not null, not null)
-                  => StringComparer.Ordinal.Compare(x!.Name, y!.Name) is var compare && compare != 0
-                      ? compare
-                      : EntityTypeFullNameComparer.Instance.Compare(
+                    => StringComparer.Ordinal.Compare(x!.Name, y!.Name) is var compare
+                    && compare != 0
+                        ? compare
+                        : EntityTypeFullNameComparer.Instance.Compare(
                             x.DeclaringEntityType,
                             y.DeclaringEntityType
                         )

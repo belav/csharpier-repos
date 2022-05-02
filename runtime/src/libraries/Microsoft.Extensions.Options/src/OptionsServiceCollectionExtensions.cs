@@ -211,8 +211,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private static void ThrowNoConfigServices(Type type) =>
             throw new InvalidOperationException(
                 type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Action<>)
-                  ? SR.Error_NoConfigurationServicesAndAction
-                  : SR.Error_NoConfigurationServices
+                    ? SR.Error_NoConfigurationServicesAndAction
+                    : SR.Error_NoConfigurationServices
             );
 
         /// <summary>

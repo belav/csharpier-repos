@@ -84,14 +84,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             var updatedPattern = oldExpression switch
             {
                 IsPatternExpressionSyntax isPattern
-                  => isPattern.WithPattern(
-                      UnaryPattern(Token(SyntaxKind.NotKeyword), isPattern.Pattern)
-                  ),
+                    => isPattern.WithPattern(
+                        UnaryPattern(Token(SyntaxKind.NotKeyword), isPattern.Pattern)
+                    ),
                 BinaryExpressionSyntax { Right: TypeSyntax type } binaryIsExpression
-                  => IsPatternExpression(
-                      binaryIsExpression.Left,
-                      UnaryPattern(Token(SyntaxKind.NotKeyword), TypePattern(type))
-                  ),
+                    => IsPatternExpression(
+                        binaryIsExpression.Left,
+                        UnaryPattern(Token(SyntaxKind.NotKeyword), TypePattern(type))
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(oldExpression)
             };
 

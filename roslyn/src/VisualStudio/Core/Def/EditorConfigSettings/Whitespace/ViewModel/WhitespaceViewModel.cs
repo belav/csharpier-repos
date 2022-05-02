@@ -14,10 +14,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
 {
     internal partial class WhitespaceViewModel
         : SettingsViewModelBase<
-              WhitespaceSetting,
-              WhitespaceViewModel.SettingsSnapshotFactory,
-              WhitespaceViewModel.SettingsEntriesSnapshot
-          >
+            WhitespaceSetting,
+            WhitespaceViewModel.SettingsSnapshotFactory,
+            WhitespaceViewModel.SettingsEntriesSnapshot
+        >
     {
         public WhitespaceViewModel(
             ISettingsProvider<WhitespaceSetting> data,

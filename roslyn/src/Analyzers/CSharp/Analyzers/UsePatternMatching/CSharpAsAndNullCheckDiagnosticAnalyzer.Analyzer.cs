@@ -151,8 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                             if (
                                 LocalFlowsIn(
                                     defAssignedWhenTrue
-                                      ? conditionalExpression.WhenFalse
-                                      : conditionalExpression.WhenTrue
+                                        ? conditionalExpression.WhenFalse
+                                        : conditionalExpression.WhenTrue
                                 )
                             )
                             {

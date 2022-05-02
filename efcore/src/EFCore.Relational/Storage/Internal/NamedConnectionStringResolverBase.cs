@@ -73,8 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
                 .Substring(0, firstEquals)
                 .Trim()
                 .Equals("name", StringComparison.OrdinalIgnoreCase)
-              ? connectionString.Substring(firstEquals + 1).Trim()
-              : null;
+                ? connectionString.Substring(firstEquals + 1).Trim()
+                : null;
         }
     }
 }

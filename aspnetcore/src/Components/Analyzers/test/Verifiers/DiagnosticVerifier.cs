@@ -139,8 +139,8 @@ public abstract partial class DiagnosticVerifier
         if (expectedCount != actualCount)
         {
             string diagnosticsOutput = actualResults.Any()
-              ? FormatDiagnostics(analyzer, actualResults.ToArray())
-              : "    NONE.";
+                ? FormatDiagnostics(analyzer, actualResults.ToArray())
+                : "    NONE.";
 
             Assert.True(
                 false,
@@ -368,8 +368,8 @@ public abstract partial class DiagnosticVerifier
                         string resultMethodName = diagnostics[
                             i
                         ].Location.SourceTree.FilePath.EndsWith(".cs", StringComparison.Ordinal)
-                          ? "GetCSharpResultAt"
-                          : "GetBasicResultAt";
+                            ? "GetCSharpResultAt"
+                            : "GetBasicResultAt";
                         var linePosition = diagnostics[i].Location.GetLineSpan().StartLinePosition;
 
                         builder.AppendFormat(

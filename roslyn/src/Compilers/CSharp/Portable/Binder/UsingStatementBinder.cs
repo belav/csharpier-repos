@@ -293,16 +293,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BoundExpression? receiver = fromExpression
                         ? expressionOpt
                         : new BoundLocal(syntax, declarationsOpt[0].LocalSymbol, null, type)
-                          {
-                              WasCompilerGenerated = true
-                          };
+                        {
+                            WasCompilerGenerated = true
+                        };
 
                     BindingDiagnosticBag patternDiagnostics =
                         originalBinder.Compilation.IsFeatureEnabled(
                             MessageID.IDS_FeatureUsingDeclarations
                         )
-                          ? diagnostics
-                          : BindingDiagnosticBag.Discarded;
+                            ? diagnostics
+                            : BindingDiagnosticBag.Discarded;
                     MethodSymbol disposeMethod = originalBinder.TryFindDisposePatternMethod(
                         receiver,
                         syntax,
@@ -366,15 +366,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     bool wrongAsync = alternateConversion.IsImplicit;
                     ErrorCode errorCode = wrongAsync
                         ? (
-                              hasAwait
-                                  ? ErrorCode.ERR_NoConvToIAsyncDispWrongAsync
-                                  : ErrorCode.ERR_NoConvToIDispWrongAsync
-                          )
+                            hasAwait
+                                ? ErrorCode.ERR_NoConvToIAsyncDispWrongAsync
+                                : ErrorCode.ERR_NoConvToIDispWrongAsync
+                        )
                         : (
-                              hasAwait
-                                  ? ErrorCode.ERR_NoConvToIAsyncDisp
-                                  : ErrorCode.ERR_NoConvToIDisp
-                          );
+                            hasAwait
+                                ? ErrorCode.ERR_NoConvToIAsyncDisp
+                                : ErrorCode.ERR_NoConvToIDisp
+                        );
 
                     Error(
                         diagnostics,
@@ -429,10 +429,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol getDisposableInterface(bool isAsync)
             {
                 return isAsync
-                  ? originalBinder.Compilation.GetWellKnownType(
+                    ? originalBinder.Compilation.GetWellKnownType(
                         WellKnownType.System_IAsyncDisposable
                     )
-                  : originalBinder.Compilation.GetSpecialType(SpecialType.System_IDisposable);
+                    : originalBinder.Compilation.GetSpecialType(SpecialType.System_IDisposable);
             }
         }
 

@@ -200,11 +200,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 LanguageNames.CSharp => "csproj",
                 LanguageNames.VisualBasic => "vbproj",
                 _
-                  => throw new ArgumentOutOfRangeException(
-                      nameof(languageName),
-                      actualValue: languageName,
-                      message: "Only C# and VB.Net project are supported."
-                  )
+                    => throw new ArgumentOutOfRangeException(
+                        nameof(languageName),
+                        actualValue: languageName,
+                        message: "Only C# and VB.Net project are supported."
+                    )
             };
             return Path.Combine(projectPath, $"{projectName}.{projectExtension}");
         }

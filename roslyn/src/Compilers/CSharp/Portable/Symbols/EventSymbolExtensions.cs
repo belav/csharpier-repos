@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             return isAdder
-              ? @event.GetOwnOrInheritedAddMethod()
-              : @event.GetOwnOrInheritedRemoveMethod();
+                ? @event.GetOwnOrInheritedAddMethod()
+                : @event.GetOwnOrInheritedRemoveMethod();
         }
     }
 }

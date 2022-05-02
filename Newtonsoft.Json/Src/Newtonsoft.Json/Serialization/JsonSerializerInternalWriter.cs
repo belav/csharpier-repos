@@ -255,8 +255,8 @@ namespace Newtonsoft.Json.Serialization
                     SerializeDictionary(
                         writer,
                         (value is IDictionary dictionary)
-                          ? dictionary
-                          : dictionaryContract.CreateWrapper(value),
+                            ? dictionary
+                            : dictionaryContract.CreateWrapper(value),
                         dictionaryContract,
                         member,
                         containerContract,

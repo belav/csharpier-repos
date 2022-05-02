@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         )
         {
             return symbol.AssociatedSymbol != null
-              ? Task.FromResult(ImmutableArray.Create(symbol.AssociatedSymbol))
-              : SpecializedTasks.EmptyImmutableArray<ISymbol>();
+                ? Task.FromResult(ImmutableArray.Create(symbol.AssociatedSymbol))
+                : SpecializedTasks.EmptyImmutableArray<ISymbol>();
         }
 
         protected override async Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(

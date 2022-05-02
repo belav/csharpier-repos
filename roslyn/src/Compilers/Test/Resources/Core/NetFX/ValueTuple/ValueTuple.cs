@@ -66,12 +66,12 @@ namespace System
     [Serializable]
     public struct ValueTuple
         : IEquatable<ValueTuple>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// Returns a value that indicates whether the current <see cref="ValueTuple"/> instance is equal to a specified object.
@@ -396,12 +396,12 @@ namespace System
     [Serializable]
     public struct ValueTuple<T1>
         : IEquatable<ValueTuple<T1>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1>>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1>>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1}"/> instance's first component.
@@ -571,12 +571,12 @@ namespace System
     [StructLayout(LayoutKind.Auto)]
     public struct ValueTuple<T1, T2>
         : IEquatable<ValueTuple<T1, T2>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1, T2>>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1, T2>>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2}"/> instance's first component.
@@ -795,12 +795,12 @@ namespace System
     [StructLayout(LayoutKind.Auto)]
     public struct ValueTuple<T1, T2, T3>
         : IEquatable<ValueTuple<T1, T2, T3>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1, T2, T3>>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1, T2, T3>>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3}"/> instance's first component.
@@ -1028,12 +1028,12 @@ namespace System
     [StructLayout(LayoutKind.Auto)]
     public struct ValueTuple<T1, T2, T3, T4>
         : IEquatable<ValueTuple<T1, T2, T3, T4>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1, T2, T3, T4>>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1, T2, T3, T4>>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance's first component.
@@ -1292,12 +1292,12 @@ namespace System
     [StructLayout(LayoutKind.Auto)]
     public struct ValueTuple<T1, T2, T3, T4, T5>
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1, T2, T3, T4, T5>>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1, T2, T3, T4, T5>>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance's first component.
@@ -1583,12 +1583,12 @@ namespace System
     [StructLayout(LayoutKind.Auto)]
     public struct ValueTuple<T1, T2, T3, T4, T5, T6>
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1, T2, T3, T4, T5, T6>>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1, T2, T3, T4, T5, T6>>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance's first component.
@@ -1900,12 +1900,12 @@ namespace System
     [StructLayout(LayoutKind.Auto)]
     public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7>
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>,
-          IValueTupleInternal,
-          ITuple
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7>>,
+            IValueTupleInternal,
+            ITuple
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance's first component.
@@ -2243,12 +2243,12 @@ namespace System
     [StructLayout(LayoutKind.Auto)]
     public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>
         : IEquatable<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>>,
-          IStructuralEquatable,
-          IStructuralComparable,
-          IComparable,
-          IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>>,
-          IValueTupleInternal,
-          ITuple where TRest : struct
+            IStructuralEquatable,
+            IStructuralComparable,
+            IComparable,
+            IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>>,
+            IValueTupleInternal,
+            ITuple where TRest : struct
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's first component.

@@ -236,7 +236,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             {
                 BaseNamespaceDeclarationSyntax ns => (ns.Usings, ns.Members),
                 CompilationUnitSyntax compilationUnit
-                  => (compilationUnit.Usings, compilationUnit.Members),
+                    => (compilationUnit.Usings, compilationUnit.Members),
                 _ => default,
             };
 
@@ -418,9 +418,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             container switch
             {
                 CompilationUnitSyntax compilation
-                  => GetNamespaceId(compilation.Members, target, ref index),
+                    => GetNamespaceId(compilation.Members, target, ref index),
                 BaseNamespaceDeclarationSyntax @namespace
-                  => GetNamespaceId(@namespace.Members, target, ref index),
+                    => GetNamespaceId(@namespace.Members, target, ref index),
                 _ => throw ExceptionUtilities.UnexpectedValue(container)
             };
 

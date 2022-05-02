@@ -127,10 +127,10 @@ namespace System.Net
 
     public partial class CookieCollection
         : System.Collections.Generic.ICollection<System.Net.Cookie>,
-          System.Collections.Generic.IEnumerable<System.Net.Cookie>,
-          System.Collections.Generic.IReadOnlyCollection<System.Net.Cookie>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Net.Cookie>,
+            System.Collections.Generic.IReadOnlyCollection<System.Net.Cookie>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         public CookieCollection() { }
 
@@ -250,7 +250,7 @@ namespace System.Net
 
     public partial class CookieException
         : System.FormatException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public CookieException() { }
 
@@ -272,8 +272,8 @@ namespace System.Net
 
     public partial class CredentialCache
         : System.Collections.IEnumerable,
-          System.Net.ICredentials,
-          System.Net.ICredentialsByHost
+            System.Net.ICredentials,
+            System.Net.ICredentialsByHost
     {
         public CredentialCache() { }
 
@@ -885,8 +885,8 @@ namespace System.Net.NetworkInformation
 {
     public partial class IPAddressCollection
         : System.Collections.Generic.ICollection<System.Net.IPAddress>,
-          System.Collections.Generic.IEnumerable<System.Net.IPAddress>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.Net.IPAddress>,
+            System.Collections.IEnumerable
     {
         protected internal IPAddressCollection() { }
 

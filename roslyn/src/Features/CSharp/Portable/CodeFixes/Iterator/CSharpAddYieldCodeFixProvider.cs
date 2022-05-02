@@ -94,11 +94,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Iterator
                 typeArguments.Length != 1
                     ? IsCorrectTypeForYieldReturn(methodReturnType, model)
                     : IsCorrectTypeForYieldReturn(
-                          typeArguments.Single(),
-                          returnExpressionType,
-                          methodReturnType,
-                          model
-                      );
+                        typeArguments.Single(),
+                        returnExpressionType,
+                        methodReturnType,
+                        model
+                    );
 
             if (!shouldOfferYieldReturn)
             {

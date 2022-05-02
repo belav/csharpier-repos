@@ -23,7 +23,7 @@ namespace AutoMapper.Configuration
 
     public class SourceMappingExpression
         : ISourceMemberConfigurationExpression,
-          ISourceMemberConfiguration
+            ISourceMemberConfiguration
     {
         private readonly MemberInfo _sourceMember;
         private readonly List<Action<SourceMemberConfig>> _sourceMemberActions =

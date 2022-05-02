@@ -135,9 +135,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new BatchedJoinBlock<int, string>(
-                              2,
-                              new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            2,
+                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new BatchedJoinBlock<int, string>(2)
             );
 
@@ -145,9 +145,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new BatchedJoinBlock<int, string, double>(
-                              3,
-                              new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            3,
+                            new GroupingDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new BatchedJoinBlock<int, string, double>(3)
             );
         }

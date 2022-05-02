@@ -1324,10 +1324,10 @@ namespace System.Net
                                     // auth incomplete
                                     newContext = context;
                                     challenge = string.IsNullOrEmpty(outBlob)
-                                      ? headerScheme == AuthenticationSchemes.Ntlm
-                                          ? NegotiationInfoClass.NTLM
-                                          : NegotiationInfoClass.Negotiate
-                                      : outBlob;
+                                        ? headerScheme == AuthenticationSchemes.Ntlm
+                                            ? NegotiationInfoClass.NTLM
+                                            : NegotiationInfoClass.Negotiate
+                                        : outBlob;
                                 }
                             }
                             break;
@@ -1522,8 +1522,8 @@ namespace System.Net
                         session,
                         requestId,
                         challenges != null && challenges.Count > 0
-                          ? HttpStatusCode.Unauthorized
-                          : HttpStatusCode.Forbidden,
+                            ? HttpStatusCode.Unauthorized
+                            : HttpStatusCode.Forbidden,
                         challenges
                     );
                     if (NetEventSource.Log.IsEnabled())

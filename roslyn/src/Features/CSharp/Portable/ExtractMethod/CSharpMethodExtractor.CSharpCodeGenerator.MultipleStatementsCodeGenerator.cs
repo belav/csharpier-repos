@@ -133,9 +133,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         BlockSyntax blockNode => blockNode.Statements,
                         SwitchSectionSyntax switchSectionNode => switchSectionNode.Statements,
                         GlobalStatementSyntax globalStatement
-                          => ((CompilationUnitSyntax)globalStatement.Parent).Members
-                              .OfType<GlobalStatementSyntax>()
-                              .Select(globalStatement => globalStatement.Statement),
+                            => ((CompilationUnitSyntax)globalStatement.Parent).Members
+                                .OfType<GlobalStatementSyntax>()
+                                .Select(globalStatement => globalStatement.Statement),
                         _ => throw ExceptionUtilities.UnexpectedValue(node),
                     };
                 }

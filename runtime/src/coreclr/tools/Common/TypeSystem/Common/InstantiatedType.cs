@@ -54,7 +54,7 @@ namespace Internal.TypeSystem
                 _baseType =
                     (uninst != null)
                         ? (MetadataType)
-                              uninst.InstantiateSignature(_instantiation, new Instantiation())
+                            uninst.InstantiateSignature(_instantiation, new Instantiation())
                         : null
             );
         }
@@ -254,8 +254,8 @@ namespace Internal.TypeSystem
             }
 
             return (clone == null)
-              ? this
-              : _typeDef.Context.GetInstantiatedType(_typeDef, new Instantiation(clone));
+                ? this
+                : _typeDef.Context.GetInstantiatedType(_typeDef, new Instantiation(clone));
         }
 
         /// <summary>

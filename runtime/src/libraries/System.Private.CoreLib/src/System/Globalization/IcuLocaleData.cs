@@ -25201,23 +25201,25 @@ namespace System.Globalization
             return part switch
             {
                 IcuLocaleDataParts.Lcid
-                  => numericData[2] | (numericData[1] << 8) | (numericData[0] << 16),
+                    => numericData[2] | (numericData[1] << 8) | (numericData[0] << 16),
                 IcuLocaleDataParts.AnsiCodePage
-                  => (numericData[4] & 0xf0) >> 4 | (numericData[3] & 0xff) << 4,
+                    => (numericData[4] & 0xf0) >> 4 | (numericData[3] & 0xff) << 4,
                 IcuLocaleDataParts.OemCodePage => numericData[5] | (numericData[4] & 0xf) << 8,
                 IcuLocaleDataParts.MacCodePage => numericData[7] | (numericData[6] << 8),
                 IcuLocaleDataParts.EbcdicCodePage => numericData[9] | (numericData[8] << 8),
                 IcuLocaleDataParts.GeoId
-                  => numericData[13]
-                      | (numericData[12] << 8)
-                      | (numericData[11] << 16)
-                      | (numericData[10] << 24),
+                    => numericData[13]
+                        | (numericData[12] << 8)
+                        | (numericData[11] << 16)
+                        | (numericData[10] << 24),
                 IcuLocaleDataParts.DigitSubstitutionOrListSeparator
-                  => ResolveDigitListSeparator(numericData[14]),
+                    => ResolveDigitListSeparator(numericData[14]),
                 IcuLocaleDataParts.SpecificLocaleIndex
-                  => ResolveIndex((numericData[16] & 0xf0) >> 4 | ((numericData[15] & 0xff) << 4)),
+                    => ResolveIndex(
+                        (numericData[16] & 0xf0) >> 4 | ((numericData[15] & 0xff) << 4)
+                    ),
                 IcuLocaleDataParts.ConsoleLocaleIndex
-                  => ResolveIndex(numericData[17] | (numericData[16] & 0xf) << 8),
+                    => ResolveIndex(numericData[17] | (numericData[16] & 0xf) << 8),
                 _ => -1
             };
 

@@ -13,15 +13,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpUseCollectionInitializerDiagnosticAnalyzer
         : AbstractUseCollectionInitializerDiagnosticAnalyzer<
-              SyntaxKind,
-              ExpressionSyntax,
-              StatementSyntax,
-              ObjectCreationExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              InvocationExpressionSyntax,
-              ExpressionStatementSyntax,
-              VariableDeclaratorSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            StatementSyntax,
+            ObjectCreationExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            InvocationExpressionSyntax,
+            ExpressionStatementSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         protected override bool AreCollectionInitializersSupported(Compilation compilation) =>
             ((CSharpCompilation)compilation).LanguageVersion >= LanguageVersion.CSharp3;

@@ -115,12 +115,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return DetermineConstant(op) switch
             {
                 ConstantResult.Left when op.LeftOperand.Syntax is ExpressionSyntax left
-                  // We need to flip the operator if the constant is on the left-hand-side.
-                  // This is because relational patterns only come in the prefix form.
-                  // For instance: `123 > x` would be rewritten as `x is < 123`.
-                  => new Relational(Flip(op.OperatorKind), left, op.RightOperand),
+                    // We need to flip the operator if the constant is on the left-hand-side.
+                    // This is because relational patterns only come in the prefix form.
+                    // For instance: `123 > x` would be rewritten as `x is < 123`.
+                    => new Relational(Flip(op.OperatorKind), left, op.RightOperand),
                 ConstantResult.Right when op.RightOperand.Syntax is ExpressionSyntax right
-                  => new Relational(op.OperatorKind, right, op.LeftOperand),
+                    => new Relational(op.OperatorKind, right, op.LeftOperand),
                 _ => null
             };
         }
@@ -130,9 +130,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return DetermineConstant(op) switch
             {
                 ConstantResult.Left when op.LeftOperand.Syntax is ExpressionSyntax left
-                  => new Constant(left, op.RightOperand),
+                    => new Constant(left, op.RightOperand),
                 ConstantResult.Right when op.RightOperand.Syntax is ExpressionSyntax right
-                  => new Constant(right, op.LeftOperand),
+                    => new Constant(right, op.LeftOperand),
                 _ => null
             };
         }
@@ -175,8 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             // By-design, constants will not propagate to conversions.
             return operation is IConversionOperation op
-              ? IsConstant(op.Operand)
-              : operation.ConstantValue.HasValue;
+                ? IsConstant(op.Operand)
+                : operation.ConstantValue.HasValue;
         }
     }
 }

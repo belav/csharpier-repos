@@ -18,9 +18,9 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 )]
 public abstract class ResultFilterAttribute
     : Attribute,
-      IResultFilter,
-      IAsyncResultFilter,
-      IOrderedFilter
+        IResultFilter,
+        IAsyncResultFilter,
+        IOrderedFilter
 {
     /// <inheritdoc />
     public int Order { get; set; }

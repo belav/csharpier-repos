@@ -622,7 +622,7 @@ namespace System.ComponentModel.Composition.Hosting
 {
     public partial class AggregateCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
-          System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
+            System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
     {
         public AggregateCatalog() { }
 
@@ -675,7 +675,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class AggregateExportProvider
         : System.ComponentModel.Composition.Hosting.ExportProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public AggregateExportProvider(
             System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Hosting.ExportProvider>? providers
@@ -705,7 +705,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class ApplicationCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
-          System.ComponentModel.Composition.Primitives.ICompositionElement
+            System.ComponentModel.Composition.Primitives.ICompositionElement
     {
         public ApplicationCatalog() { }
 
@@ -752,7 +752,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class AssemblyCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
-          System.ComponentModel.Composition.Primitives.ICompositionElement
+            System.ComponentModel.Composition.Primitives.ICompositionElement
     {
         public AssemblyCatalog(System.Reflection.Assembly assembly) { }
 
@@ -864,7 +864,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class CatalogExportProvider
         : System.ComponentModel.Composition.Hosting.ExportProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public CatalogExportProvider(
             System.ComponentModel.Composition.Primitives.ComposablePartCatalog catalog
@@ -939,7 +939,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class ComposablePartExportProvider
         : System.ComponentModel.Composition.Hosting.ExportProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public ComposablePartExportProvider() { }
 
@@ -1018,8 +1018,8 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class CompositionContainer
         : System.ComponentModel.Composition.Hosting.ExportProvider,
-          System.ComponentModel.Composition.ICompositionService,
-          System.IDisposable
+            System.ComponentModel.Composition.ICompositionService,
+            System.IDisposable
     {
         public CompositionContainer() { }
 
@@ -1104,7 +1104,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class CompositionScopeDefinition
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
-          System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
+            System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
     {
         protected CompositionScopeDefinition() { }
 
@@ -1164,7 +1164,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class CompositionService
         : System.ComponentModel.Composition.ICompositionService,
-          System.IDisposable
+            System.IDisposable
     {
         internal CompositionService() { }
 
@@ -1177,8 +1177,8 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class DirectoryCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
-          System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged,
-          System.ComponentModel.Composition.Primitives.ICompositionElement
+            System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged,
+            System.ComponentModel.Composition.Primitives.ICompositionElement
     {
         public DirectoryCatalog(string path) { }
 
@@ -1451,7 +1451,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class FilteredCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
-          System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
+            System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
     {
         public FilteredCatalog(
             System.ComponentModel.Composition.Primitives.ComposablePartCatalog catalog,
@@ -1532,7 +1532,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class ImportEngine
         : System.ComponentModel.Composition.ICompositionService,
-          System.IDisposable
+            System.IDisposable
     {
         public ImportEngine(System.ComponentModel.Composition.Hosting.ExportProvider sourceProvider)
         { }
@@ -1634,7 +1634,7 @@ namespace System.ComponentModel.Composition.Hosting
 
     public partial class TypeCatalog
         : System.ComponentModel.Composition.Primitives.ComposablePartCatalog,
-          System.ComponentModel.Composition.Primitives.ICompositionElement
+            System.ComponentModel.Composition.Primitives.ICompositionElement
     {
         public TypeCatalog(System.Collections.Generic.IEnumerable<System.Type> types) { }
 
@@ -1705,8 +1705,8 @@ namespace System.ComponentModel.Composition.Primitives
 
     public abstract partial class ComposablePartCatalog
         : System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.ComposablePartDefinition>,
-          System.Collections.IEnumerable,
-          System.IDisposable
+            System.Collections.IEnumerable,
+            System.IDisposable
     {
         protected ComposablePartCatalog() { }
 

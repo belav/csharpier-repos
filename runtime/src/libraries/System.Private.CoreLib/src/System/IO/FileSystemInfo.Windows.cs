@@ -25,16 +25,16 @@ namespace System.IO
         {
             FileSystemInfo info = findData.IsDirectory
                 ? (FileSystemInfo)
-                      new DirectoryInfo(
-                          fullPath,
-                          fileName: findData.FileName.ToString(),
-                          isNormalized: true
-                      )
+                    new DirectoryInfo(
+                        fullPath,
+                        fileName: findData.FileName.ToString(),
+                        isNormalized: true
+                    )
                 : new FileInfo(
-                      fullPath,
-                      fileName: findData.FileName.ToString(),
-                      isNormalized: true
-                  );
+                    fullPath,
+                    fileName: findData.FileName.ToString(),
+                    isNormalized: true
+                );
 
             Debug.Assert(
                 !PathInternal.IsPartiallyQualified(fullPath.AsSpan()),
@@ -182,7 +182,7 @@ namespace System.IO
         // act on the path normally (open streams/writers/etc.)
         internal string NormalizedPath =>
             PathInternal.EndsWithPeriodOrSpace(FullPath)
-              ? PathInternal.EnsureExtendedPrefix(FullPath)
-              : FullPath;
+                ? PathInternal.EnsureExtendedPrefix(FullPath)
+                : FullPath;
     }
 }

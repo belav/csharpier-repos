@@ -10905,8 +10905,8 @@ switch (e)
                         N(SyntaxKind.IsKeyword);
                         N(
                             opKind == SyntaxKind.AndKeyword
-                              ? SyntaxKind.AndPattern
-                              : SyntaxKind.OrPattern
+                                ? SyntaxKind.AndPattern
+                                : SyntaxKind.OrPattern
                         );
                         {
                             N(SyntaxKind.ConstantPattern);
@@ -11027,8 +11027,8 @@ switch (e)
                         N(SyntaxKind.IsKeyword);
                         N(
                             opKind == SyntaxKind.AndKeyword
-                              ? SyntaxKind.AndPattern
-                              : SyntaxKind.OrPattern
+                                ? SyntaxKind.AndPattern
+                                : SyntaxKind.OrPattern
                         );
                         {
                             N(SyntaxKind.ConstantPattern);
@@ -11084,8 +11084,8 @@ switch (e)
                         N(SyntaxKind.IsKeyword);
                         N(
                             opKind == SyntaxKind.AndKeyword
-                              ? SyntaxKind.AndPattern
-                              : SyntaxKind.OrPattern
+                                ? SyntaxKind.AndPattern
+                                : SyntaxKind.OrPattern
                         );
                         {
                             N(SyntaxKind.ParenthesizedPattern);

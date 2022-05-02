@@ -415,9 +415,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // https://github.com/dotnet/roslyn/issues/35046 We're dropping the result if the type doesn't match up completely
                     // with the existing type
                     expr.Type?.Equals(result.RValueType.Type, TypeCompareKind.AllIgnoreOptions)
-                        == true
-                      ? result.RValueType.Type
-                      : expr.Type
+                    == true
+                        ? result.RValueType.Type
+                        : expr.Type
                 );
             }
         }
@@ -949,8 +949,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     {
                                         this.State[memberSlot] =
                                             type.Type.IsPossiblyNullableReferenceTypeTypeParameter()
-                                              ? NullableFlowState.MaybeDefault
-                                              : NullableFlowState.MaybeNull;
+                                                ? NullableFlowState.MaybeDefault
+                                                : NullableFlowState.MaybeNull;
                                     }
                                 }
                             }
@@ -1454,8 +1454,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     compilation,
                     null,
                     method.IsStatic
-                      ? containingType.StaticInitializers
-                      : containingType.InstanceInitializers,
+                        ? containingType.StaticInitializers
+                        : containingType.InstanceInitializers,
                     BindingDiagnosticBag.Discarded,
                     ref initializers
                 );
@@ -1856,8 +1856,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     symbol,
                     diagnostics,
                     initialState is null
-                      ? (Optional<LocalState>)default
-                      : LocalState.Create(initialState.VariableNullableStates),
+                        ? (Optional<LocalState>)default
+                        : LocalState.Create(initialState.VariableNullableStates),
                     snapshotBuilderOpt,
                     requiresAnalysis
                 );
@@ -2169,8 +2169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                                             //   if (a?.B != null) _ = ((A)a).B.Value; // no warning
                                             int containingSlot = MakeSlot(operand);
                                             return containingSlot < 0
-                                              ? -1
-                                              : GetNullableOfTValueSlot(
+                                                ? -1
+                                                : GetNullableOfTValueSlot(
                                                     operandType,
                                                     containingSlot,
                                                     out _
@@ -2320,16 +2320,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static object GetParameterAsDiagnosticArgument(ParameterSymbol? parameterOpt)
         {
             return parameterOpt is null
-              ? (object)""
-              : new FormattedSymbol(parameterOpt, SymbolDisplayFormat.ShortFormat);
+                ? (object)""
+                : new FormattedSymbol(parameterOpt, SymbolDisplayFormat.ShortFormat);
         }
 
         private static object GetContainingSymbolAsDiagnosticArgument(ParameterSymbol? parameterOpt)
         {
             var containingSymbol = parameterOpt?.ContainingSymbol;
             return containingSymbol is null
-              ? (object)""
-              : new FormattedSymbol(containingSymbol, SymbolDisplayFormat.MinimallyQualifiedFormat);
+                ? (object)""
+                : new FormattedSymbol(
+                    containingSymbol,
+                    SymbolDisplayFormat.MinimallyQualifiedFormat
+                );
         }
 
         private enum AssignmentKind
@@ -2430,8 +2433,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // target (e.g.: `object F() => null;` or calling `void F(object y)` with `F(null)`).
                 ReportDiagnostic(
                     assignmentKind == AssignmentKind.Return
-                      ? ErrorCode.WRN_NullReferenceReturn
-                      : ErrorCode.WRN_NullAsNonNullable,
+                        ? ErrorCode.WRN_NullReferenceReturn
+                        : ErrorCode.WRN_NullAsNonNullable,
                     location
                 );
             }
@@ -2463,8 +2466,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 ReportDiagnostic(
                     assignmentKind == AssignmentKind.Return
-                      ? ErrorCode.WRN_NullReferenceReturn
-                      : ErrorCode.WRN_NullReferenceAssignment,
+                        ? ErrorCode.WRN_NullReferenceReturn
+                        : ErrorCode.WRN_NullReferenceAssignment,
                     location
                 );
             }
@@ -2898,8 +2901,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return;
                         }
                         value = this.State.HasValue(valueMemberSlot)
-                          ? this.State[valueMemberSlot]
-                          : NullableFlowState.NotNull;
+                            ? this.State[valueMemberSlot]
+                            : NullableFlowState.NotNull;
                     }
 
                     SetStateAndTrackForFinally(ref this.State, targetMemberSlot, value);
@@ -3848,7 +3851,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             return (original, updated) switch
             {
                 (LambdaSymbol l, NamedTypeSymbol n) _ when n.IsDelegateType()
-                  => AreLambdaAndNewDelegateSimilar(l, n),
+                    => AreLambdaAndNewDelegateSimilar(l, n),
                 (
                     FieldSymbol
                     {
@@ -3861,16 +3864,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         TupleElementIndex: var ui
                     } updatedField
                 )
-                  => originalField.Type.Equals(
-                      updatedField.Type,
-                      TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
-                  )
-                      && oi == ui,
+                    => originalField.Type.Equals(
+                        updatedField.Type,
+                        TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
+                    )
+                        && oi == ui,
                 _
-                  => original.Equals(
-                      updated,
-                      TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
-                  )
+                    => original.Equals(
+                        updated,
+                        TypeCompareKind.AllNullableIgnoreOptions | TypeCompareKind.IgnoreTupleNames
+                    )
             };
         }
 #endif
@@ -4846,8 +4849,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var isNullConstant = rightOperand.ConstantValue?.IsNull == true;
                     SetConditionalState(
                         isNullConstant == isEquals(binary)
-                          ? (State, stateWhenNotNull)
-                          : (stateWhenNotNull, State)
+                            ? (State, stateWhenNotNull)
+                            : (stateWhenNotNull, State)
                     );
                 }
 
@@ -4959,8 +4962,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var isNullConstant = leftOperand.ConstantValue?.IsNull == true;
                     SetConditionalState(
                         isNullConstant == isEquals(binary)
-                          ? (State, stateWhenNotNull)
-                          : (stateWhenNotNull, State)
+                            ? (State, stateWhenNotNull)
+                            : (stateWhenNotNull, State)
                     );
 
                     return true;
@@ -4987,8 +4990,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     UseRvalueOnly(binary.Right); // record result for the right
                     SetConditionalState(
                         isEquals(binary) == rightConstant.BooleanValue
-                          ? (stateWhenTrue, stateWhenFalse)
-                          : (stateWhenFalse, stateWhenTrue)
+                            ? (stateWhenTrue, stateWhenFalse)
+                            : (stateWhenFalse, stateWhenTrue)
                     );
                 }
                 // `true == (x != null)`
@@ -5679,17 +5682,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             var (resultType, leftState) = node.OperatorResultKind switch
             {
                 BoundNullCoalescingOperatorResultKind.NoCommonType
-                  => (node.Type, NullableFlowState.NotNull),
+                    => (node.Type, NullableFlowState.NotNull),
                 BoundNullCoalescingOperatorResultKind.LeftType
-                  => getLeftResultType(leftResultType!, rightResultType!),
+                    => getLeftResultType(leftResultType!, rightResultType!),
                 BoundNullCoalescingOperatorResultKind.LeftUnwrappedType
-                  => getLeftResultType(leftResultType!.StrippedType(), rightResultType!),
+                    => getLeftResultType(leftResultType!.StrippedType(), rightResultType!),
                 BoundNullCoalescingOperatorResultKind.RightType
-                  => getResultStateWithRightType(leftResultType!, rightResultType!),
+                    => getResultStateWithRightType(leftResultType!, rightResultType!),
                 BoundNullCoalescingOperatorResultKind.LeftUnwrappedRightType
-                  => getResultStateWithRightType(leftResultType!.StrippedType(), rightResultType!),
+                    => getResultStateWithRightType(
+                        leftResultType!.StrippedType(),
+                        rightResultType!
+                    ),
                 BoundNullCoalescingOperatorResultKind.RightDynamicType
-                  => (rightResultType!, NullableFlowState.NotNull),
+                    => (rightResultType!, NullableFlowState.NotNull),
                 _ => throw ExceptionUtilities.UnexpectedValue(node.OperatorResultKind),
             };
 
@@ -6248,8 +6254,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return !type.HasType
-              ? expr
-              : new BoundExpressionWithNullability(
+                ? expr
+                : new BoundExpressionWithNullability(
                     expr.Syntax,
                     expr,
                     type.NullableAnnotation,
@@ -6624,10 +6630,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             var (comparandIndex, valueIndex, locationIndex) = argsToParamsOpt.IsDefault
                 ? (2, 1, 0)
                 : (
-                      argsToParamsOpt.IndexOf(2),
-                      argsToParamsOpt.IndexOf(1),
-                      argsToParamsOpt.IndexOf(0)
-                  );
+                    argsToParamsOpt.IndexOf(2),
+                    argsToParamsOpt.IndexOf(1),
+                    argsToParamsOpt.IndexOf(0)
+                );
 
             var comparand = compareExchangeInfo.Arguments[comparandIndex];
             var valueFlowState = compareExchangeInfo.Results[valueIndex].RValueType.State;
@@ -6716,8 +6722,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Annotations are ignored when binding an attribute to avoid cycles. (Members used
             // in attributes are error scenarios, so missing warnings should not be important.)
             return IsAnalyzingAttribute
-              ? FlowAnalysisAnnotations.None
-              : parameter.FlowAnalysisAnnotations;
+                ? FlowAnalysisAnnotations.None
+                : parameter.FlowAnalysisAnnotations;
         }
 
         /// <summary>
@@ -7031,8 +7037,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         GetConversionIfApplicable(argument, argumentNoConversion),
                         argumentNoConversion,
                         conversions.IsDefault || i >= conversions.Length
-                          ? Conversion.Identity
-                          : conversions[i],
+                            ? Conversion.Identity
+                            : conversions[i],
                         GetRefKind(refKindsOpt, i),
                         parameter,
                         parameterType,
@@ -7069,8 +7075,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // For CompareExchange method we need more context to determine the state of outbound assignment
                 CompareExchangeInfo compareExchangeInfo = IsCompareExchangeMethod(method)
-                  ? new CompareExchangeInfo(arguments, results, argsToParamsOpt)
-                  : default;
+                    ? new CompareExchangeInfo(arguments, results, argsToParamsOpt)
+                    : default;
 
                 // Visit outbound assignments and post-conditions
                 // Note: the state may get split in this step
@@ -7096,8 +7102,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         results[i],
                         notNullParametersBuilder,
                         (!compareExchangeInfo.IsDefault && parameter.Ordinal == 0)
-                          ? compareExchangeInfo
-                          : default
+                            ? compareExchangeInfo
+                            : default
                     );
                 }
             }
@@ -8146,8 +8152,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             expr.ConstantValue == ConstantValue.NotAvailable
                             || !expr.ConstantValue.IsNull
                             || expr.IsSuppressed
-                          ? NullableAnnotation.NotAnnotated
-                          : NullableAnnotation.Annotated;
+                            ? NullableAnnotation.NotAnnotated
+                            : NullableAnnotation.Annotated;
                     case BoundKind.ExpressionWithNullability:
                         return ((BoundExpressionWithNullability)expr).NullableAnnotation;
                     case BoundKind.MethodGroup:
@@ -8393,33 +8399,33 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
             return useExpression
-              ? (
+                ? (
                     fromExplicitCast
                         ? conversions.ClassifyConversionFromExpression(
-                              sourceExpression,
-                              destinationType,
-                              ref discardedUseSiteInfo,
-                              forCast: true
-                          )
+                            sourceExpression,
+                            destinationType,
+                            ref discardedUseSiteInfo,
+                            forCast: true
+                        )
                         : conversions.ClassifyImplicitConversionFromExpression(
-                              sourceExpression!,
-                              destinationType,
-                              ref discardedUseSiteInfo
-                          )
+                            sourceExpression!,
+                            destinationType,
+                            ref discardedUseSiteInfo
+                        )
                 )
-              : (
+                : (
                     fromExplicitCast
                         ? conversions.ClassifyConversionFromType(
-                              sourceType,
-                              destinationType,
-                              ref discardedUseSiteInfo,
-                              forCast: true
-                          )
+                            sourceType,
+                            destinationType,
+                            ref discardedUseSiteInfo,
+                            forCast: true
+                        )
                         : conversions.ClassifyImplicitConversionFromType(
-                              sourceType!,
-                              destinationType,
-                              ref discardedUseSiteInfo
-                          )
+                            sourceType!,
+                            destinationType,
+                            ref discardedUseSiteInfo
+                        )
                 );
         }
 
@@ -8784,9 +8790,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     == (
                         useRestField
                             ? Math.Min(
-                                  tupleType.TupleElements.Length,
-                                  NamedTypeSymbol.ValueTupleRestPosition
-                              )
+                                tupleType.TupleElements.Length,
+                                NamedTypeSymbol.ValueTupleRestPosition
+                            )
                             : tupleType.TupleElements.Length
                     )
             );
@@ -9304,12 +9310,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 TypeKind: TypeKind.Delegate,
                                 DelegateInvokeMethod: { Parameters: { } parameters } signature
                             }
-                              => (signature, parameters),
+                                => (signature, parameters),
                             FunctionPointerTypeSymbol
                             {
                                 Signature: { Parameters: { } parameters } signature
                             }
-                              => (signature, parameters),
+                                => (signature, parameters),
                             _ => (null, ImmutableArray<ParameterSymbol>.Empty),
                         };
 
@@ -9735,8 +9741,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             )
                             {
                                 return (annotation == NullableAnnotation.Annotated)
-                                  ? NullableFlowState.MaybeDefault
-                                  : NullableFlowState.MaybeNull;
+                                    ? NullableFlowState.MaybeDefault
+                                    : NullableFlowState.MaybeNull;
                             }
                         }
                         break;
@@ -9785,8 +9791,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if (dependsOn)
                         {
                             return (annotation == NullableAnnotation.Annotated)
-                              ? NullableFlowState.MaybeDefault
-                              : NullableFlowState.MaybeNull;
+                                ? NullableFlowState.MaybeDefault
+                                : NullableFlowState.MaybeNull;
                         }
                     }
                 }
@@ -10219,8 +10225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return isLifted
-              ? GetLiftedReturnType(returnType, operandState)
-              : returnType.ToTypeWithState();
+                ? GetLiftedReturnType(returnType, operandState)
+                : returnType.ToTypeWithState();
         }
 
         private TypeSymbol MakeNullableOf(TypeWithAnnotations underlying)
@@ -10767,17 +10773,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             var annotations = expr switch
             {
                 BoundPropertyAccess property
-                  => property.PropertySymbol.GetFlowAnalysisAnnotations(),
+                    => property.PropertySymbol.GetFlowAnalysisAnnotations(),
                 BoundIndexerAccess indexer => indexer.Indexer.GetFlowAnalysisAnnotations(),
                 BoundFieldAccess field => getFieldAnnotations(field.FieldSymbol),
                 BoundObjectInitializerMember { MemberSymbol: PropertySymbol prop }
-                  => prop.GetFlowAnalysisAnnotations(),
+                    => prop.GetFlowAnalysisAnnotations(),
                 BoundObjectInitializerMember { MemberSymbol: FieldSymbol field }
-                  => getFieldAnnotations(field),
+                    => getFieldAnnotations(field),
                 BoundParameter { ParameterSymbol: ParameterSymbol parameter }
-                  => ToInwardAnnotations(
-                      GetParameterAnnotations(parameter) & ~FlowAnalysisAnnotations.NotNull
-                  ), // NotNull is enforced upon method exit
+                    => ToInwardAnnotations(
+                        GetParameterAnnotations(parameter) & ~FlowAnalysisAnnotations.NotNull
+                    ), // NotNull is enforced upon method exit
                 _ => FlowAnalysisAnnotations.None
             };
 
@@ -10787,8 +10793,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             static FlowAnalysisAnnotations getFieldAnnotations(FieldSymbol field)
             {
                 return field.AssociatedSymbol is PropertySymbol property
-                  ? property.GetFlowAnalysisAnnotations()
-                  : field.FlowAnalysisAnnotations;
+                    ? property.GetFlowAnalysisAnnotations()
+                    : field.FlowAnalysisAnnotations;
             }
         }
 
@@ -11614,14 +11620,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             ReportDiagnostic(
                 forOutput
-                  ? ErrorCode.WRN_NullabilityMismatchInArgumentForOutput
-                  : ErrorCode.WRN_NullabilityMismatchInArgument,
+                    ? ErrorCode.WRN_NullabilityMismatchInArgumentForOutput
+                    : ErrorCode.WRN_NullabilityMismatchInArgument,
                 argumentLocation,
                 argumentType,
                 parameterOpt?.Type.IsNonNullableValueType() == true
-                    && parameterType.IsNullableType()
-                  ? parameterOpt.Type
-                  : parameterType, // Compensate for operator lifting
+                && parameterType.IsNullableType()
+                    ? parameterOpt.Type
+                    : parameterType, // Compensate for operator lifting
                 GetParameterAsDiagnosticArgument(parameterOpt),
                 GetContainingSymbolAsDiagnosticArgument(parameterOpt)
             );
@@ -11630,15 +11636,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         private TypeWithAnnotations GetDeclaredLocalResult(LocalSymbol local)
         {
             return _variables.TryGetType(local, out TypeWithAnnotations type)
-              ? type
-              : local.TypeWithAnnotations;
+                ? type
+                : local.TypeWithAnnotations;
         }
 
         private TypeWithAnnotations GetDeclaredParameterResult(ParameterSymbol parameter)
         {
             return _variables.TryGetType(parameter, out TypeWithAnnotations type)
-              ? type
-              : parameter.TypeWithAnnotations;
+                ? type
+                : parameter.TypeWithAnnotations;
         }
 
         public override BoundNode? VisitBaseReference(BoundBaseReference node)
@@ -11855,8 +11861,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 compilation.GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_Value);
             valueProperty = getValue?.AsMember((NamedTypeSymbol)containingType)?.AssociatedSymbol;
             return (valueProperty is null)
-              ? -1
-              : GetOrCreateSlot(
+                ? -1
+                : GetOrCreateSlot(
                     valueProperty,
                     containingSlot,
                     forceSlotEvenIfEmpty: forceSlotEvenIfEmpty
@@ -12152,7 +12158,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 ForEachStatementSyntax statement => statement.Identifier.GetLocation(),
                 ForEachVariableStatementSyntax variableStatement
-                  => variableStatement.Variable.GetLocation(),
+                    => variableStatement.Variable.GetLocation(),
                 _ => throw ExceptionUtilities.UnexpectedValue(node.Syntax)
             };
 #pragma warning restore IDE0055 // Fix formatting
@@ -12564,15 +12570,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             return node switch
             {
                 BoundBinaryOperator binary
-                  => InferResultNullability(
-                      binary.OperatorKind,
-                      binary.Method,
-                      binary.Type,
-                      leftType,
-                      rightType
-                  ),
+                    => InferResultNullability(
+                        binary.OperatorKind,
+                        binary.Method,
+                        binary.Type,
+                        leftType,
+                        rightType
+                    ),
                 BoundUserDefinedConditionalLogicalOperator userDefined
-                  => InferResultNullability(userDefined),
+                    => InferResultNullability(userDefined),
                 _ => throw ExceptionUtilities.UnexpectedValue(node)
             };
         }
@@ -12774,8 +12780,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeWithState.Create(
                     node.Type,
                     node.Type?.CanContainNull() != false && node.ConstantValue?.IsNull == true
-                      ? NullableFlowState.MaybeDefault
-                      : NullableFlowState.NotNull
+                        ? NullableFlowState.MaybeDefault
+                        : NullableFlowState.NotNull
                 )
             );
             return result;
@@ -13102,8 +13108,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 ReportDiagnostic(
                     isValueType
-                      ? ErrorCode.WRN_NullableValueTypeMayBeNull
-                      : ErrorCode.WRN_NullReferenceReceiver,
+                        ? ErrorCode.WRN_NullableValueTypeMayBeNull
+                        : ErrorCode.WRN_NullReferenceReceiver,
                     syntax
                 );
                 reportedDiagnostic = true;

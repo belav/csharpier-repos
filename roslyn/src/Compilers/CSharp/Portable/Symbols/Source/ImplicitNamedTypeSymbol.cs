@@ -62,8 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             IsScriptClass
                 ? null
                 : this.DeclaringCompilation.GetSpecialType(
-                      Microsoft.CodeAnalysis.SpecialType.System_Object
-                  );
+                    Microsoft.CodeAnalysis.SpecialType.System_Object
+                );
 
         protected override void CheckBase(BindingDiagnosticBag diagnostics)
         {

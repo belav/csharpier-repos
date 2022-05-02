@@ -112,8 +112,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                                 generator.TypeExpression(symbol.Type),
                                 Accessibility.Private,
                                 fieldDeclarators.Contains(declarator)
-                                  ? WithReadOnly(modifiers)
-                                  : modifiers,
+                                    ? WithReadOnly(modifiers)
+                                    : modifiers,
                                 GetInitializerNode(declarator)
                             )
                             .WithAdditionalAnnotations(Formatter.Annotation);

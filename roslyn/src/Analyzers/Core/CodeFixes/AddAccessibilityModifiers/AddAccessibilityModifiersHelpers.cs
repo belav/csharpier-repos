@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
                 // If there was accessibility on the member, then remove it.  If there was no accessibility, then add
                 // the preferred accessibility for this member.
                 return generator.GetAccessibility(declaration) == Accessibility.NotApplicable
-                  ? generator.WithAccessibility(declaration, preferredAccessibility)
-                  : generator.WithAccessibility(declaration, Accessibility.NotApplicable);
+                    ? generator.WithAccessibility(declaration, preferredAccessibility)
+                    : generator.WithAccessibility(declaration, Accessibility.NotApplicable);
             }
         }
 

@@ -43,8 +43,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
         private static ExpressionType VerifyOperator(ExpressionType operatorType) =>
             _allowedOperators.Contains(operatorType)
-              ? operatorType
-              : throw new InvalidOperationException(
+                ? operatorType
+                : throw new InvalidOperationException(
                     CosmosStrings.UnsupportedOperatorForSqlExpression(
                         operatorType,
                         typeof(SqlBinaryExpression).ShortDisplayName()

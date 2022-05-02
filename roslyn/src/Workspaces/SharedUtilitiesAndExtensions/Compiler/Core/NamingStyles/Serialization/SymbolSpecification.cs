@@ -396,8 +396,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 
         public struct SymbolKindOrTypeKind
             : IEquatable<SymbolKindOrTypeKind>,
-              ISymbolMatcher,
-              IObjectWritable
+                ISymbolMatcher,
+                IObjectWritable
         {
             public SymbolKind? SymbolKind { get; }
             public TypeKind? TypeKind { get; }
@@ -431,7 +431,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                         ? symbol is ITypeSymbol type && type.TypeKind == TypeKind.Value
                         : MethodKind.HasValue
                             ? symbol is IMethodSymbol method
-                              && method.MethodKind == MethodKind.Value
+                                && method.MethodKind == MethodKind.Value
                             : throw ExceptionUtilities.Unreachable;
 
             internal XElement CreateXElement() =>
@@ -441,9 +441,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                         ? new XElement(nameof(TypeKind), GetTypeKindString(TypeKind.Value))
                         : MethodKind.HasValue
                             ? new XElement(
-                                  nameof(MethodKind),
-                                  GetMethodKindString(MethodKind.Value)
-                              )
+                                nameof(MethodKind),
+                                GetMethodKindString(MethodKind.Value)
+                            )
                             : throw ExceptionUtilities.Unreachable;
 
             private static string GetTypeKindString(TypeKind typeKind)
@@ -466,9 +466,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
                 return methodKind switch
                 {
                     CodeAnalysis.MethodKind.SharedConstructor
-                      => nameof(CodeAnalysis.MethodKind.StaticConstructor),
+                        => nameof(CodeAnalysis.MethodKind.StaticConstructor),
                     CodeAnalysis.MethodKind.AnonymousFunction
-                      => nameof(CodeAnalysis.MethodKind.LambdaMethod),
+                        => nameof(CodeAnalysis.MethodKind.LambdaMethod),
                     _ => methodKind.ToString()
                 };
             }

@@ -11,7 +11,7 @@ namespace System.ServiceModel.Syndication
     [XmlRoot(ElementName = App10Constants.Categories, Namespace = App10Constants.Namespace)]
     public class AtomPub10CategoriesDocumentFormatter
         : CategoriesDocumentFormatter,
-          IXmlSerializable
+            IXmlSerializable
     {
         private readonly Type _inlineDocumentType;
         private readonly int _maxExtensionSize;

@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
             }
 
             return ReferenceEquals(this, obj)
-              ? true
-              : obj.GetType() == GetType() && Equals((CustomerQuery)obj);
+                ? true
+                : obj.GetType() == GetType() && Equals((CustomerQuery)obj);
         }
 
         public static bool operator ==(CustomerQuery left, CustomerQuery right) =>

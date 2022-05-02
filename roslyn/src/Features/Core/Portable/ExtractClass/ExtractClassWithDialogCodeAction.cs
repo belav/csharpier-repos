@@ -101,25 +101,25 @@ namespace Microsoft.CodeAnalysis.ExtractClass
                 // containing the new type
                 var (updatedDocument, typeAnnotation) = extractClassOptions.SameFile
                     ? await ExtractTypeHelpers
-                          .AddTypeToExistingFileAsync(
-                              symbolMapping.AnnotatedSolution.GetRequiredDocument(_document.Id),
-                              newType,
-                              symbolMapping,
-                              cancellationToken
-                          )
-                          .ConfigureAwait(false)
+                        .AddTypeToExistingFileAsync(
+                            symbolMapping.AnnotatedSolution.GetRequiredDocument(_document.Id),
+                            newType,
+                            symbolMapping,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
                     : await ExtractTypeHelpers
-                          .AddTypeToNewFileAsync(
-                              symbolMapping.AnnotatedSolution,
-                              containingNamespaceDisplay,
-                              extractClassOptions.FileName,
-                              _document.Project.Id,
-                              _document.Folders,
-                              newType,
-                              _document,
-                              cancellationToken
-                          )
-                          .ConfigureAwait(false);
+                        .AddTypeToNewFileAsync(
+                            symbolMapping.AnnotatedSolution,
+                            containingNamespaceDisplay,
+                            extractClassOptions.FileName,
+                            _document.Project.Id,
+                            _document.Folders,
+                            newType,
+                            _document,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 // Update the original type to have the new base
                 var solutionWithUpdatedOriginalType = await GetSolutionWithBaseAddedAsync(

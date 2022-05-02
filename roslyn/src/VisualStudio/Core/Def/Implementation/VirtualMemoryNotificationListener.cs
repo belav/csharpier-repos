@@ -29,7 +29,7 @@ namespace Microsoft.VisualStudio.LanguageServices
     /// </summary>
     internal sealed class VirtualMemoryNotificationListener
         : ForegroundThreadAffinitizedObject,
-          IVsBroadcastMessageEvents
+            IVsBroadcastMessageEvents
     {
         // memory threshold to turn off full solution analysis - 200MB
         private const long MemoryThreshold = 200 * 1024 * 1024;

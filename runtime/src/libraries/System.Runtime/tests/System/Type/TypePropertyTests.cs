@@ -663,18 +663,18 @@ namespace System.Tests.Types
         public override TypeAttributes Attributes =>
             PlatformDetection.IsMonoRuntime
                 ? TypeAttributes.AutoLayout
-                  | TypeAttributes.AnsiClass
-                  | TypeAttributes.Class
-                  | TypeAttributes.Public
-                  | TypeAttributes.SequentialLayout
-                  | TypeAttributes.Abstract
-                  | TypeAttributes.BeforeFieldInit
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.Class
+                    | TypeAttributes.Public
+                    | TypeAttributes.SequentialLayout
+                    | TypeAttributes.Abstract
+                    | TypeAttributes.BeforeFieldInit
                 : TypeAttributes.AutoLayout
-                  | TypeAttributes.AnsiClass
-                  | TypeAttributes.Class
-                  | TypeAttributes.Public
-                  | TypeAttributes.Abstract
-                  | TypeAttributes.BeforeFieldInit;
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.Class
+                    | TypeAttributes.Public
+                    | TypeAttributes.Abstract
+                    | TypeAttributes.BeforeFieldInit;
     }
 
     public class EnumTypeTests : ClassTypeTestBase
@@ -1310,18 +1310,18 @@ namespace System.Tests.Types
         public override TypeAttributes Attributes =>
             PlatformDetection.IsMonoRuntime
                 ? TypeAttributes.AutoLayout
-                  | TypeAttributes.AnsiClass
-                  | TypeAttributes.Class
-                  | TypeAttributes.Public
-                  | TypeAttributes.Sealed
-                  | TypeAttributes.BeforeFieldInit
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.Class
+                    | TypeAttributes.Public
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.BeforeFieldInit
                 : TypeAttributes.AutoLayout
-                  | TypeAttributes.AnsiClass
-                  | TypeAttributes.Class
-                  | TypeAttributes.Public
-                  | TypeAttributes.SequentialLayout
-                  | TypeAttributes.Sealed
-                  | TypeAttributes.BeforeFieldInit;
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.Class
+                    | TypeAttributes.Public
+                    | TypeAttributes.SequentialLayout
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.BeforeFieldInit;
     }
 
     public class RuntimeArgumentHandleTypeTests : StructTypeTestBase

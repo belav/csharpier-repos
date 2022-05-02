@@ -14,7 +14,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 {
     internal partial class CPSProject
         : EncInterop.IVsENCRebuildableProjectCfg2,
-          EncInterop.IVsENCRebuildableProjectCfg4
+            EncInterop.IVsENCRebuildableProjectCfg4
     {
         public int HasCustomMetadataEmitter(out bool value) => throw ExceptionUtilities.Unreachable;
 

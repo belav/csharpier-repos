@@ -77,8 +77,8 @@ public class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions>
             // denied errors are handled differently using HandleAccessDeniedErrorAsync().
             var result = await HandleAccessDeniedErrorAsync(properties);
             return !result.None
-              ? result
-              : HandleRequestResult.Fail(
+                ? result
+                : HandleRequestResult.Fail(
                     "Access was denied by the resource owner or by the remote server.",
                     properties
                 );

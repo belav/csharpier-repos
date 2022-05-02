@@ -215,12 +215,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                                     // Unknown identifier case
                                     _
-                                      => handleSingleConvention(
-                                          specifiers[0],
-                                          compilation,
-                                          customModifiers,
-                                          diagnostics
-                                      )
+                                        => handleSingleConvention(
+                                            specifiers[0],
+                                            compilation,
+                                            customModifiers,
+                                            diagnostics
+                                        )
                                 };
 
                             case { CallingConventions: { Count: 0 } } unmanagedList:
@@ -439,13 +439,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var attributeType = refKind switch
             {
                 RefKind.In
-                  => compilation.GetWellKnownType(
-                      WellKnownType.System_Runtime_InteropServices_InAttribute
-                  ),
+                    => compilation.GetWellKnownType(
+                        WellKnownType.System_Runtime_InteropServices_InAttribute
+                    ),
                 RefKind.Out
-                  => compilation.GetWellKnownType(
-                      WellKnownType.System_Runtime_InteropServices_OutAttribute
-                  ),
+                    => compilation.GetWellKnownType(
+                        WellKnownType.System_Runtime_InteropServices_OutAttribute
+                    ),
                 _ => null
             };
 
@@ -714,12 +714,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _parameters =
                 syntax.ParameterList.Parameters.Count > 1
                     ? ParameterHelpers.MakeFunctionPointerParameters(
-                          typeBinder,
-                          this,
-                          syntax.ParameterList.Parameters,
-                          diagnostics,
-                          suppressUseSiteDiagnostics
-                      )
+                        typeBinder,
+                        this,
+                        syntax.ParameterList.Parameters,
+                        diagnostics,
+                        suppressUseSiteDiagnostics
+                    )
                     : ImmutableArray<FunctionPointerParameterSymbol>.Empty;
         }
 
@@ -800,9 +800,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     false => RefKind.None,
                     true when CustomModifierUtils.HasInAttributeModifier(paramRefCustomMods)
-                      => hasInRefKind,
+                        => hasInRefKind,
                     true when CustomModifierUtils.HasOutAttributeModifier(paramRefCustomMods)
-                      => hasOutRefKind,
+                        => hasOutRefKind,
                     true => RefKind.Ref,
                 };
             }

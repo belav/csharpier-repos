@@ -669,8 +669,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Equal(
                         targetState == EntityState.Modified
-                          ? EntityState.Unchanged
-                          : EntityState.Detached,
+                            ? EntityState.Unchanged
+                            : EntityState.Detached,
                         context.Entry(dependent).State
                     );
 

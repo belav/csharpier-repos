@@ -228,7 +228,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
     // Run the tests on a framework dependent app
     public class PortableAppRidAssetResolution
         : RidAssetResolutionBase,
-          IClassFixture<RidAssetResolutionBase.SharedTestState>
+            IClassFixture<RidAssetResolutionBase.SharedTestState>
     {
         public PortableAppRidAssetResolution(SharedTestState sharedState) : base(sharedState) { }
 
@@ -274,7 +274,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
     // Run the tests on a portable component hosted by a framework dependent app
     public class PortableComponentOnFrameworkDependentAppRidAssetResolution
         : RidAssetResolutionBase,
-          IClassFixture<RidAssetResolutionBase.SharedTestState>
+            IClassFixture<RidAssetResolutionBase.SharedTestState>
     {
         public PortableComponentOnFrameworkDependentAppRidAssetResolution(
             SharedTestState sharedState
@@ -318,7 +318,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
     // This is testing the currently shipping scenario where SDK does not generate RID fallback graph for self-contained apps
     public class PortableComponentOnSelfContainedAppRidAssetResolution
         : RidAssetResolutionBase,
-          IClassFixture<PortableComponentOnSelfContainedAppRidAssetResolution.ComponentSharedTestState>
+            IClassFixture<PortableComponentOnSelfContainedAppRidAssetResolution.ComponentSharedTestState>
     {
         private ComponentSharedTestState ComponentSharedState { get; }
 
@@ -401,7 +401,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
     //   - https://github.com/dotnet/sdk/issues/3361
     public class PortableComponentOnSelfContainedAppRidAssetResolutionWithRidFallbackGraph
         : RidAssetResolutionBase,
-          IClassFixture<PortableComponentOnSelfContainedAppRidAssetResolutionWithRidFallbackGraph.ComponentSharedTestState>
+            IClassFixture<PortableComponentOnSelfContainedAppRidAssetResolutionWithRidFallbackGraph.ComponentSharedTestState>
     {
         private ComponentSharedTestState ComponentSharedState { get; }
 

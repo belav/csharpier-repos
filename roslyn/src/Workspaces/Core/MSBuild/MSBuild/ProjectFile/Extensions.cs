@@ -54,12 +54,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var aliasesText = item.GetMetadata(MetadataNames.Aliases);
 
             return !RoslynString.IsNullOrWhiteSpace(aliasesText)
-              ? ImmutableArray.CreateRange(
+                ? ImmutableArray.CreateRange(
                     aliasesText
                         .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                         .Select(a => a.Trim())
                 )
-              : ImmutableArray<string>.Empty;
+                : ImmutableArray<string>.Empty;
         }
 
         public static bool ReferenceOutputAssemblyIsTrue(this MSB.Framework.ITaskItem item)

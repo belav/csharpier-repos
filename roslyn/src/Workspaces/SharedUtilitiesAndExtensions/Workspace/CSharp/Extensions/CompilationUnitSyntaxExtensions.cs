@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 {
                     var start = 0;
                     var end = root.Members.Any()
-                      ? root.Members.First().GetFirstToken().Span.End
-                      : root.Span.End;
+                        ? root.Members.First().GetFirstToken().Span.End
+                        : root.Span.End;
                     return TextSpan.FromBounds(start, end);
                 }
             }

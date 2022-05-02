@@ -508,7 +508,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     // We cannot perform flow analysis correctly for a ref assignment operation or ref conditional operation until this compiler feature is implemented.
                                     case IConditionalOperation conditional when conditional.IsRef:
                                     case ISimpleAssignmentOperation assignment
-                                          when assignment.IsRef:
+                                    when assignment.IsRef:
                                         return false;
 
                                     default:

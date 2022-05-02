@@ -99,8 +99,8 @@ namespace Microsoft.WebAssembly.Build.Tasks
                     string objFile = srcItem.GetMetadata("ObjectFile");
                     string depMetadata = srcItem.GetMetadata("Dependencies");
                     string[] depFiles = string.IsNullOrEmpty(depMetadata)
-                      ? Array.Empty<string>()
-                      : depMetadata.Split(
+                        ? Array.Empty<string>()
+                        : depMetadata.Split(
                             new char[] { ';' },
                             StringSplitOptions.RemoveEmptyEntries
                         );

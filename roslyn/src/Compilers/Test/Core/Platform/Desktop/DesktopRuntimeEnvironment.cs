@@ -25,8 +25,8 @@ namespace Roslyn.Test.Utilities.Desktop
 {
     public sealed class DesktopRuntimeEnvironment
         : IDisposable,
-          IRuntimeEnvironment,
-          IInternalRuntimeEnvironment
+            IRuntimeEnvironment,
+            IInternalRuntimeEnvironment
     {
         private sealed class RuntimeData : IDisposable
         {

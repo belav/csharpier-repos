@@ -553,13 +553,13 @@ namespace System.Threading.Tasks.Tests
             func = count =>
                 ++count < DiveDepth
                     ? Task.Factory
-                      .StartNew(
-                          () => func(count),
-                          CancellationToken.None,
-                          TaskCreationOptions.None,
-                          TaskScheduler.Default
-                      )
-                      .Unwrap()
+                        .StartNew(
+                            () => func(count),
+                            CancellationToken.None,
+                            TaskCreationOptions.None,
+                            TaskScheduler.Default
+                        )
+                        .Unwrap()
                     : Task.FromResult(count);
 
             // This test will overflow if it fails.

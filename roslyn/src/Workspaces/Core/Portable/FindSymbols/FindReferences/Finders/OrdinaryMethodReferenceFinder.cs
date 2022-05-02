@@ -84,19 +84,23 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 )
                 .ConfigureAwait(false);
             var forEachDocuments = IsForEachMethod(methodSymbol)
-              ? await FindDocumentsWithForEachStatementsAsync(project, documents, cancellationToken)
+                ? await FindDocumentsWithForEachStatementsAsync(
+                        project,
+                        documents,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false)
-              : ImmutableArray<Document>.Empty;
+                : ImmutableArray<Document>.Empty;
 
             var deconstructDocuments = IsDeconstructMethod(methodSymbol)
-              ? await FindDocumentsWithDeconstructionAsync(project, documents, cancellationToken)
+                ? await FindDocumentsWithDeconstructionAsync(project, documents, cancellationToken)
                     .ConfigureAwait(false)
-              : ImmutableArray<Document>.Empty;
+                : ImmutableArray<Document>.Empty;
 
             var awaitExpressionDocuments = IsGetAwaiterMethod(methodSymbol)
-              ? await FindDocumentsWithAwaitExpressionAsync(project, documents, cancellationToken)
+                ? await FindDocumentsWithAwaitExpressionAsync(project, documents, cancellationToken)
                     .ConfigureAwait(false)
-              : ImmutableArray<Document>.Empty;
+                : ImmutableArray<Document>.Empty;
 
             var documentsWithGlobalAttributes = await FindDocumentsWithGlobalAttributesAsync(
                     project,
@@ -145,34 +149,34 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 .ConfigureAwait(false);
 
             var forEachMatches = IsForEachMethod(symbol)
-              ? await FindReferencesInForEachStatementsAsync(
+                ? await FindReferencesInForEachStatementsAsync(
                         symbol,
                         document,
                         semanticModel,
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-              : ImmutableArray<FinderLocation>.Empty;
+                : ImmutableArray<FinderLocation>.Empty;
 
             var deconstructMatches = IsDeconstructMethod(symbol)
-              ? await FindReferencesInDeconstructionAsync(
+                ? await FindReferencesInDeconstructionAsync(
                         symbol,
                         document,
                         semanticModel,
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-              : ImmutableArray<FinderLocation>.Empty;
+                : ImmutableArray<FinderLocation>.Empty;
 
             var getAwaiterMatches = IsGetAwaiterMethod(symbol)
-              ? await FindReferencesInAwaitExpressionAsync(
+                ? await FindReferencesInAwaitExpressionAsync(
                         symbol,
                         document,
                         semanticModel,
                         cancellationToken
                     )
                     .ConfigureAwait(false)
-              : ImmutableArray<FinderLocation>.Empty;
+                : ImmutableArray<FinderLocation>.Empty;
 
             var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
                     document,

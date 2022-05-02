@@ -22,8 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.R
     [Export(typeof(RuleSetEventHandler))]
     internal sealed class RuleSetEventHandler
         : IVsTrackProjectDocumentsEvents2,
-          IVsTrackProjectDocumentsEvents3,
-          IVsTrackProjectDocumentsEvents4
+            IVsTrackProjectDocumentsEvents3,
+            IVsTrackProjectDocumentsEvents4
     {
         private readonly IServiceProvider _serviceProvider;
         private bool _eventsHookedUp = false;

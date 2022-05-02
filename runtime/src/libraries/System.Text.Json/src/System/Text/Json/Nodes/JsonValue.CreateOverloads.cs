@@ -85,9 +85,9 @@ namespace System.Text.Json.Nodes
         public static JsonValue? Create(DateTime? value, JsonNodeOptions? options = null) =>
             value.HasValue
                 ? new JsonValueTrimmable<DateTime>(
-                      value.Value,
-                      JsonMetadataServices.DateTimeConverter
-                  )
+                    value.Value,
+                    JsonMetadataServices.DateTimeConverter
+                )
                 : null;
 
         /// <summary>
@@ -111,9 +111,9 @@ namespace System.Text.Json.Nodes
         public static JsonValue? Create(DateTimeOffset? value, JsonNodeOptions? options = null) =>
             value.HasValue
                 ? new JsonValueTrimmable<DateTimeOffset>(
-                      value.Value,
-                      JsonMetadataServices.DateTimeOffsetConverter
-                  )
+                    value.Value,
+                    JsonMetadataServices.DateTimeOffsetConverter
+                )
                 : null;
 
         /// <summary>
@@ -134,9 +134,9 @@ namespace System.Text.Json.Nodes
         public static JsonValue? Create(decimal? value, JsonNodeOptions? options = null) =>
             value.HasValue
                 ? new JsonValueTrimmable<decimal>(
-                      value.Value,
-                      JsonMetadataServices.DecimalConverter
-                  )
+                    value.Value,
+                    JsonMetadataServices.DecimalConverter
+                )
                 : null;
 
         /// <summary>

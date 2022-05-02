@@ -654,11 +654,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             var characterOffset =
                 (CurrentToken.Kind == SyntaxKind.NumericLiteralToken)
                     ? ParseLineDirectiveNumericLiteral(
-                          ref reportError,
-                          minValue: 1,
-                          maxValue: MaxCharacterValue,
-                          out _
-                      )
+                        ref reportError,
+                        minValue: 1,
+                        maxValue: MaxCharacterValue,
+                        out _
+                    )
                     : null;
 
             var file = EatToken(
@@ -837,11 +837,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 SyntaxKind.DisableKeyword => EatToken(),
                 SyntaxKind.RestoreKeyword => EatToken(),
                 _
-                  => EatToken(
-                      SyntaxKind.DisableKeyword,
-                      ErrorCode.ERR_NullableDirectiveQualifierExpected,
-                      reportError: isActive
-                  )
+                    => EatToken(
+                        SyntaxKind.DisableKeyword,
+                        ErrorCode.ERR_NullableDirectiveQualifierExpected,
+                        reportError: isActive
+                    )
             };
 
             SyntaxToken target = this.CurrentToken.Kind switch
@@ -851,11 +851,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 SyntaxKind.EndOfDirectiveToken => null,
                 SyntaxKind.EndOfFileToken => null,
                 _
-                  => EatToken(
-                      SyntaxKind.WarningsKeyword,
-                      ErrorCode.ERR_NullableDirectiveTargetExpected,
-                      reportError: !setting.IsMissing && isActive
-                  )
+                    => EatToken(
+                        SyntaxKind.WarningsKeyword,
+                        ErrorCode.ERR_NullableDirectiveTargetExpected,
+                        reportError: !setting.IsMissing && isActive
+                    )
             };
 
             var end = this.ParseEndOfDirective(

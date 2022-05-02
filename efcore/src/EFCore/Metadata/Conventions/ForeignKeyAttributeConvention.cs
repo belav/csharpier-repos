@@ -29,10 +29,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class ForeignKeyAttributeConvention
         : IEntityTypeAddedConvention,
-          IForeignKeyAddedConvention,
-          INavigationAddedConvention,
-          ISkipNavigationForeignKeyChangedConvention,
-          IModelFinalizingConvention
+            IForeignKeyAddedConvention,
+            INavigationAddedConvention,
+            ISkipNavigationForeignKeyChangedConvention,
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ForeignKeyAttributeConvention" />.
@@ -318,8 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     {
                         Dependencies.Logger.ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
                             fkPropertiesOnDependentToPrincipal != null
-                              ? relationshipBuilder.Metadata.DependentToPrincipal!
-                              : relationshipBuilder.Metadata.PrincipalToDependent!,
+                                ? relationshipBuilder.Metadata.DependentToPrincipal!
+                                : relationshipBuilder.Metadata.PrincipalToDependent!,
                             fkProperty!
                         );
 
@@ -446,15 +446,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                     fromDataAnnotation: true
                 )
                     is null
-              ? null
-              : foreignKey.PrincipalEntityType.Builder.HasRelationship(
+                ? null
+                : foreignKey.PrincipalEntityType.Builder.HasRelationship(
                     foreignKey.DeclaringEntityType,
                     principalToDependentNavigationName,
                     null,
                     fromDataAnnotation: true
                 ) == null
-                  ? null
-                  : relationshipBuilder;
+                    ? null
+                    : relationshipBuilder;
         }
 
         private static ForeignKeyAttribute? GetForeignKeyAttribute(

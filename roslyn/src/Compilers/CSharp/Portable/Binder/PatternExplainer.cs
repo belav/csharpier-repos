@@ -59,24 +59,24 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         BoundEvaluationDecisionDagNode e => (distance(e.Next), e.Next),
                         BoundTestDecisionDagNode { Test: BoundDagNonNullTest _ } t when !nullPaths
-                          => (1 + distance(t.WhenTrue), t.WhenTrue),
+                            => (1 + distance(t.WhenTrue), t.WhenTrue),
                         BoundTestDecisionDagNode { Test: BoundDagExplicitNullTest _ } t
                             when !nullPaths
-                          => (1 + distance(t.WhenFalse), t.WhenFalse),
+                            => (1 + distance(t.WhenFalse), t.WhenFalse),
                         BoundTestDecisionDagNode t
                             when distance(t.WhenTrue) is var trueDist1
                                 && distance(t.WhenFalse) is var falseDist1
-                          => (trueDist1 <= falseDist1)
-                              ? (1 + trueDist1, t.WhenTrue)
-                              : (1 + falseDist1, t.WhenFalse),
+                            => (trueDist1 <= falseDist1)
+                                ? (1 + trueDist1, t.WhenTrue)
+                                : (1 + falseDist1, t.WhenFalse),
                         BoundWhenDecisionDagNode w
                             when distance(w.WhenTrue) is var trueDist2
                                 && distance(w.WhenFalse) is var falseDist2
-                          =>
-                          // add nodeCount to the distance if we need to flag that the path requires failure of a when clause
-                          (trueDist2 <= falseDist2)
-                              ? (1 + trueDist2, w.WhenTrue)
-                              : (
+                            =>
+                            // add nodeCount to the distance if we need to flag that the path requires failure of a when clause
+                            (trueDist2 <= falseDist2)
+                                ? (1 + trueDist2, w.WhenTrue)
+                                : (
                                     1 + (falseDist2 < nodeCount ? nodeCount : 0) + falseDist2,
                                     w.WhenFalse
                                 ),
@@ -233,8 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             )
             {
                 return map.TryGetValue(temp, out var builder)
-                  ? builder.ToImmutable()
-                  : ImmutableArray<T>.Empty;
+                    ? builder.ToImmutable()
+                    : ImmutableArray<T>.Empty;
             }
 
             // Handle the special case of a single test that is not handled.
@@ -246,16 +246,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         case (test: BoundDagNonNullTest _, sense: var sense):
                             return !sense
-                              ? "null"
-                              : requireExactType
-                                  ? input.Type.ToDisplayString()
-                                  : "not null";
+                                ? "null"
+                                : requireExactType
+                                    ? input.Type.ToDisplayString()
+                                    : "not null";
                         case (test: BoundDagExplicitNullTest _, sense: var sense):
                             return sense
-                              ? "null"
-                              : requireExactType
-                                  ? input.Type.ToDisplayString()
-                                  : "not null";
+                                ? "null"
+                                : requireExactType
+                                    ? input.Type.ToDisplayString()
+                                    : "not null";
                         case (test: BoundDagTypeTest { Type: var testedType }, sense: var sense):
                             Debug.Assert(sense); // we have dropped failing type tests
                             return testedType.ToDisplayString();
@@ -533,8 +533,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     deconstruction == null && typeName == null || properties.Count != 0;
                 var propertyString = needsPropertyString
                     ? (deconstruction != null ? " {" : "{")
-                      + string.Join(", ", properties.Select(kvp => $" {kvp.Key.Name}: {kvp.Value}"))
-                      + " }"
+                        + string.Join(
+                            ", ",
+                            properties.Select(kvp => $" {kvp.Key.Name}: {kvp.Value}")
+                        )
+                        + " }"
                     : null;
                 Debug.Assert(typeName != null || deconstruction != null || propertyString != null);
                 return typeName + deconstruction + propertyString;
@@ -689,10 +692,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         float.NegativeInfinity => "float.NegativeInfinity",
                         float.PositiveInfinity => "float.PositiveInfinity",
                         var x
-                          => ObjectDisplay.FormatPrimitive(
-                              x,
-                              ObjectDisplayOptions.IncludeTypeSuffix
-                          )
+                            => ObjectDisplay.FormatPrimitive(
+                                x,
+                                ObjectDisplayOptions.IncludeTypeSuffix
+                            )
                     };
 
                 case SpecialType.System_Double:
@@ -702,10 +705,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         double.NegativeInfinity => "double.NegativeInfinity",
                         double.PositiveInfinity => "double.PositiveInfinity",
                         var x
-                          => ObjectDisplay.FormatPrimitive(
-                              x,
-                              ObjectDisplayOptions.IncludeTypeSuffix
-                          )
+                            => ObjectDisplay.FormatPrimitive(
+                                x,
+                                ObjectDisplayOptions.IncludeTypeSuffix
+                            )
                     };
 
                 default:

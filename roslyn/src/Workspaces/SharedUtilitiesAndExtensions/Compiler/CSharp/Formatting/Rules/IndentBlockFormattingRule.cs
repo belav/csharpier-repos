@@ -126,8 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     lastTokenOfLabel,
                     lastTokenOfLabel,
                     lastSection
-                      ? TextSpan.FromBounds(lastTokenOfLabel.FullSpan.End, nextToken.SpanStart)
-                      : TextSpan.FromBounds(
+                        ? TextSpan.FromBounds(lastTokenOfLabel.FullSpan.End, nextToken.SpanStart)
+                        : TextSpan.FromBounds(
                             lastTokenOfLabel.FullSpan.End,
                             lastTokenOfLabel.FullSpan.End
                         )
@@ -190,7 +190,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     SetAlignmentBlockOperation(list, anonymousMethod, anonymousMethod.Block);
                     return;
                 case BaseObjectCreationExpressionSyntax objectCreation
-                      when objectCreation.Initializer != null:
+                when objectCreation.Initializer != null:
                     SetAlignmentBlockOperation(list, objectCreation, objectCreation.Initializer);
                     return;
                 case AnonymousObjectCreationExpressionSyntax anonymousObjectCreation:
@@ -203,7 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     );
                     return;
                 case ArrayCreationExpressionSyntax arrayCreation
-                      when arrayCreation.Initializer != null:
+                when arrayCreation.Initializer != null:
                     SetAlignmentBlockOperation(
                         list,
                         arrayCreation.NewKeyword,
@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                     );
                     return;
                 case ImplicitArrayCreationExpressionSyntax implicitArrayCreation
-                      when implicitArrayCreation.Initializer != null:
+                when implicitArrayCreation.Initializer != null:
                     SetAlignmentBlockOperation(
                         list,
                         implicitArrayCreation.NewKeyword,

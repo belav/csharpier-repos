@@ -7,7 +7,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class TestLogger<TCategory, TDefinitions>
         : TestLogger<TDefinitions>,
-          IDiagnosticsLogger<TCategory>
+            IDiagnosticsLogger<TCategory>
         where TCategory : LoggerCategory<TCategory>, new()
         where TDefinitions : LoggingDefinitions, new()
     {

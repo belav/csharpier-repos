@@ -21,13 +21,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToInterpolatedString
     ]
     internal partial class CSharpConvertPlaceholderToInterpolatedStringRefactoringProvider
         : AbstractConvertPlaceholderToInterpolatedStringRefactoringProvider<
-              InvocationExpressionSyntax,
-              ExpressionSyntax,
-              ArgumentSyntax,
-              LiteralExpressionSyntax,
-              ArgumentListSyntax,
-              InterpolationSyntax
-          >
+            InvocationExpressionSyntax,
+            ExpressionSyntax,
+            ArgumentSyntax,
+            LiteralExpressionSyntax,
+            ArgumentListSyntax,
+            InterpolationSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

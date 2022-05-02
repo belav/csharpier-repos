@@ -37,7 +37,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     [Export(typeof(VisualStudioDocumentNavigationService))]
     internal sealed class VisualStudioDocumentNavigationService
         : ForegroundThreadAffinitizedObject,
-          IDocumentNavigationService
+            IDocumentNavigationService
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IVsEditorAdaptersFactoryService _editorAdaptersFactoryService;
@@ -388,8 +388,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             // If the mapped file maps to the same document that was passed in, then re-use the documentId to preserve context.
                             // Otherwise, just pick one of the ids to use for navigation.
                             var documentIdToNavigate = documentIdsForFilePath.Contains(documentId)
-                              ? documentId
-                              : documentIdsForFilePath.First();
+                                ? documentId
+                                : documentIdsForFilePath.First();
                             return NavigateToFileInWorkspace(
                                 documentIdToNavigate,
                                 workspace,
@@ -634,8 +634,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private static IDisposable OpenNewDocumentStateScope(OptionSet options)
         {
             var state = options.GetOption(NavigationOptions.PreferProvisionalTab)
-              ? __VSNEWDOCUMENTSTATE.NDS_Provisional
-              : __VSNEWDOCUMENTSTATE.NDS_Permanent;
+                ? __VSNEWDOCUMENTSTATE.NDS_Provisional
+                : __VSNEWDOCUMENTSTATE.NDS_Permanent;
 
             if (!options.GetOption(NavigationOptions.ActivateTab))
             {

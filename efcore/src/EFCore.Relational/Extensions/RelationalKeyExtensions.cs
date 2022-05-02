@@ -52,13 +52,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             var tableName = key.DeclaringEntityType.GetTableName();
             var name = key.IsPrimaryKey()
-              ? "PK_" + tableName
-              : new StringBuilder()
-                .Append("AK_")
-                .Append(tableName)
-                .Append('_')
-                .AppendJoin(key.Properties.Select(p => p.GetColumnBaseName()), "_")
-                .ToString();
+                ? "PK_" + tableName
+                : new StringBuilder()
+                    .Append("AK_")
+                    .Append(tableName)
+                    .Append('_')
+                    .AppendJoin(key.Properties.Select(p => p.GetColumnBaseName()), "_")
+                    .ToString();
 
             return Uniquifier.Truncate(
                 name,

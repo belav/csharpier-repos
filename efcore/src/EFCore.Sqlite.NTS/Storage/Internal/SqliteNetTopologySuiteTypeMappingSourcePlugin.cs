@@ -86,7 +86,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                     storeTypeName != null
                     && _storeTypeMappings.TryGetValue(storeTypeName, out defaultClrType)
                 )
-              ? (RelationalTypeMapping)
+                ? (RelationalTypeMapping)
                     Activator.CreateInstance(
                         typeof(SqliteGeometryTypeMapping<>).MakeGenericType(
                             clrType ?? defaultClrType ?? typeof(Geometry)
@@ -94,7 +94,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
                         _geometryServices,
                         storeTypeName ?? defaultStoreType ?? "GEOMETRY"
                     )!
-              : null;
+                : null;
         }
 
         private static bool TryGetDefaultStoreType(Type type, out string? defaultStoreType)

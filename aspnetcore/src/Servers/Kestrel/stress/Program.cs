@@ -133,8 +133,8 @@ public class Program
             logPath == null
                 ? null
                 : new HttpEventListener(
-                      logPath != "console" ? new StreamWriter(logPath) { AutoFlush = true } : null
-                  );
+                    logPath != "console" ? new StreamWriter(logPath) { AutoFlush = true } : null
+                );
         // if (listener == null)
         // {
         //     // If no command-line requested logging, enable the user to press 'L' to enable logging to the console

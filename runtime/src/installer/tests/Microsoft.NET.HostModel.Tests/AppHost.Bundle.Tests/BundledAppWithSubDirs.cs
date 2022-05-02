@@ -13,7 +13,7 @@ namespace AppHost.Bundle.Tests
 {
     public class BundledAppWithSubDirs
         : BundleTestBase,
-          IClassFixture<BundledAppWithSubDirs.SharedTestState>
+            IClassFixture<BundledAppWithSubDirs.SharedTestState>
     {
         private SharedTestState sharedTestState;
 

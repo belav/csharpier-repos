@@ -13,7 +13,7 @@ namespace ILCompiler.DependencyAnalysis
 {
     public abstract partial class SortableDependencyNode
         : DependencyNodeCore<NodeFactory>,
-          ISortableNode
+            ISortableNode
     {
 #if !SUPPORT_JIT
         /// <summary>

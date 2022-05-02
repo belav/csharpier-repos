@@ -315,8 +315,12 @@ namespace System.Net
                 // Content lengths < 0 cause the requests to fail.
                 // Other input is a failure, too.
                 long parsedContentLength = ulong.TryParse(val, out ulong parsedUlongContentLength)
-                  ? (parsedUlongContentLength <= long.MaxValue ? (long)parsedUlongContentLength : 0)
-                  : long.Parse(val);
+                    ? (
+                        parsedUlongContentLength <= long.MaxValue
+                            ? (long)parsedUlongContentLength
+                            : 0
+                    )
+                    : long.Parse(val);
                 if (parsedContentLength < 0 || (_clSet && parsedContentLength != _contentLength))
                 {
                     _context.ErrorMessage = "Invalid Content-Length.";

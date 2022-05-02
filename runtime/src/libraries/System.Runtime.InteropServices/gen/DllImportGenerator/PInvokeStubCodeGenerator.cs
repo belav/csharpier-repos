@@ -635,8 +635,8 @@ namespace Microsoft.Interop
                 _retMarshaller.Generator.AsNativeType(_retMarshaller.TypeInfo),
                 _retMarshaller.Generator
                     is IAttributedReturnTypeMarshallingGenerator attributedReturn
-                  ? attributedReturn.GenerateAttributesForReturnType(_retMarshaller.TypeInfo)
-                  : null
+                    ? attributedReturn.GenerateAttributesForReturnType(_retMarshaller.TypeInfo)
+                    : null
             );
         }
 

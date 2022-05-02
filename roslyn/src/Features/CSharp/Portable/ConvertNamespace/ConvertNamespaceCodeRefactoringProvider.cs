@@ -51,10 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
 
             var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             var info = CanOfferUseBlockScoped(optionSet, namespaceDecl, forAnalyzer: false)
-              ? GetInfo(NamespaceDeclarationPreference.BlockScoped)
-              : CanOfferUseFileScoped(optionSet, root, namespaceDecl, forAnalyzer: false)
-                  ? GetInfo(NamespaceDeclarationPreference.FileScoped)
-                  : ((string title, string equivalenceKey)?)null;
+                ? GetInfo(NamespaceDeclarationPreference.BlockScoped)
+                : CanOfferUseFileScoped(optionSet, root, namespaceDecl, forAnalyzer: false)
+                    ? GetInfo(NamespaceDeclarationPreference.FileScoped)
+                    : ((string title, string equivalenceKey)?)null;
             if (info == null)
                 return;
 

@@ -14,9 +14,9 @@ namespace System.Numerics
     )]
     public readonly struct BigInteger
         : ISpanFormattable,
-          IComparable,
-          IComparable<BigInteger>,
-          IEquatable<BigInteger>
+            IComparable,
+            IComparable<BigInteger>,
+            IEquatable<BigInteger>
     {
         private const uint kuMaskHighBit = unchecked((uint)int.MinValue);
         private const int kcbitUint = 32;
@@ -964,16 +964,16 @@ namespace System.Numerics
             {
                 Debug.Assert(right._bits != null);
                 return left._sign != 0
-                  ? BigIntegerCalculator.Gcd(right._bits, NumericsHelpers.Abs(left._sign))
-                  : new BigInteger(right._bits, negative: false);
+                    ? BigIntegerCalculator.Gcd(right._bits, NumericsHelpers.Abs(left._sign))
+                    : new BigInteger(right._bits, negative: false);
             }
 
             if (trivialRight)
             {
                 Debug.Assert(left._bits != null);
                 return right._sign != 0
-                  ? BigIntegerCalculator.Gcd(left._bits, NumericsHelpers.Abs(right._sign))
-                  : new BigInteger(left._bits, negative: false);
+                    ? BigIntegerCalculator.Gcd(left._bits, NumericsHelpers.Abs(right._sign))
+                    : new BigInteger(left._bits, negative: false);
             }
 
             Debug.Assert(left._bits != null && right._bits != null);
@@ -1074,27 +1074,27 @@ namespace System.Numerics
                 uint bits =
                     trivialValue && trivialExponent
                         ? BigIntegerCalculator.Pow(
-                              NumericsHelpers.Abs(value._sign),
-                              NumericsHelpers.Abs(exponent._sign),
-                              NumericsHelpers.Abs(modulus._sign)
-                          )
+                            NumericsHelpers.Abs(value._sign),
+                            NumericsHelpers.Abs(exponent._sign),
+                            NumericsHelpers.Abs(modulus._sign)
+                        )
                         : trivialValue
                             ? BigIntegerCalculator.Pow(
-                                  NumericsHelpers.Abs(value._sign),
-                                  exponent._bits!,
-                                  NumericsHelpers.Abs(modulus._sign)
-                              )
+                                NumericsHelpers.Abs(value._sign),
+                                exponent._bits!,
+                                NumericsHelpers.Abs(modulus._sign)
+                            )
                             : trivialExponent
                                 ? BigIntegerCalculator.Pow(
-                                      value._bits!,
-                                      NumericsHelpers.Abs(exponent._sign),
-                                      NumericsHelpers.Abs(modulus._sign)
-                                  )
+                                    value._bits!,
+                                    NumericsHelpers.Abs(exponent._sign),
+                                    NumericsHelpers.Abs(modulus._sign)
+                                )
                                 : BigIntegerCalculator.Pow(
-                                      value._bits!,
-                                      exponent._bits!,
-                                      NumericsHelpers.Abs(modulus._sign)
-                                  );
+                                    value._bits!,
+                                    exponent._bits!,
+                                    NumericsHelpers.Abs(modulus._sign)
+                                );
 
                 result = value._sign < 0 && !exponent.IsEven ? -1 * bits : bits;
             }
@@ -1337,10 +1337,10 @@ namespace System.Numerics
             {
                 if (other._bits == null)
                     return _sign < other._sign
-                      ? -1
-                      : _sign > other._sign
-                          ? +1
-                          : 0;
+                        ? -1
+                        : _sign > other._sign
+                            ? +1
+                            : 0;
                 return -other._sign;
             }
             int cuThis,

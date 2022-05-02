@@ -37,7 +37,7 @@ namespace System.Drawing.Text
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeletePrivateFontCollection(ref _nativeFontCollection);
+                        Gdip.GdipDeletePrivateFontCollection(ref _nativeFontCollection);
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

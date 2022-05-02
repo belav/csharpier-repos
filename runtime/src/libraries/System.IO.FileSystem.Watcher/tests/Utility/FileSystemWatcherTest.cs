@@ -443,8 +443,8 @@ namespace System.IO.Tests
                 bool Renamed_expected = ((expectedEvents & WatcherChangeTypes.Renamed) > 0);
                 bool Renamed_actual = renamed.EventOccured.WaitOne(
                     verifyChanged || verifyCreated || verifyDeleted
-                      ? SubsequentExpectedWait
-                      : timeout
+                        ? SubsequentExpectedWait
+                        : timeout
                 );
                 watcher.Renamed -= renamed.Handler;
                 result = result && Renamed_expected == Renamed_actual;

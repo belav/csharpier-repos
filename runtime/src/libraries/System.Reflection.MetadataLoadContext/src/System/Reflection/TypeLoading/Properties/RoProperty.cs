@@ -72,13 +72,13 @@ namespace System.Reflection.TypeLoading
 
         private RoMethod? GetRoGetMethod() =>
             object.ReferenceEquals(_lazyGetter, Sentinels.RoMethod)
-              ? (_lazyGetter = ComputeGetterMethod()?.FilterInheritedAccessor())
-              : _lazyGetter;
+                ? (_lazyGetter = ComputeGetterMethod()?.FilterInheritedAccessor())
+                : _lazyGetter;
 
         private RoMethod? GetRoSetMethod() =>
             object.ReferenceEquals(_lazySetter, Sentinels.RoMethod)
-              ? (_lazySetter = ComputeSetterMethod()?.FilterInheritedAccessor())
-              : _lazySetter;
+                ? (_lazySetter = ComputeSetterMethod()?.FilterInheritedAccessor())
+                : _lazySetter;
 
         protected abstract RoMethod? ComputeGetterMethod();
         protected abstract RoMethod? ComputeSetterMethod();

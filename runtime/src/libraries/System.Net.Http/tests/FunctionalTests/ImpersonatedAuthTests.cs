@@ -101,13 +101,13 @@ namespace System.Net.Http.Functional.Tests
                             {
                                 Task t = useNtlm
                                     ? NtAuthTests.HandleNtlmAuthenticationRequest(
-                                          connection,
-                                          closeConnection: false
-                                      )
+                                        connection,
+                                        closeConnection: false
+                                    )
                                     : NtAuthTests.HandleNegotiateAuthenticationRequest(
-                                          connection,
-                                          closeConnection: false
-                                      );
+                                        connection,
+                                        closeConnection: false
+                                    );
                                 await t;
                                 _output.WriteLine("Finished first request");
 
@@ -119,13 +119,13 @@ namespace System.Net.Http.Functional.Tests
                                         {
                                             Task t = useNtlm
                                                 ? NtAuthTests.HandleNtlmAuthenticationRequest(
-                                                      connection,
-                                                      closeConnection: false
-                                                  )
+                                                    connection,
+                                                    closeConnection: false
+                                                )
                                                 : NtAuthTests.HandleNegotiateAuthenticationRequest(
-                                                      connection,
-                                                      closeConnection: false
-                                                  );
+                                                    connection,
+                                                    closeConnection: false
+                                                );
                                             await t;
                                         }
                                     )

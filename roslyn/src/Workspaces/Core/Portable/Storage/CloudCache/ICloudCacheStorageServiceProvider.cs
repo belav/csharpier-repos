@@ -8,5 +8,5 @@ namespace Microsoft.CodeAnalysis.Storage.CloudCache
 {
     internal interface ICloudCacheStorageService
         : IChecksummedPersistentStorageService,
-          IWorkspaceService { }
+            IWorkspaceService { }
 }

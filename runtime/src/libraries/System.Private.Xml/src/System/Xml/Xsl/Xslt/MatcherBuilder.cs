@@ -126,8 +126,8 @@ namespace System.Xml.Xsl.Xslt
         {
             _template = template;
             _priority = double.IsNaN(template.Priority)
-              ? XPathPatternBuilder.GetPriority(filter)
-              : template.Priority;
+                ? XPathPatternBuilder.GetPriority(filter)
+                : template.Priority;
             _iterator = filter.Variable;
             _condition = filter.Body;
 

@@ -18,8 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeNamespace))]
     public sealed class ExternalCodeNamespace
         : AbstractExternalCodeElement,
-          EnvDTE.CodeNamespace,
-          EnvDTE.CodeElement
+            EnvDTE.CodeNamespace,
+            EnvDTE.CodeElement
     {
         internal static EnvDTE.CodeNamespace Create(
             CodeModelState state,

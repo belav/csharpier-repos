@@ -463,8 +463,8 @@ namespace System.Drawing.Printing
             if (imageFormat.Equals(ImageFormat.Jpeg) || imageFormat.Equals(ImageFormat.Png))
             {
                 int nEscape = imageFormat.Equals(ImageFormat.Jpeg)
-                  ? Interop.Gdi32.CHECKJPEGFORMAT
-                  : Interop.Gdi32.CHECKPNGFORMAT;
+                    ? Interop.Gdi32.CHECKJPEGFORMAT
+                    : Interop.Gdi32.CHECKPNGFORMAT;
                 int outData = 0;
                 DeviceContext dc = CreateInformationContext(DefaultPageSettings);
                 HandleRef hdc = new HandleRef(dc, dc.Hdc);
@@ -508,8 +508,8 @@ namespace System.Drawing.Printing
                     byte[] pvImage = stream.ToArray();
 
                     int nEscape = image.RawFormat.Equals(ImageFormat.Jpeg)
-                      ? Interop.Gdi32.CHECKJPEGFORMAT
-                      : Interop.Gdi32.CHECKPNGFORMAT;
+                        ? Interop.Gdi32.CHECKJPEGFORMAT
+                        : Interop.Gdi32.CHECKPNGFORMAT;
                     int outData = 0;
 
                     DeviceContext dc = CreateInformationContext(DefaultPageSettings);

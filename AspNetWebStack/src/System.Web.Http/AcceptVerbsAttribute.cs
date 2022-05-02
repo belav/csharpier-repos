@@ -43,8 +43,8 @@ namespace System.Web.Http
             _httpMethods =
                 methods != null
                     ? new Collection<HttpMethod>(
-                          methods.Select(method => HttpMethodHelper.GetHttpMethod(method)).ToArray()
-                      )
+                        methods.Select(method => HttpMethodHelper.GetHttpMethod(method)).ToArray()
+                    )
                     : new Collection<HttpMethod>(new HttpMethod[0]);
         }
 

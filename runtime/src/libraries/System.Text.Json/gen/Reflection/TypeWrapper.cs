@@ -186,10 +186,10 @@ namespace System.Text.Json.Reflection
             IsArray
                 ? GetElementType().Namespace
                 : _typeSymbol.ContainingNamespace?.ToDisplayString(
-                      SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
-                          SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
-                      )
-                  )!;
+                    SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(
+                        SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining
+                    )
+                )!;
 
         public override Type UnderlyingSystemType => this;
 

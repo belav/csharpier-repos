@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.Extensibility.NavigationBar
 {
     internal abstract class AbstractEditorNavigationBarItemService
         : ForegroundThreadAffinitizedObject,
-          INavigationBarItemService
+            INavigationBarItemService
     {
         protected AbstractEditorNavigationBarItemService(IThreadingContext threadingContext)
             : base(threadingContext, assertIsForeground: false) { }

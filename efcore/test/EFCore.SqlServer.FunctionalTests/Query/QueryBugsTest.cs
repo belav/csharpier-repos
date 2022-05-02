@@ -6308,10 +6308,10 @@ ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]"
                                     s.RefEntity == null
                                         ? null
                                         : new IssueContext13517.IssueRefEntityDto13517
-                                          {
-                                              Id = s.RefEntity.Id,
-                                              Public = s.RefEntity.Public
-                                          },
+                                        {
+                                            Id = s.RefEntity.Id,
+                                            Public = s.RefEntity.Public
+                                        },
                                 RefEntityId = s.RefEntityId
                             }
                     )
@@ -7706,15 +7706,15 @@ FROM [Businesses] AS [b]"
                                 i => i.State >= MyContext21768.IllustrationState21768.Approved
                             ) != null
                                 ? new MyContext21768.PageViewModel21768
-                                  {
-                                      Uri = b.FrontCover.Illustrations
-                                          .FirstOrDefault(
-                                              i =>
-                                                  i.State
-                                                  >= MyContext21768.IllustrationState21768.Approved
-                                          )
-                                          .Uri
-                                  }
+                                {
+                                    Uri = b.FrontCover.Illustrations
+                                        .FirstOrDefault(
+                                            i =>
+                                                i.State
+                                                >= MyContext21768.IllustrationState21768.Approved
+                                        )
+                                        .Uri
+                                }
                                 : null,
                     };
 

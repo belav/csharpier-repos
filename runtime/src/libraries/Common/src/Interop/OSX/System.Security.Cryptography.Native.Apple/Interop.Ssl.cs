@@ -526,8 +526,8 @@ internal static partial class Interop
             //
             // It was verified as supporting case invariant match as of 10.12.1 (Sierra).
             string matchName = string.IsNullOrEmpty(hostName)
-              ? string.Empty
-              : s_idnMapping.GetAscii(hostName);
+                ? string.Empty
+                : s_idnMapping.GetAscii(hostName);
 
             using (SafeCFDateHandle cfNotBefore = CoreFoundation.CFDateCreate(notBefore))
             using (

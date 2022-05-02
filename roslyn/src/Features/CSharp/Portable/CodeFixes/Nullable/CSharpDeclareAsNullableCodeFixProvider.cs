@@ -100,10 +100,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
         private static string GetEquivalenceKey(SyntaxNode node, SemanticModel model)
         {
             return IsRemoteApiUsage(node, model)
-              ? AssigningNullLiteralRemotelyEquivalenceKey
-              : node.IsKind(SyntaxKind.ConditionalAccessExpression)
-                  ? ConditionalOperatorEquivalenceKey
-                  : AssigningNullLiteralLocallyEquivalenceKey;
+                ? AssigningNullLiteralRemotelyEquivalenceKey
+                : node.IsKind(SyntaxKind.ConditionalAccessExpression)
+                    ? ConditionalOperatorEquivalenceKey
+                    : AssigningNullLiteralLocallyEquivalenceKey;
 
             static bool IsRemoteApiUsage(SyntaxNode node, SemanticModel model)
             {
@@ -227,24 +227,28 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.DeclareAsNullable
                 return containingMember switch
                 {
                     MethodDeclarationSyntax method
-                      =>
-                      // string M() { return null; }
-                      // async Task<string> M() { return null; }
-                      // IEnumerable<string> M() { yield return null; }
-                      TryGetReturnType(method.ReturnType, method.Modifiers, onYield),
+                        =>
+                        // string M() { return null; }
+                        // async Task<string> M() { return null; }
+                        // IEnumerable<string> M() { yield return null; }
+                        TryGetReturnType(method.ReturnType, method.Modifiers, onYield),
 
                     LocalFunctionStatementSyntax localFunction
-                      =>
-                      // string local() { return null; }
-                      // async Task<string> local() { return null; }
-                      // IEnumerable<string> local() { yield return null; }
-                      TryGetReturnType(localFunction.ReturnType, localFunction.Modifiers, onYield),
+                        =>
+                        // string local() { return null; }
+                        // async Task<string> local() { return null; }
+                        // IEnumerable<string> local() { yield return null; }
+                        TryGetReturnType(
+                            localFunction.ReturnType,
+                            localFunction.Modifiers,
+                            onYield
+                        ),
 
                     PropertyDeclarationSyntax property
-                      =>
-                      // string x { get { return null; } }
-                      // IEnumerable<string> Property { get { yield return null; } }
-                      TryGetReturnType(property.Type, modifiers: default, onYield),
+                        =>
+                        // string x { get { return null; } }
+                        // IEnumerable<string> Property { get { yield return null; } }
+                        TryGetReturnType(property.Type, modifiers: default, onYield),
 
                     _ => null,
                 };

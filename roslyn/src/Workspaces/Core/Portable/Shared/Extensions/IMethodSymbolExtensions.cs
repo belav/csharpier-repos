@@ -229,8 +229,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 .Concat(outerTypeParameterNames)
                 .ToSet(
                     syntaxFacts.IsCaseSensitive
-                      ? StringComparer.Ordinal
-                      : StringComparer.OrdinalIgnoreCase
+                        ? StringComparer.Ordinal
+                        : StringComparer.OrdinalIgnoreCase
                 );
 
             var newTypeParameterNames = NameGenerator.EnsureUniqueness(

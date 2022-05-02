@@ -664,8 +664,8 @@ namespace System.Reflection.Metadata
                 rowCounts[(int)index] < MetadataStreamConstants.LargeTableRowCount
                 && !IsMinimalDelta
             )
-              ? SmallIndexSize
-              : LargeIndexSize;
+                ? SmallIndexSize
+                : LargeIndexSize;
         }
 
         private void InitializeTableReaders(
@@ -1197,10 +1197,10 @@ namespace System.Reflection.Metadata
             var combinedRowCounts =
                 (externalRowCountsOpt != null)
                     ? CombineRowCounts(
-                          rowCounts,
-                          externalRowCountsOpt,
-                          firstLocalTableIndex: TableIndex.Document
-                      )
+                        rowCounts,
+                        externalRowCountsOpt,
+                        firstLocalTableIndex: TableIndex.Document
+                    )
                     : rowCounts;
 
             int methodRefSizeCombined = GetReferenceSize(combinedRowCounts, TableIndex.MethodDef);

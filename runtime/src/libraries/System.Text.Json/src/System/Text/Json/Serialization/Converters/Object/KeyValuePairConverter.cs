@@ -9,12 +9,12 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class KeyValuePairConverter<TKey, TValue>
         : SmallObjectWithParameterizedConstructorConverter<
-              KeyValuePair<TKey, TValue>,
-              TKey,
-              TValue,
-              object,
-              object
-          >
+            KeyValuePair<TKey, TValue>,
+            TKey,
+            TValue,
+            object,
+            object
+        >
     {
         private static readonly ConstructorInfo s_constructorInfo = typeof(KeyValuePair<
             TKey,

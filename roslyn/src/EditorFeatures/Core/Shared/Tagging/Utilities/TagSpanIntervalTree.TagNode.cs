@@ -42,16 +42,16 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             {
                 var localSpan = this.GetSnapshotSpan(textSnapshot);
                 return localSpan.Snapshot == textSnapshot
-                  ? localSpan.Start
-                  : this.Span.GetStartPoint(textSnapshot);
+                    ? localSpan.Start
+                    : this.Span.GetStartPoint(textSnapshot);
             }
 
             internal int GetLength(ITextSnapshot textSnapshot)
             {
                 var localSpan = this.GetSnapshotSpan(textSnapshot);
                 return localSpan.Snapshot == textSnapshot
-                  ? localSpan.Length
-                  : this.Span.GetSpan(textSnapshot).Length;
+                    ? localSpan.Length
+                    : this.Span.GetSpan(textSnapshot).Length;
             }
         }
     }

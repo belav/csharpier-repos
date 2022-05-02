@@ -158,8 +158,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     UnusedReferencesTableKeyNames.SolutionName,
                     out string name
                 )
-                  ? new ImageEntryBucket(KnownMonikers.Solution, name)
-                  : null;
+                    ? new ImageEntryBucket(KnownMonikers.Solution, name)
+                    : null;
             }
         }
 
@@ -202,8 +202,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             public override IEntryBucket? CreateBucketForEntry(ITableEntryHandle entry)
             {
                 return entry.TryGetValue(UnusedReferencesTableKeyNames.ProjectName, out string name)
-                  ? new ImageEntryBucket(GetImageMoniker(entry), name)
-                  : null;
+                    ? new ImageEntryBucket(GetImageMoniker(entry), name)
+                    : null;
             }
 
             private static ImageMoniker GetImageMoniker(ITableEntryHandle entry)
@@ -214,8 +214,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                         out string languageName
                     )
                     && languageName == LanguageNames.VisualBasic
-                  ? KnownMonikers.VBProjectNode
-                  : KnownMonikers.CSProjectNode;
+                    ? KnownMonikers.VBProjectNode
+                    : KnownMonikers.CSProjectNode;
             }
         }
 
@@ -265,8 +265,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     UnusedReferencesTableKeyNames.ReferenceType,
                     out var referenceType
                 )
-                  ? GetText(referenceType)
-                  : null;
+                    ? GetText(referenceType)
+                    : null;
                 return content != null;
             }
 
@@ -276,11 +276,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     UnusedReferencesTableKeyNames.ReferenceType,
                     out var referenceType
                 )
-                  ? new ImageEntryBucket(
+                    ? new ImageEntryBucket(
                         GetReferenceTypeImageMoniker(referenceType),
                         GetText(referenceType)
                     )
-                  : null;
+                    : null;
             }
 
             private static string GetText(ReferenceType referenceType)
@@ -334,8 +334,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     UnusedReferencesTableKeyNames.ReferenceType,
                     out ReferenceType referenceType
                 )
-                  ? GetReferenceTypeImageMoniker(referenceType)
-                  : default;
+                    ? GetReferenceTypeImageMoniker(referenceType)
+                    : default;
             }
 
             private static string GetText(ITableEntryHandle entry)
@@ -344,8 +344,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     UnusedReferencesTableKeyNames.ReferenceName,
                     out string text
                 )
-                  ? text
-                  : string.Empty;
+                    ? text
+                    : string.Empty;
             }
         }
 

@@ -358,10 +358,10 @@ namespace Microsoft.CodeAnalysis.InlineHints
         )
         {
             var identifierNameSyntax = syntaxFacts.IsArgument(argument)
-              ? syntaxFacts.GetExpressionOfArgument(argument)
-              : syntaxFacts.IsAttributeArgument(argument)
-                  ? syntaxFacts.GetExpressionOfAttributeArgument(argument)
-                  : null;
+                ? syntaxFacts.GetExpressionOfArgument(argument)
+                : syntaxFacts.IsAttributeArgument(argument)
+                    ? syntaxFacts.GetExpressionOfAttributeArgument(argument)
+                    : null;
 
             if (!syntaxFacts.IsIdentifierName(identifierNameSyntax))
                 return string.Empty;

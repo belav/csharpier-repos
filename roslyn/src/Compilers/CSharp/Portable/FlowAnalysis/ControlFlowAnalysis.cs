@@ -45,16 +45,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var result = _context.Failed
                         ? ImmutableArray<SyntaxNode>.Empty
                         : (
-                              (IEnumerable<SyntaxNode>)
-                                  EntryPointsWalker.Analyze(
-                                      _context.Compilation,
-                                      _context.Member,
-                                      _context.BoundNode,
-                                      _context.FirstInRegion,
-                                      _context.LastInRegion,
-                                      out _succeeded
-                                  )
-                          ).ToImmutableArray();
+                            (IEnumerable<SyntaxNode>)
+                                EntryPointsWalker.Analyze(
+                                    _context.Compilation,
+                                    _context.Member,
+                                    _context.BoundNode,
+                                    _context.FirstInRegion,
+                                    _context.LastInRegion,
+                                    out _succeeded
+                                )
+                        ).ToImmutableArray();
                     ImmutableInterlocked.InterlockedInitialize(ref _entryPoints, result);
                 }
 
@@ -73,14 +73,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var result = Succeeded
                         ? ImmutableArray<SyntaxNode>.CastUp(
-                              ExitPointsWalker.Analyze(
-                                  _context.Compilation,
-                                  _context.Member,
-                                  _context.BoundNode,
-                                  _context.FirstInRegion,
-                                  _context.LastInRegion
-                              )
-                          )
+                            ExitPointsWalker.Analyze(
+                                _context.Compilation,
+                                _context.Member,
+                                _context.BoundNode,
+                                _context.FirstInRegion,
+                                _context.LastInRegion
+                            )
+                        )
                         : ImmutableArray<SyntaxNode>.Empty;
                     ImmutableInterlocked.InterlockedInitialize(ref _exitPoints, result);
                 }

@@ -112,14 +112,14 @@ namespace TestUtil
             this.testOut = new StringRecorder(
                 this.stdOut,
                 this.expectedOut != null
-                  ? this.expectedOut.ToString().Length * OUTPUT_LIMIT_FACTOR
-                  : 0
+                    ? this.expectedOut.ToString().Length * OUTPUT_LIMIT_FACTOR
+                    : 0
             );
             this.testError = new StringRecorder(
                 this.stdError,
                 this.expectedError != null
-                  ? this.expectedError.ToString().Length * OUTPUT_LIMIT_FACTOR
-                  : 0
+                    ? this.expectedError.ToString().Length * OUTPUT_LIMIT_FACTOR
+                    : 0
             );
         }
 

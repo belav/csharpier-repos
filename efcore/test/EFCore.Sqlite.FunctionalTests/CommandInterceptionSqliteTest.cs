@@ -70,7 +70,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class CommandInterceptionSqliteTest
             : CommandInterceptionSqliteTestBase,
-              IClassFixture<CommandInterceptionSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<CommandInterceptionSqliteTest.InterceptionSqliteFixture>
         {
             public CommandInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture)
             { }
@@ -83,7 +83,7 @@ namespace Microsoft.EntityFrameworkCore
 
         public class CommandInterceptionWithDiagnosticsSqliteTest
             : CommandInterceptionSqliteTestBase,
-              IClassFixture<CommandInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
+                IClassFixture<CommandInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
         {
             public CommandInterceptionWithDiagnosticsSqliteTest(InterceptionSqliteFixture fixture)
                 : base(fixture) { }

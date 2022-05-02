@@ -385,11 +385,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             toConversion = allowAnyTarget
                                 ? Conversion.Identity
                                 : EncompassingImplicitConversion(
-                                      null,
-                                      convertsTo,
-                                      target,
-                                      ref useSiteInfo
-                                  );
+                                    null,
+                                    convertsTo,
+                                    target,
+                                    ref useSiteInfo
+                                );
                         }
 
                         u.Add(
@@ -427,8 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // and see if the resulting operator is applicable.
                         TypeSymbol nullableFrom = MakeNullableType(convertsFrom);
                         TypeSymbol nullableTo = convertsTo.IsNonNullableValueType()
-                          ? MakeNullableType(convertsTo)
-                          : convertsTo;
+                            ? MakeNullableType(convertsTo)
+                            : convertsTo;
                         Conversion liftedFromConversion = EncompassingImplicitConversion(
                             sourceExpression,
                             source,
@@ -437,11 +437,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                         Conversion liftedToConversion = !allowAnyTarget
                             ? EncompassingImplicitConversion(
-                                  null,
-                                  nullableTo,
-                                  target,
-                                  ref useSiteInfo
-                              )
+                                null,
+                                nullableTo,
+                                target,
+                                ref useSiteInfo
+                            )
                             : Conversion.Identity;
                         if (liftedFromConversion.Exists && liftedToConversion.Exists)
                         {
@@ -751,8 +751,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var result = ClassifyStandardImplicitConversion(aExpr, a, b, ref useSiteInfo);
             return IsEncompassingImplicitConversionKind(result.Kind)
-              ? result
-              : Conversion.NoConversion;
+                ? result
+                : Conversion.NoConversion;
         }
 
         private static bool IsEncompassingImplicitConversionKind(ConversionKind kind)

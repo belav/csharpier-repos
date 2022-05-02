@@ -221,8 +221,8 @@ namespace System.Net
                     if (_boundaryType != BoundaryType.ContentLength && closing)
                     {
                         _contentLength = CanSendResponseBody(_httpContext!.Response.StatusCode)
-                          ? -1
-                          : 0;
+                            ? -1
+                            : 0;
                     }
 
                     if (_boundaryType == BoundaryType.ContentLength)

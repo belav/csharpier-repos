@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     internal sealed class NavigationBarProjectItem
         : NavigationBarItem,
-          IEquatable<NavigationBarProjectItem>
+            IEquatable<NavigationBarProjectItem>
     {
         public Workspace Workspace { get; }
         public DocumentId DocumentId { get; }

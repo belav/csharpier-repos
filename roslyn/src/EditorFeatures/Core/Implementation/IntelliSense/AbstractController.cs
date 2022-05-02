@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
     internal abstract class AbstractController<TSession, TModel, TPresenterSession, TEditorSession>
         : ForegroundThreadAffinitizedObject,
-          IController<TModel>
+            IController<TModel>
         where TSession : class, ISession<TModel>
         where TPresenterSession : IIntelliSensePresenterSession
     {

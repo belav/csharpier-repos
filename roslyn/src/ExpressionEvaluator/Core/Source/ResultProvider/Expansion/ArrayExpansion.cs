@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 count *= size;
             }
             return (count > 0)
-              ? new ArrayExpansion(elementTypeAndInfo, sizes, lowerBounds, count)
-              : null;
+                ? new ArrayExpansion(elementTypeAndInfo, sizes, lowerBounds, count)
+                : null;
         }
 
         private ArrayExpansion(

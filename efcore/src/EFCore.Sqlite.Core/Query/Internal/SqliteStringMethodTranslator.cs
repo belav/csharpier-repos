@@ -403,16 +403,16 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                 }
 
                 return constantString.Any(c => IsLikeWildChar(c))
-                  ? _sqlExpressionFactory.Like(
+                    ? _sqlExpressionFactory.Like(
                         instance,
                         _sqlExpressionFactory.Constant(
                             startsWith
-                              ? EscapeLikePattern(constantString) + '%'
-                              : '%' + EscapeLikePattern(constantString)
+                                ? EscapeLikePattern(constantString) + '%'
+                                : '%' + EscapeLikePattern(constantString)
                         ),
                         _sqlExpressionFactory.Constant(LikeEscapeChar.ToString())
                     ) // SQL Server has no char mapping, avoid value conversion warning)
-                  : _sqlExpressionFactory.Like(
+                    : _sqlExpressionFactory.Like(
                         instance,
                         _sqlExpressionFactory.Constant(
                             startsWith ? constantString + '%' : '%' + constantString

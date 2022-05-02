@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     {
         private abstract partial class SuggestedActionsSource
             : ForegroundThreadAffinitizedObject,
-              ISuggestedActionsSource3
+                ISuggestedActionsSource3
         {
             private readonly ISuggestedActionCategoryRegistryService _suggestedActionCategoryRegistry;
 
@@ -308,53 +308,57 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     unifiedSuggestedAction switch
                     {
                         UnifiedCodeFixSuggestedAction codeFixAction
-                          => new CodeFixSuggestedAction(
-                              ThreadingContext,
-                              owner,
-                              codeFixAction.Workspace,
-                              subjectBuffer,
-                              codeFixAction.CodeFix,
-                              codeFixAction.Provider,
-                              codeFixAction.OriginalCodeAction,
-                              ConvertToSuggestedActionSet(
-                                  codeFixAction.FixAllFlavors,
-                                  owner,
-                                  subjectBuffer
-                              )
-                          ),
+                            => new CodeFixSuggestedAction(
+                                ThreadingContext,
+                                owner,
+                                codeFixAction.Workspace,
+                                subjectBuffer,
+                                codeFixAction.CodeFix,
+                                codeFixAction.Provider,
+                                codeFixAction.OriginalCodeAction,
+                                ConvertToSuggestedActionSet(
+                                    codeFixAction.FixAllFlavors,
+                                    owner,
+                                    subjectBuffer
+                                )
+                            ),
                         UnifiedCodeRefactoringSuggestedAction codeRefactoringAction
-                          => new CodeRefactoringSuggestedAction(
-                              ThreadingContext,
-                              owner,
-                              codeRefactoringAction.Workspace,
-                              subjectBuffer,
-                              codeRefactoringAction.CodeRefactoringProvider,
-                              codeRefactoringAction.OriginalCodeAction
-                          ),
+                            => new CodeRefactoringSuggestedAction(
+                                ThreadingContext,
+                                owner,
+                                codeRefactoringAction.Workspace,
+                                subjectBuffer,
+                                codeRefactoringAction.CodeRefactoringProvider,
+                                codeRefactoringAction.OriginalCodeAction
+                            ),
                         UnifiedFixAllSuggestedAction fixAllAction
-                          => new FixAllSuggestedAction(
-                              ThreadingContext,
-                              owner,
-                              fixAllAction.Workspace,
-                              subjectBuffer,
-                              fixAllAction.FixAllState,
-                              fixAllAction.Diagnostic,
-                              fixAllAction.OriginalCodeAction
-                          ),
+                            => new FixAllSuggestedAction(
+                                ThreadingContext,
+                                owner,
+                                fixAllAction.Workspace,
+                                subjectBuffer,
+                                fixAllAction.FixAllState,
+                                fixAllAction.Diagnostic,
+                                fixAllAction.OriginalCodeAction
+                            ),
                         UnifiedSuggestedActionWithNestedActions nestedAction
-                          => new SuggestedActionWithNestedActions(
-                              ThreadingContext,
-                              owner,
-                              nestedAction.Workspace,
-                              subjectBuffer,
-                              nestedAction.Provider ?? this,
-                              nestedAction.OriginalCodeAction,
-                              nestedAction.NestedActionSets.SelectAsArray(
-                                  (s, arg) =>
-                                      ConvertToSuggestedActionSet(s, arg.owner, arg.subjectBuffer),
-                                  (owner, subjectBuffer)
-                              )
-                          ),
+                            => new SuggestedActionWithNestedActions(
+                                ThreadingContext,
+                                owner,
+                                nestedAction.Workspace,
+                                subjectBuffer,
+                                nestedAction.Provider ?? this,
+                                nestedAction.OriginalCodeAction,
+                                nestedAction.NestedActionSets.SelectAsArray(
+                                    (s, arg) =>
+                                        ConvertToSuggestedActionSet(
+                                            s,
+                                            arg.owner,
+                                            arg.subjectBuffer
+                                        ),
+                                    (owner, subjectBuffer)
+                                )
+                            ),
                         _ => throw ExceptionUtilities.Unreachable
                     };
 
@@ -366,7 +370,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         UnifiedSuggestedActionSetPriority.Lowest => SuggestedActionSetPriority.None,
                         UnifiedSuggestedActionSetPriority.Low => SuggestedActionSetPriority.Low,
                         UnifiedSuggestedActionSetPriority.Medium
-                          => SuggestedActionSetPriority.Medium,
+                            => SuggestedActionSetPriority.Medium,
                         UnifiedSuggestedActionSetPriority.High => SuggestedActionSetPriority.High,
                         _ => throw ExceptionUtilities.Unreachable,
                     };
@@ -860,8 +864,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 linkedTokenSource.Cancel();
 
                 return result == null
-                  ? null
-                  : _suggestedActionCategoryRegistry.CreateSuggestedActionCategorySet(result);
+                    ? null
+                    : _suggestedActionCategoryRegistry.CreateSuggestedActionCategorySet(result);
             }
         }
     }

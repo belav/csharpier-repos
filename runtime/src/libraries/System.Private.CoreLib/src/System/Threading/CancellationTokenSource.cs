@@ -834,9 +834,9 @@ namespace System.Threading
             return tokens.Length switch
             {
                 0
-                  => throw new ArgumentException(
-                      SR.CancellationToken_CreateLinkedToken_TokensIsEmpty
-                  ),
+                    => throw new ArgumentException(
+                        SR.CancellationToken_CreateLinkedToken_TokensIsEmpty
+                    ),
                 1 => CreateLinkedTokenSource(tokens[0]),
                 2 => CreateLinkedTokenSource(tokens[0], tokens[1]),
 

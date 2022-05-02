@@ -158,19 +158,19 @@ namespace Castle.Core.Internal.Tests
 
         public interface ISymmetricSingletonInherited
             : IOverrideSingletonInherited1,
-              IOverrideSingletonInherited2 { }
+                IOverrideSingletonInherited2 { }
 
         public interface ISymmetricAdditiveInherited
             : IOverrideAdditiveInherited1,
-              IOverrideAdditiveInherited2 { }
+                IOverrideAdditiveInherited2 { }
 
         public interface IAsymmetricSingletonInherited
             : IDeclareSingletonInherited,
-              IOverrideSingletonInherited1 { }
+                IOverrideSingletonInherited1 { }
 
         public interface IAsymmetricAdditiveInherited
             : IDeclareAdditiveInherited,
-              IOverrideAdditiveInherited1 { }
+                IOverrideAdditiveInherited1 { }
 
         [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false, Inherited = false)]
         public sealed class SingletonPrivateAttribute : MockAttribute { }

@@ -282,9 +282,9 @@ namespace XLinqTests
                     yield return isCopy
                         ? new ExpectedValue(true, node)
                         : new ExpectedValue(
-                              false,
-                              new XElement(newName, (node as XElement).Attributes(), newValue)
-                          );
+                            false,
+                            new XElement(newName, (node as XElement).Attributes(), newValue)
+                        );
                     wasReplace = true;
                 }
                 else

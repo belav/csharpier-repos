@@ -79,9 +79,9 @@ namespace System.Net.Sockets.Tests
 
                             int sent = useMemoryOverload
                                 ? await right.SendAsync(
-                                      new ReadOnlyMemory<byte>(sendBuffer),
-                                      leftEndpoint
-                                  )
+                                    new ReadOnlyMemory<byte>(sendBuffer),
+                                    leftEndpoint
+                                )
                                 : await right.SendAsync(sendBuffer, DatagramSize, leftEndpoint);
 
                             Assert.True(receiverAck.Wait(AckTimeout));

@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class InternalSequenceBuilder
         : AnnotatableBuilder<Sequence, IConventionModelBuilder>,
-          IConventionSequenceBuilder
+            IConventionSequenceBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -236,8 +236,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasType(
                 type,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -246,8 +246,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetType(
                 type,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -259,8 +259,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IncrementsBy(
                 increment,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -272,8 +272,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIncrementsBy(
                 increment,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -285,8 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             StartsAt(
                 startValue,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -295,8 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetStartsAt(
                 startValue,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -308,8 +308,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasMax(
                 maximum,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -318,8 +318,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetMax(
                 maximum,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -331,8 +331,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasMin(
                 minimum,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -341,8 +341,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetMin(
                 minimum,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -354,8 +354,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsCyclic(
                 cyclic,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -364,8 +364,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsCyclic(
                 cyclic,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

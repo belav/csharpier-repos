@@ -62,8 +62,8 @@ namespace System.Text.RegularExpressions
                 description = string.Concat(
                     "_",
                     pattern.Length > DescriptionLimit
-                      ? pattern.AsSpan(0, DescriptionLimit)
-                      : pattern
+                        ? pattern.AsSpan(0, DescriptionLimit)
+                        : pattern
                 );
             }
 

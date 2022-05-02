@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class PropertyWellKnownAttributeData
         : CommonPropertyWellKnownAttributeData,
-          ISkipLocalsInitAttributeTarget,
-          IMemberNotNullAttributeTarget
+            ISkipLocalsInitAttributeTarget,
+            IMemberNotNullAttributeTarget
     {
         private bool _hasDisallowNullAttribute;
         public bool HasDisallowNullAttribute

@@ -190,11 +190,11 @@ namespace AutoMapper
         public Type MakeGenericType(Type type) =>
             type.IsGenericTypeDefinition
                 ? type.MakeGenericType(
-                      SourceType.GenericTypeArguments
-                          .Concat(DestinationType.GenericTypeArguments)
-                          .Take(type.GenericParametersCount())
-                          .ToArray()
-                  )
+                    SourceType.GenericTypeArguments
+                        .Concat(DestinationType.GenericTypeArguments)
+                        .Take(type.GenericParametersCount())
+                        .ToArray()
+                )
                 : type;
 
         public bool HasIncludedMembers =>
@@ -207,8 +207,8 @@ namespace AutoMapper
             SourceType.IsGenericTypeDefinition
                 ? Array.Empty<LambdaExpression>()
                 : IncludedMembersNames.Select(
-                      name => ExpressionBuilder.MemberAccessLambda(SourceType, name)
-                  );
+                    name => ExpressionBuilder.MemberAccessLambda(SourceType, name)
+                );
 
         public bool ConstructorParameterMatches(string destinationPropertyName) =>
             ConstructorMap.CtorParams.Any(
@@ -436,8 +436,8 @@ namespace AutoMapper
             Types.IsGenericTypeDefinition
                 ? null
                 : new TypeMapPlanBuilder(configurationProvider, this).CreateMapperLambda(
-                      typeMapsPath
-                  );
+                    typeMapsPath
+                );
 
         private PropertyMap GetPropertyMap(string name) => _propertyMaps?.GetOrDefault(name);
 

@@ -24,8 +24,8 @@ public class DefaultClientRequestParametersProviderTests
             .Returns<HttpContext, string>(
                 (_, s) =>
                     Uri.IsWellFormedUriString(s, UriKind.Absolute)
-                      ? s
-                      : new Uri(new Uri("http://localhost/"), s).ToString()
+                        ? s
+                        : new Uri(new Uri("http://localhost/"), s).ToString()
             );
 
         var options = Options.Create(new ApiAuthorizationOptions());

@@ -26,11 +26,11 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImports
     [ExportLanguageService(typeof(IAddImportsService), LanguageNames.CSharp), Shared]
     internal class CSharpAddImportsService
         : AbstractAddImportsService<
-              CompilationUnitSyntax,
-              BaseNamespaceDeclarationSyntax,
-              UsingDirectiveSyntax,
-              ExternAliasDirectiveSyntax
-          >
+            CompilationUnitSyntax,
+            BaseNamespaceDeclarationSyntax,
+            UsingDirectiveSyntax,
+            ExternAliasDirectiveSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

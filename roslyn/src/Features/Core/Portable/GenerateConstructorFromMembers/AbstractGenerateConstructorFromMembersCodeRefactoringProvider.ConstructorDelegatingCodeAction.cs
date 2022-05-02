@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
                         CodeGenerationSymbolFactory.CreateConstructorSymbol(
                             attributes: default,
                             accessibility: _state.ContainingType.IsAbstractClass()
-                              ? Accessibility.Protected
-                              : Accessibility.Public,
+                                ? Accessibility.Protected
+                                : Accessibility.Public,
                             modifiers: new DeclarationModifiers(),
                             typeName: _state.ContainingType.Name,
                             parameters: _state.Parameters,

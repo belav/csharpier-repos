@@ -76,10 +76,10 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                     var updatedInExpression =
                         inValues.Count > 0
                             ? _sqlExpressionFactory.In(
-                                  (SqlExpression)Visit(inExpression.Item),
-                                  _sqlExpressionFactory.Constant(inValues, typeMapping),
-                                  inExpression.IsNegated
-                              )
+                                (SqlExpression)Visit(inExpression.Item),
+                                _sqlExpressionFactory.Constant(inValues, typeMapping),
+                                inExpression.IsNegated
+                            )
                             : null;
 
                     var nullCheckExpression = hasNullValue

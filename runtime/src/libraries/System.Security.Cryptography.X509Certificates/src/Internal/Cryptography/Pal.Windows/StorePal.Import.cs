@@ -65,8 +65,8 @@ namespace Internal.Cryptography.Pal
                         if (
                             !Interop.Crypt32.CryptQueryObject(
                                 fromFile
-                                  ? Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE
-                                  : Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
+                                    ? Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_FILE
+                                    : Interop.Crypt32.CertQueryObjectType.CERT_QUERY_OBJECT_BLOB,
                                 pvObject,
                                 StoreExpectedContentFlags,
                                 Interop.Crypt32.ExpectedFormatTypeFlags.CERT_QUERY_FORMAT_FLAG_ALL,

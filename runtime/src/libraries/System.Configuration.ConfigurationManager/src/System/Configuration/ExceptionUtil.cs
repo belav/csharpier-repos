@@ -42,8 +42,8 @@ namespace System.Configuration
         )
         {
             return errorInfo != null
-              ? WrapAsConfigException(outerMessage, e, errorInfo.Filename, errorInfo.LineNumber)
-              : WrapAsConfigException(outerMessage, e, null, 0);
+                ? WrapAsConfigException(outerMessage, e, errorInfo.Filename, errorInfo.LineNumber)
+                : WrapAsConfigException(outerMessage, e, null, 0);
         }
 
         internal static ConfigurationErrorsException WrapAsConfigException(

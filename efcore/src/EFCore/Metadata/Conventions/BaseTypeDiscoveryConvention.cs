@@ -21,10 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     public class BaseTypeDiscoveryConvention
         :
 #pragma warning disable CS0612 // Type or member is obsolete
-          InheritanceDiscoveryConventionBase,
+        InheritanceDiscoveryConventionBase,
 #pragma warning restore CS0612 // Type or member is obsolete
-          IEntityTypeAddedConvention,
-          IForeignKeyRemovedConvention
+            IEntityTypeAddedConvention,
+            IForeignKeyRemovedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="BaseTypeDiscoveryConvention" />.

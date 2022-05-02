@@ -2042,7 +2042,7 @@ class Program
             {
                 0 => code,
                 _
-                  => @"class Program
+                    => @"class Program
 {
     static void Main(string[] args)
     {

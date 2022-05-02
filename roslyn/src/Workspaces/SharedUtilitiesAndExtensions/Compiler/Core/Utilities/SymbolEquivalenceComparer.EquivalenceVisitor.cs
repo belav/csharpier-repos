@@ -148,98 +148,98 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return k switch
                 {
                     SymbolKind.ArrayType
-                      => ArrayTypesAreEquivalent(
-                          (IArrayTypeSymbol)x,
-                          (IArrayTypeSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => ArrayTypesAreEquivalent(
+                            (IArrayTypeSymbol)x,
+                            (IArrayTypeSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.Assembly
-                      => AssembliesAreEquivalent((IAssemblySymbol)x, (IAssemblySymbol)y),
+                        => AssembliesAreEquivalent((IAssemblySymbol)x, (IAssemblySymbol)y),
                     SymbolKind.DynamicType
-                      => NullableAnnotationsEquivalent(
-                          (IDynamicTypeSymbol)x,
-                          (IDynamicTypeSymbol)y
-                      ),
+                        => NullableAnnotationsEquivalent(
+                            (IDynamicTypeSymbol)x,
+                            (IDynamicTypeSymbol)y
+                        ),
                     SymbolKind.Event
-                      => EventsAreEquivalent(
-                          (IEventSymbol)x,
-                          (IEventSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => EventsAreEquivalent(
+                            (IEventSymbol)x,
+                            (IEventSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.Field
-                      => FieldsAreEquivalent(
-                          (IFieldSymbol)x,
-                          (IFieldSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => FieldsAreEquivalent(
+                            (IFieldSymbol)x,
+                            (IFieldSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.Label => LabelsAreEquivalent((ILabelSymbol)x, (ILabelSymbol)y),
                     SymbolKind.Local => LocalsAreEquivalent((ILocalSymbol)x, (ILocalSymbol)y),
                     SymbolKind.Method
-                      => MethodsAreEquivalent(
-                          (IMethodSymbol)x,
-                          (IMethodSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => MethodsAreEquivalent(
+                            (IMethodSymbol)x,
+                            (IMethodSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.NetModule
-                      => ModulesAreEquivalent((IModuleSymbol)x, (IModuleSymbol)y),
+                        => ModulesAreEquivalent((IModuleSymbol)x, (IModuleSymbol)y),
                     SymbolKind.NamedType
-                      => NamedTypesAreEquivalent(
-                          (INamedTypeSymbol)x,
-                          (INamedTypeSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => NamedTypesAreEquivalent(
+                            (INamedTypeSymbol)x,
+                            (INamedTypeSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.ErrorType
-                      => NamedTypesAreEquivalent(
-                          (INamedTypeSymbol)x,
-                          (INamedTypeSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => NamedTypesAreEquivalent(
+                            (INamedTypeSymbol)x,
+                            (INamedTypeSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.Namespace
-                      => NamespacesAreEquivalent(
-                          (INamespaceSymbol)x,
-                          (INamespaceSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => NamespacesAreEquivalent(
+                            (INamespaceSymbol)x,
+                            (INamespaceSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.Parameter
-                      => ParametersAreEquivalent(
-                          (IParameterSymbol)x,
-                          (IParameterSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => ParametersAreEquivalent(
+                            (IParameterSymbol)x,
+                            (IParameterSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.PointerType
-                      => PointerTypesAreEquivalent(
-                          (IPointerTypeSymbol)x,
-                          (IPointerTypeSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => PointerTypesAreEquivalent(
+                            (IPointerTypeSymbol)x,
+                            (IPointerTypeSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.Property
-                      => PropertiesAreEquivalent(
-                          (IPropertySymbol)x,
-                          (IPropertySymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => PropertiesAreEquivalent(
+                            (IPropertySymbol)x,
+                            (IPropertySymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.RangeVariable
-                      => RangeVariablesAreEquivalent(
-                          (IRangeVariableSymbol)x,
-                          (IRangeVariableSymbol)y
-                      ),
+                        => RangeVariablesAreEquivalent(
+                            (IRangeVariableSymbol)x,
+                            (IRangeVariableSymbol)y
+                        ),
                     SymbolKind.TypeParameter
-                      => TypeParametersAreEquivalent(
-                          (ITypeParameterSymbol)x,
-                          (ITypeParameterSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => TypeParametersAreEquivalent(
+                            (ITypeParameterSymbol)x,
+                            (ITypeParameterSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     SymbolKind.Preprocessing
-                      => PreprocessingSymbolsAreEquivalent(
-                          (IPreprocessingSymbol)x,
-                          (IPreprocessingSymbol)y
-                      ),
+                        => PreprocessingSymbolsAreEquivalent(
+                            (IPreprocessingSymbol)x,
+                            (IPreprocessingSymbol)y
+                        ),
                     SymbolKind.FunctionPointerType
-                      => FunctionPointerTypesAreEquivalent(
-                          (IFunctionPointerTypeSymbol)x,
-                          (IFunctionPointerTypeSymbol)y,
-                          equivalentTypesWithDifferingAssemblies
-                      ),
+                        => FunctionPointerTypesAreEquivalent(
+                            (IFunctionPointerTypeSymbol)x,
+                            (IFunctionPointerTypeSymbol)y,
+                            equivalentTypesWithDifferingAssemblies
+                        ),
                     _ => false,
                 };
             }

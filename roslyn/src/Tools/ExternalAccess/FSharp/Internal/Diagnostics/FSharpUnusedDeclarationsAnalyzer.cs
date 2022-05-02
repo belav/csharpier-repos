@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
     [DiagnosticAnalyzer(LanguageNames.FSharp)]
     internal class FSharpUnusedDeclarationsDiagnosticAnalyzer
         : DocumentDiagnosticAnalyzer,
-          IBuiltInAnalyzer
+            IBuiltInAnalyzer
     {
         private const string DescriptorId = "FS1182";
 

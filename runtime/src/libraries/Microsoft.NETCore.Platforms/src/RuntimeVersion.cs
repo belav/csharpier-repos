@@ -10,8 +10,8 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
     /// </summary>
     public sealed class RuntimeVersion
         : IComparable,
-          IComparable<RuntimeVersion>,
-          IEquatable<RuntimeVersion>
+            IComparable<RuntimeVersion>,
+            IEquatable<RuntimeVersion>
     {
         private string versionString;
         private Version version;

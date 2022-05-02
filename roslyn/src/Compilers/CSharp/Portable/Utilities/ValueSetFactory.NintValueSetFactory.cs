@@ -55,8 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             IValueSet IValueSetFactory.Related(BinaryOperatorKind relation, ConstantValue value)
             {
                 return value.IsBad
-                  ? NintValueSet.AllValues
-                  : Related(relation, default(IntTC).FromConstantValue(value));
+                    ? NintValueSet.AllValues
+                    : Related(relation, default(IntTC).FromConstantValue(value));
             }
 
             bool IValueSetFactory.Related(

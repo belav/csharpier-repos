@@ -1178,23 +1178,17 @@ namespace DebuggerTests
         {
             var bp1_req = !use_regex
                 ? JObject.FromObject(
-                      new
-                      {
-                          lineNumber = line,
-                          columnNumber = column,
-                          url = dicFileToUrl[url_key],
-                          condition
-                      }
-                  )
+                    new
+                    {
+                        lineNumber = line,
+                        columnNumber = column,
+                        url = dicFileToUrl[url_key],
+                        condition
+                    }
+                )
                 : JObject.FromObject(
-                      new
-                      {
-                          lineNumber = line,
-                          columnNumber = column,
-                          urlRegex = url_key,
-                          condition
-                      }
-                  );
+                    new { lineNumber = line, columnNumber = column, urlRegex = url_key, condition }
+                );
 
             var bp1_res = await cli.SendCommand("Debugger.setBreakpointByUrl", bp1_req, token);
             Assert.True(expect_ok ? bp1_res.IsOk : bp1_res.IsErr);
@@ -1307,8 +1301,8 @@ namespace DebuggerTests
         internal static JObject TString(string value) =>
             value == null
                 ? JObject.FromObject(
-                      new { type = "object", className = "string", subtype = "null" }
-                  )
+                    new { type = "object", className = "string", subtype = "null" }
+                )
                 : JObject.FromObject(new { type = "string", value = @value });
 
         internal static JObject TNumber(int value) =>
@@ -1353,22 +1347,22 @@ namespace DebuggerTests
         ) =>
             is_null
                 ? JObject.FromObject(
-                      new
-                      {
-                          type = "object",
-                          className = className,
-                          description = description ?? className,
-                          subtype = is_null ? "null" : null
-                      }
-                  )
+                    new
+                    {
+                        type = "object",
+                        className = className,
+                        description = description ?? className,
+                        subtype = is_null ? "null" : null
+                    }
+                )
                 : JObject.FromObject(
-                      new
-                      {
-                          type = "object",
-                          className = className,
-                          description = description ?? className
-                      }
-                  );
+                    new
+                    {
+                        type = "object",
+                        className = className,
+                        description = description ?? className
+                    }
+                );
 
         internal static JObject TArray(string className, int length = 0) =>
             JObject.FromObject(

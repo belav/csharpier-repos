@@ -83,8 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 ilStub,
                 parseOptions: TestOptions.Regular9,
                 options: expectedOutput is null
-                  ? TestOptions.UnsafeReleaseDll
-                  : TestOptions.UnsafeReleaseExe
+                    ? TestOptions.UnsafeReleaseDll
+                    : TestOptions.UnsafeReleaseExe
             );
             return CompileAndVerify(
                 comp,

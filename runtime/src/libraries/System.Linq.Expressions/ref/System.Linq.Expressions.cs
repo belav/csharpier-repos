@@ -565,17 +565,17 @@ namespace System.Dynamic
 
     public sealed partial class ExpandoObject
         : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<
-                  string,
-                  object?
-              >>,
-          System.Collections.Generic.IDictionary<string, object?>,
-          System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
-                  string,
-                  object?
-              >>,
-          System.Collections.IEnumerable,
-          System.ComponentModel.INotifyPropertyChanged,
-          System.Dynamic.IDynamicMetaObjectProvider
+                string,
+                object?
+            >>,
+            System.Collections.Generic.IDictionary<string, object?>,
+            System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<
+                    string,
+                    object?
+                >>,
+            System.Collections.IEnumerable,
+            System.ComponentModel.INotifyPropertyChanged,
+            System.Dynamic.IDynamicMetaObjectProvider
     {
         public ExpandoObject() { }
 
@@ -989,14 +989,14 @@ namespace System.Linq
 {
     public partial interface IOrderedQueryable
         : System.Collections.IEnumerable,
-          System.Linq.IQueryable { }
+            System.Linq.IQueryable { }
 
     public partial interface IOrderedQueryable<out T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable,
-          System.Linq.IOrderedQueryable,
-          System.Linq.IQueryable,
-          System.Linq.IQueryable<T> { }
+            System.Collections.IEnumerable,
+            System.Linq.IOrderedQueryable,
+            System.Linq.IQueryable,
+            System.Linq.IQueryable<T> { }
 
     public partial interface IQueryable : System.Collections.IEnumerable
     {
@@ -1007,8 +1007,8 @@ namespace System.Linq
 
     public partial interface IQueryable<out T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable,
-          System.Linq.IQueryable { }
+            System.Collections.IEnumerable,
+            System.Linq.IQueryable { }
 
     public partial interface IQueryProvider
     {
@@ -1290,8 +1290,8 @@ namespace System.Linq.Expressions
 
     public partial class DynamicExpression
         : System.Linq.Expressions.Expression,
-          System.Linq.Expressions.IArgumentProvider,
-          System.Linq.Expressions.IDynamicExpression
+            System.Linq.Expressions.IArgumentProvider,
+            System.Linq.Expressions.IDynamicExpression
     {
         internal DynamicExpression() { }
 
@@ -4732,7 +4732,7 @@ namespace System.Linq.Expressions
 
     public sealed partial class IndexExpression
         : System.Linq.Expressions.Expression,
-          System.Linq.Expressions.IArgumentProvider
+            System.Linq.Expressions.IArgumentProvider
     {
         internal IndexExpression() { }
 
@@ -4786,7 +4786,7 @@ namespace System.Linq.Expressions
 
     public sealed partial class InvocationExpression
         : System.Linq.Expressions.Expression,
-          System.Linq.Expressions.IArgumentProvider
+            System.Linq.Expressions.IArgumentProvider
     {
         internal InvocationExpression() { }
 
@@ -5202,7 +5202,7 @@ namespace System.Linq.Expressions
 
     public partial class MethodCallExpression
         : System.Linq.Expressions.Expression,
-          System.Linq.Expressions.IArgumentProvider
+            System.Linq.Expressions.IArgumentProvider
     {
         internal MethodCallExpression() { }
 
@@ -5284,7 +5284,7 @@ namespace System.Linq.Expressions
 
     public partial class NewExpression
         : System.Linq.Expressions.Expression,
-          System.Linq.Expressions.IArgumentProvider
+            System.Linq.Expressions.IArgumentProvider
     {
         internal NewExpression() { }
 
@@ -5748,11 +5748,11 @@ namespace System.Runtime.CompilerServices
 
     public sealed partial class ReadOnlyCollectionBuilder<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         public ReadOnlyCollectionBuilder() { }
 

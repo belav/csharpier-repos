@@ -1502,8 +1502,8 @@ namespace System.Xml.Serialization
                 arrayElementType = GetCollectionElementType(
                     type,
                     memberInfo == null
-                      ? null
-                      : $"{memberInfo.DeclaringType!.FullName}.{memberInfo.Name}"
+                        ? null
+                        : $"{memberInfo.DeclaringType!.FullName}.{memberInfo.Name}"
                 );
                 flags |= GetConstructorFlags(type, ref exception);
             }

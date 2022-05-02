@@ -30,8 +30,8 @@ namespace System.Collections.Immutable
         [DebuggerTypeProxy(typeof(ImmutableDictionaryBuilderDebuggerProxy<,>))]
         public sealed class Builder
             : IDictionary<TKey, TValue>,
-              IReadOnlyDictionary<TKey, TValue>,
-              IDictionary
+                IReadOnlyDictionary<TKey, TValue>,
+                IDictionary
         {
             /// <summary>
             /// The root of the binary tree that stores the collection.  Contents are typically not entirely frozen.

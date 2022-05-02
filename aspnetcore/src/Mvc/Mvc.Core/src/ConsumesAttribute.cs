@@ -26,10 +26,10 @@ namespace Microsoft.AspNetCore.Mvc;
 )]
 public class ConsumesAttribute
     : Attribute,
-      IResourceFilter,
-      IConsumesActionConstraint,
-      IApiRequestMetadataProvider,
-      IAcceptsMetadata
+        IResourceFilter,
+        IConsumesActionConstraint,
+        IApiRequestMetadataProvider,
+        IAcceptsMetadata
 {
     /// <summary>
     /// The order for consumes attribute.

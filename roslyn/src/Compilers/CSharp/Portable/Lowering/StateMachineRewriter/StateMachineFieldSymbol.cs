@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class StateMachineFieldSymbol
         : SynthesizedFieldSymbolBase,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly TypeWithAnnotations _type;
         private readonly bool _isThis;

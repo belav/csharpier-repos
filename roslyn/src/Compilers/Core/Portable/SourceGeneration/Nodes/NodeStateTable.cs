@@ -202,8 +202,8 @@ namespace Microsoft.CodeAnalysis
                     new TableEntry(
                         value,
                         comparer.Equals(_previous._states[_states.Count].GetItem(0), value)
-                          ? EntryState.Cached
-                          : EntryState.Modified
+                            ? EntryState.Cached
+                            : EntryState.Modified
                     )
                 );
                 return true;
@@ -242,8 +242,8 @@ namespace Microsoft.CodeAnalysis
                     var replacement = outputs[i];
 
                     var entryState = comparer.Equals(previous, replacement)
-                      ? EntryState.Cached
-                      : EntryState.Modified;
+                        ? EntryState.Cached
+                        : EntryState.Modified;
                     modified.Add(replacement, entryState);
                 }
 

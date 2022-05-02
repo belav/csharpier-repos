@@ -102,8 +102,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             // it's possible for the editor text to contain a trailing newline, remove it
             return replText.EndsWith(Environment.NewLine)
-              ? replText.Substring(0, replText.Length - Environment.NewLine.Length)
-              : replText;
+                ? replText.Substring(0, replText.Length - Environment.NewLine.Length)
+                : replText;
         }
 
         /// <summary>

@@ -173,9 +173,9 @@ public abstract class BatchingLoggerProvider : ILoggerProvider, ISupportExternal
             _queueSize == null
                 ? new BlockingCollection<LogMessage>(new ConcurrentQueue<LogMessage>())
                 : new BlockingCollection<LogMessage>(
-                      new ConcurrentQueue<LogMessage>(),
-                      _queueSize.Value
-                  );
+                    new ConcurrentQueue<LogMessage>(),
+                    _queueSize.Value
+                );
 
         _cancellationTokenSource = new CancellationTokenSource();
         _outputTask = Task.Run(ProcessLogQueue);

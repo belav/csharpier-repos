@@ -81,8 +81,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         public override QueryRootExpression UpdateEntityType(IEntityType entityType) =>
             entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
                 ? throw new InvalidOperationException(
-                      CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
-                  )
+                    CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+                )
                 : new FromSqlQueryRootExpression(entityType, Sql, Argument);
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             var argument = visitor.Visit(Argument);
 
             return argument != Argument
-              ? new FromSqlQueryRootExpression(EntityType, Sql, argument)
-              : this;
+                ? new FromSqlQueryRootExpression(EntityType, Sql, argument)
+                : this;
         }
 
         /// <summary>

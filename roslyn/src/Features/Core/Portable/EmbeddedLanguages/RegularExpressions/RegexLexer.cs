@@ -372,8 +372,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             }
 
             return start == Position
-              ? null
-              : CreateToken(
+                ? null
+                : CreateToken(
                     RegexKind.OptionsToken,
                     ImmutableArray<RegexTrivia>.Empty,
                     GetSubPatternToCurrentPos(start)

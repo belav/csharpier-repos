@@ -30,12 +30,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     .WhereNotNull()
                     .ToList();
                 return attributeNodes.Count == 0
-                  ? default
-                  : SyntaxFactory.SingletonList(
+                    ? default
+                    : SyntaxFactory.SingletonList(
                         SyntaxFactory.AttributeList(
                             target.HasValue
-                              ? SyntaxFactory.AttributeTargetSpecifier(target.Value)
-                              : null,
+                                ? SyntaxFactory.AttributeTargetSpecifier(target.Value)
+                                : null,
                             SyntaxFactory.SeparatedList(attributeNodes)
                         )
                     );
@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     .WhereNotNull()
                     .ToList();
                 return attributeDeclarations.Count == 0
-                  ? default
-                  : SyntaxFactory.List<AttributeListSyntax>(attributeDeclarations);
+                    ? default
+                    : SyntaxFactory.List<AttributeListSyntax>(attributeDeclarations);
             }
         }
 
@@ -61,8 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             var attributeSyntax = TryGenerateAttribute(attribute, options);
             return attributeSyntax == null
-              ? null
-              : SyntaxFactory.AttributeList(
+                ? null
+                : SyntaxFactory.AttributeList(
                     target.HasValue ? SyntaxFactory.AttributeTargetSpecifier(target.Value) : null,
                     SyntaxFactory.SingletonSeparatedList(attributeSyntax)
                 );
@@ -93,8 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             var attributeArguments = GenerateAttributeArgumentList(attribute);
             return attribute.AttributeClass.GenerateTypeSyntax() is NameSyntax nameSyntax
-              ? SyntaxFactory.Attribute(nameSyntax, attributeArguments)
-              : null;
+                ? SyntaxFactory.Attribute(nameSyntax, attributeArguments)
+                : null;
         }
 
         private static bool IsCompilerInternalAttribute(AttributeData attribute)

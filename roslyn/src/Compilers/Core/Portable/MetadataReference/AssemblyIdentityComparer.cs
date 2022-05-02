@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis
                 if (eq.HasValue)
                 {
                     return eq.GetValueOrDefault()
-                      ? ComparisonResult.Equivalent
-                      : ComparisonResult.NotEquivalent;
+                        ? ComparisonResult.Equivalent
+                        : ComparisonResult.NotEquivalent;
                 }
 
                 parts =

@@ -166,8 +166,8 @@ namespace System.ServiceModel.Syndication.Tests
             );
             Assert.Equal(
                 outerName == null
-                  ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
-                  : outerNamespace,
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
                 extension.OuterNamespace
             );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
@@ -176,8 +176,8 @@ namespace System.ServiceModel.Syndication.Tests
             extension = new SyndicationElementExtension(outerName, outerNamespace, extensionObject);
             Assert.Equal(
                 outerName == null
-                  ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
-                  : outerNamespace,
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
                 extension.OuterNamespace
             );
             Assert.Equal(
@@ -195,8 +195,8 @@ namespace System.ServiceModel.Syndication.Tests
             );
             Assert.Equal(
                 outerName == null
-                  ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
-                  : outerNamespace,
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
                 extension.OuterNamespace
             );
         }
@@ -228,8 +228,8 @@ namespace System.ServiceModel.Syndication.Tests
             );
             Assert.Equal(
                 outerName == null
-                  ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
-                  : outerNamespace,
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
                 extension.OuterNamespace
             );
             Assert.Equal(10, extension.GetObject<ExtensionObject>().Value);
@@ -243,8 +243,8 @@ namespace System.ServiceModel.Syndication.Tests
             );
             Assert.Equal(
                 outerName == null
-                  ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
-                  : outerNamespace,
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
                 extension.OuterNamespace
             );
             Assert.Equal(
@@ -267,8 +267,8 @@ namespace System.ServiceModel.Syndication.Tests
             );
             Assert.Equal(
                 outerName == null
-                  ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
-                  : outerNamespace,
+                    ? "http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"
+                    : outerNamespace,
                 extension.OuterNamespace
             );
         }

@@ -219,13 +219,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
                 var result = node switch
                 {
                     MethodDeclarationSyntax member
-                      => (member, member.ExplicitInterfaceSpecifier, member.Identifier),
+                        => (member, member.ExplicitInterfaceSpecifier, member.Identifier),
                     PropertyDeclarationSyntax member
-                      => (member, member.ExplicitInterfaceSpecifier, member.Identifier),
+                        => (member, member.ExplicitInterfaceSpecifier, member.Identifier),
                     EventDeclarationSyntax member
-                      => (member, member.ExplicitInterfaceSpecifier, member.Identifier),
+                        => (member, member.ExplicitInterfaceSpecifier, member.Identifier),
                     _
-                      => default((SyntaxNode member, ExplicitInterfaceSpecifierSyntax?, SyntaxToken)),
+                        => default((SyntaxNode member, ExplicitInterfaceSpecifierSyntax?, SyntaxToken)),
                 };
 
                 if (result.member != null)

@@ -131,8 +131,8 @@ internal class StaticContentProvider
 
     private static string GetResponseContentTypeOrDefault(string path) =>
         ContentTypeProvider.TryGetContentType(path, out var matchedContentType)
-          ? matchedContentType
-          : "application/octet-stream";
+            ? matchedContentType
+            : "application/octet-stream";
 
     private static IDictionary<string, string> GetResponseHeaders(string contentType) =>
         new Dictionary<string, string>()

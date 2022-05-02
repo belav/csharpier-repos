@@ -70,8 +70,8 @@ namespace SampleMetadata
 
     public class CInterfaceImplementerC12I2I3
         : CInterfaceImplementerI1I2,
-          Interface2,
-          Interface3 { }
+            Interface2,
+            Interface3 { }
 
     public class CInterfaceImplementerI123 : Interface123 { }
 

@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorParserOptionsFactoryProjectFeature
     : RazorProjectEngineFeatureBase,
-      IRazorParserOptionsFactoryProjectFeature
+        IRazorParserOptionsFactoryProjectFeature
 {
     private IConfigureRazorParserOptionsFeature[] _configureOptions;
 

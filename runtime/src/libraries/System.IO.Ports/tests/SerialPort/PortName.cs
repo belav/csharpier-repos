@@ -157,8 +157,8 @@ namespace System.IO.Ports.Tests
         public void PortName_LPT()
         {
             Type expectedException = _dosDevices.CommonNameExists("LPT")
-              ? typeof(ArgumentException)
-              : typeof(ArgumentException);
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=LPT");
             VerifyException(
@@ -173,8 +173,8 @@ namespace System.IO.Ports.Tests
         public void PortName_LPT1()
         {
             Type expectedException = _dosDevices.CommonNameExists("LPT1")
-              ? typeof(ArgumentException)
-              : typeof(ArgumentException);
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=LPT1");
             VerifyException(
@@ -189,8 +189,8 @@ namespace System.IO.Ports.Tests
         public void PortName_PHYSICALDRIVE0()
         {
             Type expectedException = _dosDevices.CommonNameExists("PHYSICALDRIVE0")
-              ? typeof(ArgumentException)
-              : typeof(ArgumentException);
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=PHYSICALDRIVE0");
             VerifyException(
@@ -205,8 +205,8 @@ namespace System.IO.Ports.Tests
         public void PortName_A()
         {
             Type expectedException = _dosDevices.CommonNameExists("A:")
-              ? typeof(ArgumentException)
-              : typeof(ArgumentException);
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=A:");
             VerifyException(

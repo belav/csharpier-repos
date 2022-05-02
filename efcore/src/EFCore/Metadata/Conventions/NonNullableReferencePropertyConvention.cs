@@ -16,8 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class NonNullableReferencePropertyConvention
         : NonNullableConventionBase,
-          IPropertyAddedConvention,
-          IPropertyFieldChangedConvention
+            IPropertyAddedConvention,
+            IPropertyFieldChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="NonNullableReferencePropertyConvention" />.

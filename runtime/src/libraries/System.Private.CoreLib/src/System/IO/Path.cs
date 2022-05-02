@@ -74,8 +74,8 @@ namespace System.IO
 
             ReadOnlySpan<char> subpath = path.AsSpan(0, subLength);
             return extension.StartsWith('.')
-              ? string.Concat(subpath, extension)
-              : string.Concat(subpath, ".", extension);
+                ? string.Concat(subpath, extension)
+                : string.Concat(subpath, ".", extension);
         }
 
         /// <summary>
@@ -96,8 +96,8 @@ namespace System.IO
 
             int end = GetDirectoryNameOffset(path.AsSpan());
             return end >= 0
-              ? PathInternal.NormalizeDirectorySeparators(path.Substring(0, end))
-              : null;
+                ? PathInternal.NormalizeDirectorySeparators(path.Substring(0, end))
+                : null;
         }
 
         /// <summary>
@@ -233,8 +233,8 @@ namespace System.IO
             ReadOnlySpan<char> fileName = GetFileName(path);
             int lastPeriod = fileName.LastIndexOf('.');
             return lastPeriod == -1
-              ? fileName
-              : // No extension was found
+                ? fileName
+                : // No extension was found
                 fileName.Slice(0, lastPeriod);
         }
 
@@ -324,10 +324,10 @@ namespace System.IO
             if (path1 == null || path2 == null || path3 == null)
                 throw new ArgumentNullException(
                     (path1 == null)
-                      ? nameof(path1)
-                      : (path2 == null)
-                          ? nameof(path2)
-                          : nameof(path3)
+                        ? nameof(path1)
+                        : (path2 == null)
+                            ? nameof(path2)
+                            : nameof(path3)
                 );
 
             return CombineInternal(path1, path2, path3);
@@ -338,12 +338,12 @@ namespace System.IO
             if (path1 == null || path2 == null || path3 == null || path4 == null)
                 throw new ArgumentNullException(
                     (path1 == null)
-                      ? nameof(path1)
-                      : (path2 == null)
-                          ? nameof(path2)
-                          : (path3 == null)
-                              ? nameof(path3)
-                              : nameof(path4)
+                        ? nameof(path1)
+                        : (path2 == null)
+                            ? nameof(path2)
+                            : (path3 == null)
+                                ? nameof(path3)
+                                : nameof(path4)
                 );
 
             return CombineInternal(path1, path2, path3, path4);
@@ -695,8 +695,8 @@ namespace System.IO
                 || PathInternal.IsDirectorySeparator(second[0]);
 
             return hasSeparator
-              ? string.Concat(first, second)
-              : string.Concat(first, PathInternal.DirectorySeparatorCharAsString, second);
+                ? string.Concat(first, second)
+                : string.Concat(first, PathInternal.DirectorySeparatorCharAsString, second);
         }
 
         private unsafe readonly struct Join3Payload

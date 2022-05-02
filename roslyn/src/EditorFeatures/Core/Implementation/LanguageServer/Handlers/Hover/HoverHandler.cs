@@ -137,12 +137,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     document == null
                         ? null
                         : new IntellisenseQuickInfoBuilderContext(
-                              document,
-                              threadingContext: null,
-                              operationExecutor: null,
-                              asynchronousOperationListener: null,
-                              streamingPresenter: null
-                          );
+                            document,
+                            threadingContext: null,
+                            operationExecutor: null,
+                            asynchronousOperationListener: null,
+                            streamingPresenter: null
+                        );
                 return new VSInternalHover
                 {
                     Range = ProtocolConversions.TextSpanToRange(info.Span, text),

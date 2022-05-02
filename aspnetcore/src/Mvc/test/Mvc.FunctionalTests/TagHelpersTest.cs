@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class TagHelpersTest
     : IClassFixture<MvcTestFixture<TagHelpersWebSite.Startup>>,
-      IClassFixture<MvcEncodedTestFixture<TagHelpersWebSite.Startup>>
+        IClassFixture<MvcEncodedTestFixture<TagHelpersWebSite.Startup>>
 {
     // Some tests require comparing the actual response body against an expected response baseline
     // so they require a reference to the assembly on which the resources are located, in order to

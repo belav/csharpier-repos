@@ -152,8 +152,8 @@ namespace System.Xml
             get
             {
                 return _returnOriginalStringValues
-                  ? _cachedNode!.OriginalStringValue!
-                  : _cachedNode!.RawValue;
+                    ? _cachedNode!.OriginalStringValue!
+                    : _cachedNode!.RawValue;
             }
         }
 

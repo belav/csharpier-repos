@@ -312,8 +312,8 @@ namespace ILCompiler.DependencyAnalysis
             EmitReloc(
                 symbol,
                 (_target.PointerSize == 8)
-                  ? RelocType.IMAGE_REL_BASED_DIR64
-                  : RelocType.IMAGE_REL_BASED_HIGHLOW,
+                    ? RelocType.IMAGE_REL_BASED_DIR64
+                    : RelocType.IMAGE_REL_BASED_HIGHLOW,
                 delta
             );
         }

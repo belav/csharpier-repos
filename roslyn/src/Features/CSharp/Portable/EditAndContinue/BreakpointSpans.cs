@@ -163,8 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.DestructorDeclaration:
                     var methodDeclaration = (BaseMethodDeclarationSyntax)node;
                     return (methodDeclaration.Body != null)
-                      ? CreateSpanForBlock(methodDeclaration.Body, position)
-                      : methodDeclaration.ExpressionBody?.Expression.Span;
+                        ? CreateSpanForBlock(methodDeclaration.Body, position)
+                        : methodDeclaration.ExpressionBody?.Expression.Span;
 
                 case SyntaxKind.ConstructorDeclaration:
                     return CreateSpanForConstructorDeclaration(
@@ -208,8 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.CasePatternSwitchLabel:
                     var caseClause = (CasePatternSwitchLabelSyntax)node;
                     return caseClause.WhenClause == null
-                      ? TryCreateSpanForSwitchLabel((SwitchLabelSyntax)node, position)
-                      : CreateSpan(caseClause.WhenClause);
+                        ? TryCreateSpanForSwitchLabel((SwitchLabelSyntax)node, position)
+                        : CreateSpan(caseClause.WhenClause);
 
                 case SyntaxKind.SwitchExpressionArm:
                     var switchArm = (SwitchExpressionArmSyntax)node;
@@ -218,15 +218,15 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     TextSpan createSpanForSwitchArm(SwitchExpressionArmSyntax switchArm) =>
                         CreateSpan(
                             (position <= switchArm.WhenClause?.FullSpan.End == true)
-                              ? switchArm.WhenClause
-                              : switchArm.Expression
+                                ? switchArm.WhenClause
+                                : switchArm.Expression
                         );
 
                 case SyntaxKind.SwitchExpression
-                      when node is SwitchExpressionSyntax switchExpression
-                          && switchExpression.Arms.Count > 0
-                          && position >= switchExpression.OpenBraceToken.Span.End
-                          && position <= switchExpression.CloseBraceToken.Span.Start:
+                when node is SwitchExpressionSyntax switchExpression
+                    && switchExpression.Arms.Count > 0
+                    && position >= switchExpression.OpenBraceToken.Span.End
+                    && position <= switchExpression.CloseBraceToken.Span.Start:
                     // This can occur if the cursor is on a separator. Find the nearest switch arm.
                     switchArm =
                         switchExpression.Arms.LastOrDefault(arm => position >= arm.FullSpan.Start)
@@ -296,8 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     // event Action P { [|add;|] [|remove;|] }
                     var @event = (EventDeclarationSyntax)node;
                     return @event.AccessorList != null
-                      ? CreateSpanForAccessors(@event.AccessorList.Accessors, position)
-                      : null;
+                        ? CreateSpanForAccessors(@event.AccessorList.Accessors, position)
+                        : null;
 
                 case SyntaxKind.BaseConstructorInitializer:
                 case SyntaxKind.ThisConstructorInitializer:
@@ -328,8 +328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.OrderByClause:
                     var orderByClause = (OrderByClauseSyntax)node;
                     return orderByClause.Orderings.Count > 0
-                      ? TryCreateSpanForNode(orderByClause.Orderings.First().Expression, position)
-                      : null;
+                        ? TryCreateSpanForNode(orderByClause.Orderings.First().Expression, position)
+                        : null;
 
                 case SyntaxKind.SelectClause:
                     var selectClause = (SelectClauseSyntax)node;
@@ -342,8 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.LocalFunctionStatement:
                     var localFunction = (LocalFunctionStatementSyntax)node;
                     return (localFunction.Body != null)
-                      ? TryCreateSpanForNode(localFunction.Body, position)
-                      : TryCreateSpanForNode(localFunction.ExpressionBody.Expression, position);
+                        ? TryCreateSpanForNode(localFunction.Body, position)
+                        : TryCreateSpanForNode(localFunction.ExpressionBody.Expression, position);
 
                 default:
                     if (node is ExpressionSyntax expression)
@@ -621,8 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return CreateSpan(
                         switchStatement,
                         (switchStatement.CloseParenToken != default)
-                          ? switchStatement.CloseParenToken
-                          : switchStatement.Expression.GetLastToken()
+                            ? switchStatement.CloseParenToken
+                            : switchStatement.Expression.GetLastToken()
                     );
 
                 case SyntaxKind.TryStatement:

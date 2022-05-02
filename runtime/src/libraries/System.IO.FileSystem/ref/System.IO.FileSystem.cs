@@ -1029,7 +1029,7 @@ namespace System.IO
 
     public abstract partial class FileSystemInfo
         : System.MarshalByRefObject,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         protected string FullPath;
         protected string OriginalPath;
@@ -1190,7 +1190,7 @@ namespace System.IO.Enumeration
 
     public partial class FileSystemEnumerable<TResult>
         : System.Collections.Generic.IEnumerable<TResult>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public FileSystemEnumerable(
             string directory,
@@ -1225,9 +1225,9 @@ namespace System.IO.Enumeration
 
     public abstract partial class FileSystemEnumerator<TResult>
         : System.Runtime.ConstrainedExecution.CriticalFinalizerObject,
-          System.Collections.Generic.IEnumerator<TResult>,
-          System.Collections.IEnumerator,
-          System.IDisposable
+            System.Collections.Generic.IEnumerator<TResult>,
+            System.Collections.IEnumerator,
+            System.IDisposable
     {
         public FileSystemEnumerator(string directory, System.IO.EnumerationOptions? options = null)
         { }

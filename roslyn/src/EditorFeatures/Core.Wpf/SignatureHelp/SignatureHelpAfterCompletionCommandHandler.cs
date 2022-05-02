@@ -43,9 +43,9 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
     [Order(After = "LSP SignatureHelpCommandHandler")]
     internal class SignatureHelpAfterCompletionCommandHandler
         : AbstractSignatureHelpCommandHandler,
-          IChainedCommandHandler<EscapeKeyCommandArgs>,
-          IChainedCommandHandler<UpKeyCommandArgs>,
-          IChainedCommandHandler<DownKeyCommandArgs>
+            IChainedCommandHandler<EscapeKeyCommandArgs>,
+            IChainedCommandHandler<UpKeyCommandArgs>,
+            IChainedCommandHandler<DownKeyCommandArgs>
     {
         public string DisplayName => EditorFeaturesResources.Signature_Help;
 

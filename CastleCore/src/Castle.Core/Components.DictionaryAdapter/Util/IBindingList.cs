@@ -20,9 +20,9 @@ namespace Castle.Components.DictionaryAdapter
 
     public interface IBindingList<T>
         : IList<T>,
-          IBindingListSource,
-          ICancelAddNew,
-          IRaiseItemChangedEvents
+            IBindingListSource,
+            ICancelAddNew,
+            IRaiseItemChangedEvents
     {
         bool AllowNew { get; }
         bool AllowEdit { get; }

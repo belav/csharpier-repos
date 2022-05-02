@@ -243,8 +243,8 @@ namespace Microsoft.EntityFrameworkCore
                 name,
                 schema,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -419,8 +419,8 @@ namespace Microsoft.EntityFrameworkCore
                 (IMutableModel)model,
                 Check.NotNull(methodInfo, nameof(methodInfo)),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -461,8 +461,8 @@ namespace Microsoft.EntityFrameworkCore
                 Check.NotNull(name, nameof(name)),
                 returnType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

@@ -108,8 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 ParameterEarlyWellKnownAttributeData data = GetEarlyDecodedWellKnownAttributeData();
                 return (data != null && data.DefaultParameterValue != ConstantValue.Unset)
-                  ? data.DefaultParameterValue
-                  : ConstantValue.NotAvailable;
+                    ? data.DefaultParameterValue
+                    : ConstantValue.NotAvailable;
             }
         }
 
@@ -534,8 +534,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var syntax = this.CSharpSyntaxNode;
                 return (syntax != null)
-                  ? syntax.AttributeLists
-                  : default(SyntaxList<AttributeListSyntax>);
+                    ? syntax.AttributeLists
+                    : default(SyntaxList<AttributeListSyntax>);
             }
         }
 
@@ -1132,8 +1132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return
                 arguments.Length == 1
                 && arguments[0].TryDecodeValue(SpecialType.System_Boolean, out bool value)
-              ? (bool?)value
-              : null;
+                ? (bool?)value
+                : null;
         }
 
         private void DecodeDefaultParameterValueAttribute(

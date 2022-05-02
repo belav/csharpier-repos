@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal sealed class ComponentMarkupDiagnosticPass
     : ComponentIntermediateNodePassBase,
-      IRazorOptimizationPass
+        IRazorOptimizationPass
 {
     public const int DefaultOrder = 10000;
 

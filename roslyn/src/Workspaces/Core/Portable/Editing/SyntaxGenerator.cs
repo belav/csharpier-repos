@@ -179,8 +179,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 name,
                 parameters: method.Parameters.Select(p => ParameterDeclaration(p)),
                 returnType: method.ReturnType.IsSystemVoid()
-                  ? null
-                  : TypeExpression(method.ReturnType),
+                    ? null
+                    : TypeExpression(method.ReturnType),
                 accessibility: method.DeclaredAccessibility,
                 modifiers: DeclarationModifiers.From(method),
                 statements: statements
@@ -234,8 +234,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 GetOperatorKind(method),
                 parameters: method.Parameters.Select(p => ParameterDeclaration(p)),
                 returnType: method.ReturnType.IsSystemVoid()
-                  ? null
-                  : TypeExpression(method.ReturnType),
+                    ? null
+                    : TypeExpression(method.ReturnType),
                 accessibility: method.DeclaredAccessibility,
                 modifiers: DeclarationModifiers.From(method),
                 statements: statements
@@ -259,7 +259,7 @@ namespace Microsoft.CodeAnalysis.Editing
                 WellKnownMemberNames.FalseOperatorName => OperatorKind.False,
                 WellKnownMemberNames.GreaterThanOperatorName => OperatorKind.GreaterThan,
                 WellKnownMemberNames.GreaterThanOrEqualOperatorName
-                  => OperatorKind.GreaterThanOrEqual,
+                    => OperatorKind.GreaterThanOrEqual,
                 WellKnownMemberNames.IncrementOperatorName => OperatorKind.Increment,
                 WellKnownMemberNames.InequalityOperatorName => OperatorKind.Inequality,
                 WellKnownMemberNames.LeftShiftOperatorName => OperatorKind.LeftShift,
@@ -489,8 +489,8 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             return ConstructorDeclaration(
                 constructorMethod.ContainingType != null
-                  ? constructorMethod.ContainingType.Name
-                  : "New",
+                    ? constructorMethod.ContainingType.Name
+                    : "New",
                 constructorMethod.Parameters.Select(p => ParameterDeclaration(p)),
                 constructorMethod.DeclaredAccessibility,
                 DeclarationModifiers.From(constructorMethod),
@@ -699,8 +699,8 @@ namespace Microsoft.CodeAnalysis.Editing
                             declaration = EnumDeclaration(
                                 type.Name,
                                 type.EnumUnderlyingType?.SpecialType == SpecialType.System_Int32
-                                  ? null
-                                  : TypeExpression(type.EnumUnderlyingType.SpecialType),
+                                    ? null
+                                    : TypeExpression(type.EnumUnderlyingType.SpecialType),
                                 accessibility: type.DeclaredAccessibility,
                                 members: type.GetMembers()
                                     .Where(s => s.Kind == SymbolKind.Field)
@@ -1529,8 +1529,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 newList.Select(
                     token =>
                         Any(original, token.RawKind)
-                          ? original.First(tk => tk.RawKind == token.RawKind)
-                          : token
+                            ? original.First(tk => tk.RawKind == token.RawKind)
+                            : token
                 )
             );
         }
@@ -2143,8 +2143,8 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             var expression = TypeExpression(typeSymbol);
             return addImport
-              ? expression
-              : expression.WithAdditionalAnnotations(DoNotAddImportsAnnotation.Annotation);
+                ? expression
+                : expression.WithAdditionalAnnotations(DoNotAddImportsAnnotation.Annotation);
         }
 
         /// <summary>

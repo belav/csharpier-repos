@@ -23,9 +23,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class ForeignKey
         : ConventionAnnotatable,
-          IMutableForeignKey,
-          IConventionForeignKey,
-          IRuntimeForeignKey
+            IMutableForeignKey,
+            IConventionForeignKey,
+            IRuntimeForeignKey
     {
         private DeleteBehavior? _deleteBehavior;
         private bool? _isUnique;
@@ -588,15 +588,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 navigation = pointsToPrincipal
                     ? DeclaringEntityType.AddNavigation(
-                          propertyIdentity.Value,
-                          this,
-                          pointsToPrincipal: true
-                      )
+                        propertyIdentity.Value,
+                        this,
+                        pointsToPrincipal: true
+                    )
                     : PrincipalEntityType.AddNavigation(
-                          propertyIdentity.Value,
-                          this,
-                          pointsToPrincipal: false
-                      );
+                        propertyIdentity.Value,
+                        this,
+                        pointsToPrincipal: false
+                    );
             }
 
             if (pointsToPrincipal)
@@ -727,10 +727,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 unique == null ? null : configurationSource.Max(_isUniqueConfigurationSource);
 
             return IsUnique != oldUnique
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
+                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyUniquenessChanged(
                     Builder
                 )
-              : oldUnique;
+                : oldUnique;
         }
 
         private const bool DefaultIsUnique = false;
@@ -774,10 +774,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequired != oldRequired
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
+                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyRequirednessChanged(
                     Builder
                 )
-              : oldRequired;
+                : oldRequired;
         }
 
         private bool DefaultIsRequired => !Properties.Any(p => p.IsNullable);
@@ -844,10 +844,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 required == null ? null : configurationSource.Max(_isRequiredConfigurationSource);
 
             return IsRequiredDependent != oldRequired
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
+                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyDependentRequirednessChanged(
                     Builder
                 )
-              : oldRequired;
+                : oldRequired;
         }
 
         private const bool DefaultIsRequiredDependent = false;
@@ -1000,8 +1000,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return IsOwnership != oldIsOwnership
-              ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyOwnershipChanged(Builder)
-              : oldIsOwnership;
+                ? DeclaringEntityType.Model.ConventionDispatcher.OnForeignKeyOwnershipChanged(
+                    Builder
+                )
+                : oldIsOwnership;
         }
 
         private const bool DefaultIsOwnership = false;
@@ -1723,8 +1725,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 properties.Cast<Property>().ToArray(),
                 (Key)principalKey,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1736,8 +1738,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetDependentToPrincipal(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1749,8 +1751,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetDependentToPrincipal(
                 property,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1762,8 +1764,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPrincipalToDependent(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1775,8 +1777,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPrincipalToDependent(
                 property,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1790,8 +1792,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsUnique(
                 unique,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1800,8 +1802,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsRequired(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1813,8 +1815,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsRequiredDependent(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1823,8 +1825,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetIsOwnership(
                 ownership,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -1836,8 +1838,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetDeleteBehavior(
                 deleteBehavior,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />

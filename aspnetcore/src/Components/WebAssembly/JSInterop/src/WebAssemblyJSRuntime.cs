@@ -150,8 +150,8 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
                     arg2
                 );
                 return exception != null
-                  ? throw new JSException(exception)
-                  : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
+                    ? throw new JSException(exception)
+                    : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
             case JSCallResultType.JSStreamReference:
                 var serializedStreamReference = InternalCalls.InvokeJS<T0, T1, T2, string>(
                     out exception,
@@ -161,8 +161,8 @@ public abstract class WebAssemblyJSRuntime : JSInProcessRuntime, IJSUnmarshalled
                     arg2
                 );
                 return exception != null
-                  ? throw new JSException(exception)
-                  : (TResult)(object)DeserializeJSStreamReference(serializedStreamReference);
+                    ? throw new JSException(exception)
+                    : (TResult)(object)DeserializeJSStreamReference(serializedStreamReference);
             default:
                 throw new InvalidOperationException($"Invalid result type '{resultType}'.");
         }

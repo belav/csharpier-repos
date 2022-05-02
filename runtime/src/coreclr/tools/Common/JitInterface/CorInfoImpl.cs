@@ -446,8 +446,8 @@ namespace Internal.JitInterface
             Array.Sort(relocs, (x, y) => (x.Offset - y.Offset));
 
             int alignment = JitConfigProvider.Instance.HasFlag(CorJitFlag.CORJIT_FLAG_SIZE_OPT)
-              ? _compilation.NodeFactory.Target.MinimumFunctionAlignment
-              : _compilation.NodeFactory.Target.OptimumFunctionAlignment;
+                ? _compilation.NodeFactory.Target.MinimumFunctionAlignment
+                : _compilation.NodeFactory.Target.OptimumFunctionAlignment;
 
             alignment = Math.Max(alignment, _codeAlignment);
 
@@ -925,8 +925,8 @@ namespace Internal.JitInterface
             {
                 callConv = GetMemberFunctionCallingConventionVariant(
                     found
-                      ? callConv
-                      : (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention()
+                        ? callConv
+                        : (CorInfoCallConvExtension)PlatformDefaultUnmanagedCallingConvention()
                 );
                 found = true;
             }
@@ -955,7 +955,7 @@ namespace Internal.JitInterface
                 CorInfoCallConvExtension.C => CorInfoCallConvExtension.CMemberFunction,
                 CorInfoCallConvExtension.Stdcall => CorInfoCallConvExtension.StdcallMemberFunction,
                 CorInfoCallConvExtension.Fastcall
-                  => CorInfoCallConvExtension.FastcallMemberFunction,
+                    => CorInfoCallConvExtension.FastcallMemberFunction,
                 var c => c
             };
 
@@ -1158,8 +1158,8 @@ namespace Internal.JitInterface
             if (contextStruct == contextFromMethodBeingCompiled())
             {
                 return MethodBeingCompiled.HasInstantiation
-                  ? (TypeSystemEntity)MethodBeingCompiled
-                  : (TypeSystemEntity)MethodBeingCompiled.OwningType;
+                    ? (TypeSystemEntity)MethodBeingCompiled
+                    : (TypeSystemEntity)MethodBeingCompiled.OwningType;
             }
 
             return (TypeSystemEntity)HandleToObject(
@@ -1668,8 +1668,8 @@ namespace Internal.JitInterface
         private MethodSignatureFlags PlatformDefaultUnmanagedCallingConvention()
         {
             return _compilation.TypeSystemContext.Target.IsWindows
-              ? MethodSignatureFlags.UnmanagedCallingConventionStdCall
-              : MethodSignatureFlags.UnmanagedCallingConventionCdecl;
+                ? MethodSignatureFlags.UnmanagedCallingConventionStdCall
+                : MethodSignatureFlags.UnmanagedCallingConventionCdecl;
         }
 
         private CorInfoCallConvExtension getUnmanagedCallConv(
@@ -2767,8 +2767,8 @@ namespace Internal.JitInterface
                 );
 
             return type.IsNullable
-              ? CorInfoHelpFunc.CORINFO_HELP_BOX_NULLABLE
-              : CorInfoHelpFunc.CORINFO_HELP_BOX;
+                ? CorInfoHelpFunc.CORINFO_HELP_BOX_NULLABLE
+                : CorInfoHelpFunc.CORINFO_HELP_BOX;
         }
 
         private CorInfoHelpFunc getUnBoxHelper(CORINFO_CLASS_STRUCT_* cls)
@@ -2776,8 +2776,8 @@ namespace Internal.JitInterface
             var type = HandleToObject(cls);
 
             return type.IsNullable
-              ? CorInfoHelpFunc.CORINFO_HELP_UNBOX_NULLABLE
-              : CorInfoHelpFunc.CORINFO_HELP_UNBOX;
+                ? CorInfoHelpFunc.CORINFO_HELP_UNBOX_NULLABLE
+                : CorInfoHelpFunc.CORINFO_HELP_UNBOX;
         }
 
         private byte* getHelperName(CorInfoHelpFunc helpFunc)
@@ -3510,13 +3510,13 @@ namespace Internal.JitInterface
             ) switch
             {
                 ValueTypeShapeCharacteristics.Float32Aggregate
-                  => CorInfoHFAElemType.CORINFO_HFA_ELEM_FLOAT,
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_FLOAT,
                 ValueTypeShapeCharacteristics.Float64Aggregate
-                  => CorInfoHFAElemType.CORINFO_HFA_ELEM_DOUBLE,
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_DOUBLE,
                 ValueTypeShapeCharacteristics.Vector64Aggregate
-                  => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR64,
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR64,
                 ValueTypeShapeCharacteristics.Vector128Aggregate
-                  => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR128,
+                    => CorInfoHFAElemType.CORINFO_HFA_ELEM_VECTOR128,
                 _ => CorInfoHFAElemType.CORINFO_HFA_ELEM_NONE
             };
         }
@@ -3568,10 +3568,10 @@ namespace Internal.JitInterface
         public static CORINFO_OS TargetToOs(TargetDetails target)
         {
             return target.IsWindows
-              ? CORINFO_OS.CORINFO_WINNT
-              : target.IsOSX
-                  ? CORINFO_OS.CORINFO_MACOS
-                  : CORINFO_OS.CORINFO_UNIX;
+                ? CORINFO_OS.CORINFO_WINNT
+                : target.IsOSX
+                    ? CORINFO_OS.CORINFO_MACOS
+                    : CORINFO_OS.CORINFO_UNIX;
         }
 
         private void getEEInfo(ref CORINFO_EE_INFO pEEInfoOut)
@@ -4698,8 +4698,8 @@ namespace Internal.JitInterface
         private bool notifyInstructionSetUsage(InstructionSet instructionSet, bool supportEnabled)
         {
             return supportEnabled
-              ? _compilation.InstructionSetSupport.IsInstructionSetSupported(instructionSet)
-              : false;
+                ? _compilation.InstructionSetSupport.IsInstructionSetSupported(instructionSet)
+                : false;
         }
 #endif
     }

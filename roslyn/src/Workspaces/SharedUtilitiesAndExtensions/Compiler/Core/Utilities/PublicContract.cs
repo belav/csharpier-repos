@@ -167,9 +167,9 @@ namespace Microsoft.CodeAnalysis
             throw (list[index] is null)
                 ? new ArgumentNullException(argumentName)
                 : new ArgumentException(
-                      CompilerExtensionsResources.Specified_sequence_has_duplicate_items,
-                      argumentName
-                  );
+                    CompilerExtensionsResources.Specified_sequence_has_duplicate_items,
+                    argumentName
+                );
         }
 
         [DoesNotReturn]

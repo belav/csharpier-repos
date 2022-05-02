@@ -36,9 +36,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
             var isDescending = random.Next(3) == 0;
             var thenBy = isDescending
                 ? QueryableMethods.ThenByDescending.MakeGenericMethod(
-                      typeArgument,
-                      property.PropertyType
-                  )
+                    typeArgument,
+                    property.PropertyType
+                )
                 : QueryableMethods.ThenBy.MakeGenericMethod(typeArgument, property.PropertyType);
 
             var prm = Expression.Parameter(typeArgument, "prm");
@@ -58,9 +58,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
 
                 thenBy = isDescending
                     ? QueryableMethods.ThenByDescending.MakeGenericMethod(
-                          typeArgument,
-                          nullablePropertyType
-                      )
+                        typeArgument,
+                        nullablePropertyType
+                    )
                     : QueryableMethods.ThenBy.MakeGenericMethod(typeArgument, nullablePropertyType);
 
                 lambdaBody = Expression.Convert(lambdaBody, nullablePropertyType);

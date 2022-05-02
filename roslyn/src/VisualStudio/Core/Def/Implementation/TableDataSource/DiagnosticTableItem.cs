@@ -99,7 +99,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         /// </summary>
         internal sealed class GroupingComparer
             : IEqualityComparer<DiagnosticData>,
-              IEqualityComparer<DiagnosticTableItem>
+                IEqualityComparer<DiagnosticTableItem>
         {
             public static readonly GroupingComparer Instance = new();
 

@@ -157,9 +157,9 @@ namespace System.Net.Mail
                     throw address is null
                         ? new ArgumentNullException(nameof(address))
                         : new ArgumentException(
-                              SR.Format(SR.net_emptystringcall, nameof(address)),
-                              nameof(address)
-                          );
+                            SR.Format(SR.net_emptystringcall, nameof(address)),
+                            nameof(address)
+                        );
                 }
 
                 parsedData = default;

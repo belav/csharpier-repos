@@ -61,9 +61,9 @@ namespace Internal.Cryptography.Pal
                             // Our minimum supported version (API 21) does support it, but for simplicity, we simply block adding
                             // certificates with DSA private keys on all versions instead of trying to support it on two versions.
                             SafeDsaHandle _
-                              => throw new PlatformNotSupportedException(
-                                  SR.Cryptography_X509_StoreDSAPrivateKeyNotSupported
-                              ),
+                                => throw new PlatformNotSupportedException(
+                                    SR.Cryptography_X509_StoreDSAPrivateKeyNotSupported
+                                ),
                             SafeEcKeyHandle _ => Interop.AndroidCrypto.PAL_KeyAlgorithm.EC,
                             SafeRsaHandle _ => Interop.AndroidCrypto.PAL_KeyAlgorithm.RSA,
                             _ => throw new NotSupportedException(SR.NotSupported_KeyAlgorithm)
@@ -172,11 +172,11 @@ namespace Internal.Cryptography.Pal
                     SafeKeyHandle privateKey = privateKeyAlgorithm switch
                     {
                         Interop.AndroidCrypto.PAL_KeyAlgorithm.DSA
-                          => new SafeDsaHandle((IntPtr)privateKeyPtr),
+                            => new SafeDsaHandle((IntPtr)privateKeyPtr),
                         Interop.AndroidCrypto.PAL_KeyAlgorithm.EC
-                          => new SafeEcKeyHandle((IntPtr)privateKeyPtr),
+                            => new SafeEcKeyHandle((IntPtr)privateKeyPtr),
                         Interop.AndroidCrypto.PAL_KeyAlgorithm.RSA
-                          => new SafeRsaHandle((IntPtr)privateKeyPtr),
+                            => new SafeRsaHandle((IntPtr)privateKeyPtr),
                         _ => throw new NotSupportedException(SR.NotSupported_KeyAlgorithm)
                     };
                     certPal = new AndroidCertificatePal(handle, privateKey);

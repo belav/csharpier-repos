@@ -173,10 +173,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Syntax.NullableContextState.State.Enabled => true,
                     Syntax.NullableContextState.State.Disabled => false,
                     Syntax.NullableContextState.State.ExplicitlyRestored
-                      => nullableOption.WarningsEnabled(),
+                        => nullableOption.WarningsEnabled(),
                     Syntax.NullableContextState.State.Unknown
-                      => tree?.IsGeneratedCode(syntaxTreeOptions, cancellationToken) != true
-                          && nullableOption.WarningsEnabled(),
+                        => tree?.IsGeneratedCode(syntaxTreeOptions, cancellationToken) != true
+                            && nullableOption.WarningsEnabled(),
                     null => nullableOption.WarningsEnabled(),
                     _ => throw ExceptionUtilities.UnexpectedValue(warningsState)
                 };

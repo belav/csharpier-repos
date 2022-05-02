@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
     internal abstract class AsynchronousViewTaggerProvider<TTag>
         : AbstractAsynchronousTaggerProvider<TTag>,
-          IViewTaggerProvider where TTag : ITag
+            IViewTaggerProvider where TTag : ITag
     {
         protected AsynchronousViewTaggerProvider(
             IThreadingContext threadingContext,

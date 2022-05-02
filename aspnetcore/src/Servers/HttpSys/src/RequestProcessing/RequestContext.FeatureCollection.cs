@@ -24,24 +24,24 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal partial class RequestContext
     : IHttpRequestFeature,
-      IHttpRequestBodyDetectionFeature,
-      IHttpConnectionFeature,
-      IHttpResponseFeature,
-      IHttpResponseBodyFeature,
-      ITlsConnectionFeature,
-      ITlsHandshakeFeature,
-      // ITlsTokenBindingFeature, TODO: https://github.com/aspnet/HttpSysServer/issues/231
-      IHttpRequestLifetimeFeature,
-      IHttpAuthenticationFeature,
-      IHttpUpgradeFeature,
-      IHttpRequestIdentifierFeature,
-      IHttpMaxRequestBodySizeFeature,
-      IHttpBodyControlFeature,
-      IHttpSysRequestInfoFeature,
-      IHttpResponseTrailersFeature,
-      IHttpResetFeature,
-      IHttpSysRequestDelegationFeature,
-      IConnectionLifetimeNotificationFeature
+        IHttpRequestBodyDetectionFeature,
+        IHttpConnectionFeature,
+        IHttpResponseFeature,
+        IHttpResponseBodyFeature,
+        ITlsConnectionFeature,
+        ITlsHandshakeFeature,
+        // ITlsTokenBindingFeature, TODO: https://github.com/aspnet/HttpSysServer/issues/231
+        IHttpRequestLifetimeFeature,
+        IHttpAuthenticationFeature,
+        IHttpUpgradeFeature,
+        IHttpRequestIdentifierFeature,
+        IHttpMaxRequestBodySizeFeature,
+        IHttpBodyControlFeature,
+        IHttpSysRequestInfoFeature,
+        IHttpResponseTrailersFeature,
+        IHttpResetFeature,
+        IHttpSysRequestDelegationFeature,
+        IConnectionLifetimeNotificationFeature
 {
     private IFeatureCollection? _features;
     private bool _enableResponseCaching;

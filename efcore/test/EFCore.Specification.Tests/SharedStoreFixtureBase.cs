@@ -14,8 +14,8 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class SharedStoreFixtureBase<TContext>
         : FixtureBase,
-          IDisposable,
-          IAsyncLifetime where TContext : DbContext
+            IDisposable,
+            IAsyncLifetime where TContext : DbContext
     {
         protected virtual Type ContextType { get; } = typeof(TContext);
 

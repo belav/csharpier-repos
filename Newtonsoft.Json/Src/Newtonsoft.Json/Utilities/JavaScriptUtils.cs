@@ -574,8 +574,8 @@ namespace Newtonsoft.Json.Utilities
         {
             int i = FirstCharToEscape(s, charEscapeFlags, stringEscapeHandling);
             return i == -1
-              ? writer.WriteAsync(s, cancellationToken)
-              : WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(
+                ? writer.WriteAsync(s, cancellationToken)
+                : WriteDefinitelyEscapedJavaScriptStringWithoutDelimitersAsync(
                     writer,
                     s,
                     i,

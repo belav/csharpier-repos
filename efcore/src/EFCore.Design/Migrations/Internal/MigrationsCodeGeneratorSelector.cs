@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
     /// </summary>
     public class MigrationsCodeGeneratorSelector
         : LanguageBasedSelector<IMigrationsCodeGenerator>,
-          IMigrationsCodeGeneratorSelector
+            IMigrationsCodeGeneratorSelector
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

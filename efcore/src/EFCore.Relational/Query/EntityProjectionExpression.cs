@@ -77,12 +77,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             changed |= discriminatorExpression != DiscriminatorExpression;
 
             return changed
-              ? new EntityProjectionExpression(
+                ? new EntityProjectionExpression(
                     EntityType,
                     propertyExpressionMap,
                     discriminatorExpression
                 )
-              : this;
+                : this;
         }
 
         /// <summary>
@@ -236,8 +236,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             return _ownedNavigationMap.TryGetValue(navigation, out var expression)
-              ? expression
-              : null;
+                ? expression
+                : null;
         }
 
         /// <inheritdoc />

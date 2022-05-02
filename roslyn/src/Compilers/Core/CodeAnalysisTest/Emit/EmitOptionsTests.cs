@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 (old, value) => old.WithDebugInformationFormat(value),
                 opt => opt.DebugInformationFormat,
                 PathUtilities.IsUnixLikePlatform
-                  ? DebugInformationFormat.Pdb
-                  : DebugInformationFormat.PortablePdb
+                    ? DebugInformationFormat.Pdb
+                    : DebugInformationFormat.PortablePdb
             );
             TestProperty(
                 (old, value) => old.WithTolerateErrors(value),

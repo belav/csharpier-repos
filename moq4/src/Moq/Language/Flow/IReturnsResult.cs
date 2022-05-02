@@ -11,8 +11,8 @@ namespace Moq.Language.Flow
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IReturnsResult<TMock>
         : ICallback,
-          IOccurrence,
-          IRaise<TMock>,
-          IVerifies,
-          IFluentInterface { }
+            IOccurrence,
+            IRaise<TMock>,
+            IVerifies,
+            IFluentInterface { }
 }

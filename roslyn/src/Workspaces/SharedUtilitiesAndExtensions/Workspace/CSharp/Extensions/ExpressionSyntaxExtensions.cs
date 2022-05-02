@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             var result = ParenthesizeWorker(expression, includeElasticTrivia);
             return addSimplifierAnnotation
-              ? result.WithAdditionalAnnotations(Simplifier.Annotation)
-              : result;
+                ? result.WithAdditionalAnnotations(Simplifier.Annotation)
+                : result;
         }
 
         private static ExpressionSyntax ParenthesizeWorker(
@@ -62,18 +62,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var parenthesized = includeElasticTrivia
                 ? SyntaxFactory.ParenthesizedExpression(withoutTrivia)
                 : SyntaxFactory.ParenthesizedExpression(
-                      SyntaxFactory.Token(
-                          SyntaxTriviaList.Empty,
-                          SyntaxKind.OpenParenToken,
-                          SyntaxTriviaList.Empty
-                      ),
-                      withoutTrivia,
-                      SyntaxFactory.Token(
-                          SyntaxTriviaList.Empty,
-                          SyntaxKind.CloseParenToken,
-                          SyntaxTriviaList.Empty
-                      )
-                  );
+                    SyntaxFactory.Token(
+                        SyntaxTriviaList.Empty,
+                        SyntaxKind.OpenParenToken,
+                        SyntaxTriviaList.Empty
+                    ),
+                    withoutTrivia,
+                    SyntaxFactory.Token(
+                        SyntaxTriviaList.Empty,
+                        SyntaxKind.CloseParenToken,
+                        SyntaxTriviaList.Empty
+                    )
+                );
 
             return parenthesized.WithTriviaFrom(expression);
         }
@@ -88,23 +88,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var parenthesized = includeElasticTrivia
                 ? SyntaxFactory.ParenthesizedPattern(withoutTrivia)
                 : SyntaxFactory.ParenthesizedPattern(
-                      SyntaxFactory.Token(
-                          SyntaxTriviaList.Empty,
-                          SyntaxKind.OpenParenToken,
-                          SyntaxTriviaList.Empty
-                      ),
-                      withoutTrivia,
-                      SyntaxFactory.Token(
-                          SyntaxTriviaList.Empty,
-                          SyntaxKind.CloseParenToken,
-                          SyntaxTriviaList.Empty
-                      )
-                  );
+                    SyntaxFactory.Token(
+                        SyntaxTriviaList.Empty,
+                        SyntaxKind.OpenParenToken,
+                        SyntaxTriviaList.Empty
+                    ),
+                    withoutTrivia,
+                    SyntaxFactory.Token(
+                        SyntaxTriviaList.Empty,
+                        SyntaxKind.CloseParenToken,
+                        SyntaxTriviaList.Empty
+                    )
+                );
 
             var result = parenthesized.WithTriviaFrom(pattern);
             return addSimplifierAnnotation
-              ? result.WithAdditionalAnnotations(Simplifier.Annotation)
-              : result;
+                ? result.WithAdditionalAnnotations(Simplifier.Annotation)
+                : result;
         }
 
         public static CastExpressionSyntax Cast(

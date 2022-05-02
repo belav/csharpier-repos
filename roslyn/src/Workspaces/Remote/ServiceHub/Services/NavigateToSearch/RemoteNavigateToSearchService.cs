@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteNavigateToSearchService
         : BrokeredServiceBase,
-          IRemoteNavigateToSearchService
+            IRemoteNavigateToSearchService
     {
         internal sealed class Factory
             : FactoryBase<IRemoteNavigateToSearchService, IRemoteNavigateToSearchService.ICallback>

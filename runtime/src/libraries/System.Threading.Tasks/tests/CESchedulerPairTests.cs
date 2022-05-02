@@ -718,16 +718,16 @@ namespace System.Threading.Tasks.Tests
                         delegate { },
                         CancellationToken.None,
                         syncContinuations
-                          ? TaskContinuationOptions.ExecuteSynchronously
-                          : TaskContinuationOptions.None,
+                            ? TaskContinuationOptions.ExecuteSynchronously
+                            : TaskContinuationOptions.None,
                         cesp.ConcurrentScheduler
                     );
                     t = t.ContinueWith(
                         delegate { },
                         CancellationToken.None,
                         syncContinuations
-                          ? TaskContinuationOptions.ExecuteSynchronously
-                          : TaskContinuationOptions.None,
+                            ? TaskContinuationOptions.ExecuteSynchronously
+                            : TaskContinuationOptions.None,
                         cesp.ExclusiveScheduler
                     );
                 }

@@ -268,8 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.Suppression
 
             var title = diagnostic.Descriptor.Title.ToString(CultureInfo.CurrentUICulture);
             var ruleIdText = string.IsNullOrWhiteSpace(title)
-              ? diagnostic.Id
-              : string.Format("{0}:{1}", diagnostic.Id, title);
+                ? diagnostic.Id
+                : string.Format("{0}:{1}", diagnostic.Id, title);
             var ruleId = SyntaxFactory.LiteralExpression(
                 SyntaxKind.StringLiteralExpression,
                 SyntaxFactory.Literal(ruleIdText)

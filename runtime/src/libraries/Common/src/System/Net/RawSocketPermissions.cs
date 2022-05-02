@@ -30,8 +30,8 @@ namespace System.Net
                     addressFamily,
                     SocketType.Raw,
                     addressFamily == AddressFamily.InterNetwork
-                      ? ProtocolType.Icmp
-                      : ProtocolType.IcmpV6
+                        ? ProtocolType.Icmp
+                        : ProtocolType.IcmpV6
                 ).Dispose();
                 return true;
             }

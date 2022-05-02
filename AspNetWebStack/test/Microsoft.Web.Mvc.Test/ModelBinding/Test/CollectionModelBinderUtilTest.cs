@@ -498,7 +498,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class ReadOnlyDictionary<TKey, TValue>
             : Dictionary<TKey, TValue>,
-              ICollection<KeyValuePair<TKey, TValue>>
+                ICollection<KeyValuePair<TKey, TValue>>
         {
             bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
             {

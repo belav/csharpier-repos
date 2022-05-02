@@ -518,8 +518,8 @@ namespace System.DirectoryServices.Tests
                 LdapConfiguration.Configuration.ServerName
                     + (
                         string.IsNullOrEmpty(LdapConfiguration.Configuration.Port)
-                          ? ""
-                          : ":" + LdapConfiguration.Configuration.Port
+                            ? ""
+                            : ":" + LdapConfiguration.Configuration.Port
                     ),
                 LdapConfiguration.Configuration.UserName,
                 LdapConfiguration.Configuration.Password

@@ -21,9 +21,9 @@ namespace System.Xml.XPath
     [DebuggerDisplay("{debuggerDisplayProxy}")]
     public abstract class XPathNavigator
         : XPathItem,
-          ICloneable,
-          IXPathNavigable,
-          IXmlNamespaceResolver
+            ICloneable,
+            IXPathNavigable,
+            IXmlNamespaceResolver
     {
         internal static readonly XPathNavigatorKeyComparer comparer =
             new XPathNavigatorKeyComparer();

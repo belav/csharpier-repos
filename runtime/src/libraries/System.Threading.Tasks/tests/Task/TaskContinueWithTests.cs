@@ -2242,8 +2242,8 @@ namespace System.Threading.Tasks.Tests
             {
                 --iterationsRemaining;
                 return iterationsRemaining > 0
-                  ? Task.Factory.StartNew(() => func(iterationsRemaining)).Unwrap()
-                  : Task.FromResult(iterationsRemaining);
+                    ? Task.Factory.StartNew(() => func(iterationsRemaining)).Unwrap()
+                    : Task.FromResult(iterationsRemaining);
             };
             func(DiveDepth).Wait();
         }
@@ -2257,13 +2257,13 @@ namespace System.Threading.Tasks.Tests
             func = async count =>
             {
                 return ++count < DiveDepth
-                  ? await await Task.Factory.StartNew(
+                    ? await await Task.Factory.StartNew(
                         () => func(count),
                         CancellationToken.None,
                         TaskCreationOptions.None,
                         TaskScheduler.Default
                     )
-                  : count;
+                    : count;
             };
             func(0).Wait();
         }

@@ -919,11 +919,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var result = VisitType(
                     typeWithAnnotationsOpt: canDigThroughNullable
-                      ? default
-                      : currentPointer.ReturnTypeWithAnnotations,
+                        ? default
+                        : currentPointer.ReturnTypeWithAnnotations,
                     type: canDigThroughNullable
-                      ? currentPointer.ReturnTypeWithAnnotations.NullableUnderlyingTypeOrSelf
-                      : null,
+                        ? currentPointer.ReturnTypeWithAnnotations.NullableUnderlyingTypeOrSelf
+                        : null,
                     typeWithAnnotationsPredicate,
                     typePredicate,
                     arg,
@@ -2126,8 +2126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 RoslynDebug.Assert(arity < 2);
                 var taskType = compilation.GetWellKnownType(
                     arity == 0
-                      ? WellKnownType.System_Threading_Tasks_Task
-                      : WellKnownType.System_Threading_Tasks_Task_T
+                        ? WellKnownType.System_Threading_Tasks_Task
+                        : WellKnownType.System_Threading_Tasks_Task_T
                 );
                 if (taskType.TypeKind == TypeKind.Error)
                 {
@@ -2138,11 +2138,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     arity == 0
                         ? taskType
                         : taskType.Construct(
-                              ImmutableArray.Create(
-                                  type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
-                              ),
-                              unbound: false
-                          );
+                            ImmutableArray.Create(
+                                type.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
+                            ),
+                            unbound: false
+                        );
                 hasChanged = true;
             }
 

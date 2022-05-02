@@ -194,7 +194,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
             {
                 XmlAttributeSyntax => ClassificationTypeNames.XmlDocCommentAttributeName,
                 XmlProcessingInstructionSyntax
-                  => ClassificationTypeNames.XmlDocCommentProcessingInstruction,
+                    => ClassificationTypeNames.XmlDocCommentProcessingInstruction,
                 _ => ClassificationTypeNames.XmlDocCommentName,
             };
 

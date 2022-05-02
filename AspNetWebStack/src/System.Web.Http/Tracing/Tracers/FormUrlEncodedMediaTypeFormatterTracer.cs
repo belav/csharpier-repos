@@ -18,8 +18,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class FormUrlEncodedMediaTypeFormatterTracer
         : FormUrlEncodedMediaTypeFormatter,
-          IFormatterTracer,
-          IDecorator<FormUrlEncodedMediaTypeFormatter>
+            IFormatterTracer,
+            IDecorator<FormUrlEncodedMediaTypeFormatter>
     {
         private readonly FormUrlEncodedMediaTypeFormatter _inner;
         private MediaTypeFormatterTracer _innerTracer;

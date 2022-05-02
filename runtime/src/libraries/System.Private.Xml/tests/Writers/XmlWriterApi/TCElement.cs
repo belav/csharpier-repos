@@ -67,8 +67,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                          ? WriteState.Start
-                          : WriteState.Error,
+                            ? WriteState.Start
+                            : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;
@@ -95,8 +95,8 @@ namespace System.Xml.Tests
                     CError.Compare(
                         w.WriteState,
                         (utils.WriterType == WriterType.CharCheckingWriter)
-                          ? WriteState.Start
-                          : WriteState.Error,
+                            ? WriteState.Start
+                            : WriteState.Error,
                         "WriteState should be Error"
                     );
                     return;
@@ -176,15 +176,15 @@ namespace System.Xml.Tests
                     || utils.WriterType == WriterType.UnicodeWriterIndent
                 )
                     ? string.Format(
-                          "<?xml version=\"1.0\" encoding=\"utf-{0}\"?>"
-                              + Environment.NewLine
-                              + "<a:b xmlns:a=\"c\" />",
-                          enc
-                      )
+                        "<?xml version=\"1.0\" encoding=\"utf-{0}\"?>"
+                            + Environment.NewLine
+                            + "<a:b xmlns:a=\"c\" />",
+                        enc
+                    )
                     : string.Format(
-                          "<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a:b xmlns:a=\"c\" />",
-                          enc
-                      );
+                        "<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a:b xmlns:a=\"c\" />",
+                        enc
+                    );
 
             XmlWriterSettings ws = new XmlWriterSettings();
             ws.OmitXmlDeclaration = false;
@@ -345,24 +345,24 @@ namespace System.Xml.Tests
                         exp = !isIndent
                             ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&apos;&lt;\" />"
                             : "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
-                              + Environment.NewLine
-                              + "<root xml:lang=\"&apos;&lt;\" />";
+                                + Environment.NewLine
+                                + "<root xml:lang=\"&apos;&lt;\" />";
                         break;
                     case 2:
                         w.WriteEntityRef("lt");
                         exp = !isIndent
                             ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&lt;&lt;\" />"
                             : "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
-                              + Environment.NewLine
-                              + "<root xml:lang=\"&lt;&lt;\" />";
+                                + Environment.NewLine
+                                + "<root xml:lang=\"&lt;&lt;\" />";
                         break;
                     case 3:
                         w.WriteEntityRef("quot");
                         exp = !isIndent
                             ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&quot;&lt;\" />"
                             : "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
-                              + Environment.NewLine
-                              + "<root xml:lang=\"&quot;&lt;\" />";
+                                + Environment.NewLine
+                                + "<root xml:lang=\"&quot;&lt;\" />";
                         break;
                 }
                 w.WriteString("<");

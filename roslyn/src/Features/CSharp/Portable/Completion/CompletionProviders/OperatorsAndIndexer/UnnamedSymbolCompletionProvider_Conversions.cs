@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 TextSpan.FromBounds(
                     expression.SpanStart,
                     tokenOnLeft.Kind() == SyntaxKind.DotDotToken
-                      ? tokenOnLeft.SpanStart + 1
-                      : tokenOnLeft.Span.End
+                        ? tokenOnLeft.SpanStart + 1
+                        : tokenOnLeft.Span.End
                 ),
                 replacement
             );

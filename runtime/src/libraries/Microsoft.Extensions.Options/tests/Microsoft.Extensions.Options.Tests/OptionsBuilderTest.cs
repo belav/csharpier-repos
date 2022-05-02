@@ -448,7 +448,7 @@ namespace Microsoft.Extensions.Options.Tests
 
         private class MultiOptionValidator
             : IValidateOptions<ComplexOptions>,
-              IValidateOptions<FakeOptions>
+                IValidateOptions<FakeOptions>
         {
             private readonly string _allowed;
 

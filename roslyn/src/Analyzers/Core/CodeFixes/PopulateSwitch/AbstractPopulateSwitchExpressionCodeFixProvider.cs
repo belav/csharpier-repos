@@ -19,11 +19,11 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         TMemberAccessExpressionSyntax
     >
         : AbstractPopulateSwitchCodeFixProvider<
-              ISwitchExpressionOperation,
-              TSwitchSyntax,
-              TSwitchArmSyntax,
-              TMemberAccessExpressionSyntax
-          >
+            ISwitchExpressionOperation,
+            TSwitchSyntax,
+            TSwitchArmSyntax,
+            TMemberAccessExpressionSyntax
+        >
         where TExpressionSyntax : SyntaxNode
         where TSwitchSyntax : TExpressionSyntax
         where TSwitchArmSyntax : SyntaxNode
@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
 
             var arms = switchExpression.Arms;
             return arms.Length > 0 && PopulateSwitchExpressionHelpers.IsDefault(arms[^1])
-              ? arms.Length - 1
-              : arms.Length;
+                ? arms.Length - 1
+                : arms.Length;
         }
     }
 }

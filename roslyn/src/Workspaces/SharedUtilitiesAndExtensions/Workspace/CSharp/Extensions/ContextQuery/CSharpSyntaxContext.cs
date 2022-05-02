@@ -227,22 +227,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
             var isAnyExpressionContext = !isPreProcessorDirectiveContext
                 ? syntaxTree.IsExpressionContext(
-                      position,
-                      leftToken,
-                      attributes: true,
-                      cancellationToken: cancellationToken,
-                      semanticModelOpt: semanticModel
-                  )
+                    position,
+                    leftToken,
+                    attributes: true,
+                    cancellationToken: cancellationToken,
+                    semanticModelOpt: semanticModel
+                )
                 : false;
 
             var isNonAttributeExpressionContext = !isPreProcessorDirectiveContext
                 ? syntaxTree.IsExpressionContext(
-                      position,
-                      leftToken,
-                      attributes: false,
-                      cancellationToken: cancellationToken,
-                      semanticModelOpt: semanticModel
-                  )
+                    position,
+                    leftToken,
+                    attributes: false,
+                    cancellationToken: cancellationToken,
+                    semanticModelOpt: semanticModel
+                )
                 : false;
 
             var isConstantExpressionContext = !isPreProcessorDirectiveContext
@@ -640,7 +640,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
                                 {
                                     Parent: QueryExpressionSyntax queryExpression
                                 } fromClause
-                                  => queryExpression.FromClause == fromClause,
+                                    => queryExpression.FromClause == fromClause,
                                 JoinClauseSyntax => true,
                                 _ => false,
                             };

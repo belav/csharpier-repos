@@ -66,15 +66,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             _foreignKeyProperties = foreignKeySet
                 ? builder.Metadata.Properties
                 : ((EntityType)oldBuilder.DependentEntityType).Builder.GetActualProperties(
-                      oldBuilder._foreignKeyProperties,
-                      null
-                  );
+                    oldBuilder._foreignKeyProperties,
+                    null
+                );
             _principalKeyProperties = principalKeySet
                 ? builder.Metadata.PrincipalKey.Properties
                 : ((EntityType)oldBuilder.PrincipalEntityType).Builder.GetActualProperties(
-                      oldBuilder._principalKeyProperties,
-                      null
-                  );
+                    oldBuilder._principalKeyProperties,
+                    null
+                );
             _required = requiredSet ? builder.Metadata.IsRequired : oldBuilder._required;
 
             var foreignKey = builder.Metadata;

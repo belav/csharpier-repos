@@ -83,11 +83,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var substituted = containingType as SubstitutedNamedTypeSymbol;
             return (object)substituted != null
-              ? new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
+                ? new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
                     substituted.TypeSubstitution.Mapping,
                     ReferenceEqualityComparer.Instance
                 )
-              : new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
+                : new SmallDictionary<TypeParameterSymbol, TypeWithAnnotations>(
                     ReferenceEqualityComparer.Instance
                 );
         }

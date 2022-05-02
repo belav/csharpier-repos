@@ -166,8 +166,8 @@ namespace System.Diagnostics
                 (assembly) =>
                 {
                     return (inMemoryPdbAddress != IntPtr.Zero)
-                      ? TryOpenReaderForInMemoryPdb(inMemoryPdbAddress, inMemoryPdbSize)
-                      : TryOpenReaderFromAssemblyFile(
+                        ? TryOpenReaderForInMemoryPdb(inMemoryPdbAddress, inMemoryPdbSize)
+                        : TryOpenReaderFromAssemblyFile(
                             assemblyPath!,
                             loadedPeAddress,
                             loadedPeSize,

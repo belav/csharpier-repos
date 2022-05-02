@@ -811,12 +811,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(constructorInitializer);
 
             return CanGetSemanticInfo(constructorInitializer)
-              ? GetSymbolInfoWorker(
+                ? GetSymbolInfoWorker(
                     constructorInitializer,
                     SymbolInfoOptions.DefaultOptions,
                     cancellationToken
                 )
-              : SymbolInfo.None;
+                : SymbolInfo.None;
         }
 
         /// <summary>
@@ -832,12 +832,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(constructorInitializer);
 
             return CanGetSemanticInfo(constructorInitializer)
-              ? GetSymbolInfoWorker(
+                ? GetSymbolInfoWorker(
                     constructorInitializer,
                     SymbolInfoOptions.DefaultOptions,
                     cancellationToken
                 )
-              : SymbolInfo.None;
+                : SymbolInfo.None;
         }
 
         /// <summary>
@@ -853,12 +853,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(attributeSyntax);
 
             return CanGetSemanticInfo(attributeSyntax)
-              ? GetSymbolInfoWorker(
+                ? GetSymbolInfoWorker(
                     attributeSyntax,
                     SymbolInfoOptions.DefaultOptions,
                     cancellationToken
                 )
-              : SymbolInfo.None;
+                : SymbolInfo.None;
         }
 
         /// <summary>
@@ -872,8 +872,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(crefSyntax);
 
             return CanGetSemanticInfo(crefSyntax)
-              ? GetSymbolInfoWorker(crefSyntax, SymbolInfoOptions.DefaultOptions, cancellationToken)
-              : SymbolInfo.None;
+                ? GetSymbolInfoWorker(
+                    crefSyntax,
+                    SymbolInfoOptions.DefaultOptions,
+                    cancellationToken
+                )
+                : SymbolInfo.None;
         }
 
         /// <summary>
@@ -921,8 +925,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (boundNode == null)
             {
                 return crefSymbols.IsDefault
-                  ? SymbolInfo.None
-                  : GetCrefSymbolInfo(
+                    ? SymbolInfo.None
+                    : GetCrefSymbolInfo(
                         crefSymbols,
                         SymbolInfoOptions.DefaultOptions,
                         hasParameterList: false
@@ -1133,8 +1137,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argumentList.OpenParenToken,
                     argumentList.CloseParenToken
                 )
-                  ? position
-                  : argumentList.OpenParenToken.SpanStart
+                    ? position
+                    : argumentList.OpenParenToken.SpanStart
             );
             if (binder != null)
             {
@@ -1203,8 +1207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(constructorInitializer);
 
             return CanGetSemanticInfo(constructorInitializer)
-              ? GetTypeInfoWorker(constructorInitializer, cancellationToken)
-              : CSharpTypeInfo.None;
+                ? GetTypeInfoWorker(constructorInitializer, cancellationToken)
+                : CSharpTypeInfo.None;
         }
 
         public abstract TypeInfo GetTypeInfo(
@@ -1300,8 +1304,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(attributeSyntax);
 
             return CanGetSemanticInfo(attributeSyntax)
-              ? GetTypeInfoWorker(attributeSyntax, cancellationToken)
-              : CSharpTypeInfo.None;
+                ? GetTypeInfoWorker(attributeSyntax, cancellationToken)
+                : CSharpTypeInfo.None;
         }
 
         /// <summary>
@@ -1317,8 +1321,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(csnode);
 
             var info = CanGetSemanticInfo(csnode)
-              ? GetTypeInfoWorker(csnode, cancellationToken)
-              : CSharpTypeInfo.None;
+                ? GetTypeInfoWorker(csnode, cancellationToken)
+                : CSharpTypeInfo.None;
 
             return info.ImplicitConversion;
         }
@@ -1373,8 +1377,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (boundNode == null)
             {
                 return !crefSymbols.IsDefault && crefSymbols.Length == 1
-                  ? GetTypeInfoForSymbol(crefSymbols[0])
-                  : CSharpTypeInfo.None;
+                    ? GetTypeInfoForSymbol(crefSymbols[0])
+                    : CSharpTypeInfo.None;
             }
 
             var typeInfo = GetTypeInfoForNode(
@@ -1416,13 +1420,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(expression);
 
             return CanGetSemanticInfo(expression)
-              ? this.GetMemberGroupWorker(
+                ? this.GetMemberGroupWorker(
                         expression,
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                .GetPublicSymbols()
-              : ImmutableArray<ISymbol>.Empty;
+                    .GetPublicSymbols()
+                : ImmutableArray<ISymbol>.Empty;
         }
 
         /// <summary>
@@ -1438,13 +1442,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(attribute);
 
             return CanGetSemanticInfo(attribute)
-              ? this.GetMemberGroupWorker(
+                ? this.GetMemberGroupWorker(
                         attribute,
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                .GetPublicSymbols()
-              : ImmutableArray<ISymbol>.Empty;
+                    .GetPublicSymbols()
+                : ImmutableArray<ISymbol>.Empty;
         }
 
         /// <summary>
@@ -1460,13 +1464,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(initializer);
 
             return CanGetSemanticInfo(initializer)
-              ? this.GetMemberGroupWorker(
+                ? this.GetMemberGroupWorker(
                         initializer,
                         SymbolInfoOptions.DefaultOptions,
                         cancellationToken
                     )
-                .GetPublicSymbols()
-              : ImmutableArray<ISymbol>.Empty;
+                    .GetPublicSymbols()
+                : ImmutableArray<ISymbol>.Empty;
         }
 
         #endregion GetMemberGroup
@@ -1491,12 +1495,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(expression);
 
             return CanGetSemanticInfo(expression)
-              ? this.GetIndexerGroupWorker(
+                ? this.GetIndexerGroupWorker(
                     expression,
                     SymbolInfoOptions.DefaultOptions,
                     cancellationToken
                 )
-              : ImmutableArray<IPropertySymbol>.Empty;
+                : ImmutableArray<IPropertySymbol>.Empty;
         }
 
         #endregion GetIndexerGroup
@@ -1511,8 +1515,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CheckSyntaxNode(expression);
 
             return CanGetSemanticInfo(expression)
-              ? this.GetConstantValueWorker(expression, cancellationToken)
-              : default(Optional<object>);
+                ? this.GetConstantValueWorker(expression, cancellationToken)
+                : default(Optional<object>);
         }
 
         #endregion GetConstantValue
@@ -1582,8 +1586,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (boundNode == null)
             {
                 return !crefSymbols.IsDefault && crefSymbols.Length == 1
-                  ? (crefSymbols[0] as AliasSymbol).GetPublicSymbol()
-                  : null;
+                    ? (crefSymbols[0] as AliasSymbol).GetPublicSymbol()
+                    : null;
             }
 
             var symbolInfo = this.GetSymbolInfoForNode(
@@ -3067,8 +3071,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case ExpressionSyntax expression:
                     var parent = expression.Parent;
                     return parent.IsKind(SyntaxKind.GotoStatement)
-                      ? binder.BindLabel(expression, diagnostics)
-                      : binder.BindNamespaceOrTypeOrExpression(expression, diagnostics);
+                        ? binder.BindLabel(expression, diagnostics)
+                        : binder.BindNamespaceOrTypeOrExpression(expression, diagnostics);
                 case StatementSyntax statement:
                     return binder.BindStatement(statement, diagnostics);
                 case GlobalStatementSyntax globalStatement:
@@ -4139,8 +4143,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BinderFlags GetSemanticModelBinderFlags()
         {
             return this.IgnoresAccessibility
-              ? BinderFlags.SemanticModel | BinderFlags.IgnoreAccessibility
-              : BinderFlags.SemanticModel;
+                ? BinderFlags.SemanticModel | BinderFlags.IgnoreAccessibility
+                : BinderFlags.SemanticModel;
         }
 
         /// <summary>
@@ -4225,8 +4229,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return (
                 (object)local != null && local.DeclarationKind == LocalDeclarationKind.CatchVariable
             )
-              ? local.GetPublicSymbol()
-              : null;
+                ? local.GetPublicSymbol()
+                : null;
         }
 
         public abstract IRangeVariableSymbol GetDeclaredSymbol(
@@ -4487,17 +4491,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
 
                 case BoundKind.EventAccess
-                      when boundNodeForSyntacticParent
-                          is BoundEventAssignmentOperator
-                          {
-                              ResultKind: LookupResultKind.Viable
-                          } parentOperator
-                          && boundNode.ExpressionSymbol is Symbol accessSymbol
-                          && boundNode != parentOperator.Argument
-                          && parentOperator.Event.Equals(
-                              accessSymbol,
-                              TypeCompareKind.AllNullableIgnoreOptions
-                          ):
+                when boundNodeForSyntacticParent
+                    is BoundEventAssignmentOperator
+                    {
+                        ResultKind: LookupResultKind.Viable
+                    } parentOperator
+                    && boundNode.ExpressionSymbol is Symbol accessSymbol
+                    && boundNode != parentOperator.Argument
+                    && parentOperator.Event.Equals(
+                        accessSymbol,
+                        TypeCompareKind.AllNullableIgnoreOptions
+                    ):
                     // When we're looking at the left-hand side of an event assignment, we synthesize a BoundEventAccess node. This node does not have
                     // nullability information, however, so if we're in that case then we need to grab the event symbol from the parent event assignment
                     // which does have the nullability-reinferred symbol
@@ -5818,8 +5822,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var tupleArgument = (ArgumentSyntax)identifierNameSyntax.Parent.Parent;
                 var tupleElement = GetDeclaredSymbol(tupleArgument, cancellationToken);
                 return (object)tupleElement == null
-                  ? SymbolInfo.None
-                  : new SymbolInfo(
+                    ? SymbolInfo.None
+                    : new SymbolInfo(
                         tupleElement,
                         ImmutableArray<ISymbol>.Empty,
                         CandidateReason.None
@@ -5852,8 +5856,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argumentName
                 );
                 return (object)param == null
-                  ? SymbolInfo.None
-                  : new SymbolInfo(
+                    ? SymbolInfo.None
+                    : new SymbolInfo(
                         param.GetPublicSymbol(),
                         ImmutableArray<ISymbol>.Empty,
                         CandidateReason.None
@@ -6471,8 +6475,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return node is ExpressionSyntax expression
-              ? GetSpeculativeTypeInfo(position, expression, bindingOption)
-              : CSharpTypeInfo.None;
+                ? GetSpeculativeTypeInfo(position, expression, bindingOption)
+                : CSharpTypeInfo.None;
         }
 
         protected sealed override IAliasSymbol GetSpeculativeAliasInfoCore(
@@ -6482,8 +6486,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return nameSyntax is IdentifierNameSyntax identifier
-              ? GetSpeculativeAliasInfo(position, identifier, bindingOption)
-              : null;
+                ? GetSpeculativeAliasInfo(position, identifier, bindingOption)
+                : null;
         }
 
         protected sealed override SymbolInfo GetSymbolInfoCore(
@@ -6508,8 +6512,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return node is IdentifierNameSyntax nameSyntax
-              ? GetAliasInfo(nameSyntax, cancellationToken)
-              : null;
+                ? GetAliasInfo(nameSyntax, cancellationToken)
+                : null;
         }
 
         protected sealed override PreprocessingSymbolInfo GetPreprocessingSymbolInfoCore(
@@ -6517,8 +6521,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return node is IdentifierNameSyntax nameSyntax
-              ? GetPreprocessingSymbolInfo(nameSyntax)
-              : PreprocessingSymbolInfo.None;
+                ? GetPreprocessingSymbolInfo(nameSyntax)
+                : PreprocessingSymbolInfo.None;
         }
 
         protected sealed override ISymbol GetDeclaredSymbolCore(
@@ -6885,8 +6889,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return node is ExpressionSyntax expression
-              ? GetConstantValue(expression, cancellationToken)
-              : default(Optional<object>);
+                ? GetConstantValue(expression, cancellationToken)
+                : default(Optional<object>);
         }
 
         protected sealed override ISymbol GetEnclosingSymbolCore(
@@ -6918,8 +6922,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Compilation.Options.SyntaxTreeOptionsProvider,
                 CancellationToken.None
             )
-              ? NullableContextOptions.Disable
-              : Compilation.Options.NullableContextOptions;
+                ? NullableContextOptions.Disable
+                : Compilation.Options.NullableContextOptions;
 
             NullableContext context = getFlag(
                 contextState.AnnotationsState,

@@ -708,8 +708,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
         protected virtual string SchemaPrefix =>
             string.IsNullOrEmpty(Schema)
-              ? string.Empty
-              : OpenDelimiter + Schema + CloseDelimiter + ".";
+                ? string.Empty
+                : OpenDelimiter + Schema + CloseDelimiter + ".";
 
         protected virtual string GetIdentityWhereCondition(string columnName) =>
             OpenDelimiter + columnName + CloseDelimiter + " = " + Identity;

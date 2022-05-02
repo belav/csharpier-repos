@@ -317,19 +317,19 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                     var classNameToken =
                         startingCreationNode == childCreation
                             ? g.Identifier(className)
-                              .WithAdditionalAnnotations(RenameAnnotation.Create())
+                                .WithAdditionalAnnotations(RenameAnnotation.Create())
                             : g.Identifier(className);
 
                     var classNameNode =
                         classSymbol.TypeParameters.Length == 0
                             ? (TNameSyntax)g.IdentifierName(classNameToken)
                             : (TNameSyntax)
-                                  g.GenericName(
-                                      classNameToken,
-                                      classSymbol.TypeParameters.Select(
-                                          tp => g.IdentifierName(tp.Name)
-                                      )
-                                  );
+                                g.GenericName(
+                                    classNameToken,
+                                    classSymbol.TypeParameters.Select(
+                                        tp => g.IdentifierName(tp.Name)
+                                    )
+                                );
 
                     return CreateObjectCreationExpression(classNameNode, currentAnonymousObject)
                         .WithAdditionalAnnotations(Formatter.Annotation);

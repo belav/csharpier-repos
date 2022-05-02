@@ -73,8 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     var context = (DbContext)
                         assembly.CreateInstance(
                             !string.IsNullOrEmpty(contextNamespace)
-                              ? contextNamespace + "." + options.ContextName
-                              : options.ContextName
+                                ? contextNamespace + "." + options.ContextName
+                                : options.ContextName
                         );
 
                     var compiledModel = context.GetService<IDesignTimeModel>().Model;

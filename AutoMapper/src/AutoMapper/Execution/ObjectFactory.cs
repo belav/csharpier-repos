@@ -32,7 +32,7 @@ namespace AutoMapper.Execution
                 Type stringType when stringType == typeof(string) => Constant(string.Empty),
                 { IsInterface: true } => CreateInterfaceExpression(type),
                 { IsAbstract: true }
-                  => InvalidType(type, $"Cannot create an instance of abstract type {type}."),
+                    => InvalidType(type, $"Cannot create an instance of abstract type {type}."),
                 _ => CallConstructor(type)
             };
 
@@ -68,14 +68,14 @@ namespace AutoMapper.Execution
 
         private static Expression CreateInterfaceExpression(Type type) =>
             type.IsGenericType(typeof(IDictionary<,>))
-              ? CreateCollection(type, typeof(Dictionary<,>))
-              : type.IsGenericType(typeof(IReadOnlyDictionary<,>))
-                  ? CreateReadOnlyDictionary(type.GenericTypeArguments)
-                  : type.IsGenericType(typeof(ISet<>))
-                      ? CreateCollection(type, typeof(HashSet<>))
-                      : type.IsCollection()
-                          ? CreateCollection(type, typeof(List<>), GetIEnumerableArguments(type))
-                          : InvalidType(
+                ? CreateCollection(type, typeof(Dictionary<,>))
+                : type.IsGenericType(typeof(IReadOnlyDictionary<,>))
+                    ? CreateReadOnlyDictionary(type.GenericTypeArguments)
+                    : type.IsGenericType(typeof(ISet<>))
+                        ? CreateCollection(type, typeof(HashSet<>))
+                        : type.IsCollection()
+                            ? CreateCollection(type, typeof(List<>), GetIEnumerableArguments(type))
+                            : InvalidType(
                                 type,
                                 $"Cannot create an instance of interface type {type}."
                             );

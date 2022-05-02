@@ -146,8 +146,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _principalKeyValueFactory.CreateFromCurrentValues(principalEntry),
                 out var dependents
             )
-              ? dependents
-              : Enumerable.Empty<IUpdateEntry>();
+                ? dependents
+                : Enumerable.Empty<IUpdateEntry>();
         }
 
         /// <summary>
@@ -164,8 +164,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _principalKeyValueFactory.CreateFromRelationshipSnapshot(principalEntry),
                 out var dependents
             )
-              ? dependents
-              : Enumerable.Empty<IUpdateEntry>();
+                ? dependents
+                : Enumerable.Empty<IUpdateEntry>();
         }
     }
 }

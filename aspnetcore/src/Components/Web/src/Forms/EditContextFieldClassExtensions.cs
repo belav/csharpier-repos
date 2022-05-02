@@ -41,8 +41,8 @@ public static class EditContextFieldClassExtensions
             FieldCssClassProviderKey,
             out var customProvider
         )
-          ? (FieldCssClassProvider)customProvider
-          : FieldCssClassProvider.Instance;
+            ? (FieldCssClassProvider)customProvider
+            : FieldCssClassProvider.Instance;
 
         return provider.GetFieldCssClass(editContext, fieldIdentifier);
     }

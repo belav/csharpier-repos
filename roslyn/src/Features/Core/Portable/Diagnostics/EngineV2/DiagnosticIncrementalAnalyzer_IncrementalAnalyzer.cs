@@ -231,8 +231,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     ?? (
                         project.SupportsCompilation
                             ? await project
-                                  .GetCompilationAsync(cancellationToken)
-                                  .ConfigureAwait(false)
+                                .GetCompilationAsync(cancellationToken)
+                                .ConfigureAwait(false)
                             : null
                     );
 

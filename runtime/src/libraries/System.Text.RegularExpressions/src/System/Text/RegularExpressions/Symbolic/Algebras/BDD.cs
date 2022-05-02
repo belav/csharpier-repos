@@ -344,22 +344,22 @@ namespace System.Text.RegularExpressions.Symbolic
                 m <= 0xFFFF
                     ? 2
                     : (
-                          m <= 0xFF_FFFF
-                              ? 3
-                              : (
-                                    m <= 0xFFFF_FFFF
-                                        ? 4
-                                        : (
-                                              m <= 0xFF_FFFF_FFFF
-                                                  ? 5
-                                                  : (
-                                                        m <= 0xFFFF_FFFF_FFFF
-                                                            ? 6
-                                                            : (m <= 0xFF_FFFF_FFFF_FFFF ? 7 : 8)
-                                                    )
-                                          )
-                                )
-                      );
+                        m <= 0xFF_FFFF
+                            ? 3
+                            : (
+                                m <= 0xFFFF_FFFF
+                                    ? 4
+                                    : (
+                                        m <= 0xFF_FFFF_FFFF
+                                            ? 5
+                                            : (
+                                                m <= 0xFFFF_FFFF_FFFF
+                                                    ? 6
+                                                    : (m <= 0xFF_FFFF_FFFF_FFFF ? 7 : 8)
+                                            )
+                                    )
+                            )
+                    );
 
             // the result will contain k as the first element and the number of serialized elements times k
             byte[] result = new byte[(k * serialized.Length) + 1];
@@ -646,10 +646,10 @@ namespace System.Text.RegularExpressions.Symbolic
             if (IsLeaf)
             {
                 return !bdd.IsLeaf || Ordinal < bdd.Ordinal
-                  ? -1
-                  : Ordinal == bdd.Ordinal
-                      ? 0
-                      : 1;
+                    ? -1
+                    : Ordinal == bdd.Ordinal
+                        ? 0
+                        : 1;
             }
 
             if (bdd.IsLeaf)
@@ -660,10 +660,10 @@ namespace System.Text.RegularExpressions.Symbolic
             ulong min = GetMin();
             ulong bdd_min = bdd.GetMin();
             return min < bdd_min
-              ? -1
-              : bdd_min < min
-                  ? 1
-                  : Ordinal.CompareTo(bdd.Ordinal);
+                ? -1
+                : bdd_min < min
+                    ? 1
+                    : Ordinal.CompareTo(bdd.Ordinal);
         }
     }
 }

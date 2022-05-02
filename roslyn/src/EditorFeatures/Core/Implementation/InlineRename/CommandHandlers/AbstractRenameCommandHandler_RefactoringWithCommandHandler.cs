@@ -9,9 +9,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
     internal abstract partial class AbstractRenameCommandHandler
         : ICommandHandler<ReorderParametersCommandArgs>,
-          ICommandHandler<RemoveParametersCommandArgs>,
-          ICommandHandler<ExtractInterfaceCommandArgs>,
-          ICommandHandler<EncapsulateFieldCommandArgs>
+            ICommandHandler<RemoveParametersCommandArgs>,
+            ICommandHandler<ExtractInterfaceCommandArgs>,
+            ICommandHandler<EncapsulateFieldCommandArgs>
     {
         public CommandState GetCommandState(ReorderParametersCommandArgs args) =>
             CommandState.Unspecified;

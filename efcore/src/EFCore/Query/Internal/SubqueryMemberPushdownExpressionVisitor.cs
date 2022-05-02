@@ -97,11 +97,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         );
 
                         return nullable && !memberAccessExpression.Type.IsNullableType()
-                          ? Expression.Convert(
+                            ? Expression.Convert(
                                 memberAccessExpression,
                                 memberAccessExpression.Type.MakeNullable()
                             )
-                          : (Expression)memberAccessExpression;
+                            : (Expression)memberAccessExpression;
                     },
                     memberExpression.Type
                 );
@@ -180,11 +180,11 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             );
 
                             return nullable && !indexerExpression.Type.IsNullableType()
-                              ? Expression.Convert(
+                                ? Expression.Convert(
                                     indexerExpression,
                                     indexerExpression.Type.MakeNullable()
                                 )
-                              : (Expression)indexerExpression;
+                                : (Expression)indexerExpression;
                         },
                         methodCallExpression.Type
                     );

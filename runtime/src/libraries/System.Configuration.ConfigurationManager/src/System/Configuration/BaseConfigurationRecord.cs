@@ -2665,16 +2665,16 @@ namespace System.Configuration
             {
                 AllowDefinitionMachineOnly => ConfigurationAllowExeDefinition.MachineOnly,
                 AllowDefinitionMachineToApplication
-                  => ConfigurationAllowExeDefinition.MachineToApplication,
+                    => ConfigurationAllowExeDefinition.MachineToApplication,
                 AllowExeDefinitionMachineToRoaming
-                  => ConfigurationAllowExeDefinition.MachineToRoamingUser,
+                    => ConfigurationAllowExeDefinition.MachineToRoamingUser,
                 AllowExeDefinitionMachineToLocal
-                  => ConfigurationAllowExeDefinition.MachineToLocalUser,
+                    => ConfigurationAllowExeDefinition.MachineToLocalUser,
                 _
-                  => throw new ConfigurationErrorsException(
-                      SR.Config_section_allow_exe_definition_attribute_invalid,
-                      xmlUtil
-                  ),
+                    => throw new ConfigurationErrorsException(
+                        SR.Config_section_allow_exe_definition_attribute_invalid,
+                        xmlUtil
+                    ),
             };
 
         internal static ConfigurationAllowDefinition AllowDefinitionToEnum(
@@ -2686,13 +2686,13 @@ namespace System.Configuration
                 AllowDefinitionEverywhere => ConfigurationAllowDefinition.Everywhere,
                 AllowDefinitionMachineOnly => ConfigurationAllowDefinition.MachineOnly,
                 AllowDefinitionMachineToApplication
-                  => ConfigurationAllowDefinition.MachineToApplication,
+                    => ConfigurationAllowDefinition.MachineToApplication,
                 AllowDefinitionMachineToWebRoot => ConfigurationAllowDefinition.MachineToWebRoot,
                 _
-                  => throw new ConfigurationErrorsException(
-                      SR.Config_section_allow_definition_attribute_invalid,
-                      xmlUtil
-                  ),
+                    => throw new ConfigurationErrorsException(
+                        SR.Config_section_allow_definition_attribute_invalid,
+                        xmlUtil
+                    ),
             };
 
         internal static string CombineConfigKey(string parentConfigKey, string tagName)

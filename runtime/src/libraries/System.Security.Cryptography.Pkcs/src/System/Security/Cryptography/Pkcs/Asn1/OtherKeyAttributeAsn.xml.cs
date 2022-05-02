@@ -120,8 +120,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             {
                 tmpSpan = sequenceReader.ReadEncodedValue();
                 decoded.KeyAttr = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
 
             sequenceReader.ThrowIfNotEmpty();

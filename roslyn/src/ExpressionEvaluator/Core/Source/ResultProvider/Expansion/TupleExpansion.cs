@@ -185,8 +185,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     childShouldParenthesize: false,
                     fullName: fullName,
                     childFullNamePrefixOpt: flags.Includes(DkmEvaluationResultFlags.ExceptionThrown)
-                      ? null
-                      : fullName,
+                        ? null
+                        : fullName,
                     formatSpecifiers: Formatter.AddFormatSpecifier(formatSpecifiers, "raw"),
                     category: DkmEvaluationResultCategory.Other,
                     flags: flags,
@@ -243,14 +243,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 (parentFullName == null)
                     ? null
                     : fullNameProvider.GetClrMemberName(
-                          inspectionContext,
-                          parentFullName,
-                          clrType: field.DeclaringTypeAndInfo.ClrType,
-                          customTypeInfo: null,
-                          memberName: fieldName,
-                          requiresExplicitCast: false,
-                          isStatic: false
-                      );
+                        inspectionContext,
+                        parentFullName,
+                        clrType: field.DeclaringTypeAndInfo.ClrType,
+                        customTypeInfo: null,
+                        memberName: fieldName,
+                        requiresExplicitCast: false,
+                        isStatic: false
+                    );
             return value.GetFieldValue(fieldName, inspectionContext);
         }
 
@@ -377,8 +377,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                             fieldTypeAndInfo,
                             field,
                             (offset == 0)
-                              ? fieldName
-                              : TypeHelpers.GetTupleFieldName(offset + index),
+                                ? fieldName
+                                : TypeHelpers.GetTupleFieldName(offset + index),
                             parent,
                             isRest: false
                         )

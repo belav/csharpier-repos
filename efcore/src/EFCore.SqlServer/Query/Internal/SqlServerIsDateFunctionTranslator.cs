@@ -49,7 +49,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             IDiagnosticsLogger<DbLoggerCategory.Query> logger
         ) =>
             _methodInfo.Equals(method)
-              ? _sqlExpressionFactory.Convert(
+                ? _sqlExpressionFactory.Convert(
                     _sqlExpressionFactory.Function(
                         "ISDATE",
                         new[] { arguments[1] },
@@ -59,6 +59,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                     ),
                     _methodInfo.ReturnType
                 )
-              : null;
+                : null;
     }
 }

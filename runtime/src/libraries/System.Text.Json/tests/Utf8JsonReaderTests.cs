@@ -2298,8 +2298,8 @@ namespace System.Text.Json.Tests
 
                     Assert.Equal(
                         commentHandling == JsonCommentHandling.Allow
-                          ? expectedWithComments
-                          : expectedWithoutComments,
+                            ? expectedWithComments
+                            : expectedWithoutComments,
                         builder.ToString()
                     );
                 }

@@ -371,8 +371,8 @@ namespace Microsoft.Cci
                 string typeName = GetOrCreateSerializedTypeName(import.TargetTypeOpt);
 
                 return (import.AliasOpt != null)
-                  ? "A" + import.AliasOpt + " T" + typeName
-                  : "T" + typeName;
+                    ? "A" + import.AliasOpt + " T" + typeName
+                    : "T" + typeName;
             }
 
             if (import.TargetNamespaceOpt != null)
@@ -384,28 +384,28 @@ namespace Microsoft.Cci
                 if (import.AliasOpt != null)
                 {
                     return (import.TargetAssemblyOpt != null)
-                      ? "A"
-                        + import.AliasOpt
-                        + " E"
-                        + namespaceName
-                        + " "
-                        + GetAssemblyReferenceAlias(
-                            import.TargetAssemblyOpt,
-                            declaredExternAliasesOpt
-                        )
-                      : "A" + import.AliasOpt + " U" + namespaceName;
+                        ? "A"
+                            + import.AliasOpt
+                            + " E"
+                            + namespaceName
+                            + " "
+                            + GetAssemblyReferenceAlias(
+                                import.TargetAssemblyOpt,
+                                declaredExternAliasesOpt
+                            )
+                        : "A" + import.AliasOpt + " U" + namespaceName;
                 }
                 else
                 {
                     return (import.TargetAssemblyOpt != null)
-                      ? "E"
-                        + namespaceName
-                        + " "
-                        + GetAssemblyReferenceAlias(
-                            import.TargetAssemblyOpt,
-                            declaredExternAliasesOpt
-                        )
-                      : "U" + namespaceName;
+                        ? "E"
+                            + namespaceName
+                            + " "
+                            + GetAssemblyReferenceAlias(
+                                import.TargetAssemblyOpt,
+                                declaredExternAliasesOpt
+                            )
+                        : "U" + namespaceName;
                 }
             }
 
@@ -610,8 +610,8 @@ namespace Microsoft.Cci
                         scopeLocal.Name,
                         (int)scopeLocal.PdbAttributes,
                         localSignatureHandleOpt.IsNil
-                          ? 0
-                          : MetadataTokens.GetToken(localSignatureHandleOpt)
+                            ? 0
+                            : MetadataTokens.GetToken(localSignatureHandleOpt)
                     );
                 }
             }

@@ -413,7 +413,7 @@ namespace System.Linq.Tests
 
         protected sealed class DelegateIterator<TSource>
             : IEnumerable<TSource>,
-              IEnumerator<TSource>
+                IEnumerator<TSource>
         {
             private readonly Func<IEnumerator<TSource>> _getEnumerator;
             private readonly Func<bool> _moveNext;

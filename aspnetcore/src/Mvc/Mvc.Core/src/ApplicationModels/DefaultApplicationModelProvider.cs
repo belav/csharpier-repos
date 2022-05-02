@@ -170,8 +170,8 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
             "Controller",
             StringComparison.OrdinalIgnoreCase
         )
-          ? typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length)
-          : typeInfo.Name;
+            ? typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length)
+            : typeInfo.Name;
 
         AddRange(controllerModel.Filters, attributes.OfType<IFilterMetadata>());
 

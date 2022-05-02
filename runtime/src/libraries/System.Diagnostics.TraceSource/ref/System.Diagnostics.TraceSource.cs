@@ -578,8 +578,8 @@ namespace System.Diagnostics
 
     public partial class TraceListenerCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         internal TraceListenerCollection() { }
 

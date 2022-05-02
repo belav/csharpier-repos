@@ -110,8 +110,8 @@ internal class PagedBufferedTextWriter : TextWriter
         var flushTask = FlushAsyncCore();
 
         return flushTask.IsCompletedSuccessfully
-          ? _inner.WriteAsync(value)
-          : WriteAsyncAwaited(flushTask, value);
+            ? _inner.WriteAsync(value)
+            : WriteAsyncAwaited(flushTask, value);
     }
 
     private async Task WriteAsyncAwaited(Task flushTask, char value)
@@ -125,8 +125,8 @@ internal class PagedBufferedTextWriter : TextWriter
         var flushTask = FlushAsyncCore();
 
         return flushTask.IsCompletedSuccessfully
-          ? _inner.WriteAsync(buffer, index, count)
-          : WriteAsyncAwaited(flushTask, buffer, index, count);
+            ? _inner.WriteAsync(buffer, index, count)
+            : WriteAsyncAwaited(flushTask, buffer, index, count);
     }
 
     private async Task WriteAsyncAwaited(Task flushTask, char[] buffer, int index, int count)
@@ -140,8 +140,8 @@ internal class PagedBufferedTextWriter : TextWriter
         var flushTask = FlushAsyncCore();
 
         return flushTask.IsCompletedSuccessfully
-          ? _inner.WriteAsync(value)
-          : WriteAsyncAwaited(flushTask, value);
+            ? _inner.WriteAsync(value)
+            : WriteAsyncAwaited(flushTask, value);
     }
 
     private async Task WriteAsyncAwaited(Task flushTask, string value)

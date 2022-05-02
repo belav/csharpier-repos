@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentMarkupEncodingPass
     : ComponentIntermediateNodePassBase,
-      IRazorOptimizationPass
+        IRazorOptimizationPass
 {
     // Runs after ComponentMarkupBlockPass
     public override int Order => ComponentMarkupDiagnosticPass.DefaultOrder + 20;

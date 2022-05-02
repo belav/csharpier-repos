@@ -101,15 +101,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
             node switch
             {
                 BinaryExpressionSyntax(LogicalAndExpression) logicalAnd
-                  => CombineLogicalAndOperands(logicalAnd, model),
+                    => CombineLogicalAndOperands(logicalAnd, model),
                 CasePatternSwitchLabelSyntax { WhenClause: { } whenClause } switchLabel
-                  => CombineWhenClauseCondition(switchLabel.Pattern, whenClause.Condition, model),
+                    => CombineWhenClauseCondition(switchLabel.Pattern, whenClause.Condition, model),
                 SwitchExpressionArmSyntax { WhenClause: { } whenClause } switchArm
-                  => CombineWhenClauseCondition(switchArm.Pattern, whenClause.Condition, model),
+                    => CombineWhenClauseCondition(switchArm.Pattern, whenClause.Condition, model),
                 WhenClauseSyntax { Parent: CasePatternSwitchLabelSyntax switchLabel } whenClause
-                  => CombineWhenClauseCondition(switchLabel.Pattern, whenClause.Condition, model),
+                    => CombineWhenClauseCondition(switchLabel.Pattern, whenClause.Condition, model),
                 WhenClauseSyntax { Parent: SwitchExpressionArmSyntax switchArm } whenClause
-                  => CombineWhenClauseCondition(switchArm.Pattern, whenClause.Condition, model),
+                    => CombineWhenClauseCondition(switchArm.Pattern, whenClause.Condition, model),
                 _ => null
             };
 
@@ -279,18 +279,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                 {
                     // e.g. `e is var x && x is { p: 1 }` => `e is { p: 1 } x`
                     (VarPatternSyntax var, RecursivePatternSyntax { Designation: null } recursive)
-                      => recursive.WithDesignation(var.Designation),
+                        => recursive.WithDesignation(var.Designation),
 
                     // e.g. `e is C x && x is { p: 1 }` => `is C { p: 1 } x`
                     (
                         DeclarationPatternSyntax decl,
                         RecursivePatternSyntax { Type: null, Designation: null } recursive
                     )
-                      => recursive.WithType(decl.Type).WithDesignation(decl.Designation),
+                        => recursive.WithType(decl.Type).WithDesignation(decl.Designation),
 
                     // e.g. `e is { p: 1 } x && x is C` => `is C { p: 1 } x`
                     (RecursivePatternSyntax { Type: null } recursive, TypePatternSyntax type)
-                      => recursive.WithType(type.Type),
+                        => recursive.WithType(type.Type),
 
                     // e.g. `e is { p: 1 } x && x is { q: 2 }` => `e is { p: 1, q: 2 } x`
                     (
@@ -299,22 +299,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                     )
                         when recursive.PositionalPatternClause is null
                             || other.PositionalPatternClause is null
-                      => recursive
-                          .WithPositionalPatternClause(
-                              recursive.PositionalPatternClause ?? other.PositionalPatternClause
-                          )
-                          .WithPropertyPatternClause(
-                              Concat(recursive.PropertyPatternClause, other.PropertyPatternClause)
-                          ),
+                        => recursive
+                            .WithPositionalPatternClause(
+                                recursive.PositionalPatternClause ?? other.PositionalPatternClause
+                            )
+                            .WithPropertyPatternClause(
+                                Concat(recursive.PropertyPatternClause, other.PropertyPatternClause)
+                            ),
 
                     // In any other case, we fallback to an `and` pattern.
                     // UNDONE: This may result in a few unused variables which should be removed in a later pass.
                     _
-                      => BinaryPattern(
-                          AndPattern,
-                          containingPattern.Parenthesize(),
-                          generatedPattern.Parenthesize()
-                      ),
+                        => BinaryPattern(
+                            AndPattern,
+                            containingPattern.Parenthesize(),
+                            generatedPattern.Parenthesize()
+                        ),
                 };
             }
 
@@ -330,7 +330,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
 
                     // e.g. `case Type x when x.p is 1` => `case Type { p: 1 } x`
                     DeclarationPatternSyntax p
-                      => RecursivePattern(p.Type, subpattern, p.Designation),
+                        => RecursivePattern(p.Type, subpattern, p.Designation),
 
                     // e.g. `case { p: 1 } x when x.q is 2` => `case { p: 1, q: 2 } x`
                     RecursivePatternSyntax p => p.AddPropertyPatternClauseSubpatterns(subpattern),
@@ -367,26 +367,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                 // A pattern come from an `is` expression on either side of `&&`
                 PatternSyntax pattern => pattern,
                 TypeSyntax type when originalReceiver.IsParentKind(IsExpression)
-                  => TypePattern(type),
+                    => TypePattern(type),
                 // Otherwise, this is a constant. Depending on the original receiver, we create an appropriate pattern.
                 ExpressionSyntax constant
-                  => originalReceiver.Parent switch
-                  {
-                      BinaryExpressionSyntax(EqualsExpression) => ConstantPattern(constant),
-                      BinaryExpressionSyntax(NotEqualsExpression)
-                        => UnaryPattern(ConstantPattern(constant)),
-                      BinaryExpressionSyntax(
-                          GreaterThanExpression
-                              or GreaterThanOrEqualExpression
-                              or LessThanOrEqualExpression
-                              or LessThanExpression
-                      ) e
-                        => RelationalPattern(
-                            flipped ? Flip(e.OperatorToken) : e.OperatorToken,
-                            constant
-                        ),
-                      var v => throw ExceptionUtilities.UnexpectedValue(v),
-                  },
+                    => originalReceiver.Parent switch
+                    {
+                        BinaryExpressionSyntax(EqualsExpression) => ConstantPattern(constant),
+                        BinaryExpressionSyntax(NotEqualsExpression)
+                            => UnaryPattern(ConstantPattern(constant)),
+                        BinaryExpressionSyntax(
+                            GreaterThanExpression
+                                or GreaterThanOrEqualExpression
+                                or LessThanOrEqualExpression
+                                or LessThanExpression
+                        ) e
+                            => RelationalPattern(
+                                flipped ? Flip(e.OperatorToken) : e.OperatorToken,
+                                constant
+                            ),
+                        var v => throw ExceptionUtilities.UnexpectedValue(v),
+                    },
                 var v => throw ExceptionUtilities.UnexpectedValue(v),
             };
 
@@ -458,7 +458,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                         or LessThanOrEqualExpression
                         or LessThanExpression
                 ) expr
-                  => TryDetermineConstant(expr, model),
+                    => TryDetermineConstant(expr, model),
 
                 // If we found a `&&` here, there's two possibilities:
                 //
@@ -472,23 +472,23 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                 //     For simplicity, we won't descend into any parenthesized expression here.
                 //
                 BinaryExpressionSyntax(LogicalAndExpression) expr
-                  => TryDetermineReceiver(
-                      inWhenClause ? expr.Left : expr.Right,
-                      model,
-                      inWhenClause
-                  ),
+                    => TryDetermineReceiver(
+                        inWhenClause ? expr.Left : expr.Right,
+                        model,
+                        inWhenClause
+                    ),
 
                 // If we have an `is` operator, we'll try to combine the existing pattern/type with the other operand.
                 BinaryExpressionSyntax(IsExpression) { Right: NullableTypeSyntax type } expr
-                  => (expr.Left, type.ElementType, Flipped: false),
+                    => (expr.Left, type.ElementType, Flipped: false),
                 BinaryExpressionSyntax(IsExpression) { Right: TypeSyntax type } expr
-                  => (expr.Left, type, Flipped: false),
+                    => (expr.Left, type, Flipped: false),
                 IsPatternExpressionSyntax expr => (expr.Expression, expr.Pattern, Flipped: false),
 
                 // We treat any other expression as if they were compared to true/false.
                 // For instance, `a.b && !a.c` will be converted to `a is { b: true, c: false }`
                 PrefixUnaryExpressionSyntax(LogicalNotExpression) expr
-                  => (expr.Operand, s_falseConstantPattern, Flipped: false),
+                    => (expr.Operand, s_falseConstantPattern, Flipped: false),
                 var expr => (expr, s_trueConstantPattern, Flipped: false),
             };
 
@@ -500,9 +500,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                 return (node.Left, node.Right) switch
                 {
                     var (left, right) when model.GetConstantValue(left).HasValue
-                      => (right, left, Flipped: true),
+                        => (right, left, Flipped: true),
                     var (left, right) when model.GetConstantValue(right).HasValue
-                      => (left, right, Flipped: false),
+                        => (left, right, Flipped: false),
                     _ => null
                 };
             }
@@ -660,7 +660,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                         return null;
 
                     case MemberBindingExpressionSyntax { Name: IdentifierNameSyntax name }
-                          when canConvertToSubpattern(name, arg):
+                    when canConvertToSubpattern(name, arg):
                         builder?.Add(name);
                         // We only reach here from a parent conditional-access.
                         // Returning null here means that all the names on the right were convertible to a property pattern.
@@ -670,8 +670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseRecursivePatterns
                     {
                         Name: IdentifierNameSyntax name
                     } memberAccess
-                          when canConvertToSubpattern(name, arg)
-                              && !memberAccess.Expression.IsKind(SyntaxKind.BaseExpression):
+                    when canConvertToSubpattern(name, arg)
+                        && !memberAccess.Expression.IsKind(SyntaxKind.BaseExpression):
                         builder?.Add(name);
                         // For a simple member access we simply record the name and descend into the expression on the left-hand-side.
                         return GetInnermostReceiver(memberAccess.Expression);

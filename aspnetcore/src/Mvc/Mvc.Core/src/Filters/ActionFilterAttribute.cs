@@ -20,11 +20,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 )]
 public abstract class ActionFilterAttribute
     : Attribute,
-      IActionFilter,
-      IAsyncActionFilter,
-      IResultFilter,
-      IAsyncResultFilter,
-      IOrderedFilter
+        IActionFilter,
+        IAsyncActionFilter,
+        IResultFilter,
+        IAsyncResultFilter,
+        IOrderedFilter
 {
     /// <inheritdoc />
     public int Order { get; set; }

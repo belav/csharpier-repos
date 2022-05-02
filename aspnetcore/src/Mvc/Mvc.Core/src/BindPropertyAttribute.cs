@@ -20,9 +20,9 @@ namespace Microsoft.AspNetCore.Mvc;
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 public class BindPropertyAttribute
     : Attribute,
-      IModelNameProvider,
-      IBinderTypeProviderMetadata,
-      IRequestPredicateProvider
+        IModelNameProvider,
+        IBinderTypeProviderMetadata,
+        IRequestPredicateProvider
 {
     private static readonly Func<ActionContext, bool> _supportsAllRequests = (c) => true;
     private static readonly Func<ActionContext, bool> _supportsNonGetRequests = IsNonGetRequest;

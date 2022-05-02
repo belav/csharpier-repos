@@ -171,8 +171,8 @@ namespace Microsoft.CodeAnalysis.Tools
             var folder = symbolResult.ValueForOption<bool>("--folder");
             var fixAnalyzers = symbolResult.OptionResult("--fix-analyzers");
             return folder && fixAnalyzers != null
-              ? Resources.Cannot_specify_the_folder_option_when_running_analyzers
-              : null;
+                ? Resources.Cannot_specify_the_folder_option_when_running_analyzers
+                : null;
         }
 
         internal static string? EnsureFolderNotSpecifiedWhenFixingStyle(CommandResult symbolResult)
@@ -180,8 +180,8 @@ namespace Microsoft.CodeAnalysis.Tools
             var folder = symbolResult.ValueForOption<bool>("--folder");
             var fixStyle = symbolResult.OptionResult("--fix-style");
             return folder && fixStyle != null
-              ? Resources.Cannot_specify_the_folder_option_when_fixing_style
-              : null;
+                ? Resources.Cannot_specify_the_folder_option_when_fixing_style
+                : null;
         }
 
         internal static string? EnsureFolderNotSpecifiedWithNoRestore(CommandResult symbolResult)
@@ -189,8 +189,8 @@ namespace Microsoft.CodeAnalysis.Tools
             var folder = symbolResult.ValueForOption<bool>("--folder");
             var noRestore = symbolResult.OptionResult("--no-restore");
             return folder && noRestore != null
-              ? Resources.Cannot_specify_the_folder_option_with_no_restore
-              : null;
+                ? Resources.Cannot_specify_the_folder_option_with_no_restore
+                : null;
         }
 
         internal static string? EnsureFolderNotSpecifiedWhenLoggingBinlog(
@@ -200,8 +200,8 @@ namespace Microsoft.CodeAnalysis.Tools
             var folder = symbolResult.ValueForOption<bool>("--folder");
             var binarylog = symbolResult.OptionResult("--binarylog");
             return folder && binarylog is not null && !binarylog.IsImplicit
-              ? Resources.Cannot_specify_the_folder_option_when_writing_a_binary_log
-              : null;
+                ? Resources.Cannot_specify_the_folder_option_when_writing_a_binary_log
+                : null;
         }
 
         internal static bool WasOptionUsed(this ParseResult result, params string[] aliases)

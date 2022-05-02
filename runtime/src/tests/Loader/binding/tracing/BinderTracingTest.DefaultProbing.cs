@@ -189,10 +189,10 @@ namespace BinderTracingTests
             {
                 AssemblyName requested = new AssemblyName(args.Name);
                 return requested.Name == SubdirectoryAssemblyName
-                  ? Assembly.LoadFile(
+                    ? Assembly.LoadFile(
                         Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName)
                     )
-                  : null;
+                    : null;
             }
             ;
 

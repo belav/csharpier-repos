@@ -2676,7 +2676,7 @@ namespace Microsoft.EntityFrameworkCore
 
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                    ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: IncludeMethodInfo.MakeGenericMethod(
@@ -2690,7 +2690,7 @@ namespace Microsoft.EntityFrameworkCore
                             }
                         )
                     )
-                  : source
+                    : source
             );
         }
 
@@ -2705,7 +2705,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             return new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                    ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
@@ -2719,7 +2719,7 @@ namespace Microsoft.EntityFrameworkCore
                             }
                         )
                     )
-                  : source
+                    : source
             );
         }
 
@@ -2804,7 +2804,7 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                    ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
@@ -2819,7 +2819,7 @@ namespace Microsoft.EntityFrameworkCore
                             }
                         )
                     )
-                  : source
+                    : source
             );
 
         /// <summary>
@@ -2873,7 +2873,7 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             new IncludableQueryable<TEntity, TProperty>(
                 source.Provider is EntityQueryProvider
-                  ? source.Provider.CreateQuery<TEntity>(
+                    ? source.Provider.CreateQuery<TEntity>(
                         Expression.Call(
                             instance: null,
                             method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
@@ -2888,12 +2888,12 @@ namespace Microsoft.EntityFrameworkCore
                             }
                         )
                     )
-                  : source
+                    : source
             );
 
         private sealed class IncludableQueryable<TEntity, TProperty>
             : IIncludableQueryable<TEntity, TProperty>,
-              IAsyncEnumerable<TEntity>
+                IAsyncEnumerable<TEntity>
         {
             private readonly IQueryable<TEntity> _queryable;
 
@@ -2973,7 +2973,7 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<TEntity>(
+                ? source.Provider.CreateQuery<TEntity>(
                     Expression.Call(
                         instance: null,
                         method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
@@ -2981,7 +2981,7 @@ namespace Microsoft.EntityFrameworkCore
                         arg1: Expression.Constant(navigationPropertyPath)
                     )
                 )
-              : source;
+                : source;
         }
 
         #endregion
@@ -3007,12 +3007,12 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
                 : source;
 
         #endregion
@@ -3039,12 +3039,12 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
                 : source;
 
         #endregion
@@ -3087,12 +3087,12 @@ namespace Microsoft.EntityFrameworkCore
             where TEntity : class =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
                 : source;
 
         internal static readonly MethodInfo AsNoTrackingWithIdentityResolutionMethodInfo =
@@ -3132,14 +3132,14 @@ namespace Microsoft.EntityFrameworkCore
         ) where TEntity : class =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
-                              typeof(TEntity)
-                          ),
-                          arguments: source.Expression
-                      )
-                  )
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
+                            typeof(TEntity)
+                        ),
+                        arguments: source.Expression
+                    )
+                )
                 : source;
 
         internal static readonly MethodInfo AsTrackingMethodInfo =
@@ -3169,12 +3169,12 @@ namespace Microsoft.EntityFrameworkCore
             where TEntity : class =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
-                      Expression.Call(
-                          instance: null,
-                          method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                          arguments: source.Expression
-                      )
-                  )
+                    Expression.Call(
+                        instance: null,
+                        method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
+                )
                 : source;
 
         /// <summary>
@@ -3213,7 +3213,7 @@ namespace Microsoft.EntityFrameworkCore
                 QueryTrackingBehavior.TrackAll => source.AsTracking(),
                 QueryTrackingBehavior.NoTracking => source.AsNoTracking(),
                 QueryTrackingBehavior.NoTrackingWithIdentityResolution
-                  => source.AsNoTrackingWithIdentityResolution(),
+                    => source.AsNoTrackingWithIdentityResolution(),
                 _ => throw new ArgumentOutOfRangeException(nameof(track))
             };
 
@@ -3277,7 +3277,7 @@ namespace Microsoft.EntityFrameworkCore
             Check.NotEmpty(tag, nameof(tag));
 
             return source.Provider is EntityQueryProvider
-              ? source.Provider.CreateQuery<T>(
+                ? source.Provider.CreateQuery<T>(
                     Expression.Call(
                         instance: null,
                         method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
@@ -3285,7 +3285,7 @@ namespace Microsoft.EntityFrameworkCore
                         arg1: Expression.Constant(tag)
                     )
                 )
-              : source;
+                : source;
         }
 
         /// <summary>
@@ -3310,14 +3310,14 @@ namespace Microsoft.EntityFrameworkCore
         ) =>
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<T>(
-                      Expression.Call(
-                          instance: null,
-                          method: TagWithCallSiteMethodInfo.MakeGenericMethod(typeof(T)),
-                          arg0: source.Expression,
-                          arg1: Expression.Constant(filePath),
-                          arg2: Expression.Constant(lineNumber)
-                      )
-                  )
+                    Expression.Call(
+                        instance: null,
+                        method: TagWithCallSiteMethodInfo.MakeGenericMethod(typeof(T)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(filePath),
+                        arg2: Expression.Constant(lineNumber)
+                    )
+                )
                 : source;
 
         #endregion
@@ -3646,9 +3646,9 @@ namespace Microsoft.EntityFrameworkCore
                     operatorMethodInfo =
                         operatorMethodInfo.GetGenericArguments().Length == 2
                             ? operatorMethodInfo.MakeGenericMethod(
-                                  typeof(TSource),
-                                  typeof(TResult).GetGenericArguments().Single()
-                              )
+                                typeof(TSource),
+                                typeof(TResult).GetGenericArguments().Single()
+                            )
                             : operatorMethodInfo.MakeGenericMethod(typeof(TSource));
                 }
 
@@ -3657,8 +3657,8 @@ namespace Microsoft.EntityFrameworkCore
                         instance: null,
                         method: operatorMethodInfo,
                         arguments: expression == null
-                          ? new[] { source.Expression }
-                          : new[] { source.Expression, expression }
+                            ? new[] { source.Expression }
+                            : new[] { source.Expression, expression }
                     ),
                     cancellationToken
                 );

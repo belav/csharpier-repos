@@ -383,7 +383,7 @@ namespace Microsoft.AspNetCore.Components.Forms
 
     public partial class ValidationMessage<TValue>
         : Microsoft.AspNetCore.Components.ComponentBase,
-          System.IDisposable
+            System.IDisposable
     {
         public ValidationMessage() { }
 
@@ -418,7 +418,7 @@ namespace Microsoft.AspNetCore.Components.Forms
 
     public partial class ValidationSummary
         : Microsoft.AspNetCore.Components.ComponentBase,
-          System.IDisposable
+            System.IDisposable
     {
         public ValidationSummary() { }
 

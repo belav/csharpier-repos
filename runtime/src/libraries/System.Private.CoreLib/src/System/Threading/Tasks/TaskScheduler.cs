@@ -327,8 +327,8 @@ namespace System.Threading.Tasks
                     (currentTask != null)
                     && ((currentTask.CreationOptions & TaskCreationOptions.HideScheduler) == 0)
                 )
-                  ? currentTask.ExecutingTaskScheduler
-                  : null;
+                    ? currentTask.ExecutingTaskScheduler
+                    : null;
             }
         }
 

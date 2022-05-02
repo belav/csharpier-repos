@@ -72,13 +72,13 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             foreignKey
                 .GetDependentKeyValueFactory<TKey>()!
                 .TryCreateFromCurrentValues(entry, out var keyValue)
-              ? new KeyValueIndex<TKey>(
+                ? new KeyValueIndex<TKey>(
                     foreignKey,
                     keyValue,
                     _principalKeyValueFactory.EqualityComparer,
                     fromOriginalValues: false
                 )
-              : null;
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -93,12 +93,12 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
             foreignKey
                 .GetDependentKeyValueFactory<TKey>()!
                 .TryCreateFromOriginalValues(entry, out var keyValue)
-              ? new KeyValueIndex<TKey>(
+                ? new KeyValueIndex<TKey>(
                     foreignKey,
                     keyValue,
                     _principalKeyValueFactory.EqualityComparer,
                     fromOriginalValues: true
                 )
-              : null;
+                : null;
     }
 }

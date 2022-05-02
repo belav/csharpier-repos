@@ -44,12 +44,12 @@ namespace System.DirectoryServices.Tests
         internal bool UseTls { get; set; }
         internal string LdapPath =>
             string.IsNullOrEmpty(Port)
-              ? $"LDAP://{ServerName}/{SearchDn}"
-              : $"LDAP://{ServerName}:{Port}/{SearchDn}";
+                ? $"LDAP://{ServerName}/{SearchDn}"
+                : $"LDAP://{ServerName}:{Port}/{SearchDn}";
         internal string RootDSEPath =>
             string.IsNullOrEmpty(Port)
-              ? $"LDAP://{ServerName}/rootDSE"
-              : $"LDAP://{ServerName}:{Port}/rootDSE";
+                ? $"LDAP://{ServerName}/rootDSE"
+                : $"LDAP://{ServerName}:{Port}/rootDSE";
         internal string UserNameWithNoDomain
         {
             get
@@ -69,8 +69,8 @@ namespace System.DirectoryServices.Tests
         internal string GetLdapPath(string prefix) // like "ou=something"
         {
             return string.IsNullOrEmpty(Port)
-              ? $"LDAP://{ServerName}/{prefix},{SearchDn}"
-              : $"LDAP://{ServerName}:{Port}/{prefix},{SearchDn}";
+                ? $"LDAP://{ServerName}/{prefix},{SearchDn}"
+                : $"LDAP://{ServerName}:{Port}/{prefix},{SearchDn}";
         }
 
         private const string LDAP_CAP_ACTIVE_DIRECTORY_OID = "1.2.840.113556.1.4.800";

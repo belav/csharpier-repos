@@ -101,7 +101,7 @@ public class JSObjectReferenceJsonConverterTest
 
     private class TestJSUnmarshalledObjectReference
         : JSInProcessObjectReference,
-          IJSUnmarshalledObjectReference
+            IJSUnmarshalledObjectReference
     {
         public TestJSUnmarshalledObjectReference(long id) : base(default!, id) { }
 

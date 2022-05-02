@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteValueTrackingService
         : BrokeredServiceBase,
-          IRemoteValueTrackingService
+            IRemoteValueTrackingService
     {
         internal sealed class Factory : FactoryBase<IRemoteValueTrackingService>
         {

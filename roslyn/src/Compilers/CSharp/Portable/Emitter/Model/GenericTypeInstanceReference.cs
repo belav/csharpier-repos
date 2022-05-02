@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal abstract class GenericTypeInstanceReference
         : NamedTypeReference,
-          Cci.IGenericTypeInstanceReference
+            Cci.IGenericTypeInstanceReference
     {
         public GenericTypeInstanceReference(NamedTypeSymbol underlyingNamedType)
             : base(underlyingNamedType)

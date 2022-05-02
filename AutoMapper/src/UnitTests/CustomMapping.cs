@@ -20,7 +20,7 @@ namespace AutoMapper.UnitTests
 
         public class MyTestResolver
             : IValueResolver<Source1, Destination, string>,
-              IValueResolver<Source2, Destination, string>
+                IValueResolver<Source2, Destination, string>
         {
             public string Resolve(
                 Source1 source,

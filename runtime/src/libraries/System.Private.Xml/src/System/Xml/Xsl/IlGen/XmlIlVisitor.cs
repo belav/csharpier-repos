@@ -542,8 +542,8 @@ namespace System.Xml.Xsl.IlGen
                 // code which can cause IL verification errors.
                 _helper.EmitUnconditionalBranch(
                     _iterCurr.CurrentBranchingContext == BranchingContext.OnTrue
-                      ? OpCodes.Brtrue
-                      : OpCodes.Brfalse,
+                        ? OpCodes.Brtrue
+                        : OpCodes.Brfalse,
                     _iterCurr.LabelBranch
                 );
 
@@ -575,8 +575,8 @@ namespace System.Xml.Xsl.IlGen
                 // code which can cause IL verification errors.
                 _helper.EmitUnconditionalBranch(
                     _iterCurr.CurrentBranchingContext == BranchingContext.OnFalse
-                      ? OpCodes.Brtrue
-                      : OpCodes.Brfalse,
+                        ? OpCodes.Brtrue
+                        : OpCodes.Brfalse,
                     _iterCurr.LabelBranch
                 );
 
@@ -2251,8 +2251,8 @@ namespace System.Xml.Xsl.IlGen
                             kinds,
                             name,
                             (step.NodeType == QilNodeType.Ancestor)
-                              ? TriState.False
-                              : TriState.True,
+                                ? TriState.False
+                                : TriState.True,
                             null
                         );
                         return true;
@@ -2269,8 +2269,8 @@ namespace System.Xml.Xsl.IlGen
                             kinds,
                             name,
                             (step.NodeType == QilNodeType.Descendant)
-                              ? TriState.False
-                              : TriState.True,
+                                ? TriState.False
+                                : TriState.True,
                             null
                         );
                         return true;
@@ -2838,8 +2838,8 @@ namespace System.Xml.Xsl.IlGen
                                 kinds,
                                 name,
                                 (step.NodeType == QilNodeType.Descendant)
-                                  ? TriState.False
-                                  : TriState.True
+                                    ? TriState.False
+                                    : TriState.True
                             );
                             return true;
 
@@ -2907,8 +2907,8 @@ namespace System.Xml.Xsl.IlGen
                                 kinds,
                                 name,
                                 (step.NodeType == QilNodeType.Ancestor)
-                                  ? TriState.False
-                                  : TriState.True,
+                                    ? TriState.False
+                                    : TriState.True,
                                 null
                             );
                             return true;
@@ -3815,8 +3815,8 @@ namespace System.Xml.Xsl.IlGen
                 _helper.LoadInteger((int)codeBase);
                 _helper.Call(
                     typDerived.IsSingleton
-                      ? XmlILMethods.ItemMatchesCode
-                      : XmlILMethods.SeqMatchesCode
+                        ? XmlILMethods.ItemMatchesCode
+                        : XmlILMethods.SeqMatchesCode
                 );
                 ZeroCompare(QilNodeType.Ne, true);
 

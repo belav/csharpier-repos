@@ -10,7 +10,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
     {
         private sealed class LspContainedDocumentServiceProvider
             : IDocumentServiceProvider,
-              IDocumentOperationService
+                IDocumentOperationService
         {
             private readonly VirtualDocumentPropertiesService _documentPropertiesService;
 

@@ -237,8 +237,8 @@ namespace System.Runtime.Serialization
                 return null;
             DataContract? outDataContract;
             return serializerKnownDataContracts.TryGetValue(qname, out outDataContract)
-              ? outDataContract
-              : null;
+                ? outDataContract
+                : null;
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

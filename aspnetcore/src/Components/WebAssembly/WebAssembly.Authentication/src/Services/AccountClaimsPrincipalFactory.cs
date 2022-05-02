@@ -42,10 +42,10 @@ public class AccountClaimsPrincipalFactory<TAccount> where TAccount : RemoteUser
         var identity =
             account != null
                 ? new ClaimsIdentity(
-                      options.AuthenticationType,
-                      options.NameClaim,
-                      options.RoleClaim
-                  )
+                    options.AuthenticationType,
+                    options.NameClaim,
+                    options.RoleClaim
+                )
                 : new ClaimsIdentity();
 
         if (account != null)

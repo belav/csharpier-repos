@@ -391,8 +391,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.FullyQualify
                         new SymbolResult(
                             n,
                             BindsWithoutErrors(n, rightName, isAttributeName)
-                              ? NamespaceWithNoErrorsWeight
-                              : NamespaceWithErrorsWeight
+                                ? NamespaceWithNoErrorsWeight
+                                : NamespaceWithErrorsWeight
                         )
                 );
 

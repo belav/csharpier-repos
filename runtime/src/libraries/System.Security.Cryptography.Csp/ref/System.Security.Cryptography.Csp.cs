@@ -245,7 +245,7 @@ namespace System.Security.Cryptography
 
     public sealed partial class DSACryptoServiceProvider
         : System.Security.Cryptography.DSA,
-          System.Security.Cryptography.ICspAsymmetricAlgorithm
+            System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
         public DSACryptoServiceProvider() { }
 
@@ -600,7 +600,7 @@ namespace System.Security.Cryptography
 
     public sealed partial class RSACryptoServiceProvider
         : System.Security.Cryptography.RSA,
-          System.Security.Cryptography.ICspAsymmetricAlgorithm
+            System.Security.Cryptography.ICspAsymmetricAlgorithm
     {
         public RSACryptoServiceProvider() { }
 

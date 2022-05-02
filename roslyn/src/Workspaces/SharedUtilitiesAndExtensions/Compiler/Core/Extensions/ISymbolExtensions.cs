@@ -87,11 +87,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             symbol switch
             {
                 IEventSymbol @event
-                  => ImmutableArray<ISymbol>.CastUp(@event.ExplicitInterfaceImplementations),
+                    => ImmutableArray<ISymbol>.CastUp(@event.ExplicitInterfaceImplementations),
                 IMethodSymbol method
-                  => ImmutableArray<ISymbol>.CastUp(method.ExplicitInterfaceImplementations),
+                    => ImmutableArray<ISymbol>.CastUp(method.ExplicitInterfaceImplementations),
                 IPropertySymbol property
-                  => ImmutableArray<ISymbol>.CastUp(property.ExplicitInterfaceImplementations),
+                    => ImmutableArray<ISymbol>.CastUp(property.ExplicitInterfaceImplementations),
                 _ => ImmutableArray.Create<ISymbol>(),
             };
 
@@ -517,8 +517,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // Convert the symbol to Func<...> or Action<...>
                 var delegateType = compilation.GetTypeByMetadataName(
                     method.ReturnsVoid
-                      ? WithArity("System.Action", count)
-                      : WithArity("System.Func", count + 1)
+                        ? WithArity("System.Action", count)
+                        : WithArity("System.Func", count + 1)
                 );
 
                 if (delegateType != null)
@@ -617,14 +617,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     return symbol.ContainingAssembly.GivesAccessTo(
                         finalDestination.ContainingAssembly
                     )
-                      ? Accessibility.ProtectedAndInternal
-                      : Accessibility.Internal;
+                        ? Accessibility.ProtectedAndInternal
+                        : Accessibility.Internal;
                 case Accessibility.ProtectedOrInternal:
                     return symbol.ContainingAssembly.GivesAccessTo(
                         finalDestination.ContainingAssembly
                     )
-                      ? Accessibility.ProtectedOrInternal
-                      : Accessibility.Protected;
+                        ? Accessibility.ProtectedOrInternal
+                        : Accessibility.Protected;
             }
         }
 

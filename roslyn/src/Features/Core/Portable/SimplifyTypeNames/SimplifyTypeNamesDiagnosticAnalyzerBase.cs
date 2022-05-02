@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.SimplifyTypeNames
 {
     internal abstract class SimplifyTypeNamesDiagnosticAnalyzerBase<TLanguageKindEnum>
         : DiagnosticAnalyzer,
-          IBuiltInAnalyzer where TLanguageKindEnum : struct
+            IBuiltInAnalyzer where TLanguageKindEnum : struct
     {
 #if LOG
         private static string _logFile = @"c:\temp\simplifytypenames.txt";

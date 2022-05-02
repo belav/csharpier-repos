@@ -92,8 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Equal(documentId, GetDocumentId(workspace));
 
             return _diagnostic == null
-              ? ImmutableArray<DiagnosticData>.Empty
-              : ImmutableArray.Create(_diagnostic);
+                ? ImmutableArray<DiagnosticData>.Empty
+                : ImmutableArray.Create(_diagnostic);
         }
 
         public ImmutableArray<DiagnosticBucket> GetPullDiagnosticBuckets(
@@ -128,8 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Equal(documentId, GetDocumentId(workspace));
 
             return _diagnostic == null
-              ? ImmutableArray<DiagnosticBucket>.Empty
-              : ImmutableArray.Create(
+                ? ImmutableArray<DiagnosticBucket>.Empty
+                : ImmutableArray.Create(
                     new DiagnosticBucket(
                         this,
                         workspace,

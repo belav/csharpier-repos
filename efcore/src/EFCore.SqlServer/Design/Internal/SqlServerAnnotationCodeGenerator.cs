@@ -258,8 +258,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             {
                 fragments.Add(
                     isSparse
-                      ? new(_propertyIsSparseMethodInfo)
-                      : new(_propertyIsSparseMethodInfo, false)
+                        ? new(_propertyIsSparseMethodInfo)
+                        : new(_propertyIsSparseMethodInfo, false)
                 );
             }
 
@@ -288,8 +288,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             {
                 fragments.Add(
                     isMemoryOptimized
-                      ? new(_entityTypeIsMemoryOptimizedMethodInfo)
-                      : new(_entityTypeIsMemoryOptimizedMethodInfo, false)
+                        ? new(_entityTypeIsMemoryOptimizedMethodInfo)
+                        : new(_entityTypeIsMemoryOptimizedMethodInfo, false)
                 );
             }
 
@@ -304,14 +304,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                 var historyTableName = annotations.ContainsKey(
                     SqlServerAnnotationNames.TemporalHistoryTableName
                 )
-                  ? annotations[SqlServerAnnotationNames.TemporalHistoryTableName].Value as string
-                  : null;
+                    ? annotations[SqlServerAnnotationNames.TemporalHistoryTableName].Value as string
+                    : null;
 
                 var historyTableSchema = annotations.ContainsKey(
                     SqlServerAnnotationNames.TemporalHistoryTableSchema
                 )
-                  ? annotations[SqlServerAnnotationNames.TemporalHistoryTableSchema].Value as string
-                  : null;
+                    ? annotations[SqlServerAnnotationNames.TemporalHistoryTableSchema].Value
+                        as string
+                    : null;
 
                 // for the RevEng path, we avoid adding period properties to the entity
                 // because we don't want code for them to be generated - they need to be in shadow state
@@ -339,12 +340,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                 {
                     temporalTableBuilderCalls.Add(
                         historyTableSchema != null
-                          ? new MethodCallCodeFragment(
+                            ? new MethodCallCodeFragment(
                                 _temporalTableUseHistoryTableMethodInfo1,
                                 historyTableName,
                                 historyTableSchema
                             )
-                          : new MethodCallCodeFragment(
+                            : new MethodCallCodeFragment(
                                 _temporalTableUseHistoryTableMethodInfo2,
                                 historyTableName
                             )
@@ -354,7 +355,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                 // ttb => ttb.HasPeriodStart("Start").HasColumnName("ColumnStart")
                 temporalTableBuilderCalls.Add(
                     periodStartColumnName != null
-                      ? new MethodCallCodeFragment(
+                        ? new MethodCallCodeFragment(
                             _temporalTableHasPeriodStartMethodInfo,
                             periodStartPropertyName
                         ).Chain(
@@ -363,7 +364,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                                 periodStartColumnName
                             )
                         )
-                      : new MethodCallCodeFragment(
+                        : new MethodCallCodeFragment(
                             _temporalTableHasPeriodStartMethodInfo,
                             periodStartPropertyName
                         )
@@ -372,7 +373,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                 // ttb => ttb.HasPeriodEnd("End").HasColumnName("ColumnEnd")
                 temporalTableBuilderCalls.Add(
                     periodEndColumnName != null
-                      ? new MethodCallCodeFragment(
+                        ? new MethodCallCodeFragment(
                             _temporalTableHasPeriodEndMethodInfo,
                             periodEndPropertyName
                         ).Chain(
@@ -381,7 +382,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                                 periodEndColumnName
                             )
                         )
-                      : new MethodCallCodeFragment(
+                        : new MethodCallCodeFragment(
                             _temporalTableHasPeriodEndMethodInfo,
                             periodEndPropertyName
                         )
@@ -458,17 +459,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
             annotation.Name switch
             {
                 SqlServerAnnotationNames.Clustered
-                  => (bool)annotation.Value! == false
-                      ? new MethodCallCodeFragment(_indexIsClusteredMethodInfo, false)
-                      : new MethodCallCodeFragment(_indexIsClusteredMethodInfo),
+                    => (bool)annotation.Value! == false
+                        ? new MethodCallCodeFragment(_indexIsClusteredMethodInfo, false)
+                        : new MethodCallCodeFragment(_indexIsClusteredMethodInfo),
 
                 SqlServerAnnotationNames.Include
-                  => new MethodCallCodeFragment(
-                      _indexIncludePropertiesMethodInfo,
-                      annotation.Value
-                  ),
+                    => new MethodCallCodeFragment(
+                        _indexIncludePropertiesMethodInfo,
+                        annotation.Value
+                    ),
                 SqlServerAnnotationNames.FillFactor
-                  => new MethodCallCodeFragment(_indexHasFillFactorMethodInfo, annotation.Value),
+                    => new MethodCallCodeFragment(_indexHasFillFactorMethodInfo, annotation.Value),
 
                 _ => null
             };
@@ -530,8 +531,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Design.Internal
                         ?? 1;
                     return new(
                         onModel
-                          ? _modelUseIdentityColumnsMethodInfo
-                          : _propertyUseIdentityColumnsMethodInfo,
+                            ? _modelUseIdentityColumnsMethodInfo
+                            : _propertyUseIdentityColumnsMethodInfo,
                         seed,
                         increment
                     );

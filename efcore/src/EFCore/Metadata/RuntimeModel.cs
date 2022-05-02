@@ -147,8 +147,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 entityType == null ? Array.Empty<RuntimeEntityType>() : new[] { entityType };
 
             return _sharedTypes.TryGetValue(type, out var sharedTypes)
-              ? result.Concat(sharedTypes)
-              : result;
+                ? result.Concat(sharedTypes)
+                : result;
         }
 
         /// <summary>

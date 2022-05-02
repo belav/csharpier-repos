@@ -382,8 +382,8 @@ namespace System.IO.Tests
         )
         {
             string expected = PathFeatures.IsUsingLegacyPathNormalization()
-              ? legacyExpected
-              : normalExpected;
+                ? legacyExpected
+                : normalExpected;
             Assert.Equal(expected, Path.GetFullPath(path));
         }
 

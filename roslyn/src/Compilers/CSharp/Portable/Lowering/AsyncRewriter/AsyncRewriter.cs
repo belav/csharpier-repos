@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 bool containsAwait = AwaitDetector.ContainsAwait(bodyWithAwaitLifted);
                 diagnostics.Add(
                     containsAwait
-                      ? ErrorCode.ERR_PossibleAsyncIteratorWithoutYield
-                      : ErrorCode.ERR_PossibleAsyncIteratorWithoutYieldOrAwait,
+                        ? ErrorCode.ERR_PossibleAsyncIteratorWithoutYield
+                        : ErrorCode.ERR_PossibleAsyncIteratorWithoutYieldOrAwait,
                     method.Locations[0],
                     method.ReturnTypeWithAnnotations
                 );
@@ -98,23 +98,23 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             AsyncRewriter rewriter = isAsyncEnumerableOrEnumerator
                 ? new AsyncIteratorRewriter(
-                      bodyWithAwaitLifted,
-                      method,
-                      methodOrdinal,
-                      stateMachineType,
-                      slotAllocatorOpt,
-                      compilationState,
-                      diagnostics
-                  )
+                    bodyWithAwaitLifted,
+                    method,
+                    methodOrdinal,
+                    stateMachineType,
+                    slotAllocatorOpt,
+                    compilationState,
+                    diagnostics
+                )
                 : new AsyncRewriter(
-                      bodyWithAwaitLifted,
-                      method,
-                      methodOrdinal,
-                      stateMachineType,
-                      slotAllocatorOpt,
-                      compilationState,
-                      diagnostics
-                  );
+                    bodyWithAwaitLifted,
+                    method,
+                    methodOrdinal,
+                    stateMachineType,
+                    slotAllocatorOpt,
+                    compilationState,
+                    diagnostics
+                );
 
             if (!rewriter.VerifyPresenceOfRequiredAPIs())
             {
@@ -353,8 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             bodyBuilder.Add(
                 method.IsAsyncReturningVoid()
-                  ? F.Return()
-                  : F.Return(
+                    ? F.Return()
+                    : F.Return(
                         F.Property(
                             F.Field(
                                 F.Local(stateMachineVariable),

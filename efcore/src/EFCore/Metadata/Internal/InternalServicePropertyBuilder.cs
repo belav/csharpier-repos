@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class InternalServicePropertyBuilder
         : InternalPropertyBaseBuilder<ServiceProperty>,
-          IConventionServicePropertyBuilder
+            IConventionServicePropertyBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -183,8 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -200,8 +200,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -217,8 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -234,8 +234,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -251,8 +251,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetField(
                 fieldName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -268,8 +268,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetField(
                 fieldInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -285,8 +285,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UsePropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -302,8 +302,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UsePropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -319,8 +319,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -336,8 +336,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasParameterBinding(
                 parameterBinding,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -353,8 +353,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetParameterBinding(
                 parameterBinding,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

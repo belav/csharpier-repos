@@ -107,8 +107,8 @@ namespace System.Xml.Linq
                 return Task.FromCanceled(cancellationToken);
 
             return parent is XDocument
-              ? writer.WriteWhitespaceAsync(text)
-              : writer.WriteStringAsync(text);
+                ? writer.WriteWhitespaceAsync(text)
+                : writer.WriteStringAsync(text);
         }
 
         internal override void AppendText(StringBuilder sb)

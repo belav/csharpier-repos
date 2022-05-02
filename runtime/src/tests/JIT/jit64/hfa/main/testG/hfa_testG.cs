@@ -61,8 +61,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA01 + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add01 HFA 02",
                 TestMan.Add01_HFA02(
@@ -84,8 +84,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA02 + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add01 HFA 03",
                 TestMan.Add01_HFA03(
@@ -107,8 +107,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA03 + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add01 HFA 05",
                 TestMan.Add01_HFA05(
@@ -130,8 +130,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA05 + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add01 HFA 08",
                 TestMan.Add01_HFA08(
@@ -153,8 +153,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA08 + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add01 HFA 11",
                 TestMan.Add01_HFA11(
@@ -176,8 +176,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA11 + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add01 HFA 19",
                 TestMan.Add01_HFA19(
@@ -199,8 +199,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA19 + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add01 HFA 00",
                 TestMan.Add01_HFA00(
@@ -229,8 +229,8 @@ namespace HFATest
                     + TestMan.EXPECTED_SUM_HFA19
                     + ADD01_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
 
             float ADD02_EXP =
                 (2 * (float)CONST_INT16)
@@ -261,8 +261,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA01 + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add02 HFA 02",
                 TestMan.Add02_HFA02(
@@ -286,8 +286,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA02 + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add02 HFA 03",
                 TestMan.Add02_HFA03(
@@ -311,8 +311,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA03 + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add02 HFA 05",
                 TestMan.Add02_HFA05(
@@ -336,8 +336,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA05 + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add02 HFA 08",
                 TestMan.Add02_HFA08(
@@ -361,8 +361,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA08 + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add02 HFA 11",
                 TestMan.Add02_HFA11(
@@ -386,8 +386,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA11 + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add02 HFA 19",
                 TestMan.Add02_HFA19(
@@ -411,8 +411,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA19 + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add02 HFA 00",
                 TestMan.Add02_HFA00(
@@ -443,8 +443,8 @@ namespace HFATest
                     + TestMan.EXPECTED_SUM_HFA19
                     + ADD02_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
 
             float ADD03_EXP =
                 (2 * (float)CONST_INT8)
@@ -476,8 +476,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA01 + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add03 HFA 02",
                 TestMan.Add03_HFA02(
@@ -501,8 +501,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA02 + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add03 HFA 03",
                 TestMan.Add03_HFA03(
@@ -526,8 +526,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA03 + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add03 HFA 05",
                 TestMan.Add03_HFA05(
@@ -551,8 +551,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA05 + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add03 HFA 08",
                 TestMan.Add03_HFA08(
@@ -576,8 +576,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA08 + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add03 HFA 11",
                 TestMan.Add03_HFA11(
@@ -601,8 +601,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA11 + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add03 HFA 19",
                 TestMan.Add03_HFA19(
@@ -626,8 +626,8 @@ namespace HFATest
                 ),
                 7 * TestMan.EXPECTED_SUM_HFA19 + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
             nFailures += Common.CheckResult(
                 "Add03 HFA 00",
                 TestMan.Add03_HFA00(
@@ -658,8 +658,8 @@ namespace HFATest
                     + TestMan.EXPECTED_SUM_HFA19
                     + ADD03_EXP
             )
-              ? 0
-              : 1;
+                ? 0
+                : 1;
 
             return nFailures == 0 ? Common.SUCC_RET_CODE : Common.FAIL_RET_CODE;
         }

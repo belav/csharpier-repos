@@ -25,13 +25,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 {
     internal partial class Controller
         : AbstractController<
-              Controller.Session,
-              Model,
-              ISignatureHelpPresenterSession,
-              ISignatureHelpSession
-          >,
-          IChainedCommandHandler<TypeCharCommandArgs>,
-          IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
+            Controller.Session,
+            Model,
+            ISignatureHelpPresenterSession,
+            ISignatureHelpSession
+        >,
+            IChainedCommandHandler<TypeCharCommandArgs>,
+            IChainedCommandHandler<InvokeSignatureHelpCommandArgs>
     {
         private readonly IAsyncCompletionBroker _completionBroker;
 

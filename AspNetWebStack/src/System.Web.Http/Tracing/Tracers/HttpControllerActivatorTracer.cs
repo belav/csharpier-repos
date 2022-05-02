@@ -15,7 +15,7 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class HttpControllerActivatorTracer
         : IHttpControllerActivator,
-          IDecorator<IHttpControllerActivator>
+            IDecorator<IHttpControllerActivator>
     {
         private const string CreateMethodName = "Create";
 

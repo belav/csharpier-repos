@@ -42,10 +42,10 @@ namespace System.Data
     )] // needed by Clone() to preserve derived ctors
     public class DataSet
         : MarshalByValueComponent,
-          IListSource,
-          IXmlSerializable,
-          ISupportInitializeNotification,
-          ISerializable
+            IListSource,
+            IXmlSerializable,
+            ISupportInitializeNotification,
+            ISerializable
     {
         internal const string RequiresUnreferencedCodeMessage =
             "Members from serialized types may be trimmed if not referenced directly.";

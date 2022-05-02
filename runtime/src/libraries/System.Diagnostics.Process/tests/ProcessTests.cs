@@ -1218,8 +1218,8 @@ namespace System.Diagnostics.Tests
 
             // Process.ProcessName drops the extension when it's exe.
             string processName = RemoteExecutor.HostRunner.EndsWith(".exe")
-              ? _process.ProcessName
-              : Path.GetFileNameWithoutExtension(_process.ProcessName);
+                ? _process.ProcessName
+                : Path.GetFileNameWithoutExtension(_process.ProcessName);
             Assert.Equal(
                 Path.GetFileNameWithoutExtension(RemoteExecutor.HostRunner),
                 processName,
@@ -1261,8 +1261,8 @@ namespace System.Diagnostics.Tests
                 mre.SetSafeWaitHandle(
                     new SafeWaitHandle(
                         useSafeHandle
-                          ? h.Process.SafeHandle.DangerousGetHandle()
-                          : h.Process.Handle,
+                            ? h.Process.SafeHandle.DangerousGetHandle()
+                            : h.Process.Handle,
                         ownsHandle: false
                     )
                 );

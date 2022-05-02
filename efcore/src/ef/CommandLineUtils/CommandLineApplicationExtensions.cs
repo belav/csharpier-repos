@@ -16,10 +16,10 @@ namespace Microsoft.DotNet.Cli.CommandLine
                 template,
                 description,
                 template.IndexOf('<') != -1
-                  ? template.EndsWith(">...", StringComparison.Ordinal)
-                      ? CommandOptionType.MultipleValue
-                      : CommandOptionType.SingleValue
-                  : CommandOptionType.NoValue
+                    ? template.EndsWith(">...", StringComparison.Ordinal)
+                        ? CommandOptionType.MultipleValue
+                        : CommandOptionType.SingleValue
+                    : CommandOptionType.NoValue
             );
     }
 }

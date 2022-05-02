@@ -181,47 +181,47 @@ namespace Microsoft.EntityFrameworkCore
 
             var left = ExpectLazyLoading
                 ? context.CreateProxy<EntityOne>(
-                      b =>
-                      {
-                          b.Id = 7776;
-                          b.TwoSkip = new ObservableCollection<EntityTwo> { new() { Id = 7777 } };
-                          b.TwoSkipShared = new ObservableCollection<EntityTwo>
-                          {
-                              new() { Id = 7778 }
-                          };
-                          b.SelfSkipPayloadLeft = new ObservableCollection<EntityOne>
-                          {
-                              new() { Id = 7779 }
-                          };
-                          b.SelfSkipPayloadRight = new ObservableCollection<EntityOne>
-                          {
-                              new() { Id = 7780 }
-                          };
-                          b.BranchSkip = new ObservableCollection<EntityBranch>
-                          {
-                              new() { Id = 7781 }
-                          };
-                          b.ThreeSkipPayloadFull = new ObservableCollection<EntityThree>
-                          {
-                              new() { Id = 7782 }
-                          };
-                          b.ThreeSkipPayloadFullShared = new ObservableCollection<EntityThree>
-                          {
-                              new() { Id = 7783 }
-                          };
-                      }
-                  )
+                    b =>
+                    {
+                        b.Id = 7776;
+                        b.TwoSkip = new ObservableCollection<EntityTwo> { new() { Id = 7777 } };
+                        b.TwoSkipShared = new ObservableCollection<EntityTwo>
+                        {
+                            new() { Id = 7778 }
+                        };
+                        b.SelfSkipPayloadLeft = new ObservableCollection<EntityOne>
+                        {
+                            new() { Id = 7779 }
+                        };
+                        b.SelfSkipPayloadRight = new ObservableCollection<EntityOne>
+                        {
+                            new() { Id = 7780 }
+                        };
+                        b.BranchSkip = new ObservableCollection<EntityBranch>
+                        {
+                            new() { Id = 7781 }
+                        };
+                        b.ThreeSkipPayloadFull = new ObservableCollection<EntityThree>
+                        {
+                            new() { Id = 7782 }
+                        };
+                        b.ThreeSkipPayloadFullShared = new ObservableCollection<EntityThree>
+                        {
+                            new() { Id = 7783 }
+                        };
+                    }
+                )
                 : new EntityOne
-                  {
-                      Id = 7776,
-                      TwoSkip = new List<EntityTwo> { new() { Id = 7777 } },
-                      TwoSkipShared = new List<EntityTwo> { new() { Id = 7778 } },
-                      SelfSkipPayloadLeft = new List<EntityOne> { new() { Id = 7779 } },
-                      SelfSkipPayloadRight = new List<EntityOne> { new() { Id = 7780 } },
-                      BranchSkip = new List<EntityBranch> { new() { Id = 7781 } },
-                      ThreeSkipPayloadFull = new List<EntityThree> { new() { Id = 7782 } },
-                      ThreeSkipPayloadFullShared = new List<EntityThree> { new() { Id = 7783 } }
-                  };
+                {
+                    Id = 7776,
+                    TwoSkip = new List<EntityTwo> { new() { Id = 7777 } },
+                    TwoSkipShared = new List<EntityTwo> { new() { Id = 7778 } },
+                    SelfSkipPayloadLeft = new List<EntityOne> { new() { Id = 7779 } },
+                    SelfSkipPayloadRight = new List<EntityOne> { new() { Id = 7780 } },
+                    BranchSkip = new List<EntityBranch> { new() { Id = 7781 } },
+                    ThreeSkipPayloadFull = new List<EntityThree> { new() { Id = 7782 } },
+                    ThreeSkipPayloadFullShared = new List<EntityThree> { new() { Id = 7783 } }
+                };
 
             context.Attach(left);
 
@@ -480,8 +480,8 @@ namespace Microsoft.EntityFrameworkCore
             var left = context
                 .Attach(
                     ExpectLazyLoading
-                      ? context.CreateProxy<EntityOne>(b => b.Id = 999)
-                      : new EntityOne { Id = 999 }
+                        ? context.CreateProxy<EntityOne>(b => b.Id = 999)
+                        : new EntityOne { Id = 999 }
                 )
                 .Entity;
 
@@ -535,8 +535,8 @@ namespace Microsoft.EntityFrameworkCore
             var left = context
                 .Attach(
                     ExpectLazyLoading
-                      ? context.CreateProxy<EntityOne>(b => b.Id = 999)
-                      : new EntityOne { Id = 999 }
+                        ? context.CreateProxy<EntityOne>(b => b.Id = 999)
+                        : new EntityOne { Id = 999 }
                 )
                 .Entity;
 
@@ -1021,13 +1021,13 @@ namespace Microsoft.EntityFrameworkCore
 
             var children = async
                 ? await collectionEntry
-                      .Query()
-                      .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
-                      .ToListAsync()
+                    .Query()
+                    .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
+                    .ToListAsync()
                 : collectionEntry
-                  .Query()
-                  .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
-                  .ToList();
+                    .Query()
+                    .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
+                    .ToList();
 
             Assert.False(collectionEntry.IsLoaded);
             foreach (var entityTwo in left.TwoSkipShared)

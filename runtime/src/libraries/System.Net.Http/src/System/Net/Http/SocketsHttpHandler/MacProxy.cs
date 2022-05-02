@@ -74,17 +74,17 @@ namespace System.Net.Http
             CFRunLoopSourceRef loopSource =
                 proxy.ProxyType == CFProxy.kCFProxyTypeAutoConfigurationURL
                     ? CFNetworkExecuteProxyAutoConfigurationURL(
-                          proxy.AutoConfigurationURL,
-                          cfurl,
-                          cb,
-                          ref clientContext
-                      )
+                        proxy.AutoConfigurationURL,
+                        cfurl,
+                        cb,
+                        ref clientContext
+                    )
                     : CFNetworkExecuteProxyAutoConfigurationScript(
-                          proxy.AutoConfigurationJavaScript,
-                          cfurl,
-                          cb,
-                          ref clientContext
-                      );
+                        proxy.AutoConfigurationJavaScript,
+                        cfurl,
+                        cb,
+                        ref clientContext
+                    );
 
             using (var mode = CFStringCreateWithCString(typeof(MacProxy).FullName!))
             {

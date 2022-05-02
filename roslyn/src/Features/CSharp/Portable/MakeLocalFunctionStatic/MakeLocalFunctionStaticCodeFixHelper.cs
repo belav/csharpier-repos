@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                                 (ArgumentSyntax)
                                     generator.Argument(
                                         seenNamedArgument || seenDefaultArgumentValue
-                                          ? p.symbol.Name
-                                          : null,
+                                            ? p.symbol.Name
+                                            : null,
                                         p.symbol.RefKind,
                                         p.capture.Name.ToIdentifierName()
                                     )

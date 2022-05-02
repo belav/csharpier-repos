@@ -20,9 +20,9 @@ namespace System
     )]
     public abstract partial class Array
         : ICloneable,
-          IList,
-          IStructuralComparable,
-          IStructuralEquatable
+            IList,
+            IStructuralComparable,
+            IStructuralEquatable
     {
         // This is the threshold where Introspective sort switches to Insertion sort.
         // Empirically, 16 seems to speed up most cases without slowing down others, at least for integers.

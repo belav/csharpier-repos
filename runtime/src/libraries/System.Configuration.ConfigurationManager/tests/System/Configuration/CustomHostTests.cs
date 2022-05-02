@@ -29,8 +29,8 @@ namespace System.Configuration.Tests
                         string expectedFilePathEnding = RuntimeInformation.IsOSPlatform(
                             OSPlatform.Windows
                         )
-                          ? "dotnet.exe.config"
-                          : "dotnet.config";
+                            ? "dotnet.exe.config"
+                            : "dotnet.config";
 
                         Configuration config = ConfigurationManager.OpenExeConfiguration(
                             ConfigurationUserLevel.None

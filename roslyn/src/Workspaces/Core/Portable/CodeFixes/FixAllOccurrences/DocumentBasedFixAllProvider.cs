@@ -141,10 +141,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             using var _ = progressTracker.ItemCompletedScope();
 
             return fixAllContext.Document != null
-              ? await fixAllContext
+                ? await fixAllContext
                     .GetDocumentDiagnosticsAsync(fixAllContext.Document)
                     .ConfigureAwait(false)
-              : await fixAllContext
+                : await fixAllContext
                     .GetAllDiagnosticsAsync(fixAllContext.Project)
                     .ConfigureAwait(false);
         }
@@ -206,14 +206,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                                 // language that doesn't support that, then just grab the text.
                                 var node = newDocument.SupportsSyntaxTree
                                     ? await newDocument
-                                          .GetRequiredSyntaxRootAsync(cancellationToken)
-                                          .ConfigureAwait(false)
+                                        .GetRequiredSyntaxRootAsync(cancellationToken)
+                                        .ConfigureAwait(false)
                                     : null;
                                 var text = newDocument.SupportsSyntaxTree
                                     ? null
                                     : await newDocument
-                                          .GetTextAsync(cancellationToken)
-                                          .ConfigureAwait(false);
+                                        .GetTextAsync(cancellationToken)
+                                        .ConfigureAwait(false);
 
                                 return (document.Id, (node, text));
                             },

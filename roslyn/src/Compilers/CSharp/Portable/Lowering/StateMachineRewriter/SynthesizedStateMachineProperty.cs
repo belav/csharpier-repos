@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal class SynthesizedStateMachineProperty
         : PropertySymbol,
-          ISynthesizedMethodBodyImplementationSymbol
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly SynthesizedStateMachineMethod _getter;
         private readonly string _name;

@@ -136,8 +136,8 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                 );
                 tmpSpan = explicitReader.ReadEncodedValue();
                 decoded.Content = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
                 explicitReader.ThrowIfNotEmpty();
             }
 

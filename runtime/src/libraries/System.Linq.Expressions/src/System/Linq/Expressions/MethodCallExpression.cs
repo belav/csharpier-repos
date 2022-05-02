@@ -202,7 +202,7 @@ namespace System.Linq.Expressions
 
     internal sealed class InstanceMethodCallExpressionN
         : InstanceMethodCallExpression,
-          IArgumentProvider
+            IArgumentProvider
     {
         private IReadOnlyList<Expression> _arguments;
 
@@ -674,7 +674,7 @@ namespace System.Linq.Expressions
 
     internal sealed class InstanceMethodCallExpression0
         : InstanceMethodCallExpression,
-          IArgumentProvider
+            IArgumentProvider
     {
         public InstanceMethodCallExpression0(MethodInfo method, Expression instance)
             : base(method, instance) { }
@@ -708,7 +708,7 @@ namespace System.Linq.Expressions
 
     internal sealed class InstanceMethodCallExpression1
         : InstanceMethodCallExpression,
-          IArgumentProvider
+            IArgumentProvider
     {
         private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
 
@@ -773,7 +773,7 @@ namespace System.Linq.Expressions
 
     internal sealed class InstanceMethodCallExpression2
         : InstanceMethodCallExpression,
-          IArgumentProvider
+            IArgumentProvider
     {
         private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
         private readonly Expression _arg1; // storage for the 2nd argument
@@ -852,7 +852,7 @@ namespace System.Linq.Expressions
 
     internal sealed class InstanceMethodCallExpression3
         : InstanceMethodCallExpression,
-          IArgumentProvider
+            IArgumentProvider
     {
         private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
         private readonly Expression _arg1,

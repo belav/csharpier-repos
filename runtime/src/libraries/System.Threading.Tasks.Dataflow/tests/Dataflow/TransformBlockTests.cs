@@ -80,9 +80,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 nameFormat =>
                     nameFormat != null
                         ? new TransformBlock<int, int>(
-                              i => i,
-                              new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
-                          )
+                            i => i,
+                            new ExecutionDataflowBlockOptions() { NameFormat = nameFormat }
+                        )
                         : new TransformBlock<int, int>(i => i)
             );
         }
@@ -442,11 +442,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     const int Iters = 10;
                     Func<TransformBlock<int, int>> func = sync
                         ? (Func<TransformBlock<int, int>>)(
-                              () => new TransformBlock<int, int>(i => i * 2)
-                          )
+                            () => new TransformBlock<int, int>(i => i * 2)
+                        )
                         : (Func<TransformBlock<int, int>>)(
-                              () => new TransformBlock<int, int>(i => Task.Run(() => i * 2))
-                          );
+                            () => new TransformBlock<int, int>(i => Task.Run(() => i * 2))
+                        );
                     var network = DataflowTestHelpers.Chain<TransformBlock<int, int>, int>(4, func);
                     for (int i = 0; i < Iters; i++)
                     {
@@ -472,11 +472,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     const int Iters = 10;
                     Func<TransformBlock<int, int>> func = sync
                         ? (Func<TransformBlock<int, int>>)(
-                              () => new TransformBlock<int, int>(i => i * 2)
-                          )
+                            () => new TransformBlock<int, int>(i => i * 2)
+                        )
                         : (Func<TransformBlock<int, int>>)(
-                              () => new TransformBlock<int, int>(i => Task.Run(() => i * 2))
-                          );
+                            () => new TransformBlock<int, int>(i => Task.Run(() => i * 2))
+                        );
                     var network = DataflowTestHelpers.Chain<TransformBlock<int, int>, int>(4, func);
 
                     if (post)

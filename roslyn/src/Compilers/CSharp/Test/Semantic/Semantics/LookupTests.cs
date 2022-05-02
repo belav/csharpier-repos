@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
             var position = testSrc.Contains("/*<bind>*/")
-              ? GetPositionForBinding(tree)
-              : GetPositionForBinding(testSrc);
+                ? GetPositionForBinding(tree)
+                : GetPositionForBinding(testSrc);
             return model.LookupNames(position);
         }
 
@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
             var model = compilation.GetSemanticModel(tree);
             var position = testSrc.Contains("/*<bind>*/")
-              ? GetPositionForBinding(tree)
-              : GetPositionForBinding(testSrc);
+                ? GetPositionForBinding(tree)
+                : GetPositionForBinding(testSrc);
             return model
                 .LookupSymbols(position, container.GetPublicSymbol(), name)
                 .Where(s => !arity.HasValue || arity == s.GetSymbol().GetMemberArity())

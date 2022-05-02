@@ -269,17 +269,17 @@ namespace System.Net
                             bool parsedSuccessfully =
                                 inputSlice[1] == 'x' || inputSlice[1] == 'X'
                                     ? uint.TryParse(
-                                          inputSlice.Slice(2, entityLength - 2),
-                                          NumberStyles.AllowHexSpecifier,
-                                          CultureInfo.InvariantCulture,
-                                          out uint parsedValue
-                                      )
+                                        inputSlice.Slice(2, entityLength - 2),
+                                        NumberStyles.AllowHexSpecifier,
+                                        CultureInfo.InvariantCulture,
+                                        out uint parsedValue
+                                    )
                                     : uint.TryParse(
-                                          inputSlice.Slice(1, entityLength - 1),
-                                          NumberStyles.Integer,
-                                          CultureInfo.InvariantCulture,
-                                          out parsedValue
-                                      );
+                                        inputSlice.Slice(1, entityLength - 1),
+                                        NumberStyles.Integer,
+                                        CultureInfo.InvariantCulture,
+                                        out parsedValue
+                                    );
 
                             if (parsedSuccessfully)
                             {

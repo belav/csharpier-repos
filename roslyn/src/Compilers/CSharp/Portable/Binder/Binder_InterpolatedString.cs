@@ -214,10 +214,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 (resultConstant is null)
                                     ? value.ConstantValue
                                     : FoldStringConcatenation(
-                                          BinaryOperatorKind.StringConcatenation,
-                                          resultConstant,
-                                          value.ConstantValue
-                                      );
+                                        BinaryOperatorKind.StringConcatenation,
+                                        resultConstant,
+                                        value.ConstantValue
+                                    );
                             continue;
                         }
                         case SyntaxKind.InterpolatedStringText:
@@ -240,10 +240,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     (resultConstant is null)
                                         ? constantVal
                                         : FoldStringConcatenation(
-                                              BinaryOperatorKind.StringConcatenation,
-                                              resultConstant,
-                                              constantVal
-                                          );
+                                            BinaryOperatorKind.StringConcatenation,
+                                            resultConstant,
+                                            constantVal
+                                        );
                             }
                             continue;
                         }
@@ -583,22 +583,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             unconvertedExpression switch
             {
                 BoundUnconvertedInterpolatedString interpolatedString
-                  => BindUnconvertedInterpolatedStringToHandlerType(
-                      interpolatedString,
-                      interpolatedStringHandlerType,
-                      diagnostics,
-                      isHandlerConversion: true,
-                      additionalConstructorArguments,
-                      additionalConstructorRefKinds
-                  ),
+                    => BindUnconvertedInterpolatedStringToHandlerType(
+                        interpolatedString,
+                        interpolatedStringHandlerType,
+                        diagnostics,
+                        isHandlerConversion: true,
+                        additionalConstructorArguments,
+                        additionalConstructorRefKinds
+                    ),
                 BoundBinaryOperator binary
-                  => BindUnconvertedBinaryOperatorToInterpolatedStringHandlerType(
-                      binary,
-                      interpolatedStringHandlerType,
-                      diagnostics,
-                      additionalConstructorArguments,
-                      additionalConstructorRefKinds
-                  ),
+                    => BindUnconvertedBinaryOperatorToInterpolatedStringHandlerType(
+                        binary,
+                        interpolatedStringHandlerType,
+                        diagnostics,
+                        additionalConstructorArguments,
+                        additionalConstructorRefKinds
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(unconvertedExpression.Kind)
             };
 
@@ -692,8 +692,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(
                 additionalConstructorArguments.IsDefault
-                  ? additionalConstructorRefKinds.IsDefault
-                  : additionalConstructorArguments.Length == additionalConstructorRefKinds.Length
+                    ? additionalConstructorRefKinds.IsDefault
+                    : additionalConstructorArguments.Length == additionalConstructorRefKinds.Length
             );
             additionalConstructorArguments = additionalConstructorArguments.NullToEmpty();
             additionalConstructorRefKinds = additionalConstructorRefKinds.NullToEmpty();
@@ -1348,8 +1348,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     isCast: false,
                     conversionGroupOpt: null,
                     interpolatedStringParameter.IsParams
-                      ? ((ArrayTypeSymbol)interpolatedStringParameter.Type).ElementType
-                      : interpolatedStringParameter.Type,
+                        ? ((ArrayTypeSymbol)interpolatedStringParameter.Type).ElementType
+                        : interpolatedStringParameter.Type,
                     diagnostics
                 );
             }

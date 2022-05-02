@@ -67,8 +67,8 @@ namespace System.ComponentModel.Tests
                 "{0} ({1})",
                 typeof(Win32Exception).ToString(),
                 PlatformDetection.IsNetFramework
-                  ? $"0x{E_FAIL:X8}"
-                  : error.ToString(CultureInfo.InvariantCulture)
+                    ? $"0x{E_FAIL:X8}"
+                    : error.ToString(CultureInfo.InvariantCulture)
             );
 
             Exception innerException = new FormatException();

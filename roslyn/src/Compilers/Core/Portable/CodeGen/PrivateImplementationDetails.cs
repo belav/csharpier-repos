@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
     /// </summary>
     internal sealed class PrivateImplementationDetails
         : DefaultTypeDef,
-          Cci.INamespaceTypeDefinition
+            Cci.INamespaceTypeDefinition
     {
         // Note: Dev11 uses the source method token as the prefix, rather than a fixed token
         // value, and data field offsets are unique within the method, not across all methods.

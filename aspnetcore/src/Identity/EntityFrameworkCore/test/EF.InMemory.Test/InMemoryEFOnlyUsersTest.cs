@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
 public class InMemoryEFOnlyUsersTest
     : UserManagerSpecificationTestBase<IdentityUser, string>,
-      IClassFixture<InMemoryDatabaseFixture>
+        IClassFixture<InMemoryDatabaseFixture>
 {
     private readonly InMemoryDatabaseFixture _fixture;
 

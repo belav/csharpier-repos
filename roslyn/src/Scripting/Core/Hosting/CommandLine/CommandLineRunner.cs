@@ -401,15 +401,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             var task =
                 (state == null)
                     ? newScript.RunAsync(
-                          globals,
-                          catchException: e => true,
-                          cancellationToken: cancellationToken
-                      )
+                        globals,
+                        catchException: e => true,
+                        cancellationToken: cancellationToken
+                    )
                     : newScript.RunFromAsync(
-                          state,
-                          catchException: e => true,
-                          cancellationToken: cancellationToken
-                      );
+                        state,
+                        catchException: e => true,
+                        cancellationToken: cancellationToken
+                    );
 
             state = task.GetAwaiter().GetResult();
             if (state.Exception != null)
@@ -501,8 +501,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     int delta = (int)d2.Severity - (int)d1.Severity;
                     return (delta != 0)
-                      ? delta
-                      : d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start;
+                        ? delta
+                        : d1.Location.SourceSpan.Start - d2.Location.SourceSpan.Start;
                 }
             );
 
@@ -512,8 +512,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     _console.SetForegroundColor(
                         diagnostic.Severity == DiagnosticSeverity.Error
-                          ? ConsoleColor.Red
-                          : ConsoleColor.Yellow
+                            ? ConsoleColor.Red
+                            : ConsoleColor.Yellow
                     );
                     _console.Error.WriteLine(diagnostic.ToString());
                 }

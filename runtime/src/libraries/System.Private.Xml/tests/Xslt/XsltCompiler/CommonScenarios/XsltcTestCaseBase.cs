@@ -202,17 +202,17 @@ namespace System.Xml.Tests
 
             string output = asmCreated
                 ? TryCreatePersistedTransformAssembly(
-                      cmdLine,
-                      _createFromInputFile,
-                      true,
-                      targetDirectory
-                  )
+                    cmdLine,
+                    _createFromInputFile,
+                    true,
+                    targetDirectory
+                )
                 : TryCreatePersistedTransformAssembly(
-                      cmdLine,
-                      _createFromInputFile,
-                      false,
-                      targetDirectory
-                  );
+                    cmdLine,
+                    _createFromInputFile,
+                    false,
+                    targetDirectory
+                );
 
             //verify assembly file existence
             if (asmName != null && string.CompareOrdinal(string.Empty, asmName) != 0)

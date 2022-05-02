@@ -922,8 +922,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // !canCast => Generic "can't convert" error.
             throw ErrorHandling.Error(
                 canCast(expr.Type, dest, flags)
-                  ? ErrorCode.ERR_NoImplicitConvCast
-                  : ErrorCode.ERR_NoImplicitConv,
+                    ? ErrorCode.ERR_NoImplicitConvCast
+                    : ErrorCode.ERR_NoImplicitConv,
                 new ErrArg(expr.Type, ErrArgFlags.Unique),
                 new ErrArg(dest, ErrArgFlags.Unique)
             );

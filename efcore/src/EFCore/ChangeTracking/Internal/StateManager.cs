@@ -325,8 +325,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             foreach (var property in entityType.GetProperties())
             {
                 valuesArray[i++] = values.TryGetValue(property.Name, out var value)
-                  ? value
-                  : property.ClrType.GetDefaultValue();
+                    ? value
+                    : property.ClrType.GetDefaultValue();
 
                 if (property.IsShadowProperty())
                 {
@@ -334,8 +334,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         property.Name,
                         out var shadowValue
                     )
-                      ? shadowValue
-                      : property.ClrType.GetDefaultValue();
+                        ? shadowValue
+                        : property.ClrType.GetDefaultValue();
                 }
             }
 
@@ -458,8 +458,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             bool throwOnNonUniqueness = true
         ) =>
             _entityReferenceMap.TryGet(entity, null, out var entry, throwOnNonUniqueness)
-              ? entry
-              : null;
+                ? entry
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -478,17 +478,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 out var entry,
                 throwOnNonUniqueness: false
             )
-              ? !entityType.IsAssignableFrom(entry.EntityType)
-                  ? throwOnTypeMismatch
-                      ? throw new InvalidOperationException(
+                ? !entityType.IsAssignableFrom(entry.EntityType)
+                    ? throwOnTypeMismatch
+                        ? throw new InvalidOperationException(
                             CoreStrings.TrackingTypeMismatch(
                                 entry.EntityType.DisplayName(),
                                 entityType.DisplayName()
                             )
                         )
-                      : null
-                  : entry
-              : null;
+                        : null
+                    : entry
+                : null;
 
         private IIdentityMap GetOrCreateIdentityMap(IKey key)
         {
@@ -551,8 +551,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             }
 
             return _identityMaps == null || !_identityMaps.TryGetValue(key, out var identityMap)
-              ? null
-              : identityMap;
+                ? null
+                : identityMap;
         }
 
         /// <summary>
@@ -995,8 +995,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             return
                 dependentIdentityMap != null
                 && foreignKey.PrincipalEntityType.IsAssignableFrom(principalEntry.EntityType)
-              ? dependentIdentityMap.GetDependentsMap(foreignKey).GetDependents(principalEntry)
-              : Enumerable.Empty<IUpdateEntry>();
+                ? dependentIdentityMap.GetDependentsMap(foreignKey).GetDependents(principalEntry)
+                : Enumerable.Empty<IUpdateEntry>();
         }
 
         /// <summary>
@@ -1014,10 +1014,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 foreignKey.DeclaringEntityType.FindPrimaryKey()
             );
             return dependentIdentityMap != null
-              ? dependentIdentityMap
-                .GetDependentsMap(foreignKey)
-                .GetDependentsUsingRelationshipSnapshot(principalEntry)
-              : Enumerable.Empty<IUpdateEntry>();
+                ? dependentIdentityMap
+                    .GetDependentsMap(foreignKey)
+                    .GetDependentsUsingRelationshipSnapshot(principalEntry)
+                : Enumerable.Empty<IUpdateEntry>();
         }
 
         /// <summary>
@@ -1048,8 +1048,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var dependentEntry = TryGetEntry(navigationValue, foreignKey.DeclaringEntityType);
 
                 return dependentEntry != null
-                  ? new[] { dependentEntry }
-                  : Enumerable.Empty<InternalEntityEntry>();
+                    ? new[] { dependentEntry }
+                    : Enumerable.Empty<InternalEntityEntry>();
             }
 
             return ((IEnumerable<object>)navigationValue)
@@ -1329,10 +1329,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             !Context.Database.AutoTransactionsEnabled
                 ? SaveChanges(this, acceptAllChangesOnSuccess)
                 : Dependencies.ExecutionStrategy.Execute(
-                      (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
-                      static (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
-                      null
-                  );
+                    (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
+                    static (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
+                    null
+                );
 
         private static int SaveChanges(StateManager stateManager, bool acceptAllChangesOnSuccess)
         {
@@ -1387,16 +1387,16 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             !Context.Database.AutoTransactionsEnabled
                 ? SaveChangesAsync(this, acceptAllChangesOnSuccess, cancellationToken)
                 : Dependencies.ExecutionStrategy.ExecuteAsync(
-                      (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
-                      static (_, t, cancellationToken) =>
-                          SaveChangesAsync(
-                              t.StateManager,
-                              t.AcceptAllChangesOnSuccess,
-                              cancellationToken
-                          ),
-                      null,
-                      cancellationToken
-                  );
+                    (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
+                    static (_, t, cancellationToken) =>
+                        SaveChangesAsync(
+                            t.StateManager,
+                            t.AcceptAllChangesOnSuccess,
+                            cancellationToken
+                        ),
+                    null,
+                    cancellationToken
+                );
 
         private static async Task<int> SaveChangesAsync(
             StateManager stateManager,

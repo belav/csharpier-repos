@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.FileProviders
 {
     public partial class PhysicalFileProvider
         : Microsoft.Extensions.FileProviders.IFileProvider,
-          System.IDisposable
+            System.IDisposable
     {
         public PhysicalFileProvider(string root) { }
 
@@ -61,8 +61,8 @@ namespace Microsoft.Extensions.FileProviders.Internal
 {
     public partial class PhysicalDirectoryContents
         : Microsoft.Extensions.FileProviders.IDirectoryContents,
-          System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
+            System.Collections.IEnumerable
     {
         public PhysicalDirectoryContents(string directory) { }
 

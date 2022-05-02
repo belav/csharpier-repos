@@ -22,14 +22,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             CSharpArgumentInfo x = CSharpArgumentInfo.Create(
                 constantLeftArgument
-                  ? CSharpArgumentInfoFlags.Constant
-                  : CSharpArgumentInfoFlags.None,
+                    ? CSharpArgumentInfoFlags.Constant
+                    : CSharpArgumentInfoFlags.None,
                 null
             );
             CSharpArgumentInfo y = CSharpArgumentInfo.Create(
                 constantRightArgument
-                  ? CSharpArgumentInfoFlags.Constant
-                  : CSharpArgumentInfoFlags.None,
+                    ? CSharpArgumentInfoFlags.Constant
+                    : CSharpArgumentInfoFlags.None,
                 null
             );
             CallSiteBinder binder = Binder.BinaryOperation(

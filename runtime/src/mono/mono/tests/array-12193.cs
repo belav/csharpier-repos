@@ -157,8 +157,8 @@ class T
                 + f11().Rank
                 + f12().Rank
             ) == 76
-          ? 0
-          : 1;
+            ? 0
+            : 1;
         // Matches desktop. FIXME: Verify more.
     }
 }

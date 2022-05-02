@@ -48,7 +48,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 {
     internal abstract class AbstractSnippetExpansionClient
         : ForegroundThreadAffinitizedObject,
-          IVsExpansionClient
+            IVsExpansionClient
     {
         /// <summary>
         /// The name of a snippet field created for caret placement in Full Method Call snippet sessions when the

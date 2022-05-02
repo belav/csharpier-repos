@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     NamespaceSymbol
         :
 #endif
-          Cci.INamespace
+            Cci.INamespace
     {
         Cci.INamespace Cci.INamespace.ContainingNamespace =>
             AdaptedNamespaceSymbol.ContainingNamespace?.GetCciAdapter();

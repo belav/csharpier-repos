@@ -12,8 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindSplitIncludeNoTrackingQuerySqliteTest
         : NorthwindSplitIncludeNoTrackingQueryTestBase<
-              NorthwindQuerySqliteFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqliteFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindSplitIncludeNoTrackingQuerySqliteTest(
             NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,

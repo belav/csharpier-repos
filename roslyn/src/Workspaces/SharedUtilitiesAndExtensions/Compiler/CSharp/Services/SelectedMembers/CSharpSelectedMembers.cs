@@ -12,12 +12,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 {
     internal class CSharpSelectedMembers
         : AbstractSelectedMembers<
-              MemberDeclarationSyntax,
-              FieldDeclarationSyntax,
-              PropertyDeclarationSyntax,
-              TypeDeclarationSyntax,
-              VariableDeclaratorSyntax
-          >
+            MemberDeclarationSyntax,
+            FieldDeclarationSyntax,
+            PropertyDeclarationSyntax,
+            TypeDeclarationSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         public static readonly CSharpSelectedMembers Instance = new();
 

@@ -6761,8 +6761,8 @@ class Program
     )
     {
         return Sse.CompareScalarOrderedEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6808,8 +6808,8 @@ class Program
     )
     {
         return Sse2.CompareScalarOrderedEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6855,8 +6855,8 @@ class Program
     )
     {
         return Sse.CompareScalarOrderedNotEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6902,8 +6902,8 @@ class Program
     )
     {
         return Sse2.CompareScalarOrderedNotEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6949,8 +6949,8 @@ class Program
     )
     {
         return Sse.CompareScalarOrderedLessThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -6996,8 +6996,8 @@ class Program
     )
     {
         return Sse2.CompareScalarOrderedLessThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7043,8 +7043,8 @@ class Program
     )
     {
         return Sse.CompareScalarOrderedLessThanOrEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7096,8 +7096,8 @@ class Program
             x,
             Sse2.Or(y.AsSingle(), default).AsDouble()
         )
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7143,8 +7143,8 @@ class Program
     )
     {
         return Sse.CompareScalarOrderedGreaterThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7190,8 +7190,8 @@ class Program
     )
     {
         return Sse2.CompareScalarOrderedGreaterThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7243,8 +7243,8 @@ class Program
             x,
             Sse.Or(y.AsSingle(), default).AsSingle()
         )
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7296,8 +7296,8 @@ class Program
             x,
             Sse2.Or(y.AsSingle(), default).AsDouble()
         )
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7343,8 +7343,8 @@ class Program
     )
     {
         return Sse.CompareScalarUnorderedEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7390,8 +7390,8 @@ class Program
     )
     {
         return Sse2.CompareScalarUnorderedEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7437,8 +7437,8 @@ class Program
     )
     {
         return Sse.CompareScalarUnorderedNotEqual(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7484,8 +7484,8 @@ class Program
     )
     {
         return Sse2.CompareScalarUnorderedNotEqual(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7531,8 +7531,8 @@ class Program
     )
     {
         return Sse.CompareScalarUnorderedLessThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7578,8 +7578,8 @@ class Program
     )
     {
         return Sse2.CompareScalarUnorderedLessThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7631,8 +7631,8 @@ class Program
             x,
             Sse.Or(y.AsSingle(), default).AsSingle()
         )
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7684,8 +7684,8 @@ class Program
             x,
             Sse2.Or(y.AsSingle(), default).AsDouble()
         )
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7731,8 +7731,8 @@ class Program
     )
     {
         return Sse.CompareScalarUnorderedGreaterThan(x, Sse.Or(y.AsSingle(), default).AsSingle())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7778,8 +7778,8 @@ class Program
     )
     {
         return Sse2.CompareScalarUnorderedGreaterThan(x, Sse2.Or(y.AsSingle(), default).AsDouble())
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7831,8 +7831,8 @@ class Program
             x,
             Sse.Or(y.AsSingle(), default).AsSingle()
         )
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -7884,8 +7884,8 @@ class Program
             x,
             Sse2.Or(y.AsSingle(), default).AsDouble()
         )
-          ? True()
-          : False();
+            ? True()
+            : False();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

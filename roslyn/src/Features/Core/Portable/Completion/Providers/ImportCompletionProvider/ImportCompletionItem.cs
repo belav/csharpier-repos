@@ -172,8 +172,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         public static string GetTypeName(CompletionItem item)
         {
             var typeName = item.Properties.TryGetValue(AttributeFullName, out var attributeFullName)
-              ? attributeFullName
-              : item.DisplayText;
+                ? attributeFullName
+                : item.DisplayText;
 
             if (item.Properties.TryGetValue(TypeAritySuffixName, out var aritySuffix))
             {
@@ -232,8 +232,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             // the data to construct its full metadata name
             var containingNamespace = GetContainingNamespace(item);
             var typeName = item.Properties.TryGetValue(AttributeFullName, out var attributeFullName)
-              ? attributeFullName
-              : item.DisplayText;
+                ? attributeFullName
+                : item.DisplayText;
             var fullyQualifiedName = GetFullyQualifiedName(containingNamespace, typeName);
 
             // We choose not to display the number of "type overloads" for simplicity.

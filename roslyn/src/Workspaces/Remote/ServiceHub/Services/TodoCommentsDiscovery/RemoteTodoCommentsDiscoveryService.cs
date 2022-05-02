@@ -11,13 +11,13 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal partial class RemoteTodoCommentsDiscoveryService
         : BrokeredServiceBase,
-          IRemoteTodoCommentsDiscoveryService
+            IRemoteTodoCommentsDiscoveryService
     {
         internal sealed class Factory
             : FactoryBase<
-                  IRemoteTodoCommentsDiscoveryService,
-                  IRemoteTodoCommentsDiscoveryService.ICallback
-              >
+                IRemoteTodoCommentsDiscoveryService,
+                IRemoteTodoCommentsDiscoveryService.ICallback
+            >
         {
             protected override IRemoteTodoCommentsDiscoveryService CreateService(
                 in ServiceConstructionArguments arguments,

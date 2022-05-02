@@ -90,10 +90,10 @@ namespace System.Security.AccessControl.Tests
                 newDaclStr == null
                     ? null
                     : new DiscretionaryAcl(
-                          isContainerDacl,
-                          isDSDacl,
-                          Utils.CreateRawAclFromString(newDaclStr)
-                      );
+                        isContainerDacl,
+                        isDSDacl,
+                        Utils.CreateRawAclFromString(newDaclStr)
+                    );
 
             try
             {

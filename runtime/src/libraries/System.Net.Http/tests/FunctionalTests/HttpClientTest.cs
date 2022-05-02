@@ -1816,10 +1816,10 @@ namespace System.Net.Http.Functional.Tests
                     SslApplicationProtocols =
                         serverVersion.Major >= 2
                             ? new List<SslApplicationProtocol>
-                              {
-                                  SslApplicationProtocol.Http2,
-                                  SslApplicationProtocol.Http11
-                              }
+                            {
+                                SslApplicationProtocol.Http2,
+                                SslApplicationProtocol.Http11
+                            }
                             : null
                 }
             );

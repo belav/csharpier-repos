@@ -575,8 +575,8 @@ public class BlazorClient : IAsyncDisposable
         {
             var builder = new UriBuilder(uri);
             builder.Path += builder.Path.EndsWith("/", StringComparison.Ordinal)
-              ? "_blazor"
-              : "/_blazor";
+                ? "_blazor"
+                : "/_blazor";
             return builder.Uri;
         }
     }

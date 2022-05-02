@@ -353,18 +353,18 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                     var newMethodNode =
                         _actionKind is IntroduceParameterCodeActionKind.Trampoline
                             ? await ExtractMethodAsync(
-                                      validParameters,
-                                      newMethodIdentifier,
-                                      _generator,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false)
+                                    validParameters,
+                                    newMethodIdentifier,
+                                    _generator,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
                             : await GenerateNewMethodOverloadAsync(
-                                      insertionIndex,
-                                      _generator,
-                                      cancellationToken
-                                  )
-                                  .ConfigureAwait(false);
+                                    insertionIndex,
+                                    _generator,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                     editor.InsertBefore(_containerMethod, newMethodNode);
 
                     await UpdateExpressionInOriginalFunctionAsync(editor, cancellationToken)
@@ -657,17 +657,17 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
                 var newMethod = isTrampoline
                     ? CodeGenerationSymbolFactory.CreateMethodSymbol(
-                          _methodSymbol,
-                          name: newMethodIdentifier,
-                          parameters: validParameters,
-                          statements: ImmutableArray.Create(newStatement),
-                          returnType: typeSymbol
-                      )
+                        _methodSymbol,
+                        name: newMethodIdentifier,
+                        parameters: validParameters,
+                        statements: ImmutableArray.Create(newStatement),
+                        returnType: typeSymbol
+                    )
                     : CodeGenerationSymbolFactory.CreateMethodSymbol(
-                          _methodSymbol,
-                          statements: ImmutableArray.Create(newStatement),
-                          containingType: _methodSymbol.ContainingType
-                      );
+                        _methodSymbol,
+                        statements: ImmutableArray.Create(newStatement),
+                        containingType: _methodSymbol.ContainingType
+                    );
                 var newMethodDeclaration = codeGenerationService.CreateMethodDeclaration(
                     newMethod,
                     options: new CodeGenerationOptions(

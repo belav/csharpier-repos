@@ -7,7 +7,7 @@ namespace Microsoft.JSInterop.WebAssembly;
 
 internal class WebAssemblyJSObjectReference
     : JSInProcessObjectReference,
-      IJSUnmarshalledObjectReference
+        IJSUnmarshalledObjectReference
 {
     private readonly WebAssemblyJSRuntime _jsRuntime;
 

@@ -21,11 +21,11 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference
     ]
     internal partial class CSharpMoveDeclarationNearReferenceService
         : AbstractMoveDeclarationNearReferenceService<
-              CSharpMoveDeclarationNearReferenceService,
-              StatementSyntax,
-              LocalDeclarationStatementSyntax,
-              VariableDeclaratorSyntax
-          >
+            CSharpMoveDeclarationNearReferenceService,
+            StatementSyntax,
+            LocalDeclarationStatementSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

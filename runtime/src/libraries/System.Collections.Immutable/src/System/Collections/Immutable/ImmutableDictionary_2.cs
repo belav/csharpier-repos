@@ -17,10 +17,10 @@ namespace System.Collections.Immutable
     [DebuggerTypeProxy(typeof(ImmutableDictionaryDebuggerProxy<,>))]
     public sealed partial class ImmutableDictionary<TKey, TValue>
         : IImmutableDictionary<TKey, TValue>,
-          IImmutableDictionaryInternal<TKey, TValue>,
-          IHashKeyCollection<TKey>,
-          IDictionary<TKey, TValue>,
-          IDictionary where TKey : notnull
+            IImmutableDictionaryInternal<TKey, TValue>,
+            IHashKeyCollection<TKey>,
+            IDictionary<TKey, TValue>,
+            IDictionary where TKey : notnull
     {
         /// <summary>
         /// An empty immutable dictionary with default equality comparers.
@@ -849,8 +849,8 @@ namespace System.Collections.Immutable
         >.GetEnumerator()
         {
             return this.IsEmpty
-              ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
-              : this.GetEnumerator();
+                ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
+                : this.GetEnumerator();
         }
 
         #endregion
@@ -880,8 +880,8 @@ namespace System.Collections.Immutable
             Requires.NotNull(comparers, nameof(comparers));
 
             return Empty._comparers == comparers
-              ? Empty
-              : new ImmutableDictionary<TKey, TValue>(comparers);
+                ? Empty
+                : new ImmutableDictionary<TKey, TValue>(comparers);
         }
 
         /// <summary>
@@ -1143,8 +1143,8 @@ namespace System.Collections.Immutable
             if (_root != root)
             {
                 return root.IsEmpty
-                  ? this.Clear()
-                  : new ImmutableDictionary<TKey, TValue>(
+                    ? this.Clear()
+                    : new ImmutableDictionary<TKey, TValue>(
                         root,
                         _comparers,
                         adjustedCountIfDifferentRoot

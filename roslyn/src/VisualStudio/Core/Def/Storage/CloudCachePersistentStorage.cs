@@ -82,10 +82,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
         private CacheContainerKey? GetContainerKey(ProjectKey projectKey, Project? project)
         {
             return project != null
-              ? s_projectToContainerKeyCache
-                .GetValue(project.State, _projectToContainerKeyCacheCallback)
-                .ProjectContainerKey
-              : ProjectContainerKeyCache.CreateProjectContainerKey(
+                ? s_projectToContainerKeyCache
+                    .GetValue(project.State, _projectToContainerKeyCacheCallback)
+                    .ProjectContainerKey
+                : ProjectContainerKeyCache.CreateProjectContainerKey(
                     this.SolutionFilePath,
                     projectKey
                 );
@@ -98,10 +98,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
         private CacheContainerKey? GetContainerKey(DocumentKey documentKey, Document? document)
         {
             return document != null
-              ? s_projectToContainerKeyCache
-                .GetValue(document.Project.State, _projectToContainerKeyCacheCallback)
-                .GetDocumentContainerKey(document.State)
-              : ProjectContainerKeyCache.CreateDocumentContainerKey(
+                ? s_projectToContainerKeyCache
+                    .GetValue(document.Project.State, _projectToContainerKeyCacheCallback)
+                    .GetDocumentContainerKey(document.State)
+                : ProjectContainerKeyCache.CreateDocumentContainerKey(
                     this.SolutionFilePath,
                     documentKey
                 );

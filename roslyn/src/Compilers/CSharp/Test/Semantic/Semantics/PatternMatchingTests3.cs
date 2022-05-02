@@ -6305,7 +6305,7 @@ static class Assert
                 type switch
                 {
                     "nint"
-                      => @"
+                        => @"
     {
       // Code size      145 (0x91)
       .maxstack  3
@@ -6395,7 +6395,7 @@ static class Assert
     }
 ",
                     "nuint"
-                      => @"
+                        => @"
     {
       // Code size      135 (0x87)
       .maxstack  3

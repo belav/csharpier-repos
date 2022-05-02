@@ -47,7 +47,7 @@ namespace Microsoft.Interop
             return info.MarshallingAttributeInfo switch
             {
                 NativeMarshallingAttributeInfo marshalInfo
-                  => CreateCustomNativeTypeMarshaller(info, context, marshalInfo),
+                    => CreateCustomNativeTypeMarshaller(info, context, marshalInfo),
                 BlittableTypeAttributeInfo => s_blittable,
                 GeneratedNativeMarshallingAttributeInfo => s_forwarder,
                 MissingSupportMarshallingInfo => s_forwarder,
@@ -64,32 +64,35 @@ namespace Microsoft.Interop
             return count switch
             {
                 SizeAndParamIndexInfo(int size, SizeAndParamIndexInfo.UnspecifiedParam)
-                  => GetConstSizeExpression(size),
+                    => GetConstSizeExpression(size),
                 ConstSizeCountInfo(int size) => GetConstSizeExpression(size),
                 SizeAndParamIndexInfo(
                     SizeAndParamIndexInfo.UnspecifiedConstSize,
                     TypePositionInfo param
                 )
-                  => CheckedExpression(SyntaxKind.CheckedExpression, GetExpressionForParam(param)),
+                    => CheckedExpression(
+                        SyntaxKind.CheckedExpression,
+                        GetExpressionForParam(param)
+                    ),
                 SizeAndParamIndexInfo(int size, TypePositionInfo param)
-                  => CheckedExpression(
-                      SyntaxKind.CheckedExpression,
-                      BinaryExpression(
-                          SyntaxKind.AddExpression,
-                          GetConstSizeExpression(size),
-                          GetExpressionForParam(param)
-                      )
-                  ),
+                    => CheckedExpression(
+                        SyntaxKind.CheckedExpression,
+                        BinaryExpression(
+                            SyntaxKind.AddExpression,
+                            GetConstSizeExpression(size),
+                            GetExpressionForParam(param)
+                        )
+                    ),
                 CountElementCountInfo(TypePositionInfo elementInfo)
-                  => CheckedExpression(
-                      SyntaxKind.CheckedExpression,
-                      GetExpressionForParam(elementInfo)
-                  ),
+                    => CheckedExpression(
+                        SyntaxKind.CheckedExpression,
+                        GetExpressionForParam(elementInfo)
+                    ),
                 _
-                  => throw new MarshallingNotSupportedException(info, context)
-                  {
-                      NotSupportedDetails = Resources.ArraySizeMustBeSpecified
-                  },
+                    => throw new MarshallingNotSupportedException(info, context)
+                    {
+                        NotSupportedDetails = Resources.ArraySizeMustBeSpecified
+                    },
             };
 
             static LiteralExpressionSyntax GetConstSizeExpression(int size)

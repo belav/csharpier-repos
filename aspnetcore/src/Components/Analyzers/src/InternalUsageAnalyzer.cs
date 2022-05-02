@@ -73,9 +73,9 @@ internal class InternalUsageAnalyzer
             IPropertyReferenceOperation property => property.Member,
             IEventReferenceOperation @event => @event.Member,
             _
-              => throw new InvalidOperationException(
-                  "Unexpected operation kind: " + context.Operation.Kind
-              ),
+                => throw new InvalidOperationException(
+                    "Unexpected operation kind: " + context.Operation.Kind
+                ),
         };
 
         VisitOperationSymbol(context, symbol);

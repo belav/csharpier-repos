@@ -55,8 +55,8 @@ namespace System.Web.Http
             byte[] encoded = UrlEncode(bytes, offset, count);
 
             return (alwaysCreateNewReturnValue && (encoded != null) && (encoded == bytes))
-              ? (byte[])encoded.Clone()
-              : encoded;
+                ? (byte[])encoded.Clone()
+                : encoded;
         }
 
         private static byte[] UrlEncode(byte[] bytes, int offset, int count)
@@ -163,12 +163,12 @@ namespace System.Web.Http
         private static int HexToInt(char h)
         {
             return (h >= '0' && h <= '9')
-              ? h - '0'
-              : (h >= 'a' && h <= 'f')
-                  ? h - 'a' + 10
-                  : (h >= 'A' && h <= 'F')
-                      ? h - 'A' + 10
-                      : -1;
+                ? h - '0'
+                : (h >= 'a' && h <= 'f')
+                    ? h - 'a' + 10
+                    : (h >= 'A' && h <= 'F')
+                        ? h - 'A' + 10
+                        : -1;
         }
 
         private static char IntToHex(int n)

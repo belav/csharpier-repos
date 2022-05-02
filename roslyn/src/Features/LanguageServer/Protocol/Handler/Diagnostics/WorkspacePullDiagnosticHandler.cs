@@ -18,10 +18,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 {
     internal class WorkspacePullDiagnosticHandler
         : AbstractPullDiagnosticHandler<
-              VSInternalWorkspaceDiagnosticsParams,
-              VSInternalWorkspaceDiagnosticReport,
-              VSInternalWorkspaceDiagnosticReport[]
-          >
+            VSInternalWorkspaceDiagnosticsParams,
+            VSInternalWorkspaceDiagnosticReport,
+            VSInternalWorkspaceDiagnosticReport[]
+        >
     {
         public override string Method => VSInternalMethods.WorkspacePullDiagnosticName;
 

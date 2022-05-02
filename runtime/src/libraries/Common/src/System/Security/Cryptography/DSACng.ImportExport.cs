@@ -317,9 +317,9 @@ namespace System.Security.Cryptography
                         Sha256HashOutputSize => HASHALGORITHM_ENUM.DSA_HASH_ALGORITHM_SHA256,
                         Sha512HashOutputSize => HASHALGORITHM_ENUM.DSA_HASH_ALGORITHM_SHA512,
                         _
-                          => throw new PlatformNotSupportedException(
-                              SR.Cryptography_InvalidDsaParameters_QRestriction_LargeKey
-                          ),
+                            => throw new PlatformNotSupportedException(
+                                SR.Cryptography_InvalidDsaParameters_QRestriction_LargeKey
+                            ),
                     };
                     pBcryptBlob->standardVersion = DSAFIPSVERSION_ENUM.DSA_FIPS186_3;
 

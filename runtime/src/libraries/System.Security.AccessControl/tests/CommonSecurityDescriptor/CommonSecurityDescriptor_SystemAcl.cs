@@ -87,10 +87,10 @@ namespace System.Security.AccessControl.Tests
                 newSaclStr == null
                     ? null
                     : new SystemAcl(
-                          isContainerSacl,
-                          isDSSacl,
-                          Utils.CreateRawAclFromString(newSaclStr)
-                      );
+                        isContainerSacl,
+                        isDSSacl,
+                        Utils.CreateRawAclFromString(newSaclStr)
+                    );
             try
             {
                 commonSecurityDescriptor.SystemAcl = sacl;

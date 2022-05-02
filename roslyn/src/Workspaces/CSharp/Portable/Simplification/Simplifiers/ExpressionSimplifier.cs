@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                             .Name
                             .Identifier;
                         text = declIdentifier.IsVerbatimIdentifier()
-                          ? declIdentifier.ToString().Substring(1)
-                          : declIdentifier.ToString();
+                            ? declIdentifier.ToString().Substring(1)
+                            : declIdentifier.ToString();
                     }
 
                     replacementNode = SyntaxFactory.IdentifierName(
@@ -310,15 +310,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
             speculativeSymbols = containsOtherSymbol
                 ? semanticModel.LookupSymbols(
-                      memberAccess.SpanStart,
-                      name: memberAccess.Name.Identifier.ValueText
-                  )
+                    memberAccess.SpanStart,
+                    name: memberAccess.Name.Identifier.ValueText
+                )
                 : ImmutableArray<ISymbol>.Empty;
             speculativeNamespacesAndTypes = containsNamespaceOrTypeSymbol
                 ? semanticModel.LookupNamespacesAndTypes(
-                      memberAccess.SpanStart,
-                      name: memberAccess.Name.Identifier.ValueText
-                  )
+                    memberAccess.SpanStart,
+                    name: memberAccess.Name.Identifier.ValueText
+                )
                 : ImmutableArray<ISymbol>.Empty;
         }
 

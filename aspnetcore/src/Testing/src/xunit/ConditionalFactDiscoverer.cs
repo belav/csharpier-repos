@@ -25,13 +25,13 @@ internal class ConditionalFactDiscoverer : FactDiscoverer
     {
         var skipReason = testMethod.EvaluateSkipConditions();
         return skipReason != null
-          ? new SkippedTestCase(
+            ? new SkippedTestCase(
                 skipReason,
                 _diagnosticMessageSink,
                 discoveryOptions.MethodDisplayOrDefault(),
                 TestMethodDisplayOptions.None,
                 testMethod
             )
-          : base.CreateTestCase(discoveryOptions, testMethod, factAttribute);
+            : base.CreateTestCase(discoveryOptions, testMethod, factAttribute);
     }
 }

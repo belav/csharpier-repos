@@ -22,8 +22,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class HttpParameterBindingTracer
         : HttpParameterBinding,
-          IValueProviderParameterBinding,
-          IDecorator<HttpParameterBinding>
+            IValueProviderParameterBinding,
+            IDecorator<HttpParameterBinding>
     {
         private const string ExecuteBindingAsyncMethodName = "ExecuteBindingAsync";
 
@@ -65,8 +65,8 @@ namespace System.Web.Http.Tracing.Tracers
                 IValueProviderParameterBinding valueProviderParameterBinding =
                     InnerBinding as IValueProviderParameterBinding;
                 return valueProviderParameterBinding != null
-                  ? valueProviderParameterBinding.ValueProviderFactories
-                  : Enumerable.Empty<ValueProviderFactory>();
+                    ? valueProviderParameterBinding.ValueProviderFactories
+                    : Enumerable.Empty<ValueProviderFactory>();
             }
         }
 
@@ -113,7 +113,7 @@ namespace System.Web.Http.Tracing.Tracers
                     else
                     {
                         tr.Message = actionContext.ActionArguments.ContainsKey(parameterName)
-                          ? Error.Format(
+                            ? Error.Format(
                                 SRResources.TraceEndParameterBind,
                                 parameterName,
                                 FormattingUtilities.ValueToString(
@@ -121,7 +121,7 @@ namespace System.Web.Http.Tracing.Tracers
                                     CultureInfo.CurrentCulture
                                 )
                             )
-                          : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
+                            : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
                     }
                 },
                 errorTrace: null

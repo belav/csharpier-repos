@@ -16,8 +16,8 @@ namespace System.Runtime
         public static long GetCompiledILBytes(bool currentThread = false)
         {
             return currentThread
-              ? 0
-              : (long)
+                ? 0
+                : (long)
                     EventPipeInternal.GetRuntimeCounterValue(
                         EventPipeInternal.RuntimeCounters.JIT_IL_BYTES_JITTED
                     );
@@ -32,8 +32,8 @@ namespace System.Runtime
         public static long GetCompiledMethodCount(bool currentThread = false)
         {
             return currentThread
-              ? 0
-              : (long)
+                ? 0
+                : (long)
                     EventPipeInternal.GetRuntimeCounterValue(
                         EventPipeInternal.RuntimeCounters.JIT_METHODS_JITTED
                     );
@@ -43,8 +43,8 @@ namespace System.Runtime
         private static long GetCompilationTimeInTicks(bool currentThread = false)
         {
             return currentThread
-              ? 0
-              : (long)
+                ? 0
+                : (long)
                     EventPipeInternal.GetRuntimeCounterValue(
                         EventPipeInternal.RuntimeCounters.JIT_TICKS_IN_JIT
                     );

@@ -102,8 +102,8 @@ namespace gh53564Tests
             );
 
             return (setToZeroTimestamp is null || mostRecentTimestamp is null)
-              ? false
-              : setToZeroTimestamp < mostRecentTimestamp;
+                ? false
+                : setToZeroTimestamp < mostRecentTimestamp;
         }
     }
 

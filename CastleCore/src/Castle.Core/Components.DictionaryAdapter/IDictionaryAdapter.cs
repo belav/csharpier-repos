@@ -21,9 +21,9 @@ namespace Castle.Components.DictionaryAdapter
     /// </summary>
     public interface IDictionaryAdapter
         : IDictionaryEdit,
-          IDictionaryNotify,
-          IDictionaryValidate,
-          IDictionaryCreate
+            IDictionaryNotify,
+            IDictionaryValidate,
+            IDictionaryCreate
     {
         DictionaryAdapterMeta Meta { get; }
 

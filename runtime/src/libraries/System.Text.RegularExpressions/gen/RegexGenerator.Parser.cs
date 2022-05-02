@@ -267,8 +267,8 @@ namespace System.Text.RegularExpressions.Generator
             var regexType = new RegexType(
                 regexMethod,
                 typeDec is RecordDeclarationSyntax rds
-                  ? $"{typeDec.Keyword.ValueText} {rds.ClassOrStructKeyword}"
-                  : typeDec.Keyword.ValueText,
+                    ? $"{typeDec.Keyword.ValueText} {rds.ClassOrStructKeyword}"
+                    : typeDec.Keyword.ValueText,
                 ns ?? string.Empty,
                 $"{typeDec.Identifier}{typeDec.TypeParameterList}",
                 typeDec.ConstraintClauses.ToString()
@@ -282,8 +282,8 @@ namespace System.Text.RegularExpressions.Generator
                 current.ParentClass = new RegexType(
                     null,
                     parent is RecordDeclarationSyntax rds2
-                      ? $"{parent.Keyword.ValueText} {rds2.ClassOrStructKeyword}"
-                      : parent.Keyword.ValueText,
+                        ? $"{parent.Keyword.ValueText} {rds2.ClassOrStructKeyword}"
+                        : parent.Keyword.ValueText,
                     ns ?? string.Empty,
                     $"{parent.Identifier}{parent.TypeParameterList}",
                     parent.ConstraintClauses.ToString()

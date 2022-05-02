@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteDependentTypeFinderService
         : BrokeredServiceBase,
-          IRemoteDependentTypeFinderService
+            IRemoteDependentTypeFinderService
     {
         internal sealed class Factory : FactoryBase<IRemoteDependentTypeFinderService>
         {
@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     var projects = projectIdsOpt.IsDefault
                         ? null
                         : projectIdsOpt
-                          .Select(id => solution.GetRequiredProject(id))
-                          .ToImmutableHashSet();
+                            .Select(id => solution.GetRequiredProject(id))
+                            .ToImmutableHashSet();
 
                     var types = await DependentTypeFinder
                         .FindTypesInCurrentProcessAsync(

@@ -114,17 +114,17 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                     (SyntaxKind.PublicKeyword, _) => Accessibility.Public,
 
                     (SyntaxKind.PrivateKeyword, Accessibility.Protected)
-                      => Accessibility.ProtectedAndInternal,
+                        => Accessibility.ProtectedAndInternal,
                     (SyntaxKind.PrivateKeyword, _) => Accessibility.Private,
 
                     (SyntaxKind.InternalKeyword, Accessibility.Protected)
-                      => Accessibility.ProtectedOrInternal,
+                        => Accessibility.ProtectedOrInternal,
                     (SyntaxKind.InternalKeyword, _) => Accessibility.Internal,
 
                     (SyntaxKind.ProtectedKeyword, Accessibility.Private)
-                      => Accessibility.ProtectedAndInternal,
+                        => Accessibility.ProtectedAndInternal,
                     (SyntaxKind.ProtectedKeyword, Accessibility.Internal)
-                      => Accessibility.ProtectedOrInternal,
+                        => Accessibility.ProtectedOrInternal,
                     (SyntaxKind.ProtectedKeyword, _) => Accessibility.Protected,
 
                     _ => accessibility,

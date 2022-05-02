@@ -479,8 +479,8 @@ public class DefaultHttpContextTests
 
     private class AsyncDisposableServiceProvider
         : IServiceProvider,
-          IDisposable,
-          IServiceScopeFactory
+            IDisposable,
+            IServiceScopeFactory
     {
         private readonly ServiceProvider _serviceProvider;
 

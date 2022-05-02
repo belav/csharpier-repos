@@ -45,13 +45,13 @@ namespace Newtonsoft.Json.Linq
     /// </summary>
     public partial class JValue
         : JToken,
-          IEquatable<JValue>,
-          IFormattable,
-          IComparable,
-          IComparable<JValue>
+            IEquatable<JValue>,
+            IFormattable,
+            IComparable,
+            IComparable<JValue>
 #if HAVE_ICONVERTIBLE
-          ,
-          IConvertible
+            ,
+            IConvertible
 #endif
     {
         private JTokenType _valueType;

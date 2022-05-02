@@ -28,11 +28,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseConditionalExpression
     ]
     internal partial class CSharpUseConditionalExpressionForReturnCodeFixProvider
         : AbstractUseConditionalExpressionForReturnCodeFixProvider<
-              StatementSyntax,
-              IfStatementSyntax,
-              ExpressionSyntax,
-              ConditionalExpressionSyntax
-          >
+            StatementSyntax,
+            IfStatementSyntax,
+            ExpressionSyntax,
+            ConditionalExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

@@ -112,8 +112,8 @@ namespace System.Text.RegularExpressions.Tests
                         CultureInfo.CurrentCulture = CultureInfo.CurrentCulture.Equals(
                             CultureInfo.GetCultureInfo("de-DE")
                         )
-                          ? CultureInfo.InvariantCulture
-                          : CultureInfo.GetCultureInfo("de-DE");
+                            ? CultureInfo.InvariantCulture
+                            : CultureInfo.GetCultureInfo("de-DE");
                         Assert.True(Regex.IsMatch("1", "1", RegexOptions.Multiline));
                         Assert.True(GetCachedItemsNum() == 3);
                     }

@@ -280,8 +280,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     caseWhenClauses.Count == 0
                         ? null
                         : sqlExpressionFactory.ApplyDefaultTypeMapping(
-                              sqlExpressionFactory.Case(caseWhenClauses, elseResult: null)
-                          );
+                            sqlExpressionFactory.Case(caseWhenClauses, elseResult: null)
+                        );
                 var entityProjection = new EntityProjectionExpression(
                     entityType,
                     columns,
@@ -310,7 +310,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             {
                 TableExpression tableExpression => tableExpression.Table,
                 TableValuedFunctionExpression tableValuedFunctionExpression
-                  => tableValuedFunctionExpression.StoreFunction,
+                    => tableValuedFunctionExpression.StoreFunction,
                 _ => entityType.GetDefaultMappings().Single().Table,
             };
 
@@ -656,10 +656,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         }
 
                         case ShapedQueryExpression shapedQueryExpression
-                              when shapedQueryExpression.ResultCardinality
-                                  == ResultCardinality.Single
-                                  || shapedQueryExpression.ResultCardinality
-                                      == ResultCardinality.SingleOrDefault:
+                        when shapedQueryExpression.ResultCardinality == ResultCardinality.Single
+                            || shapedQueryExpression.ResultCardinality
+                                == ResultCardinality.SingleOrDefault:
                         {
                             var innerSelectExpression = (SelectExpression)
                                 shapedQueryExpression.QueryExpression;
@@ -701,27 +700,24 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                     == ResultCardinality.SingleOrDefault
                                         ? (Expression)Default(innerShaperExpression.Type)
                                         : Block(
-                                              Throw(
-                                                  New(
-                                                      typeof(InvalidOperationException)
-                                                          .GetConstructors()
-                                                          .Single(
-                                                              ci =>
-                                                              {
-                                                                  var parameters =
-                                                                      ci.GetParameters();
-                                                                  return parameters.Length == 1
-                                                                      && parameters[0].ParameterType
-                                                                          == typeof(string);
-                                                              }
-                                                          ),
-                                                      Constant(
-                                                          CoreStrings.SequenceContainsNoElements
-                                                      )
-                                                  )
-                                              ),
-                                              Default(innerShaperExpression.Type)
-                                          );
+                                            Throw(
+                                                New(
+                                                    typeof(InvalidOperationException)
+                                                        .GetConstructors()
+                                                        .Single(
+                                                            ci =>
+                                                            {
+                                                                var parameters = ci.GetParameters();
+                                                                return parameters.Length == 1
+                                                                    && parameters[0].ParameterType
+                                                                        == typeof(string);
+                                                            }
+                                                        ),
+                                                    Constant(CoreStrings.SequenceContainsNoElements)
+                                                )
+                                            ),
+                                            Default(innerShaperExpression.Type)
+                                        );
 
                                 innerShaperExpression = Condition(
                                     Equal(dummyProjection, Default(sentinelNullableType)),
@@ -762,8 +758,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         }
 
                         case ShapedQueryExpression shapedQueryExpression
-                              when shapedQueryExpression.ResultCardinality
-                                  == ResultCardinality.Enumerable:
+                        when shapedQueryExpression.ResultCardinality
+                            == ResultCardinality.Enumerable:
                         {
                             var innerSelectExpression = (SelectExpression)
                                 shapedQueryExpression.QueryExpression;
@@ -1150,8 +1146,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                                     updatedExpressions.Add(
                                         projectionBindingExpression.Type.IsValueType
-                                          ? Convert(projectionBindingExpression, typeof(object))
-                                          : projectionBindingExpression
+                                            ? Convert(projectionBindingExpression, typeof(object))
+                                            : projectionBindingExpression
                                     );
                                     comparers.Add(keyExpression.Comparer);
                                 }
@@ -1325,11 +1321,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                         is EntityProjectionExpression entityProjection
                         ? AddEntityProjection(entityProjection)
                         : Constant(
-                              AddToProjection(
-                                  (SqlExpression)keyValuePair.Value,
-                                  keyValuePair.Key.Last?.Name
-                              )
-                          );
+                            AddToProjection(
+                                (SqlExpression)keyValuePair.Value,
+                                keyValuePair.Key.Last?.Name
+                            )
+                        );
                 }
 
                 _projectionMapping.Clear();
@@ -1506,12 +1502,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     Having == null
                         ? sqlExpression
                         : new SqlBinaryExpression(
-                              ExpressionType.AndAlso,
-                              Having,
-                              sqlExpression,
-                              typeof(bool),
-                              sqlExpression.TypeMapping
-                          );
+                            ExpressionType.AndAlso,
+                            Having,
+                            sqlExpression,
+                            typeof(bool),
+                            sqlExpression.TypeMapping
+                        );
             }
             else
             {
@@ -1519,12 +1515,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     Predicate == null
                         ? sqlExpression
                         : new SqlBinaryExpression(
-                              ExpressionType.AndAlso,
-                              Predicate,
-                              sqlExpression,
-                              typeof(bool),
-                              sqlExpression.TypeMapping
-                          );
+                            ExpressionType.AndAlso,
+                            Predicate,
+                            sqlExpression,
+                            typeof(bool),
+                            sqlExpression.TypeMapping
+                        );
             }
         }
 
@@ -1557,8 +1553,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     var item = groupByTerms[i];
                     var newItem = subquery._projection.Any(e => e.Expression.Equals(item))
-                      ? sqlRemappingVisitor.Remap(item)
-                      : subquery.GenerateOuterColumn(
+                        ? sqlRemappingVisitor.Remap(item)
+                        : subquery.GenerateOuterColumn(
                             subqueryTableReference,
                             item,
                             groupByAliases[i] ?? "Key"
@@ -1633,8 +1629,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     var item = groupByTerms[i];
                     var newItem = subquery._projection.Any(e => e.Expression.Equals(item))
-                      ? sqlRemappingVisitor.Remap(item)
-                      : subquery.GenerateOuterColumn(
+                        ? sqlRemappingVisitor.Remap(item)
+                        : subquery.GenerateOuterColumn(
                             subqueryTableReference,
                             item,
                             groupByAliases[i] ?? "Key"
@@ -1737,8 +1733,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     break;
 
                 case UnaryExpression unaryExpression
-                      when unaryExpression.NodeType == ExpressionType.Convert
-                          || unaryExpression.NodeType == ExpressionType.ConvertChecked:
+                when unaryExpression.NodeType == ExpressionType.Convert
+                    || unaryExpression.NodeType == ExpressionType.ConvertChecked:
                     PopulateGroupByTerms(
                         unaryExpression.Operand,
                         groupByTerms,
@@ -2079,16 +2075,16 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             var setExpression = setOperationType switch
             {
                 SetOperationType.Except
-                  => (SetOperationBase)
-                      new ExceptExpression(setOperationAlias, select1, select2, distinct),
+                    => (SetOperationBase)
+                        new ExceptExpression(setOperationAlias, select1, select2, distinct),
                 SetOperationType.Intersect
-                  => new IntersectExpression(setOperationAlias, select1, select2, distinct),
+                    => new IntersectExpression(setOperationAlias, select1, select2, distinct),
                 SetOperationType.Union
-                  => new UnionExpression(setOperationAlias, select1, select2, distinct),
+                    => new UnionExpression(setOperationAlias, select1, select2, distinct),
                 _
-                  => throw new InvalidOperationException(
-                      CoreStrings.InvalidSwitch(nameof(setOperationType), setOperationType)
-                  )
+                    => throw new InvalidOperationException(
+                        CoreStrings.InvalidSwitch(nameof(setOperationType), setOperationType)
+                    )
             };
             _tables.Add(setExpression);
             _tableReferences.Add(tableReferenceExpression);
@@ -2251,7 +2247,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     ColumnExpression columnExpression => columnExpression.IsNullable,
                     SqlConstantExpression sqlConstantExpression
-                      => sqlConstantExpression.Value == null,
+                        => sqlConstantExpression.Value == null,
                     _ => true,
                 };
         }
@@ -2370,8 +2366,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 );
 
                 return propertyExpressions == null
-                  ? null
-                  : new EntityProjectionExpression(entityType, propertyExpressions);
+                    ? null
+                    : new EntityProjectionExpression(entityType, propertyExpressions);
             }
 
             static TableReferenceExpression FindTableReference(
@@ -2713,15 +2709,15 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                         ? innerSelectExpression.Orderings
                                         : innerSelectExpression._identifier.Count > 0
                                             ? innerSelectExpression._identifier.Select(
-                                                  e => new OrderingExpression(e.Column, true)
-                                              )
+                                                e => new OrderingExpression(e.Column, true)
+                                            )
                                             : new[]
-                                              {
-                                                  new OrderingExpression(
-                                                      new SqlFragmentExpression("(SELECT 1)"),
-                                                      true
-                                                  )
-                                              };
+                                            {
+                                                new OrderingExpression(
+                                                    new SqlFragmentExpression("(SELECT 1)"),
+                                                    true
+                                                )
+                                            };
 
                                 var rowNumberExpression = new RowNumberExpression(
                                     partitions,
@@ -2764,19 +2760,19 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                             offset is SqlConstantExpression offsetConstant
                                             && limit is SqlConstantExpression limitConstant
                                                 ? new SqlConstantExpression(
-                                                      Constant(
-                                                          (int)offsetConstant.Value!
-                                                              + (int)limitConstant.Value!
-                                                      ),
-                                                      limit.TypeMapping
-                                                  )
+                                                    Constant(
+                                                        (int)offsetConstant.Value!
+                                                            + (int)limitConstant.Value!
+                                                    ),
+                                                    limit.TypeMapping
+                                                )
                                                 : new SqlBinaryExpression(
-                                                      ExpressionType.Add,
-                                                      offset,
-                                                      limit,
-                                                      limit.Type,
-                                                      limit.TypeMapping
-                                                  );
+                                                    ExpressionType.Add,
+                                                    offset,
+                                                    limit,
+                                                    limit.Type,
+                                                    limit.TypeMapping
+                                                );
                                     }
 
                                     limitPredicate = new SqlBinaryExpression(
@@ -2792,12 +2788,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                     offsetPredicate != null
                                         ? limitPredicate != null
                                             ? new SqlBinaryExpression(
-                                                  ExpressionType.AndAlso,
-                                                  offsetPredicate,
-                                                  limitPredicate,
-                                                  typeof(bool),
-                                                  joinPredicate.TypeMapping
-                                              )
+                                                ExpressionType.AndAlso,
+                                                offsetPredicate,
+                                                limitPredicate,
+                                                typeof(bool),
+                                                joinPredicate.TypeMapping
+                                            )
                                             : offsetPredicate
                                         : limitPredicate;
                                 innerSelectExpression.ApplyPredicate(predicate!);
@@ -2805,8 +2801,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
 
                             AddJoin(
                                 joinType == JoinType.CrossApply
-                                  ? JoinType.InnerJoin
-                                  : JoinType.LeftJoin,
+                                    ? JoinType.InnerJoin
+                                    : JoinType.LeftJoin,
                                 ref innerSelectExpression,
                                 out innerPushdownOccurred,
                                 joinPredicate
@@ -2886,9 +2882,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 JoinType.CrossApply => new CrossApplyExpression(innerTable),
                 JoinType.OuterApply => (TableExpressionBase)new OuterApplyExpression(innerTable),
                 _
-                  => throw new InvalidOperationException(
-                      CoreStrings.InvalidSwitch(nameof(joinType), joinType)
-                  )
+                    => throw new InvalidOperationException(
+                        CoreStrings.InvalidSwitch(nameof(joinType), joinType)
+                    )
             };
 
             var tableReferenceExpression = innerSelectExpression._tableReferences[0];
@@ -3143,20 +3139,20 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                             return selectExpression.ContainsTableReference(columnExpression);
 
                         case SqlConstantExpression sqlConstantExpression
-                              when sqlConstantExpression.Value == null:
+                        when sqlConstantExpression.Value == null:
                             return true;
 
                         case SqlBinaryExpression sqlBinaryExpression
-                              when sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
-                                  || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
-                                  || sqlBinaryExpression.OperatorType == ExpressionType.NotEqual:
+                        when sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
+                            || sqlBinaryExpression.OperatorType == ExpressionType.OrElse
+                            || sqlBinaryExpression.OperatorType == ExpressionType.NotEqual:
                             return IsContainedColumn(selectExpression, sqlBinaryExpression.Left)
                                 && IsContainedColumn(selectExpression, sqlBinaryExpression.Right);
 
                         case CaseExpression caseExpression
-                              when caseExpression.ElseResult == null
-                                  && caseExpression.Operand == null
-                                  && caseExpression.WhenClauses.Count == 1:
+                        when caseExpression.ElseResult == null
+                            && caseExpression.Operand == null
+                            && caseExpression.WhenClauses.Count == 1:
                             return IsContainedColumn(
                                     selectExpression,
                                     caseExpression.WhenClauses[0].Test
@@ -3234,12 +3230,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     left != null
                         ? right != null
                             ? new SqlBinaryExpression(
-                                  ExpressionType.AndAlso,
-                                  left,
-                                  right,
-                                  left.Type,
-                                  left.TypeMapping
-                              )
+                                ExpressionType.AndAlso,
+                                left,
+                                right,
+                                left.Type,
+                                left.TypeMapping
+                            )
                             : left
                         : right;
 
@@ -3945,7 +3941,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         private SqlExpression TryLiftGroupByAggregate(SqlExpression sqlExpression) =>
             _groupBy.Count > 0
                 ? (SqlExpression)
-                      new GroupByAggregateLiftingExpressionVisitor(this).Visit(sqlExpression)
+                    new GroupByAggregateLiftingExpressionVisitor(this).Visit(sqlExpression)
                 : sqlExpression;
 
         private void AddTable(
@@ -4239,9 +4235,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     var item = list[i];
                     var newItem = item is ShapedQueryExpression shapedQueryExpression
                         ? shapedQueryExpression.Update(
-                              visitor.Visit(shapedQueryExpression.QueryExpression),
-                              shapedQueryExpression.ShaperExpression
-                          )
+                            visitor.Visit(shapedQueryExpression.QueryExpression),
+                            shapedQueryExpression.ShaperExpression
+                        )
                         : visitor.Visit(item);
                     if (newItem != item && newList == list)
                     {

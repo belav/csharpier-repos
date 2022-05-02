@@ -832,15 +832,15 @@ namespace System.Linq.Expressions.Compiler
 
                     convCode = isChecked
                         ? (
-                              isFromUnsigned || tf.IsFloatingPoint()
-                                  ? OpCodes.Conv_Ovf_U8_Un
-                                  : OpCodes.Conv_Ovf_U8
-                          )
+                            isFromUnsigned || tf.IsFloatingPoint()
+                                ? OpCodes.Conv_Ovf_U8_Un
+                                : OpCodes.Conv_Ovf_U8
+                        )
                         : (
-                              isFromUnsigned || tf.IsFloatingPoint()
-                                  ? OpCodes.Conv_U8
-                                  : OpCodes.Conv_I8
-                          );
+                            isFromUnsigned || tf.IsFloatingPoint()
+                                ? OpCodes.Conv_U8
+                                : OpCodes.Conv_I8
+                        );
                     break;
                 default:
                     throw ContractUtils.Unreachable;

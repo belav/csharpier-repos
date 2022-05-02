@@ -272,8 +272,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 || IsDynamicallyTypedRuntimeProxy(argument, info);
 
             return useValueRestriction
-              ? BindingRestrictions.GetInstanceRestriction(argument.Expression, argument.Value)
-              : BindingRestrictions.GetTypeRestriction(argument.Expression, argument.RuntimeType);
+                ? BindingRestrictions.GetInstanceRestriction(argument.Expression, argument.Value)
+                : BindingRestrictions.GetTypeRestriction(argument.Expression, argument.RuntimeType);
         }
 
         /////////////////////////////////////////////////////////////////////////////////
@@ -422,7 +422,7 @@ namespace Microsoft.CSharp.RuntimeBinder
             {
                 // Binary Operators
                 ExpressionType.Add
-                  => SpecialNames.CLR_Add,
+                    => SpecialNames.CLR_Add,
                 ExpressionType.Subtract => SpecialNames.CLR_Subtract,
                 ExpressionType.Multiply => SpecialNames.CLR_Multiply,
                 ExpressionType.Divide => SpecialNames.CLR_Division,
@@ -441,7 +441,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 
                 // "op_LogicalNot";
                 ExpressionType.AddAssign
-                  => SpecialNames.CLR_InPlaceAdd,
+                    => SpecialNames.CLR_InPlaceAdd,
                 ExpressionType.SubtractAssign => SpecialNames.CLR_InPlaceSubtract,
                 ExpressionType.MultiplyAssign => SpecialNames.CLR_InPlaceMultiply,
                 ExpressionType.DivideAssign => SpecialNames.CLR_InPlaceDivide,
@@ -454,7 +454,7 @@ namespace Microsoft.CSharp.RuntimeBinder
 
                 // Unary Operators
                 ExpressionType.Negate
-                  => SpecialNames.CLR_UnaryNegation,
+                    => SpecialNames.CLR_UnaryNegation,
                 ExpressionType.UnaryPlus => SpecialNames.CLR_UnaryPlus,
                 ExpressionType.Not => SpecialNames.CLR_LogicalNot,
                 ExpressionType.OnesComplement => SpecialNames.CLR_OnesComplement,

@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 public abstract class DocumentClassifierPassBase
     : IntermediateNodePassBase,
-      IRazorDocumentClassifierPass
+        IRazorDocumentClassifierPass
 {
     protected abstract string DocumentKind { get; }
 

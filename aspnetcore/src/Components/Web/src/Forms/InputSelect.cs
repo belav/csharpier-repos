@@ -109,7 +109,7 @@ public class InputSelect<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
             CultureInfo.CurrentCulture,
             out var result
         )
-          ? result
-          : default;
+            ? result
+            : default;
     }
 }

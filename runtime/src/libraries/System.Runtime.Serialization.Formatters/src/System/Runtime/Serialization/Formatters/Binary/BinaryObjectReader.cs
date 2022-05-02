@@ -645,7 +645,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 objectPr._indexMap[0] = !objectPr._isLowerBound
                     ? objectPr._memberIndex
                     : // Zero based array
-                      objectPr._lowerBoundA[0] + objectPr._memberIndex; // Lower Bound based array
+                    objectPr._lowerBoundA[0] + objectPr._memberIndex; // Lower Bound based array
             }
 
             // Set Array element according to type of element

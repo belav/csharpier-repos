@@ -113,10 +113,10 @@ public static class BindConverter
         // Formatting for bool is special-cased. We need to produce a boolean value for conditional attributes
         // to work.
         return value == null
-          ? null
-          : value.Value
-              ? BoxedTrue
-              : BoxedFalse;
+            ? null
+            : value.Value
+                ? BoxedTrue
+                : BoxedFalse;
     }
 
     /// <summary>

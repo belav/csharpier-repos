@@ -457,19 +457,19 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     bool convertible =
                         (_flags & CONVERTTYPE.ISEXPLICIT) != 0
                             ? _binder.BindExplicitConversion(
-                                  arg1,
-                                  arg1.Type,
-                                  typeDstBase,
-                                  out arg1,
-                                  _flags | CONVERTTYPE.NOUDC
-                              )
+                                arg1,
+                                arg1.Type,
+                                typeDstBase,
+                                out arg1,
+                                _flags | CONVERTTYPE.NOUDC
+                            )
                             : _binder.BindImplicitConversion(
-                                  arg1,
-                                  arg1.Type,
-                                  typeDstBase,
-                                  out arg1,
-                                  _flags | CONVERTTYPE.NOUDC
-                              );
+                                arg1,
+                                arg1.Type,
+                                typeDstBase,
+                                out arg1,
+                                _flags | CONVERTTYPE.NOUDC
+                            );
 
                     if (!convertible)
                     {

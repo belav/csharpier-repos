@@ -187,8 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     refKindsBuilder.Add(refKind);
                     attributesBuilder.Add(
                         syntax.Kind() == SyntaxKind.ParenthesizedLambdaExpression
-                          ? p.AttributeLists
-                          : default
+                            ? p.AttributeLists
+                            : default
                     );
                 }
 
@@ -276,8 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Error(
                             diagnostics,
                             syntax.Kind() == SyntaxKind.SimpleLambdaExpression
-                              ? ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression
-                              : ErrorCode.ERR_AttributesNotAllowed,
+                                ? ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression
+                                : ErrorCode.ERR_AttributesNotAllowed,
                             attributeList
                         );
                     }

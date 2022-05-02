@@ -56,12 +56,12 @@ namespace Castle.Core.Internal
             var keyB = Unwrap(objB);
 
             return (keyA != null)
-              ? (keyB != null)
-                  ? comparer.Equals(keyA, keyB)
-                  : false // live object cannot equal a collected object
-              : (keyB != null)
-                  ? false // live object cannot equal a collected object
-                  : ReferenceEquals(objA, objB);
+                ? (keyB != null)
+                    ? comparer.Equals(keyA, keyB)
+                    : false // live object cannot equal a collected object
+                : (keyB != null)
+                    ? false // live object cannot equal a collected object
+                    : ReferenceEquals(objA, objB);
         }
     }
 }

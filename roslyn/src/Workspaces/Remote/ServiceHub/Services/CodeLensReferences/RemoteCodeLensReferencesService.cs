@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteCodeLensReferencesService
         : BrokeredServiceBase,
-          IRemoteCodeLensReferencesService
+            IRemoteCodeLensReferencesService
     {
         internal sealed class Factory : FactoryBase<IRemoteCodeLensReferencesService>
         {

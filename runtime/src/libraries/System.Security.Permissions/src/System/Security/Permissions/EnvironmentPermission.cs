@@ -12,7 +12,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class EnvironmentPermission
         : CodeAccessPermission,
-          IUnrestrictedPermission
+            IUnrestrictedPermission
     {
         public EnvironmentPermission(EnvironmentPermissionAccess flag, string pathList) { }
 

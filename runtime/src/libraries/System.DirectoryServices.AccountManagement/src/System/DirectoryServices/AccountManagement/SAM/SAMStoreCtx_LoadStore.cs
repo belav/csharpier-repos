@@ -199,8 +199,8 @@ namespace System.DirectoryServices.AccountManagement
                 return null;
 
             return (index != -1)
-              ? Name.Substring(index + 1)
-              : // +1 to skip the '/'
+                ? Name.Substring(index + 1)
+                : // +1 to skip the '/'
                 Name;
         }
 
@@ -550,8 +550,8 @@ namespace System.DirectoryServices.AccountManagement
 
                 // Return whichever one matched.  If neither matched, this will return null.
                 return (sidPrincipal != null)
-                  ? GetAsPrincipal(sidPrincipal, null)
-                  : ((nt4Principal != null) ? GetAsPrincipal(nt4Principal, null) : null);
+                    ? GetAsPrincipal(sidPrincipal, null)
+                    : ((nt4Principal != null) ? GetAsPrincipal(nt4Principal, null) : null);
             }
             else
             {
@@ -655,7 +655,7 @@ namespace System.DirectoryServices.AccountManagement
                 (index != -1)
                     ? urnValue.Substring(index + 1)
                     : // +1 to skip the '/'
-                      urnValue;
+                    urnValue;
 
             GlobalDebug.WriteLineIf(
                 GlobalDebug.Info,

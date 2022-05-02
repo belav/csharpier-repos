@@ -181,9 +181,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
                     indentationColumn = indentationColumn.HasValue
                         ? Math.Min(
-                              indentationColumn.Value,
-                              line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions)
-                          )
+                            indentationColumn.Value,
+                            line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions)
+                        )
                         : line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions);
                 }
             }

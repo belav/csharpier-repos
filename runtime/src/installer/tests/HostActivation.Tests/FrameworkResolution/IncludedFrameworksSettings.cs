@@ -9,7 +9,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
     public class IncludedFrameworksSettings
         : FrameworkResolutionBase,
-          IClassFixture<IncludedFrameworksSettings.SharedTestState>
+            IClassFixture<IncludedFrameworksSettings.SharedTestState>
     {
         private SharedTestState SharedState { get; }
 

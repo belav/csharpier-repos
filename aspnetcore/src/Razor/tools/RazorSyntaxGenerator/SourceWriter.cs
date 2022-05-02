@@ -619,10 +619,10 @@ internal class SourceWriter : AbstractFileWriter
                         ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax.SyntaxList<SyntaxToken>"
                         : IsNodeList(field.Type)
                             ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax."
-                              + field.Type
+                                + field.Type
                             : IsSeparatedNodeList(field.Type)
                                 ? "Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax."
-                                  + field.Type
+                                    + field.Type
                                 : field.Type;
 
             Write("{0} {1}", type, CamelCase(field.Name));

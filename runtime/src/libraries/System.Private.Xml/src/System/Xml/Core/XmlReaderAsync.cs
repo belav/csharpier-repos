@@ -134,8 +134,12 @@ namespace System.Xml
                 return value;
             }
             return returnType == typeof(string)
-              ? string.Empty
-              : XmlUntypedConverter.Untyped.ChangeType(string.Empty, returnType, namespaceResolver);
+                ? string.Empty
+                : XmlUntypedConverter.Untyped.ChangeType(
+                    string.Empty,
+                    returnType,
+                    namespaceResolver
+                );
         }
 
         // Moving through the Stream

@@ -2864,8 +2864,8 @@ namespace System.Xml.Serialization
                     if (ns == null || ns.Length == 0)
                     {
                         return schema.ElementFormDefault == XmlSchemaForm.None
-                          ? XmlSchemaForm.Unqualified
-                          : schema.ElementFormDefault;
+                            ? XmlSchemaForm.Unqualified
+                            : schema.ElementFormDefault;
                     }
                     else
                     {
@@ -2873,8 +2873,8 @@ namespace System.Xml.Serialization
                         return
                             element.QualifiedName.Namespace == null
                             || element.QualifiedName.Namespace.Length == 0
-                          ? XmlSchemaForm.Unqualified
-                          : XmlSchemaForm.Qualified;
+                            ? XmlSchemaForm.Unqualified
+                            : XmlSchemaForm.Qualified;
                     }
                 }
                 return XmlSchemaForm.Qualified;
@@ -2897,8 +2897,8 @@ namespace System.Xml.Serialization
                     if (ns == null || ns.Length == 0)
                     {
                         return schema.AttributeFormDefault == XmlSchemaForm.None
-                          ? XmlSchemaForm.Unqualified
-                          : schema.AttributeFormDefault;
+                            ? XmlSchemaForm.Unqualified
+                            : schema.AttributeFormDefault;
                     }
                     else
                     {
@@ -2906,8 +2906,8 @@ namespace System.Xml.Serialization
                         return
                             attribute.QualifiedName.Namespace == null
                             || attribute.QualifiedName.Namespace.Length == 0
-                          ? XmlSchemaForm.Unqualified
-                          : XmlSchemaForm.Qualified;
+                            ? XmlSchemaForm.Unqualified
+                            : XmlSchemaForm.Qualified;
                     }
                 }
                 return XmlSchemaForm.Unqualified;

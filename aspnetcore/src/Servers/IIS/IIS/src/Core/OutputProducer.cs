@@ -101,8 +101,8 @@ internal class OutputProducer
     {
         var awaitable = pipeWriter.FlushAsync(cancellationToken);
         return awaitable.IsCompleted
-          ? Task.CompletedTask
-          : FlushNowAsyncAwaited(awaitable, cancellationToken);
+            ? Task.CompletedTask
+            : FlushNowAsyncAwaited(awaitable, cancellationToken);
     }
 
     private async Task FlushNowAsyncAwaited(

@@ -1310,7 +1310,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                         or BackgroundAnalysisScope.FullSolution,
                     _
                 )
-                  => 0,
+                    => 0,
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -1322,7 +1322,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                         or BackgroundAnalysisScope.FullSolution,
                     _
                 )
-                  => 0,
+                    => 0,
                 _ => throw ExceptionUtilities.Unreachable,
             };
 
@@ -2093,8 +2093,8 @@ class C
             )
                 : base(
                     composition: incrementalAnalyzer is null
-                      ? s_composition
-                      : s_composition.AddParts(incrementalAnalyzer),
+                        ? s_composition
+                        : s_composition.AddParts(incrementalAnalyzer),
                     workspaceKind: workspaceKind,
                     disablePartialSolutions: disablePartialSolutions
                 )

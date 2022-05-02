@@ -42,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             extensionExpression switch
             {
                 ShapedQueryExpression shapedQueryExpression
-                  => VisitShapedQueryExpression(shapedQueryExpression),
+                    => VisitShapedQueryExpression(shapedQueryExpression),
                 CaseExpression caseExpression => VisitCase(caseExpression),
                 SelectExpression selectExpression => VisitSelect(selectExpression),
                 InnerJoinExpression innerJoinExpression => VisitInnerJoin(innerJoinExpression),
@@ -55,7 +55,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             var selectExpression = shapedQueryExpression.QueryExpression;
             var updatedSelectExpression = Visit(selectExpression);
             return updatedSelectExpression != selectExpression
-              ? shapedQueryExpression.Update(
+                ? shapedQueryExpression.Update(
                     updatedSelectExpression,
                     ReplacingExpressionVisitor.Replace(
                         selectExpression,
@@ -63,7 +63,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                         shapedQueryExpression.ShaperExpression
                     )
                 )
-              : shapedQueryExpression;
+                : shapedQueryExpression;
         }
 
         private Expression VisitCase(CaseExpression caseExpression)
@@ -140,7 +140,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             changed |= limit != selectExpression.Limit;
 
             return changed
-              ? selectExpression.Update(
+                ? selectExpression.Update(
                     projections,
                     tables,
                     predicate,
@@ -150,7 +150,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     limit,
                     offset
                 )
-              : selectExpression;
+                : selectExpression;
         }
 
         private Expression VisitInnerJoin(InnerJoinExpression innerJoinExpression)

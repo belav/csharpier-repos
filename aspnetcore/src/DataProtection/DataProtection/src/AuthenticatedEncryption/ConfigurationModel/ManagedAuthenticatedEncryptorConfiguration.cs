@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// </summary>
 public sealed class ManagedAuthenticatedEncryptorConfiguration
     : AlgorithmConfiguration,
-      IInternalAlgorithmConfiguration
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The type of the algorithm to use for symmetric encryption.

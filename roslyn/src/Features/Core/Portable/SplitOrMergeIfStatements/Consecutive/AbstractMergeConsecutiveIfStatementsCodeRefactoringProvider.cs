@@ -210,7 +210,7 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 relativeIndex: -1,
                 out previousStatement
             )
-              ? CanStatementsBeMergedAsync(
+                ? CanStatementsBeMergedAsync(
                     document,
                     syntaxFacts,
                     ifGenerator,
@@ -218,7 +218,7 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                     ifOrElseIf,
                     cancellationToken
                 )
-              : SpecializedTasks.False;
+                : SpecializedTasks.False;
         }
 
         private static Task<bool> CanBeMergedWithNextStatementAsync(
@@ -236,7 +236,7 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 relativeIndex: 1,
                 out nextStatement
             )
-              ? CanStatementsBeMergedAsync(
+                ? CanStatementsBeMergedAsync(
                     document,
                     syntaxFacts,
                     ifGenerator,
@@ -244,7 +244,7 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                     nextStatement,
                     cancellationToken
                 )
-              : SpecializedTasks.False;
+                : SpecializedTasks.False;
         }
 
         private static async Task<bool> CanStatementsBeMergedAsync(

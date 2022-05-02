@@ -73,15 +73,15 @@ namespace System.Net.WebSockets.Client.Tests
                 await (
                     useCloseOutputAsync
                         ? cws.CloseOutputAsync(
-                              WebSocketCloseStatus.InvalidMessageType,
-                              string.Empty,
-                              cts.Token
-                          )
+                            WebSocketCloseStatus.InvalidMessageType,
+                            string.Empty,
+                            cts.Token
+                        )
                         : cws.CloseAsync(
-                              WebSocketCloseStatus.InvalidMessageType,
-                              string.Empty,
-                              cts.Token
-                          )
+                            WebSocketCloseStatus.InvalidMessageType,
+                            string.Empty,
+                            cts.Token
+                        )
                 );
                 _output.WriteLine("Close done.");
                 Assert.Equal(WebSocketState.Closed, cws.State);

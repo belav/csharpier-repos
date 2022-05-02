@@ -33,8 +33,8 @@ namespace System
     )]
     public sealed partial class TimeZoneInfo
         : IEquatable<TimeZoneInfo?>,
-          ISerializable,
-          IDeserializationCallback
+            ISerializable,
+            IDeserializationCallback
     {
         private enum TimeZoneInfoResult
         {
@@ -127,10 +127,10 @@ namespace System
                 // TimeZoneInfo.Utc to the ConvertTime(...) methods will this check succeed.
                 //
                 return ReferenceEquals(timeZone, s_utcTimeZone)
-                  ? DateTimeKind.Utc
-                  : ReferenceEquals(timeZone, _localTimeZone)
-                      ? DateTimeKind.Local
-                      : DateTimeKind.Unspecified;
+                    ? DateTimeKind.Utc
+                    : ReferenceEquals(timeZone, _localTimeZone)
+                        ? DateTimeKind.Local
+                        : DateTimeKind.Unspecified;
             }
 
             public Dictionary<string, TimeZoneInfo>? _systemTimeZones;
@@ -712,10 +712,10 @@ namespace System
             long ticks = utcDateTime.Ticks + destinationOffset.Ticks;
 
             return ticks > DateTimeOffset.MaxValue.Ticks
-              ? DateTimeOffset.MaxValue
-              : ticks < DateTimeOffset.MinValue.Ticks
-                  ? DateTimeOffset.MinValue
-                  : new DateTimeOffset(ticks, destinationOffset);
+                ? DateTimeOffset.MaxValue
+                : ticks < DateTimeOffset.MinValue.Ticks
+                    ? DateTimeOffset.MinValue
+                    : new DateTimeOffset(ticks, destinationOffset);
         }
 
         /// <summary>
@@ -1008,8 +1008,8 @@ namespace System
                             // sort by BaseUtcOffset first and by DisplayName second - this is similar to the Windows Date/Time control panel
                             int comparison = x.BaseUtcOffset.CompareTo(y.BaseUtcOffset);
                             return comparison == 0
-                              ? string.CompareOrdinal(x.DisplayName, y.DisplayName)
-                              : comparison;
+                                ? string.CompareOrdinal(x.DisplayName, y.DisplayName)
+                                : comparison;
                         }
                     );
 
@@ -1388,13 +1388,13 @@ namespace System
                 DateTime dateTimeToCompare = dateTimeisUtc
                     ? dateTime
                     :
-                      // use the previous rule to compute the dateTimeToCompare, since the time daylight savings "switches"
-                      // is based on the previous rule's offset
-                      ConvertToUtc(
-                          dateTime,
-                          previousRule.DaylightDelta,
-                          previousRule.BaseUtcOffsetDelta
-                      );
+                    // use the previous rule to compute the dateTimeToCompare, since the time daylight savings "switches"
+                    // is based on the previous rule's offset
+                    ConvertToUtc(
+                        dateTime,
+                        previousRule.DaylightDelta,
+                        previousRule.BaseUtcOffsetDelta
+                    );
 
                 isAfterStart = dateTimeToCompare >= rule.DateStart;
             }
@@ -1464,10 +1464,10 @@ namespace System
             long ticks = dateTime.Ticks + offset.Ticks;
 
             return ticks > DateTime.MaxValue.Ticks
-              ? DateTime.MaxValue
-              : ticks < DateTime.MinValue.Ticks
-                  ? DateTime.MinValue
-                  : new DateTime(ticks);
+                ? DateTime.MaxValue
+                : ticks < DateTime.MinValue.Ticks
+                    ? DateTime.MinValue
+                    : new DateTime(ticks);
         }
 
         /// <summary>
@@ -1498,10 +1498,10 @@ namespace System
             ticks += offset.Ticks;
 
             return ticks > DateTime.MaxValue.Ticks
-              ? DateTime.MaxValue
-              : ticks < DateTime.MinValue.Ticks
-                  ? DateTime.MinValue
-                  : new DateTime(ticks);
+                ? DateTime.MaxValue
+                : ticks < DateTime.MinValue.Ticks
+                    ? DateTime.MinValue
+                    : new DateTime(ticks);
         }
 
         /// <summary>
@@ -1559,12 +1559,12 @@ namespace System
                 // startTime and endTime represent the period from either the start of
                 // DST to the end and ***includes*** the potentially overlapped times
                 startTime = rule.IsStartDateMarkerForBeginningOfYear()
-                  ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
-                  : daylightTime.Start + daylightTime.Delta;
+                    ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
+                    : daylightTime.Start + daylightTime.Delta;
 
                 endTime = rule.IsEndDateMarkerForEndOfYear()
-                  ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
-                  : daylightTime.End;
+                    ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
+                    : daylightTime.End;
             }
             else
             {
@@ -1588,12 +1588,12 @@ namespace System
                 bool invalidAtStart = rule.DaylightDelta > TimeSpan.Zero;
 
                 startTime = rule.IsStartDateMarkerForBeginningOfYear()
-                  ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
-                  : daylightTime.Start + (invalidAtStart ? rule.DaylightDelta : TimeSpan.Zero); /* FUTURE: - rule.StandardDelta; */
+                    ? new DateTime(daylightTime.Start.Year, 1, 1, 0, 0, 0)
+                    : daylightTime.Start + (invalidAtStart ? rule.DaylightDelta : TimeSpan.Zero); /* FUTURE: - rule.StandardDelta; */
 
                 endTime = rule.IsEndDateMarkerForEndOfYear()
-                  ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
-                  : daylightTime.End + (invalidAtStart ? -rule.DaylightDelta : TimeSpan.Zero);
+                    ? new DateTime(daylightTime.End.Year + 1, 1, 1, 0, 0, 0).AddTicks(-1)
+                    : daylightTime.End + (invalidAtStart ? -rule.DaylightDelta : TimeSpan.Zero);
             }
 
             bool isDst = CheckIsDst(startTime, time, endTime, false, rule);

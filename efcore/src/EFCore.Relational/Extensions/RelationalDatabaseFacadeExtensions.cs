@@ -666,8 +666,8 @@ namespace Microsoft.EntityFrameworkCore
                     return
                         transactionManager
                             is IRelationalTransactionManager relationalTransactionManager
-                      ? relationalTransactionManager.BeginTransaction(isolationLevel)
-                      : transactionManager.BeginTransaction();
+                        ? relationalTransactionManager.BeginTransaction(isolationLevel)
+                        : transactionManager.BeginTransaction();
                 },
                 null
             );
@@ -702,8 +702,8 @@ namespace Microsoft.EntityFrameworkCore
                     return
                         transactionManager
                             is IRelationalTransactionManager relationalTransactionManager
-                      ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
-                      : transactionManager.BeginTransactionAsync(ct);
+                        ? relationalTransactionManager.BeginTransactionAsync(isolationLevel, ct)
+                        : transactionManager.BeginTransactionAsync(ct);
                 },
                 null,
                 cancellationToken
@@ -781,10 +781,10 @@ namespace Microsoft.EntityFrameworkCore
             GetTransactionManager(databaseFacade)
                 is IRelationalTransactionManager relationalTransactionManager
                 ? relationalTransactionManager.UseTransactionAsync(
-                      transaction,
-                      transactionId,
-                      cancellationToken
-                  )
+                    transaction,
+                    transactionId,
+                    cancellationToken
+                )
                 : throw new InvalidOperationException(RelationalStrings.RelationalNotInUse);
 
         /// <summary>

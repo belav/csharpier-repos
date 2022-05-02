@@ -55,7 +55,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
 
         internal class InlineRenameUndoManager
             : AbstractInlineRenameUndoManager<InlineRenameUndoManager.BufferUndoState>,
-              IInlineRenameUndoManager
+                IInlineRenameUndoManager
         {
             private class RenameUndoPrimitive : IOleUndoUnit
             {

@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
                 MemberAccessExpressionSyntax node
             ) =>
                 memberAccessNodes.Contains(node)
-                  ? node.GetNameWithTriviaMoved()
-                  : base.VisitMemberAccessExpression(node);
+                    ? node.GetNameWithTriviaMoved()
+                    : base.VisitMemberAccessExpression(node);
         }
     }
 }

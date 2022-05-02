@@ -218,10 +218,10 @@ namespace System.Numerics
             buffer[1] = hi;
             buffer[0] = lo;
             return hi != 0
-              ? 2
-              : lo != 0
-                  ? 1
-                  : 0;
+                ? 2
+                : lo != 0
+                    ? 1
+                    : 0;
         }
 
         private static int Overwrite(Span<uint> bits, uint value)

@@ -56,11 +56,11 @@ namespace System.Speech.Internal.SapiInterop
                 _audioPosition =
                     audioFormat.AverageBytesPerSecond > 0
                         ? new TimeSpan(
-                              (long)(
-                                  (sapiEvent.ullAudioStreamOffset * TimeSpan.TicksPerSecond)
-                                  / (ulong)audioFormat.AverageBytesPerSecond
-                              )
-                          )
+                            (long)(
+                                (sapiEvent.ullAudioStreamOffset * TimeSpan.TicksPerSecond)
+                                / (ulong)audioFormat.AverageBytesPerSecond
+                            )
+                        )
                         : TimeSpan.Zero;
             }
         }

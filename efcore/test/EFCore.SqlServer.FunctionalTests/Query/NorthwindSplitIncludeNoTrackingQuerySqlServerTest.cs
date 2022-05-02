@@ -10,8 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindSplitIncludeNoTrackingQuerySqlServerTest
         : NorthwindSplitIncludeNoTrackingQueryTestBase<
-              NorthwindQuerySqlServerFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+        >
     {
         // ReSharper disable once UnusedParameter.Local
         public NorthwindSplitIncludeNoTrackingQuerySqlServerTest(

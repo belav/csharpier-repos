@@ -19,9 +19,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class CheckConstraint
         : ConventionAnnotatable,
-          IMutableCheckConstraint,
-          IConventionCheckConstraint,
-          ICheckConstraint
+            IMutableCheckConstraint,
+            IConventionCheckConstraint,
+            ICheckConstraint
     {
         private string? _name;
         private InternalCheckConstraintBuilder? _builder;
@@ -137,7 +137,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             entityType.BaseType != null
                 ? GetCheckConstraints(entityType.BaseType)
-                  .Concat(GetDeclaredCheckConstraints(entityType))
+                    .Concat(GetDeclaredCheckConstraints(entityType))
                 : GetDeclaredCheckConstraints(entityType);
 
         /// <summary>
@@ -166,10 +166,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var dataDictionary = GetConstraintsDictionary(entityType);
             return dataDictionary == null
-              ? null
-              : dataDictionary.TryGetValue(name, out var checkConstraint)
-                  ? checkConstraint
-                  : null;
+                ? null
+                : dataDictionary.TryGetValue(name, out var checkConstraint)
+                    ? checkConstraint
+                    : null;
         }
 
         /// <summary>
@@ -471,8 +471,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetName(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

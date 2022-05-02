@@ -103,14 +103,14 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             )
             {
                 return Visit(unaryExpression.Operand) is SqlExpression sqlExpression
-                  ? Dependencies.SqlExpressionFactory.Function(
+                    ? Dependencies.SqlExpressionFactory.Function(
                         "length",
                         new[] { sqlExpression },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true },
                         typeof(int)
                     )
-                  : QueryCompilationContext.NotTranslatedExpression;
+                    : QueryCompilationContext.NotTranslatedExpression;
             }
 
             var visitedExpression = base.VisitUnary(unaryExpression);
@@ -366,10 +366,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             expression == null
                 ? null
                 : (
-                      expression.TypeMapping?.Converter?.ProviderClrType
-                      ?? expression.TypeMapping?.ClrType
-                      ?? expression.Type
-                  );
+                    expression.TypeMapping?.Converter?.ProviderClrType
+                    ?? expression.TypeMapping?.ClrType
+                    ?? expression.Type
+                );
 
         private static bool AreOperandsDecimals(SqlBinaryExpression sqlExpression) =>
             GetProviderType(sqlExpression.Left) == typeof(decimal)
@@ -404,16 +404,19 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             return op switch
             {
                 ExpressionType.GreaterThan
-                  => Dependencies.SqlExpressionFactory.GreaterThan(left: actual, right: oracle),
+                    => Dependencies.SqlExpressionFactory.GreaterThan(left: actual, right: oracle),
                 ExpressionType.GreaterThanOrEqual
-                  => Dependencies.SqlExpressionFactory.GreaterThanOrEqual(
-                      left: actual,
-                      right: oracle
-                  ),
+                    => Dependencies.SqlExpressionFactory.GreaterThanOrEqual(
+                        left: actual,
+                        right: oracle
+                    ),
                 ExpressionType.LessThan
-                  => Dependencies.SqlExpressionFactory.LessThan(left: actual, right: oracle),
+                    => Dependencies.SqlExpressionFactory.LessThan(left: actual, right: oracle),
                 ExpressionType.LessThanOrEqual
-                  => Dependencies.SqlExpressionFactory.LessThanOrEqual(left: actual, right: oracle),
+                    => Dependencies.SqlExpressionFactory.LessThanOrEqual(
+                        left: actual,
+                        right: oracle
+                    ),
                 _ => visitedExpression
             };
         }
@@ -438,23 +441,23 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             return op switch
             {
                 ExpressionType.Add
-                  => DecimalArithmeticExpressionFactoryMethod(
-                      ResolveFunctionNameFromExpressionType(op),
-                      left,
-                      right
-                  ),
+                    => DecimalArithmeticExpressionFactoryMethod(
+                        ResolveFunctionNameFromExpressionType(op),
+                        left,
+                        right
+                    ),
                 ExpressionType.Divide
-                  => DecimalArithmeticExpressionFactoryMethod(
-                      ResolveFunctionNameFromExpressionType(op),
-                      left,
-                      right
-                  ),
+                    => DecimalArithmeticExpressionFactoryMethod(
+                        ResolveFunctionNameFromExpressionType(op),
+                        left,
+                        right
+                    ),
                 ExpressionType.Multiply
-                  => DecimalArithmeticExpressionFactoryMethod(
-                      ResolveFunctionNameFromExpressionType(op),
-                      left,
-                      right
-                  ),
+                    => DecimalArithmeticExpressionFactoryMethod(
+                        ResolveFunctionNameFromExpressionType(op),
+                        left,
+                        right
+                    ),
                 ExpressionType.Subtract => DecimalSubtractExpressionFactoryMethod(left, right),
                 _ => visitedExpression
             };

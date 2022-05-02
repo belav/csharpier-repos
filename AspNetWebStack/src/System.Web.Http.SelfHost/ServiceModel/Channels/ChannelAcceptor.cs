@@ -8,7 +8,7 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 {
     internal abstract class ChannelAcceptor<TChannel>
         : CommunicationObject,
-          IChannelAcceptor<TChannel> where TChannel : class, IChannel
+            IChannelAcceptor<TChannel> where TChannel : class, IChannel
     {
         private ChannelManagerBase _channelManager;
 

@@ -117,9 +117,9 @@ internal sealed class QueryParameterValueSupplier
                     : values.Count == 0
                         ? default
                         : destination.Parser.Parse(
-                              values[0].Span,
-                              destination.ComponentParameterName
-                          );
+                            values[0].Span,
+                            destination.ComponentParameterName
+                        );
 
                 builder.AddAttribute(0, destination.ComponentParameterName, parsedValue);
             }
@@ -156,8 +156,8 @@ internal sealed class QueryParameterValueSupplier
                 var componentParameterName = propertyInfo.Name;
                 var queryParameterName = (
                     string.IsNullOrEmpty(fromQueryAttribute.Name)
-                      ? componentParameterName
-                      : fromQueryAttribute.Name
+                        ? componentParameterName
+                        : fromQueryAttribute.Name
                 ).AsMemory();
 
                 // If it's an array type, capture that info and prepare to parse the element type

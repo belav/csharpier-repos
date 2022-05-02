@@ -10,7 +10,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal sealed class PartCreatorMemberImportDefinition
         : ReflectionMemberImportDefinition,
-          IPartCreatorImportDefinition
+            IPartCreatorImportDefinition
     {
         private readonly ContractBasedImportDefinition _productImportDefinition;
 

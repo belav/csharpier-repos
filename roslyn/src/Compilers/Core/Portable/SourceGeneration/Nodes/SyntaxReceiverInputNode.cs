@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis
 {
     internal sealed class SyntaxReceiverInputNode
         : ISyntaxInputNode,
-          IIncrementalGeneratorNode<ISyntaxContextReceiver?>
+            IIncrementalGeneratorNode<ISyntaxContextReceiver?>
     {
         private readonly SyntaxContextReceiverCreator _receiverCreator;
         private readonly Action<IIncrementalGeneratorOutputNode> _registerOutput;

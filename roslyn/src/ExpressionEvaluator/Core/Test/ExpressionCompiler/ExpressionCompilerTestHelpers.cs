@@ -101,7 +101,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     : isCSharp
                         ? DkmClrCompilationResultFlags.PotentialSideEffect
                         : DkmClrCompilationResultFlags.PotentialSideEffect
-                          | DkmClrCompilationResultFlags.ReadOnlyResult;
+                            | DkmClrCompilationResultFlags.ReadOnlyResult;
             Assert.Equal(expectedFlags, resultProperties.Flags);
             Assert.Equal(default(DkmEvaluationResultCategory), resultProperties.Category);
             Assert.Equal(default(DkmEvaluationResultAccessType), resultProperties.AccessType);
@@ -951,9 +951,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                     ilOffset =
                         atLineNumber < 0
                             ? sequencePoints
-                              .Where(sp => sp.StartLine != Cci.SequencePoint.HiddenLine)
-                              .Select(sp => sp.Offset)
-                              .FirstOrDefault()
+                                .Where(sp => sp.StartLine != Cci.SequencePoint.HiddenLine)
+                                .Select(sp => sp.Offset)
+                                .FirstOrDefault()
                             : sequencePoints.First(sp => sp.StartLine == atLineNumber).Offset;
                 }
             }

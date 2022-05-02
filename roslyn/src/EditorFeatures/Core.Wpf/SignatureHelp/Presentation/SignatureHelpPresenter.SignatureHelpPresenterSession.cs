@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
     {
         private class SignatureHelpPresenterSession
             : ForegroundThreadAffinitizedObject,
-              ISignatureHelpPresenterSession
+                ISignatureHelpPresenterSession
         {
             private readonly ISignatureHelpBroker _sigHelpBroker;
             private readonly ITextView _textView;

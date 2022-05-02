@@ -60,14 +60,14 @@ namespace Microsoft.CodeAnalysis.Recommendations
         {
             var symbols = TryGetMemberSymbolsForLambdaParameter(parameter, position);
             return symbols.IsDefault
-              ? GetMemberSymbols(
+                ? GetMemberSymbols(
                     parameter.Type,
                     position,
                     excludeInstance: false,
                     useBaseReferenceAccessibility,
                     unwrapNullable
                 )
-              : symbols;
+                : symbols;
         }
 
         private ImmutableArray<ISymbol> TryGetMemberSymbolsForLambdaParameter(
@@ -425,8 +425,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
             }
 
             return useBaseReferenceAccessibility
-              ? _context.SemanticModel.LookupBaseMembers(position)
-              : LookupSymbolsInContainer(namespaceOrType, position, excludeInstance);
+                ? _context.SemanticModel.LookupBaseMembers(position)
+                : LookupSymbolsInContainer(namespaceOrType, position, excludeInstance);
         }
 
         protected ImmutableArray<ISymbol> LookupSymbolsInContainer(
@@ -436,8 +436,8 @@ namespace Microsoft.CodeAnalysis.Recommendations
         )
         {
             return excludeInstance
-              ? _context.SemanticModel.LookupStaticMembers(position, container)
-              : SuppressDefaultTupleElements(
+                ? _context.SemanticModel.LookupStaticMembers(position, container)
+                : SuppressDefaultTupleElements(
                     container,
                     _context.SemanticModel.LookupSymbols(
                         position,

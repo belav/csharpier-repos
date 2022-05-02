@@ -142,8 +142,8 @@ namespace System.Drawing
         {
             Gdip.CheckStatus(
                 !Gdip.Initialized
-                  ? Gdip.Ok
-                  : Gdip.GdipReleaseDC(new HandleRef(this, NativeGraphics), hdc)
+                    ? Gdip.Ok
+                    : Gdip.GdipReleaseDC(new HandleRef(this, NativeGraphics), hdc)
             );
             _nativeHdc = IntPtr.Zero;
         }

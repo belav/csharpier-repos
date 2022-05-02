@@ -239,7 +239,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ) =>
             ourCollection
                 ? (ICollection<ChangedOnlyNotificationEntity>)
-                      new ObservableHashSet<ChangedOnlyNotificationEntity>(items)
+                    new ObservableHashSet<ChangedOnlyNotificationEntity>(items)
                 : new ObservableCollection<ChangedOnlyNotificationEntity>(items);
 
         private static TestNavigationListener SetupTestCollectionListener(

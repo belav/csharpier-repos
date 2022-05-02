@@ -1162,9 +1162,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 InternalPrimitiveTypeE.TimeSpan => ReadTimeSpan(),
                 InternalPrimitiveTypeE.DateTime => ReadDateTime(),
                 _
-                  => throw new SerializationException(
-                      SR.Format(SR.Serialization_TypeCode, code.ToString())
-                  ),
+                    => throw new SerializationException(
+                        SR.Format(SR.Serialization_TypeCode, code.ToString())
+                    ),
             };
 
         private ObjectProgress GetOp()

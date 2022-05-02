@@ -154,9 +154,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     switch (fromPredefTypeKind)
                     {
                         case Microsoft.Cci.PrimitiveTypeCode.IntPtr
-                              when !fromType.IsNativeIntegerType:
+                        when !fromType.IsNativeIntegerType:
                         case Microsoft.Cci.PrimitiveTypeCode.UIntPtr
-                              when !fromType.IsNativeIntegerType:
+                        when !fromType.IsNativeIntegerType:
                         case Microsoft.Cci.PrimitiveTypeCode.Pointer:
                         case Microsoft.Cci.PrimitiveTypeCode.FunctionPointer:
                             Debug.Assert(IsNumeric(toType));

@@ -126,8 +126,8 @@ namespace SerializationTestTypes
         )
         {
             Type actualDataContractType = dataContractType.Name.EndsWith("Proxy")
-              ? dataContractType.BaseType
-              : dataContractType;
+                ? dataContractType.BaseType
+                : dataContractType;
             return knownTypeResolver.TryResolveType(
                 actualDataContractType,
                 declaredType,

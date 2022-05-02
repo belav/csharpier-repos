@@ -22,22 +22,22 @@ namespace System.Collections.Immutable
 #if NET5_0_OR_GREATER
     public sealed partial class ImmutableSortedSet<T>
         : IImmutableSet<T>,
-          ISortKeyCollection<T>,
-          IReadOnlySet<T>,
-          IReadOnlyList<T>,
-          IList<T>,
-          ISet<T>,
-          IList,
-          IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
+            ISortKeyCollection<T>,
+            IReadOnlySet<T>,
+            IReadOnlyList<T>,
+            IList<T>,
+            ISet<T>,
+            IList,
+            IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
 #else
     public sealed partial class ImmutableSortedSet<T>
         : IImmutableSet<T>,
-          ISortKeyCollection<T>,
-          IReadOnlyList<T>,
-          IList<T>,
-          ISet<T>,
-          IList,
-          IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
+            ISortKeyCollection<T>,
+            IReadOnlyList<T>,
+            IList<T>,
+            ISet<T>,
+            IList,
+            IStrongEnumerable<T, ImmutableSortedSet<T>.Enumerator>
 #endif
     {
         /// <summary>
@@ -1032,8 +1032,8 @@ namespace System.Collections.Immutable
         private static ImmutableSortedSet<T> Wrap(Node root, IComparer<T> comparer)
         {
             return root.IsEmpty
-              ? ImmutableSortedSet<T>.Empty.WithComparer(comparer)
-              : new ImmutableSortedSet<T>(root, comparer);
+                ? ImmutableSortedSet<T>.Empty.WithComparer(comparer)
+                : new ImmutableSortedSet<T>(root, comparer);
         }
 
         /// <summary>

@@ -26,8 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     /// </remarks>
     public abstract class ConventionAnnotatable
         : Annotatable,
-          IConventionAnnotatable,
-          IMutableAnnotatable
+            IConventionAnnotatable,
+            IMutableAnnotatable
     {
         /// <summary>
         ///     Gets all annotations on the current object.
@@ -198,8 +198,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -237,8 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -262,8 +262,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

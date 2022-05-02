@@ -636,8 +636,8 @@ namespace System.Diagnostics.Metrics
                         instrument.Unit,
                         FormatTags(stats.Labels),
                         rateStats.Delta.HasValue
-                          ? rateStats.Delta.Value.ToString(CultureInfo.InvariantCulture)
-                          : ""
+                            ? rateStats.Delta.Value.ToString(CultureInfo.InvariantCulture)
+                            : ""
                     );
                 }
                 else if (stats.AggregationStatistics is LastValueStatistics lastValueStats)
@@ -650,8 +650,8 @@ namespace System.Diagnostics.Metrics
                         instrument.Unit,
                         FormatTags(stats.Labels),
                         lastValueStats.LastValue.HasValue
-                          ? lastValueStats.LastValue.Value.ToString(CultureInfo.InvariantCulture)
-                          : ""
+                            ? lastValueStats.LastValue.Value.ToString(CultureInfo.InvariantCulture)
+                            : ""
                     );
                 }
                 else if (stats.AggregationStatistics is HistogramStatistics histogramStats)

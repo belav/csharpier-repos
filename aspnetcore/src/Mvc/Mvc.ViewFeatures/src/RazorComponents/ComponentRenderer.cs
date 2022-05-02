@@ -65,29 +65,33 @@ internal class ComponentRenderer : IComponentRenderer
         return renderMode switch
         {
             RenderMode.Server
-              => NonPrerenderedServerComponent(
-                  context,
-                  GetOrCreateInvocationId(viewContext),
-                  componentType,
-                  parameterView
-              ),
+                => NonPrerenderedServerComponent(
+                    context,
+                    GetOrCreateInvocationId(viewContext),
+                    componentType,
+                    parameterView
+                ),
             RenderMode.ServerPrerendered
-              => await PrerenderedServerComponentAsync(
-                  context,
-                  GetOrCreateInvocationId(viewContext),
-                  componentType,
-                  parameterView
-              ),
+                => await PrerenderedServerComponentAsync(
+                    context,
+                    GetOrCreateInvocationId(viewContext),
+                    componentType,
+                    parameterView
+                ),
             RenderMode.Static => await StaticComponentAsync(context, componentType, parameterView),
             RenderMode.WebAssembly
-              => NonPrerenderedWebAssemblyComponent(context, componentType, parameterView),
+                => NonPrerenderedWebAssemblyComponent(context, componentType, parameterView),
             RenderMode.WebAssemblyPrerendered
-              => await PrerenderedWebAssemblyComponentAsync(context, componentType, parameterView),
+                => await PrerenderedWebAssemblyComponentAsync(
+                    context,
+                    componentType,
+                    parameterView
+                ),
             _
-              => throw new ArgumentException(
-                  Resources.FormatUnsupportedRenderMode(renderMode),
-                  nameof(renderMode)
-              ),
+                => throw new ArgumentException(
+                    Resources.FormatUnsupportedRenderMode(renderMode),
+                    nameof(renderMode)
+                ),
         };
     }
 
@@ -113,8 +117,8 @@ internal class ComponentRenderer : IComponentRenderer
             {
                 result = new InvokedRenderModes(
                     mode is RenderMode.ServerPrerendered
-                      ? InvokedRenderModes.Mode.Server
-                      : InvokedRenderModes.Mode.WebAssembly
+                        ? InvokedRenderModes.Mode.Server
+                        : InvokedRenderModes.Mode.WebAssembly
                 );
 
                 viewContext.Items[InvokedRenderModesKey] = result;

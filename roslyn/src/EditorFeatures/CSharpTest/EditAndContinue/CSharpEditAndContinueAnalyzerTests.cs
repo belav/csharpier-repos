@@ -878,11 +878,11 @@ class D
             var expectedDiagnostic = outOfMemory
                 ? $"ENC0089: {string.Format(FeaturesResources.Modifying_source_file_0_requires_restarting_the_application_because_the_file_is_too_big, "src.cs")}"
                 :
-                  // Because the error message that is formatted into this template string includes a stacktrace with newlines, we need to replicate that behavior
-                  // here so that any trailing punctuation is removed from the translated template string.
-                  $"ENC0080: {string.Format(FeaturesResources.Modifying_source_file_0_requires_restarting_the_application_due_to_internal_error_1, "src.cs", "System.NullReferenceException: NullRef!\n")}"
-                  .Split('\n')
-                  .First();
+                // Because the error message that is formatted into this template string includes a stacktrace with newlines, we need to replicate that behavior
+                // here so that any trailing punctuation is removed from the translated template string.
+                $"ENC0080: {string.Format(FeaturesResources.Modifying_source_file_0_requires_restarting_the_application_due_to_internal_error_1, "src.cs", "System.NullReferenceException: NullRef!\n")}"
+                    .Split('\n')
+                    .First();
 
             AssertEx.Equal(
                 new[] { expectedDiagnostic },

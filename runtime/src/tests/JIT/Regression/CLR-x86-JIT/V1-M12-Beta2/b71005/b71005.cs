@@ -3087,8 +3087,8 @@ internal class testout1
             False_Sum++;
         if (
             simple_func_bool_true()
-              ? testout1_instance._member_field_bool
-              : testout1_instance._member_field_bool
+                ? testout1_instance._member_field_bool
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else
@@ -3419,8 +3419,8 @@ internal class testout1
             False_Sum++;
         if (
             simple_func_bool_false()
-              ? testout1_instance._member_field_bool
-              : testout1_instance._member_field_bool
+                ? testout1_instance._member_field_bool
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else
@@ -3441,8 +3441,8 @@ internal class testout1
             False_Sum++;
         if (
             simple_func_bool_false()
-              ? testout1_instance._member_field_bool
-              : array_false_bool[index]
+                ? testout1_instance._member_field_bool
+                : array_false_bool[index]
         )
             True_Sum++;
         else
@@ -3575,8 +3575,8 @@ internal class testout1
             False_Sum++;
         if (
             simple_func_bool_false()
-              ? array_false_bool[index]
-              : testout1_instance._member_field_bool
+                ? array_false_bool[index]
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else
@@ -3759,8 +3759,8 @@ internal class testout1
             False_Sum++;
         if (
             complex_func_bool_true()
-              ? testout1_instance._member_field_bool
-              : testout1_instance._member_field_bool
+                ? testout1_instance._member_field_bool
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else
@@ -3781,8 +3781,8 @@ internal class testout1
             False_Sum++;
         if (
             complex_func_bool_true()
-              ? testout1_instance._member_field_bool
-              : array_false_bool[index]
+                ? testout1_instance._member_field_bool
+                : array_false_bool[index]
         )
             True_Sum++;
         else
@@ -3915,8 +3915,8 @@ internal class testout1
             False_Sum++;
         if (
             complex_func_bool_true()
-              ? array_false_bool[index]
-              : testout1_instance._member_field_bool
+                ? array_false_bool[index]
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else
@@ -4099,8 +4099,8 @@ internal class testout1
             False_Sum++;
         if (
             complex_func_bool_false()
-              ? testout1_instance._member_field_bool
-              : testout1_instance._member_field_bool
+                ? testout1_instance._member_field_bool
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else
@@ -4115,16 +4115,16 @@ internal class testout1
             False_Sum++;
         if (
             complex_func_bool_false()
-              ? testout1_instance._member_field_bool
-              : array_true_bool[index]
+                ? testout1_instance._member_field_bool
+                : array_true_bool[index]
         )
             True_Sum++;
         else
             False_Sum++;
         if (
             complex_func_bool_false()
-              ? testout1_instance._member_field_bool
-              : array_false_bool[index]
+                ? testout1_instance._member_field_bool
+                : array_false_bool[index]
         )
             True_Sum++;
         else
@@ -4219,8 +4219,8 @@ internal class testout1
             False_Sum++;
         if (
             complex_func_bool_false()
-              ? array_true_bool[index]
-              : testout1_instance._member_field_bool
+                ? array_true_bool[index]
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else
@@ -4259,8 +4259,8 @@ internal class testout1
             False_Sum++;
         if (
             complex_func_bool_false()
-              ? array_false_bool[index]
-              : testout1_instance._member_field_bool
+                ? array_false_bool[index]
+                : testout1_instance._member_field_bool
         )
             True_Sum++;
         else

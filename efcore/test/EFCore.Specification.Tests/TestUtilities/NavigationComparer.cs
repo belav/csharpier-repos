@@ -10,7 +10,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class NavigationComparer
         : IEqualityComparer<IReadOnlyNavigation>,
-          IComparer<IReadOnlyNavigation>
+            IComparer<IReadOnlyNavigation>
     {
         private readonly bool _compareAnnotations;
 
@@ -30,13 +30,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
 
             return y == null
-              ? false
-              : x.Name == y.Name
-                && (
-                    !_compareAnnotations
-                    || x.GetAnnotations()
-                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
-                );
+                ? false
+                : x.Name == y.Name
+                    && (
+                        !_compareAnnotations
+                        || x.GetAnnotations()
+                            .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                    );
         }
 
         public int GetHashCode(IReadOnlyNavigation obj) => obj.Name.GetHashCode();

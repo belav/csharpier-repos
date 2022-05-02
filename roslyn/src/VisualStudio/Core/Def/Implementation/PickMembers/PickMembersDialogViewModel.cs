@@ -55,14 +55,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
                 searchText.Length == 0
                     ? _allMembers
                     : _allMembers
-                      .Where(
-                          m =>
-                              m.SymbolAutomationText.IndexOf(
-                                  searchText,
-                                  StringComparison.OrdinalIgnoreCase
-                              ) >= 0
-                      )
-                      .ToList();
+                        .Where(
+                            m =>
+                                m.SymbolAutomationText.IndexOf(
+                                    searchText,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) >= 0
+                        )
+                        .ToList();
             NotifyPropertyChanged(nameof(MemberContainers));
         }
 

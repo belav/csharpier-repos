@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor
     [Export(typeof(ITextBufferAssociatedViewService))]
     internal class TextBufferAssociatedViewService
         : ITextViewConnectionListener,
-          ITextBufferAssociatedViewService
+            ITextBufferAssociatedViewService
     {
 #if DEBUG
         private static readonly HashSet<ITextView> s_registeredViews = new();

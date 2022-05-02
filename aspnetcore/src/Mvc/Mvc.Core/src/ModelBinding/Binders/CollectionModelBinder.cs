@@ -400,13 +400,13 @@ public class CollectionModelBinder<TElement> : ICollectionModelBinder
         {
             // Look for a non-empty name. Both ModelName and OriginalModelName may be empty at the top level.
             var name = string.IsNullOrEmpty(bindingContext.ModelName)
-              ? (
+                ? (
                     string.IsNullOrEmpty(bindingContext.OriginalModelName)
                     && bindingContext.ModelMetadata.MetadataKind != ModelMetadataKind.Type
                         ? bindingContext.ModelMetadata.Name
                         : bindingContext.OriginalModelName
                 )
-              : // This name may unfortunately be empty.
+                : // This name may unfortunately be empty.
                 bindingContext.ModelName;
 
             throw new InvalidOperationException(

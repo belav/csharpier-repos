@@ -64,8 +64,8 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 (Guid id, string debugName)? tuple = ReadFromJsonObject(reader);
                 return tuple == null
-                  ? null
-                  : SolutionId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
+                    ? null
+                    : SolutionId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
             }
 
             protected override void WriteValue(
@@ -81,8 +81,8 @@ namespace Microsoft.CodeAnalysis.Remote
             {
                 (Guid id, string debugName)? tuple = ReadFromJsonObject(reader);
                 return tuple == null
-                  ? null
-                  : ProjectId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
+                    ? null
+                    : ProjectId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
             }
 
             protected override void WriteValue(

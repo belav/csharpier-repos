@@ -439,8 +439,8 @@ namespace Roslyn.Test.Utilities
             {
                 static void AddTextual(Dictionary<int, string> dict, int key, string value) =>
                     dict[key] = dict.TryGetValue(key, out var found)
-                      ? found + ", " + value
-                      : "// " + value;
+                        ? found + ", " + value
+                        : "// " + value;
 
                 foreach (XmlNode entry in doc.GetElementsByTagName("asyncInfo"))
                 {

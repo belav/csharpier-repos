@@ -436,7 +436,7 @@ namespace Microsoft.CodeAnalysis.Options
                     OptionValueKind.Enum => reader.ReadInt32(),
                     OptionValueKind.CodeStyleOption => CodeStyleOption2<object>.ReadFrom(reader),
                     OptionValueKind.NamingStylePreferences
-                      => NamingStylePreferences.ReadFrom(reader),
+                        => NamingStylePreferences.ReadFrom(reader),
                     _ => reader.ReadValue(),
                 };
 

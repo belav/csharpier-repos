@@ -57,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public override QueryRootExpression UpdateEntityType(IEntityType entityType) =>
             entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
                 ? throw new InvalidOperationException(
-                      CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
-                  )
+                    CoreStrings.QueryRootDifferentEntityType(entityType.DisplayName())
+                )
                 : new TemporalFromToQueryRootExpression(entityType, From, To);
 
         /// <summary>

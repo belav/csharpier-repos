@@ -111,8 +111,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
             var locations = symbol.Locations
                 .Intersect(_queriedSymbol.Locations, LocationComparer.Instance)
                 .Any()
-              ? GetPartialLocations(symbol, _aggregateCancellationTokenSource.Token)
-              : symbol.Locations;
+                ? GetPartialLocations(symbol, _aggregateCancellationTokenSource.Token)
+                : symbol.Locations;
 
             _locations.AddRange(locations.Where(location => location.IsInSource));
 

@@ -139,33 +139,33 @@ namespace System.Runtime.CompilerServices
             {
                 case ContractFailureKind.Assert:
                     return hasConditionText
-                      ? SR.Format(SR.AssertionFailed_Cnd, conditionText)
-                      : SR.AssertionFailed;
+                        ? SR.Format(SR.AssertionFailed_Cnd, conditionText)
+                        : SR.AssertionFailed;
 
                 case ContractFailureKind.Assume:
                     return hasConditionText
-                      ? SR.Format(SR.AssumptionFailed_Cnd, conditionText)
-                      : SR.AssumptionFailed;
+                        ? SR.Format(SR.AssumptionFailed_Cnd, conditionText)
+                        : SR.AssumptionFailed;
 
                 case ContractFailureKind.Precondition:
                     return hasConditionText
-                      ? SR.Format(SR.PreconditionFailed_Cnd, conditionText)
-                      : SR.PreconditionFailed;
+                        ? SR.Format(SR.PreconditionFailed_Cnd, conditionText)
+                        : SR.PreconditionFailed;
 
                 case ContractFailureKind.Postcondition:
                     return hasConditionText
-                      ? SR.Format(SR.PostconditionFailed_Cnd, conditionText)
-                      : SR.PostconditionFailed;
+                        ? SR.Format(SR.PostconditionFailed_Cnd, conditionText)
+                        : SR.PostconditionFailed;
 
                 case ContractFailureKind.Invariant:
                     return hasConditionText
-                      ? SR.Format(SR.InvariantFailed_Cnd, conditionText)
-                      : SR.InvariantFailed;
+                        ? SR.Format(SR.InvariantFailed_Cnd, conditionText)
+                        : SR.InvariantFailed;
 
                 case ContractFailureKind.PostconditionOnException:
                     return hasConditionText
-                      ? SR.Format(SR.PostconditionOnExceptionFailed_Cnd, conditionText)
-                      : SR.PostconditionOnExceptionFailed;
+                        ? SR.Format(SR.PostconditionOnExceptionFailed_Cnd, conditionText)
+                        : SR.PostconditionOnExceptionFailed;
 
                 default:
                     Contract.Assume(false, "Unreachable code");

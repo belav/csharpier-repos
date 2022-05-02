@@ -25,8 +25,8 @@ internal sealed class SocketReceiver : SocketAwaitableEventArgs
         var error = SocketError;
 
         return error == SocketError.Success
-          ? new ValueTask<int>(bytesTransferred)
-          : ValueTask.FromException<int>(CreateException(error));
+            ? new ValueTask<int>(bytesTransferred)
+            : ValueTask.FromException<int>(CreateException(error));
     }
 
     public ValueTask<int> ReceiveAsync(Socket socket, Memory<byte> buffer)
@@ -42,7 +42,7 @@ internal sealed class SocketReceiver : SocketAwaitableEventArgs
         var error = SocketError;
 
         return error == SocketError.Success
-          ? new ValueTask<int>(bytesTransferred)
-          : ValueTask.FromException<int>(CreateException(error));
+            ? new ValueTask<int>(bytesTransferred)
+            : ValueTask.FromException<int>(CreateException(error));
     }
 }

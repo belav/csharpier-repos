@@ -404,27 +404,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEParameterSymbol parameter =
                 customModifiers.IsDefaultOrEmpty && refCustomModifiers.IsDefaultOrEmpty
                     ? new PEParameterSymbol(
-                          moduleSymbol,
-                          containingSymbol,
-                          ordinal,
-                          isByRef,
-                          typeWithModifiers,
-                          handle,
-                          nullableContext,
-                          0,
-                          out isBad
-                      )
+                        moduleSymbol,
+                        containingSymbol,
+                        ordinal,
+                        isByRef,
+                        typeWithModifiers,
+                        handle,
+                        nullableContext,
+                        0,
+                        out isBad
+                    )
                     : new PEParameterSymbolWithCustomModifiers(
-                          moduleSymbol,
-                          containingSymbol,
-                          ordinal,
-                          isByRef,
-                          refCustomModifiers,
-                          typeWithModifiers,
-                          handle,
-                          nullableContext,
-                          out isBad
-                      );
+                        moduleSymbol,
+                        containingSymbol,
+                        ordinal,
+                        isByRef,
+                        refCustomModifiers,
+                        typeWithModifiers,
+                        handle,
+                        nullableContext,
+                        out isBad
+                    );
 
             bool hasInAttributeModifier = parameter.RefCustomModifiers.HasInAttributeModifier();
 
@@ -991,13 +991,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 {
                     case null:
                     case ""
-                          when !ContainingSymbol.RequiresInstanceReceiver()
-                              || ContainingSymbol
-                                  is MethodSymbol
-                                  {
-                                      MethodKind: MethodKind.Constructor
-                                          or MethodKind.DelegateInvoke
-                                  }:
+                    when !ContainingSymbol.RequiresInstanceReceiver()
+                        || ContainingSymbol
+                            is MethodSymbol
+                            {
+                                MethodKind: MethodKind.Constructor or MethodKind.DelegateInvoke
+                            }:
                         // Invalid data, bail
                         builder.Free();
                         return default;
@@ -1170,14 +1169,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             _handle,
                             out paramArrayAttribute,
                             filterOutParamArrayAttribute
-                              ? AttributeDescription.ParamArrayAttribute
-                              : default,
+                                ? AttributeDescription.ParamArrayAttribute
+                                : default,
                             out constantAttribute,
                             filterOutConstantAttributeDescription,
                             out isReadOnlyAttribute,
                             filterIsReadOnlyAttribute
-                              ? AttributeDescription.IsReadOnlyAttribute
-                              : default,
+                                ? AttributeDescription.IsReadOnlyAttribute
+                                : default,
                             out _,
                             default
                         );
@@ -1265,8 +1264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         public sealed override bool Equals(Symbol other, TypeCompareKind compareKind)
         {
             return other is NativeIntegerParameterSymbol nps
-              ? nps.Equals(this, compareKind)
-              : base.Equals(other, compareKind);
+                ? nps.Equals(this, compareKind)
+                : base.Equals(other, compareKind);
         }
     }
 }

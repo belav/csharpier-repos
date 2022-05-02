@@ -420,15 +420,15 @@ namespace Microsoft.CodeAnalysis.Formatting
             if (_treeData.IsFirstToken(token2.Token))
             {
                 return this.FormatBeginningOfTree
-                  ? GetTriviaDataAtBeginningOfTree()
-                  : GetOriginalTriviaData(token1, token2);
+                    ? GetTriviaDataAtBeginningOfTree()
+                    : GetOriginalTriviaData(token1, token2);
             }
 
             if (_treeData.IsLastToken(token1.Token))
             {
                 return this.FormatEndOfTree
-                  ? GetTriviaDataAtEndOfTree()
-                  : GetOriginalTriviaData(token1, token2);
+                    ? GetTriviaDataAtEndOfTree()
+                    : GetOriginalTriviaData(token1, token2);
             }
 
             // normal cases

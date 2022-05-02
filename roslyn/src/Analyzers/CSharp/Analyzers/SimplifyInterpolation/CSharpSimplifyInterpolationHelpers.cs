@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.SimplifyInterpolation
             return operation.Syntax switch
             {
                 ConditionalExpressionSyntax { Parent: ParenthesizedExpressionSyntax parent }
-                  => parent,
+                    => parent,
                 var syntax => syntax,
             };
         }

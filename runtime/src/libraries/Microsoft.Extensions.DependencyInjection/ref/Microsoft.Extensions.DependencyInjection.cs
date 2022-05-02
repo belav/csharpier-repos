@@ -58,8 +58,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public sealed partial class ServiceProvider
         : System.IAsyncDisposable,
-          System.IDisposable,
-          System.IServiceProvider
+            System.IDisposable,
+            System.IServiceProvider
     {
         internal ServiceProvider() { }
 

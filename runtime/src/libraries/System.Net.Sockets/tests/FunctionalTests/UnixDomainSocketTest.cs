@@ -130,16 +130,16 @@ namespace System.Net.Sockets.Tests
 
                         Assert.Equal(
                             OperatingSystem.IsWindows()
-                              ? SocketError.ConnectionRefused
-                              : SocketError.AddressNotAvailable,
+                                ? SocketError.ConnectionRefused
+                                : SocketError.AddressNotAvailable,
                             args.SocketError
                         );
                     }
 
                     Assert.Equal(
                         RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                          ? SocketError.ConnectionRefused
-                          : SocketError.AddressNotAvailable,
+                            ? SocketError.ConnectionRefused
+                            : SocketError.AddressNotAvailable,
                         args.SocketError
                     );
                 }

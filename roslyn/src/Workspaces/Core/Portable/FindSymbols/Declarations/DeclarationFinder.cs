@@ -86,15 +86,15 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // the doc.
                 var containsSymbol = isExactNameSearch
                     ? await project
-                          .ContainsSymbolsWithNameAsync(query.Name, cancellationToken)
-                          .ConfigureAwait(false)
+                        .ContainsSymbolsWithNameAsync(query.Name, cancellationToken)
+                        .ConfigureAwait(false)
                     : await project
-                          .ContainsSymbolsWithNameAsync(
-                              query.GetPredicate(),
-                              filter,
-                              cancellationToken
-                          )
-                          .ConfigureAwait(false);
+                        .ContainsSymbolsWithNameAsync(
+                            query.GetPredicate(),
+                            filter,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 if (!containsSymbol)
                     return;
@@ -106,10 +106,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 var symbols = isExactNameSearch
                     ? compilation.GetSymbolsWithName(query.Name, filter, cancellationToken)
                     : compilation.GetSymbolsWithName(
-                          query.GetPredicate(),
-                          filter,
-                          cancellationToken
-                      );
+                        query.GetPredicate(),
+                        filter,
+                        cancellationToken
+                    );
 
                 var symbolsWithName = symbols.ToImmutableArray();
 

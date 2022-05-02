@@ -557,8 +557,8 @@ namespace Internal.TypeSystem.Ecma
                     result.Offsets[index] = new FieldAndOffset(
                         (EcmaField)_module.GetObject(handle),
                         specifiedOffset == -1
-                          ? FieldAndOffset.InvalidOffset
-                          : new LayoutInt(specifiedOffset)
+                            ? FieldAndOffset.InvalidOffset
+                            : new LayoutInt(specifiedOffset)
                     );
 
                     index++;

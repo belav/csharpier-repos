@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     PointerTypeSymbol
         :
 #endif
-          Cci.IPointerTypeReference
+            Cci.IPointerTypeReference
     {
         Cci.ITypeReference Cci.IPointerTypeReference.GetTargetType(EmitContext context)
         {

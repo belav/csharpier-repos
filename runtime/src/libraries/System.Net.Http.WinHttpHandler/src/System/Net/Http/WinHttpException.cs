@@ -36,7 +36,7 @@ namespace System.Net.Http
             unchecked((uint)error) switch
             {
                 Interop.WinHttp.ERROR_WINHTTP_CONNECTION_ERROR
-                  => unchecked((int)Interop.WinHttp.WININET_E_CONNECTION_RESET),
+                    => unchecked((int)Interop.WinHttp.WININET_E_CONNECTION_RESET),
 
                 // Marshal.GetHRForLastWin32Error can't be used as not all error codes originate from native code.
                 _ => Interop.HRESULT_FROM_WIN32(error),

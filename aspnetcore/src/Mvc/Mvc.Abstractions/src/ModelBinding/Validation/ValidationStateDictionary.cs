@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 /// </summary>
 public class ValidationStateDictionary
     : IDictionary<object, ValidationStateEntry>,
-      IReadOnlyDictionary<object, ValidationStateEntry>
+        IReadOnlyDictionary<object, ValidationStateEntry>
 {
     private readonly Dictionary<object, ValidationStateEntry> _inner;
 

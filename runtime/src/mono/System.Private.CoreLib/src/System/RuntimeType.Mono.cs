@@ -1481,15 +1481,15 @@ namespace System
                 MemberInfo? result = member.MemberType switch
                 {
                     MemberTypes.Method
-                      => GetMethodWithSameMetadataDefinitionAs(runtimeType, member),
+                        => GetMethodWithSameMetadataDefinitionAs(runtimeType, member),
                     MemberTypes.Constructor
-                      => GetConstructorWithSameMetadataDefinitionAs(runtimeType, member),
+                        => GetConstructorWithSameMetadataDefinitionAs(runtimeType, member),
                     MemberTypes.Property
-                      => GetPropertyWithSameMetadataDefinitionAs(runtimeType, member),
+                        => GetPropertyWithSameMetadataDefinitionAs(runtimeType, member),
                     MemberTypes.Field => GetFieldWithSameMetadataDefinitionAs(runtimeType, member),
                     MemberTypes.Event => GetEventWithSameMetadataDefinitionAs(runtimeType, member),
                     MemberTypes.NestedType
-                      => GetNestedTypeWithSameMetadataDefinitionAs(runtimeType, member),
+                        => GetNestedTypeWithSameMetadataDefinitionAs(runtimeType, member),
                     _ => null
                 };
 

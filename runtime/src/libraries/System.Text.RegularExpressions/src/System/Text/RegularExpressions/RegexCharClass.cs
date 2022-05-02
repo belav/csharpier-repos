@@ -1580,10 +1580,10 @@ namespace System.Text.RegularExpressions
                         "Found a null/empty element in RegexCharClass prop table"
                     );
                     return !invert
-                      ? set.AsSpan()
-                      : set[0] == NullChar
-                          ? set.AsSpan(1)
-                          : (NullCharString + set).AsSpan();
+                        ? set.AsSpan()
+                        : set[0] == NullChar
+                            ? set.AsSpan(1)
+                            : (NullCharString + set).AsSpan();
                 }
             }
 

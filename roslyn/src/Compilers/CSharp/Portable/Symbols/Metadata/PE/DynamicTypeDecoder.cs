@@ -211,8 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         "This shouldn't happen during decoding."
                     );
                     return ConsumeFlag()
-                      ? type
-                      : _containingAssembly.GetSpecialType(SpecialType.System_Object);
+                        ? type
+                        : _containingAssembly.GetSpecialType(SpecialType.System_Object);
 
                 default:
                     ConsumeFlag();
@@ -384,16 +384,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 arrayType.ElementType,
                 TypeCompareKind.ConsiderEverything2
             )
-              ? arrayType
-              : arrayType.IsSZArray
-                  ? ArrayTypeSymbol.CreateSZArray(
+                ? arrayType
+                : arrayType.IsSZArray
+                    ? ArrayTypeSymbol.CreateSZArray(
                         _containingAssembly,
                         arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
                             transformedElementType,
                             arrayType.ElementTypeWithAnnotations.CustomModifiers
                         )
                     )
-                  : ArrayTypeSymbol.CreateMDArray(
+                    : ArrayTypeSymbol.CreateMDArray(
                         _containingAssembly,
                         arrayType.ElementTypeWithAnnotations.WithTypeAndModifiers(
                             transformedElementType,
@@ -430,8 +430,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 pointerType.PointedAtType,
                 TypeCompareKind.ConsiderEverything2
             )
-              ? pointerType
-              : new PointerTypeSymbol(
+                ? pointerType
+                : new PointerTypeSymbol(
                     pointerType.PointedAtTypeWithAnnotations.WithTypeAndModifiers(
                         transformedPointedAtType,
                         pointerType.PointedAtTypeWithAnnotations.CustomModifiers

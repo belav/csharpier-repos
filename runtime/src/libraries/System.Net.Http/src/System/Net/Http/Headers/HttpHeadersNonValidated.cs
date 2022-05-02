@@ -172,8 +172,8 @@ namespace System.Net.Http.Headers
                     _current = new KeyValuePair<string, HeaderStringValues>(
                         current.Key.Name,
                         singleValue is not null
-                          ? new HeaderStringValues(current.Key, singleValue)
-                          : new HeaderStringValues(current.Key, multiValue!)
+                            ? new HeaderStringValues(current.Key, singleValue)
+                            : new HeaderStringValues(current.Key, multiValue!)
                     );
                     return true;
                 }

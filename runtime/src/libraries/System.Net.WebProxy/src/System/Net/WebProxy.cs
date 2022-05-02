@@ -156,10 +156,10 @@ namespace System.Net
                 string matchUriString = input.IsDefaultPort
                     ? string.Create(null, stackBuffer, $"{input.Scheme}://{input.Host}")
                     : string.Create(
-                          null,
-                          stackBuffer,
-                          $"{input.Scheme}://{input.Host}:{(uint)input.Port}"
-                      );
+                        null,
+                        stackBuffer,
+                        $"{input.Scheme}://{input.Host}:{(uint)input.Port}"
+                    );
 
                 foreach (Regex r in _regexBypassList)
                 {

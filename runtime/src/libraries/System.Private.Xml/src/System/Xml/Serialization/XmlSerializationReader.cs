@@ -4839,8 +4839,8 @@ namespace System.Xml.Serialization
                             element,
                             anyElement.Mapping.ChoiceIdentifier,
                             anyElement.Mapping.CheckSpecified == SpecifiedAccessor.ReadWrite
-                              ? anyElement.CheckSpecifiedSource
-                              : null,
+                                ? anyElement.CheckSpecifiedSource
+                                : null,
                             false,
                             false,
                             -1,
@@ -5027,8 +5027,8 @@ namespace System.Xml.Serialization
                             e,
                             choice,
                             member.Mapping.CheckSpecified == SpecifiedAccessor.ReadWrite
-                              ? member.CheckSpecifiedSource
-                              : null,
+                                ? member.CheckSpecifiedSource
+                                : null,
                             member.IsList && member.Mapping.TypeDesc!.IsNullable,
                             member.Mapping.ReadOnly,
                             member.FixupIndex,

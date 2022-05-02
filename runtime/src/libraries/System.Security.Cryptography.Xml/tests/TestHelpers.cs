@@ -161,8 +161,8 @@ namespace System.Security.Cryptography.Xml.Tests
             if (key is TripleDES)
             {
                 return keyWrap
-                  ? EncryptedXml.XmlEncTripleDESKeyWrapUrl
-                  : EncryptedXml.XmlEncTripleDESUrl;
+                    ? EncryptedXml.XmlEncTripleDESKeyWrapUrl
+                    : EncryptedXml.XmlEncTripleDESUrl;
             }
             else if (key is DES)
             {
@@ -174,16 +174,16 @@ namespace System.Security.Cryptography.Xml.Tests
                 {
                     case 128:
                         return keyWrap
-                          ? EncryptedXml.XmlEncAES128KeyWrapUrl
-                          : EncryptedXml.XmlEncAES128Url;
+                            ? EncryptedXml.XmlEncAES128KeyWrapUrl
+                            : EncryptedXml.XmlEncAES128Url;
                     case 192:
                         return keyWrap
-                          ? EncryptedXml.XmlEncAES192KeyWrapUrl
-                          : EncryptedXml.XmlEncAES192Url;
+                            ? EncryptedXml.XmlEncAES192KeyWrapUrl
+                            : EncryptedXml.XmlEncAES192Url;
                     case 256:
                         return keyWrap
-                          ? EncryptedXml.XmlEncAES256KeyWrapUrl
-                          : EncryptedXml.XmlEncAES256Url;
+                            ? EncryptedXml.XmlEncAES256KeyWrapUrl
+                            : EncryptedXml.XmlEncAES256Url;
                 }
             }
 

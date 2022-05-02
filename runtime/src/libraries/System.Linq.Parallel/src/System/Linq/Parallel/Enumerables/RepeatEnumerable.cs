@@ -20,7 +20,7 @@ namespace System.Linq.Parallel
     /// <typeparam name="TResult"></typeparam>
     internal sealed class RepeatEnumerable<TResult>
         : ParallelQuery<TResult>,
-          IParallelPartitionable<TResult>
+            IParallelPartitionable<TResult>
     {
         private readonly TResult _element; // Element value to repeat.
         private readonly int _count; // Count of element values.

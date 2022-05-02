@@ -38,16 +38,16 @@ namespace System.Runtime.Serialization
         private bool _serializeReadOnlyTypes;
 
         private static SerializationOption _option = IsReflectionBackupAllowed()
-          ? SerializationOption.ReflectionAsBackup
-          : SerializationOption.CodeGenOnly;
+            ? SerializationOption.ReflectionAsBackup
+            : SerializationOption.CodeGenOnly;
         private static bool _optionAlreadySet;
         internal static SerializationOption Option
         {
             get
             {
                 return RuntimeFeature.IsDynamicCodeSupported
-                  ? _option
-                  : SerializationOption.ReflectionOnly;
+                    ? _option
+                    : SerializationOption.ReflectionOnly;
             }
             set
             {
@@ -305,8 +305,8 @@ namespace System.Runtime.Serialization
                 {
                     _rootContract = DataContract.GetDataContract(
                         (_serializationSurrogateProvider == null)
-                          ? _rootType
-                          : GetSurrogatedType(_serializationSurrogateProvider, _rootType)
+                            ? _rootType
+                            : GetSurrogatedType(_serializationSurrogateProvider, _rootType)
                     );
                     _needsContractNsAtRoot = CheckIfNeedsContractNsAtRoot(
                         _rootName,

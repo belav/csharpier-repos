@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal sealed class SpecializedGenericMethodInstanceReference
         : SpecializedMethodReference,
-          Cci.IGenericMethodInstanceReference
+            Cci.IGenericMethodInstanceReference
     {
         private readonly SpecializedMethodReference _genericMethod;
 

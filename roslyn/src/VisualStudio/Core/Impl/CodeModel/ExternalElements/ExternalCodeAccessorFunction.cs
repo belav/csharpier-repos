@@ -17,7 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeFunction))]
     public sealed class ExternalCodeAccessorFunction
         : AbstractExternalCodeMember,
-          EnvDTE.CodeFunction
+            EnvDTE.CodeFunction
     {
         internal static EnvDTE.CodeFunction Create(
             CodeModelState state,
@@ -67,8 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
         protected override bool GetCanOverride()
         {
             return IsPropertyAccessor()
-              ? ((ExternalCodeProperty)_parentHandle.Value).CanOverride
-              : ((ExternalCodeEvent)_parentHandle.Value).CanOverride;
+                ? ((ExternalCodeProperty)_parentHandle.Value).CanOverride
+                : ((ExternalCodeEvent)_parentHandle.Value).CanOverride;
         }
 
         protected override string GetDocComment() => string.Empty;

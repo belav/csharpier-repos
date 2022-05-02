@@ -771,10 +771,10 @@ namespace System.Net.Sockets
                                 attemptSocket = tempSocketIPv6 ??= (
                                     Socket.OSSupportsIPv6
                                         ? new Socket(
-                                              AddressFamily.InterNetworkV6,
-                                              socketType,
-                                              protocolType
-                                          )
+                                            AddressFamily.InterNetworkV6,
+                                            socketType,
+                                            protocolType
+                                        )
                                         : null
                                 );
                                 if (attemptSocket is not null && address.IsIPv4MappedToIPv6)
@@ -788,10 +788,10 @@ namespace System.Net.Sockets
                                 attemptSocket = tempSocketIPv4 ??= (
                                     Socket.OSSupportsIPv4
                                         ? new Socket(
-                                              AddressFamily.InterNetwork,
-                                              socketType,
-                                              protocolType
-                                          )
+                                            AddressFamily.InterNetwork,
+                                            socketType,
+                                            protocolType
+                                        )
                                         : null
                                 );
                             }
@@ -937,7 +937,7 @@ namespace System.Net.Sockets
 
         private sealed class MultiConnectSocketAsyncEventArgs
             : SocketAsyncEventArgs,
-              IValueTaskSource
+                IValueTaskSource
         {
             private ManualResetValueTaskSourceCore<bool> _mrvtsc;
             private int _isCompleted;

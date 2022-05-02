@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Organizing
     [Name(PredefinedCommandHandlerNames.OrganizeDocument)]
     internal class OrganizeDocumentCommandHandler
         : ICommandHandler<OrganizeDocumentCommandArgs>,
-          ICommandHandler<SortImportsCommandArgs>,
-          ICommandHandler<SortAndRemoveUnnecessaryImportsCommandArgs>
+            ICommandHandler<SortImportsCommandArgs>,
+            ICommandHandler<SortAndRemoveUnnecessaryImportsCommandArgs>
     {
         private readonly IThreadingContext _threadingContext;
 

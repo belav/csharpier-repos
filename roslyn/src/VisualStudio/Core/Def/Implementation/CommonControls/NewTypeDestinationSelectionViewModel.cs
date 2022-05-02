@@ -74,8 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
                 return string.Format(
                     "{0}{1}{2}",
                     string.IsNullOrEmpty(_defaultNamespace)
-                      ? string.Empty
-                      : _defaultNamespace + ".",
+                        ? string.Empty
+                        : _defaultNamespace + ".",
                     _typeName.Trim(),
                     _generatedNameTypeParameterSuffix
                 );

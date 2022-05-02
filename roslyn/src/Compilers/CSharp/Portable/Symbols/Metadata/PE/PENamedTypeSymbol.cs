@@ -772,13 +772,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     out _,
                     // Filter out [Extension]
                     MightContainExtensionMethods
-                      ? AttributeDescription.CaseSensitiveExtensionAttribute
-                      : default,
+                        ? AttributeDescription.CaseSensitiveExtensionAttribute
+                        : default,
                     out _,
                     // Filter out [Obsolete], unless it was user defined
                     (IsRefLikeType && ObsoleteAttributeData is null)
-                      ? AttributeDescription.ObsoleteAttribute
-                      : default,
+                        ? AttributeDescription.ObsoleteAttribute
+                        : default,
                     out _,
                     // Filter out [IsReadOnly]
                     IsReadOnly ? AttributeDescription.IsReadOnlyAttribute : default,
@@ -809,8 +809,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (!_lazyNullableContextValue.TryGetByte(out value))
             {
                 value = ContainingPEModule.Module.HasNullableContextAttribute(_handle, out byte arg)
-                  ? arg
-                  : _container.GetNullableContextValue();
+                    ? arg
+                    : _container.GetNullableContextValue();
                 _lazyNullableContextValue = value.ToNullableContextFlags();
             }
             return value;
@@ -2527,8 +2527,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (uncommon == s_noUncommonProperties)
             {
                 return ((object)this.BaseTypeNoUseSiteDiagnostics != null)
-                  ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
-                  : AttributeUsageInfo.Default;
+                    ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
+                    : AttributeUsageInfo.Default;
             }
 
             if (uncommon.lazyAttributeUsageInfo.IsNull)
@@ -2559,8 +2559,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             }
 
             return ((object)this.BaseTypeNoUseSiteDiagnostics != null)
-              ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
-              : AttributeUsageInfo.Default;
+                ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
+                : AttributeUsageInfo.Default;
         }
 
         internal sealed override CSharpCompilation DeclaringCompilation // perf, not correctness
@@ -2667,8 +2667,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
             {
                 return t2 is NativeIntegerTypeSymbol nativeInteger
-                  ? nativeInteger.Equals(this, comparison)
-                  : base.Equals(t2, comparison);
+                    ? nativeInteger.Equals(this, comparison)
+                    : base.Equals(t2, comparison);
             }
         }
 

@@ -212,21 +212,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return query.Kind switch
             {
                 SearchKind.Exact
-                  => this.FindAsync(
-                      lazyAssembly,
-                      query.Name,
-                      ignoreCase: false,
-                      cancellationToken: cancellationToken
-                  ),
+                    => this.FindAsync(
+                        lazyAssembly,
+                        query.Name,
+                        ignoreCase: false,
+                        cancellationToken: cancellationToken
+                    ),
                 SearchKind.ExactIgnoreCase
-                  => this.FindAsync(
-                      lazyAssembly,
-                      query.Name,
-                      ignoreCase: true,
-                      cancellationToken: cancellationToken
-                  ),
+                    => this.FindAsync(
+                        lazyAssembly,
+                        query.Name,
+                        ignoreCase: true,
+                        cancellationToken: cancellationToken
+                    ),
                 SearchKind.Fuzzy
-                  => this.FuzzyFindAsync(lazyAssembly, query.Name, cancellationToken),
+                    => this.FuzzyFindAsync(lazyAssembly, query.Name, cancellationToken),
                 _ => throw new InvalidOperationException(),
             };
         }

@@ -16,9 +16,9 @@ namespace System.Text.RegularExpressions
     [DebuggerTypeProxy(typeof(CollectionDebuggerProxy<Group>))]
     public class GroupCollection
         : IList<Group>,
-          IReadOnlyList<Group>,
-          IList,
-          IReadOnlyDictionary<string, Group>
+            IReadOnlyList<Group>,
+            IList,
+            IReadOnlyDictionary<string, Group>
     {
         private readonly Match _match;
         private readonly Hashtable? _captureMap;
@@ -242,7 +242,7 @@ namespace System.Text.RegularExpressions
 
         private sealed class Enumerator
             : IEnumerator<Group>,
-              IEnumerator<KeyValuePair<string, Group>>
+                IEnumerator<KeyValuePair<string, Group>>
         {
             private readonly GroupCollection _collection;
             private int _index;

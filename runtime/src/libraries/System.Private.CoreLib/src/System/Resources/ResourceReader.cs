@@ -143,8 +143,8 @@ namespace System.Resources
                 "System.Resources.ResourceManager.AllowCustomResourceTypes",
                 out bool allowReflection
             )
-              ? allowReflection
-              : true;
+                ? allowReflection
+                : true;
 
         public void Close()
         {

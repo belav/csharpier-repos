@@ -157,10 +157,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override object Display =>
             (Type is null)
                 ? FormattableStringFactory.Create(
-                      "stackalloc {0}[{1}]",
-                      ElementType,
-                      Count.WasCompilerGenerated ? null : Count.Syntax.ToString()
-                  )
+                    "stackalloc {0}[{1}]",
+                    ElementType,
+                    Count.WasCompilerGenerated ? null : Count.Syntax.ToString()
+                )
                 : base.Display;
     }
 

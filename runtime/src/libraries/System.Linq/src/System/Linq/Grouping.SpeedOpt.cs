@@ -22,8 +22,8 @@ namespace System.Linq
             onlyIfCheap
                 ? -1
                 : Lookup<TKey, TElement>
-                  .Create(_source, _keySelector, _elementSelector, _comparer)
-                  .Count;
+                    .Create(_source, _keySelector, _elementSelector, _comparer)
+                    .Count;
     }
 
     internal sealed partial class GroupedResultEnumerable<TSource, TKey, TResult>
@@ -68,8 +68,8 @@ namespace System.Linq
             onlyIfCheap
                 ? -1
                 : Lookup<TKey, TElement>
-                  .Create(_source, _keySelector, _elementSelector, _comparer)
-                  .Count;
+                    .Create(_source, _keySelector, _elementSelector, _comparer)
+                    .Count;
     }
 
     internal sealed partial class GroupedEnumerable<TSource, TKey>

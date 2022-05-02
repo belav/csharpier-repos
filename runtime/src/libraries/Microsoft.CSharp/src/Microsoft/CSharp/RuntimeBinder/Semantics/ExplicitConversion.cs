@@ -853,8 +853,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             _typeDest,
                             out _exprDest,
                             (_flags & CONVERTTYPE.CHECKOVERFLOW) != 0
-                              ? EXPRFLAG.EXF_CHECKOVERFLOW
-                              : 0
+                                ? EXPRFLAG.EXF_CHECKOVERFLOW
+                                : 0
                         );
                     }
                 }
@@ -896,9 +896,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             _typeDest,
                             out _exprDest,
                             aggDest.IsValueType()
-                                && aggSrc.getThisType().FundamentalType == FUNDTYPE.FT_REF
-                              ? EXPRFLAG.EXF_UNBOX
-                              : EXPRFLAG.EXF_REFCHECK
+                            && aggSrc.getThisType().FundamentalType == FUNDTYPE.FT_REF
+                                ? EXPRFLAG.EXF_UNBOX
+                                : EXPRFLAG.EXF_REFCHECK
                                     | (_exprSrc?.Flags & EXPRFLAG.EXF_CANTBENULL ?? 0)
                         );
                     }

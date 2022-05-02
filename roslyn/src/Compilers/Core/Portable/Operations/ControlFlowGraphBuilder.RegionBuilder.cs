@@ -467,12 +467,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             private sealed class AnonymousFunctionsMapBuilder
                 : OperationVisitor<
-                      (ImmutableDictionary<
-                          IFlowAnonymousFunctionOperation,
-                          (ControlFlowRegion region, int ordinal)
-                      >.Builder map, ControlFlowRegion region),
-                      IOperation
-                  >
+                    (ImmutableDictionary<
+                        IFlowAnonymousFunctionOperation,
+                        (ControlFlowRegion region, int ordinal)
+                    >.Builder map, ControlFlowRegion region),
+                    IOperation
+                >
             {
                 public static readonly AnonymousFunctionsMapBuilder Instance =
                     new AnonymousFunctionsMapBuilder();

@@ -70,8 +70,8 @@ public class ValidationProblemDetails : HttpValidationProblemDetails
         static string GetErrorMessage(ModelError error)
         {
             return string.IsNullOrEmpty(error.ErrorMessage)
-              ? Resources.SerializableError_DefaultError
-              : error.ErrorMessage;
+                ? Resources.SerializableError_DefaultError
+                : error.ErrorMessage;
         }
     }
 

@@ -398,14 +398,19 @@ namespace System.Xml.Tests
 
                     // Xml_ErrorPosition = "Line {0}, position {1}."
                     lineInfoMessage = string.IsNullOrEmpty(lineInfo.FilePath)
-                      ? _resources["Xml_ErrorPosition"].ToString()
-                      : _resources["Xml_ErrorFilePosition"].ToString();
+                        ? _resources["Xml_ErrorPosition"].ToString()
+                        : _resources["Xml_ErrorFilePosition"].ToString();
 
                     var lineNumber = lineInfo.LineNumber.ToString();
                     var linePosition = lineInfo.LinePosition.ToString();
                     lineInfoMessage = string.IsNullOrEmpty(lineInfo.FilePath)
-                      ? string.Format(lineInfoMessage, lineNumber, linePosition)
-                      : string.Format(lineInfoMessage, lineInfo.FilePath, lineNumber, linePosition);
+                        ? string.Format(lineInfoMessage, lineNumber, linePosition)
+                        : string.Format(
+                            lineInfoMessage,
+                            lineInfo.FilePath,
+                            lineNumber,
+                            linePosition
+                        );
                 }
                 else
                     lineInfoMessage = ESCAPE_ANY;

@@ -269,8 +269,8 @@ namespace Microsoft.EntityFrameworkCore
                 var testValues = (
                     property.ClrType == typeof(string)
                         ? StringTestValues[
-                              property.GetValueConverter()!.ProviderClrType.UnwrapNullableType()
-                          ]
+                            property.GetValueConverter()!.ProviderClrType.UnwrapNullableType()
+                        ]
                         : TestValues[property.ClrType.UnwrapNullableType()]
                 ).ToArray();
 

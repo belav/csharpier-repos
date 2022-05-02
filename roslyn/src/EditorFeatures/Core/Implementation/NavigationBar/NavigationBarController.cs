@@ -196,7 +196,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             selectedProjectItem =
                 document != null
                     ? projectItems.FirstOrDefault(p => p.Text == document.Project.Name)
-                      ?? projectItems.First()
+                        ?? projectItems.First()
                     : projectItems.First();
         }
 

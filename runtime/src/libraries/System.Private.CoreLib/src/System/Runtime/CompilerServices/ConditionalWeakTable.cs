@@ -192,8 +192,8 @@ namespace System.Runtime.CompilerServices
             }
 
             return TryGetValue(key, out TValue? existingValue)
-              ? existingValue
-              : GetValueLocked(key, createValueCallback);
+                ? existingValue
+                : GetValueLocked(key, createValueCallback);
         }
 
         private TValue GetValueLocked(TKey key, CreateValueCallback createValueCallback)
@@ -245,11 +245,11 @@ namespace System.Runtime.CompilerServices
             {
                 Container c = _container;
                 return c is null || c.FirstFreeEntry == 0
-                  ? (
+                    ? (
                         (IEnumerable<KeyValuePair<TKey, TValue>>)
                             Array.Empty<KeyValuePair<TKey, TValue>>()
                     ).GetEnumerator()
-                  : new Enumerator(this);
+                    : new Enumerator(this);
             }
         }
 

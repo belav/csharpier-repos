@@ -1431,8 +1431,8 @@ public unsafe class Tests
             && (s2.k == 0x1000000)
             && (s2.l == 0x10000000 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8)
         )
-          ? 0
-          : 1;
+            ? 0
+            : 1;
     }
 
     /* TEST 2: 8 byte long INTEGER struct */

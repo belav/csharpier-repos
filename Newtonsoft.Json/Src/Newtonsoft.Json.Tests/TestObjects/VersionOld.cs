@@ -95,18 +95,18 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public int CompareTo(VersionOld value)
         {
             return object.ReferenceEquals(value, this)
-              ? 0
-              : value is null
-                  ? 1
-                  : _Major != value._Major
-                      ? (_Major > value._Major ? 1 : -1)
-                      : _Minor != value._Minor
-                          ? (_Minor > value._Minor ? 1 : -1)
-                          : _Build != value._Build
-                              ? (_Build > value._Build ? 1 : -1)
-                              : _Revision != value._Revision
-                                  ? (_Revision > value._Revision ? 1 : -1)
-                                  : 0;
+                ? 0
+                : value is null
+                    ? 1
+                    : _Major != value._Major
+                        ? (_Major > value._Major ? 1 : -1)
+                        : _Minor != value._Minor
+                            ? (_Minor > value._Minor ? 1 : -1)
+                            : _Build != value._Build
+                                ? (_Build > value._Build ? 1 : -1)
+                                : _Revision != value._Revision
+                                    ? (_Revision > value._Revision ? 1 : -1)
+                                    : 0;
         }
 
         public bool Equals(VersionOld obj)

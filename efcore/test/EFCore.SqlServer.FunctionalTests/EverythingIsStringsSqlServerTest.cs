@@ -323,8 +323,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
                         size,
                         isFixedLength,
                         storeTypePostfix: size == null
-                          ? StoreTypePostfix.None
-                          : (StoreTypePostfix?)null
+                            ? StoreTypePostfix.None
+                            : (StoreTypePostfix?)null
                     );
                 }
 

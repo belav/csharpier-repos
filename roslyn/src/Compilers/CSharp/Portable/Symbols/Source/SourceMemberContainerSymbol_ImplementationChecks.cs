@@ -473,8 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     Location location = implementingMember.IsFromCompilation(
                                         this.DeclaringCompilation
                                     )
-                                      ? implementingMember.Locations[0]
-                                      : this.Locations[0];
+                                        ? implementingMember.Locations[0]
+                                        : this.Locations[0];
                                     diagnostics.Add(useSiteInfo, location);
                                 }
                             }
@@ -1561,15 +1561,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     else if (
                         overridingProperty.SetMethod is null
                             ? !IsValidOverrideReturnType(
-                                  overridingProperty,
-                                  overridingMemberType,
-                                  overriddenMemberType,
-                                  diagnostics
-                              )
+                                overridingProperty,
+                                overridingMemberType,
+                                overriddenMemberType,
+                                diagnostics
+                            )
                             : !overridingMemberType.Equals(
-                                  overriddenMemberType,
-                                  TypeCompareKind.AllIgnoreOptions
-                              )
+                                overriddenMemberType,
+                                TypeCompareKind.AllIgnoreOptions
+                            )
                     )
                     {
                         // if the type is or contains an error type, the type must be fixed before the override can be found, so suppress error
@@ -1812,8 +1812,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) =>
             diagnostics.Add(
                 topLevel
-                  ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride
-                  : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride,
+                    ? ErrorCode.WRN_TopLevelNullabilityMismatchInReturnTypeOnOverride
+                    : ErrorCode.WRN_NullabilityMismatchInReturnTypeOnOverride,
                 location
             );
 
@@ -1827,8 +1827,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) =>
             diagnostics.Add(
                 topLevel
-                  ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnOverride
-                  : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnOverride,
+                    ? ErrorCode.WRN_TopLevelNullabilityMismatchInParameterTypeOnOverride
+                    : ErrorCode.WRN_NullabilityMismatchInParameterTypeOnOverride,
                 location,
                 new FormattedSymbol(overridingParameter, SymbolDisplayFormat.ShortFormat)
             );

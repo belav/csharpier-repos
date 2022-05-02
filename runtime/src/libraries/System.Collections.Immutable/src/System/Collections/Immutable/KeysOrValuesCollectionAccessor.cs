@@ -14,7 +14,7 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">Either TKey or TValue.</typeparam>
     internal abstract class KeysOrValuesCollectionAccessor<TKey, TValue, T>
         : ICollection<T>,
-          ICollection where TKey : notnull
+            ICollection where TKey : notnull
     {
         /// <summary>
         /// The underlying wrapped dictionary.

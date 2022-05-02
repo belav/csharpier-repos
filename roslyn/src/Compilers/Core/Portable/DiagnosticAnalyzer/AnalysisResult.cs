@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             var excludedAnalyzers = Analyzers.Except(analyzers);
             var excludedAnalyzersSet = excludedAnalyzers.Any()
-              ? excludedAnalyzers.ToImmutableHashSet()
-              : ImmutableHashSet<DiagnosticAnalyzer>.Empty;
+                ? excludedAnalyzers.ToImmutableHashSet()
+                : ImmutableHashSet<DiagnosticAnalyzer>.Empty;
             return GetDiagnostics(excludedAnalyzersSet);
         }
 

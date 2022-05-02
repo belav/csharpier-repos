@@ -1829,15 +1829,15 @@ namespace System.Net.Http
                 throw ex is OperationCanceledException oce
                 && oce.CancellationToken == cancellationToken
                     ? CancellationHelper.CreateOperationCanceledException(
-                          innerException: null,
-                          cancellationToken
-                      )
+                        innerException: null,
+                        cancellationToken
+                    )
                     : ConnectHelper.CreateWrappedException(
-                          ex,
-                          endPoint.Host,
-                          endPoint.Port,
-                          cancellationToken
-                      );
+                        ex,
+                        endPoint.Host,
+                        endPoint.Port,
+                        cancellationToken
+                    );
             }
         }
 
@@ -2744,25 +2744,25 @@ namespace System.Net.Http
             + (
                 _proxyUri == null
                     ? (
-                          _sslOptionsHttp11 == null
-                              ? $"http://{_originAuthority}"
-                              : $"https://{_originAuthority}"
+                        _sslOptionsHttp11 == null
+                            ? $"http://{_originAuthority}"
+                            : $"https://{_originAuthority}"
                                 + (
                                     _sslOptionsHttp11.TargetHost != _originAuthority!.IdnHost
                                         ? $", SSL TargetHost={_sslOptionsHttp11.TargetHost}"
                                         : null
                                 )
-                      )
+                    )
                     : (
-                          _sslOptionsHttp11 == null
-                              ? $"Proxy {_proxyUri}"
-                              : $"https://{_originAuthority}/ tunnelled via Proxy {_proxyUri}"
+                        _sslOptionsHttp11 == null
+                            ? $"Proxy {_proxyUri}"
+                            : $"https://{_originAuthority}/ tunnelled via Proxy {_proxyUri}"
                                 + (
                                     _sslOptionsHttp11.TargetHost != _originAuthority!.IdnHost
                                         ? $", SSL TargetHost={_sslOptionsHttp11.TargetHost}"
                                         : null
                                 )
-                      )
+                    )
             );
 
         private void Trace(string? message, [CallerMemberName] string? memberName = null) =>

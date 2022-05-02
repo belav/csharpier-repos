@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.Host
     [ExportWorkspaceService(typeof(IPersistentStorageLocationService)), Shared]
     internal class DefaultPersistentStorageLocationService
         : IPersistentStorageLocationService,
-          IPersistentStorageLocationService2
+            IPersistentStorageLocationService2
     {
         /// <summary>
         /// Used to ensure that the path components we generate do not contain any characters that might be invalid in a

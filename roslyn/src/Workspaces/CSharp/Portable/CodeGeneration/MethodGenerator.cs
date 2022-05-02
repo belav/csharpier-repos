@@ -323,8 +323,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             return !method.ExplicitInterfaceImplementations.Any() && !method.IsOverride
-              ? method.TypeParameters.GenerateConstraintClauses()
-              : default;
+                ? method.TypeParameters.GenerateConstraintClauses()
+                : default;
         }
 
         private static TypeParameterListSyntax GenerateTypeParameterList(

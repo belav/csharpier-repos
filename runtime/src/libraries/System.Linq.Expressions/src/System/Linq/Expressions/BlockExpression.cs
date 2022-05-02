@@ -1163,27 +1163,27 @@ namespace System.Linq.Expressions
             return expressions.Count switch
             {
                 0
-                  => BlockCore(
-                      typeof(void),
-                      EmptyReadOnlyCollection<ParameterExpression>.Instance,
-                      EmptyReadOnlyCollection<Expression>.Instance
-                  ),
+                    => BlockCore(
+                        typeof(void),
+                        EmptyReadOnlyCollection<ParameterExpression>.Instance,
+                        EmptyReadOnlyCollection<Expression>.Instance
+                    ),
                 2 => new Block2(expressions[0], expressions[1]),
                 3 => new Block3(expressions[0], expressions[1], expressions[2]),
                 4 => new Block4(expressions[0], expressions[1], expressions[2], expressions[3]),
                 5
-                  => new Block5(
-                      expressions[0],
-                      expressions[1],
-                      expressions[2],
-                      expressions[3],
-                      expressions[4]
-                  ),
+                    => new Block5(
+                        expressions[0],
+                        expressions[1],
+                        expressions[2],
+                        expressions[3],
+                        expressions[4]
+                    ),
                 _
-                  => new BlockN(
-                      expressions as ReadOnlyCollection<Expression>
-                          ?? (IReadOnlyList<Expression>)expressions.ToArray()
-                  ),
+                    => new BlockN(
+                        expressions as ReadOnlyCollection<Expression>
+                            ?? (IReadOnlyList<Expression>)expressions.ToArray()
+                    ),
             };
         }
     }

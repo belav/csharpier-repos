@@ -120,7 +120,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     [Guid(Guids.CSharpPackageIdString)]
     internal sealed class CSharpPackage
         : AbstractPackage<CSharpPackage, CSharpLanguageService>,
-          IVsUserSettingsQuery
+            IVsUserSettingsQuery
     {
         private ObjectBrowserLibraryManager _libraryManager;
         private uint _libraryManagerCookie;

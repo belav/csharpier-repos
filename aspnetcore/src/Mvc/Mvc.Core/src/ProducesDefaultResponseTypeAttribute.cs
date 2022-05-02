@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Mvc;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 public sealed class ProducesDefaultResponseTypeAttribute
     : Attribute,
-      IApiDefaultResponseMetadataProvider
+        IApiDefaultResponseMetadataProvider
 {
     /// <summary>
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.

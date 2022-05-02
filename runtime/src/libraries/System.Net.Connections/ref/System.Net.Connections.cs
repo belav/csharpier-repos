@@ -169,7 +169,7 @@ namespace System.Net.Connections
 
     public abstract partial class ConnectionListenerFactory
         : System.IAsyncDisposable,
-          System.IDisposable
+            System.IDisposable
     {
         protected ConnectionListenerFactory() { }
 

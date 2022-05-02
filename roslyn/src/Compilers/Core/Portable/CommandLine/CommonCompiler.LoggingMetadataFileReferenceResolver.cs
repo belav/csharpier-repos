@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
     {
         internal sealed class LoggingMetadataFileReferenceResolver
             : MetadataReferenceResolver,
-              IEquatable<LoggingMetadataFileReferenceResolver>
+                IEquatable<LoggingMetadataFileReferenceResolver>
         {
             private readonly TouchedFileLogger? _logger;
             private readonly RelativePathResolver _pathResolver;

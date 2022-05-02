@@ -146,8 +146,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 get
                 {
                     return _addedParameter.CallSiteKind == CallSiteKind.ValueWithName
-                      ? _addedParameter.Name + ": " + _addedParameter.CallSiteValue
-                      : _addedParameter.CallSiteValue;
+                        ? _addedParameter.Name + ": " + _addedParameter.CallSiteValue
+                        : _addedParameter.CallSiteValue;
                 }
             }
 
@@ -264,10 +264,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                     string NullText(string @null, string @default)
                     {
                         return ParameterSymbol.ExplicitDefaultValue == null
-                          ? (ParameterSymbol.Type.IsReferenceType ? @null : @default)
-                          : ParameterSymbol.ExplicitDefaultValue is string
-                              ? "\"" + ParameterSymbol.ExplicitDefaultValue.ToString() + "\""
-                              : ParameterSymbol.ExplicitDefaultValue.ToString();
+                            ? (ParameterSymbol.Type.IsReferenceType ? @null : @default)
+                            : ParameterSymbol.ExplicitDefaultValue is string
+                                ? "\"" + ParameterSymbol.ExplicitDefaultValue.ToString() + "\""
+                                : ParameterSymbol.ExplicitDefaultValue.ToString();
                     }
                 }
             }

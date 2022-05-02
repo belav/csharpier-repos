@@ -269,8 +269,8 @@ namespace System.Data.SqlTypes
         public static explicit operator SqlBoolean(SqlDecimal x)
         {
             return x.IsNull
-              ? SqlBoolean.Null
-              : new SqlBoolean(x._data1 != 0 || x._data2 != 0 || x._data3 != 0 || x._data4 != 0);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x._data1 != 0 || x._data2 != 0 || x._data3 != 0 || x._data4 != 0);
         }
 
         // Explicit conversion from SqlString to SqlBoolean
@@ -284,8 +284,8 @@ namespace System.Data.SqlTypes
         public static SqlBoolean operator ==(SqlBoolean x, SqlBoolean y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.m_value == y.m_value);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value == y.m_value);
         }
 
         public static SqlBoolean operator !=(SqlBoolean x, SqlBoolean y)
@@ -306,15 +306,15 @@ namespace System.Data.SqlTypes
         public static SqlBoolean operator <=(SqlBoolean x, SqlBoolean y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.m_value <= y.m_value);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value <= y.m_value);
         }
 
         public static SqlBoolean operator >=(SqlBoolean x, SqlBoolean y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.m_value >= y.m_value);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.m_value >= y.m_value);
         }
 
         //--------------------------------------------------

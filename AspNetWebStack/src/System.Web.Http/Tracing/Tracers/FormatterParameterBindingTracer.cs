@@ -22,7 +22,7 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class FormatterParameterBindingTracer
         : FormatterParameterBinding,
-          IDecorator<FormatterParameterBinding>
+            IDecorator<FormatterParameterBinding>
     {
         private const string ExecuteBindingAsyncMethodName = "ExecuteBindingAsync";
 
@@ -119,7 +119,7 @@ namespace System.Web.Http.Tracing.Tracers
                 {
                     string parameterName = _innerBinding.Descriptor.ParameterName;
                     tr.Message = actionContext.ActionArguments.ContainsKey(parameterName)
-                      ? Error.Format(
+                        ? Error.Format(
                             SRResources.TraceEndParameterBind,
                             parameterName,
                             FormattingUtilities.ValueToString(
@@ -127,7 +127,7 @@ namespace System.Web.Http.Tracing.Tracers
                                 CultureInfo.CurrentCulture
                             )
                         )
-                      : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
+                        : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
                 },
                 errorTrace: null
             );

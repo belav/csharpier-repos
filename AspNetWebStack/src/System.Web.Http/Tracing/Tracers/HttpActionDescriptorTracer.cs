@@ -21,7 +21,7 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class HttpActionDescriptorTracer
         : HttpActionDescriptor,
-          IDecorator<HttpActionDescriptor>
+            IDecorator<HttpActionDescriptor>
     {
         private const string ExecuteMethodName = "ExecuteAsync";
 

@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis
     [StructLayout(LayoutKind.Auto)]
     public readonly partial struct SyntaxTokenList
         : IEquatable<SyntaxTokenList>,
-          IReadOnlyList<SyntaxToken>
+            IReadOnlyList<SyntaxToken>
     {
         private readonly SyntaxNode? _parent;
         private readonly int _index;

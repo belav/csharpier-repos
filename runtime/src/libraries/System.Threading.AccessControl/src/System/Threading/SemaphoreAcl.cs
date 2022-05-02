@@ -181,7 +181,7 @@ namespace System.Threading
                 {
                     Interop.Errors.ERROR_FILE_NOT_FOUND
                     or Interop.Errors.ERROR_INVALID_NAME
-                      => OpenExistingResult.NameNotFound,
+                        => OpenExistingResult.NameNotFound,
                     Interop.Errors.ERROR_PATH_NOT_FOUND => OpenExistingResult.PathNotFound,
                     Interop.Errors.ERROR_INVALID_HANDLE => OpenExistingResult.NameInvalid,
                     _ => throw Win32Marshal.GetExceptionForLastWin32Error()

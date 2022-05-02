@@ -204,8 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         {
             var returnType = methodSymbol.ReturnType;
             var returnTypeName = returnType.IsNullable()
-              ? returnType.GetTypeArguments().First().Name
-              : returnType.Name;
+                ? returnType.GetTypeArguments().First().Name
+                : returnType.Name;
 
             return methodSymbol.Name.Equals("To" + returnTypeName, StringComparison.Ordinal);
         }
@@ -275,8 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeStyle.TypeStyle
         public static bool IsPredefinedType(TypeSyntax type)
         {
             return type is PredefinedTypeSyntax predefinedType
-              ? SyntaxFacts.IsPredefinedType(predefinedType.Keyword.Kind())
-              : false;
+                ? SyntaxFacts.IsPredefinedType(predefinedType.Keyword.Kind())
+                : false;
         }
     }
 }

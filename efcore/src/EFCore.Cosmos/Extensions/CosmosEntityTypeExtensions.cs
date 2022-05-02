@@ -27,9 +27,9 @@ namespace Microsoft.EntityFrameworkCore
             entityType.BaseType != null
                 ? entityType.GetRootType().GetContainer()
                 : (
-                      (string?)entityType[CosmosAnnotationNames.ContainerName]
-                      ?? GetDefaultContainer(entityType)
-                  );
+                    (string?)entityType[CosmosAnnotationNames.ContainerName]
+                    ?? GetDefaultContainer(entityType)
+                );
 
         private static string? GetDefaultContainer(IReadOnlyEntityType entityType) =>
             entityType.FindOwnership() != null
@@ -193,8 +193,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var partitionKeyPropertyName = entityType.GetPartitionKeyPropertyName();
             return partitionKeyPropertyName == null
-              ? null
-              : entityType.FindProperty(partitionKeyPropertyName);
+                ? null
+                : entityType.FindProperty(partitionKeyPropertyName);
         }
 
         /// <summary>
@@ -206,8 +206,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var partitionKeyPropertyName = entityType.GetPartitionKeyPropertyName();
             return partitionKeyPropertyName == null
-              ? null
-              : entityType.FindProperty(partitionKeyPropertyName);
+                ? null
+                : entityType.FindProperty(partitionKeyPropertyName);
         }
 
         /// <summary>
@@ -221,8 +221,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var partitionKeyPropertyName = entityType.GetPartitionKeyPropertyName();
             return partitionKeyPropertyName == null
-              ? null
-              : entityType.FindProperty(partitionKeyPropertyName);
+                ? null
+                : entityType.FindProperty(partitionKeyPropertyName);
         }
 
         /// <summary>
@@ -234,8 +234,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var partitionKeyPropertyName = entityType.GetPartitionKeyPropertyName();
             return partitionKeyPropertyName == null
-              ? null
-              : entityType.FindProperty(partitionKeyPropertyName);
+                ? null
+                : entityType.FindProperty(partitionKeyPropertyName);
         }
 
         /// <summary>
@@ -293,8 +293,8 @@ namespace Microsoft.EntityFrameworkCore
             var etagPropertyName = entityType.GetETagPropertyName();
 
             return !string.IsNullOrEmpty(etagPropertyName)
-              ? entityType.FindProperty(etagPropertyName)
-              : null;
+                ? entityType.FindProperty(etagPropertyName)
+                : null;
         }
 
         /// <summary>
@@ -429,10 +429,10 @@ namespace Microsoft.EntityFrameworkCore
             entityType.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.Throughput,
                 throughput == null || autoscale == null
-                  ? null
-                  : autoscale.Value
-                      ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                      : ThroughputProperties.CreateManualThroughput(throughput.Value)
+                    ? null
+                    : autoscale.Value
+                        ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                        : ThroughputProperties.CreateManualThroughput(throughput.Value)
             );
 
         /// <summary>
@@ -451,10 +451,10 @@ namespace Microsoft.EntityFrameworkCore
             entityType.SetOrRemoveAnnotation(
                 CosmosAnnotationNames.Throughput,
                 throughput == null || autoscale == null
-                  ? null
-                  : autoscale.Value
-                      ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                      : ThroughputProperties.CreateManualThroughput(throughput.Value),
+                    ? null
+                    : autoscale.Value
+                        ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                        : ThroughputProperties.CreateManualThroughput(throughput.Value),
                 fromDataAnnotation
             );
 

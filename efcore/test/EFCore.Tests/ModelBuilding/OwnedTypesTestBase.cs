@@ -1971,8 +1971,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 Assert.Equal(
                     modelBuilder.Model.IsShared(typeof(BookLabel))
-                      ? CoreStrings.ClashingSharedType(nameof(BookLabel))
-                      : CoreStrings.ClashingOwnedEntityType(nameof(BookLabel)),
+                        ? CoreStrings.ClashingSharedType(nameof(BookLabel))
+                        : CoreStrings.ClashingOwnedEntityType(nameof(BookLabel)),
                     Assert
                         .Throws<InvalidOperationException>(
                             () => modelBuilder.Entity<AnotherBookLabel>().HasBaseType<BookLabel>()

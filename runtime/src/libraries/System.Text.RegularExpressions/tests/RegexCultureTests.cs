@@ -781,14 +781,14 @@ namespace System.Text.RegularExpressions.Tests
                     HashSet<char> set = (
                         ignoreCase[c] == null
                             ? (
-                                  ignoreCase[cU] == null
-                                      ? (
-                                            ignoreCase[cL] == null
-                                                ? new HashSet<char>()
-                                                : ignoreCase[cL]
-                                        )
-                                      : ignoreCase[cU]
-                              )
+                                ignoreCase[cU] == null
+                                    ? (
+                                        ignoreCase[cL] == null
+                                            ? new HashSet<char>()
+                                            : ignoreCase[cL]
+                                    )
+                                    : ignoreCase[cU]
+                            )
                             : ignoreCase[c]
                     );
                     set.Add(c);

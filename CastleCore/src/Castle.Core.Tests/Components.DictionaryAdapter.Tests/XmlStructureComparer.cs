@@ -116,20 +116,20 @@ namespace Castle.Components.DictionaryAdapter.Tests
                             : (null == tuple.Item2)
                                 ? +1
                                 : 0
-                                  != (
-                                      r = comparer.Compare(
-                                          tuple.Item1.LocalName,
-                                          tuple.Item2.LocalName
-                                      )
-                                  )
+                                != (
+                                    r = comparer.Compare(
+                                        tuple.Item1.LocalName,
+                                        tuple.Item2.LocalName
+                                    )
+                                )
                                     ? r
                                     : 0
-                                      != (
-                                          r = comparer.Compare(
-                                              tuple.Item1.NamespaceURI,
-                                              tuple.Item2.NamespaceURI
-                                          )
-                                      )
+                                    != (
+                                        r = comparer.Compare(
+                                            tuple.Item1.NamespaceURI,
+                                            tuple.Item2.NamespaceURI
+                                        )
+                                    )
                                         ? r
                                         : 0
                 );
@@ -212,12 +212,12 @@ namespace Castle.Components.DictionaryAdapter.Tests
         private static IEnumerable<XmlNode> GetChildElementsAndAttributes(XmlNode node)
         {
             return (null == node)
-              ? Enumerable.Empty<XmlNode>()
-              : (node.NodeType == XmlNodeType.Element)
-                  ? GetElementChildNodes(node)
-                  : (node.NodeType == XmlNodeType.Document)
-                      ? GetDocumentChildNodes((XmlDocument)node)
-                      : Enumerable.Empty<XmlNode>();
+                ? Enumerable.Empty<XmlNode>()
+                : (node.NodeType == XmlNodeType.Element)
+                    ? GetElementChildNodes(node)
+                    : (node.NodeType == XmlNodeType.Document)
+                        ? GetDocumentChildNodes((XmlDocument)node)
+                        : Enumerable.Empty<XmlNode>();
         }
 
         private static IEnumerable<XmlNode> GetElementChildNodes(XmlNode node)

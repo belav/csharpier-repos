@@ -132,9 +132,9 @@ namespace Microsoft.NET.Build.Tasks
                 PublishReadyToRunCompositeExclusions == null || !Crossgen2Composite
                     ? null
                     : new HashSet<string>(
-                          PublishReadyToRunCompositeExclusions,
-                          StringComparer.OrdinalIgnoreCase
-                      );
+                        PublishReadyToRunCompositeExclusions,
+                        StringComparer.OrdinalIgnoreCase
+                    );
 
             foreach (var file in inputFiles)
             {

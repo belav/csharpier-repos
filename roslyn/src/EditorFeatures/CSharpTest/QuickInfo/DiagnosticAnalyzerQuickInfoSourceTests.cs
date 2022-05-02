@@ -229,9 +229,9 @@ namespace T
         {
             var description = shouldShowQuickInfo
                 ? GetFormattedIDEAnalyzerTitle(
-                      51,
-                      nameof(AnalyzersResources.Remove_unused_private_members)
-                  )
+                    51,
+                    nameof(AnalyzersResources.Remove_unused_private_members)
+                )
                 : null;
             await TestAsync(
                 @$"

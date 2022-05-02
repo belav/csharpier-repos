@@ -81,8 +81,8 @@ public class SelfHostDeployer : ApplicationDeployer
                 DeploymentParameters,
                 applicationBaseUri: actualUrl.ToString(),
                 contentRoot: DeploymentParameters.PublishApplicationBeforeDeployment
-                  ? DeploymentParameters.PublishedApplicationRootPath
-                  : DeploymentParameters.ApplicationPath,
+                    ? DeploymentParameters.PublishedApplicationRootPath
+                    : DeploymentParameters.ApplicationPath,
                 hostShutdownToken: hostExitToken
             );
         }

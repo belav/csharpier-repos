@@ -744,12 +744,12 @@ namespace System.ServiceModel.Syndication
                 Atom10Constants.HtmlType => TextSyndicationContentKind.Html,
                 Atom10Constants.XHtmlType => TextSyndicationContentKind.XHtml,
                 _
-                  => throw new XmlException(
-                      FeedUtils.AddLineInfo(
-                          reader,
-                          SR.Format(SR.Atom10SpecRequiresTextConstruct, context, type)
-                      )
-                  ),
+                    => throw new XmlException(
+                        FeedUtils.AddLineInfo(
+                            reader,
+                            SR.Format(SR.Atom10SpecRequiresTextConstruct, context, type)
+                        )
+                    ),
             };
 
             Dictionary<XmlQualifiedName, string> attrs = null;
@@ -1287,12 +1287,12 @@ namespace System.ServiceModel.Syndication
             link.Uri =
                 (val != null)
                     ? UriFromString(
-                          val,
-                          UriKind.RelativeOrAbsolute,
-                          Atom10Constants.LinkTag,
-                          Atom10Constants.Atom10Namespace,
-                          reader
-                      )
+                        val,
+                        UriKind.RelativeOrAbsolute,
+                        Atom10Constants.LinkTag,
+                        Atom10Constants.Atom10Namespace,
+                        reader
+                    )
                     : null;
         }
 

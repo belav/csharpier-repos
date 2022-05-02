@@ -332,8 +332,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 {
                     Expr pTemp = binder.MustConvertWithSuppressedMessage(x, pDestType);
                     return pDestType == pIntType
-                      ? pTemp
-                      : ExprFactoryCreateCastWithSuppressedMessage(
+                        ? pTemp
+                        : ExprFactoryCreateCastWithSuppressedMessage(
                             EXPRFLAG.EXF_INDEXEXPR,
                             pDestType,
                             pTemp
@@ -653,10 +653,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     (
                         methCur == null
                             ? SymbolLoader.LookupAggMember(
-                                  pName,
-                                  atsCur.OwningAggregate,
-                                  symbmask_t.MASK_MethodSymbol
-                              )
+                                pName,
+                                atsCur.OwningAggregate,
+                                symbmask_t.MASK_MethodSymbol
+                            )
                             : methCur.LookupNext(symbmask_t.MASK_MethodSymbol)
                     ) as MethodSymbol;
 
@@ -973,8 +973,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Debug.Assert(kind >= CheckLvalueKind.Assignment && kind <= CheckLvalueKind.Increment);
             return kind == CheckLvalueKind.Increment
-              ? ErrorCode.ERR_IncrementLvalueExpected
-              : ErrorCode.ERR_AssgLvalueExpected;
+                ? ErrorCode.ERR_IncrementLvalueExpected
+                : ErrorCode.ERR_AssgLvalueExpected;
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -1016,8 +1016,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 case ACCESSERROR.ACCESSERROR_NOACCESS:
                     throw ErrorHandling.Error(
                         mwt.Meth().isSetAccessor()
-                          ? ErrorCode.ERR_InaccessibleSetter
-                          : ErrorCode.ERR_InaccessibleGetter,
+                            ? ErrorCode.ERR_InaccessibleSetter
+                            : ErrorCode.ERR_InaccessibleGetter,
                         pwtSlot
                     );
             }
@@ -1083,8 +1083,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     Debug.Assert(field.FieldWithType.Field().isReadOnly);
                     throw ErrorHandling.Error(
                         field.FieldWithType.Field().isStatic
-                          ? ErrorCode.ERR_AssgReadonlyStatic
-                          : ErrorCode.ERR_AssgReadonly
+                            ? ErrorCode.ERR_AssgReadonlyStatic
+                            : ErrorCode.ERR_AssgReadonly
                     );
 
                 default:

@@ -65,14 +65,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             const string InterpolatedVerbatimText = "$@\"";
 
             return isVerbatim
-              ? SyntaxFactory.Token(
+                ? SyntaxFactory.Token(
                     default,
                     SyntaxKind.InterpolatedVerbatimStringStartToken,
                     InterpolatedVerbatimText,
                     InterpolatedVerbatimText,
                     default
                 )
-              : SyntaxFactory.Token(SyntaxKind.InterpolatedStringStartToken);
+                : SyntaxFactory.Token(SyntaxKind.InterpolatedStringStartToken);
         }
 
         internal override SyntaxToken CreateInterpolatedStringEndToken() =>
@@ -154,10 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             return declarations != null
-              ? SyntaxFactory.List(
+                ? SyntaxFactory.List(
                     declarations.Select(this.AsUsingDirective).OfType<UsingDirectiveSyntax>()
                 )
-              : default;
+                : default;
         }
 
         private SyntaxNode AsUsingDirective(SyntaxNode node)
@@ -175,10 +175,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             return declarations != null
-              ? SyntaxFactory.List(
+                ? SyntaxFactory.List(
                     declarations.Select(AsNamespaceMember).OfType<MemberDeclarationSyntax>()
                 )
-              : default;
+                : default;
         }
 
         private static SyntaxNode AsNamespaceMember(SyntaxNode declaration)
@@ -243,8 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                             name.ToIdentifierToken(),
                             null,
                             initializer != null
-                              ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
-                              : null
+                                ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
+                                : null
                         )
                     )
                 )
@@ -264,8 +264,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 (TypeSyntax)type,
                 name.ToIdentifierToken(),
                 initializer != null
-                  ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
-                  : null
+                    ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)initializer)
+                    : null
             );
         }
 
@@ -301,8 +301,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 attributeLists: default,
                 modifiers: AsModifierList(accessibility, modifiers, SyntaxKind.MethodDeclaration),
                 returnType: returnType != null
-                  ? (TypeSyntax)returnType
-                  : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
+                    ? (TypeSyntax)returnType
+                    : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
                 explicitInterfaceSpecifier: null,
                 identifier: name.ToIdentifierToken(),
                 typeParameterList: AsTypeParameterList(typeParameters),
@@ -401,10 +401,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static ParameterListSyntax AsParameterList(IEnumerable<SyntaxNode> parameters)
         {
             return parameters != null
-              ? SyntaxFactory.ParameterList(
+                ? SyntaxFactory.ParameterList(
                     SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
                 )
-              : SyntaxFactory.ParameterList();
+                : SyntaxFactory.ParameterList();
         }
 
         public override SyntaxNode ConstructorDeclaration(
@@ -422,13 +422,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 (name ?? "ctor").ToIdentifierToken(),
                 AsParameterList(parameters),
                 baseConstructorArguments != null
-                  ? SyntaxFactory.ConstructorInitializer(
+                    ? SyntaxFactory.ConstructorInitializer(
                         SyntaxKind.BaseConstructorInitializer,
                         SyntaxFactory.ArgumentList(
                             SyntaxFactory.SeparatedList(baseConstructorArguments.Select(AsArgument))
                         )
                     )
-                  : null,
+                    : null,
                 CreateBlock(statements)
             );
         }
@@ -515,20 +515,20 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration switch
             {
                 PropertyDeclarationSyntax property
-                  => property
-                      .WithAccessorList(
-                          CreateAccessorList(property.AccessorList, accessorDeclarations)
-                      )
-                      .WithExpressionBody(null)
-                      .WithSemicolonToken(default),
+                    => property
+                        .WithAccessorList(
+                            CreateAccessorList(property.AccessorList, accessorDeclarations)
+                        )
+                        .WithExpressionBody(null)
+                        .WithSemicolonToken(default),
 
                 IndexerDeclarationSyntax indexer
-                  => indexer
-                      .WithAccessorList(
-                          CreateAccessorList(indexer.AccessorList, accessorDeclarations)
-                      )
-                      .WithExpressionBody(null)
-                      .WithSemicolonToken(default),
+                    => indexer
+                        .WithAccessorList(
+                            CreateAccessorList(indexer.AccessorList, accessorDeclarations)
+                        )
+                        .WithExpressionBody(null)
+                        .WithSemicolonToken(default),
 
                 _ => declaration,
             };
@@ -540,8 +540,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             var list = SyntaxFactory.List(accessorDeclarations.Cast<AccessorDeclarationSyntax>());
             return accessorListOpt == null
-              ? SyntaxFactory.AccessorList(list)
-              : accessorListOpt.WithAccessors(list);
+                ? SyntaxFactory.AccessorList(list)
+                : accessorListOpt.WithAccessors(list);
         }
 
         public override SyntaxNode IndexerDeclaration(
@@ -607,10 +607,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             return parameters != null
-              ? SyntaxFactory.BracketedParameterList(
+                ? SyntaxFactory.BracketedParameterList(
                     SyntaxFactory.SeparatedList(parameters.Cast<ParameterSyntax>())
                 )
-              : SyntaxFactory.BracketedParameterList();
+                : SyntaxFactory.BracketedParameterList();
         }
 
         private static AccessorDeclarationSyntax AccessorDeclaration(
@@ -766,21 +766,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.MethodDeclaration
-                  => ((MethodDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                    => ((MethodDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
+                        specifier
+                    ),
                 SyntaxKind.PropertyDeclaration
-                  => ((PropertyDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                    => ((PropertyDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
+                        specifier
+                    ),
                 SyntaxKind.IndexerDeclaration
-                  => ((IndexerDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                    => ((IndexerDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
+                        specifier
+                    ),
                 SyntaxKind.EventDeclaration
-                  => ((EventDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
-                      specifier
-                  ),
+                    => ((EventDeclarationSyntax)declaration).WithExplicitInterfaceSpecifier(
+                        specifier
+                    ),
                 _ => declaration,
             };
 
@@ -802,18 +802,18 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.MethodDeclaration:
                     var method = (MethodDeclarationSyntax)declaration;
                     return method.Body == null
-                      ? method.WithSemicolonToken(default).WithBody(CreateBlock(null))
-                      : method;
+                        ? method.WithSemicolonToken(default).WithBody(CreateBlock(null))
+                        : method;
                 case SyntaxKind.OperatorDeclaration:
                     var op = (OperatorDeclarationSyntax)declaration;
                     return op.Body == null
-                      ? op.WithSemicolonToken(default).WithBody(CreateBlock(null))
-                      : op;
+                        ? op.WithSemicolonToken(default).WithBody(CreateBlock(null))
+                        : op;
                 case SyntaxKind.ConversionOperatorDeclaration:
                     var cop = (ConversionOperatorDeclarationSyntax)declaration;
                     return cop.Body == null
-                      ? cop.WithSemicolonToken(default).WithBody(CreateBlock(null))
-                      : cop;
+                        ? cop.WithSemicolonToken(default).WithBody(CreateBlock(null))
+                        : cop;
                 case SyntaxKind.PropertyDeclaration:
                     var prop = (PropertyDeclarationSyntax)declaration;
                     return prop.WithAccessorList(WithBodies(prop.AccessorList));
@@ -853,8 +853,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static AccessorDeclarationSyntax WithoutBody(AccessorDeclarationSyntax accessor) =>
             accessor.Body != null
                 ? accessor
-                  .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                  .WithBody(null)
+                    .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                    .WithBody(null)
                 : accessor;
 
         public override SyntaxNode ClassDeclaration(
@@ -896,8 +896,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 name.ToIdentifierToken(),
                 AsTypeParameterList(typeParameters),
                 baseTypes != null
-                  ? SyntaxFactory.BaseList(SyntaxFactory.SeparatedList(baseTypes))
-                  : null,
+                    ? SyntaxFactory.BaseList(SyntaxFactory.SeparatedList(baseTypes))
+                    : null,
                 default,
                 this.AsClassMembers(name, members)
             );
@@ -909,10 +909,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             return members != null
-              ? SyntaxFactory.List(
+                ? SyntaxFactory.List(
                     members.Select(m => this.AsClassMember(m, className)).Where(m => m != null)
                 )
-              : default;
+                : default;
         }
 
         private MemberDeclarationSyntax AsClassMember(SyntaxNode node, string className)
@@ -994,10 +994,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         )
         {
             return members != null
-              ? SyntaxFactory.List(
+                ? SyntaxFactory.List(
                     members.Select(this.AsInterfaceMember).OfType<MemberDeclarationSyntax>()
                 )
-              : default;
+                : default;
         }
 
         internal override SyntaxNode AsInterfaceMember(SyntaxNode m)
@@ -1093,12 +1093,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 AsModifierList(accessibility, modifiers, SyntaxKind.EnumDeclaration),
                 name.ToIdentifierToken(),
                 underlyingType != null
-                  ? SyntaxFactory.BaseList(
+                    ? SyntaxFactory.BaseList(
                         SyntaxFactory.SingletonSeparatedList(
                             (BaseTypeSyntax)SyntaxFactory.SimpleBaseType((TypeSyntax)underlyingType)
                         )
                     )
-                  : null,
+                    : null,
                 this.AsEnumMembers(members)
             );
         }
@@ -1109,8 +1109,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 default,
                 name.ToIdentifierToken(),
                 expression != null
-                  ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
-                  : null
+                    ? SyntaxFactory.EqualsValueClause((ExpressionSyntax)expression)
+                    : null
             );
         }
 
@@ -1158,8 +1158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 default,
                 AsModifierList(accessibility, modifiers),
                 returnType != null
-                  ? (TypeSyntax)returnType
-                  : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
+                    ? (TypeSyntax)returnType
+                    : SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)),
                 name.ToIdentifierToken(),
                 AsTypeParameterList(typeParameters),
                 AsParameterList(parameters),
@@ -1181,12 +1181,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public override SyntaxNode AttributeArgument(string name, SyntaxNode expression)
         {
             return name != null
-              ? SyntaxFactory.AttributeArgument(
+                ? SyntaxFactory.AttributeArgument(
                     SyntaxFactory.NameEquals(name.ToIdentifierName()),
                     null,
                     (ExpressionSyntax)expression
                 )
-              : SyntaxFactory.AttributeArgument((ExpressionSyntax)expression);
+                : SyntaxFactory.AttributeArgument((ExpressionSyntax)expression);
         }
 
         private static AttributeArgumentListSyntax AsAttributeArgumentList(
@@ -1554,7 +1554,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 AccessorDeclarationSyntax accessor => accessor.WithAttributeLists(attributeLists),
                 ParameterSyntax parameter => parameter.WithAttributeLists(attributeLists),
                 CompilationUnitSyntax compilationUnit
-                  => compilationUnit.WithAttributeLists(AsAssemblyAttributes(attributeLists)),
+                    => compilationUnit.WithAttributeLists(AsAssemblyAttributes(attributeLists)),
                 StatementSyntax statement => statement.WithAttributeLists(attributeLists),
                 _ => declaration,
             };
@@ -1593,9 +1593,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return declaration switch
             {
                 CompilationUnitSyntax cu
-                  => cu.WithUsings(cu.Usings.InsertRange(index, usingsToInsert)),
+                    => cu.WithUsings(cu.Usings.InsertRange(index, usingsToInsert)),
                 BaseNamespaceDeclarationSyntax nd
-                  => nd.WithUsings(nd.Usings.InsertRange(index, usingsToInsert)),
+                    => nd.WithUsings(nd.Usings.InsertRange(index, usingsToInsert)),
                 _ => declaration,
             };
         }
@@ -1694,13 +1694,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.FieldDeclaration
-                  => ((FieldDeclarationSyntax)declaration).Declaration.Variables.Count,
+                    => ((FieldDeclarationSyntax)declaration).Declaration.Variables.Count,
                 SyntaxKind.EventFieldDeclaration
-                  => ((EventFieldDeclarationSyntax)declaration).Declaration.Variables.Count,
+                    => ((EventFieldDeclarationSyntax)declaration).Declaration.Variables.Count,
                 SyntaxKind.LocalDeclarationStatement
-                  => ((LocalDeclarationStatementSyntax)declaration).Declaration.Variables.Count,
+                    => ((LocalDeclarationStatementSyntax)declaration).Declaration.Variables.Count,
                 SyntaxKind.VariableDeclaration
-                  => ((VariableDeclarationSyntax)declaration).Variables.Count,
+                    => ((VariableDeclarationSyntax)declaration).Variables.Count,
                 SyntaxKind.AttributeList => ((AttributeListSyntax)declaration).Attributes.Count,
                 _ => 1,
             };
@@ -1713,13 +1713,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     .WithSemicolonToken(default)
                     .WithOpenBraceToken(
                         recordDeclaration.OpenBraceToken == default
-                          ? SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
-                          : recordDeclaration.OpenBraceToken
+                            ? SyntaxFactory.Token(SyntaxKind.OpenBraceToken)
+                            : recordDeclaration.OpenBraceToken
                     )
                     .WithCloseBraceToken(
                         recordDeclaration.CloseBraceToken == default
-                          ? SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
-                          : recordDeclaration.CloseBraceToken
+                            ? SyntaxFactory.Token(SyntaxKind.CloseBraceToken)
+                            : recordDeclaration.CloseBraceToken
                     );
             }
 
@@ -1753,15 +1753,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 return declaration switch
                 {
                     TypeDeclarationSyntax type
-                      => type.WithMembers(type.Members.AddRange(newMembers)),
+                        => type.WithMembers(type.Members.AddRange(newMembers)),
                     EnumDeclarationSyntax @enum
-                      => @enum.WithMembers(
-                          @enum.Members.AddRange(newMembers.OfType<EnumMemberDeclarationSyntax>())
-                      ),
+                        => @enum.WithMembers(
+                            @enum.Members.AddRange(newMembers.OfType<EnumMemberDeclarationSyntax>())
+                        ),
                     BaseNamespaceDeclarationSyntax @namespace
-                      => @namespace.WithMembers(@namespace.Members.AddRange(newMembers)),
+                        => @namespace.WithMembers(@namespace.Members.AddRange(newMembers)),
                     CompilationUnitSyntax compilationUnit
-                      => compilationUnit.WithMembers(compilationUnit.Members.AddRange(newMembers)),
+                        => compilationUnit.WithMembers(
+                            compilationUnit.Members.AddRange(newMembers)
+                        ),
                     _ => declaration,
                 };
             }
@@ -1778,7 +1780,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 InterfaceDeclarationSyntax => this.AsInterfaceMember(member),
                 TypeDeclarationSyntax typeDeclaration
-                  => this.AsClassMember(member, typeDeclaration.Identifier.Text),
+                    => this.AsClassMember(member, typeDeclaration.Identifier.Text),
                 EnumDeclarationSyntax => this.AsEnumMember(member),
                 BaseNamespaceDeclarationSyntax => AsNamespaceMember(member),
                 CompilationUnitSyntax => AsNamespaceMember(member),
@@ -2151,10 +2153,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var typeParameters =
                 typeParameterNames != null
                     ? SyntaxFactory.TypeParameterList(
-                          SyntaxFactory.SeparatedList(
-                              typeParameterNames.Select(name => SyntaxFactory.TypeParameter(name))
-                          )
-                      )
+                        SyntaxFactory.SeparatedList(
+                            typeParameterNames.Select(name => SyntaxFactory.TypeParameter(name))
+                        )
+                    )
                     : null;
 
             if (typeParameters != null && typeParameters.Parameters.Count == 0)
@@ -2177,7 +2179,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 MethodDeclarationSyntax method => method.WithTypeParameterList(typeParameters),
                 TypeDeclarationSyntax type => type.WithTypeParameterList(typeParameters),
                 DelegateDeclarationSyntax @delegate
-                  => @delegate.WithTypeParameterList(typeParameters),
+                    => @delegate.WithTypeParameterList(typeParameters),
                 _ => declaration,
             };
         }
@@ -2190,17 +2192,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 declaration switch
                 {
                     MethodDeclarationSyntax member
-                      => member.WithExplicitInterfaceSpecifier(
-                          CreateExplicitInterfaceSpecifier(explicitInterfaceImplementations)
-                      ),
+                        => member.WithExplicitInterfaceSpecifier(
+                            CreateExplicitInterfaceSpecifier(explicitInterfaceImplementations)
+                        ),
                     PropertyDeclarationSyntax member
-                      => member.WithExplicitInterfaceSpecifier(
-                          CreateExplicitInterfaceSpecifier(explicitInterfaceImplementations)
-                      ),
+                        => member.WithExplicitInterfaceSpecifier(
+                            CreateExplicitInterfaceSpecifier(explicitInterfaceImplementations)
+                        ),
                     EventDeclarationSyntax member
-                      => member.WithExplicitInterfaceSpecifier(
-                          CreateExplicitInterfaceSpecifier(explicitInterfaceImplementations)
-                      ),
+                        => member.WithExplicitInterfaceSpecifier(
+                            CreateExplicitInterfaceSpecifier(explicitInterfaceImplementations)
+                        ),
                     _ => declaration,
                 },
                 Accessibility.NotApplicable
@@ -2222,22 +2224,27 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration switch
             {
                 MethodDeclarationSyntax method
-                  => method.WithConstraintClauses(
-                      WithTypeConstraints(method.ConstraintClauses, typeParameterName, kinds, types)
-                  ),
+                    => method.WithConstraintClauses(
+                        WithTypeConstraints(
+                            method.ConstraintClauses,
+                            typeParameterName,
+                            kinds,
+                            types
+                        )
+                    ),
                 TypeDeclarationSyntax type
-                  => type.WithConstraintClauses(
-                      WithTypeConstraints(type.ConstraintClauses, typeParameterName, kinds, types)
-                  ),
+                    => type.WithConstraintClauses(
+                        WithTypeConstraints(type.ConstraintClauses, typeParameterName, kinds, types)
+                    ),
                 DelegateDeclarationSyntax @delegate
-                  => @delegate.WithConstraintClauses(
-                      WithTypeConstraints(
-                          @delegate.ConstraintClauses,
-                          typeParameterName,
-                          kinds,
-                          types
-                      )
-                  ),
+                    => @delegate.WithConstraintClauses(
+                        WithTypeConstraints(
+                            @delegate.ConstraintClauses,
+                            typeParameterName,
+                            kinds,
+                            types
+                        )
+                    ),
                 _ => declaration,
             };
 
@@ -2251,8 +2258,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             var constraints =
                 types != null
                     ? SyntaxFactory.SeparatedList<TypeParameterConstraintSyntax>(
-                          types.Select(t => SyntaxFactory.TypeConstraint((TypeSyntax)t))
-                      )
+                        types.Select(t => SyntaxFactory.TypeConstraint((TypeSyntax)t))
+                    )
                     : SyntaxFactory.SeparatedList<TypeParameterConstraintSyntax>();
 
             if ((kinds & SpecialTypeConstraintKind.Constructor) != 0)
@@ -2310,31 +2317,31 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration switch
             {
                 BaseTypeDeclarationSyntax baseTypeDeclaration
-                  => baseTypeDeclaration.Identifier.ValueText,
+                    => baseTypeDeclaration.Identifier.ValueText,
                 DelegateDeclarationSyntax delegateDeclaration
-                  => delegateDeclaration.Identifier.ValueText,
+                    => delegateDeclaration.Identifier.ValueText,
                 MethodDeclarationSyntax methodDeclaration => methodDeclaration.Identifier.ValueText,
                 BaseFieldDeclarationSyntax baseFieldDeclaration
-                  => this.GetName(baseFieldDeclaration.Declaration),
+                    => this.GetName(baseFieldDeclaration.Declaration),
                 PropertyDeclarationSyntax propertyDeclaration
-                  => propertyDeclaration.Identifier.ValueText,
+                    => propertyDeclaration.Identifier.ValueText,
                 EnumMemberDeclarationSyntax enumMemberDeclaration
-                  => enumMemberDeclaration.Identifier.ValueText,
+                    => enumMemberDeclaration.Identifier.ValueText,
                 EventDeclarationSyntax eventDeclaration => eventDeclaration.Identifier.ValueText,
                 BaseNamespaceDeclarationSyntax namespaceDeclaration
-                  => namespaceDeclaration.Name.ToString(),
+                    => namespaceDeclaration.Name.ToString(),
                 UsingDirectiveSyntax usingDirective => usingDirective.Name.ToString(),
                 ParameterSyntax parameter => parameter.Identifier.ValueText,
                 LocalDeclarationStatementSyntax localDeclaration
-                  => this.GetName(localDeclaration.Declaration),
+                    => this.GetName(localDeclaration.Declaration),
                 VariableDeclarationSyntax variableDeclaration
                     when variableDeclaration.Variables.Count == 1
-                  => variableDeclaration.Variables[0].Identifier.ValueText,
+                    => variableDeclaration.Variables[0].Identifier.ValueText,
                 VariableDeclaratorSyntax variableDeclarator
-                  => variableDeclarator.Identifier.ValueText,
+                    => variableDeclarator.Identifier.ValueText,
                 TypeParameterSyntax typeParameter => typeParameter.Identifier.ValueText,
                 AttributeListSyntax attributeList when attributeList.Attributes.Count == 1
-                  => attributeList.Attributes[0].Name.ToString(),
+                    => attributeList.Attributes[0].Name.ToString(),
                 AttributeSyntax attribute => attribute.Name.ToString(),
                 _ => string.Empty
             };
@@ -2348,68 +2355,68 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return declaration switch
             {
                 BaseTypeDeclarationSyntax typeDeclaration
-                  => ReplaceWithTrivia(declaration, typeDeclaration.Identifier, id),
+                    => ReplaceWithTrivia(declaration, typeDeclaration.Identifier, id),
                 DelegateDeclarationSyntax delegateDeclaration
-                  => ReplaceWithTrivia(declaration, delegateDeclaration.Identifier, id),
+                    => ReplaceWithTrivia(declaration, delegateDeclaration.Identifier, id),
                 MethodDeclarationSyntax methodDeclaration
-                  => ReplaceWithTrivia(declaration, methodDeclaration.Identifier, id),
+                    => ReplaceWithTrivia(declaration, methodDeclaration.Identifier, id),
 
                 BaseFieldDeclarationSyntax fieldDeclaration
                     when fieldDeclaration.Declaration.Variables.Count == 1
-                  => ReplaceWithTrivia(
-                      declaration,
-                      fieldDeclaration.Declaration.Variables[0].Identifier,
-                      id
-                  ),
+                    => ReplaceWithTrivia(
+                        declaration,
+                        fieldDeclaration.Declaration.Variables[0].Identifier,
+                        id
+                    ),
 
                 PropertyDeclarationSyntax propertyDeclaration
-                  => ReplaceWithTrivia(declaration, propertyDeclaration.Identifier, id),
+                    => ReplaceWithTrivia(declaration, propertyDeclaration.Identifier, id),
                 EnumMemberDeclarationSyntax enumMemberDeclaration
-                  => ReplaceWithTrivia(declaration, enumMemberDeclaration.Identifier, id),
+                    => ReplaceWithTrivia(declaration, enumMemberDeclaration.Identifier, id),
                 EventDeclarationSyntax eventDeclaration
-                  => ReplaceWithTrivia(declaration, eventDeclaration.Identifier, id),
+                    => ReplaceWithTrivia(declaration, eventDeclaration.Identifier, id),
                 BaseNamespaceDeclarationSyntax namespaceDeclaration
-                  => ReplaceWithTrivia(
-                      declaration,
-                      namespaceDeclaration.Name,
-                      this.DottedName(name)
-                  ),
+                    => ReplaceWithTrivia(
+                        declaration,
+                        namespaceDeclaration.Name,
+                        this.DottedName(name)
+                    ),
                 UsingDirectiveSyntax usingDeclaration
-                  => ReplaceWithTrivia(declaration, usingDeclaration.Name, this.DottedName(name)),
+                    => ReplaceWithTrivia(declaration, usingDeclaration.Name, this.DottedName(name)),
                 ParameterSyntax parameter
-                  => ReplaceWithTrivia(declaration, parameter.Identifier, id),
+                    => ReplaceWithTrivia(declaration, parameter.Identifier, id),
 
                 LocalDeclarationStatementSyntax localDeclaration
                     when localDeclaration.Declaration.Variables.Count == 1
-                  => ReplaceWithTrivia(
-                      declaration,
-                      localDeclaration.Declaration.Variables[0].Identifier,
-                      id
-                  ),
+                    => ReplaceWithTrivia(
+                        declaration,
+                        localDeclaration.Declaration.Variables[0].Identifier,
+                        id
+                    ),
 
                 TypeParameterSyntax typeParameter
-                  => ReplaceWithTrivia(declaration, typeParameter.Identifier, id),
+                    => ReplaceWithTrivia(declaration, typeParameter.Identifier, id),
 
                 AttributeListSyntax attributeList when attributeList.Attributes.Count == 1
-                  => ReplaceWithTrivia(
-                      declaration,
-                      attributeList.Attributes[0].Name,
-                      this.DottedName(name)
-                  ),
+                    => ReplaceWithTrivia(
+                        declaration,
+                        attributeList.Attributes[0].Name,
+                        this.DottedName(name)
+                    ),
 
                 AttributeSyntax attribute
-                  => ReplaceWithTrivia(declaration, attribute.Name, this.DottedName(name)),
+                    => ReplaceWithTrivia(declaration, attribute.Name, this.DottedName(name)),
 
                 VariableDeclarationSyntax variableDeclaration
                     when variableDeclaration.Variables.Count == 1
-                  => ReplaceWithTrivia(
-                      declaration,
-                      variableDeclaration.Variables[0].Identifier,
-                      id
-                  ),
+                    => ReplaceWithTrivia(
+                        declaration,
+                        variableDeclaration.Variables[0].Identifier,
+                        id
+                    ),
 
                 VariableDeclaratorSyntax variableDeclarator
-                  => ReplaceWithTrivia(declaration, variableDeclarator.Identifier, id),
+                    => ReplaceWithTrivia(declaration, variableDeclarator.Identifier, id),
                 _ => declaration
             };
         }
@@ -2462,34 +2469,34 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.DelegateDeclaration
-                  => ((DelegateDeclarationSyntax)declaration).WithReturnType((TypeSyntax)type),
+                    => ((DelegateDeclarationSyntax)declaration).WithReturnType((TypeSyntax)type),
                 SyntaxKind.MethodDeclaration
-                  => ((MethodDeclarationSyntax)declaration).WithReturnType((TypeSyntax)type),
+                    => ((MethodDeclarationSyntax)declaration).WithReturnType((TypeSyntax)type),
                 SyntaxKind.FieldDeclaration
-                  => ((FieldDeclarationSyntax)declaration).WithDeclaration(
-                      ((FieldDeclarationSyntax)declaration).Declaration.WithType((TypeSyntax)type)
-                  ),
+                    => ((FieldDeclarationSyntax)declaration).WithDeclaration(
+                        ((FieldDeclarationSyntax)declaration).Declaration.WithType((TypeSyntax)type)
+                    ),
                 SyntaxKind.PropertyDeclaration
-                  => ((PropertyDeclarationSyntax)declaration).WithType((TypeSyntax)type),
+                    => ((PropertyDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.IndexerDeclaration
-                  => ((IndexerDeclarationSyntax)declaration).WithType((TypeSyntax)type),
+                    => ((IndexerDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.EventFieldDeclaration
-                  => ((EventFieldDeclarationSyntax)declaration).WithDeclaration(
-                      ((EventFieldDeclarationSyntax)declaration).Declaration.WithType(
-                          (TypeSyntax)type
-                      )
-                  ),
+                    => ((EventFieldDeclarationSyntax)declaration).WithDeclaration(
+                        ((EventFieldDeclarationSyntax)declaration).Declaration.WithType(
+                            (TypeSyntax)type
+                        )
+                    ),
                 SyntaxKind.EventDeclaration
-                  => ((EventDeclarationSyntax)declaration).WithType((TypeSyntax)type),
+                    => ((EventDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.Parameter => ((ParameterSyntax)declaration).WithType((TypeSyntax)type),
                 SyntaxKind.LocalDeclarationStatement
-                  => ((LocalDeclarationStatementSyntax)declaration).WithDeclaration(
-                      ((LocalDeclarationStatementSyntax)declaration).Declaration.WithType(
-                          (TypeSyntax)type
-                      )
-                  ),
+                    => ((LocalDeclarationStatementSyntax)declaration).WithDeclaration(
+                        ((LocalDeclarationStatementSyntax)declaration).Declaration.WithType(
+                            (TypeSyntax)type
+                        )
+                    ),
                 SyntaxKind.VariableDeclaration
-                  => ((VariableDeclarationSyntax)declaration).WithType((TypeSyntax)type),
+                    => ((VariableDeclarationSyntax)declaration).WithType((TypeSyntax)type),
                 _ => declaration,
             };
 
@@ -2563,9 +2570,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 SyntaxKind.FieldDeclaration => ((FieldDeclarationSyntax)declaration).Declaration,
                 SyntaxKind.EventFieldDeclaration
-                  => ((EventFieldDeclarationSyntax)declaration).Declaration,
+                    => ((EventFieldDeclarationSyntax)declaration).Declaration,
                 SyntaxKind.LocalDeclarationStatement
-                  => ((LocalDeclarationStatementSyntax)declaration).Declaration,
+                    => ((LocalDeclarationStatementSyntax)declaration).Declaration,
                 _ => null,
             };
 
@@ -2576,11 +2583,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.FieldDeclaration
-                  => ((FieldDeclarationSyntax)declaration).WithDeclaration(variables),
+                    => ((FieldDeclarationSyntax)declaration).WithDeclaration(variables),
                 SyntaxKind.EventFieldDeclaration
-                  => ((EventFieldDeclarationSyntax)declaration).WithDeclaration(variables),
+                    => ((EventFieldDeclarationSyntax)declaration).WithDeclaration(variables),
                 SyntaxKind.LocalDeclarationStatement
-                  => ((LocalDeclarationStatementSyntax)declaration).WithDeclaration(variables),
+                    => ((LocalDeclarationStatementSyntax)declaration).WithDeclaration(variables),
                 _ => declaration,
             };
 
@@ -2645,10 +2652,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             var list = declaration.GetParameterList();
             return list != null
-              ? list.Parameters
-              : declaration is SimpleLambdaExpressionSyntax simpleLambda
-                  ? new[] { simpleLambda.Parameter }
-                  : SpecializedCollections.EmptyReadOnlyList<SyntaxNode>();
+                ? list.Parameters
+                : declaration is SimpleLambdaExpressionSyntax simpleLambda
+                    ? new[] { simpleLambda.Parameter }
+                    : SpecializedCollections.EmptyReadOnlyList<SyntaxNode>();
         }
 
         public override SyntaxNode InsertParameters(
@@ -2663,8 +2670,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (currentList == null)
             {
                 currentList = declaration.IsKind(SyntaxKind.IndexerDeclaration)
-                  ? SyntaxFactory.BracketedParameterList()
-                  : SyntaxFactory.ParameterList();
+                    ? SyntaxFactory.BracketedParameterList()
+                    : SyntaxFactory.ParameterList();
             }
 
             var newList = currentList.WithParameters(
@@ -3170,9 +3177,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.PropertyDeclaration
-                  => ((PropertyDeclarationSyntax)declaration).ExpressionBody == null,
+                    => ((PropertyDeclarationSyntax)declaration).ExpressionBody == null,
                 SyntaxKind.IndexerDeclaration
-                  => ((IndexerDeclarationSyntax)declaration).ExpressionBody == null,
+                    => ((IndexerDeclarationSyntax)declaration).ExpressionBody == null,
                 SyntaxKind.EventDeclaration => true,
                 _ => false,
             };
@@ -3184,7 +3191,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration switch
             {
                 BasePropertyDeclarationSyntax baseProperty
-                  => baseProperty.WithAccessorList(accessorList),
+                    => baseProperty.WithAccessorList(accessorList),
                 _ => declaration,
             };
 
@@ -3730,13 +3737,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             declaration.Kind() switch
             {
                 SyntaxKind.FieldDeclaration
-                  => ((FieldDeclarationSyntax)declaration).Declaration.Variables,
+                    => ((FieldDeclarationSyntax)declaration).Declaration.Variables,
                 SyntaxKind.EventFieldDeclaration
-                  => ((EventFieldDeclarationSyntax)declaration).Declaration.Variables,
+                    => ((EventFieldDeclarationSyntax)declaration).Declaration.Variables,
                 SyntaxKind.LocalDeclarationStatement
-                  => ((LocalDeclarationStatementSyntax)declaration).Declaration.Variables,
+                    => ((LocalDeclarationStatementSyntax)declaration).Declaration.Variables,
                 SyntaxKind.VariableDeclaration
-                  => ((VariableDeclarationSyntax)declaration).Variables,
+                    => ((VariableDeclarationSyntax)declaration).Variables,
                 SyntaxKind.AttributeList => ((AttributeListSyntax)declaration).Attributes,
                 _ => SpecializedCollections.EmptyReadOnlyList<SyntaxNode>(),
             };
@@ -3926,8 +3933,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     CreateBlock(trueStatements),
                     SyntaxFactory.ElseClause(
                         falseArray.Count == 1 && falseArray[0] is IfStatementSyntax
-                          ? (StatementSyntax)falseArray[0]
-                          : CreateBlock(falseArray)
+                            ? (StatementSyntax)falseArray[0]
+                            : CreateBlock(falseArray)
                     )
                 );
             }
@@ -4379,35 +4386,35 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             specialType switch
             {
                 SpecialType.System_Boolean
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.BoolKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.BoolKeyword)),
                 SpecialType.System_Byte
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ByteKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ByteKeyword)),
                 SpecialType.System_Char
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.CharKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.CharKeyword)),
                 SpecialType.System_Decimal
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.DecimalKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.DecimalKeyword)),
                 SpecialType.System_Double
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.DoubleKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.DoubleKeyword)),
                 SpecialType.System_Int16
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ShortKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ShortKeyword)),
                 SpecialType.System_Int32
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword)),
                 SpecialType.System_Int64
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.LongKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.LongKeyword)),
                 SpecialType.System_Object
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ObjectKeyword)),
                 SpecialType.System_SByte
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.SByteKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.SByteKeyword)),
                 SpecialType.System_Single
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.FloatKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.FloatKeyword)),
                 SpecialType.System_String
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.StringKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.StringKeyword)),
                 SpecialType.System_UInt16
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.UShortKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.UShortKeyword)),
                 SpecialType.System_UInt32
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.UIntKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.UIntKeyword)),
                 SpecialType.System_UInt64
-                  => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ULongKeyword)),
+                    => SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.ULongKeyword)),
                 _ => throw new NotSupportedException("Unsupported SpecialType"),
             };
 
@@ -4509,11 +4516,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return SyntaxFactory.TryStatement(
                 CreateBlock(tryStatements),
                 catchClauses != null
-                  ? SyntaxFactory.List(catchClauses.Cast<CatchClauseSyntax>())
-                  : default,
+                    ? SyntaxFactory.List(catchClauses.Cast<CatchClauseSyntax>())
+                    : default,
                 finallyStatements != null
-                  ? SyntaxFactory.FinallyClause(CreateBlock(finallyStatements))
-                  : null
+                    ? SyntaxFactory.FinallyClause(CreateBlock(finallyStatements))
+                    : null
             );
         }
 

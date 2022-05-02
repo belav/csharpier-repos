@@ -290,7 +290,7 @@ namespace System.Formats.Cbor
         // Defines order and equality semantics for a key/value encoding range pair up to key encoding
         private sealed class KeyEncodingComparer
             : IComparer<KeyValuePairEncodingRange>,
-              IEqualityComparer<(int Offset, int Length)>
+                IEqualityComparer<(int Offset, int Length)>
         {
             private readonly CborWriter _writer;
 

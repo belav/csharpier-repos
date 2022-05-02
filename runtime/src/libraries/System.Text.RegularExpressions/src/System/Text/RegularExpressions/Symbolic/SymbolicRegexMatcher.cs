@@ -299,8 +299,8 @@ namespace System.Text.RegularExpressions.Symbolic
                     _asciiCharKinds[i] = _builder._solver
                         .And(GetMinterm(i), predicate2)
                         .Equals(_builder._solver.False)
-                      ? 0
-                      : charKind;
+                        ? 0
+                        : charKind;
                 }
             }
         }
@@ -406,7 +406,7 @@ namespace System.Text.RegularExpressions.Symbolic
                 c == '\n' && i == input.Length - 1 && sourceState.StartsWithLineAnchor
                     ? minterms.Length
                     : // mintermId = minterms.Length represents \Z (last \n)
-                      _partitions.GetMintermID(c);
+                    _partitions.GetMintermID(c);
 
             TSetType minterm =
                 (uint)mintermId < minterms.Length ? minterms[mintermId] : _builder._solver.False; // minterm=False represents \Z
@@ -649,19 +649,19 @@ namespace System.Text.RegularExpressions.Symbolic
                 int j = Math.Min(exclusiveEnd, i + AntimirovThresholdLeeway);
                 bool done = _builder._antimirov
                     ? FindEndPositionDeltas<AntimirovTransition>(
-                          input,
-                          ref i,
-                          j,
-                          ref state,
-                          ref i_end
-                      )
+                        input,
+                        ref i,
+                        j,
+                        ref state,
+                        ref i_end
+                    )
                     : FindEndPositionDeltas<BrzozowskiTransition>(
-                          input,
-                          ref i,
-                          j,
-                          ref state,
-                          ref i_end
-                      );
+                        input,
+                        ref i,
+                        j,
+                        ref state,
+                        ref i_end
+                    );
 
                 if (done)
                 {
@@ -754,19 +754,19 @@ namespace System.Text.RegularExpressions.Symbolic
                 int j = Math.Max(match_start_boundary, i - AntimirovThresholdLeeway);
                 bool done = _builder._antimirov
                     ? FindStartPositionDeltas<AntimirovTransition>(
-                          input,
-                          ref i,
-                          j,
-                          ref q,
-                          ref last_start
-                      )
+                        input,
+                        ref i,
+                        j,
+                        ref q,
+                        ref last_start
+                    )
                     : FindStartPositionDeltas<BrzozowskiTransition>(
-                          input,
-                          ref i,
-                          j,
-                          ref q,
-                          ref last_start
-                      );
+                        input,
+                        ref i,
+                        j,
+                        ref q,
+                        ref last_start
+                    );
 
                 if (done)
                 {
@@ -925,21 +925,21 @@ namespace System.Text.RegularExpressions.Symbolic
                 int j = Math.Min(k, i + AntimirovThresholdLeeway);
                 bool done = _builder._antimirov
                     ? FindFinalStatePositionDeltas<AntimirovTransition>(
-                          input,
-                          j,
-                          ref i,
-                          ref q,
-                          ref watchdog,
-                          out result
-                      )
+                        input,
+                        j,
+                        ref i,
+                        ref q,
+                        ref watchdog,
+                        out result
+                    )
                     : FindFinalStatePositionDeltas<BrzozowskiTransition>(
-                          input,
-                          j,
-                          ref i,
-                          ref q,
-                          ref watchdog,
-                          out result
-                      );
+                        input,
+                        j,
+                        ref i,
+                        ref q,
+                        ref watchdog,
+                        out result
+                    );
 
                 if (done)
                 {
@@ -1012,22 +1012,22 @@ namespace System.Text.RegularExpressions.Symbolic
             if (nextChar == '\n')
             {
                 return _builder._newLinePredicate.Equals(_builder._solver.False)
-                  ? 0
-                  : // ignore \n
+                    ? 0
+                    : // ignore \n
                     i == 0 || i == input.Length - 1
-                      ? CharKind.NewLineS
-                      : // very first or very last \n. Detection of very first \n is needed for rev(\Z).
+                        ? CharKind.NewLineS
+                        : // very first or very last \n. Detection of very first \n is needed for rev(\Z).
                         CharKind.Newline;
             }
 
             uint[] asciiCharKinds = _asciiCharKinds;
             return nextChar < asciiCharKinds.Length
-              ? asciiCharKinds[nextChar]
-              : _builder._solver
+                ? asciiCharKinds[nextChar]
+                : _builder._solver
                     .And(GetMinterm(nextChar), _builder._wordLetterPredicateForAnchors)
                     .Equals(_builder._solver.False)
-                  ? 0
-                  : //apply the wordletter predicate to compute the kind of the next character
+                    ? 0
+                    : //apply the wordletter predicate to compute the kind of the next character
                     CharKind.WordLetter;
         }
 

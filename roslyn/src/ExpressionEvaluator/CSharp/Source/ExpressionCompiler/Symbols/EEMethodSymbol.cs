@@ -202,8 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     (oldDisplayClassInstanceFromLocal == null)
                         ? oldDisplayClassInstance.ToOtherMethod(this, this.TypeMap)
                         : new DisplayClassInstanceFromLocal(
-                              (EELocalSymbol)localsMap[oldDisplayClassInstanceFromLocal.Local]
-                          );
+                            (EELocalSymbol)localsMap[oldDisplayClassInstanceFromLocal.Local]
+                        );
 
                 variable = variable.SubstituteFields(newDisplayClassInstance, this.TypeMap);
                 displayClassVariables.Add(pair.Key, variable);

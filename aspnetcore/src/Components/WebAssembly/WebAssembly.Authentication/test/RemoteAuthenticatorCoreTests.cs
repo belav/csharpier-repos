@@ -909,8 +909,8 @@ public class RemoteAuthenticatorCoreTests
 
         protected override void NavigateToCore(string uri, bool forceLoad) =>
             Uri = System.Uri.IsWellFormedUriString(uri, UriKind.Absolute)
-              ? uri
-              : new Uri(new Uri(BaseUri), uri).ToString();
+                ? uri
+                : new Uri(new Uri(BaseUri), uri).ToString();
     }
 
     private class TestSignOutSessionStateManager : SignOutSessionStateManager
@@ -983,10 +983,10 @@ public class RemoteAuthenticatorCoreTests
 
     private class TestRemoteAuthenticationService
         : RemoteAuthenticationService<
-              RemoteAuthenticationState,
-              RemoteUserAccount,
-              OidcProviderOptions
-          >
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >
     {
         public TestRemoteAuthenticationService(
             IJSRuntime jsRuntime,

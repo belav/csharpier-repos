@@ -22,9 +22,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
     [ProvidesMethod(VSInternalMethods.WorkspacePullDiagnosticName)]
     internal class WorkspacePullDiagnosticHandler
         : AbstractPullDiagnosticHandler<
-              VSInternalWorkspaceDiagnosticsParams,
-              VSInternalWorkspaceDiagnosticReport
-          >
+            VSInternalWorkspaceDiagnosticsParams,
+            VSInternalWorkspaceDiagnosticReport
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

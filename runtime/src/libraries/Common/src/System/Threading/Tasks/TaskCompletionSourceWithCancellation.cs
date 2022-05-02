@@ -51,8 +51,8 @@ namespace System.Threading.Tasks
         )
         {
             return async
-              ? WaitWithCancellationAsync(cancellationToken)
-              : new ValueTask<T>(WaitWithCancellation(cancellationToken));
+                ? WaitWithCancellationAsync(cancellationToken)
+                : new ValueTask<T>(WaitWithCancellation(cancellationToken));
         }
     }
 }

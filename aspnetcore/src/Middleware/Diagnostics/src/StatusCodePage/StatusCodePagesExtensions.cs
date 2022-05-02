@@ -264,10 +264,10 @@ public static class StatusCodePagesExtensions
                 queryFormat == null
                     ? null
                     : string.Format(
-                          CultureInfo.InvariantCulture,
-                          queryFormat,
-                          context.HttpContext.Response.StatusCode
-                      );
+                        CultureInfo.InvariantCulture,
+                        queryFormat,
+                        context.HttpContext.Response.StatusCode
+                    );
             var newQueryString =
                 queryFormat == null ? QueryString.Empty : new QueryString(formatedQueryString);
 

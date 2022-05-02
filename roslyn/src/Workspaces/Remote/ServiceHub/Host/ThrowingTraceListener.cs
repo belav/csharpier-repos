@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 (string.IsNullOrEmpty(message) ? "Assertion failed" : message)
                     + (
                         string.IsNullOrEmpty(detailMessage)
-                          ? ""
-                          : Environment.NewLine + detailMessage
+                            ? ""
+                            : Environment.NewLine + detailMessage
                     )
             );
         }

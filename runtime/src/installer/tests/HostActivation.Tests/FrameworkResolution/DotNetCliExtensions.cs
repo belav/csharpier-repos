@@ -36,8 +36,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             {
                 string path = Path.Combine(_dotnet.BinPath, "shared", name);
                 IEnumerable<string> versions = Directory.Exists(path)
-                  ? Directory.GetDirectories(path)
-                  : Enumerable.Empty<string>();
+                    ? Directory.GetDirectories(path)
+                    : Enumerable.Empty<string>();
 
                 if (version == null)
                 {

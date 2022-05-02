@@ -119,8 +119,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             new CSharpCompilationOptions(
                 OutputKind.DynamicallyLinkedLibrary,
                 nullableContextOptions: NullableReferenceTypes
-                  ? NullableContextOptions.Enable
-                  : NullableContextOptions.Disable,
+                    ? NullableContextOptions.Enable
+                    : NullableContextOptions.Disable,
                 reportSuppressedDiagnostics: false,
                 generalDiagnosticOption: ReportDiagnostic.Error,
                 specificDiagnosticOptions: new Dictionary<string, ReportDiagnostic>()

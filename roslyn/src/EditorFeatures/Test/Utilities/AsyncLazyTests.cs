@@ -104,15 +104,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var lazy = producerAsync
                 ? new AsyncLazy<object>(asynchronousComputeFunction, cacheResult: true)
                 : new AsyncLazy<object>(
-                      asynchronousComputeFunction,
-                      synchronousComputeFunction,
-                      cacheResult: true
-                  );
+                    asynchronousComputeFunction,
+                    synchronousComputeFunction,
+                    cacheResult: true
+                );
 
             var actual = consumerAsync
                 ? await Assert.ThrowsAsync<ArgumentException>(
-                      async () => await lazy.GetValueAsync(CancellationToken.None)
-                  )
+                    async () => await lazy.GetValueAsync(CancellationToken.None)
+                )
                 : Assert.Throws<ArgumentException>(() => lazy.GetValue(CancellationToken.None));
 
             Assert.Same(exception, actual);

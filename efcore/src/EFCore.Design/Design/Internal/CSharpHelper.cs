@@ -320,8 +320,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             return @namespace.Length > 0
-              ? @namespace.Remove(@namespace.Length - 1, 1).ToString()
-              : "_";
+                ? @namespace.Remove(@namespace.Length - 1, 1).ToString()
+                : "_";
         }
 
         /// <summary>
@@ -404,10 +404,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 value.Ticks % 10000 == 0
                     ? ""
                     : string.Format(
-                          CultureInfo.InvariantCulture,
-                          ".AddTicks({0})",
-                          value.Ticks % 10000
-                      )
+                        CultureInfo.InvariantCulture,
+                        ".AddTicks({0})",
+                        value.Ticks % 10000
+                    )
             );
 
         /// <summary>
@@ -456,8 +456,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
 
             return !literal.Contains("E") && !literal.Contains("e") && !literal.Contains(".")
-              ? literal + ".0"
-              : literal;
+                ? literal + ".0"
+                : literal;
         }
 
         /// <summary>
@@ -521,20 +521,20 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var result =
                 value.Millisecond == 0
                     ? string.Format(
-                          CultureInfo.InvariantCulture,
-                          "new TimeOnly({0}, {1}, {2})",
-                          value.Hour,
-                          value.Minute,
-                          value.Second
-                      )
+                        CultureInfo.InvariantCulture,
+                        "new TimeOnly({0}, {1}, {2})",
+                        value.Hour,
+                        value.Minute,
+                        value.Second
+                    )
                     : string.Format(
-                          CultureInfo.InvariantCulture,
-                          "new TimeOnly({0}, {1}, {2}, {3})",
-                          value.Hour,
-                          value.Minute,
-                          value.Second,
-                          value.Millisecond
-                      );
+                        CultureInfo.InvariantCulture,
+                        "new TimeOnly({0}, {1}, {2}, {3})",
+                        value.Hour,
+                        value.Minute,
+                        value.Second,
+                        value.Millisecond
+                    );
 
             if (value.Ticks % 10000 > 0)
             {
@@ -557,14 +557,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         public virtual string Literal(TimeSpan value) =>
             value.Ticks % 10000 == 0
                 ? string.Format(
-                      CultureInfo.InvariantCulture,
-                      "new TimeSpan({0}, {1}, {2}, {3}, {4})",
-                      value.Days,
-                      value.Hours,
-                      value.Minutes,
-                      value.Seconds,
-                      value.Milliseconds
-                  )
+                    CultureInfo.InvariantCulture,
+                    "new TimeSpan({0}, {1}, {2}, {3}, {4})",
+                    value.Days,
+                    value.Hours,
+                    value.Minutes,
+                    value.Seconds,
+                    value.Milliseconds
+                )
                 : string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})", value.Ticks);
 
         /// <summary>
@@ -767,8 +767,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var name = Enum.GetName(type, value);
 
             return name == null
-              ? GetCompositeEnumValue(type, value)
-              : GetSimpleEnumValue(type, name);
+                ? GetCompositeEnumValue(type, value)
+                : GetSimpleEnumValue(type, name);
         }
 
         /// <summary>
@@ -944,8 +944,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
                     builder.Append(
                         simple && value?.GetType()?.IsNumeric() == true
-                          ? value
-                          : UnknownLiteral(value)
+                            ? value
+                            : UnknownLiteral(value)
                     );
                     return true;
                 }

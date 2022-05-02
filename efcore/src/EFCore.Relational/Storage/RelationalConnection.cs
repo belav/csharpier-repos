@@ -42,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
     /// </remarks>
     public abstract class RelationalConnection
         : IRelationalConnection,
-          ITransactionEnlistmentManager
+            ITransactionEnlistmentManager
     {
         private string? _connectionString;
         private bool _connectionOwned;
@@ -72,8 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             _defaultCommandTimeout = _commandTimeout = relationalOptions.CommandTimeout;
 
             _connectionString = string.IsNullOrWhiteSpace(relationalOptions.ConnectionString)
-              ? null
-              : dependencies.ConnectionStringResolver.ResolveConnectionString(
+                ? null
+                : dependencies.ConnectionStringResolver.ResolveConnectionString(
                     relationalOptions.ConnectionString
                 );
 
@@ -415,7 +415,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var dbTransaction = interceptionResult.HasResult
                 ? interceptionResult.Result
                 : await ConnectionBeginTransactionAsync(isolationLevel, cancellationToken)
-                      .ConfigureAwait(false);
+                    .ConfigureAwait(false);
 
             dbTransaction = await Dependencies.TransactionLogger
                 .TransactionStartedAsync(

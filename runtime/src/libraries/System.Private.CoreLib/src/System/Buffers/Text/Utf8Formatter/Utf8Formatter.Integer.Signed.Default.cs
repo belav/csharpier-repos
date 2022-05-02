@@ -41,12 +41,12 @@ namespace System.Buffers.Text
                     )
                     {
                         return value < 0
-                          ? TryFormatInt64MoreThanNegativeBillionMaxUInt(
+                            ? TryFormatInt64MoreThanNegativeBillionMaxUInt(
                                 -value,
                                 destination,
                                 out bytesWritten
                             )
-                          : TryFormatUInt64LessThanBillionMaxUInt(
+                            : TryFormatUInt64LessThanBillionMaxUInt(
                                 (ulong)value,
                                 destination,
                                 out bytesWritten
@@ -55,12 +55,12 @@ namespace System.Buffers.Text
                     else
                     {
                         return value < 0
-                          ? TryFormatInt64LessThanNegativeBillionMaxUInt(
+                            ? TryFormatInt64LessThanNegativeBillionMaxUInt(
                                 -value,
                                 destination,
                                 out bytesWritten
                             )
-                          : TryFormatUInt64MoreThanBillionMaxUInt(
+                            : TryFormatUInt64MoreThanBillionMaxUInt(
                                 (ulong)value,
                                 destination,
                                 out bytesWritten

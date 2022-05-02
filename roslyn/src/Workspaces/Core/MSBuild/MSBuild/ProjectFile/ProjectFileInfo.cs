@@ -90,8 +90,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         public override string ToString() =>
             RoslynString.IsNullOrWhiteSpace(TargetFramework)
-              ? FilePath ?? string.Empty
-              : $"{FilePath} ({TargetFramework})";
+                ? FilePath ?? string.Empty
+                : $"{FilePath} ({TargetFramework})";
 
         private ProjectFileInfo(
             bool isEmpty,

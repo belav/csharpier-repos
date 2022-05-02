@@ -74,8 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             }
 
             return changed
-              ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
-              : this;
+                ? new TableValuedFunctionExpression(Alias, StoreFunction, arguments)
+                : this;
         }
 
         /// <summary>

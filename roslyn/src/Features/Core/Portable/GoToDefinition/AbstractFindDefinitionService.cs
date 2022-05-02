@@ -37,13 +37,13 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
 
             // Try to compute source definitions from symbol.
             return symbol != null
-              ? NavigableItemFactory.GetItemsFromPreferredSourceLocations(
+                ? NavigableItemFactory.GetItemsFromPreferredSourceLocations(
                     document.Project.Solution,
                     symbol,
                     displayTaggedParts: FindUsagesHelpers.GetDisplayParts(symbol),
                     cancellationToken: cancellationToken
                 )
-              : ImmutableArray<INavigableItem>.Empty;
+                : ImmutableArray<INavigableItem>.Empty;
         }
     }
 }

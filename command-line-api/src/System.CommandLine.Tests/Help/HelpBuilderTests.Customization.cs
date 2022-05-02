@@ -79,8 +79,8 @@ namespace System.CommandLine.Tests.Help
                     option,
                     secondColumnText: parseResult =>
                         parseResult.CommandResult.Command.Equals(commandA)
-                          ? optionADescription
-                          : optionBDescription
+                            ? optionADescription
+                            : optionBDescription
                 );
 
                 var parser = new CommandLineBuilder(command)
@@ -112,8 +112,8 @@ namespace System.CommandLine.Tests.Help
                     option,
                     firstColumnText: parseResult =>
                         parseResult.CommandResult.Command.Equals(commandA)
-                          ? optionAFirstColumnText
-                          : optionBFirstColumnText
+                            ? optionAFirstColumnText
+                            : optionBFirstColumnText
                 );
                 var parser = new CommandLineBuilder(command)
                     .UseDefaults()

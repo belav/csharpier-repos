@@ -392,8 +392,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             if (extensionExpression is IncludeExpression includeExpression)
             {
                 return _indexBasedBinding
-                  ? base.VisitExtension(includeExpression)
-                  : QueryCompilationContext.NotTranslatedExpression;
+                    ? base.VisitExtension(includeExpression)
+                    : QueryCompilationContext.NotTranslatedExpression;
             }
 
             throw new InvalidOperationException(
@@ -421,8 +421,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             var expression = Visit(memberExpression.Expression);
             Expression updatedMemberExpression = memberExpression.Update(
                 expression != null
-                  ? MatchTypes(expression, memberExpression.Expression!.Type)
-                  : expression
+                    ? MatchTypes(expression, memberExpression.Expression!.Type)
+                    : expression
             );
 
             if (expression?.Type.IsNullableValueType() == true)
@@ -637,8 +637,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     || unaryExpression.NodeType == ExpressionType.ConvertChecked
                 )
                 && unaryExpression.Type == operand.Type
-              ? operand
-              : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
+                ? operand
+                : unaryExpression.Update(MatchTypes(operand, unaryExpression.Operand.Type));
         }
 
         private static Expression MatchTypes(Expression expression, Type targetType)

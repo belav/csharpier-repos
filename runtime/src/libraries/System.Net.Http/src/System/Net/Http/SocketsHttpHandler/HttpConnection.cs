@@ -1376,8 +1376,8 @@ namespace System.Net.Http
                 string headerValue = descriptor.GetHeaderValue(value, valueEncoding);
                 response.TrailingHeaders.TryAddWithoutValidation(
                     (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                      ? descriptor.AsCustomHeader()
-                      : descriptor,
+                        ? descriptor.AsCustomHeader()
+                        : descriptor,
                     headerValue
                 );
             }
@@ -1396,8 +1396,8 @@ namespace System.Net.Http
                 );
                 response.Headers.TryAddWithoutValidation(
                     (descriptor.HeaderType & HttpHeaderType.Request) == HttpHeaderType.Request
-                      ? descriptor.AsCustomHeader()
-                      : descriptor,
+                        ? descriptor.AsCustomHeader()
+                        : descriptor,
                     headerValue
                 );
             }
@@ -1970,14 +1970,10 @@ namespace System.Net.Http
 
             int bytesRead = async
                 ? await _stream
-                      .ReadAsync(
-                          new Memory<byte>(
-                              _readBuffer,
-                              _readLength,
-                              _readBuffer.Length - _readLength
-                          )
-                      )
-                      .ConfigureAwait(false)
+                    .ReadAsync(
+                        new Memory<byte>(_readBuffer, _readLength, _readBuffer.Length - _readLength)
+                    )
+                    .ConfigureAwait(false)
                 : _stream.Read(_readBuffer, _readLength, _readBuffer.Length - _readLength);
 
             if (NetEventSource.Log.IsEnabled())
@@ -2109,8 +2105,8 @@ namespace System.Net.Http
             // is larger than the internal buffer, there's no point going through the internal
             // buffer, so just do an unbuffered read.
             return destination.Length >= _readBuffer.Length
-              ? ReadAsync(destination)
-              : ReadBufferedAsyncCore(destination);
+                ? ReadAsync(destination)
+                : ReadBufferedAsyncCore(destination);
         }
 
         private async ValueTask<int> ReadBufferedAsyncCore(Memory<byte> destination)

@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 #pragma warning disable CS0618 // Type or member is obsolete
 internal class DefaultRazorCodeGenerationOptionsFeature
     : RazorEngineFeatureBase,
-      IRazorCodeGenerationOptionsFeature
+        IRazorCodeGenerationOptionsFeature
 #pragma warning restore CS0618 // Type or member is obsolete
 {
     private readonly bool _designTime;
@@ -29,8 +29,8 @@ internal class DefaultRazorCodeGenerationOptionsFeature
     public RazorCodeGenerationOptions GetOptions()
     {
         return _designTime
-          ? RazorCodeGenerationOptions.CreateDesignTime(ConfigureOptions)
-          : RazorCodeGenerationOptions.Create(ConfigureOptions);
+            ? RazorCodeGenerationOptions.CreateDesignTime(ConfigureOptions)
+            : RazorCodeGenerationOptions.Create(ConfigureOptions);
     }
 
     private void ConfigureOptions(RazorCodeGenerationOptionsBuilder builder)

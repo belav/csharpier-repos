@@ -363,18 +363,18 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                         message =
                             argumentBindingException != null
                                 ? new InvocationBindingFailureMessage(
-                                      invocationId,
-                                      target,
-                                      argumentBindingException
-                                  )
+                                    invocationId,
+                                    target,
+                                    argumentBindingException
+                                )
                                 : BindInvocationMessage(
-                                      invocationId,
-                                      target,
-                                      arguments,
-                                      hasArguments,
-                                      streamIds,
-                                      binder
-                                  );
+                                    invocationId,
+                                    target,
+                                    arguments,
+                                    hasArguments,
+                                    streamIds,
+                                    binder
+                                );
                     }
                     break;
                 case HubProtocolConstants.StreamInvocationMessageType:
@@ -404,18 +404,18 @@ public class NewtonsoftJsonHubProtocol : IHubProtocol
                         message =
                             argumentBindingException != null
                                 ? new InvocationBindingFailureMessage(
-                                      invocationId,
-                                      target,
-                                      argumentBindingException
-                                  )
+                                    invocationId,
+                                    target,
+                                    argumentBindingException
+                                )
                                 : BindStreamInvocationMessage(
-                                      invocationId,
-                                      target,
-                                      arguments,
-                                      hasArguments,
-                                      streamIds,
-                                      binder
-                                  );
+                                    invocationId,
+                                    target,
+                                    arguments,
+                                    hasArguments,
+                                    streamIds,
+                                    binder
+                                );
                     }
                     break;
                 case HubProtocolConstants.StreamItemMessageType:

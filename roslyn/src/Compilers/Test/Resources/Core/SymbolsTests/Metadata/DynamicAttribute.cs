@@ -36,9 +36,9 @@ public class Outer3
 
 public class Derived<T>
     : Outer<dynamic>.Inner<
-          Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
-          dynamic
-      >.InnerInner<dynamic> where T : Derived<T>
+        Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
+        dynamic
+    >.InnerInner<dynamic> where T : Derived<T>
 {
     public static dynamic field1;
     public static dynamic[] field2;
@@ -114,12 +114,12 @@ public class Derived<T>
 
 public unsafe class UnsafeClass<T>
     : Base2<
-          int*[],
-          Outer<dynamic>.Inner<
-              Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[],
-              dynamic
-          >.InnerInner<dynamic>[][]
-      > { }
+        int*[],
+        Outer<dynamic>.Inner<
+            Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int*[][]>[],
+            dynamic
+        >.InnerInner<dynamic>[][]
+    > { }
 
 public struct Struct
 {

@@ -152,7 +152,7 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal sealed class FlowAnonymousFunctionOperation
         : Operation,
-          IFlowAnonymousFunctionOperation
+            IFlowAnonymousFunctionOperation
     {
         public readonly ControlFlowGraphBuilder.Context Context;
         public readonly IAnonymousFunctionOperation Original;
@@ -271,7 +271,7 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal sealed partial class DynamicObjectCreationOperation
         : HasDynamicArgumentsExpression,
-          IDynamicObjectCreationOperation
+            IDynamicObjectCreationOperation
     {
         public DynamicObjectCreationOperation(
             IObjectOrCollectionInitializerOperation? initializer,
@@ -355,7 +355,7 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal sealed partial class DynamicInvocationOperation
         : HasDynamicArgumentsExpression,
-          IDynamicInvocationOperation
+            IDynamicInvocationOperation
     {
         public DynamicInvocationOperation(
             IOperation operation,
@@ -439,7 +439,7 @@ namespace Microsoft.CodeAnalysis.Operations
 
     internal sealed partial class DynamicIndexerAccessOperation
         : HasDynamicArgumentsExpression,
-          IDynamicIndexerAccessOperation
+            IDynamicIndexerAccessOperation
     {
         public DynamicIndexerAccessOperation(
             IOperation operation,

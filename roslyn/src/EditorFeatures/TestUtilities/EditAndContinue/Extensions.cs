@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         d.Span == default ? null : newSource.ToString(d.Span),
                         d.Arguments,
                         firstLine: includeFirstLines
-                          ? newSource.Lines.GetLineFromPosition(d.Span.Start).ToString().Trim()
-                          : null
+                            ? newSource.Lines.GetLineFromPosition(d.Span.Start).ToString().Trim()
+                            : null
                     )
             );
         }

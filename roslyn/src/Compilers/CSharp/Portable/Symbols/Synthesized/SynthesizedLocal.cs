@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return (_syntaxOpt == null)
-                  ? ImmutableArray<Location>.Empty
-                  : ImmutableArray.Create(_syntaxOpt.GetLocation());
+                    ? ImmutableArray<Location>.Empty
+                    : ImmutableArray.Create(_syntaxOpt.GetLocation());
             }
         }
 
@@ -142,8 +142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return (_syntaxOpt == null)
-                  ? ImmutableArray<SyntaxReference>.Empty
-                  : ImmutableArray.Create(_syntaxOpt.GetReference());
+                    ? ImmutableArray<SyntaxReference>.Empty
+                    : ImmutableArray.Create(_syntaxOpt.GetReference());
             }
         }
 

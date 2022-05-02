@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
     {
         private class Tagger
             : ForegroundThreadAffinitizedObject,
-              IAccurateTagger<IClassificationTag>,
-              IDisposable
+                IAccurateTagger<IClassificationTag>,
+                IDisposable
         {
             private readonly CopyPasteAndPrintingClassificationBufferTaggerProvider _owner;
             private readonly ITextBuffer _subjectBuffer;
@@ -166,8 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 }
 
                 return cachedTags == null
-                  ? Array.Empty<ITagSpan<IClassificationTag>>()
-                  : cachedTags.GetIntersectingTagSpans(spans);
+                    ? Array.Empty<ITagSpan<IClassificationTag>>()
+                    : cachedTags.GetIntersectingTagSpans(spans);
             }
 
             private void GetCachedInfo(
@@ -192,14 +192,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 var classificationService =
                     documentSpan.Document.GetLanguageService<IClassificationService>();
                 return classificationService != null
-                  ? SemanticClassificationUtilities.ProduceTagsAsync(
+                    ? SemanticClassificationUtilities.ProduceTagsAsync(
                         context,
                         documentSpan,
                         classificationService,
                         typeMap,
                         cancellationToken
                     )
-                  : Task.CompletedTask;
+                    : Task.CompletedTask;
             }
         }
     }

@@ -133,13 +133,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     ) =>
                         includeStartTokenChange
                             ? GetNewTokenWithModifiedPragma(
-                                  startToken,
-                                  currentDiagnosticSpan,
-                                  add,
-                                  toggle,
-                                  indexOfLeadingPragmaDisableToRemove,
-                                  isStartToken: true
-                              )
+                                startToken,
+                                currentDiagnosticSpan,
+                                add,
+                                toggle,
+                                indexOfLeadingPragmaDisableToRemove,
+                                isStartToken: true
+                            )
                             : startToken;
 
                     SyntaxToken getNewEndToken(
@@ -148,13 +148,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     ) =>
                         includeEndTokenChange
                             ? GetNewTokenWithModifiedPragma(
-                                  endToken,
-                                  currentDiagnosticSpan,
-                                  add,
-                                  toggle,
-                                  indexOfTrailingPragmaEnableToRemove,
-                                  isStartToken: false
-                              )
+                                endToken,
+                                currentDiagnosticSpan,
+                                add,
+                                toggle,
+                                indexOfTrailingPragmaEnableToRemove,
+                                isStartToken: false
+                            )
                             : endToken;
 
                     return await PragmaHelpers
@@ -176,8 +176,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 )
                 {
                     return isStartToken || fixer.IsEndOfFileToken(token)
-                      ? token.LeadingTrivia
-                      : token.TrailingTrivia;
+                        ? token.LeadingTrivia
+                        : token.TrailingTrivia;
                 }
 
                 private static SyntaxToken UpdateTriviaList(
@@ -188,8 +188,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 )
                 {
                     return isStartToken || fixer.IsEndOfFileToken(token)
-                      ? token.WithLeadingTrivia(triviaList)
-                      : token.WithTrailingTrivia(triviaList);
+                        ? token.WithLeadingTrivia(triviaList)
+                        : token.WithTrailingTrivia(triviaList);
                 }
 
                 private static bool CanRemovePragmaTrivia(
@@ -260,8 +260,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 )
                 {
                     return add
-                      ? GetNewTokenWithAddedPragma(token, currentDiagnosticSpan, isStartToken)
-                      : GetNewTokenWithRemovedOrToggledPragma(
+                        ? GetNewTokenWithAddedPragma(token, currentDiagnosticSpan, isStartToken)
+                        : GetNewTokenWithRemovedOrToggledPragma(
                             token,
                             indexOfTriviaToRemoveOrToggle,
                             isStartToken,

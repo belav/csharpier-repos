@@ -23,7 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class InternalForeignKeyBuilder
         : AnnotatableBuilder<ForeignKey, InternalModelBuilder>,
-          IConventionForeignKeyBuilder
+            IConventionForeignKeyBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,15 +47,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             pointsToPrincipal
                 ? HasNavigations(
-                      MemberIdentity.Create(name),
-                      navigationToDependent: null,
-                      configurationSource
-                  )
+                    MemberIdentity.Create(name),
+                    navigationToDependent: null,
+                    configurationSource
+                )
                 : HasNavigations(
-                      navigationToPrincipal: null,
-                      MemberIdentity.Create(name),
-                      configurationSource
-                  );
+                    navigationToPrincipal: null,
+                    MemberIdentity.Create(name),
+                    configurationSource
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,15 +70,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             pointsToPrincipal
                 ? HasNavigations(
-                      MemberIdentity.Create(property),
-                      navigationToDependent: null,
-                      configurationSource
-                  )
+                    MemberIdentity.Create(property),
+                    navigationToDependent: null,
+                    configurationSource
+                )
                 : HasNavigations(
-                      navigationToPrincipal: null,
-                      MemberIdentity.Create(property),
-                      configurationSource
-                  );
+                    navigationToPrincipal: null,
+                    MemberIdentity.Create(property),
+                    configurationSource
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -480,8 +480,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     isUnique: shouldBeUnique,
                     removeCurrent: shouldInvert == true || changeRelatedTypes,
                     principalEndConfigurationSource: shouldInvert != null
-                      ? configurationSource
-                      : null,
+                        ? configurationSource
+                        : null,
                     oldRelationshipInverted: shouldInvert == true
                 );
 
@@ -535,8 +535,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     IsUnique(
                         shouldBeUnique,
                         shouldBeUnique.HasValue
-                          ? configurationSource
-                          : ConfigurationSource.Convention
+                            ? configurationSource
+                            : ConfigurationSource.Convention
                     );
 
                     var navigationProperty = navigationToDependent.Value.MemberInfo;
@@ -590,8 +590,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                             != navigationToPrincipal.Value.Name
                     )
                 )
-              ? null
-              : builder;
+                ? null
+                : builder;
         }
 
         /// <summary>
@@ -616,8 +616,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 null,
                 shouldThrow
             )
-              ? null
-              : navigationProperty;
+                ? null
+                : navigationProperty;
         }
 
         /// <summary>
@@ -673,25 +673,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             pointsToPrincipal
                 ? CanSetNavigations(
-                      navigation,
-                      navigationToDependent: null,
-                      configurationSource,
-                      shouldThrow,
-                      out _,
-                      out shouldBeUnique,
-                      out removeOppositeNavigation,
-                      out removeConflictingNavigations
-                  )
+                    navigation,
+                    navigationToDependent: null,
+                    configurationSource,
+                    shouldThrow,
+                    out _,
+                    out shouldBeUnique,
+                    out removeOppositeNavigation,
+                    out removeConflictingNavigations
+                )
                 : CanSetNavigations(
-                      navigationToPrincipal: null,
-                      navigation,
-                      configurationSource,
-                      shouldThrow,
-                      out _,
-                      out shouldBeUnique,
-                      out removeOppositeNavigation,
-                      out removeConflictingNavigations
-                  );
+                    navigationToPrincipal: null,
+                    navigation,
+                    configurationSource,
+                    shouldThrow,
+                    out _,
+                    out shouldBeUnique,
+                    out removeOppositeNavigation,
+                    out removeConflictingNavigations
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1062,28 +1062,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ) =>
             pointsToPrincipal
                 ? Metadata.DependentToPrincipal == null
-                  || (
-                      configurationSource.Overrides(
-                          Metadata.GetDependentToPrincipalConfigurationSource()
-                      )
-                      && (
-                          overrideSameSource
-                          || configurationSource
-                              != Metadata.GetDependentToPrincipalConfigurationSource()
-                      )
-                  )
+                    || (
+                        configurationSource.Overrides(
+                            Metadata.GetDependentToPrincipalConfigurationSource()
+                        )
+                        && (
+                            overrideSameSource
+                            || configurationSource
+                                != Metadata.GetDependentToPrincipalConfigurationSource()
+                        )
+                    )
                 : Metadata.PrincipalToDependent == null
-                  || (
-                      !Metadata.IsOwnership
-                      && configurationSource.Overrides(
-                          Metadata.GetPrincipalToDependentConfigurationSource()
-                      )
-                      && (
-                          overrideSameSource
-                          || configurationSource
-                              != Metadata.GetPrincipalToDependentConfigurationSource()
-                      )
-                  );
+                    || (
+                        !Metadata.IsOwnership
+                        && configurationSource.Overrides(
+                            Metadata.GetPrincipalToDependentConfigurationSource()
+                        )
+                        && (
+                            overrideSameSource
+                            || configurationSource
+                                != Metadata.GetPrincipalToDependentConfigurationSource()
+                        )
+                    );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1858,12 +1858,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             return
                 dependentEntityType.IsAssignableFrom(Metadata.DeclaringEntityType)
                 || configurationSource == ConfigurationSource.Explicit
-              ? HasEntityTypes(
+                ? HasEntityTypes(
                     Metadata.PrincipalEntityType,
                     dependentEntityType,
                     configurationSource
                 )
-              : null;
+                : null;
         }
 
         // Note: This will not invert relationships, use RelatedEntityTypes for that
@@ -1902,12 +1902,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             return
                 principalEntityType.IsAssignableFrom(Metadata.PrincipalEntityType)
                 || configurationSource == ConfigurationSource.Explicit
-              ? HasEntityTypes(
+                ? HasEntityTypes(
                     principalEntityType,
                     Metadata.DeclaringEntityType,
                     configurationSource
                 )
-              : null;
+                : null;
         }
 
         /// <summary>
@@ -2027,32 +2027,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 dependentProperties = shouldResetDependentProperties
                     ? dependentProperties
                     : (
-                          (
-                              Metadata
-                                  .GetPropertiesConfigurationSource()
-                                  ?.Overrides(configurationSource) ?? false
-                          )
-                              ? dependentEntityType.Builder.GetActualProperties(
-                                    Metadata.Properties,
-                                    configurationSource
-                                )
-                              : null
-                      );
+                        (
+                            Metadata
+                                .GetPropertiesConfigurationSource()
+                                ?.Overrides(configurationSource) ?? false
+                        )
+                            ? dependentEntityType.Builder.GetActualProperties(
+                                Metadata.Properties,
+                                configurationSource
+                            )
+                            : null
+                    );
 
                 principalProperties = shouldResetPrincipalProperties
                     ? principalProperties
                     : (
-                          (
-                              Metadata
-                                  .GetPrincipalKeyConfigurationSource()
-                                  ?.Overrides(configurationSource) ?? false
-                          )
-                              ? principalEntityType.Builder.GetActualProperties(
-                                    Metadata.PrincipalKey.Properties,
-                                    configurationSource
-                                )
-                              : null
-                      );
+                        (
+                            Metadata
+                                .GetPrincipalKeyConfigurationSource()
+                                ?.Overrides(configurationSource) ?? false
+                        )
+                            ? principalEntityType.Builder.GetActualProperties(
+                                Metadata.PrincipalKey.Properties,
+                                configurationSource
+                            )
+                            : null
+                    );
             }
 
             return builder.ReplaceForeignKey(
@@ -2345,8 +2345,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (properties == null)
             {
                 return !configurationSource.Overrides(Metadata.GetPropertiesConfigurationSource())
-                  ? null
-                  : ReplaceForeignKey(
+                    ? null
+                    : ReplaceForeignKey(
                         configurationSource,
                         dependentProperties: Array.Empty<Property>()
                     );
@@ -2627,8 +2627,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             if (properties == null)
             {
                 return !configurationSource.Overrides(Metadata.GetPrincipalKeyConfigurationSource())
-                  ? null
-                  : ReplaceForeignKey(
+                    ? null
+                    : ReplaceForeignKey(
                         configurationSource,
                         principalProperties: Array.Empty<Property>()
                     );
@@ -2899,43 +2899,42 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             isRequired ??= !oldRelationshipInverted
                 ? (
-                      (
-                          Metadata
-                              .GetIsRequiredConfigurationSource()
-                              ?.Overrides(configurationSource) ?? false
-                      )
-                          ? Metadata.IsRequired
-                          : null
-                  )
+                    (
+                        Metadata.GetIsRequiredConfigurationSource()?.Overrides(configurationSource)
+                        ?? false
+                    )
+                        ? Metadata.IsRequired
+                        : null
+                )
                 : (
-                      (
-                          Metadata
-                              .GetIsRequiredDependentConfigurationSource()
-                              ?.Overrides(ConfigurationSource.Explicit) ?? false
-                      )
-                          ? Metadata.IsRequiredDependent
-                          : null
-                  );
+                    (
+                        Metadata
+                            .GetIsRequiredDependentConfigurationSource()
+                            ?.Overrides(ConfigurationSource.Explicit) ?? false
+                    )
+                        ? Metadata.IsRequiredDependent
+                        : null
+                );
 
             isRequiredDependent ??= !oldRelationshipInverted
                 ? (
-                      (
-                          Metadata
-                              .GetIsRequiredDependentConfigurationSource()
-                              ?.Overrides(configurationSource) ?? false
-                      )
-                          ? Metadata.IsRequiredDependent
-                          : null
-                  )
+                    (
+                        Metadata
+                            .GetIsRequiredDependentConfigurationSource()
+                            ?.Overrides(configurationSource) ?? false
+                    )
+                        ? Metadata.IsRequiredDependent
+                        : null
+                )
                 : (
-                      (
-                          Metadata
-                              .GetIsRequiredConfigurationSource()
-                              ?.Overrides(ConfigurationSource.Explicit) ?? false
-                      )
-                          ? Metadata.IsRequired
-                          : null
-                  );
+                    (
+                        Metadata
+                            .GetIsRequiredConfigurationSource()
+                            ?.Overrides(ConfigurationSource.Explicit) ?? false
+                    )
+                        ? Metadata.IsRequired
+                        : null
+                );
 
             isOwnership ??=
                 !oldRelationshipInverted
@@ -3837,8 +3836,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 temporaryProperties?.Count > 0
                 && dependentEntityType.FindIndex(temporaryProperties) == null
                     ? dependentEntityType.Builder
-                      .HasIndex(temporaryProperties, ConfigurationSource.Convention)!
-                      .Metadata
+                        .HasIndex(temporaryProperties, ConfigurationSource.Convention)!
+                        .Metadata
                     : null;
 
             var temporaryKeyProperties = principalProperties
@@ -3852,8 +3851,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 temporaryKeyProperties?.Count > 0
                 && principalEntityType.FindIndex(temporaryKeyProperties) == null
                     ? principalEntityType.Builder
-                      .HasIndex(temporaryKeyProperties, ConfigurationSource.Convention)!
-                      .Metadata
+                        .HasIndex(temporaryKeyProperties, ConfigurationSource.Convention)!
+                        .Metadata
                     : null;
 
             var removedForeignKeys = new List<ForeignKey>();
@@ -3975,9 +3974,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var principalKey =
                     principalProperties != null
                         ? principalEntityType
-                          .RootType()
-                          .Builder.HasKey(principalProperties, configurationSource)!
-                          .Metadata
+                            .RootType()
+                            .Builder.HasKey(principalProperties, configurationSource)!
+                            .Metadata
                         : principalEntityType.FindPrimaryKey();
                 if (principalKey != null)
                 {
@@ -4995,8 +4994,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         dependentProperties,
                         dependentEntityType,
                         principalProperties.Count != 0
-                          ? principalProperties
-                          : Metadata.PrincipalKey.Properties,
+                            ? principalProperties
+                            : Metadata.PrincipalKey.Properties,
                         principalEntityType,
                         configurationSource,
                         out var resetPrincipalKey
@@ -5448,8 +5447,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (EntityType)principalEntityType,
                 (EntityType)dependentEntityType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5463,8 +5462,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 (EntityType)principalEntityType,
                 (EntityType)dependentEntityType,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5476,8 +5475,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanInvert(
                 (IReadOnlyList<Property>?)newForeignKeyProperties,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5489,8 +5488,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasForeignKey(
                 properties,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5502,8 +5501,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasForeignKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5515,8 +5514,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetForeignKey(
                 properties,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5528,8 +5527,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetForeignKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5541,8 +5540,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasPrincipalKey(
                 properties,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5554,8 +5553,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasPrincipalKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5567,8 +5566,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPrincipalKey(
                 properties,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5580,8 +5579,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPrincipalKey(
                 properties as IReadOnlyList<Property> ?? properties?.Cast<Property>().ToList(),
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5595,8 +5594,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 name,
                 pointsToPrincipal,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5610,8 +5609,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 property,
                 pointsToPrincipal,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5625,8 +5624,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipalName,
                 navigationToDependentName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5640,8 +5639,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipal,
                 navigationToDependent,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5655,8 +5654,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 property,
                 pointsToPrincipal,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5670,8 +5669,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 name,
                 pointsToPrincipal,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5685,8 +5684,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipal,
                 navigationToDependent,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5700,8 +5699,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 navigationToPrincipalName,
                 navigationToDependentName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5713,8 +5712,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsRequired(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5726,8 +5725,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsRequired(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5739,8 +5738,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsRequiredDependent(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -5752,8 +5751,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsRequiredDependent(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5770,8 +5769,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsOwnership(
                 ownership,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5788,8 +5787,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsOwnership(
                 ownership,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5806,8 +5805,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             OnDelete(
                 deleteBehavior,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5824,8 +5823,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetDeleteBehavior(
                 deleteBehavior,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5842,8 +5841,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsUnique(
                 unique,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -5857,8 +5856,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsUnique(
                 unique,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

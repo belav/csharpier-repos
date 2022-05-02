@@ -33,8 +33,8 @@ public class NginxDeployer : SelfHostDeployer
             _configFile = Path.GetTempFileName();
 
             var uri = string.IsNullOrEmpty(DeploymentParameters.ApplicationBaseUriHint)
-              ? new Uri("http://localhost:0")
-              : new Uri(DeploymentParameters.ApplicationBaseUriHint);
+                ? new Uri("http://localhost:0")
+                : new Uri(DeploymentParameters.ApplicationBaseUriHint);
 
             if (uri.Port == 0)
             {

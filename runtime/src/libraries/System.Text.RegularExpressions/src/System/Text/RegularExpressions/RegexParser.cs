@@ -458,13 +458,13 @@ namespace System.Text.RegularExpressions
                         {
                             throw wasPrevQuantifier
                                 ? MakeException(
-                                      RegexParseError.NestedQuantifiersNotParenthesized,
-                                      SR.Format(SR.NestedQuantifiersNotParenthesized, ch)
-                                  )
+                                    RegexParseError.NestedQuantifiersNotParenthesized,
+                                    SR.Format(SR.NestedQuantifiersNotParenthesized, ch)
+                                )
                                 : MakeException(
-                                      RegexParseError.QuantifierAfterNothing,
-                                      SR.QuantifierAfterNothing
-                                  );
+                                    RegexParseError.QuantifierAfterNothing,
+                                    SR.QuantifierAfterNothing
+                                );
                         }
                         MoveLeft();
                         break;
@@ -1407,8 +1407,8 @@ namespace System.Text.RegularExpressions
                 case 'w':
                     MoveRight();
                     return scanOnly
-                      ? null
-                      : new RegexNode(
+                        ? null
+                        : new RegexNode(
                             RegexNode.Set,
                             _options,
                             UseOptionE() ? RegexCharClass.ECMAWordClass : RegexCharClass.WordClass
@@ -1417,20 +1417,20 @@ namespace System.Text.RegularExpressions
                 case 'W':
                     MoveRight();
                     return scanOnly
-                      ? null
-                      : new RegexNode(
+                        ? null
+                        : new RegexNode(
                             RegexNode.Set,
                             _options,
                             UseOptionE()
-                              ? RegexCharClass.NotECMAWordClass
-                              : RegexCharClass.NotWordClass
+                                ? RegexCharClass.NotECMAWordClass
+                                : RegexCharClass.NotWordClass
                         );
 
                 case 's':
                     MoveRight();
                     return scanOnly
-                      ? null
-                      : new RegexNode(
+                        ? null
+                        : new RegexNode(
                             RegexNode.Set,
                             _options,
                             UseOptionE() ? RegexCharClass.ECMASpaceClass : RegexCharClass.SpaceClass
@@ -1439,20 +1439,20 @@ namespace System.Text.RegularExpressions
                 case 'S':
                     MoveRight();
                     return scanOnly
-                      ? null
-                      : new RegexNode(
+                        ? null
+                        : new RegexNode(
                             RegexNode.Set,
                             _options,
                             UseOptionE()
-                              ? RegexCharClass.NotECMASpaceClass
-                              : RegexCharClass.NotSpaceClass
+                                ? RegexCharClass.NotECMASpaceClass
+                                : RegexCharClass.NotSpaceClass
                         );
 
                 case 'd':
                     MoveRight();
                     return scanOnly
-                      ? null
-                      : new RegexNode(
+                        ? null
+                        : new RegexNode(
                             RegexNode.Set,
                             _options,
                             UseOptionE() ? RegexCharClass.ECMADigitClass : RegexCharClass.DigitClass
@@ -1461,13 +1461,13 @@ namespace System.Text.RegularExpressions
                 case 'D':
                     MoveRight();
                     return scanOnly
-                      ? null
-                      : new RegexNode(
+                        ? null
+                        : new RegexNode(
                             RegexNode.Set,
                             _options,
                             UseOptionE()
-                              ? RegexCharClass.NotECMADigitClass
-                              : RegexCharClass.NotDigitClass
+                                ? RegexCharClass.NotECMADigitClass
+                                : RegexCharClass.NotDigitClass
                         );
 
                 case 'p':
@@ -1558,10 +1558,10 @@ namespace System.Text.RegularExpressions
                 if (CharsRight() > 0 && RightCharMoveRight() == close)
                 {
                     return scanOnly
-                      ? null
-                      : IsCaptureSlot(capnum)
-                          ? new RegexNode(RegexNode.Ref, _options, capnum)
-                          : throw MakeException(
+                        ? null
+                        : IsCaptureSlot(capnum)
+                            ? new RegexNode(RegexNode.Ref, _options, capnum)
+                            : throw MakeException(
                                 RegexParseError.UndefinedNumberedReference,
                                 SR.Format(SR.UndefinedNumberedReference, capnum.ToString())
                             );
@@ -1632,10 +1632,10 @@ namespace System.Text.RegularExpressions
                 if (CharsRight() > 0 && RightCharMoveRight() == close)
                 {
                     return scanOnly
-                      ? null
-                      : IsCaptureName(capname)
-                          ? new RegexNode(RegexNode.Ref, _options, CaptureSlotFromName(capname))
-                          : throw MakeException(
+                        ? null
+                        : IsCaptureName(capname)
+                            ? new RegexNode(RegexNode.Ref, _options, CaptureSlotFromName(capname))
+                            : throw MakeException(
                                 RegexParseError.UndefinedNamedReference,
                                 SR.Format(SR.UndefinedNamedReference, capname)
                             );
@@ -2132,7 +2132,7 @@ namespace System.Text.RegularExpressions
                 'd' => RegexOptions.Debug,
 #endif
                 _
-                  => 0,
+                    => 0,
             };
         }
 
@@ -2622,30 +2622,30 @@ namespace System.Text.RegularExpressions
                     UseOptionI() && !isReplacement
                         ?
 #if REGEXGENERATOR
-                          StringExtensions.Create
+                        StringExtensions.Create
 #else
-                          string.Create
+                        string.Create
 #endif
-                          (
-                              cch,
-                              (_pattern, _culture, pos, cch),
-                              static (dest, state) =>
-                              {
-                                  // We do the ToLower character-by character for consistency with the rest of the implementation.
-                                  // With surrogate pairs, doing a ToLower on the entire string is more correct linguistically, but
-                                  // Regex doesn't support surrogates, and not doing this character-by-character then causes differences
-                                  // from matching where characters are lowercased individually.
-                                  ReadOnlySpan<char> src = state._pattern.AsSpan(
-                                      state.pos,
-                                      state.cch
-                                  );
-                                  TextInfo ti = state._culture.TextInfo;
-                                  for (int i = 0; i < dest.Length; i++)
-                                  {
-                                      dest[i] = ti.ToLower(src[i]);
-                                  }
-                              }
-                          )
+                        (
+                            cch,
+                            (_pattern, _culture, pos, cch),
+                            static (dest, state) =>
+                            {
+                                // We do the ToLower character-by character for consistency with the rest of the implementation.
+                                // With surrogate pairs, doing a ToLower on the entire string is more correct linguistically, but
+                                // Regex doesn't support surrogates, and not doing this character-by-character then causes differences
+                                // from matching where characters are lowercased individually.
+                                ReadOnlySpan<char> src = state._pattern.AsSpan(
+                                    state.pos,
+                                    state.cch
+                                );
+                                TextInfo ti = state._culture.TextInfo;
+                                for (int i = 0; i < dest.Length; i++)
+                                {
+                                    dest[i] = ti.ToLower(src[i]);
+                                }
+                            }
+                        )
                         : _pattern.Substring(pos, cch);
 
                 node = new RegexNode(RegexNode.Multi, _options, str);

@@ -218,16 +218,16 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 // lsif (which does this for every symbol in an entire solution).
                 var documentationComment = original is IMethodSymbol method
                     ? ISymbolExtensions2.GetMethodDocumentation(
-                          method,
-                          compilation,
-                          CancellationToken
-                      )
+                        method,
+                        compilation,
+                        CancellationToken
+                    )
                     : original.GetDocumentationComment(
-                          compilation,
-                          expandIncludes: true,
-                          expandInheritdoc: true,
-                          cancellationToken: CancellationToken
-                      );
+                        compilation,
+                        expandIncludes: true,
+                        expandInheritdoc: true,
+                        cancellationToken: CancellationToken
+                    );
 
                 _documentationMap.Add(
                     SymbolDescriptionGroups.Documentation,
@@ -652,8 +652,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     AddToGroup(
                         SymbolDescriptionGroups.MainDescription,
                         symbol.IsAnonymousDelegateType()
-                          ? symbol.ToDisplayParts(style)
-                          : symbol.OriginalDefinition.ToDisplayParts(style)
+                            ? symbol.ToDisplayParts(style)
+                            : symbol.OriginalDefinition.ToDisplayParts(style)
                     );
                 }
                 else
@@ -723,8 +723,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                     AddToGroup(
                         SymbolDescriptionGroups.MainDescription,
                         symbol.IsConst
-                          ? Description(FeaturesResources.constant)
-                          : Description(FeaturesResources.field),
+                            ? Description(FeaturesResources.constant)
+                            : Description(FeaturesResources.field),
                         parts
                     );
                 }
@@ -764,8 +764,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 AddToGroup(
                     SymbolDescriptionGroups.MainDescription,
                     symbol.IsConst
-                      ? Description(FeaturesResources.local_constant)
-                      : Description(FeaturesResources.local_variable),
+                        ? Description(FeaturesResources.local_constant)
+                        : Description(FeaturesResources.local_variable),
                     parts
                 );
             }
@@ -920,8 +920,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                         PlainText(count.ToString()),
                         Space(),
                         count == 1
-                          ? PlainText(FeaturesResources.overload)
-                          : PlainText(FeaturesResources.overloads_),
+                            ? PlainText(FeaturesResources.overload)
+                            : PlainText(FeaturesResources.overloads_),
                         Punctuation(")")
                     );
                 }

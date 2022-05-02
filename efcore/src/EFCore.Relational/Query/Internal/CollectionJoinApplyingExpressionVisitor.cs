@@ -100,10 +100,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             }
 
             return extensionExpression is ShapedQueryExpression shapedQueryExpression
-              ? shapedQueryExpression.UpdateShaperExpression(
+                ? shapedQueryExpression.UpdateShaperExpression(
                     Visit(shapedQueryExpression.ShaperExpression)
                 )
-              : base.VisitExtension(extensionExpression);
+                : base.VisitExtension(extensionExpression);
         }
     }
 }

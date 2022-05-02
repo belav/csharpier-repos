@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.ProjectTelemetry
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteProjectTelemetryService)), Shared]
     internal sealed class RemoteProjectTelemetryServiceCallbackDispatcher
         : RemoteServiceCallbackDispatcher,
-          IRemoteProjectTelemetryService.ICallback
+            IRemoteProjectTelemetryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

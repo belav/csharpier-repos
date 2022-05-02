@@ -51,8 +51,8 @@ namespace System
                     int errorCode = Marshal.GetLastPInvokeError();
                     throw Win32Marshal.GetExceptionForWin32Error(
                         errorCode == Interop.Errors.ERROR_FILE_NOT_FOUND
-                          ? Interop.Errors.ERROR_PATH_NOT_FOUND
-                          : errorCode,
+                            ? Interop.Errors.ERROR_PATH_NOT_FOUND
+                            : errorCode,
                         value
                     );
                 }
@@ -151,8 +151,12 @@ namespace System
             );
 
             return osvi.szCSDVersion[0] != '\0'
-              ? new OperatingSystem(PlatformID.Win32NT, version, new string(&osvi.szCSDVersion[0]))
-              : new OperatingSystem(PlatformID.Win32NT, version);
+                ? new OperatingSystem(
+                    PlatformID.Win32NT,
+                    version,
+                    new string(&osvi.szCSDVersion[0])
+                )
+                : new OperatingSystem(PlatformID.Win32NT, version);
         }
 
         public static string SystemDirectory

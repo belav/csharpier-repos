@@ -385,7 +385,7 @@ namespace System.Threading.Tasks.Dataflow
     [DebuggerTypeProxy(typeof(JoinBlock<,,>.DebugView))]
     public sealed class JoinBlock<T1, T2, T3>
         : IReceivableSourceBlock<Tuple<T1, T2, T3>>,
-          IDebuggerDisplay
+            IDebuggerDisplay
     {
         /// <summary>Resources shared by all targets for this join block.</summary>
         private readonly JoinBlockTargetSharedResources _sharedResources;
@@ -769,8 +769,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
     [DebuggerTypeProxy(typeof(JoinBlockTarget<>.DebugView))]
     internal sealed class JoinBlockTarget<T>
         : JoinBlockTargetBase,
-          ITargetBlock<T>,
-          IDebuggerDisplay
+            ITargetBlock<T>,
+            IDebuggerDisplay
     {
         /// <summary>The shared resources used by all targets associated with the same join instance.</summary>
         private readonly JoinBlockTargetSharedResources _sharedResources;
@@ -897,8 +897,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
                 return !_sharedResources._dataflowBlockOptions.Greedy
-                  ? _nonGreedy!.PostponedMessages.Count
-                  : _messages!.Count;
+                    ? _nonGreedy!.PostponedMessages.Count
+                    : _messages!.Count;
             }
         }
 
@@ -1395,10 +1395,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             get
             {
                 return _messages != null
-                  ? _messages.Count
-                  : _nonGreedy!.ConsumedMessage.Key
-                      ? 1
-                      : 0;
+                    ? _messages.Count
+                    : _nonGreedy!.ConsumedMessage.Key
+                        ? 1
+                        : 0;
             }
         }
 

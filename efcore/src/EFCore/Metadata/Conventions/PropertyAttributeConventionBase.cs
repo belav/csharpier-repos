@@ -20,7 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <typeparam name="TAttribute">The attribute type to look for.</typeparam>
     public abstract class PropertyAttributeConventionBase<TAttribute>
         : IPropertyAddedConvention,
-          IPropertyFieldChangedConvention where TAttribute : Attribute
+            IPropertyFieldChangedConvention where TAttribute : Attribute
     {
         /// <summary>
         ///     Creates a new instance of <see cref="PropertyAttributeConventionBase{TAttribute}" />.

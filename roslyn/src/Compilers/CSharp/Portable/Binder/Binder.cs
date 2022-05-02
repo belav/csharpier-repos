@@ -113,10 +113,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 return this.Flags.Includes(BinderFlags.CheckedRegion)
-                  ? OverflowChecks.Enabled
-                  : this.Flags.Includes(BinderFlags.UncheckedRegion)
-                      ? OverflowChecks.Disabled
-                      : OverflowChecks.Implicit;
+                    ? OverflowChecks.Enabled
+                    : this.Flags.Includes(BinderFlags.UncheckedRegion)
+                        ? OverflowChecks.Disabled
+                        : OverflowChecks.Implicit;
             }
         }
 
@@ -252,10 +252,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax.NullableContextState.State.Disabled => false,
                 Syntax.NullableContextState.State.ExplicitlyRestored => GetGlobalAnnotationState(),
                 Syntax.NullableContextState.State.Unknown
-                  => !csTree.IsGeneratedCode(
-                      this.Compilation.Options.SyntaxTreeOptionsProvider,
-                      CancellationToken.None
-                  ) && AreNullableAnnotationsGloballyEnabled(),
+                    => !csTree.IsGeneratedCode(
+                        this.Compilation.Options.SyntaxTreeOptionsProvider,
+                        CancellationToken.None
+                    ) && AreNullableAnnotationsGloballyEnabled(),
                 _ => throw ExceptionUtilities.UnexpectedValue(context.AnnotationsState)
             };
         }
@@ -895,16 +895,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // binding cycle.
                 diagnostics.Add(
                     unmanagedCallersOnlyAttributeData
-                        == UnmanagedCallersOnlyAttributeData.Uninitialized
-                      ? (DiagnosticInfo)
+                    == UnmanagedCallersOnlyAttributeData.Uninitialized
+                        ? (DiagnosticInfo)
                             new LazyUnmanagedCallersOnlyMethodCalledDiagnosticInfo(
                                 symbol,
                                 isDelegateConversion
                             )
-                      : new CSDiagnosticInfo(
+                        : new CSDiagnosticInfo(
                             isDelegateConversion
-                              ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
-                              : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
+                                ? ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeConvertedToDelegate
+                                : ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
                             symbol
                         ),
                     location
@@ -1011,8 +1011,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var locals = this.GetDeclaredLocalsForScope(scopeDesignator);
             return (locals.IsEmpty)
-              ? expression
-              : new BoundSequence(
+                ? expression
+                : new BoundSequence(
                     scopeDesignator,
                     locals,
                     ImmutableArray<BoundExpression>.Empty,

@@ -82,11 +82,11 @@ namespace Microsoft.CodeAnalysis.AddParameter
 
             var referencedSymbols = fixAllReferences
                 ? await FindMethodDeclarationReferencesAsync(
-                          invocationDocument,
-                          method,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false)
+                        invocationDocument,
+                        method,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
                 : method.GetAllMethodSymbolsOfPartialParts();
 
             var anySymbolReferencesNotInSource = referencedSymbols.Any(

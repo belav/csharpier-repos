@@ -437,8 +437,8 @@ namespace System.IO.Strategies
         private int FillReadBufferForReadByte() =>
             _useAsyncIO
                 ? ReadNativeAsync(new Memory<byte>(_buffer), 0, CancellationToken.None)
-                  .GetAwaiter()
-                  .GetResult()
+                    .GetAwaiter()
+                    .GetResult()
                 : ReadNative(_buffer);
 
         private unsafe int ReadNative(Span<byte> buffer)
@@ -1078,10 +1078,10 @@ namespace System.IO.Strategies
             Task writeTask = WriteAsyncInternalCore(source, cancellationToken);
             return new ValueTask(
                 (flushTask == null || flushTask.Status == TaskStatus.RanToCompletion)
-                  ? writeTask
-                  : (writeTask.Status == TaskStatus.RanToCompletion)
-                      ? flushTask
-                      : Task.WhenAll(flushTask, writeTask)
+                    ? writeTask
+                    : (writeTask.Status == TaskStatus.RanToCompletion)
+                        ? flushTask
+                        : Task.WhenAll(flushTask, writeTask)
             );
         }
 

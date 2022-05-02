@@ -105,8 +105,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 var documentsByProject = captureAllMatchingDocuments
                     ? solution.Projects.Select(
-                          project => (project, project.State.DocumentStates.States.Values)
-                      )
+                        project => (project, project.State.DocumentStates.States.Values)
+                    )
                     : GetDocumentStatesGroupedByProject(solution, captureMatchingDocuments);
 
                 initialDocumentStates = await CommittedSolution

@@ -1334,8 +1334,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return (IsTupleType || IsRecord || IsRecordStruct)
-                  ? GetMembers().Select(m => m.Name)
-                  : this.declaration.MemberNames;
+                    ? GetMembers().Select(m => m.Name)
+                    : this.declaration.MemberNames;
             }
         }
 
@@ -1450,8 +1450,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 Debug.Assert(s_emptyTypeMembers.Count == 0);
                 return symbols.Count > 0
-                  ? symbols.ToDictionary(s => s.Name, StringOrdinalComparer.Instance)
-                  : s_emptyTypeMembers;
+                    ? symbols.ToDictionary(s => s.Name, StringOrdinalComparer.Instance)
+                    : s_emptyTypeMembers;
             }
             finally
             {
@@ -1610,8 +1610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             ImmutableArray<Symbol> result;
             return GetEarlyAttributeDecodingMembersDictionary().TryGetValue(name, out result)
-              ? result
-              : ImmutableArray<Symbol>.Empty;
+                ? result
+                : ImmutableArray<Symbol>.Empty;
         }
 
         private Dictionary<
@@ -5396,8 +5396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 builder.AddNonTypeMember(
                     (this.TypeKind == TypeKind.Submission)
-                      ? new SynthesizedSubmissionConstructor(this, diagnostics)
-                      : new SynthesizedInstanceConstructor(this),
+                        ? new SynthesizedSubmissionConstructor(this, diagnostics)
+                        : new SynthesizedInstanceConstructor(this),
                     declaredMembersAndInitializers
                 );
             }
@@ -5526,19 +5526,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 var fieldSymbol =
                                     (modifiers & DeclarationModifiers.Fixed) == 0
                                         ? new SourceMemberFieldSymbolFromDeclarator(
-                                              this,
-                                              variable,
-                                              modifiers,
-                                              modifierErrors,
-                                              diagnostics
-                                          )
+                                            this,
+                                            variable,
+                                            modifiers,
+                                            modifierErrors,
+                                            diagnostics
+                                        )
                                         : new SourceFixedFieldSymbol(
-                                              this,
-                                              variable,
-                                              modifiers,
-                                              modifierErrors,
-                                              diagnostics
-                                          );
+                                            this,
+                                            variable,
+                                            modifiers,
+                                            modifierErrors,
+                                            diagnostics
+                                        );
                                 builder.NonTypeMembers.Add(fieldSymbol);
                                 // All fields are included in the nullable context for constructors and initializers, even fields without
                                 // initializers, to ensure warnings are reported for uninitialized non-nullable fields in NullableWalker.
@@ -6081,8 +6081,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var membersAndInitializers = GetMembersAndInitializers();
             return useStatic
-              ? membersAndInitializers.IsNullableEnabledForStaticConstructorsAndFields
-              : membersAndInitializers.IsNullableEnabledForInstanceConstructorsAndFields;
+                ? membersAndInitializers.IsNullableEnabledForStaticConstructorsAndFields
+                : membersAndInitializers.IsNullableEnabledForInstanceConstructorsAndFields;
         }
 
         internal override void AddSynthesizedAttributes(

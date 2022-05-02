@@ -22,10 +22,10 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateVariable
     [ExportLanguageService(typeof(IGenerateVariableService), LanguageNames.CSharp), Shared]
     internal partial class CSharpGenerateVariableService
         : AbstractGenerateVariableService<
-              CSharpGenerateVariableService,
-              SimpleNameSyntax,
-              ExpressionSyntax
-          >
+            CSharpGenerateVariableService,
+            SimpleNameSyntax,
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

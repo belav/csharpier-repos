@@ -99,19 +99,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             var buckets = forPullDiagnostics
                 ? service.GetPullDiagnosticBuckets(
-                      workspace,
-                      project.Id,
-                      document.Id,
-                      diagnosticMode,
-                      cancellationToken
-                  )
+                    workspace,
+                    project.Id,
+                    document.Id,
+                    diagnosticMode,
+                    cancellationToken
+                )
                 : service.GetPushDiagnosticBuckets(
-                      workspace,
-                      project.Id,
-                      document.Id,
-                      diagnosticMode,
-                      cancellationToken
-                  );
+                    workspace,
+                    project.Id,
+                    document.Id,
+                    diagnosticMode,
+                    cancellationToken
+                );
 
             foreach (var bucket in buckets)
             {
@@ -120,21 +120,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 var diagnostics = forPullDiagnostics
                     ? await service
-                          .GetPullDiagnosticsAsync(
-                              bucket,
-                              includeSuppressedDiagnostics,
-                              diagnosticMode,
-                              cancellationToken
-                          )
-                          .ConfigureAwait(false)
+                        .GetPullDiagnosticsAsync(
+                            bucket,
+                            includeSuppressedDiagnostics,
+                            diagnosticMode,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
                     : await service
-                          .GetPushDiagnosticsAsync(
-                              bucket,
-                              includeSuppressedDiagnostics,
-                              diagnosticMode,
-                              cancellationToken
-                          )
-                          .ConfigureAwait(false);
+                        .GetPushDiagnosticsAsync(
+                            bucket,
+                            includeSuppressedDiagnostics,
+                            diagnosticMode,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 result.AddRange(diagnostics);
             }
 

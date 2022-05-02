@@ -297,8 +297,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
 
                 // Remove the '\' at the beginning if present
                 trimmedFileName = trimmedFileName.StartsWith(@"\", StringComparison.Ordinal)
-                  ? trimmedFileName.Substring(1)
-                  : trimmedFileName;
+                    ? trimmedFileName.Substring(1)
+                    : trimmedFileName;
 
                 // Construct the full path of the file to be created
                 this.FullFilePath = implicitFilePath + @"\" + trimmedFileName;
@@ -808,8 +808,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                     ? _csharpAccessList
                     : _visualBasicAccessList;
             this.AccessSelectIndex = this.AccessList.Contains(accessSelectString)
-              ? this.AccessList.IndexOf(accessSelectString)
-              : 0;
+                ? this.AccessList.IndexOf(accessSelectString)
+                : 0;
             this.IsAccessListEnabled = true;
 
             this.KindList =
@@ -817,8 +817,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                     ? _csharpTypeKindList
                     : _visualBasicTypeKindList;
             this.KindSelectIndex = this.KindList.Contains(typeKindSelectString)
-              ? this.KindList.IndexOf(typeKindSelectString)
-              : 0;
+                ? this.KindList.IndexOf(typeKindSelectString)
+                : 0;
 
             this.ProjectSelectIndex = 0;
             this.DocumentSelectIndex = 0;

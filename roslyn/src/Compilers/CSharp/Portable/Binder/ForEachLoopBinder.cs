@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             get
             {
                 return (_syntax.Kind() == SyntaxKind.ForEachStatement)
-                  ? (SourceLocalSymbol)this.Locals[0]
-                  : null;
+                    ? (SourceLocalSymbol)this.Locals[0]
+                    : null;
             }
         }
 
@@ -847,10 +847,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var awaitableType = builder.PatternDisposeInfo is null
                 ? this.GetWellKnownType(
-                      WellKnownType.System_Threading_Tasks_ValueTask,
-                      diagnostics,
-                      this._syntax
-                  )
+                    WellKnownType.System_Threading_Tasks_ValueTask,
+                    diagnostics,
+                    this._syntax
+                )
                 : builder.PatternDisposeInfo.Method.ReturnType;
 
             bool hasErrors = false;
@@ -1049,15 +1049,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var errorCode = wrongAsync
                 ? (
-                      isAsync
-                          ? ErrorCode.ERR_AwaitForEachMissingMemberWrongAsync
-                          : ErrorCode.ERR_ForEachMissingMemberWrongAsync
-                  )
+                    isAsync
+                        ? ErrorCode.ERR_AwaitForEachMissingMemberWrongAsync
+                        : ErrorCode.ERR_ForEachMissingMemberWrongAsync
+                )
                 : (
-                      isAsync
-                          ? ErrorCode.ERR_AwaitForEachMissingMember
-                          : ErrorCode.ERR_ForEachMissingMember
-                  );
+                    isAsync
+                        ? ErrorCode.ERR_AwaitForEachMissingMember
+                        : ErrorCode.ERR_ForEachMissingMember
+                );
 
             diagnostics.Add(
                 errorCode,
@@ -1314,10 +1314,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     errorLocationSyntax.Location,
                     unwrappedCollectionExprType,
                     isAsync
-                      ? this.Compilation.GetWellKnownType(
+                        ? this.Compilation.GetWellKnownType(
                             WellKnownType.System_Collections_Generic_IAsyncEnumerable_T
                         )
-                      : this.Compilation.GetSpecialType(
+                        : this.Compilation.GetSpecialType(
                             SpecialType.System_Collections_Generic_IEnumerable_T
                         )
                 );
@@ -1541,8 +1541,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     .ClassifyImplicitConversionFromType(
                         enumeratorType,
                         isAsync
-                          ? this.Compilation.GetWellKnownType(WellKnownType.System_IAsyncDisposable)
-                          : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
+                            ? this.Compilation.GetWellKnownType(
+                                WellKnownType.System_IAsyncDisposable
+                            )
+                            : this.Compilation.GetSpecialType(SpecialType.System_IDisposable),
                         ref useSiteInfo
                     )
                     .IsImplicit
@@ -1618,8 +1620,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 builder.ElementTypeWithAnnotations = TypeWithAnnotations.Create(
                     ((_syntax as ForEachStatementSyntax)?.Type.IsVar == true)
-                      ? (TypeSymbol)DynamicTypeSymbol.Instance
-                      : GetSpecialType(SpecialType.System_Object, diagnostics, _syntax)
+                        ? (TypeSymbol)DynamicTypeSymbol.Instance
+                        : GetSpecialType(SpecialType.System_Object, diagnostics, _syntax)
                 );
             }
             else
@@ -1627,8 +1629,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 builder.ElementTypeWithAnnotations =
                     collectionExprType.SpecialType == SpecialType.System_String
                         ? TypeWithAnnotations.Create(
-                              GetSpecialType(SpecialType.System_Char, diagnostics, _syntax)
-                          )
+                            GetSpecialType(SpecialType.System_Char, diagnostics, _syntax)
+                        )
                         : ((ArrayTypeSymbol)collectionExprType).ElementTypeWithAnnotations;
             }
 
@@ -2491,8 +2493,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var resolvedMember = (MethodSymbol)GetSpecialTypeMember(member, diagnostics, syntax);
             Debug.Assert(resolvedMember is null or { ParameterCount: 0 });
             return resolvedMember is not null
-              ? MethodArgumentInfo.CreateParameterlessMethod(resolvedMember)
-              : null;
+                ? MethodArgumentInfo.CreateParameterlessMethod(resolvedMember)
+                : null;
         }
 
         /// <param name="extensionReceiverOpt">If method is an extension method, this must be non-null.</param>

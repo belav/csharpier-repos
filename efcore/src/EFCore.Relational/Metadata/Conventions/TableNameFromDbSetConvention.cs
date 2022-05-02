@@ -16,8 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class TableNameFromDbSetConvention
         : IEntityTypeAddedConvention,
-          IEntityTypeBaseTypeChangedConvention,
-          IModelFinalizingConvention
+            IEntityTypeBaseTypeChangedConvention,
+            IModelFinalizingConvention
     {
         private readonly IDictionary<Type, string> _sets;
 

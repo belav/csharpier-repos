@@ -44,8 +44,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             new(
                 new(
                     syntaxError != null || hasEmitErrors
-                      ? ManagedModuleUpdateStatusEx.Blocked
-                      : ManagedModuleUpdateStatusEx.RestartRequired,
+                        ? ManagedModuleUpdateStatusEx.Blocked
+                        : ManagedModuleUpdateStatusEx.RestartRequired,
                     ImmutableArray<ManagedModuleUpdate>.Empty
                 ),
                 ImmutableArray<(Guid, ImmutableArray<(ManagedModuleMethodId, NonRemappableRegion)>)>.Empty,

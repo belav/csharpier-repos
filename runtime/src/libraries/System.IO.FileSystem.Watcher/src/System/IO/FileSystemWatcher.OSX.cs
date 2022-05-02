@@ -836,8 +836,8 @@ namespace System.IO
                     return FileSystem.DirectoryExists(path);
 
                 return PathInternal.IsDirectorySeparator(path[path.Length - 1])
-                  ? false
-                  : FileSystem.FileExists(path);
+                    ? false
+                    : FileSystem.FileExists(path);
             }
         }
     }

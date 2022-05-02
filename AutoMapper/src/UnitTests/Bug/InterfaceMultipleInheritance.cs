@@ -29,7 +29,7 @@ namespace AutoMapper.UnitTests.Bug
 
             public interface IMapFromElementDerivedBoth
                 : IMapFromElementDerived1,
-                  IMapFromElementDerived2 { }
+                    IMapFromElementDerived2 { }
 
             public interface IMapToElementWritable
             {

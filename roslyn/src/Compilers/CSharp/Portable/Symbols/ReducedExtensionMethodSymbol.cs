@@ -251,9 +251,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 nullabilityDiagnosticsBuilderOpt: null,
                 ref useSiteDiagnosticsBuilder,
                 ignoreTypeConstraintsDependentOnTypeParametersOpt: notInferredTypeParameters.Count
-                    > 0
-                  ? notInferredTypeParameters
-                  : null
+                > 0
+                    ? notInferredTypeParameters
+                    : null
             );
             diagnosticsBuilder.Free();
             notInferredTypeParameters.Free();

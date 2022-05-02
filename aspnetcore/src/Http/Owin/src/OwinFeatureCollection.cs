@@ -28,16 +28,16 @@ using SendFileFunc = Func<string, long, long?, CancellationToken, Task>;
 /// </summary>
 public class OwinFeatureCollection
     : IFeatureCollection,
-      IHttpRequestFeature,
-      IHttpResponseFeature,
-      IHttpResponseBodyFeature,
-      IHttpConnectionFeature,
-      ITlsConnectionFeature,
-      IHttpRequestIdentifierFeature,
-      IHttpRequestLifetimeFeature,
-      IHttpAuthenticationFeature,
-      IHttpWebSocketFeature,
-      IOwinEnvironmentFeature
+        IHttpRequestFeature,
+        IHttpResponseFeature,
+        IHttpResponseBodyFeature,
+        IHttpConnectionFeature,
+        ITlsConnectionFeature,
+        IHttpRequestIdentifierFeature,
+        IHttpRequestLifetimeFeature,
+        IHttpAuthenticationFeature,
+        IHttpWebSocketFeature,
+        IOwinEnvironmentFeature
 {
     /// <summary>
     /// Gets or sets OWIN environment values.

@@ -13,8 +13,8 @@ namespace Microsoft.Web.Mvc
             Func<Type, bool> matchesInterface = t =>
                 t.IsGenericType && t.GetGenericTypeDefinition() == interfaceType;
             return (matchesInterface(queryType))
-              ? queryType
-              : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
+                ? queryType
+                : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
         }
 
         public static Type[] GetTypeArgumentsIfMatch(Type closedType, Type matchingOpenType)

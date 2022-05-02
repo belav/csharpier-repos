@@ -101,11 +101,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             exception switch
             {
                 RemoteInvocationException remote
-                  => $"{remote.ErrorCode} {remote.StackTrace ?? exception.Message}",
+                    => $"{remote.ErrorCode} {remote.StackTrace ?? exception.Message}",
                 AggregateException aggregate when aggregate.InnerException != null
-                  =>
-                  // get first exception that is not aggregated exception
-                  GetParameterString(aggregate.InnerException),
+                    =>
+                    // get first exception that is not aggregated exception
+                    GetParameterString(aggregate.InnerException),
                 _ => $"{exception.GetType()} {exception.StackTrace ?? exception.ToString()}",
             };
 

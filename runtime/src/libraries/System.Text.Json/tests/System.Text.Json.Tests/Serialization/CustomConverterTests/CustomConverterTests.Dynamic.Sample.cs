@@ -357,8 +357,8 @@ namespace System.Text.Json.Serialization.Samples
             {
                 _value = new Dictionary<string, object>(
                     options.PropertyNameCaseInsensitive
-                      ? StringComparer.OrdinalIgnoreCase
-                      : StringComparer.Ordinal
+                        ? StringComparer.OrdinalIgnoreCase
+                        : StringComparer.Ordinal
                 );
             }
 

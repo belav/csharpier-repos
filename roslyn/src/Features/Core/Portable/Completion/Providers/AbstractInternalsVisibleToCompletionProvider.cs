@@ -308,8 +308,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             return resultBuilder == null
-              ? ImmutableHashSet<string>.Empty
-              : resultBuilder.ToImmutable();
+                ? ImmutableHashSet<string>.Empty
+                : resultBuilder.ToImmutable();
         }
 
         private async Task<string> GetAssemblyNameFromInternalsVisibleToAttributeAsync(

@@ -674,8 +674,8 @@ public unsafe struct UnsafeStructNUMBER1
                     streamDll,
                     xmlDocumentationStream: streamXml,
                     pdbStream: optEmit.DebugInformationFormat != DebugInformationFormat.Embedded
-                      ? streamPdb
-                      : null,
+                        ? streamPdb
+                        : null,
                     options: optEmit
                 );
                 var newResult = streamDll.ToArray();

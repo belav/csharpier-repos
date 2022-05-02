@@ -50,8 +50,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
             }
 
             return ReferenceEquals(this, obj)
-              ? true
-              : obj.GetType() == GetType() && Equals((CompositeThree)obj);
+                ? true
+                : obj.GetType() == GetType() && Equals((CompositeThree)obj);
         }
 
         protected bool Equals(CompositeThree other)

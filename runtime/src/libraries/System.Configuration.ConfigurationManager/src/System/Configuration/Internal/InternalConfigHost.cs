@@ -276,8 +276,8 @@ namespace System.Configuration.Internal
         {
             FileInfo info = new FileInfo(streamName);
             return info.Exists
-              ? new FileVersion(true, info.Length, info.CreationTimeUtc, info.LastWriteTimeUtc)
-              : new FileVersion(false, 0, DateTime.MinValue, DateTime.MinValue);
+                ? new FileVersion(true, info.Length, info.CreationTimeUtc, info.LastWriteTimeUtc)
+                : new FileVersion(false, 0, DateTime.MinValue, DateTime.MinValue);
         }
 
         // default impl treats name as a file name
@@ -288,8 +288,8 @@ namespace System.Configuration.Internal
                 throw ExceptionUtil.UnexpectedError("InternalConfigHost::StaticOpenStreamForRead");
 
             return !File.Exists(streamName)
-              ? null
-              : new FileStream(streamName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                ? null
+                : new FileStream(streamName, FileMode.Open, FileAccess.Read, FileShare.Read);
         }
 
         // This method doesn't really open the streamName for write.  Instead, using WriteFileContext

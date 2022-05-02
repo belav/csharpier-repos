@@ -124,35 +124,35 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         private static ParameterBinding Bind(IEntityType entityType, Type parameterType) =>
             parameterType == typeof(ILazyLoader)
                 ? new DependencyInjectionParameterBinding(
-                      typeof(ILazyLoader),
-                      typeof(ILazyLoader),
-                      entityType
-                          .GetServiceProperties()
-                          .Cast<IPropertyBase>()
-                          .Where(p => IsLazyLoader(p.ClrType))
-                          .ToArray()
-                  )
+                    typeof(ILazyLoader),
+                    typeof(ILazyLoader),
+                    entityType
+                        .GetServiceProperties()
+                        .Cast<IPropertyBase>()
+                        .Where(p => IsLazyLoader(p.ClrType))
+                        .ToArray()
+                )
                 : parameterType == typeof(Action<object, string>)
                     ? new DependencyInjectionMethodParameterBinding(
-                          typeof(Action<object, string>),
-                          typeof(ILazyLoader),
-                          _loadMethod,
-                          entityType
-                              .GetServiceProperties()
-                              .Cast<IPropertyBase>()
-                              .Where(p => IsLazyLoaderMethod(p.ClrType, p.Name))
-                              .ToArray()
-                      )
+                        typeof(Action<object, string>),
+                        typeof(ILazyLoader),
+                        _loadMethod,
+                        entityType
+                            .GetServiceProperties()
+                            .Cast<IPropertyBase>()
+                            .Where(p => IsLazyLoaderMethod(p.ClrType, p.Name))
+                            .ToArray()
+                    )
                     : new DependencyInjectionMethodParameterBinding(
-                          typeof(Func<object, CancellationToken, string, Task>),
-                          typeof(ILazyLoader),
-                          _loadAsyncMethod,
-                          entityType
-                              .GetServiceProperties()
-                              .Cast<IPropertyBase>()
-                              .Where(p => IsLazyLoaderAsyncMethod(p.ClrType, p.Name))
-                              .ToArray()
-                      );
+                        typeof(Func<object, CancellationToken, string, Task>),
+                        typeof(ILazyLoader),
+                        _loadAsyncMethod,
+                        entityType
+                            .GetServiceProperties()
+                            .Cast<IPropertyBase>()
+                            .Where(p => IsLazyLoaderAsyncMethod(p.ClrType, p.Name))
+                            .ToArray()
+                    );
 
         private static bool IsLazyLoader(Type type) => type == typeof(ILazyLoader);
 

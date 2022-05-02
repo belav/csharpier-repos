@@ -1836,8 +1836,8 @@ namespace System
                         _string,
                         obj._string,
                         IsUncOrDosPath
-                          ? StringComparison.OrdinalIgnoreCase
-                          : StringComparison.Ordinal
+                            ? StringComparison.OrdinalIgnoreCase
+                            : StringComparison.Ordinal
                     )
                 )
                 {
@@ -2010,12 +2010,12 @@ namespace System
             rawString is null
                 ? string.Empty
                 : UriHelper.EscapeString(
-                      rawString,
-                      checkExistingEscaped: true,
-                      UriHelper.UnreservedReservedTable,
-                      '?',
-                      '#'
-                  );
+                    rawString,
+                    checkExistingEscaped: true,
+                    UriHelper.UnreservedReservedTable,
+                    '?',
+                    '#'
+                );
 
         //
         //  This method is called first to figure out the scheme or a simple file path
@@ -3048,8 +3048,8 @@ namespace System
                                 '/',
                                 '\\',
                                 InFact(Flags.UserEscaped)
-                                  ? UnescapeMode.Unescape
-                                  : UnescapeMode.EscapeUnescape,
+                                    ? UnescapeMode.Unescape
+                                    : UnescapeMode.EscapeUnescape,
                                 _syntax,
                                 isQuery: false
                             );
@@ -3105,10 +3105,10 @@ namespace System
                             formatAs == UriFormat.Unescaped
                                 ? (UnescapeMode.Unescape | UnescapeMode.UnescapeAll)
                                 : (
-                                      InFact(Flags.UserEscaped)
+                                    InFact(Flags.UserEscaped)
                                         ? UnescapeMode.Unescape
                                         : UnescapeMode.EscapeUnescape
-                                  );
+                                );
                     }
                     else
                     {
@@ -3233,16 +3233,16 @@ namespace System
                         mode = formatAs switch
                         {
                             V1ToStringUnescape
-                              => (
-                                  InFact(Flags.UserEscaped)
-                                    ? UnescapeMode.Unescape
-                                    : UnescapeMode.EscapeUnescape
-                              ) | UnescapeMode.V1ToStringFlag,
+                                => (
+                                    InFact(Flags.UserEscaped)
+                                        ? UnescapeMode.Unescape
+                                        : UnescapeMode.EscapeUnescape
+                                ) | UnescapeMode.V1ToStringFlag,
                             UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
                             _
-                              => InFact(Flags.UserEscaped)
-                                ? UnescapeMode.Unescape
-                                : UnescapeMode.EscapeUnescape
+                                => InFact(Flags.UserEscaped)
+                                    ? UnescapeMode.Unescape
+                                    : UnescapeMode.EscapeUnescape
                         };
                     }
                 }
@@ -3291,16 +3291,16 @@ namespace System
                         mode = formatAs switch
                         {
                             V1ToStringUnescape
-                              => (
-                                  InFact(Flags.UserEscaped)
-                                    ? UnescapeMode.Unescape
-                                    : UnescapeMode.EscapeUnescape
-                              ) | UnescapeMode.V1ToStringFlag,
+                                => (
+                                    InFact(Flags.UserEscaped)
+                                        ? UnescapeMode.Unescape
+                                        : UnescapeMode.EscapeUnescape
+                                ) | UnescapeMode.V1ToStringFlag,
                             UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
                             _
-                              => InFact(Flags.UserEscaped)
-                                ? UnescapeMode.Unescape
-                                : UnescapeMode.EscapeUnescape
+                                => InFact(Flags.UserEscaped)
+                                    ? UnescapeMode.Unescape
+                                    : UnescapeMode.EscapeUnescape
                         };
                     }
                 }
@@ -3440,8 +3440,8 @@ namespace System
                             ;
                     }
                     return (idx - _info.Offset.Host == 0)
-                      ? string.Empty
-                      : _string.Substring(_info.Offset.Host, idx - _info.Offset.Host);
+                        ? string.Empty
+                        : _string.Substring(_info.Offset.Host, idx - _info.Offset.Host);
 
                 case UriComponents.Path:
 
@@ -3496,8 +3496,11 @@ namespace System
 
                 case UriComponents.UserInfo | UriComponents.Host | UriComponents.Port:
                     return (_info.Offset.Path - _info.Offset.User == 0)
-                      ? string.Empty
-                      : _string.Substring(_info.Offset.User, _info.Offset.Path - _info.Offset.User);
+                        ? string.Empty
+                        : _string.Substring(
+                            _info.Offset.User,
+                            _info.Offset.Path - _info.Offset.User
+                        );
 
                 case UriComponents.StrongAuthority: //UserInfo|Host|StrongPort
                     if (InFact(Flags.NotDefaultPort) || _syntax.DefaultPort == UriParser.NoDefaultPort)
@@ -5310,8 +5313,8 @@ namespace System
                                 '.',
                                 '/',
                                 _syntax.InFact(UriSyntaxFlags.ConvertPathSlashes)
-                                  ? '\\'
-                                  : c_DummyChar
+                                    ? '\\'
+                                    : c_DummyChar
                             );
                             dest.Length = end;
                         }
@@ -5405,8 +5408,8 @@ namespace System
                                 '.',
                                 '/',
                                 _syntax.InFact(UriSyntaxFlags.ConvertPathSlashes)
-                                  ? '\\'
-                                  : c_DummyChar
+                                    ? '\\'
+                                    : c_DummyChar
                             );
                             dest.Length = end;
                         }
@@ -5478,8 +5481,8 @@ namespace System
                         mode =
                             (
                                 InFact(Flags.UserEscaped)
-                                  ? UnescapeMode.Unescape
-                                  : UnescapeMode.EscapeUnescape
+                                    ? UnescapeMode.Unescape
+                                    : UnescapeMode.EscapeUnescape
                             ) | UnescapeMode.V1ToStringFlag;
                         if (IsImplicitFile)
                             mode &= ~UnescapeMode.Unescape;
@@ -5494,8 +5497,8 @@ namespace System
                     default: // UriFormat.SafeUnescaped
 
                         mode = InFact(Flags.UserEscaped)
-                          ? UnescapeMode.Unescape
-                          : UnescapeMode.EscapeUnescape;
+                            ? UnescapeMode.Unescape
+                            : UnescapeMode.EscapeUnescape;
                         if (IsImplicitFile)
                             mode &= ~UnescapeMode.Unescape;
                         break;
@@ -5875,8 +5878,8 @@ namespace System
                 }
 
                 return convBackSlashes && c1 == '\\'
-                  ? string.Concat(left, "/", relativePart.AsSpan(1))
-                  : left + relativePart;
+                    ? string.Concat(left, "/", relativePart.AsSpan(1))
+                    : left + relativePart;
             }
 
             // Here we got a relative path
@@ -6167,12 +6170,12 @@ namespace System
             str is null
                 ? string.Empty
                 : UriHelper.EscapeString(
-                      str,
-                      checkExistingEscaped: true,
-                      UriHelper.UnreservedReservedTable,
-                      '?',
-                      '#'
-                  );
+                    str,
+                    checkExistingEscaped: true,
+                    UriHelper.UnreservedReservedTable,
+                    '?',
+                    '#'
+                );
 
         //
         // CheckSecurity

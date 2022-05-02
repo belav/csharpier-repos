@@ -795,8 +795,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ) where TMember : Symbol
         {
             return IsTupleType
-              ? TupleData!.GetTupleMemberSymbolForUnderlyingMember(underlyingMemberOpt)
-              : null;
+                ? TupleData!.GetTupleMemberSymbolForUnderlyingMember(underlyingMemberOpt)
+                : null;
         }
 
         protected ArrayBuilder<Symbol> MakeSynthesizedTupleMembers(
@@ -1028,8 +1028,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ).OriginalDefinition;
 
                     var diagnosticInfo = container.IsErrorType()
-                      ? null
-                      : new CSDiagnosticInfo(
+                        ? null
+                        : new CSDiagnosticInfo(
                             ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly,
                             TupleMemberName(fieldRemainder),
                             container,
@@ -1177,8 +1177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var elementLocation = elementLocations[tupleFieldIndex];
                 return elementLocation == null
-                  ? ImmutableArray<Location>.Empty
-                  : ImmutableArray.Create(elementLocation);
+                    ? ImmutableArray<Location>.Empty
+                    : ImmutableArray.Create(elementLocation);
             }
         }
 
@@ -1210,8 +1210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ? TupleElementNames.IsDefault
                 : mergedNames.SequenceEqual(TupleElementNames);
             return (namesUnchanged && this.Equals(mergedType, TypeCompareKind.ConsiderEverything))
-              ? this
-              : CreateTuple(
+                ? this
+                : CreateTuple(
                     mergedType,
                     mergedNames,
                     this.TupleErrorPositions,

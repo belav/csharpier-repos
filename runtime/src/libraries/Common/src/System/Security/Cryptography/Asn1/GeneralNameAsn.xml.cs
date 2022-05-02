@@ -271,16 +271,16 @@ namespace System.Security.Cryptography.Asn1
             {
                 tmpSpan = reader.ReadEncodedValue();
                 decoded.X400Address = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 4)))
             {
                 explicitReader = reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 4));
                 tmpSpan = explicitReader.ReadEncodedValue();
                 decoded.DirectoryName = rebindSpan.Overlaps(tmpSpan, out offset)
-                  ? rebind.Slice(offset, tmpSpan.Length)
-                  : tmpSpan.ToArray();
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
                 explicitReader.ThrowIfNotEmpty();
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 5)))
@@ -311,8 +311,8 @@ namespace System.Security.Cryptography.Asn1
                 )
                 {
                     decoded.IPAddress = rebindSpan.Overlaps(tmpSpan, out offset)
-                      ? rebind.Slice(offset, tmpSpan.Length)
-                      : tmpSpan.ToArray();
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {

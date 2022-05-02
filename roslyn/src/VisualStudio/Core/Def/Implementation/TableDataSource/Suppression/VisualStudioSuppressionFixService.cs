@@ -295,9 +295,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 // Otherwise, get all diagnostics from the diagnostic service.
                 var diagnosticsToFixTask = selectedEntriesOnly
                     ? _suppressionStateService.GetSelectedItemsAsync(
-                          isAddSuppression,
-                          cancellationToken
-                      )
+                        isAddSuppression,
+                        cancellationToken
+                    )
                     : GetAllBuildDiagnosticsAsync(shouldFixInProject, cancellationToken);
 
                 diagnosticsToFix = diagnosticsToFixTask
@@ -416,12 +416,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 var projectDiagnosticsToFixMap = isSuppressionInSource
                     ? ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty
                     : await GetProjectDiagnosticsToFixAsync(
-                              diagnosticsToFix,
-                              shouldFixInProject,
-                              filterStaleDiagnostics,
-                              cancellationToken
-                          )
-                          .ConfigureAwait(false);
+                            diagnosticsToFix,
+                            shouldFixInProject,
+                            filterStaleDiagnostics,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 if (
                     documentDiagnosticsToFixMap == null
@@ -439,10 +439,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
                 // Make sure we don't include any specific diagnostic ID, as we want all of the given diagnostics (which can have varied ID) to be fixed.
                 var equivalenceKey = isAddSuppression
                     ? (
-                          isSuppressionInSource
-                              ? FeaturesResources.in_Source
-                              : FeaturesResources.in_Suppression_File
-                      )
+                        isSuppressionInSource
+                            ? FeaturesResources.in_Source
+                            : FeaturesResources.in_Suppression_File
+                    )
                     : FeaturesResources.Remove_Suppression;
 
                 // We have different suppression fixers for every language.
@@ -676,8 +676,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
             }
 
             return builder != null
-              ? builder.ToImmutable()
-              : ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty;
+                ? builder.ToImmutable()
+                : ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty;
         }
 
         private static ImmutableDictionary<
@@ -708,8 +708,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Suppression
             }
 
             return projectDiagsBuilder != null
-              ? projectDiagsBuilder.ToImmutable()
-              : ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty;
+                ? projectDiagsBuilder.ToImmutable()
+                : ImmutableDictionary<Project, ImmutableArray<Diagnostic>>.Empty;
         }
 
         private static CodeFixProvider GetSuppressionFixer(

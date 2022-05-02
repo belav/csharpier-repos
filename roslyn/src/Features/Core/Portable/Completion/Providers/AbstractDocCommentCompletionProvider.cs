@@ -415,8 +415,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var itemSpan = item.Span;
             var replacementSpan = TextSpan.FromBounds(
                 text[itemSpan.Start - 1] == '<' && beforeCaretText[0] == '<'
-                  ? itemSpan.Start - 1
-                  : itemSpan.Start,
+                    ? itemSpan.Start - 1
+                    : itemSpan.Start,
                 itemSpan.End
             );
 

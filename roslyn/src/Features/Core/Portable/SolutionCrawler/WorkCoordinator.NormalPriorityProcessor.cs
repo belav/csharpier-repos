@@ -150,8 +150,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                         return
                             _higherPriorityDocumentsNotProcessed.Count <= MaxHighPriorityQueueCache
-                          ? Processor.EnableCaching(id.ProjectId)
-                          : null;
+                            ? Processor.EnableCaching(id.ProjectId)
+                            : null;
                     }
 
                     protected override Task WaitAsync(CancellationToken cancellationToken)

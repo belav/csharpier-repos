@@ -698,8 +698,8 @@ namespace System.Collections.Specialized
             private string GetNotSupportedErrorMessage()
             {
                 return IsKeys
-                  ? SR.NotSupported_KeyCollectionSet
-                  : SR.NotSupported_ValueCollectionSet;
+                    ? SR.NotSupported_KeyCollectionSet
+                    : SR.NotSupported_ValueCollectionSet;
             }
         }
     }

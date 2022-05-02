@@ -15,9 +15,9 @@ namespace System
     // IList<U> and IReadOnlyList<U>, where T : U dynamically.  See the SZArrayHelper class for details.
     public abstract partial class Array
         : ICloneable,
-          IList,
-          IStructuralComparable,
-          IStructuralEquatable
+            IList,
+            IStructuralComparable,
+            IStructuralEquatable
     {
         // Create instance will create an array
         public static unsafe Array CreateInstance(Type elementType, int length)
@@ -630,8 +630,8 @@ namespace System
             // ! or you may introduce a security hole!
             T[] _this = Unsafe.As<T[]>(this);
             return _this.Length == 0
-              ? SZGenericArrayEnumerator<T>.Empty
-              : new SZGenericArrayEnumerator<T>(_this);
+                ? SZGenericArrayEnumerator<T>.Empty
+                : new SZGenericArrayEnumerator<T>(_this);
         }
 
         private void CopyTo<T>(T[] array, int index)

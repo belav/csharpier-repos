@@ -117,9 +117,9 @@ public class DynamicPageEndpointMatcherPolicyTest
                                 "/About" => LoadedEndpoints[1],
                                 "/ReplacedEndpoint" => LoadedEndpoints[2],
                                 _
-                                  => throw new InvalidOperationException(
-                                      $"Invalid endpoint '{descriptor.DisplayName}'."
-                                  )
+                                    => throw new InvalidOperationException(
+                                        $"Invalid endpoint '{descriptor.DisplayName}'."
+                                    )
                             }
                         }
                     )

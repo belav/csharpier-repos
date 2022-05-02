@@ -11,20 +11,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 {
     public class InternalClrEntityEntryTest
         : InternalEntityEntryTestBase<
-              InternalClrEntityEntryTest.SomeEntity,
-              InternalClrEntityEntryTest.SomeSimpleEntityBase,
-              InternalClrEntityEntryTest.SomeDependentEntity,
-              InternalClrEntityEntryTest.SomeMoreDependentEntity,
-              InternalClrEntityEntryTest.Root,
-              InternalClrEntityEntryTest.FirstDependent,
-              InternalClrEntityEntryTest.SecondDependent,
-              InternalClrEntityEntryTest.CompositeRoot,
-              InternalClrEntityEntryTest.CompositeFirstDependent,
-              InternalClrEntityEntryTest.SomeCompositeEntityBase,
-              InternalClrEntityEntryTest.CompositeSecondDependent,
-              InternalClrEntityEntryTest.KClrContext,
-              InternalClrEntityEntryTest.KClrSnapContext
-          >
+            InternalClrEntityEntryTest.SomeEntity,
+            InternalClrEntityEntryTest.SomeSimpleEntityBase,
+            InternalClrEntityEntryTest.SomeDependentEntity,
+            InternalClrEntityEntryTest.SomeMoreDependentEntity,
+            InternalClrEntityEntryTest.Root,
+            InternalClrEntityEntryTest.FirstDependent,
+            InternalClrEntityEntryTest.SecondDependent,
+            InternalClrEntityEntryTest.CompositeRoot,
+            InternalClrEntityEntryTest.CompositeFirstDependent,
+            InternalClrEntityEntryTest.SomeCompositeEntityBase,
+            InternalClrEntityEntryTest.CompositeSecondDependent,
+            InternalClrEntityEntryTest.KClrContext,
+            InternalClrEntityEntryTest.KClrSnapContext
+        >
     {
         [ConditionalFact]
         public virtual void All_original_values_can_be_accessed_for_entity_that_does_full_change_tracking_if_eager_values_on() =>
@@ -137,8 +137,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             Assert.Equal(
                 entityState == EntityState.Deleted || entityState == EntityState.Detached
-                  ? EntityState.Detached
-                  : EntityState.Unchanged,
+                    ? EntityState.Detached
+                    : EntityState.Unchanged,
                 entry.EntityState
             );
             if (entityState == EntityState.Unchanged)
@@ -151,8 +151,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 Assert.Equal("Pickle", entry[valueProperty]);
                 Assert.Equal(
                     entityState == EntityState.Detached || entityState == EntityState.Deleted
-                      ? "Cheese"
-                      : "Pickle",
+                        ? "Cheese"
+                        : "Pickle",
                     entry.GetOriginalValue(valueProperty)
                 );
             }
@@ -255,8 +255,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
         public class FullNotificationEntity
             : INotifyPropertyChanging,
-              INotifyPropertyChanged,
-              ISomeEntity
+                INotifyPropertyChanged,
+                ISomeEntity
         {
             private int _id;
             private string _name;

@@ -230,7 +230,7 @@ namespace System.Xml.Xsl.Qil
                 QilNodeType.XsltGenerateId => VisitXsltGenerateId((QilUnary)n),
                 QilNodeType.XsltInvokeLateBound => VisitXsltInvokeLateBound((QilInvokeLateBound)n),
                 QilNodeType.XsltInvokeEarlyBound
-                  => VisitXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
+                    => VisitXsltInvokeEarlyBound((QilInvokeEarlyBound)n),
                 QilNodeType.XsltCopy => VisitXsltCopy((QilBinary)n),
                 QilNodeType.XsltCopyOf => VisitXsltCopyOf((QilUnary)n),
                 QilNodeType.XsltConvert => VisitXsltConvert((QilTargetType)n),

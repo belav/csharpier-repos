@@ -14,10 +14,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
 {
     internal partial class FormattingViewModel
         : SettingsViewModelBase<
-              FormattingSetting,
-              FormattingViewModel.SettingsSnapshotFactory,
-              FormattingViewModel.SettingsEntriesSnapshot
-          >
+            FormattingSetting,
+            FormattingViewModel.SettingsSnapshotFactory,
+            FormattingViewModel.SettingsEntriesSnapshot
+        >
     {
         public FormattingViewModel(
             ISettingsProvider<FormattingSetting> data,

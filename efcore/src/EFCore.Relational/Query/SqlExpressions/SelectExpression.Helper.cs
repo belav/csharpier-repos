@@ -214,11 +214,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 switch (expression)
                 {
                     case SqlExpression sqlExpression
-                          when _mappings.TryGetValue(sqlExpression, out var outer):
+                    when _mappings.TryGetValue(sqlExpression, out var outer):
                         return outer;
 
                     case ColumnExpression columnExpression
-                          when _subquery.ContainsTableReference(columnExpression):
+                    when _subquery.ContainsTableReference(columnExpression):
                         var outerColumn = _subquery.GenerateOuterColumn(
                             _tableReferenceExpression,
                             columnExpression
@@ -495,7 +495,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 {
                     ColumnExpression columnExpression => columnExpression.IsNullable,
                     SqlConstantExpression sqlConstantExpression
-                      => sqlConstantExpression.Value == null,
+                        => sqlConstantExpression.Value == null,
                     _ => true,
                 };
 
@@ -919,8 +919,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                 }
 
                 return expression is IClonableTableExpressionBase cloneable
-                  ? cloneable.Clone()
-                  : base.Visit(expression);
+                    ? cloneable.Clone()
+                    : base.Visit(expression);
             }
         }
 
@@ -947,14 +947,14 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     expression is ConcreteColumnExpression concreteColumnExpression
                     && _oldSelectExpression.ContainsTableReference(concreteColumnExpression)
                     && _newTableReferences.ContainsKey(concreteColumnExpression.TableAlias)
-                  ? new ConcreteColumnExpression(
+                    ? new ConcreteColumnExpression(
                         concreteColumnExpression.Name,
                         _newTableReferences[concreteColumnExpression.TableAlias],
                         concreteColumnExpression.Type,
                         concreteColumnExpression.TypeMapping!,
                         concreteColumnExpression.IsNullable
                     )
-                  : base.Visit(expression);
+                    : base.Visit(expression);
             }
         }
 

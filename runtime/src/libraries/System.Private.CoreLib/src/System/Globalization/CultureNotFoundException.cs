@@ -80,10 +80,10 @@ namespace System.Globalization
         private string? FormattedInvalidCultureId =>
             InvalidCultureId != null
                 ? string.Format(
-                      CultureInfo.InvariantCulture,
-                      "{0} (0x{0:x4})",
-                      (int)InvalidCultureId
-                  )
+                    CultureInfo.InvariantCulture,
+                    "{0} (0x{0:x4})",
+                    (int)InvalidCultureId
+                )
                 : InvalidCultureName;
 
         public override string Message

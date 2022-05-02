@@ -564,8 +564,8 @@ namespace System.Threading
             {
                 if (_canceled)
                     return throwIfDisposed
-                      ? throw new ObjectDisposedException(null, SR.ObjectDisposed_Generic)
-                      : false;
+                        ? throw new ObjectDisposedException(null, SR.ObjectDisposed_Generic)
+                        : false;
 
                 _period = period;
 

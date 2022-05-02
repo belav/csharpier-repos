@@ -1016,8 +1016,8 @@ namespace System.Text.RegularExpressions.Tests
             Regex r = await RegexHelpers.GetRegexAsync(
                 engine,
                 engine == RegexEngine.NonBacktracking
-                  ? "^(([0-9a-fA-F]{1,4}:)*([0-9a-fA-F]{1,4}))*(::)$"
-                  : // Using RegexOptions.NonBacktracking to avoid backtracking
+                    ? "^(([0-9a-fA-F]{1,4}:)*([0-9a-fA-F]{1,4}))*(::)$"
+                    : // Using RegexOptions.NonBacktracking to avoid backtracking
                     "^((?>[0-9a-fA-F]{1,4}:)*(?>[0-9a-fA-F]{1,4}))*(::)$"
             ); // Using atomic to avoid backtracking
 

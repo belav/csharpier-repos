@@ -155,11 +155,11 @@ public class CreateFrameworkListFile : Microsoft.Build.Utilities.Task
         // replicate the logic used by PackTask https://github.com/NuGet/NuGet.Client/blob/f24bad0668193ce21a1db8cabd1ce95ba509c7f0/src/NuGet.Core/NuGet.Build.Tasks.Pack/PackTaskLogic.cs#L644-L647
         string recursiveDir = item.GetMetadata("RecursiveDir");
         recursiveDir = string.IsNullOrEmpty(recursiveDir)
-          ? item.GetMetadata("NuGetRecursiveDir")
-          : recursiveDir;
+            ? item.GetMetadata("NuGetRecursiveDir")
+            : recursiveDir;
 
         return string.IsNullOrEmpty(recursiveDir)
-          ? packagePath
-          : Path.Combine(packagePath, recursiveDir);
+            ? packagePath
+            : Path.Combine(packagePath, recursiveDir);
     }
 }

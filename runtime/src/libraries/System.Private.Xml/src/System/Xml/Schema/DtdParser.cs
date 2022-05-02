@@ -2788,16 +2788,16 @@ namespace System.Xml
                                 {
                                     _stringBuilder.Append(
                                         _readerAdapter.IsEntityEolNormalized
-                                          ? "\u0020\u0020"
-                                          : "\u0020"
+                                            ? "\u0020\u0020"
+                                            : "\u0020"
                                     ); // CDATA normalization of 0xD 0xA
                                 }
                                 else
                                 {
                                     _stringBuilder.Append(
                                         _readerAdapter.IsEntityEolNormalized
-                                          ? "\u000D\u000A"
-                                          : "\u000A"
+                                            ? "\u000D\u000A"
+                                            : "\u000A"
                                     ); // EOL normalization of 0xD 0xA
                                 }
                                 _tokenStartPos = _curPos + 2;

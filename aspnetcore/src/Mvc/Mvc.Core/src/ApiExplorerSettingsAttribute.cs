@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Mvc;
 )]
 public class ApiExplorerSettingsAttribute
     : Attribute,
-      IApiDescriptionGroupNameProvider,
-      IApiDescriptionVisibilityProvider
+        IApiDescriptionGroupNameProvider,
+        IApiDescriptionVisibilityProvider
 {
     /// <inheritdoc />
     public string? GroupName { get; set; }

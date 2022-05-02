@@ -352,13 +352,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(eventSymbol.HasAssociatedField);
             return eventSymbol.IsWindowsRuntimeEvent
-              ? ConstructFieldLikeEventAccessorBody_WinRT(
+                ? ConstructFieldLikeEventAccessorBody_WinRT(
                     eventSymbol,
                     isAddMethod,
                     compilation,
                     diagnostics
                 )
-              : ConstructFieldLikeEventAccessorBody_Regular(
+                : ConstructFieldLikeEventAccessorBody_Regular(
                     eventSymbol,
                     isAddMethod,
                     compilation,
@@ -560,9 +560,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundThisReference fieldReceiver = eventSymbol.IsStatic
                 ? null
                 : new BoundThisReference(syntax, thisParameter.Type)
-                  {
-                      WasCompilerGenerated = true
-                  };
+                {
+                    WasCompilerGenerated = true
+                };
 
             BoundFieldAccess boundBackingField = new BoundFieldAccess(
                 syntax,

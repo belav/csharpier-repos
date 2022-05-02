@@ -1125,8 +1125,8 @@ namespace System.Reflection.Metadata
                 "AllowMultipleAttribute"
             );
             return allowMultiple
-              ? CustomAttributeValueTreatment.AttributeUsageAllowMultiple
-              : CustomAttributeValueTreatment.AttributeUsageAllowSingle;
+                ? CustomAttributeValueTreatment.AttributeUsageAllowMultiple
+                : CustomAttributeValueTreatment.AttributeUsageAllowSingle;
         }
 
         private bool IsWindowsAttributeUsageAttribute(

@@ -1475,8 +1475,8 @@ namespace N1
             foreach (var child in @namespace.GetNamespaceMembers())
             {
                 var childName = string.IsNullOrEmpty(baseName)
-                  ? child.Name
-                  : (baseName + "." + child.Name);
+                    ? child.Name
+                    : (baseName + "." + child.Name);
                 yield return childName;
 
                 foreach (var result in EnumerateNamespaces(child, childName))

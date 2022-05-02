@@ -18,9 +18,9 @@ namespace System.Collections.Immutable
     [DebuggerTypeProxy(typeof(ImmutableDictionaryDebuggerProxy<,>))]
     public sealed partial class ImmutableSortedDictionary<TKey, TValue>
         : IImmutableDictionary<TKey, TValue>,
-          ISortKeyCollection<TKey>,
-          IDictionary<TKey, TValue>,
-          IDictionary
+            ISortKeyCollection<TKey>,
+            IDictionary<TKey, TValue>,
+            IDictionary
     {
         /// <summary>
         /// An empty sorted dictionary with default sort and equality comparers.
@@ -770,8 +770,8 @@ namespace System.Collections.Immutable
         >.GetEnumerator()
         {
             return this.IsEmpty
-              ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
-              : this.GetEnumerator();
+                ? Enumerable.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
+                : this.GetEnumerator();
         }
 
         #endregion
@@ -818,8 +818,8 @@ namespace System.Collections.Immutable
         )
         {
             return root.IsEmpty
-              ? Empty.WithComparers(keyComparer, valueComparer)
-              : new ImmutableSortedDictionary<TKey, TValue>(
+                ? Empty.WithComparers(keyComparer, valueComparer)
+                : new ImmutableSortedDictionary<TKey, TValue>(
                     root,
                     count,
                     keyComparer,
@@ -884,13 +884,13 @@ namespace System.Collections.Immutable
                 bool replacedExistingValue = false;
                 var newResult = overwriteOnCollision
                     ? result.SetItem(
-                          item.Key,
-                          item.Value,
-                          _keyComparer,
-                          _valueComparer,
-                          out replacedExistingValue,
-                          out mutated
-                      )
+                        item.Key,
+                        item.Value,
+                        _keyComparer,
+                        _valueComparer,
+                        out replacedExistingValue,
+                        out mutated
+                    )
                     : result.Add(item.Key, item.Value, _keyComparer, _valueComparer, out mutated);
                 if (mutated)
                 {
@@ -919,8 +919,8 @@ namespace System.Collections.Immutable
             if (_root != root)
             {
                 return root.IsEmpty
-                  ? this.Clear()
-                  : new ImmutableSortedDictionary<TKey, TValue>(
+                    ? this.Clear()
+                    : new ImmutableSortedDictionary<TKey, TValue>(
                         root,
                         adjustedCountIfDifferentRoot,
                         _keyComparer,

@@ -228,8 +228,8 @@ namespace Microsoft.Extensions.Logging.Console
     [Microsoft.Extensions.Logging.ProviderAliasAttribute("Console")]
     public partial class ConsoleLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
-          Microsoft.Extensions.Logging.ISupportExternalScope,
-          System.IDisposable
+            Microsoft.Extensions.Logging.ISupportExternalScope,
+            System.IDisposable
     {
         public ConsoleLoggerProvider(
             Microsoft.Extensions.Options.IOptionsMonitor<Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions> options

@@ -119,8 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared
             var strUri = uri.ToString();
 
             var resourceName = strUri.StartsWith(BingGetApiUrl, StringComparison.Ordinal)
-              ? EditorFeaturesResources.Get_help_for_0_from_Bing
-              : EditorFeaturesResources.Get_help_for_0;
+                ? EditorFeaturesResources.Get_help_for_0_from_Bing
+                : EditorFeaturesResources.Get_help_for_0;
 
             // We make sure not to use Uri.AbsoluteUri for the url displayed in the tooltip so that the url displayed in the tooltip stays human readable.
             return string.Format(resourceName, diagnosticId) + "\r\n" + strUri;

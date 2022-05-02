@@ -310,9 +310,9 @@ namespace System.Web.Mvc
                         port = requestUrl.IsDefaultPort
                             ? String.Empty
                             : (
-                                  ":"
-                                  + Convert.ToString(requestUrl.Port, CultureInfo.InvariantCulture)
-                              );
+                                ":"
+                                + Convert.ToString(requestUrl.Port, CultureInfo.InvariantCulture)
+                            );
                     }
 
                     url = protocol + Uri.SchemeDelimiter + hostName + port + url;

@@ -15,8 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeParameter))]
     public sealed class ExternalCodeParameter
         : AbstractExternalCodeElement,
-          EnvDTE.CodeParameter,
-          EnvDTE80.CodeParameter2
+            EnvDTE.CodeParameter,
+            EnvDTE80.CodeParameter2
     {
         internal static EnvDTE.CodeParameter Create(
             CodeModelState state,
@@ -79,8 +79,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
                 return
                     ParameterSymbol.HasExplicitDefaultValue
                     && ParameterSymbol.ExplicitDefaultValue != null
-                  ? ParameterSymbol.ExplicitDefaultValue.ToString()
-                  : null;
+                    ? ParameterSymbol.ExplicitDefaultValue.ToString()
+                    : null;
             }
             set { throw Exceptions.ThrowEFail(); }
         }

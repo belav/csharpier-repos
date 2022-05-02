@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.FileProviders
 {
     public partial interface IDirectoryContents
         : System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         bool Exists { get; }
     }
@@ -33,8 +33,8 @@ namespace Microsoft.Extensions.FileProviders
 
     public partial class NotFoundDirectoryContents
         : Microsoft.Extensions.FileProviders.IDirectoryContents,
-          System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<Microsoft.Extensions.FileProviders.IFileInfo>,
+            System.Collections.IEnumerable
     {
         public NotFoundDirectoryContents() { }
 

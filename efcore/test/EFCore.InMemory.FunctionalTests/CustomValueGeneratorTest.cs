@@ -263,15 +263,15 @@ namespace Microsoft.EntityFrameworkCore
                 if (property.ClrType == typeof(Guid))
                 {
                     return property["SpecialGuid"] != null
-                      ? new CustomGuidValueGenerator()
-                      : new SequentialGuidValueGenerator();
+                        ? new CustomGuidValueGenerator()
+                        : new SequentialGuidValueGenerator();
                 }
 
                 return
                     property.ClrType == typeof(string)
                     && property.DeclaringEntityType.ClrType == typeof(SomeEntity)
-                  ? new SomeEntityStringValueGenerator()
-                  : null;
+                    ? new SomeEntityStringValueGenerator()
+                    : null;
             }
         }
     }

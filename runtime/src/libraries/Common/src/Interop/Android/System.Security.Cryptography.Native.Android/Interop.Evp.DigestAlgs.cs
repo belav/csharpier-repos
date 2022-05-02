@@ -54,9 +54,9 @@ internal static partial class Interop
                 nameof(HashAlgorithmName.SHA512) => EvpSha512(),
                 nameof(HashAlgorithmName.MD5) => EvpMd5(),
                 _
-                  => throw new CryptographicException(
-                      SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
-                  )
+                    => throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                    )
             };
     }
 }

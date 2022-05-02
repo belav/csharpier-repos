@@ -199,8 +199,8 @@ namespace System.IO.Ports
                 SetDcbFlag(
                     Interop.Kernel32.DCBFlags.FDTRCONTROL,
                     value
-                      ? Interop.Kernel32.DCBDTRFlowControl.DTR_CONTROL_ENABLE
-                      : Interop.Kernel32.DCBDTRFlowControl.DTR_CONTROL_DISABLE
+                        ? Interop.Kernel32.DCBDTRFlowControl.DTR_CONTROL_ENABLE
+                        : Interop.Kernel32.DCBDTRFlowControl.DTR_CONTROL_DISABLE
                 );
                 if (Interop.Kernel32.SetCommState(_handle, ref _dcb) == false)
                 {
@@ -213,8 +213,8 @@ namespace System.IO.Ports
                     !Interop.Kernel32.EscapeCommFunction(
                         _handle,
                         value
-                          ? Interop.Kernel32.CommFunctions.SETDTR
-                          : Interop.Kernel32.CommFunctions.CLRDTR
+                            ? Interop.Kernel32.CommFunctions.SETDTR
+                            : Interop.Kernel32.CommFunctions.CLRDTR
                     )
                 )
                     throw Win32Marshal.GetExceptionForLastWin32Error();
@@ -256,8 +256,8 @@ namespace System.IO.Ports
                             _handshake == Handshake.RequestToSend
                             || _handshake == Handshake.RequestToSendXOnXOff
                         )
-                          ? 1
-                          : 0
+                            ? 1
+                            : 0
                     );
 
                     if (
@@ -510,8 +510,8 @@ namespace System.IO.Ports
                         !Interop.Kernel32.EscapeCommFunction(
                             _handle,
                             value
-                              ? Interop.Kernel32.CommFunctions.SETRTS
-                              : Interop.Kernel32.CommFunctions.CLRRTS
+                                ? Interop.Kernel32.CommFunctions.SETRTS
+                                : Interop.Kernel32.CommFunctions.CLRRTS
                         )
                     )
                         throw Win32Marshal.GetExceptionForLastWin32Error();
@@ -1438,14 +1438,14 @@ namespace System.IO.Ports
             SetDcbFlag(
                 Interop.Kernel32.DCBFlags.FINX,
                 (_handshake == Handshake.XOnXOff || _handshake == Handshake.RequestToSendXOnXOff)
-                  ? 1
-                  : 0
+                    ? 1
+                    : 0
             );
             SetDcbFlag(
                 Interop.Kernel32.DCBFlags.FOUTX,
                 (_handshake == Handshake.XOnXOff || _handshake == Handshake.RequestToSendXOnXOff)
-                  ? 1
-                  : 0
+                    ? 1
+                    : 0
             );
 
             // if no parity, we have no error character (i.e. ErrorChar = '\0' or null character)

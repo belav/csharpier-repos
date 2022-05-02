@@ -17,8 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     [ComDefaultInterface(typeof(EnvDTE80.CodeFunction2))]
     public sealed partial class CodeAccessorFunction
         : AbstractCodeElement,
-          EnvDTE.CodeFunction,
-          EnvDTE80.CodeFunction2
+            EnvDTE.CodeFunction,
+            EnvDTE80.CodeFunction2
     {
         internal static EnvDTE.CodeFunction Create(
             CodeModelState state,

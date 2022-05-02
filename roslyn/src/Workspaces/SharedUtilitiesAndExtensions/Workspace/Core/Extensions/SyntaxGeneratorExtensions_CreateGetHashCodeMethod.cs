@@ -179,13 +179,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             const string HashCodeName = "hashCode";
             statements.Add(
                 !useInt64
-                  ? factory.SimpleLocalDeclarationStatement(
+                    ? factory.SimpleLocalDeclarationStatement(
                         generatorInternal,
                         compilation.GetSpecialType(SpecialType.System_Int32),
                         HashCodeName,
                         CreateLiteralExpression(factory, initHash)
                     )
-                  : factory.LocalDeclarationStatement(
+                    : factory.LocalDeclarationStatement(
                         compilation.GetSpecialType(SpecialType.System_Int64),
                         HashCodeName,
                         CreateLiteralExpression(factory, initHash)
@@ -221,8 +221,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // And finally, the "return hashCode;" statement.
             statements.Add(
                 !useInt64
-                  ? factory.ReturnStatement(hashCodeNameExpression)
-                  : factory.ReturnStatement(
+                    ? factory.ReturnStatement(hashCodeNameExpression)
+                    : factory.ReturnStatement(
                         factory.ConvertExpression(
                             compilation.GetSpecialType(SpecialType.System_Int32),
                             hashCodeNameExpression
@@ -248,8 +248,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         )
         {
             return generatorInternal.RequiresLocalDeclarationType()
-              ? generator.LocalDeclarationStatement(namedTypeSymbol, name, initializer)
-              : generator.LocalDeclarationStatement(name, initializer);
+                ? generator.LocalDeclarationStatement(namedTypeSymbol, name, initializer)
+                : generator.LocalDeclarationStatement(name, initializer);
         }
 
         private static SyntaxNode CreateLiteralExpression(SyntaxGenerator factory, int value) =>

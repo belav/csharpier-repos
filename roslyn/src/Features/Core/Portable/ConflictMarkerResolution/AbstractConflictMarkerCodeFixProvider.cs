@@ -234,13 +234,13 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
 
             var topText = startLine.ToString()[s_mergeConflictLength..].Trim();
             var takeTopText = string.IsNullOrWhiteSpace(topText)
-              ? FeaturesResources.Take_top
-              : string.Format(FeaturesResources.Take_0, topText);
+                ? FeaturesResources.Take_top
+                : string.Format(FeaturesResources.Take_0, topText);
 
             var bottomText = endLine.ToString()[s_mergeConflictLength..].Trim();
             var takeBottomText = string.IsNullOrWhiteSpace(bottomText)
-              ? FeaturesResources.Take_bottom
-              : string.Format(FeaturesResources.Take_0, bottomText);
+                ? FeaturesResources.Take_bottom
+                : string.Format(FeaturesResources.Take_0, bottomText);
 
             var startPos = startLine.Start;
             var equalsPos = middleLine.Start;

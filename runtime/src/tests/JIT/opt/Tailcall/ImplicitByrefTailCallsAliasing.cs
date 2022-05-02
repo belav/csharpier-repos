@@ -332,7 +332,7 @@ public class ImplicitByrefTailCalls
             && (rj == 5350)
             && (rk == 5350)
             && (rl == 5350)
-          ? 100
-          : -1;
+            ? 100
+            : -1;
     }
 }

@@ -62,7 +62,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             return
                 member.DeclaringType == typeof(DateOnly)
                 && _datePartMapping.TryGetValue(member.Name, out var datePart)
-              ? _sqlExpressionFactory.Convert(
+                ? _sqlExpressionFactory.Convert(
                     SqliteExpression.Strftime(
                         _sqlExpressionFactory,
                         typeof(string),
@@ -71,7 +71,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     ),
                     returnType
                 )
-              : null;
+                : null;
         }
     }
 }

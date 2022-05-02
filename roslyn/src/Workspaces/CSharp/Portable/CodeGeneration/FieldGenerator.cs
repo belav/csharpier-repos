@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             // Place a readonly field after the last readonly field if we have one.  Otherwise
             // after the last field/const.
             return fieldDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword)
-              ? lastReadOnly ?? lastConst ?? lastNormal
-              : lastNormal ?? lastReadOnly ?? lastConst;
+                ? lastReadOnly ?? lastConst ?? lastNormal
+                : lastNormal ?? lastReadOnly ?? lastConst;
         }
 
         internal static CompilationUnitSyntax AddFieldTo(

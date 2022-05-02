@@ -76,8 +76,10 @@ namespace System.Net.WebSockets
             CancellationToken cancellationToken
         ) =>
             MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> arraySegment)
-              ? new ValueTask(SendAsync(arraySegment, messageType, endOfMessage, cancellationToken))
-              : SendWithArrayPoolAsync(buffer, messageType, endOfMessage, cancellationToken);
+                ? new ValueTask(
+                    SendAsync(arraySegment, messageType, endOfMessage, cancellationToken)
+                )
+                : SendWithArrayPoolAsync(buffer, messageType, endOfMessage, cancellationToken);
 
         public virtual ValueTask SendAsync(
             ReadOnlyMemory<byte> buffer,

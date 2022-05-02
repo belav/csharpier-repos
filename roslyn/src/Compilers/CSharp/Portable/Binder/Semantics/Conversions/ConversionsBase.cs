@@ -280,8 +280,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     destinationFunctionType,
                     ref useSiteInfo
                 )
-                  ? Conversion.FunctionType
-                  : Conversion.NoConversion;
+                    ? Conversion.FunctionType
+                    : Conversion.NoConversion;
             }
 
             Debug.Assert(false);
@@ -1028,8 +1028,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (HasExplicitReferenceConversion(source, destination, ref useSiteInfo))
             {
                 return (source.Kind == SymbolKind.DynamicType)
-                  ? Conversion.ExplicitDynamic
-                  : Conversion.ExplicitReference;
+                    ? Conversion.ExplicitDynamic
+                    : Conversion.ExplicitReference;
             }
 
             if (HasUnboxingConversion(source, destination, ref useSiteInfo))
@@ -1141,9 +1141,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // for example if underlying conversion is implicit tuple
                     impliedExplicitConversion = underlyingConversion.Exists
                         ? Conversion.MakeNullableConversion(
-                              ConversionKind.ExplicitNullable,
-                              underlyingConversion
-                          )
+                            ConversionKind.ExplicitNullable,
+                            underlyingConversion
+                        )
                         : Conversion.NoConversion;
 
                     break;
@@ -1364,9 +1364,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.UnconvertedInterpolatedString:
                 case BoundKind.BinaryOperator
-                      when (
-                          (BoundBinaryOperator)sourceExpression
-                      ).IsUnconvertedInterpolatedStringAddition:
+                when (
+                    (BoundBinaryOperator)sourceExpression
+                ).IsUnconvertedInterpolatedStringAddition:
                     Conversion interpolatedStringConversion = GetInterpolatedStringConversion(
                         sourceExpression,
                         destination,
@@ -1390,7 +1390,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     break;
 
                 case BoundKind.UnconvertedAddressOfOperator
-                      when destination is FunctionPointerTypeSymbol funcPtrType:
+                when destination is FunctionPointerTypeSymbol funcPtrType:
                     var addressOfConversion = GetMethodGroupFunctionPointerConversion(
                         ((BoundUnconvertedAddressOfOperator)sourceExpression).Operand,
                         funcPtrType,
@@ -2146,7 +2146,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // See TypeCompareKind.ObliviousNullableModifierMatchesAny
             var compareKind = includeNullability
                 ? TypeCompareKind.AllIgnoreOptions
-                  & ~TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    & ~TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
                 : TypeCompareKind.AllIgnoreOptions;
             return type1.Equals(type2, compareKind);
         }
@@ -2296,8 +2296,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ref useSiteInfo
             );
             return IsValidExtensionMethodThisArgConversion(conversion)
-              ? conversion
-              : Conversion.NoConversion;
+                ? conversion
+                : Conversion.NoConversion;
         }
 
         // Spec 7.6.5.2: "An extension method ... is eligible if ... [an] implicit identity, reference,

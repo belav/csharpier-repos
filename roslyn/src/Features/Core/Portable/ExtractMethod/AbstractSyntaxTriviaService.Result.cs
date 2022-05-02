@@ -334,11 +334,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             )
             {
                 var previousTriviaPair = triviaMap.ContainsKey(tokenPair.PreviousToken)
-                  ? triviaMap[tokenPair.PreviousToken]
-                  : default;
+                    ? triviaMap[tokenPair.PreviousToken]
+                    : default;
                 var nextTriviaPair = triviaMap.ContainsKey(tokenPair.NextToken)
-                  ? triviaMap[tokenPair.NextToken]
-                  : default;
+                    ? triviaMap[tokenPair.NextToken]
+                    : default;
 
                 var trailingTrivia =
                     previousTriviaPair.TrailingTrivia

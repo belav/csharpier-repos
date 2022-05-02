@@ -70,8 +70,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         left.Type == typeof(object)
                         && (left is SqlParameterExpression || left is SqlConstantExpression)
                     )
-                  ? _sqlExpressionFactory.Equal(left, right)
-                  : _sqlExpressionFactory.Constant(false);
+                    ? _sqlExpressionFactory.Equal(left, right)
+                    : _sqlExpressionFactory.Constant(false);
             }
 
             return null;

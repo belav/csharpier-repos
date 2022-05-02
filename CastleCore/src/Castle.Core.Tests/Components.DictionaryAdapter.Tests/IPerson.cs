@@ -21,9 +21,9 @@ namespace Castle.Components.DictionaryAdapter.Tests
     [MultiLevelEdit]
     public interface IPerson
         : IDictionaryAdapter,
-          IEditableObject,
-          IDictionaryNotify,
-          IDataErrorInfo
+            IEditableObject,
+            IDictionaryNotify,
+            IDataErrorInfo
     {
         [RemoveIf(null)]
         string Name { get; set; }

@@ -41,10 +41,10 @@ namespace BenchmarksGame
         {
             var bytesRead = stream.Read(buffer, offset, count);
             return bytesRead == count
-              ? offset + count
-              : bytesRead == 0
-                  ? offset
-                  : read(stream, buffer, offset + bytesRead, count - bytesRead);
+                ? offset + count
+                : bytesRead == 0
+                    ? offset
+                    : read(stream, buffer, offset + bytesRead, count - bytesRead);
         }
 
         static int find(byte[] buffer, byte[] toFind, int i, ref int matchIndex)

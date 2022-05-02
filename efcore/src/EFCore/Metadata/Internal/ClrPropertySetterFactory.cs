@@ -79,13 +79,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var propertyType = propertyBase?.ClrType ?? memberInfo.GetMemberType();
 
             return propertyType.IsNullableType() && propertyType.UnwrapNullableType().IsEnum
-              ? new NullableEnumClrPropertySetter<TEntity, TValue, TNonNullableEnumValue>(setter)
-              : new ClrPropertySetter<TEntity, TValue>(setter);
+                ? new NullableEnumClrPropertySetter<TEntity, TValue, TNonNullableEnumValue>(setter)
+                : new ClrPropertySetter<TEntity, TValue>(setter);
 
             Expression CreateMemberAssignment(Expression parameter)
             {
                 return propertyBase?.IsIndexerProperty() == true
-                  ? Expression.Assign(
+                    ? Expression.Assign(
                         Expression.MakeIndex(
                             entityParameter,
                             (PropertyInfo)memberInfo,
@@ -93,7 +93,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                         ),
                         convertedParameter
                     )
-                  : Expression.MakeMemberAccess(parameter, memberInfo).Assign(convertedParameter);
+                    : Expression.MakeMemberAccess(parameter, memberInfo).Assign(convertedParameter);
             }
         }
     }

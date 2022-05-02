@@ -125,8 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Squiggles
             ) =>
                 new(
                     includeSuppressedDiagnostics
-                      ? _diagnostics
-                      : _diagnostics.WhereAsArray(d => !d.IsSuppressed)
+                        ? _diagnostics
+                        : _diagnostics.WhereAsArray(d => !d.IsSuppressed)
                 );
         }
     }

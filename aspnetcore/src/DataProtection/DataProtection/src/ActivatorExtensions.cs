@@ -36,7 +36,7 @@ internal static class ActivatorExtensions
     public static IActivator GetActivator(this IServiceProvider serviceProvider)
     {
         return (serviceProvider != null)
-          ? (serviceProvider.GetService<IActivator>() ?? new SimpleActivator(serviceProvider))
-          : SimpleActivator.DefaultWithoutServices;
+            ? (serviceProvider.GetService<IActivator>() ?? new SimpleActivator(serviceProvider))
+            : SimpleActivator.DefaultWithoutServices;
     }
 }

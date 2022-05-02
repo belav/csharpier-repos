@@ -368,8 +368,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             var exception = async
                 ? await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-                      () => batch.ExecuteAsync(connection)
-                  )
+                    () => batch.ExecuteAsync(connection)
+                )
                 : Assert.Throws<DbUpdateConcurrencyException>(() => batch.Execute(connection));
 
             Assert.Equal(RelationalStrings.UpdateConcurrencyException(1, 42), exception.Message);
@@ -403,8 +403,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             var exception = async
                 ? await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-                      () => batch.ExecuteAsync(connection)
-                  )
+                    () => batch.ExecuteAsync(connection)
+                )
                 : Assert.Throws<DbUpdateConcurrencyException>(() => batch.Execute(connection));
 
             Assert.Equal(RelationalStrings.UpdateConcurrencyException(1, 0), exception.Message);
@@ -477,8 +477,8 @@ namespace Microsoft.EntityFrameworkCore.Update
 
             var actualException = async
                 ? await Assert.ThrowsAsync<OperationCanceledException>(
-                      () => batch.ExecuteAsync(connection)
-                  )
+                    () => batch.ExecuteAsync(connection)
+                )
                 : Assert.Throws<OperationCanceledException>(() => batch.Execute(connection));
 
             Assert.Same(originalException, actualException);

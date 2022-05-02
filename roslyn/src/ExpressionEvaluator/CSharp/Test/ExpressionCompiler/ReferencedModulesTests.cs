@@ -2906,14 +2906,14 @@ namespace System
             return blocks.ToCompilation(
                 moduleVersionId,
                 useReferencedModulesOnly
-                  ? MakeAssemblyReferencesKind.DirectReferencesOnly
-                  : MakeAssemblyReferencesKind.AllAssemblies
+                    ? MakeAssemblyReferencesKind.DirectReferencesOnly
+                    : MakeAssemblyReferencesKind.AllAssemblies
             );
         }
 
         private sealed class PEAssemblyBuilderWithAdditionalReferences
             : PEModuleBuilder,
-              IAssemblyReference
+                IAssemblyReference
         {
             private readonly CommonPEModuleBuilder _builder;
             private readonly NamespaceTypeDefinitionNoBase _objectType;

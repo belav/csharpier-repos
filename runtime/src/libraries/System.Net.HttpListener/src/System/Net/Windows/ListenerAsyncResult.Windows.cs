@@ -78,9 +78,9 @@ namespace System.Net
                                 asyncResult._requestContext =
                                     result == null
                                         ? new AsyncRequestContext(
-                                              listenerSession.RequestQueueBoundHandle,
-                                              asyncResult
-                                          )
+                                            listenerSession.RequestQueueBoundHandle,
+                                            asyncResult
+                                        )
                                         : null;
                             }
                             else

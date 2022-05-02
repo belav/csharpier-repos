@@ -301,8 +301,8 @@ namespace Microsoft.CodeAnalysis.GenerateType
                 state.IsAttribute
                 && !state.NameIsVerbatim
                 && !state.Name.EndsWith(AttributeSuffix, StringComparison.Ordinal)
-              ? state.Name + AttributeSuffix
-              : state.Name;
+                ? state.Name + AttributeSuffix
+                : state.Name;
         }
 
         protected static ImmutableArray<ITypeParameterSymbol> GetTypeParameters(

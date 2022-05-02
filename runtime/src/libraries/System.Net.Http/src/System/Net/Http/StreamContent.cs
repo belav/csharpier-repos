@@ -130,7 +130,7 @@ namespace System.Net.Http
             GetType() == typeof(StreamContent)
                 ? new ReadOnlyStream(_content)
                 : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
-                  null;
+                null;
 
         internal override bool AllowDuplex => false;
 

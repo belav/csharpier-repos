@@ -434,11 +434,11 @@ namespace Microsoft.CodeAnalysis.AddImport
                     )
                     {
                         var expression = syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode)
-                          ? syntaxFacts.GetExpressionOfMemberAccessExpression(
+                            ? syntaxFacts.GetExpressionOfMemberAccessExpression(
                                 nameNode.Parent,
                                 allowImplicitTarget: true
                             )
-                          : syntaxFacts.GetTargetOfMemberBinding(nameNode.Parent);
+                            : syntaxFacts.GetTargetOfMemberBinding(nameNode.Parent);
                         if (expression is TSimpleNameSyntax simpleName)
                         {
                             // Check if the expression before the dot binds to a property or field.

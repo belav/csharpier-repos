@@ -131,9 +131,9 @@ namespace CSharpSyntaxGenerator
                                 string s => new[] { s },
                                 IEnumerable<string> ss => ss,
                                 _
-                                  => throw new InvalidOperationException(
-                                      "Join must be passed strings or collections of strings"
-                                  )
+                                    => throw new InvalidOperationException(
+                                        "Join must be passed strings or collections of strings"
+                                    )
                             }
                         ).Where(s => s != "")
                 )
@@ -158,10 +158,10 @@ namespace CSharpSyntaxGenerator
         protected static string OverrideOrNewModifier(Field field)
         {
             return IsOverride(field)
-              ? "override "
-              : IsNew(field)
-                  ? "new "
-                  : "";
+                ? "override "
+                : IsNew(field)
+                    ? "new "
+                    : "";
         }
 
         protected static bool CanBeField(Field field)
@@ -321,8 +321,8 @@ namespace CSharpSyntaxGenerator
         protected static string StripPost(string name, string post)
         {
             return name.EndsWith(post, StringComparison.Ordinal)
-              ? name.Substring(0, name.Length - post.Length)
-              : name;
+                ? name.Substring(0, name.Length - post.Length)
+                : name;
         }
 
         protected static bool IsKeyword(string name)

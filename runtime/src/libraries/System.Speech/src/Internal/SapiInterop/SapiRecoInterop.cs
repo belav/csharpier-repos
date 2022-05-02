@@ -498,8 +498,8 @@ namespace System.Speech.Internal.SapiInterop
                         // display + confidence
                         bDisplayAttributes = RecognizedWordUnit.DisplayAttributesToSapiAttributes(
                             word.DisplayAttributes == DisplayAttributes.None
-                              ? DisplayAttributes.OneTrailingSpace
-                              : word.DisplayAttributes
+                                ? DisplayAttributes.OneTrailingSpace
+                                : word.DisplayAttributes
                         ),
                         SREngineConfidence = word.Confidence,
                         // Timing information

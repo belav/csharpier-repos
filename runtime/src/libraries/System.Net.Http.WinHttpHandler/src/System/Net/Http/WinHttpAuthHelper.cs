@@ -337,10 +337,10 @@ namespace System.Net.Http
 
             uint optionData = allowDefaultCredentials
                 ? (
-                      authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY
-                          ? Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_MEDIUM
-                          : Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_LOW
-                  )
+                    authTarget == Interop.WinHttp.WINHTTP_AUTH_TARGET_PROXY
+                        ? Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_MEDIUM
+                        : Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_LOW
+                )
                 : Interop.WinHttp.WINHTTP_AUTOLOGON_SECURITY_LEVEL_HIGH;
 
             if (

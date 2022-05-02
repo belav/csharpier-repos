@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Authorization.Infrastructure;
 /// </summary>
 public class NameAuthorizationRequirement
     : AuthorizationHandler<NameAuthorizationRequirement>,
-      IAuthorizationRequirement
+        IAuthorizationRequirement
 {
     /// <summary>
     /// Constructs a new instance of <see cref="NameAuthorizationRequirement"/>.

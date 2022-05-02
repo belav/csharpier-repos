@@ -45,9 +45,9 @@ namespace System.Security.Cryptography.X509Certificates
                 StoreName.TrustedPeople => "TrustedPeople",
                 StoreName.TrustedPublisher => "TrustedPublisher",
                 _
-                  => throw new ArgumentException(
-                      SR.Format(SR.Arg_EnumIllegalVal, nameof(storeName))
-                  ),
+                    => throw new ArgumentException(
+                        SR.Format(SR.Arg_EnumIllegalVal, nameof(storeName))
+                    ),
             };
             Location = storeLocation;
         }

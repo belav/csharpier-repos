@@ -323,10 +323,10 @@ namespace System.Runtime.Serialization
                     (classContract.BaseContract == null)
                         ? 0
                         : WriteMembers(
-                              classContract.BaseContract,
-                              extensionDataLocal,
-                              derivedMostClassContract
-                          );
+                            classContract.BaseContract,
+                            extensionDataLocal,
+                            derivedMostClassContract
+                        );
 
                 LocalBuilder namespaceLocal = _ilg.DeclareLocal(typeof(XmlDictionaryString), "ns");
                 if (_contractNamespacesLocal == null)
@@ -357,8 +357,8 @@ namespace System.Runtime.Serialization
                     _ilg.Load(_contextArg);
                     _ilg.Call(
                         methodInfo: member.IsGetOnlyCollection
-                          ? XmlFormatGeneratorStatics.StoreIsGetOnlyCollectionMethod
-                          : XmlFormatGeneratorStatics.ResetIsGetOnlyCollectionMethod
+                            ? XmlFormatGeneratorStatics.StoreIsGetOnlyCollectionMethod
+                            : XmlFormatGeneratorStatics.ResetIsGetOnlyCollectionMethod
                     );
 
                     if (!member.EmitDefaultValue)
@@ -1084,8 +1084,8 @@ namespace System.Runtime.Serialization
 
                 _ilg.Call(
                     needsPrefix
-                      ? XmlFormatGeneratorStatics.WriteStartElementMethod3
-                      : XmlFormatGeneratorStatics.WriteStartElementMethod2
+                        ? XmlFormatGeneratorStatics.WriteStartElementMethod3
+                        : XmlFormatGeneratorStatics.WriteStartElementMethod2
                 );
             }
 

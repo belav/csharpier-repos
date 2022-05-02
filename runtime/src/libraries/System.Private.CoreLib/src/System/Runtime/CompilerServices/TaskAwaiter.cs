@@ -300,8 +300,8 @@ namespace System.Runtime.CompilerServices
                 );
                 log.TaskWaitBegin(
                     currentTaskAtBegin != null
-                      ? currentTaskAtBegin.m_taskScheduler!.Id
-                      : TaskScheduler.Default.Id,
+                        ? currentTaskAtBegin.m_taskScheduler!.Id
+                        : TaskScheduler.Default.Id,
                     currentTaskAtBegin != null ? currentTaskAtBegin.Id : 0,
                     task.Id,
                     TplEventSource.TaskWaitBehavior.Asynchronous,
@@ -333,8 +333,8 @@ namespace System.Runtime.CompilerServices
                         Task? currentTaskAtEnd = Task.InternalCurrent;
                         innerEtwLog.TaskWaitEnd(
                             currentTaskAtEnd != null
-                              ? currentTaskAtEnd.m_taskScheduler!.Id
-                              : TaskScheduler.Default.Id,
+                                ? currentTaskAtEnd.m_taskScheduler!.Id
+                                : TaskScheduler.Default.Id,
                             currentTaskAtEnd != null ? currentTaskAtEnd.Id : 0,
                             innerTask.Id
                         );
@@ -487,7 +487,7 @@ namespace System.Runtime.CompilerServices
         /// <remarks>This type is intended for compiler use only.</remarks>
         public readonly struct ConfiguredTaskAwaiter
             : ICriticalNotifyCompletion,
-              IConfiguredTaskAwaiter
+                IConfiguredTaskAwaiter
         {
             // WARNING: Unsafe.As is used to access the generic ConfiguredTaskAwaiter as this.
             // Its layout must remain the same.
@@ -589,7 +589,7 @@ namespace System.Runtime.CompilerServices
         /// <remarks>This type is intended for compiler use only.</remarks>
         public readonly struct ConfiguredTaskAwaiter
             : ICriticalNotifyCompletion,
-              IConfiguredTaskAwaiter
+                IConfiguredTaskAwaiter
         {
             // WARNING: Unsafe.As is used to access this as the non-generic ConfiguredTaskAwaiter.
             // Its layout must remain the same.

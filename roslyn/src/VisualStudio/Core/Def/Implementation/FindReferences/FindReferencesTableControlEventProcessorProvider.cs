@@ -72,8 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     entry.Identity as ISupportsNavigation
                     ?? (
                         entry.TryGetValue(StreamingFindUsagesPresenter.SelfKeyName, out var item)
-                          ? item as ISupportsNavigation
-                          : null
+                            ? item as ISupportsNavigation
+                            : null
                     );
                 if (supportsNavigation != null && supportsNavigation.CanNavigateTo())
                 {

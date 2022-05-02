@@ -20,11 +20,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
     {
         protected new class State
             : AbstractGenerateParameterizedMemberService<
-                  TService,
-                  TSimpleNameSyntax,
-                  TExpressionSyntax,
-                  TInvocationExpressionSyntax
-              >.State
+                TService,
+                TSimpleNameSyntax,
+                TExpressionSyntax,
+                TInvocationExpressionSyntax
+            >.State
         {
             public static async Task<State> GenerateConversionStateAsync(
                 TService service,

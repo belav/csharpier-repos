@@ -95,8 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 ),
                 body: hasNoBody ? null : StatementGenerator.GenerateBlock(method),
                 semicolonToken: hasNoBody
-                  ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
-                  : new SyntaxToken()
+                    ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                    : new SyntaxToken()
             );
 
             declaration = UseExpressionBodyIfDesired(options, declaration, parseOptions);

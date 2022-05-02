@@ -48,11 +48,11 @@ internal static class TemplatePackageInstaller
     public static string CustomHivePath { get; } =
         Path.GetFullPath(
             (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
-              ? typeof(TemplatePackageInstaller).Assembly
-                .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .Single(s => s.Key == "CustomTemplateHivePath")
-                .Value
-              : Path.Combine("Hives", ".templateEngine")
+                ? typeof(TemplatePackageInstaller).Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .Single(s => s.Key == "CustomTemplateHivePath")
+                    .Value
+                : Path.Combine("Hives", ".templateEngine")
         );
 
     public static async Task EnsureTemplatingEngineInitializedAsync(ITestOutputHelper output)

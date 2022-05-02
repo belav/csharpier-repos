@@ -459,9 +459,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     _parameterTypes == null
                         ? _returnType.GetHashCode()
                         : TypeHashingAlgorithms.ComputeGenericInstanceHashCode(
-                              _returnType.GetHashCode(),
-                              _parameterTypes
-                          )
+                            _returnType.GetHashCode(),
+                            _parameterTypes
+                        )
                 );
         }
 
@@ -494,8 +494,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 argNum < _parameterTypes.Length
                 && _parameterTypes[argNum].GetCorElementType() == CorElementType.ELEMENT_TYPE_BYREF
             )
-              ? _parameterTypes[argNum]
-              : default(TypeHandle);
+                ? _parameterTypes[argNum]
+                : default(TypeHandle);
         }
 
         public CorElementType GetReturnType(out TypeHandle thRetType)

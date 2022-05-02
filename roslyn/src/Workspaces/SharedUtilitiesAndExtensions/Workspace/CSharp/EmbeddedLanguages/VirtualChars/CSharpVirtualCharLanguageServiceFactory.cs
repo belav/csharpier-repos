@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.VirtualChars
 
         private sealed class CSharpVirtualCharLanguageService
             : CSharpVirtualCharService,
-              IVirtualCharLanguageService
+                IVirtualCharLanguageService
         {
             internal static new readonly CSharpVirtualCharLanguageService Instance = new();
 

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
     /// </summary>
     internal sealed class NamingStylePreferences
         : IEquatable<NamingStylePreferences>,
-          IObjectWritable
+            IObjectWritable
     {
         static NamingStylePreferences()
         {
@@ -429,8 +429,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             );
 
             return serializationVersion == s_serializationVersion
-              ? rootElement
-              : XElement.Parse(DefaultNamingPreferencesString);
+                ? rootElement
+                : XElement.Parse(DefaultNamingPreferencesString);
         }
 
         private static void UpgradeSerialization_4To5(XElement rootElement)

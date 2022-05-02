@@ -1394,7 +1394,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 or DeleteBehavior.ClientSetNull
                 or DeleteBehavior.ClientCascade
                 or DeleteBehavior.ClientNoAction
-                  => ReferentialAction.NoAction,
+                    => ReferentialAction.NoAction,
                 DeleteBehavior.Restrict => ReferentialAction.Restrict,
                 _ => throw new NotSupportedException(deleteBehavior.ToString()),
             };

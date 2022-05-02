@@ -475,9 +475,7 @@ namespace System.Text.Json.Serialization
                             switch (options.ReferenceHandlingStrategy)
                             {
                                 case ReferenceHandlingStrategy.Preserve
-                                      when (
-                                          jsonConverter.CanHaveIdMetadata && !state.IsContinuation
-                                      ):
+                                when (jsonConverter.CanHaveIdMetadata && !state.IsContinuation):
                                     if (
                                         JsonSerializer.TryWriteReferenceForBoxedStruct(
                                             value,

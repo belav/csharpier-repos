@@ -202,8 +202,8 @@ namespace System.Linq.Expressions.Compiler
                 case ExpressionType.AddChecked:
                     _ilg.Emit(
                         leftType.IsFloatingPoint()
-                          ? OpCodes.Add
-                          : (leftType.IsUnsigned() ? OpCodes.Add_Ovf_Un : OpCodes.Add_Ovf)
+                            ? OpCodes.Add
+                            : (leftType.IsUnsigned() ? OpCodes.Add_Ovf_Un : OpCodes.Add_Ovf)
                     );
                     break;
                 case ExpressionType.Subtract:
@@ -227,8 +227,8 @@ namespace System.Linq.Expressions.Compiler
                 case ExpressionType.MultiplyChecked:
                     _ilg.Emit(
                         leftType.IsFloatingPoint()
-                          ? OpCodes.Mul
-                          : (leftType.IsUnsigned() ? OpCodes.Mul_Ovf_Un : OpCodes.Mul_Ovf)
+                            ? OpCodes.Mul
+                            : (leftType.IsUnsigned() ? OpCodes.Mul_Ovf_Un : OpCodes.Mul_Ovf)
                     );
                     break;
                 case ExpressionType.Divide:
@@ -255,8 +255,8 @@ namespace System.Linq.Expressions.Compiler
                 case ExpressionType.LessThanOrEqual:
                     _ilg.Emit(
                         leftType.IsUnsigned() || leftType.IsFloatingPoint()
-                          ? OpCodes.Cgt_Un
-                          : OpCodes.Cgt
+                            ? OpCodes.Cgt_Un
+                            : OpCodes.Cgt
                     );
                     _ilg.Emit(OpCodes.Ldc_I4_0);
                     _ilg.Emit(OpCodes.Ceq);
@@ -269,8 +269,8 @@ namespace System.Linq.Expressions.Compiler
                 case ExpressionType.GreaterThanOrEqual:
                     _ilg.Emit(
                         leftType.IsUnsigned() || leftType.IsFloatingPoint()
-                          ? OpCodes.Clt_Un
-                          : OpCodes.Clt
+                            ? OpCodes.Clt_Un
+                            : OpCodes.Clt
                     );
                     _ilg.Emit(OpCodes.Ldc_I4_0);
                     _ilg.Emit(OpCodes.Ceq);

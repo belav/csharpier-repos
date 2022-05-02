@@ -594,7 +594,7 @@ class TestFile : IFileInfo
         }
 
         return _contents == null
-          ? new MemoryStream()
-          : new MemoryStream(Encoding.UTF8.GetBytes(_contents));
+            ? new MemoryStream()
+            : new MemoryStream(Encoding.UTF8.GetBytes(_contents));
     }
 }

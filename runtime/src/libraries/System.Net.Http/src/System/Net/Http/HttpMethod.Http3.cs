@@ -23,9 +23,9 @@ namespace System.Net.Http
                             _http3Index is int index && index >= 0
                                 ? QPackEncoder.EncodeStaticIndexedHeaderFieldToArray(index)
                                 : QPackEncoder.EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(
-                                      H3StaticTable.MethodGet,
-                                      _method
-                                  )
+                                    H3StaticTable.MethodGet,
+                                    _method
+                                )
                     );
                 }
 

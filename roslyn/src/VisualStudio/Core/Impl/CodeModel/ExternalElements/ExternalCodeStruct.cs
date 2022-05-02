@@ -17,8 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeStruct))]
     public sealed class ExternalCodeStruct
         : AbstractExternalCodeType,
-          EnvDTE80.CodeStruct2,
-          EnvDTE.CodeStruct
+            EnvDTE80.CodeStruct2,
+            EnvDTE.CodeStruct
     {
         internal static EnvDTE.CodeStruct Create(
             CodeModelState state,

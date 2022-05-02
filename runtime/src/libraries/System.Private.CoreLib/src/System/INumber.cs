@@ -16,19 +16,19 @@ namespace System
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
     public interface INumber<TSelf>
         : IAdditionOperators<TSelf, TSelf, TSelf>,
-          IAdditiveIdentity<TSelf, TSelf>,
-          IComparisonOperators<TSelf, TSelf>, // implies IEquatableOperators<TSelf, TSelf>
-          IDecrementOperators<TSelf>,
-          IDivisionOperators<TSelf, TSelf, TSelf>,
-          IIncrementOperators<TSelf>,
-          IModulusOperators<TSelf, TSelf, TSelf>,
-          IMultiplicativeIdentity<TSelf, TSelf>,
-          IMultiplyOperators<TSelf, TSelf, TSelf>,
-          ISpanFormattable, // implies IFormattable
-          ISpanParseable<TSelf>, // implies IParseable<TSelf>
-          ISubtractionOperators<TSelf, TSelf, TSelf>,
-          IUnaryNegationOperators<TSelf, TSelf>,
-          IUnaryPlusOperators<TSelf, TSelf> where TSelf : INumber<TSelf>
+            IAdditiveIdentity<TSelf, TSelf>,
+            IComparisonOperators<TSelf, TSelf>, // implies IEquatableOperators<TSelf, TSelf>
+            IDecrementOperators<TSelf>,
+            IDivisionOperators<TSelf, TSelf, TSelf>,
+            IIncrementOperators<TSelf>,
+            IModulusOperators<TSelf, TSelf, TSelf>,
+            IMultiplicativeIdentity<TSelf, TSelf>,
+            IMultiplyOperators<TSelf, TSelf, TSelf>,
+            ISpanFormattable, // implies IFormattable
+            ISpanParseable<TSelf>, // implies IParseable<TSelf>
+            ISubtractionOperators<TSelf, TSelf, TSelf>,
+            IUnaryNegationOperators<TSelf, TSelf>,
+            IUnaryPlusOperators<TSelf, TSelf> where TSelf : INumber<TSelf>
     {
         /// <summary>Gets the value <c>1</c> for the type.</summary>
         static abstract TSelf One { get; }

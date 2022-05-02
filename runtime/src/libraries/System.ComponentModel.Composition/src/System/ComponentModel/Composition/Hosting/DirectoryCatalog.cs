@@ -21,8 +21,8 @@ namespace System.ComponentModel.Composition.Hosting
     [DebuggerTypeProxy(typeof(DirectoryCatalogDebuggerProxy))]
     public partial class DirectoryCatalog
         : ComposablePartCatalog,
-          INotifyComposablePartCatalogChanged,
-          ICompositionElement
+            INotifyComposablePartCatalogChanged,
+            ICompositionElement
     {
         private static bool IsWindows =>
 #if NETCOREAPP_5_0_OR_GREATER
@@ -695,8 +695,8 @@ namespace System.ComponentModel.Composition.Hosting
             try
             {
                 return (_reflectionContext != null)
-                  ? new AssemblyCatalog(assemblyFilePath, _reflectionContext, this)
-                  : new AssemblyCatalog(assemblyFilePath, this);
+                    ? new AssemblyCatalog(assemblyFilePath, _reflectionContext, this)
+                    : new AssemblyCatalog(assemblyFilePath, this);
             }
             catch (FileNotFoundException ex)
             { // Files should always exists but don't blow up here if they don't

@@ -1324,7 +1324,7 @@ namespace System.Speech.Recognition
                 ruleClass == grammarType
                     ? grammar
                     : (System.Speech.Recognition.Grammar)
-                          assembly.CreateInstance(ruleClass.FullName);
+                        assembly.CreateInstance(ruleClass.FullName);
             onParse = ruleInstance.MethodInfo(method);
         }
 

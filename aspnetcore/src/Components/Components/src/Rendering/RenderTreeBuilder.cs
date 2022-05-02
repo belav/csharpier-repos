@@ -700,8 +700,8 @@ public sealed class RenderTreeBuilder : IDisposable
     {
         var parentIndex = GetCurrentParentFrameIndex();
         return parentIndex.HasValue
-          ? _entries.Buffer[parentIndex.Value].FrameTypeField
-          : (RenderTreeFrameType?)null;
+            ? _entries.Buffer[parentIndex.Value].FrameTypeField
+            : (RenderTreeFrameType?)null;
     }
 
     /// <summary>

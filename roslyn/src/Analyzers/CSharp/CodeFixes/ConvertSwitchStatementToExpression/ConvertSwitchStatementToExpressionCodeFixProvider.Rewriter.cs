@@ -93,8 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 Debug.Assert(_assignmentTargetOpt != null);
 
                 return generateDeclaration
-                  ? GenerateVariableDeclaration(switchExpression, declaratorToRemoveTypeOpt)
-                  : GenerateAssignment(switchExpression, nodeToGenerate, leadingTrivia);
+                    ? GenerateVariableDeclaration(switchExpression, declaratorToRemoveTypeOpt)
+                    : GenerateAssignment(switchExpression, nodeToGenerate, leadingTrivia);
             }
 
             private ExpressionStatementSyntax GenerateAssignment(

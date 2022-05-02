@@ -58,9 +58,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
             scope switch
             {
                 TextBufferCodeCleanUpScope textBufferScope
-                  => FixTextBufferAsync(textBufferScope, context),
+                    => FixTextBufferAsync(textBufferScope, context),
                 IVsHierarchyCodeCleanupScope hierarchyContentScope
-                  => FixHierarchyContentAsync(hierarchyContentScope, context),
+                    => FixHierarchyContentAsync(hierarchyContentScope, context),
                 _ => Task.FromResult(false),
             };
 

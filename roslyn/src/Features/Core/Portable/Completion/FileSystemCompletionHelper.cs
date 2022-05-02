@@ -291,8 +291,8 @@ namespace Microsoft.CodeAnalysis.Completion
                     && !_allowableExtensions.Contains(
                         PathUtilities.GetExtension(file),
                         PathUtilities.IsUnixLikePlatform
-                          ? StringComparer.Ordinal
-                          : StringComparer.OrdinalIgnoreCase
+                            ? StringComparer.Ordinal
+                            : StringComparer.OrdinalIgnoreCase
                     )
                 )
                 {

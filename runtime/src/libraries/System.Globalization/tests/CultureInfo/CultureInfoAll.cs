@@ -35,8 +35,8 @@ namespace System.Globalization.Tests
             {
                 Assert.Equal(
                     ci.Name.Length == 0
-                      ? "Invariant Language (Invariant Country)"
-                      : GetLocaleInfo(ci, LOCALE_SNATIVEDISPLAYNAME),
+                        ? "Invariant Language (Invariant Country)"
+                        : GetLocaleInfo(ci, LOCALE_SNATIVEDISPLAYNAME),
                     ci.NativeName
                 );
             }
@@ -170,8 +170,8 @@ namespace System.Globalization.Tests
 
             Assert.Equal(
                 string.IsNullOrEmpty(GetLocaleInfo(ci, LOCALE_SPOSITIVESIGN))
-                  ? "+"
-                  : GetLocaleInfo(ci, LOCALE_SPOSITIVESIGN),
+                    ? "+"
+                    : GetLocaleInfo(ci, LOCALE_SPOSITIVESIGN),
                 nfi.PositiveSign
             );
             Assert.Equal(GetLocaleInfo(ci, LOCALE_SNEGATIVESIGN), nfi.NegativeSign);

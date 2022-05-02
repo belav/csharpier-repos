@@ -113,12 +113,12 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 && (controllerContext != null)
                 && (controllerContext.HttpContext != null)
             )
-              ? controllerContext.HttpContext.GetGlobalResourceObject(
+                ? controllerContext.HttpContext.GetGlobalResourceObject(
                     resourceClassKey,
                     resourceName,
                     CultureInfo.CurrentUICulture
                 ) as string
-              : null;
+                : null;
         }
 
         private static string GetValueInvalidResource(ControllerContext controllerContext)

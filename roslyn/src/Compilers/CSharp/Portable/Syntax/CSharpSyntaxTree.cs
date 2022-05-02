@@ -765,8 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var map = GetDirectiveMap();
             Debug.Assert(map.Entries.Length >= 1);
             return (map.Entries.Length == 1)
-              ? Array.Empty<LineMapping>()
-              : map.GetLineMappings(GetText(cancellationToken).Lines);
+                ? Array.Empty<LineMapping>()
+                : map.GetLineMappings(GetText(cancellationToken).Lines);
         }
 
         /// <summary>

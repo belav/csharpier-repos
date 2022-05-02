@@ -88,9 +88,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DisambiguateSameVariable
             var (left, right, titleFormat) = node switch
             {
                 BinaryExpressionSyntax binary
-                  => (binary.Left, binary.Right, CSharpFeaturesResources.Compare_to_0),
+                    => (binary.Left, binary.Right, CSharpFeaturesResources.Compare_to_0),
                 AssignmentExpressionSyntax assignment
-                  => (assignment.Left, assignment.Right, CSharpFeaturesResources.Assign_to_0),
+                    => (assignment.Left, assignment.Right, CSharpFeaturesResources.Assign_to_0),
                 _ => default,
             };
 

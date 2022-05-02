@@ -264,12 +264,12 @@ namespace System.Xml.Tests
                     w.WriteEndElement();
                     w.Dispose();
                     string exp = utils.IsIndent()
-                      ? "<Root>"
-                        + Environment.NewLine
-                        + "  <!--\u000B-->"
-                        + Environment.NewLine
-                        + "</Root>"
-                      : "<Root><!--\u000B--></Root>";
+                        ? "<Root>"
+                            + Environment.NewLine
+                            + "  <!--\u000B-->"
+                            + Environment.NewLine
+                            + "</Root>"
+                        : "<Root><!--\u000B--></Root>";
                     Assert.True(utils.CompareString(exp));
                     break;
                 case "PI":
@@ -277,12 +277,12 @@ namespace System.Xml.Tests
                     w.WriteEndElement();
                     w.Dispose();
                     exp = utils.IsIndent()
-                      ? "<Root>"
-                        + Environment.NewLine
-                        + "  <?pi \uFFFE?>"
-                        + Environment.NewLine
-                        + "</Root>"
-                      : "<Root><?pi \uFFFE?></Root>";
+                        ? "<Root>"
+                            + Environment.NewLine
+                            + "  <?pi \uFFFE?>"
+                            + Environment.NewLine
+                            + "</Root>"
+                        : "<Root><?pi \uFFFE?></Root>";
                     Assert.True(utils.CompareString(exp));
                     break;
                 case "RawString":

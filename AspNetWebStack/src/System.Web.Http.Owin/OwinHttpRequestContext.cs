@@ -183,8 +183,8 @@ namespace System.Web.Http.Owin
                     // OWIN spec requires request path base to be either the empty string or start with "/"
                     string requestPathBase = _context.Request.PathBase.Value;
                     _virtualPathRoot = String.IsNullOrEmpty(requestPathBase)
-                      ? "/"
-                      : requestPathBase;
+                        ? "/"
+                        : requestPathBase;
                     _virtualPathRootSet = true;
                 }
 

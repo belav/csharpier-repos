@@ -589,9 +589,9 @@ namespace System.Net.Http.HPack
                 _headerValueRange == null
                     ? _headerValueOctets.AsSpan(0, _headerValueLength)
                     : data.Slice(
-                          _headerValueRange.GetValueOrDefault().start,
-                          _headerValueRange.GetValueOrDefault().length
-                      );
+                        _headerValueRange.GetValueOrDefault().start,
+                        _headerValueRange.GetValueOrDefault().length
+                    );
 
             if (_headerStaticIndex > 0)
             {
@@ -611,9 +611,9 @@ namespace System.Net.Http.HPack
                     _headerNameRange == null
                         ? _headerName.AsSpan(0, _headerNameLength)
                         : data.Slice(
-                              _headerNameRange.GetValueOrDefault().start,
-                              _headerNameRange.GetValueOrDefault().length
-                          );
+                            _headerNameRange.GetValueOrDefault().start,
+                            _headerNameRange.GetValueOrDefault().length
+                        );
 
                 handler.OnHeader(headerNameSpan, headerValueSpan);
 

@@ -289,11 +289,11 @@ namespace Microsoft.CodeAnalysis.Tools
                     formatOptions =
                         Path.GetExtension(binaryLogPath)?.Equals(".binlog") == false
                             ? (
-                                  formatOptions with
-                                  {
-                                      BinaryLogPath = Path.ChangeExtension(binaryLogPath, ".binlog")
-                                  }
-                              )
+                                formatOptions with
+                                {
+                                    BinaryLogPath = Path.ChangeExtension(binaryLogPath, ".binlog")
+                                }
+                            )
                             : (formatOptions with { BinaryLogPath = binaryLogPath });
                 }
             }

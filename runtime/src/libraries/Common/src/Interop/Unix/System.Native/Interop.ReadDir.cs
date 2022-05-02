@@ -45,9 +45,9 @@ internal static partial class Interop
                     (NameLength == -1)
                         // In this case the struct was allocated via struct dirent *readdir(DIR *dirp);
                         ? new ReadOnlySpan<byte>(
-                              Name,
-                              new ReadOnlySpan<byte>(Name, NameBufferSize).IndexOf<byte>(0)
-                          )
+                            Name,
+                            new ReadOnlySpan<byte>(Name, NameBufferSize).IndexOf<byte>(0)
+                        )
                         : new ReadOnlySpan<byte>(Name, NameLength);
 
                 Debug.Assert(

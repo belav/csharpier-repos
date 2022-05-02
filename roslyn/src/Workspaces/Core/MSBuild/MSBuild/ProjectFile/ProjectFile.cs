@@ -150,8 +150,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 .ConfigureAwait(false);
 
             return project != null
-              ? CreateProjectFileInfo(project)
-              : ProjectFileInfo.CreateEmpty(Language, _loadedProject.FullPath, Log);
+                ? CreateProjectFileInfo(project)
+                : ProjectFileInfo.CreateEmpty(Language, _loadedProject.FullPath, Log);
         }
 
         private ProjectFileInfo CreateProjectFileInfo(MSB.Execution.ProjectInstance project)

@@ -6950,28 +6950,28 @@ class A
             var expectedDiagnostics =
                 (type == "nuint")
                     ? new DiagnosticDescription[]
-                      {
-                          // (5,14): error CS0266: Cannot implicitly convert type 'sbyte' to 'nuint'. An explicit conversion exists (are you missing a cast?)
-                          //         F1 = sbyte.MaxValue;
-                          Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "sbyte.MaxValue")
-                              .WithArguments("sbyte", "nuint")
-                              .WithLocation(5, 14),
-                          // (8,14): error CS0266: Cannot implicitly convert type 'short' to 'nuint'. An explicit conversion exists (are you missing a cast?)
-                          //         F1 = short.MaxValue;
-                          Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "short.MaxValue")
-                              .WithArguments("short", "nuint")
-                              .WithLocation(8, 14),
-                          // (11,14): error CS0266: Cannot implicitly convert type 'sbyte' to 'nuint?'. An explicit conversion exists (are you missing a cast?)
-                          //         F2 = sbyte.MaxValue;
-                          Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "sbyte.MaxValue")
-                              .WithArguments("sbyte", "nuint?")
-                              .WithLocation(11, 14),
-                          // (14,14): error CS0266: Cannot implicitly convert type 'short' to 'nuint?'. An explicit conversion exists (are you missing a cast?)
-                          //         F2 = short.MaxValue;
-                          Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "short.MaxValue")
-                              .WithArguments("short", "nuint?")
-                              .WithLocation(14, 14)
-                      }
+                    {
+                        // (5,14): error CS0266: Cannot implicitly convert type 'sbyte' to 'nuint'. An explicit conversion exists (are you missing a cast?)
+                        //         F1 = sbyte.MaxValue;
+                        Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "sbyte.MaxValue")
+                            .WithArguments("sbyte", "nuint")
+                            .WithLocation(5, 14),
+                        // (8,14): error CS0266: Cannot implicitly convert type 'short' to 'nuint'. An explicit conversion exists (are you missing a cast?)
+                        //         F1 = short.MaxValue;
+                        Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "short.MaxValue")
+                            .WithArguments("short", "nuint")
+                            .WithLocation(8, 14),
+                        // (11,14): error CS0266: Cannot implicitly convert type 'sbyte' to 'nuint?'. An explicit conversion exists (are you missing a cast?)
+                        //         F2 = sbyte.MaxValue;
+                        Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "sbyte.MaxValue")
+                            .WithArguments("sbyte", "nuint?")
+                            .WithLocation(11, 14),
+                        // (14,14): error CS0266: Cannot implicitly convert type 'short' to 'nuint?'. An explicit conversion exists (are you missing a cast?)
+                        //         F2 = short.MaxValue;
+                        Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "short.MaxValue")
+                            .WithArguments("short", "nuint?")
+                            .WithLocation(14, 14)
+                    }
                     : new DiagnosticDescription[0];
 
             comp = CreateCompilation(
@@ -7669,8 +7669,8 @@ class Program
             CompileAndVerify(
                 comp,
                 expectedOutput: IntPtr.Size == 4
-                  ? "System.OverflowException"
-                  : "1152921504606846975"
+                    ? "System.OverflowException"
+                    : "1152921504606846975"
             );
         }
 
@@ -8535,8 +8535,8 @@ class Program
                 );
                 comp.VerifyDiagnostics(
                     expectedError is null
-                      ? Array.Empty<DiagnosticDescription>()
-                      : new[] { expectedError }
+                        ? Array.Empty<DiagnosticDescription>()
+                        : new[] { expectedError }
                 );
                 if (expectedError == null || ErrorFacts.IsWarning((ErrorCode)expectedError.Code))
                 {
@@ -9132,8 +9132,8 @@ class Program
                 );
                 Assert.Equal(
                     signed
-                      ? ConstantValueTypeDiscriminator.NInt
-                      : ConstantValueTypeDiscriminator.NUInt,
+                        ? ConstantValueTypeDiscriminator.NInt
+                        : ConstantValueTypeDiscriminator.NUInt,
                     value.Discriminator
                 );
                 Assert.Equal(expectedValue, value.Value);
@@ -9976,10 +9976,10 @@ default: 0
                     useChecked: false,
                     verify: verify,
                     expectedImplicitIL is null
-                      ? expectedExplicitIL is null
-                          ? ErrorCode.ERR_NoImplicitConv
-                          : ErrorCode.ERR_NoImplicitConvCast
-                      : 0
+                        ? expectedExplicitIL is null
+                            ? ErrorCode.ERR_NoImplicitConv
+                            : ErrorCode.ERR_NoImplicitConvCast
+                        : 0
                 );
                 convert(
                     sourceType,
@@ -15522,10 +15522,9 @@ default: 0
                     expectedErrorCode == 0
                         ? Array.Empty<DiagnosticDescription>()
                         : new[]
-                          {
-                              Diagnostic(expectedErrorCode, value)
-                                  .WithArguments(sourceType, destType)
-                          };
+                        {
+                            Diagnostic(expectedErrorCode, value).WithArguments(sourceType, destType)
+                        };
                 if (useChecked)
                 {
                     value = $"checked({value})";
@@ -15567,8 +15566,8 @@ enum E {{ }}
                     var verifier = CompileAndVerify(
                         comp,
                         verify: useUnsafeContext || !verify
-                          ? Verification.Skipped
-                          : Verification.Passes
+                            ? Verification.Skipped
+                            : Verification.Passes
                     );
                     verifier.VerifyIL("Program.Convert", expectedIL);
                 }
@@ -15982,8 +15981,8 @@ enum E {{ }}
                             .WithArguments(op, opType);
                     }
                     return diagnostic != null
-                      ? new[] { diagnostic }
-                      : Array.Empty<DiagnosticDescription>();
+                        ? new[] { diagnostic }
+                        : Array.Empty<DiagnosticDescription>();
                 }
             }
 
@@ -16454,8 +16453,8 @@ class Program
                             .WithArguments(op, opType);
                     }
                     return diagnostic != null
-                      ? new[] { diagnostic }
-                      : Array.Empty<DiagnosticDescription>();
+                        ? new[] { diagnostic }
+                        : Array.Empty<DiagnosticDescription>();
                 }
             }
 
@@ -17618,8 +17617,8 @@ class Program
                     "System.IntPtr",
                     "char",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17627,8 +17626,8 @@ class Program
                     "System.IntPtr",
                     "sbyte",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17636,8 +17635,8 @@ class Program
                     "System.IntPtr",
                     "byte",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17645,8 +17644,8 @@ class Program
                     "System.IntPtr",
                     "short",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17654,8 +17653,8 @@ class Program
                     "System.IntPtr",
                     "ushort",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17663,8 +17662,8 @@ class Program
                     "System.IntPtr",
                     "int",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.IntPtr", "uint");
@@ -17688,8 +17687,8 @@ class Program
                     "System.IntPtr",
                     "char?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17697,8 +17696,8 @@ class Program
                     "System.IntPtr",
                     "sbyte?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17706,8 +17705,8 @@ class Program
                     "System.IntPtr",
                     "byte?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17715,8 +17714,8 @@ class Program
                     "System.IntPtr",
                     "short?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17724,8 +17723,8 @@ class Program
                     "System.IntPtr",
                     "ushort?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17733,8 +17732,8 @@ class Program
                     "System.IntPtr",
                     "int?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.IntPtr", "uint?");
@@ -17779,8 +17778,8 @@ class Program
                     "System.IntPtr?",
                     "char",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17788,8 +17787,8 @@ class Program
                     "System.IntPtr?",
                     "sbyte",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17797,8 +17796,8 @@ class Program
                     "System.IntPtr?",
                     "byte",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17806,8 +17805,8 @@ class Program
                     "System.IntPtr?",
                     "short",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17815,8 +17814,8 @@ class Program
                     "System.IntPtr?",
                     "ushort",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17824,8 +17823,8 @@ class Program
                     "System.IntPtr?",
                     "int",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.IntPtr?", "uint");
@@ -17849,8 +17848,8 @@ class Program
                     "System.IntPtr?",
                     "char?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17858,8 +17857,8 @@ class Program
                     "System.IntPtr?",
                     "sbyte?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17867,8 +17866,8 @@ class Program
                     "System.IntPtr?",
                     "byte?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17876,8 +17875,8 @@ class Program
                     "System.IntPtr?",
                     "short?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17885,8 +17884,8 @@ class Program
                     "System.IntPtr?",
                     "ushort?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17894,8 +17893,8 @@ class Program
                     "System.IntPtr?",
                     "int?",
                     (symbol == "-")
-                      ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.IntPtr System.IntPtr.{name}(System.IntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.IntPtr?", "uint?");
@@ -17940,8 +17939,8 @@ class Program
                     "System.UIntPtr",
                     "char",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17949,8 +17948,8 @@ class Program
                     "System.UIntPtr",
                     "sbyte",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17958,8 +17957,8 @@ class Program
                     "System.UIntPtr",
                     "byte",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17967,8 +17966,8 @@ class Program
                     "System.UIntPtr",
                     "short",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17976,8 +17975,8 @@ class Program
                     "System.UIntPtr",
                     "ushort",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -17985,8 +17984,8 @@ class Program
                     "System.UIntPtr",
                     "int",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.UIntPtr", "uint");
@@ -18010,8 +18009,8 @@ class Program
                     "System.UIntPtr",
                     "char?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18019,8 +18018,8 @@ class Program
                     "System.UIntPtr",
                     "sbyte?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18028,8 +18027,8 @@ class Program
                     "System.UIntPtr",
                     "byte?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18037,8 +18036,8 @@ class Program
                     "System.UIntPtr",
                     "short?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18046,8 +18045,8 @@ class Program
                     "System.UIntPtr",
                     "ushort?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18055,8 +18054,8 @@ class Program
                     "System.UIntPtr",
                     "int?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.UIntPtr", "uint?");
@@ -18101,8 +18100,8 @@ class Program
                     "System.UIntPtr?",
                     "char",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18110,8 +18109,8 @@ class Program
                     "System.UIntPtr?",
                     "sbyte",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18119,8 +18118,8 @@ class Program
                     "System.UIntPtr?",
                     "byte",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18128,8 +18127,8 @@ class Program
                     "System.UIntPtr?",
                     "short",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18137,8 +18136,8 @@ class Program
                     "System.UIntPtr?",
                     "ushort",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18146,8 +18145,8 @@ class Program
                     "System.UIntPtr?",
                     "int",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.UIntPtr?", "uint");
@@ -18171,8 +18170,8 @@ class Program
                     "System.UIntPtr?",
                     "char?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18180,8 +18179,8 @@ class Program
                     "System.UIntPtr?",
                     "sbyte?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18189,8 +18188,8 @@ class Program
                     "System.UIntPtr?",
                     "byte?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18198,8 +18197,8 @@ class Program
                     "System.UIntPtr?",
                     "short?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18207,8 +18206,8 @@ class Program
                     "System.UIntPtr?",
                     "ushort?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(
@@ -18216,8 +18215,8 @@ class Program
                     "System.UIntPtr?",
                     "int?",
                     (symbol == "-")
-                      ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
-                      : null,
+                        ? $"System.UIntPtr System.UIntPtr.{name}(System.UIntPtr pointer, int offset)"
+                        : null,
                     null
                 );
                 binaryOps(symbol, "System.UIntPtr?", "uint?");

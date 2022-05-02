@@ -607,9 +607,9 @@ namespace StaticTestGenerator
                 CustomAttributeTypedArgument cata = args[i];
                 object? newArg = cata.Value is IReadOnlyCollection<CustomAttributeTypedArgument> roc
                     ? UnwrapCustomAttributeTypedArguments(
-                          cata.ArgumentType.GetElementType()!,
-                          roc.ToArray()
-                      )
+                        cata.ArgumentType.GetElementType()!,
+                        roc.ToArray()
+                    )
                     : cata.Value;
                 try
                 {
@@ -953,21 +953,21 @@ namespace StaticTestGenerator
                         break;
                     case TypeCode.Single:
                         result = float.IsNegativeInfinity((float)literal)
-                          ? "float.NegativeInfinity"
-                          : float.IsInfinity((float)literal)
-                              ? "float.PositiveInfinity"
-                              : float.IsNaN((float)literal)
-                                  ? "float.NaN"
-                                  : $"(float)({((float)literal).ToString("R")}F)";
+                            ? "float.NegativeInfinity"
+                            : float.IsInfinity((float)literal)
+                                ? "float.PositiveInfinity"
+                                : float.IsNaN((float)literal)
+                                    ? "float.NaN"
+                                    : $"(float)({((float)literal).ToString("R")}F)";
                         break;
                     case TypeCode.Double:
                         result = double.IsNegativeInfinity((double)literal)
-                          ? "double.NegativeInfinity"
-                          : double.IsInfinity((double)literal)
-                              ? "double.PositiveInfinity"
-                              : double.IsNaN((double)literal)
-                                  ? "double.NaN"
-                                  : $"(double)({((double)literal).ToString("R")}D)";
+                            ? "double.NegativeInfinity"
+                            : double.IsInfinity((double)literal)
+                                ? "double.PositiveInfinity"
+                                : double.IsNaN((double)literal)
+                                    ? "double.NaN"
+                                    : $"(double)({((double)literal).ToString("R")}D)";
                         break;
                     case TypeCode.String:
                         var sb = new StringBuilder();

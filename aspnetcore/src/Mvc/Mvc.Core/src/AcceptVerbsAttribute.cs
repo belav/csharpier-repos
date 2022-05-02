@@ -14,8 +14,8 @@ namespace Microsoft.AspNetCore.Mvc;
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 public sealed class AcceptVerbsAttribute
     : Attribute,
-      IActionHttpMethodProvider,
-      IRouteTemplateProvider
+        IActionHttpMethodProvider,
+        IRouteTemplateProvider
 {
     private readonly List<string> _httpMethods;
 

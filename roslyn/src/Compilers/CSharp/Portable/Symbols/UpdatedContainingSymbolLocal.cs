@@ -74,7 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceLocalSymbol? otherSource = otherLocal switch
             {
                 UpdatedContainingSymbolAndNullableAnnotationLocal updated
-                  => updated._underlyingLocal,
+                    => updated._underlyingLocal,
                 SourceLocalSymbol source => source,
                 _ => null
             };

@@ -69,8 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         /// <returns>The <see cref="ServiceCharacteristics" /> for the type or <see langword="null" /> if it's not an EF service.</returns>
         protected override ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType) =>
             Services.TryGetValue(serviceType, out var characteristics)
-              ? characteristics
-              : base.TryGetServiceCharacteristics(serviceType);
+                ? characteristics
+                : base.TryGetServiceCharacteristics(serviceType);
 
         /// <summary>
         ///     Registers default implementations of all services, including relational services, not already

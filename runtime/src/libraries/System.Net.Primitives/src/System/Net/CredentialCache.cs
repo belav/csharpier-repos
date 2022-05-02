@@ -335,17 +335,17 @@ namespace System.Net
                 if (cache._cache != null)
                 {
                     return cache._cacheForHosts != null
-                      ? new DoubleTableCredentialEnumerator(cache)
-                      : new SingleTableCredentialEnumerator<CredentialKey>(cache, cache._cache);
+                        ? new DoubleTableCredentialEnumerator(cache)
+                        : new SingleTableCredentialEnumerator<CredentialKey>(cache, cache._cache);
                 }
                 else
                 {
                     return cache._cacheForHosts != null
-                      ? new SingleTableCredentialEnumerator<CredentialHostKey>(
+                        ? new SingleTableCredentialEnumerator<CredentialHostKey>(
                             cache,
                             cache._cacheForHosts
                         )
-                      : new CredentialEnumerator(cache);
+                        : new CredentialEnumerator(cache);
                 }
             }
 

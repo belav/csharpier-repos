@@ -96,8 +96,8 @@ namespace System.Threading.Tasks.Dataflow
         internal DataflowBlockOptions DefaultOrClone()
         {
             return (this == Default)
-              ? this
-              : new DataflowBlockOptions
+                ? this
+                : new DataflowBlockOptions
                 {
                     TaskScheduler = this.TaskScheduler,
                     CancellationToken = this.CancellationToken,
@@ -274,8 +274,8 @@ namespace System.Threading.Tasks.Dataflow
         internal new ExecutionDataflowBlockOptions DefaultOrClone()
         {
             return (this == Default)
-              ? this
-              : new ExecutionDataflowBlockOptions
+                ? this
+                : new ExecutionDataflowBlockOptions
                 {
                     TaskScheduler = this.TaskScheduler,
                     CancellationToken = this.CancellationToken,
@@ -340,8 +340,8 @@ namespace System.Threading.Tasks.Dataflow
             get
             {
                 return (_maxDegreeOfParallelism == Unbounded)
-                  ? int.MaxValue
-                  : _maxDegreeOfParallelism;
+                    ? int.MaxValue
+                    : _maxDegreeOfParallelism;
             }
         }
 
@@ -419,8 +419,8 @@ namespace System.Threading.Tasks.Dataflow
         internal new GroupingDataflowBlockOptions DefaultOrClone()
         {
             return (this == Default)
-              ? this
-              : new GroupingDataflowBlockOptions
+                ? this
+                : new GroupingDataflowBlockOptions
                 {
                     TaskScheduler = this.TaskScheduler,
                     CancellationToken = this.CancellationToken,

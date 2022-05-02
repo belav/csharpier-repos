@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// </summary>
     internal sealed partial class FixAllSuggestedAction
         : SuggestedAction,
-          ITelemetryDiagnosticID<string>,
-          IFixAllSuggestedAction
+            ITelemetryDiagnosticID<string>,
+            IFixAllSuggestedAction
     {
         public Diagnostic Diagnostic { get; }
 

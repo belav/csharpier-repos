@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<LabelSymbol> labels = null;
             base.BuildLabels(_block.Statements, ref labels);
             return (labels != null)
-              ? labels.ToImmutableAndFree()
-              : ImmutableArray<LabelSymbol>.Empty;
+                ? labels.ToImmutableAndFree()
+                : ImmutableArray<LabelSymbol>.Empty;
         }
 
         internal override bool IsLabelsScopeBinder

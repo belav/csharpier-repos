@@ -14,9 +14,9 @@ namespace System.Web.WebPages.Administration.PackageManager
     // We need to make changes to NuGet.Core once we ship Beta so that this type is removed.
     internal class RemoteAssembly
         : MarshalByRefObject,
-          IAssembly,
-          IEquatable<RemoteAssembly>,
-          IComparable<RemoteAssembly>
+            IAssembly,
+            IEquatable<RemoteAssembly>,
+            IComparable<RemoteAssembly>
     {
         private readonly List<IAssembly> _referencedAssemblies = new List<IAssembly>();
 

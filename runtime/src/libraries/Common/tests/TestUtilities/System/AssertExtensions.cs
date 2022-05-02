@@ -306,11 +306,11 @@ namespace System
             if (actual == null)
                 throw new XunitException(
                     greaterThan == null
-                      ? AddOptionalUserMessage(
+                        ? AddOptionalUserMessage(
                             $"Expected: <null> to be greater than <null>.",
                             userMessage
                         )
-                      : AddOptionalUserMessage(
+                        : AddOptionalUserMessage(
                             $"Expected: <null> to be greater than {greaterThan}.",
                             userMessage
                         )

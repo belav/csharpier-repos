@@ -358,13 +358,13 @@ namespace System.Web.Mvc
             else
             {
                 return nameRepresentsPath
-                  ? GetPathFromSpecificName(
+                    ? GetPathFromSpecificName(
                         controllerContext,
                         name,
                         cacheKey,
                         ref searchedLocations
                     )
-                  : GetPathFromGeneralName(
+                    : GetPathFromGeneralName(
                         controllerContext,
                         viewLocations,
                         name,

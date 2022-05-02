@@ -22,9 +22,8 @@ namespace System.Collections.Tests
             PlatformDetection.IsNetFramework
                 ? base.ModifyEnumeratorThrows
                 : (
-                      base.ModifyEnumeratorAllowed
-                      & ~(ModifyOperation.Remove | ModifyOperation.Clear)
-                  );
+                    base.ModifyEnumeratorAllowed & ~(ModifyOperation.Remove | ModifyOperation.Clear)
+                );
 
         protected override ModifyOperation ModifyEnumeratorAllowed =>
             PlatformDetection.IsNetFramework

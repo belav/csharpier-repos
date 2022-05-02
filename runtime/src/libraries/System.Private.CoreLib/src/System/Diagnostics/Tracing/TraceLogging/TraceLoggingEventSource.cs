@@ -92,8 +92,8 @@ namespace System.Diagnostics.Tracing
         )
             : this(
                 eventSourceName == null
-                  ? default
-                  : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
+                    ? default
+                    : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
                 eventSourceName!,
                 config,
                 traits

@@ -660,8 +660,8 @@ internal class ComponentLoweringPass : ComponentIntermediateNodePassBase, IRazor
             // to handle those cases.
             _children.Add(
                 node.TagHelper.IsComponentTagHelper()
-                  ? (IntermediateNode)new ComponentAttributeIntermediateNode(node)
-                  : node
+                    ? (IntermediateNode)new ComponentAttributeIntermediateNode(node)
+                    : node
             );
         }
 

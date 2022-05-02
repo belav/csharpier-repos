@@ -312,8 +312,8 @@ namespace System.Net.Http
             if (_contentReadStream == null) // don't yet have a Stream
             {
                 Stream s = TryGetBuffer(out ArraySegment<byte> buffer)
-                  ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
-                  : CreateContentReadStream(cancellationToken);
+                    ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
+                    : CreateContentReadStream(cancellationToken);
                 _contentReadStream = s;
                 return s;
             }
@@ -341,7 +341,7 @@ namespace System.Net.Http
             if (_contentReadStream == null) // don't yet have a Stream
             {
                 Task<Stream> t = TryGetBuffer(out ArraySegment<byte> buffer)
-                  ? Task.FromResult<Stream>(
+                    ? Task.FromResult<Stream>(
                         new MemoryStream(
                             buffer.Array!,
                             buffer.Offset,
@@ -349,7 +349,7 @@ namespace System.Net.Http
                             writable: false
                         )
                     )
-                  : CreateContentReadStreamAsync(cancellationToken);
+                    : CreateContentReadStreamAsync(cancellationToken);
                 _contentReadStream = t;
                 return t;
             }
@@ -380,8 +380,8 @@ namespace System.Net.Http
             if (_contentReadStream == null) // don't yet have a Stream
             {
                 Stream? s = TryGetBuffer(out ArraySegment<byte> buffer)
-                  ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
-                  : TryCreateContentReadStream();
+                    ? new MemoryStream(buffer.Array!, buffer.Offset, buffer.Count, writable: false)
+                    : TryCreateContentReadStream();
                 _contentReadStream = s;
                 return s;
             }
@@ -871,8 +871,8 @@ namespace System.Net.Http
             // ObjectDisposedException is also wrapped, since aborting HWR after a request is complete will result in
             // the response stream being closed.
             return StreamCopyExceptionNeedsWrapping(originalException)
-              ? WrapStreamCopyException(originalException)
-              : originalException;
+                ? WrapStreamCopyException(originalException)
+                : originalException;
         }
 
         internal static Exception WrapStreamCopyException(Exception e)
@@ -899,8 +899,8 @@ namespace System.Net.Http
                         && data[offset + 1] == UTF8PreambleByte1
                         && data[offset + 2] == UTF8PreambleByte2
                     )
-                      ? UTF8PreambleLength
-                      : 0;
+                        ? UTF8PreambleLength
+                        : 0;
                 case UTF32CodePage:
                     return (
                         dataLength >= UTF32PreambleLength
@@ -909,16 +909,16 @@ namespace System.Net.Http
                         && data[offset + 2] == UTF32PreambleByte2
                         && data[offset + 3] == UTF32PreambleByte3
                     )
-                      ? UTF32PreambleLength
-                      : 0;
+                        ? UTF32PreambleLength
+                        : 0;
                 case UnicodeCodePage:
                     return (
                         dataLength >= UnicodePreambleLength
                         && data[offset + 0] == UnicodePreambleByte0
                         && data[offset + 1] == UnicodePreambleByte1
                     )
-                      ? UnicodePreambleLength
-                      : 0;
+                        ? UnicodePreambleLength
+                        : 0;
 
                 case BigEndianUnicodeCodePage:
                     return (
@@ -926,8 +926,8 @@ namespace System.Net.Http
                         && data[offset + 0] == BigEndianUnicodePreambleByte0
                         && data[offset + 1] == BigEndianUnicodePreambleByte1
                     )
-                      ? BigEndianUnicodePreambleLength
-                      : 0;
+                        ? BigEndianUnicodePreambleLength
+                        : 0;
 
                 default:
                     byte[] preamble = encoding.GetPreamble();
@@ -1051,8 +1051,8 @@ namespace System.Net.Http
                     TryGetBuffer(out buffer)
                     && buffer.Offset == 0
                     && buffer.Count == buffer.Array!.Length
-                  ? buffer.Array
-                  : ToArray();
+                    ? buffer.Array
+                    : ToArray();
             }
 
             public override void Write(byte[] buffer, int offset, int count)

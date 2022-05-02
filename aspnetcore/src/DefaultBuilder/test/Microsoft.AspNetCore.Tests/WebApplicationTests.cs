@@ -2294,8 +2294,8 @@ public class WebApplicationTests
 
     private sealed class HostingListener
         : IObserver<DiagnosticListener>,
-          IObserver<KeyValuePair<string, object>>,
-          IDisposable
+            IObserver<KeyValuePair<string, object>>,
+            IDisposable
     {
         private readonly Action<IHostBuilder> _configure;
         private static readonly AsyncLocal<HostingListener> _currentListener = new();

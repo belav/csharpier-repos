@@ -1265,8 +1265,8 @@ namespace System.IO
                     // the EndXx method for the outstanding async operation won't be able to acquire the lock on
                     // _stream due to this call blocked while holding the lock.
                     return overridesBeginRead
-                      ? _stream.BeginRead(buffer, offset, count, callback, state)
-                      : _stream.BeginReadInternal(
+                        ? _stream.BeginRead(buffer, offset, count, callback, state)
+                        : _stream.BeginReadInternal(
                             buffer,
                             offset,
                             count,
@@ -1354,8 +1354,8 @@ namespace System.IO
                     // the EndXx method for the outstanding async operation won't be able to acquire the lock on
                     // _stream due to this call blocked while holding the lock.
                     return overridesBeginWrite
-                      ? _stream.BeginWrite(buffer, offset, count, callback, state)
-                      : _stream.BeginWriteInternal(
+                        ? _stream.BeginWrite(buffer, offset, count, callback, state)
+                        : _stream.BeginWriteInternal(
                             buffer,
                             offset,
                             count,

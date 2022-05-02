@@ -99,12 +99,12 @@ namespace System.Runtime.Serialization
                 serializer.PreserveObjectReferences
                 || serializer.SerializationSurrogateProvider != null
             )
-              ? new XmlObjectSerializerReadContextComplex(
+                ? new XmlObjectSerializerReadContextComplex(
                     serializer,
                     rootTypeDataContract,
                     dataContractResolver
                 )
-              : new XmlObjectSerializerReadContext(
+                : new XmlObjectSerializerReadContext(
                     serializer,
                     rootTypeDataContract,
                     dataContractResolver
@@ -828,8 +828,8 @@ namespace System.Runtime.Serialization
             Debug.Assert(attributes != null);
 
             return (attributes.XsiTypeName == null)
-              ? null
-              : ResolveDataContractFromKnownTypes(
+                ? null
+                : ResolveDataContractFromKnownTypes(
                     attributes.XsiTypeName,
                     attributes.XsiTypeNamespace,
                     null /*memberTypeContract*/

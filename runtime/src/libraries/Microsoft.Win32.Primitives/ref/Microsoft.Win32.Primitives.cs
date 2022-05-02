@@ -8,7 +8,7 @@ namespace System.ComponentModel
 {
     public partial class Win32Exception
         : System.Runtime.InteropServices.ExternalException,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public Win32Exception() { }
 

@@ -599,11 +599,11 @@ namespace System.Net
                 result = justAddresses
                     ? (object)addresses
                     : new IPHostEntry
-                      {
-                          AddressList = addresses,
-                          HostName = newHostName!,
-                          Aliases = aliases
-                      };
+                    {
+                        AddressList = addresses,
+                        HostName = newHostName!,
+                        Aliases = aliases
+                    };
             }
             catch when (LogFailure(stopwatch))
             {
@@ -714,11 +714,11 @@ namespace System.Net
                 result = justAddresses
                     ? (object)addresses
                     : new IPHostEntry
-                      {
-                          HostName = hostName!,
-                          Aliases = aliases,
-                          AddressList = addresses
-                      };
+                    {
+                        HostName = hostName!,
+                        Aliases = aliases,
+                        AddressList = addresses
+                    };
             }
             catch when (LogFailure(stopwatch))
             {
@@ -773,8 +773,8 @@ namespace System.Net
             if (cancellationToken.IsCancellationRequested)
             {
                 return justAddresses
-                  ? (Task)Task.FromCanceled<IPAddress[]>(cancellationToken)
-                  : Task.FromCanceled<IPHostEntry>(cancellationToken);
+                    ? (Task)Task.FromCanceled<IPAddress[]>(cancellationToken)
+                    : Task.FromCanceled<IPHostEntry>(cancellationToken);
             }
 
             object asyncState;
@@ -795,14 +795,14 @@ namespace System.Net
                 if (justReturnParsedIp)
                 {
                     return justAddresses
-                      ? (Task)
+                        ? (Task)
                             Task.FromResult(
                                 family == AddressFamily.Unspecified
-                                    || ipAddress.AddressFamily == family
-                                  ? new[] { ipAddress }
-                                  : Array.Empty<IPAddress>()
+                                || ipAddress.AddressFamily == family
+                                    ? new[] { ipAddress }
+                                    : Array.Empty<IPAddress>()
                             )
-                      : Task.FromResult(CreateHostEntryForAddress(ipAddress));
+                        : Task.FromResult(CreateHostEntryForAddress(ipAddress));
                 }
 
                 asyncState =
@@ -827,17 +827,17 @@ namespace System.Net
                     {
                         t = justAddresses
                             ? GetAddrInfoWithTelemetryAsync<IPAddress[]>(
-                                  hostName,
-                                  justAddresses,
-                                  family,
-                                  cancellationToken
-                              )
+                                hostName,
+                                justAddresses,
+                                family,
+                                cancellationToken
+                            )
                             : GetAddrInfoWithTelemetryAsync<IPHostEntry>(
-                                  hostName,
-                                  justAddresses,
-                                  family,
-                                  cancellationToken
-                              );
+                                hostName,
+                                justAddresses,
+                                family,
+                                cancellationToken
+                            );
                     }
                     else
                     {
@@ -870,13 +870,13 @@ namespace System.Net
                         s switch
                         {
                             string h
-                              => GetHostAddressesCore(h, AddressFamily.Unspecified, stopwatch),
+                                => GetHostAddressesCore(h, AddressFamily.Unspecified, stopwatch),
                             KeyValuePair<string, AddressFamily> t
-                              => GetHostAddressesCore(t.Key, t.Value, stopwatch),
+                                => GetHostAddressesCore(t.Key, t.Value, stopwatch),
                             IPAddress a
-                              => GetHostAddressesCore(a, AddressFamily.Unspecified, stopwatch),
+                                => GetHostAddressesCore(a, AddressFamily.Unspecified, stopwatch),
                             KeyValuePair<IPAddress, AddressFamily> t
-                              => GetHostAddressesCore(t.Key, t.Value, stopwatch),
+                                => GetHostAddressesCore(t.Key, t.Value, stopwatch),
                             _ => null
                         },
                     asyncState,
@@ -891,11 +891,11 @@ namespace System.Net
                         {
                             string h => GetHostEntryCore(h, AddressFamily.Unspecified, stopwatch),
                             KeyValuePair<string, AddressFamily> t
-                              => GetHostEntryCore(t.Key, t.Value, stopwatch),
+                                => GetHostEntryCore(t.Key, t.Value, stopwatch),
                             IPAddress a
-                              => GetHostEntryCore(a, AddressFamily.Unspecified, stopwatch),
+                                => GetHostEntryCore(a, AddressFamily.Unspecified, stopwatch),
                             KeyValuePair<IPAddress, AddressFamily> t
-                              => GetHostEntryCore(t.Key, t.Value, stopwatch),
+                                => GetHostEntryCore(t.Key, t.Value, stopwatch),
                             _ => null
                         },
                     asyncState,

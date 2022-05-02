@@ -643,8 +643,8 @@ namespace System.IO
                     if (completeSynchronously)
                     {
                         return (error == null)
-                          ? LastSyncCompletedReadTask(bytesFromBuffer)
-                          : Task.FromException<int>(error);
+                            ? LastSyncCompletedReadTask(bytesFromBuffer)
+                            : Task.FromException<int>(error);
                     }
                 }
                 finally
@@ -1394,8 +1394,8 @@ namespace System.IO
             EnsureCanRead();
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled<int>(cancellationToken)
-              : CopyToAsyncCore(destination, bufferSize, cancellationToken);
+                ? Task.FromCanceled<int>(cancellationToken)
+                : CopyToAsyncCore(destination, bufferSize, cancellationToken);
         }
 
         private async Task CopyToAsyncCore(

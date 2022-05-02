@@ -901,8 +901,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     {
                         fields.Add(field);
                         return (scan)
-                          ? (PathFilter)new ScanMultipleFilter(fields)
-                          : (PathFilter)new FieldMultipleFilter(fields);
+                            ? (PathFilter)new ScanMultipleFilter(fields)
+                            : (PathFilter)new FieldMultipleFilter(fields);
                     }
                     else
                     {

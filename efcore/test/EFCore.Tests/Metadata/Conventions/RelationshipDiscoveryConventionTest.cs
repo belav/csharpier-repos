@@ -1643,8 +1643,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             );
             CreateRelationshipDiscoveryConvention().ProcessEntityTypeAdded(entityBuilder, context);
             return context.ShouldStopProcessing()
-              ? (InternalEntityTypeBuilder)context.Result
-              : entityBuilder;
+                ? (InternalEntityTypeBuilder)context.Result
+                : entityBuilder;
         }
 
         private RelationshipDiscoveryConvention CreateRelationshipDiscoveryConvention() =>

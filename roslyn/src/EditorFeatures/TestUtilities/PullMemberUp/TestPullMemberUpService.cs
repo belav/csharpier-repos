@@ -42,12 +42,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp
                 _selectedMembers == null
                     ? members.Select(member => (member, false))
                     : _selectedMembers.Select(
-                          selection =>
-                              (
-                                  members.Single(symbol => symbol.Name == selection.member),
-                                  selection.makeAbstract
-                              )
-                      );
+                        selection =>
+                            (
+                                members.Single(symbol => symbol.Name == selection.member),
+                                selection.makeAbstract
+                            )
+                    );
 
             var allInterfaces = selectedNodeSymbol.ContainingType.AllInterfaces;
             var baseClass = selectedNodeSymbol.ContainingType.BaseType;

@@ -16,7 +16,7 @@ namespace System.IO.Enumeration
     /// <summary>Enumerates the file system elements of the provided type that are being searched and filtered by a <see cref="Enumeration.FileSystemEnumerable{T}" />.</summary>
     public unsafe abstract partial class FileSystemEnumerator<TResult>
         : CriticalFinalizerObject,
-          IEnumerator<TResult>
+            IEnumerator<TResult>
     {
         private const int StandardBufferSize = 4096;
 

@@ -21,8 +21,8 @@ namespace System.Web.Http.Tracing.Tracers
     /// </summary>
     internal class JsonMediaTypeFormatterTracer
         : JsonMediaTypeFormatter,
-          IFormatterTracer,
-          IDecorator<JsonMediaTypeFormatter>
+            IFormatterTracer,
+            IDecorator<JsonMediaTypeFormatter>
     {
         private readonly JsonMediaTypeFormatter _inner;
         private MediaTypeFormatterTracer _innerTracer;

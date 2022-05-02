@@ -33,9 +33,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
     ]
     internal partial class CSharpInlineTemporaryCodeRefactoringProvider
         : AbstractInlineTemporaryCodeRefactoringProvider<
-              IdentifierNameSyntax,
-              VariableDeclaratorSyntax
-          >
+            IdentifierNameSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         private static readonly SyntaxAnnotation DefinitionAnnotation = new();
         private static readonly SyntaxAnnotation ReferenceAnnotation = new();
@@ -437,11 +437,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             var scope = GetScope(variableDeclarator);
 
             var newLocalDeclaration = variableDeclarator.GetLeadingTrivia().Any(t => t.IsDirective)
-              ? localDeclaration.RemoveNode(
+                ? localDeclaration.RemoveNode(
                     variableDeclarator,
                     SyntaxRemoveOptions.KeepExteriorTrivia
                 )
-              : localDeclaration.RemoveNode(variableDeclarator, SyntaxRemoveOptions.KeepNoTrivia);
+                : localDeclaration.RemoveNode(variableDeclarator, SyntaxRemoveOptions.KeepNoTrivia);
 
             return scope.ReplaceNode(
                 localDeclaration,

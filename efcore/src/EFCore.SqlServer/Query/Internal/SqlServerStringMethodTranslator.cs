@@ -326,14 +326,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         }
 
                         return patternValue.Any(IsLikeWildChar)
-                          ? _sqlExpressionFactory.Like(
+                            ? _sqlExpressionFactory.Like(
                                 instance,
                                 _sqlExpressionFactory.Constant(
                                     $"%{EscapeLikePattern(patternValue)}%"
                                 ),
                                 _sqlExpressionFactory.Constant(LikeEscapeString)
                             )
-                          : _sqlExpressionFactory.Like(
+                            : _sqlExpressionFactory.Like(
                                 instance,
                                 _sqlExpressionFactory.Constant($"%{patternValue}%")
                             );
@@ -461,16 +461,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                 }
 
                 return patternValue.Any(IsLikeWildChar)
-                  ? _sqlExpressionFactory.Like(
+                    ? _sqlExpressionFactory.Like(
                         instance,
                         _sqlExpressionFactory.Constant(
                             startsWith
-                              ? EscapeLikePattern(patternValue) + '%'
-                              : '%' + EscapeLikePattern(patternValue)
+                                ? EscapeLikePattern(patternValue) + '%'
+                                : '%' + EscapeLikePattern(patternValue)
                         ),
                         _sqlExpressionFactory.Constant(LikeEscapeString)
                     )
-                  : _sqlExpressionFactory.Like(
+                    : _sqlExpressionFactory.Like(
                         instance,
                         _sqlExpressionFactory.Constant(
                             startsWith ? patternValue + '%' : '%' + patternValue

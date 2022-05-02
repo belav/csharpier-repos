@@ -249,8 +249,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -264,8 +264,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -279,8 +279,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
                 name,
                 value,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -292,8 +292,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             RemoveAnnotation(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -305,8 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             CanRemoveAnnotation(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

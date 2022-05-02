@@ -162,8 +162,8 @@ namespace System.Net.WebSockets
                 state == WebSocketState.Open
                 || state == WebSocketState.Connecting
                 || state == WebSocketState.Aborted
-              ? CloseAsyncCore(closeStatus, statusDescription, false, cancellationToken)
-              : Task.CompletedTask;
+                ? CloseAsyncCore(closeStatus, statusDescription, false, cancellationToken)
+                : Task.CompletedTask;
         }
 
         public override Task CloseAsync(
@@ -195,13 +195,13 @@ namespace System.Net.WebSockets
                 || state == WebSocketState.Connecting
                 || state == WebSocketState.Aborted
                 || state == WebSocketState.CloseSent
-              ? CloseAsyncCore(
+                ? CloseAsyncCore(
                     closeStatus,
                     statusDescription,
                     state != WebSocketState.Aborted,
                     cancellationToken
                 )
-              : Task.CompletedTask;
+                : Task.CompletedTask;
         }
 
         public override void Abort()

@@ -160,18 +160,18 @@ namespace System.Web.Http.SelfHost.Channels
             {
                 contentString = contentLength.HasValue
                     ? Error.Format(
-                          SRResources.MessageBodyIsHttpRequestMessageWithKnownContentLength,
-                          contentLength.Value
-                      )
+                        SRResources.MessageBodyIsHttpRequestMessageWithKnownContentLength,
+                        contentLength.Value
+                    )
                     : SRResources.MessageBodyIsHttpRequestMessageWithUnknownContentLength;
             }
             else
             {
                 contentString = contentLength.HasValue
                     ? Error.Format(
-                          SRResources.MessageBodyIsHttpResponseMessageWithKnownContentLength,
-                          contentLength.Value
-                      )
+                        SRResources.MessageBodyIsHttpResponseMessageWithKnownContentLength,
+                        contentLength.Value
+                    )
                     : SRResources.MessageBodyIsHttpResponseMessageWithUnknownContentLength;
             }
 

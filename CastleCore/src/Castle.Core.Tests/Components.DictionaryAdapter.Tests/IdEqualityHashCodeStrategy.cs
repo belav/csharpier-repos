@@ -16,8 +16,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
 {
     public class IdEqualityHashCodeStrategy
         : DictionaryBehaviorAttribute,
-          IDictionaryInitializer,
-          IDictionaryEqualityHashCodeStrategy
+            IDictionaryInitializer,
+            IDictionaryEqualityHashCodeStrategy
     {
         public void Initialize(IDictionaryAdapter dictionaryAdapter, object[] behaviors)
         {

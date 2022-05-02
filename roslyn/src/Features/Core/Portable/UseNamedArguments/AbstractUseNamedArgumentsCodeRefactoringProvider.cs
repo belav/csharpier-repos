@@ -210,9 +210,9 @@ namespace Microsoft.CodeAnalysis.UseNamedArguments
                 var namedArguments = arguments.Select(
                     (argument, i) =>
                         ShouldAddName(argument, i)
-                          ? WithName((TSimpleArgumentSyntax)argument, parameters[i].Name)
-                            .WithTriviaFrom(argument)
-                          : argument
+                            ? WithName((TSimpleArgumentSyntax)argument, parameters[i].Name)
+                                .WithTriviaFrom(argument)
+                            : argument
                 );
 
                 return WithArguments(argumentList, namedArguments, arguments.GetSeparators());

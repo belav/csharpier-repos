@@ -180,8 +180,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
                 type,
                 collectionVariableToken,
                 foreachInfo.RequireExplicitCastInterface
-                  ? generator.CastExpression(foreachInfo.ExplicitCastInterface, expression)
-                  : expression
+                    ? generator.CastExpression(foreachInfo.ExplicitCastInterface, expression)
+                    : expression
             );
 
             // attach trivia to right place
@@ -516,8 +516,8 @@ namespace Microsoft.CodeAnalysis.ConvertForEachToFor
         private IOperation RemoveImplicitConversion(IOperation collection)
         {
             return (collection is IConversionOperation conversion && conversion.IsImplicit)
-              ? RemoveImplicitConversion(conversion.Operand)
-              : collection;
+                ? RemoveImplicitConversion(conversion.Operand)
+                : collection;
         }
 
         private bool CheckIfForEachVariableIsWrittenInside(

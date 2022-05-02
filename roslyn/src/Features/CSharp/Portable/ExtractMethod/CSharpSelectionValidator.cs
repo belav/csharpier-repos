@@ -640,17 +640,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var start =
                 (selectionInfo.FirstTokenInOriginalSpan == selectionInfo.FirstTokenInFinalSpan)
                     ? Math.Min(
-                          selectionInfo.FirstTokenInOriginalSpan.SpanStart,
-                          selectionInfo.OriginalSpan.Start
-                      )
+                        selectionInfo.FirstTokenInOriginalSpan.SpanStart,
+                        selectionInfo.OriginalSpan.Start
+                    )
                     : selectionInfo.FirstTokenInFinalSpan.FullSpan.Start;
 
             var end =
                 (selectionInfo.LastTokenInOriginalSpan == selectionInfo.LastTokenInFinalSpan)
                     ? Math.Max(
-                          selectionInfo.LastTokenInOriginalSpan.Span.End,
-                          selectionInfo.OriginalSpan.End
-                      )
+                        selectionInfo.LastTokenInOriginalSpan.Span.End,
+                        selectionInfo.OriginalSpan.End
+                    )
                     : selectionInfo.LastTokenInFinalSpan.FullSpan.End;
 
             return selectionInfo.With(

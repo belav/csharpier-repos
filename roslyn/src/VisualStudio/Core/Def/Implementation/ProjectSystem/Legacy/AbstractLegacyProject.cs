@@ -550,8 +550,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             }
 
             propertyValue = bool.TryParse(stringPropertyValue, out var parsedBoolValue)
-              ? parsedBoolValue
-              : null;
+                ? parsedBoolValue
+                : null;
             return true;
         }
     }

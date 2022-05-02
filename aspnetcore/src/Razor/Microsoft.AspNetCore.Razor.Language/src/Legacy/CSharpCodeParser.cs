@@ -103,8 +103,8 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     public CSharpCodeParser(IEnumerable<DirectiveDescriptor> directives, ParserContext context)
         : base(
             context.ParseLeadingDirectives
-              ? FirstDirectiveCSharpLanguageCharacteristics.Instance
-              : CSharpLanguageCharacteristics.Instance,
+                ? FirstDirectiveCSharpLanguageCharacteristics.Instance
+                : CSharpLanguageCharacteristics.Instance,
             context
         )
     {

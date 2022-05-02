@@ -97,10 +97,10 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
 
             var expression = syntaxFacts.GetExpressionOfInvocationExpression(invocation);
             var nameNode = syntaxFacts.IsIdentifierName(expression)
-              ? expression
-              : syntaxFacts.IsSimpleMemberAccessExpression(expression)
-                  ? syntaxFacts.GetNameOfMemberAccessExpression(expression)
-                  : null;
+                ? expression
+                : syntaxFacts.IsSimpleMemberAccessExpression(expression)
+                    ? syntaxFacts.GetNameOfMemberAccessExpression(expression)
+                    : null;
 
             if (!syntaxFacts.IsIdentifierName(nameNode))
             {
@@ -197,8 +197,8 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             var valueNode = syntaxFacts.IsNullLiteralExpression(
                 syntaxFacts.GetExpressionOfArgument(node1)
             )
-              ? node2
-              : node1;
+                ? node2
+                : node1;
             var argumentExpression = syntaxFacts.GetExpressionOfArgument(valueNode);
             if (argumentExpression != null)
             {

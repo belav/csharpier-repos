@@ -2210,8 +2210,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public static ValidationResult Validate(HasMetadataTypeToBeValidated value) =>
                 value.SecondPropertyToBeTested == "TypeInvalid"
                     ? new ValidationResult(
-                          "The SecondPropertyToBeTested field mustn't be \"TypeInvalid\"."
-                      )
+                        "The SecondPropertyToBeTested field mustn't be \"TypeInvalid\"."
+                    )
                     : ValidationResult.Success;
         }
     }

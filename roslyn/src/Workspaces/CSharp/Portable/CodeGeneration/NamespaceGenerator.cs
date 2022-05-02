@@ -110,11 +110,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             declaration = options.GenerateMembers
                 ? service.AddMembers(
-                      declaration,
-                      innermostNamespace.GetMembers(),
-                      options,
-                      cancellationToken
-                  )
+                    declaration,
+                    innermostNamespace.GetMembers(),
+                    options,
+                    cancellationToken
+                )
                 : declaration;
 
             return AddFormatterAndCodeGeneratorAnnotationsTo(declaration);
@@ -175,14 +175,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             var reusableSyntax = GetReuseableSyntaxNodeForSymbol<SyntaxNode>(@namespace, options);
             return reusableSyntax == null
-              ? GenerateNamespaceDeclarationWorker(
+                ? GenerateNamespaceDeclarationWorker(
                     name,
                     innermostNamespace,
                     destination,
                     options,
                     parseOptions
                 )
-              : RemoveAllMembers(reusableSyntax);
+                : RemoveAllMembers(reusableSyntax);
         }
 
         private static SyntaxNode RemoveAllMembers(SyntaxNode declaration) =>
@@ -190,7 +190,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 CompilationUnitSyntax compilationUnit => compilationUnit.WithMembers(default),
                 BaseNamespaceDeclarationSyntax namespaceDeclaration
-                  => namespaceDeclaration.WithMembers(default),
+                    => namespaceDeclaration.WithMembers(default),
                 _ => declaration,
             };
 
@@ -235,8 +235,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static NameSyntax GenerateName(INamespaceOrTypeSymbol symbol)
         {
             return symbol is ITypeSymbol type
-              ? type.GenerateNameSyntax()
-              : SyntaxFactory.ParseName(
+                ? type.GenerateNameSyntax()
+                : SyntaxFactory.ParseName(
                     symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
                 );
         }

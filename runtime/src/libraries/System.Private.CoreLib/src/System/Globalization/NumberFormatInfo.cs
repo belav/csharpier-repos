@@ -205,7 +205,7 @@ namespace System.Globalization
                     '\uFE63'
                     or // Small Hyphen-Minus
                     '\uFF0D'
-                      => true, // Fullwidth Hyphen-Minus
+                        => true, // Fullwidth Hyphen-Minus
                     _ => false
                 };
         }
@@ -244,8 +244,8 @@ namespace System.Globalization
         public static NumberFormatInfo GetInstance(IFormatProvider? formatProvider)
         {
             return formatProvider == null
-              ? CurrentInfo
-              : // Fast path for a null provider
+                ? CurrentInfo
+                : // Fast path for a null provider
                 GetProviderNonNull(formatProvider);
 
             static NumberFormatInfo GetProviderNonNull(IFormatProvider provider)

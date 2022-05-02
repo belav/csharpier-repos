@@ -335,16 +335,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpParseOptions options
         ) =>
             options.IsFeatureEnabled(feature)
-              ? null
-              : GetDisabledFeatureDiagnosticInfo(feature, options.LanguageVersion);
+                ? null
+                : GetDisabledFeatureDiagnosticInfo(feature, options.LanguageVersion);
 
         internal static CSDiagnosticInfo? GetFeatureAvailabilityDiagnosticInfo(
             this MessageID feature,
             CSharpCompilation compilation
         ) =>
             compilation.IsFeatureEnabled(feature)
-              ? null
-              : GetDisabledFeatureDiagnosticInfo(feature, compilation.LanguageVersion);
+                ? null
+                : GetDisabledFeatureDiagnosticInfo(feature, compilation.LanguageVersion);
 
         private static CSDiagnosticInfo GetDisabledFeatureDiagnosticInfo(
             MessageID feature,
@@ -363,8 +363,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             LanguageVersion requiredVersion = feature.RequiredVersion();
             return requiredVersion == LanguageVersion.Preview.MapSpecifiedToEffectiveVersion()
-              ? new CSDiagnosticInfo(ErrorCode.ERR_FeatureInPreview, feature.Localize())
-              : new CSDiagnosticInfo(
+                ? new CSDiagnosticInfo(ErrorCode.ERR_FeatureInPreview, feature.Localize())
+                : new CSDiagnosticInfo(
                     availableVersion.GetErrorCode(),
                     feature.Localize(),
                     new CSharpRequiredLanguageVersion(requiredVersion)

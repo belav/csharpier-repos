@@ -27,16 +27,16 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
     [ExportLanguageService(typeof(IDeclaredSymbolInfoFactoryService), LanguageNames.CSharp), Shared]
     internal class CSharpDeclaredSymbolInfoFactoryService
         : AbstractDeclaredSymbolInfoFactoryService<
-              CompilationUnitSyntax,
-              UsingDirectiveSyntax,
-              BaseNamespaceDeclarationSyntax,
-              TypeDeclarationSyntax,
-              EnumDeclarationSyntax,
-              MemberDeclarationSyntax,
-              NameSyntax,
-              QualifiedNameSyntax,
-              IdentifierNameSyntax
-          >
+            CompilationUnitSyntax,
+            UsingDirectiveSyntax,
+            BaseNamespaceDeclarationSyntax,
+            TypeDeclarationSyntax,
+            EnumDeclarationSyntax,
+            MemberDeclarationSyntax,
+            NameSyntax,
+            QualifiedNameSyntax,
+            IdentifierNameSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -222,7 +222,7 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                                 SyntaxKind.InterfaceDeclaration => DeclaredSymbolInfoKind.Interface,
                                 SyntaxKind.StructDeclaration => DeclaredSymbolInfoKind.Struct,
                                 SyntaxKind.RecordStructDeclaration
-                                  => DeclaredSymbolInfoKind.RecordStruct,
+                                    => DeclaredSymbolInfoKind.RecordStruct,
                                 _ => throw ExceptionUtilities.UnexpectedValue(node.Kind()),
                             },
                             GetAccessibility(container, typeDecl.Modifiers),
@@ -348,8 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                             fullyQualifiedContainerName,
                             method.Modifiers.Any(SyntaxKind.PartialKeyword),
                             isExtensionMethod
-                              ? DeclaredSymbolInfoKind.ExtensionMethod
-                              : DeclaredSymbolInfoKind.Method,
+                                ? DeclaredSymbolInfoKind.ExtensionMethod
+                                : DeclaredSymbolInfoKind.Method,
                             GetAccessibility(container, method.Modifiers),
                             method.Identifier.Span,
                             inheritanceNames: ImmutableArray<string>.Empty,
@@ -391,8 +391,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                             fieldDeclaration is EventFieldDeclarationSyntax
                                 ? DeclaredSymbolInfoKind.Event
                                 : fieldDeclaration.Modifiers.Any(
-                                      m => m.Kind() == SyntaxKind.ConstKeyword
-                                  )
+                                    m => m.Kind() == SyntaxKind.ConstKeyword
+                                )
                                     ? DeclaredSymbolInfoKind.Constant
                                     : DeclaredSymbolInfoKind.Field;
 
@@ -453,8 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
 
         private static string GetConstructorSuffix(ConstructorDeclarationSyntax constructor) =>
             constructor.Modifiers.Any(SyntaxKind.StaticKeyword)
-              ? ".static " + constructor.Identifier + "()"
-              : GetSuffix('(', ')', constructor.ParameterList.Parameters);
+                ? ".static " + constructor.Identifier + "()"
+                : GetSuffix('(', ')', constructor.ParameterList.Parameters);
 
         private static string GetMethodSuffix(MethodDeclarationSyntax method) =>
             GetTypeParameterSuffix(method.TypeParameterList)

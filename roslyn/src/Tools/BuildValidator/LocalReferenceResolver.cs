@@ -120,8 +120,8 @@ namespace BuildValidator
                 properties: new MetadataReferenceProperties(
                     kind: MetadataImageKind.Assembly,
                     aliases: metadataReferenceInfo.ExternAlias is null
-                      ? ImmutableArray<string>.Empty
-                      : ImmutableArray.Create(metadataReferenceInfo.ExternAlias),
+                        ? ImmutableArray<string>.Empty
+                        : ImmutableArray.Create(metadataReferenceInfo.ExternAlias),
                     embedInteropTypes: metadataReferenceInfo.EmbedInteropTypes
                 )
             );

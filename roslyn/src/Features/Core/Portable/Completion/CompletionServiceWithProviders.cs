@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Completion
     /// </summary>
     public abstract partial class CompletionServiceWithProviders
         : CompletionService,
-          IEqualityComparer<ImmutableHashSet<string>>
+            IEqualityComparer<ImmutableHashSet<string>>
     {
         private readonly object _gate = new();
 

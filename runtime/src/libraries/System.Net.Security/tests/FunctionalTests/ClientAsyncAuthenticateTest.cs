@@ -220,8 +220,8 @@ namespace System.Net.Security.Tests
                         client.GetStream(),
                         false,
                         certificateCallback != null
-                          ? certificateCallback
-                          : AllowAnyServerCertificate,
+                            ? certificateCallback
+                            : AllowAnyServerCertificate,
                         null
                     )
                 )

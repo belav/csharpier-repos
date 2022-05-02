@@ -150,7 +150,7 @@ namespace System.DirectoryServices.AccountManagement
                                     (index != -1)
                                         ? samAccountName.Substring(index + 1)
                                         : // +1 to skip the '/'
-                                          samAccountName;
+                                        samAccountName;
                             }
 
                             if ((samAccountName != null) && (samAccountName.Length > 0))

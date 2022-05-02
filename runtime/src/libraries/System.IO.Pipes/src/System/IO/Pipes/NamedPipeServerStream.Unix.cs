@@ -64,8 +64,8 @@ namespace System.IO.Pipes
             _instance = SharedServer.Get(
                 GetPipePath(".", pipeName),
                 (maxNumberOfServerInstances == MaxAllowedServerInstances)
-                  ? int.MaxValue
-                  : maxNumberOfServerInstances
+                    ? int.MaxValue
+                    : maxNumberOfServerInstances
             );
 
             _direction = direction;
@@ -98,8 +98,8 @@ namespace System.IO.Pipes
             }
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : WaitForConnectionAsyncCore();
+                ? Task.FromCanceled(cancellationToken)
+                : WaitForConnectionAsyncCore();
 
             async Task WaitForConnectionAsyncCore()
             {

@@ -371,32 +371,32 @@ namespace System.ServiceModel.Syndication.Tests
                                             "SourceLineNum",
                                             string.Empty,
                                             (sourceElem != null)
-                                              ? sourceElem.EndLineNumber.ToString()
-                                              : "-1"
+                                                ? sourceElem.EndLineNumber.ToString()
+                                                : "-1"
                                         );
                                         _writer.WriteAttributeString(
                                             string.Empty,
                                             "SourceLinePos",
                                             string.Empty,
                                             (sourceElem != null)
-                                              ? sourceElem.EndLinePosition.ToString()
-                                              : "-1"
+                                                ? sourceElem.EndLinePosition.ToString()
+                                                : "-1"
                                         );
                                         _writer.WriteAttributeString(
                                             string.Empty,
                                             "TargetLineNum",
                                             string.Empty,
                                             (targetElem != null)
-                                              ? targetElem.EndLineNumber.ToString()
-                                              : "-1"
+                                                ? targetElem.EndLineNumber.ToString()
+                                                : "-1"
                                         );
                                         _writer.WriteAttributeString(
                                             string.Empty,
                                             "TargetLinePos",
                                             string.Empty,
                                             (targetElem != null)
-                                              ? targetElem.EndLineNumber.ToString()
-                                              : "-1"
+                                                ? targetElem.EndLineNumber.ToString()
+                                                : "-1"
                                         );
                                         _writer.WriteStartElement(
                                             string.Empty,

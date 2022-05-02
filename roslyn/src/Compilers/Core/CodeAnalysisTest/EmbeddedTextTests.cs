@@ -380,18 +380,18 @@ class Program
             {
                 var source = useStream
                     ? SourceText.From(
-                          new MemoryStream(bytes),
-                          Encoding.ASCII,
-                          SourceHashAlgorithm.Sha1,
-                          canBeEmbedded: true
-                      )
+                        new MemoryStream(bytes),
+                        Encoding.ASCII,
+                        SourceHashAlgorithm.Sha1,
+                        canBeEmbedded: true
+                    )
                     : SourceText.From(
-                          bytes,
-                          bytes.Length,
-                          Encoding.ASCII,
-                          SourceHashAlgorithm.Sha1,
-                          canBeEmbedded: true
-                      );
+                        bytes,
+                        bytes.Length,
+                        Encoding.ASCII,
+                        SourceHashAlgorithm.Sha1,
+                        canBeEmbedded: true
+                    );
 
                 var text = EmbeddedText.FromSource("pathToPrecomputed", source);
                 Assert.Equal("pathToPrecomputed", text.FilePath);

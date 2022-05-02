@@ -113,12 +113,12 @@ namespace Microsoft.CodeAnalysis
                     // DeclarationState now. We'll pass false for generatedDocumentsAreFinal because this is being called
                     // if our referenced projects are changing, so we'll have to rerun to consume changes.
                     return intermediateProjects.Length == 0
-                      ? new FullDeclarationState(
+                        ? new FullDeclarationState(
                             compilation,
                             generatedDocuments,
                             generatedDocumentsAreFinal: false
                         )
-                      : (State)
+                        : (State)
                             new InProgressState(
                                 compilation,
                                 generatedDocuments,
@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis
                 )
                 {
                     return services.SupportsCachingRecoverableObjects
-                      ? new WeakValueSource<Compilation>(compilation)
-                      : (ValueSource<Optional<Compilation>>)
+                        ? new WeakValueSource<Compilation>(compilation)
+                        : (ValueSource<Optional<Compilation>>)
                             new ConstantValueSource<Optional<Compilation>>(compilation);
                 }
             }
@@ -369,8 +369,8 @@ namespace Microsoft.CodeAnalysis
                     // underlying compilation is GC'ed.
                     var primaryDynamic = new WeakReference<ITypeSymbol?>(
                         compilation.Language == LanguageNames.CSharp
-                          ? compilation.DynamicType
-                          : null
+                            ? compilation.DynamicType
+                            : null
                     );
 
                     // PERF: Preallocate this array so we don't have to resize it as we're adding assembly symbols.

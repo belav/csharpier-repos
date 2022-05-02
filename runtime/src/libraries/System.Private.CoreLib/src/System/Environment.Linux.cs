@@ -10,8 +10,8 @@ namespace System
         public static long WorkingSet =>
             (long)(
                 Interop.procfs.TryReadStatusFile(ProcessId, out Interop.procfs.ParsedStatus status)
-                  ? status.VmRSS
-                  : 0
+                    ? status.VmRSS
+                    : 0
             );
     }
 }

@@ -89,13 +89,13 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             var assemblyInfoString =
                 LanguageName == LanguageNames.CSharp
                     ? string.Format(
-                          @"[assembly: System.Reflection.AssemblyVersion(""{0}"")]",
-                          AssemblyIdentity.Version
-                      )
+                        @"[assembly: System.Reflection.AssemblyVersion(""{0}"")]",
+                        AssemblyIdentity.Version
+                    )
                     : string.Format(
-                          @"<Assembly: System.Reflection.AssemblyVersion(""{0}"")>",
-                          AssemblyIdentity.Version
-                      );
+                        @"<Assembly: System.Reflection.AssemblyVersion(""{0}"")>",
+                        AssemblyIdentity.Version
+                    );
 
             var assemblyInfoSourceTextContainer = SourceText
                 .From(assemblyInfoString, Encoding)

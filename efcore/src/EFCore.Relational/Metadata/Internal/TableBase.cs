@@ -133,10 +133,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return !OptionalEntityTypes.TryGetValue(entityType, out var optional)
-              ? throw new InvalidOperationException(
+                ? throw new InvalidOperationException(
                     RelationalStrings.TableNotMappedEntityType(entityType.DisplayName(), Name)
                 )
-              : optional;
+                : optional;
         }
 
         private void CheckMappedEntityType(IEntityType entityType)

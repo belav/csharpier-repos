@@ -20,10 +20,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
     ]
     internal class CSharpUseCompoundAssignmentCodeFixProvider
         : AbstractUseCompoundAssignmentCodeFixProvider<
-              SyntaxKind,
-              AssignmentExpressionSyntax,
-              ExpressionSyntax
-          >
+            SyntaxKind,
+            AssignmentExpressionSyntax,
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

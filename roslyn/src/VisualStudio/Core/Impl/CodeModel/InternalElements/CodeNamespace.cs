@@ -68,8 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var namespaceNode = GetNamespaceNode();
 
                 return namespaceNode != null
-                  ? FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeNamespace>(namespaceNode)
-                  : this.FileCodeModel;
+                    ? FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeNamespace>(namespaceNode)
+                    : this.FileCodeModel;
             }
         }
 

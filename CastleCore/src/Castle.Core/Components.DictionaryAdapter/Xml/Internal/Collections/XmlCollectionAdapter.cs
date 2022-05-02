@@ -135,8 +135,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             SetValue(cursor, default(T), ref value);
 
             return advisor.OnInserting(value)
-              ? CommitInsert(index, node, value, append)
-              : RollbackInsert();
+                ? CommitInsert(index, node, value, append)
+                : RollbackInsert();
         }
 
         private bool CommitInsert(int index, IXmlNode node, T value, bool append)

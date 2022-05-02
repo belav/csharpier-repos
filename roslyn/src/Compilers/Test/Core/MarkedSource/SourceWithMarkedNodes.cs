@@ -73,8 +73,8 @@ namespace Roslyn.Test.Utilities
                 var parentIdOpt = match.Groups["ParentId"].Value;
                 var parentId = string.IsNullOrEmpty(parentIdOpt) ? 0 : int.Parse(parentIdOpt);
                 var parsedKind = string.IsNullOrEmpty(syntaxKindOpt)
-                  ? 0
-                  : getSyntaxKind(syntaxKindOpt);
+                    ? 0
+                    : getSyntaxKind(syntaxKindOpt);
                 int absoluteOffset = offset + markedSyntax.Index;
 
                 yield return new MarkedSpan(

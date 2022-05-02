@@ -28,8 +28,8 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
                 foreach (var modifier in modifiers)
                 {
                     var currentOrder = preferredOrder.TryGetValue(modifier.RawKind, out var value)
-                      ? value
-                      : int.MaxValue;
+                        ? value
+                        : int.MaxValue;
                     if (currentOrder < lastOrder)
                     {
                         return false;

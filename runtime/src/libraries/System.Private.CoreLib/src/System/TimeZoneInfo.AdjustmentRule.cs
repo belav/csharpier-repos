@@ -11,8 +11,8 @@ namespace System
         [Serializable]
         public sealed class AdjustmentRule
             : IEquatable<AdjustmentRule?>,
-              ISerializable,
-              IDeserializationCallback
+                ISerializable,
+                IDeserializationCallback
         {
             private static readonly TimeSpan DaylightDeltaAdjustment = TimeSpan.FromHours(24.0);
             private static readonly TimeSpan MaxDaylightDelta = TimeSpan.FromHours(12.0);

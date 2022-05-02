@@ -126,8 +126,8 @@ namespace System.Configuration
                     // on Unix, we want to first append '.dll' extension and on Windows change '.exe' to '.dll'
                     // eventually, in ApplicationConfigUri we will get '{applicationName}.dll.config'
                     applicationPath = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                      ? Path.ChangeExtension(ApplicationUri, ".dll")
-                      : ApplicationUri + ".dll";
+                        ? Path.ChangeExtension(ApplicationUri, ".dll")
+                        : ApplicationUri + ".dll";
                 }
 
                 ApplicationConfigUri = applicationPath + ConfigExtension;

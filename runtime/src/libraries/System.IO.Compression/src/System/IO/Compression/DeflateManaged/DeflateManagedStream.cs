@@ -84,8 +84,8 @@ namespace System.IO.Compression
         {
             EnsureNotDisposed();
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : Task.CompletedTask;
+                ? Task.FromCanceled(cancellationToken)
+                : Task.CompletedTask;
         }
 
         public override long Seek(long offset, SeekOrigin origin)

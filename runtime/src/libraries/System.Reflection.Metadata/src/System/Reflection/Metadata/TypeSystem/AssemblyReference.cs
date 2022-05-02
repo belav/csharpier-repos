@@ -210,8 +210,8 @@ namespace System.Reflection.Metadata
                         ) != 0;
                     return BlobHandle.FromVirtualIndex(
                         hasFullKey
-                          ? BlobHandle.VirtualIndex.ContractPublicKey
-                          : BlobHandle.VirtualIndex.ContractPublicKeyToken,
+                            ? BlobHandle.VirtualIndex.ContractPublicKey
+                            : BlobHandle.VirtualIndex.ContractPublicKeyToken,
                         0
                     );
             }

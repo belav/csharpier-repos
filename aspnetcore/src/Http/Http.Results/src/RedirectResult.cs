@@ -57,8 +57,8 @@ internal sealed partial class RedirectResult : IResult
 
         // IsLocalUrl is called to handle URLs starting with '~/'.
         var destinationUrl = SharedUrlHelper.IsLocalUrl(Url)
-          ? SharedUrlHelper.Content(httpContext, Url)
-          : Url;
+            ? SharedUrlHelper.Content(httpContext, Url)
+            : Url;
 
         Log.RedirectResultExecuting(logger, destinationUrl);
 

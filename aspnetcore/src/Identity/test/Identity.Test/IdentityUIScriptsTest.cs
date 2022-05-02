@@ -180,8 +180,8 @@ public class IdentityUIScriptsTest : IDisposable
             .Single(a => a.Key == "Microsoft.AspNetCore.Testing.DefaultUIProjectPath")
             .Value;
         return Directory.Exists(projectPath)
-          ? projectPath
-          : Path.Combine(FindHelixSlnFileDirectory(), "UI");
+            ? projectPath
+            : Path.Combine(FindHelixSlnFileDirectory(), "UI");
     }
 
     private static string FindHelixSlnFileDirectory()

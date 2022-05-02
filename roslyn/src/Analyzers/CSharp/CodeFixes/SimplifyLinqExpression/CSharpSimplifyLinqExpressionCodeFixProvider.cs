@@ -21,10 +21,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyLinqExpression
     ]
     internal sealed class CSharpSimplifyLinqExpressionCodeFixProvider
         : AbstractSimplifyLinqExpressionCodeFixProvider<
-              InvocationExpressionSyntax,
-              SimpleNameSyntax,
-              ExpressionSyntax
-          >
+            InvocationExpressionSyntax,
+            SimpleNameSyntax,
+            ExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

@@ -179,8 +179,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     )
                     .WithOptimizationLevel(
                         GetBooleanOption(CompilerOptions.OPTID_OPTIMIZATIONS)
-                          ? OptimizationLevel.Release
-                          : OptimizationLevel.Debug
+                            ? OptimizationLevel.Release
+                            : OptimizationLevel.Debug
                     )
                     .WithOutputKind(_outputKind)
                     .WithPlatform(platform)
@@ -293,10 +293,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                     OutputFileType.AppContainer => OutputKind.WindowsRuntimeApplication,
                     OutputFileType.WinMDObj => OutputKind.WindowsRuntimeMetadata,
                     _
-                      => throw new ArgumentException(
-                          "fileType was not a valid OutputFileType",
-                          nameof(fileType)
-                      ),
+                        => throw new ArgumentException(
+                            "fileType was not a valid OutputFileType",
+                            nameof(fileType)
+                        ),
                 };
 
                 if (_outputKind != newOutputKind)

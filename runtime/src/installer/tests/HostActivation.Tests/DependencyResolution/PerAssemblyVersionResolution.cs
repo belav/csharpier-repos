@@ -9,7 +9,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 {
     public abstract class PerAssemblyVersionResolutionBase
         : ComponentDependencyResolutionBase,
-          IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
+            IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
     {
         protected readonly SharedTestState SharedState;
 
@@ -137,7 +137,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
     public class AppPerAssemblyVersionResolution
         : PerAssemblyVersionResolutionBase,
-          IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
+            IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
     {
         public AppPerAssemblyVersionResolution(SharedTestState sharedState) : base(sharedState) { }
 
@@ -168,8 +168,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
             string expectedTestAssemblyPath = Path.Combine(
                 appWins
-                  ? app.Location
-                  : SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
+                    ? app.Location
+                    : SharedState.DotNetWithNetCoreApp.GreatestVersionSharedFxPath,
                 testAssemblyName + ".dll"
             );
 
@@ -185,7 +185,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
     public class ComponentPerAssemblyVersionResolution
         : PerAssemblyVersionResolutionBase,
-          IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
+            IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
     {
         public ComponentPerAssemblyVersionResolution(SharedTestState sharedState)
             : base(sharedState) { }

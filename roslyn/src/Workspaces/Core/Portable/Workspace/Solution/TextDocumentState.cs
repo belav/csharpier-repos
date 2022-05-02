@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis
                 info.Attributes,
                 sourceText: null,
                 textAndVersionSource: info.TextLoader != null
-                  ? CreateRecoverableText(info.TextLoader, info.Id, services)
-                  : CreateStrongText(
+                    ? CreateRecoverableText(info.TextLoader, info.Id, services)
+                    : CreateStrongText(
                         TextAndVersion.Create(
                             SourceText.From(string.Empty, Encoding.UTF8),
                             VersionStamp.Default,

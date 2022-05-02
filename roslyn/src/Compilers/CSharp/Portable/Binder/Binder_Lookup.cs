@@ -1125,8 +1125,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var useSiteInfo =
                         attributeTypeViabilityUseSiteInfo.AccumulatesDependencies || !diagnose
                             ? new CompoundUseSiteInfo<AssemblySymbol>(
-                                  attributeTypeViabilityUseSiteInfo
-                              )
+                                attributeTypeViabilityUseSiteInfo
+                            )
                             : CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
                     Debug.Assert(!diagnose || useSiteInfo.AccumulatesDiagnostics);
 
@@ -2147,11 +2147,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var unwrappedSymbols = ImmutableArray.Create<Symbol>(unwrappedSymbol);
                 diagInfo = diagnose
                     ? new CSDiagnosticInfo(
-                          ErrorCode.ERR_BadAccess,
-                          new[] { unwrappedSymbol },
-                          unwrappedSymbols,
-                          additionalLocations: ImmutableArray<Location>.Empty
-                      )
+                        ErrorCode.ERR_BadAccess,
+                        new[] { unwrappedSymbol },
+                        unwrappedSymbols,
+                        additionalLocations: ImmutableArray<Location>.Empty
+                    )
                     : null;
                 return LookupResult.Inaccessible(symbol, diagInfo);
             }
@@ -2227,10 +2227,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 diagInfo = diagnose
                     ? new CSDiagnosticInfo(
-                          ErrorCode.ERR_BadSKunknown,
-                          unwrappedSymbol,
-                          unwrappedSymbol.GetKindText()
-                      )
+                        ErrorCode.ERR_BadSKunknown,
+                        unwrappedSymbol,
+                        unwrappedSymbol.GetKindText()
+                    )
                     : null;
                 return LookupResult.NotTypeOrNamespace(symbol, diagInfo);
             }
@@ -2322,8 +2322,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return (((object)method1 != null) && ((object)method2 != null))
-              ? new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp2, symbol, method1, method2)
-              : new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp1, symbol, method1 ?? method2);
+                ? new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp2, symbol, method1, method2)
+                : new CSDiagnosticInfo(ErrorCode.ERR_BindToBogusProp1, symbol, method1 ?? method2);
         }
 
         internal void CheckViability<TSymbol>(
@@ -2402,10 +2402,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 InCref
                     ? !this.IsCrefAccessible(symbol)
                     : !this.IsAccessible(
-                          symbol,
-                          ref discardedUseSiteInfo,
-                          RefineAccessThroughType(options, accessThroughType)
-                      )
+                        symbol,
+                        ref discardedUseSiteInfo,
+                        RefineAccessThroughType(options, accessThroughType)
+                    )
             )
             {
                 return false;
@@ -2443,8 +2443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // can determine whether the member is actually accessible in the containing type.  There is one exception:
             // If the receiver is "base", then it's okay if the receiver type isn't derived from the containing type.
             return ((options & LookupOptions.UseBaseReferenceAccessibility) != 0)
-              ? null
-              : accessThroughType;
+                ? null
+                : accessThroughType;
         }
 
         /// <summary>
@@ -2623,10 +2623,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // The non-generic {1} '{0}' cannot be used with type arguments
                                 diagInfo = diagnose
                                     ? new CSDiagnosticInfo(
-                                          ErrorCode.ERR_HasNoTypeVars,
-                                          namedType,
-                                          MessageID.IDS_SK_TYPE.Localize()
-                                      )
+                                        ErrorCode.ERR_HasNoTypeVars,
+                                        namedType,
+                                        MessageID.IDS_SK_TYPE.Localize()
+                                    )
                                     : null;
                             }
                             else
@@ -2634,11 +2634,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // Using the generic {1} '{0}' requires {2} type arguments
                                 diagInfo = diagnose
                                     ? new CSDiagnosticInfo(
-                                          ErrorCode.ERR_BadArity,
-                                          namedType,
-                                          MessageID.IDS_SK_TYPE.Localize(),
-                                          namedType.Arity
-                                      )
+                                        ErrorCode.ERR_BadArity,
+                                        namedType,
+                                        MessageID.IDS_SK_TYPE.Localize(),
+                                        namedType.Arity
+                                    )
                                     : null;
                             }
                             return true;
@@ -2657,10 +2657,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // The non-generic {1} '{0}' cannot be used with type arguments
                                 diagInfo = diagnose
                                     ? new CSDiagnosticInfo(
-                                          ErrorCode.ERR_HasNoTypeVars,
-                                          method,
-                                          MessageID.IDS_SK_METHOD.Localize()
-                                      )
+                                        ErrorCode.ERR_HasNoTypeVars,
+                                        method,
+                                        MessageID.IDS_SK_METHOD.Localize()
+                                    )
                                     : null;
                             }
                             else
@@ -2668,11 +2668,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 // Using the generic {1} '{0}' requires {2} type arguments
                                 diagInfo = diagnose
                                     ? new CSDiagnosticInfo(
-                                          ErrorCode.ERR_BadArity,
-                                          method,
-                                          MessageID.IDS_SK_METHOD.Localize(),
-                                          method.Arity
-                                      )
+                                        ErrorCode.ERR_BadArity,
+                                        method,
+                                        MessageID.IDS_SK_METHOD.Localize(),
+                                        method.Arity
+                                    )
                                     : null;
                             }
                             return true;
@@ -2685,10 +2685,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         diagInfo = diagnose
                             ? new CSDiagnosticInfo(
-                                  ErrorCode.ERR_TypeArgsNotAllowed,
-                                  symbol,
-                                  symbol.Kind.Localize()
-                              )
+                                ErrorCode.ERR_TypeArgsNotAllowed,
+                                symbol,
+                                symbol.Kind.Localize()
+                            )
                             : null;
                         return true;
                     }

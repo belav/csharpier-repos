@@ -25,8 +25,8 @@ namespace System.Net.Security
         )
         {
             SslPolicyErrors errors = chain.Build(remoteCertificate)
-              ? SslPolicyErrors.None
-              : SslPolicyErrors.RemoteCertificateChainErrors;
+                ? SslPolicyErrors.None
+                : SslPolicyErrors.RemoteCertificateChainErrors;
 
             if (!checkCertName)
             {
@@ -92,8 +92,8 @@ namespace System.Net.Security
                 $"Expected 0 or 1 from CheckX509Hostname, got {hostNameMatch}"
             );
             return hostNameMatch == 1
-              ? errors
-              : errors | SslPolicyErrors.RemoteCertificateNameMismatch;
+                ? errors
+                : errors | SslPolicyErrors.RemoteCertificateNameMismatch;
         }
     }
 }

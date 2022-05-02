@@ -134,7 +134,7 @@ namespace SslStress
                         (random.NextBoolean(probability: _config.CancellationProbability))
                             ? connectionLifetime * random.NextDouble()
                             : // cancel in a random interval within the lifetime
-                              connectionLifetime + TimeSpan.FromSeconds(10); // otherwise trigger cancellation 10 seconds after expected expiry
+                            connectionLifetime + TimeSpan.FromSeconds(10); // otherwise trigger cancellation 10 seconds after expected expiry
 
                     using var cts = CancellationTokenSource.CreateLinkedTokenSource(_cts.Token);
                     cts.CancelAfter(cancellationDelay);

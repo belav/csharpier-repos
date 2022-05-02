@@ -399,7 +399,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                                     break;
 
                                 case IMethodReferenceOperation methodReferenceOperation
-                                      when (methodReferenceOperation.Method.IsLocalFunction()):
+                                when (methodReferenceOperation.Method.IsLocalFunction()):
                                     lambdaOrLocalFunctionCfgOpt =
                                         TryGetLocalFunctionControlFlowGraphInScope(
                                             methodReferenceOperation.Method

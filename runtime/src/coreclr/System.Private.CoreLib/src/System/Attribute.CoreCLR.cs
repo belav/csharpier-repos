@@ -510,9 +510,9 @@ namespace System
             return element.MemberType switch
             {
                 MemberTypes.Property
-                  => InternalGetCustomAttributes((PropertyInfo)element, attributeType, inherit),
+                    => InternalGetCustomAttributes((PropertyInfo)element, attributeType, inherit),
                 MemberTypes.Event
-                  => InternalGetCustomAttributes((EventInfo)element, attributeType, inherit),
+                    => InternalGetCustomAttributes((EventInfo)element, attributeType, inherit),
                 _ => (element.GetCustomAttributes(attributeType, inherit) as Attribute[])!,
             };
         }
@@ -530,9 +530,13 @@ namespace System
             return element.MemberType switch
             {
                 MemberTypes.Property
-                  => InternalGetCustomAttributes((PropertyInfo)element, typeof(Attribute), inherit),
+                    => InternalGetCustomAttributes(
+                        (PropertyInfo)element,
+                        typeof(Attribute),
+                        inherit
+                    ),
                 MemberTypes.Event
-                  => InternalGetCustomAttributes((EventInfo)element, typeof(Attribute), inherit),
+                    => InternalGetCustomAttributes((EventInfo)element, typeof(Attribute), inherit),
                 _ => (element.GetCustomAttributes(typeof(Attribute), inherit) as Attribute[])!,
             };
         }
@@ -559,7 +563,7 @@ namespace System
             return element.MemberType switch
             {
                 MemberTypes.Property
-                  => InternalIsDefined((PropertyInfo)element, attributeType, inherit),
+                    => InternalIsDefined((PropertyInfo)element, attributeType, inherit),
                 MemberTypes.Event => InternalIsDefined((EventInfo)element, attributeType, inherit),
                 _ => element.IsDefined(attributeType, inherit),
             };

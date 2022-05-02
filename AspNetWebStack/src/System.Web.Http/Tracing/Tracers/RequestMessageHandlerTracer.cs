@@ -69,11 +69,11 @@ namespace System.Web.Http.Tracing.Tracers
                     tr.Message = Error.Format(
                         SRResources.TraceRequestCompleteMessage,
                         contentType == null
-                          ? SRResources.TraceNoneObjectMessage
-                          : contentType.ToString(),
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString(),
                         contentLength.HasValue
-                          ? contentLength.Value.ToString(CultureInfo.CurrentCulture)
-                          : SRResources.TraceUnknownMessage
+                            ? contentLength.Value.ToString(CultureInfo.CurrentCulture)
+                            : SRResources.TraceUnknownMessage
                     );
                 },
                 errorTrace: null

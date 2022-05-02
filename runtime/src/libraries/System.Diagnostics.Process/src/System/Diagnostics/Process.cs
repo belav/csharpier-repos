@@ -1768,8 +1768,8 @@ namespace System.Diagnostics
         )
         {
             string directoryForException = string.IsNullOrEmpty(workingDirectory)
-              ? Directory.GetCurrentDirectory()
-              : workingDirectory;
+                ? Directory.GetCurrentDirectory()
+                : workingDirectory;
             string msg = SR.Format(
                 SR.ErrorStartingProcess,
                 fileName,

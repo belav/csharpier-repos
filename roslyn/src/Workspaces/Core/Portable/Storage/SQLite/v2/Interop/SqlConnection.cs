@@ -150,8 +150,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                 // reasons that aren't fully understood yet.  If more details/fixes emerge in that linked issue, we can
                 // ideally remove this and perform the attachment uniformly on all platforms.
                 var attachString = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                  ? $"attach database '{new Uri(databasePath).AbsoluteUri}?mode=memory&cache=shared' as {Database.WriteCache.GetName()};"
-                  : $"attach database 'file::memory:?cache=shared' as {Database.WriteCache.GetName()};";
+                    ? $"attach database '{new Uri(databasePath).AbsoluteUri}?mode=memory&cache=shared' as {Database.WriteCache.GetName()};"
+                    : $"attach database 'file::memory:?cache=shared' as {Database.WriteCache.GetName()};";
 
                 connection.ExecuteCommand(attachString);
 

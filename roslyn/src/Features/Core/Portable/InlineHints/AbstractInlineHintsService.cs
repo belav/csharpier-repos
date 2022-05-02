@@ -27,15 +27,15 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 inlineParameterService == null
                     ? ImmutableArray<InlineHint>.Empty
                     : await inlineParameterService
-                          .GetInlineHintsAsync(document, textSpan, cancellationToken)
-                          .ConfigureAwait(false);
+                        .GetInlineHintsAsync(document, textSpan, cancellationToken)
+                        .ConfigureAwait(false);
 
             var types =
                 inlineTypeService == null
                     ? ImmutableArray<InlineHint>.Empty
                     : await inlineTypeService
-                          .GetInlineHintsAsync(document, textSpan, cancellationToken)
-                          .ConfigureAwait(false);
+                        .GetInlineHintsAsync(document, textSpan, cancellationToken)
+                        .ConfigureAwait(false);
 
             return parameters.Concat(types);
         }

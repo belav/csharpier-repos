@@ -308,8 +308,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? _foreignKeys.Count == 0
                     ? _baseType.FindForeignKeys(properties)
                     : _baseType
-                      .FindForeignKeys(properties)
-                      .Concat(FindDeclaredForeignKeys(properties))
+                        .FindForeignKeys(properties)
+                        .Concat(FindDeclaredForeignKeys(properties))
                 : FindDeclaredForeignKeys(properties);
 
         /// <summary>
@@ -355,8 +355,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             _foreignKeys.Count == 0
                 ? Enumerable.Empty<RuntimeForeignKey>()
                 : _foreignKeys.Where(
-                      fk => PropertyListComparer.Instance.Equals(fk.Properties, properties)
-                  );
+                    fk => PropertyListComparer.Instance.Equals(fk.Properties, properties)
+                );
 
         private RuntimeForeignKey? FindDeclaredForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
@@ -391,8 +391,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 ? (DeclaredReferencingForeignKeys?.Count ?? 0) == 0
                     ? _baseType.GetReferencingForeignKeys()
                     : _baseType
-                      .GetReferencingForeignKeys()
-                      .Concat(GetDeclaredReferencingForeignKeys())
+                        .GetReferencingForeignKeys()
+                        .Concat(GetDeclaredReferencingForeignKeys())
                 : GetDeclaredReferencingForeignKeys();
 
         private IEnumerable<RuntimeForeignKey> GetDeclaredReferencingForeignKeys() =>
@@ -587,8 +587,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>The index, or <see langword="null" /> if none is found.</returns>
         public virtual RuntimeIndex? FindIndex(IReadOnlyList<IReadOnlyProperty> properties) =>
             _unnamedIndexes.TryGetValue(properties, out var index)
-              ? index
-              : _baseType?.FindIndex(properties);
+                ? index
+                : _baseType?.FindIndex(properties);
 
         /// <summary>
         ///     Gets the index with the given name. Returns <see langword="null" /> if no such index exists.
@@ -821,19 +821,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             get =>
                 !_clrType.IsAbstract
                     ? NonCapturingLazyInitializer.EnsureInitialized(
-                          ref _constructorBinding,
-                          this,
-                          static entityType =>
-                          {
-                              ((IModel)entityType.Model)
-                                  .GetModelDependencies()
-                                  .ConstructorBindingFactory.GetBindings(
-                                      entityType,
-                                      out entityType._constructorBinding,
-                                      out entityType._serviceOnlyConstructorBinding
-                                  );
-                          }
-                      )
+                        ref _constructorBinding,
+                        this,
+                        static entityType =>
+                        {
+                            ((IModel)entityType.Model)
+                                .GetModelDependencies()
+                                .ConstructorBindingFactory.GetBindings(
+                                    entityType,
+                                    out entityType._constructorBinding,
+                                    out entityType._serviceOnlyConstructorBinding
+                                );
+                        }
+                    )
                     : _constructorBinding;
             [DebuggerStepThrough]
             set => _constructorBinding = value;

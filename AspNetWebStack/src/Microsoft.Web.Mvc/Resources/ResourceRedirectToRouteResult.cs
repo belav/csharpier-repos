@@ -31,8 +31,8 @@ namespace Microsoft.Web.Mvc.Resources
                     HttpVerbs.Post,
                     true
                 )
-                  ? (int)HttpStatusCode.Created
-                  : (int)HttpStatusCode.OK;
+                    ? (int)HttpStatusCode.Created
+                    : (int)HttpStatusCode.OK;
             }
         }
     }

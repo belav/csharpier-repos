@@ -23,9 +23,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public abstract class PropertyBase
         : ConventionAnnotatable,
-          IMutablePropertyBase,
-          IConventionPropertyBase,
-          IRuntimePropertyBase
+            IMutablePropertyBase,
+            IConventionPropertyBase,
+            IRuntimePropertyBase
     {
         private FieldInfo? _fieldInfo;
         private ConfigurationSource _configurationSource;
@@ -580,8 +580,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetField(
                 fieldName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -598,8 +598,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetFieldInfo(
                 fieldInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>
@@ -626,8 +626,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             SetPropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <summary>

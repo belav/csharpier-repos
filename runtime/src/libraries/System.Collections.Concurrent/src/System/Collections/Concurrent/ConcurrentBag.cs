@@ -232,9 +232,9 @@ namespace System.Collections.Concurrent
                     localQueue == null
                         ? TryStealFromTo(_workStealingQueues, null, out result, take)
                         : (
-                              TryStealFromTo(localQueue._nextQueue, null, out result, take)
-                              || TryStealFromTo(_workStealingQueues, localQueue, out result, take)
-                          );
+                            TryStealFromTo(localQueue._nextQueue, null, out result, take)
+                            || TryStealFromTo(_workStealingQueues, localQueue, out result, take)
+                        );
                 if (gotItem)
                 {
 #pragma warning disable CS8762

@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(type.TypeParameters.IsEmpty == (typeArguments.Length == 0));
             return type.TypeParameters.IsEmpty
-              ? type
-              : type.Construct(typeArguments, unbound: false);
+                ? type
+                : type.Construct(typeArguments, unbound: false);
         }
 
         public static bool IsNestedType([NotNullWhen(true)] this Symbol? symbol)
@@ -640,10 +640,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SymbolKind.Field => ((FieldSymbol)symbol).RequiresInstanceReceiver,
                 SymbolKind.Event => ((EventSymbol)symbol).RequiresInstanceReceiver,
                 _
-                  => throw new ArgumentException(
-                      "only methods, properties, fields and events can take a receiver",
-                      nameof(symbol)
-                  ),
+                    => throw new ArgumentException(
+                        "only methods, properties, fields and events can take a receiver",
+                        nameof(symbol)
+                    ),
             };
         }
 

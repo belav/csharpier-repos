@@ -20,8 +20,8 @@ namespace System.Collections.ObjectModel
     )]
     public class ReadOnlyObservableCollection<T>
         : ReadOnlyCollection<T>,
-          INotifyCollectionChanged,
-          INotifyPropertyChanged
+            INotifyCollectionChanged,
+            INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of ReadOnlyObservableCollection that

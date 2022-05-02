@@ -25,8 +25,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
     {
         private sealed class QueryingEnumerable<T>
             : IAsyncEnumerable<T>,
-              IEnumerable<T>,
-              IQueryingEnumerable
+                IEnumerable<T>,
+                IQueryingEnumerable
         {
             private readonly QueryContext _queryContext;
             private readonly IEnumerable<ValueBuffer> _innerEnumerable;

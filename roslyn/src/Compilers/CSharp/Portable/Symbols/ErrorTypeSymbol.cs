@@ -432,8 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             );
             return newOwner.IsDefinition
-              ? this
-              : new SubstitutedNestedErrorTypeSymbol(newOwner, this);
+                ? this
+                : new SubstitutedNestedErrorTypeSymbol(newOwner, this);
         }
 
         internal sealed override bool ShouldAddWinRTMembers

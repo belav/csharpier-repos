@@ -56,8 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 return ReferenceEquals(this, obj)
-                  ? true
-                  : obj.GetType() == GetType() && Equals((ProjectedType)obj);
+                    ? true
+                    : obj.GetType() == GetType() && Equals((ProjectedType)obj);
             }
 
             public override int GetHashCode() => Order.GetHashCode();

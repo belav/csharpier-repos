@@ -40,9 +40,9 @@ namespace Microsoft.CodeAnalysis.Remote
             (additionalFormatters.IsEmpty && additionalResolvers.IsEmpty)
                 ? DefaultResolver
                 : CompositeResolver.Create(
-                      s_formatters.AddRange(additionalFormatters),
-                      s_resolvers.AddRange(additionalResolvers)
-                  );
+                    s_formatters.AddRange(additionalFormatters),
+                    s_resolvers.AddRange(additionalResolvers)
+                );
 
         internal sealed class SolutionIdFormatter : IMessagePackFormatter<SolutionId?>
         {

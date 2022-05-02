@@ -41,17 +41,17 @@ public class Project : IDisposable
                 "HELIX_WORKITEM_UPLOAD_ROOT"
             );
             return string.IsNullOrEmpty(helixWorkItemUploadRoot)
-              ? GetAssemblyMetadata("ArtifactsLogDir")
-              : helixWorkItemUploadRoot;
+                ? GetAssemblyMetadata("ArtifactsLogDir")
+                : helixWorkItemUploadRoot;
         }
     }
 
     public static string DotNetEfFullPath =>
         (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DotNetEfFullPath")))
             ? typeof(ProjectFactoryFixture).Assembly
-              .GetCustomAttributes<AssemblyMetadataAttribute>()
-              .First(attribute => attribute.Key == "DotNetEfFullPath")
-              .Value
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .First(attribute => attribute.Key == "DotNetEfFullPath")
+                .Value
             : Environment.GetEnvironmentVariable("DotNetEfFullPath");
 
     public string ProjectName { get; set; }

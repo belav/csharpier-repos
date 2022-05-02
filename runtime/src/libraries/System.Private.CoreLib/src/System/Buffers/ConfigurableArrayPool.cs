@@ -127,8 +127,8 @@ namespace System.Buffers
                     Id,
                     ArrayPoolEventSource.NoBucketId,
                     index >= _buckets.Length
-                      ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
-                      : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
+                        ? ArrayPoolEventSource.BufferAllocatedReason.OverMaximumSize
+                        : ArrayPoolEventSource.BufferAllocatedReason.PoolExhausted
                 );
             }
 

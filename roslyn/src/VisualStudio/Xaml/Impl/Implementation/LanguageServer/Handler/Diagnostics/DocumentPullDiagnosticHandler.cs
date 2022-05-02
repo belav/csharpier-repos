@@ -18,9 +18,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
     [ProvidesMethod(VSInternalMethods.DocumentPullDiagnosticName)]
     internal class DocumentPullDiagnosticHandler
         : AbstractPullDiagnosticHandler<
-              VSInternalDocumentDiagnosticsParams,
-              VSInternalDiagnosticReport
-          >
+            VSInternalDocumentDiagnosticsParams,
+            VSInternalDiagnosticReport
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -47,8 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             // since removed from the workspace.  In this case, we don't really have anything to process.
             // GetPreviousResults will be used to properly realize this and notify the client that the doc is gone.
             return context.Document == null
-              ? ImmutableArray<Document>.Empty
-              : ImmutableArray.Create(context.Document);
+                ? ImmutableArray<Document>.Empty
+                : ImmutableArray.Create(context.Document);
         }
 
         protected override VSInternalDiagnosticParams[]? GetPreviousResults(

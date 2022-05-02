@@ -255,8 +255,8 @@ namespace Castle.DynamicProxy.Internal
                 // overhead by comparing the two properties separately.
                 int result = string.CompareOrdinal(x.FullName, y.FullName);
                 return result != 0
-                  ? result
-                  : string.CompareOrdinal(x.Assembly.FullName, y.Assembly.FullName);
+                    ? result
+                    : string.CompareOrdinal(x.Assembly.FullName, y.Assembly.FullName);
             }
         }
     }

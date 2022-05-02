@@ -444,8 +444,7 @@ namespace System.CommandLine.Parsing
                     switch (symbolResult)
                     {
                         case OptionResult o
-                              when o.Option.Argument.ValueType == typeof(bool)
-                                  && o.Children.Count == 0:
+                        when o.Option.Argument.ValueType == typeof(bool) && o.Children.Count == 0:
                             o.Children.Add(new ArgumentResult(o.Option.Argument, o));
                             break;
 

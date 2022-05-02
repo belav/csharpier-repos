@@ -275,8 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 ImmutableInterlocked.InterlockedCompareExchange(
                     ref _lazyAssemblyAttributes,
                     (moduleAssemblyAttributesBuilder != null)
-                      ? moduleAssemblyAttributesBuilder.ToImmutableAndFree()
-                      : ImmutableArray<CSharpAttributeData>.Empty,
+                        ? moduleAssemblyAttributesBuilder.ToImmutableAndFree()
+                        : ImmutableArray<CSharpAttributeData>.Empty,
                     default(ImmutableArray<CSharpAttributeData>)
                 );
             }
@@ -866,12 +866,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     Token,
                     out bool includesInternals
                 )
-                  ? (
+                    ? (
                         includesInternals
                             ? NullableMemberMetadata.Internal
                             : NullableMemberMetadata.Public
                     )
-                  : NullableMemberMetadata.All;
+                    : NullableMemberMetadata.All;
             }
 
             NullableMemberMetadata nullableMemberMetadata = _lazyNullableMemberMetadata;

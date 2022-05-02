@@ -1448,12 +1448,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal class SpecialMembersSignatureComparer
             : SignatureComparer<
-                  MethodSymbol,
-                  FieldSymbol,
-                  PropertySymbol,
-                  TypeSymbol,
-                  ParameterSymbol
-              >
+                MethodSymbol,
+                FieldSymbol,
+                PropertySymbol,
+                TypeSymbol,
+                ParameterSymbol
+            >
         {
             // Fields
             public static readonly SpecialMembersSignatureComparer Instance =
@@ -1545,8 +1545,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             protected override TypeSymbol? GetPointedToType(TypeSymbol type)
             {
                 return type.Kind == SymbolKind.PointerType
-                  ? ((PointerTypeSymbol)type).PointedAtType
-                  : null;
+                    ? ((PointerTypeSymbol)type).PointedAtType
+                    : null;
             }
 
             protected override TypeSymbol GetReturnType(MethodSymbol method)

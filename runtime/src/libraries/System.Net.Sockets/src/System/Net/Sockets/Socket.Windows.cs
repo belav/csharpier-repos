@@ -284,8 +284,8 @@ namespace System.Net.Sockets
                 case AddressFamily.InterNetwork:
                     csep = IsDualMode
                         ? s_cachedMappedAnyV6EndPoint ??= new CachedSerializedEndPoint(
-                              s_IPAddressAnyMapToIPv6
-                          )
+                            s_IPAddressAnyMapToIPv6
+                        )
                         : s_cachedAnyEndPoint ??= new CachedSerializedEndPoint(IPAddress.Any);
                     break;
 

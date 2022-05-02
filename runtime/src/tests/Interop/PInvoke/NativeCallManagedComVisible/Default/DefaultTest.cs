@@ -131,8 +131,8 @@ public interface IDerivedInterfaceWithoutVisibleNoGuid
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 public interface IInterfaceVisibleTrueNoGuid
     : IDerivedInterfaceVisibleTrueGuid,
-      IDerivedInterfaceVisibleTrueNoGuid,
-      IDerivedInterfaceWithoutVisibleNoGuid
+        IDerivedInterfaceVisibleTrueNoGuid,
+        IDerivedInterfaceWithoutVisibleNoGuid
 {
     new int Foo1(UInt16 int16Val, bool boolVal);
     new int Foo();
@@ -267,20 +267,20 @@ interface IInterfaceNotPublic_VisibleTrue : IInterfaceVisibleTrue
 [Guid("48FC2EFC-C7ED-4E02-8D02-F05B6A439FC9")]
 public sealed class ClassVisibleTrueServer
     : IInterfaceComImport,
-      IInterfaceVisibleTrue,
-      IInterfaceVisibleFalse,
-      IInterfaceWithoutVisible,
-      IInterfaceNotPublic,
-      IInterfaceVisibleTrueNoGuid,
-      IInterfaceNotVisibleNoGuid,
-      IInterfaceVisibleTrueNoGuidGenericInterface,
-      IInterfaceComImport_ComImport,
-      IInterfaceVisibleTrue_ComImport,
-      IInterfaceVisibleFalse_ComImport,
-      IInterfaceVisibleTrue_VisibleTrue,
-      IInterfaceVisibleFalse_VisibleTrue,
-      IInterfaceVisibleTrue_VisibleFalse,
-      IInterfaceNotPublic_VisibleTrue
+        IInterfaceVisibleTrue,
+        IInterfaceVisibleFalse,
+        IInterfaceWithoutVisible,
+        IInterfaceNotPublic,
+        IInterfaceVisibleTrueNoGuid,
+        IInterfaceNotVisibleNoGuid,
+        IInterfaceVisibleTrueNoGuidGenericInterface,
+        IInterfaceComImport_ComImport,
+        IInterfaceVisibleTrue_ComImport,
+        IInterfaceVisibleFalse_ComImport,
+        IInterfaceVisibleTrue_VisibleTrue,
+        IInterfaceVisibleFalse_VisibleTrue,
+        IInterfaceVisibleTrue_VisibleFalse,
+        IInterfaceNotPublic_VisibleTrue
 {
     int IInterfaceComImport.Foo()
     {
@@ -435,10 +435,10 @@ public sealed class ClassVisibleTrueServer
 [Guid("6DF17EC1-A8F4-4693-B195-EDB27DF00170")]
 public sealed class ClassVisibleFalseServer
     : IInterfaceComImport,
-      IInterfaceVisibleTrue,
-      IInterfaceVisibleFalse,
-      IInterfaceWithoutVisible,
-      IInterfaceNotPublic
+        IInterfaceVisibleTrue,
+        IInterfaceVisibleFalse,
+        IInterfaceWithoutVisible,
+        IInterfaceNotPublic
 {
     int IInterfaceComImport.Foo()
     {
@@ -477,10 +477,10 @@ public sealed class ClassVisibleFalseServer
 [Guid("A57430B8-E0C1-486E-AE57-A15D6A729F99")]
 public sealed class ClassWithoutVisibleServer
     : IInterfaceComImport,
-      IInterfaceVisibleTrue,
-      IInterfaceVisibleFalse,
-      IInterfaceWithoutVisible,
-      IInterfaceNotPublic
+        IInterfaceVisibleTrue,
+        IInterfaceVisibleFalse,
+        IInterfaceWithoutVisible,
+        IInterfaceNotPublic
 {
     int IInterfaceComImport.Foo()
     {
@@ -520,8 +520,8 @@ public sealed class ClassWithoutVisibleServer
 [Guid("3CD290FA-1CD0-4370-B8E6-5A573F78C9F7")]
 public sealed class ClassGenericServer<T>
     : IInterfaceVisibleTrue,
-      IInterfaceGenericVisibleTrue<T>,
-      IInterfaceComImport
+        IInterfaceGenericVisibleTrue<T>,
+        IInterfaceComImport
 {
     int IInterfaceComImport.Foo()
     {
@@ -743,20 +743,20 @@ public class ComVisibleServer
     [Guid("CF681980-CE6D-421E-8B21-AEAE3F1B7DAC")]
     public sealed class NestedClassVisibleTrueServer
         : INestedInterfaceComImport,
-          INestedInterfaceVisibleTrue,
-          INestedInterfaceVisibleFalse,
-          INestedInterfaceWithoutVisible,
-          INestedInterfaceNotPublic,
-          INestedInterfaceVisibleTrueNoGuid,
-          NestedClass.INestedInterfaceNestedInClassNoGuid,
-          NestedClass.INestedInterfaceNestedInClass,
-          INestedInterfaceComImport_ComImport,
-          INestedInterfaceVisibleTrue_ComImport,
-          INestedInterfaceVisibleFalse_ComImport,
-          INestedInterfaceVisibleTrue_VisibleTrue,
-          INestedInterfaceVisibleFalse_VisibleTrue,
-          INestedInterfaceVisibleTrue_VisibleFalse,
-          INestedInterfaceNotPublic_VisibleTrue
+            INestedInterfaceVisibleTrue,
+            INestedInterfaceVisibleFalse,
+            INestedInterfaceWithoutVisible,
+            INestedInterfaceNotPublic,
+            INestedInterfaceVisibleTrueNoGuid,
+            NestedClass.INestedInterfaceNestedInClassNoGuid,
+            NestedClass.INestedInterfaceNestedInClass,
+            INestedInterfaceComImport_ComImport,
+            INestedInterfaceVisibleTrue_ComImport,
+            INestedInterfaceVisibleFalse_ComImport,
+            INestedInterfaceVisibleTrue_VisibleTrue,
+            INestedInterfaceVisibleFalse_VisibleTrue,
+            INestedInterfaceVisibleTrue_VisibleFalse,
+            INestedInterfaceNotPublic_VisibleTrue
     {
         int INestedInterfaceComImport.Foo()
         {
@@ -846,10 +846,10 @@ public class ComVisibleServer
     [Guid("6DF17EC1-A8F4-4693-B195-EDB27DF00170")]
     public sealed class NestedClassVisibleFalseServer
         : INestedInterfaceComImport,
-          INestedInterfaceVisibleTrue,
-          INestedInterfaceVisibleFalse,
-          INestedInterfaceWithoutVisible,
-          INestedInterfaceNotPublic
+            INestedInterfaceVisibleTrue,
+            INestedInterfaceVisibleFalse,
+            INestedInterfaceWithoutVisible,
+            INestedInterfaceNotPublic
     {
         int INestedInterfaceComImport.Foo()
         {
@@ -888,10 +888,10 @@ public class ComVisibleServer
     [Guid("A57430B8-E0C1-486E-AE57-A15D6A729F99")]
     public sealed class NestedClassWithoutVisibleServer
         : INestedInterfaceComImport,
-          INestedInterfaceVisibleTrue,
-          INestedInterfaceVisibleFalse,
-          INestedInterfaceWithoutVisible,
-          INestedInterfaceNotPublic
+            INestedInterfaceVisibleTrue,
+            INestedInterfaceVisibleFalse,
+            INestedInterfaceWithoutVisible,
+            INestedInterfaceNotPublic
     {
         int INestedInterfaceComImport.Foo()
         {
@@ -931,8 +931,8 @@ public class ComVisibleServer
     [Guid("CAFBD2FF-710A-4E83-9229-42FA16963424")]
     public sealed class NestedClassGenericServer<T>
         : INestedInterfaceVisibleTrue,
-          INestedInterfaceGenericVisibleTrue<T>,
-          INestedInterfaceComImport
+            INestedInterfaceGenericVisibleTrue<T>,
+            INestedInterfaceComImport
     {
         int INestedInterfaceComImport.Foo()
         {

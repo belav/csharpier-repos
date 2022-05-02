@@ -11,8 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindAggregateOperatorsQuerySqlServerTest
         : NorthwindAggregateOperatorsQueryRelationalTestBase<
-              NorthwindQuerySqlServerFixture<NoopModelCustomizer>
-          >
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+        >
     {
         public NorthwindAggregateOperatorsQuerySqlServerTest(
             NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,

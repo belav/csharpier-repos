@@ -25,7 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 {
     internal sealed class ProjectExternalErrorReporter
         : IVsReportExternalErrors,
-          IVsLanguageServiceBuildErrorReporter2
+            IVsLanguageServiceBuildErrorReporter2
     {
         internal static readonly ImmutableArray<string> CustomTags = ImmutableArray.Create(
             WellKnownDiagnosticTags.Telemetry
@@ -288,10 +288,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 VSTASKPRIORITY.TP_NORMAL => DiagnosticSeverity.Warning,
                 VSTASKPRIORITY.TP_LOW => DiagnosticSeverity.Info,
                 _
-                  => throw new ArgumentException(
-                      ServicesVSResources.Not_a_valid_value,
-                      nameof(nPriority)
-                  )
+                    => throw new ArgumentException(
+                        ServicesVSResources.Not_a_valid_value,
+                        nameof(nPriority)
+                    )
             };
 
             DocumentId documentId;
@@ -370,8 +370,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 isEnabledByDefault: true,
                 warningLevel: (severity == DiagnosticSeverity.Error) ? 0 : 1,
                 customTags: IsCompilerDiagnostic(errorId)
-                  ? CompilerDiagnosticCustomTags
-                  : CustomTags,
+                    ? CompilerDiagnosticCustomTags
+                    : CustomTags,
                 properties: DiagnosticData.PropertiesForBuildDiagnostic,
                 projectId: projectId,
                 location: new DiagnosticDataLocation(

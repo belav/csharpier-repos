@@ -119,8 +119,8 @@ namespace System.IO.Tests
                         Assert.Equal(
                             writeBuffer.Length,
                             syncRead
-                              ? RandomAccess.Read(handle, readBuffer, fileOffset)
-                              : await RandomAccess.ReadAsync(handle, readBuffer, fileOffset)
+                                ? RandomAccess.Read(handle, readBuffer, fileOffset)
+                                : await RandomAccess.ReadAsync(handle, readBuffer, fileOffset)
                         );
 
                         Assert.Equal(writeBuffer[0], readBuffer[0]);
@@ -227,8 +227,8 @@ namespace System.IO.Tests
                         Assert.Equal(
                             writeBuffer_1.Length + writeBuffer_2.Length,
                             syncRead
-                              ? RandomAccess.Read(handle, readBuffers, fileOffset)
-                              : await RandomAccess.ReadAsync(handle, readBuffers, fileOffset)
+                                ? RandomAccess.Read(handle, readBuffers, fileOffset)
+                                : await RandomAccess.ReadAsync(handle, readBuffers, fileOffset)
                         );
 
                         Assert.Equal(writeBuffer_1[0], readBuffer_1[0]);

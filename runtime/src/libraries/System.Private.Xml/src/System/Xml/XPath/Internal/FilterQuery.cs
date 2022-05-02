@@ -165,8 +165,8 @@ namespace MS.Internal.Xml.XPath
                                         )
                                     )
                             )
-                              ? context
-                              : null;
+                                ? context
+                                : null;
                         }
                         break;
                     case XPathResultType.String:
@@ -183,8 +183,8 @@ namespace MS.Internal.Xml.XPath
                                         )
                                 ).Length != 0
                             )
-                              ? context
-                              : null;
+                                ? context
+                                : null;
                         }
                         break;
                     case XPathResultType_Navigator:

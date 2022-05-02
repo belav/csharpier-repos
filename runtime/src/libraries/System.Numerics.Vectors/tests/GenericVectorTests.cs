@@ -4588,8 +4588,8 @@ namespace System.Numerics.Tests
                 (index, val) =>
                 {
                     T expected = Util.GreaterThan(values1[index], values2[index])
-                      ? values1[index]
-                      : values2[index];
+                        ? values1[index]
+                        : values2[index];
                     Assert.Equal(expected, val);
                 }
             );
@@ -4680,8 +4680,8 @@ namespace System.Numerics.Tests
                 (index, val) =>
                 {
                     T expected = Util.LessThan(values1[index], values2[index])
-                      ? values1[index]
-                      : values2[index];
+                        ? values1[index]
+                        : values2[index];
                     Assert.Equal(expected, val);
                 }
             );

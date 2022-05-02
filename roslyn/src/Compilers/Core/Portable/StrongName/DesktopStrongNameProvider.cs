@@ -49,8 +49,8 @@ namespace Microsoft.CodeAnalysis
             : this(
                 keyFileSearchPaths,
                 tempPath == null
-                  ? StrongNameFileSystem.Instance
-                  : new StrongNameFileSystem(tempPath)
+                    ? StrongNameFileSystem.Instance
+                    : new StrongNameFileSystem(tempPath)
             ) { }
 
         internal DesktopStrongNameProvider(

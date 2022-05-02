@@ -242,8 +242,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
             tmpSpan = sequenceReader.ReadIntegerBytes();
             decoded.SerialNumber = rebindSpan.Overlaps(tmpSpan, out offset)
-              ? rebind.Slice(offset, tmpSpan.Length)
-              : tmpSpan.ToArray();
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
                 ref sequenceReader,
                 rebind,
@@ -256,8 +256,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
             tmpSpan = sequenceReader.ReadEncodedValue();
             decoded.Issuer = rebindSpan.Overlaps(tmpSpan, out offset)
-              ? rebind.Slice(offset, tmpSpan.Length)
-              : tmpSpan.ToArray();
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             System.Security.Cryptography.X509Certificates.Asn1.ValidityAsn.Decode(
                 ref sequenceReader,
                 rebind,
@@ -270,8 +270,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
 
             tmpSpan = sequenceReader.ReadEncodedValue();
             decoded.Subject = rebindSpan.Overlaps(tmpSpan, out offset)
-              ? rebind.Slice(offset, tmpSpan.Length)
-              : tmpSpan.ToArray();
+                ? rebind.Slice(offset, tmpSpan.Length)
+                : tmpSpan.ToArray();
             System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn.Decode(
                 ref sequenceReader,
                 rebind,
@@ -294,8 +294,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 )
                 {
                     decoded.IssuerUniqueId = rebindSpan.Overlaps(tmpSpan, out offset)
-                      ? rebind.Slice(offset, tmpSpan.Length)
-                      : tmpSpan.ToArray();
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
@@ -322,8 +322,8 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
                 )
                 {
                     decoded.SubjectUniqueId = rebindSpan.Overlaps(tmpSpan, out offset)
-                      ? rebind.Slice(offset, tmpSpan.Length)
-                      : tmpSpan.ToArray();
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {

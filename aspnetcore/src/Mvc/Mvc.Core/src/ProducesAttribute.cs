@@ -24,9 +24,9 @@ namespace Microsoft.AspNetCore.Mvc;
 )]
 public class ProducesAttribute
     : Attribute,
-      IResultFilter,
-      IOrderedFilter,
-      IApiResponseMetadataProvider
+        IResultFilter,
+        IOrderedFilter,
+        IApiResponseMetadataProvider
 {
     /// <summary>
     /// Initializes an instance of <see cref="ProducesAttribute"/>.

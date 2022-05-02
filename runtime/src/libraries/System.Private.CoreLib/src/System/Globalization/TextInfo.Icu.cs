@@ -49,8 +49,8 @@ namespace System.Globalization
                 if (_needsTurkishCasing == Tristate.NotInitialized)
                 {
                     _needsTurkishCasing = NeedsTurkishCasing(_textInfoName)
-                      ? Tristate.True
-                      : Tristate.False;
+                        ? Tristate.True
+                        : Tristate.False;
                 }
                 if (_needsTurkishCasing == Tristate.True)
                 {

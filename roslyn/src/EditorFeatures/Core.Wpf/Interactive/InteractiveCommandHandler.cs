@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
 {
     internal abstract class InteractiveCommandHandler
         : ICommandHandler<ExecuteInInteractiveCommandArgs>,
-          ICommandHandler<CopyToInteractiveCommandArgs>
+            ICommandHandler<CopyToInteractiveCommandArgs>
     {
         private readonly IContentTypeRegistryService _contentTypeRegistryService;
         private readonly IEditorOptionsFactoryService _editorOptionsFactoryService;

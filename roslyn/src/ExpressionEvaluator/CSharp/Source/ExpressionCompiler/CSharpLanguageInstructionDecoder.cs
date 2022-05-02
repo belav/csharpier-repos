@@ -15,13 +15,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     ]
     internal sealed class CSharpLanguageInstructionDecoder
         : LanguageInstructionDecoder<
-              CSharpCompilation,
-              MethodSymbol,
-              PEModuleSymbol,
-              TypeSymbol,
-              TypeParameterSymbol,
-              ParameterSymbol
-          >
+            CSharpCompilation,
+            MethodSymbol,
+            PEModuleSymbol,
+            TypeSymbol,
+            TypeParameterSymbol,
+            ParameterSymbol
+        >
     {
         public CSharpLanguageInstructionDecoder() : base(CSharpInstructionDecoder.Instance) { }
     }

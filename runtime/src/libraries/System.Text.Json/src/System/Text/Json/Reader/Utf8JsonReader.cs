@@ -1720,8 +1720,8 @@ namespace System.Text.Json
                 ThrowHelper.ThrowJsonReaderException(
                     ref this,
                     JsonHelpers.IsInRangeInclusive(nextByte, '0', '9')
-                      ? ExceptionResource.InvalidLeadingZeroInNumber
-                      : ExceptionResource.ExpectedEndOfDigitNotFound,
+                        ? ExceptionResource.InvalidLeadingZeroInNumber
+                        : ExceptionResource.ExpectedEndOfDigitNotFound,
                     nextByte
                 );
             }
@@ -1874,8 +1874,8 @@ namespace System.Text.Json
                     if (marker == JsonConstants.Slash)
                     {
                         return ConsumeComment()
-                          ? ConsumeTokenResult.Success
-                          : ConsumeTokenResult.NotEnoughDataRollBackState;
+                            ? ConsumeTokenResult.Success
+                            : ConsumeTokenResult.NotEnoughDataRollBackState;
                     }
                     if (_tokenType == JsonTokenType.Comment)
                     {
@@ -1939,8 +1939,8 @@ namespace System.Text.Json
                 {
                     _trailingCommaBeforeComment = true;
                     return ConsumeComment()
-                      ? ConsumeTokenResult.Success
-                      : ConsumeTokenResult.NotEnoughDataRollBackState;
+                        ? ConsumeTokenResult.Success
+                        : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
 
                 if (_inObject)
@@ -1966,8 +1966,8 @@ namespace System.Text.Json
                         );
                     }
                     return ConsumePropertyName()
-                      ? ConsumeTokenResult.Success
-                      : ConsumeTokenResult.NotEnoughDataRollBackState;
+                        ? ConsumeTokenResult.Success
+                        : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
                 else
                 {
@@ -1984,8 +1984,8 @@ namespace System.Text.Json
                         );
                     }
                     return ConsumeValue(first)
-                      ? ConsumeTokenResult.Success
-                      : ConsumeTokenResult.NotEnoughDataRollBackState;
+                        ? ConsumeTokenResult.Success
+                        : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
             }
             else if (marker == JsonConstants.CloseBrace)
@@ -2494,8 +2494,8 @@ namespace System.Text.Json
                         );
                     }
                     return ConsumePropertyName()
-                      ? ConsumeTokenResult.Success
-                      : ConsumeTokenResult.NotEnoughDataRollBackState;
+                        ? ConsumeTokenResult.Success
+                        : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
                 else
                 {
@@ -2513,8 +2513,8 @@ namespace System.Text.Json
                     }
 
                     return ConsumeValue(marker)
-                      ? ConsumeTokenResult.Success
-                      : ConsumeTokenResult.NotEnoughDataRollBackState;
+                        ? ConsumeTokenResult.Success
+                        : ConsumeTokenResult.NotEnoughDataRollBackState;
                 }
             }
             else if (marker == JsonConstants.CloseBrace)

@@ -191,8 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 return (object?)AssociatedEventField != null
-                  ? AttributeLocation.Event | AttributeLocation.Method | AttributeLocation.Field
-                  : AttributeLocation.Event | AttributeLocation.Method;
+                    ? AttributeLocation.Event | AttributeLocation.Method | AttributeLocation.Field
+                    : AttributeLocation.Event | AttributeLocation.Method;
             }
         }
 

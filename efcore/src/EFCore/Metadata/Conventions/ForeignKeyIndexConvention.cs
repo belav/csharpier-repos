@@ -19,16 +19,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class ForeignKeyIndexConvention
         : IForeignKeyAddedConvention,
-          IForeignKeyRemovedConvention,
-          IForeignKeyPropertiesChangedConvention,
-          IForeignKeyUniquenessChangedConvention,
-          IKeyAddedConvention,
-          IKeyRemovedConvention,
-          IEntityTypeBaseTypeChangedConvention,
-          IIndexAddedConvention,
-          IIndexRemovedConvention,
-          IIndexUniquenessChangedConvention,
-          IModelFinalizingConvention
+            IForeignKeyRemovedConvention,
+            IForeignKeyPropertiesChangedConvention,
+            IForeignKeyUniquenessChangedConvention,
+            IKeyAddedConvention,
+            IKeyRemovedConvention,
+            IEntityTypeBaseTypeChangedConvention,
+            IIndexAddedConvention,
+            IIndexRemovedConvention,
+            IIndexUniquenessChangedConvention,
+            IModelFinalizingConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ForeignKeyIndexConvention" />.

@@ -190,7 +190,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         { AssociatedSymbol: PropertySymbol overriddenProperty }
                     }
                 }
-                  => overriddenProperty,
+                    => overriddenProperty,
                 RetargetingPropertySymbol
                 {
                     GetMethod: RetargetingMethodSymbol
@@ -199,7 +199,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         { AssociatedSymbol: PropertySymbol overriddenProperty }
                     }
                 }
-                  => overriddenProperty,
+                    => overriddenProperty,
                 _ => null
             };
 
@@ -480,13 +480,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && (
                     accessorIsFromSomeCompilation
                         ? MemberSignatureComparer.CSharpAccessorOverrideComparer.Equals(
-                              accessor,
-                              overriddenAccessor
-                          ) //NB: custom comparer
+                            accessor,
+                            overriddenAccessor
+                        ) //NB: custom comparer
                         : MemberSignatureComparer.RuntimeSignatureComparer.Equals(
-                              accessor,
-                              overriddenAccessor
-                          )
+                            accessor,
+                            overriddenAccessor
+                        )
                 )
             )
             {

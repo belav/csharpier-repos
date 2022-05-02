@@ -63,8 +63,8 @@ public sealed class SocketConnectionContextFactory : IDisposable
                     : new IOQueue();
                 // https://github.com/aspnet/KestrelHttpServer/issues/2573
                 var awaiterScheduler = OperatingSystem.IsWindows()
-                  ? transportScheduler
-                  : PipeScheduler.Inline;
+                    ? transportScheduler
+                    : PipeScheduler.Inline;
 
                 _settings[i] = new QueueSettings()
                 {
@@ -96,8 +96,8 @@ public sealed class SocketConnectionContextFactory : IDisposable
                 : PipeScheduler.ThreadPool;
             // https://github.com/aspnet/KestrelHttpServer/issues/2573
             var awaiterScheduler = OperatingSystem.IsWindows()
-              ? transportScheduler
-              : PipeScheduler.Inline;
+                ? transportScheduler
+                : PipeScheduler.Inline;
             _settings = new QueueSettings[]
             {
                 new QueueSettings()

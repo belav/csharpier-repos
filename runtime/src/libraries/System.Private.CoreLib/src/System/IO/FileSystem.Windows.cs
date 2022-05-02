@@ -166,8 +166,8 @@ namespace System.IO
         public static FileSystemInfo GetFileSystemInfo(string fullPath, bool asDirectory)
         {
             return asDirectory
-              ? (FileSystemInfo)new DirectoryInfo(fullPath, null)
-              : (FileSystemInfo)new FileInfo(fullPath, null);
+                ? (FileSystemInfo)new DirectoryInfo(fullPath, null)
+                : (FileSystemInfo)new FileInfo(fullPath, null);
         }
 
         public static DateTimeOffset GetLastAccessTime(string fullPath)
@@ -596,17 +596,17 @@ namespace System.IO
             string? targetPath = returnFinalTarget
                 ? GetFinalLinkTarget(linkPath, isDirectory)
                 : GetImmediateLinkTarget(
-                      linkPath,
-                      isDirectory,
-                      throwOnError: true,
-                      returnFullPath: true
-                  );
+                    linkPath,
+                    isDirectory,
+                    throwOnError: true,
+                    returnFullPath: true
+                );
 
             return targetPath == null
-              ? null
-              : isDirectory
-                  ? new DirectoryInfo(targetPath)
-                  : new FileInfo(targetPath);
+                ? null
+                : isDirectory
+                    ? new DirectoryInfo(targetPath)
+                    : new FileInfo(targetPath);
         }
 
         internal static string? GetLinkTarget(string linkPath, bool isDirectory) =>

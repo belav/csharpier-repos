@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class BinaryHttpClientTest
     : BrowserTestBase,
-      IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>,
-      IClassFixture<BlazorWasmTestAppFixture<BasicTestApp.Program>>
+        IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>,
+        IClassFixture<BlazorWasmTestAppFixture<BasicTestApp.Program>>
 {
     private readonly BlazorWasmTestAppFixture<BasicTestApp.Program> _devHostServerFixture;
     readonly ServerFixture _apiServerFixture;

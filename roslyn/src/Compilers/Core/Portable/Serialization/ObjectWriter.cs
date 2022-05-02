@@ -855,32 +855,32 @@ namespace Roslyn.Utilities
                 case 1200:
                     Debug.Assert(HasPreamble(Encoding.Unicode));
                     return (encoding.Equals(Encoding.Unicode) || HasPreamble(encoding))
-                      ? EncodingKind.EncodingUnicode_LE_BOM
-                      : EncodingKind.EncodingUnicode_LE;
+                        ? EncodingKind.EncodingUnicode_LE_BOM
+                        : EncodingKind.EncodingUnicode_LE;
 
                 case 1201:
                     Debug.Assert(HasPreamble(Encoding.BigEndianUnicode));
                     return (encoding.Equals(Encoding.BigEndianUnicode) || HasPreamble(encoding))
-                      ? EncodingKind.EncodingUnicode_BE_BOM
-                      : EncodingKind.EncodingUnicode_BE;
+                        ? EncodingKind.EncodingUnicode_BE_BOM
+                        : EncodingKind.EncodingUnicode_BE;
 
                 case 12000:
                     Debug.Assert(HasPreamble(Encoding.UTF32));
                     return (encoding.Equals(Encoding.UTF32) || HasPreamble(encoding))
-                      ? EncodingKind.EncodingUTF32_LE_BOM
-                      : EncodingKind.EncodingUTF32_LE;
+                        ? EncodingKind.EncodingUTF32_LE_BOM
+                        : EncodingKind.EncodingUTF32_LE;
 
                 case 12001:
                     Debug.Assert(HasPreamble(Encoding.UTF32));
                     return (encoding.Equals(Encoding.UTF32) || HasPreamble(encoding))
-                      ? EncodingKind.EncodingUTF32_BE_BOM
-                      : EncodingKind.EncodingUTF32_BE;
+                        ? EncodingKind.EncodingUTF32_BE_BOM
+                        : EncodingKind.EncodingUTF32_BE;
 
                 case 65001:
                     Debug.Assert(HasPreamble(Encoding.UTF8));
                     return (encoding.Equals(Encoding.UTF8) || HasPreamble(encoding))
-                      ? EncodingKind.EncodingUTF8_BOM
-                      : EncodingKind.EncodingUTF8;
+                        ? EncodingKind.EncodingUTF8_BOM
+                        : EncodingKind.EncodingUTF8;
 
                 default:
                     return EncodingKind.EncodingName;

@@ -113,7 +113,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     // both targets must have been converted to the same type, otherwise we bail.
                     ({ IsImplicit: true }, { IsImplicit: true })
                         when !Equals(leftTarget.Type, rightTarget.Type)
-                      => null,
+                        => null,
 
                     // If either of targets are implicitly converted but not both,
                     // we take the conversion node so that we can generate a cast off of it.
@@ -165,7 +165,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                     Not p => p.Pattern, // Avoid double negative
                     Relational p => new Relational(Negate(p.OperatorKind), p.Value, p.Target),
                     Binary { Left: Not left, Right: Not right } p // Apply demorgans's law
-                      => Binary.TryCreate(left.Pattern, right.Pattern, !p.IsDisjunctive, p.Token),
+                        => Binary.TryCreate(left.Pattern, right.Pattern, !p.IsDisjunctive, p.Token),
                     _ => new Not(pattern, pattern.Target)
                 };
             }

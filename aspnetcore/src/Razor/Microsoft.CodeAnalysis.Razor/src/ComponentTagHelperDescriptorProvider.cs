@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Razor;
 
 internal class ComponentTagHelperDescriptorProvider
     : RazorEngineFeatureBase,
-      ITagHelperDescriptorProvider
+        ITagHelperDescriptorProvider
 {
     private static readonly SymbolDisplayFormat FullNameTypeDisplayFormat =
         SymbolDisplayFormat.FullyQualifiedFormat

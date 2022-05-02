@@ -402,9 +402,9 @@ namespace System.Net.Sockets
                         || _addressFamily == AddressFamily.InterNetworkV6
                             ? IPEndPointExtensions.Serialize(_rightEndPoint)
                             : new Internals.SocketAddress(
-                                  _addressFamily,
-                                  SocketPal.MaximumAddressSize
-                              ); // may be different size than _rightEndPoint.
+                                _addressFamily,
+                                SocketPal.MaximumAddressSize
+                            ); // may be different size than _rightEndPoint.
 
                     // This may throw ObjectDisposedException.
                     SocketError errorCode = SocketPal.GetPeerName(
@@ -537,8 +537,8 @@ namespace System.Net.Sockets
                             SocketOptionLevel.Socket,
                             SocketOptionName.ExclusiveAddressUse
                         )! != 0
-                  ? true
-                  : false;
+                    ? true
+                    : false;
             }
             set
             {
@@ -651,8 +651,8 @@ namespace System.Net.Sockets
             get
             {
                 return (int)GetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay)! != 0
-                  ? true
-                  : false;
+                    ? true
+                    : false;
             }
             set { SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, value ? 1 : 0); }
         }
@@ -709,8 +709,8 @@ namespace System.Net.Sockets
                     return
                         (int)GetSocketOption(SocketOptionLevel.IP, SocketOptionName.DontFragment)!
                         != 0
-                      ? true
-                      : false;
+                        ? true
+                        : false;
                 }
                 else
                 {
@@ -746,8 +746,8 @@ namespace System.Net.Sockets
                                 SocketOptionLevel.IP,
                                 SocketOptionName.MulticastLoopback
                             )! != 0
-                      ? true
-                      : false;
+                        ? true
+                        : false;
                 }
                 else if (_addressFamily == AddressFamily.InterNetworkV6)
                 {
@@ -757,8 +757,8 @@ namespace System.Net.Sockets
                                 SocketOptionLevel.IPv6,
                                 SocketOptionName.MulticastLoopback
                             )! != 0
-                      ? true
-                      : false;
+                        ? true
+                        : false;
                 }
                 else
                 {
@@ -796,8 +796,8 @@ namespace System.Net.Sockets
             {
                 return
                     (int)GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast)! != 0
-                  ? true
-                  : false;
+                    ? true
+                    : false;
             }
             set
             {
@@ -1370,8 +1370,8 @@ namespace System.Net.Sockets
         {
             int bytesTransferred = Send(buffer, socketFlags, out SocketError errorCode);
             return errorCode == SocketError.Success
-              ? bytesTransferred
-              : throw new SocketException((int)errorCode);
+                ? bytesTransferred
+                : throw new SocketException((int)errorCode);
         }
 
         public int Send(
@@ -1721,8 +1721,8 @@ namespace System.Net.Sockets
         {
             int bytesTransferred = Receive(buffer, socketFlags, out SocketError errorCode);
             return errorCode == SocketError.Success
-              ? bytesTransferred
-              : throw new SocketException((int)errorCode);
+                ? bytesTransferred
+                : throw new SocketException((int)errorCode);
         }
 
         public int Receive(Span<byte> buffer, SocketFlags socketFlags, out SocketError errorCode)
@@ -3898,10 +3898,10 @@ namespace System.Net.Sockets
         {
             AddressFamily fam = endPoint.AddressFamily;
             return fam == AddressFamily.InterNetwork
-              ? SocketAddressPal.IPv4AddressSize
-              : fam == AddressFamily.InterNetworkV6
-                  ? SocketAddressPal.IPv6AddressSize
-                  : endPoint.Serialize().Size;
+                ? SocketAddressPal.IPv4AddressSize
+                : fam == AddressFamily.InterNetworkV6
+                    ? SocketAddressPal.IPv6AddressSize
+                    : endPoint.Serialize().Size;
         }
 
         private Internals.SocketAddress Serialize(ref EndPoint remoteEP)
@@ -4687,8 +4687,8 @@ namespace System.Net.Sockets
         // Helper for SendFile implementations
         private static SafeFileHandle? OpenFileHandle(string? name) =>
             string.IsNullOrEmpty(name)
-              ? null
-              : File.OpenHandle(name, FileMode.Open, FileAccess.Read);
+                ? null
+                : File.OpenHandle(name, FileMode.Open, FileAccess.Read);
 
         private void UpdateReceiveSocketErrorForDisposed(
             ref SocketError socketError,

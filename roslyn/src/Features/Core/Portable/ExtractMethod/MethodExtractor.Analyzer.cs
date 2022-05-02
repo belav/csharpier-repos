@@ -397,12 +397,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var anonymousTypeStatus = !namesWithAnonymousTypes.Any()
                     ? OperationStatus.Succeeded
                     : new OperationStatus(
-                          OperationStatusFlag.BestEffort,
-                          string.Format(
-                              FeaturesResources.Parameters_type_or_return_type_cannot_be_an_anonymous_type_colon_bracket_0_bracket,
-                              string.Join(", ", namesWithAnonymousTypes)
-                          )
-                      );
+                        OperationStatusFlag.BestEffort,
+                        string.Format(
+                            FeaturesResources.Parameters_type_or_return_type_cannot_be_an_anonymous_type_colon_bracket_0_bracket,
+                            string.Join(", ", namesWithAnonymousTypes)
+                        )
+                    );
 
                 var unsafeAddressStatus = unsafeAddressTakenUsed
                     ? OperationStatus.UnsafeAddressTaken
@@ -414,12 +414,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     failedVariables.Count == 0
                         ? OperationStatus.Succeeded
                         : new OperationStatus(
-                              OperationStatusFlag.BestEffort,
-                              string.Format(
-                                  FeaturesResources.Failed_to_analyze_data_flow_for_0,
-                                  string.Join(", ", failedVariables.Select(v => v.Name))
-                              )
-                          );
+                            OperationStatusFlag.BestEffort,
+                            string.Format(
+                                FeaturesResources.Failed_to_analyze_data_flow_for_0,
+                                string.Join(", ", failedVariables.Select(v => v.Name))
+                            )
+                        );
 
                 var localFunctionStatus =
                     (containsAnyLocalFunctionCallNotWithinSpan && !LocalFunction)
@@ -873,7 +873,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     ILocalSymbol local => local.Type,
                     IParameterSymbol parameter => parameter.Type,
                     IRangeVariableSymbol rangeVariable
-                      => GetRangeVariableType(model, rangeVariable),
+                        => GetRangeVariableType(model, rangeVariable),
                     _ => throw ExceptionUtilities.UnexpectedValue(symbol)
                 };
 
@@ -1244,25 +1244,25 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 return symbol switch
                 {
                     ILocalSymbol local
-                      => new VariableInfo(
-                          new LocalVariableSymbol<T>(
-                              compilation,
-                              local,
-                              type,
-                              nonNoisySyntaxKindSet
-                          ),
-                          style
-                      ),
+                        => new VariableInfo(
+                            new LocalVariableSymbol<T>(
+                                compilation,
+                                local,
+                                type,
+                                nonNoisySyntaxKindSet
+                            ),
+                            style
+                        ),
                     IParameterSymbol parameter
-                      => new VariableInfo(
-                          new ParameterVariableSymbol(compilation, parameter, type),
-                          style
-                      ),
+                        => new VariableInfo(
+                            new ParameterVariableSymbol(compilation, parameter, type),
+                            style
+                        ),
                     IRangeVariableSymbol rangeVariable
-                      => new VariableInfo(
-                          new QueryVariableSymbol(compilation, rangeVariable, type),
-                          style
-                      ),
+                        => new VariableInfo(
+                            new QueryVariableSymbol(compilation, rangeVariable, type),
+                            style
+                        ),
                     _ => throw ExceptionUtilities.UnexpectedValue(symbol)
                 };
             }

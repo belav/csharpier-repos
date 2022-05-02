@@ -93,8 +93,8 @@ namespace MyNamespace
                     Assert.Equal(17, GetCollapsedHintLineCount(namespaceTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Namespace
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Namespace
+                            : PredefinedStructureTagTypes.Nonstructural,
                         namespaceTag.Type
                     );
                     Assert.Equal("namespace MyNamespace", GetHeaderText(namespaceTag));
@@ -115,8 +115,8 @@ namespace MyNamespace
                     Assert.Equal(12, GetCollapsedHintLineCount(classTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Type
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
                         classTag.Type
                     );
                     Assert.Equal("public class MyClass", GetHeaderText(classTag));
@@ -127,8 +127,8 @@ namespace MyNamespace
                     Assert.Equal(9, GetCollapsedHintLineCount(methodTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Member
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Member
+                            : PredefinedStructureTagTypes.Nonstructural,
                         methodTag.Type
                     );
                     Assert.Equal("static void Main(string[] args)", GetHeaderText(methodTag));
@@ -139,8 +139,8 @@ namespace MyNamespace
                     Assert.Equal(4, GetCollapsedHintLineCount(ifTag));
                     Assert.Equal(
                         showBlockStructureGuidesForCodeLevelConstructs
-                          ? PredefinedStructureTagTypes.Conditional
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Conditional
+                            : PredefinedStructureTagTypes.Nonstructural,
                         ifTag.Type
                     );
                     Assert.Equal("if (false)", GetHeaderText(ifTag));
@@ -208,8 +208,8 @@ public class Bar
                     Assert.Equal(2, GetCollapsedHintLineCount(importsTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Imports
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Imports
+                            : PredefinedStructureTagTypes.Nonstructural,
                         importsTag.Type
                     );
                     Assert.Equal("using ", GetHeaderText(importsTag));
@@ -219,8 +219,8 @@ public class Bar
                     Assert.Equal(4, GetCollapsedHintLineCount(classTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Type
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
                         classTag.Type
                     );
                     Assert.Equal("public class Bar", GetHeaderText(classTag));
@@ -297,8 +297,8 @@ public class Bar
                     Assert.Equal(3, GetCollapsedHintLineCount(commentsTag));
                     Assert.Equal(
                         showBlockStructureGuidesForCommentsAndPreprocessorRegions
-                          ? PredefinedStructureTagTypes.Comment
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Comment
+                            : PredefinedStructureTagTypes.Nonstructural,
                         commentsTag.Type
                     );
                     Assert.Equal("/// <summary>", GetHeaderText(commentsTag));
@@ -308,8 +308,8 @@ public class Bar
                     Assert.Equal(4, GetCollapsedHintLineCount(classTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Type
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
                         classTag.Type
                     );
                     Assert.Equal("public class Bar", GetHeaderText(classTag));
@@ -378,8 +378,8 @@ namespace Foo
                     Assert.Equal(9, GetCollapsedHintLineCount(namespaceTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Namespace
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Namespace
+                            : PredefinedStructureTagTypes.Nonstructural,
                         namespaceTag.Type
                     );
                     Assert.Equal("namespace Foo", GetHeaderText(namespaceTag));
@@ -389,8 +389,8 @@ namespace Foo
                     Assert.Equal(2, GetCollapsedHintLineCount(importsTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Imports
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Imports
+                            : PredefinedStructureTagTypes.Nonstructural,
                         importsTag.Type
                     );
                     Assert.Equal("using ", GetHeaderText(importsTag));
@@ -400,8 +400,8 @@ namespace Foo
                     Assert.Equal(4, GetCollapsedHintLineCount(classTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Type
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
                         classTag.Type
                     );
                     Assert.Equal("public class Bar", GetHeaderText(classTag));
@@ -474,8 +474,8 @@ End Namespace";
                     Assert.Equal(13, GetCollapsedHintLineCount(namespaceTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Namespace
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Namespace
+                            : PredefinedStructureTagTypes.Nonstructural,
                         namespaceTag.Type
                     );
                     Assert.Equal("Namespace MyNamespace", GetHeaderText(namespaceTag));
@@ -496,8 +496,8 @@ End Namespace";
                     Assert.Equal(9, GetCollapsedHintLineCount(moduleTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Type
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Type
+                            : PredefinedStructureTagTypes.Nonstructural,
                         moduleTag.Type
                     );
                     Assert.Equal("Module M", GetHeaderText(moduleTag));
@@ -508,8 +508,8 @@ End Namespace";
                     Assert.Equal(7, GetCollapsedHintLineCount(methodTag));
                     Assert.Equal(
                         showBlockStructureGuidesForDeclarationLevelConstructs
-                          ? PredefinedStructureTagTypes.Member
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Member
+                            : PredefinedStructureTagTypes.Nonstructural,
                         methodTag.Type
                     );
                     Assert.Equal("Sub Main(args As String())", GetHeaderText(methodTag));
@@ -520,8 +520,8 @@ End Namespace";
                     Assert.Equal(3, GetCollapsedHintLineCount(ifTag));
                     Assert.Equal(
                         showBlockStructureGuidesForCodeLevelConstructs
-                          ? PredefinedStructureTagTypes.Conditional
-                          : PredefinedStructureTagTypes.Nonstructural,
+                            ? PredefinedStructureTagTypes.Conditional
+                            : PredefinedStructureTagTypes.Nonstructural,
                         ifTag.Type
                     );
                     Assert.Equal("If False Then", GetHeaderText(ifTag));

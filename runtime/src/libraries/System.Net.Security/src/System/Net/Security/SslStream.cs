@@ -866,8 +866,8 @@ namespace System.Net.Security
             {
                 ThrowIfExceptionalOrNotAuthenticated();
                 return _context!.IsServer
-                  ? _context.LocalServerCertificate
-                  : _context.LocalClientCertificate;
+                    ? _context.LocalServerCertificate
+                    : _context.LocalClientCertificate;
             }
         }
 
@@ -983,8 +983,8 @@ namespace System.Net.Security
             get
             {
                 return _sslAuthenticationOptions != null
-                  ? _sslAuthenticationOptions.TargetHost
-                  : string.Empty;
+                    ? _sslAuthenticationOptions.TargetHost
+                    : string.Empty;
             }
         }
 

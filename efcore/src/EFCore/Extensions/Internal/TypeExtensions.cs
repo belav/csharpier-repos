@@ -47,8 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
             var removeLowerCase = sb.Append(type.Name.Where(char.IsUpper).ToArray()).ToString();
 
             return removeLowerCase.Length > 0
-              ? removeLowerCase.ToLowerInvariant()
-              : type.Name.ToLowerInvariant().Substring(0, 1);
+                ? removeLowerCase.ToLowerInvariant()
+                : type.Name.ToLowerInvariant().Substring(0, 1);
         }
 
         /// <summary>
@@ -63,16 +63,16 @@ namespace Microsoft.EntityFrameworkCore.Internal
                 .FirstOrDefault();
 
             return defaultPropertyAttribute == null
-              ? null
-              : type.GetRuntimeProperties()
-                .FirstOrDefault(
-                    pi =>
-                        pi.Name == defaultPropertyAttribute.MemberName
-                        && pi.IsIndexerProperty()
-                        && pi.SetMethod?.GetParameters() is ParameterInfo[] parameters
-                        && parameters.Length == 2
-                        && parameters[0].ParameterType == typeof(string)
-                );
+                ? null
+                : type.GetRuntimeProperties()
+                    .FirstOrDefault(
+                        pi =>
+                            pi.Name == defaultPropertyAttribute.MemberName
+                            && pi.IsIndexerProperty()
+                            && pi.SetMethod?.GetParameters() is ParameterInfo[] parameters
+                            && parameters.Length == 2
+                            && parameters[0].ParameterType == typeof(string)
+                    );
         }
     }
 }

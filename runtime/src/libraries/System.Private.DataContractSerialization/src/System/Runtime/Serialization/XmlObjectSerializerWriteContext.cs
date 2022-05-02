@@ -39,12 +39,12 @@ namespace System.Runtime.Serialization
                 serializer.PreserveObjectReferences
                 || serializer.SerializationSurrogateProvider != null
             )
-              ? new XmlObjectSerializerWriteContextComplex(
+                ? new XmlObjectSerializerWriteContextComplex(
                     serializer,
                     rootTypeDataContract,
                     dataContractResolver
                 )
-              : new XmlObjectSerializerWriteContext(
+                : new XmlObjectSerializerWriteContext(
                     serializer,
                     rootTypeDataContract,
                     dataContractResolver
@@ -179,9 +179,9 @@ namespace System.Runtime.Serialization
                         (declaredTypeID >= 0)
                             ? GetDataContract(declaredTypeID, declaredTypeHandle)
                             : GetDataContract(
-                                  declaredTypeHandle,
-                                  null /*type*/
-                              );
+                                declaredTypeHandle,
+                                null /*type*/
+                            );
                     SerializeWithoutXsiType(dataContract, xmlWriter, obj, declaredTypeHandle);
                 }
                 else

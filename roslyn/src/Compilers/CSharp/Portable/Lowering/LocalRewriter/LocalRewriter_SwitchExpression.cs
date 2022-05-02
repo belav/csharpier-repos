@@ -176,22 +176,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 is MethodSymbol exception1
                         )
                             ? _factory.New(
-                                  exception1,
-                                  _factory.Convert(objectType, savedInputExpression)
-                              )
+                                exception1,
+                                _factory.Convert(objectType, savedInputExpression)
+                            )
                             : (
-                                  _factory.WellKnownMember(
-                                      WellKnownMember.System_Runtime_CompilerServices_SwitchExpressionException__ctor,
-                                      isOptional: true
-                                  )
-                                  is MethodSymbol exception0
-                              )
+                                _factory.WellKnownMember(
+                                    WellKnownMember.System_Runtime_CompilerServices_SwitchExpressionException__ctor,
+                                    isOptional: true
+                                )
+                                is MethodSymbol exception0
+                            )
                                 ? _factory.New(exception0)
                                 : _factory.New(
-                                      _factory.WellKnownMethod(
-                                          WellKnownMember.System_InvalidOperationException__ctor
-                                      )
-                                  );
+                                    _factory.WellKnownMethod(
+                                        WellKnownMember.System_InvalidOperationException__ctor
+                                    )
+                                );
                     result.Add(_factory.Throw(thrownExpression));
                 }
 

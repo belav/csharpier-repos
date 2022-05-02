@@ -393,8 +393,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 return ReferenceEquals(this, obj)
-                  ? true
-                  : obj.GetType() == GetType() && string.Equals(Id, ((CustomerDeets)obj).Id);
+                    ? true
+                    : obj.GetType() == GetType() && string.Equals(Id, ((CustomerDeets)obj).Id);
             }
 
             public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;

@@ -18,11 +18,11 @@ namespace System.Collections.Generic
     )]
     public class HashSet<T>
         : ICollection<T>,
-          ISet<T>,
-          IReadOnlyCollection<T>,
-          IReadOnlySet<T>,
-          ISerializable,
-          IDeserializationCallback
+            ISet<T>,
+            IReadOnlyCollection<T>,
+            IReadOnlySet<T>,
+            ISerializable,
+            IDeserializationCallback
     {
         // This uses the same array-based implementation as Dictionary<TKey, TValue>.
 

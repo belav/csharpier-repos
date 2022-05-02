@@ -418,8 +418,8 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
             return (
                 context == null
                     ? servicesBuilder.CreateServiceCollection(
-                          "Microsoft.EntityFrameworkCore.SqlServer"
-                      )
+                        "Microsoft.EntityFrameworkCore.SqlServer"
+                    )
                     : servicesBuilder.CreateServiceCollection(context)
             ).BuildServiceProvider(validateScopes: true);
         }

@@ -47,7 +47,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         private sealed class Service
             : ForegroundThreadAffinitizedObject,
-              IFrameworkAssemblyPathResolver
+                IFrameworkAssemblyPathResolver
         {
             private readonly VisualStudioWorkspace? _workspace;
             private readonly IServiceProvider _serviceProvider;

@@ -26,9 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     internal class VisualStudioProjectTelemetryService
         : ForegroundThreadAffinitizedObject,
-          IProjectTelemetryListener,
-          IEventListener<object>,
-          IDisposable
+            IProjectTelemetryListener,
+            IEventListener<object>,
+            IDisposable
     {
         private const string EventPrefix = "VS/Compilers/Compilation/";
         private const string PropertyPrefix = "VS.Compilers.Compilation.Inputs.";

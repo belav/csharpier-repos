@@ -24,8 +24,8 @@ namespace System.Linq
             }
 
             return first is ConcatIterator<TSource> firstConcat
-              ? firstConcat.Concat(second)
-              : new Concat2Iterator<TSource>(first, second);
+                ? firstConcat.Concat(second)
+                : new Concat2Iterator<TSource>(first, second);
         }
 
         /// <summary>

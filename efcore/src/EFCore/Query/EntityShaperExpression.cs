@@ -291,11 +291,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual EntityShaperExpression Update(Expression valueBufferExpression) =>
             valueBufferExpression != ValueBufferExpression
                 ? new EntityShaperExpression(
-                      EntityType,
-                      valueBufferExpression,
-                      IsNullable,
-                      MaterializationCondition
-                  )
+                    EntityType,
+                    valueBufferExpression,
+                    IsNullable,
+                    MaterializationCondition
+                )
                 : this;
 
         /// <inheritdoc />

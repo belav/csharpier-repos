@@ -17,13 +17,13 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteMissingImportDiscoveryService
         : BrokeredServiceBase,
-          IRemoteMissingImportDiscoveryService
+            IRemoteMissingImportDiscoveryService
     {
         internal sealed class Factory
             : FactoryBase<
-                  IRemoteMissingImportDiscoveryService,
-                  IRemoteMissingImportDiscoveryService.ICallback
-              >
+                IRemoteMissingImportDiscoveryService,
+                IRemoteMissingImportDiscoveryService.ICallback
+            >
         {
             protected override IRemoteMissingImportDiscoveryService CreateService(
                 in ServiceConstructionArguments arguments,

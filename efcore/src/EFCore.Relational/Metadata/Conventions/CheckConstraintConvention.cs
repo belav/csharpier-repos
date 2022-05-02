@@ -20,7 +20,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class CheckConstraintConvention
         : IEntityTypeBaseTypeChangedConvention,
-          IEntityTypeAddedConvention
+            IEntityTypeAddedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="CheckConstraintConvention" />.

@@ -79,8 +79,8 @@ namespace XPathTests.Common
             var current = xPathNodeIterator.Current;
 
             return namespaceManager == null
-              ? current.Matches(testExpression)
-              : current.Matches(XPathExpression.Compile(testExpression, namespaceManager));
+                ? current.Matches(testExpression)
+                : current.Matches(XPathExpression.Compile(testExpression, namespaceManager));
         }
 
         public static void XPathMatchTestThrows<T>(

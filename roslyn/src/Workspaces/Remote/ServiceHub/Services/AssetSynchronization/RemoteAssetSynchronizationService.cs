@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal sealed class RemoteAssetSynchronizationService
         : BrokeredServiceBase,
-          IRemoteAssetSynchronizationService
+            IRemoteAssetSynchronizationService
     {
         internal sealed class Factory : FactoryBase<IRemoteAssetSynchronizationService>
         {

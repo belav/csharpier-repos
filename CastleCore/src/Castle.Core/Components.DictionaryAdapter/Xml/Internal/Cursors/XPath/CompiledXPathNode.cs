@@ -100,8 +100,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             return
                 dependencies != null && dependencies.Count == 1 && dependencies[0].IsSelfReference
-              ? dependencies[0].value
-              : null;
+                ? dependencies[0].value
+                : null;
         }
 
         internal virtual void Prepare()

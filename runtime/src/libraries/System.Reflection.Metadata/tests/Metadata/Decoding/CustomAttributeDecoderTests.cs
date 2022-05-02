@@ -442,7 +442,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
         private class CustomAttributeTypeProvider
             : DisassemblingTypeProvider,
-              ICustomAttributeTypeProvider<string>
+                ICustomAttributeTypeProvider<string>
         {
             public string GetSystemType()
             {

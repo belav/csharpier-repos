@@ -627,13 +627,13 @@ namespace System.Reflection.Emit
                 case ConstructorBuilder constructorBuilder:
                     return constructorBuilder.GetMethodSignature();
                 case MethodOnTypeBuilderInstantiation motbi
-                      when motbi.m_method is MethodBuilder methodBuilder:
+                when motbi.m_method is MethodBuilder methodBuilder:
                     return methodBuilder.GetMethodSignature();
                 case MethodOnTypeBuilderInstantiation motbi:
                     method = motbi.m_method;
                     break;
                 case ConstructorOnTypeBuilderInstantiation cotbi
-                      when cotbi.m_ctor is ConstructorBuilder constructorBuilder:
+                when cotbi.m_ctor is ConstructorBuilder constructorBuilder:
                     return constructorBuilder.GetMethodSignature();
                 case ConstructorOnTypeBuilderInstantiation cotbi:
                     method = cotbi.m_ctor;

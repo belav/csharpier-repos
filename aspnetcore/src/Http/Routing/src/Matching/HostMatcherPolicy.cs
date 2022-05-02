@@ -16,9 +16,9 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 /// </summary>
 public sealed class HostMatcherPolicy
     : MatcherPolicy,
-      IEndpointComparerPolicy,
-      INodeBuilderPolicy,
-      IEndpointSelectorPolicy
+        IEndpointComparerPolicy,
+        INodeBuilderPolicy,
+        IEndpointSelectorPolicy
 {
     private const string WildcardHost = "*";
     private const string WildcardPrefix = "*.";

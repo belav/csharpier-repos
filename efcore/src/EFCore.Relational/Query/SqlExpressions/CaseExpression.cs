@@ -93,10 +93,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             changed |= elseResult != ElseResult;
 
             return changed
-              ? operand == null
-                  ? new CaseExpression(whenClauses, elseResult)
-                  : new CaseExpression(operand, whenClauses, elseResult)
-              : this;
+                ? operand == null
+                    ? new CaseExpression(whenClauses, elseResult)
+                    : new CaseExpression(operand, whenClauses, elseResult)
+                : this;
         }
 
         /// <summary>
@@ -116,10 +116,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             || !whenClauses.SequenceEqual(WhenClauses)
             || elseResult != ElseResult
                 ? (
-                      operand == null
-                          ? new CaseExpression(whenClauses, elseResult)
-                          : new CaseExpression(operand, whenClauses, elseResult)
-                  )
+                    operand == null
+                        ? new CaseExpression(whenClauses, elseResult)
+                        : new CaseExpression(operand, whenClauses, elseResult)
+                )
                 : this;
 
         /// <inheritdoc />

@@ -54,12 +54,12 @@ namespace System.Web.Http.Tracing.Tracers
                 newParameterBindings[i] =
                     formatterParameterBinding != null
                         ? (HttpParameterBinding)
-                              new FormatterParameterBindingTracer(
-                                  formatterParameterBinding,
-                                  _traceWriter
-                              )
+                            new FormatterParameterBindingTracer(
+                                formatterParameterBinding,
+                                _traceWriter
+                            )
                         : (HttpParameterBinding)
-                              new HttpParameterBindingTracer(parameterBinding, _traceWriter);
+                            new HttpParameterBindingTracer(parameterBinding, _traceWriter);
             }
 
             // Replace the inner HttpActionBinding's parameter bindings with our tracing versions.

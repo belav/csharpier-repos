@@ -140,8 +140,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 var nullableValue = value.GetNullableValue(inspectionContext);
                 // It should be impossible to nest nullables, so this recursion should introduce only a single extra stack frame.
                 return nullableValue == null
-                  ? _nullString
-                  : GetValueString(
+                    ? _nullString
+                    : GetValueString(
                         nullableValue,
                         inspectionContext,
                         ObjectDisplayOptions.None,
@@ -302,8 +302,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             {
                 var nullableValue = value.GetNullableValue(inspectionContext);
                 return nullableValue != null
-                  ? GetUnderlyingStringImpl(nullableValue, inspectionContext)
-                  : null;
+                    ? GetUnderlyingStringImpl(nullableValue, inspectionContext)
+                    : null;
             }
 
             if (lmrType.IsString())
@@ -604,8 +604,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             Debug.Assert(valueStr != null);
             return (flags & GetValueFlags.IncludeObjectId) == 0
-              ? valueStr
-              : value.IncludeObjectId(valueStr);
+                ? valueStr
+                : value.IncludeObjectId(valueStr);
         }
 
         #region Language-specific value formatting behavior

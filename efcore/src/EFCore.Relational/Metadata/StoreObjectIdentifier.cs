@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
     /// </remarks>
     public readonly struct StoreObjectIdentifier
         : IComparable<StoreObjectIdentifier>,
-          IEquatable<StoreObjectIdentifier>
+            IEquatable<StoreObjectIdentifier>
     {
         private StoreObjectIdentifier(
             StoreObjectType storeObjectType,

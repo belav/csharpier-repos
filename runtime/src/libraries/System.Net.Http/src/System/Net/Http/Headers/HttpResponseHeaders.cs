@@ -185,8 +185,8 @@ namespace System.Net.Http.Headers
         internal HttpResponseHeaders(bool containsTrailingHeaders = false)
             : base(
                 containsTrailingHeaders
-                  ? HttpHeaderType.All ^ HttpHeaderType.Request
-                  : HttpHeaderType.General | HttpHeaderType.Response | HttpHeaderType.Custom,
+                    ? HttpHeaderType.All ^ HttpHeaderType.Request
+                    : HttpHeaderType.General | HttpHeaderType.Response | HttpHeaderType.Custom,
                 HttpHeaderType.Request
             )
         {

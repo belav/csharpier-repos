@@ -66,15 +66,15 @@ namespace System.Reflection.TypeLoading
                 int index = MemberPolicies<M>.MemberTypeIndex;
                 object[] cacheArray = ignoreCase
                     ? (
-                          immediateTypeOnly
-                              ? _perNameQueryCaches_CaseInsensitive_ImmediateTypeOnly
-                              : _perNameQueryCaches_CaseInsensitive
-                      )
+                        immediateTypeOnly
+                            ? _perNameQueryCaches_CaseInsensitive_ImmediateTypeOnly
+                            : _perNameQueryCaches_CaseInsensitive
+                    )
                     : (
-                          immediateTypeOnly
-                              ? _perNameQueryCaches_CaseSensitive_ImmediateTypeOnly
-                              : _perNameQueryCaches_CaseSensitive
-                      );
+                        immediateTypeOnly
+                            ? _perNameQueryCaches_CaseSensitive_ImmediateTypeOnly
+                            : _perNameQueryCaches_CaseSensitive
+                    );
 
                 object unifierAsObject = cacheArray[index];
                 PerNameQueryCache<M> unifier = (PerNameQueryCache<M>)unifierAsObject;

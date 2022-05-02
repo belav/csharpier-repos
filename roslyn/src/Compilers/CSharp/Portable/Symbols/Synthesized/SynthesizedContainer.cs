@@ -176,16 +176,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Symbol constructor = this.Constructor;
             return (object)constructor == null
-              ? ImmutableArray<Symbol>.Empty
-              : ImmutableArray.Create(constructor);
+                ? ImmutableArray<Symbol>.Empty
+                : ImmutableArray.Create(constructor);
         }
 
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
             var ctor = Constructor;
             return ((object)ctor != null && name == ctor.Name)
-              ? ImmutableArray.Create<Symbol>(ctor)
-              : ImmutableArray<Symbol>.Empty;
+                ? ImmutableArray.Create<Symbol>(ctor)
+                : ImmutableArray<Symbol>.Empty;
         }
 
         internal override IEnumerable<FieldSymbol> GetFieldsToEmit()
@@ -234,8 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
             ContainingAssembly.GetSpecialType(
                 this.TypeKind == TypeKind.Struct
-                  ? SpecialType.System_ValueType
-                  : SpecialType.System_Object
+                    ? SpecialType.System_ValueType
+                    : SpecialType.System_Object
             );
 
         internal override NamedTypeSymbol GetDeclaredBaseType(

@@ -21,9 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddDebuggerDisplay
     ]
     internal sealed class CSharpAddDebuggerDisplayCodeRefactoringProvider
         : AbstractAddDebuggerDisplayCodeRefactoringProvider<
-              TypeDeclarationSyntax,
-              MethodDeclarationSyntax
-          >
+            TypeDeclarationSyntax,
+            MethodDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

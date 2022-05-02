@@ -50,8 +50,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         )
         {
             return ApplyWorker(workspace, progressTracker)
-              ? SpecializedTasks.True
-              : SpecializedTasks.False;
+                ? SpecializedTasks.True
+                : SpecializedTasks.False;
         }
 
         private bool ApplyWorker(Workspace workspace, IProgressTracker progressTracker)

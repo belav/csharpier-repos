@@ -739,17 +739,17 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                 {
                     ValueGenerated.OnAdd => nameof(PropertyBuilder.ValueGeneratedOnAdd),
                     ValueGenerated.OnAddOrUpdate
-                      => property.IsConcurrencyToken
-                          ? nameof(PropertyBuilder.IsRowVersion)
-                          : nameof(PropertyBuilder.ValueGeneratedOnAddOrUpdate),
+                        => property.IsConcurrencyToken
+                            ? nameof(PropertyBuilder.IsRowVersion)
+                            : nameof(PropertyBuilder.ValueGeneratedOnAddOrUpdate),
                     ValueGenerated.OnUpdate => nameof(PropertyBuilder.ValueGeneratedOnUpdate),
                     ValueGenerated.Never => nameof(PropertyBuilder.ValueGeneratedNever),
                     _
-                      => throw new InvalidOperationException(
-                          DesignStrings.UnhandledEnumValue(
-                              $"{nameof(ValueGenerated)}.{valueGenerated}"
-                          )
-                      )
+                        => throw new InvalidOperationException(
+                            DesignStrings.UnhandledEnumValue(
+                                $"{nameof(ValueGenerated)}.{valueGenerated}"
+                            )
+                        )
                 };
 
                 lines.Add($".{methodName}()");
@@ -1078,21 +1078,23 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                                     var methodName = valueGenerated switch
                                     {
                                         ValueGenerated.OnAdd
-                                          => nameof(PropertyBuilder.ValueGeneratedOnAdd),
+                                            => nameof(PropertyBuilder.ValueGeneratedOnAdd),
                                         ValueGenerated.OnAddOrUpdate
-                                          => property.IsConcurrencyToken
-                                              ? nameof(PropertyBuilder.IsRowVersion)
-                                              : nameof(PropertyBuilder.ValueGeneratedOnAddOrUpdate),
+                                            => property.IsConcurrencyToken
+                                                ? nameof(PropertyBuilder.IsRowVersion)
+                                                : nameof(
+                                                    PropertyBuilder.ValueGeneratedOnAddOrUpdate
+                                                ),
                                         ValueGenerated.OnUpdate
-                                          => nameof(PropertyBuilder.ValueGeneratedOnUpdate),
+                                            => nameof(PropertyBuilder.ValueGeneratedOnUpdate),
                                         ValueGenerated.Never
-                                          => nameof(PropertyBuilder.ValueGeneratedNever),
+                                            => nameof(PropertyBuilder.ValueGeneratedNever),
                                         _
-                                          => throw new InvalidOperationException(
-                                              DesignStrings.UnhandledEnumValue(
-                                                  $"{nameof(ValueGenerated)}.{valueGenerated}"
-                                              )
-                                          )
+                                            => throw new InvalidOperationException(
+                                                DesignStrings.UnhandledEnumValue(
+                                                    $"{nameof(ValueGenerated)}.{valueGenerated}"
+                                                )
+                                            )
                                     };
 
                                     lines.Add($".{methodName}()");

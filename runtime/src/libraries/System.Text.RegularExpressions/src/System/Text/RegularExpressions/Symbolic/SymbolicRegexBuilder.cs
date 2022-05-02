@@ -305,8 +305,8 @@ namespace System.Text.RegularExpressions.Symbolic
             else if (k == 1)
             {
                 return topLevel
-                  ? SymbolicRegexNode<TElement>.MkConcat(this, MkSingleton(seq[0]), MkWatchDog(1))
-                  : MkSingleton(seq[0]);
+                    ? SymbolicRegexNode<TElement>.MkConcat(this, MkSingleton(seq[0]), MkWatchDog(1))
+                    : MkSingleton(seq[0]);
             }
             else
             {

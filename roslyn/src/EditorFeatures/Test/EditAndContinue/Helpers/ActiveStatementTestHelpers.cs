@@ -76,8 +76,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         documentName: documentName,
                         sourceSpan: text.Lines.GetLinePositionSpan(span).ToSourceSpan(),
                         flags: (flags != null)
-                          ? flags[index]
-                          : (
+                            ? flags[index]
+                            : (
                                 (
                                     id == 0
                                         ? ActiveStatementFlags.IsLeafFrame

@@ -175,8 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var contextId = MetadataContextId.GetContextId(moduleVersionId, kind);
             var previous = getMetadataContext(appDomain);
             var assemblyContexts = previous.Matches(metadataBlocks)
-              ? previous.AssemblyContexts
-              : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
+                ? previous.AssemblyContexts
+                : ImmutableDictionary<MetadataContextId, CSharpMetadataContext>.Empty;
             CSharpMetadataContext previousMetadataContext;
             assemblyContexts.TryGetValue(contextId, out previousMetadataContext);
 

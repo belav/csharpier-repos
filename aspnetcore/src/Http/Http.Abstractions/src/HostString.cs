@@ -158,8 +158,8 @@ public readonly struct HostString : IEquatable<HostString>
             var encoded = mapping.GetAscii(host.Buffer!, host.Offset, host.Length);
 
             return StringSegment.IsNullOrEmpty(port)
-              ? encoded
-              : string.Concat(encoded, ":", port.ToString());
+                ? encoded
+                : string.Concat(encoded, ":", port.ToString());
         }
 
         return _value;

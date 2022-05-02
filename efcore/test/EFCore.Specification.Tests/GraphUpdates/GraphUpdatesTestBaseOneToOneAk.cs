@@ -2928,8 +2928,8 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Equal(
                             Fixture.ForceClientNoAction
-                              ? EntityState.Unchanged
-                              : EntityState.Deleted,
+                                ? EntityState.Unchanged
+                                : EntityState.Deleted,
                             context.Entry(orphaned).State
                         );
                     }

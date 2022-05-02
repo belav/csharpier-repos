@@ -244,8 +244,8 @@ namespace MS.Internal.Xml.XPath
                         s1,
                         s2,
                         _caseOrder != XmlCaseOrder.None
-                          ? CompareOptions.IgnoreCase
-                          : CompareOptions.None
+                            ? CompareOptions.IgnoreCase
+                            : CompareOptions.None
                     );
 
                     if (result != 0 || _caseOrder == XmlCaseOrder.None)

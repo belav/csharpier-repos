@@ -54,8 +54,8 @@ namespace Microsoft.Data.Sqlite
 
             connection.ExecuteNonQuery(
                 IsolationLevel == IsolationLevel.Serializable && !deferred
-                  ? "BEGIN IMMEDIATE;"
-                  : "BEGIN;"
+                    ? "BEGIN IMMEDIATE;"
+                    : "BEGIN;"
             );
             sqlite3_rollback_hook(connection.Handle, RollbackExternal, null);
         }

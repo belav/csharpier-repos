@@ -555,8 +555,8 @@ namespace System.Globalization
                 !EqualStringArrays(monthNames, genitveMonthNames)
                 || !EqualStringArrays(abbrevMonthNames, genetiveAbbrevMonthNames)
             )
-              ? FORMATFLAGS.UseGenitiveMonth
-              : 0;
+                ? FORMATFLAGS.UseGenitiveMonth
+                : 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////
@@ -603,8 +603,8 @@ namespace System.Globalization
         )
         {
             return (ArrayElementsHaveSpace(dayNames) || ArrayElementsHaveSpace(abbrevDayNames))
-              ? FORMATFLAGS.UseSpacesInDayNames
-              : 0;
+                ? FORMATFLAGS.UseSpacesInDayNames
+                : 0;
         }
 
         ////////////////////////////////////////////////////////////////////////////
@@ -615,8 +615,8 @@ namespace System.Globalization
         internal static FORMATFLAGS GetFormatFlagUseHebrewCalendar(int calID)
         {
             return calID == (int)CalendarId.HEBREW
-              ? FORMATFLAGS.UseHebrewParsing | FORMATFLAGS.UseLeapYearMonth
-              : 0;
+                ? FORMATFLAGS.UseHebrewParsing | FORMATFLAGS.UseLeapYearMonth
+                : 0;
         }
 
         //-----------------------------------------------------------------------------

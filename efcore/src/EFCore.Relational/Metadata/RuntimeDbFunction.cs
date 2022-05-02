@@ -101,22 +101,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             get =>
                 _isScalar
                     ? NonCapturingLazyInitializer.EnsureInitialized(
-                          ref _typeMapping,
-                          this,
-                          static dbFunction =>
-                          {
-                              var relationalTypeMappingSource = (IRelationalTypeMappingSource)
-                                  ((IModel)dbFunction.Model)
-                                      .GetModelDependencies()
-                                      .TypeMappingSource;
-                              return !string.IsNullOrEmpty(dbFunction._storeType)
+                        ref _typeMapping,
+                        this,
+                        static dbFunction =>
+                        {
+                            var relationalTypeMappingSource = (IRelationalTypeMappingSource)
+                                ((IModel)dbFunction.Model).GetModelDependencies().TypeMappingSource;
+                            return !string.IsNullOrEmpty(dbFunction._storeType)
                                 ? relationalTypeMappingSource.FindMapping(dbFunction._storeType)!
                                 : relationalTypeMappingSource.FindMapping(
-                                      dbFunction._returnType,
-                                      dbFunction.Model
-                                  )!;
-                          }
-                      )
+                                    dbFunction._returnType,
+                                    dbFunction.Model
+                                )!;
+                        }
+                    )
                     : _typeMapping;
             set => _typeMapping = value;
         }

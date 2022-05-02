@@ -309,8 +309,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             Debug.Assert(typeArguments.Length > 0);
             Debug.Assert(
                 openToken.Kind == StackFrameKind.OpenBracketToken
-                  ? closeToken.Kind == StackFrameKind.CloseBracketToken
-                  : closeToken.Kind == StackFrameKind.GreaterThanToken
+                    ? closeToken.Kind == StackFrameKind.CloseBracketToken
+                    : closeToken.Kind == StackFrameKind.GreaterThanToken
             );
 
             OpenToken = openToken;

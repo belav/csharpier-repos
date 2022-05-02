@@ -140,8 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 body: hasNoBody ? null : StatementGenerator.GenerateBlock(method),
                 expressionBody: null,
                 semicolonToken: hasNoBody
-                  ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
-                  : new SyntaxToken()
+                    ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                    : new SyntaxToken()
             );
 
             operatorDecl = UseExpressionBodyIfDesired(options, operatorDecl, parseOptions);

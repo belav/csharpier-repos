@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal abstract class SourceMemberMethodSymbol
         : SourceMethodSymbolWithAttributes,
-          IAttributeTargetSymbol
+            IAttributeTargetSymbol
     {
         // The flags type is used to compact many different bits of information.
         protected struct Flags
@@ -493,8 +493,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // override explicitly (see GetExplicitImplementationOverrides
             // in NamedTypeSymbolAdapter.cs).
             return this.IsOverride
-              ? this.RequiresExplicitOverride(out _)
-              : !this.IsStatic && this.IsMetadataVirtual(ignoreInterfaceImplementationChanges);
+                ? this.RequiresExplicitOverride(out _)
+                : !this.IsStatic && this.IsMetadataVirtual(ignoreInterfaceImplementationChanges);
         }
 
         // TODO (tomat): sealed?
@@ -668,8 +668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Binder inMethod = TryGetInMethodBinder(binderFactoryOpt);
             return inMethod == null
-              ? null
-              : new ExecutableCodeBinder(
+                ? null
+                : new ExecutableCodeBinder(
                     SyntaxNode,
                     this,
                     inMethod.WithAdditionalFlags(

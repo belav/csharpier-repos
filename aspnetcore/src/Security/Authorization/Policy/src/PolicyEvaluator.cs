@@ -85,8 +85,8 @@ public class PolicyEvaluator : IPolicyEvaluator
         static AuthenticateResult DefaultAuthenticateResult(HttpContext context)
         {
             return (context.User?.Identity?.IsAuthenticated ?? false)
-              ? AuthenticateResult.Success(new AuthenticationTicket(context.User, "context.User"))
-              : AuthenticateResult.NoResult();
+                ? AuthenticateResult.Success(new AuthenticationTicket(context.User, "context.User"))
+                : AuthenticateResult.NoResult();
         }
     }
 
@@ -123,7 +123,7 @@ public class PolicyEvaluator : IPolicyEvaluator
 
         // If authentication was successful, return forbidden, otherwise challenge
         return (authenticationResult.Succeeded)
-          ? PolicyAuthorizationResult.Forbid(result.Failure)
-          : PolicyAuthorizationResult.Challenge();
+            ? PolicyAuthorizationResult.Forbid(result.Failure)
+            : PolicyAuthorizationResult.Challenge();
     }
 }

@@ -278,8 +278,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                         arguments[0] is SqlConstantExpression constant
                         && constant.Value is int intValue
                         && intValue == 0
-                      ? TranslateSystemFunction("LEFT", method.ReturnType, instance, arguments[1])
-                      : TranslateSystemFunction(
+                        ? TranslateSystemFunction("LEFT", method.ReturnType, instance, arguments[1])
+                        : TranslateSystemFunction(
                             "SUBSTRING",
                             method.ReturnType,
                             instance,
@@ -351,29 +351,29 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
                 )
                 {
                     return _stringComparisonWithComparisonTypeArgumentInstance.Equals(method)
-                      ? comparisonTypeArgumentValue == StringComparison.OrdinalIgnoreCase
-                          ? TranslateSystemFunction(
+                        ? comparisonTypeArgumentValue == StringComparison.OrdinalIgnoreCase
+                            ? TranslateSystemFunction(
                                 "STRINGEQUALS",
                                 typeof(bool),
                                 instance!,
                                 arguments[0],
                                 _sqlExpressionFactory.Constant(true)
                             )
-                          : TranslateSystemFunction(
+                            : TranslateSystemFunction(
                                 "STRINGEQUALS",
                                 typeof(bool),
                                 instance!,
                                 arguments[0]
                             )
-                      : comparisonTypeArgumentValue == StringComparison.OrdinalIgnoreCase
-                          ? TranslateSystemFunction(
+                        : comparisonTypeArgumentValue == StringComparison.OrdinalIgnoreCase
+                            ? TranslateSystemFunction(
                                 "STRINGEQUALS",
                                 typeof(bool),
                                 arguments[0],
                                 arguments[1],
                                 _sqlExpressionFactory.Constant(true)
                             )
-                          : TranslateSystemFunction(
+                            : TranslateSystemFunction(
                                 "STRINGEQUALS",
                                 typeof(bool),
                                 arguments[0],

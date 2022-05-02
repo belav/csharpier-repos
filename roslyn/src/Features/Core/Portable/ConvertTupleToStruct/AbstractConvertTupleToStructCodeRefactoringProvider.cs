@@ -381,7 +381,7 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             var container = tupleExprOrTypeNode.GetAncestor<TNamespaceDeclarationSyntax>() ?? root;
             var containingNamespace = container is TNamespaceDeclarationSyntax namespaceDecl
                 ? (INamespaceSymbol)
-                      semanticModel.GetRequiredDeclaredSymbol(namespaceDecl, cancellationToken)
+                    semanticModel.GetRequiredDeclaredSymbol(namespaceDecl, cancellationToken)
                 : semanticModel.Compilation.GlobalNamespace;
 
             // Generate a unique name for the struct we're creating.  We'll also add a rename
@@ -513,10 +513,10 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                 var fullTypeName = containingNamespace.IsGlobalNamespace
                     ? (TNameSyntax)generator.GlobalAliasedName(structNameNode)
                     : (TNameSyntax)
-                          generator.QualifiedName(
-                              generator.NameExpression(containingNamespace),
-                              structNameNode
-                          );
+                        generator.QualifiedName(
+                            generator.NameExpression(containingNamespace),
+                            structNameNode
+                        );
 
                 fullTypeName = fullTypeName
                     .WithAdditionalAnnotations(Simplifier.Annotation)
@@ -595,8 +595,8 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             }
 
             return typeParameters.IsEmpty
-              ? (TNameSyntax)generator.IdentifierName(structNameToken)
-              : (TNameSyntax)
+                ? (TNameSyntax)generator.IdentifierName(structNameToken)
+                : (TNameSyntax)
                     generator.GenericName(
                         structNameToken,
                         typeParameters.Select(tp => generator.IdentifierName(tp.Name))
@@ -614,28 +614,28 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             return scope switch
             {
                 Scope.ContainingMember
-                  => GetDocumentsToUpdateForContainingMember(document, tupleExprOrTypeNode),
+                    => GetDocumentsToUpdateForContainingMember(document, tupleExprOrTypeNode),
                 Scope.ContainingType
-                  => await GetDocumentsToUpdateForContainingTypeAsync(
-                          document,
-                          tupleExprOrTypeNode,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetDocumentsToUpdateForContainingTypeAsync(
+                            document,
+                            tupleExprOrTypeNode,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 Scope.ContainingProject
-                  => await GetDocumentsToUpdateForContainingProjectAsync(
-                          document.Project,
-                          tupleType,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetDocumentsToUpdateForContainingProjectAsync(
+                            document.Project,
+                            tupleType,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 Scope.DependentProjects
-                  => await GetDocumentsToUpdateForDependentProjectAsync(
-                          document.Project,
-                          tupleType,
-                          cancellationToken
-                      )
-                      .ConfigureAwait(false),
+                    => await GetDocumentsToUpdateForDependentProjectAsync(
+                            document.Project,
+                            tupleType,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false),
                 _ => throw ExceptionUtilities.UnexpectedValue(scope),
             };
         }
@@ -1056,11 +1056,11 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                     var typeNameNode =
                         startingCreationNode == childCreation
                             ? CreateStructNameNode(
-                                  g,
-                                  typeName,
-                                  typeParameters,
-                                  addRenameAnnotation: true
-                              )
+                                g,
+                                typeName,
+                                typeParameters,
+                                addRenameAnnotation: true
+                            )
                             : qualifiedTypeName;
 
                     var syntaxFacts = g.SyntaxFacts;
@@ -1119,11 +1119,11 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
             arg.IsToken
                 ? arg
                 : ConvertArgument(
-                      generator,
-                      parameterNamingRule,
-                      isRecord,
-                      (TArgumentSyntax)arg.AsNode()!
-                  );
+                    generator,
+                    parameterNamingRule,
+                    isRecord,
+                    (TArgumentSyntax)arg.AsNode()!
+                );
 
         private TArgumentSyntax ConvertArgument(
             SyntaxGenerator generator,
@@ -1223,11 +1223,11 @@ namespace Microsoft.CodeAnalysis.ConvertTupleToStruct
                     var typeNameNode =
                         startingNode == childTupleType
                             ? CreateStructNameNode(
-                                  g,
-                                  typeName,
-                                  typeParameters,
-                                  addRenameAnnotation: true
-                              )
+                                g,
+                                typeName,
+                                typeParameters,
+                                addRenameAnnotation: true
+                            )
                             : qualifiedTypeName;
 
                     return typeNameNode.WithTriviaFrom(currentNode);

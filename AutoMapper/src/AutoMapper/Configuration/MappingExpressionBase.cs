@@ -340,7 +340,7 @@ namespace AutoMapper.Configuration
 
     public abstract class MappingExpressionBase<TSource, TDestination, TMappingExpression>
         : MappingExpressionBase,
-          IMappingExpressionBase<TSource, TDestination, TMappingExpression>
+            IMappingExpressionBase<TSource, TDestination, TMappingExpression>
         where TMappingExpression : class,
             IMappingExpressionBase<TSource, TDestination, TMappingExpression>
     {

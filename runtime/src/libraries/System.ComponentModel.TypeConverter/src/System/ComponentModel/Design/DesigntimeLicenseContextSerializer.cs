@@ -22,8 +22,8 @@ namespace System.ComponentModel.Design
                 "System.ComponentModel.TypeConverter.EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization",
                 out bool isEnabled
             )
-              ? isEnabled
-              : false;
+                ? isEnabled
+                : false;
 
         // Not creatable.
         private DesigntimeLicenseContextSerializer() { }

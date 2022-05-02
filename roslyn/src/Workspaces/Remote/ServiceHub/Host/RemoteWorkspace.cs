@@ -144,14 +144,14 @@ namespace Microsoft.CodeAnalysis.Remote
         )
         {
             return projectId == null
-              ? GetFullSolutionAsync(
+                ? GetFullSolutionAsync(
                     assetProvider,
                     solutionChecksum,
                     fromPrimaryBranch,
                     workspaceVersion,
                     cancellationToken
                 )
-              : GetProjectSubsetSolutionAsync(
+                : GetProjectSubsetSolutionAsync(
                     assetProvider,
                     solutionChecksum,
                     projectId,

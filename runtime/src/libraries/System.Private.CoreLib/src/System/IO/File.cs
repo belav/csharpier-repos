@@ -496,8 +496,8 @@ namespace System.IO
                 Path.GetFullPath(sourceFileName),
                 Path.GetFullPath(destinationFileName),
                 destinationBackupFileName != null
-                  ? Path.GetFullPath(destinationBackupFileName)
-                  : null,
+                    ? Path.GetFullPath(destinationBackupFileName)
+                    : null,
                 ignoreMetadataErrors
             );
         }
@@ -593,8 +593,8 @@ namespace System.IO
             Validate(path, encoding);
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled<string>(cancellationToken)
-              : InternalReadAllTextAsync(path, encoding, cancellationToken);
+                ? Task.FromCanceled<string>(cancellationToken)
+                : InternalReadAllTextAsync(path, encoding, cancellationToken);
         }
 
         private static async Task<string> InternalReadAllTextAsync(
@@ -692,8 +692,8 @@ namespace System.IO
 
                 returningInternalTask = true;
                 return fileLength > 0
-                  ? InternalReadAllBytesAsync(fs, (int)fileLength, cancellationToken)
-                  : InternalReadAllBytesUnknownLengthAsync(fs, cancellationToken);
+                    ? InternalReadAllBytesAsync(fs, (int)fileLength, cancellationToken)
+                    : InternalReadAllBytesUnknownLengthAsync(fs, cancellationToken);
             }
             finally
             {
@@ -792,8 +792,8 @@ namespace System.IO
                 throw new ArgumentNullException(nameof(bytes));
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : Core(path, bytes, cancellationToken);
+                ? Task.FromCanceled(cancellationToken)
+                : Core(path, bytes, cancellationToken);
 
             static async Task Core(string path, byte[] bytes, CancellationToken cancellationToken)
             {
@@ -824,8 +824,8 @@ namespace System.IO
             Validate(path, encoding);
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled<string[]>(cancellationToken)
-              : InternalReadAllLinesAsync(path, encoding, cancellationToken);
+                ? Task.FromCanceled<string[]>(cancellationToken)
+                : InternalReadAllLinesAsync(path, encoding, cancellationToken);
         }
 
         private static async Task<string[]> InternalReadAllLinesAsync(
@@ -871,8 +871,8 @@ namespace System.IO
                 throw new ArgumentNullException(nameof(contents));
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : InternalWriteAllLinesAsync(
+                ? Task.FromCanceled(cancellationToken)
+                : InternalWriteAllLinesAsync(
                     AsyncStreamWriter(path, encoding, append: false),
                     contents,
                     cancellationToken
@@ -943,8 +943,8 @@ namespace System.IO
                 throw new ArgumentNullException(nameof(contents));
 
             return cancellationToken.IsCancellationRequested
-              ? Task.FromCanceled(cancellationToken)
-              : InternalWriteAllLinesAsync(
+                ? Task.FromCanceled(cancellationToken)
+                : InternalWriteAllLinesAsync(
                     AsyncStreamWriter(path, encoding, append: true),
                     contents,
                     cancellationToken

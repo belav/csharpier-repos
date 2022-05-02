@@ -317,8 +317,8 @@ namespace System.Net.Http.Headers
         {
             Contract.Assert(nameValuePair != null);
             return nameValuePair.Length > 1
-              ? FormattingUtilities.UnquoteToken(nameValuePair[1])
-              : defaultValue;
+                ? FormattingUtilities.UnquoteToken(nameValuePair[1])
+                : defaultValue;
         }
     }
 }

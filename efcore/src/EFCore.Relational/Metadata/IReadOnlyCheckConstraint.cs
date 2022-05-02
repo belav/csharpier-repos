@@ -51,8 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var prefix = $"CK_{storeObject.Name}_";
             return Uniquifier.Truncate(
                 ModelName.StartsWith(prefix, StringComparison.Ordinal)
-                  ? ModelName
-                  : prefix + ModelName,
+                    ? ModelName
+                    : prefix + ModelName,
                 EntityType.Model.GetMaxIdentifierLength()
             );
         }

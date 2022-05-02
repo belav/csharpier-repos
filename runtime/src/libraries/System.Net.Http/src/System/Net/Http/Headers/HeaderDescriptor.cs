@@ -287,8 +287,8 @@ namespace System.Net.Http.Headers
             return
                 candidate != null
                 && ByteArrayHelpers.EqualsOrdinalAsciiIgnoreCase(candidate, contentTypeValue)
-              ? candidate
-              : null;
+                ? candidate
+                : null;
         }
 
         private static bool TryDecodeUtf8(

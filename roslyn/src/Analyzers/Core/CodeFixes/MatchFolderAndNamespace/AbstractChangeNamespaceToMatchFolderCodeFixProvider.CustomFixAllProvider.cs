@@ -31,15 +31,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes.MatchFolderAndNamespace
                 var diagnostics = fixAllContext.Scope switch
                 {
                     FixAllScope.Document when fixAllContext.Document is not null
-                      => await fixAllContext
-                          .GetDocumentDiagnosticsAsync(fixAllContext.Document)
-                          .ConfigureAwait(false),
+                        => await fixAllContext
+                            .GetDocumentDiagnosticsAsync(fixAllContext.Document)
+                            .ConfigureAwait(false),
                     FixAllScope.Project
-                      => await fixAllContext
-                          .GetAllDiagnosticsAsync(fixAllContext.Project)
-                          .ConfigureAwait(false),
+                        => await fixAllContext
+                            .GetAllDiagnosticsAsync(fixAllContext.Project)
+                            .ConfigureAwait(false),
                     FixAllScope.Solution
-                      => await GetSolutionDiagnosticsAsync(fixAllContext).ConfigureAwait(false),
+                        => await GetSolutionDiagnosticsAsync(fixAllContext).ConfigureAwait(false),
                     _ => default
                 };
 

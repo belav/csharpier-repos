@@ -24,7 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 {
     internal class InheritanceMarginViewMargin
         : ForegroundThreadAffinitizedObject,
-          IWpfTextViewMargin
+            IWpfTextViewMargin
     {
         // 16 (width of the crisp image) + 2 * 1 (width of the border) = 18
         private const double HeightAndWidthOfMargin = 18;

@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     internal sealed class RemoteGlobalNotificationDeliveryService
         : BrokeredServiceBase,
-          IRemoteGlobalNotificationDeliveryService
+            IRemoteGlobalNotificationDeliveryService
     {
         internal sealed class Factory : FactoryBase<IRemoteGlobalNotificationDeliveryService>
         {

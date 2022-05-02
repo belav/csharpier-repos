@@ -335,9 +335,9 @@ namespace System.Threading.Tasks.Dataflow
             // We can eliminate that call for direct ActionBlock usage by providing the same method as an instance method.
 
             return _defaultTarget != null
-              ? _defaultTarget.OfferMessage(Common.SingleMessageHeader, item, null, false)
-                == DataflowMessageStatus.Accepted
-              : _spscTarget!.Post(item);
+                ? _defaultTarget.OfferMessage(Common.SingleMessageHeader, item, null, false)
+                    == DataflowMessageStatus.Accepted
+                : _spscTarget!.Post(item);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
@@ -349,8 +349,8 @@ namespace System.Threading.Tasks.Dataflow
         )
         {
             return _defaultTarget != null
-              ? _defaultTarget.OfferMessage(messageHeader, messageValue, source, consumeToAccept)
-              : _spscTarget!.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
+                ? _defaultTarget.OfferMessage(messageHeader, messageValue, source, consumeToAccept)
+                : _spscTarget!.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="InputCount"]/*' />
@@ -368,8 +368,8 @@ namespace System.Threading.Tasks.Dataflow
             get
             {
                 return _defaultTarget != null
-                  ? _defaultTarget.GetDebuggingInformation().InputCount
-                  : _spscTarget!.InputCount;
+                    ? _defaultTarget.GetDebuggingInformation().InputCount
+                    : _spscTarget!.InputCount;
             }
         }
 
@@ -379,8 +379,8 @@ namespace System.Threading.Tasks.Dataflow
             return Common.GetNameForDebugger(
                 this,
                 _defaultTarget != null
-                  ? _defaultTarget.DataflowBlockOptions
-                  : _spscTarget!.DataflowBlockOptions
+                    ? _defaultTarget.DataflowBlockOptions
+                    : _spscTarget!.DataflowBlockOptions
             );
         }
 
@@ -431,8 +431,8 @@ namespace System.Threading.Tasks.Dataflow
                 get
                 {
                     return _defaultDebugInfo != null
-                      ? _defaultDebugInfo.InputQueue
-                      : _spscDebugInfo!.InputQueue;
+                        ? _defaultDebugInfo.InputQueue
+                        : _spscDebugInfo!.InputQueue;
                 }
             }
 
@@ -451,8 +451,8 @@ namespace System.Threading.Tasks.Dataflow
                 get
                 {
                     return _defaultDebugInfo != null
-                      ? _defaultDebugInfo.CurrentDegreeOfParallelism
-                      : _spscDebugInfo!.CurrentDegreeOfParallelism;
+                        ? _defaultDebugInfo.CurrentDegreeOfParallelism
+                        : _spscDebugInfo!.CurrentDegreeOfParallelism;
                 }
             }
 
@@ -462,8 +462,8 @@ namespace System.Threading.Tasks.Dataflow
                 get
                 {
                     return _defaultDebugInfo != null
-                      ? _defaultDebugInfo.DataflowBlockOptions
-                      : _spscDebugInfo!.DataflowBlockOptions;
+                        ? _defaultDebugInfo.DataflowBlockOptions
+                        : _spscDebugInfo!.DataflowBlockOptions;
                 }
             }
 
@@ -473,8 +473,8 @@ namespace System.Threading.Tasks.Dataflow
                 get
                 {
                     return _defaultDebugInfo != null
-                      ? _defaultDebugInfo.IsDecliningPermanently
-                      : _spscDebugInfo!.IsDecliningPermanently;
+                        ? _defaultDebugInfo.IsDecliningPermanently
+                        : _spscDebugInfo!.IsDecliningPermanently;
                 }
             }
 
@@ -484,8 +484,8 @@ namespace System.Threading.Tasks.Dataflow
                 get
                 {
                     return _defaultDebugInfo != null
-                      ? _defaultDebugInfo.IsCompleted
-                      : _spscDebugInfo!.IsCompleted;
+                        ? _defaultDebugInfo.IsCompleted
+                        : _spscDebugInfo!.IsCompleted;
                 }
             }
 

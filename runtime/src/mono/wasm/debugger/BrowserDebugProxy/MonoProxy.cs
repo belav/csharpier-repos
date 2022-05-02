@@ -1399,8 +1399,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
                 var assembly_data = Convert.FromBase64String(assembly_b64);
                 var pdb_data = string.IsNullOrEmpty(pdb_b64)
-                  ? null
-                  : Convert.FromBase64String(pdb_b64);
+                    ? null
+                    : Convert.FromBase64String(pdb_b64);
 
                 var context = GetContext(sessionId);
                 foreach (var source in store.Add(sessionId, assembly_data, pdb_data))

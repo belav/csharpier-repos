@@ -368,8 +368,8 @@ namespace {lc.Namespace}
                 string level = GetLogLevel(lm);
                 string extension = (lm.IsExtensionMethod ? "this " : string.Empty);
                 string eventName = string.IsNullOrWhiteSpace(lm.EventName)
-                  ? $"nameof({lm.Name})"
-                  : $"\"{lm.EventName}\"";
+                    ? $"nameof({lm.Name})"
+                    : $"\"{lm.EventName}\"";
                 string exceptionArg = GetException(lm);
                 string logger = GetLogger(lm);
 

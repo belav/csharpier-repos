@@ -1065,7 +1065,7 @@ namespace System.Text.Json.Serialization.Tests
 
         private class RefCountedDictionary<TKey, TValue>
             : Dictionary<TKey, TValue>,
-              IEnumerable<KeyValuePair<TKey, TValue>> //  Reimplement interface.
+                IEnumerable<KeyValuePair<TKey, TValue>> //  Reimplement interface.
         {
             public RefCountedDictionary() : base() { }
 

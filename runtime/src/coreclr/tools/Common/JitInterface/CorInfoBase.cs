@@ -170,8 +170,8 @@ namespace Internal.JitInterface
                     exactCalleeHnd,
                     fIsTailPrefix != 0
                 )
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {
@@ -509,8 +509,8 @@ namespace Internal.JitInterface
                     delegateCls,
                     ref *pfIsOpenDelegate
                 )
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {
@@ -1209,8 +1209,8 @@ namespace Internal.JitInterface
             try
             {
                 return _this.checkMethodModifier(hMethod, modifier, fOptional != 0)
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {
@@ -1374,8 +1374,8 @@ namespace Internal.JitInterface
                     id,
                     ref *pLookup
                 )
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {
@@ -2370,8 +2370,8 @@ namespace Internal.JitInterface
                     structHnd,
                     structPassInRegDescPtr
                 )
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {
@@ -3070,8 +3070,8 @@ namespace Internal.JitInterface
             try
             {
                 return _this.getTailCallHelpers(ref *callToken, sig, flags, ref *pResult)
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {
@@ -3092,8 +3092,8 @@ namespace Internal.JitInterface
             try
             {
                 return _this.convertPInvokeCalliToCall(ref *pResolvedToken, mustConvert != 0)
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {
@@ -3114,8 +3114,8 @@ namespace Internal.JitInterface
             try
             {
                 return _this.notifyInstructionSetUsage(instructionSet, supportEnabled != 0)
-                  ? (byte)1
-                  : (byte)0;
+                    ? (byte)1
+                    : (byte)0;
             }
             catch (Exception ex)
             {

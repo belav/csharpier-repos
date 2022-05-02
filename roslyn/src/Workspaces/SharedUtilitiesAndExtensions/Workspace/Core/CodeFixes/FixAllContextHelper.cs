@@ -182,24 +182,24 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             return fixAllScope switch
             {
                 FixAllScope.Custom
-                  => string.Format(WorkspaceExtensionsResources.Fix_all_0, diagnosticId),
+                    => string.Format(WorkspaceExtensionsResources.Fix_all_0, diagnosticId),
                 FixAllScope.Document
-                  => string.Format(
-                      WorkspaceExtensionsResources.Fix_all_0_in_1,
-                      diagnosticId,
-                      triggerDocument!.Name
-                  ),
+                    => string.Format(
+                        WorkspaceExtensionsResources.Fix_all_0_in_1,
+                        diagnosticId,
+                        triggerDocument!.Name
+                    ),
                 FixAllScope.Project
-                  => string.Format(
-                      WorkspaceExtensionsResources.Fix_all_0_in_1,
-                      diagnosticId,
-                      triggerProject.Name
-                  ),
+                    => string.Format(
+                        WorkspaceExtensionsResources.Fix_all_0_in_1,
+                        diagnosticId,
+                        triggerProject.Name
+                    ),
                 FixAllScope.Solution
-                  => string.Format(
-                      WorkspaceExtensionsResources.Fix_all_0_in_Solution,
-                      diagnosticId
-                  ),
+                    => string.Format(
+                        WorkspaceExtensionsResources.Fix_all_0_in_Solution,
+                        diagnosticId
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(fixAllScope),
             };
         }

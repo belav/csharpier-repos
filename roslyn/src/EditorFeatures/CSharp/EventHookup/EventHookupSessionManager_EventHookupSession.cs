@@ -369,8 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                     ) as BaseTypeDeclarationSyntax;
 
                 return typeDeclaration != null
-                  ? typeDeclaration.Identifier.Text
-                  : eventSymbol.ContainingType.Name;
+                    ? typeDeclaration.Identifier.Text
+                    : eventSymbol.ContainingType.Name;
             }
         }
     }

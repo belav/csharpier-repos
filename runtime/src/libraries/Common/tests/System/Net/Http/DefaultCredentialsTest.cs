@@ -45,8 +45,8 @@ namespace System.Net.Http.Functional.Tests
         );
         private static Uri s_authenticatedServer = DomainJoinedTestsEnabled
             ? new Uri(
-                  $"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/negotiate/showidentity.ashx"
-              )
+                $"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/negotiate/showidentity.ashx"
+            )
             : null;
 
         public DefaultCredentialsTest(ITestOutputHelper output) : base(output) { }

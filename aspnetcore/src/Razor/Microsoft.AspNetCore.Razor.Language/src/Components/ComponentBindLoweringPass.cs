@@ -519,8 +519,8 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
                     PropertyName = expressionAttribute.GetPropertyName(),
                     TagHelper = node.TagHelper,
                     TypeName = expressionAttribute.IsWeaklyTyped()
-                      ? null
-                      : expressionAttribute.TypeName,
+                        ? null
+                        : expressionAttribute.TypeName,
                 };
 
                 expressionNode.Children.Clear();
@@ -535,8 +535,8 @@ internal class ComponentBindLoweringPass : ComponentIntermediateNodePassBase, IR
             }
 
             return expressionNode == null
-              ? new[] { valueNode, changeNode }
-              : new[] { valueNode, changeNode, expressionNode };
+                ? new[] { valueNode, changeNode }
+                : new[] { valueNode, changeNode, expressionNode };
         }
     }
 

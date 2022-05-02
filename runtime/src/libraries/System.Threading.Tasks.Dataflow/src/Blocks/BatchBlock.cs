@@ -25,8 +25,8 @@ namespace System.Threading.Tasks.Dataflow
     [DebuggerTypeProxy(typeof(BatchBlock<>.DebugView))]
     public sealed class BatchBlock<T>
         : IPropagatorBlock<T, T[]>,
-          IReceivableSourceBlock<T[]>,
-          IDebuggerDisplay
+            IReceivableSourceBlock<T[]>,
+            IDebuggerDisplay
     {
         /// <summary>The target half of this batch.</summary>
         private readonly BatchBlockTargetCore _target;
@@ -749,8 +749,8 @@ namespace System.Threading.Tasks.Dataflow
                     Common.ContractAssertMonitorStatus(IncomingLock, held: true);
 
                     return _boundingState != null
-                      ? _dataflowBlockOptions.BoundedCapacity - _boundingState.CurrentCount
-                      : _batchSize;
+                        ? _dataflowBlockOptions.BoundedCapacity - _boundingState.CurrentCount
+                        : _batchSize;
                 }
             }
 
@@ -1124,8 +1124,8 @@ namespace System.Threading.Tasks.Dataflow
                     poppedInitially = postponed.PopRange(postponedTemp, 0, _batchSize);
                     Debug.Assert(
                         allowFewerThanBatchSize
-                          ? poppedInitially > 0
-                          : poppedInitially == _batchSize,
+                            ? poppedInitially > 0
+                            : poppedInitially == _batchSize,
                         "We received fewer than we expected based on the previous check."
                     );
                 } // Release the lock.  We must not hold it while calling Reserve/Consume/Release.
@@ -1707,8 +1707,8 @@ namespace System.Threading.Tasks.Dataflow
                     get
                     {
                         return _target._nonGreedyState != null
-                          ? _target._nonGreedyState.TaskForInputProcessing
-                          : null;
+                            ? _target._nonGreedyState.TaskForInputProcessing
+                            : null;
                     }
                 }
 
@@ -1718,8 +1718,8 @@ namespace System.Threading.Tasks.Dataflow
                     get
                     {
                         return _target._nonGreedyState != null
-                          ? _target._nonGreedyState.PostponedMessages
-                          : null;
+                            ? _target._nonGreedyState.PostponedMessages
+                            : null;
                     }
                 }
 

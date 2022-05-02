@@ -16,7 +16,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class InternalCheckConstraintBuilder
         : AnnotatableBuilder<CheckConstraint, IConventionModelBuilder>,
-          IConventionCheckConstraintBuilder
+            IConventionCheckConstraintBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -213,8 +213,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasName(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -223,8 +223,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetName(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

@@ -404,9 +404,9 @@ namespace System
                     throw (value is null)
                         ? new ArgumentNullException(nameof(value))
                         : new ArgumentException(
-                              SR.NotSupported_StringComparison,
-                              nameof(comparisonType)
-                          );
+                            SR.NotSupported_StringComparison,
+                            nameof(comparisonType)
+                        );
             }
         }
 
@@ -610,9 +610,9 @@ namespace System
                     throw (value is null)
                         ? new ArgumentNullException(nameof(value))
                         : new ArgumentException(
-                              SR.NotSupported_StringComparison,
-                              nameof(comparisonType)
-                          );
+                            SR.NotSupported_StringComparison,
+                            nameof(comparisonType)
+                        );
             }
         }
 

@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
     [BracePair(LessAndGreaterThan.OpenCharacter, LessAndGreaterThan.CloseCharacter)]
     internal partial class BraceCompletionSessionProvider
         : ForegroundThreadAffinitizedObject,
-          IBraceCompletionSessionProvider
+            IBraceCompletionSessionProvider
     {
         private readonly ITextBufferUndoManagerProvider _undoManager;
         private readonly IEditorOperationsFactoryService _editorOperationsFactoryService;

@@ -31,7 +31,7 @@ namespace AutoMapper.UnitTests.Bug
 
         public class DualConverter
             : ITypeConverter<SourceFoo, DestinationFoo>,
-              ITypeConverter<SourceBar, DestinationBar>
+                ITypeConverter<SourceBar, DestinationBar>
         {
             public DestinationFoo Convert(
                 SourceFoo source,

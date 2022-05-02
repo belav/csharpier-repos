@@ -159,8 +159,8 @@ namespace System.Runtime.Serialization
                     (UnderlyingType == null)
                         ? null
                         : UnderlyingType
-                          .GetCustomAttributes(Globals.TypeOfXmlRootAttribute, false)
-                          .ToArray();
+                            .GetCustomAttributes(Globals.TypeOfXmlRootAttribute, false)
+                            .ToArray();
                 if (xmlRootAttributes == null || xmlRootAttributes.Length == 0)
                 {
                     if (hasRoot)

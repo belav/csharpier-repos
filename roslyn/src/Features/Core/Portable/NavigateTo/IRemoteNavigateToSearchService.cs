@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
     [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteNavigateToSearchService)), Shared]
     internal sealed class NavigateToSearchServiceServerCallbackDispatcher
         : RemoteServiceCallbackDispatcher,
-          IRemoteNavigateToSearchService.ICallback
+            IRemoteNavigateToSearchService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

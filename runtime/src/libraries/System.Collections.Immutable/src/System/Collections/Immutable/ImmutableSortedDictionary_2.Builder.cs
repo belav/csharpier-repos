@@ -28,8 +28,8 @@ namespace System.Collections.Immutable
         [DebuggerTypeProxy(typeof(ImmutableSortedDictionaryBuilderDebuggerProxy<,>))]
         public sealed class Builder
             : IDictionary<TKey, TValue>,
-              IReadOnlyDictionary<TKey, TValue>,
-              IDictionary
+                IReadOnlyDictionary<TKey, TValue>,
+                IDictionary
         {
             /// <summary>
             /// The binary tree used to store the contents of the map.  Contents are typically not entirely frozen.

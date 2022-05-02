@@ -164,11 +164,11 @@ namespace Microsoft.Interop
         MarshallingInfo ElementMarshallingInfo
     )
         : NativeMarshallingAttributeInfo(
-              NativeMarshallingType,
-              ValuePropertyType,
-              MarshallingFeatures,
-              UseDefaultMarshalling
-          );
+            NativeMarshallingType,
+            ValuePropertyType,
+            MarshallingFeatures,
+            UseDefaultMarshalling
+        );
 
     public sealed class MarshallingAttributeInfoParser
     {
@@ -373,8 +373,8 @@ namespace Microsoft.Interop
                 )
                 {
                     return type.IsConsideredBlittable()
-                      ? new BlittableTypeAttributeInfo()
-                      : new GeneratedNativeMarshallingAttributeInfo(
+                        ? new BlittableTypeAttributeInfo()
+                        : new GeneratedNativeMarshallingAttributeInfo(
                             null! /* TODO: determine naming convention */
                         );
                 }
@@ -765,8 +765,8 @@ namespace Microsoft.Interop
             return new NativeContiguousCollectionMarshallingInfo(
                 NativeMarshallingType: ManagedTypeInfo.CreateTypeInfoForTypeSymbol(arrayMarshaller),
                 ValuePropertyType: valuePropertyType is not null
-                  ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valuePropertyType)
-                  : null,
+                    ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valuePropertyType)
+                    : null,
                 MarshallingFeatures: ~CustomMarshallingFeatures.ManagedTypePinning,
                 UseDefaultMarshalling: true,
                 ElementCountInfo: arraySizeInfo,
@@ -921,8 +921,8 @@ namespace Microsoft.Interop
                 _diagnostics.ReportInvalidMarshallingAttributeInfo(
                     attrData,
                     isContiguousCollectionMarshaller
-                      ? nameof(Resources.CollectionNativeTypeMustHaveRequiredShapeMessage)
-                      : nameof(Resources.NativeTypeMustHaveRequiredShapeMessage),
+                        ? nameof(Resources.CollectionNativeTypeMustHaveRequiredShapeMessage)
+                        : nameof(Resources.NativeTypeMustHaveRequiredShapeMessage),
                     nativeType.ToDisplayString()
                 );
                 return NoMarshallingInfo.Instance;
@@ -973,8 +973,8 @@ namespace Microsoft.Interop
                 return new NativeContiguousCollectionMarshallingInfo(
                     ManagedTypeInfo.CreateTypeInfoForTypeSymbol(nativeType),
                     valueProperty is not null
-                      ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valueProperty.Type)
-                      : null,
+                        ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valueProperty.Type)
+                        : null,
                     features,
                     UseDefaultMarshalling: !isMarshalUsingAttribute,
                     parsedCountInfo,
@@ -992,8 +992,8 @@ namespace Microsoft.Interop
             return new NativeMarshallingAttributeInfo(
                 ManagedTypeInfo.CreateTypeInfoForTypeSymbol(nativeType),
                 valueProperty is not null
-                  ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valueProperty.Type)
-                  : null,
+                    ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valueProperty.Type)
+                    : null,
                 features,
                 UseDefaultMarshalling: !isMarshalUsingAttribute
             );
@@ -1086,8 +1086,8 @@ namespace Microsoft.Interop
                         arrayMarshaller
                     ),
                     ValuePropertyType: valuePropertyType is not null
-                      ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valuePropertyType)
-                      : null,
+                        ? ManagedTypeInfo.CreateTypeInfoForTypeSymbol(valuePropertyType)
+                        : null,
                     MarshallingFeatures: ~CustomMarshallingFeatures.ManagedTypePinning,
                     UseDefaultMarshalling: true,
                     ElementCountInfo: parsedCountInfo,

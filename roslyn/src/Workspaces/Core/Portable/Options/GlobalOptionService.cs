@@ -530,12 +530,12 @@ namespace Microsoft.CodeAnalysis.Options
             {
                 null => throw new ArgumentNullException(nameof(optionSet)),
                 SerializableOptionSet serializableOptionSet
-                  => serializableOptionSet.GetChangedOptions(),
+                    => serializableOptionSet.GetChangedOptions(),
                 _
-                  => throw new ArgumentException(
-                      WorkspacesResources.Options_did_not_come_from_specified_Solution,
-                      paramName: nameof(optionSet)
-                  )
+                    => throw new ArgumentException(
+                        WorkspacesResources.Options_did_not_come_from_specified_Solution,
+                        paramName: nameof(optionSet)
+                    )
             };
 
             var changedOptions = new List<OptionChangedEventArgs>();

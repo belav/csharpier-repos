@@ -108,8 +108,8 @@ namespace System.Net.Sockets
             get
             {
                 return _serverSocket != null
-                  ? _serverSocket.ExclusiveAddressUse
-                  : _exclusiveAddressUse;
+                    ? _serverSocket.ExclusiveAddressUse
+                    : _exclusiveAddressUse;
             }
             set
             {

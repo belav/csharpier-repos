@@ -17,9 +17,9 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 )]
 public abstract class ExceptionFilterAttribute
     : Attribute,
-      IAsyncExceptionFilter,
-      IExceptionFilter,
-      IOrderedFilter
+        IAsyncExceptionFilter,
+        IExceptionFilter,
+        IOrderedFilter
 {
     /// <inheritdoc />
     public int Order { get; set; }

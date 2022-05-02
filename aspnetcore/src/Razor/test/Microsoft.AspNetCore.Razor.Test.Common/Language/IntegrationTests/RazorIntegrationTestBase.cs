@@ -69,8 +69,8 @@ public class RazorIntegrationTestBase
         FileSystem = new VirtualRazorProjectFileSystem();
         PathSeparator = Path.DirectorySeparatorChar.ToString();
         WorkingDirectory = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-          ? ArbitraryWindowsPath
-          : ArbitraryMacLinuxPath;
+            ? ArbitraryWindowsPath
+            : ArbitraryMacLinuxPath;
 
         DefaultRootNamespace = "Test"; // Matches the default working directory
         DefaultFileName = "TestComponent.cshtml";

@@ -260,13 +260,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             var handlesExpressions = useHandlesClause
                 ? ImmutableArray.Create(
-                      syntaxFactory.MemberAccessExpression(
-                          objectName != null
+                    syntaxFactory.MemberAccessExpression(
+                        objectName != null
                             ? syntaxFactory.IdentifierName(objectName)
                             : syntaxFactory.ThisExpression(),
-                          syntaxFactory.IdentifierName(nameOfEvent)
-                      )
-                  )
+                        syntaxFactory.IdentifierName(nameOfEvent)
+                    )
+                )
                 : default;
 
             var invokeMethod = ((INamedTypeSymbol)eventType).DelegateInvokeMethod;
@@ -449,10 +449,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             var allMembers =
                 codeMemberType == CODEMEMBERTYPE.CODEMEMBERTYPE_EVENTS
                     ? semanticModel.LookupSymbols(
-                          position: type.Locations[0].SourceSpan.Start,
-                          container: type,
-                          name: null
-                      )
+                        position: type.Locations[0].SourceSpan.Start,
+                        container: type,
+                        name: null
+                    )
                     : type.GetMembers();
 
             var members = allMembers.Where(m => IncludeMember(m, codeMemberType, compilation));

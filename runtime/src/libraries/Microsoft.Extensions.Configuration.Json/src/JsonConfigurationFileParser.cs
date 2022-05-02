@@ -106,8 +106,8 @@ namespace Microsoft.Extensions.Configuration.Json
         private void EnterContext(string context) =>
             _paths.Push(
                 _paths.Count > 0
-                  ? _paths.Peek() + ConfigurationPath.KeyDelimiter + context
-                  : context
+                    ? _paths.Peek() + ConfigurationPath.KeyDelimiter + context
+                    : context
             );
 
         private void ExitContext() => _paths.Pop();

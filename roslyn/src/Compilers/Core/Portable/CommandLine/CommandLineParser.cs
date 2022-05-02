@@ -1468,8 +1468,8 @@ namespace Microsoft.CodeAnalysis
             string pattern = PathUtilities.GetFileName(path);
 
             var resolvedDirectoryPath = string.IsNullOrEmpty(directory)
-              ? baseDirectory
-              : FileUtilities.ResolveRelativePath(directory, baseDirectory);
+                ? baseDirectory
+                : FileUtilities.ResolveRelativePath(directory, baseDirectory);
 
             IEnumerator<string>? enumerator = null;
             try

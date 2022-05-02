@@ -42,7 +42,7 @@ namespace System.Formats.Cbor
                 value.Offset == TimeSpan.Zero
                     ? value.UtcDateTime.ToString(Rfc3339FormatString)
                     : // prefer 'Z' over '+00:00'
-                      value.ToString(Rfc3339FormatString);
+                    value.ToString(Rfc3339FormatString);
 
             WriteTag(CborTag.DateTimeString);
             WriteTextString(dateString);

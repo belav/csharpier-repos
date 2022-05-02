@@ -80,8 +80,8 @@ namespace Wasm.Build.Tests
                 buildArgs,
                 projectTemplate: s_resourcesProjectTemplate,
                 extraProperties: nativeRelink
-                  ? $"<WasmBuildNative>true</WasmBuildNative>"
-                  : string.Empty
+                    ? $"<WasmBuildNative>true</WasmBuildNative>"
+                    : string.Empty
             );
 
             BuildProject(

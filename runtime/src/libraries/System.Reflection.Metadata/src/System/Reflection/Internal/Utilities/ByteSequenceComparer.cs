@@ -10,7 +10,7 @@ namespace System.Reflection.Internal
 {
     internal sealed class ByteSequenceComparer
         : IEqualityComparer<byte[]>,
-          IEqualityComparer<ImmutableArray<byte>>
+            IEqualityComparer<ImmutableArray<byte>>
     {
         internal static readonly ByteSequenceComparer Instance = new ByteSequenceComparer();
 

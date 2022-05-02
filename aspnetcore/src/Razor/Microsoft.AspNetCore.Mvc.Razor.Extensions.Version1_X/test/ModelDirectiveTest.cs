@@ -318,7 +318,7 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 
     private class DesignTimeOptionsFeature
         : IConfigureRazorParserOptionsFeature,
-          IConfigureRazorCodeGenerationOptionsFeature
+            IConfigureRazorCodeGenerationOptionsFeature
     {
         private readonly bool _designTime;
 

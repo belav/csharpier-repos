@@ -210,10 +210,10 @@ namespace System.Text.RegularExpressions.Symbolic
                         99 => _categorizer.WhiteSpaceCondition, // whitespace has special code 99
                         < 0
                         or > 29
-                          => throw new ArgumentOutOfRangeException(
-                              nameof(code),
-                              "Must be in the range 0..29 or equal to 99"
-                          ), // TODO-NONBACKTRACKING: Remove message or put it into the .resx
+                            => throw new ArgumentOutOfRangeException(
+                                nameof(code),
+                                "Must be in the range 0..29 or equal to 99"
+                            ), // TODO-NONBACKTRACKING: Remove message or put it into the .resx
                         _ => _categorizer.CategoryCondition(code)
                     };
             }
@@ -382,7 +382,7 @@ namespace System.Text.RegularExpressions.Symbolic
                                 or RegexNode.Setloopatomic
                                 or RegexNode.Oneloopatomic
                                 or RegexNode.Notoneloopatomic
-                                  => SR.ExpressionDescription_AtomicSubexpressions,
+                                    => SR.ExpressionDescription_AtomicSubexpressions,
                                 _ => UnexpectedNodeType(node)
                             }
                         )

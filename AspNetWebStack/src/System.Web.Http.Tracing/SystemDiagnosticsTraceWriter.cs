@@ -255,8 +255,8 @@ namespace System.Web.Http.Tracing
                 messages.Add(
                     Error.Format(
                         (traceRecord.Kind == TraceKind.Begin)
-                          ? SRResources.TimeRequestFormat
-                          : SRResources.TimeResponseFormat,
+                            ? SRResources.TimeRequestFormat
+                            : SRResources.TimeResponseFormat,
                         FormatDateTime(traceRecord.Timestamp)
                     )
                 );
@@ -265,8 +265,8 @@ namespace System.Web.Http.Tracing
             {
                 messages.Add(
                     (traceRecord.Kind == TraceKind.Begin)
-                      ? SRResources.ShortRequestFormat
-                      : SRResources.ShortResponseFormat
+                        ? SRResources.ShortRequestFormat
+                        : SRResources.ShortResponseFormat
                 );
             }
 

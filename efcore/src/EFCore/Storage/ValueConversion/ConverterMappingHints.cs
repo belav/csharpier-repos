@@ -55,12 +55,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             hints == null
                 ? this
                 : new ConverterMappingHints(
-                      hints.Size ?? Size,
-                      hints.Precision ?? Precision,
-                      hints.Scale ?? Scale,
-                      hints.IsUnicode ?? IsUnicode,
-                      hints.ValueGeneratorFactory ?? ValueGeneratorFactory
-                  );
+                    hints.Size ?? Size,
+                    hints.Precision ?? Precision,
+                    hints.Scale ?? Scale,
+                    hints.IsUnicode ?? IsUnicode,
+                    hints.ValueGeneratorFactory ?? ValueGeneratorFactory
+                );
 
         /// <summary>
         ///     The suggested size of the mapped data type.

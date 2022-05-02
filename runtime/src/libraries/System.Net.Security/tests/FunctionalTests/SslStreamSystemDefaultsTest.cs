@@ -342,20 +342,20 @@ namespace System.Net.Security.Tests
                 (callback, state) =>
                     protocols.HasValue
                         ? _clientStream.BeginAuthenticateAsClient(
-                              targetHost,
-                              clientCertificates,
-                              protocols.Value,
-                              checkCertificateRevocation,
-                              callback,
-                              state
-                          )
+                            targetHost,
+                            clientCertificates,
+                            protocols.Value,
+                            checkCertificateRevocation,
+                            callback,
+                            state
+                        )
                         : _clientStream.BeginAuthenticateAsClient(
-                              targetHost,
-                              clientCertificates,
-                              checkCertificateRevocation,
-                              callback,
-                              state
-                          ),
+                            targetHost,
+                            clientCertificates,
+                            checkCertificateRevocation,
+                            callback,
+                            state
+                        ),
                 _clientStream.EndAuthenticateAsClient,
                 state: null
             );
@@ -370,20 +370,20 @@ namespace System.Net.Security.Tests
                 (callback, state) =>
                     protocols.HasValue
                         ? _serverStream.BeginAuthenticateAsServer(
-                              serverCertificate,
-                              clientCertificateRequired,
-                              protocols.Value,
-                              checkCertificateRevocation,
-                              callback,
-                              state
-                          )
+                            serverCertificate,
+                            clientCertificateRequired,
+                            protocols.Value,
+                            checkCertificateRevocation,
+                            callback,
+                            state
+                        )
                         : _serverStream.BeginAuthenticateAsServer(
-                              serverCertificate,
-                              clientCertificateRequired,
-                              checkCertificateRevocation,
-                              callback,
-                              state
-                          ),
+                            serverCertificate,
+                            clientCertificateRequired,
+                            checkCertificateRevocation,
+                            callback,
+                            state
+                        ),
                 _serverStream.EndAuthenticateAsServer,
                 state: null
             );
@@ -399,16 +399,16 @@ namespace System.Net.Security.Tests
         ) =>
             protocols.HasValue
                 ? _clientStream.AuthenticateAsClientAsync(
-                      targetHost,
-                      clientCertificates,
-                      protocols.Value,
-                      checkCertificateRevocation
-                  )
+                    targetHost,
+                    clientCertificates,
+                    protocols.Value,
+                    checkCertificateRevocation
+                )
                 : _clientStream.AuthenticateAsClientAsync(
-                      targetHost,
-                      clientCertificates,
-                      checkCertificateRevocation
-                  );
+                    targetHost,
+                    clientCertificates,
+                    checkCertificateRevocation
+                );
 
         protected override Task AuthenticateServerAsync(
             X509Certificate serverCertificate,
@@ -418,15 +418,15 @@ namespace System.Net.Security.Tests
         ) =>
             protocols.HasValue
                 ? _serverStream.AuthenticateAsServerAsync(
-                      serverCertificate,
-                      clientCertificateRequired,
-                      protocols.Value,
-                      checkCertificateRevocation
-                  )
+                    serverCertificate,
+                    clientCertificateRequired,
+                    protocols.Value,
+                    checkCertificateRevocation
+                )
                 : _serverStream.AuthenticateAsServerAsync(
-                      serverCertificate,
-                      clientCertificateRequired,
-                      checkCertificateRevocation
-                  );
+                    serverCertificate,
+                    clientCertificateRequired,
+                    checkCertificateRevocation
+                );
     }
 }

@@ -212,10 +212,10 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             var subNamespace = SubnamespaceFromOutputPath(_projectDir, directoryPath);
             return string.IsNullOrEmpty(subNamespace)
-              ? _rootNamespace
-              : string.IsNullOrEmpty(_rootNamespace)
-                  ? subNamespace
-                  : _rootNamespace + "." + subNamespace;
+                ? _rootNamespace
+                : string.IsNullOrEmpty(_rootNamespace)
+                    ? subNamespace
+                    : _rootNamespace + "." + subNamespace;
         }
 
         // if outputDir is a subfolder of projectDir, then use each subfolder as a subnamespace
@@ -231,14 +231,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var subPath = outputDir.Substring(projectDir.Length);
 
             return !string.IsNullOrWhiteSpace(subPath)
-              ? string.Join(
+                ? string.Join(
                     ".",
                     subPath.Split(
                         new[] { Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar },
                         StringSplitOptions.RemoveEmptyEntries
                     )
                 )
-              : null;
+                : null;
         }
 
         /// <summary>
@@ -436,8 +436,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             var factoryInterface = typeof(IDbContextFactory<>).MakeGenericType(contextType);
             var service = appServices.GetService(factoryInterface);
             return service == null
-              ? null
-              : () =>
+                ? null
+                : () =>
                     (DbContext)
                         factoryInterface
                             .GetMethod(nameof(IDbContextFactory<DbContext>.CreateDbContext))!
@@ -453,8 +453,8 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
                 .GetConstructibleTypes()
                 .FirstOrDefault(t => factoryInterface.IsAssignableFrom(t));
             return factory == null
-              ? null
-              : (() => CreateContextFromFactory(factory.AsType(), contextType));
+                ? null
+                : (() => CreateContextFromFactory(factory.AsType(), contextType));
         }
 
         private DbContext CreateContextFromFactory(Type factory, Type contextType)

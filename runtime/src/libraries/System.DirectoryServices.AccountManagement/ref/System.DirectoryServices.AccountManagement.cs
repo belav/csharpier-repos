@@ -759,9 +759,9 @@ namespace System.DirectoryServices.AccountManagement
 
     public partial class PrincipalCollection
         : System.Collections.Generic.ICollection<System.DirectoryServices.AccountManagement.Principal>,
-          System.Collections.Generic.IEnumerable<System.DirectoryServices.AccountManagement.Principal>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.Generic.IEnumerable<System.DirectoryServices.AccountManagement.Principal>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable
     {
         internal PrincipalCollection() { }
 
@@ -1113,8 +1113,8 @@ namespace System.DirectoryServices.AccountManagement
 
     public partial class PrincipalSearchResult<T>
         : System.Collections.Generic.IEnumerable<T>,
-          System.Collections.IEnumerable,
-          System.IDisposable
+            System.Collections.IEnumerable,
+            System.IDisposable
     {
         internal PrincipalSearchResult() { }
 
@@ -1196,11 +1196,11 @@ namespace System.DirectoryServices.AccountManagement
 
     public partial class PrincipalValueCollection<T>
         : System.Collections.Generic.ICollection<T>,
-          System.Collections.Generic.IEnumerable<T>,
-          System.Collections.Generic.IList<T>,
-          System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Collections.IList
+            System.Collections.Generic.IEnumerable<T>,
+            System.Collections.Generic.IList<T>,
+            System.Collections.ICollection,
+            System.Collections.IEnumerable,
+            System.Collections.IList
     {
         internal PrincipalValueCollection() { }
 

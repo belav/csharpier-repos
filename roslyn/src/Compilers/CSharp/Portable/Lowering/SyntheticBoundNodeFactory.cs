@@ -124,8 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 args,
                 diagnostics,
                 typeArgs: typeArgs.IsDefault
-                  ? default(ImmutableArray<TypeWithAnnotations>)
-                  : typeArgs.SelectAsArray(t => TypeWithAnnotations.Create(t)),
+                    ? default(ImmutableArray<TypeWithAnnotations>)
+                    : typeArgs.SelectAsArray(t => TypeWithAnnotations.Create(t)),
                 allowFieldsAndProperties: false,
                 allowUnexpandedForm: allowUnexpandedForm
             );
@@ -1455,8 +1455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(result.Type is { });
             return locals.IsDefaultOrEmpty && sideEffects.IsDefaultOrEmpty
-              ? result
-              : new BoundSequence(Syntax, locals, sideEffects, result, result.Type)
+                ? result
+                : new BoundSequence(Syntax, locals, sideEffects, result, result.Type)
                 {
                     WasCompilerGenerated = true
                 };
@@ -1749,13 +1749,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 WasCompilerGenerated = true
             };
             return type.IsPointerOrFunctionPointer()
-              ? BoundConversion.SynthesizedNonUserDefined(
+                ? BoundConversion.SynthesizedNonUserDefined(
                     syntax,
                     nullLiteral,
                     Conversion.NullToPointer,
                     type
                 )
-              : nullLiteral;
+                : nullLiteral;
         }
 
         public BoundTypeExpression Type(TypeSymbol type)
@@ -1946,8 +1946,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return WellKnownMethod(
                 (methodContainer.AllTypeArgumentCount() == 0 && !methodContainer.IsAnonymousType)
-                  ? CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle
-                  : CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle2
+                    ? CodeAnalysis.WellKnownMember.System_Reflection_MethodBase__GetMethodFromHandle
+                    : CodeAnalysis
+                        .WellKnownMember
+                        .System_Reflection_MethodBase__GetMethodFromHandle2
             );
         }
 
@@ -1955,8 +1957,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return WellKnownMethod(
                 (fieldContainer.AllTypeArgumentCount() == 0)
-                  ? CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle
-                  : CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle2
+                    ? CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle
+                    : CodeAnalysis.WellKnownMember.System_Reflection_FieldInfo__GetFieldFromHandle2
             );
         }
 
@@ -2179,8 +2181,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static BoundExpression NullOrDefault(TypeSymbol typeSymbol, SyntaxNode syntax)
         {
             return typeSymbol.IsReferenceType
-              ? Null(typeSymbol, syntax)
-              : Default(typeSymbol, syntax);
+                ? Null(typeSymbol, syntax)
+                : Default(typeSymbol, syntax);
         }
 
         internal BoundExpression Not(BoundExpression expression)

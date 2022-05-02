@@ -798,8 +798,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
 
             var array = source as Array;
             return array != null
-              ? array.LongLength
-              : source.Aggregate(0L, (count, item) => count + 1);
+                ? array.LongLength
+                : source.Aggregate(0L, (count, item) => count + 1);
         }
 
         /// <summary>

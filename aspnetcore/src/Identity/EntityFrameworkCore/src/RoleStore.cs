@@ -54,8 +54,8 @@ public class RoleStore<TRole, TContext> : RoleStore<TRole, TContext, string>
 /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
 public class RoleStore<TRole, TContext, TKey>
     : RoleStore<TRole, TContext, TKey, IdentityUserRole<TKey>, IdentityRoleClaim<TKey>>,
-      IQueryableRoleStore<TRole>,
-      IRoleClaimStore<TRole>
+        IQueryableRoleStore<TRole>,
+        IRoleClaimStore<TRole>
     where TRole : IdentityRole<TKey>
     where TKey : IEquatable<TKey>
     where TContext : DbContext
@@ -79,7 +79,7 @@ public class RoleStore<TRole, TContext, TKey>
 /// <typeparam name="TRoleClaim">The type of the class representing a role claim.</typeparam>
 public class RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>
     : IQueryableRoleStore<TRole>,
-      IRoleClaimStore<TRole>
+        IRoleClaimStore<TRole>
     where TRole : IdentityRole<TKey>
     where TKey : IEquatable<TKey>
     where TContext : DbContext

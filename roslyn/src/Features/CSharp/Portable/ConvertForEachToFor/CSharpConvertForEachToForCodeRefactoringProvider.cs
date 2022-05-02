@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
     ]
     internal sealed class CSharpConvertForEachToForCodeRefactoringProvider
         : AbstractConvertForEachToForCodeRefactoringProvider<
-              StatementSyntax,
-              ForEachStatementSyntax
-          >
+            StatementSyntax,
+            ForEachStatementSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(
@@ -88,7 +88,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
             var typeSymbol = foreachInfo.RequireExplicitCastInterface
                 ? foreachInfo.ExplicitCastInterface
                 : model.GetTypeInfo(foreachCollectionExpression, cancellationToken).Type
-                  ?? model.Compilation.GetSpecialType(SpecialType.System_Object);
+                    ?? model.Compilation.GetSpecialType(SpecialType.System_Object);
 
             var collectionStatementType = typeSymbol.GenerateTypeSyntax();
 

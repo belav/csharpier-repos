@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.Collections
     [DebuggerDisplay("Count = {Count}")]
     internal sealed class SegmentedDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
-          IDictionary,
-          IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IDictionary,
+            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         private const bool SupportsComparerDevirtualization
 #if NETCOREAPP
@@ -1308,8 +1308,8 @@ namespace Microsoft.CodeAnalysis.Collections
         [DebuggerDisplay("Count = {Count}")]
         public sealed class KeyCollection
             : ICollection<TKey>,
-              ICollection,
-              IReadOnlyCollection<TKey>
+                ICollection,
+                IReadOnlyCollection<TKey>
         {
             private readonly SegmentedDictionary<TKey, TValue> _dictionary;
 
@@ -1513,8 +1513,8 @@ namespace Microsoft.CodeAnalysis.Collections
         [DebuggerDisplay("Count = {Count}")]
         public sealed class ValueCollection
             : ICollection<TValue>,
-              ICollection,
-              IReadOnlyCollection<TValue>
+                ICollection,
+                IReadOnlyCollection<TValue>
         {
             private readonly SegmentedDictionary<TKey, TValue> _dictionary;
 

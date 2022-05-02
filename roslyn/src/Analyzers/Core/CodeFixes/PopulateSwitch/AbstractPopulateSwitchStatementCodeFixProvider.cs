@@ -20,11 +20,11 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         TMemberAccessExpression
     >
         : AbstractPopulateSwitchCodeFixProvider<
-              ISwitchOperation,
-              TSwitchSyntax,
-              TSwitchArmSyntax,
-              TMemberAccessExpression
-          >
+            ISwitchOperation,
+            TSwitchSyntax,
+            TSwitchArmSyntax,
+            TMemberAccessExpression
+        >
         where TSwitchSyntax : SyntaxNode
         where TSwitchArmSyntax : SyntaxNode
         where TMemberAccessExpression : SyntaxNode

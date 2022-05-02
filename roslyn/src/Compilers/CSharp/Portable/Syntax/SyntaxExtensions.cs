@@ -238,8 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return simpleName.Kind() == SyntaxKind.IdentifierName
-              ? (SimpleNameSyntax)((IdentifierNameSyntax)simpleName).WithIdentifier(identifier)
-              : (SimpleNameSyntax)((GenericNameSyntax)simpleName).WithIdentifier(identifier);
+                ? (SimpleNameSyntax)((IdentifierNameSyntax)simpleName).WithIdentifier(identifier)
+                : (SimpleNameSyntax)((GenericNameSyntax)simpleName).WithIdentifier(identifier);
         }
 
         internal static bool IsTypeInContextWhichNeedsDynamicAttribute(

@@ -77,8 +77,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                 && !literal.Contains("e")
                 && !double.IsNaN(doubleValue)
                 && !double.IsInfinity(doubleValue)
-              ? literal + "E0"
-              : literal;
+                ? literal + "E0"
+                : literal;
         }
 
         /// <summary>

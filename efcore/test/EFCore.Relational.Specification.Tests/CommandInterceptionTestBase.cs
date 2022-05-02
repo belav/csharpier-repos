@@ -1275,8 +1275,8 @@ namespace Microsoft.EntityFrameworkCore
             {
                 var exception = async
                     ? await Assert.ThrowsAsync<Exception>(
-                          () => context.Set<Singularity>().ToListAsync()
-                      )
+                        () => context.Set<Singularity>().ToListAsync()
+                    )
                     : Assert.Throws<Exception>(() => context.Set<Singularity>().ToList());
 
                 Assert.Equal("Bang!", exception.Message);
@@ -1311,8 +1311,8 @@ namespace Microsoft.EntityFrameworkCore
 
                 var exception = async
                     ? await Assert.ThrowsAsync<Exception>(
-                          () => command.ExecuteScalarAsync(commandParameterObject)
-                      )
+                        () => command.ExecuteScalarAsync(commandParameterObject)
+                    )
                     : Assert.Throws<Exception>(() => command.ExecuteScalar(commandParameterObject));
 
                 Assert.Equal("Bang!", exception.Message);
@@ -1337,8 +1337,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     var exception = async
                         ? await Assert.ThrowsAsync<Exception>(
-                              () => context.Database.ExecuteSqlRawAsync(nonQuery)
-                          )
+                            () => context.Database.ExecuteSqlRawAsync(nonQuery)
+                        )
                         : Assert.Throws<Exception>(() => context.Database.ExecuteSqlRaw(nonQuery));
 
                     Assert.Equal("Bang!", exception.Message);
@@ -1479,8 +1479,8 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 ResultReplacingScalarCommandInterceptor.InterceptedResult,
                 async
-                  ? await command.ExecuteScalarAsync(commandParameterObject)
-                  : command.ExecuteScalar(commandParameterObject)
+                    ? await command.ExecuteScalarAsync(commandParameterObject)
+                    : command.ExecuteScalar(commandParameterObject)
             );
         }
 
@@ -1509,8 +1509,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(
                     7,
                     async
-                      ? await context.Database.ExecuteSqlRawAsync(nonQuery)
-                      : context.Database.ExecuteSqlRaw(nonQuery)
+                        ? await context.Database.ExecuteSqlRawAsync(nonQuery)
+                        : context.Database.ExecuteSqlRaw(nonQuery)
                 );
             }
         }

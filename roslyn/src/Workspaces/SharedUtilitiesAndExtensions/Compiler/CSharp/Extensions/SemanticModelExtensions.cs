@@ -360,8 +360,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     type,
                     cancellationToken
                 )
-                  ? Accessibility.Public
-                  : Accessibility.Internal;
+                    ? Accessibility.Public
+                    : Accessibility.Internal;
             }
 
             return Accessibility.Private;

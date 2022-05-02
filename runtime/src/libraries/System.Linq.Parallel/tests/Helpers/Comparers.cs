@@ -106,10 +106,10 @@ namespace System.Linq.Parallel.Tests
         {
             int direction = _def.Compare(x, y);
             return direction == 0
-              ? 0
-              : direction > 0
-                  ? int.MaxValue
-                  : int.MinValue;
+                ? 0
+                : direction > 0
+                    ? int.MaxValue
+                    : int.MinValue;
         }
     }
 

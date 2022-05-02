@@ -63,8 +63,8 @@ namespace System.Xml.Xsl.Xslt
             get
             {
                 return _nodeType == XmlNodeType.Element && 0 < _currentRecord
-                  ? XmlNodeType.Attribute
-                  : _nodeType;
+                    ? XmlNodeType.Attribute
+                    : _nodeType;
             }
         }
         public string LocalName
@@ -535,7 +535,7 @@ namespace System.Xml.Xsl.Xslt
                                 : textPreserveWS
                                     ? XmlNodeType.SignificantWhitespace
                                     :
-                                      /*default:    */XmlNodeType.Whitespace
+                                    /*default:    */XmlNodeType.Whitespace
                         );
                         return curTextNode;
                 }
@@ -807,8 +807,8 @@ namespace System.Xml.Xsl.Xslt
             get
             {
                 return _scopeManager.ForwardCompatibility
-                  ? XslVersion.ForwardsCompatible
-                  : XslVersion.Current;
+                    ? XslVersion.ForwardsCompatible
+                    : XslVersion.Current;
             }
         }
 
@@ -1111,10 +1111,10 @@ namespace System.Xml.Xsl.Xslt
                 {
                     ReportError(
                         Ref.Equal(NamespaceUri, _atoms.UriWdXsl)
-                            && Ref.Equal(LocalName, _atoms.Stylesheet)
-                          ?
+                        && Ref.Equal(LocalName, _atoms.Stylesheet)
+                            ?
                             /*[XT_025]*/SR.Xslt_WdXslNamespace
-                          : /*[XT0150]*/
+                            : /*[XT0150]*/
                             SR.Xslt_WrongStylesheetElement
                     );
 #if XSLT2
@@ -1188,8 +1188,8 @@ namespace System.Xml.Xsl.Xslt
             {
                 Debug.Assert(
                     extensions
-                      ? IsKeyword(_atoms.ExtensionElementPrefixes)
-                      : IsKeyword(_atoms.ExcludeResultPrefixes)
+                        ? IsKeyword(_atoms.ExtensionElementPrefixes)
+                        : IsKeyword(_atoms.ExcludeResultPrefixes)
                 );
                 string value = Value;
                 if (value.Length != 0)

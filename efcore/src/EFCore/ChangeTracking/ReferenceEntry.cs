@@ -170,8 +170,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 var navigation = (INavigation)Metadata;
 
                 return navigation.IsOnDependent
-                  ? navigation.ForeignKey.Properties.Any(InternalEntry.IsModified)
-                  : AnyFkPropertiesModified(navigation, CurrentValue);
+                    ? navigation.ForeignKey.Properties.Any(InternalEntry.IsModified)
+                    : AnyFkPropertiesModified(navigation, CurrentValue);
             }
             set
             {
@@ -266,9 +266,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             CurrentValue == null
                 ? null
                 : InternalEntry.StateManager.GetOrCreateEntry(
-                      CurrentValue,
-                      Metadata.TargetEntityType
-                  );
+                    CurrentValue,
+                    Metadata.TargetEntityType
+                );
 
         private IEntityFinder TargetFinder =>
             _finder ??= InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType);

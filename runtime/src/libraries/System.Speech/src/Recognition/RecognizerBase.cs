@@ -1286,13 +1286,13 @@ namespace System.Speech.Recognition
                     {
                         SpeechAudioFormatInfo audioFormat = AudioFormat;
                         return audioFormat.AverageBytesPerSecond > 0
-                          ? new TimeSpan(
+                            ? new TimeSpan(
                                 (long)(
                                     (recoStatus.AudioStatus.CurDevicePos * TimeSpan.TicksPerSecond)
                                     / (ulong)audioFormat.AverageBytesPerSecond
                                 )
                             )
-                          : TimeSpan.Zero;
+                            : TimeSpan.Zero;
                     }
                 }
                 catch (COMException e)
@@ -1631,8 +1631,8 @@ namespace System.Speech.Recognition
                     //  - Modify the engine and use a regular grammar with a special ruleref to dictation.
                     //  - Call back to the Grammar and let it manage the loading activation.
                     string topicName = string.IsNullOrEmpty(uri.Fragment)
-                      ? null
-                      : uri.Fragment.Substring(1, uri.Fragment.Length - 1);
+                        ? null
+                        : uri.Fragment.Substring(1, uri.Fragment.Length - 1);
                     sapiGrammar.LoadDictation(topicName, SPLOADOPTIONS.SPLO_STATIC);
                 }
                 else
@@ -2821,8 +2821,8 @@ namespace System.Speech.Recognition
                     isStreamReleased,
                     speechEvent.AudioPosition,
                     (speechEvent.LParam == 0)
-                      ? null
-                      : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
+                        ? null
+                        : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
                     isRecognizeCancelled
                 );
             }
@@ -2841,8 +2841,8 @@ namespace System.Speech.Recognition
                 FireEmulateRecognizeCompletedEvent(
                     lastResult,
                     (speechEvent.LParam == 0)
-                      ? lastException
-                      : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
+                        ? lastException
+                        : ExceptionFromSapiStreamError((SAPIErrorCodes)speechEvent.LParam),
                     isRecognizeCancelled
                 );
             }
@@ -3203,13 +3203,13 @@ namespace System.Speech.Recognition
                         audioPosition =
                             audioFormat.AverageBytesPerSecond > 0
                                 ? new TimeSpan(
-                                      (long)(
-                                          (
-                                              recoStatus.AudioStatus.CurDevicePos
-                                              * TimeSpan.TicksPerSecond
-                                          ) / (ulong)audioFormat.AverageBytesPerSecond
-                                      )
-                                  )
+                                    (long)(
+                                        (
+                                            recoStatus.AudioStatus.CurDevicePos
+                                            * TimeSpan.TicksPerSecond
+                                        ) / (ulong)audioFormat.AverageBytesPerSecond
+                                    )
+                                )
                                 : TimeSpan.Zero;
                         recognizerPosition = new TimeSpan(
                             (long)recoStatus.ullRecognitionStreamTime

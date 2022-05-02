@@ -11,8 +11,8 @@ namespace System
         [Serializable]
         public readonly struct TransitionTime
             : IEquatable<TransitionTime>,
-              ISerializable,
-              IDeserializationCallback
+                ISerializable,
+                IDeserializationCallback
         {
             private readonly DateTime _timeOfDay;
             private readonly byte _month;

@@ -19,9 +19,9 @@ namespace Castle.Components.DictionaryAdapter
 
     public class EditableBindingList<T>
         : System.ComponentModel.BindingList<T>,
-          IList<T>,
-          IEditableObject,
-          IRevertibleChangeTracking
+            IList<T>,
+            IEditableObject,
+            IRevertibleChangeTracking
     {
         private bool isEditing;
         private List<T> snapshot;

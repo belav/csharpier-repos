@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions;
 /// </summary>
 internal sealed class CreateNewOnMetadataUpdateAttributePass
     : IntermediateNodePassBase,
-      IRazorOptimizationPass
+        IRazorOptimizationPass
 {
     protected override void ExecuteCore(
         RazorCodeDocument codeDocument,

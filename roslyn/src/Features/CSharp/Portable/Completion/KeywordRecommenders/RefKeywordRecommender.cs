@@ -137,8 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 || syntaxTree.IsGlobalMemberDeclarationContext(
                     position,
                     syntaxTree.IsScript()
-                      ? RefGlobalMemberScriptModifiers
-                      : RefGlobalMemberModifiers,
+                        ? RefGlobalMemberScriptModifiers
+                        : RefGlobalMemberModifiers,
                     cancellationToken
                 )
                 || context.IsMemberDeclarationContext(

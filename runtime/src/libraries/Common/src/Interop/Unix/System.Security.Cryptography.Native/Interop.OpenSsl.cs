@@ -385,8 +385,8 @@ internal static partial class Interop
                 {
                     // The IdnMapping converts unicode input into the IDNA punycode sequence.
                     string punyCode = string.IsNullOrEmpty(sslAuthenticationOptions.TargetHost)
-                      ? string.Empty
-                      : s_idnMapping.GetAscii(sslAuthenticationOptions.TargetHost!);
+                        ? string.Empty
+                        : s_idnMapping.GetAscii(sslAuthenticationOptions.TargetHost!);
 
                     // Similar to windows behavior, set SNI on openssl by default for client context, ignore errors.
                     if (!Ssl.SslSetTlsExtHostName(sslHandle, punyCode))
@@ -619,8 +619,8 @@ internal static partial class Interop
                 case Ssl.SslErrorCode.SSL_ERROR_WANT_READ:
                     // update error code to renegotiate if renegotiate is pending, otherwise make it SSL_ERROR_WANT_READ
                     errorCode = Ssl.IsSslRenegotiatePending(context)
-                      ? Ssl.SslErrorCode.SSL_ERROR_RENEGOTIATE
-                      : Ssl.SslErrorCode.SSL_ERROR_WANT_READ;
+                        ? Ssl.SslErrorCode.SSL_ERROR_RENEGOTIATE
+                        : Ssl.SslErrorCode.SSL_ERROR_WANT_READ;
                     break;
 
                 default:
@@ -656,10 +656,10 @@ internal static partial class Interop
             int certHashLength =
                 context.IsServer ^ sessionReused
                     ? Ssl.SslGetPeerFinished(
-                          context,
-                          bindingHandle.CertHashPtr,
-                          bindingHandle.Length
-                      )
+                        context,
+                        bindingHandle.CertHashPtr,
+                        bindingHandle.Length
+                    )
                     : Ssl.SslGetFinished(context, bindingHandle.CertHashPtr, bindingHandle.Length);
 
             if (0 == certHashLength)
@@ -781,16 +781,16 @@ internal static partial class Interop
                         Crypto.ErrPeekError() != 0
                             ? Crypto.CreateOpenSslCryptographicException()
                             : // crypto error queue not empty
-                              result == 0
+                            result == 0
                                 ? new EndOfStreamException()
                                 : // end of file that violates protocol
-                                  result == -1 && lastErrno.Error != Error.SUCCESS
+                                result == -1 && lastErrno.Error != Error.SUCCESS
                                     ? new IOException(
-                                          lastErrno.GetErrorMessage(),
-                                          lastErrno.RawErrno
-                                      )
+                                        lastErrno.GetErrorMessage(),
+                                        lastErrno.RawErrno
+                                    )
                                     : // underlying I/O error
-                                      null; // no additional info available
+                                    null; // no additional info available
                     break;
 
                 case Ssl.SslErrorCode.SSL_ERROR_SSL:

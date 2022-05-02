@@ -11,9 +11,9 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         private class ProjectCompletionProvider
             : AbstractProjectExtensionProvider<
-                  CompletionProvider,
-                  ExportCompletionProviderAttribute
-              >
+                CompletionProvider,
+                ExportCompletionProviderAttribute
+            >
         {
             public ProjectCompletionProvider(AnalyzerReference reference) : base(reference) { }
 

@@ -263,12 +263,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var containingType = type.ContainingType;
             return containingType == null
-              ? IsNonNestedTypeAccessible(
+                ? IsNonNestedTypeAccessible(
                     type.ContainingAssembly,
                     type.DeclaredAccessibility,
                     within
                 )
-              : IsMemberAccessible(
+                : IsMemberAccessible(
                     type.ContainingType,
                     type.DeclaredAccessibility,
                     within,

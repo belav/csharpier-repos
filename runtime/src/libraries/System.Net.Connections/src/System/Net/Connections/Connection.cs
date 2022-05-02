@@ -29,12 +29,12 @@ namespace System.Net.Connections
                 : _pipe != null
                     ? throw new InvalidOperationException(SR.net_connections_stream_use_after_pipe)
                     : (
-                          _stream =
-                              CreateStream()
-                              ?? throw new InvalidOperationException(
-                                  SR.net_connections_createstream_null
-                              )
-                      );
+                        _stream =
+                            CreateStream()
+                            ?? throw new InvalidOperationException(
+                                SR.net_connections_createstream_null
+                            )
+                    );
 
         /// <summary>
         /// The connection's <see cref="IDuplexPipe"/>.
@@ -45,12 +45,12 @@ namespace System.Net.Connections
                 : _stream != null
                     ? throw new InvalidOperationException(SR.net_connections_pipe_use_after_stream)
                     : (
-                          _pipe =
-                              CreatePipe()
-                              ?? throw new InvalidOperationException(
-                                  SR.net_connections_createpipe_null
-                              )
-                      );
+                        _pipe =
+                            CreatePipe()
+                            ?? throw new InvalidOperationException(
+                                SR.net_connections_createpipe_null
+                            )
+                    );
 
         /// <summary>
         /// Initializes the <see cref="Stream"/> for the <see cref="Connection"/>.

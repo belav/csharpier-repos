@@ -98,11 +98,11 @@ namespace Microsoft.EntityFrameworkCore.Query
                 }
 
                 var defaultBlock = entityType.IsAbstract()
-                  ? CreateUnableToDiscriminateExceptionExpression(
+                    ? CreateUnableToDiscriminateExceptionExpression(
                         entityType,
                         discriminatorValueVariable
                     )
-                  : Constant(entityType, typeof(IEntityType));
+                    : Constant(entityType, typeof(IEntityType));
 
                 expressions.Add(Switch(discriminatorValueVariable, defaultBlock, switchCases));
                 baseCondition = Lambda(
@@ -172,9 +172,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                             condition == null
                                 ? atLeastOneNonNullValueInNullablePropertyCondition
                                 : AndAlso(
-                                      condition,
-                                      atLeastOneNonNullValueInNullablePropertyCondition
-                                  );
+                                    condition,
+                                    atLeastOneNonNullValueInNullablePropertyCondition
+                                );
                     }
 
                     if (condition != null)
@@ -193,10 +193,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override EntityShaperExpression WithEntityType(IEntityType entityType) =>
             entityType != EntityType
                 ? new RelationalEntityShaperExpression(
-                      entityType,
-                      ValueBufferExpression,
-                      IsNullable
-                  )
+                    entityType,
+                    ValueBufferExpression,
+                    IsNullable
+                )
                 : this;
 
         /// <inheritdoc />
@@ -210,11 +210,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public override EntityShaperExpression Update(Expression valueBufferExpression) =>
             valueBufferExpression != ValueBufferExpression
                 ? new RelationalEntityShaperExpression(
-                      EntityType,
-                      valueBufferExpression,
-                      IsNullable,
-                      MaterializationCondition
-                  )
+                    EntityType,
+                    valueBufferExpression,
+                    IsNullable,
+                    MaterializationCondition
+                )
                 : this;
     }
 }

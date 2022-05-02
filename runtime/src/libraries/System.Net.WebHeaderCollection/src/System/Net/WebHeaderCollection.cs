@@ -206,8 +206,8 @@ namespace System.Net
         {
             headerName = HttpValidationHelpers.CheckBadHeaderNameChars(headerName);
             return response
-              ? HeaderInfo[headerName].IsResponseRestricted
-              : HeaderInfo[headerName].IsRequestRestricted;
+                ? HeaderInfo[headerName].IsResponseRestricted
+                : HeaderInfo[headerName].IsRequestRestricted;
         }
 
         public override string[]? GetValues(int index)

@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// </summary>
     internal sealed class CodeRefactoringSuggestedAction
         : SuggestedActionWithNestedFlavors,
-          ICodeRefactoringSuggestedAction
+            ICodeRefactoringSuggestedAction
     {
         public CodeRefactoringProvider CodeRefactoringProvider { get; }
 

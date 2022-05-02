@@ -343,8 +343,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             {
                 var symbol = semanticModel.GetSymbolInfo(lambdaSyntax, cancellationToken).Symbol;
                 return symbol != null
-                  ? ImmutableArray.Create(symbol)
-                  : ImmutableArray<ISymbol>.Empty;
+                    ? ImmutableArray.Create(symbol)
+                    : ImmutableArray<ISymbol>.Empty;
             }
 
             if (

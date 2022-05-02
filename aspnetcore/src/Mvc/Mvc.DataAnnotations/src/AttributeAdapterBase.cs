@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// <typeparam name="TAttribute">The type of <see cref="ValidationAttribute"/> which is being wrapped.</typeparam>
 public abstract class AttributeAdapterBase<TAttribute>
     : ValidationAttributeAdapter<TAttribute>,
-      IAttributeAdapter where TAttribute : ValidationAttribute
+        IAttributeAdapter where TAttribute : ValidationAttribute
 {
     /// <summary>
     /// Instantiates a new <see cref="AttributeAdapterBase{TAttribute}"/>.

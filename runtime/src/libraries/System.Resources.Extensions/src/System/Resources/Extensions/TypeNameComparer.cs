@@ -29,8 +29,8 @@ namespace System.Resources.Extensions
             int comma = assemblyQualifiedTypeName.IndexOf(',');
 
             return comma == -1
-              ? assemblyQualifiedTypeName
-              : assemblyQualifiedTypeName.Slice(0, comma);
+                ? assemblyQualifiedTypeName
+                : assemblyQualifiedTypeName.Slice(0, comma);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -39,8 +39,8 @@ namespace System.Resources.Extensions
             int comma = assemblyName.IndexOf(',');
 
             return comma == -1
-              ? assemblyName
-              : assemblyName.Slice(0, comma).TrimEnd(s_whiteSpaceChars);
+                ? assemblyName
+                : assemblyName.Slice(0, comma).TrimEnd(s_whiteSpaceChars);
         }
 
         private static bool IsMscorlib(ReadOnlySpan<char> assemblyName)

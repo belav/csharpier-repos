@@ -33,7 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     [Export(typeof(MiscellaneousFilesWorkspace))]
     internal sealed partial class MiscellaneousFilesWorkspace
         : Workspace,
-          IRunningDocumentTableEventListener
+            IRunningDocumentTableEventListener
     {
         private readonly IMetadataAsSourceFileService _fileTrackingMetadataAsSourceService;
         private readonly Lazy<IVsTextManager> _lazyTextManager;

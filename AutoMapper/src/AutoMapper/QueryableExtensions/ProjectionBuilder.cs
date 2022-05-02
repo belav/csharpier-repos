@@ -131,14 +131,14 @@ namespace AutoMapper.QueryableExtensions.Impl
                 out var typeMap
             );
             return letPropertyMaps.Count > 0
-              ? letPropertyMaps.GetSubQueryExpression(
+                ? letPropertyMaps.GetSubQueryExpression(
                     this,
                     projection,
                     typeMap,
                     request,
                     instanceParameter
                 )
-              : new QueryExpressions(projection, instanceParameter);
+                : new QueryExpressions(projection, instanceParameter);
         }
 
         public Expression CreateInnerProjection(
@@ -256,17 +256,17 @@ namespace AutoMapper.QueryableExtensions.Impl
                         letPropertyMaps
                     );
                     return mappedExpression == null
-                      ? null
-                      : memberMap.ApplyTransformers(mappedExpression);
+                        ? null
+                        : memberMap.ApplyTransformers(mappedExpression);
                     Expression ResolveSource()
                     {
                         var customSource = memberMap.IncludedMember?.ProjectToCustomSource;
                         var resolvedSource = memberMap switch
                         {
                             { CustomMapExpression: LambdaExpression mapFrom }
-                              => MapFromExpression(mapFrom),
+                                => MapFromExpression(mapFrom),
                             { SourceMembers: { Length: > 0 } sourceMembers }
-                              => sourceMembers.Chain(CheckCustomSource()),
+                                => sourceMembers.Chain(CheckCustomSource()),
                             _ => throw CannotMap(memberMap, request.SourceType)
                         };
                         if (NullSubstitute())
@@ -307,8 +307,8 @@ namespace AutoMapper.QueryableExtensions.Impl
                                 return instanceParameter;
                             }
                             return customSource.IsMemberPath(out _)
-                              ? customSource.ReplaceParameters(instanceParameter)
-                              : letPropertyMaps.GetSubQueryMarker(customSource);
+                                ? customSource.ReplaceParameters(instanceParameter)
+                                : letPropertyMaps.GetSubQueryMarker(customSource);
                         }
                     }
                     IProjectionMapper GetProjectionMapper()
@@ -328,14 +328,14 @@ namespace AutoMapper.QueryableExtensions.Impl
                 typeMap switch
                 {
                     { CustomCtorExpression: LambdaExpression ctorExpression }
-                      => (NewExpression)ctorExpression.ReplaceParameters(instanceParameter),
+                        => (NewExpression)ctorExpression.ReplaceParameters(instanceParameter),
                     { ConstructorMap: { CanResolve: true } constructorMap }
-                      => New(
-                          constructorMap.Ctor,
-                          constructorMap.CtorParams.Select(
-                              map => TryProjectMember(map) ?? Default(map.DestinationType)
-                          )
-                      ),
+                        => New(
+                            constructorMap.Ctor,
+                            constructorMap.CtorParams.Select(
+                                map => TryProjectMember(map) ?? Default(map.DestinationType)
+                            )
+                        ),
                     _ => New(typeMap.DestinationTypeToUse)
                 };
         }
@@ -715,8 +715,8 @@ namespace AutoMapper.QueryableExtensions.Impl
             {
                 var matchingMember = _parameters.GetType().GetProperty(name);
                 return matchingMember != null
-                  ? Property(Constant(_parameters), matchingMember)
-                  : null;
+                    ? Property(Constant(_parameters), matchingMember)
+                    : null;
             }
         }
 
@@ -729,8 +729,8 @@ namespace AutoMapper.QueryableExtensions.Impl
 
             protected override Expression GetValue(string name) =>
                 _paramValues.TryGetValue(name, out object parameterValue)
-                  ? Constant(parameterValue)
-                  : null;
+                    ? Constant(parameterValue)
+                    : null;
         }
     }
 

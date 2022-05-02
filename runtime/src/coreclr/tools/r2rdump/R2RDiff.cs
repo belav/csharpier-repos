@@ -150,8 +150,8 @@ namespace R2RDump
                                         kvp.Key,
                                         out ReadyToRunMethod rightMethod
                                     )
-                                      ? rightMethod
-                                      : null
+                                        ? rightMethod
+                                        : null
                                 )
                             )
                     )

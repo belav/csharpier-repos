@@ -28,8 +28,8 @@ Examples:
 ";
 
         var catCmd = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-          ? @"type .\secrets.json"
-          : "cat ./secrets.json";
+            ? @"type .\secrets.json"
+            : "cat ./secrets.json";
 
         command.ExtendedHelpText += $@"  {catCmd} | dotnet user-secrets set";
 

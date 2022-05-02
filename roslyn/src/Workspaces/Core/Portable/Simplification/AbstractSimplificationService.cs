@@ -329,13 +329,13 @@ namespace Microsoft.CodeAnalysis.Simplification
 
                                         var replacedParent = isNode
                                             ? nodeOrToken.Parent.ReplaceNode(
-                                                  nodeOrToken.AsNode(),
-                                                  currentNodeOrToken.AsNode()
-                                              )
+                                                nodeOrToken.AsNode(),
+                                                currentNodeOrToken.AsNode()
+                                            )
                                             : nodeOrToken.Parent.ReplaceToken(
-                                                  nodeOrToken.AsToken(),
-                                                  currentNodeOrToken.AsToken()
-                                              );
+                                                nodeOrToken.AsToken(),
+                                                currentNodeOrToken.AsToken()
+                                            );
 
                                         currentNodeOrToken = replacedParent
                                             .ChildNodesAndTokens()

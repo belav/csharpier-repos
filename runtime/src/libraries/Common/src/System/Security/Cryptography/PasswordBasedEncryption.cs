@@ -794,12 +794,12 @@ namespace System.Security.Cryptography
                 Oids.HmacWithSha384 => HashAlgorithmName.SHA384,
                 Oids.HmacWithSha512 => HashAlgorithmName.SHA512,
                 _
-                  => throw new CryptographicException(
-                      SR.Format(
-                          SR.Cryptography_UnknownAlgorithmIdentifier,
-                          pbkdf2Params.Prf.Algorithm
-                      )
-                  ),
+                    => throw new CryptographicException(
+                        SR.Format(
+                            SR.Cryptography_UnknownAlgorithmIdentifier,
+                            pbkdf2Params.Prf.Algorithm
+                        )
+                    ),
             };
 
             // All of the PRFs that we know about have NULL parameters, so check that now that we know

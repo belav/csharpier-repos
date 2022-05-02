@@ -20,7 +20,7 @@ namespace AutoMapper.Configuration
 
     public class MemberConfigurationExpression<TSource, TDestination, TMember>
         : IMemberConfigurationExpression<TSource, TDestination, TMember>,
-          IPropertyMapConfiguration
+            IPropertyMapConfiguration
     {
         private MemberInfo[] _sourceMembers;
         private readonly Type _sourceType;

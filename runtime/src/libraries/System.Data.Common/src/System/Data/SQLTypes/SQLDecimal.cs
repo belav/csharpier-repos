@@ -2957,8 +2957,8 @@ namespace System.Data.SqlTypes
         public static SqlBoolean operator ==(SqlDecimal x, SqlDecimal y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.CompareNm(y) == EComparison.EQ);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.CompareNm(y) == EComparison.EQ);
         }
 
         public static SqlBoolean operator !=(SqlDecimal x, SqlDecimal y)
@@ -2969,15 +2969,15 @@ namespace System.Data.SqlTypes
         public static SqlBoolean operator <(SqlDecimal x, SqlDecimal y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.CompareNm(y) == EComparison.LT);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.CompareNm(y) == EComparison.LT);
         }
 
         public static SqlBoolean operator >(SqlDecimal x, SqlDecimal y)
         {
             return (x.IsNull || y.IsNull)
-              ? SqlBoolean.Null
-              : new SqlBoolean(x.CompareNm(y) == EComparison.GT);
+                ? SqlBoolean.Null
+                : new SqlBoolean(x.CompareNm(y) == EComparison.GT);
         }
 
         public static SqlBoolean operator <=(SqlDecimal x, SqlDecimal y)
@@ -3251,8 +3251,8 @@ namespace System.Data.SqlTypes
                 return SqlInt32.Zero;
             else
                 return n.IsNull
-                  ? SqlInt32.Null
-                  : (n.IsPositive ? new SqlInt32(1) : new SqlInt32(-1));
+                    ? SqlInt32.Null
+                    : (n.IsPositive ? new SqlInt32(1) : new SqlInt32(-1));
         }
 
         private static SqlDecimal Round(SqlDecimal n, int lPosition, bool fTruncate)

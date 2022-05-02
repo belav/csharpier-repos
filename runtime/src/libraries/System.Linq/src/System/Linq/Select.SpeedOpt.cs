@@ -139,8 +139,8 @@ namespace System.Linq
             {
                 Debug.Assert(count > 0);
                 return count >= _source.Length
-                  ? (IPartition<TResult>)this
-                  : new SelectListPartitionIterator<TSource, TResult>(
+                    ? (IPartition<TResult>)this
+                    : new SelectListPartitionIterator<TSource, TResult>(
                         _source,
                         _selector,
                         0,
@@ -179,7 +179,7 @@ namespace System.Linq
 
         private sealed partial class SelectRangeIterator<TResult>
             : Iterator<TResult>,
-              IPartition<TResult>
+                IPartition<TResult>
         {
             private readonly int _start;
             private readonly int _end;
@@ -536,7 +536,7 @@ namespace System.Linq
         /// <typeparam name="TResult">The type of the mapped items.</typeparam>
         private sealed class SelectIPartitionIterator<TSource, TResult>
             : Iterator<TResult>,
-              IPartition<TResult>
+                IPartition<TResult>
         {
             private readonly IPartition<TSource> _source;
             private readonly Func<TSource, TResult> _selector;
@@ -736,7 +736,7 @@ namespace System.Linq
         [DebuggerDisplay("Count = {Count}")]
         private sealed class SelectListPartitionIterator<TSource, TResult>
             : Iterator<TResult>,
-              IPartition<TResult>
+                IPartition<TResult>
         {
             private readonly IList<TSource> _source;
             private readonly Func<TSource, TResult> _selector;
@@ -805,8 +805,8 @@ namespace System.Linq
                 Debug.Assert(count > 0);
                 int minIndex = _minIndexInclusive + count;
                 return (uint)minIndex > (uint)_maxIndexInclusive
-                  ? EmptyPartition<TResult>.Instance
-                  : new SelectListPartitionIterator<TSource, TResult>(
+                    ? EmptyPartition<TResult>.Instance
+                    : new SelectListPartitionIterator<TSource, TResult>(
                         _source,
                         _selector,
                         minIndex,
@@ -819,8 +819,8 @@ namespace System.Linq
                 Debug.Assert(count > 0);
                 int maxIndex = _minIndexInclusive + count - 1;
                 return (uint)maxIndex >= (uint)_maxIndexInclusive
-                  ? this
-                  : new SelectListPartitionIterator<TSource, TResult>(
+                    ? this
+                    : new SelectListPartitionIterator<TSource, TResult>(
                         _source,
                         _selector,
                         _minIndexInclusive,

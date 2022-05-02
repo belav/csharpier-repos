@@ -593,7 +593,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 ForEachPart.ForEach => node.ForEachKeyword.Span,
                 ForEachPart.VariableDeclaration
-                  => TextSpan.FromBounds(node.Type.SpanStart, node.Identifier.Span.End),
+                    => TextSpan.FromBounds(node.Type.SpanStart, node.Identifier.Span.End),
                 ForEachPart.In => node.InKeyword.Span,
                 ForEachPart.Expression => node.Expression.Span,
                 _ => throw ExceptionUtilities.UnexpectedValue(part),
@@ -607,7 +607,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 ForEachPart.ForEach => node.ForEachKeyword.Span,
                 ForEachPart.VariableDeclaration
-                  => TextSpan.FromBounds(node.Variable.SpanStart, node.Variable.Span.End),
+                    => TextSpan.FromBounds(node.Variable.SpanStart, node.Variable.Span.End),
                 ForEachPart.In => node.InKeyword.Span,
                 ForEachPart.Expression => node.Expression.Span,
                 _ => throw ExceptionUtilities.UnexpectedValue(part),
@@ -621,10 +621,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 SwitchExpressionPart.WholeExpression => node.Span,
                 SwitchExpressionPart.SwitchBody
-                  => TextSpan.FromBounds(
-                      node.SwitchKeyword.SpanStart,
-                      node.CloseBraceToken.Span.End
-                  ),
+                    => TextSpan.FromBounds(
+                        node.SwitchKeyword.SpanStart,
+                        node.CloseBraceToken.Span.End
+                    ),
                 _ => throw ExceptionUtilities.UnexpectedValue(part),
             };
 
@@ -746,8 +746,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return
                         parent.IsKind(SyntaxKind.ArrowExpressionClause)
                         && parent.Parent.IsKind(SyntaxKind.LocalFunctionStatement)
-                      ? parent.Parent
-                      : parent;
+                        ? parent.Parent
+                        : parent;
                 }
 
                 var oldRoot = GetMatchingRoot(oldBody);
@@ -945,8 +945,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     var newConstructor = (ConstructorDeclarationSyntax)
                         (
                             newBody.Parent.IsKind(SyntaxKind.ArrowExpressionClause)
-                              ? newBody.Parent.Parent
-                              : newBody.Parent
+                                ? newBody.Parent.Parent
+                                : newBody.Parent
                         )!;
                     newStatement = (SyntaxNode?)newConstructor.Initializer ?? newConstructor;
                     return true;
@@ -1824,8 +1824,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             }
 
             return (editKind == EditKind.Delete ? oldSymbol : newSymbol) is null
-              ? OneOrMany<(ISymbol?, ISymbol?, EditKind)>.Empty
-              : new OneOrMany<(ISymbol?, ISymbol?, EditKind)>((oldSymbol, newSymbol, editKind));
+                ? OneOrMany<(ISymbol?, ISymbol?, EditKind)>.Empty
+                : new OneOrMany<(ISymbol?, ISymbol?, EditKind)>((oldSymbol, newSymbol, editKind));
         }
 
         private static ISymbol? GetSymbolForEdit(
@@ -2292,8 +2292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return TextSpan.FromBounds(
                         switchStatement.SwitchKeyword.SpanStart,
                         (switchStatement.CloseParenToken != default)
-                          ? switchStatement.CloseParenToken.Span.End
-                          : switchStatement.Expression.Span.End
+                            ? switchStatement.CloseParenToken.Span.End
+                            : switchStatement.Expression.Span.End
                     );
 
                 case SyntaxKind.SwitchSection:
@@ -2321,8 +2321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     var commonForEachStatement = (CommonForEachStatementSyntax)node;
                     return TextSpan.FromBounds(
                         (commonForEachStatement.AwaitKeyword.Span.Length > 0)
-                          ? commonForEachStatement.AwaitKeyword.SpanStart
-                          : commonForEachStatement.ForEachKeyword.SpanStart,
+                            ? commonForEachStatement.AwaitKeyword.SpanStart
+                            : commonForEachStatement.ForEachKeyword.SpanStart,
                         commonForEachStatement.CloseParenToken.Span.End
                     );
 
@@ -2498,11 +2498,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             symbol.TypeKind switch
             {
                 TypeKind.Struct
-                  => symbol.IsRecord
-                      ? CSharpFeaturesResources.record_struct
-                      : CSharpFeaturesResources.struct_,
+                    => symbol.IsRecord
+                        ? CSharpFeaturesResources.record_struct
+                        : CSharpFeaturesResources.struct_,
                 TypeKind.Class
-                  => symbol.IsRecord ? CSharpFeaturesResources.record_ : FeaturesResources.class_,
+                    => symbol.IsRecord ? CSharpFeaturesResources.record_ : FeaturesResources.class_,
                 _ => base.GetDisplayName(symbol)
             };
 
@@ -2513,13 +2513,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             symbol.MethodKind switch
             {
                 MethodKind.PropertyGet
-                  => symbol.AssociatedSymbol is IPropertySymbol { IsIndexer: true }
-                      ? CSharpFeaturesResources.indexer_getter
-                      : CSharpFeaturesResources.property_getter,
+                    => symbol.AssociatedSymbol is IPropertySymbol { IsIndexer: true }
+                        ? CSharpFeaturesResources.indexer_getter
+                        : CSharpFeaturesResources.property_getter,
                 MethodKind.PropertySet
-                  => symbol.AssociatedSymbol is IPropertySymbol { IsIndexer: true }
-                      ? CSharpFeaturesResources.indexer_setter
-                      : CSharpFeaturesResources.property_setter,
+                    => symbol.AssociatedSymbol is IPropertySymbol { IsIndexer: true }
+                        ? CSharpFeaturesResources.indexer_setter
+                        : CSharpFeaturesResources.property_setter,
                 MethodKind.StaticConstructor => FeaturesResources.static_constructor,
                 MethodKind.Destructor => CSharpFeaturesResources.destructor,
                 MethodKind.Conversion => CSharpFeaturesResources.conversion_operator,
@@ -2580,8 +2580,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.FieldDeclaration:
                     var declaration = (FieldDeclarationSyntax)node;
                     return declaration.Modifiers.Any(SyntaxKind.ConstKeyword)
-                      ? FeaturesResources.const_field
-                      : FeaturesResources.field;
+                        ? FeaturesResources.const_field
+                        : FeaturesResources.field;
 
                 case SyntaxKind.EventFieldDeclaration:
                     return CSharpFeaturesResources.event_field;
@@ -2602,16 +2602,16 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.ConstructorDeclaration:
                     var ctor = (ConstructorDeclarationSyntax)node;
                     return ctor.Modifiers.Any(SyntaxKind.StaticKeyword)
-                      ? FeaturesResources.static_constructor
-                      : FeaturesResources.constructor;
+                        ? FeaturesResources.static_constructor
+                        : FeaturesResources.constructor;
 
                 case SyntaxKind.DestructorDeclaration:
                     return CSharpFeaturesResources.destructor;
 
                 case SyntaxKind.PropertyDeclaration:
                     return SyntaxUtilities.HasBackingField((PropertyDeclarationSyntax)node)
-                      ? FeaturesResources.auto_property
-                      : FeaturesResources.property_;
+                        ? FeaturesResources.auto_property
+                        : FeaturesResources.property_;
 
                 case SyntaxKind.IndexerDeclaration:
                     return CSharpFeaturesResources.indexer;
@@ -3155,14 +3155,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 // Inserting a member into an existing generic type is not allowed.
                 { ContainingType: { Arity: > 0 } }
                 and not INamedTypeSymbol
-                  => RudeEditKind.InsertIntoGenericType,
+                    => RudeEditKind.InsertIntoGenericType,
 
                 // Inserting virtual or interface member into an existing type is not allowed.
                 { IsVirtual: true }
                 or { IsOverride: true }
                 or { IsAbstract: true }
                 and not INamedTypeSymbol
-                  => RudeEditKind.InsertVirtual,
+                    => RudeEditKind.InsertVirtual,
 
                 // Inserting generic method into an existing type is not allowed.
                 IMethodSymbol { Arity: > 0 } => RudeEditKind.InsertGenericMethod,
@@ -3175,16 +3175,16 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 {
                     MethodKind: MethodKind.Conversion or MethodKind.UserDefinedOperator
                 }
-                  => RudeEditKind.InsertOperator,
+                    => RudeEditKind.InsertOperator,
 
                 // Inserting a method that explictly implements an interface method into an existing type is not allowed.
                 IMethodSymbol { ExplicitInterfaceImplementations: { IsEmpty: false } }
-                  => RudeEditKind.InsertMethodWithExplicitInterfaceSpecifier,
+                    => RudeEditKind.InsertMethodWithExplicitInterfaceSpecifier,
 
                 // TODO: Inserting non-virtual member to an interface (https://github.com/dotnet/roslyn/issues/37128)
                 { ContainingType: { TypeKind: TypeKind.Interface } }
                 and not INamedTypeSymbol
-                  => RudeEditKind.InsertIntoInterface,
+                    => RudeEditKind.InsertIntoInterface,
 
                 // Inserting a field into an enum:
 #pragma warning disable format // https://github.com/dotnet/roslyn/issues/54759
@@ -3356,8 +3356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return TextSpan.FromBounds(
                         tryStatement.Catches.First().SpanStart,
                         (tryStatement.Finally != null)
-                          ? tryStatement.Finally.Span.End
-                          : tryStatement.Catches.Last().Span.End
+                            ? tryStatement.Finally.Span.End
+                            : tryStatement.Catches.Last().Span.End
                     );
 
                 case SyntaxKind.CatchClause:

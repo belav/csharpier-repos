@@ -103,9 +103,9 @@ namespace System.Net.Http
             autoProxyOptions.AutoConfigUrl = AutoConfigUrl;
             autoProxyOptions.AutoDetectFlags = AutoDetect
                 ? (
-                      Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DHCP
-                      | Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DNS_A
-                  )
+                    Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DHCP
+                    | Interop.WinHttp.WINHTTP_AUTO_DETECT_TYPE_DNS_A
+                )
                 : 0;
             autoProxyOptions.AutoLoginIfChallenged = false;
             autoProxyOptions.Flags =
@@ -203,8 +203,8 @@ namespace System.Net.Http
                 proxyInfo.AccessType = Interop.WinHttp.WINHTTP_ACCESS_TYPE_NAMED_PROXY;
                 proxyInfo.Proxy = Marshal.StringToHGlobalUni(Proxy);
                 proxyInfo.ProxyBypass = string.IsNullOrEmpty(ProxyBypass)
-                  ? IntPtr.Zero
-                  : Marshal.StringToHGlobalUni(ProxyBypass);
+                    ? IntPtr.Zero
+                    : Marshal.StringToHGlobalUni(ProxyBypass);
 
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(

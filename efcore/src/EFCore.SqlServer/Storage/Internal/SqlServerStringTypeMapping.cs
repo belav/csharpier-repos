@@ -66,10 +66,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             unicode
                 ? (fixedLength ? System.Data.DbType.StringFixedLength : System.Data.DbType.String)
                 : (
-                      fixedLength
-                          ? System.Data.DbType.AnsiStringFixedLength
-                          : System.Data.DbType.AnsiString
-                  );
+                    fixedLength
+                        ? System.Data.DbType.AnsiStringFixedLength
+                        : System.Data.DbType.AnsiString
+                );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

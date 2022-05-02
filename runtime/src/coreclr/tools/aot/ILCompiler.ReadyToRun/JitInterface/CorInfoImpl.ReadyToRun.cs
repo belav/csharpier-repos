@@ -1432,8 +1432,8 @@ namespace Internal.JitInterface
         )
         {
             return fThrowing
-              ? CorInfoHelpFunc.CORINFO_HELP_CHKCASTANY
-              : CorInfoHelpFunc.CORINFO_HELP_ISINSTANCEOFANY;
+                ? CorInfoHelpFunc.CORINFO_HELP_CHKCASTANY
+                : CorInfoHelpFunc.CORINFO_HELP_ISINSTANCEOFANY;
         }
 
         private CorInfoHelpFunc getNewHelper(

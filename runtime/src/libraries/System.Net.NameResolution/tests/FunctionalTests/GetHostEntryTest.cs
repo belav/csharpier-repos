@@ -320,12 +320,12 @@ namespace System.Net.NameResolution.Tests
                 0 => Dns.GetHostEntry("localhost"),
                 1 => await Dns.GetHostEntryAsync("localhost"),
                 _
-                  => await Task.Factory.FromAsync(
-                      Dns.BeginGetHostEntry,
-                      Dns.EndGetHostEntry,
-                      "localhost",
-                      null
-                  )
+                    => await Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        "localhost",
+                        null
+                    )
             };
 
             Assert.NotNull(entry.HostName);
@@ -353,24 +353,24 @@ namespace System.Net.NameResolution.Tests
                 0 => Dns.GetHostEntry(address),
                 1 => await Dns.GetHostEntryAsync(address),
                 _
-                  => await Task.Factory.FromAsync(
-                      Dns.BeginGetHostEntry,
-                      Dns.EndGetHostEntry,
-                      address,
-                      null
-                  )
+                    => await Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        address,
+                        null
+                    )
             };
             IPHostEntry stringEntry = mode switch
             {
                 0 => Dns.GetHostEntry(address.ToString()),
                 1 => await Dns.GetHostEntryAsync(address.ToString()),
                 _
-                  => await Task.Factory.FromAsync(
-                      Dns.BeginGetHostEntry,
-                      Dns.EndGetHostEntry,
-                      address.ToString(),
-                      null
-                  )
+                    => await Task.Factory.FromAsync(
+                        Dns.BeginGetHostEntry,
+                        Dns.EndGetHostEntry,
+                        address.ToString(),
+                        null
+                    )
             };
 
             Assert.Equal(ipEntry.HostName, stringEntry.HostName);

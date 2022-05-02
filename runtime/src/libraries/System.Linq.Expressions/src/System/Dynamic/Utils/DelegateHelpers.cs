@@ -163,8 +163,8 @@ namespace System.Dynamic.Utils
                 }
 
                 return (thunkTypeArgs.Length > 0)
-                  ? uninstantiatedMethod.MakeGenericMethod(thunkTypeArgs)
-                  : uninstantiatedMethod;
+                    ? uninstantiatedMethod.MakeGenericMethod(thunkTypeArgs)
+                    : uninstantiatedMethod;
             }
             catch
             {

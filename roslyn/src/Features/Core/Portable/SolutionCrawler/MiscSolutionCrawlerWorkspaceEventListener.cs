@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     ]
     internal class MiscSolutionCrawlerWorkspaceEventListener
         : IEventListener<object>,
-          IEventListenerStoppable
+            IEventListenerStoppable
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

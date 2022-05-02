@@ -71,10 +71,10 @@ internal class SocketAwaitableEventArgs : SocketAsyncEventArgs, IValueTaskSource
     public ValueTaskSourceStatus GetStatus(short token)
     {
         return !ReferenceEquals(_continuation, _continuationCompleted)
-          ? ValueTaskSourceStatus.Pending
-          : SocketError == SocketError.Success
-              ? ValueTaskSourceStatus.Succeeded
-              : ValueTaskSourceStatus.Faulted;
+            ? ValueTaskSourceStatus.Pending
+            : SocketError == SocketError.Success
+                ? ValueTaskSourceStatus.Succeeded
+                : ValueTaskSourceStatus.Faulted;
     }
 
     public void OnCompleted(

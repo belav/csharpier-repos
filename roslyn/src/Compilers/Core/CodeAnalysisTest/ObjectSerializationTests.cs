@@ -239,7 +239,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private class TypeWithTwoMembers<T, S>
             : IObjectWritable,
-              IEquatable<TypeWithTwoMembers<T, S>>
+                IEquatable<TypeWithTwoMembers<T, S>>
         {
             private readonly T _member1;
             private readonly S _member2;

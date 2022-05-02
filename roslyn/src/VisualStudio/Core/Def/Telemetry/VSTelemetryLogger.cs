@@ -120,10 +120,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             logMessage is KeyValueLogMessage kvLogMessage
                 ? kvLogMessage.Kind
                 : logMessage.LogLevel switch
-                  {
-                      >= LogLevel.Information => LogType.UserAction,
-                      _ => LogType.Trace
-                  };
+                {
+                    >= LogLevel.Information => LogType.UserAction,
+                    _ => LogType.Trace
+                };
 
         private void EndScope<T>(
             FunctionId functionId,
@@ -143,8 +143,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             UpdateEvent(operation.EndEvent, functionId, logMessage);
             operation.End(
                 cancellationToken.IsCancellationRequested
-                  ? TelemetryResult.UserCancel
-                  : TelemetryResult.Success
+                    ? TelemetryResult.UserCancel
+                    : TelemetryResult.Success
             );
         }
 
@@ -215,9 +215,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                     {
                         PiiValue pii => new TelemetryPiiProperty(pii.Value),
                         IEnumerable<object> items
-                          => new TelemetryComplexProperty(
-                              items.Select(item => (item is PiiValue pii) ? pii.Value : item)
-                          ),
+                            => new TelemetryComplexProperty(
+                                items.Select(item => (item is PiiValue pii) ? pii.Value : item)
+                            ),
                         _ => value
                     }
                 );

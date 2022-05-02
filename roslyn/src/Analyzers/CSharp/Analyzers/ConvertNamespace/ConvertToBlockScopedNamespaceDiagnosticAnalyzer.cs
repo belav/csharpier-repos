@@ -80,11 +80,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) != ReportDiagnostic.Hidden
                     ? declaration.Name.GetLocation()
                     : tree.GetLocation(
-                          TextSpan.FromBounds(
-                              declaration.SpanStart,
-                              declaration.SemicolonToken.Span.End
-                          )
-                      );
+                        TextSpan.FromBounds(
+                            declaration.SpanStart,
+                            declaration.SemicolonToken.Span.End
+                        )
+                    );
 
             return DiagnosticHelper.Create(
                 this.Descriptor,

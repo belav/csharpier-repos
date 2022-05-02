@@ -141,8 +141,8 @@ namespace System.Drawing
 
     public abstract partial class Brush
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable
+            System.ICloneable,
+            System.IDisposable
     {
         protected Brush() { }
 
@@ -878,9 +878,9 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.FontConverter))]
     public sealed partial class Font
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable,
-          System.Runtime.Serialization.ISerializable
+            System.ICloneable,
+            System.IDisposable,
+            System.Runtime.Serialization.ISerializable
     {
         public Font(System.Drawing.Font prototype, System.Drawing.FontStyle newStyle) { }
 
@@ -1217,7 +1217,7 @@ namespace System.Drawing
 
         public sealed partial class FontNameConverter
             : System.ComponentModel.TypeConverter,
-              System.IDisposable
+                System.IDisposable
         {
             public FontNameConverter() { }
 
@@ -1376,8 +1376,8 @@ namespace System.Drawing
 
     public sealed partial class Graphics
         : System.MarshalByRefObject,
-          System.Drawing.IDeviceContext,
-          System.IDisposable
+            System.Drawing.IDeviceContext,
+            System.IDisposable
     {
         internal Graphics() { }
 
@@ -2754,9 +2754,9 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.IconConverter))]
     public sealed partial class Icon
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable,
-          System.Runtime.Serialization.ISerializable
+            System.ICloneable,
+            System.IDisposable,
+            System.Runtime.Serialization.ISerializable
     {
         public Icon(System.Drawing.Icon original, System.Drawing.Size size) { }
 
@@ -2889,9 +2889,9 @@ namespace System.Drawing
     [System.ComponentModel.TypeConverterAttribute(typeof(System.Drawing.ImageConverter))]
     public abstract partial class Image
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable,
-          System.Runtime.Serialization.ISerializable
+            System.ICloneable,
+            System.IDisposable,
+            System.Runtime.Serialization.ISerializable
     {
         internal Image() { }
 
@@ -3277,8 +3277,8 @@ namespace System.Drawing
 
     public sealed partial class Pen
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable
+            System.ICloneable,
+            System.IDisposable
     {
         public Pen(System.Drawing.Brush brush) { }
 
@@ -4236,8 +4236,8 @@ namespace System.Drawing
 
     public sealed partial class StringFormat
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable
+            System.ICloneable,
+            System.IDisposable
     {
         public StringFormat() { }
 
@@ -5001,8 +5001,8 @@ namespace System.Drawing.Drawing2D
 
     public partial class CustomLineCap
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable
+            System.ICloneable,
+            System.IDisposable
     {
         public CustomLineCap(
             System.Drawing.Drawing2D.GraphicsPath? fillPath,
@@ -5104,8 +5104,8 @@ namespace System.Drawing.Drawing2D
 
     public sealed partial class GraphicsPath
         : System.MarshalByRefObject,
-          System.ICloneable,
-          System.IDisposable
+            System.ICloneable,
+            System.IDisposable
     {
         public GraphicsPath() { }
 
@@ -8605,7 +8605,7 @@ namespace System.Drawing.Printing
 
         public partial class PaperSizeCollection
             : System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.IEnumerable
         {
             public PaperSizeCollection(System.Drawing.Printing.PaperSize[] array) { }
 
@@ -8655,7 +8655,7 @@ namespace System.Drawing.Printing
 
         public partial class PaperSourceCollection
             : System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.IEnumerable
         {
             public PaperSourceCollection(System.Drawing.Printing.PaperSource[] array) { }
 
@@ -8705,7 +8705,7 @@ namespace System.Drawing.Printing
 
         public partial class PrinterResolutionCollection
             : System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.IEnumerable
         {
             public PrinterResolutionCollection(System.Drawing.Printing.PrinterResolution[] array)
             { }
@@ -8759,7 +8759,7 @@ namespace System.Drawing.Printing
 
         public partial class StringCollection
             : System.Collections.ICollection,
-              System.Collections.IEnumerable
+                System.Collections.IEnumerable
         {
             public StringCollection(string[] array) { }
 

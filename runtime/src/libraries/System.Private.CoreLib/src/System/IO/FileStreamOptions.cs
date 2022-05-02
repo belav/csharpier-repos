@@ -118,9 +118,9 @@ namespace System.IO
                     value >= 0
                         ? value
                         : throw new ArgumentOutOfRangeException(
-                              nameof(value),
-                              SR.ArgumentOutOfRange_NeedNonNegNum
-                          );
+                            nameof(value),
+                            SR.ArgumentOutOfRange_NeedNonNegNum
+                        );
         }
 
         /// <summary>
@@ -136,9 +136,9 @@ namespace System.IO
                     value >= 0
                         ? value
                         : throw new ArgumentOutOfRangeException(
-                              nameof(value),
-                              SR.ArgumentOutOfRange_NeedNonNegNum
-                          );
+                            nameof(value),
+                            SR.ArgumentOutOfRange_NeedNonNegNum
+                        );
         }
     }
 }

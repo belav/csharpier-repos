@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SymbolKind.Method
                             when symbol is MethodSymbol m
                                 && m.MethodKind == MethodKind.LocalFunction
-                          => true,
+                            => true,
                         _ => false
                     }
                 );
@@ -60,8 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // and is necessary in cases such as anonymous types where OriginalDefinition will be distinct.
                 int? thisIndex = Symbol.MemberIndexOpt;
                 return thisIndex.HasValue
-                  ? Hash.Combine(thisIndex.GetValueOrDefault(), currentKey)
-                  : Hash.Combine(Symbol.OriginalDefinition, currentKey);
+                    ? Hash.Combine(thisIndex.GetValueOrDefault(), currentKey)
+                    : Hash.Combine(Symbol.OriginalDefinition, currentKey);
             }
 
             public bool Equals(VariableIdentifier other)

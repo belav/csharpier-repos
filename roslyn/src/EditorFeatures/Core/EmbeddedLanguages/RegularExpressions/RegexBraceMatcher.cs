@@ -83,8 +83,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             var firstChar = trivia.Value.VirtualChars[0];
             var lastChar = trivia.Value.VirtualChars[trivia.Value.VirtualChars.Length - 1];
             return firstChar != '(' || lastChar != ')'
-              ? null
-              : new BraceMatchingResult(firstChar.Span, lastChar.Span);
+                ? null
+                : new BraceMatchingResult(firstChar.Span, lastChar.Span);
         }
 
         private static BraceMatchingResult? FindGroupingBraces(RegexTree tree, VirtualChar ch)
@@ -97,8 +97,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
         {
             var node = FindCharacterClassNode(tree.Root, ch);
             return node == null
-              ? null
-              : CreateResult(node.OpenBracketToken, node.CloseBracketToken);
+                ? null
+                : CreateResult(node.OpenBracketToken, node.CloseBracketToken);
         }
 
         private static RegexGroupingNode FindGroupingNode(RegexNode node, VirtualChar ch) =>

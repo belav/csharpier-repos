@@ -381,8 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 assemblyName,
                 options?.WithReferencesSupersedeLowerVersions(true) ?? s_defaultSubmissionOptions,
                 (syntaxTree != null)
-                  ? new[] { syntaxTree }
-                  : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
+                    ? new[] { syntaxTree }
+                    : SpecializedCollections.EmptyEnumerable<SyntaxTree>(),
                 references,
                 previousScriptCompilation,
                 returnType,
@@ -729,8 +729,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _referenceManager,
                 reuseReferenceManager,
                 reuseSyntaxAndDeclarationManager
-                  ? _syntaxAndDeclarations
-                  : new SyntaxAndDeclarationManager(
+                    ? _syntaxAndDeclarations
+                    : new SyntaxAndDeclarationManager(
                         _syntaxAndDeclarations.ExternalSyntaxTrees,
                         options.ScriptClassName,
                         options.SourceReferenceResolver,
@@ -1253,8 +1253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (directive.SyntaxTree.FilePath, directive.File.ValueText),
                 out reference
             )
-              ? reference
-              : null;
+                ? reference
+                : null;
         }
 
         /// <summary>
@@ -1548,19 +1548,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             // same alias will have the same target.
             @namespace = foundNamespace
                 ? MergedNamespaceSymbol.Create(
-                      new NamespaceExtent(this),
-                      namespacesToMerge: builder!.ToImmutableAndFree(),
-                      containingNamespace: null,
-                      nameOpt: null
-                  )
+                    new NamespaceExtent(this),
+                    namespacesToMerge: builder!.ToImmutableAndFree(),
+                    containingNamespace: null,
+                    nameOpt: null
+                )
                 : new MissingNamespaceSymbol(
-                      new MissingModuleSymbol(
-                          new MissingAssemblySymbol(
-                              new AssemblyIdentity(System.Guid.NewGuid().ToString())
-                          ),
-                          ordinal: -1
-                      )
-                  );
+                    new MissingModuleSymbol(
+                        new MissingAssemblySymbol(
+                            new AssemblyIdentity(System.Guid.NewGuid().ToString())
+                        ),
+                        ordinal: -1
+                    )
+                );
 
             // Use GetOrAdd in case another thread beat us to the punch (i.e. should return the same object for the same alias, every time).
             @namespace = _externAliasTargets.GetOrAdd(aliasName, @namespace);
@@ -1612,9 +1612,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var previousSubmissionImports =
                 previousSubmission is object
                     ? Imports.ExpandPreviousSubmissionImports(
-                          previousSubmission.GlobalImports,
-                          this
-                      )
+                        previousSubmission.GlobalImports,
+                        this
+                    )
                     : ImmutableArray<NamespaceOrTypeAndUsingDirective>.Empty;
 
             if (usingsFromoptions.UsingNamespacesOrTypes.IsEmpty)
@@ -1821,8 +1821,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal SynthesizedInteractiveInitializerMethod? GetSubmissionInitializer()
         {
             return (IsSubmission && ScriptClass is object)
-              ? ScriptClass.GetScriptInitializer()
-              : null;
+                ? ScriptClass.GetScriptInitializer()
+                : null;
         }
 
         /// <summary>
@@ -2585,12 +2585,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol? throughType0 = throughType.EnsureCSharpSymbolOrNull(nameof(throughType));
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
             return within0.Kind == SymbolKind.Assembly
-              ? AccessCheck.IsSymbolAccessible(
+                ? AccessCheck.IsSymbolAccessible(
                     symbol0,
                     (AssemblySymbol)within0,
                     ref discardedUseSiteInfo
                 )
-              : AccessCheck.IsSymbolAccessible(
+                : AccessCheck.IsSymbolAccessible(
                     symbol0,
                     (NamedTypeSymbol)within0,
                     ref discardedUseSiteInfo,
@@ -2698,8 +2698,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 System.Runtime.CompilerServices.Unsafe.AreSame(
                     ref cachedBinderFactories,
                     ref ignoreAccessibility
-                      ? ref _ignoreAccessibilityBinderFactories
-                      : ref _binderFactories
+                        ? ref _ignoreAccessibilityBinderFactories
+                        : ref _binderFactories
                 )
             );
 
@@ -3320,7 +3320,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodCompiler.CompileMethodBodies(
                 compilation: this,
                 moduleBeingBuiltOpt: doLowering
-                  ? (PEModuleBuilder?)CreateModuleBuilder(
+                    ? (PEModuleBuilder?)CreateModuleBuilder(
                         emitOptions: EmitOptions.Default,
                         debugEntryPoint: null,
                         manifestResources: null,
@@ -3330,7 +3330,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         diagnostics: diagnostics.DiagnosticBag,
                         cancellationToken: cancellationToken
                     )
-                  : null,
+                    : null,
                 emittingPdb: false,
                 emitTestCoverageData: false,
                 hasDeclarationErrors: false,
@@ -3496,10 +3496,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     emitMethodBodies: false,
                     diagnostics: bindingDiagnostics,
                     filterOpt: filterTree is object
-                      ? (Predicate<Symbol>?)(
+                        ? (Predicate<Symbol>?)(
                             s => IsDefinedOrImplementedInSourceTree(s, filterTree, filterSpan)
                         )
-                      : (Predicate<Symbol>?)null,
+                        : (Predicate<Symbol>?)null,
                     cancellationToken: cancellationToken
                 );
 
@@ -3853,8 +3853,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             else
             {
                 var kind = _options.OutputKind.IsValid()
-                  ? _options.OutputKind
-                  : OutputKind.DynamicallyLinkedLibrary;
+                    ? _options.OutputKind
+                    : OutputKind.DynamicallyLinkedLibrary;
                 moduleBeingBuilt = new PEAssemblyBuilder(
                     SourceAssembly,
                     emitOptions,
@@ -4562,9 +4562,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 internalCallingConvention == CallingConvention.Unmanaged
                 && !callingConventionTypes.IsDefaultOrEmpty
                     ? callingConventionTypes.SelectAsArray(
-                          (type, i, @this) => getCustomModifierForType(type, @this, i),
-                          this
-                      )
+                        (type, i, @this) => getCustomModifierForType(type, @this, i),
+                        this
+                    )
                     : ImmutableArray<CustomModifier>.Empty;
 
             return FunctionPointerTypeSymbol

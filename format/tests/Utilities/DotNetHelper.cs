@@ -25,11 +25,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities
                 LanguageNames.VisualBasic => "VB",
                 LanguageNames.FSharp => "F#",
                 _
-                  => throw new ArgumentOutOfRangeException(
-                      nameof(languageName),
-                      actualValue: languageName,
-                      message: "Only C#, F# and VB.NET project are supported."
-                  )
+                    => throw new ArgumentOutOfRangeException(
+                        nameof(languageName),
+                        actualValue: languageName,
+                        message: "Only C#, F# and VB.NET project are supported."
+                    )
             };
 
             var processInfo = ProcessRunner.CreateProcess(

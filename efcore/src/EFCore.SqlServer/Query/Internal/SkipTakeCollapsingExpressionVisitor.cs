@@ -71,12 +71,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         selectExpression.Projection,
                         selectExpression.Tables,
                         selectExpression.GroupBy.Count > 0
-                          ? selectExpression.Predicate
-                          : _sqlExpressionFactory.Constant(false),
+                            ? selectExpression.Predicate
+                            : _sqlExpressionFactory.Constant(false),
                         selectExpression.GroupBy,
                         selectExpression.GroupBy.Count > 0
-                          ? _sqlExpressionFactory.Constant(false)
-                          : null,
+                            ? _sqlExpressionFactory.Constant(false)
+                            : null,
                         new List<OrderingExpression>(0),
                         limit: null,
                         offset: null

@@ -273,19 +273,19 @@ namespace Roslyn.Test.Utilities
             {
                 // Primary
                 TargetFramework.Empty
-                  => ImmutableArray<MetadataReference>.Empty,
+                    => ImmutableArray<MetadataReference>.Empty,
                 TargetFramework.NetStandard20 => NetStandard20References,
                 TargetFramework.NetCoreApp
                 or TargetFramework.Net50
-                  => NetCoreApp.StandardReferences,
+                    => NetCoreApp.StandardReferences,
                 TargetFramework.Net60 => ImmutableArray.CreateRange<MetadataReference>(Net60.All),
                 TargetFramework.NetCoreAppAndCSharp
-                  => NetCoreApp.StandardReferences.Add(NetCoreApp.MicrosoftCSharp),
+                    => NetCoreApp.StandardReferences.Add(NetCoreApp.MicrosoftCSharp),
                 TargetFramework.NetFramework => NetFramework.StandardReferences,
 
                 // Legacy we should be phasing out
                 TargetFramework.Mscorlib40
-                  => Mscorlib40References,
+                    => Mscorlib40References,
                 TargetFramework.Mscorlib40Extended => Mscorlib40ExtendedReferences,
                 TargetFramework.Mscorlib40AndSystemCore => Mscorlib40andSystemCoreReferences,
                 TargetFramework.Mscorlib40AndVBRuntime => Mscorlib40andVBRuntimeReferences,
@@ -306,9 +306,9 @@ namespace Roslyn.Test.Utilities
                 TargetFramework.MinimalAsync => MinimalAsyncReferences,
                 TargetFramework.StandardLatest => StandardLatestReferences,
                 _
-                  => throw new InvalidOperationException(
-                      $"Unexpected target framework {targetFramework}"
-                  ),
+                    => throw new InvalidOperationException(
+                        $"Unexpected target framework {targetFramework}"
+                    ),
             };
 
         public static ImmutableArray<MetadataReference> GetReferences(

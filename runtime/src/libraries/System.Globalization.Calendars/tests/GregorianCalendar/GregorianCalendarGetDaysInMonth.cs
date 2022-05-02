@@ -79,8 +79,8 @@ namespace System.Globalization.Tests
         {
             GregorianCalendar calendar = new GregorianCalendar();
             int expected = IsLeapYear(year)
-              ? s_daysInMonthInLeapYear[month]
-              : s_daysInMonthInCommonYear[month];
+                ? s_daysInMonthInLeapYear[month]
+                : s_daysInMonthInCommonYear[month];
             Assert.Equal(expected, calendar.GetDaysInMonth(year, month));
             Assert.Equal(expected, calendar.GetDaysInMonth(year, month, 0));
             Assert.Equal(expected, calendar.GetDaysInMonth(year, month, 1));

@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             // Make sure that moving 'v' to the outer scope won't cause any conflicts.
 
             var ifStatementScope = ifStatement.Parent.IsKind(SyntaxKind.Block)
-              ? ifStatement.Parent
-              : ifStatement;
+                ? ifStatement.Parent
+                : ifStatement;
 
             if (ContainsVariableDeclaration(ifStatementScope, declarator))
             {

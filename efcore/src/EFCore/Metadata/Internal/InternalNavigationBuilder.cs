@@ -17,7 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public class InternalNavigationBuilder
         : InternalPropertyBaseBuilder<Navigation>,
-          IConventionNavigationBuilder
+            IConventionNavigationBuilder
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -126,14 +126,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var foreignKey = Metadata.ForeignKey;
             return foreignKey.IsUnique
-              ? foreignKey.GetPrincipalEndConfigurationSource() == null
-                  ? false
-                  : Metadata.IsOnDependent
-                      ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                      : foreignKey.Builder.CanSetIsRequiredDependent(required, configurationSource)
-              : Metadata.IsOnDependent
-                  ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
-                  : false;
+                ? foreignKey.GetPrincipalEndConfigurationSource() == null
+                    ? false
+                    : Metadata.IsOnDependent
+                        ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
+                        : foreignKey.Builder.CanSetIsRequiredDependent(
+                            required,
+                            configurationSource
+                        )
+                : Metadata.IsOnDependent
+                    ? foreignKey.Builder.CanSetIsRequired(required, configurationSource)
+                    : false;
         }
 
         /// <summary>
@@ -167,12 +170,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     }
 
                     return Metadata.IsOnDependent
-                      ? foreignKey.Builder
-                        .IsRequired(required, configurationSource)!
-                        .Metadata.DependentToPrincipal!.Builder
-                      : foreignKey.Builder
-                        .IsRequiredDependent(required, configurationSource)!
-                        .Metadata.PrincipalToDependent!.Builder;
+                        ? foreignKey.Builder
+                            .IsRequired(required, configurationSource)!
+                            .Metadata.DependentToPrincipal!.Builder
+                        : foreignKey.Builder
+                            .IsRequiredDependent(required, configurationSource)!
+                            .Metadata.PrincipalToDependent!.Builder;
                 }
 
                 if (Metadata.IsOnDependent)
@@ -214,8 +217,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetPropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -227,8 +230,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UsePropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -240,8 +243,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             UsePropertyAccessMode(
                 propertyAccessMode,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -253,8 +256,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetField(
                 fieldName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -266,8 +269,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -279,8 +282,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldName,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -292,8 +295,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetField(
                 fieldInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -305,8 +308,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -318,8 +321,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             HasField(
                 fieldInfo,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -331,8 +334,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetAutoInclude(
                 autoInclude,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -344,8 +347,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AutoInclude(
                 autoInclude,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -357,8 +360,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             CanSetIsRequired(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
 
         /// <inheritdoc />
@@ -370,8 +373,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IsRequired(
                 required,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

@@ -698,8 +698,8 @@ namespace System.Diagnostics
                         throw new SecurityException(
                             SR.Format(
                                 wantToCreate
-                                  ? SR.SomeLogsInaccessibleToCreate
-                                  : SR.SomeLogsInaccessible,
+                                    ? SR.SomeLogsInaccessibleToCreate
+                                    : SR.SomeLogsInaccessible,
                                 inaccessibleLogs
                             )
                         );
@@ -1107,7 +1107,7 @@ namespace System.Diagnostics
                     msgLen > 1 && buf[msgLen - 1] == '\n'
                         ? new string(buf, 0, msgLen - 2)
                         : // chop off a single CR/LF pair from the end if there is one. FormatMessage always appends one extra.
-                          new string(buf, 0, msgLen);
+                        new string(buf, 0, msgLen);
             }
 
             return msg;

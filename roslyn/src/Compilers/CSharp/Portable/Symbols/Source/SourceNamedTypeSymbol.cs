@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     // That is, for a generic type C<T> this is the instance type C<T>.
     internal sealed partial class SourceNamedTypeSymbol
         : SourceMemberContainerTypeSymbol,
-          IAttributeTargetSymbol
+            IAttributeTargetSymbol
     {
         private ImmutableArray<TypeParameterSymbol> _lazyTypeParameters;
 
@@ -318,8 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var constraintTypes = GetTypeParameterConstraintTypes();
             return (constraintTypes.Length > 0)
-              ? constraintTypes[ordinal]
-              : ImmutableArray<TypeWithAnnotations>.Empty;
+                ? constraintTypes[ordinal]
+                : ImmutableArray<TypeWithAnnotations>.Empty;
         }
 
         private ImmutableArray<
@@ -355,8 +355,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var constraintKinds = GetTypeParameterConstraintKinds();
             return (constraintKinds.Length > 0)
-              ? constraintKinds[ordinal]
-              : TypeParameterConstraintKind.None;
+                ? constraintKinds[ordinal]
+                : TypeParameterConstraintKind.None;
         }
 
         private ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds()
@@ -1395,8 +1395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             return ((object)this.BaseTypeNoUseSiteDiagnostics != null)
-              ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
-              : AttributeUsageInfo.Default;
+                ? this.BaseTypeNoUseSiteDiagnostics.GetAttributeUsageInfo()
+                : AttributeUsageInfo.Default;
         }
 
         /// <summary>
@@ -1924,8 +1924,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var data = GetDecodedWellKnownAttributeData();
                 return (data != null && data.HasStructLayoutAttribute)
-                  ? data.MarshallingCharSet
-                  : DefaultMarshallingCharSet;
+                    ? data.MarshallingCharSet
+                    : DefaultMarshallingCharSet;
             }
         }
 
@@ -2220,8 +2220,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
         {
             return t2 is NativeIntegerTypeSymbol nativeInteger
-              ? nativeInteger.Equals(this, comparison)
-              : base.Equals(t2, comparison);
+                ? nativeInteger.Equals(this, comparison)
+                : base.Equals(t2, comparison);
         }
 
 #nullable enable

@@ -110,8 +110,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         attributes: default,
                         accessibility: DetermineMinimalAccessibility(_state),
                         modifiers: _isConstant
-                          ? new DeclarationModifiers(isConst: true, isUnsafe: generateUnsafe)
-                          : new DeclarationModifiers(
+                            ? new DeclarationModifiers(isConst: true, isUnsafe: generateUnsafe)
+                            : new DeclarationModifiers(
                                 isStatic: _state.IsStatic,
                                 isReadOnly: _isReadonly,
                                 isUnsafe: generateUnsafe
@@ -156,8 +156,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 return
                     _state.TypeToGenerateIn.TypeKind != TypeKind.Interface
                     && _refKind != RefKind.None
-                  ? ImmutableArray.Create(throwStatement)
-                  : default;
+                    ? ImmutableArray.Create(throwStatement)
+                    : default;
             }
 
             private static Accessibility DetermineMaximalAccessibility(State state)

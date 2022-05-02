@@ -26,15 +26,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
     ]
     internal class CSharpUseCollectionInitializerCodeFixProvider
         : AbstractUseCollectionInitializerCodeFixProvider<
-              SyntaxKind,
-              ExpressionSyntax,
-              StatementSyntax,
-              ObjectCreationExpressionSyntax,
-              MemberAccessExpressionSyntax,
-              InvocationExpressionSyntax,
-              ExpressionStatementSyntax,
-              VariableDeclaratorSyntax
-          >
+            SyntaxKind,
+            ExpressionSyntax,
+            StatementSyntax,
+            ObjectCreationExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            InvocationExpressionSyntax,
+            ExpressionStatementSyntax,
+            VariableDeclaratorSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(
@@ -135,8 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
                 // avoid the ambiguity.
                 var expression = arguments[0].Expression;
                 return SyntaxFacts.IsAssignmentExpression(expression.Kind())
-                  ? SyntaxFactory.ParenthesizedExpression(expression)
-                  : expression;
+                    ? SyntaxFactory.ParenthesizedExpression(expression)
+                    : expression;
             }
 
             return SyntaxFactory.InitializerExpression(

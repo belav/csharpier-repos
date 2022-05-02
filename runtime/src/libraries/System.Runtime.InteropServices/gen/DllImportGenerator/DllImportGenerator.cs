@@ -366,8 +366,8 @@ namespace Microsoft.Interop
 
             int idx = modifiers.IndexOf(SyntaxKind.PartialKeyword);
             return idx >= 0
-              ? modifiers.Insert(idx, Token(modifierToAdd))
-              : modifiers.Add(Token(modifierToAdd));
+                ? modifiers.Insert(idx, Token(modifierToAdd))
+                : modifiers.Add(Token(modifierToAdd));
         }
 
         private static TypeDeclarationSyntax CreateTypeDeclarationWithoutTrivia(
@@ -457,7 +457,7 @@ namespace Microsoft.Interop
                 // .NET Core (when version < 5.0) or .NET
                 "System.Runtime"
                 or "System.Private.CoreLib"
-                  => (version.Major < 5) ? TargetFramework.Core : TargetFramework.Net,
+                    => (version.Major < 5) ? TargetFramework.Core : TargetFramework.Net,
                 _ => TargetFramework.Unknown,
             };
         }
@@ -849,8 +849,8 @@ namespace Microsoft.Interop
             {
                 return LiteralExpression(
                     trueOrFalse
-                      ? SyntaxKind.TrueLiteralExpression
-                      : SyntaxKind.FalseLiteralExpression
+                        ? SyntaxKind.TrueLiteralExpression
+                        : SyntaxKind.FalseLiteralExpression
                 );
             }
 

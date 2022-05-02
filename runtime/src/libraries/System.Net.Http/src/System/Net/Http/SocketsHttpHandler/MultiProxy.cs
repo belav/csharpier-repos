@@ -89,8 +89,8 @@ namespace System.Net.Http
             Debug.Assert(failedProxyCache != null);
 
             return string.IsNullOrEmpty(proxyConfig) == false
-              ? new MultiProxy(failedProxyCache, proxyConfig, secure)
-              : MultiProxy.Empty;
+                ? new MultiProxy(failedProxyCache, proxyConfig, secure)
+                : MultiProxy.Empty;
         }
 
         /// <summary>

@@ -24,8 +24,8 @@ namespace System.Threading.Tasks.Dataflow
     [DebuggerTypeProxy(typeof(TransformBlock<,>.DebugView))]
     public sealed class TransformBlock<TInput, TOutput>
         : IPropagatorBlock<TInput, TOutput>,
-          IReceivableSourceBlock<TOutput>,
-          IDebuggerDisplay
+            IReceivableSourceBlock<TOutput>,
+            IDebuggerDisplay
     {
         /// <summary>The target side.</summary>
         private readonly TargetCore<TInput> _target;

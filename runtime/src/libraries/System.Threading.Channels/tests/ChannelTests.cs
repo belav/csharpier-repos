@@ -248,7 +248,7 @@ namespace System.Threading.Channels.Tests
                     : _rand.Next(0, 2) == 0
                         ? new ValueTask<bool>(Task.Delay(1).ContinueWith(_ => true))
                         : // randomly introduce delays
-                          new ValueTask<bool>(Task.FromResult(true));
+                        new ValueTask<bool>(Task.FromResult(true));
         }
 
         private sealed class TestChannelReader<T> : ChannelReader<T>
@@ -286,10 +286,10 @@ namespace System.Threading.Channels.Tests
             public override ValueTask<bool> WaitToReadAsync(CancellationToken cancellationToken) =>
                 new ValueTask<bool>(
                     _closed
-                      ? Task.FromResult(false)
-                      : _rand.Next(0, 2) == 0
-                          ? Task.Delay(1).ContinueWith(_ => true)
-                          : // randomly introduce delays
+                        ? Task.FromResult(false)
+                        : _rand.Next(0, 2) == 0
+                            ? Task.Delay(1).ContinueWith(_ => true)
+                            : // randomly introduce delays
                             Task.FromResult(true)
                 );
         }

@@ -57,7 +57,7 @@ namespace AutoMapper.Configuration
 
     public class PathConfigurationExpression<TSource, TDestination, TMember>
         : IPathConfigurationExpression<TSource, TDestination, TMember>,
-          IPropertyMapConfiguration
+            IPropertyMapConfiguration
     {
         private readonly LambdaExpression _destinationExpression;
         private LambdaExpression _sourceExpression;

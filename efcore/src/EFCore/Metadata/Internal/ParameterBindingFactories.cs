@@ -49,8 +49,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             _parameterBindingFactories.FirstOrDefault(f => f.CanBind(parameterType, parameterName))
             ?? (
                 _registeredServices.Services.Contains(parameterType)
-                  ? new ServiceParameterBindingFactory(parameterType)
-                  : null
+                    ? new ServiceParameterBindingFactory(parameterType)
+                    : null
             );
     }
 }

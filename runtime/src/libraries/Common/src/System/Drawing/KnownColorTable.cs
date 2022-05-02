@@ -486,8 +486,8 @@ namespace System.Drawing
             Debug.Assert(color > 0 && color <= KnownColor.RebeccaPurple);
 
             return ColorKindTable[(int)color] == KnownColorKindSystem
-              ? GetSystemColorArgb(color)
-              : s_colorValueTable[(int)color];
+                ? GetSystemColorArgb(color)
+                : s_colorValueTable[(int)color];
         }
 
 #if FEATURE_WINDOWS_SYSTEM_COLORS

@@ -421,8 +421,8 @@ namespace System.IO.Compression
                 writeEntryNameEncoding = _archive.EntryNameEncoding;
             else
                 writeEntryNameEncoding = ZipHelper.RequiresUnicode(entryName)
-                  ? Encoding.UTF8
-                  : Encoding.ASCII;
+                    ? Encoding.UTF8
+                    : Encoding.ASCII;
 
             isUTF8 = writeEntryNameEncoding.Equals(Encoding.UTF8);
             return writeEntryNameEncoding.GetBytes(entryName);

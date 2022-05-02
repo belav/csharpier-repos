@@ -185,11 +185,11 @@ namespace System.Linq
                 childComparer == null
                     ? new CachingComparer<TElement, TKey>(_keySelector, _comparer, _descending)
                     : new CachingComparerWithChild<TElement, TKey>(
-                          _keySelector,
-                          _comparer,
-                          _descending,
-                          childComparer
-                      );
+                        _keySelector,
+                        _comparer,
+                        _descending,
+                        childComparer
+                    );
             return _parent != null ? _parent.GetComparer(cmp) : cmp;
         }
     }
@@ -319,8 +319,8 @@ namespace System.Linq
         {
             int[] map = ComputeMap(elements, count);
             return idx == 0
-              ? elements[Min(map, count)]
-              : elements[QuickSelect(map, count - 1, idx)];
+                ? elements[Min(map, count)]
+                : elements[QuickSelect(map, count - 1, idx)];
         }
 
         protected abstract void QuickSort(int[] map, int left, int right);

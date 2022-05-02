@@ -160,8 +160,8 @@ public abstract class UrlHelperBase : IUrlHelper
                 builder.Append(Uri.SchemeDelimiter);
 
                 host = string.IsNullOrEmpty(host)
-                  ? ActionContext.HttpContext.Request.Host.Value
-                  : host;
+                    ? ActionContext.HttpContext.Request.Host.Value
+                    : host;
                 builder.Append(host);
                 AppendPathAndFragment(builder, pathBase, virtualPath, fragment);
             }
@@ -224,8 +224,8 @@ public abstract class UrlHelperBase : IUrlHelper
                 builder.Append(Uri.SchemeDelimiter);
 
                 host = string.IsNullOrEmpty(host)
-                  ? ActionContext.HttpContext.Request.Host.Value
-                  : host;
+                    ? ActionContext.HttpContext.Request.Host.Value
+                    : host;
                 builder.Append(host);
                 AppendPathAndFragment(builder, pathBase: null, path, fragment: null);
             }

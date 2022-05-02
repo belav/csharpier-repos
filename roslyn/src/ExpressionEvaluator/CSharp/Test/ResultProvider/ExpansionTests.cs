@@ -3849,9 +3849,9 @@ class D : C
             ) =>
                 (m == "P")
                     ? CreateErrorValue(
-                          runtime.GetType(typeof(int?)),
-                          "Function evaluation timed out"
-                      )
+                        runtime.GetType(typeof(int?)),
+                        "Function evaluation timed out"
+                    )
                     : null;
             runtime = new DkmClrRuntimeInstance(
                 ReflectionUtilities.GetMscorlibAndSystemCore(GetAssembly(source)),

@@ -12598,15 +12598,15 @@ class C
 
             var expectedDiagnostic = outOfMemory
                 ? Diagnostic(
-                      RudeEditKind.MemberBodyTooBig,
-                      "public static void G()",
-                      FeaturesResources.method
-                  )
+                    RudeEditKind.MemberBodyTooBig,
+                    "public static void G()",
+                    FeaturesResources.method
+                )
                 : Diagnostic(
-                      RudeEditKind.MemberBodyInternalError,
-                      "public static void G()",
-                      FeaturesResources.method
-                  );
+                    RudeEditKind.MemberBodyInternalError,
+                    "public static void G()",
+                    FeaturesResources.method
+                );
 
             validator.VerifySemantics(
                 new[] { edits },

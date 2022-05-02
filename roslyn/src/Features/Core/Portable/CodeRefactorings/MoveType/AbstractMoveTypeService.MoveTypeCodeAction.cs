@@ -46,14 +46,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 _operationKind switch
                 {
                     MoveTypeOperationKind.MoveType
-                      => string.Format(FeaturesResources.Move_type_to_0, _fileName),
+                        => string.Format(FeaturesResources.Move_type_to_0, _fileName),
                     MoveTypeOperationKind.RenameType
-                      => string.Format(
-                          FeaturesResources.Rename_type_to_0,
-                          _state.DocumentNameWithoutExtension
-                      ),
+                        => string.Format(
+                            FeaturesResources.Rename_type_to_0,
+                            _state.DocumentNameWithoutExtension
+                        ),
                     MoveTypeOperationKind.RenameFile
-                      => string.Format(FeaturesResources.Rename_file_to_0, _fileName),
+                        => string.Format(FeaturesResources.Rename_file_to_0, _fileName),
                     MoveTypeOperationKind.MoveTypeNamespaceScope => string.Empty,
                     _ => throw ExceptionUtilities.UnexpectedValue(_operationKind),
                 };

@@ -39,9 +39,9 @@ namespace System.Xml
 
     internal sealed partial class XsdValidatingReader
         : XmlReader,
-          IXmlSchemaInfo,
-          IXmlLineInfo,
-          IXmlNamespaceResolver
+            IXmlSchemaInfo,
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         private enum ValidatingReaderState
         {
@@ -1825,8 +1825,8 @@ namespace System.Xml
             get
             {
                 return (_validationState == ValidatingReaderState.Init)
-                  ? ReadState.Initial
-                  : _coreReader.ReadState;
+                    ? ReadState.Initial
+                    : _coreReader.ReadState;
             }
         }
 
@@ -2454,8 +2454,8 @@ namespace System.Xml
                             Debug.Assert(_nsManager != null);
                             _nsManager.AddNamespace(
                                 _coreReader.Prefix.Length == 0
-                                  ? string.Empty
-                                  : _coreReader.LocalName,
+                                    ? string.Empty
+                                    : _coreReader.LocalName,
                                 _coreReader.Value
                             );
                         }
@@ -3232,8 +3232,8 @@ namespace System.Xml
                 if (schemaElem != null)
                 {
                     return (schemaElem.DefaultValue != null)
-                      ? schemaElem.DefaultValue
-                      : schemaElem.FixedValue;
+                        ? schemaElem.DefaultValue
+                        : schemaElem.FixedValue;
                 }
             }
             else

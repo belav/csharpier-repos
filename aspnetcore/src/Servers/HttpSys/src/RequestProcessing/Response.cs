@@ -361,8 +361,8 @@ internal sealed class Response
                         IntPtr.Zero,
                         0,
                         asyncResult == null
-                          ? SafeNativeOverlapped.Zero
-                          : asyncResult.NativeOverlapped!,
+                            ? SafeNativeOverlapped.Zero
+                            : asyncResult.NativeOverlapped!,
                         IntPtr.Zero
                     );
 
@@ -383,8 +383,8 @@ internal sealed class Response
                             IntPtr.Zero,
                             0,
                             asyncResult == null
-                              ? SafeNativeOverlapped.Zero
-                              : asyncResult.NativeOverlapped!,
+                                ? SafeNativeOverlapped.Zero
+                                : asyncResult.NativeOverlapped!,
                             IntPtr.Zero
                         );
 

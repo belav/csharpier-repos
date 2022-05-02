@@ -42,7 +42,7 @@ namespace System.Configuration
 #endif
     public sealed partial class ConfigurationPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public ConfigurationPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -114,7 +114,7 @@ namespace System.Data.Common
 #endif
     public abstract partial class DBDataPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         protected DBDataPermission() { }
 
@@ -387,7 +387,7 @@ namespace System.Data.OracleClient
 #endif
     public sealed partial class OraclePermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public OraclePermission(System.Security.Permissions.PermissionState state) { }
 
@@ -875,7 +875,7 @@ namespace System.Drawing.Printing
 #endif
     public sealed partial class PrintingPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public PrintingPermission(System.Drawing.Printing.PrintingPermissionLevel printingLevel) { }
 
@@ -965,7 +965,7 @@ namespace System.Net
 #endif
     public sealed partial class DnsPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public DnsPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -1072,7 +1072,7 @@ namespace System.Net
 #endif
     public sealed partial class SocketPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public const int AllPorts = -1;
 
@@ -1199,7 +1199,7 @@ namespace System.Net
 #endif
     public sealed partial class WebPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public WebPermission() { }
 
@@ -1327,7 +1327,7 @@ namespace System.Net.Mail
 #endif
     public sealed partial class SmtpPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public SmtpPermission(bool unrestricted) { }
 
@@ -1427,7 +1427,7 @@ namespace System.Net.NetworkInformation
 #endif
     public sealed partial class NetworkInformationPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public NetworkInformationPermission(
             System.Net.NetworkInformation.NetworkInformationAccess access
@@ -1521,7 +1521,7 @@ namespace System.Net.PeerToPeer
 #endif
     public sealed partial class PnrpPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public PnrpPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -1605,7 +1605,7 @@ namespace System.Net.PeerToPeer.Collaboration
 #endif
     public sealed partial class PeerCollaborationPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public PeerCollaborationPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -1682,8 +1682,8 @@ namespace System.Security
 #endif
     public abstract partial class CodeAccessPermission
         : System.Security.IPermission,
-          System.Security.ISecurityEncodable,
-          System.Security.IStackWalk
+            System.Security.ISecurityEncodable,
+            System.Security.IStackWalk
     {
         protected CodeAccessPermission() { }
 
@@ -1941,10 +1941,10 @@ namespace System.Security
 #if !NETCOREAPP
     public partial class PermissionSet
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.Runtime.Serialization.IDeserializationCallback,
-          System.Security.ISecurityEncodable,
-          System.Security.IStackWalk
+            System.Collections.IEnumerable,
+            System.Runtime.Serialization.IDeserializationCallback,
+            System.Security.ISecurityEncodable,
+            System.Security.IStackWalk
     {
         public PermissionSet(System.Security.Permissions.PermissionState state) { }
 
@@ -2337,7 +2337,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class DataProtectionPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public DataProtectionPermission(
             System.Security.Permissions.DataProtectionPermissionFlags flag
@@ -2462,7 +2462,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class EnvironmentPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public EnvironmentPermission(
             System.Security.Permissions.EnvironmentPermissionAccess flag,
@@ -2585,7 +2585,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class FileDialogPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public FileDialogPermission(System.Security.Permissions.FileDialogPermissionAccess access)
         { }
@@ -2692,7 +2692,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class FileIOPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public FileIOPermission(
             System.Security.Permissions.FileIOPermissionAccess access,
@@ -3160,7 +3160,7 @@ namespace System.Security.Permissions
 #endif
     public abstract partial class IsolatedStoragePermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         protected IsolatedStoragePermission(System.Security.Permissions.PermissionState state) { }
 
@@ -3232,7 +3232,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class KeyContainerPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public KeyContainerPermission(System.Security.Permissions.KeyContainerPermissionFlags flags)
         { }
@@ -3363,7 +3363,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class KeyContainerPermissionAccessEntryCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         public KeyContainerPermissionAccessEntryCollection() { }
 
@@ -3535,7 +3535,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class MediaPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public MediaPermission() { }
 
@@ -3757,8 +3757,8 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class PrincipalPermission
         : System.Security.IPermission,
-          System.Security.ISecurityEncodable,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.ISecurityEncodable,
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public PrincipalPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -3963,7 +3963,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class ReflectionPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public ReflectionPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -4096,7 +4096,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class RegistryPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public RegistryPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -4253,7 +4253,7 @@ namespace System.Security.Permissions
 #endif
     public abstract partial class ResourcePermissionBase
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public const string Any = "*";
         public const string Local = ".";
@@ -4351,7 +4351,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class SecurityPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public SecurityPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -4483,7 +4483,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class StorePermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public StorePermission(System.Security.Permissions.PermissionState state) { }
 
@@ -4754,7 +4754,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class TypeDescriptorPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public TypeDescriptorPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -4860,7 +4860,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class UIPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public UIPermission(System.Security.Permissions.PermissionState state) { }
 
@@ -5069,7 +5069,7 @@ namespace System.Security.Permissions
 #endif
     public sealed partial class WebBrowserPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public WebBrowserPermission() { }
 
@@ -5248,8 +5248,8 @@ namespace System.Security.Policy
 {
     public sealed partial class AllMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public AllMembershipCondition() { }
 
@@ -5328,8 +5328,8 @@ namespace System.Security.Policy
 
     public sealed partial class ApplicationDirectoryMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public ApplicationDirectoryMembershipCondition() { }
 
@@ -5378,7 +5378,7 @@ namespace System.Security.Policy
 
     public sealed partial class ApplicationTrust
         : System.Security.Policy.EvidenceBase,
-          System.Security.ISecurityEncodable
+            System.Security.ISecurityEncodable
     {
         public ApplicationTrust() { }
 
@@ -5442,7 +5442,7 @@ namespace System.Security.Policy
 
     public sealed partial class ApplicationTrustCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal ApplicationTrustCollection() { }
 
@@ -5795,7 +5795,7 @@ namespace System.Security.Policy
 #endif
     public sealed partial class GacInstalled
         : System.Security.Policy.EvidenceBase,
-          System.Security.Policy.IIdentityPermissionFactory
+            System.Security.Policy.IIdentityPermissionFactory
     {
         public GacInstalled() { }
 
@@ -5829,8 +5829,8 @@ namespace System.Security.Policy
 
     public sealed partial class GacMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public GacMembershipCondition() { }
 
@@ -5879,7 +5879,7 @@ namespace System.Security.Policy
 
     public sealed partial class Hash
         : System.Security.Policy.EvidenceBase,
-          System.Runtime.Serialization.ISerializable
+            System.Runtime.Serialization.ISerializable
     {
         public Hash(System.Reflection.Assembly assembly) { }
 
@@ -5929,10 +5929,10 @@ namespace System.Security.Policy
 
     public sealed partial class HashMembershipCondition
         : System.Runtime.Serialization.IDeserializationCallback,
-          System.Runtime.Serialization.ISerializable,
-          System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Runtime.Serialization.ISerializable,
+            System.Security.ISecurityEncodable,
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public HashMembershipCondition(
             System.Security.Cryptography.HashAlgorithm hashAlg,
@@ -6017,7 +6017,7 @@ namespace System.Security.Policy
 
     public partial interface IMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable
+            System.Security.ISecurityPolicyEncodable
     {
         bool Check(System.Security.Policy.Evidence evidence);
         System.Security.Policy.IMembershipCondition Copy();
@@ -6290,7 +6290,7 @@ namespace System.Security.Policy
 
     public sealed partial class PolicyStatement
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable
+            System.Security.ISecurityPolicyEncodable
     {
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
@@ -6384,7 +6384,7 @@ namespace System.Security.Policy
 #endif
     public sealed partial class Publisher
         : System.Security.Policy.EvidenceBase,
-          System.Security.Policy.IIdentityPermissionFactory
+            System.Security.Policy.IIdentityPermissionFactory
     {
         public Publisher(System.Security.Cryptography.X509Certificates.X509Certificate cert) { }
 
@@ -6423,8 +6423,8 @@ namespace System.Security.Policy
 
     public sealed partial class PublisherMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public PublisherMembershipCondition(
             System.Security.Cryptography.X509Certificates.X509Certificate certificate
@@ -6487,7 +6487,7 @@ namespace System.Security.Policy
 #endif
     public sealed partial class Site
         : System.Security.Policy.EvidenceBase,
-          System.Security.Policy.IIdentityPermissionFactory
+            System.Security.Policy.IIdentityPermissionFactory
     {
         public Site(string name) { }
 
@@ -6531,8 +6531,8 @@ namespace System.Security.Policy
 
     public sealed partial class SiteMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public SiteMembershipCondition(string site) { }
 
@@ -6593,7 +6593,7 @@ namespace System.Security.Policy
 #endif
     public sealed partial class StrongName
         : System.Security.Policy.EvidenceBase,
-          System.Security.Policy.IIdentityPermissionFactory
+            System.Security.Policy.IIdentityPermissionFactory
     {
         public StrongName(
             System.Security.Permissions.StrongNamePublicKeyBlob blob,
@@ -6650,8 +6650,8 @@ namespace System.Security.Policy
 #endif
     public sealed partial class StrongNameMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public StrongNameMembershipCondition(
             System.Security.Permissions.StrongNamePublicKeyBlob blob,
@@ -6810,7 +6810,7 @@ namespace System.Security.Policy
 #endif
     public sealed partial class Url
         : System.Security.Policy.EvidenceBase,
-          System.Security.Policy.IIdentityPermissionFactory
+            System.Security.Policy.IIdentityPermissionFactory
     {
         public Url(string name) { }
 
@@ -6849,8 +6849,8 @@ namespace System.Security.Policy
 
     public sealed partial class UrlMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public UrlMembershipCondition(string url) { }
 
@@ -6911,7 +6911,7 @@ namespace System.Security.Policy
 #endif
     public sealed partial class Zone
         : System.Security.Policy.EvidenceBase,
-          System.Security.Policy.IIdentityPermissionFactory
+            System.Security.Policy.IIdentityPermissionFactory
     {
         public Zone(System.Security.SecurityZone zone) { }
 
@@ -6955,8 +6955,8 @@ namespace System.Security.Policy
 
     public sealed partial class ZoneMembershipCondition
         : System.Security.ISecurityEncodable,
-          System.Security.ISecurityPolicyEncodable,
-          System.Security.Policy.IMembershipCondition
+            System.Security.ISecurityPolicyEncodable,
+            System.Security.Policy.IMembershipCondition
     {
         public ZoneMembershipCondition(System.Security.SecurityZone zone) { }
 
@@ -7184,7 +7184,7 @@ namespace System.Transactions
 #endif
     public sealed partial class DistributedTransactionPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public DistributedTransactionPermission(System.Security.Permissions.PermissionState state)
         { }
@@ -7260,7 +7260,7 @@ namespace System.Web
 #endif
     public sealed partial class AspNetHostingPermission
         : System.Security.CodeAccessPermission,
-          System.Security.Permissions.IUnrestrictedPermission
+            System.Security.Permissions.IUnrestrictedPermission
     {
         public AspNetHostingPermission(System.Security.Permissions.PermissionState state) { }
 

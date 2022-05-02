@@ -585,13 +585,13 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         (i % 2 == 0)
                             ? (
-                                  BitConverter.SingleToInt32Bits(firstOp[i + 1])
-                                  != BitConverter.SingleToInt32Bits(result[i])
-                              )
+                                BitConverter.SingleToInt32Bits(firstOp[i + 1])
+                                != BitConverter.SingleToInt32Bits(result[i])
+                            )
                             : (
-                                  BitConverter.SingleToInt32Bits(firstOp[i])
-                                  != BitConverter.SingleToInt32Bits(result[i])
-                              )
+                                BitConverter.SingleToInt32Bits(firstOp[i])
+                                != BitConverter.SingleToInt32Bits(result[i])
+                            )
                     )
                     {
                         succeeded = false;

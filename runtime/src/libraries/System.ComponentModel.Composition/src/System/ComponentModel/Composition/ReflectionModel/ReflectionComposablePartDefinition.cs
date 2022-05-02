@@ -13,7 +13,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal sealed class ReflectionComposablePartDefinition
         : ComposablePartDefinition,
-          ICompositionElement
+            ICompositionElement
     {
         private readonly IReflectionPartCreationInfo _creationInfo;
 
@@ -166,8 +166,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 var genericParameters =
                     (definition.Metadata.Count > 0)
                         ? definition.Metadata.GetValue<IEnumerable<object>>(
-                              CompositionConstants.GenericParametersMetadataName
-                          )
+                            CompositionConstants.GenericParametersMetadataName
+                        )
                         : null;
                 // if and only if generic parameters have been supplied can we attempt to "close" the generic
                 if (genericParameters != null)

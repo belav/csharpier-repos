@@ -139,8 +139,8 @@ namespace System.Reflection.PortableExecutable
             AddEntry(
                 type: DebugDirectoryEntryType.CodeView,
                 version: (portablePdbVersion == 0)
-                  ? 0
-                  : PortablePdbVersions.DebugDirectoryEntryVersion(portablePdbVersion),
+                    ? 0
+                    : PortablePdbVersions.DebugDirectoryEntryVersion(portablePdbVersion),
                 stamp: pdbContentId.Stamp,
                 dataSize
             );

@@ -797,8 +797,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             public DateTimeOffset GetDateTimeOffset(int ordinal) =>
                 _columnTypeCases[ordinal] == TypeCase.DateTimeOffset
                     ? _dateTimeOffsets[
-                          _currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]
-                      ]
+                        _currentRowNumber * _dateTimeOffsetCount + _ordinalToIndexMap[ordinal]
+                    ]
                     : GetFieldValue<DateTimeOffset>(ordinal);
 
             public decimal GetDecimal(int ordinal) =>
@@ -884,8 +884,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     TypeCase.UInt => (T)(object)GetUInt32(ordinal),
                     TypeCase.ULong => (T)(object)GetUInt64(ordinal),
                     _
-                      => (T)
-                          _objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]],
+                        => (T)
+                            _objects[
+                                _currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]
+                            ],
                 };
 
             public bool IsDBNull(int ordinal) =>
@@ -2058,21 +2060,21 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     message =
                         exception is NullReferenceException || Equals(value, DBNull.Value)
                             ? RelationalStrings.ErrorMaterializingPropertyNullReference(
-                                  entityType,
-                                  propertyName,
-                                  expectedType
-                              )
+                                entityType,
+                                propertyName,
+                                expectedType
+                            )
                             : exception is InvalidCastException
                                 ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
-                                      entityType,
-                                      propertyName,
-                                      expectedType,
-                                      actualType
-                                  )
+                                    entityType,
+                                    propertyName,
+                                    expectedType,
+                                    actualType
+                                )
                                 : RelationalStrings.ErrorMaterializingProperty(
-                                      entityType,
-                                      propertyName
-                                  );
+                                    entityType,
+                                    propertyName
+                                );
                 }
                 else
                 {
@@ -2081,9 +2083,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                             ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
                             : exception is InvalidCastException
                                 ? RelationalStrings.ErrorMaterializingValueInvalidCast(
-                                      expectedType,
-                                      actualType
-                                  )
+                                    expectedType,
+                                    actualType
+                                )
                                 : RelationalStrings.ErrorMaterializingValue;
                 }
 

@@ -1348,8 +1348,8 @@ namespace Microsoft.CodeAnalysis
                 if (state.HasSuccessfullyLoaded.HasValue)
                 {
                     return state.HasSuccessfullyLoaded.Value
-                      ? SpecializedTasks.True
-                      : SpecializedTasks.False;
+                        ? SpecializedTasks.True
+                        : SpecializedTasks.False;
                 }
                 else
                 {
@@ -1403,8 +1403,8 @@ namespace Microsoft.CodeAnalysis
                 // Compilation. The GeneratedDocuments can be filled for intermediate states, but those aren't guaranteed to be
                 // correct and can be re-ran later.
                 return state is FinalState finalState
-                  ? finalState.GeneratorInfo.Documents.GetState(documentId)
-                  : null;
+                    ? finalState.GeneratorInfo.Documents.GetState(documentId)
+                    : null;
             }
 
             #region Versions and Checksums

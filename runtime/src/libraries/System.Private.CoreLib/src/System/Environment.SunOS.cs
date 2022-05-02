@@ -13,8 +13,8 @@ namespace System
                     ProcessId,
                     out Interop.procfs.ProcessStatusInfo status
                 )
-                  ? status.ResidentSetSize
-                  : 0
+                    ? status.ResidentSetSize
+                    : 0
             );
     }
 }

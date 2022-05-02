@@ -396,8 +396,8 @@ namespace System.Reflection.Emit
                 IRuntimeMethodInfo? methodHandle = m_methodHandle;
                 System.Runtime.CompilerServices.RuntimeHelpers.CompileMethod(
                     methodHandle != null
-                      ? methodHandle.Value
-                      : RuntimeMethodHandleInternal.EmptyHandle
+                        ? methodHandle.Value
+                        : RuntimeMethodHandleInternal.EmptyHandle
                 );
                 GC.KeepAlive(methodHandle);
             }
@@ -418,8 +418,8 @@ namespace System.Reflection.Emit
                 IRuntimeMethodInfo? methodHandle = m_methodHandle;
                 System.Runtime.CompilerServices.RuntimeHelpers.CompileMethod(
                     methodHandle != null
-                      ? methodHandle.Value
-                      : RuntimeMethodHandleInternal.EmptyHandle
+                        ? methodHandle.Value
+                        : RuntimeMethodHandleInternal.EmptyHandle
                 );
                 GC.KeepAlive(methodHandle);
             }

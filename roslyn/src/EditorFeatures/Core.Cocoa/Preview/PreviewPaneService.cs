@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
     [ExportWorkspaceServiceFactory(typeof(IPreviewPaneService), ServiceLayer.Host), Shared]
     internal class PreviewPaneService
         : ForegroundThreadAffinitizedObject,
-          IPreviewPaneService,
-          IWorkspaceServiceFactory
+            IPreviewPaneService,
+            IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

@@ -629,8 +629,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return
                     InMemoryStorage.TryGetValue(_owner.Analyzer, (key, stateKey), out var entry)
                     && serializerVersion == entry.Version
-                  ? new(entry.Diagnostics)
-                  : default;
+                    ? new(entry.Diagnostics)
+                    : default;
             }
 
             private void RemoveInMemoryCache(DiagnosticAnalysisResult lastResult)

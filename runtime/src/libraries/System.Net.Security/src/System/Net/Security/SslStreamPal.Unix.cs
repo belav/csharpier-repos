@@ -134,17 +134,17 @@ namespace System.Net.Security
             errorCode switch
             {
                 Interop.Ssl.SslErrorCode.SSL_ERROR_RENEGOTIATE
-                  => new SecurityStatusPal(SecurityStatusPalErrorCode.Renegotiate),
+                    => new SecurityStatusPal(SecurityStatusPalErrorCode.Renegotiate),
                 Interop.Ssl.SslErrorCode.SSL_ERROR_ZERO_RETURN
-                  => new SecurityStatusPal(SecurityStatusPalErrorCode.ContextExpired),
+                    => new SecurityStatusPal(SecurityStatusPalErrorCode.ContextExpired),
                 Interop.Ssl.SslErrorCode.SSL_ERROR_NONE
                 or Interop.Ssl.SslErrorCode.SSL_ERROR_WANT_READ
-                  => new SecurityStatusPal(SecurityStatusPalErrorCode.OK),
+                    => new SecurityStatusPal(SecurityStatusPalErrorCode.OK),
                 _
-                  => new SecurityStatusPal(
-                      SecurityStatusPalErrorCode.InternalError,
-                      new Interop.OpenSsl.SslException((int)errorCode)
-                  )
+                    => new SecurityStatusPal(
+                        SecurityStatusPalErrorCode.InternalError,
+                        new Interop.OpenSsl.SslException((int)errorCode)
+                    )
             };
 
         public static ChannelBinding? QueryContextChannelBinding(

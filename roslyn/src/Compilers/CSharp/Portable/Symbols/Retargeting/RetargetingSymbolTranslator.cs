@@ -74,7 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     (correspondingTupleField == (object)tupleErrorField)
                         ? null
                         : (TupleErrorFieldSymbol)
-                              RetargetingTranslator.Retarget(correspondingTupleField);
+                            RetargetingTranslator.Retarget(correspondingTupleField);
 
                 return new TupleErrorFieldSymbol(
                     RetargetingTranslator.Retarget(
@@ -244,8 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         options
                     );
                     return result.SpecialType == SpecialType.None
-                      ? result
-                      : result.AsNativeInteger();
+                        ? result
+                        : result.AsNativeInteger();
                 }
 
                 // Before we do anything else, check if we need to do special retargeting
@@ -898,8 +898,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                         newModifiers.Add(
                             oldModifier.IsOptional
-                              ? CSharpCustomModifier.CreateOptional(newModifierSymbol)
-                              : CSharpCustomModifier.CreateRequired(newModifierSymbol)
+                                ? CSharpCustomModifier.CreateOptional(newModifierSymbol)
+                                : CSharpCustomModifier.CreateRequired(newModifierSymbol)
                         );
                     }
                     else if (newModifiers != null)
@@ -1205,8 +1205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                 // NB: may return null if the property cannot be found in the retargeted type (e.g. removed in a subsequent version)
                 return ReferenceEquals(retargetedType, containingType)
-                  ? property
-                  : FindPropertyInRetargetedType(
+                    ? property
+                    : FindPropertyInRetargetedType(
                         property,
                         retargetedType,
                         retargetedPropertyComparer
@@ -1232,8 +1232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 
                 // NB: may return null if the event cannot be found in the retargeted type (e.g. removed in a subsequent version)
                 return ReferenceEquals(retargetedType, containingType)
-                  ? @event
-                  : FindEventInRetargetedType(@event, retargetedType);
+                    ? @event
+                    : FindEventInRetargetedType(@event, retargetedType);
             }
 
             private MethodSymbol FindMethodInRetargetedType(
@@ -1536,9 +1536,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     (object)oldAttributeCtor == null
                         ? null
                         : Retarget(
-                              oldAttributeCtor,
-                              MemberSignatureComparer.RetargetedExplicitImplementationComparer
-                          );
+                            oldAttributeCtor,
+                            MemberSignatureComparer.RetargetedExplicitImplementationComparer
+                        );
 
                 NamedTypeSymbol oldAttributeType = oldAttribute.AttributeClass;
                 NamedTypeSymbol newAttributeType;
@@ -1626,9 +1626,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     (object)oldConstantType == null
                         ? null
                         : Retarget(
-                              oldConstantType,
-                              RetargetOptions.RetargetPrimitiveTypesByTypeCode
-                          );
+                            oldConstantType,
+                            RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                        );
 
                 if (oldConstant.Kind == TypedConstantKind.Array)
                 {

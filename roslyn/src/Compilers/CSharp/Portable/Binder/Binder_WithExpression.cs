@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 cloneMethod = SynthesizedRecordClone.FindValidCloneMethod(
                     receiverType is TypeParameterSymbol typeParameter
-                      ? typeParameter.EffectiveBaseClass(ref useSiteInfo)
-                      : receiverType,
+                        ? typeParameter.EffectiveBaseClass(ref useSiteInfo)
+                        : receiverType,
                     ref useSiteInfo
                 );
                 if (cloneMethod is null)

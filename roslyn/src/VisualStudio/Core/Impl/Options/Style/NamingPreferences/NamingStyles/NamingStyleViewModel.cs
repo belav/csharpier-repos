@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 {
     internal class NamingStyleViewModel
         : AbstractNotifyPropertyChanged,
-          INamingStylesInfoDialogViewModel
+            INamingStylesInfoDialogViewModel
     {
         private readonly MutableNamingStyle _style;
         private readonly INotificationService _notificationService;

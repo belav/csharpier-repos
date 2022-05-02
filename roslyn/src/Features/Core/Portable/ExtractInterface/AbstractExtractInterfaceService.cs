@@ -69,8 +69,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                 .ConfigureAwait(false);
 
             return typeAnalysisResult.CanExtractInterface
-              ? ImmutableArray.Create(new ExtractInterfaceCodeAction(this, typeAnalysisResult))
-              : ImmutableArray<ExtractInterfaceCodeAction>.Empty;
+                ? ImmutableArray.Create(new ExtractInterfaceCodeAction(this, typeAnalysisResult))
+                : ImmutableArray<ExtractInterfaceCodeAction>.Empty;
         }
 
         public async Task<ExtractInterfaceResult> ExtractInterfaceAsync(
@@ -195,8 +195,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             var extractedInterfaceSymbol = CodeGenerationSymbolFactory.CreateNamedTypeSymbol(
                 attributes: default,
                 accessibility: ShouldIncludeAccessibilityModifier(refactoringResult.TypeNode)
-                  ? refactoringResult.TypeToExtractFrom.DeclaredAccessibility
-                  : Accessibility.NotApplicable,
+                    ? refactoringResult.TypeToExtractFrom.DeclaredAccessibility
+                    : Accessibility.NotApplicable,
                 modifiers: new DeclarationModifiers(),
                 typeKind: TypeKind.Interface,
                 name: extractInterfaceOptions.InterfaceName,
@@ -564,16 +564,16 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                                 name: property.Name,
                                 parameters: property.Parameters,
                                 getMethod: property.GetMethod == null
-                                  ? null
-                                  : (
+                                    ? null
+                                    : (
                                         property.GetMethod.DeclaredAccessibility
                                         == Accessibility.Public
                                             ? property.GetMethod
                                             : null
                                     ),
                                 setMethod: property.SetMethod == null
-                                  ? null
-                                  : (
+                                    ? null
+                                    : (
                                         property.SetMethod.DeclaredAccessibility
                                         == Accessibility.Public
                                             ? property.SetMethod

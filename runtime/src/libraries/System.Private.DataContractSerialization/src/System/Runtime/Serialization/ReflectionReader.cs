@@ -455,9 +455,9 @@ namespace System.Runtime.Serialization
                 nullables != 0
                     ? PrimitiveDataContract.GetPrimitiveDataContract(type)
                     : (
-                          primitiveContractForOriginalType
-                          ?? PrimitiveDataContract.GetPrimitiveDataContract(type)
-                      );
+                        primitiveContractForOriginalType
+                        ?? PrimitiveDataContract.GetPrimitiveDataContract(type)
+                    );
 
             if (
                 (

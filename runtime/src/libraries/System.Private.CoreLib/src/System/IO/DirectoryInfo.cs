@@ -44,8 +44,8 @@ namespace System.IO
                 fileName
                 ?? (
                     PathInternal.IsRoot(fullPath.AsSpan())
-                      ? fullPath.AsSpan()
-                      : Path.GetFileName(Path.TrimEndingDirectorySeparator(fullPath.AsSpan()))
+                        ? fullPath.AsSpan()
+                        : Path.GetFileName(Path.TrimEndingDirectorySeparator(fullPath.AsSpan()))
                 ).ToString();
 
             FullPath = fullPath;
@@ -62,12 +62,12 @@ namespace System.IO
                 // but don't mangle the root.
                 string? parentName = Path.GetDirectoryName(
                     PathInternal.IsRoot(FullPath.AsSpan())
-                      ? FullPath
-                      : Path.TrimEndingDirectorySeparator(FullPath)
+                        ? FullPath
+                        : Path.TrimEndingDirectorySeparator(FullPath)
                 );
                 return parentName != null
-                  ? new DirectoryInfo(parentName, isNormalized: true)
-                  : null;
+                    ? new DirectoryInfo(parentName, isNormalized: true)
+                    : null;
             }
         }
 
@@ -280,26 +280,26 @@ namespace System.IO
             return searchTarget switch
             {
                 SearchTarget.Directories
-                  => FileSystemEnumerableFactory.DirectoryInfos(
-                      path,
-                      searchPattern,
-                      options,
-                      _isNormalized
-                  ),
+                    => FileSystemEnumerableFactory.DirectoryInfos(
+                        path,
+                        searchPattern,
+                        options,
+                        _isNormalized
+                    ),
                 SearchTarget.Files
-                  => FileSystemEnumerableFactory.FileInfos(
-                      path,
-                      searchPattern,
-                      options,
-                      _isNormalized
-                  ),
+                    => FileSystemEnumerableFactory.FileInfos(
+                        path,
+                        searchPattern,
+                        options,
+                        _isNormalized
+                    ),
                 SearchTarget.Both
-                  => FileSystemEnumerableFactory.FileSystemInfos(
-                      path,
-                      searchPattern,
-                      options,
-                      _isNormalized
-                  ),
+                    => FileSystemEnumerableFactory.FileSystemInfos(
+                        path,
+                        searchPattern,
+                        options,
+                        _isNormalized
+                    ),
                 _ => throw new ArgumentException(SR.ArgumentOutOfRange_Enum, nameof(searchTarget)),
             };
         }

@@ -44,12 +44,12 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentNullException(nameof(r2));
 
             return r1.Length == 0
-              ? r2
-              : r2.Length == 0
-                  ? r1
-                  : checked(r1.Length + r2.Length < 32)
-                      ? ForString(r1.ToString() + r2.ToString())
-                      : new ConcatRope(r1, r2);
+                ? r2
+                : r2.Length == 0
+                    ? r1
+                    : checked(r1.Length + r2.Length < 32)
+                        ? ForString(r1.ToString() + r2.ToString())
+                        : new ConcatRope(r1, r2);
         }
 
         /// <summary>

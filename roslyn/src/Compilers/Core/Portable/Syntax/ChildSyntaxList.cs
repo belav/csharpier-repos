@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis
 {
     public readonly partial struct ChildSyntaxList
         : IEquatable<ChildSyntaxList>,
-          IReadOnlyList<SyntaxNodeOrToken>
+            IReadOnlyList<SyntaxNodeOrToken>
     {
         private readonly SyntaxNode? _node;
         private readonly int _count;

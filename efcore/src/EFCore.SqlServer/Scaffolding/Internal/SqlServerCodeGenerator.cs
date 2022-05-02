@@ -45,8 +45,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
             new(
                 _useSqlServerMethodInfo,
                 providerOptions == null
-                  ? new object[] { connectionString }
-                  : new object[]
+                    ? new object[] { connectionString }
+                    : new object[]
                     {
                         connectionString,
                         new NestedClosureCodeFragment("x", providerOptions)

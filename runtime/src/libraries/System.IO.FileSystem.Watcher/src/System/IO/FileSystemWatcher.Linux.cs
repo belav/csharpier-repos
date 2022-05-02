@@ -42,9 +42,9 @@ namespace System.IO
                         string? maxValue = ReadMaxUserLimit(MaxUserInstancesPath);
                         string message = !string.IsNullOrEmpty(maxValue)
                             ? SR.Format(
-                                  SR.IOException_INotifyInstanceUserLimitExceeded_Value,
-                                  maxValue
-                              )
+                                SR.IOException_INotifyInstanceUserLimitExceeded_Value,
+                                maxValue
+                            )
                             : SR.IOException_INotifyInstanceUserLimitExceeded;
                         throw new IOException(message, error.RawErrno);
                     case Interop.Error.ENFILE:
@@ -412,9 +412,9 @@ namespace System.IO
                         string? maxValue = ReadMaxUserLimit(MaxUserWatchesPath);
                         string message = !string.IsNullOrEmpty(maxValue)
                             ? SR.Format(
-                                  SR.IOException_INotifyWatchesUserLimitExceeded_Value,
-                                  maxValue
-                              )
+                                SR.IOException_INotifyWatchesUserLimitExceeded_Value,
+                                maxValue
+                            )
                             : SR.IOException_INotifyWatchesUserLimitExceeded;
                         exc = new IOException(message, error.RawErrno);
                     }
@@ -964,8 +964,8 @@ namespace System.IO
                 Debug.Assert(lengthWithoutNullTerm <= nameLength); // should be null terminated or empty
 
                 return lengthWithoutNullTerm > 0
-                  ? Encoding.UTF8.GetString(_buffer, position, lengthWithoutNullTerm)
-                  : string.Empty;
+                    ? Encoding.UTF8.GetString(_buffer, position, lengthWithoutNullTerm)
+                    : string.Empty;
             }
 
             /// <summary>An event read and translated from the inotify handle.</summary>

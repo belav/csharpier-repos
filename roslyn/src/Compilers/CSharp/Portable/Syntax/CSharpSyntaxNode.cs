@@ -459,8 +459,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
                 {
                     return LookupPosition.IsInXmlAttributeValue(position, (XmlAttributeSyntax)curr)
-                      ? triviaToken
-                      : nonTriviaToken;
+                        ? triviaToken
+                        : nonTriviaToken;
                 }
 
                 curr = curr.Parent;

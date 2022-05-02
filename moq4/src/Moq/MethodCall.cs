@@ -258,8 +258,8 @@ namespace Moq
             Debug.Assert(this.returnOrThrow == null);
 
             var expectedReturnType = this.Expectation.HasResultExpression(out var awaitable)
-              ? awaitable.ResultType
-              : this.Method.ReturnType;
+                ? awaitable.ResultType
+                : this.Method.ReturnType;
 
             if (valueFactory == null)
             {

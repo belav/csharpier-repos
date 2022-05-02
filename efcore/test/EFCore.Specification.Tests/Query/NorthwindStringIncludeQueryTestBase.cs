@@ -110,9 +110,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var customer = async
                 ? await context
-                      .Set<Customer>()
-                      .Include("Orders")
-                      .SingleAsync(c => c.CustomerID == "ALFKI")
+                    .Set<Customer>()
+                    .Include("Orders")
+                    .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context.Set<Customer>().Include("Orders").Single(c => c.CustomerID == "ALFKI");
 
             Assert.Equal(orders, customer.Orders, LegacyReferenceEqualityComparer.Instance);
@@ -129,9 +129,9 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var customer2 = async
                 ? await context
-                      .Set<Customer>()
-                      .Include("Orders")
-                      .SingleAsync(c => c.CustomerID == "ALFKI")
+                    .Set<Customer>()
+                    .Include("Orders")
+                    .SingleAsync(c => c.CustomerID == "ALFKI")
                 : context.Set<Customer>().Include("Orders").Single(c => c.CustomerID == "ALFKI");
 
             Assert.Same(customer1, customer2);
@@ -148,15 +148,15 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var orders = async
                 ? await context
-                      .Set<Order>()
-                      .Include("Customer")
-                      .Where(o => o.CustomerID == "ALFKI")
-                      .ToListAsync()
+                    .Set<Order>()
+                    .Include("Customer")
+                    .Where(o => o.CustomerID == "ALFKI")
+                    .ToListAsync()
                 : context
-                  .Set<Order>()
-                  .Include("Customer")
-                  .Where(o => o.CustomerID == "ALFKI")
-                  .ToList();
+                    .Set<Order>()
+                    .Include("Customer")
+                    .Where(o => o.CustomerID == "ALFKI")
+                    .ToList();
 
             Assert.Equal(6, orders.Count);
             Assert.True(orders.All(o => ReferenceEquals(o.Customer, customer)));
@@ -322,9 +322,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                         return $"{GetPath(memberExpression.Expression)}.{memberExpression.Member.Name}";
 
                     case UnaryExpression unaryExpression
-                          when unaryExpression.NodeType == ExpressionType.Convert
-                              || unaryExpression.NodeType == ExpressionType.Convert
-                              || unaryExpression.NodeType == ExpressionType.TypeAs:
+                    when unaryExpression.NodeType == ExpressionType.Convert
+                        || unaryExpression.NodeType == ExpressionType.Convert
+                        || unaryExpression.NodeType == ExpressionType.TypeAs:
                         return GetPath(unaryExpression.Operand);
 
                     default:

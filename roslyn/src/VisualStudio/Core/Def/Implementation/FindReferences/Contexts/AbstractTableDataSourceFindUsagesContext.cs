@@ -31,8 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     {
         private abstract class AbstractTableDataSourceFindUsagesContext
             : FindUsagesContext,
-              ITableDataSource,
-              ITableEntriesSnapshotFactory
+                ITableDataSource,
+                ITableEntriesSnapshotFactory
         {
             /// <summary>
             /// Cancellation token we own that we will trigger if the presenter for this particular

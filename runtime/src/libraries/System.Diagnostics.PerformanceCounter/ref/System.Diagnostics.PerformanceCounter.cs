@@ -297,7 +297,7 @@ namespace System.Diagnostics
 
     public sealed partial class PerformanceCounter
         : System.ComponentModel.Component,
-          System.ComponentModel.ISupportInitialize
+            System.ComponentModel.ISupportInitialize
     {
         [System.ObsoleteAttribute(
             "This field has been deprecated and is not used. Use machine.config or an application configuration file to set the size of the PerformanceCounter file mapping instead."

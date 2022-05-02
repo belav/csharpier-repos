@@ -61,8 +61,8 @@ namespace System.Text.RegularExpressions.Generator
                                 cancellationToken
                             );
                             return result is RegexType regexType
-                              ? EmitRegexType(regexType)
-                              : result;
+                                ? EmitRegexType(regexType)
+                                : result;
                         }
                     )
                     .Collect();

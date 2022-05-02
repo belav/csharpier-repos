@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
     {
         public class GenerateEventHandler
             : AbstractGenerateCodeItem,
-              IEquatable<GenerateEventHandler>
+                IEquatable<GenerateEventHandler>
         {
             public readonly string ContainerName;
             public readonly SymbolKey EventSymbolKey;

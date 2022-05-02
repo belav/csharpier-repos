@@ -849,22 +849,22 @@ namespace System.Data.OleDb
                     return D_Guid;
                 case BYTES:
                     return (isLong)
-                      ? D_LongVarBinary
-                      : (isFixed)
-                          ? D_Binary
-                          : D_VarBinary;
+                        ? D_LongVarBinary
+                        : (isFixed)
+                            ? D_Binary
+                            : D_VarBinary;
                 case STR:
                     return (isLong)
-                      ? D_LongVarChar
-                      : (isFixed)
-                          ? D_Char
-                          : D_VarChar;
+                        ? D_LongVarChar
+                        : (isFixed)
+                            ? D_Char
+                            : D_VarChar;
                 case WSTR:
                     return (isLong)
-                      ? D_LongVarWChar
-                      : (isFixed)
-                          ? D_WChar
-                          : D_VarWChar;
+                        ? D_LongVarWChar
+                        : (isFixed)
+                            ? D_WChar
+                            : D_VarWChar;
                 case NUMERIC:
                     return D_Numeric;
                 //case UDT:

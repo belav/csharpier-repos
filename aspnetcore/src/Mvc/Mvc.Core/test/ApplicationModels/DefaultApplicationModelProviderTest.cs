@@ -1525,7 +1525,7 @@ public class DefaultApplicationModelProviderTest
 
     private class DerivedFromControllerAndExplicitIDisposableImplementationController
         : ViewFeaturesController,
-          IDisposable
+            IDisposable
     {
         void IDisposable.Dispose()
         {
@@ -1900,8 +1900,8 @@ public class DefaultApplicationModelProviderTest
 
     private class UnsupportedFiltersController
         : IExceptionFilter,
-          IAuthorizationFilter,
-          IAsyncResourceFilter
+            IAuthorizationFilter,
+            IAsyncResourceFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -1929,8 +1929,8 @@ public class DefaultApplicationModelProviderTest
     )]
     private class RouteAndConstraintAttribute
         : Attribute,
-          IActionConstraintMetadata,
-          IRouteTemplateProvider
+            IActionConstraintMetadata,
+            IRouteTemplateProvider
     {
         public RouteAndConstraintAttribute(string template)
         {

@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// </summary>
 public sealed class AuthenticatedEncryptorConfiguration
     : AlgorithmConfiguration,
-      IInternalAlgorithmConfiguration
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The algorithm to use for symmetric encryption (confidentiality).

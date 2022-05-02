@@ -45,7 +45,7 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
     [Export(typeof(KeybindingResetDetector))]
     internal sealed class KeybindingResetDetector
         : ForegroundThreadAffinitizedObject,
-          IOleCommandTarget
+            IOleCommandTarget
     {
         private const string KeybindingsFwLink = "https://go.microsoft.com/fwlink/?linkid=864209";
         private const string ReSharperExtensionName = "ReSharper Ultimate";

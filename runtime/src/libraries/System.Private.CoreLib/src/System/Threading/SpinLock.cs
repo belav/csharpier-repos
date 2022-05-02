@@ -400,7 +400,7 @@ namespace System.Threading
                     int newOwner =
                         (observedOwner & WAITERS_MASK) == 0
                             ? // Gets the number of waiters, if zero
-                              observedOwner | 1 // don't decrement it. just set the lock bit, it is zero because a previous call of Exit(false) which corrupted the waiters
+                            observedOwner | 1 // don't decrement it. just set the lock bit, it is zero because a previous call of Exit(false) which corrupted the waiters
                             : (observedOwner - 2) | 1; // otherwise decrement the waiters and set the lock bit
                     Debug.Assert((newOwner & WAITERS_MASK) >= 0);
 

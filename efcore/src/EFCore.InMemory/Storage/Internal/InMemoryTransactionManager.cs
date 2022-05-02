@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal
     /// </summary>
     public class InMemoryTransactionManager
         : IDbContextTransactionManager,
-          ITransactionEnlistmentManager
+            ITransactionEnlistmentManager
     {
         private static readonly InMemoryTransaction _stubTransaction = new();
 

@@ -327,8 +327,8 @@ namespace Microsoft.EntityFrameworkCore.Design
             {
                 methodCallCodeFragments.Add(
                     defaultValueSql.Length == 0
-                      ? new MethodCallCodeFragment(_propertyHasDefaultValueSqlMethodInfo1)
-                      : new MethodCallCodeFragment(
+                        ? new MethodCallCodeFragment(_propertyHasDefaultValueSqlMethodInfo1)
+                        : new MethodCallCodeFragment(
                             _propertyHasDefaultValueSqlMethodInfo2,
                             defaultValueSql
                         )
@@ -345,18 +345,18 @@ namespace Microsoft.EntityFrameworkCore.Design
             {
                 methodCallCodeFragments.Add(
                     computedColumnSql.Length == 0
-                      ? new MethodCallCodeFragment(_propertyHasComputedColumnSqlMethodInfo1)
-                      : TryGetAndRemove(
+                        ? new MethodCallCodeFragment(_propertyHasComputedColumnSqlMethodInfo1)
+                        : TryGetAndRemove(
                             annotations,
                             RelationalAnnotationNames.IsStored,
                             out bool isStored
                         )
-                          ? new MethodCallCodeFragment(
+                            ? new MethodCallCodeFragment(
                                 _hasComputedColumnSqlMethodInfo3,
                                 computedColumnSql,
                                 isStored
                             )
-                          : new MethodCallCodeFragment(
+                            : new MethodCallCodeFragment(
                                 _propertyHasComputedColumnSqlMethodInfo2,
                                 computedColumnSql
                             )
@@ -373,8 +373,11 @@ namespace Microsoft.EntityFrameworkCore.Design
             {
                 methodCallCodeFragments.Add(
                     isFixedLength
-                      ? new MethodCallCodeFragment(_propertyIsFixedLengthMethodInfo)
-                      : new MethodCallCodeFragment(_propertyIsFixedLengthMethodInfo, isFixedLength)
+                        ? new MethodCallCodeFragment(_propertyIsFixedLengthMethodInfo)
+                        : new MethodCallCodeFragment(
+                            _propertyIsFixedLengthMethodInfo,
+                            isFixedLength
+                        )
                 );
             }
 
@@ -433,8 +436,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                 annotations,
                 RelationalAnnotationNames.Name,
                 foreignKey.IsUnique
-                  ? _referenceReferenceHasConstraintNameMethodInfo
-                  : _referenceCollectionHasConstraintNameMethodInfo,
+                    ? _referenceReferenceHasConstraintNameMethodInfo
+                    : _referenceCollectionHasConstraintNameMethodInfo,
                 methodCallCodeFragments
             );
 
@@ -531,8 +534,8 @@ namespace Microsoft.EntityFrameworkCore.Design
                 attributeCodeFragments.Add(
                     new AttributeCodeFragment(
                         property.ClrType == typeof(string)
-                          ? typeof(StringLengthAttribute)
-                          : typeof(MaxLengthAttribute),
+                            ? typeof(StringLengthAttribute)
+                            : typeof(MaxLengthAttribute),
                         maxLength
                     )
                 );

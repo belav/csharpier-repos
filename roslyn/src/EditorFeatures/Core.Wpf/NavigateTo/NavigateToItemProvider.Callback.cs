@@ -89,10 +89,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                     NavigateToMatchKind.CamelCaseExact => PatternMatchKind.CamelCaseExact,
                     NavigateToMatchKind.CamelCasePrefix => PatternMatchKind.CamelCasePrefix,
                     NavigateToMatchKind.CamelCaseNonContiguousPrefix
-                      => PatternMatchKind.CamelCaseNonContiguousPrefix,
+                        => PatternMatchKind.CamelCaseNonContiguousPrefix,
                     NavigateToMatchKind.CamelCaseSubstring => PatternMatchKind.CamelCaseSubstring,
                     NavigateToMatchKind.CamelCaseNonContiguousSubstring
-                      => PatternMatchKind.CamelCaseNonContiguousSubstring,
+                        => PatternMatchKind.CamelCaseNonContiguousSubstring,
                     NavigateToMatchKind.Fuzzy => PatternMatchKind.Fuzzy,
                     _ => throw ExceptionUtilities.UnexpectedValue(matchKind),
                 };

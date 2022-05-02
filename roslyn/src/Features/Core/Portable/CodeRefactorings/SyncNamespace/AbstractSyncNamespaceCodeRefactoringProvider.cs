@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.SyncNamespace
 
                 var solutionChangeAction = new ChangeNamespaceCodeAction(
                     state.TargetNamespace.Length == 0
-                      ? FeaturesResources.Change_to_global_namespace
-                      : string.Format(
+                        ? FeaturesResources.Change_to_global_namespace
+                        : string.Format(
                             FeaturesResources.Change_namespace_to_0,
                             state.TargetNamespace
                         ),

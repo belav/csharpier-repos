@@ -25,7 +25,7 @@ namespace System.Reflection.TypeLoading.Ecma
                 HandleKind.TypeDefinition => ((TypeDefinitionHandle)handle).ResolveTypeDef(module),
                 HandleKind.TypeReference => ((TypeReferenceHandle)handle).ResolveTypeRef(module),
                 HandleKind.TypeSpecification
-                  => ((TypeSpecificationHandle)handle).ResolveTypeSpec(module, typeContext),
+                    => ((TypeSpecificationHandle)handle).ResolveTypeSpec(module, typeContext),
                 _ => throw new BadImageFormatException(),
             };
         }

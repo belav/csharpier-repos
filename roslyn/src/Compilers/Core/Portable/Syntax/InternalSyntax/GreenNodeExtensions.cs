@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             where T : GreenNode
         {
             return node != null
-              ? new SeparatedSyntaxList<T>(ToGreenList<T>(node.Green))
-              : default(SeparatedSyntaxList<T>);
+                ? new SeparatedSyntaxList<T>(ToGreenList<T>(node.Green))
+                : default(SeparatedSyntaxList<T>);
         }
 
         internal static SyntaxList<T> ToGreenList<T>(this GreenNode? node) where T : GreenNode

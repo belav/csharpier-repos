@@ -35,7 +35,7 @@ End Module";
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                        => $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -45,7 +45,7 @@ Friend Module M
     End Class
 End Module",
                     false
-                      => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+                        => $@"#region {FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -92,7 +92,7 @@ internal sealed class M
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
+                        => $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
 ' mscorlib.v4_6_1038_0.dll
 #End Region
 
@@ -112,7 +112,7 @@ Namespace System
     End Class
 End Namespace",
                     false
-                      => $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+                        => $@"#region {FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion
@@ -262,7 +262,7 @@ namespace System
                 var expected = signaturesOnly switch
                 {
                     true
-                      => $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
+                        => $@"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
 ' System.ValueTuple.dll
 #End Region
 
@@ -289,7 +289,7 @@ Namespace System
     End Structure
 End Namespace",
                     false
-                      => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
+                        => $@"#region {FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 // {FeaturesResources.location_unknown}
 // Decompiled with ICSharpCode.Decompiler 6.1.0.5902
 #endregion

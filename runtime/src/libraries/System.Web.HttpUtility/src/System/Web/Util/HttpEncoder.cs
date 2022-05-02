@@ -434,8 +434,8 @@ namespace System.Web.Util
             byte[]? encoded = UrlEncode(bytes, offset, count);
 
             return (alwaysCreateNewReturnValue && (encoded != null) && (encoded == bytes))
-              ? (byte[])encoded.Clone()
-              : encoded;
+                ? (byte[])encoded.Clone()
+                : encoded;
         }
 
         [return: NotNullIfNotNull("bytes")]

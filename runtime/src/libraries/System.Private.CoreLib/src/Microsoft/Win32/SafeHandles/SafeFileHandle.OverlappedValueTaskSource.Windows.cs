@@ -46,7 +46,7 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>Reusable IValueTaskSource for RandomAccess async operations based on Overlapped I/O.</summary>
         internal sealed unsafe class OverlappedValueTaskSource
             : IValueTaskSource<int>,
-              IValueTaskSource
+                IValueTaskSource
         {
             internal static readonly IOCompletionCallback s_ioCallback = IOCallback;
 
@@ -266,8 +266,8 @@ namespace Microsoft.Win32.SafeHandles
                         CancellationToken ct = _cancellationRegistration.Token;
                         _source.SetException(
                             ct.IsCancellationRequested
-                              ? new OperationCanceledException(ct)
-                              : new OperationCanceledException()
+                                ? new OperationCanceledException(ct)
+                                : new OperationCanceledException()
                         );
                         break;
 

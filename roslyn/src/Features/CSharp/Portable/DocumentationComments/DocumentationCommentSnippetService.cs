@@ -21,9 +21,9 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
     ]
     internal class DocumentationCommentSnippetService
         : AbstractDocumentationCommentSnippetService<
-              DocumentationCommentTriviaSyntax,
-              MemberDeclarationSyntax
-          >
+            DocumentationCommentTriviaSyntax,
+            MemberDeclarationSyntax
+        >
     {
         public override string DocumentationCommentCharacter => "/";
 

@@ -24,8 +24,8 @@ internal class DefaultCodeTarget : CodeTarget
     public override IntermediateNodeWriter CreateNodeWriter()
     {
         return _options.DesignTime
-          ? (IntermediateNodeWriter)new DesignTimeNodeWriter()
-          : new RuntimeNodeWriter();
+            ? (IntermediateNodeWriter)new DesignTimeNodeWriter()
+            : new RuntimeNodeWriter();
     }
 
     public override TExtension GetExtension<TExtension>()

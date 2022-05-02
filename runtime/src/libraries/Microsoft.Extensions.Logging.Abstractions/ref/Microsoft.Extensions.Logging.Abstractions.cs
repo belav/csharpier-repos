@@ -691,7 +691,7 @@ namespace Microsoft.Extensions.Logging
 
     public partial class Logger<T>
         : Microsoft.Extensions.Logging.ILogger,
-          Microsoft.Extensions.Logging.ILogger<T>
+            Microsoft.Extensions.Logging.ILogger<T>
     {
         public Logger(Microsoft.Extensions.Logging.ILoggerFactory factory) { }
 
@@ -804,7 +804,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
 
     public partial class NullLoggerFactory
         : Microsoft.Extensions.Logging.ILoggerFactory,
-          System.IDisposable
+            System.IDisposable
     {
         public static readonly Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory Instance;
 
@@ -822,7 +822,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
 
     public partial class NullLoggerProvider
         : Microsoft.Extensions.Logging.ILoggerProvider,
-          System.IDisposable
+            System.IDisposable
     {
         internal NullLoggerProvider() { }
 
@@ -841,7 +841,7 @@ namespace Microsoft.Extensions.Logging.Abstractions
 
     public partial class NullLogger<T>
         : Microsoft.Extensions.Logging.ILogger,
-          Microsoft.Extensions.Logging.ILogger<T>
+            Microsoft.Extensions.Logging.ILogger<T>
     {
         public static readonly Microsoft.Extensions.Logging.Abstractions.NullLogger<T> Instance;
 

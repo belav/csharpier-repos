@@ -134,7 +134,7 @@ public class double1
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
             string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
-              => new Random().Next(),
+                => new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
             _ => DefaultSeed
         };

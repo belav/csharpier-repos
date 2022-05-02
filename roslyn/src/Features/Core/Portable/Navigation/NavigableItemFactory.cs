@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.Navigation
                 ?? SpecializedCollections.EmptyEnumerable<Location>();
 
             return nonGeneratedSourceLocations.Any()
-              ? nonGeneratedSourceLocations
-              : generatedSourceLocations;
+                ? nonGeneratedSourceLocations
+                : generatedSourceLocations;
         }
 
         private static IEnumerable<Location> GetPreferredSourceLocations(ISymbol symbol)
@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.Navigation
             // source locations.
             var visibleSourceLocations = locations.Where(loc => loc.IsVisibleSourceLocation());
             return visibleSourceLocations.Any()
-              ? visibleSourceLocations
-              : locations.Where(loc => loc.IsInSource);
+                ? visibleSourceLocations
+                : locations.Where(loc => loc.IsInSource);
         }
     }
 }

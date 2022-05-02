@@ -486,14 +486,14 @@ namespace System.Text.RegularExpressions.Generator.Tests
                 string[] typeModifiers = type switch
                 {
                     "class"
-                      => new[]
-                      {
-                          "",
-                          "public",
-                          "public sealed",
-                          "internal abstract",
-                          "internal static"
-                      },
+                        => new[]
+                        {
+                            "",
+                            "public",
+                            "public sealed",
+                            "internal abstract",
+                            "internal static"
+                        },
                     _ => new[] { "", "public", "internal" }
                 };
 
@@ -501,8 +501,8 @@ namespace System.Text.RegularExpressions.Generator.Tests
                 {
                     foreach (
                         bool instance in typeModifier.Contains("static")
-                          ? new[] { false }
-                          : new[] { false, true }
+                            ? new[] { false }
+                            : new[] { false, true }
                     )
                     {
                         string[] methodVisibilities = type switch
@@ -510,14 +510,14 @@ namespace System.Text.RegularExpressions.Generator.Tests
                             "class"
                                 when !typeModifier.Contains("sealed")
                                     && !typeModifier.Contains("static")
-                              => new[]
-                              {
-                                  "public",
-                                  "internal",
-                                  "private protected",
-                                  "protected internal",
-                                  "private"
-                              },
+                                => new[]
+                                {
+                                    "public",
+                                    "internal",
+                                    "private protected",
+                                    "protected internal",
+                                    "private"
+                                },
                             _ => new[] { "public", "internal", "private" }
                         };
 

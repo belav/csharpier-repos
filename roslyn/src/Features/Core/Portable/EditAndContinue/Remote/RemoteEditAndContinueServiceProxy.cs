@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteEditAndContinueService)), Shared]
         internal sealed class CallbackDispatcher
             : RemoteServiceCallbackDispatcher,
-              IRemoteEditAndContinueService.ICallback
+                IRemoteEditAndContinueService.ICallback
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

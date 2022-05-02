@@ -490,12 +490,12 @@ namespace System.Diagnostics.Tracing
             TraceLoggingDataCollector.AddScalar(hasValue);
             PropertyValue val = valueInfo.PropertyValueFactory(
                 hasValue
-                  ? refVal
+                    ? refVal
 #if ES_BUILD_STANDALONE
-                  : FormatterServices.GetUninitializedObject(valueInfo.DataType)
+                    : FormatterServices.GetUninitializedObject(valueInfo.DataType)
             );
 #else
-                  : RuntimeHelpers.GetUninitializedObject(valueInfo.DataType)
+                    : RuntimeHelpers.GetUninitializedObject(valueInfo.DataType)
             );
 #endif
             this.valueInfo.WriteData(val);

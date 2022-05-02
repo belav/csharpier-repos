@@ -2674,8 +2674,8 @@ No, Parameter 'x' does not require fixing. It has an underlying symbol 'x'
                                 string.Concat(
                                     $"No, {expr.Kind} '{text}' does not require fixing.",
                                     accessedLocalOrParameterOpt is null
-                                      ? " It has no underlying symbol."
-                                      : $" It has an underlying symbol '{accessedLocalOrParameterOpt.Name}'"
+                                        ? " It has no underlying symbol."
+                                        : $" It has an underlying symbol '{accessedLocalOrParameterOpt.Name}'"
                                 )
                             );
                         }

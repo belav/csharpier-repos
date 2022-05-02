@@ -102,11 +102,11 @@ namespace System.Net.Test.Common
             Http2LoopbackConnection connection =
                 timeout != null
                     ? await Http2LoopbackConnection
-                          .CreateAsync(wrapper, stream, _options, timeout.Value)
-                          .ConfigureAwait(false)
+                        .CreateAsync(wrapper, stream, _options, timeout.Value)
+                        .ConfigureAwait(false)
                     : await Http2LoopbackConnection
-                          .CreateAsync(wrapper, stream, _options)
-                          .ConfigureAwait(false);
+                        .CreateAsync(wrapper, stream, _options)
+                        .ConfigureAwait(false);
             _connections.Add(connection);
 
             return connection;

@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 {
     internal abstract class AbstractRemoveUnnecessaryInlineSuppressionsDiagnosticAnalyzer
         : AbstractCodeQualityDiagnosticAnalyzer,
-          IPragmaSuppressionsAnalyzer
+            IPragmaSuppressionsAnalyzer
     {
         private static readonly LocalizableResourceString s_localizableRemoveUnnecessarySuppression =
             new(

@@ -74,8 +74,8 @@ namespace Internal.Cryptography.Pal
                         }
 
                         X509ContentType contentType = label.SequenceEqual(PemLabels.X509Certificate)
-                          ? X509ContentType.Cert
-                          : X509ContentType.Pkcs7;
+                            ? X509ContentType.Cert
+                            : X509ContentType.Pkcs7;
                         bool cont = derCallback(certBytes.AsSpan(0, bytesWritten), contentType);
 
                         byte[] toReturn = certBytes;

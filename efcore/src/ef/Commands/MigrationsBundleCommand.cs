@@ -63,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
 
             var assembly = Path.GetFileNameWithoutExtension(Assembly!.Value()!);
             var startupAssembly = StartupAssembly!.HasValue()
-              ? Path.GetFileNameWithoutExtension(StartupAssembly.Value()!)
-              : assembly;
+                ? Path.GetFileNameWithoutExtension(StartupAssembly.Value()!)
+                : assembly;
 
             var programGenerator = new BundleProgramGenerator
             {
@@ -132,8 +132,8 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                 var publishArgs = new List<string> { "publish" };
 
                 var runtime = _runtime!.HasValue()
-                  ? _runtime!.Value()!
-                  : (string)AppContext.GetData("RUNTIME_IDENTIFIER");
+                    ? _runtime!.Value()!
+                    : (string)AppContext.GetData("RUNTIME_IDENTIFIER");
                 publishArgs.Add("--runtime");
                 publishArgs.Add(runtime);
 
@@ -142,8 +142,8 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
                 );
                 var baseRID = runtime.Substring(0, baseLength);
                 var exe = string.Equals(baseRID, "win", StringComparison.OrdinalIgnoreCase)
-                  ? ".exe"
-                  : null;
+                    ? ".exe"
+                    : null;
 
                 var outputPath = _output!.HasValue() ? _output!.Value()! : "efbundle" + exe;
                 var bundleName = Path.GetFileNameWithoutExtension(outputPath);

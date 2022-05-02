@@ -155,10 +155,10 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                         .AnnotationsEnabled();
 
                 return useNullableTypeArgument
-                  ? equatableType.Construct(
+                    ? equatableType.Construct(
                         _containingType.WithNullableAnnotation(NullableAnnotation.Annotated)
                     )
-                  : equatableType.Construct(_containingType);
+                    : equatableType.Construct(_containingType);
             }
 
             private async Task<Document> UpdateDocumentAndAddImportsAsync(
@@ -197,14 +197,14 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 var parameters = ImmutableArray.Create(
                     CodeGenerationSymbolFactory.CreateParameterSymbol(
                         _containingType.IsValueType
-                          ? _containingType
-                          : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
+                            ? _containingType
+                            : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
                         LeftName
                     ),
                     CodeGenerationSymbolFactory.CreateParameterSymbol(
                         _containingType.IsValueType
-                          ? _containingType
-                          : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
+                            ? _containingType
+                            : _containingType.WithNullableAnnotation(NullableAnnotation.Annotated),
                         RightName
                     )
                 );
@@ -224,24 +224,24 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             {
                 var expression = _containingType.IsValueType
                     ? generator.InvocationExpression(
-                          generator.MemberAccessExpression(
-                              generator.IdentifierName(LeftName),
-                              generator.IdentifierName(EqualsName)
-                          ),
-                          generator.IdentifierName(RightName)
-                      )
+                        generator.MemberAccessExpression(
+                            generator.IdentifierName(LeftName),
+                            generator.IdentifierName(EqualsName)
+                        ),
+                        generator.IdentifierName(RightName)
+                    )
                     : generator.InvocationExpression(
-                          generator.MemberAccessExpression(
-                              generator.GetDefaultEqualityComparer(
-                                  generatorInternal,
-                                  compilation,
-                                  _containingType
-                              ),
-                              generator.IdentifierName(EqualsName)
-                          ),
-                          generator.IdentifierName(LeftName),
-                          generator.IdentifierName(RightName)
-                      );
+                        generator.MemberAccessExpression(
+                            generator.GetDefaultEqualityComparer(
+                                generatorInternal,
+                                compilation,
+                                _containingType
+                            ),
+                            generator.IdentifierName(EqualsName)
+                        ),
+                        generator.IdentifierName(LeftName),
+                        generator.IdentifierName(RightName)
+                    );
 
                 return CodeGenerationSymbolFactory.CreateOperatorSymbol(
                     default,
@@ -297,12 +297,12 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
                 var service =
                     _document.GetRequiredLanguageService<IGenerateEqualsAndGetHashCodeService>();
                 return _implementIEquatable
-                  ? service.GenerateEqualsMethodThroughIEquatableEqualsAsync(
+                    ? service.GenerateEqualsMethodThroughIEquatableEqualsAsync(
                         _document,
                         _containingType,
                         cancellationToken
                     )
-                  : service.GenerateEqualsMethodAsync(
+                    : service.GenerateEqualsMethodAsync(
                         _document,
                         _containingType,
                         _selectedMembers,

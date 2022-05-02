@@ -30,8 +30,8 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
         var project = await CreateBuildPublishAsync("blazorservernoauth" + browserKind);
 
         await using var browser = BrowserManager.IsAvailable(browserKind)
-          ? await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo)
-          : null;
+            ? await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo)
+            : null;
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {

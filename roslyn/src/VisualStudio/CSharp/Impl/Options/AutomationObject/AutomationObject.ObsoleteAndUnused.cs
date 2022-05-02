@@ -50,8 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
                 return
                     GetOption(CompletionOptions.Metadata.SnippetsBehavior)
                     == SnippetsRule.AlwaysInclude
-                  ? 1
-                  : 0;
+                    ? 1
+                    : 0;
             }
             set
             {

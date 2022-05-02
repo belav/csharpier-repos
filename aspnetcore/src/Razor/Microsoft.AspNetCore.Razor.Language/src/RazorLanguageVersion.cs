@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 [DebuggerDisplay("{" + nameof(DebuggerToString) + "(),nq}")]
 public sealed class RazorLanguageVersion
     : IEquatable<RazorLanguageVersion>,
-      IComparable<RazorLanguageVersion>
+        IComparable<RazorLanguageVersion>
 {
     public static readonly RazorLanguageVersion Version_1_0 = new RazorLanguageVersion(1, 0);
 

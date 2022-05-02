@@ -210,8 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 string text = i == 0 ? "" : _indentations[i - 1].ToString() + _indentWhitespace;
                 _indentations.Add(
                     _useElasticTrivia
-                      ? SyntaxFactory.ElasticWhitespace(text)
-                      : SyntaxFactory.Whitespace(text)
+                        ? SyntaxFactory.ElasticWhitespace(text)
+                        : SyntaxFactory.Whitespace(text)
                 );
             }
 
@@ -284,8 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         || nextToken.Kind() == SyntaxKind.OpenBraceToken
                         || nextToken.Kind() == SyntaxKind.WhereKeyword
                     )
-                      ? 1
-                      : 0;
+                        ? 1
+                        : 0;
 
                 case SyntaxKind.CloseBracketToken:
                     if (
@@ -302,8 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                 case SyntaxKind.CommaToken:
                     return currentToken.Parent is EnumDeclarationSyntax or SwitchExpressionSyntax
-                      ? 1
-                      : 0;
+                        ? 1
+                        : 0;
                 case SyntaxKind.ElseKeyword:
                     return nextToken.Kind() != SyntaxKind.IfKeyword ? 1 : 0;
                 case SyntaxKind.ColonToken:
@@ -371,8 +371,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         nextToken.Parent is AttributeListSyntax
                         && !(nextToken.Parent.Parent is ParameterSyntax)
                     )
-                      ? 1
-                      : 0;
+                        ? 1
+                        : 0;
                 case SyntaxKind.WhereKeyword:
                     return currentToken.Parent is TypeParameterListSyntax ? 1 : 0;
             }
@@ -841,9 +841,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     // No spacing between the calling convention specifier and the opening angle
                     // delegate* unmanaged[Cdecl]<
                     case SyntaxKind.CloseBracketToken
-                          when token.Parent.IsKind(
-                              SyntaxKind.FunctionPointerUnmanagedCallingConventionList
-                          ):
+                    when token.Parent.IsKind(
+                        SyntaxKind.FunctionPointerUnmanagedCallingConventionList
+                    ):
                         return false;
                 }
             }

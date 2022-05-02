@@ -1854,9 +1854,9 @@ class B
                 getMemberValue: (_, m) =>
                     (m == "Item2")
                         ? CreateDkmClrValue(
-                              new System.InvalidOperationException("Unable to evaluate"),
-                              evalFlags: DkmEvaluationResultFlags.ExceptionThrown
-                          )
+                            new System.InvalidOperationException("Unable to evaluate"),
+                            evalFlags: DkmEvaluationResultFlags.ExceptionThrown
+                        )
                         : null
             );
             using (runtime.Load())

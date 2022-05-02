@@ -1245,8 +1245,8 @@ internal class Http2Utilities : IHttpHeadersHandler
                 !expected.Equals(
                     actual,
                     ignoreCase
-                      ? StringComparison.InvariantCultureIgnoreCase
-                      : StringComparison.InvariantCulture
+                        ? StringComparison.InvariantCultureIgnoreCase
+                        : StringComparison.InvariantCulture
                 )
             )
             {

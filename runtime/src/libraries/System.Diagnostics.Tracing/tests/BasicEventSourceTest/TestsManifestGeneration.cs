@@ -74,9 +74,9 @@ namespace BasicEventSourceTests
                 var tyGmf =
                     (baseAssm != null)
                         ? baseAssm.GetType(
-                              eventSourceType.GetTypeInfo().BaseType.Namespace
-                                  + ".EventManifestOptions"
-                          )
+                            eventSourceType.GetTypeInfo().BaseType.Namespace
+                                + ".EventManifestOptions"
+                        )
                         : null;
                 MethodInfo mi = null;
                 if (tyGmf != null)

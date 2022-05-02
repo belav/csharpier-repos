@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.NavigationBar
     {
         public class GenerateDefaultConstructor
             : AbstractGenerateCodeItem,
-              IEquatable<GenerateDefaultConstructor>
+                IEquatable<GenerateDefaultConstructor>
         {
             public GenerateDefaultConstructor(string text, SymbolKey destinationTypeSymbolKey)
                 : base(

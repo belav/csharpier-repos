@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.Logging.AzureAppServices;
 
 internal class BlobLoggerConfigureOptions
     : BatchLoggerConfigureOptions,
-      IConfigureOptions<AzureBlobLoggerOptions>
+        IConfigureOptions<AzureBlobLoggerOptions>
 {
     private readonly IConfiguration _configuration;
     private readonly IWebAppContext _context;

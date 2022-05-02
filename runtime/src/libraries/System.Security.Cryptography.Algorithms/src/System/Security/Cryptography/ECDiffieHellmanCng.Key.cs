@@ -40,8 +40,8 @@ namespace System.Security.Cryptography
 
                     return new ECDiffieHellmanCngPublicKey(
                         curveName == null
-                          ? ExportFullKeyBlob(includePrivateParameters: false)
-                          : ExportKeyBlob(includePrivateParameters: false),
+                            ? ExportFullKeyBlob(includePrivateParameters: false)
+                            : ExportKeyBlob(includePrivateParameters: false),
                         curveName
                     );
                 }

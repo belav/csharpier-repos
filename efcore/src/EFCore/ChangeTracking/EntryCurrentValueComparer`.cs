@@ -24,7 +24,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
     /// <typeparam name="TProperty">The type of the property.</typeparam>
     public sealed class EntryCurrentValueComparer<TProperty>
         : IComparer<IUpdateEntry>,
-          IEqualityComparer<IUpdateEntry>
+            IEqualityComparer<IUpdateEntry>
     {
         private readonly IPropertyBase _property;
         private readonly IComparer<TProperty> _underlyingComparer;

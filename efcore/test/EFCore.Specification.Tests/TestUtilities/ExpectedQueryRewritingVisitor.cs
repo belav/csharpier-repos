@@ -249,25 +249,25 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
             var leftKeySelector = keySelectorTypeChanged
                 ? Expression.Lambda(
-                      leftKeySelectorBody,
-                      methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters
-                  )
+                    leftKeySelectorBody,
+                    methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters
+                )
                 : Expression.Lambda(
-                      originalLeftKeySelectorLambda.Type,
-                      leftKeySelectorBody,
-                      methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters
-                  );
+                    originalLeftKeySelectorLambda.Type,
+                    leftKeySelectorBody,
+                    methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters
+                );
 
             var rightKeySelector = keySelectorTypeChanged
                 ? Expression.Lambda(
-                      rightKeySelectorBody,
-                      methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters
-                  )
+                    rightKeySelectorBody,
+                    methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters
+                )
                 : Expression.Lambda(
-                      originalRightKeySelectorLambda.Type,
-                      rightKeySelectorBody,
-                      methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters
-                  );
+                    originalRightKeySelectorLambda.Type,
+                    rightKeySelectorBody,
+                    methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters
+                );
 
             return Expression.Call(
                 joinMethodInfo,
@@ -387,8 +387,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         // in case type argument on EF property overrides actual type of the member that is accessed, e.g.
                         // EF.Property<bool>(e, "MyNullableBool")
                         return result.Type != expression.Type
-                          ? Expression.Convert(result, expression.Type)
-                          : result;
+                            ? Expression.Convert(result, expression.Type)
+                            : result;
                     }
                 }
 
@@ -431,8 +431,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 var methodInfo = (
                     memberExpression.Type.IsNullableValueType()
-                      ? _maybeScalarNullableMethod
-                      : _maybeScalarNonNullableMethod
+                        ? _maybeScalarNullableMethod
+                        : _maybeScalarNonNullableMethod
                 ).MakeGenericMethod(instance.Type, memberExpression.Type.UnwrapNullableType());
 
                 var maybeMethodCall = Expression.Call(methodInfo, instance, maybeLambda);
@@ -440,8 +440,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 return
                     memberExpression.Member.DeclaringType.IsNullableType()
                     && memberExpression.Member.Name == "HasValue"
-                  ? Expression.Coalesce(maybeMethodCall, Expression.Constant(false))
-                  : maybeMethodCall;
+                    ? Expression.Coalesce(maybeMethodCall, Expression.Constant(false))
+                    : maybeMethodCall;
             }
 
             return Visit(expression);

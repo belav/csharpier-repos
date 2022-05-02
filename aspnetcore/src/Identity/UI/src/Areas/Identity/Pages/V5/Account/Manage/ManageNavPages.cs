@@ -123,8 +123,8 @@ public static class ManageNavPages
             viewContext.ViewData["ActivePage"] as string
             ?? Path.GetFileNameWithoutExtension(viewContext.ActionDescriptor.DisplayName);
         return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase)
-          ? "active"
-          : null;
+            ? "active"
+            : null;
     }
 
     /// <summary>

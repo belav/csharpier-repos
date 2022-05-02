@@ -51,10 +51,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// </summary>
         private class ProjectAccessor
             : Accessor<
-                  (ProjectKey projectKey, string name),
-                  (ProjectId projectId, string name),
-                  long
-              >
+                (ProjectKey projectKey, string name),
+                (ProjectId projectId, string name),
+                long
+            >
         {
             public ProjectAccessor(SQLitePersistentStorage storage) : base(storage) { }
 

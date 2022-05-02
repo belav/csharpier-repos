@@ -63,8 +63,8 @@ namespace System.Xml
             {
                 XPathNodeType xnt = _curNode.NodeType;
                 return xnt == XPathNodeType.Element || xnt == XPathNodeType.Root
-                  ? _curNode.InnerText
-                  : _curNode.Value!;
+                    ? _curNode.InnerText
+                    : _curNode.Value!;
             }
         }
 
@@ -129,13 +129,13 @@ namespace System.Xml
             _curNode.NodeType != XPathNodeType.Element
                 ? false
                 : //other type of nodes can't have attributes
-                  _curNode.MoveToAttribute(localName, namespaceURI);
+                _curNode.MoveToAttribute(localName, namespaceURI);
 
         public override bool MoveToFirstAttribute() =>
             _curNode.NodeType != XPathNodeType.Element
                 ? false
                 : //other type of nodes can't have attributes
-                  _curNode.MoveToNextAttribute(true);
+                _curNode.MoveToNextAttribute(true);
 
         public override bool MoveToNextAttribute() =>
             _curNode.NodeType != XPathNodeType.Attribute
@@ -220,8 +220,8 @@ namespace System.Xml
             DataDocumentXPathNavigator? otherDataDocXPathNav = other as DataDocumentXPathNavigator;
 
             return otherDataDocXPathNav == null || otherDataDocXPathNav.Document != _doc
-              ? XmlNodeOrder.Unknown
-              : _curNode.ComparePosition(otherDataDocXPathNav.CurNode);
+                ? XmlNodeOrder.Unknown
+                : _curNode.ComparePosition(otherDataDocXPathNav.CurNode);
         }
     }
 }

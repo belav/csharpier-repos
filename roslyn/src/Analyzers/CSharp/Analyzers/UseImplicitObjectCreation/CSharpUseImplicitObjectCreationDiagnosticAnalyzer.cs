@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseImplicitObjectCreation
                             Parent: BasePropertyDeclarationSyntax baseProperty
                         }
                     } accessor
-                      => baseProperty.Type,
+                        => baseProperty.Type,
                     _ => null,
                 };
             }

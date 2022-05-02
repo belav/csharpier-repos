@@ -45,8 +45,8 @@ public class AssemblyTestLog : IDisposable
         );
         var defaultMaxPath = 245;
         return string.IsNullOrEmpty(maxPathString)
-          ? defaultMaxPath
-          : int.Parse(maxPathString, CultureInfo.InvariantCulture);
+            ? defaultMaxPath
+            : int.Parse(maxPathString, CultureInfo.InvariantCulture);
     }
 
     private AssemblyTestLog(
@@ -460,8 +460,8 @@ public class AssemblyTestLog : IDisposable
                 propertyFactory.CreateProperty(
                     "TimestampOffset",
                     _logStart.HasValue
-                      ? $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s"
-                      : DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture)
+                        ? $"{(DateTimeOffset.UtcNow - _logStart.Value).TotalSeconds.ToString("N3", CultureInfo.InvariantCulture)}s"
+                        : DateTimeOffset.UtcNow.ToString("s", CultureInfo.InvariantCulture)
                 )
             );
     }

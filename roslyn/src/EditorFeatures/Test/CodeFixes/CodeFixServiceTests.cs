@@ -392,12 +392,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
             var configurationFixProviders = includeConfigurationFixProviders
                 ? workspace.ExportProvider.GetExports<
-                      IConfigurationFixProvider,
-                      CodeChangeProviderMetadata
-                  >()
+                    IConfigurationFixProvider,
+                    CodeChangeProviderMetadata
+                >()
                 : SpecializedCollections.EmptyEnumerable<
-                      Lazy<IConfigurationFixProvider, CodeChangeProviderMetadata>
-                  >();
+                    Lazy<IConfigurationFixProvider, CodeChangeProviderMetadata>
+                >();
 
             var fixService = new CodeFixService(
                 diagnosticService,
@@ -768,17 +768,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
             var vsixFixers =
                 vsixFixer != null
                     ? SpecializedCollections.SingletonEnumerable(
-                          new Lazy<CodeFixProvider, CodeChangeProviderMetadata>(
-                              () => vsixFixer,
-                              new CodeChangeProviderMetadata(
-                                  name: nameof(VsixCodeFixProvider),
-                                  languages: LanguageNames.CSharp
-                              )
-                          )
-                      )
+                        new Lazy<CodeFixProvider, CodeChangeProviderMetadata>(
+                            () => vsixFixer,
+                            new CodeChangeProviderMetadata(
+                                name: nameof(VsixCodeFixProvider),
+                                languages: LanguageNames.CSharp
+                            )
+                        )
+                    )
                     : SpecializedCollections.EmptyEnumerable<
-                          Lazy<CodeFixProvider, CodeChangeProviderMetadata>
-                      >();
+                        Lazy<CodeFixProvider, CodeChangeProviderMetadata>
+                    >();
 
             using var workspace = TestWorkspace.CreateCSharp(
                 code,

@@ -8,7 +8,7 @@ namespace System.Threading.Tasks.Dataflow
 {
     public sealed partial class ActionBlock<TInput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
+            System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
     {
         public ActionBlock(System.Action<TInput> action) { }
 
@@ -60,10 +60,10 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class BatchBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T[]>,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T[]>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<T[]>,
-          System.Threading.Tasks.Dataflow.ITargetBlock<T>
+            System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T[]>,
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T[]>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<T[]>,
+            System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public BatchBlock(int batchSize) { }
 
@@ -155,14 +155,14 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class BatchedJoinBlock<T1, T2>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
-                  System.Collections.Generic.IList<T1>,
-                  System.Collections.Generic.IList<T2>
-              >>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
-                  System.Collections.Generic.IList<T1>,
-                  System.Collections.Generic.IList<T2>
-              >>
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
+                    System.Collections.Generic.IList<T1>,
+                    System.Collections.Generic.IList<T2>
+                >>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
+                    System.Collections.Generic.IList<T1>,
+                    System.Collections.Generic.IList<T2>
+                >>
     {
         public BatchedJoinBlock(int batchSize) { }
 
@@ -284,16 +284,16 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class BatchedJoinBlock<T1, T2, T3>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
-                  System.Collections.Generic.IList<T1>,
-                  System.Collections.Generic.IList<T2>,
-                  System.Collections.Generic.IList<T3>
-              >>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
-                  System.Collections.Generic.IList<T1>,
-                  System.Collections.Generic.IList<T2>,
-                  System.Collections.Generic.IList<T3>
-              >>
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<
+                    System.Collections.Generic.IList<T1>,
+                    System.Collections.Generic.IList<T2>,
+                    System.Collections.Generic.IList<T3>
+                >>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<
+                    System.Collections.Generic.IList<T1>,
+                    System.Collections.Generic.IList<T2>,
+                    System.Collections.Generic.IList<T3>
+                >>
     {
         public BatchedJoinBlock(int batchSize) { }
 
@@ -430,10 +430,10 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class BroadcastBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<T>,
-          System.Threading.Tasks.Dataflow.ITargetBlock<T>
+            System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<T>,
+            System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public BroadcastBlock(System.Func<T, T>? cloningFunction) { }
 
@@ -515,10 +515,10 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class BufferBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<T>,
-          System.Threading.Tasks.Dataflow.ITargetBlock<T>
+            System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<T>,
+            System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public BufferBlock() { }
 
@@ -983,12 +983,12 @@ namespace System.Threading.Tasks.Dataflow
 
     public partial interface IPropagatorBlock<in TInput, out TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
-          System.Threading.Tasks.Dataflow.ITargetBlock<TInput> { }
+            System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
+            System.Threading.Tasks.Dataflow.ITargetBlock<TInput> { }
 
     public partial interface IReceivableSourceBlock<TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>
+            System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>
     {
         bool TryReceive(
             System.Predicate<TOutput>? filter,
@@ -1035,8 +1035,8 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class JoinBlock<T1, T2>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2>>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2>>
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2>>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2>>
     {
         public JoinBlock() { }
 
@@ -1123,8 +1123,8 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class JoinBlock<T1, T2, T3>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2, T3>>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2, T3>>
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<System.Tuple<T1, T2, T3>>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<System.Tuple<T1, T2, T3>>
     {
         public JoinBlock() { }
 
@@ -1220,10 +1220,10 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class TransformBlock<TInput, TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
-          System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
+            System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
+            System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
     {
         public TransformBlock(System.Func<TInput, System.Threading.Tasks.Task<TOutput>> transform)
         { }
@@ -1321,10 +1321,10 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class TransformManyBlock<TInput, TOutput>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
-          System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
+            System.Threading.Tasks.Dataflow.IPropagatorBlock<TInput, TOutput>,
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<TOutput>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<TOutput>,
+            System.Threading.Tasks.Dataflow.ITargetBlock<TInput>
     {
         public TransformManyBlock(
             System.Func<TInput, System.Collections.Generic.IEnumerable<TOutput>> transform
@@ -1431,10 +1431,10 @@ namespace System.Threading.Tasks.Dataflow
 
     public sealed partial class WriteOnceBlock<T>
         : System.Threading.Tasks.Dataflow.IDataflowBlock,
-          System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
-          System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
-          System.Threading.Tasks.Dataflow.ISourceBlock<T>,
-          System.Threading.Tasks.Dataflow.ITargetBlock<T>
+            System.Threading.Tasks.Dataflow.IPropagatorBlock<T, T>,
+            System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>,
+            System.Threading.Tasks.Dataflow.ISourceBlock<T>,
+            System.Threading.Tasks.Dataflow.ITargetBlock<T>
     {
         public WriteOnceBlock(System.Func<T, T>? cloningFunction) { }
 

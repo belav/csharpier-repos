@@ -8,9 +8,9 @@ namespace System.Data
 {
     public class DataRowView
         : ICustomTypeDescriptor,
-          IEditableObject,
-          IDataErrorInfo,
-          INotifyPropertyChanged
+            IEditableObject,
+            IDataErrorInfo,
+            INotifyPropertyChanged
     {
         private readonly DataView _dataView;
         private readonly DataRow _row;

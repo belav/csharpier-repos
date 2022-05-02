@@ -981,9 +981,9 @@ namespace System.ComponentModel.Composition
 
     public class GenericContract7
         : GenericContract4<string, string>.GenericContract5<int, int>.GenericContract6<
-              double,
-              double
-          > { }
+            double,
+            double
+        > { }
 
     public class GenericContract8<T>
         : GenericContract1<string>.GenericContract2.GenericContract3<T> { }

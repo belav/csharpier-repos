@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class UrlResolutionTest
     : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>,
-      IClassFixture<MvcEncodedTestFixture<RazorWebSite.Startup>>
+        IClassFixture<MvcEncodedTestFixture<RazorWebSite.Startup>>
 {
     private static readonly Assembly _resourcesAssembly = typeof(UrlResolutionTest)
         .GetTypeInfo()

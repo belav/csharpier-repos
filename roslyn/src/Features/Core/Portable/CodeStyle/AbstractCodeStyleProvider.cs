@@ -67,8 +67,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         {
             var severity = optionValue.Notification.Severity;
             return severity == ReportDiagnostic.Default
-              ? severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
-              : severity;
+                ? severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
+                : severity;
         }
 
         #region analysis

@@ -1497,8 +1497,8 @@ namespace System.Net.Sockets.Tests
 
                 bool success = server.WaitHandle.WaitOne(
                     expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
+                        ? TestSettings.FailingTestTimeout
+                        : TestSettings.PassingTestTimeout
                 ); // Make sure the bytes were received
                 if (!success)
                 {
@@ -1669,8 +1669,8 @@ namespace System.Net.Sockets.Tests
 
                 bool success = server.WaitHandle.WaitOne(
                     expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
+                        ? TestSettings.FailingTestTimeout
+                        : TestSettings.PassingTestTimeout
                 ); // Make sure the bytes were received
                 if (!success)
                 {
@@ -1861,8 +1861,8 @@ namespace System.Net.Sockets.Tests
 
                 bool success = server.WaitHandle.WaitOne(
                     expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
+                        ? TestSettings.FailingTestTimeout
+                        : TestSettings.PassingTestTimeout
                 ); // Make sure the bytes were received
                 if (!success)
                 {
@@ -2213,8 +2213,8 @@ namespace System.Net.Sockets.Tests
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
                 bool success = async.AsyncWaitHandle.WaitOne(
                     expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
+                        ? TestSettings.FailingTestTimeout
+                        : TestSettings.PassingTestTimeout
                 );
                 if (!success)
                 {
@@ -2402,8 +2402,8 @@ namespace System.Net.Sockets.Tests
                     async
                     && !waitHandle.WaitOne(
                         expectedToTimeout
-                          ? TestSettings.FailingTestTimeout
-                          : TestSettings.PassingTestTimeout
+                            ? TestSettings.FailingTestTimeout
+                            : TestSettings.PassingTestTimeout
                     )
                 )
                 {
@@ -3041,8 +3041,8 @@ namespace System.Net.Sockets.Tests
                 SocketUdpClient client = new SocketUdpClient(_log, serverSocket, connectTo, port);
                 bool success = async.AsyncWaitHandle.WaitOne(
                     expectedToTimeout
-                      ? TestSettings.FailingTestTimeout
-                      : TestSettings.PassingTestTimeout
+                        ? TestSettings.FailingTestTimeout
+                        : TestSettings.PassingTestTimeout
                 );
                 if (!success)
                 {

@@ -690,13 +690,13 @@ namespace JIT.HardwareIntrinsics.X86
                     if (
                         i > 3
                             ? (
-                                  BitConverter.SingleToInt32Bits(left[5])
-                                  != BitConverter.SingleToInt32Bits(result[i])
-                              )
+                                BitConverter.SingleToInt32Bits(left[5])
+                                != BitConverter.SingleToInt32Bits(result[i])
+                            )
                             : (
-                                  BitConverter.SingleToInt32Bits(left[1])
-                                  != BitConverter.SingleToInt32Bits(result[i])
-                              )
+                                BitConverter.SingleToInt32Bits(left[1])
+                                != BitConverter.SingleToInt32Bits(result[i])
+                            )
                     )
                     {
                         succeeded = false;

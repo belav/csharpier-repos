@@ -11,7 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
     /// </summary>
     public class ConventionContext<TMetadata>
         : IConventionContext<TMetadata>,
-          IReadableConventionContext
+            IReadableConventionContext
     {
         private bool _stopProcessing;
         private readonly ConventionDispatcher _dispatcher;

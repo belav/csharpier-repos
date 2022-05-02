@@ -95,8 +95,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
                     GetWrapEdits(align),
                     FeaturesResources.Wrapping,
                     align
-                      ? FeaturesResources.Wrap_and_align_expression
-                      : FeaturesResources.Wrap_expression
+                        ? FeaturesResources.Wrap_and_align_expression
+                        : FeaturesResources.Wrap_expression
                 );
 
             private Task<WrapItemsAction> GetUnwrapCodeActionAsync() =>

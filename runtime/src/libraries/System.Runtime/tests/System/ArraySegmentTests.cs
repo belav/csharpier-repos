@@ -59,8 +59,8 @@ namespace System.Tests
             {
                 Assert.True(
                     expected[i] == null
-                      ? (segment as IList<T>)[i] == null
-                      : expected[i].Equals((segment as IList<T>)[i])
+                        ? (segment as IList<T>)[i] == null
+                        : expected[i].Equals((segment as IList<T>)[i])
                 );
             }
         }

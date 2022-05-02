@@ -413,10 +413,10 @@ namespace System.Xml.Serialization
                 element.Any && element.Name.Length == 0
                     ? null
                     : (
-                          element.Form == XmlSchemaForm.Qualified
-                              ? (writeAccessor ? element.Namespace : element.Mapping!.Namespace)
-                              : string.Empty
-                      );
+                        element.Form == XmlSchemaForm.Qualified
+                            ? (writeAccessor ? element.Namespace : element.Mapping!.Namespace)
+                            : string.Empty
+                    );
 
             if (element.Mapping is NullableMapping nullableMapping)
             {
@@ -558,10 +558,10 @@ namespace System.Xml.Serialization
                         : WritePrimitiveMethodRequirement.None;
                     WritePrimitive(
                         element.IsNullable
-                          ? WritePrimitiveMethodRequirement.WriteNullableStringLiteral
+                            ? WritePrimitiveMethodRequirement.WriteNullableStringLiteral
                                 | suffixNullable
                                 | suffixRaw
-                          : WritePrimitiveMethodRequirement.WriteElementString | suffixRaw,
+                            : WritePrimitiveMethodRequirement.WriteElementString | suffixRaw,
                         name,
                         ns!,
                         element.Default,
@@ -1040,8 +1040,8 @@ namespace System.Xml.Serialization
                             null,
                             attribute.Name,
                             attribute.Form == XmlSchemaForm.Qualified
-                              ? attribute.Namespace
-                              : string.Empty
+                                ? attribute.Namespace
+                                : string.Empty
                         );
                     }
                 }

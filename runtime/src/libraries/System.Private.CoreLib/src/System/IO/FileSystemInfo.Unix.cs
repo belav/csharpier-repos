@@ -23,7 +23,7 @@ namespace System.IO
         {
             FileSystemInfo info = fileStatus.InitiallyDirectory
                 ? (FileSystemInfo)
-                      new DirectoryInfo(fullPath, fileName: fileName, isNormalized: true)
+                    new DirectoryInfo(fullPath, fileName: fileName, isNormalized: true)
                 : new FileInfo(fullPath, fileName: fileName, isNormalized: true);
 
             Debug.Assert(

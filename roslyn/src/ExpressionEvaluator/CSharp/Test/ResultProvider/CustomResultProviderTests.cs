@@ -248,8 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private sealed class CustomFormatter
             : IDkmClrFormatter,
-              IDkmClrFormatter2,
-              IDkmClrFullNameProvider
+                IDkmClrFormatter2,
+                IDkmClrFullNameProvider
         {
             private readonly IDkmClrFormatter _fallback; // Remove and dispatch calls through DkmInspectionContext.
 

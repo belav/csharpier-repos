@@ -13,7 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public abstract class GearsOfWarQueryFixtureBase
         : SharedStoreFixtureBase<GearsOfWarContext>,
-          IQueryFixtureBase
+            IQueryFixtureBase
     {
         private GearsOfWarData _expectedData;
 

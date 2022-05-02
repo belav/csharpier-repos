@@ -19,15 +19,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             return kind switch
             {
                 InlineRenameReplacementKind.NoConflict
-                  => VSTypeScriptInlineRenameReplacementKind.NoConflict,
+                    => VSTypeScriptInlineRenameReplacementKind.NoConflict,
                 InlineRenameReplacementKind.ResolvedReferenceConflict
-                  => VSTypeScriptInlineRenameReplacementKind.ResolvedReferenceConflict,
+                    => VSTypeScriptInlineRenameReplacementKind.ResolvedReferenceConflict,
                 InlineRenameReplacementKind.ResolvedNonReferenceConflict
-                  => VSTypeScriptInlineRenameReplacementKind.ResolvedNonReferenceConflict,
+                    => VSTypeScriptInlineRenameReplacementKind.ResolvedNonReferenceConflict,
                 InlineRenameReplacementKind.UnresolvedConflict
-                  => VSTypeScriptInlineRenameReplacementKind.UnresolvedConflict,
+                    => VSTypeScriptInlineRenameReplacementKind.UnresolvedConflict,
                 InlineRenameReplacementKind.Complexified
-                  => VSTypeScriptInlineRenameReplacementKind.Complexified,
+                    => VSTypeScriptInlineRenameReplacementKind.Complexified,
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
         }
@@ -39,15 +39,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             return kind switch
             {
                 VSTypeScriptInlineRenameReplacementKind.NoConflict
-                  => InlineRenameReplacementKind.NoConflict,
+                    => InlineRenameReplacementKind.NoConflict,
                 VSTypeScriptInlineRenameReplacementKind.ResolvedReferenceConflict
-                  => InlineRenameReplacementKind.ResolvedReferenceConflict,
+                    => InlineRenameReplacementKind.ResolvedReferenceConflict,
                 VSTypeScriptInlineRenameReplacementKind.ResolvedNonReferenceConflict
-                  => InlineRenameReplacementKind.ResolvedNonReferenceConflict,
+                    => InlineRenameReplacementKind.ResolvedNonReferenceConflict,
                 VSTypeScriptInlineRenameReplacementKind.UnresolvedConflict
-                  => InlineRenameReplacementKind.UnresolvedConflict,
+                    => InlineRenameReplacementKind.UnresolvedConflict,
                 VSTypeScriptInlineRenameReplacementKind.Complexified
-                  => InlineRenameReplacementKind.Complexified,
+                    => InlineRenameReplacementKind.Complexified,
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
         }

@@ -31,8 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
     [ExportWorkspaceServiceFactory(typeof(IPreviewPaneService), ServiceLayer.Host), Shared]
     internal class PreviewPaneService
         : ForegroundThreadAffinitizedObject,
-          IPreviewPaneService,
-          IWorkspaceServiceFactory
+            IPreviewPaneService,
+            IWorkspaceServiceFactory
     {
         private readonly IVsUIShell _uiShell;
 

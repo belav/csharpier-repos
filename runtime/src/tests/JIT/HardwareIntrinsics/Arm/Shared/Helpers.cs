@@ -2871,9 +2871,9 @@ namespace JIT.HardwareIntrinsics.Arm
             i < op1.Length
                 ? op1[i]
                 : (byte)ShiftRightArithmeticRoundedNarrowingSaturateUnsigned(
-                      op2[i - op1.Length],
-                      op3
-                  );
+                    op2[i - op1.Length],
+                    op3
+                );
 
         public static sbyte ShiftRightArithmeticRoundedNarrowingSaturateUpper(
             sbyte[] op1,
@@ -3382,9 +3382,9 @@ namespace JIT.HardwareIntrinsics.Arm
             i < op1.Length
                 ? op1[i]
                 : (ushort)ShiftRightArithmeticRoundedNarrowingSaturateUnsigned(
-                      op2[i - op1.Length],
-                      op3
-                  );
+                    op2[i - op1.Length],
+                    op3
+                );
 
         public static short ShiftRightArithmeticRoundedNarrowingSaturateUpper(
             short[] op1,
@@ -3882,9 +3882,9 @@ namespace JIT.HardwareIntrinsics.Arm
             i < op1.Length
                 ? op1[i]
                 : (uint)ShiftRightArithmeticRoundedNarrowingSaturateUnsigned(
-                      op2[i - op1.Length],
-                      op3
-                  );
+                    op2[i - op1.Length],
+                    op3
+                );
 
         public static int ShiftRightArithmeticRoundedNarrowingSaturateUpper(
             int[] op1,

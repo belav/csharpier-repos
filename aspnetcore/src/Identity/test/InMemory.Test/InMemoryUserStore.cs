@@ -13,17 +13,17 @@ namespace Microsoft.AspNetCore.Identity.InMemory;
 
 public class InMemoryUserStore<TUser>
     : IUserLoginStore<TUser>,
-      IUserClaimStore<TUser>,
-      IUserPasswordStore<TUser>,
-      IUserSecurityStampStore<TUser>,
-      IUserEmailStore<TUser>,
-      IUserLockoutStore<TUser>,
-      IUserPhoneNumberStore<TUser>,
-      IQueryableUserStore<TUser>,
-      IUserTwoFactorStore<TUser>,
-      IUserAuthenticationTokenStore<TUser>,
-      IUserAuthenticatorKeyStore<TUser>,
-      IUserTwoFactorRecoveryCodeStore<TUser> where TUser : PocoUser
+        IUserClaimStore<TUser>,
+        IUserPasswordStore<TUser>,
+        IUserSecurityStampStore<TUser>,
+        IUserEmailStore<TUser>,
+        IUserLockoutStore<TUser>,
+        IUserPhoneNumberStore<TUser>,
+        IQueryableUserStore<TUser>,
+        IUserTwoFactorStore<TUser>,
+        IUserAuthenticationTokenStore<TUser>,
+        IUserAuthenticatorKeyStore<TUser>,
+        IUserTwoFactorRecoveryCodeStore<TUser> where TUser : PocoUser
 {
     private readonly Dictionary<string, TUser> _logins = new Dictionary<string, TUser>();
 

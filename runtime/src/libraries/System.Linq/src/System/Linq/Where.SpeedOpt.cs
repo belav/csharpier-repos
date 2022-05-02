@@ -121,7 +121,7 @@ namespace System.Linq
 
         private sealed partial class WhereListIterator<TSource>
             : Iterator<TSource>,
-              IIListProvider<TSource>
+                IIListProvider<TSource>
         {
             public int GetCount(bool onlyIfCheap)
             {

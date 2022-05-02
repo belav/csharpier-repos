@@ -105,8 +105,8 @@ public class C
             // Note: it is expected that the symbol shows different Interfaces in PE vs. compilation reference
             AssertEx.SetEqual(
                 useImageReferences
-                  ? new[] { "I1<System.String>", "I2<System.String, System.Object!>" }
-                  : new[] { "I1<System.String>" },
+                    ? new[] { "I1<System.String>", "I2<System.String, System.Object!>" }
+                    : new[] { "I1<System.String>" },
                 imc2.InterfacesNoUseSiteDiagnostics()
                     .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );

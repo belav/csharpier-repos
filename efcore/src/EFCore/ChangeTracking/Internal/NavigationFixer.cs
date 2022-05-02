@@ -309,8 +309,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     newTargetEntry,
                     EntityState.Added,
                     entry.EntityState == EntityState.Added && !navigation.IsOnDependent
-                      ? EntityState.Added
-                      : EntityState.Modified,
+                        ? EntityState.Added
+                        : EntityState.Modified,
                     forceStateWhenUnknownKey: false
                 );
             }
@@ -477,8 +477,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         newTargetEntry,
                         EntityState.Added,
                         entry.EntityState == EntityState.Added
-                          ? EntityState.Added
-                          : EntityState.Modified,
+                            ? EntityState.Added
+                            : EntityState.Modified,
                         forceStateWhenUnknownKey: false
                     );
                 }
@@ -1386,10 +1386,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 joinEntry.SetEntityState(
                     arguments.SetModified
-                        || arguments.Entry.EntityState == EntityState.Added
-                        || arguments.OtherEntry.EntityState == EntityState.Added
-                      ? EntityState.Added
-                      : EntityState.Unchanged
+                    || arguments.Entry.EntityState == EntityState.Added
+                    || arguments.OtherEntry.EntityState == EntityState.Added
+                        ? EntityState.Added
+                        : EntityState.Unchanged
                 );
             }
             else
@@ -1605,16 +1605,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var oldDependentEntry =
                     oldDependent != null && !ReferenceEquals(dependentEntry.Entity, oldDependent)
                         ? dependentEntry.StateManager.TryGetEntry(
-                              oldDependent,
-                              foreignKey.DeclaringEntityType
-                          )
+                            oldDependent,
+                            foreignKey.DeclaringEntityType
+                        )
                         : (InternalEntityEntry?)
-                              dependentEntry.StateManager
-                                  .GetDependentsUsingRelationshipSnapshot(
-                                      principalEntry,
-                                      foreignKey
-                                  )
-                                  .FirstOrDefault();
+                            dependentEntry.StateManager
+                                .GetDependentsUsingRelationshipSnapshot(principalEntry, foreignKey)
+                                .FirstOrDefault();
 
                 if (
                     oldDependentEntry != null
@@ -1797,8 +1794,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     case EntityState.Modified:
                         dependentEntry.SetEntityState(
                             dependentEntry.SharedIdentityEntry != null
-                              ? EntityState.Detached
-                              : EntityState.Deleted
+                                ? EntityState.Detached
+                                : EntityState.Deleted
                         );
                         DeleteFixup(dependentEntry);
                         break;

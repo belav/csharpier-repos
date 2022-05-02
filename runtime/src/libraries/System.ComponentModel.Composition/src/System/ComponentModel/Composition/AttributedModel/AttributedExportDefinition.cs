@@ -56,8 +56,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                     _member.TryExportMetadataForMember(out IDictionary<string, object?> metadata);
 
                     string typeIdentity = _exportAttribute.IsContractNameSameAsTypeIdentity()
-                      ? ContractName
-                      : _member.GetTypeIdentityFromExport(_typeIdentityType);
+                        ? ContractName
+                        : _member.GetTypeIdentityFromExport(_typeIdentityType);
 
                     metadata.Add(CompositionConstants.ExportTypeIdentityMetadataName, typeIdentity);
 

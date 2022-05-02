@@ -365,9 +365,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
 
         private class ProjectCodeRefactoringProvider
             : AbstractProjectExtensionProvider<
-                  CodeRefactoringProvider,
-                  ExportCodeRefactoringProviderAttribute
-              >
+                CodeRefactoringProvider,
+                ExportCodeRefactoringProviderAttribute
+            >
         {
             public ProjectCodeRefactoringProvider(AnalyzerReference reference) : base(reference) { }
 

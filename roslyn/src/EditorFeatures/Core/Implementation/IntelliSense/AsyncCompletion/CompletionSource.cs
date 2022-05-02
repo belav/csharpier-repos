@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 {
     internal sealed class CompletionSource
         : ForegroundThreadAffinitizedObject,
-          IAsyncExpandingCompletionSource
+            IAsyncExpandingCompletionSource
     {
         internal const string RoslynItem = nameof(RoslynItem);
         internal const string TriggerLocation = nameof(TriggerLocation);
@@ -161,7 +161,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 service,
                 options
             )
-              ? new AsyncCompletionData.CompletionStartData(
+                ? new AsyncCompletionData.CompletionStartData(
                     participation: AsyncCompletionData.CompletionParticipation.ProvidesItems,
                     applicableToSpan: new SnapshotSpan(
                         triggerLocation.Snapshot,
@@ -170,7 +170,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                             .ToSpan()
                     )
                 )
-              : AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
+                : AsyncCompletionData.CompletionStartData.DoesNotParticipateInCompletion;
 
             // For telemetry reporting purpose
             static void CheckForExperimentStatus(ITextView textView, in CompletionOptions options)
@@ -421,14 +421,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 suggestionItemOptions =
                     completionList.SuggestionModeItem != null
                         ? new AsyncCompletionData.SuggestionItemOptions(
-                              completionList.SuggestionModeItem.DisplayText,
-                              completionList.SuggestionModeItem.Properties.TryGetValue(
-                                  Description,
-                                  out var description
-                              )
+                            completionList.SuggestionModeItem.DisplayText,
+                            completionList.SuggestionModeItem.Properties.TryGetValue(
+                                Description,
+                                out var description
+                            )
                                 ? description
                                 : string.Empty
-                          )
+                        )
                         : null;
 
                 // Store around the span this completion list applies to.  We'll use this later
@@ -483,8 +483,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 items,
                 suggestionItemOptions,
                 suggestionItemOptions == null
-                  ? AsyncCompletionData.InitialSelectionHint.RegularSelection
-                  : AsyncCompletionData.InitialSelectionHint.SoftSelection,
+                    ? AsyncCompletionData.InitialSelectionHint.RegularSelection
+                    : AsyncCompletionData.InitialSelectionHint.SoftSelection,
                 filterSet.GetFilterStatesInSet(addUnselectedExpander: expandItemsAvailable)
             );
         }

@@ -352,8 +352,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var characteristics = TryGetServiceCharacteristics(serviceType);
             return characteristics == null
-              ? throw new InvalidOperationException(CoreStrings.NotAnEFService(serviceType.Name))
-              : characteristics.Value;
+                ? throw new InvalidOperationException(CoreStrings.NotAnEFService(serviceType.Name))
+                : characteristics.Value;
         }
 
         /// <summary>

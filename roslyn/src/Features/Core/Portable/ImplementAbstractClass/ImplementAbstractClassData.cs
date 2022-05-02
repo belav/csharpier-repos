@@ -251,18 +251,18 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
             return member switch
             {
                 IMethodSymbol method
-                  => GenerateMethod(compilation, method, throughMember, modifiers, accessibility),
+                    => GenerateMethod(compilation, method, throughMember, modifiers, accessibility),
                 IPropertySymbol property
-                  => GenerateProperty(
-                      compilation,
-                      property,
-                      throughMember,
-                      modifiers,
-                      accessibility,
-                      propertyGenerationBehavior
-                  ),
+                    => GenerateProperty(
+                        compilation,
+                        property,
+                        throughMember,
+                        modifiers,
+                        accessibility,
+                        propertyGenerationBehavior
+                    ),
                 IEventSymbol @event
-                  => GenerateEvent(@event, throughMember, accessibility, modifiers),
+                    => GenerateEvent(@event, throughMember, accessibility, modifiers),
                 _ => null,
             };
         }
@@ -314,7 +314,7 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                 == ImplementTypePropertyGenerationBehavior.PreferAutoProperties;
 
             var getMethod = ShouldGenerateAccessor(property.GetMethod)
-              ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
+                ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     property.GetMethod,
                     attributes: default,
                     accessibility: property.GetMethod.ComputeResultantAccessibility(ClassType),
@@ -325,10 +325,10 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                         preferAutoProperties
                     )
                 )
-              : null;
+                : null;
 
             var setMethod = ShouldGenerateAccessor(property.SetMethod)
-              ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
+                ? CodeGenerationSymbolFactory.CreateAccessorSymbol(
                     property.SetMethod,
                     attributes: default,
                     accessibility: property.SetMethod.ComputeResultantAccessibility(ClassType),
@@ -339,7 +339,7 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
                         preferAutoProperties
                     )
                 )
-              : null;
+                : null;
 
             return CodeGenerationSymbolFactory.CreatePropertySymbol(
                 property,

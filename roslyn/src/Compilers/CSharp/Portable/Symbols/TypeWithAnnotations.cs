@@ -97,10 +97,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return Create(
                 typeSymbol,
                 nullableAnnotation: isAnnotated
-                  ? NullableAnnotation.Annotated
-                  : isNullableEnabled
-                      ? NullableAnnotation.NotAnnotated
-                      : NullableAnnotation.Oblivious
+                    ? NullableAnnotation.Annotated
+                    : isNullableEnabled
+                        ? NullableAnnotation.NotAnnotated
+                        : NullableAnnotation.Oblivious
             );
         }
 
@@ -973,8 +973,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (type is null)
                 {
                     return annotation.IsAnnotated()
-                      ? NullableFlowState.MaybeDefault
-                      : NullableFlowState.NotNull;
+                        ? NullableFlowState.MaybeDefault
+                        : NullableFlowState.NotNull;
                 }
                 if (type.IsPossiblyNullableReferenceTypeTypeParameter())
                 {
@@ -1156,8 +1156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return CreateNonLazyType(
                     defaultType,
                     defaultType.IsNullableType()
-                      ? type.NullableAnnotation
-                      : NullableAnnotation.NotAnnotated,
+                        ? type.NullableAnnotation
+                        : NullableAnnotation.NotAnnotated,
                     _customModifiers
                 );
             }
@@ -1391,8 +1391,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var resolved = asValueType
                     ? _compilation
-                      .GetSpecialType(SpecialType.System_Nullable_T)
-                      .Construct(ImmutableArray.Create(_underlying))
+                        .GetSpecialType(SpecialType.System_Nullable_T)
+                        .Construct(ImmutableArray.Create(_underlying))
                     : _underlying.Type;
                 Interlocked.CompareExchange(ref _resolved, resolved, null);
             }

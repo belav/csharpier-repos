@@ -35,7 +35,7 @@ namespace System.Composition.UnitTests
         [Export(typeof(IUnrelatedThings<,>))]
         public class UnrelatedThings<TC, TP>
             : ObservableCollection<TC>,
-              IUnrelatedThings<TC, TP> { }
+                IUnrelatedThings<TC, TP> { }
 
         [Fact]
         public void GenericPartDiscoveryIgnoresAPartAndDoesntThrowAnExceptionWhenItsConstraintOnTypeParameterIsNotAssignableFromTheExportTarget()

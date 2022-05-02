@@ -211,8 +211,8 @@ namespace System.Web.Helpers
                 return null;
             }
             HttpPostedFileBase file = String.IsNullOrEmpty(postedFileName)
-              ? request.Files[0]
-              : request.Files[postedFileName];
+                ? request.Files[0]
+                : request.Files[postedFileName];
             if (file == null || file.ContentLength < 1)
             {
                 return null;
@@ -757,8 +757,8 @@ namespace System.Web.Helpers
             {
                 ImageFormat saveImageFormat;
                 ImageFormat requestedImageFormat = String.IsNullOrEmpty(imageFormat)
-                  ? _initialFormat
-                  : GetImageFormat(imageFormat);
+                    ? _initialFormat
+                    : GetImageFormat(imageFormat);
                 var extension = Path.GetExtension(filePath).TrimStart('.');
                 // TryFromStringToImageFormat accepts mime types and image names. For images supported by System.Drawing.Imaging, the image name maps to the extension.
                 // Replace the extension with the current format in the following two events:

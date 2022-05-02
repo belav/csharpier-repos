@@ -29,11 +29,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
     /// </summary>
     public sealed partial class FileCodeModel
         : AbstractCodeModelObject,
-          EnvDTE.FileCodeModel,
-          EnvDTE80.FileCodeModel2,
-          ICodeElementContainer<AbstractCodeElement>,
-          IVBFileCodeModelEvents,
-          ICSCodeModelRefactoring
+            EnvDTE.FileCodeModel,
+            EnvDTE80.FileCodeModel2,
+            ICodeElementContainer<AbstractCodeElement>,
+            IVBFileCodeModelEvents,
+            ICSCodeModelRefactoring
     {
         internal static ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> Create(
             CodeModelState state,
@@ -908,8 +908,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 var syntaxTree = GetSyntaxTree();
                 return syntaxTree.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
-                  ? EnvDTE80.vsCMParseStatus.vsCMParseStatusError
-                  : EnvDTE80.vsCMParseStatus.vsCMParseStatusComplete;
+                    ? EnvDTE80.vsCMParseStatus.vsCMParseStatusError
+                    : EnvDTE80.vsCMParseStatus.vsCMParseStatusComplete;
             }
         }
 

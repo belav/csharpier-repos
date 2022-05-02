@@ -24,7 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
     /// </remarks>
     public class NavigationBuilder
         : IInfrastructure<IConventionSkipNavigationBuilder?>,
-          IInfrastructure<IConventionNavigationBuilder?>
+            IInfrastructure<IConventionNavigationBuilder?>
     {
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

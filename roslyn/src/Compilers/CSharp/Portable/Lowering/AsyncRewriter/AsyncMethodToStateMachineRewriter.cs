@@ -98,12 +98,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             _exitLabel = F.GenerateLabel("exitLabel");
 
             _exprRetValue = method.IsAsyncEffectivelyReturningGenericTask(F.Compilation)
-              ? F.SynthesizedLocal(
+                ? F.SynthesizedLocal(
                     asyncMethodBuilderMemberCollection.ResultType,
                     syntax: F.Syntax,
                     kind: SynthesizedLocalKind.AsyncMethodReturnValue
                 )
-              : null;
+                : null;
 
             _dynamicFactory = new LoweredDynamicOperationFactory(F, methodOrdinal);
             _awaiterFields = new Dictionary<TypeSymbol, FieldSymbol>(
@@ -254,8 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     F.Field(F.This(), _asyncMethodBuilderField),
                     _asyncMethodBuilderMemberCollection.SetResult,
                     _method.IsAsyncEffectivelyReturningGenericTask(F.Compilation)
-                      ? ImmutableArray.Create<BoundExpression>(F.Local(_exprRetValue))
-                      : ImmutableArray<BoundExpression>.Empty
+                        ? ImmutableArray.Create<BoundExpression>(F.Local(_exprRetValue))
+                        : ImmutableArray<BoundExpression>.Empty
                 )
             );
         }
@@ -489,8 +489,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(receiver != null);
 
                 return methodSymbol.IsStatic
-                  ? F.StaticCall(methodSymbol.ContainingType, methodSymbol, receiver)
-                  : F.Call(receiver, methodSymbol);
+                    ? F.StaticCall(methodSymbol.ContainingType, methodSymbol, receiver)
+                    : F.Call(receiver, methodSymbol);
             }
 
             // dynamic:
@@ -541,8 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             AddState(out int stateNumber, out GeneratedLabelSymbol resumeLabel);
 
             TypeSymbol awaiterFieldType = awaiterTemp.Type.IsVerifierReference()
-              ? F.SpecialType(SpecialType.System_Object)
-              : awaiterTemp.Type;
+                ? F.SpecialType(SpecialType.System_Object)
+                : awaiterTemp.Type;
 
             FieldSymbol awaiterField = GetAwaiterField(awaiterFieldType);
 
@@ -569,15 +569,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                             TypeCompareKind.ConsiderEverything2
                         )
                     )
-                      ? F.Local(awaiterTemp)
-                      : F.Convert(awaiterFieldType, F.Local(awaiterTemp))
+                        ? F.Local(awaiterTemp)
+                        : F.Convert(awaiterFieldType, F.Local(awaiterTemp))
                 )
             );
 
             blockBuilder.Add(
                 awaiterTemp.Type.IsDynamic()
-                  ? GenerateAwaitOnCompletedDynamic(awaiterTemp)
-                  : GenerateAwaitOnCompleted(awaiterTemp.Type, awaiterTemp)
+                    ? GenerateAwaitOnCompletedDynamic(awaiterTemp)
+                    : GenerateAwaitOnCompleted(awaiterTemp.Type, awaiterTemp)
             );
 
             blockBuilder.Add(GenerateReturn(false));
@@ -599,8 +599,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         awaiterField.Type,
                         TypeCompareKind.ConsiderEverything2
                     )
-                      ? F.Field(F.This(), awaiterField)
-                      : F.Convert(awaiterTemp.Type, F.Field(F.This(), awaiterField))
+                        ? F.Field(F.This(), awaiterField)
+                        : F.Convert(awaiterTemp.Type, F.Field(F.This(), awaiterField))
                 )
             );
 
@@ -797,8 +797,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             return (secondOpt == null)
-              ? ImmutableArray.Create(first)
-              : ImmutableArray.Create(first, secondOpt);
+                ? ImmutableArray.Create(first)
+                : ImmutableArray.Create(first, secondOpt);
         }
 
         public sealed override BoundNode VisitReturnStatement(BoundReturnStatement node)

@@ -788,8 +788,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SyntaxKind GetBaseTypeDeclarationKind(SyntaxKind kind)
         {
             return kind == SyntaxKind.EnumKeyword
-              ? SyntaxKind.EnumDeclaration
-              : GetTypeDeclarationKind(kind);
+                ? SyntaxKind.EnumDeclaration
+                : GetTypeDeclarationKind(kind);
         }
 
         public static SyntaxKind GetTypeDeclarationKind(SyntaxKind kind)

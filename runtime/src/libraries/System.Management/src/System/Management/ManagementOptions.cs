@@ -469,9 +469,9 @@ namespace System.Management
                     (value == true)
                         ? (Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS)
                         : (
-                              Flags
-                              & (int)~tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS
-                          );
+                            Flags
+                            & (int)~tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS
+                        );
             }
         }
 
@@ -937,9 +937,9 @@ namespace System.Management
                     (value == true)
                         ? (Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS)
                         : (
-                              Flags
-                              & (int)~tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS
-                          );
+                            Flags
+                            & (int)~tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS
+                        );
                 FireIdentifierChanged();
             }
         }
@@ -1089,9 +1089,9 @@ namespace System.Management
                     (value == true)
                         ? (Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS)
                         : (
-                              Flags
-                              & (int)~tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS
-                          );
+                            Flags
+                            & (int)~tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_USE_AMENDED_QUALIFIERS
+                        );
             }
         }
 
@@ -1120,7 +1120,7 @@ namespace System.Management
                     PutType.UpdateOnly => (int)tag_WBEM_CHANGE_FLAG_TYPE.WBEM_FLAG_UPDATE_ONLY,
                     PutType.CreateOnly => (int)tag_WBEM_CHANGE_FLAG_TYPE.WBEM_FLAG_CREATE_ONLY,
                     PutType.UpdateOrCreate
-                      => (int)tag_WBEM_CHANGE_FLAG_TYPE.WBEM_FLAG_CREATE_OR_UPDATE,
+                        => (int)tag_WBEM_CHANGE_FLAG_TYPE.WBEM_FLAG_CREATE_OR_UPDATE,
                     _ => throw new ArgumentException(null, nameof(Type)),
                 };
             }

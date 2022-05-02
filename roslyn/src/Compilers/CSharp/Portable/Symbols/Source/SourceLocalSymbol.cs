@@ -157,7 +157,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             Debug.Assert(closestTypeSyntax.Kind() != SyntaxKind.RefType);
             return closestTypeSyntax.IsVar
-              ? new DeconstructionLocalSymbol(
+                ? new DeconstructionLocalSymbol(
                     containingSymbol,
                     scopeBinder,
                     nodeBinder,
@@ -166,7 +166,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     kind,
                     deconstruction
                 )
-              : new SourceLocalSymbol(
+                : new SourceLocalSymbol(
                     containingSymbol,
                     scopeBinder,
                     false,
@@ -221,7 +221,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return
                 typeSyntax?.IsVar != false
                 && kind != LocalDeclarationKind.DeclarationExpressionVariable
-              ? new LocalSymbolWithEnclosingContext(
+                ? new LocalSymbolWithEnclosingContext(
                     containingSymbol,
                     scopeBinder,
                     nodeBinder,
@@ -231,7 +231,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     nodeToBind,
                     forbiddenZone
                 )
-              : new SourceLocalSymbol(
+                : new SourceLocalSymbol(
                     containingSymbol,
                     scopeBinder,
                     false,
@@ -270,7 +270,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(declarationKind != LocalDeclarationKind.ForEachIterationVariable);
             return (initializer != null)
-              ? new LocalWithInitializer(
+                ? new LocalWithInitializer(
                     containingSymbol,
                     scopeBinder,
                     typeSyntax,
@@ -279,7 +279,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     initializerBinderOpt ?? scopeBinder,
                     declarationKind
                 )
-              : new SourceLocalSymbol(
+                : new SourceLocalSymbol(
                     containingSymbol,
                     scopeBinder,
                     allowRefKind,
@@ -729,8 +729,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Debug.Assert(boundInitValue != null);
                 MakeConstantTuple(inProgress: null, boundInitValue: boundInitValue);
                 return _constantTuple == null
-                  ? ImmutableBindingDiagnostic<AssemblySymbol>.Empty
-                  : _constantTuple.Diagnostics;
+                    ? ImmutableBindingDiagnostic<AssemblySymbol>.Empty
+                    : _constantTuple.Diagnostics;
             }
 
             internal override void SetRefEscape(uint value)

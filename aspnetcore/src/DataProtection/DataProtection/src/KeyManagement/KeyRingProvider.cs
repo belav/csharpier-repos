@@ -166,8 +166,8 @@ internal sealed class KeyRingProvider : ICacheableKeyRingProvider, IKeyRingProvi
         return new CacheableKeyRing(
             expirationToken: cacheExpirationToken,
             expirationTime: (defaultKey.ExpirationDate <= now)
-              ? nextAutoRefreshTime
-              : Min(defaultKey.ExpirationDate, nextAutoRefreshTime),
+                ? nextAutoRefreshTime
+                : Min(defaultKey.ExpirationDate, nextAutoRefreshTime),
             defaultKey: defaultKey,
             allKeys: allKeys
         );

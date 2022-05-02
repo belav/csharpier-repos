@@ -41,7 +41,7 @@ namespace System.Drawing.Drawing2D
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeletePathIter(new HandleRef(this, nativeIter));
+                        Gdip.GdipDeletePathIter(new HandleRef(this, nativeIter));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

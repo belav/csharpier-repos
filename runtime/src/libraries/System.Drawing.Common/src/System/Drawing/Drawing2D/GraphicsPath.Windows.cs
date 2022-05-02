@@ -104,7 +104,7 @@ namespace System.Drawing.Drawing2D
                         ? Gdip.Ok
                         :
 #endif
-                          Gdip.GdipDeletePath(new HandleRef(this, _nativePath));
+                        Gdip.GdipDeletePath(new HandleRef(this, _nativePath));
 #if DEBUG
                     Debug.Assert(
                         status == Gdip.Ok,

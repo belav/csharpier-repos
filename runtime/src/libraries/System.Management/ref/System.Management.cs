@@ -309,8 +309,8 @@ namespace System.Management
     [System.ComponentModel.ToolboxItemAttribute(false)]
     public partial class ManagementBaseObject
         : System.ComponentModel.Component,
-          System.ICloneable,
-          System.Runtime.Serialization.ISerializable
+            System.ICloneable,
+            System.Runtime.Serialization.ISerializable
     {
         protected ManagementBaseObject(
             System.Runtime.Serialization.SerializationInfo info,
@@ -772,7 +772,7 @@ namespace System.Management
 
     public partial class ManagementObject
         : System.Management.ManagementBaseObject,
-          System.ICloneable
+            System.ICloneable
     {
         public ManagementObject()
             : base(
@@ -1067,8 +1067,8 @@ namespace System.Management
 
     public partial class ManagementObjectCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable,
-          System.IDisposable
+            System.Collections.IEnumerable,
+            System.IDisposable
     {
         internal ManagementObjectCollection() { }
 
@@ -1105,7 +1105,7 @@ namespace System.Management
 
         public partial class ManagementObjectEnumerator
             : System.Collections.IEnumerator,
-              System.IDisposable
+                System.IDisposable
         {
             internal ManagementObjectEnumerator() { }
 
@@ -1522,7 +1522,7 @@ namespace System.Management
 
     public partial class MethodDataCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal MethodDataCollection() { }
 
@@ -1714,7 +1714,7 @@ namespace System.Management
 
     public partial class PropertyDataCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal PropertyDataCollection() { }
 
@@ -1866,7 +1866,7 @@ namespace System.Management
 
     public partial class QualifierDataCollection
         : System.Collections.ICollection,
-          System.Collections.IEnumerable
+            System.Collections.IEnumerable
     {
         internal QualifierDataCollection() { }
 

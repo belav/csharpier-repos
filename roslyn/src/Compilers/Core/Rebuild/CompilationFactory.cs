@@ -42,13 +42,13 @@ namespace Microsoft.CodeAnalysis.Rebuild
             optionsReader.GetLanguageName() switch
             {
                 LanguageNames.CSharp
-                  => CSharpCompilationFactory.Create(assemblyFileName, optionsReader),
+                    => CSharpCompilationFactory.Create(assemblyFileName, optionsReader),
                 LanguageNames.VisualBasic
-                  => VisualBasicCompilationFactory.Create(assemblyFileName, optionsReader),
+                    => VisualBasicCompilationFactory.Create(assemblyFileName, optionsReader),
                 var language
-                  => throw new InvalidDataException(
-                      $"{assemblyFileName} has unsupported language {language}"
-                  )
+                    => throw new InvalidDataException(
+                        $"{assemblyFileName} has unsupported language {language}"
+                    )
             };
 
         public abstract SyntaxTree CreateSyntaxTree(string filePath, SourceText sourceText);

@@ -318,8 +318,8 @@ public static class SyntaxNodeVerifier
         {
             var delimiter = text.IndexOf(" - ", start, StringComparison.Ordinal);
             return delimiter == -1
-              ? text.Substring(start)
-              : text.Substring(start, delimiter - start);
+                ? text.Substring(start)
+                : text.Substring(start, delimiter - start);
         }
 
         private string GetContent(string text, int start)

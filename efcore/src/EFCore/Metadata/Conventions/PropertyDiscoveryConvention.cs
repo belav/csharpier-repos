@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class PropertyDiscoveryConvention
         : IEntityTypeAddedConvention,
-          IEntityTypeBaseTypeChangedConvention
+            IEntityTypeBaseTypeChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="PropertyDiscoveryConvention" />.

@@ -25,8 +25,8 @@ namespace System.Runtime.Serialization.Json
             if (context == null)
             {
                 return TryReadNullAtTopLevel(jsonReader)
-                  ? null
-                  : jsonReader.ReadElementContentAsBase64();
+                    ? null
+                    : jsonReader.ReadElementContentAsBase64();
             }
             else
             {

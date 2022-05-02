@@ -213,8 +213,8 @@ namespace Microsoft.CodeAnalysis
         {
             // global increment < 0 means it is a global version which has its global increment in local increment
             return version._globalIncrement >= 0
-              ? version._globalIncrement
-              : version._localIncrement;
+                ? version._globalIncrement
+                : version._localIncrement;
         }
 
         private static int GetNextGlobalVersion()

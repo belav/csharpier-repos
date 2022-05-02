@@ -159,8 +159,8 @@ namespace System.Net.Http.Functional.Tests
                                     UseVersion.ToString(),
                                     // If proxy is used , the url does not matter. We set it to be different to avoid confusion.
                                     useProxy
-                                      ? Configuration.Http.RemoteEchoServer.ToString()
-                                      : uri.ToString(),
+                                        ? Configuration.Http.RemoteEchoServer.ToString()
+                                        : uri.ToString(),
                                     new RemoteInvokeOptions { StartInfo = psi }
                                 )
                                 .Dispose();

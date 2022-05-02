@@ -105,7 +105,7 @@ namespace System.IO.IsolatedStorage
 
     public sealed partial class IsolatedStorageFile
         : System.IO.IsolatedStorage.IsolatedStorage,
-          System.IDisposable
+            System.IDisposable
     {
         internal IsolatedStorageFile() { }
 

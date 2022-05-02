@@ -20,8 +20,8 @@ namespace System.IO.Tests
         protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
             Task.FromResult<Stream>(
                 initialData != null
-                  ? new BufferedStream(new MemoryStream(initialData), BufferSize)
-                  : new BufferedStream(new MemoryStream(), BufferSize)
+                    ? new BufferedStream(new MemoryStream(initialData), BufferSize)
+                    : new BufferedStream(new MemoryStream(), BufferSize)
             );
 
         protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>

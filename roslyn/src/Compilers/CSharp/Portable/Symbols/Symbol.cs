@@ -208,8 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var sourceModuleSymbol = this.ContainingModule as SourceModuleSymbol;
                 return (object)sourceModuleSymbol == null
-                  ? null
-                  : sourceModuleSymbol.DeclaringCompilation;
+                    ? null
+                    : sourceModuleSymbol.DeclaringCompilation;
             }
         }
 
@@ -303,8 +303,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var declaringCompilation = this.DeclaringCompilation;
             Debug.Assert(declaringCompilation != null); // require that it is a source symbol
             return (locations.Length > 0)
-              ? new LexicalSortKey(locations[0], declaringCompilation)
-              : LexicalSortKey.NotInSource;
+                ? new LexicalSortKey(locations[0], declaringCompilation)
+                : LexicalSortKey.NotInSource;
         }
 
         /// <summary>
@@ -1184,10 +1184,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ref result,
                     param.RefCustomModifiers,
                     this is MethodSymbol method
-                        && method.MethodKind == MethodKind.FunctionPointerSignature
-                      ? AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
+                    && method.MethodKind == MethodKind.FunctionPointerSignature
+                        ? AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
                             | AllowedRequiredModifierType.System_Runtime_CompilerServices_OutAttribute
-                      : AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
+                        : AllowedRequiredModifierType.System_Runtime_InteropServices_InAttribute
                 );
         }
 

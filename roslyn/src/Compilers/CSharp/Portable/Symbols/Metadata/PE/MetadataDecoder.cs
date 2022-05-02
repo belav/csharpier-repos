@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             : base(
                 moduleSymbol.Module,
                 (moduleSymbol.ContainingAssembly is PEAssemblySymbol)
-                  ? moduleSymbol.ContainingAssembly.Identity
-                  : null,
+                    ? moduleSymbol.ContainingAssembly.Identity
+                    : null,
                 SymbolFactory.Instance,
                 moduleSymbol
             )
@@ -610,12 +610,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     !TypeSymbol.Equals(scope, targetTypeSymbol, TypeCompareKind.ConsiderEverything2)
                     && !(
                         targetTypeSymbol.IsInterfaceType()
-                          ? scope.AllInterfacesNoUseSiteDiagnostics.IndexOf(
+                            ? scope.AllInterfacesNoUseSiteDiagnostics.IndexOf(
                                 (NamedTypeSymbol)targetTypeSymbol,
                                 0,
                                 SymbolEqualityComparer.CLRSignature
                             ) != -1
-                          : scope.IsDerivedFrom(
+                            : scope.IsDerivedFrom(
                                 targetTypeSymbol,
                                 TypeCompareKind.CLRSignatureCompareOptions,
                                 useSiteInfo: ref discardedUseSiteInfo

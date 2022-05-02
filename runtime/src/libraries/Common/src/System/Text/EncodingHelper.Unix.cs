@@ -61,7 +61,7 @@ namespace System.Text
                         atPos < dotPos
                             ? locale.Substring(dotPos)
                             : // no modifier
-                              locale.Substring(dotPos, atPos - dotPos); // has modifier
+                            locale.Substring(dotPos, atPos - dotPos); // has modifier
                     return charset.ToLowerInvariant();
                 }
             }

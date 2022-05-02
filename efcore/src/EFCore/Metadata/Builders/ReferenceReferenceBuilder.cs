@@ -390,8 +390,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             return
                 RelatedEntityType.HasSharedClrType
                 && RelatedEntityType.ShortName() == entityTypeName
-              ? (EntityType)RelatedEntityType
-              : null;
+                ? (EntityType)RelatedEntityType
+                : null;
         }
 
         /// <summary>

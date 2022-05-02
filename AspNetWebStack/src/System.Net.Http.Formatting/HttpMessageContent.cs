@@ -100,8 +100,8 @@ namespace System.Net.Http
             get
             {
                 return HttpRequestMessage != null
-                  ? HttpRequestMessage.Content
-                  : HttpResponseMessage.Content;
+                    ? HttpRequestMessage.Content
+                    : HttpResponseMessage.Content;
             }
         }
 
@@ -444,8 +444,8 @@ namespace System.Net.Http
                         Properties.Resources.HttpMessageContentAlreadyRead,
                         FormattingUtilities.HttpContentType.Name,
                         HttpRequestMessage != null
-                          ? FormattingUtilities.HttpRequestMessageType.Name
-                          : FormattingUtilities.HttpResponseMessageType.Name
+                            ? FormattingUtilities.HttpRequestMessageType.Name
+                            : FormattingUtilities.HttpResponseMessageType.Name
                     );
                 }
             }

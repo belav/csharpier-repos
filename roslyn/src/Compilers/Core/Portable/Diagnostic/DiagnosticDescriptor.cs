@@ -271,8 +271,8 @@ namespace Microsoft.CodeAnalysis
                 CancellationToken.None
             );
             return effectiveDiagnostic != null
-              ? MapSeverityToReport(effectiveDiagnostic.Severity)
-              : ReportDiagnostic.Suppress;
+                ? MapSeverityToReport(effectiveDiagnostic.Severity)
+                : ReportDiagnostic.Suppress;
         }
 
         // internal for testing purposes.

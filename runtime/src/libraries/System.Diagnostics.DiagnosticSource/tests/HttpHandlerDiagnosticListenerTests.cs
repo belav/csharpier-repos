@@ -894,7 +894,7 @@ namespace System.Diagnostics.Tests
         /// </summary>
         private class EventObserverAndRecorder
             : IObserver<KeyValuePair<string, object>>,
-              IDisposable
+                IDisposable
         {
             private readonly Action<KeyValuePair<string, object>> onEvent;
 

@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnreachableCode
             // squiggle.  On all the other lines make the code action low priority as it's definitely
             // helpful, but shouldn't interfere with anything else the uesr is doing.
             var priority = IsSubsequentSection(diagnostic)
-              ? CodeActionPriority.Low
-              : CodeActionPriority.Medium;
+                ? CodeActionPriority.Low
+                : CodeActionPriority.Medium;
 
             var codeAction = new MyCodeAction(
                 CSharpCodeFixesResources.Remove_unreachable_code,

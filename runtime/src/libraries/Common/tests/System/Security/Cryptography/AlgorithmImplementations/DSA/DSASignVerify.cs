@@ -153,8 +153,8 @@ namespace System.Security.Cryptography.Dsa.Tests
             TryWithOutputArray(
                 dest =>
                     dsa.TrySignData(data, dest, hashAlgorithm, out int bytesWritten)
-                      ? (true, bytesWritten)
-                      : (false, 0)
+                        ? (true, bytesWritten)
+                        : (false, 0)
             );
 
         public override bool VerifyData(

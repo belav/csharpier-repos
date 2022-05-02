@@ -458,14 +458,14 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 o.StateDataFormat = new TestStateDataFormat();
                 o.Events = redirect
                     ? new OAuthEvents()
-                      {
-                          OnAccessDenied = ctx =>
-                          {
-                              ctx.Response.Redirect("/error?FailureMessage=AccessDenied");
-                              ctx.HandleResponse();
-                              return Task.FromResult(0);
-                          }
-                      }
+                    {
+                        OnAccessDenied = ctx =>
+                        {
+                            ctx.Response.Redirect("/error?FailureMessage=AccessDenied");
+                            ctx.HandleResponse();
+                            return Task.FromResult(0);
+                        }
+                    }
                     : new OAuthEvents();
             }
         );
@@ -598,27 +598,24 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 o.StateDataFormat = new TestStateDataFormat();
                 o.Events = redirect
                     ? new OAuthEvents()
-                      {
-                          OnRemoteFailure = ctx =>
-                          {
-                              var ex = ctx.Failure;
-                              Assert.True(ex.Data.Contains("error"), "error");
-                              Assert.True(
-                                  ex.Data.Contains("error_description"),
-                                  "error_description"
-                              );
-                              Assert.True(ex.Data.Contains("error_uri"), "error_uri");
-                              Assert.Equal("itfailed", ex.Data["error"]);
-                              Assert.Equal("whyitfailed", ex.Data["error_description"]);
-                              Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                              ctx.Response.Redirect(
-                                  "/error?FailureMessage="
-                                      + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                              );
-                              ctx.HandleResponse();
-                              return Task.FromResult(0);
-                          }
-                      }
+                    {
+                        OnRemoteFailure = ctx =>
+                        {
+                            var ex = ctx.Failure;
+                            Assert.True(ex.Data.Contains("error"), "error");
+                            Assert.True(ex.Data.Contains("error_description"), "error_description");
+                            Assert.True(ex.Data.Contains("error_uri"), "error_uri");
+                            Assert.Equal("itfailed", ex.Data["error"]);
+                            Assert.Equal("whyitfailed", ex.Data["error_description"]);
+                            Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
+                            ctx.Response.Redirect(
+                                "/error?FailureMessage="
+                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                            );
+                            ctx.HandleResponse();
+                            return Task.FromResult(0);
+                        }
+                    }
                     : new OAuthEvents();
             }
         );
@@ -753,17 +750,17 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 };
                 o.Events = redirect
                     ? new OAuthEvents()
-                      {
-                          OnRemoteFailure = ctx =>
-                          {
-                              ctx.Response.Redirect(
-                                  "/error?FailureMessage="
-                                      + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                              );
-                              ctx.HandleResponse();
-                              return Task.FromResult(0);
-                          }
-                      }
+                    {
+                        OnRemoteFailure = ctx =>
+                        {
+                            ctx.Response.Redirect(
+                                "/error?FailureMessage="
+                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                            );
+                            ctx.HandleResponse();
+                            return Task.FromResult(0);
+                        }
+                    }
                     : new OAuthEvents();
             }
         );
@@ -827,17 +824,17 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 };
                 o.Events = redirect
                     ? new OAuthEvents()
-                      {
-                          OnRemoteFailure = ctx =>
-                          {
-                              ctx.Response.Redirect(
-                                  "/error?FailureMessage="
-                                      + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                              );
-                              ctx.HandleResponse();
-                              return Task.FromResult(0);
-                          }
-                      }
+                    {
+                        OnRemoteFailure = ctx =>
+                        {
+                            ctx.Response.Redirect(
+                                "/error?FailureMessage="
+                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                            );
+                            ctx.HandleResponse();
+                            return Task.FromResult(0);
+                        }
+                    }
                     : new OAuthEvents();
             }
         );

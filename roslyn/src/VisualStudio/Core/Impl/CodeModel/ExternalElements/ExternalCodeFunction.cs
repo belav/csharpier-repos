@@ -17,9 +17,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
     [ComDefaultInterface(typeof(EnvDTE.CodeFunction))]
     public sealed class ExternalCodeFunction
         : AbstractExternalCodeMember,
-          ICodeElementContainer<ExternalCodeParameter>,
-          EnvDTE.CodeFunction,
-          EnvDTE80.CodeFunction2
+            ICodeElementContainer<ExternalCodeParameter>,
+            EnvDTE.CodeFunction,
+            EnvDTE80.CodeFunction2
     {
         internal static EnvDTE.CodeFunction Create(
             CodeModelState state,

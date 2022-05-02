@@ -19,14 +19,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BraceMatching
     [ExportBraceMatcher(LanguageNames.CSharp)]
     internal class CSharpDirectiveTriviaBraceMatcher
         : AbstractDirectiveTriviaBraceMatcher<
-              DirectiveTriviaSyntax,
-              IfDirectiveTriviaSyntax,
-              ElifDirectiveTriviaSyntax,
-              ElseDirectiveTriviaSyntax,
-              EndIfDirectiveTriviaSyntax,
-              RegionDirectiveTriviaSyntax,
-              EndRegionDirectiveTriviaSyntax
-          >
+            DirectiveTriviaSyntax,
+            IfDirectiveTriviaSyntax,
+            ElifDirectiveTriviaSyntax,
+            ElseDirectiveTriviaSyntax,
+            EndIfDirectiveTriviaSyntax,
+            RegionDirectiveTriviaSyntax,
+            EndRegionDirectiveTriviaSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

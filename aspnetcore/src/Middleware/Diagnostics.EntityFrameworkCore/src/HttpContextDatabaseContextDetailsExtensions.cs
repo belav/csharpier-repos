@@ -78,8 +78,8 @@ internal static class HttpContextDatabaseContextDetailsExtensions
                     context.GetService<IDesignTimeModel>().Model.GetRelationalModel()
                 ),
             pendingMigrations: databaseExists
-              ? await context.Database.GetPendingMigrationsAsync()
-              : context.Database.GetMigrations()
+                ? await context.Database.GetPendingMigrationsAsync()
+                : context.Database.GetMigrations()
         );
     }
 }

@@ -131,11 +131,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
         {
             var newIf = currentIf.ReplaceNode(currentIf.Condition, updatedCondition);
             newIf = originalIf.IsParentKind(SyntaxKind.ElseClause)
-              ? newIf.ReplaceToken(
+                ? newIf.ReplaceToken(
                     newIf.CloseParenToken,
                     newIf.CloseParenToken.WithTrailingTrivia(trivia)
                 )
-              : newIf.WithPrependedLeadingTrivia(trivia);
+                : newIf.WithPrependedLeadingTrivia(trivia);
 
             return newIf.WithAdditionalAnnotations(Formatter.Annotation);
         }

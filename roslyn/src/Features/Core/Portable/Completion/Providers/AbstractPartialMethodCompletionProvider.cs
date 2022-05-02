@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return CodeGenerationSymbolFactory.CreateMethodSymbol(
                 attributes: ImmutableArray<AttributeData>.Empty,
                 accessibility: IncludeAccessibility(method, cancellationToken)
-                  ? method.DeclaredAccessibility
-                  : Accessibility.NotApplicable,
+                    ? method.DeclaredAccessibility
+                    : Accessibility.NotApplicable,
                 modifiers: MemberInsertionCompletionItem.GetModifiers(item),
                 returnType: method.ReturnType,
                 refKind: method.RefKind,

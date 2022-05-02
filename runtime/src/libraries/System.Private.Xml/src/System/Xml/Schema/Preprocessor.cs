@@ -1417,8 +1417,8 @@ namespace System.Xml.Schema
                                 && _attributeFormDefault == XmlSchemaForm.Qualified
                             )
                         )
-                          ? _targetNamespace
-                          : null
+                            ? _targetNamespace
+                            : null
                     )
                 );
             }
@@ -1585,8 +1585,8 @@ namespace System.Xml.Schema
                                 && _elementFormDefault == XmlSchemaForm.Qualified
                             )
                         )
-                          ? _targetNamespace
-                          : null
+                            ? _targetNamespace
+                            : null
                     )
                 );
             }

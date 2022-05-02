@@ -16,7 +16,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// </remarks>
     public class ServicePropertyDiscoveryConvention
         : IEntityTypeAddedConvention,
-          IEntityTypeBaseTypeChangedConvention
+            IEntityTypeBaseTypeChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="ServicePropertyDiscoveryConvention" />.

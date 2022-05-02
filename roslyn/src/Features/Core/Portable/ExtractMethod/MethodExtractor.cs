@@ -354,8 +354,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             }
 
             return char.IsUpper(name[0])
-              ? prefix + name
-              : prefix + char.ToUpper(name[0]).ToString() + name[1..];
+                ? prefix + name
+                : prefix + char.ToUpper(name[0]).ToString() + name[1..];
         }
     }
 }

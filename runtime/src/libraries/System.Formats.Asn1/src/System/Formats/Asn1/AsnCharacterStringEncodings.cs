@@ -33,11 +33,11 @@ namespace System.Formats.Asn1
                 UniversalTagNumber.BMPString => s_bmpEncoding,
                 UniversalTagNumber.T61String => s_t61Encoding,
                 _
-                  => throw new ArgumentOutOfRangeException(
-                      nameof(encodingType),
-                      encodingType,
-                      null
-                  ),
+                    => throw new ArgumentOutOfRangeException(
+                        nameof(encodingType),
+                        encodingType,
+                        null
+                    ),
             };
 
         internal static int GetByteCount(this Encoding encoding, ReadOnlySpan<char> str)

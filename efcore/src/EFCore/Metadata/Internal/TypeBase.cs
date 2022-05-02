@@ -20,9 +20,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
     /// </summary>
     public abstract class TypeBase
         : ConventionAnnotatable,
-          IMutableTypeBase,
-          IConventionTypeBase,
-          ITypeBase
+            IMutableTypeBase,
+            IConventionTypeBase,
+            ITypeBase
     {
         private ConfigurationSource _configurationSource;
 
@@ -333,8 +333,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 Check.NotEmpty(name, nameof(name)),
                 out var ignoredConfigurationSource
             )
-              ? ignoredConfigurationSource
-              : null;
+                ? ignoredConfigurationSource
+                : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -448,8 +448,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             AddIgnored(
                 name,
                 fromDataAnnotation
-                  ? ConfigurationSource.DataAnnotation
-                  : ConfigurationSource.Convention
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
             );
     }
 }

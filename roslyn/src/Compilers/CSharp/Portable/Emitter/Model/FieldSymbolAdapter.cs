@@ -21,11 +21,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     FieldSymbol
         :
 #endif
-          Cci.IFieldReference,
-          Cci.IFieldDefinition,
-          Cci.ITypeMemberReference,
-          Cci.ITypeDefinitionMember,
-          Cci.ISpecializedFieldReference
+            Cci.IFieldReference,
+            Cci.IFieldDefinition,
+            Cci.ITypeMemberReference,
+            Cci.ITypeDefinitionMember,
+            Cci.ISpecializedFieldReference
     {
         Cci.ITypeReference Cci.IFieldReference.GetType(EmitContext context)
         {

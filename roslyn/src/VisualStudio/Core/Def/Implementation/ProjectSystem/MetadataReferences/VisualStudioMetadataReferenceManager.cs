@@ -164,8 +164,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _workspace.Options.GetOption(
                         WorkspaceConfigurationOptions.DisableReferenceManagerWeakRuntimeReferences
                     )
-                      ? new ConstantValueSource<Optional<AssemblyMetadata>>(newMetadata)
-                      : new WeakValueSource<AssemblyMetadata>(newMetadata);
+                        ? new ConstantValueSource<Optional<AssemblyMetadata>>(newMetadata)
+                        : new WeakValueSource<AssemblyMetadata>(newMetadata);
 
                 if (!_metadataCache.GetOrAddMetadata(key, metadataValueSource, out metadata))
                 {

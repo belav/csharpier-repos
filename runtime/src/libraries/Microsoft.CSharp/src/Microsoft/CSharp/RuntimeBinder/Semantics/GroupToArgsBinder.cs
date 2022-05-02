@@ -119,8 +119,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 Debug.Assert(pGroup != null);
 
                 return (pGroup.Flags & EXPRFLAG.EXF_CTOR) != 0
-                  ? pGroup.ParentType
-                  : pGroup.OptionalObject?.Type;
+                    ? pGroup.ParentType
+                    : pGroup.OptionalObject?.Type;
             }
 
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -144,8 +144,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         _pGroup.Flags,
                         mask,
                         _namedArgumentsKind == NamedArgumentsKind.NonTrailing
-                          ? _pOriginalArguments
-                          : null
+                            ? _pOriginalArguments
+                            : null
                     );
                 while (true)
                 {
@@ -623,9 +623,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                         optionalArgument = ExprFactory.CreateConstant(
                             pRawParamType.IsEnumType
-                                && pConstValType == pRawParamType.UnderlyingEnumType
-                              ? pRawParamType
-                              : pConstValType,
+                            && pConstValType == pRawParamType.UnderlyingEnumType
+                                ? pRawParamType
+                                : pConstValType,
                             cv
                         );
                     }
@@ -1443,12 +1443,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     return
                         _pGroup.OptionalObject?.Type is AggregateType agg
                         && agg.OwningAggregate.IsDelegate()
-                      ? ErrorHandling.Error(
+                        ? ErrorHandling.Error(
                             ErrorCode.ERR_BadNamedArgumentForDelegateInvoke,
                             agg.OwningAggregate.name,
                             _pInvalidSpecifiedName
                         )
-                      : ErrorHandling.Error(
+                        : ErrorHandling.Error(
                             ErrorCode.ERR_BadNamedArgument,
                             _pGroup.Name,
                             _pInvalidSpecifiedName

@@ -112,8 +112,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 configSectionPath,
                 StringComparison.OrdinalIgnoreCase
             )
-              ? config
-              : config.GetSection(configSectionPath);
+                ? config
+                : config.GetSection(configSectionPath);
             section.Bind(opts, configureBinder);
         }
     }

@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
     /// </remarks>
     internal sealed class RuntimeMetadataReferenceResolver
         : MetadataReferenceResolver,
-          IEquatable<RuntimeMetadataReferenceResolver>
+            IEquatable<RuntimeMetadataReferenceResolver>
     {
         // Ideally we'd use properties with no aliases, but currently that's not possible since empty aliases mean {global}.
         private static readonly MetadataReferenceProperties s_resolvedMissingAssemblyReferenceProperties =
@@ -33,8 +33,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         internal static string? GetDesktopFrameworkDirectory() =>
             GacFileResolver.IsAvailable
                 ? PathUtilities.GetDirectoryName(
-                      typeof(object).GetTypeInfo().Assembly.ManifestModule.FullyQualifiedName
-                  )
+                    typeof(object).GetTypeInfo().Assembly.ManifestModule.FullyQualifiedName
+                )
                 : null;
 
         // file name to path:
@@ -80,8 +80,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 baseDirectory,
                 packageResolver: null,
                 gacFileResolver: GacFileResolver.IsAvailable
-                  ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
-                  : null,
+                    ? new GacFileResolver(preferredCulture: CultureInfo.CurrentCulture)
+                    : null,
                 GetTrustedPlatformAssemblyPaths(),
                 fileReferenceProvider
             );
@@ -348,8 +348,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         )
         {
             return Equals(resolver, PathResolver)
-              ? this
-              : new RuntimeMetadataReferenceResolver(
+                ? this
+                : new RuntimeMetadataReferenceResolver(
                     resolver,
                     PackageResolver,
                     GacFileResolver,

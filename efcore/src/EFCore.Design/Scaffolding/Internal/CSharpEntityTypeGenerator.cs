@@ -311,10 +311,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                 _sb.AppendLine(
                     !_useNullableReferenceTypes || property.ClrType.IsValueType
-                      ? $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }}"
-                      : property.IsNullable
-                          ? $"public {_code.Reference(property.ClrType)}? {property.Name} {{ get; set; }}"
-                          : $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }} = null!;"
+                        ? $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }}"
+                        : property.IsNullable
+                            ? $"public {_code.Reference(property.ClrType)}? {property.Name} {{ get; set; }}"
+                            : $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }} = null!;"
                 );
             }
         }
@@ -417,8 +417,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
             {
                 var lengthAttribute = new AttributeWriter(
                     property.ClrType == typeof(string)
-                      ? nameof(StringLengthAttribute)
-                      : nameof(MaxLengthAttribute)
+                        ? nameof(StringLengthAttribute)
+                        : nameof(MaxLengthAttribute)
                 );
 
                 lengthAttribute.AddParameter(_code.Literal(maxLength.Value));
@@ -497,10 +497,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                     _sb.AppendLine(
                         !_useNullableReferenceTypes || navigation.IsCollection
-                          ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }}"
-                          : navigation.ForeignKey.IsRequired
-                              ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }} = null!;"
-                              : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}"
+                            ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }}"
+                            : navigation.ForeignKey.IsRequired
+                                ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }} = null!;"
+                                : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}"
                     );
                 }
             }
@@ -573,10 +573,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
 
                     _sb.AppendLine(
                         !_useNullableReferenceTypes || navigation.IsCollection
-                          ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }}"
-                          : navigation.ForeignKey.IsRequired
-                              ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }} = null!;"
-                              : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}"
+                            ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }}"
+                            : navigation.ForeignKey.IsRequired
+                                ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }} = null!;"
+                                : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}"
                     );
                 }
             }
@@ -664,16 +664,16 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     _parameters.Count == 0
                         ? StripAttribute(_attributeName)
                         : StripAttribute(_attributeName)
-                          + "("
-                          + string.Join(", ", _parameters)
-                          + ")"
+                            + "("
+                            + string.Join(", ", _parameters)
+                            + ")"
                 )
                 + "]";
 
             private static string StripAttribute(string attributeName) =>
                 attributeName.EndsWith("Attribute", StringComparison.Ordinal)
-                  ? attributeName[..^9]
-                  : attributeName;
+                    ? attributeName[..^9]
+                    : attributeName;
         }
     }
 }

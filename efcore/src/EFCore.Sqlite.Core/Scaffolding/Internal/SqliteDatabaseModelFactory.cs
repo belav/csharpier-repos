@@ -460,8 +460,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
                 {
                     Table = table,
                     Name = constraintName.StartsWith("sqlite_", StringComparison.Ordinal)
-                      ? string.Empty
-                      : constraintName
+                        ? string.Empty
+                        : constraintName
                 };
 
                 _logger.UniqueConstraintFound(constraintName, table.Name);

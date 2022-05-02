@@ -29,8 +29,8 @@ namespace System.Drawing
         )
         {
             return value is byte[] bytes
-              ? new Icon(new MemoryStream(bytes))
-              : base.ConvertFrom(context, culture, value);
+                ? new Icon(new MemoryStream(bytes))
+                : base.ConvertFrom(context, culture, value);
         }
 
         public override object? ConvertTo(

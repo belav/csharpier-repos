@@ -39,11 +39,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<IPropertySymbol> GetIndexers(this INamespaceOrTypeSymbol? symbol)
         {
             return symbol == null
-              ? SpecializedCollections.EmptyEnumerable<IPropertySymbol>()
-              : symbol
-                .GetMembers(WellKnownMemberNames.Indexer)
-                .OfType<IPropertySymbol>()
-                .Where(p => p.IsIndexer);
+                ? SpecializedCollections.EmptyEnumerable<IPropertySymbol>()
+                : symbol
+                    .GetMembers(WellKnownMemberNames.Indexer)
+                    .OfType<IPropertySymbol>()
+                    .Where(p => p.IsIndexer);
         }
 
         public static IReadOnlyList<string> GetNameParts(this INamespaceOrTypeSymbol symbol) =>

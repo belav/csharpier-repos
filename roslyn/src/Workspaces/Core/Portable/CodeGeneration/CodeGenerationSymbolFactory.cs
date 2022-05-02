@@ -481,10 +481,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 isOptional ?? parameter.IsOptional,
                 hasDefaultValue ?? parameter.HasExplicitDefaultValue,
                 defaultValue.HasValue
-                  ? defaultValue.Value
-                  : parameter.HasExplicitDefaultValue
-                      ? parameter.ExplicitDefaultValue
-                      : null
+                    ? defaultValue.Value
+                    : parameter.HasExplicitDefaultValue
+                        ? parameter.ExplicitDefaultValue
+                        : null
             );
         }
 
@@ -570,8 +570,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 accessor.ReturnType,
                 accessor.RefKind,
                 explicitInterfaceImplementations.IsDefault
-                  ? accessor.ExplicitInterfaceImplementations
-                  : explicitInterfaceImplementations,
+                    ? accessor.ExplicitInterfaceImplementations
+                    : explicitInterfaceImplementations,
                 accessor.Name,
                 accessor.TypeParameters,
                 accessor.Parameters,
@@ -788,8 +788,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 parameters ?? method.Parameters,
                 statements,
                 returnTypeAttributes: returnTypeAttributes.HasValue
-                  ? returnTypeAttributes.Value
-                  : method.GetReturnTypeAttributes(),
+                    ? returnTypeAttributes.Value
+                    : method.GetReturnTypeAttributes(),
                 methodKind: method.MethodKind,
                 isInitOnly: method.IsInitOnly
             );

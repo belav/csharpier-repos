@@ -7,7 +7,7 @@ namespace Microsoft.AspNetCore.Razor.Language;
 
 internal class DefaultRazorDirectiveClassifierPhase
     : RazorEnginePhaseBase,
-      IRazorDirectiveClassifierPhase
+        IRazorDirectiveClassifierPhase
 {
     public IRazorDirectiveClassifierPass[] Passes { get; private set; }
 

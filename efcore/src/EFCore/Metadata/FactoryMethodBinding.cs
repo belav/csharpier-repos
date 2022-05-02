@@ -72,10 +72,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 _factoryInstance == null
                     ? Expression.Call(_factoryMethod, arguments)
                     : Expression.Call(
-                          Expression.Constant(_factoryInstance),
-                          _factoryMethod,
-                          arguments
-                      );
+                        Expression.Constant(_factoryInstance),
+                        _factoryMethod,
+                        arguments
+                    );
 
             if (_factoryMethod.ReturnType != RuntimeType)
             {
@@ -101,10 +101,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             _factoryInstance == null
                 ? new FactoryMethodBinding(_factoryMethod, parameterBindings, RuntimeType)
                 : new FactoryMethodBinding(
-                      _factoryInstance,
-                      _factoryMethod,
-                      parameterBindings,
-                      RuntimeType
-                  );
+                    _factoryInstance,
+                    _factoryMethod,
+                    parameterBindings,
+                    RuntimeType
+                );
     }
 }

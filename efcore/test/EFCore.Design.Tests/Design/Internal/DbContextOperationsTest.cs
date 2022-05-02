@@ -247,7 +247,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
         private class HierarchyContextFactory
             : IDesignTimeDbContextFactory<BaseContext>,
-              IDesignTimeDbContextFactory<DerivedContext>
+                IDesignTimeDbContextFactory<DerivedContext>
         {
             BaseContext IDesignTimeDbContextFactory<BaseContext>.CreateDbContext(string[] args) =>
                 new(nameof(BaseContext));

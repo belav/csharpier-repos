@@ -86,8 +86,8 @@ namespace Microsoft.AspNet.Facebook.Client
 
                     StringBuilder fieldName = new StringBuilder(
                         jsonPropertyAttribute != null
-                          ? jsonPropertyAttribute.PropertyName
-                          : propertyName
+                            ? jsonPropertyAttribute.PropertyName
+                            : propertyName
                     );
 
                     if (modifierAttribute != null)

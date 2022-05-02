@@ -27,9 +27,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var (data, parts) = node.Operand switch
                     {
                         BoundInterpolatedString { InterpolationData: { } d, Parts: { } p }
-                          => (d, p),
+                            => (d, p),
                         BoundBinaryOperator { InterpolatedStringHandlerData: { } d } binary
-                          => (d, CollectBinaryOperatorInterpolatedStringParts(binary)),
+                            => (d, CollectBinaryOperatorInterpolatedStringParts(binary)),
                         _ => throw ExceptionUtilities.UnexpectedValue(node.Operand.Kind)
                     };
 
@@ -530,8 +530,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
 
                 case ConversionKind.MethodGroup
-                      when oldNodeOpt
-                          is { Type: { TypeKind: TypeKind.FunctionPointer } funcPtrType }:
+                when oldNodeOpt is { Type: { TypeKind: TypeKind.FunctionPointer } funcPtrType }:
                 {
                     var mg = (BoundMethodGroup)rewrittenOperand;
                     Debug.Assert(oldNodeOpt.SymbolOpt is { });
@@ -539,9 +538,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         oldNodeOpt.Syntax,
                         oldNodeOpt.SymbolOpt,
                         constrainedToTypeOpt: oldNodeOpt.SymbolOpt.IsStatic
-                            && oldNodeOpt.SymbolOpt.IsAbstract
-                          ? mg.ReceiverOpt?.Type
-                          : null,
+                        && oldNodeOpt.SymbolOpt.IsAbstract
+                            ? mg.ReceiverOpt?.Type
+                            : null,
                         type: funcPtrType,
                         hasErrors: false
                     );
@@ -579,7 +578,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return oldNodeOpt != null
-              ? oldNodeOpt.Update(
+                ? oldNodeOpt.Update(
                     rewrittenOperand,
                     conversion,
                     isBaseConversion: oldNodeOpt.IsBaseConversion,
@@ -589,7 +588,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     constantValueOpt: constantValueOpt,
                     type: rewrittenType
                 )
-              : new BoundConversion(
+                : new BoundConversion(
                     syntax,
                     rewrittenOperand,
                     conversion,
@@ -949,10 +948,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Conversion: { Kind: ConversionKind.ImplicitNullable },
                     Operand: var convertedArgument
                 }
-                      when convertedArgument.Type!.Equals(
-                          expression.Type.StrippedType(),
-                          TypeCompareKind.AllIgnoreOptions
-                      ):
+                when convertedArgument.Type!.Equals(
+                    expression.Type.StrippedType(),
+                    TypeCompareKind.AllIgnoreOptions
+                ):
                     return convertedArgument;
 
                 // Detect the unlowered nullable conversion from a tuple type T1 to Nullable<T2> for a tuple type T2.
@@ -965,9 +964,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     },
                     Operand: var convertedArgument
                 } conversion
-                      when underlying.Length == 1
-                          && underlying[0].Kind == ConversionKind.ImplicitTuple
-                          && !convertedArgument.Type!.IsNullableType():
+                when underlying.Length == 1
+                    && underlying[0].Kind == ConversionKind.ImplicitTuple
+                    && !convertedArgument.Type!.IsNullableType():
 
                     conversion.Conversion.AssertUnderlyingConversionsChecked();
                     return new BoundConversion(
@@ -1116,10 +1115,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // NOTE: Dev10 converts enum? to underlying?, rather than directly to underlying.
                     rewrittenOperandType = rewrittenOperandType.IsNullableType()
-                      ? ((NamedTypeSymbol)rewrittenOperandType.OriginalDefinition).Construct(
+                        ? ((NamedTypeSymbol)rewrittenOperandType.OriginalDefinition).Construct(
                             typeFromUnderlying
                         )
-                      : typeFromUnderlying;
+                        : typeFromUnderlying;
                     rewrittenOperand = BoundConversion.SynthesizedNonUserDefined(
                         syntax,
                         rewrittenOperand,
@@ -1144,8 +1143,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var conversionKind = conversion.Kind.IsImplicitConversion()
-                  ? ConversionKind.ImplicitUserDefined
-                  : ConversionKind.ExplicitUserDefined;
+                    ? ConversionKind.ImplicitUserDefined
+                    : ConversionKind.ExplicitUserDefined;
                 var result = new BoundConversion(
                     syntax,
                     rewrittenOperand,
@@ -1279,8 +1278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BoundCall.Synthesized(
                         syntax,
                         receiverOpt: constrainedToTypeOpt is null
-                          ? null
-                          : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
+                            ? null
+                            : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
                         conversion.Method,
                         nonNullValue
                     ),
@@ -1516,8 +1515,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression result = BoundCall.Synthesized(
                 syntax,
                 receiverOpt: constrainedToTypeOpt is null
-                  ? null
-                  : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
+                    ? null
+                    : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
                 conversion.Method,
                 rewrittenOperand
             );
@@ -1638,8 +1637,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundCall userDefinedCall = BoundCall.Synthesized(
                 syntax,
                 receiverOpt: constrainedToTypeOpt is null
-                  ? null
-                  : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
+                    ? null
+                    : new BoundTypeExpression(syntax, aliasOpt: null, constrainedToTypeOpt),
                 conversion.Method,
                 callGetValueOrDefault
             );
@@ -1769,11 +1768,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol s0 = source.StrippedType();
 
             SpecialType t0Type = t0.IsEnumType()
-              ? t0.GetEnumUnderlyingType()!.SpecialType
-              : t0.SpecialType;
+                ? t0.GetEnumUnderlyingType()!.SpecialType
+                : t0.SpecialType;
             SpecialType s0Type = s0.IsEnumType()
-              ? s0.GetEnumUnderlyingType()!.SpecialType
-              : s0.SpecialType;
+                ? s0.GetEnumUnderlyingType()!.SpecialType
+                : s0.SpecialType;
 
             if (t0Type == SpecialType.System_IntPtr)
             {

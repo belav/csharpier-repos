@@ -82,8 +82,8 @@ class A {
                 {
                     Assert.Equal(
                         ct.IsStatic
-                          ? WellKnownMemberNames.StaticConstructorName
-                          : WellKnownMemberNames.InstanceConstructorName,
+                            ? WellKnownMemberNames.StaticConstructorName
+                            : WellKnownMemberNames.InstanceConstructorName,
                         ct.Name
                     );
 

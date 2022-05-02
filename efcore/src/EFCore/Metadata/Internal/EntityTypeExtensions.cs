@@ -300,15 +300,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 var indexes = new PropertyIndexes(
                     index: index++,
                     originalValueIndex: property.RequiresOriginalValue()
-                      ? originalValueIndex++
-                      : -1,
+                        ? originalValueIndex++
+                        : -1,
                     shadowIndex: property.IsShadowProperty() ? shadowIndex++ : -1,
                     relationshipIndex: property.IsKey() || property.IsForeignKey()
-                      ? relationshipIndex++
-                      : -1,
+                        ? relationshipIndex++
+                        : -1,
                     storeGenerationIndex: property.MayBeStoreGenerated()
-                      ? storeGenerationIndex++
-                      : -1
+                        ? storeGenerationIndex++
+                        : -1
                 );
 
                 ((IRuntimePropertyBase)property).PropertyIndexes = indexes;
@@ -328,9 +328,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                     originalValueIndex: -1,
                     shadowIndex: navigation.IsShadowProperty() ? shadowIndex++ : -1,
                     relationshipIndex: ((IReadOnlyNavigationBase)navigation).IsCollection
-                        && isNotifying
-                      ? -1
-                      : relationshipIndex++,
+                    && isNotifying
+                        ? -1
+                        : relationshipIndex++,
                     storeGenerationIndex: -1
                 );
 

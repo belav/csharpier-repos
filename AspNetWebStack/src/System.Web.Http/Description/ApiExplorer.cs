@@ -234,10 +234,10 @@ namespace System.Web.Http.Description
                     Collection<ApiDescription> descriptionsFromRoute =
                         (directRouteController != null && directRouteCandidates != null)
                             ? ExploreDirectRoute(
-                                  directRouteController,
-                                  directRouteCandidates,
-                                  route
-                              )
+                                directRouteController,
+                                directRouteCandidates,
+                                route
+                            )
                             : ExploreRouteControllers(controllerMappings, route);
 
                     // Remove ApiDescription that will lead to ambiguous action matching.
@@ -503,8 +503,8 @@ namespace System.Web.Http.Description
             IEnumerable<MediaTypeFormatter> supportedRequestBodyFormatters =
                 bodyParameter != null
                     ? actionDescriptor.Configuration.Formatters.Where(
-                          f => f.CanReadType(bodyParameter.ParameterDescriptor.ParameterType)
-                      )
+                        f => f.CanReadType(bodyParameter.ParameterDescriptor.ParameterType)
+                    )
                     : Enumerable.Empty<MediaTypeFormatter>();
 
             // response formatters
@@ -513,8 +513,8 @@ namespace System.Web.Http.Description
             IEnumerable<MediaTypeFormatter> supportedResponseFormatters =
                 (returnType != null && returnType != typeof(void))
                     ? actionDescriptor.Configuration.Formatters.Where(
-                          f => f.CanWriteType(returnType)
-                      )
+                        f => f.CanWriteType(returnType)
+                    )
                     : Enumerable.Empty<MediaTypeFormatter>();
 
             // Replacing the formatter tracers with formatters if tracers are present.

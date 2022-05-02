@@ -840,8 +840,8 @@ internal static class ModelBindingHelper
         try
         {
             return canConvertFrom
-              ? converter.ConvertFrom(null, culture, value)
-              : converter.ConvertTo(null, culture, value, destinationType);
+                ? converter.ConvertFrom(null, culture, value)
+                : converter.ConvertTo(null, culture, value, destinationType);
         }
         catch (FormatException)
         {

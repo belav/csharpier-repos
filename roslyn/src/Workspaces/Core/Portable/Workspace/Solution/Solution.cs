@@ -2095,10 +2095,10 @@ namespace Microsoft.CodeAnalysis
                 SerializableOptionSet serializableOptions => WithOptions(serializableOptions),
                 null => throw new ArgumentNullException(nameof(options)),
                 _
-                  => throw new ArgumentException(
-                      WorkspacesResources.Options_did_not_come_from_specified_Solution,
-                      paramName: nameof(options)
-                  )
+                    => throw new ArgumentException(
+                        WorkspacesResources.Options_did_not_come_from_specified_Solution,
+                        paramName: nameof(options)
+                    )
             };
         }
 

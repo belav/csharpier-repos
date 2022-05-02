@@ -184,8 +184,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                                 builder.AddOptional(
                                     TypeManager.CreateSynthesizedAttribute(
                                         signatureIndex == 0
-                                          ? WellKnownMember.System_Runtime_InteropServices_InterfaceTypeAttribute__ctorInt16
-                                          : WellKnownMember.System_Runtime_InteropServices_InterfaceTypeAttribute__ctorComInterfaceType,
+                                            ? WellKnownMember.System_Runtime_InteropServices_InterfaceTypeAttribute__ctorInt16
+                                            : WellKnownMember.System_Runtime_InteropServices_InterfaceTypeAttribute__ctorComInterfaceType,
                                         attrData,
                                         syntaxNodeOpt,
                                         diagnostics

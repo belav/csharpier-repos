@@ -39,8 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CompleteStatement
         protected void VerifyNoSpecialSemicolonHandling(string initialMarkup)
         {
             var expected = initialMarkup.Contains("$$")
-              ? initialMarkup.Replace("$$", ";$$")
-              : initialMarkup.Replace("|]", ";$$|]");
+                ? initialMarkup.Replace("$$", ";$$")
+                : initialMarkup.Replace("|]", ";$$|]");
 
             VerifyTypingSemicolon(initialMarkup, expected);
         }

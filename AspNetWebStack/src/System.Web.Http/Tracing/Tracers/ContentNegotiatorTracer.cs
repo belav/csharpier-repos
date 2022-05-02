@@ -65,14 +65,14 @@ namespace System.Web.Http.Tracing.Tracers
                     tr.Message = Error.Format(
                         SRResources.TraceSelectedFormatter,
                         result == null
-                          ? SRResources.TraceNoneObjectMessage
-                          : MediaTypeFormatterTracer
-                            .ActualMediaTypeFormatter(result.Formatter)
-                            .GetType()
-                            .Name,
+                            ? SRResources.TraceNoneObjectMessage
+                            : MediaTypeFormatterTracer
+                                .ActualMediaTypeFormatter(result.Formatter)
+                                .GetType()
+                                .Name,
                         result == null || result.MediaType == null
-                          ? SRResources.TraceNoneObjectMessage
-                          : result.MediaType.ToString()
+                            ? SRResources.TraceNoneObjectMessage
+                            : result.MediaType.ToString()
                     );
                 },
                 errorTrace: null

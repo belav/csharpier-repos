@@ -189,8 +189,8 @@ namespace System.CommandLine.Tests
                         {
                             var opt1Value = parseResult?.GetValueForOption(originOption);
                             return !string.IsNullOrWhiteSpace(opt1Value)
-                              ? new[] { opt1Value }
-                              : Array.Empty<string>();
+                                ? new[] { opt1Value }
+                                : Array.Empty<string>();
                         }
                     )
                 }

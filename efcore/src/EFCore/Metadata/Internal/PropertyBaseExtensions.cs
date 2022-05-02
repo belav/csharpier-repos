@@ -100,8 +100,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var indexerPropertyInfo = propertyBase.DeclaringType.FindIndexerPropertyInfo();
             return indexerPropertyInfo != null && propertyBase.PropertyInfo == indexerPropertyInfo
-              ? null
-              : (propertyBase.PropertyInfo ?? (MemberInfo?)propertyBase.FieldInfo);
+                ? null
+                : (propertyBase.PropertyInfo ?? (MemberInfo?)propertyBase.FieldInfo);
         }
 
         /// <summary>
@@ -170,15 +170,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                     errorMessage = hasGetter
                         ? CoreStrings.NoSetter(
-                              propertyBase.Name,
-                              propertyBase.DeclaringType.DisplayName(),
-                              nameof(PropertyAccessMode)
-                          )
+                            propertyBase.Name,
+                            propertyBase.DeclaringType.DisplayName(),
+                            nameof(PropertyAccessMode)
+                        )
                         : CoreStrings.NoProperty(
-                              fieldInfo?.Name,
-                              propertyBase.DeclaringType.DisplayName(),
-                              nameof(PropertyAccessMode)
-                          );
+                            fieldInfo?.Name,
+                            propertyBase.DeclaringType.DisplayName(),
+                            nameof(PropertyAccessMode)
+                        );
 
                     return false;
                 }
@@ -262,15 +262,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                     errorMessage = hasGetter
                         ? CoreStrings.NoSetter(
-                              propertyBase.Name,
-                              propertyBase.DeclaringType.DisplayName(),
-                              nameof(PropertyAccessMode)
-                          )
+                            propertyBase.Name,
+                            propertyBase.DeclaringType.DisplayName(),
+                            nameof(PropertyAccessMode)
+                        )
                         : CoreStrings.NoProperty(
-                              fieldInfo?.Name,
-                              propertyBase.DeclaringType.DisplayName(),
-                              nameof(PropertyAccessMode)
-                          );
+                            fieldInfo?.Name,
+                            propertyBase.DeclaringType.DisplayName(),
+                            nameof(PropertyAccessMode)
+                        );
 
                     return false;
                 }
@@ -344,15 +344,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 errorMessage = hasSetter
                     ? CoreStrings.NoGetter(
-                          propertyBase.Name,
-                          propertyBase.DeclaringType.DisplayName(),
-                          nameof(PropertyAccessMode)
-                      )
+                        propertyBase.Name,
+                        propertyBase.DeclaringType.DisplayName(),
+                        nameof(PropertyAccessMode)
+                    )
                     : CoreStrings.NoProperty(
-                          fieldInfo?.Name,
-                          propertyBase.DeclaringType.DisplayName(),
-                          nameof(PropertyAccessMode)
-                      );
+                        fieldInfo?.Name,
+                        propertyBase.DeclaringType.DisplayName(),
+                        nameof(PropertyAccessMode)
+                    );
 
                 return false;
             }
@@ -405,11 +405,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 constructorBinding?.ParameterBindings
                     .OfType<ServiceParameterBinding>()
                     .Any(b => b.ServiceType == typeof(ILazyLoader)) == true
-              ? CoreStrings.NoBackingFieldLazyLoading(
+                ? CoreStrings.NoBackingFieldLazyLoading(
                     propertyBase.Name,
                     propertyBase.DeclaringType.DisplayName()
                 )
-              : CoreStrings.NoBackingField(
+                : CoreStrings.NoBackingField(
                     propertyBase.Name,
                     propertyBase.DeclaringType.DisplayName(),
                     nameof(PropertyAccessMode)

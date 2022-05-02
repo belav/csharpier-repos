@@ -693,8 +693,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     var unexpectedTemp = EmitAddress(
                         argument,
                         refKind == RefKindExtensions.StrictIn
-                          ? AddressKind.ReadOnlyStrict
-                          : AddressKind.Writeable
+                            ? AddressKind.ReadOnlyStrict
+                            : AddressKind.Writeable
                     );
                     if (unexpectedTemp != null)
                     {
@@ -1181,8 +1181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             if (FieldLoadMustUseRef(receiver) || FieldLoadPrefersRef(receiver))
             {
                 return EmitFieldLoadReceiverAddress(receiver)
-                  ? null
-                  : EmitReceiverRef(receiver, AddressKind.ReadOnly);
+                    ? null
+                    : EmitReceiverRef(receiver, AddressKind.ReadOnly);
             }
 
             EmitExpression(receiver, true);
@@ -1715,8 +1715,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     // if method is defined in the struct itself it is assumed to be mutating, unless
                     // it is a member of a readonly struct and is not a constructor
                     var receiverAddresskind = IsReadOnlyCall(method, methodContainingType)
-                      ? AddressKind.ReadOnly
-                      : AddressKind.Writeable;
+                        ? AddressKind.ReadOnly
+                        : AddressKind.Writeable;
                     if (MayUseCallForStructMethod(method))
                     {
                         // NOTE: this should be either a method which overrides some abstract method or
@@ -1774,8 +1774,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 tempOpt = EmitReceiverRef(
                     receiver,
                     callKind == CallKind.ConstrainedCallVirt
-                      ? AddressKind.Constrained
-                      : AddressKind.Writeable
+                        ? AddressKind.Constrained
+                        : AddressKind.Writeable
                 );
             }
 
@@ -1862,8 +1862,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 actualMethodTargetedByTheCall,
                 call.Syntax,
                 actualMethodTargetedByTheCall.IsVararg
-                  ? (BoundArgListOperator)arguments[arguments.Length - 1]
-                  : null
+                    ? (BoundArgListOperator)arguments[arguments.Length - 1]
+                    : null
             );
 
             EmitCallCleanup(call.Syntax, useKind, method);
@@ -2071,8 +2071,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             //       a positive native int. We can treat it as either signed or unsigned.
             //       We will use whatever typeTo says so we do not need to convert because of sign.
             var typeFrom = typeTo.IsUnsigned()
-              ? Microsoft.Cci.PrimitiveTypeCode.UIntPtr
-              : Microsoft.Cci.PrimitiveTypeCode.IntPtr;
+                ? Microsoft.Cci.PrimitiveTypeCode.UIntPtr
+                : Microsoft.Cci.PrimitiveTypeCode.IntPtr;
 
             // NOTE: In Dev10 C# this cast is unchecked.
             // That seems to be wrong since that would cause silent truncation on 64bit platform if that implements large arrays.
@@ -2204,8 +2204,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     constructor,
                     expression.Syntax,
                     constructor.IsVararg
-                      ? (BoundArgListOperator)expression.Arguments[expression.Arguments.Length - 1]
-                      : null
+                        ? (BoundArgListOperator)
+                            expression.Arguments[expression.Arguments.Length - 1]
+                        : null
                 );
 
                 EmitPopIfUnused(used);
@@ -2535,8 +2536,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 constructor,
                 objCreation.Syntax,
                 constructor.IsVararg
-                  ? (BoundArgListOperator)objCreation.Arguments[objCreation.Arguments.Length - 1]
-                  : null
+                    ? (BoundArgListOperator)objCreation.Arguments[objCreation.Arguments.Length - 1]
+                    : null
             );
 
             if (used)
@@ -2836,8 +2837,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 LocalDefinition temp = EmitAddress(
                     assignmentOperator.Right,
                     lhs.GetRefKind() == RefKind.RefReadOnly
-                      ? AddressKind.ReadOnlyStrict
-                      : AddressKind.Writeable
+                        ? AddressKind.ReadOnlyStrict
+                        : AddressKind.Writeable
                 );
 
                 // Generally taking a ref for the purpose of ref assignment should not be done on homeless values
@@ -2904,8 +2905,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         assignmentOperator.Left.Type,
                         assignmentOperator.Left.Syntax,
                         assignmentOperator.IsRef
-                          ? LocalSlotConstraints.ByRef
-                          : LocalSlotConstraints.None
+                            ? LocalSlotConstraints.ByRef
+                            : LocalSlotConstraints.None
                     );
                     _builder.EmitLocalStore(temp);
                 }

@@ -66,7 +66,7 @@ internal static class PageDirectiveFeature
 
     private sealed class PageDirectiveParserOptionsFeature
         : RazorEngineFeatureBase,
-          IConfigureRazorParserOptionsFeature
+            IConfigureRazorParserOptionsFeature
     {
         public int Order { get; }
 

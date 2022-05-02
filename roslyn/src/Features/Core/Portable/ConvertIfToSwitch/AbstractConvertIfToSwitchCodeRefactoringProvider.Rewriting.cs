@@ -56,10 +56,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             var @switch = convertToSwitchExpression
                 ? CreateSwitchExpressionStatement(target, sections, feature)
                 : CreateSwitchStatement(
-                      ifStatement,
-                      target,
-                      sections.Select(section => AsSwitchSectionSyntax(section, generator, feature))
-                  );
+                    ifStatement,
+                    target,
+                    sections.Select(section => AsSwitchSectionSyntax(section, generator, feature))
+                );
 
             var lastNode = sections.Last().SyntaxToRemove;
             @switch = @switch
@@ -86,8 +86,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         {
             var statements = AsSwitchSectionStatements(section.Body);
             return section.Labels.IsDefault
-              ? generator.DefaultSwitchSection(statements)
-              : generator.SwitchSectionFromLabels(
+                ? generator.DefaultSwitchSection(statements)
+                : generator.SwitchSectionFromLabels(
                     section.Labels.Select(label => AsSwitchLabelSyntax(label, feature)),
                     statements
                 );

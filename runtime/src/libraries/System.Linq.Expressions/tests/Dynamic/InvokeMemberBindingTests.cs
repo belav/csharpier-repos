@@ -552,9 +552,9 @@ namespace System.Dynamic.Tests
                         value == null
                             ? default(OutAction)
                             : (out TResult arg) =>
-                              {
-                                  arg = value();
-                              };
+                            {
+                                arg = value();
+                            };
                 }
             }
 

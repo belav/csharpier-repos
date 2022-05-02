@@ -299,8 +299,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             diagnostics.Add(
                 new DiagnosticInfoWithSymbols(
                     multiple
-                      ? ErrorCode.ERR_QueryTypeInferenceFailedMulti
-                      : ErrorCode.ERR_QueryTypeInferenceFailed,
+                        ? ErrorCode.ERR_QueryTypeInferenceFailedMulti
+                        : ErrorCode.ERR_QueryTypeInferenceFailed,
                     new object[] { clauseKind, methodName },
                     symbols
                 ),

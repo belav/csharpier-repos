@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
     internal abstract partial class AbstractRenameCommandHandler
         : ICommandHandler<MoveSelectedLinesUpCommandArgs>,
-          ICommandHandler<MoveSelectedLinesDownCommandArgs>
+            ICommandHandler<MoveSelectedLinesDownCommandArgs>
     {
         public CommandState GetCommandState(MoveSelectedLinesUpCommandArgs args) =>
             CommandState.Unspecified;

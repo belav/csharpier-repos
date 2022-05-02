@@ -24,13 +24,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousTypeToClass
     ]
     internal class CSharpConvertAnonymousTypeToClassCodeRefactoringProvider
         : AbstractConvertAnonymousTypeToClassCodeRefactoringProvider<
-              ExpressionSyntax,
-              NameSyntax,
-              IdentifierNameSyntax,
-              ObjectCreationExpressionSyntax,
-              AnonymousObjectCreationExpressionSyntax,
-              NamespaceDeclarationSyntax
-          >
+            ExpressionSyntax,
+            NameSyntax,
+            IdentifierNameSyntax,
+            ObjectCreationExpressionSyntax,
+            AnonymousObjectCreationExpressionSyntax,
+            NamespaceDeclarationSyntax
+        >
     {
         [ImportingConstructor]
         [SuppressMessage(

@@ -216,8 +216,8 @@ namespace System.Web.Mvc.Routing
             }
 
             return matchesWithActionSelectors.Any()
-              ? matchesWithActionSelectors
-              : matchesWithoutActionSelectors;
+                ? matchesWithActionSelectors
+                : matchesWithoutActionSelectors;
         }
 
         private static List<DirectRouteCandidate> FilterByOrder(

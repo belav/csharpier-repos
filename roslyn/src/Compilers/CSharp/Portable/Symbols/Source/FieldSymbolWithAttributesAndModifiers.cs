@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal abstract class FieldSymbolWithAttributesAndModifiers
         : FieldSymbol,
-          IAttributeTargetSymbol
+            IAttributeTargetSymbol
     {
         private CustomAttributesBag<CSharpAttributeData> _lazyCustomAttributesBag;
         protected SymbolCompletionState state;

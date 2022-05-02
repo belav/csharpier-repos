@@ -66,13 +66,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             var expansion = CreateExpansion(inspectionContext, value, resultProvider);
             return (expansion != null)
-              ? expansion.CreateDynamicViewRow(
+                ? expansion.CreateDynamicViewRow(
                     inspectionContext,
                     name,
                     parent: null,
                     fullNameProvider: resultProvider.FullNameProvider
                 )
-              : new EvalResult(name, Resources.DynamicViewNotDynamic, inspectionContext);
+                : new EvalResult(name, Resources.DynamicViewNotDynamic, inspectionContext);
         }
 
         private readonly DkmClrValue _proxyValue;
@@ -128,11 +128,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 (fullName == null)
                     ? null
                     : fullNameProvider.GetClrObjectCreationExpression(
-                          inspectionContext,
-                          proxyTypeAndInfo.ClrType,
-                          proxyTypeAndInfo.Info,
-                          new[] { fullName }
-                      );
+                        inspectionContext,
+                        proxyTypeAndInfo.ClrType,
+                        proxyTypeAndInfo.Info,
+                        new[] { fullName }
+                    );
             var formatSpecifiers = isRootExpression
                 ? Formatter.NoFormatSpecifiers
                 : parent.FormatSpecifiers;

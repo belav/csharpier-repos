@@ -321,8 +321,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 entityType.Name,
                 entityType.ClrType,
                 entityType.BaseType == null
-                  ? null
-                  : model.FindEntityType(entityType.BaseType.Name)!,
+                    ? null
+                    : model.FindEntityType(entityType.BaseType.Name)!,
                 entityType.HasSharedClrType,
                 entityType.GetDiscriminatorPropertyName(),
                 entityType.GetChangeTrackingStrategy(),
@@ -766,8 +766,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         protected virtual RuntimeIndex GetIndex(IIndex index, RuntimeEntityType entityType) =>
             index.Name == null
                 ? entityType.FindIndex(
-                      entityType.FindProperties(index.Properties.Select(p => p.Name))!
-                  )!
+                    entityType.FindProperties(index.Properties.Select(p => p.Name))!
+                )!
                 : entityType.FindIndex(index.Name)!;
 
         /// <summary>
@@ -822,8 +822,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             protected override Expression VisitExtension(Expression extensionExpression) =>
                 extensionExpression is QueryRootExpression queryRootExpression
                     ? queryRootExpression.UpdateEntityType(
-                          _model.FindEntityType(queryRootExpression.EntityType.Name)!
-                      )
+                        _model.FindEntityType(queryRootExpression.EntityType.Name)!
+                    )
                     : base.VisitExtension(extensionExpression);
         }
     }

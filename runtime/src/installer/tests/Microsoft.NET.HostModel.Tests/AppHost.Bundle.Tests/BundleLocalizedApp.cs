@@ -13,7 +13,7 @@ namespace AppHost.Bundle.Tests
 {
     public class BundleLocalizedApp
         : BundleTestBase,
-          IClassFixture<BundleLocalizedApp.SharedTestState>
+            IClassFixture<BundleLocalizedApp.SharedTestState>
     {
         private SharedTestState sharedTestState;
 

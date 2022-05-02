@@ -144,10 +144,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     : SyntaxKind.BaseConstructorInitializer;
 
             return arguments == null
-              ? null
-              : SyntaxFactory
-                .ConstructorInitializer(kind)
-                .WithArgumentList(GenerateArgumentList(arguments));
+                ? null
+                : SyntaxFactory
+                    .ConstructorInitializer(kind)
+                    .WithArgumentList(GenerateArgumentList(arguments));
         }
 
         private static ArgumentListSyntax GenerateArgumentList(
@@ -163,8 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 CodeGenerationConstructorInfo.GetStatements(constructor) == null
                     ? default
                     : StatementGenerator.GenerateStatements(
-                          CodeGenerationConstructorInfo.GetStatements(constructor)
-                      );
+                        CodeGenerationConstructorInfo.GetStatements(constructor)
+                    );
 
             return SyntaxFactory.Block(statements);
         }

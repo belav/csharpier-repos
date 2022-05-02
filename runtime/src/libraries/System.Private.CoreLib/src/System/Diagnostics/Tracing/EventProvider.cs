@@ -124,14 +124,14 @@ namespace System.Diagnostics.Tracing
             {
 #if TARGET_WINDOWS
                 EventProviderType.ETW
-                  => new EtwEventProvider(),
+                    => new EtwEventProvider(),
 #endif
 #if FEATURE_PERFTRACING
                 EventProviderType.EventPipe
-                  => new EventPipeEventProvider(),
+                    => new EventPipeEventProvider(),
 #endif
                 _
-                  => new NoOpEventProvider(),
+                    => new NoOpEventProvider(),
             };
         }
 

@@ -156,8 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             )
             {
                 var expr = condition.Left.IsKind(SyntaxKind.NullLiteralExpression)
-                  ? condition.Right
-                  : condition.Left;
+                    ? condition.Right
+                    : condition.Left;
 
                 cancellationToken.ThrowIfCancellationRequested();
                 if (

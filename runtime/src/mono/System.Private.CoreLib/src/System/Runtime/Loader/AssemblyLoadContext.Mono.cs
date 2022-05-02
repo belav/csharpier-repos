@@ -215,12 +215,12 @@ namespace System.Runtime.Loader
         private static RuntimeAssembly? GetRuntimeAssembly(Assembly? asm)
         {
             return asm == null
-              ? null
-              : asm is RuntimeAssembly rtAssembly
-                  ? rtAssembly
-                  : asm is System.Reflection.Emit.AssemblyBuilder ab
-                      ? Unsafe.As<RuntimeAssembly>(ab)
-                      : // Mono AssemblyBuilder is also a RuntimeAssembly, see AssemblyBuilder.Mono.cs
+                ? null
+                : asm is RuntimeAssembly rtAssembly
+                    ? rtAssembly
+                    : asm is System.Reflection.Emit.AssemblyBuilder ab
+                        ? Unsafe.As<RuntimeAssembly>(ab)
+                        : // Mono AssemblyBuilder is also a RuntimeAssembly, see AssemblyBuilder.Mono.cs
                         null;
         }
     }

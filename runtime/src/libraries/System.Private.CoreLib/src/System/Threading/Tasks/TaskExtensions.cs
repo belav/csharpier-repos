@@ -20,8 +20,8 @@ namespace System.Threading.Tasks
             // it completed successfully.  Return its inner task to avoid unnecessary wrapping, or if the inner
             // task is null, return a canceled task to match the same semantics as CreateUnwrapPromise.
             return !task.IsCompletedSuccessfully
-              ? Task.CreateUnwrapPromise<VoidTaskResult>(task, lookForOce: false)
-              : task.Result ?? Task.FromCanceled(new CancellationToken(true));
+                ? Task.CreateUnwrapPromise<VoidTaskResult>(task, lookForOce: false)
+                : task.Result ?? Task.FromCanceled(new CancellationToken(true));
         }
 
         /// <summary>Creates a proxy <see cref="Task{TResult}"/> that represents the asynchronous operation of a wrapped <see cref="Task{TResult}"/>.</summary>
@@ -38,8 +38,8 @@ namespace System.Threading.Tasks
             // it completed successfully.  Return its inner task to avoid unnecessary wrapping, or if the inner
             // task is null, return a canceled task to match the same semantics as CreateUnwrapPromise.
             return !task.IsCompletedSuccessfully
-              ? Task.CreateUnwrapPromise<TResult>(task, lookForOce: false)
-              : task.Result ?? Task.FromCanceled<TResult>(new CancellationToken(true));
+                ? Task.CreateUnwrapPromise<TResult>(task, lookForOce: false)
+                : task.Result ?? Task.FromCanceled<TResult>(new CancellationToken(true));
         }
     }
 }

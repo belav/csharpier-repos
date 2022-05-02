@@ -120,8 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 // If we can get a previousId of the document, use it,
                 // otherwise use null as the previousId to pass into the XamlPullDiagnosticService
                 var previousResultId = documentToPreviousResultId.TryGetValue(document, out var id)
-                  ? id
-                  : null;
+                    ? id
+                    : null;
 
                 // Call XamlPullDiagnosticService to get the diagnostic report for this document.
                 // We will compute what to report inside XamlPullDiagnosticService, for example, whether we should keep using the previousId or use a new resultId,
@@ -195,7 +195,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 // Hidden is translated in ConvertTags to pass along appropriate _ms tags
                 // that will hide the item in a client that knows about those tags.
                 XamlDiagnosticSeverity.Hidden
-                  => LSP.DiagnosticSeverity.Hint,
+                    => LSP.DiagnosticSeverity.Hint,
                 XamlDiagnosticSeverity.HintedSuggestion => LSP.DiagnosticSeverity.Hint,
                 XamlDiagnosticSeverity.Message => LSP.DiagnosticSeverity.Information,
                 XamlDiagnosticSeverity.Warning => LSP.DiagnosticSeverity.Warning,

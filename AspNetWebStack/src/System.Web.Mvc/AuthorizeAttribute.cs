@@ -164,8 +164,8 @@ namespace System.Web.Mvc
 
             bool isAuthorized = AuthorizeCore(httpContext);
             return (isAuthorized)
-              ? HttpValidationStatus.Valid
-              : HttpValidationStatus.IgnoreThisRequest;
+                ? HttpValidationStatus.Valid
+                : HttpValidationStatus.IgnoreThisRequest;
         }
 
         internal static string[] SplitString(string original)

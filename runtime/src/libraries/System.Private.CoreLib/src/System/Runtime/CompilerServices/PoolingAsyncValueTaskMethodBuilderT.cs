@@ -305,10 +305,10 @@ namespace System.Runtime.CompilerServices
         /// <summary>Provides a strongly-typed box object based on the specific state machine type in use.</summary>
         private sealed class StateMachineBox<TStateMachine>
             : StateMachineBox,
-              IValueTaskSource<TResult>,
-              IValueTaskSource,
-              IAsyncStateMachineBox,
-              IThreadPoolWorkItem where TStateMachine : IAsyncStateMachine
+                IValueTaskSource<TResult>,
+                IValueTaskSource,
+                IAsyncStateMachineBox,
+                IThreadPoolWorkItem where TStateMachine : IAsyncStateMachine
         {
             /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box type.</summary>
             private static readonly ContextCallback s_callback = ExecutionContextCallback;

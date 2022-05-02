@@ -2596,7 +2596,7 @@ class C { }
 
         private class TestSyntaxContextReceiver
             : TestReceiverBase<GeneratorSyntaxContext>,
-              ISyntaxContextReceiver
+                ISyntaxContextReceiver
         {
             public TestSyntaxContextReceiver(
                 int tag = 0,

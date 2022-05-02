@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 UsingDirectiveSyntax usingDirective => usingDirective.SemicolonToken == token,
                 ExternAliasDirectiveSyntax externAliasDirective
-                  => externAliasDirective.SemicolonToken == token,
+                    => externAliasDirective.SemicolonToken == token,
                 _ => false,
             };
         }

@@ -35,8 +35,8 @@ namespace System.Threading.Tasks.Dataflow
     [DebuggerTypeProxy(typeof(BroadcastBlock<>.DebugView))]
     public sealed class BroadcastBlock<T>
         : IPropagatorBlock<T, T>,
-          IReceivableSourceBlock<T>,
-          IDebuggerDisplay
+            IReceivableSourceBlock<T>,
+            IDebuggerDisplay
     {
         /// <summary>The source side.</summary>
         private readonly BroadcastingSourceCore<T> _source;

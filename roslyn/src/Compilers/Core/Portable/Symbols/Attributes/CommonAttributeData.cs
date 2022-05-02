@@ -208,8 +208,8 @@ namespace Microsoft.CodeAnalysis
         {
             int index = IndexOfNamedArgument(namedArguments, name);
             return index >= 0
-              ? namedArguments[index].Value.DecodeValue<T>(specialType)
-              : defaultValue;
+                ? namedArguments[index].Value.DecodeValue<T>(specialType)
+                : defaultValue;
         }
 
         private static int IndexOfNamedArgument(

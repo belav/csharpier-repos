@@ -79,10 +79,10 @@ namespace Microsoft.NET.HostModel.Bundle
         public bool IsNativeBinary(string filePath)
         {
             return IsLinux
-              ? ElfUtils.IsElfImage(filePath)
-              : IsOSX
-                  ? MachOUtils.IsMachOImage(filePath)
-                  : PEUtils.IsPEImage(filePath);
+                ? ElfUtils.IsElfImage(filePath)
+                : IsOSX
+                    ? MachOUtils.IsMachOImage(filePath)
+                    : PEUtils.IsPEImage(filePath);
         }
 
         public string GetAssemblyName(string hostName)
@@ -105,10 +105,10 @@ namespace Microsoft.NET.HostModel.Bundle
 
         private static OSPlatform HostOS =>
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
-              ? OSPlatform.Linux
-              : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
-                  ? OSPlatform.OSX
-                  : OSPlatform.Windows;
+                ? OSPlatform.Linux
+                : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                    ? OSPlatform.OSX
+                    : OSPlatform.Windows;
 
         public bool IsLinux => OS.Equals(OSPlatform.Linux);
         public bool IsOSX => OS.Equals(OSPlatform.OSX);

@@ -11,17 +11,17 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
         : AspNetIdentityTestBase<
-              TFixture,
-              CustomTypesIdentityContextInt,
-              CustomUserInt,
-              CustomRoleInt,
-              int,
-              CustomUserClaimInt,
-              CustomUserRoleInt,
-              CustomUserLoginInt,
-              CustomRoleClaimInt,
-              CustomUserTokenInt
-          >
+            TFixture,
+            CustomTypesIdentityContextInt,
+            CustomUserInt,
+            CustomRoleInt,
+            int,
+            CustomUserClaimInt,
+            CustomUserRoleInt,
+            CustomUserLoginInt,
+            CustomRoleClaimInt,
+            CustomUserTokenInt
+        >
         where TFixture : AspNetIdentityTestBase<
                 TFixture,
                 CustomTypesIdentityContextInt,
@@ -211,15 +211,15 @@ namespace Microsoft.EntityFrameworkCore
 
     public class CustomTypesIdentityContextInt
         : IdentityDbContext<
-              CustomUserInt,
-              CustomRoleInt,
-              int,
-              CustomUserClaimInt,
-              CustomUserRoleInt,
-              CustomUserLoginInt,
-              CustomRoleClaimInt,
-              CustomUserTokenInt
-          >
+            CustomUserInt,
+            CustomRoleInt,
+            int,
+            CustomUserClaimInt,
+            CustomUserRoleInt,
+            CustomUserLoginInt,
+            CustomRoleClaimInt,
+            CustomUserTokenInt
+        >
     {
         public CustomTypesIdentityContextInt(DbContextOptions options) : base(options) { }
 

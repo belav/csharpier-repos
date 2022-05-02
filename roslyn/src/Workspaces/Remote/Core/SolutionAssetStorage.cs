@@ -60,8 +60,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 projectId == null
                     ? await solutionState.GetChecksumAsync(cancellationToken).ConfigureAwait(false)
                     : await solutionState
-                          .GetChecksumAsync(projectId, cancellationToken)
-                          .ConfigureAwait(false);
+                        .GetChecksumAsync(projectId, cancellationToken)
+                        .ConfigureAwait(false);
             var context = SolutionReplicationContext.Create();
 
             // The check of `fromPrimaryBranch: solution == solution.Workspace.CurrentSolution` may result in

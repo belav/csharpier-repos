@@ -56,10 +56,10 @@ namespace Microsoft.CodeAnalysis
                     pdbPath == null
                         ? null
                         : FileUtilities.CreateFileStreamChecked(
-                              File.Create,
-                              pdbPath,
-                              nameof(pdbPath)
-                          )
+                            File.Create,
+                            pdbPath,
+                            nameof(pdbPath)
+                        )
                 )
             )
             using (
@@ -67,10 +67,10 @@ namespace Microsoft.CodeAnalysis
                     xmlDocPath == null
                         ? null
                         : FileUtilities.CreateFileStreamChecked(
-                              File.Create,
-                              xmlDocPath,
-                              nameof(xmlDocPath)
-                          )
+                            File.Create,
+                            xmlDocPath,
+                            nameof(xmlDocPath)
+                        )
                 )
             )
             using (
@@ -78,10 +78,10 @@ namespace Microsoft.CodeAnalysis
                     win32ResourcesPath == null
                         ? null
                         : FileUtilities.CreateFileStreamChecked(
-                              File.OpenRead,
-                              win32ResourcesPath,
-                              nameof(win32ResourcesPath)
-                          )
+                            File.OpenRead,
+                            win32ResourcesPath,
+                            nameof(win32ResourcesPath)
+                        )
                 )
             )
             {

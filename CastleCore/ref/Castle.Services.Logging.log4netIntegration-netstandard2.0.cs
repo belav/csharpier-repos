@@ -31,8 +31,8 @@ namespace Castle.Services.Logging.Log4netIntegration
 
     public class ExtendedLog4netLogger
         : Castle.Services.Logging.Log4netIntegration.Log4netLogger,
-          Castle.Core.Logging.IExtendedLogger,
-          Castle.Core.Logging.ILogger
+            Castle.Core.Logging.IExtendedLogger,
+            Castle.Core.Logging.ILogger
     {
         public ExtendedLog4netLogger(
             log4net.Core.ILogger logger,

@@ -5,9 +5,9 @@ namespace System.CodeDom.Tests
 {
     public class CodeParameterDeclarationExpressionCollectionTests
         : CodeCollectionTestBase<
-              CodeParameterDeclarationExpressionCollection,
-              CodeParameterDeclarationExpression
-          >
+            CodeParameterDeclarationExpressionCollection,
+            CodeParameterDeclarationExpression
+        >
     {
         protected override CodeParameterDeclarationExpressionCollection Ctor() =>
             new CodeParameterDeclarationExpressionCollection();

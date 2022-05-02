@@ -589,8 +589,8 @@ namespace System.Composition.Convention
                 {
                     attributes.Add(
                         _sharingBoundary == null
-                          ? new SharedAttribute()
-                          : new SharedAttribute(_sharingBoundary)
+                            ? new SharedAttribute()
+                            : new SharedAttribute(_sharingBoundary)
                     );
                 }
             }

@@ -9,7 +9,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Components;
 
 internal class ComponentTemplateDiagnosticPass
     : ComponentIntermediateNodePassBase,
-      IRazorOptimizationPass
+        IRazorOptimizationPass
 {
     // Runs after components/eventhandlers/ref/bind. We need to check for templates in all of those
     // places.
@@ -43,7 +43,7 @@ internal class ComponentTemplateDiagnosticPass
 
     private class Visitor
         : IntermediateNodeWalker,
-          IExtensionIntermediateNodeVisitor<TemplateIntermediateNode>
+            IExtensionIntermediateNodeVisitor<TemplateIntermediateNode>
     {
         public List<IntermediateNodeReference> Candidates { get; } =
             new List<IntermediateNodeReference>();

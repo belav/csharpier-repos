@@ -19,8 +19,8 @@ namespace System.Net.Http
                 cancellationToken
             );
             return sendTask.IsCompleted
-              ? sendTask.Result
-              : sendTask.AsTask().GetAwaiter().GetResult();
+                ? sendTask.Result
+                : sendTask.AsTask().GetAwaiter().GetResult();
         }
 
         protected internal sealed override Task<HttpResponseMessage> SendAsync(

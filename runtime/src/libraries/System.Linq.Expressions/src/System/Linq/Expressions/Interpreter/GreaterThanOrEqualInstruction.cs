@@ -269,38 +269,38 @@ namespace System.Linq.Expressions.Interpreter
                 return type.GetNonNullableType().GetTypeCode() switch
                 {
                     TypeCode.SByte
-                      => s_liftedToNullSByte
-                          ?? (s_liftedToNullSByte = new GreaterThanOrEqualSByte(null)),
+                        => s_liftedToNullSByte
+                            ?? (s_liftedToNullSByte = new GreaterThanOrEqualSByte(null)),
                     TypeCode.Int16
-                      => s_liftedToNullInt16
-                          ?? (s_liftedToNullInt16 = new GreaterThanOrEqualInt16(null)),
+                        => s_liftedToNullInt16
+                            ?? (s_liftedToNullInt16 = new GreaterThanOrEqualInt16(null)),
                     TypeCode.Char
-                      => s_liftedToNullChar
-                          ?? (s_liftedToNullChar = new GreaterThanOrEqualChar(null)),
+                        => s_liftedToNullChar
+                            ?? (s_liftedToNullChar = new GreaterThanOrEqualChar(null)),
                     TypeCode.Int32
-                      => s_liftedToNullInt32
-                          ?? (s_liftedToNullInt32 = new GreaterThanOrEqualInt32(null)),
+                        => s_liftedToNullInt32
+                            ?? (s_liftedToNullInt32 = new GreaterThanOrEqualInt32(null)),
                     TypeCode.Int64
-                      => s_liftedToNullInt64
-                          ?? (s_liftedToNullInt64 = new GreaterThanOrEqualInt64(null)),
+                        => s_liftedToNullInt64
+                            ?? (s_liftedToNullInt64 = new GreaterThanOrEqualInt64(null)),
                     TypeCode.Byte
-                      => s_liftedToNullByte
-                          ?? (s_liftedToNullByte = new GreaterThanOrEqualByte(null)),
+                        => s_liftedToNullByte
+                            ?? (s_liftedToNullByte = new GreaterThanOrEqualByte(null)),
                     TypeCode.UInt16
-                      => s_liftedToNullUInt16
-                          ?? (s_liftedToNullUInt16 = new GreaterThanOrEqualUInt16(null)),
+                        => s_liftedToNullUInt16
+                            ?? (s_liftedToNullUInt16 = new GreaterThanOrEqualUInt16(null)),
                     TypeCode.UInt32
-                      => s_liftedToNullUInt32
-                          ?? (s_liftedToNullUInt32 = new GreaterThanOrEqualUInt32(null)),
+                        => s_liftedToNullUInt32
+                            ?? (s_liftedToNullUInt32 = new GreaterThanOrEqualUInt32(null)),
                     TypeCode.UInt64
-                      => s_liftedToNullUInt64
-                          ?? (s_liftedToNullUInt64 = new GreaterThanOrEqualUInt64(null)),
+                        => s_liftedToNullUInt64
+                            ?? (s_liftedToNullUInt64 = new GreaterThanOrEqualUInt64(null)),
                     TypeCode.Single
-                      => s_liftedToNullSingle
-                          ?? (s_liftedToNullSingle = new GreaterThanOrEqualSingle(null)),
+                        => s_liftedToNullSingle
+                            ?? (s_liftedToNullSingle = new GreaterThanOrEqualSingle(null)),
                     TypeCode.Double
-                      => s_liftedToNullDouble
-                          ?? (s_liftedToNullDouble = new GreaterThanOrEqualDouble(null)),
+                        => s_liftedToNullDouble
+                            ?? (s_liftedToNullDouble = new GreaterThanOrEqualDouble(null)),
                     _ => throw ContractUtils.Unreachable,
                 };
             }
@@ -309,27 +309,27 @@ namespace System.Linq.Expressions.Interpreter
                 return type.GetNonNullableType().GetTypeCode() switch
                 {
                     TypeCode.SByte
-                      => s_SByte ?? (s_SByte = new GreaterThanOrEqualSByte(Utils.BoxedFalse)),
+                        => s_SByte ?? (s_SByte = new GreaterThanOrEqualSByte(Utils.BoxedFalse)),
                     TypeCode.Int16
-                      => s_Int16 ?? (s_Int16 = new GreaterThanOrEqualInt16(Utils.BoxedFalse)),
+                        => s_Int16 ?? (s_Int16 = new GreaterThanOrEqualInt16(Utils.BoxedFalse)),
                     TypeCode.Char
-                      => s_Char ?? (s_Char = new GreaterThanOrEqualChar(Utils.BoxedFalse)),
+                        => s_Char ?? (s_Char = new GreaterThanOrEqualChar(Utils.BoxedFalse)),
                     TypeCode.Int32
-                      => s_Int32 ?? (s_Int32 = new GreaterThanOrEqualInt32(Utils.BoxedFalse)),
+                        => s_Int32 ?? (s_Int32 = new GreaterThanOrEqualInt32(Utils.BoxedFalse)),
                     TypeCode.Int64
-                      => s_Int64 ?? (s_Int64 = new GreaterThanOrEqualInt64(Utils.BoxedFalse)),
+                        => s_Int64 ?? (s_Int64 = new GreaterThanOrEqualInt64(Utils.BoxedFalse)),
                     TypeCode.Byte
-                      => s_Byte ?? (s_Byte = new GreaterThanOrEqualByte(Utils.BoxedFalse)),
+                        => s_Byte ?? (s_Byte = new GreaterThanOrEqualByte(Utils.BoxedFalse)),
                     TypeCode.UInt16
-                      => s_UInt16 ?? (s_UInt16 = new GreaterThanOrEqualUInt16(Utils.BoxedFalse)),
+                        => s_UInt16 ?? (s_UInt16 = new GreaterThanOrEqualUInt16(Utils.BoxedFalse)),
                     TypeCode.UInt32
-                      => s_UInt32 ?? (s_UInt32 = new GreaterThanOrEqualUInt32(Utils.BoxedFalse)),
+                        => s_UInt32 ?? (s_UInt32 = new GreaterThanOrEqualUInt32(Utils.BoxedFalse)),
                     TypeCode.UInt64
-                      => s_UInt64 ?? (s_UInt64 = new GreaterThanOrEqualUInt64(Utils.BoxedFalse)),
+                        => s_UInt64 ?? (s_UInt64 = new GreaterThanOrEqualUInt64(Utils.BoxedFalse)),
                     TypeCode.Single
-                      => s_Single ?? (s_Single = new GreaterThanOrEqualSingle(Utils.BoxedFalse)),
+                        => s_Single ?? (s_Single = new GreaterThanOrEqualSingle(Utils.BoxedFalse)),
                     TypeCode.Double
-                      => s_Double ?? (s_Double = new GreaterThanOrEqualDouble(Utils.BoxedFalse)),
+                        => s_Double ?? (s_Double = new GreaterThanOrEqualDouble(Utils.BoxedFalse)),
                     _ => throw ContractUtils.Unreachable,
                 };
             }

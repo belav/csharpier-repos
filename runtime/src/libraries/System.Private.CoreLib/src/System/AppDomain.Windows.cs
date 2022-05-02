@@ -13,7 +13,7 @@ namespace System
                 out _,
                 out long userTime100Nanoseconds
             )
-              ? new TimeSpan(userTime100Nanoseconds)
-              : TimeSpan.Zero;
+                ? new TimeSpan(userTime100Nanoseconds)
+                : TimeSpan.Zero;
     }
 }

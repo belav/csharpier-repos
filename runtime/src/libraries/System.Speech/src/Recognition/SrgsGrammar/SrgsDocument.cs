@@ -145,8 +145,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             get
             {
                 return _grammar.Mode == GrammarType.VoiceGrammar
-                  ? SrgsGrammarMode.Voice
-                  : SrgsGrammarMode.Dtmf;
+                    ? SrgsGrammarMode.Voice
+                    : SrgsGrammarMode.Dtmf;
             }
             set
             {

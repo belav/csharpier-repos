@@ -401,8 +401,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     {
                         var diagnostics = buffer[0].Diagnostics;
                         return includeSuppressedDiagnostics
-                          ? diagnostics
-                          : diagnostics.NullToEmpty().WhereAsArray(d => !d.IsSuppressed);
+                            ? diagnostics
+                            : diagnostics.NullToEmpty().WhereAsArray(d => !d.IsSuppressed);
                     }
                 }
             }

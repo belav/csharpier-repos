@@ -158,12 +158,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 (temps.Count == 0 && stores.Count == 0)
                     ? rewrittenAssignment
                     : new BoundSequence(
-                          node.Syntax,
-                          temps.ToImmutable(),
-                          stores.ToImmutable(),
-                          rewrittenAssignment,
-                          rewrittenAssignment.Type
-                      );
+                        node.Syntax,
+                        temps.ToImmutable(),
+                        stores.ToImmutable(),
+                        rewrittenAssignment,
+                        rewrittenAssignment.Type
+                    );
 
             temps.Free();
             stores.Free();
@@ -647,8 +647,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         VisitExpression(arguments[i]),
                         out assignmentToTemp,
                         indexerAccess.ArgumentRefKindsOpt.RefKinds(i) != RefKind.None
-                          ? RefKind.Ref
-                          : RefKind.None
+                            ? RefKind.Ref
+                            : RefKind.None
                     );
                     stores.Add(assignmentToTemp);
                     temps.Add(temp.LocalSymbol);

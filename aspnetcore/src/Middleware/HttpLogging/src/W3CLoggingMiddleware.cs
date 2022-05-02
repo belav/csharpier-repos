@@ -153,8 +153,8 @@ internal class W3CLoggingMiddleware
                     elements,
                     _clientIpIndex,
                     connectionInfo.RemoteIpAddress is null
-                      ? ""
-                      : connectionInfo.RemoteIpAddress.ToString()
+                        ? ""
+                        : connectionInfo.RemoteIpAddress.ToString()
                 );
             }
 
@@ -164,8 +164,8 @@ internal class W3CLoggingMiddleware
                     elements,
                     _serverIpIndex,
                     connectionInfo.LocalIpAddress is null
-                      ? ""
-                      : connectionInfo.LocalIpAddress.ToString()
+                        ? ""
+                        : connectionInfo.LocalIpAddress.ToString()
                 );
             }
 

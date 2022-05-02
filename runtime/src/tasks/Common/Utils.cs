@@ -37,8 +37,8 @@ internal static class Utils
     {
         string scriptFileName = CreateTemporaryBatchFile(command);
         (string shell, string args) = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-          ? ("cmd", $"/c \"{scriptFileName}\"")
-          : ("/bin/sh", $"\"{scriptFileName}\"");
+            ? ("cmd", $"/c \"{scriptFileName}\"")
+            : ("/bin/sh", $"\"{scriptFileName}\"");
 
         string msgPrefix = label == null ? string.Empty : $"[{label}] ";
         logger.LogMessage(

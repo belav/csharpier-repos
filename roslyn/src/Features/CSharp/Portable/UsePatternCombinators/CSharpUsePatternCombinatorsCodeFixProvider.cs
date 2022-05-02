@@ -85,8 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             context.RegisterCodeFix(
                 new MyCodeAction(
                     isSafe
-                      ? CSharpAnalyzersResources.Use_pattern_matching
-                      : CSharpAnalyzersResources.Use_pattern_matching_may_change_code_meaning,
+                        ? CSharpAnalyzersResources.Use_pattern_matching
+                        : CSharpAnalyzersResources.Use_pattern_matching_may_change_code_meaning,
                     c => FixAsync(context.Document, diagnostic, c),
                     isSafe ? SafeEquivalenceKey : UnsafeEquivalenceKey
                 ),
@@ -131,24 +131,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
             return pattern switch
             {
                 Binary p
-                  => BinaryPattern(
-                      p.IsDisjunctive ? SyntaxKind.OrPattern : SyntaxKind.AndPattern,
-                      AsPatternSyntax(p.Left).Parenthesize(),
-                      Token(
-                          p.Token.LeadingTrivia,
-                          p.IsDisjunctive ? SyntaxKind.OrKeyword : SyntaxKind.AndKeyword,
-                          TriviaList(p.Token.GetAllTrailingTrivia())
-                      ),
-                      AsPatternSyntax(p.Right).Parenthesize()
-                  ),
+                    => BinaryPattern(
+                        p.IsDisjunctive ? SyntaxKind.OrPattern : SyntaxKind.AndPattern,
+                        AsPatternSyntax(p.Left).Parenthesize(),
+                        Token(
+                            p.Token.LeadingTrivia,
+                            p.IsDisjunctive ? SyntaxKind.OrKeyword : SyntaxKind.AndKeyword,
+                            TriviaList(p.Token.GetAllTrailingTrivia())
+                        ),
+                        AsPatternSyntax(p.Right).Parenthesize()
+                    ),
                 Constant p => ConstantPattern(AsExpressionSyntax(p.ExpressionSyntax, p)),
                 Source p => p.PatternSyntax,
                 Type p => TypePattern(p.TypeSyntax),
                 Relational p
-                  => RelationalPattern(
-                      Token(MapToSyntaxKind(p.OperatorKind)),
-                      AsExpressionSyntax(p.Value, p)
-                  ),
+                    => RelationalPattern(
+                        Token(MapToSyntaxKind(p.OperatorKind)),
+                        AsExpressionSyntax(p.Value, p)
+                    ),
                 Not p => UnaryPattern(AsPatternSyntax(p.Pattern).Parenthesize()),
                 var p => throw ExceptionUtilities.UnexpectedValue(p)
             };

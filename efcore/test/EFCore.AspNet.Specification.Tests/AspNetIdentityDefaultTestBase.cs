@@ -9,17 +9,17 @@ namespace Microsoft.EntityFrameworkCore
 {
     public abstract class AspNetIdentityDefaultTestBase<TFixture>
         : AspNetIdentityTestBase<
-              TFixture,
-              IdentityDbContext,
-              IdentityUser,
-              IdentityRole,
-              string,
-              IdentityUserClaim<string>,
-              IdentityUserRole<string>,
-              IdentityUserLogin<string>,
-              IdentityRoleClaim<string>,
-              IdentityUserToken<string>
-          >
+            TFixture,
+            IdentityDbContext,
+            IdentityUser,
+            IdentityRole,
+            string,
+            IdentityUserClaim<string>,
+            IdentityUserRole<string>,
+            IdentityUserLogin<string>,
+            IdentityRoleClaim<string>,
+            IdentityUserToken<string>
+        >
         where TFixture : AspNetIdentityTestBase<
                 TFixture,
                 IdentityDbContext,

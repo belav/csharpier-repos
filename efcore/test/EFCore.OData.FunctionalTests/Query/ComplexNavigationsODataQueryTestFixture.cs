@@ -12,7 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class ComplexNavigationsODataQueryTestFixture
         : ComplexNavigationsQuerySqlServerFixture,
-          IODataQueryTestFixture
+            IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 

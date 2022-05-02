@@ -78,8 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction
             {
                 editor.RemoveNode(
                     localFunction.IsParentKind(SyntaxKind.GlobalStatement)
-                      ? localFunction.Parent
-                      : localFunction
+                        ? localFunction.Parent
+                        : localFunction
                 );
             }
 
