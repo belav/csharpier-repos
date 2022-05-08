@@ -667,6 +667,5 @@ namespace System.Threading.Tasks.Tests.FromAsync
         }
 
         #endregion
-
     }
 }

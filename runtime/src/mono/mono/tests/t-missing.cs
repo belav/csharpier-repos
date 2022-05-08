@@ -46,5 +46,4 @@ namespace Missing
 #if FOUND
     public struct Foo6 { }
 #endif
-
 }

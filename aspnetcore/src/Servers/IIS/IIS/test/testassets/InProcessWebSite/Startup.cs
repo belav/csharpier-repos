@@ -52,6 +52,7 @@ public partial class Startup
         serviceCollection.AddResponseCompression();
         serviceCollection.AddHttpContextAccessor();
     }
+
 #if FORWARDCOMPAT
     private async Task ContentRootPath(HttpContext ctx) =>
         await ctx.Response.WriteAsync(
@@ -446,6 +447,7 @@ public partial class Startup
         writer.Advance(10);
     }
 #endif
+
     private async Task ResponseHeaders(HttpContext ctx)
     {
         ctx.Response.Headers["UnknownHeader"] = "test123=foo";

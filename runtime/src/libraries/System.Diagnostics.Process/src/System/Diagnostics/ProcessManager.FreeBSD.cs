@@ -50,6 +50,5 @@ namespace System.Diagnostics
         // ----------------------------------
         // ---- Unix PAL layer ends here ----
         // ----------------------------------
-
     }
 }

@@ -419,6 +419,7 @@ namespace System.Diagnostics.Tracing
                 EventManifestOptions.None
             );
         }
+
         /// <summary>
         /// Returns a string of the XML manifest associated with the eventSourceType. The scheme for this XML is
         /// documented at in EventManifest Schema https://docs.microsoft.com/en-us/windows/desktop/WES/eventmanifestschema-schema.
@@ -5933,7 +5934,8 @@ namespace System.Diagnostics.Tracing
         public EventTask Task { get; set; }
 #if FEATURE_MANAGED_ETW_CHANNELS
         /// <summary>Event's channel: defines an event log as an additional destination for the event</summary>
-        public EventChannel Channel { get; set; }
+        public EventChannel
+        Channel { get; set; }
 #endif
         /// <summary>Event's version</summary>
         public byte Version { get; set; }
@@ -6489,6 +6491,7 @@ namespace System.Diagnostics.Tracing
             return channelMask;
         }
 #endif
+
         public void StartEvent(string eventName, EventAttribute eventAttribute)
         {
             Debug.Assert(numParams == 0);
@@ -7075,6 +7078,7 @@ namespace System.Diagnostics.Tracing
             return info.Name;
         }
 #endif
+
         private string GetTaskName(EventTask task, string eventName)
         {
             if (task == EventTask.None)

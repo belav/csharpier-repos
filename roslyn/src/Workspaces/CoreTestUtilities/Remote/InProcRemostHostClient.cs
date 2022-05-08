@@ -433,6 +433,7 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                     object? state
                 ) => _stream.BeginWrite(buffer, offset, count, callback, state);
 #endif
+
                 public override int EndRead(IAsyncResult asyncResult) =>
                     _stream.EndRead(asyncResult);
 

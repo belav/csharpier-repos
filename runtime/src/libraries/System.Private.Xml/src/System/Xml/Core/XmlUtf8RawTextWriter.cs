@@ -704,7 +704,6 @@ namespace System.Xml
         private void FlushEncoder()
         {
             // intentionally empty
-
         }
 
         // Serialize text that is part of an attribute value.  The '&', '<', '>', and '"' characters

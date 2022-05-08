@@ -374,6 +374,7 @@ namespace System.Net.Quic.Implementations.Mock
 #else
                 32 * 1024;
 #endif
+
             public StreamState(long streamId, bool bidirectional)
             {
                 _streamId = streamId;

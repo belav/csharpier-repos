@@ -31,6 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static int s_sequence = 1;
 #endif
+
         private static string LabelName(string name)
         {
 #if DEBUG

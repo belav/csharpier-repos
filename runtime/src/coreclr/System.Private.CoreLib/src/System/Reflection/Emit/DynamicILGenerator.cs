@@ -615,7 +615,6 @@ namespace System.Reflection.Emit
             return m_scope.GetTokenFor(sig);
         }
         #endregion
-
     }
 
     internal sealed class DynamicResolver : Resolver

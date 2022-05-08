@@ -638,6 +638,5 @@ namespace System.Speech.Recognition.SrgsGrammar
         // .NET Namespaces to import
         private Collection<string> _assemblyReferences = new();
         #endregion
-
     }
 }

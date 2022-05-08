@@ -149,7 +149,6 @@ public class ResurrectObj : BaseObj
             // the referenced object to be resurrected as well. This object
             // can continue to use the referenced object even though it was
             // finalized.
-
         }
         else
         {

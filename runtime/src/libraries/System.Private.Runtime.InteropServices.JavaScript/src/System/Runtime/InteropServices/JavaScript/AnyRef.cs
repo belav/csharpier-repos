@@ -31,6 +31,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AnyRefHandle.Free();
         }
+
 #if DEBUG_HANDLE
         private int _refCount;
 

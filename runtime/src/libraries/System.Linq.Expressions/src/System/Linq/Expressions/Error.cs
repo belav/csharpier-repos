@@ -1347,6 +1347,7 @@ namespace System.Linq.Expressions
         /// <summary>
         /// InvalidOperationException with message like "Invalid lvalue for assignment: {0}."
         /// </summary>
+
         internal static Exception InvalidLvalue(ExpressionType p0)
         {
             return new InvalidOperationException(Strings.InvalidLvalue(p0));

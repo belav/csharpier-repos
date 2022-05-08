@@ -1056,6 +1056,7 @@ namespace System.Linq.Expressions.Interpreter
             return c != null && c.Value == null;
         }
 #endif
+
         private void CompileEqual(Expression left, Expression right, bool liftedToNull)
         {
 #if DEBUG

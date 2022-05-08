@@ -2805,7 +2805,6 @@ namespace System.Xml.Serialization
                         )
                     );
 #endif
-
             }
             return choiceSource;
         }

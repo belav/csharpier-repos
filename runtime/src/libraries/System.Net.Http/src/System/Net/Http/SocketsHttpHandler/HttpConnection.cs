@@ -27,6 +27,7 @@ namespace System.Net.Http
             4096;
 #endif
         /// <summary>Default size of the write buffer used for the connection.</summary>
+
         private const int InitialWriteBufferSize = InitialReadBufferSize;
 
         /// <summary>

@@ -183,6 +183,5 @@ namespace Microsoft.CodeAnalysis.CSharp
             return s;
         }
 #endif
-
     }
 }

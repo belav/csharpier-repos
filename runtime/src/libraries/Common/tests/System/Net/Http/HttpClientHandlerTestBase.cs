@@ -234,7 +234,6 @@ namespace System.Net.Http.Functional.Tests
 #else
                 return content.ReadAsStreamAsync();
 #endif
-
             }
             else
             {

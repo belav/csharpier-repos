@@ -965,7 +965,6 @@ namespace System.Xml.Schema
     }
 #endif
 
-
     /// <summary>
     /// Using range node as one of the terminals
     /// </summary>
@@ -1351,6 +1350,7 @@ namespace System.Xml.Schema
             Closure(new RangeNode(min, max));
         }
 #endif
+
         private void Closure(InteriorNode node)
         {
             if (_stack!.Count > 0)

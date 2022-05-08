@@ -1305,7 +1305,6 @@ namespace ILCompiler
                 return 1;
             }
 #endif
-
         }
     }
 }

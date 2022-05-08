@@ -35,6 +35,7 @@ public static partial class DataContractSerializerTests
         method.Invoke(null, new object[] { 1 });
     }
 #endif
+
     [Fact]
     [ActiveIssue(
         "https://github.com/dotnet/runtime/issues/60462",

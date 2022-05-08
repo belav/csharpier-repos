@@ -1667,6 +1667,7 @@ namespace System.Data.Common
 #endif
             return (condition == (condition & value.Direction));
         }
+
 #if DEBUG
         private static void IsDirectionValid(ParameterDirection value)
         {

@@ -33,6 +33,7 @@ public static partial class DataContractJsonSerializerTests
         method.Invoke(null, new object[] { 1 });
     }
 #endif
+
     [Fact]
     public static void DCJS_BoolAsRoot()
     {

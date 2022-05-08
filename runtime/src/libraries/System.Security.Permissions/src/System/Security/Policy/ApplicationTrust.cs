@@ -10,6 +10,7 @@ namespace System.Security.Policy
         public ApplicationTrust() { }
 
         public ApplicationTrust(ApplicationIdentity identity) { }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -32,7 +33,8 @@ namespace System.Security.Policy
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
 #endif
-        public IList<StrongName> FullTrustAssemblies
+        public IList<StrongName>
+        FullTrustAssemblies
         {
             get { return default(IList<StrongName>); }
         }

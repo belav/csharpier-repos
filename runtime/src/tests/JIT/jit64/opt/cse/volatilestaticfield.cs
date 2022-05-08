@@ -58,7 +58,6 @@ namespace CseTest
                     {
 #endif
 
-
                 int v1 = (((class_s.a + class_s.b) + class_s.c) + class_s.d);
                 int v2 = (class_s.d + ((class_s.a + class_s.b) + class_s.c));
                 int v3 = ((class_s.a + class_s.b) + class_s.c);
@@ -309,7 +308,6 @@ namespace CseTest
 #if LOOP
             } while (ret == 1000);
 #endif
-
 
             Console.WriteLine(ret);
             return ret;

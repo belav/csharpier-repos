@@ -373,7 +373,6 @@ namespace System.Data.Tests
             // it seems that it is no matter between 10 - 30. The
             // result is always 25 :-P
             //Assert.Equal (25, T.Select ("id < 10").Length);
-
         }
 
         [ConditionalFact(

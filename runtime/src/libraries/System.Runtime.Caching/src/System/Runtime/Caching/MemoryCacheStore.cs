@@ -28,7 +28,8 @@ namespace System.Runtime.Caching
         private readonly Counters _perfCounters;
 #if NET5_0_OR_GREATER
         [UnsupportedOSPlatformGuard("browser")]
-        private static bool _countersSupported => !OperatingSystem.IsBrowser();
+        private static bool
+        _countersSupported => !OperatingSystem.IsBrowser();
 #else
         private static bool _countersSupported => true;
 #endif

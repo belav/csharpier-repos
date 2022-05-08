@@ -629,6 +629,7 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
 
             [FieldOffset(0)]
             internal SOCKADDR_IN6 Ipv6;
+
 #if SOCKADDR_HAS_LENGTH
             [FieldOffset(1)]
 #else

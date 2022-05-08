@@ -47,6 +47,7 @@ namespace System
 
             [FieldOffset(4)]
             private uint uhi;
+
 #if BIGENDIAN
             [FieldOffset(8)]
             private uint umid;

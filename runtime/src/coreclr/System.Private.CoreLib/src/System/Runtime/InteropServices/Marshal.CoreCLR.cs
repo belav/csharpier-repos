@@ -316,7 +316,6 @@ namespace System.Runtime.InteropServices
         private static extern IntPtr GetHINSTANCE(QCallModule m);
 #endif // TARGET_WINDOWS
 
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern Exception GetExceptionForHRInternal(int errorCode, IntPtr errorInfo);
 

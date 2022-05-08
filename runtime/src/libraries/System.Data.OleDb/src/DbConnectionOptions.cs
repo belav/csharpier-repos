@@ -1094,6 +1094,7 @@ namespace System.Data.Common
             }
         }
 #endif
+
         private static NameValuePair? ParseInternal(
             Hashtable parsetable,
             string connectionString,

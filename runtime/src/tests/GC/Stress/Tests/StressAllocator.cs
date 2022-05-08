@@ -327,9 +327,6 @@ namespace StressAllocator
                         }
                     }
                     //Console.WriteLine("Thread " + threadIndex + " accessing object at " + pos + " expired= " + ret);
-
-
-
                 }
 
                 if ((Rand.Next(0, numThreads) != 0))

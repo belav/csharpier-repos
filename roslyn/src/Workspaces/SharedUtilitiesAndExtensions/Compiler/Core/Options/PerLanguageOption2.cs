@@ -163,6 +163,7 @@ namespace Microsoft.CodeAnalysis.Options
         ImmutableArray<OptionStorageLocation> IOption.StorageLocations =>
             this.StorageLocations.As<OptionStorageLocation>();
 #endif
+
         public override string ToString() => OptionDefinition.ToString();
 
         public override int GetHashCode() => OptionDefinition.GetHashCode();

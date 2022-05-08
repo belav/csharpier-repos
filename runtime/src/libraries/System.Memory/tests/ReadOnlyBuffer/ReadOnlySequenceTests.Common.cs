@@ -702,6 +702,5 @@ namespace System.Memory.Tests
         }
 
         #endregion
-
     }
 }

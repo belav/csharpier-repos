@@ -141,8 +141,6 @@ namespace DefaultNamespace
                         ; //select a random node, also avoid self-loops
                     BuildEdge(i, v2); //build edge betn node i and v2
                     //TestLibrary.Logging.WriteLine("Edge built between {0} and {1}...",i,v2);
-
-
                 }
             }
         }

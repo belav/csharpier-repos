@@ -187,7 +187,6 @@ namespace System.Threading.Tests
                 }
             );
             // Failure Case: The ToString method of the disposed ThreadLocal object should throw ODE
-
         }
 
         [Fact]

@@ -65,6 +65,5 @@ namespace System.Speech.Internal.Synthesis
 #pragma warning restore 56524
 
         #endregion
-
     }
 }

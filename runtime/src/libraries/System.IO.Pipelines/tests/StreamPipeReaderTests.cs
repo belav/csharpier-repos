@@ -748,6 +748,7 @@ namespace System.IO.Pipelines.Tests
             {
                 throw new OperationCanceledException();
             }
+
 #if NETCOREAPP
             public override ValueTask<int> ReadAsync(
                 Memory<byte> buffer,

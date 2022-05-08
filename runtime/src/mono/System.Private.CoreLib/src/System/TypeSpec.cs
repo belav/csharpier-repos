@@ -174,6 +174,7 @@ namespace System
             WANT_ASSEMBLY = 0x1,
             NO_MODIFIERS = 0x2,
         }
+
 #if DEBUG
         public override string ToString()
         {

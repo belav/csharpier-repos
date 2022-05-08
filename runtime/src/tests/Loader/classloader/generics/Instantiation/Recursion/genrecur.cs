@@ -830,7 +830,6 @@ class Test20
 #pragma warning disable 219
         S<object> s = new S<object>();
 #pragma warning restore 219
-
     }
 }
 
@@ -864,7 +863,6 @@ class Test21
 #pragma warning disable 219
         S<int> s = new S<int>();
 #pragma warning restore 219
-
     }
 }
 

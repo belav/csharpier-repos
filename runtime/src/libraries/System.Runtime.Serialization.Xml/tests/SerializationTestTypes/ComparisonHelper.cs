@@ -389,7 +389,6 @@ namespace SerializationTestTypes
                         cmpType
                     );
                     #endregion
-
                 }
                 #endregion
             }

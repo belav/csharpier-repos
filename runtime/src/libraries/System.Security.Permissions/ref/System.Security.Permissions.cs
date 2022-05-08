@@ -2104,6 +2104,7 @@ namespace System.Security
 #endif
     public enum PolicyLevelType
     {
+
         User = 0,
         Machine = 1,
         Enterprise = 2,
@@ -3744,6 +3745,7 @@ namespace System.Security.Permissions
 #if !NETCOREAPP
     public enum PermissionState
     {
+
         None = 0,
         Unrestricted = 1,
     }
@@ -5383,6 +5385,7 @@ namespace System.Security.Policy
         public ApplicationTrust() { }
 
         public ApplicationTrust(System.ApplicationIdentity identity) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6188,6 +6191,7 @@ namespace System.Security.Policy
         public void AddFullTrustAssembly(
             System.Security.Policy.StrongNameMembershipCondition snMC
         ) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6196,6 +6200,7 @@ namespace System.Security.Policy
         )]
 #endif
         public void AddNamedPermissionSet(System.Security.NamedPermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6220,6 +6225,7 @@ namespace System.Security.Policy
         }
 
         public void FromXml(System.Security.SecurityElement e) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6241,6 +6247,7 @@ namespace System.Security.Policy
         public void RemoveFullTrustAssembly(
             System.Security.Policy.StrongNameMembershipCondition snMC
         ) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6254,6 +6261,7 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6300,6 +6308,7 @@ namespace System.Security.Policy
         )]
 #endif
         public PolicyStatement(System.Security.PermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",

@@ -953,7 +953,6 @@ namespace XmlCoreTest.Common
             }
         }
         #endregion
-
     }
 
     /// <summary>

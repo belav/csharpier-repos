@@ -1385,7 +1385,6 @@ third line",
         }
 #endif
 
-
         [Test]
         public void ReadBadMSDateAsString()
         {

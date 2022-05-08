@@ -60,8 +60,8 @@ namespace System.Reflection.TypeLoading
         )]
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
 #endif
-        public sealed override string CodeBase =>
-            throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
+        public sealed override string
+        CodeBase => throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeBaseMessage,
@@ -70,8 +70,8 @@ namespace System.Reflection.TypeLoading
         )]
         [RequiresAssemblyFiles(ThrowingMessageInRAF)]
 #endif
-        public sealed override string EscapedCodeBase =>
-            throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
+        public sealed override string
+        EscapedCodeBase => throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
 
         // Custom Attributes
         public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
@@ -208,7 +208,8 @@ namespace System.Reflection.TypeLoading
             UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
         )]
 #endif
-        public sealed override bool GlobalAssemblyCache => false;
+        public sealed override bool
+        GlobalAssemblyCache => false;
         public sealed override long HostContext => 0;
         public abstract override string ImageRuntimeVersion { get; }
         public abstract override bool IsDynamic { get; }

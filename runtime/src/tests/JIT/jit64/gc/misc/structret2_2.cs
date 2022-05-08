@@ -38,7 +38,6 @@ struct Pad
     public double d29;
     public double d30;
 #pragma warning restore 0414
-
 }
 
 struct S

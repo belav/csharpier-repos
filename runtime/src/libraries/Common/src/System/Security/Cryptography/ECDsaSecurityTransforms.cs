@@ -48,6 +48,7 @@ namespace System.Security.Cryptography
         {
             public sealed partial class ECDsaSecurityTransforms : ECDsa
             {
+
                 private readonly EccSecurityTransforms _ecc = new EccSecurityTransforms(
                     nameof(ECDsa)
                 );

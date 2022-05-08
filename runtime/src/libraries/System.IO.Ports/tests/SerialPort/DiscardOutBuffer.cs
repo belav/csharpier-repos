@@ -183,7 +183,5 @@ namespace System.IO.Ports.Tests
             Assert.Equal(0, com.BytesToWrite);
         }
         #endregion
-
-
     }
 }

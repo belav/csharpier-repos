@@ -1286,7 +1286,6 @@ public class Helper
         }
     }
     #endregion
-
 }
 
 public static class TestFramework

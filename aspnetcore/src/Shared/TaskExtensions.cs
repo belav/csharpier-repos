@@ -16,7 +16,6 @@ namespace System.Threading.Tasks.Extensions;
 
 #endif
 
-
 #if AspNetCoreTesting
 public
 #else
