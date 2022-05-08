@@ -20,13 +20,15 @@ namespace Microsoft.EntityFrameworkCore
             var tasks = new Task[Environment.ProcessorCount];
             for (var i = 0; i < tasks.Length; i++)
             {
-                tasks[i] = Task.Factory.StartNew(() =>
-                {
-                    using (var ctx = new EmptyContext())
+                tasks[i] = Task.Factory.StartNew(
+                    () =>
                     {
-                        Assert.NotNull(ctx.Model.GetRelationalDependencies());
+                        using (var ctx = new EmptyContext())
+                        {
+                            Assert.NotNull(ctx.Model.GetRelationalDependencies());
+                        }
                     }
-                });
+                );
             }
 
             Task.WaitAll(tasks);
@@ -74,10 +76,9 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ChangedRowNumberContext : DbContext
         {
-            private static readonly IServiceProvider _serviceProvider
-                = new ServiceCollection()
-                    .AddEntityFrameworkSqlServer()
-                    .BuildServiceProvider(validateScopes: true);
+            private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+                .AddEntityFrameworkSqlServer()
+                .BuildServiceProvider(validateScopes: true);
 
             private readonly bool _setInternalServiceProvider;
 

@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// <summary>
     /// Information decoded from well-known custom attributes applied on a method.
     /// </summary>
-    internal sealed class MethodWellKnownAttributeData : CommonMethodWellKnownAttributeData, ISkipLocalsInitAttributeTarget, IMemberNotNullAttributeTarget
+    internal sealed class MethodWellKnownAttributeData
+        : CommonMethodWellKnownAttributeData,
+          ISkipLocalsInitAttributeTarget,
+          IMemberNotNullAttributeTarget
     {
         private bool _hasDoesNotReturnAttribute;
         public bool HasDoesNotReturnAttribute
@@ -69,19 +72,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private ImmutableArray<string> _memberNotNullWhenTrueAttributeData = ImmutableArray<string>.Empty;
-        private ImmutableArray<string> _memberNotNullWhenFalseAttributeData = ImmutableArray<string>.Empty;
+        private ImmutableArray<string> _memberNotNullWhenTrueAttributeData =
+            ImmutableArray<string>.Empty;
+        private ImmutableArray<string> _memberNotNullWhenFalseAttributeData =
+            ImmutableArray<string>.Empty;
 
         public void AddNotNullWhenMember(bool sense, string memberName)
         {
             VerifySealed(expected: false);
             if (sense)
             {
-                _memberNotNullWhenTrueAttributeData = _memberNotNullWhenTrueAttributeData.Add(memberName);
+                _memberNotNullWhenTrueAttributeData = _memberNotNullWhenTrueAttributeData.Add(
+                    memberName
+                );
             }
             else
             {
-                _memberNotNullWhenFalseAttributeData = _memberNotNullWhenFalseAttributeData.Add(memberName);
+                _memberNotNullWhenFalseAttributeData = _memberNotNullWhenFalseAttributeData.Add(
+                    memberName
+                );
             }
             SetDataStored();
         }
@@ -91,11 +100,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VerifySealed(expected: false);
             if (sense)
             {
-                _memberNotNullWhenTrueAttributeData = _memberNotNullWhenTrueAttributeData.AddRange(memberNames);
+                _memberNotNullWhenTrueAttributeData = _memberNotNullWhenTrueAttributeData.AddRange(
+                    memberNames
+                );
             }
             else
             {
-                _memberNotNullWhenFalseAttributeData = _memberNotNullWhenFalseAttributeData.AddRange(memberNames);
+                _memberNotNullWhenFalseAttributeData =
+                    _memberNotNullWhenFalseAttributeData.AddRange(memberNames);
             }
             SetDataStored();
         }

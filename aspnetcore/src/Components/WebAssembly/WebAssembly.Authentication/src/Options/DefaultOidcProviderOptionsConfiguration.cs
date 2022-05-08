@@ -6,11 +6,13 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
-internal class DefaultOidcOptionsConfiguration : IPostConfigureOptions<RemoteAuthenticationOptions<OidcProviderOptions>>
+internal class DefaultOidcOptionsConfiguration
+    : IPostConfigureOptions<RemoteAuthenticationOptions<OidcProviderOptions>>
 {
     private readonly NavigationManager _navigationManager;
 
-    public DefaultOidcOptionsConfiguration(NavigationManager navigationManager) => _navigationManager = navigationManager;
+    public DefaultOidcOptionsConfiguration(NavigationManager navigationManager) =>
+        _navigationManager = navigationManager;
 
     public void Configure(RemoteAuthenticationOptions<OidcProviderOptions> options)
     {
@@ -21,7 +23,8 @@ internal class DefaultOidcOptionsConfiguration : IPostConfigureOptions<RemoteAut
         {
             redirectUri ??= "authentication/login-callback";
             options.ProviderOptions.RedirectUri = _navigationManager
-                .ToAbsoluteUri(redirectUri).AbsoluteUri;
+                .ToAbsoluteUri(redirectUri)
+                .AbsoluteUri;
         }
 
         var logoutUri = options.ProviderOptions.PostLogoutRedirectUri;
@@ -29,7 +32,8 @@ internal class DefaultOidcOptionsConfiguration : IPostConfigureOptions<RemoteAut
         {
             logoutUri ??= "authentication/logout-callback";
             options.ProviderOptions.PostLogoutRedirectUri = _navigationManager
-                .ToAbsoluteUri(logoutUri).AbsoluteUri;
+                .ToAbsoluteUri(logoutUri)
+                .AbsoluteUri;
         }
     }
 

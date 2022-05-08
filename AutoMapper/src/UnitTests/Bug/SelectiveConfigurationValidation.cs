@@ -6,6 +6,7 @@
     public class SelectiveConfigurationValidation : NonValidatingSpecBase
     {
         public class GoodSrc { }
+
         public class GoodDest { }
 
         public class BadSrc
@@ -18,6 +19,7 @@
             public int Value { get; set; }
             public int BlowUp { get; set; }
         }
+
         public class GoodProfile : Profile
         {
             public GoodProfile()
@@ -34,17 +36,21 @@
             }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<GoodProfile>();
-            cfg.AddProfile<BadProfile>();
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.AddProfile<GoodProfile>();
+                    cfg.AddProfile<BadProfile>();
+                }
+            );
 
         [Fact]
         public void Should_pass_specific_profile_assertion()
         {
-            typeof(AutoMapperConfigurationException)
-                .ShouldNotBeThrownBy(AssertConfigurationIsValid<GoodProfile>);
+            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
+                AssertConfigurationIsValid<GoodProfile>
+            );
         }
     }
 }

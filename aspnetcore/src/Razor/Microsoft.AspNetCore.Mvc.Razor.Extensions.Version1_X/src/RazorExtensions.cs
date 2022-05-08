@@ -30,10 +30,12 @@ public static class RazorExtensions
         builder.Features.Add(new SectionDirectivePass());
         builder.AddTargetExtension(new LegacySectionTargetExtension());
 
-        builder.AddTargetExtension(new TemplateTargetExtension()
-        {
-            TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
-        });
+        builder.AddTargetExtension(
+            new TemplateTargetExtension()
+            {
+                TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
+            }
+        );
 
         builder.Features.Add(new ModelExpressionPass());
         builder.Features.Add(new MvcViewDocumentClassifierPass());
@@ -81,10 +83,12 @@ public static class RazorExtensions
         builder.Features.Add(new SectionDirectivePass());
         builder.AddTargetExtension(new LegacySectionTargetExtension());
 
-        builder.AddTargetExtension(new TemplateTargetExtension()
-        {
-            TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
-        });
+        builder.AddTargetExtension(
+            new TemplateTargetExtension()
+            {
+                TemplateTypeName = "global::Microsoft.AspNetCore.Mvc.Razor.HelperResult",
+            }
+        );
 
         builder.Features.Add(new ModelExpressionPass());
         builder.Features.Add(new MvcViewDocumentClassifierPass());

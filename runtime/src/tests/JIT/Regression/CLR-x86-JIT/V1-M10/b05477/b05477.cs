@@ -11,13 +11,9 @@ public class TestClass
 
 public class mem035
 {
-
     public static TestClass getTC
     {
-        get
-        {
-            return null;
-        }
+        get { return null; }
     }
 
     public static int Main()

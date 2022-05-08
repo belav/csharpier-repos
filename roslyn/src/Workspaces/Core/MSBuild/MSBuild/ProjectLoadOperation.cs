@@ -14,12 +14,14 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// to evalute the project file before any tasks are executed.
         /// </summary>
         Evaluate,
+
         /// <summary>
         /// Represents the MSBuild design-time build of a project. This build does not produce any
         /// any compiled binaries, but computes the information need to compile the project, such
         /// as compiler flags, source files and references.
         /// </summary>
         Build,
+
         /// <summary>
         /// Represents a resolution step that occurs after the MSBuild design-time build. This step
         /// performs final logic to resolve metadata and project references and produces the information

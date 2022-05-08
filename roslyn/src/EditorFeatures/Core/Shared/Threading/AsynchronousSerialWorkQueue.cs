@@ -14,10 +14,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
     // A helper class primarily used for the AsynchronousTagger that can handle the job of
     // scheduling work to be done on the UI thread and on a background thread.  This class wraps the
     // TPL and implements things in special ways to provide certain nice bits of functionality.
-    // Specifically: 
+    // Specifically:
     //
     // 1) Background actions are run serially.  This allows you to enqueue a whole host of background
-    // work to do, without having to worry about those same background tasks running simultaneously 
+    // work to do, without having to worry about those same background tasks running simultaneously
     // and colliding with each other.
     //
     // 2) You can start a 'chain' of actions starting with an action that fires after a delay. After
@@ -43,21 +43,22 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
 
         #endregion
 
-        public AsynchronousSerialWorkQueue(IThreadingContext threadingContext, IAsynchronousOperationListener asyncListener)
-            : base(threadingContext, assertIsForeground: false)
+        public AsynchronousSerialWorkQueue(
+            IThreadingContext threadingContext,
+            IAsynchronousOperationListener asyncListener
+        ) : base(threadingContext, assertIsForeground: false)
         {
             Contract.ThrowIfNull(asyncListener);
             _asyncListener = asyncListener;
 
             // Initialize so we don't have to check for null below. Force the background task to run
-            // on the threadpool. 
+            // on the threadpool.
             _currentBackgroundTask = Task.CompletedTask;
         }
 
         public CancellationToken CancellationToken => _cancellationTokenSource.Token;
 
-        public void CancelCurrentWork()
-            => CancelCurrentWork(remainCancelled: false);
+        public void CancelCurrentWork() => CancelCurrentWork(remainCancelled: false);
 
         public void CancelCurrentWork(bool remainCancelled)
         {
@@ -72,10 +73,24 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
             }
         }
 
-        public void EnqueueBackgroundWork(Action action, string name, CancellationToken cancellationToken)
-            => EnqueueBackgroundWork(action, name, afterDelay: 0, cancellationToken: cancellationToken);
+        public void EnqueueBackgroundWork(
+            Action action,
+            string name,
+            CancellationToken cancellationToken
+        ) =>
+            EnqueueBackgroundWork(
+                action,
+                name,
+                afterDelay: 0,
+                cancellationToken: cancellationToken
+            );
 
-        public void EnqueueBackgroundWork(Action action, string name, int afterDelay, CancellationToken cancellationToken)
+        public void EnqueueBackgroundWork(
+            Action action,
+            string name,
+            int afterDelay,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(action);
 
@@ -92,12 +107,18 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
                         _ => action(),
                         cancellationToken,
                         TaskContinuationOptions.None,
-                        TaskScheduler.Default);
+                        TaskScheduler.Default
+                    );
                 }
                 else
                 {
                     _currentBackgroundTask = _currentBackgroundTask.ContinueWithAfterDelay(
-                        action, cancellationToken, afterDelay, TaskContinuationOptions.None, TaskScheduler.Default);
+                        action,
+                        cancellationToken,
+                        afterDelay,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
                 }
 
                 _currentBackgroundTask.CompletesAsyncOperation(asyncToken);
@@ -107,14 +128,23 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
         public void EnqueueBackgroundTask(
             Func<CancellationToken, Task> taskGeneratingFunctionAsync,
             string name,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            EnqueueBackgroundTask(taskGeneratingFunctionAsync, name, afterDelay: 0, cancellationToken: cancellationToken);
+            EnqueueBackgroundTask(
+                taskGeneratingFunctionAsync,
+                name,
+                afterDelay: 0,
+                cancellationToken: cancellationToken
+            );
         }
 
         public void EnqueueBackgroundTask(
             Func<CancellationToken, Task> taskGeneratingFunctionAsync,
-            string name, int afterDelay, CancellationToken cancellationToken)
+            string name,
+            int afterDelay,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(taskGeneratingFunctionAsync);
 
@@ -131,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
                         _ => taskGeneratingFunctionAsync(cancellationToken),
                         cancellationToken,
                         TaskContinuationOptions.None,
-                        TaskScheduler.Default);
+                        TaskScheduler.Default
+                    );
                 }
                 else
                 {
@@ -140,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
                         cancellationToken,
                         afterDelay,
                         TaskContinuationOptions.None,
-                        TaskScheduler.Default);
+                        TaskScheduler.Default
+                    );
                 }
 
                 _currentBackgroundTask.CompletesAsyncOperation(asyncToken);
@@ -178,8 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Threading
             /// called on the UI thread. Also, it isn't guaranteed to be stable in the case of tasks
             /// enqueuing other tasks in arbitrary orders, though it does support our common pattern of
             /// "timer task->background task->foreground task with results"
-            /// 
-            /// Use this method very judiciously.  Most of the time, we should be able to just use 
+            ///
+            /// Use this method very judiciously.  Most of the time, we should be able to just use
             /// IAsynchronousOperationListener for tests.
             /// </summary>
             public void WaitUntilCompletion()

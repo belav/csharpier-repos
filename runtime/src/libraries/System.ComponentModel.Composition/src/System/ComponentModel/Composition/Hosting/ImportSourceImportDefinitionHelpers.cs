@@ -9,7 +9,6 @@ using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-
     internal static class ImportSourceImportDefinitionHelpers
     {
         public static ImportDefinition RemoveImportSource(this ImportDefinition definition)
@@ -101,10 +100,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             public override IEnumerable<KeyValuePair<string, Type>> RequiredMetadata
             {
-                get
-                {
-                    return _sourceDefinition.RequiredMetadata;
-                }
+                get { return _sourceDefinition.RequiredMetadata; }
             }
 
             public override CreationPolicy RequiredCreationPolicy

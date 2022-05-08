@@ -68,11 +68,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
         public abstract Task<int> SaveChangesAsync(
             IList<IUpdateEntry> entries,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <inheritdoc />
-        public virtual Func<QueryContext, TResult> CompileQuery<TResult>(Expression query, bool async)
-            => Dependencies.QueryCompilationContextFactory
+        public virtual Func<QueryContext, TResult> CompileQuery<TResult>(
+            Expression query,
+            bool async
+        ) =>
+            Dependencies.QueryCompilationContextFactory
                 .Create(async)
                 .CreateQueryExecutor<TResult>(query);
     }

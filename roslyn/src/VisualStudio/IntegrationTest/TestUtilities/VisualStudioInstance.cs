@@ -93,7 +93,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
         public bool IsUsingLspEditor { get; }
 
-        public VisualStudioInstance(Process hostProcess, DTE dte, ImmutableHashSet<string> supportedPackageIds, string installationPath, bool isUsingLspEditor)
+        public VisualStudioInstance(
+            Process hostProcess,
+            DTE dte,
+            ImmutableHashSet<string> supportedPackageIds,
+            string installationPath,
+            bool isUsingLspEditor
+        )
         {
             HostProcess = hostProcess;
             Dte = dte;
@@ -107,7 +113,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 // integration tests as well.
                 var debuggerHostDte = GetDebuggerHostDte();
                 var targetProcessId = Process.GetCurrentProcess().Id;
-                var localProcess = debuggerHostDte?.Debugger.LocalProcesses.OfType<EnvDTE80.Process2>().FirstOrDefault(p => p.ProcessID == hostProcess.Id);
+                var localProcess = debuggerHostDte?.Debugger.LocalProcesses
+                    .OfType<EnvDTE80.Process2>()
+                    .FirstOrDefault(p => p.ProcessID == hostProcess.Id);
                 if (localProcess != null)
                 {
                     localProcess.Attach2("Managed");
@@ -116,7 +124,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
             StartRemoteIntegrationService(dte);
 
-            _integrationServiceChannel = new IpcClientChannel(GetIpcClientChannelName(HostProcess), sinkProvider: null);
+            _integrationServiceChannel = new IpcClientChannel(
+                GetIpcClientChannelName(HostProcess),
+                sinkProvider: null
+            );
             ChannelServices.RegisterChannel(_integrationServiceChannel, ensureSecurity: true);
 
             // Connect to a 'well defined, shouldn't conflict' IPC channel
@@ -177,43 +188,54 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
         public void ExecuteInHostProcess(Type type, string methodName)
         {
-            var result = _integrationService.Execute(type.Assembly.Location, type.FullName, methodName);
+            var result = _integrationService.Execute(
+                type.Assembly.Location,
+                type.FullName,
+                methodName
+            );
 
             if (result != null)
             {
-                throw new InvalidOperationException("The specified call was not expected to return a value.");
+                throw new InvalidOperationException(
+                    "The specified call was not expected to return a value."
+                );
             }
         }
 
         public T ExecuteInHostProcess<T>(Type type, string methodName)
         {
-            var objectUri = _integrationService.Execute(type.Assembly.Location, type.FullName, methodName) ?? throw new InvalidOperationException("The specified call was expected to return a value.");
+            var objectUri =
+                _integrationService.Execute(type.Assembly.Location, type.FullName, methodName)
+                ?? throw new InvalidOperationException(
+                    "The specified call was expected to return a value."
+                );
             return (T)Activator.GetObject(typeof(T), $"{_integrationService.BaseUri}/{objectUri}");
         }
 
-        public void ActivateMainWindow()
-            => _inProc.ActivateMainWindow();
+        public void ActivateMainWindow() => _inProc.ActivateMainWindow();
 
         public void WaitForApplicationIdle(CancellationToken cancellationToken)
         {
-            var task = Task.Factory.StartNew(() => _inProc.WaitForApplicationIdle(Helper.HangMitigatingTimeout), cancellationToken, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+            var task = Task.Factory.StartNew(
+                () => _inProc.WaitForApplicationIdle(Helper.HangMitigatingTimeout),
+                cancellationToken,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default
+            );
             task.Wait(cancellationToken);
         }
 
-        public void ExecuteCommand(string commandName, string argument = "")
-            => _inProc.ExecuteCommand(commandName, argument);
+        public void ExecuteCommand(string commandName, string argument = "") =>
+            _inProc.ExecuteCommand(commandName, argument);
 
-        public bool IsCommandAvailable(string commandName)
-            => _inProc.IsCommandAvailable(commandName);
+        public bool IsCommandAvailable(string commandName) =>
+            _inProc.IsCommandAvailable(commandName);
 
-        public string[] GetAvailableCommands()
-            => _inProc.GetAvailableCommands();
+        public string[] GetAvailableCommands() => _inProc.GetAvailableCommands();
 
-        public int ErrorListErrorCount
-            => _inProc.GetErrorListErrorCount();
+        public int ErrorListErrorCount => _inProc.GetErrorListErrorCount();
 
-        public void WaitForNoErrorsInErrorList()
-            => _inProc.WaitForNoErrorsInErrorList();
+        public void WaitForNoErrorsInErrorList() => _inProc.WaitForNoErrorsInErrorList();
 
         public bool IsRunning => !HostProcess.HasExited;
 
@@ -272,7 +294,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             foreach (var process in Process.GetProcessesByName("devenv"))
             {
                 var dte = IntegrationHelper.TryLocateDteForProcess(process);
-                if (dte?.Debugger?.DebuggedProcesses?.OfType<EnvDTE.Process>().Any(p => p.ProcessID == currentProcessId) ?? false)
+                if (
+                    dte?.Debugger?.DebuggedProcesses?.OfType<EnvDTE.Process>()
+                        .Any(p => p.ProcessID == currentProcessId) ?? false
+                )
                 {
                     return dte;
                 }
@@ -301,8 +326,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
             finally
             {
-                if (_integrationServiceChannel != null
-                    && ChannelServices.RegisteredChannels.Contains(_integrationServiceChannel))
+                if (
+                    _integrationServiceChannel != null
+                    && ChannelServices.RegisteredChannels.Contains(_integrationServiceChannel)
+                )
                 {
                     ChannelServices.UnregisterChannel(_integrationServiceChannel);
                 }
@@ -312,7 +339,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         private void StartRemoteIntegrationService(DTE dte)
         {
             // We use DTE over RPC to start the integration service. All other DTE calls should happen in the host process.
-            if (dte.Commands.Item(WellKnownCommandNames.Test_IntegrationTestService_Start).IsAvailable)
+            if (
+                dte.Commands
+                    .Item(WellKnownCommandNames.Test_IntegrationTestService_Start)
+                    .IsAvailable
+            )
             {
                 dte.ExecuteCommand(WellKnownCommandNames.Test_IntegrationTestService_Start);
             }
@@ -332,8 +363,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             return new TelemetryVerifier(this);
         }
 
-        private void DisableTestTelemetryChannel()
-            => _inProc.DisableTestTelemetryChannel();
+        private void DisableTestTelemetryChannel() => _inProc.DisableTestTelemetryChannel();
 
         /// <summary>
         /// Waits for specific telemetry events to occur.
@@ -341,8 +371,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// <param name="names">The telemetry events to wait for.</param>
         /// <returns><see langword="true"/> if the telemetry events occurred; otherwise, <see langword="false"/> if
         /// telemetry is disabled.</returns>
-        private bool TryWaitForTelemetryEvents(string[] names)
-            => _inProc.TryWaitForTelemetryEvents(names);
+        private bool TryWaitForTelemetryEvents(string[] names) =>
+            _inProc.TryWaitForTelemetryEvents(names);
 
         public class TelemetryVerifier : IDisposable
         {
@@ -363,7 +393,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             public void VerifyFired(params string[] expectedEventNames)
             {
                 var telemetryEnabled = _instance.TryWaitForTelemetryEvents(expectedEventNames);
-                if (string.Equals(Environment.GetEnvironmentVariable("ROSLYN_TEST_CI"), "true", StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        Environment.GetEnvironmentVariable("ROSLYN_TEST_CI"),
+                        "true",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // Telemetry verification is optional for developer machines, but required for CI.
                     Assert.True(telemetryEnabled);

@@ -22,7 +22,8 @@ class Program
         var mainWindow = new BlazorWindow(
             title: "Hello, world!",
             hostPage: "wwwroot/webviewhost.html",
-            services: serviceCollection.BuildServiceProvider());
+            services: serviceCollection.BuildServiceProvider()
+        );
 
         AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
         {
@@ -30,10 +31,13 @@ class Program
         };
 
         mainWindow.RootComponents.Add<BasicTestApp.Index>("root");
-        mainWindow.RootComponents.RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>("my-dynamic-root-component");
+        mainWindow.RootComponents.RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>(
+            "my-dynamic-root-component"
+        );
         mainWindow.RootComponents.RegisterForJavaScript<BasicTestApp.JavaScriptRootComponentParameterTypes>(
             "component-with-many-parameters",
-            javaScriptInitializer: "myJsRootComponentInitializers.testInitializer");
+            javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
+        );
 
         mainWindow.Run();
     }

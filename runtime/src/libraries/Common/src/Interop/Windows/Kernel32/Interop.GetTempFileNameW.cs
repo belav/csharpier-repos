@@ -7,7 +7,18 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [DllImport(Libraries.Kernel32, CharSet = CharSet.Unicode, SetLastError = true, BestFitMapping = false, ExactSpelling = true)]
-        internal static extern uint GetTempFileNameW(ref char lpPathName, string lpPrefixString, uint uUnique, ref char lpTempFileName);
+        [DllImport(
+            Libraries.Kernel32,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            BestFitMapping = false,
+            ExactSpelling = true
+        )]
+        internal static extern uint GetTempFileNameW(
+            ref char lpPathName,
+            string lpPrefixString,
+            uint uUnique,
+            ref char lpTempFileName
+        );
     }
 }

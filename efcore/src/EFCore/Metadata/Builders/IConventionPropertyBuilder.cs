@@ -73,7 +73,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the requiredness was configured,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? ValueGenerated(ValueGenerated? valueGenerated, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? ValueGenerated(
+            ValueGenerated? valueGenerated,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the property value generation can be configured
@@ -100,7 +103,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? IsConcurrencyToken(bool? concurrencyToken, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? IsConcurrencyToken(
+            bool? concurrencyToken,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the property can be configured as a concurrency token
@@ -120,7 +126,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        new IConventionPropertyBuilder? HasField(string? fieldName, bool fromDataAnnotation = false);
+        new IConventionPropertyBuilder? HasField(
+            string? fieldName,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the backing field to use for this property.
@@ -131,7 +140,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        new IConventionPropertyBuilder? HasField(FieldInfo? fieldInfo, bool fromDataAnnotation = false);
+        new IConventionPropertyBuilder? HasField(
+            FieldInfo? fieldInfo,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Sets the <see cref="PropertyAccessMode" /> to use for this property.
@@ -142,7 +154,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        new IConventionPropertyBuilder? UsePropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+        new IConventionPropertyBuilder? UsePropertyAccessMode(
+            PropertyAccessMode? propertyAccessMode,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Configures the maximum length of data that can be stored in this property.
@@ -236,7 +251,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? BeforeSave(PropertySaveBehavior? behavior, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? BeforeSave(
+            PropertySaveBehavior? behavior,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the ability to be modified before the entity is saved to the database
@@ -264,7 +282,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? AfterSave(PropertySaveBehavior? behavior, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? AfterSave(
+            PropertySaveBehavior? behavior,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the ability to be modified after the entity is saved to the database
@@ -289,7 +310,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasValueGenerator(Type? valueGeneratorType, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasValueGenerator(
+            Type? valueGeneratorType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Configures the <see cref="ValueGenerator" /> that will generate values for this property.
@@ -302,7 +326,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </returns>
         IConventionPropertyBuilder? HasValueGenerator(
             Func<IProperty, IEntityType, ValueGenerator>? factory,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" /> that will
@@ -314,7 +339,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasValueGeneratorFactory(Type? valueGeneratorFactoryType, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasValueGeneratorFactory(
+            Type? valueGeneratorFactoryType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the <see cref="ValueGenerator" /> can be configured for this property
@@ -331,7 +359,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </returns>
         bool CanSetValueGenerator(
             Func<IProperty, IEntityType, ValueGenerator>? factory,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the <see cref="ValueGeneratorFactory" /> can be configured for this property
@@ -348,7 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </returns>
         bool CanSetValueGeneratorFactory(
             Type? valueGeneratorFactoryType,
-            bool fromDataAnnotation = false);
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Configures the property so that the property value is converted to and from the database
@@ -360,7 +390,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasConversion(ValueConverter? converter, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasConversion(
+            ValueConverter? converter,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the <see cref="ValueConverter" /> can be configured for this property
@@ -383,7 +416,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasConversion(Type? providerClrType, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasConversion(
+            Type? providerClrType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given type to convert values to and from
@@ -409,7 +445,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasConverter(Type? converterType, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasConverter(
+            Type? converterType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the <see cref="ValueConverter" /> can be configured for this property
@@ -434,7 +473,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasTypeMapping(CoreTypeMapping? typeMapping, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasTypeMapping(
+            CoreTypeMapping? typeMapping,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given <see cref="CoreTypeMapping" />
@@ -455,7 +497,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasValueComparer(
+            ValueComparer? comparer,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -479,7 +524,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
         /// </returns>
-        IConventionPropertyBuilder? HasValueComparer(Type? comparerType, bool fromDataAnnotation = false);
+        IConventionPropertyBuilder? HasValueComparer(
+            Type? comparerType,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -504,8 +552,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        [Obsolete("Use HasValueComparer. Only a single value comparer is allowed for a given property.")]
-        IConventionPropertyBuilder? HasKeyValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+        [Obsolete(
+            "Use HasValueComparer. Only a single value comparer is allowed for a given property."
+        )]
+        IConventionPropertyBuilder? HasKeyValueComparer(
+            ValueComparer? comparer,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -516,7 +569,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     <see langword="true" /> if the given <see cref="ValueComparer" /> can be configured for this property.
         /// </returns>
-        [Obsolete("Use CanSetValueComparer. Only a single value comparer is allowed for a given property.")]
+        [Obsolete(
+            "Use CanSetValueComparer. Only a single value comparer is allowed for a given property."
+        )]
         bool CanSetKeyValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
 
         /// <summary>
@@ -528,8 +583,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     The same builder instance if the configuration was applied,
         ///     <see langword="null" /> otherwise.
         /// </returns>
-        [Obsolete("Use HasValueComparer. Only a single value comparer is allowed for a given property.")]
-        IConventionPropertyBuilder? HasStructuralValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+        [Obsolete(
+            "Use HasValueComparer. Only a single value comparer is allowed for a given property."
+        )]
+        IConventionPropertyBuilder? HasStructuralValueComparer(
+            ValueComparer? comparer,
+            bool fromDataAnnotation = false
+        );
 
         /// <summary>
         ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -540,7 +600,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>
         ///     <see langword="true" /> if the given <see cref="ValueComparer" /> can be configured for this property.
         /// </returns>
-        [Obsolete("Use CanSetValueComparer. Only a single value comparer is allowed for a given property.")]
-        bool CanSetStructuralValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+        [Obsolete(
+            "Use CanSetValueComparer. Only a single value comparer is allowed for a given property."
+        )]
+        bool CanSetStructuralValueComparer(
+            ValueComparer? comparer,
+            bool fromDataAnnotation = false
+        );
     }
 }

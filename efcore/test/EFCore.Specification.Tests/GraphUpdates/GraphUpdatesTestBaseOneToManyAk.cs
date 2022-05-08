@@ -23,44 +23,138 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.OnSaveChanges)]
         [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.OnSaveChanges)]
         [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
         [InlineData(
-            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
         [InlineData(
-            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
         [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Immediate
+        )]
         [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Never)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Never
+        )]
         [InlineData((int)ChangeMechanism.Principal, false, null)]
         [InlineData((int)ChangeMechanism.Principal, true, null)]
         [InlineData((int)ChangeMechanism.Dependent, false, null)]
@@ -73,12 +167,21 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, null)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, null)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, null)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, null)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, null)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            null
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            null
+        )]
         public virtual void Save_optional_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var new1 = new OptionalAk1 { AlternateId = Guid.NewGuid() };
             var new1d = new OptionalAk1Derived { AlternateId = Guid.NewGuid() };
@@ -97,13 +200,24 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (useExistingEntities)
                     {
-                        context.AddRange(new1, new1d, new1dd, new2a, new2d, new2dd, new2b, new2ca, new2cb);
+                        context.AddRange(
+                            new1,
+                            new1d,
+                            new1dd,
+                            new2a,
+                            new2d,
+                            new2dd,
+                            new2b,
+                            new2ca,
+                            new2cb
+                        );
                         context.SaveChanges();
                     }
                 },
                 context =>
                 {
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     root = LoadOptionalAkGraph(context);
                     var existing = root.OptionalChildrenAk.OrderBy(e => e.Id).First();
@@ -111,18 +225,32 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<OptionalAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (OptionalAk1Derived)context.Set<OptionalAk1>().Single(e => e.Id == new1d.Id);
-                        new1dd = (OptionalAk1MoreDerived)context.Set<OptionalAk1>().Single(e => e.Id == new1dd.Id);
+                        new1d = (OptionalAk1Derived)
+                            context.Set<OptionalAk1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (OptionalAk1MoreDerived)
+                            context.Set<OptionalAk1>().Single(e => e.Id == new1dd.Id);
                         new2a = context.Set<OptionalAk2>().Single(e => e.Id == new2a.Id);
                         new2b = context.Set<OptionalAk2>().Single(e => e.Id == new2b.Id);
                         new2ca = context.Set<OptionalComposite2>().Single(e => e.Id == new2ca.Id);
                         new2cb = context.Set<OptionalComposite2>().Single(e => e.Id == new2cb.Id);
-                        new2d = (OptionalAk2Derived)context.Set<OptionalAk2>().Single(e => e.Id == new2d.Id);
-                        new2dd = (OptionalAk2MoreDerived)context.Set<OptionalAk2>().Single(e => e.Id == new2dd.Id);
+                        new2d = (OptionalAk2Derived)
+                            context.Set<OptionalAk2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (OptionalAk2MoreDerived)
+                            context.Set<OptionalAk2>().Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {
-                        context.AddRange(new1, new1d, new1dd, new2a, new2d, new2dd, new2b, new2ca, new2cb);
+                        context.AddRange(
+                            new1,
+                            new1d,
+                            new1dd,
+                            new2a,
+                            new2d,
+                            new2dd,
+                            new2b,
+                            new2ca,
+                            new2cb
+                        );
                     }
 
                     if ((changeMechanism & ChangeMechanism.Principal) != 0)
@@ -213,7 +341,8 @@ namespace Microsoft.EntityFrameworkCore
                     AssertEntries(entries, context.ChangeTracker.Entries().ToList());
                     AssertKeys(root, loadedRoot);
                     AssertNavigations(loadedRoot);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -223,44 +352,138 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.OnSaveChanges)]
         [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.OnSaveChanges)]
         [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.OnSaveChanges)]
         [InlineData(
-            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.OnSaveChanges)]
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
         [InlineData(
-            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.OnSaveChanges)]
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.OnSaveChanges
+        )]
         [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Immediate)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Immediate
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Immediate
+        )]
         [InlineData((int)ChangeMechanism.Principal, false, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Principal, true, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Dependent, false, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Dependent, true, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Fk, false, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Fk, true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, CascadeTiming.Never)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            true,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            CascadeTiming.Never
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            CascadeTiming.Never
+        )]
         [InlineData((int)ChangeMechanism.Principal, false, null)]
         [InlineData((int)ChangeMechanism.Principal, true, null)]
         [InlineData((int)ChangeMechanism.Dependent, false, null)]
@@ -273,17 +496,30 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true, null)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false, null)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true, null)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false, null)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true, null)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            false,
+            null
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            true,
+            null
+        )]
         public virtual void Save_required_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
             bool useExistingEntities,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var newRoot = new Root { AlternateId = Guid.NewGuid() };
             var new1 = new RequiredAk1 { AlternateId = Guid.NewGuid(), Parent = newRoot };
             var new1d = new RequiredAk1Derived { AlternateId = Guid.NewGuid(), Parent = newRoot };
-            var new1dd = new RequiredAk1MoreDerived { AlternateId = Guid.NewGuid(), Parent = newRoot };
+            var new1dd = new RequiredAk1MoreDerived
+            {
+                AlternateId = Guid.NewGuid(),
+                Parent = newRoot
+            };
             var new2a = new RequiredAk2 { AlternateId = Guid.NewGuid(), Parent = new1 };
             var new2b = new RequiredAk2 { AlternateId = Guid.NewGuid(), Parent = new1 };
             var new2ca = new RequiredComposite2 { Parent = new1 };
@@ -298,13 +534,25 @@ namespace Microsoft.EntityFrameworkCore
                 {
                     if (useExistingEntities)
                     {
-                        context.AddRange(newRoot, new1, new1d, new1dd, new2a, new2d, new2dd, new2b, new2ca, new2cb);
+                        context.AddRange(
+                            newRoot,
+                            new1,
+                            new1d,
+                            new1dd,
+                            new2a,
+                            new2d,
+                            new2dd,
+                            new2b,
+                            new2ca,
+                            new2cb
+                        );
                         context.SaveChanges();
                     }
                 },
                 context =>
                 {
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     root = LoadRequiredAkGraph(context);
                     var existing = root.RequiredChildrenAk.OrderBy(e => e.Id).First();
@@ -312,14 +560,18 @@ namespace Microsoft.EntityFrameworkCore
                     if (useExistingEntities)
                     {
                         new1 = context.Set<RequiredAk1>().Single(e => e.Id == new1.Id);
-                        new1d = (RequiredAk1Derived)context.Set<RequiredAk1>().Single(e => e.Id == new1d.Id);
-                        new1dd = (RequiredAk1MoreDerived)context.Set<RequiredAk1>().Single(e => e.Id == new1dd.Id);
+                        new1d = (RequiredAk1Derived)
+                            context.Set<RequiredAk1>().Single(e => e.Id == new1d.Id);
+                        new1dd = (RequiredAk1MoreDerived)
+                            context.Set<RequiredAk1>().Single(e => e.Id == new1dd.Id);
                         new2a = context.Set<RequiredAk2>().Single(e => e.Id == new2a.Id);
                         new2b = context.Set<RequiredAk2>().Single(e => e.Id == new2b.Id);
                         new2ca = context.Set<RequiredComposite2>().Single(e => e.Id == new2ca.Id);
                         new2cb = context.Set<RequiredComposite2>().Single(e => e.Id == new2cb.Id);
-                        new2d = (RequiredAk2Derived)context.Set<RequiredAk2>().Single(e => e.Id == new2d.Id);
-                        new2dd = (RequiredAk2MoreDerived)context.Set<RequiredAk2>().Single(e => e.Id == new2dd.Id);
+                        new2d = (RequiredAk2Derived)
+                            context.Set<RequiredAk2>().Single(e => e.Id == new2d.Id);
+                        new2dd = (RequiredAk2MoreDerived)
+                            context.Set<RequiredAk2>().Single(e => e.Id == new2dd.Id);
                     }
                     else
                     {
@@ -334,7 +586,17 @@ namespace Microsoft.EntityFrameworkCore
                         context.Remove(old1);
                         context.RemoveRange(old1.Children);
                         context.RemoveRange(old1.CompositeChildren);
-                        context.AddRange(new1, new1d, new1dd, new2a, new2d, new2dd, new2b, new2ca, new2cb);
+                        context.AddRange(
+                            new1,
+                            new1d,
+                            new1dd,
+                            new2a,
+                            new2d,
+                            new2dd,
+                            new2b,
+                            new2ca,
+                            new2cb
+                        );
                     }
 
                     if ((changeMechanism & ChangeMechanism.Principal) != 0)
@@ -425,47 +687,77 @@ namespace Microsoft.EntityFrameworkCore
                     AssertEntries(entries, context.ChangeTracker.Entries().ToList());
                     AssertKeys(root, loadedRoot);
                     AssertNavigations(loadedRoot);
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData((int)ChangeMechanism.Principal, CascadeTiming.OnSaveChanges)]
         [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.OnSaveChanges)]
         [InlineData((int)ChangeMechanism.Fk, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.OnSaveChanges)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Fk),
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Fk | ChangeMechanism.Dependent),
+            CascadeTiming.OnSaveChanges
+        )]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            CascadeTiming.OnSaveChanges
+        )]
         [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Fk, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            CascadeTiming.Immediate
+        )]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.Immediate)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.Immediate)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            CascadeTiming.Immediate
+        )]
         [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Fk, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Never)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            CascadeTiming.Never
+        )]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), CascadeTiming.Never)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), CascadeTiming.Never)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            CascadeTiming.Never
+        )]
         [InlineData((int)ChangeMechanism.Principal, null)]
         [InlineData((int)ChangeMechanism.Dependent, null)]
         [InlineData((int)ChangeMechanism.Fk, null)]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), null)]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), null)]
         [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), null)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), null)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+            null
+        )]
         public virtual void Save_removed_optional_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             Root root = null;
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     root = LoadOptionalAkGraph(context);
 
@@ -473,7 +765,10 @@ namespace Microsoft.EntityFrameworkCore
                     var childCollection = firstChild.Children;
                     var childCompositeCollection = firstChild.CompositeChildren;
                     var removed2 = childCollection.OrderByDescending(c => c.Id).First();
-                    var removed1 = root.OptionalChildrenAk.OrderByDescending(c => c.Id).Skip(1).First();
+                    var removed1 = root.OptionalChildrenAk
+                        .OrderByDescending(c => c.Id)
+                        .Skip(1)
+                        .First();
                     var removed2c = childCompositeCollection.OrderByDescending(c => c.Id).First();
 
                     if ((changeMechanism & ChangeMechanism.Principal) != 0)
@@ -525,27 +820,40 @@ namespace Microsoft.EntityFrameworkCore
                         AssertNavigations(loadedRoot);
 
                         Assert.Single(loadedRoot.OptionalChildrenAk);
-                        Assert.Single(loadedRoot.OptionalChildrenAk.OrderBy(c => c.Id).First().Children);
+                        Assert.Single(
+                            loadedRoot.OptionalChildrenAk.OrderBy(c => c.Id).First().Children
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
         [InlineData((int)ChangeMechanism.Principal, CascadeTiming.OnSaveChanges)]
         [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.OnSaveChanges)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.OnSaveChanges)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            CascadeTiming.OnSaveChanges
+        )]
         [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Immediate)]
         [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Immediate)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Immediate)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            CascadeTiming.Immediate
+        )]
         [InlineData((int)ChangeMechanism.Principal, CascadeTiming.Never)]
         [InlineData((int)ChangeMechanism.Dependent, CascadeTiming.Never)]
-        [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), CascadeTiming.Never)]
+        [InlineData(
+            (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent),
+            CascadeTiming.Never
+        )]
         [InlineData((int)ChangeMechanism.Principal, null)]
         [InlineData((int)ChangeMechanism.Dependent, null)]
         [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent), null)]
         public virtual void Save_removed_required_many_to_one_dependents_with_alternate_key(
             ChangeMechanism changeMechanism,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             Root root = null;
             RequiredAk2 removed2 = null;
@@ -555,7 +863,8 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     root = LoadRequiredAkGraph(context);
 
@@ -585,24 +894,31 @@ namespace Microsoft.EntityFrameworkCore
                         throw new ArgumentOutOfRangeException(nameof(changeMechanism));
                     }
 
-                    if (Fixture.ForceClientNoAction
-                        || deleteOrphansTiming == CascadeTiming.Never)
+                    if (Fixture.ForceClientNoAction || deleteOrphansTiming == CascadeTiming.Never)
                     {
-                        var testCode = deleteOrphansTiming == CascadeTiming.Immediate
-                            ? () => context.ChangeTracker.DetectChanges()
-                            : deleteOrphansTiming == null
-                                ? () => context.ChangeTracker.CascadeChanges()
-                                : (Action)(() => context.SaveChanges());
+                        var testCode =
+                            deleteOrphansTiming == CascadeTiming.Immediate
+                                ? () => context.ChangeTracker.DetectChanges()
+                                : deleteOrphansTiming == null
+                                    ? () => context.ChangeTracker.CascadeChanges()
+                                    : (Action)(() => context.SaveChanges());
 
                         var message = Assert.Throws<InvalidOperationException>(testCode).Message;
 
                         Assert.True(
                             message
-                            == CoreStrings.RelationshipConceptualNullSensitive(
-                                nameof(Root), nameof(RequiredAk1), "{ParentId: " + removed1.ParentId + "}")
-                            || message
-                            == CoreStrings.RelationshipConceptualNullSensitive(
-                                nameof(RequiredAk1), nameof(RequiredAk2), "{ParentId: " + removed2.ParentId + "}"));
+                                == CoreStrings.RelationshipConceptualNullSensitive(
+                                    nameof(Root),
+                                    nameof(RequiredAk1),
+                                    "{ParentId: " + removed1.ParentId + "}"
+                                )
+                                || message
+                                    == CoreStrings.RelationshipConceptualNullSensitive(
+                                        nameof(RequiredAk1),
+                                        nameof(RequiredAk2),
+                                        "{ParentId: " + removed2.ParentId + "}"
+                                    )
+                        );
                     }
                     else
                     {
@@ -628,9 +944,11 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    if (!Fixture.ForceClientNoAction
+                    if (
+                        !Fixture.ForceClientNoAction
                         && !Fixture.NoStoreCascades
-                        && deleteOrphansTiming != CascadeTiming.Never)
+                        && deleteOrphansTiming != CascadeTiming.Never
+                    )
                     {
                         var loadedRoot = LoadRequiredAkGraph(context);
 
@@ -639,13 +957,23 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.False(context.Set<RequiredAk1>().Any(e => e.Id == removed1.Id));
                         Assert.False(context.Set<RequiredAk2>().Any(e => e.Id == removed2.Id));
-                        Assert.False(context.Set<RequiredComposite2>().Any(e => e.Id == removed2c.Id));
+                        Assert.False(
+                            context.Set<RequiredComposite2>().Any(e => e.Id == removed2c.Id)
+                        );
 
                         Assert.Single(loadedRoot.RequiredChildrenAk);
-                        Assert.Single(loadedRoot.RequiredChildrenAk.OrderBy(c => c.Id).First().Children);
-                        Assert.Single(loadedRoot.RequiredChildrenAk.OrderBy(c => c.Id).First().CompositeChildren);
+                        Assert.Single(
+                            loadedRoot.RequiredChildrenAk.OrderBy(c => c.Id).First().Children
+                        );
+                        Assert.Single(
+                            loadedRoot.RequiredChildrenAk
+                                .OrderBy(c => c.Id)
+                                .First()
+                                .CompositeChildren
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -661,7 +989,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             List<int> orphanedIds = null;
@@ -669,8 +998,10 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     var root = LoadOptionalAkGraph(context);
 
@@ -688,14 +1019,23 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (cascadeDeleteTiming == null)
                     {
-                        Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            orphaned.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
 
                         context.ChangeTracker.CascadeChanges();
 
                         Assert.True(
                             orphaned.All(
-                                e => context.Entry(e).State
-                                    == (Fixture.ForceClientNoAction ? EntityState.Unchanged : EntityState.Modified)));
+                                e =>
+                                    context.Entry(e).State
+                                    == (
+                                        Fixture.ForceClientNoAction
+                                            ? EntityState.Unchanged
+                                            : EntityState.Modified
+                                    )
+                            )
+                        );
                     }
 
                     Assert.True(context.ChangeTracker.HasChanges());
@@ -711,13 +1051,18 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.False(context.ChangeTracker.HasChanges());
 
                         Assert.Equal(EntityState.Detached, context.Entry(removed).State);
-                        Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            orphaned.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
 
                         Assert.Single(root.OptionalChildrenAk);
                         Assert.DoesNotContain(removedId, root.OptionalChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<OptionalAk1>().Where(e => e.Id == removedId));
-                        Assert.Equal(orphanedIds.Count, context.Set<OptionalAk2>().Count(e => orphanedIds.Contains(e.Id)));
+                        Assert.Equal(
+                            orphanedIds.Count,
+                            context.Set<OptionalAk2>().Count(e => orphanedIds.Contains(e.Id))
+                        );
 
                         Assert.Same(root, removed.Parent);
                         Assert.Equal(2, removed.Children.Count());
@@ -733,9 +1078,13 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.DoesNotContain(removedId, root.OptionalChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<OptionalAk1>().Where(e => e.Id == removedId));
-                        Assert.Equal(orphanedIds.Count, context.Set<OptionalAk2>().Count(e => orphanedIds.Contains(e.Id)));
+                        Assert.Equal(
+                            orphanedIds.Count,
+                            context.Set<OptionalAk2>().Count(e => orphanedIds.Contains(e.Id))
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -751,7 +1100,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             List<int> orphanedIds = null;
@@ -760,8 +1110,10 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     var root = LoadRequiredAkGraph(context);
 
@@ -784,20 +1136,42 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (cascadeDeleteTiming == null)
                     {
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(
+                                e => context.Entry(e).State == EntityState.Unchanged
+                            )
+                        );
 
                         context.ChangeTracker.CascadeChanges();
 
                         if (Fixture.ForceClientNoAction)
                         {
-                            Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
-                            Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                            Assert.True(
+                                cascadeRemoved.All(
+                                    e => context.Entry(e).State == EntityState.Unchanged
+                                )
+                            );
+                            Assert.True(
+                                cascadeRemovedC.All(
+                                    e => context.Entry(e).State == EntityState.Unchanged
+                                )
+                            );
                         }
                         else
                         {
-                            Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Deleted));
-                            Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Deleted));
+                            Assert.True(
+                                cascadeRemoved.All(
+                                    e => context.Entry(e).State == EntityState.Deleted
+                                )
+                            );
+                            Assert.True(
+                                cascadeRemovedC.All(
+                                    e => context.Entry(e).State == EntityState.Deleted
+                                )
+                            );
                         }
                     }
 
@@ -816,14 +1190,20 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.False(context.ChangeTracker.HasChanges());
 
                         Assert.Equal(EntityState.Detached, context.Entry(removed).State);
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Detached));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Detached)
+                        );
 
                         Assert.Single(root.RequiredChildrenAk);
                         Assert.DoesNotContain(removedId, root.RequiredChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<RequiredAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id)));
+                        Assert.Empty(
+                            context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id))
+                        );
 
                         Assert.Same(root, removed.Parent);
                         Assert.Equal(2, removed.Children.Count());
@@ -831,8 +1211,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    if (!Fixture.ForceClientNoAction
-                        && cascadeDeleteTiming != CascadeTiming.Never)
+                    if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                     {
                         var root = LoadRequiredAkGraph(context);
 
@@ -840,10 +1219,17 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.DoesNotContain(removedId, root.RequiredChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<RequiredAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id)));
-                        Assert.Empty(context.Set<RequiredComposite2>().Where(e => orphanedIdCs.Contains(e.Id)));
+                        Assert.Empty(
+                            context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id))
+                        );
+                        Assert.Empty(
+                            context
+                                .Set<RequiredComposite2>()
+                                .Where(e => orphanedIdCs.Contains(e.Id))
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -859,7 +1245,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted_in_store(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             List<int> orphanedIds = null;
@@ -879,10 +1266,15 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var root = context.Set<Root>().Include(e => e.RequiredChildrenAk).Single(IsTheRoot);
+                    var root = context
+                        .Set<Root>()
+                        .Include(e => e.RequiredChildrenAk)
+                        .Single(IsTheRoot);
                     context.Set<RequiredAk1>().Load();
 
                     var removed = root.RequiredChildrenAk.Single(e => e.Id == removedId);
@@ -896,8 +1288,7 @@ namespace Microsoft.EntityFrameworkCore
                         context.ChangeTracker.CascadeChanges();
                     }
 
-                    if (Fixture.ForceClientNoAction
-                        || Fixture.NoStoreCascades)
+                    if (Fixture.ForceClientNoAction || Fixture.NoStoreCascades)
                     {
                         Assert.Throws<DbUpdateException>(() => context.SaveChanges());
                     }
@@ -913,8 +1304,14 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.DoesNotContain(removedId, root.RequiredChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<RequiredAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id)));
-                        Assert.Empty(context.Set<RequiredComposite2>().Where(e => orphanedIdCs.Contains(e.Id)));
+                        Assert.Empty(
+                            context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id))
+                        );
+                        Assert.Empty(
+                            context
+                                .Set<RequiredComposite2>()
+                                .Where(e => orphanedIdCs.Contains(e.Id))
+                        );
 
                         Assert.Same(root, removed.Parent);
                         Assert.Empty(removed.Children); // Never loaded
@@ -922,8 +1319,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    if (!Fixture.ForceClientNoAction
-                        && !Fixture.NoStoreCascades)
+                    if (!Fixture.ForceClientNoAction && !Fixture.NoStoreCascades)
                     {
                         var root = LoadRequiredAkGraph(context);
 
@@ -931,10 +1327,17 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.DoesNotContain(removedId, root.RequiredChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<RequiredAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id)));
-                        Assert.Empty(context.Set<RequiredComposite2>().Where(e => orphanedIdCs.Contains(e.Id)));
+                        Assert.Empty(
+                            context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id))
+                        );
+                        Assert.Empty(
+                            context
+                                .Set<RequiredComposite2>()
+                                .Where(e => orphanedIdCs.Contains(e.Id))
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -950,7 +1353,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned_in_store(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             List<int> orphanedIds = null;
@@ -959,7 +1363,9 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    var removed = LoadOptionalAkGraph(context).OptionalChildrenAk.OrderBy(c => c.Id).First();
+                    var removed = LoadOptionalAkGraph(context).OptionalChildrenAk
+                        .OrderBy(c => c.Id)
+                        .First();
 
                     removedId = removed.Id;
                     orphanedIds = removed.Children.Select(e => e.Id).ToList();
@@ -970,17 +1376,27 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var root = context.Set<Root>().Include(e => e.OptionalChildrenAk).Single(IsTheRoot);
+                    var root = context
+                        .Set<Root>()
+                        .Include(e => e.OptionalChildrenAk)
+                        .Single(IsTheRoot);
                     context.Entry(root).Collection(e => e.OptionalChildrenAk).Load();
 
                     var removed = root.OptionalChildrenAk.First(e => e.Id == removedId);
 
                     context.Remove(removed);
 
-                    foreach (var toOrphan in context.Set<OptionalComposite2>().Where(e => orphanedIdCs.Contains(e.Id)).ToList())
+                    foreach (
+                        var toOrphan in context
+                            .Set<OptionalComposite2>()
+                            .Where(e => orphanedIdCs.Contains(e.Id))
+                            .ToList()
+                    )
                     {
                         toOrphan.ParentId = null;
                     }
@@ -1009,11 +1425,17 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Empty(context.Set<OptionalAk1>().Where(e => e.Id == removedId));
 
-                        var orphaned = context.Set<OptionalAk2>().Where(e => orphanedIds.Contains(e.Id)).ToList();
+                        var orphaned = context
+                            .Set<OptionalAk2>()
+                            .Where(e => orphanedIds.Contains(e.Id))
+                            .ToList();
                         Assert.Equal(orphanedIds.Count, orphaned.Count);
                         Assert.True(orphaned.All(e => e.ParentId == null));
 
-                        var orphanedC = context.Set<OptionalComposite2>().Where(e => orphanedIdCs.Contains(e.Id)).ToList();
+                        var orphanedC = context
+                            .Set<OptionalComposite2>()
+                            .Where(e => orphanedIdCs.Contains(e.Id))
+                            .ToList();
                         Assert.Equal(orphanedIdCs.Count, orphanedC.Count);
                         Assert.True(orphanedC.All(e => e.ParentId == null));
 
@@ -1032,15 +1454,22 @@ namespace Microsoft.EntityFrameworkCore
 
                         Assert.Empty(context.Set<OptionalAk1>().Where(e => e.Id == removedId));
 
-                        var orphaned = context.Set<OptionalAk2>().Where(e => orphanedIds.Contains(e.Id)).ToList();
+                        var orphaned = context
+                            .Set<OptionalAk2>()
+                            .Where(e => orphanedIds.Contains(e.Id))
+                            .ToList();
                         Assert.Equal(orphanedIds.Count, orphaned.Count);
                         Assert.True(orphaned.All(e => e.ParentId == null));
 
-                        var orphanedC = context.Set<OptionalComposite2>().Where(e => orphanedIdCs.Contains(e.Id)).ToList();
+                        var orphanedC = context
+                            .Set<OptionalComposite2>()
+                            .Where(e => orphanedIdCs.Contains(e.Id))
+                            .ToList();
                         Assert.Equal(orphanedIdCs.Count, orphanedC.Count);
                         Assert.True(orphanedC.All(e => e.ParentId == null));
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1056,7 +1485,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Optional_many_to_one_dependents_with_alternate_key_are_orphaned_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             List<int> orphanedIds = null;
@@ -1072,8 +1502,10 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     var removed = root.OptionalChildrenAk.OrderBy(c => c.Id).First();
 
@@ -1092,15 +1524,21 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (cascadeDeleteTiming == null)
                     {
-                        Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Unchanged));
-                        Assert.True(orphanedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            orphaned.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
+                        Assert.True(
+                            orphanedC.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
 
                         context.ChangeTracker.CascadeChanges();
                     }
 
-                    var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate
-                            || cascadeDeleteTiming == null)
-                        && !Fixture.ForceClientNoAction
+                    var expectedState =
+                        (
+                            cascadeDeleteTiming == CascadeTiming.Immediate
+                            || cascadeDeleteTiming == null
+                        ) && !Fixture.ForceClientNoAction
                             ? EntityState.Modified
                             : EntityState.Unchanged;
 
@@ -1120,8 +1558,12 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.False(context.ChangeTracker.HasChanges());
 
                         Assert.Equal(EntityState.Detached, context.Entry(removed).State);
-                        Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Unchanged));
-                        Assert.True(orphanedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            orphaned.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
+                        Assert.True(
+                            orphanedC.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
 
                         Assert.Same(root, removed.Parent);
                         Assert.Equal(2, removed.Children.Count());
@@ -1137,10 +1579,19 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.DoesNotContain(removedId, root.OptionalChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<OptionalAk1>().Where(e => e.Id == removedId));
-                        Assert.Equal(orphanedIds.Count, context.Set<OptionalAk2>().Count(e => orphanedIds.Contains(e.Id)));
-                        Assert.Equal(orphanedIdCs.Count, context.Set<OptionalComposite2>().Count(e => orphanedIdCs.Contains(e.Id)));
+                        Assert.Equal(
+                            orphanedIds.Count,
+                            context.Set<OptionalAk2>().Count(e => orphanedIds.Contains(e.Id))
+                        );
+                        Assert.Equal(
+                            orphanedIdCs.Count,
+                            context
+                                .Set<OptionalComposite2>()
+                                .Count(e => orphanedIdCs.Contains(e.Id))
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1156,7 +1607,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_deleted_starting_detached(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             List<int> orphanedIds = null;
@@ -1172,8 +1624,10 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     var removed = root.RequiredChildrenAk.OrderBy(c => c.Id).First();
 
@@ -1191,15 +1645,23 @@ namespace Microsoft.EntityFrameworkCore
 
                     if (cascadeDeleteTiming == null)
                     {
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(
+                                e => context.Entry(e).State == EntityState.Unchanged
+                            )
+                        );
 
                         context.ChangeTracker.CascadeChanges();
                     }
 
-                    var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate
-                            || cascadeDeleteTiming == null)
-                        && !Fixture.ForceClientNoAction
+                    var expectedState =
+                        (
+                            cascadeDeleteTiming == CascadeTiming.Immediate
+                            || cascadeDeleteTiming == null
+                        ) && !Fixture.ForceClientNoAction
                             ? EntityState.Deleted
                             : EntityState.Unchanged;
 
@@ -1223,8 +1685,12 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.False(context.ChangeTracker.HasChanges());
 
                         Assert.Equal(EntityState.Detached, context.Entry(removed).State);
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Detached));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Detached)
+                        );
 
                         Assert.Same(root, removed.Parent);
                         Assert.Equal(2, removed.Children.Count());
@@ -1232,8 +1698,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    if (!Fixture.ForceClientNoAction
-                        && cascadeDeleteTiming != CascadeTiming.Never)
+                    if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                     {
                         root = LoadRequiredAkGraph(context);
 
@@ -1241,10 +1706,17 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.DoesNotContain(removedId, root.RequiredChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<RequiredAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id)));
-                        Assert.Empty(context.Set<RequiredComposite2>().Where(e => orphanedIdCs.Contains(e.Id)));
+                        Assert.Empty(
+                            context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id))
+                        );
+                        Assert.Empty(
+                            context
+                                .Set<RequiredComposite2>()
+                                .Where(e => orphanedIdCs.Contains(e.Id))
+                        );
                     }
-                });
+                }
+            );
         }
 
         [ConditionalTheory]
@@ -1260,7 +1732,8 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public virtual void Required_many_to_one_dependents_with_alternate_key_are_cascade_detached_when_Added(
             CascadeTiming? cascadeDeleteTiming,
-            CascadeTiming? deleteOrphansTiming)
+            CascadeTiming? deleteOrphansTiming
+        )
         {
             var removedId = 0;
             List<int> orphanedIds = null;
@@ -1269,8 +1742,10 @@ namespace Microsoft.EntityFrameworkCore
             ExecuteWithStrategyInTransaction(
                 context =>
                 {
-                    context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                    context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.CascadeDeleteTiming =
+                        cascadeDeleteTiming ?? CascadeTiming.Never;
+                    context.ChangeTracker.DeleteOrphansTiming =
+                        deleteOrphansTiming ?? CascadeTiming.Never;
 
                     var root = LoadRequiredAkGraph(context);
 
@@ -1300,8 +1775,12 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(EntityState.Unchanged, context.Entry(removed).State);
                     Assert.Equal(EntityState.Added, context.Entry(added).State);
                     Assert.Equal(EntityState.Added, context.Entry(addedC).State);
-                    Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
-                    Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                    Assert.True(
+                        cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
+                    );
+                    Assert.True(
+                        cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged)
+                    );
 
                     context.Remove(removed);
 
@@ -1311,27 +1790,46 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(EntityState.Added, context.Entry(added).State);
                         Assert.Equal(EntityState.Added, context.Entry(addedC).State);
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(
+                                e => context.Entry(e).State == EntityState.Unchanged
+                            )
+                        );
 
                         context.ChangeTracker.CascadeChanges();
                     }
 
-                    if ((cascadeDeleteTiming == CascadeTiming.Immediate
-                            || cascadeDeleteTiming == null)
-                        && !Fixture.ForceClientNoAction)
+                    if (
+                        (
+                            cascadeDeleteTiming == CascadeTiming.Immediate
+                            || cascadeDeleteTiming == null
+                        ) && !Fixture.ForceClientNoAction
+                    )
                     {
                         Assert.Equal(EntityState.Detached, context.Entry(added).State);
                         Assert.Equal(EntityState.Detached, context.Entry(addedC).State);
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Deleted));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Deleted));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Deleted)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Deleted)
+                        );
                     }
                     else
                     {
                         Assert.Equal(EntityState.Added, context.Entry(added).State);
                         Assert.Equal(EntityState.Added, context.Entry(addedC).State);
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Unchanged));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(
+                                e => context.Entry(e).State == EntityState.Unchanged
+                            )
+                        );
                     }
 
                     Assert.True(context.ChangeTracker.HasChanges());
@@ -1353,8 +1851,12 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.Equal(EntityState.Detached, context.Entry(removed).State);
                         Assert.Equal(EntityState.Detached, context.Entry(added).State);
                         Assert.Equal(EntityState.Detached, context.Entry(addedC).State);
-                        Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached));
-                        Assert.True(cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Detached));
+                        Assert.True(
+                            cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached)
+                        );
+                        Assert.True(
+                            cascadeRemovedC.All(e => context.Entry(e).State == EntityState.Detached)
+                        );
 
                         Assert.Same(root, removed.Parent);
                         Assert.Equal(3, removed.Children.Count());
@@ -1362,8 +1864,7 @@ namespace Microsoft.EntityFrameworkCore
                 },
                 context =>
                 {
-                    if (!Fixture.ForceClientNoAction
-                        && cascadeDeleteTiming != CascadeTiming.Never)
+                    if (!Fixture.ForceClientNoAction && cascadeDeleteTiming != CascadeTiming.Never)
                     {
                         var root = LoadRequiredAkGraph(context);
 
@@ -1371,10 +1872,17 @@ namespace Microsoft.EntityFrameworkCore
                         Assert.DoesNotContain(removedId, root.RequiredChildrenAk.Select(e => e.Id));
 
                         Assert.Empty(context.Set<RequiredAk1>().Where(e => e.Id == removedId));
-                        Assert.Empty(context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id)));
-                        Assert.Empty(context.Set<RequiredComposite2>().Where(e => orphanedIdCs.Contains(e.Id)));
+                        Assert.Empty(
+                            context.Set<RequiredAk2>().Where(e => orphanedIds.Contains(e.Id))
+                        );
+                        Assert.Empty(
+                            context
+                                .Set<RequiredComposite2>()
+                                .Where(e => orphanedIdCs.Contains(e.Id))
+                        );
                     }
-                });
+                }
+            );
         }
     }
 }

@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         private abstract class IndentationData
         {
-            public IndentationData(TextSpan textSpan)
-                => this.TextSpan = textSpan;
+            public IndentationData(TextSpan textSpan) => this.TextSpan = textSpan;
 
             public TextSpan TextSpan { get; }
             public abstract int Indentation { get; }
@@ -26,17 +25,14 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             // first and last token of root indentation are not valid
             public RootIndentationData(SyntaxNode rootNode)
-                : base(rootNode.FullSpan, indentation: 0)
-            {
-            }
+                : base(rootNode.FullSpan, indentation: 0) { }
         }
 
         private class SimpleIndentationData : IndentationData
         {
             private readonly int _indentation;
 
-            public SimpleIndentationData(TextSpan textSpan, int indentation)
-                : base(textSpan)
+            public SimpleIndentationData(TextSpan textSpan, int indentation) : base(textSpan)
             {
                 _indentation = indentation;
             }
@@ -47,6 +43,7 @@ namespace Microsoft.CodeAnalysis.Formatting
         private class LazyIndentationData : IndentationData
         {
             private readonly Lazy<int> _indentationGetter;
+
             public LazyIndentationData(TextSpan textSpan, Lazy<int> indentationGetter)
                 : base(textSpan)
             {
@@ -58,11 +55,18 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         private class RelativeIndentationData : LazyIndentationData
         {
-            public RelativeIndentationData(int inseparableRegionSpanStart, TextSpan textSpan, IndentBlockOperation operation, Lazy<int> indentationGetter)
-                : base(textSpan, indentationGetter)
+            public RelativeIndentationData(
+                int inseparableRegionSpanStart,
+                TextSpan textSpan,
+                IndentBlockOperation operation,
+                Lazy<int> indentationGetter
+            ) : base(textSpan, indentationGetter)
             {
                 this.Operation = operation;
-                this.InseparableRegionSpan = TextSpan.FromBounds(inseparableRegionSpanStart, textSpan.End);
+                this.InseparableRegionSpan = TextSpan.FromBounds(
+                    inseparableRegionSpanStart,
+                    textSpan.End
+                );
             }
 
             public TextSpan InseparableRegionSpan { get; }

@@ -123,18 +123,21 @@ namespace System.Runtime.InteropServices
             {
                 return default;
             }
-
             unsafe
             {
                 if (RuntimeHelpers.ObjectHasComponentSize(target))
                 {
                     if (target.GetType() == typeof(string))
                     {
-                        return (IntPtr)Unsafe.AsPointer(ref Unsafe.As<string>(target).GetRawStringData());
+                        return (IntPtr)
+                            Unsafe.AsPointer(ref Unsafe.As<string>(target).GetRawStringData());
                     }
 
                     Debug.Assert(target is Array);
-                    return (IntPtr)Unsafe.AsPointer(ref MemoryMarshal.GetArrayDataReference(Unsafe.As<Array>(target)));
+                    return (IntPtr)
+                        Unsafe.AsPointer(
+                            ref MemoryMarshal.GetArrayDataReference(Unsafe.As<Array>(target))
+                        );
                 }
 
                 return (IntPtr)Unsafe.AsPointer(ref target.GetRawData());
@@ -163,11 +166,14 @@ namespace System.Runtime.InteropServices
 
         public override int GetHashCode() => _handle.GetHashCode();
 
-        public override bool Equals([NotNullWhen(true)] object? o) => o is GCHandle && _handle == ((GCHandle)o)._handle;
+        public override bool Equals([NotNullWhen(true)] object? o) =>
+            o is GCHandle && _handle == ((GCHandle)o)._handle;
 
-        public static bool operator ==(GCHandle a, GCHandle b) => (nint)a._handle == (nint)b._handle;
+        public static bool operator ==(GCHandle a, GCHandle b) =>
+            (nint)a._handle == (nint)b._handle;
 
-        public static bool operator !=(GCHandle a, GCHandle b) => (nint)a._handle != (nint)b._handle;
+        public static bool operator !=(GCHandle a, GCHandle b) =>
+            (nint)a._handle != (nint)b._handle;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static IntPtr GetHandleValue(IntPtr handle) => new IntPtr((nint)handle & ~(nint)1); // Remove Pin flag

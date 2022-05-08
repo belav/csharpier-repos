@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.FileProviders.Composite
 {
     public class MockChangeToken : IChangeToken
     {
-        private readonly List<Tuple<Action<object>, object, MockDisposable>> _callbacks = new List<Tuple<Action<object>, object, MockDisposable>>();
+        private readonly List<Tuple<Action<object>, object, MockDisposable>> _callbacks =
+            new List<Tuple<Action<object>, object, MockDisposable>>();
 
         public bool ActiveChangeCallbacks { get; set; }
 
@@ -17,10 +18,7 @@ namespace Microsoft.Extensions.FileProviders.Composite
 
         public List<Tuple<Action<object>, object, MockDisposable>> Callbacks
         {
-            get
-            {
-                return _callbacks;
-            }
+            get { return _callbacks; }
         }
 
         public IDisposable RegisterChangeCallback(Action<object> callback, object state)

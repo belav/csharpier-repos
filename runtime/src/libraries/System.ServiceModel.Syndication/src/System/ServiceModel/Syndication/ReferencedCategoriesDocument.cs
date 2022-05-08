@@ -5,9 +5,7 @@ namespace System.ServiceModel.Syndication
 {
     public class ReferencedCategoriesDocument : CategoriesDocument
     {
-        public ReferencedCategoriesDocument()
-        {
-        }
+        public ReferencedCategoriesDocument() { }
 
         public ReferencedCategoriesDocument(Uri link) : base()
         {

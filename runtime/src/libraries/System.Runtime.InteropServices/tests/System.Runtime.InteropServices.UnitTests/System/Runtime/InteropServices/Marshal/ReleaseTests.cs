@@ -13,7 +13,10 @@ namespace System.Runtime.InteropServices.Tests
         public void Release_ValidPointer_Success()
         {
             var cw = new ComWrappersImpl();
-            IntPtr iUnknown = cw.GetOrCreateComInterfaceForObject(new object(), CreateComInterfaceFlags.None);
+            IntPtr iUnknown = cw.GetOrCreateComInterfaceForObject(
+                new object(),
+                CreateComInterfaceFlags.None
+            );
             try
             {
                 Marshal.AddRef(iUnknown);
@@ -34,7 +37,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Release_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.Release(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.Release(IntPtr.Zero)
+            );
         }
     }
 }

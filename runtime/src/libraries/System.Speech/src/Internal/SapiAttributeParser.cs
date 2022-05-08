@@ -21,7 +21,14 @@ namespace System.Speech.Internal
             {
                 try
                 {
-                    return new CultureInfo(int.Parse(langStringTrim, NumberStyles.HexNumber, CultureInfo.InvariantCulture), false);
+                    return new CultureInfo(
+                        int.Parse(
+                            langStringTrim,
+                            NumberStyles.HexNumber,
+                            CultureInfo.InvariantCulture
+                        ),
+                        false
+                    );
                 }
                 catch (ArgumentException)
                 {
@@ -42,7 +49,9 @@ namespace System.Speech.Internal
                 string formatString = strings[i].Trim();
                 if (!string.IsNullOrEmpty(formatString))
                 {
-                    SpeechAudioFormatInfo formatInfo = AudioFormatConverter.ToSpeechAudioFormatInfo(formatString);
+                    SpeechAudioFormatInfo formatInfo = AudioFormatConverter.ToSpeechAudioFormatInfo(
+                        formatString
+                    );
                     if (formatInfo != null) // Skip cases where a Guid is used.
                     {
                         formatList.Add(formatInfo);

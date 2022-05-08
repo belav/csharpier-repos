@@ -5,8 +5,15 @@ namespace System.Reflection
 {
     public readonly partial struct CustomAttributeNamedArgument
     {
-        public static bool operator ==(CustomAttributeNamedArgument left, CustomAttributeNamedArgument right) => left.Equals(right);
-        public static bool operator !=(CustomAttributeNamedArgument left, CustomAttributeNamedArgument right) => !left.Equals(right);
+        public static bool operator ==(
+            CustomAttributeNamedArgument left,
+            CustomAttributeNamedArgument right
+        ) => left.Equals(right);
+
+        public static bool operator !=(
+            CustomAttributeNamedArgument left,
+            CustomAttributeNamedArgument right
+        ) => !left.Equals(right);
 
         private readonly MemberInfo _memberInfo;
         private readonly CustomAttributeTypedArgument _value;
@@ -27,7 +34,10 @@ namespace System.Reflection
             _value = new CustomAttributeTypedArgument(type, value);
         }
 
-        public CustomAttributeNamedArgument(MemberInfo memberInfo, CustomAttributeTypedArgument typedArgument)
+        public CustomAttributeNamedArgument(
+            MemberInfo memberInfo,
+            CustomAttributeTypedArgument typedArgument
+        )
         {
             _memberInfo = memberInfo ?? throw new ArgumentNullException(nameof(memberInfo));
             _value = typedArgument;
@@ -52,9 +62,7 @@ namespace System.Reflection
         }
 
         internal Type ArgumentType =>
-            _memberInfo is FieldInfo fi ?
-                fi.FieldType :
-                ((PropertyInfo)_memberInfo).PropertyType;
+            _memberInfo is FieldInfo fi ? fi.FieldType : ((PropertyInfo)_memberInfo).PropertyType;
 
         public MemberInfo MemberInfo => _memberInfo;
         public CustomAttributeTypedArgument TypedValue => _value;

@@ -30,7 +30,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(Guid), "RowVersion", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(Guid),
+                "RowVersion",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsConcurrencyToken(false, ConfigurationSource.Convention);
 
@@ -44,7 +48,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(Guid), "RowVersion", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(Guid),
+                "RowVersion",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsConcurrencyToken(false, ConfigurationSource.Explicit);
 
@@ -68,7 +76,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<F>();
 
-            Assert.True(entityTypeBuilder.Property<Guid>(nameof(F.RowVersion)).Metadata.IsConcurrencyToken);
+            Assert.True(
+                entityTypeBuilder.Property<Guid>(nameof(F.RowVersion)).Metadata.IsConcurrencyToken
+            );
         }
 
         #endregion
@@ -80,7 +90,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(int),
+                "Id",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.ValueGenerated(ValueGenerated.OnAdd, ConfigurationSource.Convention);
 
@@ -94,7 +108,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(int),
+                "Id",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.Explicit);
 
@@ -109,7 +127,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<A>();
 
-            Assert.Equal(ValueGenerated.OnAddOrUpdate, entityTypeBuilder.Property(e => e.Id).Metadata.ValueGenerated);
+            Assert.Equal(
+                ValueGenerated.OnAddOrUpdate,
+                entityTypeBuilder.Property(e => e.Id).Metadata.ValueGenerated
+            );
         }
 
         [ConditionalFact]
@@ -118,7 +139,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<F>();
 
-            Assert.Equal(ValueGenerated.OnAddOrUpdate, entityTypeBuilder.Property<int>(nameof(F.Id)).Metadata.ValueGenerated);
+            Assert.Equal(
+                ValueGenerated.OnAddOrUpdate,
+                entityTypeBuilder.Property<int>(nameof(F.Id)).Metadata.ValueGenerated
+            );
         }
 
         #endregion
@@ -130,14 +154,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(int), "MyPrimaryKey", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(int),
+                "MyPrimaryKey",
+                ConfigurationSource.Explicit
+            );
 
-            entityTypeBuilder.PrimaryKey(
-                new List<string> { "Id" }, ConfigurationSource.Convention);
+            entityTypeBuilder.PrimaryKey(new List<string> { "Id" }, ConfigurationSource.Convention);
 
             RunConvention(propertyBuilder);
 
-            Assert.Equal("MyPrimaryKey", entityTypeBuilder.Metadata.FindPrimaryKey().Properties[0].Name);
+            Assert.Equal(
+                "MyPrimaryKey",
+                entityTypeBuilder.Metadata.FindPrimaryKey().Properties[0].Name
+            );
         }
 
         [ConditionalFact]
@@ -145,10 +175,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(int), "MyPrimaryKey", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(int),
+                "MyPrimaryKey",
+                ConfigurationSource.Explicit
+            );
 
-            entityTypeBuilder.PrimaryKey(
-                new List<string> { "Id" }, ConfigurationSource.Explicit);
+            entityTypeBuilder.PrimaryKey(new List<string> { "Id" }, ConfigurationSource.Explicit);
 
             RunConvention(propertyBuilder);
 
@@ -160,14 +193,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(int), "MyPrimaryKey", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(int),
+                "MyPrimaryKey",
+                ConfigurationSource.Explicit
+            );
 
             Assert.Null(entityTypeBuilder.Metadata.FindPrimaryKey());
 
             RunConvention(propertyBuilder);
 
             Assert.Equal(1, entityTypeBuilder.Metadata.FindPrimaryKey().Properties.Count);
-            Assert.Equal("MyPrimaryKey", entityTypeBuilder.Metadata.FindPrimaryKey().Properties[0].Name);
+            Assert.Equal(
+                "MyPrimaryKey",
+                entityTypeBuilder.Metadata.FindPrimaryKey().Properties[0].Name
+            );
         }
 
         [ConditionalFact]
@@ -177,8 +217,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Null(entityTypeBuilder.Metadata.FindPrimaryKey());
 
-            var idPropertyBuilder = entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Explicit);
-            var myPrimaryKeyPropertyBuilder = entityTypeBuilder.Property(typeof(int), "MyPrimaryKey", ConfigurationSource.Explicit);
+            var idPropertyBuilder = entityTypeBuilder.Property(
+                typeof(int),
+                "Id",
+                ConfigurationSource.Explicit
+            );
+            var myPrimaryKeyPropertyBuilder = entityTypeBuilder.Property(
+                typeof(int),
+                "MyPrimaryKey",
+                ConfigurationSource.Explicit
+            );
 
             RunConvention(idPropertyBuilder);
 
@@ -189,11 +237,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
             Assert.Equal(2, entityTypeBuilder.Metadata.FindPrimaryKey().Properties.Count);
             Assert.Equal("Id", entityTypeBuilder.Metadata.FindPrimaryKey().Properties[0].Name);
-            Assert.Equal("MyPrimaryKey", entityTypeBuilder.Metadata.FindPrimaryKey().Properties[1].Name);
+            Assert.Equal(
+                "MyPrimaryKey",
+                entityTypeBuilder.Metadata.FindPrimaryKey().Properties[1].Name
+            );
 
             Assert.Equal(
                 CoreStrings.CompositePKWithDataAnnotation(entityTypeBuilder.Metadata.DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => Validate(entityTypeBuilder)).Message);
+                Assert.Throws<InvalidOperationException>(() => Validate(entityTypeBuilder)).Message
+            );
         }
 
         [ConditionalFact]
@@ -202,7 +254,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var model = new MyContext().Model;
 
             Assert.Equal(2, model.FindEntityType(typeof(B)).FindPrimaryKey().Properties.Count);
-            Assert.Equal("MyPrimaryKey", model.FindEntityType(typeof(B)).FindPrimaryKey().Properties[0].Name);
+            Assert.Equal(
+                "MyPrimaryKey",
+                model.FindEntityType(typeof(B)).FindPrimaryKey().Properties[0].Name
+            );
             Assert.Equal("Id", model.FindEntityType(typeof(B)).FindPrimaryKey().Properties[1].Name);
         }
 
@@ -210,27 +265,47 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void KeyAttribute_throws_when_setting_key_in_derived_type()
         {
             var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<DerivedEntity>();
-            var baseEntityType = derivedEntityTypeBuilder.ModelBuilder.Entity(typeof(BaseEntity), ConfigurationSource.Explicit).Metadata;
+            var baseEntityType = derivedEntityTypeBuilder.ModelBuilder
+                .Entity(typeof(BaseEntity), ConfigurationSource.Explicit)
+                .Metadata;
             derivedEntityTypeBuilder.HasBaseType(baseEntityType, ConfigurationSource.Explicit);
 
-            var propertyBuilder = derivedEntityTypeBuilder.Property(typeof(int), "Number", ConfigurationSource.Explicit);
+            var propertyBuilder = derivedEntityTypeBuilder.Property(
+                typeof(int),
+                "Number",
+                ConfigurationSource.Explicit
+            );
 
             Assert.Equal(
                 CoreStrings.KeyAttributeOnDerivedEntity(
-                    derivedEntityTypeBuilder.Metadata.DisplayName(), propertyBuilder.Metadata.Name, baseEntityType.DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => Validate(derivedEntityTypeBuilder))
-                    .Message);
+                    derivedEntityTypeBuilder.Metadata.DisplayName(),
+                    propertyBuilder.Metadata.Name,
+                    baseEntityType.DisplayName()
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(() => Validate(derivedEntityTypeBuilder))
+                    .Message
+            );
         }
 
         [ConditionalFact]
         public void KeyAttribute_allows_composite_key_with_inheritance()
         {
-            var derivedEntityTypeBuilder = CreateInternalEntityTypeBuilder<CompositeKeyDerivedEntity>();
-            var baseEntityTypeBuilder = derivedEntityTypeBuilder.ModelBuilder.Entity(typeof(BaseEntity), ConfigurationSource.Explicit);
-            derivedEntityTypeBuilder.HasBaseType(baseEntityTypeBuilder.Metadata, ConfigurationSource.Explicit);
+            var derivedEntityTypeBuilder =
+                CreateInternalEntityTypeBuilder<CompositeKeyDerivedEntity>();
+            var baseEntityTypeBuilder = derivedEntityTypeBuilder.ModelBuilder.Entity(
+                typeof(BaseEntity),
+                ConfigurationSource.Explicit
+            );
+            derivedEntityTypeBuilder.HasBaseType(
+                baseEntityTypeBuilder.Metadata,
+                ConfigurationSource.Explicit
+            );
 
             baseEntityTypeBuilder.PrimaryKey(
-                new List<string> { "Id", "Name" }, ConfigurationSource.Explicit);
+                new List<string> { "Id", "Name" },
+                ConfigurationSource.Explicit
+            );
 
             Validate(derivedEntityTypeBuilder);
 
@@ -244,7 +319,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var entityTypeBuilder = modelBuilder.Entity<F>();
             entityTypeBuilder.Property<int>(nameof(F.MyPrimaryKey));
 
-            Assert.Equal(nameof(F.MyPrimaryKey), entityTypeBuilder.Metadata.FindPrimaryKey().Properties.Single().Name);
+            Assert.Equal(
+                nameof(F.MyPrimaryKey),
+                entityTypeBuilder.Metadata.FindPrimaryKey().Properties.Single().Name
+            );
         }
 
         #endregion
@@ -256,7 +334,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "MaxLengthProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "MaxLengthProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.HasMaxLength(100, ConfigurationSource.Convention);
 
@@ -270,7 +352,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "MaxLengthProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "MaxLengthProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.HasMaxLength(100, ConfigurationSource.Explicit);
 
@@ -285,7 +371,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<A>();
 
-            Assert.Equal(10, entityTypeBuilder.Property(e => e.MaxLengthProperty).Metadata.GetMaxLength());
+            Assert.Equal(
+                10,
+                entityTypeBuilder.Property(e => e.MaxLengthProperty).Metadata.GetMaxLength()
+            );
         }
 
         [ConditionalFact]
@@ -294,7 +383,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<F>();
 
-            Assert.Equal(10, entityTypeBuilder.Property<string>(nameof(F.MaxLengthProperty)).Metadata.GetMaxLength());
+            Assert.Equal(
+                10,
+                entityTypeBuilder
+                    .Property<string>(nameof(F.MaxLengthProperty))
+                    .Metadata.GetMaxLength()
+            );
         }
 
         #endregion
@@ -305,22 +399,36 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public void NotMappedAttribute_overrides_configuration_from_convention_source()
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
-            entityTypeBuilder.Property(typeof(string), "IgnoredProperty", ConfigurationSource.Convention);
+            entityTypeBuilder.Property(
+                typeof(string),
+                "IgnoredProperty",
+                ConfigurationSource.Convention
+            );
 
             RunConvention(entityTypeBuilder);
 
-            Assert.DoesNotContain(entityTypeBuilder.Metadata.GetProperties(), p => p.Name == "IgnoredProperty");
+            Assert.DoesNotContain(
+                entityTypeBuilder.Metadata.GetProperties(),
+                p => p.Name == "IgnoredProperty"
+            );
         }
 
         [ConditionalFact]
         public void NotMappedAttribute_does_not_override_configuration_from_explicit_source()
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
-            entityTypeBuilder.Property(typeof(string), "IgnoredProperty", ConfigurationSource.Explicit);
+            entityTypeBuilder.Property(
+                typeof(string),
+                "IgnoredProperty",
+                ConfigurationSource.Explicit
+            );
 
             RunConvention(entityTypeBuilder);
 
-            Assert.Contains(entityTypeBuilder.Metadata.GetProperties(), p => p.Name == "IgnoredProperty");
+            Assert.Contains(
+                entityTypeBuilder.Metadata.GetProperties(),
+                p => p.Name == "IgnoredProperty"
+            );
         }
 
         [ConditionalFact]
@@ -329,7 +437,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<A>();
 
-            Assert.DoesNotContain(entityTypeBuilder.Metadata.GetProperties(), p => p.Name == "IgnoredProperty");
+            Assert.DoesNotContain(
+                entityTypeBuilder.Metadata.GetProperties(),
+                p => p.Name == "IgnoredProperty"
+            );
         }
 
         [ConditionalFact]
@@ -340,18 +451,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             entityTypeBuilder.Property<string>(nameof(F.IgnoredProperty));
 
             // Because bringing the property in by the fluent API overrides the annotation it has no effect
-            Assert.Contains(entityTypeBuilder.Metadata.GetProperties(), p => p.Name == "IgnoredProperty");
+            Assert.Contains(
+                entityTypeBuilder.Metadata.GetProperties(),
+                p => p.Name == "IgnoredProperty"
+            );
         }
 
         [ConditionalFact]
         public void NotMappedAttribute_on_field_overrides_configuration_from_convention_source()
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<F>();
-            entityTypeBuilder.Property(typeof(string), "IgnoredProperty", ConfigurationSource.Convention);
+            entityTypeBuilder.Property(
+                typeof(string),
+                "IgnoredProperty",
+                ConfigurationSource.Convention
+            );
 
             RunConvention(entityTypeBuilder);
 
-            Assert.DoesNotContain(entityTypeBuilder.Metadata.GetProperties(), p => p.Name == "IgnoredProperty");
+            Assert.DoesNotContain(
+                entityTypeBuilder.Metadata.GetProperties(),
+                p => p.Name == "IgnoredProperty"
+            );
         }
 
         #endregion
@@ -363,7 +484,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "Name", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "Name",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsRequired(false, ConfigurationSource.Convention);
 
@@ -377,7 +502,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "Name", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "Name",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsRequired(false, ConfigurationSource.Explicit);
 
@@ -413,7 +542,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "StringLengthProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "StringLengthProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.HasMaxLength(100, ConfigurationSource.Convention);
 
@@ -427,7 +560,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "StringLengthProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "StringLengthProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.HasMaxLength(100, ConfigurationSource.Explicit);
 
@@ -442,7 +579,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<A>();
 
-            Assert.Equal(20, entityTypeBuilder.Property(e => e.StringLengthProperty).Metadata.GetMaxLength());
+            Assert.Equal(
+                20,
+                entityTypeBuilder.Property(e => e.StringLengthProperty).Metadata.GetMaxLength()
+            );
         }
 
         [ConditionalFact]
@@ -451,7 +591,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<F>();
 
-            Assert.Equal(20, entityTypeBuilder.Property<string>(nameof(F.StringLengthProperty)).Metadata.GetMaxLength());
+            Assert.Equal(
+                20,
+                entityTypeBuilder
+                    .Property<string>(nameof(F.StringLengthProperty))
+                    .Metadata.GetMaxLength()
+            );
         }
 
         #endregion
@@ -463,7 +608,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(byte[]), "Timestamp", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(byte[]),
+                "Timestamp",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.Convention);
             propertyBuilder.IsConcurrencyToken(false, ConfigurationSource.Convention);
@@ -479,7 +628,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(byte[]), "Timestamp", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(byte[]),
+                "Timestamp",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.ValueGenerated(ValueGenerated.Never, ConfigurationSource.Explicit);
             propertyBuilder.IsConcurrencyToken(false, ConfigurationSource.Explicit);
@@ -496,7 +649,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<A>();
 
-            Assert.Equal(ValueGenerated.OnAddOrUpdate, entityTypeBuilder.Property(e => e.Timestamp).Metadata.ValueGenerated);
+            Assert.Equal(
+                ValueGenerated.OnAddOrUpdate,
+                entityTypeBuilder.Property(e => e.Timestamp).Metadata.ValueGenerated
+            );
             Assert.True(entityTypeBuilder.Property(e => e.Timestamp).Metadata.IsConcurrencyToken);
         }
 
@@ -506,8 +662,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<F>();
 
-            Assert.Equal(ValueGenerated.OnAddOrUpdate, entityTypeBuilder.Property<byte[]>(nameof(F.Timestamp)).Metadata.ValueGenerated);
-            Assert.True(entityTypeBuilder.Property<byte[]>(nameof(F.Timestamp)).Metadata.IsConcurrencyToken);
+            Assert.Equal(
+                ValueGenerated.OnAddOrUpdate,
+                entityTypeBuilder.Property<byte[]>(nameof(F.Timestamp)).Metadata.ValueGenerated
+            );
+            Assert.True(
+                entityTypeBuilder.Property<byte[]>(nameof(F.Timestamp)).Metadata.IsConcurrencyToken
+            );
         }
 
         #endregion
@@ -520,7 +681,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
             IConventionPropertyBuilder propertyBuilder = entityTypeBuilder.Property(
-                typeof(int?), "BackingFieldProperty", ConfigurationSource.Explicit);
+                typeof(int?),
+                "BackingFieldProperty",
+                ConfigurationSource.Explicit
+            );
 
             RunConvention(propertyBuilder);
 
@@ -534,14 +698,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
             var propertyBuilder = entityTypeBuilder.Property(
-                typeof(int?), "BackingFieldProperty", ConfigurationSource.Explicit);
+                typeof(int?),
+                "BackingFieldProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.HasField("_backingFieldForFluentApi", ConfigurationSource.Explicit);
 
             RunConvention(propertyBuilder);
 
             // also asserts that the default backing field, _backingFieldProperty, was _not_ chosen
-            Assert.Equal("_backingFieldForFluentApi", ((IConventionProperty)propertyBuilder.Metadata).GetFieldName());
+            Assert.Equal(
+                "_backingFieldForFluentApi",
+                ((IConventionProperty)propertyBuilder.Metadata).GetFieldName()
+            );
         }
 
         #endregion
@@ -552,7 +722,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "UnicodeProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "UnicodeProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsUnicode(false, ConfigurationSource.Convention);
 
@@ -566,7 +740,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "UnicodeProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "UnicodeProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsUnicode(false, ConfigurationSource.Explicit);
 
@@ -582,7 +760,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var entityTypeBuilder = modelBuilder.Entity<A>();
 
             Assert.True(entityTypeBuilder.Property(e => e.UnicodeProperty).Metadata.IsUnicode());
-            Assert.False(entityTypeBuilder.Property(e => e.NonUnicodeProperty).Metadata.IsUnicode());
+            Assert.False(
+                entityTypeBuilder.Property(e => e.NonUnicodeProperty).Metadata.IsUnicode()
+            );
         }
 
         [ConditionalFact]
@@ -591,8 +771,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<F>();
 
-            Assert.True(entityTypeBuilder.Property<string>(nameof(F.UnicodeField)).Metadata.IsUnicode());
-            Assert.False(entityTypeBuilder.Property<string>(nameof(F.NonUnicodeField)).Metadata.IsUnicode());
+            Assert.True(
+                entityTypeBuilder.Property<string>(nameof(F.UnicodeField)).Metadata.IsUnicode()
+            );
+            Assert.False(
+                entityTypeBuilder.Property<string>(nameof(F.NonUnicodeField)).Metadata.IsUnicode()
+            );
         }
         #endregion
 
@@ -602,7 +786,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(decimal), "DecimalProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(decimal),
+                "DecimalProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.HasPrecision(12, ConfigurationSource.Convention);
             propertyBuilder.HasScale(5, ConfigurationSource.Convention);
@@ -618,7 +806,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(decimal), "DecimalProperty", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(decimal),
+                "DecimalProperty",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.HasPrecision(12, ConfigurationSource.Explicit);
             propertyBuilder.HasScale(5, ConfigurationSource.Explicit);
@@ -635,7 +827,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<A>();
 
-            Assert.Equal(10, entityTypeBuilder.Property(e => e.DecimalProperty).Metadata.GetPrecision());
+            Assert.Equal(
+                10,
+                entityTypeBuilder.Property(e => e.DecimalProperty).Metadata.GetPrecision()
+            );
             Assert.Equal(2, entityTypeBuilder.Property(e => e.DecimalProperty).Metadata.GetScale());
         }
 
@@ -645,8 +840,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity<F>();
 
-            Assert.Equal(10, entityTypeBuilder.Property<decimal>(nameof(F.DecimalField)).Metadata.GetPrecision());
-            Assert.Equal(2, entityTypeBuilder.Property<decimal>(nameof(F.DecimalField)).Metadata.GetScale());
+            Assert.Equal(
+                10,
+                entityTypeBuilder.Property<decimal>(nameof(F.DecimalField)).Metadata.GetPrecision()
+            );
+            Assert.Equal(
+                2,
+                entityTypeBuilder.Property<decimal>(nameof(F.DecimalField)).Metadata.GetScale()
+            );
         }
         #endregion
         [ConditionalFact]
@@ -662,7 +863,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var conventionSet = new ConventionSet();
             conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies()));
+                new PropertyDiscoveryConvention(CreateDependencies())
+            );
 
             var modelBuilder = new Model(conventionSet).Builder;
 
@@ -673,61 +875,87 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var dependencies = CreateDependencies();
             var context = new ConventionContext<IConventionPropertyBuilder>(
-                ((Model)propertyBuilder.Metadata.DeclaringEntityType.Model).ConventionDispatcher);
+                ((Model)propertyBuilder.Metadata.DeclaringEntityType.Model).ConventionDispatcher
+            );
 
-            new BackingFieldConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new BackingFieldConvention(dependencies).ProcessPropertyAdded(propertyBuilder, context);
 
-            new ConcurrencyCheckAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new ConcurrencyCheckAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new DatabaseGeneratedAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new DatabaseGeneratedAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new RequiredPropertyAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new RequiredPropertyAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new MaxLengthAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new MaxLengthAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new StringLengthAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new StringLengthAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new TimestampAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new TimestampAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new BackingFieldAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new BackingFieldAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new KeyAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new KeyAttributeConvention(dependencies).ProcessPropertyAdded(propertyBuilder, context);
 
-            new UnicodeAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new UnicodeAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
 
-            new PrecisionAttributeConvention(dependencies)
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new PrecisionAttributeConvention(dependencies).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
         }
 
         private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
         {
-            var context = new ConventionContext<IConventionEntityTypeBuilder>(entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+            var context = new ConventionContext<IConventionEntityTypeBuilder>(
+                entityTypeBuilder.Metadata.Model.ConventionDispatcher
+            );
 
-            new NotMappedMemberAttributeConvention(CreateDependencies())
-                .ProcessEntityTypeAdded(entityTypeBuilder, context);
+            new NotMappedMemberAttributeConvention(CreateDependencies()).ProcessEntityTypeAdded(
+                entityTypeBuilder,
+                context
+            );
         }
 
         private void Validate(InternalEntityTypeBuilder entityTypeBuilder)
         {
             var context = new ConventionContext<IConventionModelBuilder>(
-                entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+                entityTypeBuilder.Metadata.Model.ConventionDispatcher
+            );
 
-            new KeyAttributeConvention(CreateDependencies())
-                .ProcessModelFinalizing(entityTypeBuilder.ModelBuilder, context);
+            new KeyAttributeConvention(CreateDependencies()).ProcessModelFinalizing(
+                entityTypeBuilder.ModelBuilder,
+                context
+            );
         }
 
-        private static ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance
+                .CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private class A
         {
@@ -842,23 +1070,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public int Number { get; set; }
         }
 
-        private class CompositeKeyDerivedEntity : BaseEntity
-        {
-        }
+        private class CompositeKeyDerivedEntity : BaseEntity { }
 
-        private static ModelBuilder CreateModelBuilder()
-            => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+        private static ModelBuilder CreateModelBuilder() =>
+            InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         private class MyContext : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(nameof(MyContext));
 
-            protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<B>().HasKey(
-                    e => new { e.MyPrimaryKey, e.Id });
+            protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<B>().HasKey(e => new { e.MyPrimaryKey, e.Id });
         }
     }
 }

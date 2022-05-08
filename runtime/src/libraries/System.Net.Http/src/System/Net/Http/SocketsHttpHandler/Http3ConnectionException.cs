@@ -13,12 +13,16 @@ namespace System.Net.Http
     internal sealed class Http3ConnectionException : Http3ProtocolException
     {
         public Http3ConnectionException(Http3ErrorCode errorCode)
-            : base(SR.Format(SR.net_http_http3_connection_error, GetName(errorCode), ((long)errorCode).ToString("x")), errorCode)
-        {
-        }
+            : base(
+                SR.Format(
+                    SR.net_http_http3_connection_error,
+                    GetName(errorCode),
+                    ((long)errorCode).ToString("x")
+                ),
+                errorCode
+            ) { }
 
-        private Http3ConnectionException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private Http3ConnectionException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -19,43 +19,86 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
 {
     public abstract class AbstractSemanticTokensTests : AbstractLanguageServerProtocolTests
     {
-        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensAsync(TestLspServer testLspServer, LSP.Location caret)
+        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret
+        )
         {
-            var result = await testLspServer.ExecuteRequestAsync<LSP.SemanticTokensParams, LSP.SemanticTokens>(LSP.Methods.TextDocumentSemanticTokensFullName,
-                CreateSemanticTokensParams(caret), new LSP.VSInternalClientCapabilities(), null, CancellationToken.None);
+            var result = await testLspServer.ExecuteRequestAsync<
+                LSP.SemanticTokensParams,
+                LSP.SemanticTokens
+            >(
+                LSP.Methods.TextDocumentSemanticTokensFullName,
+                CreateSemanticTokensParams(caret),
+                new LSP.VSInternalClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
             Contract.ThrowIfNull(result);
             return result;
         }
 
-        private static LSP.SemanticTokensParams CreateSemanticTokensParams(LSP.Location caret)
-            => new LSP.SemanticTokensParams
+        private static LSP.SemanticTokensParams CreateSemanticTokensParams(LSP.Location caret) =>
+            new LSP.SemanticTokensParams
             {
                 TextDocument = new LSP.TextDocumentIdentifier { Uri = caret.Uri }
             };
 
-        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangeAsync(TestLspServer testLspServer, LSP.Location caret, LSP.Range range)
+        private protected static async Task<LSP.SemanticTokens> RunGetSemanticTokensRangeAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret,
+            LSP.Range range
+        )
         {
-            var result = await testLspServer.ExecuteRequestAsync<LSP.SemanticTokensRangeParams, LSP.SemanticTokens>(LSP.Methods.TextDocumentSemanticTokensRangeName,
-                CreateSemanticTokensRangeParams(caret, range), new LSP.VSInternalClientCapabilities(), null, CancellationToken.None);
+            var result = await testLspServer.ExecuteRequestAsync<
+                LSP.SemanticTokensRangeParams,
+                LSP.SemanticTokens
+            >(
+                LSP.Methods.TextDocumentSemanticTokensRangeName,
+                CreateSemanticTokensRangeParams(caret, range),
+                new LSP.VSInternalClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
             Contract.ThrowIfNull(result);
             return result;
         }
 
-        private static LSP.SemanticTokensRangeParams CreateSemanticTokensRangeParams(LSP.Location caret, LSP.Range range)
-            => new LSP.SemanticTokensRangeParams
+        private static LSP.SemanticTokensRangeParams CreateSemanticTokensRangeParams(
+            LSP.Location caret,
+            LSP.Range range
+        ) =>
+            new LSP.SemanticTokensRangeParams
             {
                 TextDocument = new LSP.TextDocumentIdentifier { Uri = caret.Uri },
                 Range = range
             };
 
-        private protected static async Task<SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>> RunGetSemanticTokensEditsAsync(TestLspServer testLspServer, LSP.Location caret, string previousResultId)
+        private protected static async Task<
+            SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>
+        > RunGetSemanticTokensEditsAsync(
+            TestLspServer testLspServer,
+            LSP.Location caret,
+            string previousResultId
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.SemanticTokensDeltaParams, SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>>(LSP.Methods.TextDocumentSemanticTokensFullDeltaName,
-                CreateSemanticTokensParams(caret, previousResultId), new LSP.VSInternalClientCapabilities(), null, CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.SemanticTokensDeltaParams,
+                SumType<LSP.SemanticTokens, LSP.SemanticTokensDelta>
+            >(
+                LSP.Methods.TextDocumentSemanticTokensFullDeltaName,
+                CreateSemanticTokensParams(caret, previousResultId),
+                new LSP.VSInternalClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
         }
 
-        private static LSP.SemanticTokensDeltaParams CreateSemanticTokensParams(LSP.Location caret, string previousResultId)
-            => new LSP.SemanticTokensDeltaParams
+        private static LSP.SemanticTokensDeltaParams CreateSemanticTokensParams(
+            LSP.Location caret,
+            string previousResultId
+        ) =>
+            new LSP.SemanticTokensDeltaParams
             {
                 TextDocument = new LSP.TextDocumentIdentifier { Uri = caret.Uri },
                 PreviousResultId = previousResultId
@@ -64,12 +107,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
         protected static async Task UpdateDocumentTextAsync(string updatedText, Workspace workspace)
         {
             var docId = ((TestWorkspace)workspace).Documents.First().Id;
-            await ((TestWorkspace)workspace).ChangeDocumentAsync(docId, SourceText.From(updatedText));
+            await ((TestWorkspace)workspace).ChangeDocumentAsync(
+                docId,
+                SourceText.From(updatedText)
+            );
         }
 
         // VS doesn't currently support multi-line tokens, so we want to verify that we aren't
         // returning any in the tokens array.
-        protected static async Task VerifyNoMultiLineTokens(TestLspServer testLspServer, int[] tokens)
+        protected static async Task VerifyNoMultiLineTokens(
+            TestLspServer testLspServer,
+            int[] tokens
+        )
         {
             var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
             var text = await document.GetTextAsync().ConfigureAwait(false);
@@ -104,9 +153,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SemanticTokens
                 var lineLength = text.Lines[currentLine].Span.Length;
 
                 // If this assertion fails, we didn't break up a multi-line token properly.
-                Assert.True(currentChar + tokenLength <= lineLength,
-                    $"Multi-line token found on line {currentLine} at character index {currentChar}. " +
-                    $"The token ends at index {currentChar + tokenLength}, which exceeds the line length of {lineLength}.");
+                Assert.True(
+                    currentChar + tokenLength <= lineLength,
+                    $"Multi-line token found on line {currentLine} at character index {currentChar}. "
+                        + $"The token ends at index {currentChar + tokenLength}, which exceeds the line length of {lineLength}."
+                );
             }
         }
     }

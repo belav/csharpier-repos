@@ -19,7 +19,8 @@ internal class FileProviderGlobbingDirectory : DirectoryInfoBase
     public FileProviderGlobbingDirectory(
         IFileProvider fileProvider,
         IFileInfo fileInfo,
-        FileProviderGlobbingDirectory parent)
+        FileProviderGlobbingDirectory parent
+    )
     {
         if (fileProvider == null)
         {
@@ -78,7 +79,11 @@ internal class FileProviderGlobbingDirectory : DirectoryInfoBase
 
     public override DirectoryInfoBase GetDirectory(string path)
     {
-        return new FileProviderGlobbingDirectory(_fileProvider, _fileProvider.GetFileInfo(path), this);
+        return new FileProviderGlobbingDirectory(
+            _fileProvider,
+            _fileProvider.GetFileInfo(path),
+            this
+        );
     }
 
     public override FileInfoBase GetFile(string path)

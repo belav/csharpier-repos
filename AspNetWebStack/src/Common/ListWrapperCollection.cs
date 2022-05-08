@@ -12,13 +12,9 @@ namespace System.Collections.ObjectModel
     {
         private readonly List<T> _items;
 
-        internal ListWrapperCollection()
-            : this(new List<T>())
-        {
-        }
+        internal ListWrapperCollection() : this(new List<T>()) { }
 
-        internal ListWrapperCollection(List<T> list)
-            : base(list)
+        internal ListWrapperCollection(List<T> list) : base(list)
         {
             _items = list;
         }

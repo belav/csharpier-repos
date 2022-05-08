@@ -30,7 +30,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             /// <summary>
             /// Holds the captured values for initialized anonymous type properties in an anonymous object initializer.
             /// </summary>
-            public PooledDictionary<IPropertySymbol, IOperation>? AnonymousTypePropertyValues { get; }
+            public PooledDictionary<
+                IPropertySymbol,
+                IOperation
+            >? AnonymousTypePropertyValues { get; }
 
             public ImplicitInstanceInfo(IOperation currentImplicitInstance)
             {
@@ -46,7 +49,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 ImplicitInstance = null;
                 AnonymousType = currentInitializedAnonymousType;
-                AnonymousTypePropertyValues = PooledDictionary<IPropertySymbol, IOperation>.GetInstance();
+                AnonymousTypePropertyValues = PooledDictionary<
+                    IPropertySymbol,
+                    IOperation
+                >.GetInstance();
             }
 
             public ImplicitInstanceInfo(in Context context)
@@ -63,9 +69,17 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     ImplicitInstance = null;
                     AnonymousType = context.AnonymousType;
-                    AnonymousTypePropertyValues = PooledDictionary<IPropertySymbol, IOperation>.GetInstance();
+                    AnonymousTypePropertyValues = PooledDictionary<
+                        IPropertySymbol,
+                        IOperation
+                    >.GetInstance();
 
-                    foreach (KeyValuePair<IPropertySymbol, IOperation> pair in context.AnonymousTypePropertyValues)
+                    foreach (
+                        KeyValuePair<
+                            IPropertySymbol,
+                            IOperation
+                        > pair in context.AnonymousTypePropertyValues
+                    )
                     {
                         AnonymousTypePropertyValues.Add(pair.Key, pair.Value);
                     }

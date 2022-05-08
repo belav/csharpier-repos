@@ -15,19 +15,25 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         string _instructionSetsSupport;
 
-        public static string ToInstructionSetSupportString(InstructionSetSupport instructionSetSupport)
+        public static string ToInstructionSetSupportString(
+            InstructionSetSupport instructionSetSupport
+        )
         {
             StringBuilder builder = new StringBuilder();
-            InstructionSet[] supportedInstructionSets = instructionSetSupport.SupportedFlags.ToArray();
+            InstructionSet[] supportedInstructionSets =
+                instructionSetSupport.SupportedFlags.ToArray();
             Array.Sort(supportedInstructionSets);
-            InstructionSet[] explicitlyUnsupportedInstructionSets = instructionSetSupport.ExplicitlyUnsupportedFlags.ToArray();
+            InstructionSet[] explicitlyUnsupportedInstructionSets =
+                instructionSetSupport.ExplicitlyUnsupportedFlags.ToArray();
             Array.Sort(explicitlyUnsupportedInstructionSets);
 
             bool addDelimeter = false;
             var r2rAlreadyEmitted = new HashSet<ReadyToRunInstructionSet>();
             foreach (var instructionSetSupported in supportedInstructionSets)
             {
-                var r2rInstructionSet = instructionSetSupported.R2RInstructionSet(instructionSetSupport.Architecture);
+                var r2rInstructionSet = instructionSetSupported.R2RInstructionSet(
+                    instructionSetSupport.Architecture
+                );
                 if (r2rInstructionSet == null)
                     continue;
 
@@ -46,10 +52,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             addDelimeter = false;
             foreach (var instructionSetUnsupported in explicitlyUnsupportedInstructionSets)
             {
-                var r2rInstructionSet = instructionSetUnsupported.R2RInstructionSet(instructionSetSupport.Architecture);
+                var r2rInstructionSet = instructionSetUnsupported.R2RInstructionSet(
+                    instructionSetSupport.Architecture
+                );
                 if (r2rInstructionSet == null)
                     continue;
-                    
+
                 if (r2rAlreadyEmitted.Add(r2rInstructionSet.Value))
                 {
                     if (addDelimeter)
@@ -69,7 +77,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         private ReadyToRunInstructionSet? InstructionSetFromString(string instructionSetString)
         {
-            return (ReadyToRunInstructionSet)Enum.Parse(typeof(ReadyToRunInstructionSet), instructionSetString);
+            return (ReadyToRunInstructionSet)
+                Enum.Parse(typeof(ReadyToRunInstructionSet), instructionSetString);
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -79,23 +88,35 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             string[] supportedAndUnsupportedSplit = _instructionSetsSupport.Split(',');
 
-            string[] instructionSetsSupported = supportedAndUnsupportedSplit[0] == "" ? Array.Empty<string>() : supportedAndUnsupportedSplit[0].Split('+');
-            string[] instructionSetsExplicitlyUnsupported = supportedAndUnsupportedSplit[1] == "" ? Array.Empty<string>() : supportedAndUnsupportedSplit[1].Split('-');
+            string[] instructionSetsSupported =
+                supportedAndUnsupportedSplit[0] == ""
+                    ? Array.Empty<string>()
+                    : supportedAndUnsupportedSplit[0].Split('+');
+            string[] instructionSetsExplicitlyUnsupported =
+                supportedAndUnsupportedSplit[1] == ""
+                    ? Array.Empty<string>()
+                    : supportedAndUnsupportedSplit[1].Split('-');
 
             // This type of fixup is not dependent on module
             builder.EmitByte(checked((byte)ReadyToRunFixupKind.Check_InstructionSetSupport));
 
-            builder.EmitUInt((uint)(instructionSetsSupported.Length + instructionSetsExplicitlyUnsupported.Length));
+            builder.EmitUInt(
+                (uint)(
+                    instructionSetsSupported.Length + instructionSetsExplicitlyUnsupported.Length
+                )
+            );
 
             foreach (string instructionSetString in instructionSetsSupported)
             {
-                uint valueToEmit = (((uint)InstructionSetFromString(instructionSetString)) << 1) | 1;
+                uint valueToEmit =
+                    (((uint)InstructionSetFromString(instructionSetString)) << 1) | 1;
                 builder.EmitUInt(valueToEmit);
             }
 
             foreach (string instructionSetString in instructionSetsExplicitlyUnsupported)
             {
-                uint valueToEmit = (((uint)InstructionSetFromString(instructionSetString)) << 1) | 0;
+                uint valueToEmit =
+                    (((uint)InstructionSetFromString(instructionSetString)) << 1) | 0;
                 builder.EmitUInt(valueToEmit);
             }
 
@@ -113,7 +134,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
-            return _instructionSetsSupport.CompareTo(((ReadyToRunInstructionSetSupportSignature)other)._instructionSetsSupport);
+            return _instructionSetsSupport.CompareTo(
+                ((ReadyToRunInstructionSetSupportSignature)other)._instructionSetsSupport
+            );
         }
     }
 }

@@ -20,7 +20,7 @@ namespace System.Globalization.Tests
             yield return new object[] { 400 };
 
             // Boundary years
-            yield return new object[] { 9999  };
+            yield return new object[] { 9999 };
             yield return new object[] { 1 };
         }
 

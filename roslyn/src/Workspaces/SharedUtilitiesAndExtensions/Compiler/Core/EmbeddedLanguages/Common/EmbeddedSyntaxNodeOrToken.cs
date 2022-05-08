@@ -29,10 +29,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         [MemberNotNullWhen(true, nameof(Node))]
         public bool IsNode => Node != null;
 
-        public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(TSyntaxNode? node)
-            => new(node);
+        public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(
+            TSyntaxNode? node
+        ) => new(node);
 
-        public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(EmbeddedSyntaxToken<TSyntaxKind> token)
-            => new(token);
+        public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(
+            EmbeddedSyntaxToken<TSyntaxKind> token
+        ) => new(token);
     }
 }

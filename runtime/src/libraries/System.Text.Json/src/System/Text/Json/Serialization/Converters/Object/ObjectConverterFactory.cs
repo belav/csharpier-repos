@@ -32,11 +32,20 @@ namespace System.Text.Json.Serialization.Converters
             return true;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067:UnrecognizedReflectionPattern",
-            Justification = "The ctor is marked RequiresUnreferencedCode.")]
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2067:UnrecognizedReflectionPattern",
+            Justification = "The ctor is marked RequiresUnreferencedCode."
+        )]
+        public override JsonConverter CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (typeToConvert.IsKeyValuePair())
             {
@@ -46,9 +55,16 @@ namespace System.Text.Json.Serialization.Converters
             JsonConverter converter;
             Type converterType;
 
-            if (!typeToConvert.TryGetDeserializationConstructor(_useDefaultConstructorInUnannotatedStructs, out ConstructorInfo? constructor))
+            if (
+                !typeToConvert.TryGetDeserializationConstructor(
+                    _useDefaultConstructorInUnannotatedStructs,
+                    out ConstructorInfo? constructor
+                )
+            )
             {
-                ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(typeToConvert);
+                ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute<JsonConstructorAttribute>(
+                    typeToConvert
+                );
             }
 
             ParameterInfo[]? parameters = constructor?.GetParameters();
@@ -64,7 +80,9 @@ namespace System.Text.Json.Serialization.Converters
                 if (parameterCount <= JsonConstants.UnboxedParameterCountThreshold)
                 {
                     Type placeHolderType = JsonTypeInfo.ObjectType;
-                    Type[] typeArguments = new Type[JsonConstants.UnboxedParameterCountThreshold + 1];
+                    Type[] typeArguments = new Type[
+                        JsonConstants.UnboxedParameterCountThreshold + 1
+                    ];
 
                     typeArguments[0] = typeToConvert;
                     for (int i = 0; i < JsonConstants.UnboxedParameterCountThreshold; i++)
@@ -80,20 +98,27 @@ namespace System.Text.Json.Serialization.Converters
                         }
                     }
 
-                    converterType = typeof(SmallObjectWithParameterizedConstructorConverter<,,,,>).MakeGenericType(typeArguments);
+                    converterType = typeof(SmallObjectWithParameterizedConstructorConverter<
+                        ,,,,
+                    >).MakeGenericType(typeArguments);
                 }
                 else
                 {
-                    converterType = typeof(LargeObjectWithParameterizedConstructorConverterWithReflection<>).MakeGenericType(typeToConvert);
+                    converterType =
+                        typeof(LargeObjectWithParameterizedConstructorConverterWithReflection<>).MakeGenericType(
+                            typeToConvert
+                        );
                 }
             }
 
-            converter = (JsonConverter)Activator.CreateInstance(
+            converter = (JsonConverter)
+                Activator.CreateInstance(
                     converterType,
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
                     args: null,
-                    culture: null)!;
+                    culture: null
+                )!;
 
             converter.ConstructorInfo = constructor!;
             return converter;
@@ -106,12 +131,16 @@ namespace System.Text.Json.Serialization.Converters
             Type keyType = type.GetGenericArguments()[0];
             Type valueType = type.GetGenericArguments()[1];
 
-            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                typeof(KeyValuePairConverter<,>).MakeGenericType(new Type[] { keyType, valueType }),
-                BindingFlags.Instance | BindingFlags.Public,
-                binder: null,
-                args: null,
-                culture: null)!;
+            JsonConverter converter = (JsonConverter)
+                Activator.CreateInstance(
+                    typeof(KeyValuePairConverter<,>).MakeGenericType(
+                        new Type[] { keyType, valueType }
+                    ),
+                    BindingFlags.Instance | BindingFlags.Public,
+                    binder: null,
+                    args: null,
+                    culture: null
+                )!;
 
             return converter;
         }

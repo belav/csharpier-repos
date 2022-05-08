@@ -21,10 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public CharToStringConverter()
-            : this(null)
-        {
-        }
+        public CharToStringConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter. This converter preserves order.
@@ -37,17 +34,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public CharToStringConverter(ConverterMappingHints? mappingHints)
-            : base(
-                ToString(),
-                ToChar(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToString(), ToChar(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(char), typeof(string), i => new CharToStringConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(char),
+                typeof(string),
+                i => new CharToStringConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

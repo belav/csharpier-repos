@@ -30,8 +30,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             EnumeratorTestHelper(emptyMap);
         }
 
-        private static void EmptyTestHelperHash<TKey, TValue>(IImmutableDictionary<TKey, TValue> empty, TKey someKey)
-            where TKey : notnull
+        private static void EmptyTestHelperHash<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> empty,
+            TKey someKey
+        ) where TKey : notnull
         {
             // Intentionally not used
             _ = someKey;

@@ -16,25 +16,36 @@ namespace System.Runtime.Loader
     {
         internal IntPtr NativeALC
         {
-            get
-            {
-                return _nativeAssemblyLoadContext;
-            }
+            get { return _nativeAssemblyLoadContext; }
         }
 
         [DynamicDependency(nameof(_nativeAssemblyLoadContext))]
-        private IntPtr InitializeAssemblyLoadContext(IntPtr thisHandlePtr, bool representsTPALoadContext, bool isCollectible)
+        private IntPtr InitializeAssemblyLoadContext(
+            IntPtr thisHandlePtr,
+            bool representsTPALoadContext,
+            bool isCollectible
+        )
         {
             using (SafeStringMarshal handle = RuntimeMarshal.MarshalString(Name))
             {
-                return InternalInitializeNativeALC(thisHandlePtr, handle.Value, representsTPALoadContext, isCollectible);
+                return InternalInitializeNativeALC(
+                    thisHandlePtr,
+                    handle.Value,
+                    representsTPALoadContext,
+                    isCollectible
+                );
             }
         }
 
-        [MethodImplAttribute (MethodImplOptions.InternalCall)]
-        private static extern void PrepareForAssemblyLoadContextRelease (IntPtr nativeAssemblyLoadContext, IntPtr assemblyLoadContextStrong);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern void PrepareForAssemblyLoadContextRelease(
+            IntPtr nativeAssemblyLoadContext,
+            IntPtr assemblyLoadContextStrong
+        );
 
-        [RequiresUnreferencedCode("Types and members the loaded assembly depends on might be removed")]
+        [RequiresUnreferencedCode(
+            "Types and members the loaded assembly depends on might be removed"
+        )]
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
         private Assembly InternalLoadFromPath(string? assemblyPath, string? nativeImagePath)
         {
@@ -45,16 +56,26 @@ namespace System.Runtime.Loader
             return InternalLoadFile(NativeALC, assemblyPath, ref stackMark);
         }
 
-        [RequiresUnreferencedCode("Types and members the loaded assembly depends on might be removed")]
+        [RequiresUnreferencedCode(
+            "Types and members the loaded assembly depends on might be removed"
+        )]
         internal Assembly InternalLoad(byte[] arrAssembly, byte[]? arrSymbols)
         {
             unsafe
             {
                 int symbolsLength = arrSymbols?.Length ?? 0;
-                fixed (byte* ptrAssembly = arrAssembly, ptrSymbols = arrSymbols)
+                fixed (
+                    byte* ptrAssembly = arrAssembly,
+                        ptrSymbols = arrSymbols
+                )
                 {
-                    return InternalLoadFromStream(NativeALC, new IntPtr(ptrAssembly), arrAssembly.Length,
-                                       new IntPtr(ptrSymbols), symbolsLength);
+                    return InternalLoadFromStream(
+                        NativeALC,
+                        new IntPtr(ptrAssembly),
+                        arrAssembly.Length,
+                        new IntPtr(ptrSymbols),
+                        symbolsLength
+                    );
                 }
             }
         }
@@ -80,7 +101,7 @@ namespace System.Runtime.Loader
             // We only support looking up load context for runtime assemblies.
             if (rtAsm != null)
             {
-                var _ = Default;  // ensure the default ALC is initialized.
+                var _ = Default; // ensure the default ALC is initialized.
                 RuntimeAssembly runtimeAssembly = rtAsm;
                 IntPtr ptrAssemblyLoadContext = GetLoadContextForAssembly(runtimeAssembly);
                 loadContextForAssembly = GetAssemblyLoadContext(ptrAssemblyLoadContext);
@@ -89,24 +110,39 @@ namespace System.Runtime.Loader
             return loadContextForAssembly;
         }
 
-        public void SetProfileOptimizationRoot(string directoryPath)
-        {
-        }
+        public void SetProfileOptimizationRoot(string directoryPath) { }
 
-        public void StartProfileOptimization(string? profile)
-        {
-        }
+        public void StartProfileOptimization(string? profile) { }
 
-        [RequiresUnreferencedCode("Types and members the loaded assembly depends on might be removed")]
+        [RequiresUnreferencedCode(
+            "Types and members the loaded assembly depends on might be removed"
+        )]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern Assembly InternalLoadFile(IntPtr nativeAssemblyLoadContext, string? assemblyFile, ref StackCrawlMark stackMark);
+        private static extern Assembly InternalLoadFile(
+            IntPtr nativeAssemblyLoadContext,
+            string? assemblyFile,
+            ref StackCrawlMark stackMark
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr InternalInitializeNativeALC(IntPtr thisHandlePtr, IntPtr name, bool representsTPALoadContext, bool isCollectible);
+        private static extern IntPtr InternalInitializeNativeALC(
+            IntPtr thisHandlePtr,
+            IntPtr name,
+            bool representsTPALoadContext,
+            bool isCollectible
+        );
 
-        [RequiresUnreferencedCode("Types and members the loaded assembly depends on might be removed")]
+        [RequiresUnreferencedCode(
+            "Types and members the loaded assembly depends on might be removed"
+        )]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern Assembly InternalLoadFromStream(IntPtr nativeAssemblyLoadContext, IntPtr assm, int assmLength, IntPtr symbols, int symbolsLength);
+        private static extern Assembly InternalLoadFromStream(
+            IntPtr nativeAssemblyLoadContext,
+            IntPtr assm,
+            int assmLength,
+            IntPtr symbols,
+            int symbolsLength
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern Assembly[] InternalGetLoadedAssemblies();
@@ -132,30 +168,45 @@ namespace System.Runtime.Loader
         }
 
         // Invoked by Mono to resolve requests to load satellite assemblies.
-        private static Assembly? MonoResolveUsingResolveSatelliteAssembly(IntPtr gchALC, string assemblyName)
+        private static Assembly? MonoResolveUsingResolveSatelliteAssembly(
+            IntPtr gchALC,
+            string assemblyName
+        )
         {
             AssemblyLoadContext context = GetAssemblyLoadContext(gchALC);
             return context.ResolveSatelliteAssembly(new AssemblyName(assemblyName));
         }
 
-        private static AssemblyLoadContext GetAssemblyLoadContext(IntPtr gchManagedAssemblyLoadContext)
+        private static AssemblyLoadContext GetAssemblyLoadContext(
+            IntPtr gchManagedAssemblyLoadContext
+        )
         {
             AssemblyLoadContext context;
             // This check exists because the function can be called early in startup, before the default ALC is initialized
             if (gchManagedAssemblyLoadContext == IntPtr.Zero)
                 context = Default;
             else
-                context = (AssemblyLoadContext)(GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
+                context = (AssemblyLoadContext)
+                    (GCHandle.FromIntPtr(gchManagedAssemblyLoadContext).Target)!;
             return context;
         }
 
-        private static void MonoResolveUnmanagedDll(string unmanagedDllName, IntPtr gchManagedAssemblyLoadContext, ref IntPtr dll)
+        private static void MonoResolveUnmanagedDll(
+            string unmanagedDllName,
+            IntPtr gchManagedAssemblyLoadContext,
+            ref IntPtr dll
+        )
         {
             AssemblyLoadContext context = GetAssemblyLoadContext(gchManagedAssemblyLoadContext);
             dll = context.LoadUnmanagedDll(unmanagedDllName);
         }
 
-        private static void MonoResolveUnmanagedDllUsingEvent(string unmanagedDllName, Assembly assembly, IntPtr gchManagedAssemblyLoadContext, ref IntPtr dll)
+        private static void MonoResolveUnmanagedDllUsingEvent(
+            string unmanagedDllName,
+            Assembly assembly,
+            IntPtr gchManagedAssemblyLoadContext,
+            ref IntPtr dll
+        )
         {
             AssemblyLoadContext context = GetAssemblyLoadContext(gchManagedAssemblyLoadContext);
             dll = context.GetResolvedUnmanagedDll(assembly, unmanagedDllName);
@@ -163,11 +214,14 @@ namespace System.Runtime.Loader
 
         private static RuntimeAssembly? GetRuntimeAssembly(Assembly? asm)
         {
-            return
-                asm == null ? null :
-                asm is RuntimeAssembly rtAssembly ? rtAssembly :
-                asm is System.Reflection.Emit.AssemblyBuilder ab ? Unsafe.As<RuntimeAssembly>(ab) : // Mono AssemblyBuilder is also a RuntimeAssembly, see AssemblyBuilder.Mono.cs
-                null;
+            return asm == null
+              ? null
+              : asm is RuntimeAssembly rtAssembly
+                  ? rtAssembly
+                  : asm is System.Reflection.Emit.AssemblyBuilder ab
+                      ? Unsafe.As<RuntimeAssembly>(ab)
+                      : // Mono AssemblyBuilder is also a RuntimeAssembly, see AssemblyBuilder.Mono.cs
+                        null;
         }
     }
 }

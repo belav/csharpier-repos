@@ -20,9 +20,14 @@ public class CookieSlidingExpirationContext : PrincipalContext<CookieAuthenticat
     /// <param name="elapsedTime"></param>
     /// <param name="remainingTime"></param>
     /// <param name="options"></param>
-    public CookieSlidingExpirationContext(HttpContext context, AuthenticationScheme scheme, CookieAuthenticationOptions options,
-        AuthenticationTicket ticket, TimeSpan elapsedTime, TimeSpan remainingTime)
-        : base(context, scheme, options, ticket?.Properties)
+    public CookieSlidingExpirationContext(
+        HttpContext context,
+        AuthenticationScheme scheme,
+        CookieAuthenticationOptions options,
+        AuthenticationTicket ticket,
+        TimeSpan elapsedTime,
+        TimeSpan remainingTime
+    ) : base(context, scheme, options, ticket?.Properties)
     {
         if (ticket == null)
         {

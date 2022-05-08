@@ -28,9 +28,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbFunctionAttribute" /> class.
         /// </summary>
-        public DbFunctionAttribute()
-        {
-        }
+        public DbFunctionAttribute() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbFunctionAttribute" /> class.
@@ -90,7 +88,6 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         ///     Checks whether <see cref="IsNullable" /> has been explicitly set to a value.
         /// </summary>
-        public bool IsNullableHasValue
-            => _nullable.HasValue;
+        public bool IsNullableHasValue => _nullable.HasValue;
     }
 }

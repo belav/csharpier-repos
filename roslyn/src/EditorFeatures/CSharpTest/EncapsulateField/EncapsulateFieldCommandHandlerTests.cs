@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
         public void EncapsulatePrivateField()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     private int f$$ield;
@@ -33,7 +34,8 @@ class C
         field = 3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     private int field;
@@ -64,7 +66,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
         public void EncapsulateNonPrivateField()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     protected int fi$$eld;
@@ -74,7 +77,8 @@ class C
         field = 3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     private int field;
@@ -105,7 +109,8 @@ class C
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
         public void DialogShownIfNotFieldsFound()
         {
-            var text = @"
+            var text =
+                @"
 class$$ C
 {
     private int field;
@@ -124,7 +129,8 @@ class$$ C
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
         public void EncapsulateTwoFields()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     [|static int A = 1;
@@ -137,7 +143,8 @@ class Program
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static int A = 1;
@@ -186,7 +193,9 @@ class Program
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public void EncapsulateFieldCommandDisabledInSubmission()
         {
-            using var workspace = TestWorkspace.Create(XElement.Parse(@"
+            using var workspace = TestWorkspace.Create(
+                XElement.Parse(
+                    @"
                 <Workspace>
                     <Submission Language=""C#"" CommonReferences=""true"">  
                         class C
@@ -194,17 +203,28 @@ class Program
                             object $$goo;
                         }
                     </Submission>
-                </Workspace> "),
+                </Workspace> "
+                ),
                 workspaceKind: WorkspaceKind.Interactive,
-                composition: EditorTestCompositions.EditorFeaturesWpf);
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             // Force initialization.
-            workspace.GetOpenDocumentIds().Select(id => workspace.GetTestDocument(id).GetTextView()).ToList();
+            workspace
+                .GetOpenDocumentIds()
+                .Select(id => workspace.GetTestDocument(id).GetTextView())
+                .ToList();
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(PredefinedCommandHandlerNames.EncapsulateField, ContentTypeNames.CSharpContentType);
+            var handler =
+                workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(
+                    PredefinedCommandHandlerNames.EncapsulateField,
+                    ContentTypeNames.CSharpContentType
+                );
 
-            var state = handler.GetCommandState(new EncapsulateFieldCommandArgs(textView, textView.TextBuffer));
+            var state = handler.GetCommandState(
+                new EncapsulateFieldCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
         }
     }

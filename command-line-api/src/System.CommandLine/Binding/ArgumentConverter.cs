@@ -15,93 +15,95 @@ namespace System.CommandLine.Binding
 {
     internal static class ArgumentConverter
     {
-        private static readonly Dictionary<Type, TryConvertString> _stringConverters = new()
-        {
-            [typeof(DirectoryInfo)] = (string path, out object? value) =>
+        private static readonly Dictionary<Type, TryConvertString> _stringConverters =
+            new()
             {
-                value = new DirectoryInfo(path);
-                return true;
-            },
-
-            [typeof(int)] = (string token, out object? value) =>
-            {
-                if (int.TryParse(token, out var intValue))
-                {
-                    value = intValue;
-                    return true;
-                }
-
-                value = default;
-                return false;
-            },
-
-            [typeof(int?)] = (string token, out object? value) =>
-            {
-                if (int.TryParse(token, out var intValue))
-                {
-                    value = intValue;
-                    return true;
-                }
-
-                value = default;
-                return false;
-            },
-
-            [typeof(bool)] = (string token, out object? value) =>
-            {
-                if (bool.TryParse(token, out var parsed))
-                {
-                    value = parsed;
-                    return true;
-                }
-
-                value = default;
-                return false;
-            },
-            
-            [typeof(bool?)] = (string token, out object? value) =>
-            {
-                if (bool.TryParse(token, out var parsed))
-                {
-                    value = parsed;
-                    return true;
-                }
-
-                value = default;
-                return false;
-            },
-
-            [typeof(FileSystemInfo)] = (string path, out object? value) =>
-            {
-                if (Directory.Exists(path))
+                [typeof(DirectoryInfo)] = (string path, out object? value) =>
                 {
                     value = new DirectoryInfo(path);
-                }
-                else if (path.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal) ||
-                         path.EndsWith(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+                    return true;
+                },
+                [typeof(int)] = (string token, out object? value) =>
                 {
-                    value = new DirectoryInfo(path);
-                }
-                else
+                    if (int.TryParse(token, out var intValue))
+                    {
+                        value = intValue;
+                        return true;
+                    }
+
+                    value = default;
+                    return false;
+                },
+                [typeof(int?)] = (string token, out object? value) =>
+                {
+                    if (int.TryParse(token, out var intValue))
+                    {
+                        value = intValue;
+                        return true;
+                    }
+
+                    value = default;
+                    return false;
+                },
+                [typeof(bool)] = (string token, out object? value) =>
+                {
+                    if (bool.TryParse(token, out var parsed))
+                    {
+                        value = parsed;
+                        return true;
+                    }
+
+                    value = default;
+                    return false;
+                },
+                [typeof(bool?)] = (string token, out object? value) =>
+                {
+                    if (bool.TryParse(token, out var parsed))
+                    {
+                        value = parsed;
+                        return true;
+                    }
+
+                    value = default;
+                    return false;
+                },
+                [typeof(FileSystemInfo)] = (string path, out object? value) =>
+                {
+                    if (Directory.Exists(path))
+                    {
+                        value = new DirectoryInfo(path);
+                    }
+                    else if (
+                        path.EndsWith(
+                            Path.DirectorySeparatorChar.ToString(),
+                            StringComparison.Ordinal
+                        )
+                        || path.EndsWith(
+                            Path.AltDirectorySeparatorChar.ToString(),
+                            StringComparison.Ordinal
+                        )
+                    )
+                    {
+                        value = new DirectoryInfo(path);
+                    }
+                    else
+                    {
+                        value = new FileInfo(path);
+                    }
+
+                    return true;
+                },
+                [typeof(FileInfo)] = (string path, out object? value) =>
                 {
                     value = new FileInfo(path);
-                }
-
-                return true;
-            },
-
-            [typeof(FileInfo)] = (string path, out object? value) =>
-            {
-                value = new FileInfo(path);
-                return true;
-            },
-
-            [typeof(string)] = (string input, out object? value) =>
-            {
-                value = input;
-                return true;
-            },
-        };
+                    return true;
+                },
+                [typeof(string)] = (string input, out object? value) =>
+                {
+                    value = input;
+                    return true;
+                },
+            };
 
         private delegate bool TryConvertString(string token, out object? value);
 
@@ -109,14 +111,20 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type type,
             object? value,
-            LocalizationResources localizationResources)
+            LocalizationResources localizationResources
+        )
         {
             switch (value)
             {
                 case string singleValue:
                     if (type.IsEnumerable() && !type.HasStringTypeConverter())
                     {
-                        return ConvertStrings(argument, type, new[] { singleValue }, localizationResources);
+                        return ConvertStrings(
+                            argument,
+                            type,
+                            new[] { singleValue },
+                            localizationResources
+                        );
                     }
                     else
                     {
@@ -134,7 +142,8 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type type,
             string value,
-            LocalizationResources localizationResources)
+            LocalizationResources localizationResources
+        )
         {
             if (_stringConverters.TryGetValue(type, out var tryConvert))
             {
@@ -154,9 +163,7 @@ namespace System.CommandLine.Binding
                 {
                     try
                     {
-                        return Success(
-                            argument,
-                            typeConverter.ConvertFromInvariantString(value));
+                        return Success(argument, typeConverter.ConvertFromInvariantString(value));
                     }
                     catch (Exception)
                     {
@@ -165,13 +172,14 @@ namespace System.CommandLine.Binding
                 }
             }
 
-            if (type.TryFindConstructorWithSingleParameterOfType(
-                typeof(string), out ConstructorInfo? ctor))
+            if (
+                type.TryFindConstructorWithSingleParameterOfType(
+                    typeof(string),
+                    out ConstructorInfo? ctor
+                )
+            )
             {
-                var instance = ctor.Invoke(new object[]
-                {
-                    value
-                });
+                var instance = ctor.Invoke(new object[] { value });
 
                 return Success(argument, instance);
             }
@@ -184,7 +192,8 @@ namespace System.CommandLine.Binding
             Type type,
             IReadOnlyList<string> tokens,
             LocalizationResources localizationResources,
-            ArgumentResult? argumentResult = null)
+            ArgumentResult? argumentResult = null
+        )
         {
             Type itemType;
 
@@ -202,8 +211,8 @@ namespace System.CommandLine.Binding
             }
 
             var (values, isArray) = type.IsArray
-                                        ? (CreateArray(itemType, tokens.Count), true)
-                                        : (CreateList(itemType, tokens.Count), false);
+                ? (CreateArray(itemType, tokens.Count), true)
+                : (CreateList(itemType, tokens.Count), false);
 
             for (var i = 0; i < tokens.Count; i++)
             {
@@ -250,9 +259,11 @@ namespace System.CommandLine.Binding
                 }
                 else
                 {
-                    return (IList)Activator.CreateInstance(
-                        typeof(List<>).MakeGenericType(itemType),
-                        capacity);
+                    return (IList)
+                        Activator.CreateInstance(
+                            typeof(List<>).MakeGenericType(itemType),
+                            capacity
+                        );
                 }
             }
 
@@ -285,7 +296,10 @@ namespace System.CommandLine.Binding
 
                         bool ConvertSingleString(ArgumentResult result, out object? value)
                         {
-                            return converter(result.Tokens[result.Tokens.Count - 1].Value, out value);
+                            return converter(
+                                result.Tokens[result.Tokens.Count - 1].Value,
+                                out value
+                            );
                         }
                 }
             }
@@ -325,13 +339,17 @@ namespace System.CommandLine.Binding
         private static bool TryFindConstructorWithSingleParameterOfType(
             this Type type,
             Type parameterType,
-            [NotNullWhen(true)] out ConstructorInfo? ctor)
+            [NotNullWhen(true)] out ConstructorInfo? ctor
+        )
         {
             var (x, _) = type.GetConstructors()
-                             .Select(c => (ctor: c, parameters: c.GetParameters()))
-                             .SingleOrDefault(tuple => tuple.ctor.IsPublic &&
-                                                       tuple.parameters.Length == 1 &&
-                                                       tuple.parameters[0].ParameterType == parameterType);
+                .Select(c => (ctor: c, parameters: c.GetParameters()))
+                .SingleOrDefault(
+                    tuple =>
+                        tuple.ctor.IsPublic
+                        && tuple.parameters.Length == 1
+                        && tuple.parameters[0].ParameterType == parameterType
+                );
 
             if (x is not null)
             {
@@ -346,46 +364,61 @@ namespace System.CommandLine.Binding
         }
 
         private static bool HasStringTypeConverter(this Type type) =>
-            TypeDescriptor.GetConverter(type) is { } typeConverter &&
-            typeConverter.CanConvertFrom(typeof(string));
+            TypeDescriptor.GetConverter(type) is { } typeConverter
+            && typeConverter.CanConvertFrom(typeof(string));
 
         private static FailedArgumentConversionResult Failure(
             IArgument argument,
             Type expectedType,
             string value,
-            LocalizationResources localizationResources)
+            LocalizationResources localizationResources
+        )
         {
-            return new FailedArgumentTypeConversionResult(argument, expectedType, value, localizationResources);
+            return new FailedArgumentTypeConversionResult(
+                argument,
+                expectedType,
+                value,
+                localizationResources
+            );
         }
 
         internal static ArgumentConversionResult ConvertIfNeeded(
             this ArgumentConversionResult conversionResult,
             SymbolResult symbolResult,
-            Type toType)
+            Type toType
+        )
         {
             return conversionResult switch
             {
-                SuccessfulArgumentConversionResult successful when !toType.IsInstanceOfType(successful.Value) =>
-                    ConvertObject(conversionResult.Argument,
-                                  toType,
-                                  successful.Value,
-                                  symbolResult.LocalizationResources),
-                SuccessfulArgumentConversionResult successful when toType == typeof(object) &&
-                                                                   conversionResult.Argument.Arity.MaximumNumberOfValues > 1 &&
-                                                                   successful.Value is string =>
-                    ConvertObject(conversionResult.Argument,
-                                  typeof(IEnumerable<string>),
-                                  successful.Value,
-                                  symbolResult.LocalizationResources),
-                NoArgumentConversionResult _ when toType == typeof(bool) =>
-                    Success(conversionResult.Argument,
-                            true),
-                NoArgumentConversionResult _ when conversionResult.Argument.Arity.MinimumNumberOfValues > 0 =>
-                    new MissingArgumentConversionResult(conversionResult.Argument,
-                                                        symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult)),
-                NoArgumentConversionResult _ when conversionResult.Argument.Arity.MaximumNumberOfValues > 1 =>
-                    Success(conversionResult.Argument,
-                            Array.Empty<string>()),
+                SuccessfulArgumentConversionResult successful
+                    when !toType.IsInstanceOfType(successful.Value)
+                  => ConvertObject(
+                      conversionResult.Argument,
+                      toType,
+                      successful.Value,
+                      symbolResult.LocalizationResources
+                  ),
+                SuccessfulArgumentConversionResult successful
+                    when toType == typeof(object)
+                        && conversionResult.Argument.Arity.MaximumNumberOfValues > 1
+                        && successful.Value is string
+                  => ConvertObject(
+                      conversionResult.Argument,
+                      typeof(IEnumerable<string>),
+                      successful.Value,
+                      symbolResult.LocalizationResources
+                  ),
+                NoArgumentConversionResult _ when toType == typeof(bool)
+                  => Success(conversionResult.Argument, true),
+                NoArgumentConversionResult _
+                    when conversionResult.Argument.Arity.MinimumNumberOfValues > 0
+                  => new MissingArgumentConversionResult(
+                      conversionResult.Argument,
+                      symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult)
+                  ),
+                NoArgumentConversionResult _
+                    when conversionResult.Argument.Arity.MaximumNumberOfValues > 1
+                  => Success(conversionResult.Argument, Array.Empty<string>()),
                 _ => conversionResult
             };
         }
@@ -396,7 +429,8 @@ namespace System.CommandLine.Binding
             return result switch
             {
                 SuccessfulArgumentConversionResult successful => (T)successful.Value!,
-                FailedArgumentConversionResult failed => throw new InvalidOperationException(failed.ErrorMessage),
+                FailedArgumentConversionResult failed
+                  => throw new InvalidOperationException(failed.ErrorMessage),
                 NoArgumentConversionResult _ => default!,
                 _ => default!,
             };
@@ -425,16 +459,23 @@ namespace System.CommandLine.Binding
             {
                 // 0 is an implicit bool, i.e. a "flag"
                 0 => Success(argumentResult.Argument, true),
-                1 => ConvertObject(argument,
-                                   argument.ValueType,
-                                   argumentResult.Tokens.Count > 0
-                                       ? argumentResult.Tokens[argumentResult.Tokens.Count - 1].Value
-                                       : null, argumentResult.LocalizationResources),
-                _ => ConvertStrings(argument,
-                                    argument.ValueType,
-                                    argumentResult.Tokens.Select(t => t.Value).ToArray(),
-                                    argumentResult.LocalizationResources,
-                                    argumentResult)
+                1
+                  => ConvertObject(
+                      argument,
+                      argument.ValueType,
+                      argumentResult.Tokens.Count > 0
+                        ? argumentResult.Tokens[argumentResult.Tokens.Count - 1].Value
+                        : null,
+                      argumentResult.LocalizationResources
+                  ),
+                _
+                  => ConvertStrings(
+                      argument,
+                      argument.ValueType,
+                      argumentResult.Tokens.Select(t => t.Value).ToArray(),
+                      argumentResult.LocalizationResources,
+                      argumentResult
+                  )
             };
 
             return value is SuccessfulArgumentConversionResult;

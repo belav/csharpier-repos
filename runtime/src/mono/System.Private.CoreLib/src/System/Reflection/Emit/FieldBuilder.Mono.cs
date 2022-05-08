@@ -58,8 +58,15 @@ namespace System.Reflection.Emit
         private Type[]? modOpt;
 #endregion
 
-        [DynamicDependency(nameof(modOpt))]  // Automatically keeps all previous fields too due to StructLayout
-        internal FieldBuilder(TypeBuilder tb, string fieldName, Type type, FieldAttributes attributes, Type[]? modReq, Type[]? modOpt)
+        [DynamicDependency(nameof(modOpt))] // Automatically keeps all previous fields too due to StructLayout
+        internal FieldBuilder(
+            TypeBuilder tb,
+            string fieldName,
+            Type type,
+            FieldAttributes attributes,
+            Type[]? modReq,
+            Type[]? modOpt
+        )
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -87,10 +94,7 @@ namespace System.Reflection.Emit
 
         public override RuntimeFieldHandle FieldHandle
         {
-            get
-            {
-                throw CreateNotSupportedException();
-            }
+            get { throw CreateNotSupportedException(); }
         }
 
         public override Type FieldType
@@ -129,7 +133,10 @@ namespace System.Reflection.Emit
                 throw CreateNotSupportedException();
         }
 
-        public override int MetadataToken { get { return ((ModuleBuilder)typeb.Module).GetToken(this); } }
+        public override int MetadataToken
+        {
+            get { return ((ModuleBuilder)typeb.Module).GetToken(this); }
+        }
 
         public override object? GetValue(object? obj)
         {
@@ -224,20 +231,30 @@ namespace System.Reflection.Emit
             offset = iOffset;
         }
 
-        public override void SetValue(object? obj, object? val, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? val,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             throw CreateNotSupportedException();
         }
 
         private static Exception CreateNotSupportedException()
         {
-            return new NotSupportedException("The invoked member is not supported in a dynamic module.");
+            return new NotSupportedException(
+                "The invoked member is not supported in a dynamic module."
+            );
         }
 
         private void RejectIfCreated()
         {
             if (typeb.is_created)
-                throw new InvalidOperationException("Unable to change after type has been created.");
+                throw new InvalidOperationException(
+                    "Unable to change after type has been created."
+                );
         }
 
         internal void ResolveUserTypes()
@@ -246,7 +263,9 @@ namespace System.Reflection.Emit
             TypeBuilder.ResolveUserTypes(modReq);
             TypeBuilder.ResolveUserTypes(modOpt);
             if (marshal_info != null)
-                marshal_info.marshaltyperef = TypeBuilder.ResolveUserType(marshal_info.marshaltyperef);
+                marshal_info.marshaltyperef = TypeBuilder.ResolveUserType(
+                    marshal_info.marshaltyperef
+                );
         }
 
         internal FieldInfo RuntimeResolve()
@@ -258,10 +277,7 @@ namespace System.Reflection.Emit
 
         public override Module Module
         {
-            get
-            {
-                return base.Module;
-            }
+            get { return base.Module; }
         }
     }
 }

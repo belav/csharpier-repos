@@ -29,7 +29,8 @@ public class InitCommandTests : IClassFixture<UserSecretsTestFixture>
         _console = new TestConsole(output);
     }
 
-    private CommandContext MakeCommandContext() => new CommandContext(null, new TestReporter(_output), _console);
+    private CommandContext MakeCommandContext() =>
+        new CommandContext(null, new TestReporter(_output), _console);
 
     [Fact]
     public void AddsSecretIdToProject()
@@ -102,13 +103,22 @@ public class InitCommandTests : IClassFixture<UserSecretsTestFixture>
     {
         var projectDir = _fixture.CreateProject(null);
         var projectFile = Path.Combine(projectDir, "TestProject.csproj");
-        var projectDocumentWithoutSecret = XDocument.Load(projectFile, LoadOptions.PreserveWhitespace);
-        var lineCountWithoutSecret = projectDocumentWithoutSecret.ToString().Split(Environment.NewLine).Length;
+        var projectDocumentWithoutSecret = XDocument.Load(
+            projectFile,
+            LoadOptions.PreserveWhitespace
+        );
+        var lineCountWithoutSecret = projectDocumentWithoutSecret
+            .ToString()
+            .Split(Environment.NewLine)
+            .Length;
 
         new InitCommand(null, null).Execute(MakeCommandContext(), projectDir);
 
         var projectDocumentWithSecret = XDocument.Load(projectFile, LoadOptions.PreserveWhitespace);
-        var lineCountWithSecret = projectDocumentWithSecret.ToString().Split(Environment.NewLine).Length;
+        var lineCountWithSecret = projectDocumentWithSecret
+            .ToString()
+            .Split(Environment.NewLine)
+            .Length;
 
         Assert.True(lineCountWithSecret == lineCountWithoutSecret + 1);
     }
@@ -135,9 +145,11 @@ public class InitCommandTests : IClassFixture<UserSecretsTestFixture>
 
         var projectDir = _fixture.CreateProject(null);
 
-        Assert.Throws<ArgumentException>(() =>
-        {
-            new InitCommand(secretId, null).Execute(MakeCommandContext(), projectDir);
-        });
+        Assert.Throws<ArgumentException>(
+            () =>
+            {
+                new InitCommand(secretId, null).Execute(MakeCommandContext(), projectDir);
+            }
+        );
     }
 }

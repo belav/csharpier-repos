@@ -12,18 +12,22 @@ namespace System.Drawing.Imaging
         /// Specifies the Cyan color channel.
         /// </summary>
         ColorChannelC = 0,
+
         /// <summary>
         /// Specifies the Magenta color channel.
         /// </summary>
         ColorChannelM,
+
         /// <summary>
         /// Specifies the Yellow color channel.
         /// </summary>
         ColorChannelY,
+
         /// <summary>
         /// Specifies the Black color channel.
         /// </summary>
         ColorChannelK,
+
         /// <summary>
         /// This element specifies to leave the color channel unchanged from the last selected channel.
         /// </summary>

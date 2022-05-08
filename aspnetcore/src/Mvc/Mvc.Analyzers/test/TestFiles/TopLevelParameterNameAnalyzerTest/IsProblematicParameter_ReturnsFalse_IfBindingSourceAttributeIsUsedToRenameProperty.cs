@@ -5,6 +5,8 @@
         [FromQuery(Name = "different")]
         public string Model { get; set; }
 
-        public void ActionMethod(IsProblematicParameter_ReturnsFalse_IfBindingSourceAttributeIsUsedToRenameProperty model) { }
+        public void ActionMethod(
+            IsProblematicParameter_ReturnsFalse_IfBindingSourceAttributeIsUsedToRenameProperty model
+        ) { }
     }
 }

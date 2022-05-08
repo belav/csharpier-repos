@@ -15,31 +15,42 @@ internal static class CodeWriterExtensions
 
     private static readonly char[] CStyleStringLiteralEscapeChars =
     {
-            '\r',
-            '\t',
-            '\"',
-            '\'',
-            '\\',
-            '\0',
-            '\n',
-            '\u2028',
-            '\u2029',
-        };
+        '\r',
+        '\t',
+        '\"',
+        '\'',
+        '\\',
+        '\0',
+        '\n',
+        '\u2028',
+        '\u2029',
+    };
 
     public static bool IsAtBeginningOfLine(this CodeWriter writer)
     {
         return writer.Length == 0 || writer[writer.Length - 1] == '\n';
     }
 
-    public static CodeWriter WritePadding(this CodeWriter writer, int offset, SourceSpan? span, CodeRenderingContext context)
+    public static CodeWriter WritePadding(
+        this CodeWriter writer,
+        int offset,
+        SourceSpan? span,
+        CodeRenderingContext context
+    )
     {
         if (span == null)
         {
             return writer;
         }
 
-        if (context.SourceDocument.FilePath != null &&
-            !string.Equals(context.SourceDocument.FilePath, span.Value.FilePath, StringComparison.OrdinalIgnoreCase))
+        if (
+            context.SourceDocument.FilePath != null
+            && !string.Equals(
+                context.SourceDocument.FilePath,
+                span.Value.FilePath,
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             // We don't want to generate padding for nodes from imports.
             return writer;
@@ -76,7 +87,12 @@ internal static class CodeWriterExtensions
         }
     }
 
-    public static CodeWriter WriteVariableDeclaration(this CodeWriter writer, string type, string name, string value)
+    public static CodeWriter WriteVariableDeclaration(
+        this CodeWriter writer,
+        string type,
+        string name,
+        string value
+    )
     {
         writer.Write(type).Write(" ").Write(name);
         if (!string.IsNullOrEmpty(value))
@@ -145,15 +161,26 @@ internal static class CodeWriterExtensions
         return writer;
     }
 
-    public static CodeWriter WriteEnhancedLineNumberDirective(this CodeWriter writer, SourceSpan span, int characterOffset)
+    public static CodeWriter WriteEnhancedLineNumberDirective(
+        this CodeWriter writer,
+        SourceSpan span,
+        int characterOffset
+    )
     {
         // All values here need to be offset by 1 since #line uses a 1-indexed numbering system.
         var lineNumberAsString = (span.LineIndex + 1).ToString(CultureInfo.InvariantCulture);
-        var characterStartAsString = (span.CharacterIndex + 1).ToString(CultureInfo.InvariantCulture);
-        var lineEndAsString = (span.LineIndex + 1 + span.LineCount).ToString(CultureInfo.InvariantCulture);
-        var characterEndAsString = (span.EndCharacterIndex + 1).ToString(CultureInfo.InvariantCulture);
+        var characterStartAsString = (span.CharacterIndex + 1).ToString(
+            CultureInfo.InvariantCulture
+        );
+        var lineEndAsString = (span.LineIndex + 1 + span.LineCount).ToString(
+            CultureInfo.InvariantCulture
+        );
+        var characterEndAsString = (span.EndCharacterIndex + 1).ToString(
+            CultureInfo.InvariantCulture
+        );
         var characterOffsetAsString = characterOffset.ToString(CultureInfo.InvariantCulture);
-        return writer.Write("#line (")
+        return writer
+            .Write("#line (")
             .Write(lineNumberAsString)
             .Write(",")
             .Write(characterStartAsString)
@@ -163,7 +190,9 @@ internal static class CodeWriterExtensions
             .Write(characterEndAsString)
             .Write(") ")
             .Write(characterOffsetAsString)
-            .Write(" \"").Write(span.FilePath).WriteLine("\"");
+            .Write(" \"")
+            .Write(span.FilePath)
+            .WriteLine("\"");
     }
 
     public static CodeWriter WriteLineNumberDirective(this CodeWriter writer, SourceSpan span)
@@ -174,7 +203,12 @@ internal static class CodeWriterExtensions
         }
 
         var lineNumberAsString = (span.LineIndex + 1).ToString(CultureInfo.InvariantCulture);
-        return writer.Write("#line ").Write(lineNumberAsString).Write(" \"").Write(span.FilePath).WriteLine("\"");
+        return writer
+            .Write("#line ")
+            .Write(lineNumberAsString)
+            .Write(" \"")
+            .Write(span.FilePath)
+            .WriteLine("\"");
     }
 
     public static CodeWriter WriteStartMethodInvocation(this CodeWriter writer, string methodName)
@@ -205,7 +239,8 @@ internal static class CodeWriterExtensions
         this CodeWriter writer,
         string instanceName,
         string methodName,
-        params string[] parameters)
+        params string[] parameters
+    )
     {
         if (instanceName == null)
         {
@@ -217,7 +252,13 @@ internal static class CodeWriterExtensions
             throw new ArgumentNullException(nameof(methodName));
         }
 
-        return WriteInstanceMethodInvocation(writer, instanceName, methodName, endLine: true, parameters: parameters);
+        return WriteInstanceMethodInvocation(
+            writer,
+            instanceName,
+            methodName,
+            endLine: true,
+            parameters: parameters
+        );
     }
 
     // Writes a method invocation for the given instance name.
@@ -226,7 +267,8 @@ internal static class CodeWriterExtensions
         string instanceName,
         string methodName,
         bool endLine,
-        params string[] parameters)
+        params string[] parameters
+    )
     {
         if (instanceName == null)
         {
@@ -240,12 +282,22 @@ internal static class CodeWriterExtensions
 
         return WriteMethodInvocation(
             writer,
-            string.Format(CultureInfo.InvariantCulture, InstanceMethodFormat, instanceName, methodName),
+            string.Format(
+                CultureInfo.InvariantCulture,
+                InstanceMethodFormat,
+                instanceName,
+                methodName
+            ),
             endLine,
-            parameters);
+            parameters
+        );
     }
 
-    public static CodeWriter WriteStartInstanceMethodInvocation(this CodeWriter writer, string instanceName, string methodName)
+    public static CodeWriter WriteStartInstanceMethodInvocation(
+        this CodeWriter writer,
+        string instanceName,
+        string methodName
+    )
     {
         if (instanceName == null)
         {
@@ -259,10 +311,22 @@ internal static class CodeWriterExtensions
 
         return WriteStartMethodInvocation(
             writer,
-            string.Format(CultureInfo.InvariantCulture, InstanceMethodFormat, instanceName, methodName));
+            string.Format(
+                CultureInfo.InvariantCulture,
+                InstanceMethodFormat,
+                instanceName,
+                methodName
+            )
+        );
     }
 
-    public static CodeWriter WriteField(this CodeWriter writer, IList<string> suppressWarnings, IList<string> modifiers, string typeName, string fieldName)
+    public static CodeWriter WriteField(
+        this CodeWriter writer,
+        IList<string> suppressWarnings,
+        IList<string> modifiers,
+        string typeName,
+        string fieldName
+    )
     {
         if (suppressWarnings == null)
         {
@@ -311,20 +375,33 @@ internal static class CodeWriterExtensions
         return writer;
     }
 
-    public static CodeWriter WriteMethodInvocation(this CodeWriter writer, string methodName, params string[] parameters)
+    public static CodeWriter WriteMethodInvocation(
+        this CodeWriter writer,
+        string methodName,
+        params string[] parameters
+    )
     {
         return WriteMethodInvocation(writer, methodName, endLine: true, parameters: parameters);
     }
 
-    public static CodeWriter WriteMethodInvocation(this CodeWriter writer, string methodName, bool endLine, params string[] parameters)
+    public static CodeWriter WriteMethodInvocation(
+        this CodeWriter writer,
+        string methodName,
+        bool endLine,
+        params string[] parameters
+    )
     {
-        return
-            WriteStartMethodInvocation(writer, methodName)
+        return WriteStartMethodInvocation(writer, methodName)
             .Write(string.Join(", ", parameters))
             .WriteEndMethodInvocation(endLine);
     }
 
-    public static CodeWriter WriteAutoPropertyDeclaration(this CodeWriter writer, IList<string> modifiers, string typeName, string propertyName)
+    public static CodeWriter WriteAutoPropertyDeclaration(
+        this CodeWriter writer,
+        IList<string> modifiers,
+        string typeName,
+        string propertyName
+    )
     {
         if (modifiers == null)
         {
@@ -361,17 +438,27 @@ internal static class CodeWriterExtensions
         return new CSharpCodeWritingScope(writer);
     }
 
-    public static CSharpCodeWritingScope BuildLambda(this CodeWriter writer, params string[] parameterNames)
+    public static CSharpCodeWritingScope BuildLambda(
+        this CodeWriter writer,
+        params string[] parameterNames
+    )
     {
         return BuildLambda(writer, async: false, parameterNames: parameterNames);
     }
 
-    public static CSharpCodeWritingScope BuildAsyncLambda(this CodeWriter writer, params string[] parameterNames)
+    public static CSharpCodeWritingScope BuildAsyncLambda(
+        this CodeWriter writer,
+        params string[] parameterNames
+    )
     {
         return BuildLambda(writer, async: true, parameterNames: parameterNames);
     }
 
-    private static CSharpCodeWritingScope BuildLambda(CodeWriter writer, bool async, string[] parameterNames)
+    private static CSharpCodeWritingScope BuildLambda(
+        CodeWriter writer,
+        bool async,
+        string[] parameterNames
+    )
     {
         if (async)
         {
@@ -398,7 +485,8 @@ internal static class CodeWriterExtensions
         string name,
         string baseType,
         IList<string> interfaces,
-        IList<(string name, string constraint)> typeParameters)
+        IList<(string name, string constraint)> typeParameters
+    )
     {
         for (var i = 0; i < modifiers.Count; i++)
         {
@@ -461,9 +549,11 @@ internal static class CodeWriterExtensions
         string accessibility,
         string returnType,
         string name,
-        IEnumerable<KeyValuePair<string, string>> parameters)
+        IEnumerable<KeyValuePair<string, string>> parameters
+    )
     {
-        writer.Write(accessibility)
+        writer
+            .Write(accessibility)
             .Write(" ")
             .Write(returnType)
             .Write(" ")
@@ -475,7 +565,11 @@ internal static class CodeWriterExtensions
         return new CSharpCodeWritingScope(writer);
     }
 
-    public static IDisposable BuildLinePragma(this CodeWriter writer, SourceSpan? span, CodeRenderingContext context)
+    public static IDisposable BuildLinePragma(
+        this CodeWriter writer,
+        SourceSpan? span,
+        CodeRenderingContext context
+    )
     {
         if (string.IsNullOrEmpty(span?.FilePath))
         {
@@ -486,7 +580,12 @@ internal static class CodeWriterExtensions
         return new LinePragmaWriter(writer, span.Value, context, 0, false);
     }
 
-    public static IDisposable BuildEnhancedLinePragma(this CodeWriter writer, SourceSpan? span, CodeRenderingContext context, int characterOffset = 0)
+    public static IDisposable BuildEnhancedLinePragma(
+        this CodeWriter writer,
+        SourceSpan? span,
+        CodeRenderingContext context,
+        int characterOffset = 0
+    )
     {
         if (string.IsNullOrEmpty(span?.FilePath))
         {
@@ -494,7 +593,13 @@ internal static class CodeWriterExtensions
             return NullDisposable.Default;
         }
 
-        return new LinePragmaWriter(writer, span.Value, context, characterOffset, useEnhancedLinePragma: true);
+        return new LinePragmaWriter(
+            writer,
+            span.Value,
+            context,
+            characterOffset,
+            useEnhancedLinePragma: true
+        );
     }
 
     private static void WriteVerbatimStringLiteral(CodeWriter writer, string literal)
@@ -630,9 +735,7 @@ internal static class CodeWriterExtensions
 
         private void TryAutoSpace(string spaceCharacter)
         {
-            if (_autoSpace &&
-                _writer.Length > 0 &&
-                !char.IsWhiteSpace(_writer[_writer.Length - 1]))
+            if (_autoSpace && _writer.Length > 0 && !char.IsWhiteSpace(_writer[_writer.Length - 1]))
             {
                 _writer.Write(spaceCharacter);
             }
@@ -653,7 +756,8 @@ internal static class CodeWriterExtensions
             SourceSpan span,
             CodeRenderingContext context,
             int characterOffset,
-            bool useEnhancedLinePragma = false)
+            bool useEnhancedLinePragma = false
+        )
         {
             if (writer == null)
             {
@@ -686,7 +790,6 @@ internal static class CodeWriterExtensions
                 WriteLineNumberDirective(writer, span);
             }
 
-
             // Capture the line index after writing the #line directive.
             _startLineIndex = writer.Location.LineIndex;
         }
@@ -710,9 +813,7 @@ internal static class CodeWriterExtensions
             var linePragma = new LinePragma(_sourceLineIndex, lineCount, _sourceFilePath);
             _context.AddLinePragma(linePragma);
 
-            _writer
-                .WriteLine("#line default")
-                .WriteLine("#line hidden");
+            _writer.WriteLine("#line default").WriteLine("#line hidden");
 
             if (!_context.Options.SuppressNullabilityEnforcement)
             {
@@ -720,7 +821,6 @@ internal static class CodeWriterExtensions
             }
 
             _writer.CurrentIndent = _startIndent;
-
         }
     }
 
@@ -728,12 +828,8 @@ internal static class CodeWriterExtensions
     {
         public static readonly NullDisposable Default = new NullDisposable();
 
-        private NullDisposable()
-        {
-        }
+        private NullDisposable() { }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

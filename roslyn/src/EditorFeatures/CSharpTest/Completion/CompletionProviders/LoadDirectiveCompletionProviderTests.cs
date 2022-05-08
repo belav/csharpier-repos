@@ -23,31 +23,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class LoadDirectiveCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(LoadDirectiveCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(LoadDirectiveCompletionProvider);
 
-        protected override IEqualityComparer<string> GetStringComparer()
-            => StringComparer.OrdinalIgnoreCase;
+        protected override IEqualityComparer<string> GetStringComparer() =>
+            StringComparer.OrdinalIgnoreCase;
 
         private protected override Task VerifyWorkerAsync(
-            string code, int position, string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool usePreviousCharAsTrigger, bool checkForAbsence,
-            int? glyph, int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription = null, bool? isComplexTextEdit = null,
-            List<CompletionFilter> matchingFilters = null, CompletionItemFlags? flags = null)
+            string code,
+            int position,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool usePreviousCharAsTrigger,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription = null,
+            bool? isComplexTextEdit = null,
+            List<CompletionFilter> matchingFilters = null,
+            CompletionItemFlags? flags = null
+        )
         {
             return BaseVerifyWorkerAsync(
-                code, position, expectedItemOrNull, expectedDescriptionOrNull,
-                sourceCodeKind, usePreviousCharAsTrigger, checkForAbsence,
-                glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags);
+                code,
+                position,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                usePreviousCharAsTrigger,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags
+            );
         }
 
         [Fact]
         public async Task IsCommitCharacterTest()
         {
             var commitCharacters = new[] { '"', '\\' };
-            await VerifyCommitCharactersAsync("#load \"$$", textTypedSoFar: "", validChars: commitCharacters, sourceCodeKind: SourceCodeKind.Script);
+            await VerifyCommitCharactersAsync(
+                "#load \"$$",
+                textTypedSoFar: "",
+                validChars: commitCharacters,
+                sourceCodeKind: SourceCodeKind.Script
+            );
         }
 
         [Theory]
@@ -57,8 +87,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("#load \"$$A")]
         [InlineData("#load \"$$!")]
         [InlineData("#load \"$$(")]
-        public void IsTextualTriggerCharacterTest(string markup)
-            => VerifyTextualTriggerCharacter(markup, shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: true, SourceCodeKind.Script);
+        public void IsTextualTriggerCharacterTest(string markup) =>
+            VerifyTextualTriggerCharacter(
+                markup,
+                shouldTriggerWithTriggerOnLettersEnabled: true,
+                shouldTriggerWithTriggerOnLettersDisabled: true,
+                SourceCodeKind.Script
+            );
 
         [Theory]
         [InlineData("$$", false)]
@@ -77,9 +112,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var text = textWithPositionMarker.Replace("$$", "");
 
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
-            var provider = workspace.ExportProvider.GetExports<CompletionProvider, CompletionProviderMetadata>().Single(p => p.Metadata.Language == LanguageNames.CSharp && p.Metadata.Name == nameof(LoadDirectiveCompletionProvider)).Value;
+            var provider = workspace.ExportProvider
+                .GetExports<CompletionProvider, CompletionProviderMetadata>()
+                .Single(
+                    p =>
+                        p.Metadata.Language == LanguageNames.CSharp
+                        && p.Metadata.Name == nameof(LoadDirectiveCompletionProvider)
+                )
+                .Value;
             var languageServices = workspace.Services.GetLanguageServices(LanguageNames.CSharp);
-            Assert.Equal(expectedResult, provider.ShouldTriggerCompletion(languageServices, SourceText.From(text), position, trigger: default, CompletionOptions.Default));
+            Assert.Equal(
+                expectedResult,
+                provider.ShouldTriggerCompletion(
+                    languageServices,
+                    SourceText.From(text),
+                    position,
+                    trigger: default,
+                    CompletionOptions.Default
+                )
+            );
         }
     }
 }

@@ -11,7 +11,11 @@ using Microsoft.CodeAnalysis.CodeActions;
 
 namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 {
-    internal partial class AbstractGenerateVariableService<TService, TSimpleNameSyntax, TExpressionSyntax>
+    internal partial class AbstractGenerateVariableService<
+        TService,
+        TSimpleNameSyntax,
+        TExpressionSyntax
+    >
     {
         private class GenerateParameterCodeAction : CodeAction
         {
@@ -19,7 +23,11 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             private readonly State _state;
             private readonly bool _includeOverridesAndImplementations;
 
-            public GenerateParameterCodeAction(Document document, State state, bool includeOverridesAndImplementations)
+            public GenerateParameterCodeAction(
+                Document document,
+                State state,
+                bool includeOverridesAndImplementations
+            )
             {
                 _document = document;
                 _state = state;
@@ -34,13 +42,13 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                         ? FeaturesResources.Generate_parameter_0_and_overrides_implementations
                         : FeaturesResources.Generate_parameter_0;
 
-                    return string.Format(
-                        text,
-                        _state.IdentifierToken.ValueText);
+                    return string.Format(text, _state.IdentifierToken.ValueText);
                 }
             }
 
-            protected override Task<Solution> GetChangedSolutionAsync(CancellationToken cancellationToken)
+            protected override Task<Solution> GetChangedSolutionAsync(
+                CancellationToken cancellationToken
+            )
             {
                 return AddParameterService.Instance.AddParameterAsync(
                     _document,
@@ -50,7 +58,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     _state.IdentifierToken.ValueText,
                     newParameterIndex: null,
                     _includeOverridesAndImplementations,
-                    cancellationToken);
+                    cancellationToken
+                );
             }
         }
     }

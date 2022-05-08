@@ -20,8 +20,7 @@ internal sealed class FileStreamResult : FileResult, IResult
     /// </summary>
     /// <param name="fileStream">The stream with the file.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
-    public FileStreamResult(Stream fileStream, string? contentType)
-        : base(contentType)
+    public FileStreamResult(Stream fileStream, string? contentType) : base(contentType)
     {
         if (fileStream == null)
         {
@@ -64,7 +63,8 @@ internal sealed class FileStreamResult : FileResult, IResult
                 EnableRangeProcessing,
                 LastModified,
                 EntityTag,
-                logger);
+                logger
+            );
 
             if (!serveBody)
             {

@@ -16,7 +16,6 @@ namespace System.CommandLine.Suggest
             var fxDepsFile = GetDataFromAppDomain("FX_DEPS_FILE");
 
             if (string.IsNullOrEmpty(fxDepsFile))
-
             {
                 return;
             }
@@ -26,10 +25,11 @@ namespace System.CommandLine.Suggest
             if (muxerDir == null)
             {
                 return;
-
             }
 
-            var muxerCandidate = new FileInfo(System.IO.Path.Combine(muxerDir.FullName, muxerFileName));
+            var muxerCandidate = new FileInfo(
+                System.IO.Path.Combine(muxerDir.FullName, muxerFileName)
+            );
 
             if (muxerCandidate.Exists)
             {
@@ -48,7 +48,7 @@ namespace System.CommandLine.Suggest
 
         public static string ExecutableName(this string withoutExtension) =>
             RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                ? withoutExtension + ".exe"
-                : withoutExtension;
+              ? withoutExtension + ".exe"
+              : withoutExtension;
     }
 }

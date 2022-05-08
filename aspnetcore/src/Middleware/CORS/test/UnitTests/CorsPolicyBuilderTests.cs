@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -125,7 +125,10 @@ public class CorsPolicyBuilderTests
         // Assert
         var corsPolicy = builder.Build();
         Assert.False(corsPolicy.AllowAnyOrigin);
-        Assert.Equal(new List<string>() { "http://example.com", "http://example2.com" }, corsPolicy.Origins);
+        Assert.Equal(
+            new List<string>() { "http://example.com", "http://example2.com" },
+            corsPolicy.Origins
+        );
     }
 
     [Fact]
@@ -136,7 +139,10 @@ public class CorsPolicyBuilderTests
 
         // Assert
         var corsPolicy = builder.Build();
-        Assert.Equal(new List<string>() { "http://www.example.com", "https://example2.com" }, corsPolicy.Origins);
+        Assert.Equal(
+            new List<string>() { "http://www.example.com", "https://example2.com" },
+            corsPolicy.Origins
+        );
     }
 
     [Fact]
@@ -339,9 +345,7 @@ public class CorsPolicyBuilderTests
     public void Build_ThrowsIfConfiguredToAllowAnyOriginWithCredentials()
     {
         // Arrange
-        var builder = new CorsPolicyBuilder()
-            .AllowAnyOrigin()
-            .AllowCredentials();
+        var builder = new CorsPolicyBuilder().AllowAnyOrigin().AllowCredentials();
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => builder.Build());
@@ -354,7 +358,10 @@ public class CorsPolicyBuilderTests
     [InlineData("Some-String", "some-string")]
     [InlineData("x:\\Test", "x:\\test")]
     [InlineData("FTP://Some-url", "ftp://some-url")]
-    public void GetNormalizedOrigin_ReturnsLowerCasedValue_IfStringIsNotHttpOrHttpsUrl(string origin, string expected)
+    public void GetNormalizedOrigin_ReturnsLowerCasedValue_IfStringIsNotHttpOrHttpsUrl(
+        string origin,
+        string expected
+    )
     {
         // Act
         var normalizedOrigin = CorsPolicyBuilder.GetNormalizedOrigin(origin);

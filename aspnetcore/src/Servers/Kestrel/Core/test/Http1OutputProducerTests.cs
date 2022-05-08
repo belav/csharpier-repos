@@ -32,8 +32,7 @@ public class Http1OutputProducerTests : IDisposable
     [Fact]
     public async Task WritesNoopAfterConnectionCloses()
     {
-        var pipeOptions = new PipeOptions
-        (
+        var pipeOptions = new PipeOptions(
             pool: _memoryPool,
             readerScheduler: Mock.Of<PipeScheduler>(),
             writerScheduler: PipeScheduler.Inline,
@@ -63,7 +62,10 @@ public class Http1OutputProducerTests : IDisposable
 
         outputProducer.Dispose();
 
-        mockConnectionContext.Verify(f => f.Abort(It.IsAny<ConnectionAbortedException>()), Times.Never());
+        mockConnectionContext.Verify(
+            f => f.Abort(It.IsAny<ConnectionAbortedException>()),
+            Times.Never()
+        );
 
         outputProducer.Abort(null);
 
@@ -77,8 +79,7 @@ public class Http1OutputProducerTests : IDisposable
     [Fact]
     public void AllocatesFakeMemorySmallerThanMaxBufferSize()
     {
-        var pipeOptions = new PipeOptions
-        (
+        var pipeOptions = new PipeOptions(
             pool: _memoryPool,
             readerScheduler: Mock.Of<PipeScheduler>(),
             writerScheduler: PipeScheduler.Inline,
@@ -97,8 +98,7 @@ public class Http1OutputProducerTests : IDisposable
     [Fact]
     public void AllocatesFakeMemoryBiggerThanMaxBufferSize()
     {
-        var pipeOptions = new PipeOptions
-        (
+        var pipeOptions = new PipeOptions(
             pool: _memoryPool,
             readerScheduler: Mock.Of<PipeScheduler>(),
             writerScheduler: PipeScheduler.Inline,
@@ -117,8 +117,7 @@ public class Http1OutputProducerTests : IDisposable
     [Fact]
     public void AllocatesIncreasingFakeMemory()
     {
-        var pipeOptions = new PipeOptions
-        (
+        var pipeOptions = new PipeOptions(
             pool: _memoryPool,
             readerScheduler: Mock.Of<PipeScheduler>(),
             writerScheduler: PipeScheduler.Inline,
@@ -139,8 +138,7 @@ public class Http1OutputProducerTests : IDisposable
     [Fact]
     public void ReusesFakeMemory()
     {
-        var pipeOptions = new PipeOptions
-        (
+        var pipeOptions = new PipeOptions(
             pool: _memoryPool,
             readerScheduler: Mock.Of<PipeScheduler>(),
             writerScheduler: PipeScheduler.Inline,
@@ -159,7 +157,8 @@ public class Http1OutputProducerTests : IDisposable
 
     private TestHttpOutputProducer CreateOutputProducer(
         PipeOptions pipeOptions = null,
-        ConnectionContext connectionContext = null)
+        ConnectionContext connectionContext = null
+    )
     {
         pipeOptions = pipeOptions ?? new PipeOptions();
         connectionContext = connectionContext ?? Mock.Of<ConnectionContext>();
@@ -174,15 +173,34 @@ public class Http1OutputProducerTests : IDisposable
             serviceContext.Log,
             Mock.Of<ITimeoutControl>(),
             Mock.Of<IHttpMinResponseDataRateFeature>(),
-            Mock.Of<IHttpOutputAborter>());
+            Mock.Of<IHttpOutputAborter>()
+        );
 
         return socketOutput;
     }
 
     private class TestHttpOutputProducer : Http1OutputProducer
     {
-        public TestHttpOutputProducer(Pipe pipe, string connectionId, ConnectionContext connectionContext, MemoryPool<byte> memoryPool, KestrelTrace log, ITimeoutControl timeoutControl, IHttpMinResponseDataRateFeature minResponseDataRateFeature, IHttpOutputAborter outputAborter)
-            : base(pipe.Writer, connectionId, connectionContext, memoryPool, log, timeoutControl, minResponseDataRateFeature, outputAborter)
+        public TestHttpOutputProducer(
+            Pipe pipe,
+            string connectionId,
+            ConnectionContext connectionContext,
+            MemoryPool<byte> memoryPool,
+            KestrelTrace log,
+            ITimeoutControl timeoutControl,
+            IHttpMinResponseDataRateFeature minResponseDataRateFeature,
+            IHttpOutputAborter outputAborter
+        )
+            : base(
+                pipe.Writer,
+                connectionId,
+                connectionContext,
+                memoryPool,
+                log,
+                timeoutControl,
+                minResponseDataRateFeature,
+                outputAborter
+            )
         {
             Pipe = pipe;
         }

@@ -40,7 +40,5 @@ public abstract class CodeRenderingContext
 
     public abstract void RenderChildren(IntermediateNode node, IntermediateNodeWriter writer);
 
-    public virtual void AddLinePragma(LinePragma linePragma)
-    {
-    }
+    public virtual void AddLinePragma(LinePragma linePragma) { }
 }

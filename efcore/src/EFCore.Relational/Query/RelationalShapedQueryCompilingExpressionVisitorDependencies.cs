@@ -50,10 +50,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public RelationalShapedQueryCompilingExpressionVisitorDependencies(
             IQuerySqlGeneratorFactory querySqlGeneratorFactory,
-            IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory)
+            IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory
+        )
         {
             QuerySqlGeneratorFactory = querySqlGeneratorFactory;
-            RelationalParameterBasedSqlProcessorFactory = relationalParameterBasedSqlProcessorFactory;
+            RelationalParameterBasedSqlProcessorFactory =
+                relationalParameterBasedSqlProcessorFactory;
         }
 
         /// <summary>

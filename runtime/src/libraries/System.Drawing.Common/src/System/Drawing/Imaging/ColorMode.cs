@@ -12,6 +12,7 @@ namespace System.Drawing.Imaging
         /// Specifies that integer values supplied are 32-bit values.
         /// </summary>
         Argb32Mode = 0,
+
         /// <summary>
         /// Specifies that integer values supplied are 64-bit values.
         /// </summary>

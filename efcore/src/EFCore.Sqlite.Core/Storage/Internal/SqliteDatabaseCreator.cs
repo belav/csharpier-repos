@@ -32,8 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         public SqliteDatabaseCreator(
             RelationalDatabaseCreatorDependencies dependencies,
             ISqliteRelationalConnection connection,
-            IRawSqlCommandBuilder rawSqlCommandBuilder)
-            : base(dependencies)
+            IRawSqlCommandBuilder rawSqlCommandBuilder
+        ) : base(dependencies)
         {
             _connection = connection;
             _rawSqlCommandBuilder = rawSqlCommandBuilder;
@@ -49,14 +49,18 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         {
             Dependencies.Connection.Open();
 
-            _rawSqlCommandBuilder.Build("PRAGMA journal_mode = 'wal';")
+            _rawSqlCommandBuilder
+                .Build("PRAGMA journal_mode = 'wal';")
                 .ExecuteNonQuery(
                     new RelationalCommandParameterObject(
                         Dependencies.Connection,
                         null,
                         null,
                         null,
-                        Dependencies.CommandLogger, CommandSource.Migrations));
+                        Dependencies.CommandLogger,
+                        CommandSource.Migrations
+                    )
+                );
 
             Dependencies.Connection.Close();
         }
@@ -70,8 +74,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         public override bool Exists()
         {
             var connectionOptions = new SqliteConnectionStringBuilder(_connection.ConnectionString);
-            if (connectionOptions.DataSource.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
-                || connectionOptions.Mode == SqliteOpenMode.Memory)
+            if (
+                connectionOptions.DataSource.Equals(":memory:", StringComparison.OrdinalIgnoreCase)
+                || connectionOptions.Mode == SqliteOpenMode.Memory
+            )
             {
                 return true;
             }
@@ -99,15 +105,21 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// </summary>
         public override bool HasTables()
         {
-            var count = (long)_rawSqlCommandBuilder
-                .Build("SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;")
-                .ExecuteScalar(
-                    new RelationalCommandParameterObject(
-                        Dependencies.Connection,
-                        null,
-                        null,
-                        null,
-                        Dependencies.CommandLogger, CommandSource.Migrations))!;
+            var count = (long)
+                _rawSqlCommandBuilder
+                    .Build(
+                        "SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;"
+                    )
+                    .ExecuteScalar(
+                        new RelationalCommandParameterObject(
+                            Dependencies.Connection,
+                            null,
+                            null,
+                            null,
+                            Dependencies.CommandLogger,
+                            CommandSource.Migrations
+                        )
+                    )!;
 
             return count != 0;
         }
@@ -138,7 +150,9 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
 
             if (!string.IsNullOrEmpty(path))
             {
-                SqliteConnection.ClearPool(new SqliteConnection(Dependencies.Connection.ConnectionString));
+                SqliteConnection.ClearPool(
+                    new SqliteConnection(Dependencies.Connection.ConnectionString)
+                );
                 // See issues #25797 and #26016
                 // SqliteConnection.ClearAllPools();
                 File.Delete(path);

@@ -25,11 +25,21 @@ public class DefaultLinkParserTest : LinkParserTestBase
     public void ParsePathByAddresss_NoMatchingEndpoint_ReturnsNull()
     {
         // Arrange
-        var endpoint = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id?}", displayName: "Test1", metadata: new object[] { new IntMetadata(1), });
+        var endpoint = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id?}",
+            displayName: "Test1",
+            metadata: new object[] { new IntMetadata(1), }
+        );
 
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
-        var parser = CreateLinkParser(services => { services.AddSingleton<ILoggerFactory>(loggerFactory); }, endpoint);
+        var parser = CreateLinkParser(
+            services =>
+            {
+                services.AddSingleton<ILoggerFactory>(loggerFactory);
+            },
+            endpoint
+        );
 
         // Act
         var values = parser.ParsePathByAddress(0, "/Home/Index/17");
@@ -39,19 +49,35 @@ public class DefaultLinkParserTest : LinkParserTestBase
 
         Assert.Collection(
             sink.Writes,
-            w => Assert.Equal("No endpoints found for address 0", w.Message));
+            w => Assert.Equal("No endpoints found for address 0", w.Message)
+        );
     }
 
     [Fact]
     public void ParsePathByAddresss_HasMatches_ReturnsNullWhenParsingFails()
     {
         // Arrange
-        var endpoint1 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id}", displayName: "Test1", metadata: new object[] { new IntMetadata(1), });
-        var endpoint2 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id2}", displayName: "Test2", metadata: new object[] { new IntMetadata(0), });
+        var endpoint1 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id}",
+            displayName: "Test1",
+            metadata: new object[] { new IntMetadata(1), }
+        );
+        var endpoint2 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id2}",
+            displayName: "Test2",
+            metadata: new object[] { new IntMetadata(0), }
+        );
 
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
-        var parser = CreateLinkParser(services => { services.AddSingleton<ILoggerFactory>(loggerFactory); }, endpoint1, endpoint2);
+        var parser = CreateLinkParser(
+            services =>
+            {
+                services.AddSingleton<ILoggerFactory>(loggerFactory);
+            },
+            endpoint1,
+            endpoint2
+        );
 
         // Act
         var values = parser.ParsePathByAddress(0, "/");
@@ -62,38 +88,70 @@ public class DefaultLinkParserTest : LinkParserTestBase
         Assert.Collection(
             sink.Writes,
             w => Assert.Equal("Found the endpoints Test2 for address 0", w.Message),
-            w => Assert.Equal("Path parsing failed for endpoints Test2 and URI path /", w.Message));
+            w => Assert.Equal("Path parsing failed for endpoints Test2 and URI path /", w.Message)
+        );
     }
 
     [Fact]
     public void ParsePathByAddresss_HasMatches_ReturnsFirstSuccessfulParse()
     {
         // Arrange
-        var endpoint0 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}", displayName: "Test1", metadata: new object[] { new IntMetadata(0), });
-        var endpoint1 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id}", displayName: "Test2", metadata: new object[] { new IntMetadata(0), });
-        var endpoint2 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id2}", displayName: "Test3", metadata: new object[] { new IntMetadata(0), });
+        var endpoint0 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}",
+            displayName: "Test1",
+            metadata: new object[] { new IntMetadata(0), }
+        );
+        var endpoint1 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id}",
+            displayName: "Test2",
+            metadata: new object[] { new IntMetadata(0), }
+        );
+        var endpoint2 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id2}",
+            displayName: "Test3",
+            metadata: new object[] { new IntMetadata(0), }
+        );
 
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
-        var parser = CreateLinkParser(services => { services.AddSingleton<ILoggerFactory>(loggerFactory); }, endpoint0, endpoint1, endpoint2);
+        var parser = CreateLinkParser(
+            services =>
+            {
+                services.AddSingleton<ILoggerFactory>(loggerFactory);
+            },
+            endpoint0,
+            endpoint1,
+            endpoint2
+        );
 
         // Act
         var values = parser.ParsePathByAddress(0, "/Home/Index/17");
 
         // Assert
-        MatcherAssert.AssertRouteValuesEqual(new { controller = "Home", action = "Index", id = "17" }, values);
+        MatcherAssert.AssertRouteValuesEqual(
+            new { controller = "Home", action = "Index", id = "17" },
+            values
+        );
 
         Assert.Collection(
             sink.Writes,
             w => Assert.Equal("Found the endpoints Test1, Test2, Test3 for address 0", w.Message),
-            w => Assert.Equal("Path parsing succeeded for endpoint Test2 and URI path /Home/Index/17", w.Message));
+            w =>
+                Assert.Equal(
+                    "Path parsing succeeded for endpoint Test2 and URI path /Home/Index/17",
+                    w.Message
+                )
+        );
     }
 
     [Fact]
     public void ParsePathByAddresss_HasMatches_IncludesDefaults()
     {
         // Arrange
-        var endpoint = EndpointFactory.CreateRouteEndpoint("{controller=Home}/{action=Index}/{id?}", metadata: new object[] { new IntMetadata(0), });
+        var endpoint = EndpointFactory.CreateRouteEndpoint(
+            "{controller=Home}/{action=Index}/{id?}",
+            metadata: new object[] { new IntMetadata(0), }
+        );
 
         var parser = CreateLinkParser(endpoint);
 
@@ -101,15 +159,24 @@ public class DefaultLinkParserTest : LinkParserTestBase
         var values = parser.ParsePathByAddress(0, "/");
 
         // Assert
-        MatcherAssert.AssertRouteValuesEqual(new { controller = "Home", action = "Index", }, values);
+        MatcherAssert.AssertRouteValuesEqual(
+            new { controller = "Home", action = "Index", },
+            values
+        );
     }
 
     [Fact]
     public void ParsePathByAddresss_HasMatches_RunsConstraints()
     {
         // Arrange
-        var endpoint0 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id:int}", metadata: new object[] { new IntMetadata(0), });
-        var endpoint1 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id2:alpha}", metadata: new object[] { new IntMetadata(0), });
+        var endpoint0 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id:int}",
+            metadata: new object[] { new IntMetadata(0), }
+        );
+        var endpoint1 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id2:alpha}",
+            metadata: new object[] { new IntMetadata(0), }
+        );
 
         var parser = CreateLinkParser(endpoint0, endpoint1);
 
@@ -117,14 +184,20 @@ public class DefaultLinkParserTest : LinkParserTestBase
         var values = parser.ParsePathByAddress(0, "/Home/Index/abc");
 
         // Assert
-        MatcherAssert.AssertRouteValuesEqual(new { controller = "Home", action = "Index", id2 = "abc" }, values);
+        MatcherAssert.AssertRouteValuesEqual(
+            new { controller = "Home", action = "Index", id2 = "abc" },
+            values
+        );
     }
 
     [Fact]
     public void GetRoutePatternMatcher_CanCache()
     {
         // Arrange
-        var endpoint1 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id}", metadata: new object[] { new IntMetadata(1), });
+        var endpoint1 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id}",
+            metadata: new object[] { new IntMetadata(1), }
+        );
         var dataSource = new DynamicEndpointDataSource(endpoint1);
 
         var parser = CreateLinkParser(dataSources: new[] { dataSource });
@@ -143,13 +216,19 @@ public class DefaultLinkParserTest : LinkParserTestBase
     public void GetRoutePatternMatcherr_CanClearCache()
     {
         // Arrange
-        var endpoint1 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id}", metadata: new object[] { new IntMetadata(1), });
+        var endpoint1 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id}",
+            metadata: new object[] { new IntMetadata(1), }
+        );
         var dataSource = new DynamicEndpointDataSource(endpoint1);
 
         var parser = CreateLinkParser(dataSources: new[] { dataSource });
         var original = parser.GetMatcherState(endpoint1);
 
-        var endpoint2 = EndpointFactory.CreateRouteEndpoint("{controller}/{action}/{id}", metadata: new object[] { new IntMetadata(1), });
+        var endpoint2 = EndpointFactory.CreateRouteEndpoint(
+            "{controller}/{action}/{id}",
+            metadata: new object[] { new IntMetadata(1), }
+        );
         dataSource.AddEndpoint(endpoint2);
 
         // Act
@@ -176,7 +255,9 @@ public class DefaultLinkParserTest : LinkParserTestBase
 
         public IEnumerable<Endpoint> FindEndpoints(int address)
         {
-            return _dataSource.Endpoints.Where(e => e.Metadata.GetMetadata<IntMetadata>().Value == address);
+            return _dataSource.Endpoints.Where(
+                e => e.Metadata.GetMetadata<IntMetadata>().Value == address
+            );
         }
     }
 
@@ -186,6 +267,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
         {
             Value = value;
         }
+
         public int Value { get; }
     }
 }

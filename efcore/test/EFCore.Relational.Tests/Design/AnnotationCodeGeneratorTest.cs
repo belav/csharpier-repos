@@ -19,9 +19,13 @@ namespace Microsoft.EntityFrameworkCore.Design
             var entityType = modelBuilder.Model.GetEntityTypes().Single();
 
             var annotations = entityType.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            CreateGenerator().RemoveAnnotationsHandledByConventions((IEntityType)entityType, annotations);
+            CreateGenerator()
+                .RemoveAnnotationsHandledByConventions((IEntityType)entityType, annotations);
 
-            Assert.DoesNotContain(RelationalAnnotationNames.IsTableExcludedFromMigrations, annotations.Keys);
+            Assert.DoesNotContain(
+                RelationalAnnotationNames.IsTableExcludedFromMigrations,
+                annotations.Keys
+            );
         }
 
         [ConditionalFact]
@@ -30,7 +34,9 @@ namespace Microsoft.EntityFrameworkCore.Design
             var modelBuilder = CreateModelBuilder();
             modelBuilder.UseCollation("foo");
             var annotations = modelBuilder.Model.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            var result = CreateGenerator().GenerateFluentApiCalls((IModel)modelBuilder.Model, annotations).Single();
+            var result = CreateGenerator()
+                .GenerateFluentApiCalls((IModel)modelBuilder.Model, annotations)
+                .Single();
 
             Assert.Equal("UseCollation", result.Method);
             Assert.Equal("foo", Assert.Single(result.Arguments));
@@ -44,20 +50,25 @@ namespace Microsoft.EntityFrameworkCore.Design
             var property = modelBuilder.Model.FindEntityType("Blog").FindProperty("Name");
 
             var annotations = property.GetAnnotations().ToDictionary(a => a.Name, a => a);
-            var result = CreateGenerator().GenerateFluentApiCalls((IProperty)property, annotations).Single();
+            var result = CreateGenerator()
+                .GenerateFluentApiCalls((IProperty)property, annotations)
+                .Single();
 
             Assert.Equal("UseCollation", result.Method);
             Assert.Equal("foo", Assert.Single(result.Arguments));
         }
 
-        private ModelBuilder CreateModelBuilder()
-            => RelationalTestHelpers.Instance.CreateConventionBuilder();
+        private ModelBuilder CreateModelBuilder() =>
+            RelationalTestHelpers.Instance.CreateConventionBuilder();
 
-        private AnnotationCodeGenerator CreateGenerator()
-            => new(
+        private AnnotationCodeGenerator CreateGenerator() =>
+            new(
                 new AnnotationCodeGeneratorDependencies(
                     new TestRelationalTypeMappingSource(
                         TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>())));
+                        TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                    )
+                )
+            );
     }
 }

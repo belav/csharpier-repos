@@ -16,11 +16,13 @@ namespace System.Xml.Xsl.Xslt
             public string? prefix;
             public string? nsUri;
         }
+
         private ScopeReord[] _records = new ScopeReord[32];
         private int _lastRecord;
-        private int _lastScopes;  // Cache of records[lastRecord].scopeCount field;
-                                  // most often we will have PushScope()/PopScope over the same record.
-                                  // It makes sense to avoid accessing this field through the array.
+        private int _lastScopes; // Cache of records[lastRecord].scopeCount field;
+
+        // most often we will have PushScope()/PopScope over the same record.
+        // It makes sense to avoid accessing this field through the array.
 
         public OutputScopeManager()
         {
@@ -48,7 +50,8 @@ namespace System.Xml.Xsl.Xslt
             }
             else
             {
-                while (_records[--_lastRecord].scopeCount == 0) ;
+                while (_records[--_lastRecord].scopeCount == 0)
+                    ;
                 _lastScopes = _records[_lastRecord].scopeCount;
                 _lastScopes--;
             }
@@ -110,7 +113,7 @@ namespace System.Xml.Xsl.Xslt
         {
             if (_records[_lastRecord].prefix == null)
             {
-                return;                            // Averything was invalidated already. Nothing to do.
+                return; // Averything was invalidated already. Nothing to do.
             }
             AddRecord(null, null);
         }
@@ -119,17 +122,17 @@ namespace System.Xml.Xsl.Xslt
         {
             string? defaultNs = LookupNamespace(string.Empty);
             if (defaultNs == null)
-            {             // We don't know default NS anyway.
+            { // We don't know default NS anyway.
                 InvalidateAllPrefixes();
             }
             else
             {
                 if (
-                    _records[_lastRecord].prefix!.Length == 0 &&
-                    _records[_lastRecord - 1].prefix == null
+                    _records[_lastRecord].prefix!.Length == 0
+                    && _records[_lastRecord - 1].prefix == null
                 )
                 {
-                    return;                       // Averything was already done
+                    return; // Averything was already done
                 }
 
                 AddRecord(null, null);
@@ -141,12 +144,15 @@ namespace System.Xml.Xsl.Xslt
         {
             Debug.Assert(prefix != null);
             for (
-                int record = _lastRecord;              // from last record
-                 _records[record].prefix != null;      // till lookup barrier
-                --record                             // in reverce direction
+                int record = _lastRecord; // from last record
+                _records[record].prefix != null; // till lookup barrier
+                    --record // in reverce direction
             )
             {
-                Debug.Assert(0 < record, "first record is lookup barrier, so we don't need to check this condition runtime");
+                Debug.Assert(
+                    0 < record,
+                    "first record is lookup barrier, so we don't need to check this condition runtime"
+                );
                 if (_records[record].prefix == prefix)
                 {
                     return _records[record].nsUri;

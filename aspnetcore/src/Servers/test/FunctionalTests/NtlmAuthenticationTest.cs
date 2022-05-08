@@ -16,12 +16,11 @@ namespace ServerComparison.FunctionalTests;
 
 public class NtlmAuthenticationTests : LoggedTest
 {
-    public NtlmAuthenticationTests(ITestOutputHelper output) : base(output)
-    {
-    }
+    public NtlmAuthenticationTests(ITestOutputHelper output) : base(output) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(ServerType.IISExpress, ServerType.HttpSys, ServerType.Kestrel)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(ServerType.IISExpress, ServerType.HttpSys, ServerType.Kestrel)
             .WithTfms(Tfm.Default)
             .WithAllHostingModels();
 
@@ -31,7 +30,8 @@ public class NtlmAuthenticationTests : LoggedTest
     [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
     public async Task NtlmAuthentication(TestVariant variant)
     {
-        var testName = $"NtlmAuthentication_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
+        var testName =
+            $"NtlmAuthentication_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
         using (StartLog(out var loggerFactory, testName))
         {
             var logger = loggerFactory.CreateLogger("NtlmAuthenticationTest");
@@ -42,16 +42,25 @@ public class NtlmAuthenticationTests : LoggedTest
                 EnvironmentName = "NtlmAuthentication", // Will pick the Start class named 'StartupNtlmAuthentication'
             };
 
-            using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, loggerFactory))
+            using (
+                var deployer = IISApplicationDeployerFactory.Create(
+                    deploymentParameters,
+                    loggerFactory
+                )
+            )
             {
                 var deploymentResult = await deployer.DeployAsync();
                 var httpClient = deploymentResult.HttpClient;
 
                 // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
-                var response = await RetryHelper.RetryRequest(() =>
-                {
-                    return httpClient.GetAsync(string.Empty);
-                }, logger, deploymentResult.HostShutdownToken);
+                var response = await RetryHelper.RetryRequest(
+                    () =>
+                    {
+                        return httpClient.GetAsync(string.Empty);
+                    },
+                    logger,
+                    deploymentResult.HostShutdownToken
+                );
 
                 var responseText = await response.Content.ReadAsStringAsync();
                 try
@@ -84,7 +93,9 @@ public class NtlmAuthenticationTests : LoggedTest
                     logger.LogInformation("Enabling Default Credentials");
 
                     // Change the http client to one that uses default credentials
-                    httpClient = deploymentResult.CreateHttpClient(new HttpClientHandler() { UseDefaultCredentials = true });
+                    httpClient = deploymentResult.CreateHttpClient(
+                        new HttpClientHandler() { UseDefaultCredentials = true }
+                    );
 
                     logger.LogInformation("Testing /Restricted");
                     response = await httpClient.GetAsync("/Restricted");

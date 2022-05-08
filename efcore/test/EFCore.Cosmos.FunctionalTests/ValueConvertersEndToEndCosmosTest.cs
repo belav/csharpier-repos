@@ -11,14 +11,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         : ValueConvertersEndToEndTestBase<ValueConvertersEndToEndCosmosTest.ValueConvertersEndToEndCosmosFixture>
     {
         public ValueConvertersEndToEndCosmosTest(ValueConvertersEndToEndCosmosFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class ValueConvertersEndToEndCosmosFixture : ValueConvertersEndToEndFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => CosmosTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                CosmosTestStoreFactory.Instance;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -32,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
                         b.Ignore(e => e.NullableStringToDateTimeOffset);
                         b.Ignore(e => e.StringToNullableDateTimeOffset);
                         b.Ignore(e => e.NullableStringToNullableDateTimeOffset);
-                    });
+                    }
+                );
             }
         }
     }

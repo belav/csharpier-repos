@@ -32,28 +32,49 @@ namespace Microsoft.Cci
         /// </summary>
         internal sealed class ImportScopeEqualityComparer : IEqualityComparer<IImportScope>
         {
-            public static readonly ImportScopeEqualityComparer Instance = new ImportScopeEqualityComparer();
+            public static readonly ImportScopeEqualityComparer Instance =
+                new ImportScopeEqualityComparer();
 
             public bool Equals(IImportScope x, IImportScope y)
             {
-                return (object)x == y ||
-                       x != null && y != null && Equals(x.Parent, y.Parent) && x.GetUsedNamespaces().SequenceEqual(y.GetUsedNamespaces());
+                return (object)x == y
+                    || x != null
+                        && y != null
+                        && Equals(x.Parent, y.Parent)
+                        && x.GetUsedNamespaces().SequenceEqual(y.GetUsedNamespaces());
             }
 
             public int GetHashCode(IImportScope obj)
             {
-                return Hash.Combine(Hash.CombineValues(obj.GetUsedNamespaces()), obj.Parent != null ? GetHashCode(obj.Parent) : 0);
+                return Hash.Combine(
+                    Hash.CombineValues(obj.GetUsedNamespaces()),
+                    obj.Parent != null ? GetHashCode(obj.Parent) : 0
+                );
             }
         }
 
-        private readonly Dictionary<DebugSourceDocument, DocumentHandle> _documentIndex = new Dictionary<DebugSourceDocument, DocumentHandle>();
-        private readonly Dictionary<IImportScope, ImportScopeHandle> _scopeIndex = new Dictionary<IImportScope, ImportScopeHandle>(ImportScopeEqualityComparer.Instance);
+        private readonly Dictionary<DebugSourceDocument, DocumentHandle> _documentIndex =
+            new Dictionary<DebugSourceDocument, DocumentHandle>();
+        private readonly Dictionary<IImportScope, ImportScopeHandle> _scopeIndex = new Dictionary<
+            IImportScope,
+            ImportScopeHandle
+        >(ImportScopeEqualityComparer.Instance);
 
-        private void SerializeMethodDebugInfo(IMethodBody bodyOpt, int methodRid, int aggregateMethodRid, StandaloneSignatureHandle localSignatureHandleOpt, ref LocalVariableHandle lastLocalVariableHandle, ref LocalConstantHandle lastLocalConstantHandle)
+        private void SerializeMethodDebugInfo(
+            IMethodBody bodyOpt,
+            int methodRid,
+            int aggregateMethodRid,
+            StandaloneSignatureHandle localSignatureHandleOpt,
+            ref LocalVariableHandle lastLocalVariableHandle,
+            ref LocalConstantHandle lastLocalConstantHandle
+        )
         {
             if (bodyOpt == null)
             {
-                _debugMetadataOpt.AddMethodDebugInformation(document: default, sequencePoints: default);
+                _debugMetadataOpt.AddMethodDebugInformation(
+                    document: default,
+                    sequencePoints: default
+                );
                 return;
             }
 
@@ -63,13 +84,24 @@ namespace Microsoft.Cci
             var methodHandle = MetadataTokens.MethodDefinitionHandle(methodRid);
 
             // documents & sequence points:
-            BlobHandle sequencePointsBlob = SerializeSequencePoints(localSignatureHandleOpt, bodyOpt.SequencePoints, _documentIndex, out var singleDocumentHandle);
-            _debugMetadataOpt.AddMethodDebugInformation(document: singleDocumentHandle, sequencePoints: sequencePointsBlob);
+            BlobHandle sequencePointsBlob = SerializeSequencePoints(
+                localSignatureHandleOpt,
+                bodyOpt.SequencePoints,
+                _documentIndex,
+                out var singleDocumentHandle
+            );
+            _debugMetadataOpt.AddMethodDebugInformation(
+                document: singleDocumentHandle,
+                sequencePoints: sequencePointsBlob
+            );
 
             if (emitAllDebugInfo)
             {
                 var bodyImportScope = bodyOpt.ImportScope;
-                var importScopeHandle = (bodyImportScope != null) ? GetImportScopeIndex(bodyImportScope, _scopeIndex) : default;
+                var importScopeHandle =
+                    (bodyImportScope != null)
+                        ? GetImportScopeIndex(bodyImportScope, _scopeIndex)
+                        : default;
 
                 // Unlike native PDB we don't emit an empty root scope.
                 // scopes are already ordered by StartOffset ascending then by EndOffset descending (the longest scope first).
@@ -83,7 +115,8 @@ namespace Microsoft.Cci
                         variableList: NextHandle(lastLocalVariableHandle),
                         constantList: NextHandle(lastLocalConstantHandle),
                         startOffset: 0,
-                        length: bodyOpt.IL.Length);
+                        length: bodyOpt.IL.Length
+                    );
                 }
                 else
                 {
@@ -95,7 +128,8 @@ namespace Microsoft.Cci
                             variableList: NextHandle(lastLocalVariableHandle),
                             constantList: NextHandle(lastLocalConstantHandle),
                             startOffset: scope.StartOffset,
-                            length: scope.Length);
+                            length: scope.Length
+                        );
 
                         foreach (ILocalDefinition local in scope.Variables)
                         {
@@ -104,7 +138,8 @@ namespace Microsoft.Cci
                             lastLocalVariableHandle = _debugMetadataOpt.AddLocalVariable(
                                 attributes: local.PdbAttributes,
                                 index: local.SlotIndex,
-                                name: _debugMetadataOpt.GetOrAddString(local.Name));
+                                name: _debugMetadataOpt.GetOrAddString(local.Name)
+                            );
 
                             SerializeLocalInfo(local, lastLocalVariableHandle);
                         }
@@ -116,7 +151,8 @@ namespace Microsoft.Cci
 
                             lastLocalConstantHandle = _debugMetadataOpt.AddLocalConstant(
                                 name: _debugMetadataOpt.GetOrAddString(constant.Name),
-                                signature: SerializeLocalConstantSignature(constant));
+                                signature: SerializeLocalConstantSignature(constant)
+                            );
 
                             SerializeLocalInfo(constant, lastLocalConstantHandle);
                         }
@@ -128,11 +164,16 @@ namespace Microsoft.Cci
                 {
                     _debugMetadataOpt.AddStateMachineMethod(
                         moveNextMethod: methodHandle,
-                        kickoffMethod: GetMethodDefinitionHandle(moveNextBodyInfo.KickoffMethod));
+                        kickoffMethod: GetMethodDefinitionHandle(moveNextBodyInfo.KickoffMethod)
+                    );
 
                     if (moveNextBodyInfo is AsyncMoveNextBodyDebugInfo asyncInfo)
                     {
-                        SerializeAsyncMethodSteppingInfo(asyncInfo, methodHandle, aggregateMethodRid);
+                        SerializeAsyncMethodSteppingInfo(
+                            asyncInfo,
+                            methodHandle,
+                            aggregateMethodRid
+                        );
                     }
                 }
 
@@ -207,7 +248,9 @@ namespace Microsoft.Cci
                 // EnumType
                 if (type.IsEnum)
                 {
-                    builder.WriteCompressedInteger(CodedIndex.TypeDefOrRefOrSpec(GetTypeHandle(type)));
+                    builder.WriteCompressedInteger(
+                        CodedIndex.TypeDefOrRefOrSpec(GetTypeHandle(type))
+                    );
                 }
             }
             else if (this.module.IsPlatformType(type, PlatformType.SystemObject))
@@ -216,7 +259,9 @@ namespace Microsoft.Cci
             }
             else
             {
-                builder.WriteByte((byte)(type.IsValueType ? SignatureTypeKind.ValueType : SignatureTypeKind.Class));
+                builder.WriteByte(
+                    (byte)(type.IsValueType ? SignatureTypeKind.ValueType : SignatureTypeKind.Class)
+                );
                 builder.WriteCompressedInteger(CodedIndex.TypeDefOrRefOrSpec(GetTypeHandle(type)));
             }
 
@@ -306,14 +351,19 @@ namespace Microsoft.Cci
 
         #region ImportScope
 
-        private static readonly ImportScopeHandle ModuleImportScopeHandle = MetadataTokens.ImportScopeHandle(1);
+        private static readonly ImportScopeHandle ModuleImportScopeHandle =
+            MetadataTokens.ImportScopeHandle(1);
 
         private void SerializeImport(BlobBuilder writer, AssemblyReferenceAlias alias)
         {
             // <import> ::= AliasAssemblyReference <alias> <target-assembly>
             writer.WriteByte((byte)ImportDefinitionKind.AliasAssemblyReference);
-            writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(alias.Name)));
-            writer.WriteCompressedInteger(MetadataTokens.GetRowNumber(GetOrAddAssemblyReferenceHandle(alias.Assembly)));
+            writer.WriteCompressedInteger(
+                MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(alias.Name))
+            );
+            writer.WriteCompressedInteger(
+                MetadataTokens.GetRowNumber(GetOrAddAssemblyReferenceHandle(alias.Assembly))
+            );
         }
 
         private void SerializeImport(BlobBuilder writer, UsedNamespaceOrType import)
@@ -326,8 +376,16 @@ namespace Microsoft.Cci
 
                 // <import> ::= ImportXmlNamespace <alias> <target-namespace>
                 writer.WriteByte((byte)ImportDefinitionKind.ImportXmlNamespace);
-                writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)));
-                writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(import.TargetXmlNamespaceOpt)));
+                writer.WriteCompressedInteger(
+                    MetadataTokens.GetHeapOffset(
+                        _debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)
+                    )
+                );
+                writer.WriteCompressedInteger(
+                    MetadataTokens.GetHeapOffset(
+                        _debugMetadataOpt.GetOrAddBlobUTF8(import.TargetXmlNamespaceOpt)
+                    )
+                );
             }
             else if (import.TargetTypeOpt != null)
             {
@@ -338,7 +396,11 @@ namespace Microsoft.Cci
                 {
                     // <import> ::= AliasType <alias> <target-type>
                     writer.WriteByte((byte)ImportDefinitionKind.AliasType);
-                    writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)));
+                    writer.WriteCompressedInteger(
+                        MetadataTokens.GetHeapOffset(
+                            _debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)
+                        )
+                    );
                 }
                 else
                 {
@@ -346,7 +408,9 @@ namespace Microsoft.Cci
                     writer.WriteByte((byte)ImportDefinitionKind.ImportType);
                 }
 
-                writer.WriteCompressedInteger(CodedIndex.TypeDefOrRefOrSpec(GetTypeHandle(import.TargetTypeOpt))); // TODO: index in release build
+                writer.WriteCompressedInteger(
+                    CodedIndex.TypeDefOrRefOrSpec(GetTypeHandle(import.TargetTypeOpt))
+                ); // TODO: index in release build
             }
             else if (import.TargetNamespaceOpt != null)
             {
@@ -356,7 +420,11 @@ namespace Microsoft.Cci
                     {
                         // <import> ::= AliasAssemblyNamespace <alias> <target-assembly> <target-namespace>
                         writer.WriteByte((byte)ImportDefinitionKind.AliasAssemblyNamespace);
-                        writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)));
+                        writer.WriteCompressedInteger(
+                            MetadataTokens.GetHeapOffset(
+                                _debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)
+                            )
+                        );
                     }
                     else
                     {
@@ -364,7 +432,11 @@ namespace Microsoft.Cci
                         writer.WriteByte((byte)ImportDefinitionKind.ImportAssemblyNamespace);
                     }
 
-                    writer.WriteCompressedInteger(MetadataTokens.GetRowNumber(GetAssemblyReferenceHandle(import.TargetAssemblyOpt)));
+                    writer.WriteCompressedInteger(
+                        MetadataTokens.GetRowNumber(
+                            GetAssemblyReferenceHandle(import.TargetAssemblyOpt)
+                        )
+                    );
                 }
                 else
                 {
@@ -372,7 +444,11 @@ namespace Microsoft.Cci
                     {
                         // <import> ::= AliasNamespace <alias> <target-namespace>
                         writer.WriteByte((byte)ImportDefinitionKind.AliasNamespace);
-                        writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)));
+                        writer.WriteCompressedInteger(
+                            MetadataTokens.GetHeapOffset(
+                                _debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)
+                            )
+                        );
                     }
                     else
                     {
@@ -382,8 +458,12 @@ namespace Microsoft.Cci
                 }
 
                 // TODO: cache?
-                string namespaceName = TypeNameSerializer.BuildQualifiedNamespaceName(import.TargetNamespaceOpt);
-                writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(namespaceName)));
+                string namespaceName = TypeNameSerializer.BuildQualifiedNamespaceName(
+                    import.TargetNamespaceOpt
+                );
+                writer.WriteCompressedInteger(
+                    MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(namespaceName))
+                );
             }
             else
             {
@@ -392,7 +472,11 @@ namespace Microsoft.Cci
                 Debug.Assert(import.TargetAssemblyOpt == null);
 
                 writer.WriteByte((byte)ImportDefinitionKind.ImportAssemblyReferenceAlias);
-                writer.WriteCompressedInteger(MetadataTokens.GetHeapOffset(_debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)));
+                writer.WriteCompressedInteger(
+                    MetadataTokens.GetHeapOffset(
+                        _debugMetadataOpt.GetOrAddBlobUTF8(import.AliasOpt)
+                    )
+                );
             }
         }
 
@@ -415,12 +499,16 @@ namespace Microsoft.Cci
 
             var rid = _debugMetadataOpt.AddImportScope(
                 parentScope: default(ImportScopeHandle),
-                imports: _debugMetadataOpt.GetOrAddBlob(writer));
+                imports: _debugMetadataOpt.GetOrAddBlob(writer)
+            );
 
             Debug.Assert(rid == ModuleImportScopeHandle);
         }
 
-        private ImportScopeHandle GetImportScopeIndex(IImportScope scope, Dictionary<IImportScope, ImportScopeHandle> scopeIndex)
+        private ImportScopeHandle GetImportScopeIndex(
+            IImportScope scope,
+            Dictionary<IImportScope, ImportScopeHandle> scopeIndex
+        )
         {
             ImportScopeHandle scopeHandle;
             if (scopeIndex.TryGetValue(scope, out scopeHandle))
@@ -430,11 +518,15 @@ namespace Microsoft.Cci
             }
 
             var parent = scope.Parent;
-            var parentScopeHandle = (parent != null) ? GetImportScopeIndex(scope.Parent, scopeIndex) : ModuleImportScopeHandle;
+            var parentScopeHandle =
+                (parent != null)
+                    ? GetImportScopeIndex(scope.Parent, scopeIndex)
+                    : ModuleImportScopeHandle;
 
             var result = _debugMetadataOpt.AddImportScope(
                 parentScope: parentScopeHandle,
-                imports: SerializeImportsBlob(scope));
+                imports: SerializeImportsBlob(scope)
+            );
 
             scopeIndex.Add(scope, result);
             return result;
@@ -464,7 +556,8 @@ namespace Microsoft.Cci
             _debugMetadataOpt.AddCustomDebugInformation(
                 parent: EntityHandle.ModuleDefinition,
                 kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.DefaultNamespace),
-                value: _debugMetadataOpt.GetOrAddBlobUTF8(module.DefaultNamespace));
+                value: _debugMetadataOpt.GetOrAddBlobUTF8(module.DefaultNamespace)
+            );
         }
 
         #endregion
@@ -480,8 +573,11 @@ namespace Microsoft.Cci
 
                 _debugMetadataOpt.AddCustomDebugInformation(
                     parent: parent,
-                    kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.DynamicLocalVariables),
-                    value: _debugMetadataOpt.GetOrAddBlob(value));
+                    kind: _debugMetadataOpt.GetOrAddGuid(
+                        PortableCustomDebugInfoKinds.DynamicLocalVariables
+                    ),
+                    value: _debugMetadataOpt.GetOrAddBlob(value)
+                );
             }
 
             var tupleElementNames = local.TupleElementNames;
@@ -492,8 +588,11 @@ namespace Microsoft.Cci
 
                 _debugMetadataOpt.AddCustomDebugInformation(
                     parent: parent,
-                    kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.TupleElementNames),
-                    value: _debugMetadataOpt.GetOrAddBlob(builder));
+                    kind: _debugMetadataOpt.GetOrAddGuid(
+                        PortableCustomDebugInfoKinds.TupleElementNames
+                    ),
+                    value: _debugMetadataOpt.GetOrAddBlob(builder)
+                );
             }
         }
 
@@ -541,7 +640,10 @@ namespace Microsoft.Cci
             return builder.ToImmutableAndFree();
         }
 
-        private static void SerializeTupleElementNames(BlobBuilder builder, ImmutableArray<string> names)
+        private static void SerializeTupleElementNames(
+            BlobBuilder builder,
+            ImmutableArray<string> names
+        )
         {
             foreach (var name in names)
             {
@@ -562,7 +664,11 @@ namespace Microsoft.Cci
 
         #region State Machines
 
-        private void SerializeAsyncMethodSteppingInfo(AsyncMoveNextBodyDebugInfo asyncInfo, MethodDefinitionHandle moveNextMethod, int aggregateMethodDefRid)
+        private void SerializeAsyncMethodSteppingInfo(
+            AsyncMoveNextBodyDebugInfo asyncInfo,
+            MethodDefinitionHandle moveNextMethod,
+            int aggregateMethodDefRid
+        )
         {
             Debug.Assert(asyncInfo.ResumeOffsets.Length == asyncInfo.YieldOffsets.Length);
             Debug.Assert(asyncInfo.CatchHandlerOffset >= -1);
@@ -580,11 +686,17 @@ namespace Microsoft.Cci
 
             _debugMetadataOpt.AddCustomDebugInformation(
                 parent: moveNextMethod,
-                kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.AsyncMethodSteppingInformationBlob),
-                value: _debugMetadataOpt.GetOrAddBlob(writer));
+                kind: _debugMetadataOpt.GetOrAddGuid(
+                    PortableCustomDebugInfoKinds.AsyncMethodSteppingInformationBlob
+                ),
+                value: _debugMetadataOpt.GetOrAddBlob(writer)
+            );
         }
 
-        private void SerializeStateMachineLocalScopes(IMethodBody methodBody, MethodDefinitionHandle method)
+        private void SerializeStateMachineLocalScopes(
+            IMethodBody methodBody,
+            MethodDefinitionHandle method
+        )
         {
             var scopes = methodBody.StateMachineHoistedLocalScopes;
             if (scopes.IsDefaultOrEmpty)
@@ -602,8 +714,11 @@ namespace Microsoft.Cci
 
             _debugMetadataOpt.AddCustomDebugInformation(
                 parent: method,
-                kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.StateMachineHoistedLocalScopes),
-                value: _debugMetadataOpt.GetOrAddBlob(writer));
+                kind: _debugMetadataOpt.GetOrAddGuid(
+                    PortableCustomDebugInfoKinds.StateMachineHoistedLocalScopes
+                ),
+                value: _debugMetadataOpt.GetOrAddBlob(writer)
+            );
         }
 
         #endregion
@@ -614,7 +729,8 @@ namespace Microsoft.Cci
             StandaloneSignatureHandle localSignatureHandleOpt,
             ImmutableArray<SequencePoint> sequencePoints,
             Dictionary<DebugSourceDocument, DocumentHandle> documentIndex,
-            out DocumentHandle singleDocumentHandle)
+            out DocumentHandle singleDocumentHandle
+        )
         {
             if (sequencePoints.Length == 0)
             {
@@ -631,7 +747,10 @@ namespace Microsoft.Cci
             writer.WriteCompressedInteger(MetadataTokens.GetRowNumber(localSignatureHandleOpt));
 
             var previousDocument = TryGetSingleDocument(sequencePoints);
-            singleDocumentHandle = (previousDocument != null) ? GetOrAddDocument(previousDocument, documentIndex) : default(DocumentHandle);
+            singleDocumentHandle =
+                (previousDocument != null)
+                    ? GetOrAddDocument(previousDocument, documentIndex)
+                    : default(DocumentHandle);
 
             for (int i = 0; i < sequencePoints.Length; i++)
             {
@@ -653,7 +772,9 @@ namespace Microsoft.Cci
                 // delta IL offset:
                 if (i > 0)
                 {
-                    writer.WriteCompressedInteger(sequencePoints[i].Offset - sequencePoints[i - 1].Offset);
+                    writer.WriteCompressedInteger(
+                        sequencePoints[i].Offset - sequencePoints[i - 1].Offset
+                    );
                 }
                 else
                 {
@@ -678,8 +799,12 @@ namespace Microsoft.Cci
                 }
                 else
                 {
-                    writer.WriteCompressedSignedInteger(sequencePoints[i].StartLine - previousNonHiddenStartLine);
-                    writer.WriteCompressedSignedInteger(sequencePoints[i].StartColumn - previousNonHiddenStartColumn);
+                    writer.WriteCompressedSignedInteger(
+                        sequencePoints[i].StartLine - previousNonHiddenStartLine
+                    );
+                    writer.WriteCompressedSignedInteger(
+                        sequencePoints[i].StartColumn - previousNonHiddenStartColumn
+                    );
                 }
 
                 previousNonHiddenStartLine = sequencePoints[i].StartLine;
@@ -689,7 +814,9 @@ namespace Microsoft.Cci
             return _debugMetadataOpt.GetOrAddBlob(writer);
         }
 
-        private static DebugSourceDocument TryGetSingleDocument(ImmutableArray<SequencePoint> sequencePoints)
+        private static DebugSourceDocument TryGetSingleDocument(
+            ImmutableArray<SequencePoint> sequencePoints
+        )
         {
             DebugSourceDocument singleDocument = sequencePoints[0].Document;
             for (int i = 1; i < sequencePoints.Length; i++)
@@ -727,7 +854,10 @@ namespace Microsoft.Cci
 
         #region Documents
 
-        private DocumentHandle GetOrAddDocument(DebugSourceDocument document, Dictionary<DebugSourceDocument, DocumentHandle> index)
+        private DocumentHandle GetOrAddDocument(
+            DebugSourceDocument document,
+            Dictionary<DebugSourceDocument, DocumentHandle> index
+        )
         {
             if (index.TryGetValue(document, out var documentHandle))
             {
@@ -737,7 +867,10 @@ namespace Microsoft.Cci
             return AddDocument(document, index);
         }
 
-        private DocumentHandle AddDocument(DebugSourceDocument document, Dictionary<DebugSourceDocument, DocumentHandle> index)
+        private DocumentHandle AddDocument(
+            DebugSourceDocument document,
+            Dictionary<DebugSourceDocument, DocumentHandle> index
+        )
         {
             DocumentHandle documentHandle;
             DebugSourceInfo info = document.GetSourceInfo();
@@ -752,9 +885,14 @@ namespace Microsoft.Cci
 
             documentHandle = _debugMetadataOpt.AddDocument(
                 name: _debugMetadataOpt.GetOrAddDocumentName(name),
-                hashAlgorithm: info.Checksum.IsDefault ? default(GuidHandle) : _debugMetadataOpt.GetOrAddGuid(info.ChecksumAlgorithmId),
-                hash: info.Checksum.IsDefault ? default(BlobHandle) : _debugMetadataOpt.GetOrAddBlob(info.Checksum),
-                language: _debugMetadataOpt.GetOrAddGuid(document.Language));
+                hashAlgorithm: info.Checksum.IsDefault
+                  ? default(GuidHandle)
+                  : _debugMetadataOpt.GetOrAddGuid(info.ChecksumAlgorithmId),
+                hash: info.Checksum.IsDefault
+                  ? default(BlobHandle)
+                  : _debugMetadataOpt.GetOrAddBlob(info.Checksum),
+                language: _debugMetadataOpt.GetOrAddGuid(document.Language)
+            );
 
             index.Add(document, documentHandle);
 
@@ -762,8 +900,11 @@ namespace Microsoft.Cci
             {
                 _debugMetadataOpt.AddCustomDebugInformation(
                     parent: documentHandle,
-                    kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.EmbeddedSource),
-                    value: _debugMetadataOpt.GetOrAddBlob(info.EmbeddedTextBlob));
+                    kind: _debugMetadataOpt.GetOrAddGuid(
+                        PortableCustomDebugInfoKinds.EmbeddedSource
+                    ),
+                    value: _debugMetadataOpt.GetOrAddBlob(info.EmbeddedTextBlob)
+                );
             }
 
             return documentHandle;
@@ -776,11 +917,15 @@ namespace Microsoft.Cci
         /// This is done after serializing method debug info to ensure that we embed all requested
         /// text even if there are no corresponding sequence points.
         /// </remarks>
-        public void AddRemainingDebugDocuments(IReadOnlyDictionary<string, DebugSourceDocument> documents)
+        public void AddRemainingDebugDocuments(
+            IReadOnlyDictionary<string, DebugSourceDocument> documents
+        )
         {
-            foreach (var kvp in documents
-                .Where(kvp => !_documentIndex.ContainsKey(kvp.Value))
-                .OrderBy(kvp => kvp.Key))
+            foreach (
+                var kvp in documents
+                    .Where(kvp => !_documentIndex.ContainsKey(kvp.Value))
+                    .OrderBy(kvp => kvp.Key)
+            )
             {
                 AddDocument(kvp.Value, _documentIndex);
             }
@@ -790,7 +935,10 @@ namespace Microsoft.Cci
 
         #region Edit and Continue
 
-        private void SerializeEncMethodDebugInformation(IMethodBody methodBody, MethodDefinitionHandle method)
+        private void SerializeEncMethodDebugInformation(
+            IMethodBody methodBody,
+            MethodDefinitionHandle method
+        )
         {
             var encInfo = GetEncMethodDebugInfo(methodBody);
 
@@ -802,8 +950,11 @@ namespace Microsoft.Cci
 
                 _debugMetadataOpt.AddCustomDebugInformation(
                     parent: method,
-                    kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.EncLocalSlotMap),
-                    value: _debugMetadataOpt.GetOrAddBlob(writer));
+                    kind: _debugMetadataOpt.GetOrAddGuid(
+                        PortableCustomDebugInfoKinds.EncLocalSlotMap
+                    ),
+                    value: _debugMetadataOpt.GetOrAddBlob(writer)
+                );
             }
 
             if (!encInfo.Lambdas.IsDefaultOrEmpty)
@@ -814,8 +965,11 @@ namespace Microsoft.Cci
 
                 _debugMetadataOpt.AddCustomDebugInformation(
                     parent: method,
-                    kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.EncLambdaAndClosureMap),
-                    value: _debugMetadataOpt.GetOrAddBlob(writer));
+                    kind: _debugMetadataOpt.GetOrAddGuid(
+                        PortableCustomDebugInfoKinds.EncLambdaAndClosureMap
+                    ),
+                    value: _debugMetadataOpt.GetOrAddBlob(writer)
+                );
             }
         }
 
@@ -837,14 +991,15 @@ namespace Microsoft.Cci
             _debugMetadataOpt.AddCustomDebugInformation(
                 parent: EntityHandle.ModuleDefinition,
                 kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.SourceLink),
-                value: _debugMetadataOpt.GetOrAddBlob(bytes));
+                value: _debugMetadataOpt.GetOrAddBlob(bytes)
+            );
         }
 
         ///<summary>The version of the compilation options schema to be written to the PDB.</summary>
         private const int CompilationOptionsSchemaVersion = 2;
 
         /// <summary>
-        /// Capture the set of compilation options to allow a compilation 
+        /// Capture the set of compilation options to allow a compilation
         /// to be reconstructed from the pdb
         /// </summary>
         private void EmbedCompilationOptions(CommonPEModuleBuilder module)
@@ -858,47 +1013,83 @@ namespace Microsoft.Cci
             }
             else
             {
-                var compilerVersion = typeof(Compilation).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-                WriteValue(CompilationOptionNames.CompilationOptionsVersion, CompilationOptionsSchemaVersion.ToString());
+                var compilerVersion = typeof(Compilation).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    .InformationalVersion;
+                WriteValue(
+                    CompilationOptionNames.CompilationOptionsVersion,
+                    CompilationOptionsSchemaVersion.ToString()
+                );
                 WriteValue(CompilationOptionNames.CompilerVersion, compilerVersion);
 
-                WriteValue(CompilationOptionNames.Language, module.CommonCompilation.Options.Language);
-                WriteValue(CompilationOptionNames.SourceFileCount, module.CommonCompilation.SyntaxTrees.Count().ToString());
+                WriteValue(
+                    CompilationOptionNames.Language,
+                    module.CommonCompilation.Options.Language
+                );
+                WriteValue(
+                    CompilationOptionNames.SourceFileCount,
+                    module.CommonCompilation.SyntaxTrees.Count().ToString()
+                );
                 WriteValue(CompilationOptionNames.OutputKind, module.OutputKind.ToString());
 
                 if (module.EmitOptions.FallbackSourceFileEncoding != null)
                 {
-                    WriteValue(CompilationOptionNames.FallbackEncoding, module.EmitOptions.FallbackSourceFileEncoding.WebName);
+                    WriteValue(
+                        CompilationOptionNames.FallbackEncoding,
+                        module.EmitOptions.FallbackSourceFileEncoding.WebName
+                    );
                 }
 
                 if (module.EmitOptions.DefaultSourceFileEncoding != null)
                 {
-                    WriteValue(CompilationOptionNames.DefaultEncoding, module.EmitOptions.DefaultSourceFileEncoding.WebName);
+                    WriteValue(
+                        CompilationOptionNames.DefaultEncoding,
+                        module.EmitOptions.DefaultSourceFileEncoding.WebName
+                    );
                 }
 
                 int portabilityPolicy = 0;
-                if (module.CommonCompilation.Options.AssemblyIdentityComparer is DesktopAssemblyIdentityComparer identityComparer)
+                if (
+                    module.CommonCompilation.Options.AssemblyIdentityComparer
+                    is DesktopAssemblyIdentityComparer identityComparer
+                )
                 {
-                    portabilityPolicy |= identityComparer.PortabilityPolicy.SuppressSilverlightLibraryAssembliesPortability ? 0b1 : 0;
-                    portabilityPolicy |= identityComparer.PortabilityPolicy.SuppressSilverlightPlatformAssembliesPortability ? 0b10 : 0;
+                    portabilityPolicy |= identityComparer
+                        .PortabilityPolicy
+                        .SuppressSilverlightLibraryAssembliesPortability
+                        ? 0b1
+                        : 0;
+                    portabilityPolicy |= identityComparer
+                        .PortabilityPolicy
+                        .SuppressSilverlightPlatformAssembliesPortability
+                        ? 0b10
+                        : 0;
                 }
 
                 if (portabilityPolicy != 0)
                 {
-                    WriteValue(CompilationOptionNames.PortabilityPolicy, portabilityPolicy.ToString());
+                    WriteValue(
+                        CompilationOptionNames.PortabilityPolicy,
+                        portabilityPolicy.ToString()
+                    );
                 }
 
                 var optimizationLevel = module.CommonCompilation.Options.OptimizationLevel;
                 var debugPlusMode = module.CommonCompilation.Options.DebugPlusMode;
                 if ((optimizationLevel, debugPlusMode) != OptimizationLevelFacts.DefaultValues)
                 {
-                    WriteValue(CompilationOptionNames.Optimization, optimizationLevel.ToPdbSerializedString(debugPlusMode));
+                    WriteValue(
+                        CompilationOptionNames.Optimization,
+                        optimizationLevel.ToPdbSerializedString(debugPlusMode)
+                    );
                 }
 
                 var platform = module.CommonCompilation.Options.Platform;
                 WriteValue(CompilationOptionNames.Platform, platform.ToString());
 
-                var runtimeVersion = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                var runtimeVersion = typeof(object).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    ?.InformationalVersion;
                 WriteValue(CompilationOptionNames.RuntimeVersion, runtimeVersion);
 
                 module.CommonCompilation.SerializePdbEmbeddedCompilationOptions(builder);
@@ -906,8 +1097,11 @@ namespace Microsoft.Cci
 
             _debugMetadataOpt.AddCustomDebugInformation(
                 parent: EntityHandle.ModuleDefinition,
-                kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.CompilationOptions),
-                value: _debugMetadataOpt.GetOrAddBlob(builder));
+                kind: _debugMetadataOpt.GetOrAddGuid(
+                    PortableCustomDebugInfoKinds.CompilationOptions
+                ),
+                value: _debugMetadataOpt.GetOrAddBlob(builder)
+            );
 
             void WriteValue(string key, string value)
             {
@@ -937,10 +1131,14 @@ namespace Microsoft.Cci
             var referenceManager = module.CommonCompilation.GetBoundReferenceManager();
             foreach (var pair in referenceManager.GetReferencedAssemblyAliases())
             {
-                if (referenceManager.GetMetadataReference(pair.AssemblySymbol) is PortableExecutableReference { FilePath: { } } portableReference)
+                if (
+                    referenceManager.GetMetadataReference(pair.AssemblySymbol)
+                    is PortableExecutableReference { FilePath: { } } portableReference
+                )
                 {
                     var fileName = PathUtilities.GetFileName(portableReference.FilePath);
-                    var peReader = pair.AssemblySymbol.GetISymbol() is IAssemblySymbol assemblySymbol
+                    var peReader = pair.AssemblySymbol.GetISymbol()
+                        is IAssemblySymbol assemblySymbol
                         ? assemblySymbol.GetMetadata().GetAssembly().ManifestModule.PEReaderOpt
                         : null;
 
@@ -956,20 +1154,25 @@ namespace Microsoft.Cci
 
                     // Extern alias
                     if (pair.Aliases.Length > 0)
-                        builder.WriteUTF8(string.Join(",", pair.Aliases.OrderBy(StringComparer.Ordinal)));
+                        builder.WriteUTF8(
+                            string.Join(",", pair.Aliases.OrderBy(StringComparer.Ordinal))
+                        );
 
                     // Always null terminate the extern alias list
                     builder.WriteByte(0);
 
-                    byte kindAndEmbedInteropTypes = (byte)(portableReference.Properties.EmbedInteropTypes
-                        ? 0b10
-                        : 0b0);
+                    byte kindAndEmbedInteropTypes = (byte)(
+                        portableReference.Properties.EmbedInteropTypes ? 0b10 : 0b0
+                    );
 
                     kindAndEmbedInteropTypes |= portableReference.Properties.Kind switch
                     {
                         MetadataImageKind.Assembly => 1,
                         MetadataImageKind.Module => 0,
-                        _ => throw ExceptionUtilities.UnexpectedValue(portableReference.Properties.Kind)
+                        _
+                          => throw ExceptionUtilities.UnexpectedValue(
+                              portableReference.Properties.Kind
+                          )
                     };
 
                     builder.WriteByte(kindAndEmbedInteropTypes);
@@ -984,8 +1187,11 @@ namespace Microsoft.Cci
 
             _debugMetadataOpt.AddCustomDebugInformation(
                 parent: EntityHandle.ModuleDefinition,
-                kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.CompilationMetadataReferences),
-                value: _debugMetadataOpt.GetOrAddBlob(builder));
+                kind: _debugMetadataOpt.GetOrAddGuid(
+                    PortableCustomDebugInfoKinds.CompilationMetadataReferences
+                ),
+                value: _debugMetadataOpt.GetOrAddBlob(builder)
+            );
         }
 
         private void EmbedTypeDefinitionDocumentInformation(CommonPEModuleBuilder module)
@@ -1001,11 +1207,13 @@ namespace Microsoft.Cci
                 }
                 _debugMetadataOpt.AddCustomDebugInformation(
                     parent: GetTypeDefinitionHandle(definition),
-                    kind: _debugMetadataOpt.GetOrAddGuid(PortableCustomDebugInfoKinds.TypeDefinitionDocuments),
-                    value: _debugMetadataOpt.GetOrAddBlob(builder));
+                    kind: _debugMetadataOpt.GetOrAddGuid(
+                        PortableCustomDebugInfoKinds.TypeDefinitionDocuments
+                    ),
+                    value: _debugMetadataOpt.GetOrAddBlob(builder)
+                );
                 builder.Clear();
             }
         }
-
     }
 }

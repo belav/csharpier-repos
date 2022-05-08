@@ -11,6 +11,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel
         public int Id;
         public string Name;
 
-        public ICollection<GeneratedKeysRight> Rights = new ObservableCollection<GeneratedKeysRight>();
+        public ICollection<GeneratedKeysRight> Rights =
+            new ObservableCollection<GeneratedKeysRight>();
     }
 }

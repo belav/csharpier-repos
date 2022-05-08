@@ -49,8 +49,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,8 +57,7 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override Type Type
-            => Expression.Type;
+        public override Type Type => Expression.Type;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,8 +65,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => Update((SqlExpression)visitor.Visit(Expression));
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            Update((SqlExpression)visitor.Visit(Expression));
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,10 +74,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual OrderingExpression Update(SqlExpression expression)
-            => expression != Expression
-                ? new OrderingExpression(expression, IsAscending)
-                : this;
+        public virtual OrderingExpression Update(SqlExpression expression) =>
+            expression != Expression ? new OrderingExpression(expression, IsAscending) : this;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -99,15 +95,16 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is OrderingExpression orderingExpression
-                    && Equals(orderingExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is OrderingExpression orderingExpression && Equals(orderingExpression)
+            );
 
-        private bool Equals(OrderingExpression orderingExpression)
-            => Expression.Equals(orderingExpression.Expression)
-                && IsAscending == orderingExpression.IsAscending;
+        private bool Equals(OrderingExpression orderingExpression) =>
+            Expression.Equals(orderingExpression.Expression)
+            && IsAscending == orderingExpression.IsAscending;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -115,7 +112,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override int GetHashCode()
-            => HashCode.Combine(Expression, IsAscending);
+        public override int GetHashCode() => HashCode.Combine(Expression, IsAscending);
     }
 }

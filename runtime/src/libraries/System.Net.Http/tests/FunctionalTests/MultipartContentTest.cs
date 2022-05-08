@@ -24,38 +24,97 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_NullOrEmptyBoundary_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", null));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", ""));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", " "));
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", " ")
+            );
         }
 
         [Fact]
         public void Ctor_TooLongBoundary_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new MultipartContent("Some",
-                "LongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70Characters"));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    new MultipartContent(
+                        "Some",
+                        "LongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70Characters"
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_BadBoundary_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "EndsInSpace "));
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "EndsInSpace ")
+            );
 
             // Invalid chars CTLs HT < > @ ; \ " [ ] { } ! # $ % & ^ ~ `
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "a\t"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "<"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "@"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "["));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "{"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "!"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "#"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "$"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "%"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "&"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "^"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "~"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "`"));
-            AssertExtensions.Throws<ArgumentException>("boundary", () => new MultipartContent("Some", "\"quoted\""));
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "a\t")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "<")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "@")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "[")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "{")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "!")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "#")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "$")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "%")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "&")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "^")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "~")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "`")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "boundary",
+                () => new MultipartContent("Some", "\"quoted\"")
+            );
         }
 
         [Fact]
@@ -132,15 +191,17 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(MultipartContentToStringMode.ReadAsStreamAsync, true)]
         [InlineData(MultipartContentToStringMode.CopyToAsync, false)]
         [InlineData(MultipartContentToStringMode.CopyToAsync, true)]
-        public async Task ReadAsStringAsync_NoSubContent_MatchesExpected(MultipartContentToStringMode mode, bool async)
+        public async Task ReadAsStringAsync_NoSubContent_MatchesExpected(
+            MultipartContentToStringMode mode,
+            bool async
+        )
         {
             var mc = new MultipartContent("someSubtype", "theBoundary");
 
             Assert.Equal(
-                "--theBoundary\r\n" +
-                "\r\n" +
-                "--theBoundary--\r\n",
-                await MultipartContentToStringAsync(mc, mode, async));
+                "--theBoundary\r\n" + "\r\n" + "--theBoundary--\r\n",
+                await MultipartContentToStringAsync(mc, mode, async)
+            );
         }
 
         [Theory]
@@ -148,25 +209,34 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(MultipartContentToStringMode.ReadAsStreamAsync, true)]
         [InlineData(MultipartContentToStringMode.CopyToAsync, false)]
         [InlineData(MultipartContentToStringMode.CopyToAsync, true)]
-        public async Task ReadAsStringAsync_OneSubContentWithHeaders_MatchesExpected(MultipartContentToStringMode mode, bool async)
+        public async Task ReadAsStringAsync_OneSubContentWithHeaders_MatchesExpected(
+            MultipartContentToStringMode mode,
+            bool async
+        )
         {
-            var subContent = new ByteArrayContent(Encoding.UTF8.GetBytes("This is a ByteArrayContent"));
+            var subContent = new ByteArrayContent(
+                Encoding.UTF8.GetBytes("This is a ByteArrayContent")
+            );
             subContent.Headers.Add("someHeaderName", "andSomeHeaderValue");
             subContent.Headers.Add("someOtherHeaderName", new[] { "withNotOne", "ButTwoValues" });
-            subContent.Headers.Add("oneMoreHeader", new[] { "withNotOne", "AndNotTwo", "butThreeValues" });
+            subContent.Headers.Add(
+                "oneMoreHeader",
+                new[] { "withNotOne", "AndNotTwo", "butThreeValues" }
+            );
 
             var mc = new MultipartContent("someSubtype", "theBoundary");
             mc.Add(subContent);
 
             Assert.Equal(
-                "--theBoundary\r\n" +
-                "someHeaderName: andSomeHeaderValue\r\n" +
-                "someOtherHeaderName: withNotOne, ButTwoValues\r\n" +
-                "oneMoreHeader: withNotOne, AndNotTwo, butThreeValues\r\n" +
-                "\r\n" +
-                "This is a ByteArrayContent\r\n" +
-                "--theBoundary--\r\n",
-                await MultipartContentToStringAsync(mc, mode, async));
+                "--theBoundary\r\n"
+                    + "someHeaderName: andSomeHeaderValue\r\n"
+                    + "someOtherHeaderName: withNotOne, ButTwoValues\r\n"
+                    + "oneMoreHeader: withNotOne, AndNotTwo, butThreeValues\r\n"
+                    + "\r\n"
+                    + "This is a ByteArrayContent\r\n"
+                    + "--theBoundary--\r\n",
+                await MultipartContentToStringAsync(mc, mode, async)
+            );
         }
 
         [Theory]
@@ -174,22 +244,26 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(MultipartContentToStringMode.ReadAsStreamAsync, true)]
         [InlineData(MultipartContentToStringMode.CopyToAsync, false)]
         [InlineData(MultipartContentToStringMode.CopyToAsync, true)]
-        public async Task ReadAsStringAsync_TwoSubContents_MatchesExpected(MultipartContentToStringMode mode, bool async)
+        public async Task ReadAsStringAsync_TwoSubContents_MatchesExpected(
+            MultipartContentToStringMode mode,
+            bool async
+        )
         {
             var mc = new MultipartContent("someSubtype", "theBoundary");
             mc.Add(new ByteArrayContent(Encoding.UTF8.GetBytes("This is a ByteArrayContent")));
             mc.Add(new StringContent("This is a StringContent"));
 
             Assert.Equal(
-                "--theBoundary\r\n" +
-                "\r\n" +
-                "This is a ByteArrayContent\r\n" +
-                "--theBoundary\r\n" +
-                "Content-Type: text/plain; charset=utf-8\r\n" +
-                "\r\n" +
-                "This is a StringContent\r\n" +
-                "--theBoundary--\r\n",
-                await MultipartContentToStringAsync(mc, mode, async));
+                "--theBoundary\r\n"
+                    + "\r\n"
+                    + "This is a ByteArrayContent\r\n"
+                    + "--theBoundary\r\n"
+                    + "Content-Type: text/plain; charset=utf-8\r\n"
+                    + "\r\n"
+                    + "This is a StringContent\r\n"
+                    + "--theBoundary--\r\n",
+                await MultipartContentToStringAsync(mc, mode, async)
+            );
         }
 
         [Theory]
@@ -208,7 +282,9 @@ namespace System.Net.Http.Functional.Tests
                 form.Add(new ByteArrayContent(bytes), "file", Guid.NewGuid().ToString());
             }
 
-            long totalAsyncRead = 0, totalSyncArrayRead = 0, totalSyncSpanRead = 0;
+            long totalAsyncRead = 0,
+                totalSyncArrayRead = 0,
+                totalSyncSpanRead = 0;
             int bytesRead;
 
             using (Stream s = await form.ReadAsStreamAsync(readStreamAsync))
@@ -246,11 +322,27 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(true, false, true)]
         [InlineData(true, true, false)]
         [InlineData(true, true, true)]
-        public async Task ReadAsStreamAsync_CanSeekEvenIfAllStreamsNotSeekale(bool firstContentSeekable, bool secondContentSeekable, bool readStreamAsync)
+        public async Task ReadAsStreamAsync_CanSeekEvenIfAllStreamsNotSeekale(
+            bool firstContentSeekable,
+            bool secondContentSeekable,
+            bool readStreamAsync
+        )
         {
             var c = new MultipartContent();
-            c.Add(new StreamContent(firstContentSeekable ? new MemoryStream(new byte[42]) : new NonSeekableMemoryStream(new byte[42])));
-            c.Add(new StreamContent(secondContentSeekable ? new MemoryStream(new byte[42]) : new NonSeekableMemoryStream(new byte[1])));
+            c.Add(
+                new StreamContent(
+                    firstContentSeekable
+                      ? new MemoryStream(new byte[42])
+                      : new NonSeekableMemoryStream(new byte[42])
+                )
+            );
+            c.Add(
+                new StreamContent(
+                    secondContentSeekable
+                      ? new MemoryStream(new byte[42])
+                      : new NonSeekableMemoryStream(new byte[1])
+                )
+            );
             using (Stream s = await c.ReadAsStreamAsync(readStreamAsync))
             {
                 Assert.True(s.CanSeek);
@@ -269,20 +361,26 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public async Task ReadAsStreamAsync_Seek_JumpsToSpecifiedPosition(bool nestedContent, bool readStreamAsync)
+        public async Task ReadAsStreamAsync_Seek_JumpsToSpecifiedPosition(
+            bool nestedContent,
+            bool readStreamAsync
+        )
         {
             var mc = new MultipartContent();
             if (nestedContent)
             {
                 mc.Add(new ByteArrayContent(Encoding.UTF8.GetBytes("This is a ByteArrayContent")));
                 mc.Add(new StringContent("This is a StringContent"));
-                mc.Add(new ByteArrayContent(Encoding.UTF8.GetBytes("Another ByteArrayContent :-)")));
+                mc.Add(
+                    new ByteArrayContent(Encoding.UTF8.GetBytes("Another ByteArrayContent :-)"))
+                );
             }
 
             var memStream = new MemoryStream();
             await mc.CopyToAsync(memStream);
 
-            byte[] buf1 = new byte[1], buf2 = new byte[1];
+            byte[] buf1 = new byte[1],
+                buf2 = new byte[1];
             using (Stream s = await mc.ReadAsStreamAsync(readStreamAsync))
             {
                 var targets = new[]
@@ -293,13 +391,11 @@ namespace System.Net.Http.Functional.Tests
                     new { Origin = SeekOrigin.Begin, Offset = memStream.Length + 1 },
                     new { Origin = SeekOrigin.Begin, Offset = 0L },
                     new { Origin = SeekOrigin.Begin, Offset = 1L },
-
                     new { Origin = SeekOrigin.Current, Offset = 1L },
                     new { Origin = SeekOrigin.Current, Offset = 2L },
                     new { Origin = SeekOrigin.Current, Offset = -2L },
                     new { Origin = SeekOrigin.Current, Offset = 0L },
                     new { Origin = SeekOrigin.Current, Offset = 1000L },
-
                     new { Origin = SeekOrigin.End, Offset = 0L },
                     new { Origin = SeekOrigin.End, Offset = memStream.Length },
                     new { Origin = SeekOrigin.End, Offset = memStream.Length / 2 },
@@ -328,22 +424,78 @@ namespace System.Net.Http.Functional.Tests
                 Assert.False(s.CanWrite);
                 Assert.True(s.CanSeek);
 
-                AssertExtensions.Throws<ArgumentNullException>("buffer", null, () => s.Read(null, 0, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => s.Read(new byte[1], -1, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => s.Read(new byte[1], 0, -1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", null, () => s.Read(new byte[1], 1, 1));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    null,
+                    () => s.Read(null, 0, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => s.Read(new byte[1], -1, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    () => s.Read(new byte[1], 0, -1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    null,
+                    () => s.Read(new byte[1], 1, 1)
+                );
 
-                AssertExtensions.Throws<ArgumentNullException>("buffer", null, () => { s.ReadAsync(null, 0, 0); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => { s.ReadAsync(new byte[1], -1, 0); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => { s.ReadAsync(new byte[1], 0, -1); });
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", null, () => { s.ReadAsync(new byte[1], 1, 1); });
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    null,
+                    () =>
+                    {
+                        s.ReadAsync(null, 0, 0);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () =>
+                    {
+                        s.ReadAsync(new byte[1], -1, 0);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    () =>
+                    {
+                        s.ReadAsync(new byte[1], 0, -1);
+                    }
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    null,
+                    () =>
+                    {
+                        s.ReadAsync(new byte[1], 1, 1);
+                    }
+                );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => s.Position = -1);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => s.Seek(-1, SeekOrigin.Begin));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("origin", () => s.Seek(0, (SeekOrigin)42));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => s.Position = -1
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => s.Seek(-1, SeekOrigin.Begin)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "origin",
+                    () => s.Seek(0, (SeekOrigin)42)
+                );
                 Assert.Throws<NotSupportedException>(() => s.Write(new byte[1], 0, 0));
-                Assert.Throws<NotSupportedException>(() => s.Write(new Span<byte>(new byte[1], 0, 0)));
-                Assert.Throws<NotSupportedException>(() => { s.WriteAsync(new byte[1], 0, 0); });
+                Assert.Throws<NotSupportedException>(
+                    () => s.Write(new Span<byte>(new byte[1], 0, 0))
+                );
+                Assert.Throws<NotSupportedException>(
+                    () =>
+                    {
+                        s.WriteAsync(new byte[1], 0, 0);
+                    }
+                );
                 Assert.Throws<NotSupportedException>(() => s.SetLength(1));
             }
         }
@@ -391,7 +543,9 @@ namespace System.Net.Http.Functional.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task ReadAsStreamAsync_CustomEncodingSelector_SelectorIsCalledWithCustomState(bool async)
+        public async Task ReadAsStreamAsync_CustomEncodingSelector_SelectorIsCalledWithCustomState(
+            bool async
+        )
         {
             var mc = new MultipartContent();
 
@@ -403,7 +557,8 @@ namespace System.Net.Http.Functional.Tests
             byteArrayContent.Headers.Add("ByteArrayContent", "foo");
             mc.Add(byteArrayContent);
 
-            bool seenStringContent = false, seenByteArrayContent = false;
+            bool seenStringContent = false,
+                seenByteArrayContent = false;
 
             mc.HeaderEncodingSelector = (name, content) =>
             {
@@ -457,13 +612,14 @@ namespace System.Net.Http.Functional.Tests
             byteArrayContent.Headers.Add("default", "\uD83D\uDE00");
             mc.Add(byteArrayContent);
 
-            mc.HeaderEncodingSelector = (name, _) => name switch
-            {
-                "latin1" => Encoding.Latin1,
-                "utf8" => Encoding.UTF8,
-                "ascii" => Encoding.ASCII,
-                _ => null
-            };
+            mc.HeaderEncodingSelector = (name, _) =>
+                name switch
+                {
+                    "latin1" => Encoding.Latin1,
+                    "utf8" => Encoding.UTF8,
+                    "ascii" => Encoding.ASCII,
+                    _ => null
+                };
 
             var ms = new MemoryStream();
             if (async)
@@ -497,7 +653,8 @@ namespace System.Net.Http.Functional.Tests
                 Encoding.Latin1.GetBytes("\uD83D\uDE00"),
                 Encoding.Latin1.GetBytes("\r\n\r\n"),
                 Encoding.Latin1.GetBytes("bar4"),
-                Encoding.Latin1.GetBytes("\r\n--fooBoundary--\r\n"));
+                Encoding.Latin1.GetBytes("\r\n--fooBoundary--\r\n")
+            );
 
             Assert.Equal(expected, ms.ToArray());
 
@@ -506,7 +663,11 @@ namespace System.Net.Http.Functional.Tests
 
         #region Helpers
 
-        private static async Task<string> MultipartContentToStringAsync(MultipartContent content, MultipartContentToStringMode mode, bool async)
+        private static async Task<string> MultipartContentToStringAsync(
+            MultipartContent content,
+            MultipartContentToStringMode mode,
+            bool async
+        )
         {
             Stream stream;
 
@@ -554,7 +715,11 @@ namespace System.Net.Http.Functional.Tests
                 base.Dispose(disposing);
             }
 
-            protected override void SerializeToStream(Stream stream, TransportContext context, CancellationToken cancellationToken)
+            protected override void SerializeToStream(
+                Stream stream,
+                TransportContext context,
+                CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }
@@ -580,6 +745,7 @@ namespace System.Net.Http.Functional.Tests
         private sealed class NonSeekableMemoryStream : MemoryStream
         {
             public NonSeekableMemoryStream(byte[] data) : base(data) { }
+
             public override bool CanSeek => false;
         }
 

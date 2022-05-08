@@ -5,7 +5,5 @@ using System;
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity
 {
-    public class PersonalDataAttribute : Attribute
-    {
-    }
+    public class PersonalDataAttribute : Attribute { }
 }

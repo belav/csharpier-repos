@@ -15,16 +15,24 @@ namespace Microsoft.CodeAnalysis.Simplification
         private const string FeatureName = "SimplificationOptions";
 
         /// <summary>
-        /// This option describes the naming rules that should be applied to specified categories of symbols, 
+        /// This option describes the naming rules that should be applied to specified categories of symbols,
         /// and the level to which those rules should be enforced.
         /// </summary>
-        internal static PerLanguageOption2<NamingStylePreferences> NamingPreferences { get; } = new PerLanguageOption2<NamingStylePreferences>(
-            FeatureName, nameof(NamingPreferences), defaultValue: NamingStylePreferences.Default,
-            new NamingStylePreferenceEditorConfigStorageLocation(),
-            new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.NamingPreferences5"),
-            new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.NamingPreferences"));
+        internal static PerLanguageOption2<NamingStylePreferences> NamingPreferences { get; } =
+            new PerLanguageOption2<NamingStylePreferences>(
+                FeatureName,
+                nameof(NamingPreferences),
+                defaultValue: NamingStylePreferences.Default,
+                new NamingStylePreferenceEditorConfigStorageLocation(),
+                new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.NamingPreferences5"
+                ),
+                new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.NamingPreferences"
+                )
+            );
 
-        public static OptionKey2 GetNamingPreferencesOptionKey(string language)
-            => new(NamingPreferences, language);
+        public static OptionKey2 GetNamingPreferencesOptionKey(string language) =>
+            new(NamingPreferences, language);
     }
 }

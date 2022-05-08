@@ -61,9 +61,17 @@ namespace System.Runtime.InteropServices
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void PtrToStructureInternal(IntPtr ptr, object structure, bool allowValueClasses);
+        private static extern void PtrToStructureInternal(
+            IntPtr ptr,
+            object structure,
+            bool allowValueClasses
+        );
 
-        private static void PtrToStructureHelper(IntPtr ptr, object? structure, bool allowValueClasses)
+        private static void PtrToStructureHelper(
+            IntPtr ptr,
+            object? structure,
+            bool allowValueClasses
+        )
         {
             if (structure == null)
                 throw new ArgumentNullException(nameof(structure));
@@ -104,16 +112,25 @@ namespace System.Runtime.InteropServices
 
         private static Dictionary<(Type, string), ICustomMarshaler>? MarshalerInstanceCache;
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Implementation detail of MarshalAs.CustomMarshaler")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Implementation detail of MarshalAs.CustomMarshaler"
+        )]
         internal static ICustomMarshaler? GetCustomMarshalerInstance(Type type, string cookie)
         {
             var key = (type, cookie);
 
             Dictionary<(Type, string), ICustomMarshaler> cache =
-                Volatile.Read(ref MarshalerInstanceCache) ??
-                Interlocked.CompareExchange(ref MarshalerInstanceCache, new Dictionary<(Type, string), ICustomMarshaler>(new MarshalerInstanceKeyComparer()), null) ??
-                MarshalerInstanceCache;
+                Volatile.Read(ref MarshalerInstanceCache)
+                ?? Interlocked.CompareExchange(
+                    ref MarshalerInstanceCache,
+                    new Dictionary<(Type, string), ICustomMarshaler>(
+                        new MarshalerInstanceKeyComparer()
+                    ),
+                    null
+                )
+                ?? MarshalerInstanceCache;
 
             ICustomMarshaler? result;
             bool gotExistingInstance;
@@ -125,26 +142,40 @@ namespace System.Runtime.InteropServices
                 RuntimeMethodInfo? getInstanceMethod;
                 try
                 {
-                    getInstanceMethod = (RuntimeMethodInfo?)type.GetMethod(
-                        "GetInstance", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.InvokeMethod,
-                        null, new Type[] { typeof(string) }, null
-                    );
+                    getInstanceMethod = (RuntimeMethodInfo?)
+                        type.GetMethod(
+                            "GetInstance",
+                            BindingFlags.Static
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.InvokeMethod,
+                            null,
+                            new Type[] { typeof(string) },
+                            null
+                        );
                 }
                 catch (AmbiguousMatchException)
                 {
-                    throw new ApplicationException($"Custom marshaler '{type.FullName}' implements multiple static GetInstance methods that take a single string parameter.");
+                    throw new ApplicationException(
+                        $"Custom marshaler '{type.FullName}' implements multiple static GetInstance methods that take a single string parameter."
+                    );
                 }
 
-                if ((getInstanceMethod == null) ||
-                    (getInstanceMethod.ReturnType != typeof(ICustomMarshaler)))
+                if (
+                    (getInstanceMethod == null)
+                    || (getInstanceMethod.ReturnType != typeof(ICustomMarshaler))
+                )
                 {
-                    throw new ApplicationException($"Custom marshaler '{type.FullName}' does not implement a static GetInstance method that takes a single string parameter and returns an ICustomMarshaler.");
+                    throw new ApplicationException(
+                        $"Custom marshaler '{type.FullName}' does not implement a static GetInstance method that takes a single string parameter and returns an ICustomMarshaler."
+                    );
                 }
 
                 Exception? exc;
                 try
                 {
-                    result = (ICustomMarshaler?)getInstanceMethod.InternalInvoke(null, new object[] { cookie }, out exc);
+                    result = (ICustomMarshaler?)
+                        getInstanceMethod.InternalInvoke(null, new object[] { cookie }, out exc);
                 }
                 catch (Exception e)
                 {
@@ -161,7 +192,9 @@ namespace System.Runtime.InteropServices
                 }
 
                 if (result == null)
-                    throw new ApplicationException($"A call to GetInstance() for custom marshaler '{type.FullName}' returned null, which is not allowed.");
+                    throw new ApplicationException(
+                        $"A call to GetInstance() for custom marshaler '{type.FullName}' returned null, which is not allowed."
+                    );
 
                 lock (cache)
                     cache[key] = result;

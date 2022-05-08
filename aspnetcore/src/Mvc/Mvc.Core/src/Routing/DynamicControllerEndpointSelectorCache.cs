@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 internal class DynamicControllerEndpointSelectorCache
 {
     private readonly ConcurrentDictionary<int, EndpointDataSource> _dataSourceCache = new();
-    private readonly ConcurrentDictionary<int, DynamicControllerEndpointSelector> _endpointSelectorCache = new();
+    private readonly ConcurrentDictionary<
+        int,
+        DynamicControllerEndpointSelector
+    > _endpointSelectorCache = new();
 
     public void AddDataSource(ControllerActionEndpointDataSource dataSource)
     {

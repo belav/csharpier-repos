@@ -17,23 +17,27 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 {
-    public partial class UseLocalFunctionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseLocalFunctionTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseLocalFunctionTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public UseLocalFunctionTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseLocalFunctionDiagnosticAnalyzer(), GetCSharpUseLocalFunctionCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseLocalFunctionDiagnosticAnalyzer(),
+                GetCSharpUseLocalFunctionCodeFixProvider()
+            );
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp72ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingBeforeCSharp7()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -49,14 +53,20 @@ class C
             return fibonacci(v - 1, v - 2);
         };
     }
-}", parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+}",
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingIfWrittenAfter()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -74,14 +84,15 @@ class C
 
         fibonacci = null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingIfWrittenInside()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -98,14 +109,15 @@ class C
             return fibonacci(v - 1, v - 2);
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingForErrorType()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -120,14 +132,15 @@ class C
             return fibonacci(v - 1, v - 2);
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingForMultipleVariables()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -143,14 +156,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }, fib2 = x => x;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingForField()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -163,14 +177,15 @@ class C
 
             return fibonacci(v - 1, v - 2);
         };
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleInitialization_SimpleLambda_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -187,7 +202,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -203,14 +218,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleInitialization_ParenLambdaNoType_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -227,7 +243,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -243,14 +259,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleInitialization_ParenLambdaWithType_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -267,7 +284,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -283,14 +300,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleInitialization_AnonymousMethod()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -307,7 +325,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -323,14 +341,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleInitialization_SimpleLambda_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -342,7 +361,7 @@ class C
                 : fibonacci(v - 1, v - 2);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -353,14 +372,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleInitialization_ParenLambdaNoType_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -372,7 +392,7 @@ class C
                 : fibonacci(v - 1, v - 2);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -383,14 +403,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleInitialization_ParenLambdaWithType_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -402,7 +423,7 @@ class C
                 : fibonacci(v - 1, v - 2);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -413,14 +434,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_SimpleLambda_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -437,7 +459,7 @@ class C
         });
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -453,14 +475,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_SimpleLambda_Block_ExtraParens()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -477,7 +500,7 @@ class C
         }));
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -493,14 +516,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_ParenLambdaNoType_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -517,7 +541,7 @@ class C
         });
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -533,14 +557,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_ParenLambdaWithType_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -557,7 +582,7 @@ class C
         });
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -573,14 +598,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_AnonymousMethod()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -597,7 +623,7 @@ class C
         });
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -613,14 +639,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_SimpleLambda_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -632,7 +659,7 @@ class C
                 : fibonacci(v - 1, v - 2));
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -643,14 +670,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_ParenLambdaNoType_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -662,7 +690,7 @@ class C
                 : fibonacci(v - 1, v - 2));
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -673,14 +701,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestCastInitialization_ParenLambdaWithType_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -692,7 +721,7 @@ class C
                 : fibonacci(v - 1, v - 2));
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -703,14 +732,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_WrongName()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -727,14 +757,15 @@ class C
             return fibonacci(v - 1, v - 2);
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_InitializedToOtherValue()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -751,14 +782,15 @@ class C
             return fibonacci(v - 1, v - 2);
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_SimpleLambda_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -776,7 +808,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -792,14 +824,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_SimpleLambda_Block_NoInitializer()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -817,7 +850,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -833,14 +866,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_SimpleLambda_Block_DefaultLiteral()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -858,7 +892,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -875,16 +909,17 @@ class C
         }
     }
 }",
-            // 7.1 is required for default literals, so 7.2 should be sufficient
-            // and is used in other tests
-            new TestParameters(parseOptions: CSharp72ParseOptions));
+                // 7.1 is required for default literals, so 7.2 should be sufficient
+                // and is used in other tests
+                new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_SimpleLambda_Block_DefaultExpression()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -902,7 +937,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -918,14 +953,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_SimpleLambda_Block_DefaultExpression_var()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -943,7 +979,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -959,14 +995,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_ParenLambdaNoType_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -984,7 +1021,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1000,14 +1037,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_ParenLambdaWithType_Block()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1025,7 +1063,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1041,14 +1079,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_AnonymousMethod()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1066,7 +1105,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1082,14 +1121,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_SimpleLambda_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1102,7 +1142,7 @@ class C
                 : fibonacci(v - 1, v - 2);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1113,14 +1153,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_ParenLambdaNoType_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1133,7 +1174,7 @@ class C
                 : fibonacci(v - 1, v - 2);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1144,14 +1185,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSplitInitialization_ParenLambdaWithType_ExprBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1164,7 +1206,7 @@ class C
                 : fibonacci(v - 1, v - 2);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1175,14 +1217,15 @@ class C
                 ? 1
                 : fibonacci(v - 1, v - 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1196,7 +1239,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1209,14 +1252,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1230,7 +1274,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1243,14 +1287,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1266,7 +1311,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1278,14 +1323,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestFixAll4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1301,7 +1347,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1313,14 +1359,15 @@ class C
             return fibonacciHelper(v);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestTrivia()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1338,7 +1385,7 @@ class C
         }; // Trailing trivia
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1355,14 +1402,15 @@ class C
             return fibonacci(v - 1, v - 2);
         } // Trailing trivia
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestInWithParameters()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 delegate void D(in int p);
 class C
 {
@@ -1371,7 +1419,7 @@ class C
         D [||]lambda = (in int p) => throw null;
     }
 }",
-@"
+                @"
 delegate void D(in int p);
 class C
 {
@@ -1380,15 +1428,16 @@ class C
         void lambda(in int p) => throw null;
     }
 }",
-            // Run with 7.2 to get read-only references
-            new TestParameters(parseOptions: CSharp72ParseOptions));
+                // Run with 7.2 to get read-only references
+                new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestRefReadOnlyWithReturnType()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 delegate ref readonly int D();
 class C
 {
@@ -1397,7 +1446,7 @@ class C
         D [||]lambda = () => throw null;
     }
 }",
-@"
+                @"
 delegate ref readonly int D();
 class C
 {
@@ -1405,7 +1454,8 @@ class C
     {
         static ref readonly int lambda() => throw null;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1413,7 +1463,7 @@ class C
         public async Task TestMissingIfConvertedToNonDelegate()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -1426,7 +1476,8 @@ class Program
     }
 
     public static void AssertSame(object expected, object actual) { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1434,7 +1485,7 @@ class Program
         public async Task TestAvailableIfConvertedToDelegate()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -1448,7 +1499,7 @@ class Program
 
     public static void AssertSame(Func<string, Task> expected, object actual) { }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class Program
@@ -1461,7 +1512,8 @@ class Program
     }
 
     public static void AssertSame(Func<string, Task> expected, object actual) { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1469,7 +1521,7 @@ class Program
         public async Task TestNotAvailableIfConvertedToSystemDelegate()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1480,7 +1532,8 @@ class Program
     }
 
     public static void M(Delegate expected) { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1488,7 +1541,7 @@ class Program
         public async Task TestNotAvailableIfConvertedToSystemMulticastDelegate()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1499,7 +1552,8 @@ class Program
     }
 
     public static void M(MulticastDelegate expected) { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1507,7 +1561,7 @@ class Program
         public async Task TestAvailableIfConvertedToCoContraVariantDelegate0()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1519,7 +1573,7 @@ class Program
 
     public static void M(Func<object, string> expected) { }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1530,15 +1584,19 @@ class Program
     }
 
     public static void M(Func<object, string> expected) { }
-}");
+}"
+            );
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938"), Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)
+        ]
         [WorkItem(23118, "https://github.com/dotnet/roslyn/issues/23118")]
         public async Task TestAvailableIfConvertedToCoContraVariantDelegate1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1550,7 +1608,7 @@ class Program
 
     public static void M(Func<string, object> expected) { }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1561,15 +1619,19 @@ class Program
     }
 
     public static void M(Func<string, object> expected) { }
-}");
+}"
+            );
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938"), Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)
+        ]
         [WorkItem(23118, "https://github.com/dotnet/roslyn/issues/23118")]
         public async Task TestAvailableIfConvertedToCoContraVariantDelegate2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1581,7 +1643,7 @@ class Program
 
     public static void M(Func<string, object> expected) { }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1592,15 +1654,19 @@ class Program
     }
 
     public static void M(Func<string, object> expected) { }
-}");
+}"
+            );
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938"), Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)
+        ]
         [WorkItem(23118, "https://github.com/dotnet/roslyn/issues/23118")]
         public async Task TestAvailableIfConvertedToCoContraVariantDelegate3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1612,7 +1678,7 @@ class Program
 
     public static void M(Func<string, object> expected) { }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -1623,7 +1689,8 @@ class Program
     }
 
     public static void M(Func<string, object> expected) { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1631,7 +1698,7 @@ class Program
         public async Task TestMissingIfAdded()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class Enclosing<T> where T : class
@@ -1647,7 +1714,8 @@ class Enclosing<T> where T : class
       var doubleDelegate = local + local;
     }
   }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1655,7 +1723,7 @@ class Enclosing<T> where T : class
         public async Task TestMissingIfUsedInMemberAccess1()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1670,7 +1738,8 @@ class Enclosing<T> where T : class
             var str = local.ToString();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1678,7 +1747,7 @@ class Enclosing<T> where T : class
         public async Task TestMissingIfUsedInMemberAccess2()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1696,7 +1765,8 @@ class Enclosing<T> where T : class
             local.Invoke(t);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1704,7 +1774,7 @@ class Enclosing<T> where T : class
         public async Task TestMissingIfUsedInExpressionTree()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 class Enclosing<T> where T : class
@@ -1720,7 +1790,8 @@ class Enclosing<T> where T : class
       Expression<Action> expression = () => local(null);
     }
   }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1728,7 +1799,7 @@ class Enclosing<T> where T : class
         public async Task TestMissingIfUsedInExpressionTree2()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 
 public class C
@@ -1741,7 +1812,8 @@ public class C
         return () => Method(action);
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1749,7 +1821,7 @@ public class C
         public async Task TestWithInvokeMethod1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1765,7 +1837,7 @@ class Enclosing<T> where T : class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1780,7 +1852,8 @@ class Enclosing<T> where T : class
             local();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1788,7 +1861,7 @@ class Enclosing<T> where T : class
         public async Task TestWithInvokeMethod2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1804,7 +1877,7 @@ class Enclosing<T> where T : class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1819,7 +1892,8 @@ class Enclosing<T> where T : class
             Console.Write(local(t));
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1827,7 +1901,7 @@ class Enclosing<T> where T : class
         public async Task TestWithInvokeMethod3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1846,7 +1920,7 @@ class Enclosing<T> where T : class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1864,7 +1938,8 @@ class Enclosing<T> where T : class
             local(t);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1872,7 +1947,7 @@ class Enclosing<T> where T : class
         public async Task TestWithInvokeMethod4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1891,7 +1966,7 @@ class Enclosing<T> where T : class
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Enclosing<T> where T : class
 {
@@ -1909,7 +1984,8 @@ class Enclosing<T> where T : class
             local(t);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1917,7 +1993,7 @@ class Enclosing<T> where T : class
         public async Task TestWithRecursiveInvokeMethod1()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 
 class C
 {
@@ -1927,7 +2003,7 @@ class C
         local = () => local.Invoke();
     }
 }",
- @"using System;
+                @"using System;
 
 class C
 {
@@ -1935,7 +2011,8 @@ class C
     {
         static void local() => local();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1943,7 +2020,7 @@ class C
         public async Task TestWithRecursiveInvokeMethod2()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 
 class C
 {
@@ -1953,7 +2030,7 @@ class C
         local = () => { local.Invoke(); }
     }
 }",
- @"using System;
+                @"using System;
 
 class C
 {
@@ -1961,7 +2038,8 @@ class C
     {
         static void local() { local(); }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -1969,7 +2047,7 @@ class C
         public async Task TestWithNestedInvokeMethod()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 
 class C
 {
@@ -1979,7 +2057,7 @@ class C
         a.Invoke(a.Invoke(null));
     }
 }",
- @"using System;
+                @"using System;
 
 class C
 {
@@ -1988,14 +2066,15 @@ class C
         static string a(string s) => s;
         a(a(null));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithNestedRecursiveInvokeMethod()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 
 class C
 {
@@ -2005,7 +2084,7 @@ class C
         a = s => a.Invoke(a.Invoke(s));
     }
 }",
- @"using System;
+                @"using System;
 
 class C
 {
@@ -2013,14 +2092,15 @@ class C
     {
         static string a(string s) => a(a(s));
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithDefaultParameter1()
         {
             await TestInRegularAndScript1Async(
- @"class C
+                @"class C
 {
     delegate string MyDelegate(string arg = ""hello"");
 
@@ -2029,7 +2109,7 @@ class C
         MyDelegate [||]local = (s) => s;
     }
 }",
- @"class C
+                @"class C
 {
     delegate string MyDelegate(string arg = ""hello"");
 
@@ -2037,7 +2117,8 @@ class C
     {
         static string local(string s = ""hello"") => s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -2045,7 +2126,7 @@ class C
         public async Task TestWithDefaultParameter2()
         {
             await TestInRegularAndScript1Async(
- @"class C
+                @"class C
 {
     delegate string MyDelegate(string arg = ""hello"");
 
@@ -2054,7 +2135,7 @@ class C
         MyDelegate [||]local = (string s) => s;
     }
 }",
- @"class C
+                @"class C
 {
     delegate string MyDelegate(string arg = ""hello"");
 
@@ -2062,14 +2143,15 @@ class C
     {
         static string local(string s = ""hello"") => s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithDefaultParameter3()
         {
             await TestInRegularAndScript1Async(
- @"class C
+                @"class C
 {
     delegate string MyDelegate(string arg = ""hello"");
 
@@ -2078,7 +2160,7 @@ class C
         MyDelegate [||]local = delegate (string s) { return s; };
     }
 }",
- @"class C
+                @"class C
 {
     delegate string MyDelegate(string arg = ""hello"");
 
@@ -2086,7 +2168,8 @@ class C
     {
         static string local(string s = ""hello"") { return s; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -2094,7 +2177,7 @@ class C
         public async Task TestWithUnmatchingParameterList1()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 
 class C
 {
@@ -2103,7 +2186,7 @@ class C
         Action [||]x = (a, b) => { };
     }
 }",
- @"using System;
+                @"using System;
 
 class C
 {
@@ -2111,14 +2194,15 @@ class C
     {
         static void x(object a, object b) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithUnmatchingParameterList2()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 
 class C
 {
@@ -2127,7 +2211,7 @@ class C
         Action [||]x = (string a, int b) => { };
     }
 }",
- @"using System;
+                @"using System;
 
 class C
 {
@@ -2135,14 +2219,15 @@ class C
     {
         static void x(string a, int b) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithAsyncLambdaExpression()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2152,7 +2237,7 @@ class C
         Func<Task> [||]f = async () => await Task.Yield();
     }
 }",
- @"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2161,14 +2246,15 @@ class C
     {
         static async Task f() => await Task.Yield();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithAsyncAnonymousMethod()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2178,7 +2264,7 @@ class C
         Func<Task<int>> [||]f = async delegate () { return 0; };
     }
 }",
- @"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -2187,14 +2273,15 @@ class C
     {
         static async Task<int> f() { return 0; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithParameterlessAnonymousMethod()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2207,7 +2294,7 @@ class C
 
     event EventHandler E;
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2219,7 +2306,8 @@ class C
     }
 
     event EventHandler E;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -2227,7 +2315,7 @@ class C
         public async Task TestWithNamedArguments1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2239,7 +2327,7 @@ class C
         x.Invoke(arg1: null, 0, 0);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2250,7 +2338,8 @@ class C
         x(a1: null, 0, 0);
         x(a1: null, 0, 0);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -2258,7 +2347,7 @@ class C
         public async Task TestWithNamedArguments2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2271,7 +2360,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2283,14 +2372,15 @@ class C
             x(null, a3: 0, a2: 0);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithNamedArgumentsAndBrokenCode1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2303,7 +2393,7 @@ class C
         x.Invoke(0, null, null, null, null, null);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2315,14 +2405,15 @@ class C
         x(null, a3: 0, a2: 0, arg4: 0);
         x(0, null, null, null, null, null);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithNamedArgumentsAndBrokenCode2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2336,7 +2427,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -2349,14 +2440,15 @@ class C
             x();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithNamedAndDefaultArguments()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
 
@@ -2370,7 +2462,7 @@ class C
         };
     }
 }",
-@"class C
+                @"class C
 {
     delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
 
@@ -2382,14 +2474,15 @@ class C
             return x(null, a3: 42);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithNamedAndDefaultArgumentsAndNestedRecursiveInvocations_FixAll()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
 
@@ -2414,7 +2507,7 @@ class C
         x(arg1: null);
     }
 }",
-@"class C
+                @"class C
 {
     delegate string MyDelegate(string arg1, int arg2 = 2, int arg3 = 3);
 
@@ -2435,7 +2528,8 @@ class C
 
         x(arg1: null);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2443,7 +2537,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2452,7 +2546,7 @@ class C
         Action [||]onUpdateSolutionCancel = () => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2460,7 +2554,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel() { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2468,7 +2563,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2477,7 +2572,7 @@ class C
         Action<int> [||]onUpdateSolutionCancel = a => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2485,7 +2580,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2493,7 +2589,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine2Async()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2502,7 +2598,7 @@ class C
         Action<int> [||]onUpdateSolutionCancel = async a => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2510,7 +2606,8 @@ class C
         var buildCancelled = false;
         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2518,7 +2615,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine2MultiToken()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2526,14 +2623,15 @@ class C
         Func<int, int[]> [||]onUpdateSolutionCancel = a => { return null; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
     {
         static int[] onUpdateSolutionCancel(int a) { return null; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2541,7 +2639,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine2MultiTokenAsync()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 class C
 {
@@ -2550,7 +2648,7 @@ class C
         Func<int, Task<int[]>> [||]onUpdateSolutionCancel = async a => { return null; };
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 class C
 {
@@ -2558,7 +2656,8 @@ class C
     {
         static async Task<int[]> onUpdateSolutionCancel(int a) { return null; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2566,7 +2665,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2575,7 +2674,7 @@ class C
         Action<int> [||]onUpdateSolutionCancel = (int a) => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2583,7 +2682,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2591,7 +2691,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2600,7 +2700,7 @@ class C
         Action<int> [||]onUpdateSolutionCancel = delegate (int a) { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2608,7 +2708,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2616,7 +2717,7 @@ class C
         public async Task TestSimpleInitialization_SingleLine4Async()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2625,7 +2726,7 @@ class C
         Action<int> [||]onUpdateSolutionCancel = async delegate (int a) { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2633,7 +2734,8 @@ class C
         var buildCancelled = false;
         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2641,7 +2743,7 @@ class C
         public async Task TestCastInitialization_SingleLine1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2650,7 +2752,7 @@ class C
         var [||]onUpdateSolutionCancel = (Action)(() => { buildCancelled = true; });
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2658,7 +2760,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel() { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2666,7 +2769,7 @@ class C
         public async Task TestCastInitialization_SingleLine2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2675,7 +2778,7 @@ class C
         var [||]onUpdateSolutionCancel = (Action<int>)(a => { buildCancelled = true; });
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2683,7 +2786,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2691,7 +2795,7 @@ class C
         public async Task TestCastInitialization_SingleLine2Async()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2700,7 +2804,7 @@ class C
         var [||]onUpdateSolutionCancel = (Action<int>)(async a => { buildCancelled = true; });
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2708,7 +2812,8 @@ class C
         var buildCancelled = false;
         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2716,7 +2821,7 @@ class C
         public async Task TestCastInitialization_SingleLine3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2725,7 +2830,7 @@ class C
         var [||]onUpdateSolutionCancel = (Action<int>)((int a) => { buildCancelled = true; });
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2733,7 +2838,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2741,7 +2847,7 @@ class C
         public async Task TestCastInitialization_SingleLine4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2750,7 +2856,7 @@ class C
         var [||]onUpdateSolutionCancel = (Action<int>)(delegate (int a) { buildCancelled = true; });
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2758,7 +2864,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2766,7 +2873,7 @@ class C
         public async Task TestCastInitialization_SingleLine4Async()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2775,7 +2882,7 @@ class C
         var [||]onUpdateSolutionCancel = (Action<int>)(async delegate (int a) { buildCancelled = true; });
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2783,7 +2890,8 @@ class C
         var buildCancelled = false;
         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2791,7 +2899,7 @@ class C
         public async Task TestSplitInitialization_SingleLine1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2801,7 +2909,7 @@ class C
         onUpdateSolutionCancel = () => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2809,7 +2917,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel() { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2817,7 +2926,7 @@ class C
         public async Task TestSplitInitialization_SingleLine2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2827,7 +2936,7 @@ class C
         onUpdateSolutionCancel = a => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2835,7 +2944,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2843,7 +2953,7 @@ class C
         public async Task TestSplitInitialization_SingleLine2Async()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2853,7 +2963,7 @@ class C
         onUpdateSolutionCancel = async a => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2861,7 +2971,8 @@ class C
         var buildCancelled = false;
         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2869,7 +2980,7 @@ class C
         public async Task TestSplitInitialization_SingleLine3()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2879,7 +2990,7 @@ class C
         onUpdateSolutionCancel = (int a) => { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2887,7 +2998,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2895,7 +3007,7 @@ class C
         public async Task TestSplitInitialization_SingleLine4()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2905,7 +3017,7 @@ class C
         onUpdateSolutionCancel = delegate (int a) { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2913,7 +3025,8 @@ class C
         var buildCancelled = false;
         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23872, "https://github.com/dotnet/roslyn/issues/23872")]
@@ -2921,7 +3034,7 @@ class C
         public async Task TestSplitInitialization_SingleLine4Async()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2931,7 +3044,7 @@ class C
         onUpdateSolutionCancel = async delegate (int a) { buildCancelled = true; };
     }
 }",
-@"using System;
+                @"using System;
 class C
 {
     void Goo()
@@ -2939,7 +3052,8 @@ class C
         var buildCancelled = false;
         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -2947,7 +3061,7 @@ class C
         public async Task TestNotAvailableIfTypeParameterChanged1()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class Enclosing<T>
 {
@@ -2962,7 +3076,8 @@ class Enclosing<T>
             Callee(local);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -2970,7 +3085,7 @@ class Enclosing<T>
         public async Task TestNotAvailableIfTypeParameterChanged2()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class Enclosing<T>
 {
@@ -2988,7 +3103,8 @@ class Enclosing<T>
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -2996,7 +3112,7 @@ class Enclosing<T>
         public async Task TestNotAvailableIfTypeParameterChanged3()
         {
             await TestMissingAsync(
-@"public class Class<T>
+                @"public class Class<T>
 {
     delegate T MyDelegate(T t);
     static void Callee(MyDelegate d) => d(default);
@@ -3009,7 +3125,8 @@ class Enclosing<T>
             Callee(local);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -3017,7 +3134,7 @@ class Enclosing<T>
         public async Task TestNotAvailableIfTypeParameterChanged4()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class Enclosing<T>
 {
@@ -3035,15 +3152,19 @@ class Enclosing<T>
             }
         }
     }
-}");
+}"
+            );
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/27950"), Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/27950"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)
+        ]
         [WorkItem(23149, "https://github.com/dotnet/roslyn/issues/23149")]
         public async Task TestAvailableIfTypeParameterNotChanged1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class DelegateEnclosing<T>
 {
@@ -3060,7 +3181,7 @@ class Enclosing<T> : DelegateEnclosing<T>
         Callee(local);
     }
 }",
-@"using System;
+                @"using System;
 
 class DelegateEnclosing<T>
 {
@@ -3076,7 +3197,8 @@ class Enclosing<T> : DelegateEnclosing<T>
         static T local(T x) => x;
         Callee(local);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -3084,7 +3206,7 @@ class Enclosing<T> : DelegateEnclosing<T>
         public async Task TestAvailableIfTypeParameterNotChanged2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class DelegateEnclosing<T>
 {
@@ -3101,7 +3223,7 @@ class Enclosing<U> : DelegateEnclosing<U>
         Callee(local);
     }
 }",
-@"using System;
+                @"using System;
 
 class DelegateEnclosing<T>
 {
@@ -3117,15 +3239,19 @@ class Enclosing<U> : DelegateEnclosing<U>
         static U local(U x) => x;
         Callee(local);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26526, "https://github.com/dotnet/roslyn/issues/26526")]
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56963"), Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/56963"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)
+        ]
         public async Task TestAvailableWithCastIntroducedIfAssignedToVar()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3136,7 +3262,7 @@ class C
         var f2 = f;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3146,7 +3272,8 @@ class C
 
         var f2 = (Func<string>)f;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26526, "https://github.com/dotnet/roslyn/issues/26526")]
@@ -3154,7 +3281,7 @@ class C
         public async Task TestAvailableWithCastIntroducedForGenericTypeInference1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3169,7 +3296,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3183,7 +3310,8 @@ class C
     void Method<T>(Func<T, string> o)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(26526, "https://github.com/dotnet/roslyn/issues/26526")]
@@ -3191,7 +3319,7 @@ class C
         public async Task TestAvailableWithCastIntroducedForGenericTypeInference2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3210,7 +3338,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3228,14 +3356,15 @@ class C
     void Method(string o)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestAvailableWithCastIntroducedForOverloadResolution()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 delegate string CustomDelegate();
 
@@ -3256,7 +3385,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 delegate string CustomDelegate();
 
@@ -3276,14 +3405,15 @@ class C
     void Method(CustomDelegate o)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestAvailableWithoutCastIfUnnecessaryForOverloadResolution()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 delegate string CustomDelegate(object arg);
 
@@ -3304,7 +3434,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 delegate string CustomDelegate(object arg);
 
@@ -3324,7 +3454,8 @@ class C
     void Method(CustomDelegate o)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(29793, "https://github.com/dotnet/roslyn/issues/29793")]
@@ -3332,7 +3463,7 @@ class C
         public async Task TestNotAvailableWithInvalidDeclaration()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3348,7 +3479,8 @@ class C
     }
 }
 
-");
+"
+            );
         }
 
         [WorkItem(29793, "https://github.com/dotnet/roslyn/issues/29793")]
@@ -3356,7 +3488,7 @@ class C
         public async Task TestNotAvailableWithInvalidDeclaration2()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3372,7 +3504,8 @@ class C
     }
 }
 
-");
+"
+            );
         }
 
         [WorkItem(29793, "https://github.com/dotnet/roslyn/issues/29793")]
@@ -3380,7 +3513,7 @@ class C
         public async Task TestNotAvailableWithInvalidDeclaration3()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3396,7 +3529,8 @@ class C
     }
 }
 
-");
+"
+            );
         }
 
         [WorkItem(29793, "https://github.com/dotnet/roslyn/issues/29793")]
@@ -3404,7 +3538,7 @@ class C
         public async Task TestWithInvalidUnrelatedCode()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3419,7 +3553,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3433,7 +3567,8 @@ class C
     void Method<T>(Func<T, string> o))
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(29793, "https://github.com/dotnet/roslyn/issues/29793")]
@@ -3441,7 +3576,7 @@ class C
         public async Task TestWithInvalidUnrelatedCode2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3456,7 +3591,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3470,7 +3605,8 @@ class C
     void Method<T>(Func<T, string> o)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(29793, "https://github.com/dotnet/roslyn/issues/29793")]
@@ -3478,7 +3614,7 @@ class C
         public async Task TestWithObsoleteCode()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3499,7 +3635,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3519,7 +3655,8 @@ class C
     void Method<T>(Func<T, string> o)
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(29793, "https://github.com/dotnet/roslyn/issues/29793")]
@@ -3527,7 +3664,7 @@ class C
         public async Task TestWithDeclarationWarning()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3543,7 +3680,7 @@ class C
     {
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3558,14 +3695,15 @@ class C
     void Method<T>(Func<T, string> o)
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMakeStaticIfNoCaptures()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3582,7 +3720,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3598,14 +3736,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestDoNotMakeStaticIfCaptures()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3623,7 +3762,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -3640,14 +3779,15 @@ class C
             return fibonacci(v - 1, v - 2);
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithAsyncLambdaExpression_MakeStatic()
         {
             await TestInRegularAndScript1Async(
- @"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -3657,7 +3797,7 @@ class C
         Func<Task> [||]f = async () => await Task.Yield();
     }
 }",
- @"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class C
@@ -3666,14 +3806,15 @@ class C
     {
         static async Task f() => await Task.Yield();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithNullableParameterAndReturn()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -3684,7 +3825,7 @@ class Program
         Func<string?, string?> [||]f = s => s;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -3694,14 +3835,15 @@ class Program
     {
         static string? f(string? s) => s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestWithDiscardParameters()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3709,14 +3851,15 @@ class Program
         System.Func<int, string, int, long> [||]f = (_, _, a) => 1;
     }
 }",
-@"
+                @"
 class Program
 {
     static void Main(string[] args)
     {
         static long f(int _, string _, int a) => 1;
     }
-}");
+}"
+            );
         }
     }
 }

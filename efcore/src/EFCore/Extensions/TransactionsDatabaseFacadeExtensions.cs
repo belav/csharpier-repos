@@ -23,10 +23,17 @@ namespace System.Transactions
         /// </remarks>
         /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
         /// <param name="transaction">The transaction to be used.</param>
-        public static void EnlistTransaction(this DatabaseFacade databaseFacade, Transaction? transaction)
+        public static void EnlistTransaction(
+            this DatabaseFacade databaseFacade,
+            Transaction? transaction
+        )
         {
-            if (((IDatabaseFacadeDependenciesAccessor)databaseFacade).Dependencies.TransactionManager is ITransactionEnlistmentManager
-                transactionManager)
+            if (
+                ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+                    .Dependencies
+                    .TransactionManager
+                is ITransactionEnlistmentManager transactionManager
+            )
             {
                 transactionManager.EnlistTransaction(transaction);
             }
@@ -46,8 +53,12 @@ namespace System.Transactions
         /// <returns>The currently enlisted transaction.</returns>
         public static Transaction? GetEnlistedTransaction(this DatabaseFacade databaseFacade)
         {
-            if (((IDatabaseFacadeDependenciesAccessor)databaseFacade).Dependencies.TransactionManager is ITransactionEnlistmentManager
-                transactionManager)
+            if (
+                ((IDatabaseFacadeDependenciesAccessor)databaseFacade)
+                    .Dependencies
+                    .TransactionManager
+                is ITransactionEnlistmentManager transactionManager
+            )
             {
                 return transactionManager.EnlistedTransaction;
             }

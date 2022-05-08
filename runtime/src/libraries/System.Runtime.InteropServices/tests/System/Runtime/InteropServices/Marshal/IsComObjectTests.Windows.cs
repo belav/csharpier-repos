@@ -19,7 +19,10 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new InterfaceComImportObject(), false };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         [MemberData(nameof(IsComObject_Windows_TestData))]
         public void IsComObject_Windows_ReturnsExpected(object value, bool expected)
         {

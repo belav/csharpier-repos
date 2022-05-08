@@ -9,10 +9,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
 {
     public class NorthwindContext : PoolableDbContext
     {
-        public NorthwindContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public NorthwindContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
@@ -40,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                     e.Ignore(em => em.TitleOfCourtesy);
 
                     e.HasOne(e1 => e1.Manager).WithMany().HasForeignKey(e1 => e1.ReportsTo);
-                });
+                }
+            );
 
             modelBuilder.Entity<Product>(
                 e =>
@@ -49,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                     e.Ignore(p => p.QuantityPerUnit);
                     e.Ignore(p => p.ReorderLevel);
                     e.Ignore(p => p.UnitsOnOrder);
-                });
+                }
+            );
 
             modelBuilder.Entity<Order>(
                 e =>
@@ -64,14 +63,15 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
                     e.Ignore(o => o.ShipRegion);
                     e.Ignore(o => o.ShipVia);
                     e.Ignore(o => o.ShippedDate);
-                });
+                }
+            );
 
             modelBuilder.Entity<OrderDetail>(
                 e =>
                 {
-                    e.HasKey(
-                        od => new { od.OrderID, od.ProductID });
-                });
+                    e.HasKey(od => new { od.OrderID, od.ProductID });
+                }
+            );
 
             modelBuilder.Entity<CustomerQuery>().HasNoKey();
             modelBuilder.Entity<OrderQuery>().HasNoKey();
@@ -90,18 +90,26 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind
             // Called explicitly from filter test fixtures. Code is here
             // so we can capture TenantPrefix in filter exprs (simulates OnModelCreating).
 
-            modelBuilder.Entity<Customer>().HasQueryFilter(c => c.CompanyName.StartsWith(TenantPrefix));
-            modelBuilder.Entity<Order>().HasQueryFilter(o => o.Customer != null && o.Customer.CompanyName != null);
-            modelBuilder.Entity<OrderDetail>().HasQueryFilter(od => od.Order != null && EF.Property<short>(od, "Quantity") > _quantity);
+            modelBuilder
+                .Entity<Customer>()
+                .HasQueryFilter(c => c.CompanyName.StartsWith(TenantPrefix));
+            modelBuilder
+                .Entity<Order>()
+                .HasQueryFilter(o => o.Customer != null && o.Customer.CompanyName != null);
+            modelBuilder
+                .Entity<OrderDetail>()
+                .HasQueryFilter(
+                    od => od.Order != null && EF.Property<short>(od, "Quantity") > _quantity
+                );
             modelBuilder.Entity<Employee>().HasQueryFilter(e => e.Address.StartsWith("A"));
             modelBuilder.Entity<Product>().HasQueryFilter(p => ClientMethod(p));
-            modelBuilder.Entity<CustomerQueryWithQueryFilter>().HasQueryFilter(cq => cq.CompanyName.StartsWith(SearchTerm));
+            modelBuilder
+                .Entity<CustomerQueryWithQueryFilter>()
+                .HasQueryFilter(cq => cq.CompanyName.StartsWith(SearchTerm));
         }
 
-        private static bool ClientMethod(Product product)
-            => !product.Discontinued;
+        private static bool ClientMethod(Product product) => !product.Discontinued;
 
-        public bool ClientMethod(Customer customer)
-            => !customer.IsLondon;
+        public bool ClientMethod(Customer customer) => !customer.IsLondon;
     }
 }

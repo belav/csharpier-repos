@@ -52,7 +52,8 @@ public class NavLink : ComponentBase, IDisposable
     [Parameter]
     public NavLinkMatch Match { get; set; }
 
-    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
 
     /// <inheritdoc />
     protected override void OnInitialized()
@@ -120,8 +121,10 @@ public class NavLink : ComponentBase, IDisposable
             return true;
         }
 
-        if (Match == NavLinkMatch.Prefix
-            && IsStrictlyPrefixWithSeparator(currentUriAbsolute, _hrefAbsolute))
+        if (
+            Match == NavLinkMatch.Prefix
+            && IsStrictlyPrefixWithSeparator(currentUriAbsolute, _hrefAbsolute)
+        )
         {
             return true;
         }
@@ -148,8 +151,10 @@ public class NavLink : ComponentBase, IDisposable
             // which in turn is because it's common for servers to return the same page
             // for http://host/vdir as they do for host://host/vdir/ as it's no
             // good to display a blank page in that case.
-            if (_hrefAbsolute[_hrefAbsolute.Length - 1] == '/'
-                && _hrefAbsolute.StartsWith(currentUriAbsolute, StringComparison.OrdinalIgnoreCase))
+            if (
+                _hrefAbsolute[_hrefAbsolute.Length - 1] == '/'
+                && _hrefAbsolute.StartsWith(currentUriAbsolute, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return true;
             }
@@ -170,8 +175,8 @@ public class NavLink : ComponentBase, IDisposable
         builder.CloseElement();
     }
 
-    private string? CombineWithSpace(string? str1, string str2)
-        => str1 == null ? str2 : $"{str1} {str2}";
+    private string? CombineWithSpace(string? str1, string str2) =>
+        str1 == null ? str2 : $"{str1} {str2}";
 
     private static bool IsStrictlyPrefixWithSeparator(string value, string prefix)
     {

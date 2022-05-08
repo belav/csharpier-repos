@@ -6,17 +6,18 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindChangeTrackingQuerySqlServerTest : NorthwindChangeTrackingQueryTestBase<
-        NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+    public class NorthwindChangeTrackingQuerySqlServerTest
+        : NorthwindChangeTrackingQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
     {
-        public NorthwindChangeTrackingQuerySqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture)
-            : base(fixture)
-        {
-        }
+        public NorthwindChangeTrackingQuerySqlServerTest(
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
+        ) : base(fixture) { }
 
-        protected override NorthwindContext CreateNoTrackingContext()
-            => new NorthwindRelationalContext(
+        protected override NorthwindContext CreateNoTrackingContext() =>
+            new NorthwindRelationalContext(
                 new DbContextOptionsBuilder(Fixture.CreateOptions())
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
+                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    .Options
+            );
     }
 }

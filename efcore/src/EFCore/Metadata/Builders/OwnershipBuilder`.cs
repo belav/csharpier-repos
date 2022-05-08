@@ -30,10 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         public OwnershipBuilder(
             IMutableEntityType principalEntityType,
             IMutableEntityType dependentEntityType,
-            IMutableForeignKey foreignKey)
-            : base(principalEntityType, dependentEntityType, foreignKey)
-        {
-        }
+            IMutableForeignKey foreignKey
+        ) : base(principalEntityType, dependentEntityType, foreignKey) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -47,10 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             OwnershipBuilder oldBuilder,
             bool foreignKeySet = false,
             bool principalKeySet = false,
-            bool requiredSet = false)
-            : base(builder, oldBuilder, foreignKeySet, principalKeySet, requiredSet)
-        {
-        }
+            bool requiredSet = false
+        ) : base(builder, oldBuilder, foreignKeySet, principalKeySet, requiredSet) { }
 
         /// <summary>
         ///     Adds or updates an annotation on the foreign key. If an annotation with the key specified in
@@ -61,8 +57,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public new virtual OwnershipBuilder<TEntity, TDependentEntity> HasAnnotation(
             string annotation,
-            object? value)
-            => (OwnershipBuilder<TEntity, TDependentEntity>)base.HasAnnotation(annotation, value);
+            object? value
+        ) => (OwnershipBuilder<TEntity, TDependentEntity>)base.HasAnnotation(annotation, value);
 
         /// <summary>
         ///     Configures the property(s) to use as the foreign key for this relationship.
@@ -87,16 +83,19 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public new virtual OwnershipBuilder<TEntity, TDependentEntity> HasForeignKey(
-            params string[] foreignKeyPropertyNames)
+            params string[] foreignKeyPropertyNames
+        )
         {
             Builder = Builder.HasForeignKey(
                 Check.NotNull(foreignKeyPropertyNames, nameof(foreignKeyPropertyNames)),
                 (EntityType)DependentEntityType,
-                ConfigurationSource.Explicit)!;
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,
-                foreignKeySet: foreignKeyPropertyNames.Length > 0);
+                foreignKeySet: foreignKeyPropertyNames.Length > 0
+            );
         }
 
         /// <summary>
@@ -129,16 +128,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual OwnershipBuilder<TEntity, TDependentEntity> HasForeignKey(
-            Expression<Func<TDependentEntity, object?>> foreignKeyExpression)
+            Expression<Func<TDependentEntity, object?>> foreignKeyExpression
+        )
         {
             Builder = Builder.HasForeignKey(
-                Check.NotNull(foreignKeyExpression, nameof(foreignKeyExpression)).GetMemberAccessList(),
+                Check
+                    .NotNull(foreignKeyExpression, nameof(foreignKeyExpression))
+                    .GetMemberAccessList(),
                 (EntityType)DependentEntityType,
-                ConfigurationSource.Explicit)!;
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,
-                foreignKeySet: true);
+                foreignKeySet: true
+            );
         }
 
         /// <summary>
@@ -150,15 +154,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="keyPropertyNames">The name(s) of the reference key property(s).</param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public new virtual OwnershipBuilder<TEntity, TDependentEntity> HasPrincipalKey(
-            params string[] keyPropertyNames)
+            params string[] keyPropertyNames
+        )
         {
             Builder = Builder.HasPrincipalKey(
                 Check.NotNull(keyPropertyNames, nameof(keyPropertyNames)),
-                ConfigurationSource.Explicit)!;
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,
-                principalKeySet: keyPropertyNames.Length > 0);
+                principalKeySet: keyPropertyNames.Length > 0
+            );
         }
 
         /// <summary>
@@ -179,15 +186,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </param>
         /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
         public virtual OwnershipBuilder<TEntity, TDependentEntity> HasPrincipalKey(
-            Expression<Func<TEntity, object?>> keyExpression)
+            Expression<Func<TEntity, object?>> keyExpression
+        )
         {
             Builder = Builder.HasPrincipalKey(
                 Check.NotNull(keyExpression, nameof(keyExpression)).GetMemberAccessList(),
-                ConfigurationSource.Explicit)!;
+                ConfigurationSource.Explicit
+            )!;
             return new OwnershipBuilder<TEntity, TDependentEntity>(
                 Builder,
                 this,
-                principalKeySet: true);
+                principalKeySet: true
+            );
         }
     }
 }

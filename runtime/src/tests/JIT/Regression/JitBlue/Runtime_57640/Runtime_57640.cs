@@ -9,7 +9,8 @@
 // Release: Outputs 4294953026
 public class Runtime_57640
 {
-    static long[] s_28 = new long[]{1};
+    static long[] s_28 = new long[] { 1 };
+
     public static int Main()
     {
         bool correct = true;

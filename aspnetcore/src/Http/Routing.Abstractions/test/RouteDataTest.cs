@@ -65,7 +65,11 @@ public class RouteDataTest
         var routeData = new RouteData();
 
         // Act
-        var snapshot = routeData.PushState(null, new RouteValueDictionary(), new RouteValueDictionary());
+        var snapshot = routeData.PushState(
+            null,
+            new RouteValueDictionary(),
+            new RouteValueDictionary()
+        );
         var copy = new RouteData(routeData);
         snapshot.Restore();
 
@@ -90,7 +94,8 @@ public class RouteDataTest
         var snapshot = routeData.PushState(
             null,
             new RouteValueDictionary(new { bleh = (string)null }),
-            new RouteValueDictionary());
+            new RouteValueDictionary()
+        );
         snapshot.Restore();
 
         // Assert
@@ -136,7 +141,8 @@ public class RouteDataTest
         var snapshot = routeData.PushState(
             Mock.Of<IRouter>(),
             new RouteValueDictionary(new { route = "value2" }),
-            new RouteValueDictionary(new { data = "token2" }));
+            new RouteValueDictionary(new { data = "token2" })
+        );
 
         routeData.DataTokens.Add("data2", "token");
         routeData.Routers.Add(Mock.Of<IRouter>());

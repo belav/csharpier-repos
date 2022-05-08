@@ -18,20 +18,14 @@ public class ForbidResult : ActionResult
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/>.
     /// </summary>
-    public ForbidResult()
-        : this(Array.Empty<string>())
-    {
-    }
+    public ForbidResult() : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
     /// specified authentication scheme.
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to challenge.</param>
-    public ForbidResult(string authenticationScheme)
-        : this(new[] { authenticationScheme })
-    {
-    }
+    public ForbidResult(string authenticationScheme) : this(new[] { authenticationScheme }) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -39,9 +33,7 @@ public class ForbidResult : ActionResult
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     public ForbidResult(IList<string> authenticationSchemes)
-        : this(authenticationSchemes, properties: null)
-    {
-    }
+        : this(authenticationSchemes, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -50,9 +42,7 @@ public class ForbidResult : ActionResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ForbidResult(AuthenticationProperties? properties)
-        : this(Array.Empty<string>(), properties)
-    {
-    }
+        : this(Array.Empty<string>(), properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
@@ -62,9 +52,7 @@ public class ForbidResult : ActionResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
     /// challenge.</param>
     public ForbidResult(string authenticationScheme, AuthenticationProperties? properties)
-        : this(new[] { authenticationScheme }, properties)
-    {
-    }
+        : this(new[] { authenticationScheme }, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the

@@ -19,13 +19,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = CreateModelBuilder();
 
-            modelBuilder.Entity<Post>()
-                .Property(e => e.BlogId)
-                .IsRequired();
+            modelBuilder.Entity<Post>().Property(e => e.BlogId).IsRequired();
 
-            var fk = modelBuilder.Entity<Blog>()
+            var fk = modelBuilder
+                .Entity<Blog>()
                 .HasMany(e => e.Posts)
-                .WithOne(e => e.Blog).Metadata;
+                .WithOne(e => e.Blog)
+                .Metadata;
 
             Assert.Equal(DeleteBehavior.Cascade, fk.DeleteBehavior);
         }
@@ -35,9 +35,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = CreateModelBuilder();
 
-            var fk = modelBuilder.Entity<Blog>()
+            var fk = modelBuilder
+                .Entity<Blog>()
                 .HasMany(e => e.Posts)
-                .WithOne(e => e.Blog).Metadata;
+                .WithOne(e => e.Blog)
+                .Metadata;
 
             Assert.Equal(DeleteBehavior.ClientSetNull, fk.DeleteBehavior);
         }
@@ -47,13 +49,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = CreateModelBuilder();
 
-            var fk = modelBuilder.Entity<Blog>()
+            var fk = modelBuilder
+                .Entity<Blog>()
                 .HasMany(e => e.Posts)
-                .WithOne(e => e.Blog).Metadata;
+                .WithOne(e => e.Blog)
+                .Metadata;
 
-            modelBuilder.Entity<Post>()
-                .Property(e => e.BlogId)
-                .IsRequired();
+            modelBuilder.Entity<Post>().Property(e => e.BlogId).IsRequired();
 
             Assert.Equal(DeleteBehavior.Cascade, fk.DeleteBehavior);
         }
@@ -63,17 +65,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = CreateModelBuilder();
 
-            modelBuilder.Entity<Post>()
-                .Property(e => e.BlogId)
-                .IsRequired();
+            modelBuilder.Entity<Post>().Property(e => e.BlogId).IsRequired();
 
-            var fk = modelBuilder.Entity<Blog>()
+            var fk = modelBuilder
+                .Entity<Blog>()
                 .HasMany(e => e.Posts)
-                .WithOne(e => e.Blog).Metadata;
+                .WithOne(e => e.Blog)
+                .Metadata;
 
-            modelBuilder.Entity<Post>()
-                .Property(e => e.BlogId)
-                .IsRequired(false);
+            modelBuilder.Entity<Post>().Property(e => e.BlogId).IsRequired(false);
 
             Assert.Equal(DeleteBehavior.ClientSetNull, fk.DeleteBehavior);
         }
@@ -83,7 +83,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = CreateModelBuilder();
 
-            var fk = modelBuilder.Entity<Blog>()
+            var fk = modelBuilder
+                .Entity<Blog>()
                 .HasMany(e => e.Posts)
                 .WithOne(e => e.Blog)
                 .OnDelete(DeleteBehavior.Cascade)
@@ -97,19 +98,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var modelBuilder = CreateModelBuilder();
 
-            modelBuilder.Entity<Post>()
-                .Property(e => e.BlogId)
-                .IsRequired();
+            modelBuilder.Entity<Post>().Property(e => e.BlogId).IsRequired();
 
-            var fk = modelBuilder.Entity<Blog>()
+            var fk = modelBuilder
+                .Entity<Blog>()
                 .HasMany(e => e.Posts)
                 .WithOne(e => e.Blog)
                 .OnDelete(DeleteBehavior.Cascade)
                 .Metadata;
 
-            modelBuilder.Entity<Post>()
-                .Property(e => e.BlogId)
-                .IsRequired(false);
+            modelBuilder.Entity<Post>().Property(e => e.BlogId).IsRequired(false);
 
             Assert.Equal(DeleteBehavior.Cascade, fk.DeleteBehavior);
         }
@@ -129,7 +127,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             public int? BlogId { get; set; }
         }
 
-        private static ModelBuilder CreateModelBuilder()
-            => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+        private static ModelBuilder CreateModelBuilder() =>
+            InMemoryTestHelpers.Instance.CreateConventionBuilder();
     }
 }

@@ -99,8 +99,15 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt32(); }
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int32>, byte>(ref testStruct._fld1), ref Unsafe.As<Int32, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Int32>>());
+                for (var i = 0; i < Op1ElementCount; i++)
+                {
+                    _data1[i] = TestLibrary.Generator.GetInt32();
+                }
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Int32>, byte>(ref testStruct._fld1),
+                    ref Unsafe.As<Int32, byte>(ref _data1[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Int32>>()
+                );
 
                 return testStruct;
             }
@@ -114,8 +121,10 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
 
         private static Int32[] _data1 = new Int32[Op1ElementCount];
 
@@ -127,19 +136,40 @@ namespace JIT.HardwareIntrinsics.X86
 
         static StoreUnaryOpTest__StoreScalarInt32()
         {
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt32(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int32>, byte>(ref _clsVar1), ref Unsafe.As<Int32, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Int32>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt32();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Int32>, byte>(ref _clsVar1),
+                ref Unsafe.As<Int32, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Int32>>()
+            );
         }
 
         public StoreUnaryOpTest__StoreScalarInt32()
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt32(); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Int32>, byte>(ref _fld1), ref Unsafe.As<Int32, byte>(ref _data1[0]), (uint)Unsafe.SizeOf<Vector128<Int32>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt32();
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Int32>, byte>(ref _fld1),
+                ref Unsafe.As<Int32, byte>(ref _data1[0]),
+                (uint)Unsafe.SizeOf<Vector128<Int32>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data1[i] = TestLibrary.Generator.GetInt32(); }
-            _dataTable = new SimpleUnaryOpTest__DataTable<Int32, Int32>(_data1, new Int32[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data1[i] = TestLibrary.Generator.GetInt32();
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<Int32, Int32>(
+                _data1,
+                new Int32[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Sse2.IsSupported;
@@ -186,11 +216,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            typeof(Sse2).GetMethod(nameof(Sse2.StoreScalar), new Type[] { typeof(Int32*), typeof(Vector128<Int32>) })
-                         .Invoke(null, new object[] {
-                            Pointer.Box(_dataTable.outArrayPtr, typeof(Int32*)),
-                            Unsafe.Read<Vector128<Int32>>(_dataTable.inArrayPtr)
-                         });
+            typeof(Sse2)
+                .GetMethod(
+                    nameof(Sse2.StoreScalar),
+                    new Type[] { typeof(Int32*), typeof(Vector128<Int32>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Int32*)),
+                        Unsafe.Read<Vector128<Int32>>(_dataTable.inArrayPtr)
+                    }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
         }
@@ -199,11 +237,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            typeof(Sse2).GetMethod(nameof(Sse2.StoreScalar), new Type[] { typeof(Int32*), typeof(Vector128<Int32>) })
-                         .Invoke(null, new object[] {
-                            Pointer.Box(_dataTable.outArrayPtr, typeof(Int32*)),
-                            Sse2.LoadVector128((Int32*)(_dataTable.inArrayPtr))
-                         });
+            typeof(Sse2)
+                .GetMethod(
+                    nameof(Sse2.StoreScalar),
+                    new Type[] { typeof(Int32*), typeof(Vector128<Int32>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Int32*)),
+                        Sse2.LoadVector128((Int32*)(_dataTable.inArrayPtr))
+                    }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
         }
@@ -212,11 +258,19 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            typeof(Sse2).GetMethod(nameof(Sse2.StoreScalar), new Type[] { typeof(Int32*), typeof(Vector128<Int32>) })
-                         .Invoke(null, new object[] {
-                            Pointer.Box(_dataTable.outArrayPtr, typeof(Int32*)),
-                            Sse2.LoadAlignedVector128((Int32*)(_dataTable.inArrayPtr))
-                         });
+            typeof(Sse2)
+                .GetMethod(
+                    nameof(Sse2.StoreScalar),
+                    new Type[] { typeof(Int32*), typeof(Vector128<Int32>) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Pointer.Box(_dataTable.outArrayPtr, typeof(Int32*)),
+                        Sse2.LoadAlignedVector128((Int32*)(_dataTable.inArrayPtr))
+                    }
+                );
 
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
         }
@@ -225,10 +279,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            Sse2.StoreScalar(
-                (Int32*)_dataTable.outArrayPtr,
-                _clsVar1
-            );
+            Sse2.StoreScalar((Int32*)_dataTable.outArrayPtr, _clsVar1);
 
             ValidateResult(_clsVar1, _dataTable.outArrayPtr);
         }
@@ -320,29 +371,53 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<Int32> value, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Int32> value,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] inArray = new Int32[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref inArray[0]), value);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Int32>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Int32>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* value, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* value,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] inArray = new Int32[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(value), (uint)Unsafe.SizeOf<Vector128<Int32>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Int32>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(value),
+                (uint)Unsafe.SizeOf<Vector128<Int32>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Int32>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(Int32[] value, Int32[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int32[] value,
+            Int32[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -364,9 +439,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Sse2)}.{nameof(Sse2.StoreScalar)}<Int32>(Vector128<Int32>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"    value: ({string.Join(", ", value)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Sse2)}.{nameof(Sse2.StoreScalar)}<Int32>(Vector128<Int32>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"    value: ({string.Join(", ", value)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

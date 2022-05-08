@@ -23,14 +23,22 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseExplicitType), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseExplicitType
+        ),
+        Shared
+    ]
     internal class UseExplicitTypeCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseExplicitTypeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseExplicitTypeCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseExplicitTypeDiagnosticId);
@@ -39,31 +47,44 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var root = editor.OriginalRoot;
 
             foreach (var diagnostic in diagnostics)
             {
-                var node = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
-                await HandleDeclarationAsync(document, editor, node, cancellationToken).ConfigureAwait(false);
+                var node = root.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
+                await HandleDeclarationAsync(document, editor, node, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
         internal static async Task HandleDeclarationAsync(
-            Document document, SyntaxEditor editor,
-            SyntaxNode node, CancellationToken cancellationToken)
+            Document document,
+            SyntaxEditor editor,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var declarationContext = node.Parent;
 
             TypeSyntax typeSyntax = null;
@@ -84,7 +105,12 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
             else if (declarationContext is DeclarationExpressionSyntax declarationExpression)
             {
                 typeSyntax = declarationExpression.Type;
-                if (declarationExpression.Designation.IsKind(SyntaxKind.ParenthesizedVariableDesignation, out ParenthesizedVariableDesignationSyntax variableDesignation))
+                if (
+                    declarationExpression.Designation.IsKind(
+                        SyntaxKind.ParenthesizedVariableDesignation,
+                        out ParenthesizedVariableDesignationSyntax variableDesignation
+                    )
+                )
                 {
                     parensDesignation = variableDesignation;
                 }
@@ -100,35 +126,52 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
 
                 // We're going to be passed through the simplifier.  Tell it to not just convert this back to var (as
                 // that would defeat the purpose of this refactoring entirely).
-                var newTypeSyntax =
-                    semanticModel.GetTypeInfo(typeSyntax, cancellationToken).ConvertedType
-                                 .GenerateTypeSyntax(allowVar: false)
-                                 .WithTriviaFrom(typeSyntax);
+                var newTypeSyntax = semanticModel
+                    .GetTypeInfo(typeSyntax, cancellationToken)
+                    .ConvertedType.GenerateTypeSyntax(allowVar: false)
+                    .WithTriviaFrom(typeSyntax);
 
-                Debug.Assert(!newTypeSyntax.ContainsDiagnostics, "Explicit type replacement likely introduced an error in code");
+                Debug.Assert(
+                    !newTypeSyntax.ContainsDiagnostics,
+                    "Explicit type replacement likely introduced an error in code"
+                );
 
                 editor.ReplaceNode(typeSyntax, newTypeSyntax);
             }
             else
             {
-                var tupleTypeSymbol = semanticModel.GetTypeInfo(typeSyntax.Parent, cancellationToken).ConvertedType;
+                var tupleTypeSymbol = semanticModel
+                    .GetTypeInfo(typeSyntax.Parent, cancellationToken)
+                    .ConvertedType;
 
                 var leadingTrivia = node.GetLeadingTrivia()
-                    .Concat(parensDesignation.GetAllPrecedingTriviaToPreviousToken().Where(t => !t.IsWhitespace()).Select(t => t.WithoutAnnotations(SyntaxAnnotation.ElasticAnnotation)));
+                    .Concat(
+                        parensDesignation
+                            .GetAllPrecedingTriviaToPreviousToken()
+                            .Where(t => !t.IsWhitespace())
+                            .Select(t => t.WithoutAnnotations(SyntaxAnnotation.ElasticAnnotation))
+                    );
 
-                var tupleDeclaration = GenerateTupleDeclaration(tupleTypeSymbol, parensDesignation).WithLeadingTrivia(leadingTrivia);
+                var tupleDeclaration = GenerateTupleDeclaration(tupleTypeSymbol, parensDesignation)
+                    .WithLeadingTrivia(leadingTrivia);
 
                 editor.ReplaceNode(declarationContext, tupleDeclaration);
             }
         }
 
-        private static ExpressionSyntax GenerateTupleDeclaration(ITypeSymbol typeSymbol, ParenthesizedVariableDesignationSyntax parensDesignation)
+        private static ExpressionSyntax GenerateTupleDeclaration(
+            ITypeSymbol typeSymbol,
+            ParenthesizedVariableDesignationSyntax parensDesignation
+        )
         {
             Debug.Assert(typeSymbol.IsTupleType);
             var elements = ((INamedTypeSymbol)typeSymbol).TupleElements;
             Debug.Assert(elements.Length == parensDesignation.Variables.Count);
 
-            using var builderDisposer = ArrayBuilder<SyntaxNode>.GetInstance(elements.Length, out var builder);
+            using var builderDisposer = ArrayBuilder<SyntaxNode>.GetInstance(
+                elements.Length,
+                out var builder
+            );
             for (var i = 0; i < elements.Length; i++)
             {
                 var designation = parensDesignation.Variables[i];
@@ -142,7 +185,10 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
                         newDeclaration = SyntaxFactory.DeclarationExpression(typeName, designation);
                         break;
                     case SyntaxKind.ParenthesizedVariableDesignation:
-                        newDeclaration = GenerateTupleDeclaration(type, (ParenthesizedVariableDesignationSyntax)designation);
+                        newDeclaration = GenerateTupleDeclaration(
+                            type,
+                            (ParenthesizedVariableDesignationSyntax)designation
+                        );
                         break;
                     default:
                         throw ExceptionUtilities.UnexpectedValue(designation.Kind());
@@ -155,23 +201,31 @@ namespace Microsoft.CodeAnalysis.CSharp.TypeStyle
                 builder.Add(SyntaxFactory.Argument(newDeclaration));
             }
 
-            var separatorBuilder = ArrayBuilder<SyntaxToken>.GetInstance(builder.Count - 1, SyntaxFactory.Token(leading: default, SyntaxKind.CommaToken, trailing: default));
+            var separatorBuilder = ArrayBuilder<SyntaxToken>.GetInstance(
+                builder.Count - 1,
+                SyntaxFactory.Token(leading: default, SyntaxKind.CommaToken, trailing: default)
+            );
 
-            return SyntaxFactory.TupleExpression(
-                SyntaxFactory.Token(SyntaxKind.OpenParenToken).WithTrailingTrivia(),
-                SyntaxFactory.SeparatedList(builder.ToImmutable(), separatorBuilder.ToImmutableAndFree()),
-                SyntaxFactory.Token(SyntaxKind.CloseParenToken))
+            return SyntaxFactory
+                .TupleExpression(
+                    SyntaxFactory.Token(SyntaxKind.OpenParenToken).WithTrailingTrivia(),
+                    SyntaxFactory.SeparatedList(
+                        builder.ToImmutable(),
+                        separatorBuilder.ToImmutableAndFree()
+                    ),
+                    SyntaxFactory.Token(SyntaxKind.CloseParenToken)
+                )
                 .WithTrailingTrivia(parensDesignation.GetTrailingTrivia());
         }
 
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
-                       createChangedDocument,
-                       CSharpAnalyzersResources.Use_explicit_type_instead_of_var)
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Use_explicit_type_instead_of_var,
+                    createChangedDocument,
+                    CSharpAnalyzersResources.Use_explicit_type_instead_of_var
+                ) { }
         }
     }
 }

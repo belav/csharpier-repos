@@ -9,17 +9,21 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.ServiceModel.Syndication
 {
     [XmlRoot(ElementName = App10Constants.Categories, Namespace = App10Constants.Namespace)]
-    public class AtomPub10CategoriesDocumentFormatter : CategoriesDocumentFormatter, IXmlSerializable
+    public class AtomPub10CategoriesDocumentFormatter
+        : CategoriesDocumentFormatter,
+          IXmlSerializable
     {
         private readonly Type _inlineDocumentType;
         private readonly int _maxExtensionSize;
         private readonly Type _referencedDocumentType;
 
-        public AtomPub10CategoriesDocumentFormatter() : this(typeof(InlineCategoriesDocument), typeof(ReferencedCategoriesDocument))
-        {
-        }
+        public AtomPub10CategoriesDocumentFormatter()
+            : this(typeof(InlineCategoriesDocument), typeof(ReferencedCategoriesDocument)) { }
 
-        public AtomPub10CategoriesDocumentFormatter(Type inlineDocumentType, Type referencedDocumentType) : base()
+        public AtomPub10CategoriesDocumentFormatter(
+            Type inlineDocumentType,
+            Type referencedDocumentType
+        ) : base()
         {
             if (inlineDocumentType == null)
             {
@@ -27,7 +31,14 @@ namespace System.ServiceModel.Syndication
             }
             if (!typeof(InlineCategoriesDocument).IsAssignableFrom(inlineDocumentType))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidObjectTypePassed, nameof(inlineDocumentType), nameof(InlineCategoriesDocument)), nameof(inlineDocumentType));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.InvalidObjectTypePassed,
+                        nameof(inlineDocumentType),
+                        nameof(InlineCategoriesDocument)
+                    ),
+                    nameof(inlineDocumentType)
+                );
             }
             if (referencedDocumentType == null)
             {
@@ -35,7 +46,14 @@ namespace System.ServiceModel.Syndication
             }
             if (!typeof(ReferencedCategoriesDocument).IsAssignableFrom(referencedDocumentType))
             {
-                throw new ArgumentException(SR.Format(SR.InvalidObjectTypePassed, nameof(referencedDocumentType), nameof(ReferencedCategoriesDocument)), nameof(referencedDocumentType));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.InvalidObjectTypePassed,
+                        nameof(referencedDocumentType),
+                        nameof(ReferencedCategoriesDocument)
+                    ),
+                    nameof(referencedDocumentType)
+                );
             }
 
             _maxExtensionSize = int.MaxValue;
@@ -43,7 +61,8 @@ namespace System.ServiceModel.Syndication
             _referencedDocumentType = referencedDocumentType;
         }
 
-        public AtomPub10CategoriesDocumentFormatter(CategoriesDocument documentToWrite) : base(documentToWrite)
+        public AtomPub10CategoriesDocumentFormatter(CategoriesDocument documentToWrite)
+            : base(documentToWrite)
         {
             _maxExtensionSize = int.MaxValue;
             if (documentToWrite.IsInline)
@@ -104,7 +123,9 @@ namespace System.ServiceModel.Syndication
             }
             if (!CanRead(reader))
             {
-                throw new XmlException(SR.Format(SR.UnknownDocumentXml, reader.LocalName, reader.NamespaceURI));
+                throw new XmlException(
+                    SR.Format(SR.UnknownDocumentXml, reader.LocalName, reader.NamespaceURI)
+                );
             }
 
             ReadDocument(reader);
@@ -121,7 +142,11 @@ namespace System.ServiceModel.Syndication
                 throw new InvalidOperationException(SR.DocumentFormatterDoesNotHaveDocument);
             }
 
-            writer.WriteStartElement(App10Constants.Prefix, App10Constants.Categories, App10Constants.Namespace);
+            writer.WriteStartElement(
+                App10Constants.Prefix,
+                App10Constants.Categories,
+                App10Constants.Namespace
+            );
             WriteDocument(writer);
             writer.WriteEndElement();
         }
@@ -146,7 +171,8 @@ namespace System.ServiceModel.Syndication
             }
             else
             {
-                return (ReferencedCategoriesDocument)Activator.CreateInstance(_referencedDocumentType);
+                return (ReferencedCategoriesDocument)
+                    Activator.CreateInstance(_referencedDocumentType);
             }
         }
 
@@ -155,11 +181,16 @@ namespace System.ServiceModel.Syndication
             try
             {
                 SyndicationFeedFormatter.MoveToStartElement(reader);
-                SetDocument(AtomPub10ServiceDocumentFormatter.ReadCategories(reader, null,
-                    () => CreateInlineCategoriesDocument(),
-                    () => CreateReferencedCategoriesDocument(),
-                    Version,
-                    _maxExtensionSize));
+                SetDocument(
+                    AtomPub10ServiceDocumentFormatter.ReadCategories(
+                        reader,
+                        null,
+                        () => CreateInlineCategoriesDocument(),
+                        () => CreateReferencedCategoriesDocument(),
+                        Version,
+                        _maxExtensionSize
+                    )
+                );
             }
             catch (FormatException e)
             {
@@ -174,8 +205,17 @@ namespace System.ServiceModel.Syndication
         private void WriteDocument(XmlWriter writer)
         {
             // declare the atom10 namespace upfront for compactness
-            writer.WriteAttributeString(Atom10Constants.Atom10Prefix, Atom10FeedFormatter.XmlNsNs, Atom10Constants.Atom10Namespace);
-            AtomPub10ServiceDocumentFormatter.WriteCategoriesInnerXml(writer, Document, null, Version);
+            writer.WriteAttributeString(
+                Atom10Constants.Atom10Prefix,
+                Atom10FeedFormatter.XmlNsNs,
+                Atom10Constants.Atom10Namespace
+            );
+            AtomPub10ServiceDocumentFormatter.WriteCategoriesInnerXml(
+                writer,
+                Document,
+                null,
+                Version
+            );
         }
     }
 }

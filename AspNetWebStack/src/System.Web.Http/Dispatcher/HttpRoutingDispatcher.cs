@@ -30,11 +30,13 @@ namespace System.Web.Http.Dispatcher
         /// as the default handler.
         /// </summary>
         /// <param name="configuration">The server configuration.</param>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "HttpControllerDispatcher does not require disposal")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "HttpControllerDispatcher does not require disposal"
+        )]
         public HttpRoutingDispatcher(HttpConfiguration configuration)
-            : this(configuration, new HttpControllerDispatcher(configuration))
-        {
-        }
+            : this(configuration, new HttpControllerDispatcher(configuration)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRoutingDispatcher"/> class,
@@ -42,7 +44,10 @@ namespace System.Web.Http.Dispatcher
         /// </summary>
         /// <param name="configuration">The server configuration.</param>
         /// <param name="defaultHandler">The default handler to use when the <see cref="IHttpRoute"/> has no <see cref="IHttpRoute.Handler"/>.</param>
-        public HttpRoutingDispatcher(HttpConfiguration configuration, HttpMessageHandler defaultHandler)
+        public HttpRoutingDispatcher(
+            HttpConfiguration configuration,
+            HttpMessageHandler defaultHandler
+        )
         {
             if (configuration == null)
             {
@@ -58,8 +63,15 @@ namespace System.Web.Http.Dispatcher
         }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The Web API framework will dispose of the response after sending it")]
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The Web API framework will dispose of the response after sending it"
+        )]
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             // Lookup route data, or if not found as a request property then we look it up in the route table
             IHttpRouteData routeData = request.GetRouteData();
@@ -72,22 +84,30 @@ namespace System.Web.Http.Dispatcher
                 }
             }
 
-            if (routeData == null || (routeData.Route != null && routeData.Route.Handler is StopRoutingHandler))
+            if (
+                routeData == null
+                || (routeData.Route != null && routeData.Route.Handler is StopRoutingHandler)
+            )
             {
                 request.Properties.Add(HttpPropertyKeys.NoRouteMatched, true);
-                return Task.FromResult(request.CreateErrorResponse(
-                    HttpStatusCode.NotFound,
-                    Error.Format(SRResources.ResourceNotFound, request.RequestUri),
-                    SRResources.NoRouteData));
+                return Task.FromResult(
+                    request.CreateErrorResponse(
+                        HttpStatusCode.NotFound,
+                        Error.Format(SRResources.ResourceNotFound, request.RequestUri),
+                        SRResources.NoRouteData
+                    )
+                );
             }
 
             routeData.RemoveOptionalRoutingParameters();
 
-            // routeData.Route could be null if user adds a custom route that derives from System.Web.Routing.Route explicitly 
+            // routeData.Route could be null if user adds a custom route that derives from System.Web.Routing.Route explicitly
             // and add that to the RouteCollection in the web hosted case
-            var invoker = (routeData.Route == null || routeData.Route.Handler == null) ?
-                _defaultInvoker : new HttpMessageInvoker(routeData.Route.Handler, disposeHandler: false);
+            var invoker =
+                (routeData.Route == null || routeData.Route.Handler == null)
+                    ? _defaultInvoker
+                    : new HttpMessageInvoker(routeData.Route.Handler, disposeHandler: false);
             return invoker.SendAsync(request, cancellationToken);
-        }       
+        }
     }
 }

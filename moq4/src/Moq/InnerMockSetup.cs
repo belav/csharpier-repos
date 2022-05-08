@@ -9,45 +9,47 @@ using Moq.Async;
 
 namespace Moq
 {
-	internal sealed class InnerMockSetup : SetupWithOutParameterSupport
-	{
-		private readonly object returnValue;
+    internal sealed class InnerMockSetup : SetupWithOutParameterSupport
+    {
+        private readonly object returnValue;
 
-		public InnerMockSetup(Expression originalExpression, Mock mock, MethodExpectation expectation, object returnValue)
-			: base(originalExpression, mock, expectation)
-		{
-			Debug.Assert(Awaitable.TryGetResultRecursive(returnValue) is IMocked);
+        public InnerMockSetup(
+            Expression originalExpression,
+            Mock mock,
+            MethodExpectation expectation,
+            object returnValue
+        ) : base(originalExpression, mock, expectation)
+        {
+            Debug.Assert(Awaitable.TryGetResultRecursive(returnValue) is IMocked);
 
-			this.returnValue = returnValue;
+            this.returnValue = returnValue;
 
-			this.MarkAsVerifiable();
-		}
+            this.MarkAsVerifiable();
+        }
 
-		public override IEnumerable<Mock> InnerMocks
-		{
-			get
-			{
-				var innerMock = TryGetInnerMockFrom(this.returnValue);
-				Debug.Assert(innerMock != null);
-				yield return innerMock;
-			}
-		}
+        public override IEnumerable<Mock> InnerMocks
+        {
+            get
+            {
+                var innerMock = TryGetInnerMockFrom(this.returnValue);
+                Debug.Assert(innerMock != null);
+                yield return innerMock;
+            }
+        }
 
-		protected override void ExecuteCore(Invocation invocation)
-		{
-			invocation.ReturnValue = this.returnValue;
-		}
+        protected override void ExecuteCore(Invocation invocation)
+        {
+            invocation.ReturnValue = this.returnValue;
+        }
 
-		protected override void ResetCore()
-		{
-			foreach (var innerMock in this.InnerMocks)
-			{
-				innerMock.MutableSetups.Reset();
-			}
-		}
+        protected override void ResetCore()
+        {
+            foreach (var innerMock in this.InnerMocks)
+            {
+                innerMock.MutableSetups.Reset();
+            }
+        }
 
-		protected override void VerifySelf()
-		{
-		}
-	}
+        protected override void VerifySelf() { }
+    }
 }

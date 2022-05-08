@@ -15,21 +15,24 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnreachableCode
 {
-    public class RemoveUnreachableCodeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class RemoveUnreachableCodeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveUnreachableCodeTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public RemoveUnreachableCodeTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpRemoveUnreachableCodeDiagnosticAnalyzer(), new CSharpRemoveUnreachableCodeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpRemoveUnreachableCodeDiagnosticAnalyzer(),
+                new CSharpRemoveUnreachableCodeCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestSingleUnreachableStatement()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -38,21 +41,22 @@ class C
         [|var v = 0;|]
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestInUnreachableIfBody()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -63,7 +67,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -72,14 +76,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestInIfWithNoBlock()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -88,7 +93,7 @@ class C
             [|var v = 0;|]
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -97,14 +102,15 @@ class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestRemoveSubsequentStatements()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -114,21 +120,22 @@ class C
         var y = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestFromSubsequentStatement()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -138,21 +145,22 @@ class C
         [|var y = 1;|]
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestRemoveSubsequentStatementsExcludingLocalFunction()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -165,7 +173,7 @@ class C
         var y = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -174,14 +182,15 @@ class C
 
         void Local() {}
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestRemoveSubsequentStatementsExcludingMultipleLocalFunctions()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -195,7 +204,7 @@ class C
         var y = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -205,14 +214,15 @@ class C
         void Local() {}
         void Local2() {}
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestRemoveSubsequentStatementsInterspersedWithMultipleLocalFunctions()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -229,7 +239,7 @@ class C
         var y = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -240,14 +250,15 @@ class C
 
         void Local2() {}
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestRemoveSubsequentStatementsInterspersedWithMultipleLocalFunctions2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -265,7 +276,7 @@ class C
         var y = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -276,14 +287,15 @@ class C
 
         void Local2() {}
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestRemoveSubsequentStatementsUpToNextLabel()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -297,7 +309,7 @@ class C
         var y = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -309,14 +321,15 @@ class C
 
         var y = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestOnUnreachableLabel()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -330,7 +343,7 @@ class C
         var y = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -338,14 +351,15 @@ class C
         throw new System.Exception();
         var v = 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestMissingOnReachableLabel()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -363,14 +377,15 @@ class C
 
         var y = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestInLambda()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -385,7 +400,7 @@ class C
         };
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -397,14 +412,15 @@ class C
                 return;
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestInLambdaInExpressionBody()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -417,7 +433,7 @@ class C
             [|Console.WriteLine();|]
         };
 }",
-@"
+                @"
 using System;
 
 class C
@@ -427,14 +443,15 @@ class C
             if (true)
                 return;
         };
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestSingleRemovalDoesNotTouchCodeInUnrelatedLocalFunction()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -449,7 +466,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -462,14 +479,15 @@ class C
             var x = 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -484,7 +502,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -496,14 +514,15 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -523,7 +542,7 @@ class C
             Console.WriteLine(y);
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -538,14 +557,15 @@ class C
         ReachableLabel:
             Console.WriteLine(y);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestFixAll3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -570,7 +590,7 @@ class C
         var x = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -591,14 +611,15 @@ class C
             goto ReachableLabel1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestFixAll4()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -618,7 +639,7 @@ class C
     }
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -636,14 +657,15 @@ class C
         return;
     }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestFixAll5()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(object o)
@@ -655,7 +677,7 @@ class C
         {|FixAllInDocument:return;|}
     }
 }",
-@"
+                @"
 class C
 {
     void M(object o)
@@ -665,14 +687,15 @@ class C
 
         throw new Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestInUnreachableInSwitchSection1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -686,7 +709,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -697,14 +720,15 @@ class C
                 throw new Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestDirectives1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -716,7 +740,7 @@ class C
 #endif
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -726,14 +750,15 @@ class C
 #if true
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestDirectives2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -744,7 +769,7 @@ class C
 #endif
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -753,14 +778,15 @@ class C
         throw new System.Exception();
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestDirectives3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -771,7 +797,7 @@ class C
         [|var v = 0;|]
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -781,14 +807,15 @@ class C
 
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestForLoop1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -804,7 +831,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -817,14 +844,15 @@ class C
             return ;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnreachableCode)]
         public async Task TestInfiniteForLoop()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -833,14 +861,15 @@ class C
         [|return;|]
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         for (;;) { }
     }
-}");
+}"
+            );
         }
     }
 }

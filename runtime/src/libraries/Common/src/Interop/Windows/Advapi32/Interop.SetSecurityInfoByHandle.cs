@@ -8,14 +8,20 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [GeneratedDllImport(Interop.Libraries.Advapi32, EntryPoint = "SetSecurityInfo", ExactSpelling = true, SetLastError = true)]
+        [GeneratedDllImport(
+            Interop.Libraries.Advapi32,
+            EntryPoint = "SetSecurityInfo",
+            ExactSpelling = true,
+            SetLastError = true
+        )]
         internal static partial uint SetSecurityInfoByHandle(
             SafeHandle handle,
-            /*DWORD*/ uint objectType,
-            /*DWORD*/ uint securityInformation,
+            /*DWORD*/uint objectType,
+            /*DWORD*/uint securityInformation,
             byte[]? owner,
             byte[]? group,
             byte[]? dacl,
-            byte[]? sacl);
+            byte[]? sacl
+        );
     }
 }

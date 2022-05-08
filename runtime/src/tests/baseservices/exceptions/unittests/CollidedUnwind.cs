@@ -23,8 +23,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new CollidedUnwindTest().Run(),            ref nSuccesses, ref nFailures);
-        
+        CountResults(new CollidedUnwindTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -40,20 +40,16 @@ public class TestSet
 
 public class CollidedUnwindTest
 {
-    class ExType1 : Exception
-    {
-    }
-    
-    class ExType2 : Exception
-    {
-    }
+    class ExType1 : Exception { }
+
+    class ExType2 : Exception { }
 
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("CollidedUnwindTest", "0123456789ABCDE");
-        
+
         try
         {
             _trace.Write("0");
@@ -87,7 +83,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("2");
-            FnBBB();   
+            FnBBB();
         }
         finally
         {
@@ -100,7 +96,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("3");
-            Bar();   
+            Bar();
         }
         finally
         {
@@ -127,7 +123,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("5");
-            FnDDD();   
+            FnDDD();
         }
         finally
         {
@@ -140,7 +136,7 @@ public class CollidedUnwindTest
         try
         {
             _trace.Write("6");
-            Fubar();   
+            Fubar();
         }
         finally
         {
@@ -161,4 +157,3 @@ public class CollidedUnwindTest
         }
     }
 }
-

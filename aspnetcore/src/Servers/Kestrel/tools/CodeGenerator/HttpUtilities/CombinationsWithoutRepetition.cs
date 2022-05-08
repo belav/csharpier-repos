@@ -17,7 +17,8 @@ internal class CombinationsWithoutRepetition<T> : IEnumerator<T[]>
 
     public CombinationsWithoutRepetition(T[] nElements, int p)
     {
-        if (nElements.Length < p) throw new ArgumentOutOfRangeException(nameof(p));
+        if (nElements.Length < p)
+            throw new ArgumentOutOfRangeException(nameof(p));
 
         _nElements = nElements;
         _p = p;

@@ -47,8 +47,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     the constructor at any point in this process.
         /// </remarks>
         [EntityFrameworkInternal]
-        public EntityMaterializerSourceDependencies()
-        {
-        }
+        public EntityMaterializerSourceDependencies() { }
     }
 }

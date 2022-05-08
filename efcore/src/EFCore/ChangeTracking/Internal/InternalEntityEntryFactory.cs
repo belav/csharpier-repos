@@ -30,8 +30,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InternalEntityEntry Create(IStateManager stateManager, IEntityType entityType, object entity)
-            => NewInternalEntityEntry(stateManager, entityType, entity);
+        public virtual InternalEntityEntry Create(
+            IStateManager stateManager,
+            IEntityType entityType,
+            object entity
+        ) => NewInternalEntityEntry(stateManager, entityType, entity);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,25 +46,31 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IStateManager stateManager,
             IEntityType entityType,
             object entity,
-            in ValueBuffer valueBuffer)
-            => NewInternalEntityEntry(stateManager, entityType, entity, valueBuffer);
+            in ValueBuffer valueBuffer
+        ) => NewInternalEntityEntry(stateManager, entityType, entity, valueBuffer);
 
-        private static InternalEntityEntry NewInternalEntityEntry(IStateManager stateManager, IEntityType entityType, object entity)
+        private static InternalEntityEntry NewInternalEntityEntry(
+            IStateManager stateManager,
+            IEntityType entityType,
+            object entity
+        )
         {
             Check.DebugAssert(entity != null, "entity is null");
 
             return entityType.ShadowPropertyCount() > 0
-                ? (InternalEntityEntry)new InternalMixedEntityEntry(stateManager, entityType, entity)
-                : new InternalClrEntityEntry(stateManager, entityType, entity);
+              ? (InternalEntityEntry)new InternalMixedEntityEntry(stateManager, entityType, entity)
+              : new InternalClrEntityEntry(stateManager, entityType, entity);
         }
 
         private static InternalEntityEntry NewInternalEntityEntry(
             IStateManager stateManager,
             IEntityType entityType,
             object entity,
-            in ValueBuffer valueBuffer)
-            => entityType.ShadowPropertyCount() > 0
-                ? (InternalEntityEntry)new InternalMixedEntityEntry(stateManager, entityType, entity, valueBuffer)
+            in ValueBuffer valueBuffer
+        ) =>
+            entityType.ShadowPropertyCount() > 0
+                ? (InternalEntityEntry)
+                      new InternalMixedEntityEntry(stateManager, entityType, entity, valueBuffer)
                 : new InternalClrEntityEntry(stateManager, entityType, entity);
     }
 }

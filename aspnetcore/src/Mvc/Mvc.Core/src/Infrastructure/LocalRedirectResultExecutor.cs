@@ -26,7 +26,10 @@ public class LocalRedirectResultExecutor : IActionResultExecutor<LocalRedirectRe
     /// </summary>
     /// <param name="loggerFactory">Used to create loggers.</param>
     /// <param name="urlHelperFactory">Used to create url helpers.</param>
-    public LocalRedirectResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
+    public LocalRedirectResultExecutor(
+        ILoggerFactory loggerFactory,
+        IUrlHelperFactory urlHelperFactory
+    )
     {
         if (loggerFactory == null)
         {
@@ -68,8 +71,9 @@ public class LocalRedirectResultExecutor : IActionResultExecutor<LocalRedirectRe
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else

@@ -8,9 +8,7 @@ namespace System.Data.OleDb
 {
     public sealed class OleDbEnumerator
     {
-        public OleDbEnumerator()
-        {
-        }
+        public OleDbEnumerator() { }
 
         public DataTable GetElements()
         {
@@ -28,7 +26,14 @@ namespace System.Data.OleDb
 
         internal static OleDbDataReader GetEnumeratorFromType(Type type)
         {
-            object? value = Activator.CreateInstance(type, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance, null, null, CultureInfo.InvariantCulture, null);
+            object? value = Activator.CreateInstance(
+                type,
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance,
+                null,
+                null,
+                CultureInfo.InvariantCulture,
+                null
+            );
             return GetEnumeratorReader(value);
         }
 
@@ -52,7 +57,13 @@ namespace System.Data.OleDb
 
             int propCount = 0;
             IntPtr propSets = ADP.PtrZero;
-            OleDbHResult hr = srcrowset.GetSourcesRowset(ADP.PtrZero, ODB.IID_IRowset, propCount, propSets, out value);
+            OleDbHResult hr = srcrowset.GetSourcesRowset(
+                ADP.PtrZero,
+                ODB.IID_IRowset,
+                propCount,
+                propSets,
+                out value
+            );
 
             Exception? f = OleDbConnection.ProcessResults(hr, null, null);
             if (null != f)
@@ -60,8 +71,17 @@ namespace System.Data.OleDb
                 throw f;
             }
 
-            OleDbDataReader dataReader = new OleDbDataReader(null, null, 0, CommandBehavior.Default);
-            dataReader.InitializeIRowset(value, ChapterHandle.DB_NULL_HCHAPTER, ADP.RecordsUnaffected);
+            OleDbDataReader dataReader = new OleDbDataReader(
+                null,
+                null,
+                0,
+                CommandBehavior.Default
+            );
+            dataReader.InitializeIRowset(
+                value,
+                ChapterHandle.DB_NULL_HCHAPTER,
+                ADP.RecordsUnaffected
+            );
             dataReader.BuildMetaInfo();
             dataReader.HasRowsRead();
             return dataReader;

@@ -21,7 +21,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.MetadataAsSource
         /// <param name="symbol">The symbol to generate source for</param>
         /// <param name="cancellationToken">To cancel document operations</param>
         /// <returns>The updated document</returns>
-        public static Task<Document> AddSourceToAsync(Document document, Compilation symbolCompilation, ISymbol symbol, CancellationToken cancellationToken)
+        public static Task<Document> AddSourceToAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetRequiredLanguageService<IMetadataAsSourceService>();
             return service.AddSourceToAsync(document, symbolCompilation, symbol, cancellationToken);

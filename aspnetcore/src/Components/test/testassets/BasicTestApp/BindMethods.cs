@@ -8,6 +8,4 @@ namespace Microsoft.AspNetCore.Components;
 //
 // This has already gotten better in 16.3 and we look for IComponent rather
 // than specific implementation details.
-public static class BindMethods
-{
-}
+public static class BindMethods { }

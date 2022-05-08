@@ -38,10 +38,14 @@ namespace Test
         ~AA()
         {
             CheckFields();
-            if (self1 != null) self1.CheckFields();
-            if (self2 != null) self2.CheckFields();
-            if (self3 != null) self3.CheckFields();
-            if (self4 != null) self4.CheckFields();
+            if (self1 != null)
+                self1.CheckFields();
+            if (self2 != null)
+                self2.CheckFields();
+            if (self3 != null)
+                self3.CheckFields();
+            if (self4 != null)
+                self4.CheckFields();
         }
     }
 
@@ -49,6 +53,7 @@ namespace Test
     {
         private static AA s_aa = new AA(0);
         public static int exitCode = 1;
+
         private static void Litter()
         {
             GC.Collect();

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             ParameterListSyntax parameterList,
             BlockSyntax? body,
             ArrowExpressionClauseSyntax? expressionBody,
-            SyntaxToken semicolonToken)
+            SyntaxToken semicolonToken
+        )
         {
             return Update(
                 attributeLists: attributeLists,
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 parameterList: parameterList,
                 body: body,
                 expressionBody: expressionBody,
-                semicolonToken: semicolonToken);
+                semicolonToken: semicolonToken
+            );
         }
     }
 }

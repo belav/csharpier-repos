@@ -18,8 +18,13 @@ public class ActionResultOfTTest
         var input = new FileStreamResult(Stream.Null, "application/json");
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => new ActionResult<FileStreamResult>(value: input));
-        Assert.Equal($"Invalid type parameter '{typeof(FileStreamResult)}' specified for 'ActionResult<T>'.", ex.Message);
+        var ex = Assert.Throws<ArgumentException>(
+            () => new ActionResult<FileStreamResult>(value: input)
+        );
+        Assert.Equal(
+            $"Invalid type parameter '{typeof(FileStreamResult)}' specified for 'ActionResult<T>'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -29,8 +34,13 @@ public class ActionResultOfTTest
         var actionResult = new OkResult();
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => new ActionResult<FileStreamResult>(result: actionResult));
-        Assert.Equal($"Invalid type parameter '{typeof(FileStreamResult)}' specified for 'ActionResult<T>'.", ex.Message);
+        var ex = Assert.Throws<ArgumentException>(
+            () => new ActionResult<FileStreamResult>(result: actionResult)
+        );
+        Assert.Equal(
+            $"Invalid type parameter '{typeof(FileStreamResult)}' specified for 'ActionResult<T>'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -102,11 +112,7 @@ public class ActionResultOfTTest
         Assert.Equal(StatusCodes.Status200OK, objectResult.StatusCode);
     }
 
-    private class BaseItem
-    {
-    }
+    private class BaseItem { }
 
-    private class DerivedItem : BaseItem
-    {
-    }
+    private class DerivedItem : BaseItem { }
 }

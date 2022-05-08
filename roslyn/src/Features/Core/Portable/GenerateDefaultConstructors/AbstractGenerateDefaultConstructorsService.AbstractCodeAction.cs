@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 Document document,
                 State state,
                 IList<IMethodSymbol> constructors,
-                string title)
+                string title
+            )
             {
                 _document = document;
                 _state = state;
@@ -37,25 +38,30 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
 
             public override string Title => _title;
 
-            protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+            protected override async Task<Document> GetChangedDocumentAsync(
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfNull(_state.ClassType);
-                var result = await CodeGenerator.AddMemberDeclarationsAsync(
-                    _document.Project.Solution,
-                    _state.ClassType,
-                    _constructors.Select(CreateConstructorDefinition),
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
+                var result = await CodeGenerator
+                    .AddMemberDeclarationsAsync(
+                        _document.Project.Solution,
+                        _state.ClassType,
+                        _constructors.Select(CreateConstructorDefinition),
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return result;
             }
 
-            private IMethodSymbol CreateConstructorDefinition(
-                IMethodSymbol baseConstructor)
+            private IMethodSymbol CreateConstructorDefinition(IMethodSymbol baseConstructor)
             {
                 var syntaxFactory = _document.GetLanguageService<SyntaxGenerator>();
-                var baseConstructorArguments = baseConstructor.Parameters.Length != 0
-                    ? syntaxFactory.CreateArguments(baseConstructor.Parameters)
-                    : default;
+                var baseConstructorArguments =
+                    baseConstructor.Parameters.Length != 0
+                        ? syntaxFactory.CreateArguments(baseConstructor.Parameters)
+                        : default;
 
                 var classType = _state.ClassType;
                 Contract.ThrowIfNull(classType);
@@ -68,19 +74,28 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                     typeName: classType.Name,
                     parameters: baseConstructor.Parameters,
                     statements: default,
-                    baseConstructorArguments: baseConstructorArguments);
+                    baseConstructorArguments: baseConstructorArguments
+                );
             }
 
-            private static Accessibility DetermineAccessibility(IMethodSymbol baseConstructor, INamedTypeSymbol classType)
+            private static Accessibility DetermineAccessibility(
+                IMethodSymbol baseConstructor,
+                INamedTypeSymbol classType
+            )
             {
                 // If our base is abstract, and we are not, then (since we likely want to be
                 // instantiated) we make our constructor public by default.
-                if (baseConstructor.ContainingType.IsAbstractClass() && !classType.IsAbstractClass())
+                if (
+                    baseConstructor.ContainingType.IsAbstractClass() && !classType.IsAbstractClass()
+                )
                     return Accessibility.Public;
 
                 // If our base constructor is public, and we're abstract, we switch to being
                 // protected as that's a more natural default for constructors in abstract classes.
-                if (classType.IsAbstractClass() && baseConstructor.DeclaredAccessibility == Accessibility.Public)
+                if (
+                    classType.IsAbstractClass()
+                    && baseConstructor.DeclaredAccessibility == Accessibility.Public
+                )
                     return Accessibility.Protected;
 
                 if (classType.IsSealed)

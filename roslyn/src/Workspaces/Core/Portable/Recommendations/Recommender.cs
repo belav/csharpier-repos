@@ -19,24 +19,42 @@ namespace Microsoft.CodeAnalysis.Recommendations
             int position,
             Workspace workspace,
             OptionSet? options = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var solution = workspace.CurrentSolution;
             options ??= solution.Options;
             var document = solution.GetRequiredDocument(semanticModel.SyntaxTree);
             var languageRecommender = document.GetRequiredLanguageService<IRecommendationService>();
-            return languageRecommender.GetRecommendedSymbolsAtPosition(document, semanticModel, position, RecommendationServiceOptions.From(options, document.Project.Language), cancellationToken).NamedSymbols;
+            return languageRecommender
+                .GetRecommendedSymbolsAtPosition(
+                    document,
+                    semanticModel,
+                    position,
+                    RecommendationServiceOptions.From(options, document.Project.Language),
+                    cancellationToken
+                )
+                .NamedSymbols;
         }
 
         [Obsolete("Use GetRecommendedSymbolsAtPosition")]
         public static Task<IEnumerable<ISymbol>> GetRecommendedSymbolsAtPositionAsync(
-             SemanticModel semanticModel,
-             int position,
-             Workspace workspace,
-             OptionSet? options = null,
-             CancellationToken cancellationToken = default)
+            SemanticModel semanticModel,
+            int position,
+            Workspace workspace,
+            OptionSet? options = null,
+            CancellationToken cancellationToken = default
+        )
         {
-            return Task.FromResult(GetRecommendedSymbolsAtPosition(semanticModel, position, workspace, options, cancellationToken));
+            return Task.FromResult(
+                GetRecommendedSymbolsAtPosition(
+                    semanticModel,
+                    position,
+                    workspace,
+                    options,
+                    cancellationToken
+                )
+            );
         }
     }
 }

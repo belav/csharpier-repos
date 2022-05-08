@@ -14,16 +14,18 @@ public class ComponentMarkupBlockPassTest
     public ComponentMarkupBlockPassTest()
     {
         Pass = new ComponentMarkupBlockPass();
-        ProjectEngine = (DefaultRazorProjectEngine)RazorProjectEngine.Create(
-            RazorConfiguration.Default,
-            RazorProjectFileSystem.Create(Environment.CurrentDirectory),
-            b =>
-            {
-                if (b.Features.OfType<ComponentMarkupBlockPass>().Any())
+        ProjectEngine = (DefaultRazorProjectEngine)
+            RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                RazorProjectFileSystem.Create(Environment.CurrentDirectory),
+                b =>
                 {
-                    b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
+                    if (b.Features.OfType<ComponentMarkupBlockPass>().Any())
+                    {
+                        b.Features.Remove(b.Features.OfType<ComponentMarkupBlockPass>().Single());
+                    }
                 }
-            });
+            );
         Engine = ProjectEngine.Engine;
 
         Pass.Engine = Engine;
@@ -39,17 +41,21 @@ public class ComponentMarkupBlockPassTest
     public void Execute_RewritesHtml_Basic()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <head cool=""beans"">
     Hello, World!
   </head>
-</html>");
+</html>"
+        );
 
-        var expected = NormalizeContent(@"
+        var expected = NormalizeContent(
+            @"
 <html><head cool=""beans"">
     Hello, World!
-  </head></html>");
+  </head></html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -102,17 +108,21 @@ public class ComponentMarkupBlockPassTest
     public void Execute_RewritesHtml_MergesSiblings()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   @(""Hi"")<div></div>
   <div></div>
   <div>@(""Hi"")</div>
-</html>");
+</html>"
+        );
 
-        var expected = NormalizeContent(@"
+        var expected = NormalizeContent(
+            @"
 <div></div>
   <div></div>
-  ");
+  "
+        );
 
         var documentNode = Lower(document);
 
@@ -128,16 +138,20 @@ public class ComponentMarkupBlockPassTest
     public void Execute_RewritesHtml_MergesSiblings_LeftEdge()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html><div></div>
   <div></div>
   <div>@(""Hi"")</div>
-</html>");
+</html>"
+        );
 
-        var expected = NormalizeContent(@"
+        var expected = NormalizeContent(
+            @"
 <div></div>
   <div></div>
-  ");
+  "
+        );
 
         var documentNode = Lower(document);
 
@@ -149,17 +163,18 @@ public class ComponentMarkupBlockPassTest
         Assert.Equal(expected, block.Content, ignoreLineEndingDifferences: true);
     }
 
-
     [Fact]
     public void Execute_RewritesHtml_CSharpInAttributes()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <head cool=""beans"" csharp=""@yes"" mixed=""hi @there"">
     <div>foo</div>
   </head>
-</html>");
+</html>"
+        );
 
         var expected = NormalizeContent("<div>foo</div>");
 
@@ -177,14 +192,16 @@ public class ComponentMarkupBlockPassTest
     public void Execute_RewritesHtml_CSharpInBody()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <head cool=""beans"">
     <div>@foo</div>
     <div>rewriteme</div>
     <div>@bar</div>
   </head>
-</html>");
+</html>"
+        );
 
         var expected = NormalizeContent("<div>rewriteme</div>\n    ");
 
@@ -202,15 +219,19 @@ public class ComponentMarkupBlockPassTest
     public void Execute_RewritesHtml_EncodesHtmlEntities()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <div>
     &lt;span&gt;Hi&lt;/span&gt;
-</div>");
+</div>"
+        );
 
-        var expected = NormalizeContent(@"
+        var expected = NormalizeContent(
+            @"
 <div>
     &lt;span&gt;Hi&lt;/span&gt;
-</div>");
+</div>"
+        );
 
         var documentNode = Lower(document);
 
@@ -262,7 +283,8 @@ public class ComponentMarkupBlockPassTest
     public void Execute_CannotRewriteHtml_CSharpInCode()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   @if (some_bool)
   {
@@ -270,7 +292,8 @@ public class ComponentMarkupBlockPassTest
     @hello
   </head>
   }
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -285,7 +308,8 @@ public class ComponentMarkupBlockPassTest
     public void Execute_CannotRewriteHtml_Script()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   @if (some_bool)
   {
@@ -293,7 +317,8 @@ public class ComponentMarkupBlockPassTest
     <script>...</script>
   </head>
   }
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -308,7 +333,8 @@ public class ComponentMarkupBlockPassTest
     public void Execute_CannotRewriteHtml_SelectOption()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   @if (some_bool)
   {
@@ -320,7 +346,8 @@ public class ComponentMarkupBlockPassTest
     </select>
   </head>
   }
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -335,7 +362,8 @@ public class ComponentMarkupBlockPassTest
     public void Execute_CanRewriteHtml_OptionWithNoSelectAncestor()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   @if (some_bool)
   {
@@ -344,11 +372,14 @@ public class ComponentMarkupBlockPassTest
     <option selected value='2'>Two</option>
   </head>
   }
-</html>");
+</html>"
+        );
 
-        var expected = NormalizeContent(@"
+        var expected = NormalizeContent(
+            @"
 <head cool=""beans""><option value='1'>One</option>
-    <option selected value='2'>Two</option></head>");
+    <option selected value='2'>Two</option></head>"
+        );
 
         var documentNode = Lower(document);
 
@@ -365,10 +396,12 @@ public class ComponentMarkupBlockPassTest
     public void Execute_CannotRewriteHtml_Errors()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <a href=""..."">
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -388,10 +421,12 @@ public class ComponentMarkupBlockPassTest
     public void Execute_CannotRewriteHtml_DuplicateAttribute()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <a href=""test1"" href=""test2""></a>
-</html>");
+</html>"
+        );
 
         var documentNode = Lower(document);
 
@@ -409,12 +444,14 @@ public class ComponentMarkupBlockPassTest
     public void Execute_RewritesHtml_MismatchedClosingTag()
     {
         // Arrange
-        var document = CreateDocument(@"
+        var document = CreateDocument(
+            @"
 <html>
   <div>
     <div>rewriteme</div>
   </span>
-</html>");
+</html>"
+        );
 
         var expected = NormalizeContent("<div>rewriteme</div>\n  ");
 
@@ -464,8 +501,14 @@ public class ComponentMarkupBlockPassTest
         }
 
         var document = codeDocument.GetDocumentIntermediateNode();
-        Engine.Features.OfType<ComponentDocumentClassifierPass>().Single().Execute(codeDocument, document);
-        Engine.Features.OfType<ComponentMarkupDiagnosticPass>().Single().Execute(codeDocument, document);
+        Engine.Features
+            .OfType<ComponentDocumentClassifierPass>()
+            .Single()
+            .Execute(codeDocument, document);
+        Engine.Features
+            .OfType<ComponentMarkupDiagnosticPass>()
+            .Single()
+            .Execute(codeDocument, document);
         return document;
     }
 

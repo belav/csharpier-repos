@@ -7,7 +7,12 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [DllImport(Libraries.Advapi32, CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true)]
+        [DllImport(
+            Libraries.Advapi32,
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            ExactSpelling = true
+        )]
         internal static extern bool LookupAccountNameW(
             string? lpSystemName,
             ref char lpAccountName,
@@ -15,6 +20,7 @@ internal static partial class Interop
             ref uint cbSid,
             ref char ReferencedDomainName,
             ref uint cchReferencedDomainName,
-            out uint peUse);
+            out uint peUse
+        );
     }
 }

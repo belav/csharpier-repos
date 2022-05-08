@@ -14,8 +14,10 @@ internal static partial class Interop
         {
             foreach (string name in Enum.GetNames(typeof(UnixFileSystemTypes)))
             {
-                System.Diagnostics.Debug.Assert(GetDriveType(name) != DriveType.Unknown,
-                    $"Expected {nameof(UnixFileSystemTypes)}.{name} to have an entry in {nameof(GetDriveType)}.");
+                System.Diagnostics.Debug.Assert(
+                    GetDriveType(name) != DriveType.Unknown,
+                    $"Expected {nameof(UnixFileSystemTypes)}.{name} to have an entry in {nameof(GetDriveType)}."
+                );
             }
         }
 #endif
@@ -30,15 +32,27 @@ internal static partial class Interop
             internal ulong TotalSize;
         }
 
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetSpaceInfoForMountPoint", SetLastError = true)]
-        internal static partial int GetSpaceInfoForMountPoint([MarshalAs(UnmanagedType.LPStr)]string name, out MountPointInformation mpi);
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetSpaceInfoForMountPoint",
+            SetLastError = true
+        )]
+        internal static partial int GetSpaceInfoForMountPoint(
+            [MarshalAs(UnmanagedType.LPStr)] string name,
+            out MountPointInformation mpi
+        );
 
-        [GeneratedDllImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetFormatInfoForMountPoint", SetLastError = true)]
+        [GeneratedDllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetFormatInfoForMountPoint",
+            SetLastError = true
+        )]
         private static unsafe partial int GetFormatInfoForMountPoint(
-            [MarshalAs(UnmanagedType.LPStr)]string name,
+            [MarshalAs(UnmanagedType.LPStr)] string name,
             byte* formatNameBuffer,
             int bufferLength,
-            long* formatType);
+            long* formatType
+        );
 
         internal static int GetFormatInfoForMountPoint(string name, out string format)
         {
@@ -50,17 +64,27 @@ internal static partial class Interop
             return GetFormatInfoForMountPoint(name, out _, out type);
         }
 
-        private static unsafe int GetFormatInfoForMountPoint(string name, out string format, out DriveType type)
+        private static unsafe int GetFormatInfoForMountPoint(
+            string name,
+            out string format,
+            out DriveType type
+        )
         {
-            byte* formatBuffer = stackalloc byte[MountPointFormatBufferSizeInBytes];    // format names should be small
+            byte* formatBuffer = stackalloc byte[MountPointFormatBufferSizeInBytes]; // format names should be small
             long numericFormat;
-            int result = GetFormatInfoForMountPoint(name, formatBuffer, MountPointFormatBufferSizeInBytes, &numericFormat);
+            int result = GetFormatInfoForMountPoint(
+                name,
+                formatBuffer,
+                MountPointFormatBufferSizeInBytes,
+                &numericFormat
+            );
             if (result == 0)
             {
                 // Check if we have a numeric answer or string
-                format = numericFormat != -1 ?
-                    Enum.GetName(typeof(UnixFileSystemTypes), numericFormat) ?? string.Empty :
-                    Marshal.PtrToStringAnsi((IntPtr)formatBuffer)!;
+                format =
+                    numericFormat != -1
+                        ? Enum.GetName(typeof(UnixFileSystemTypes), numericFormat) ?? string.Empty
+                        : Marshal.PtrToStringAnsi((IntPtr)formatBuffer)!;
                 type = GetDriveType(format);
             }
             else

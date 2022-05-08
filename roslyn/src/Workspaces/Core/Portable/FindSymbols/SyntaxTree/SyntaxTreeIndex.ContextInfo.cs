@@ -32,27 +32,34 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 bool containsTupleExpressionOrTupleType,
                 bool containsImplicitObjectCreation,
                 bool containsGlobalAttributes,
-                bool containsConversion)
-                : this(predefinedTypes, predefinedOperators,
-                       ConvertToContainingNodeFlag(
-                         containsForEachStatement,
-                         containsLockStatement,
-                         containsUsingStatement,
-                         containsQueryExpression,
-                         containsThisConstructorInitializer,
-                         containsBaseConstructorInitializer,
-                         containsElementAccessExpression,
-                         containsIndexerMemberCref,
-                         containsDeconstruction,
-                         containsAwait,
-                         containsTupleExpressionOrTupleType,
-                         containsImplicitObjectCreation,
-                         containsGlobalAttributes,
-                         containsConversion))
-            {
-            }
+                bool containsConversion
+            )
+                : this(
+                    predefinedTypes,
+                    predefinedOperators,
+                    ConvertToContainingNodeFlag(
+                        containsForEachStatement,
+                        containsLockStatement,
+                        containsUsingStatement,
+                        containsQueryExpression,
+                        containsThisConstructorInitializer,
+                        containsBaseConstructorInitializer,
+                        containsElementAccessExpression,
+                        containsIndexerMemberCref,
+                        containsDeconstruction,
+                        containsAwait,
+                        containsTupleExpressionOrTupleType,
+                        containsImplicitObjectCreation,
+                        containsGlobalAttributes,
+                        containsConversion
+                    )
+                ) { }
 
-            private ContextInfo(int predefinedTypes, int predefinedOperators, ContainingNodes containingNodes)
+            private ContextInfo(
+                int predefinedTypes,
+                int predefinedOperators,
+                ContainingNodes containingNodes
+            )
             {
                 _predefinedTypes = predefinedTypes;
                 _predefinedOperators = predefinedOperators;
@@ -73,75 +80,113 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 bool containsTupleExpressionOrTupleType,
                 bool containsImplicitObjectCreation,
                 bool containsGlobalAttributes,
-                bool containsConversion)
+                bool containsConversion
+            )
             {
                 var containingNodes = ContainingNodes.None;
 
-                containingNodes |= containsForEachStatement ? ContainingNodes.ContainsForEachStatement : 0;
-                containingNodes |= containsLockStatement ? ContainingNodes.ContainsLockStatement : 0;
-                containingNodes |= containsUsingStatement ? ContainingNodes.ContainsUsingStatement : 0;
-                containingNodes |= containsQueryExpression ? ContainingNodes.ContainsQueryExpression : 0;
-                containingNodes |= containsThisConstructorInitializer ? ContainingNodes.ContainsThisConstructorInitializer : 0;
-                containingNodes |= containsBaseConstructorInitializer ? ContainingNodes.ContainsBaseConstructorInitializer : 0;
-                containingNodes |= containsElementAccessExpression ? ContainingNodes.ContainsElementAccessExpression : 0;
-                containingNodes |= containsIndexerMemberCref ? ContainingNodes.ContainsIndexerMemberCref : 0;
-                containingNodes |= containsDeconstruction ? ContainingNodes.ContainsDeconstruction : 0;
+                containingNodes |= containsForEachStatement
+                    ? ContainingNodes.ContainsForEachStatement
+                    : 0;
+                containingNodes |= containsLockStatement
+                    ? ContainingNodes.ContainsLockStatement
+                    : 0;
+                containingNodes |= containsUsingStatement
+                    ? ContainingNodes.ContainsUsingStatement
+                    : 0;
+                containingNodes |= containsQueryExpression
+                    ? ContainingNodes.ContainsQueryExpression
+                    : 0;
+                containingNodes |= containsThisConstructorInitializer
+                    ? ContainingNodes.ContainsThisConstructorInitializer
+                    : 0;
+                containingNodes |= containsBaseConstructorInitializer
+                    ? ContainingNodes.ContainsBaseConstructorInitializer
+                    : 0;
+                containingNodes |= containsElementAccessExpression
+                    ? ContainingNodes.ContainsElementAccessExpression
+                    : 0;
+                containingNodes |= containsIndexerMemberCref
+                    ? ContainingNodes.ContainsIndexerMemberCref
+                    : 0;
+                containingNodes |= containsDeconstruction
+                    ? ContainingNodes.ContainsDeconstruction
+                    : 0;
                 containingNodes |= containsAwait ? ContainingNodes.ContainsAwait : 0;
-                containingNodes |= containsTupleExpressionOrTupleType ? ContainingNodes.ContainsTupleExpressionOrTupleType : 0;
-                containingNodes |= containsImplicitObjectCreation ? ContainingNodes.ContainsImplicitObjectCreation : 0;
-                containingNodes |= containsGlobalAttributes ? ContainingNodes.ContainsGlobalAttributes : 0;
+                containingNodes |= containsTupleExpressionOrTupleType
+                    ? ContainingNodes.ContainsTupleExpressionOrTupleType
+                    : 0;
+                containingNodes |= containsImplicitObjectCreation
+                    ? ContainingNodes.ContainsImplicitObjectCreation
+                    : 0;
+                containingNodes |= containsGlobalAttributes
+                    ? ContainingNodes.ContainsGlobalAttributes
+                    : 0;
                 containingNodes |= containsConversion ? ContainingNodes.ContainsConversion : 0;
 
                 return containingNodes;
             }
 
-            public bool ContainsPredefinedType(PredefinedType type)
-                => (_predefinedTypes & (int)type) == (int)type;
+            public bool ContainsPredefinedType(PredefinedType type) =>
+                (_predefinedTypes & (int)type) == (int)type;
 
-            public bool ContainsPredefinedOperator(PredefinedOperator op)
-                => (_predefinedOperators & (int)op) == (int)op;
+            public bool ContainsPredefinedOperator(PredefinedOperator op) =>
+                (_predefinedOperators & (int)op) == (int)op;
 
-            public bool ContainsForEachStatement
-                => (_containingNodes & ContainingNodes.ContainsForEachStatement) == ContainingNodes.ContainsForEachStatement;
+            public bool ContainsForEachStatement =>
+                (_containingNodes & ContainingNodes.ContainsForEachStatement)
+                == ContainingNodes.ContainsForEachStatement;
 
-            public bool ContainsDeconstruction
-                => (_containingNodes & ContainingNodes.ContainsDeconstruction) == ContainingNodes.ContainsDeconstruction;
+            public bool ContainsDeconstruction =>
+                (_containingNodes & ContainingNodes.ContainsDeconstruction)
+                == ContainingNodes.ContainsDeconstruction;
 
-            public bool ContainsAwait
-                => (_containingNodes & ContainingNodes.ContainsAwait) == ContainingNodes.ContainsAwait;
+            public bool ContainsAwait =>
+                (_containingNodes & ContainingNodes.ContainsAwait) == ContainingNodes.ContainsAwait;
 
-            public bool ContainsImplicitObjectCreation
-                => (_containingNodes & ContainingNodes.ContainsImplicitObjectCreation) == ContainingNodes.ContainsImplicitObjectCreation;
+            public bool ContainsImplicitObjectCreation =>
+                (_containingNodes & ContainingNodes.ContainsImplicitObjectCreation)
+                == ContainingNodes.ContainsImplicitObjectCreation;
 
-            public bool ContainsLockStatement
-                => (_containingNodes & ContainingNodes.ContainsLockStatement) == ContainingNodes.ContainsLockStatement;
+            public bool ContainsLockStatement =>
+                (_containingNodes & ContainingNodes.ContainsLockStatement)
+                == ContainingNodes.ContainsLockStatement;
 
-            public bool ContainsUsingStatement
-                => (_containingNodes & ContainingNodes.ContainsUsingStatement) == ContainingNodes.ContainsUsingStatement;
+            public bool ContainsUsingStatement =>
+                (_containingNodes & ContainingNodes.ContainsUsingStatement)
+                == ContainingNodes.ContainsUsingStatement;
 
-            public bool ContainsQueryExpression
-                => (_containingNodes & ContainingNodes.ContainsQueryExpression) == ContainingNodes.ContainsQueryExpression;
+            public bool ContainsQueryExpression =>
+                (_containingNodes & ContainingNodes.ContainsQueryExpression)
+                == ContainingNodes.ContainsQueryExpression;
 
-            public bool ContainsThisConstructorInitializer
-                => (_containingNodes & ContainingNodes.ContainsThisConstructorInitializer) == ContainingNodes.ContainsThisConstructorInitializer;
+            public bool ContainsThisConstructorInitializer =>
+                (_containingNodes & ContainingNodes.ContainsThisConstructorInitializer)
+                == ContainingNodes.ContainsThisConstructorInitializer;
 
-            public bool ContainsBaseConstructorInitializer
-                => (_containingNodes & ContainingNodes.ContainsBaseConstructorInitializer) == ContainingNodes.ContainsBaseConstructorInitializer;
+            public bool ContainsBaseConstructorInitializer =>
+                (_containingNodes & ContainingNodes.ContainsBaseConstructorInitializer)
+                == ContainingNodes.ContainsBaseConstructorInitializer;
 
-            public bool ContainsElementAccessExpression
-                => (_containingNodes & ContainingNodes.ContainsElementAccessExpression) == ContainingNodes.ContainsElementAccessExpression;
+            public bool ContainsElementAccessExpression =>
+                (_containingNodes & ContainingNodes.ContainsElementAccessExpression)
+                == ContainingNodes.ContainsElementAccessExpression;
 
-            public bool ContainsIndexerMemberCref
-                => (_containingNodes & ContainingNodes.ContainsIndexerMemberCref) == ContainingNodes.ContainsIndexerMemberCref;
+            public bool ContainsIndexerMemberCref =>
+                (_containingNodes & ContainingNodes.ContainsIndexerMemberCref)
+                == ContainingNodes.ContainsIndexerMemberCref;
 
-            public bool ContainsTupleExpressionOrTupleType
-                => (_containingNodes & ContainingNodes.ContainsTupleExpressionOrTupleType) == ContainingNodes.ContainsTupleExpressionOrTupleType;
+            public bool ContainsTupleExpressionOrTupleType =>
+                (_containingNodes & ContainingNodes.ContainsTupleExpressionOrTupleType)
+                == ContainingNodes.ContainsTupleExpressionOrTupleType;
 
-            public bool ContainsGlobalAttributes
-                => (_containingNodes & ContainingNodes.ContainsGlobalAttributes) == ContainingNodes.ContainsGlobalAttributes;
+            public bool ContainsGlobalAttributes =>
+                (_containingNodes & ContainingNodes.ContainsGlobalAttributes)
+                == ContainingNodes.ContainsGlobalAttributes;
 
-            public bool ContainsConversion
-                => (_containingNodes & ContainingNodes.ContainsConversion) == ContainingNodes.ContainsConversion;
+            public bool ContainsConversion =>
+                (_containingNodes & ContainingNodes.ContainsConversion)
+                == ContainingNodes.ContainsConversion;
 
             public void WriteTo(ObjectWriter writer)
             {
@@ -160,9 +205,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     return new ContextInfo(predefinedTypes, predefinedOperators, containingNodes);
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 return null;
             }

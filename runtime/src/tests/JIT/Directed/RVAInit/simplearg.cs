@@ -14,7 +14,12 @@ namespace SimpleArg
         public int PadValue;
         public long LongValue;
 
-        public MyValue(int init1, long init2) { IntValue = init1; PadValue = 0; LongValue = init2; }
+        public MyValue(int init1, long init2)
+        {
+            IntValue = init1;
+            PadValue = 0;
+            LongValue = init2;
+        }
     }
 
     class Holder

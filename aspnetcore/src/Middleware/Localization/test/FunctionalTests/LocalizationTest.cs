@@ -18,19 +18,13 @@ public class LocalizationTest
     [Fact]
     public Task Localization_ContentLanguageHeader()
     {
-        return RunTest(
-            typeof(StartupContentLanguageHeader),
-            "ar-YE",
-            "True ar-YE");
+        return RunTest(typeof(StartupContentLanguageHeader), "ar-YE", "True ar-YE");
     }
 
     [Fact]
     public Task Localization_CustomCulture()
     {
-        return RunTest(
-            typeof(StartupCustomCulturePreserved),
-            "en-US",
-            "kr10.00");
+        return RunTest(typeof(StartupCustomCulturePreserved), "en-US", "kr10.00");
     }
 
     [Fact]
@@ -39,7 +33,8 @@ public class LocalizationTest
         return RunTest(
             typeof(StartupGetAllStrings),
             "fr-FR",
-            "1 Bonjour from Customer in resources folder");
+            "1 Bonjour from Customer in resources folder"
+        );
     }
 
     [Fact]
@@ -48,7 +43,8 @@ public class LocalizationTest
         return RunTest(
             typeof(StartupResourcesInClassLibrary),
             "fr-FR",
-            "Bonjour from ResourcesClassLibraryNoAttribute Bonjour from ResourcesClassLibraryNoAttribute Bonjour from ResourcesClassLibraryWithAttribute Bonjour from ResourcesClassLibraryWithAttribute");
+            "Bonjour from ResourcesClassLibraryNoAttribute Bonjour from ResourcesClassLibraryNoAttribute Bonjour from ResourcesClassLibraryWithAttribute Bonjour from ResourcesClassLibraryWithAttribute"
+        );
     }
 
     [Fact]
@@ -57,7 +53,8 @@ public class LocalizationTest
         return RunTest(
             typeof(StartupResourcesInFolder),
             "fr-FR",
-            "Bonjour from StartupResourcesInFolder Bonjour from Test in resources folder Bonjour from Customer in resources folder Hello");
+            "Bonjour from StartupResourcesInFolder Bonjour from Test in resources folder Bonjour from Customer in resources folder Hello"
+        );
     }
 
     [Fact]
@@ -66,7 +63,8 @@ public class LocalizationTest
         return RunTest(
             typeof(StartupResourcesInFolder),
             "fr-FR-test",
-            "Bonjour from StartupResourcesInFolder Bonjour from Test in resources folder Bonjour from Customer in resources folder Hello");
+            "Bonjour from StartupResourcesInFolder Bonjour from Test in resources folder Bonjour from Customer in resources folder Hello"
+        );
     }
 
     [Fact]
@@ -75,7 +73,8 @@ public class LocalizationTest
         return RunTest(
             typeof(StartupResourcesInFolder),
             "fr-FR-test-again-too-deep-to-work",
-            "Hello Hello Hello Hello");
+            "Hello Hello Hello Hello"
+        );
     }
 
     [Fact]
@@ -84,27 +83,26 @@ public class LocalizationTest
         return RunTest(
             typeof(StartupResourcesAtRootFolder),
             "fr-FR",
-            "Bonjour from StartupResourcesAtRootFolder Bonjour from Test in root folder Bonjour from Customer in Models folder");
+            "Bonjour from StartupResourcesAtRootFolder Bonjour from Test in root folder Bonjour from Customer in Models folder"
+        );
     }
 
     [Fact]
     public Task Localization_BuilderAPIs()
     {
-        return RunTest(
-            typeof(StartupBuilderAPIs),
-            "ar-YE",
-            "Hello");
+        return RunTest(typeof(StartupBuilderAPIs), "ar-YE", "Hello");
     }
 
     private async Task RunTest(Type startupType, string culture, string expected)
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                .UseTestServer()
-                .UseStartup(startupType);
-            }).Build();
+            .ConfigureWebHost(
+                webHostBuilder =>
+                {
+                    webHostBuilder.UseTestServer().UseStartup(startupType);
+                }
+            )
+            .Build();
 
         await host.StartAsync();
 
@@ -113,7 +111,10 @@ public class LocalizationTest
         var client = testHost.CreateClient();
         var request = new HttpRequestMessage();
         var cookieValue = $"c={culture}|uic={culture}";
-        request.Headers.Add("Cookie", $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}");
+        request.Headers.Add(
+            "Cookie",
+            $"{CookieRequestCultureProvider.DefaultCookieName}={cookieValue}"
+        );
 
         var response = await client.SendAsync(request);
 

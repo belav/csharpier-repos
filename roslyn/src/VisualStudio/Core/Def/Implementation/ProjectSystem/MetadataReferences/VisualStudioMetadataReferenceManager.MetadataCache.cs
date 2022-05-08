@@ -18,12 +18,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             private readonly object _gate = new();
 
-            // value is ValueSource so that how metadata is re-acquired back are different per entry. 
-            private readonly Dictionary<FileKey, ValueSource<Optional<AssemblyMetadata>>> _metadataCache = new();
+            // value is ValueSource so that how metadata is re-acquired back are different per entry.
+            private readonly Dictionary<
+                FileKey,
+                ValueSource<Optional<AssemblyMetadata>>
+            > _metadataCache = new();
 
             private int _capacity = InitialCapacity;
 
-            public bool TryGetMetadata(FileKey key, [NotNullWhen(true)] out AssemblyMetadata? metadata)
+            public bool TryGetMetadata(
+                FileKey key,
+                [NotNullWhen(true)] out AssemblyMetadata? metadata
+            )
             {
                 lock (_gate)
                 {
@@ -31,7 +37,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             }
 
-            public bool TryGetSource(FileKey key, [NotNullWhen(true)] out ValueSource<Optional<AssemblyMetadata>>? source)
+            public bool TryGetSource(
+                FileKey key,
+                [NotNullWhen(true)] out ValueSource<Optional<AssemblyMetadata>>? source
+            )
             {
                 lock (_gate)
                 {
@@ -39,7 +48,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             }
 
-            private bool TryGetMetadata_NoLock(FileKey key, [NotNullWhen(true)] out AssemblyMetadata? metadata)
+            private bool TryGetMetadata_NoLock(
+                FileKey key,
+                [NotNullWhen(true)] out AssemblyMetadata? metadata
+            )
             {
                 if (_metadataCache.TryGetValue(key, out var metadataSource))
                 {
@@ -54,13 +66,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             /// <summary>
             /// <para>Gets specified metadata from the cache, or retrieves metadata from given <paramref name="metadataSource"/>
             /// and adds it to the cache if it's not there yet.</para>
-            /// 
+            ///
             /// <para><paramref name="metadataSource"/> is expected to to provide metadata at least until this method returns.</para>
             /// </summary>
             /// <returns>
             /// True if the metadata is retrieved from <paramref name="metadataSource"/> source, false if it already exists in the cache.
             /// </returns>
-            public bool GetOrAddMetadata(FileKey key, ValueSource<Optional<AssemblyMetadata>> metadataSource, out AssemblyMetadata metadata)
+            public bool GetOrAddMetadata(
+                FileKey key,
+                ValueSource<Optional<AssemblyMetadata>> metadataSource,
+                out AssemblyMetadata metadata
+            )
             {
                 lock (_gate)
                 {

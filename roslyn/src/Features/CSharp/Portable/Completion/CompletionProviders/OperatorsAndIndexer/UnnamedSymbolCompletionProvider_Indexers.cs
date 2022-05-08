@@ -21,22 +21,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (indexers.Length == 0)
                 return;
 
-            context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                displayText: "this",
-                displayTextSuffix: "[]",
-                filterText: "this",
-                sortText: "this",
-                symbols: indexers,
-                rules: CompletionItemRules.Default,
-                contextPosition: context.Position,
-                properties: IndexerProperties));
+            context.AddItem(
+                SymbolCompletionItem.CreateWithSymbolId(
+                    displayText: "this",
+                    displayTextSuffix: "[]",
+                    filterText: "this",
+                    sortText: "this",
+                    symbols: indexers,
+                    rules: CompletionItemRules.Default,
+                    contextPosition: context.Position,
+                    properties: IndexerProperties
+                )
+            );
         }
 
         // Remove the dot, but leave the ? if one is there.  Place the caret one space back so it is between the braces.
-        private static Task<CompletionChange> GetIndexerChangeAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => ReplaceTextAfterOperatorAsync(document, item, text: "[]", keepQuestion: true, positionOffset: -1, cancellationToken);
+        private static Task<CompletionChange> GetIndexerChangeAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) =>
+            ReplaceTextAfterOperatorAsync(
+                document,
+                item,
+                text: "[]",
+                keepQuestion: true,
+                positionOffset: -1,
+                cancellationToken
+            );
 
-        private static Task<CompletionDescription> GetIndexerDescriptionAsync(Document document, CompletionItem item, SymbolDescriptionOptions options, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, options, cancellationToken);
+        private static Task<CompletionDescription> GetIndexerDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        ) => SymbolCompletionItem.GetDescriptionAsync(item, document, options, cancellationToken);
     }
 }

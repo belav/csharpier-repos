@@ -15,12 +15,17 @@ internal class ProtectedPrerenderComponentApplicationStore : PrerenderComponentA
 {
     private IDataProtector _protector;
 
-    public ProtectedPrerenderComponentApplicationStore(IDataProtectionProvider dataProtectionProvider) : base()
+    public ProtectedPrerenderComponentApplicationStore(
+        IDataProtectionProvider dataProtectionProvider
+    ) : base()
     {
         CreateProtector(dataProtectionProvider);
     }
 
-    public ProtectedPrerenderComponentApplicationStore(string existingState, IDataProtectionProvider dataProtectionProvider)
+    public ProtectedPrerenderComponentApplicationStore(
+        string existingState,
+        IDataProtectionProvider dataProtectionProvider
+    )
     {
         CreateProtector(dataProtectionProvider);
         DeserializeState(_protector.Unprotect(Convert.FromBase64String(existingState)));
@@ -33,5 +38,7 @@ internal class ProtectedPrerenderComponentApplicationStore : PrerenderComponentA
     }
 
     private void CreateProtector(IDataProtectionProvider dataProtectionProvider) =>
-        _protector = dataProtectionProvider.CreateProtector("Microsoft.AspNetCore.Components.Server.State");
+        _protector = dataProtectionProvider.CreateProtector(
+            "Microsoft.AspNetCore.Components.Server.State"
+        );
 }

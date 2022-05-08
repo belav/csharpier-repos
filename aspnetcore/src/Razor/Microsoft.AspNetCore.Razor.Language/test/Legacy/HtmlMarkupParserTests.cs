@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Test.Legacy;
 
 public class HtmlMarkupParserTests
 {
-    private static readonly SyntaxToken doubleHyphenToken = SyntaxFactory.Token(SyntaxKind.DoubleHyphen, "--");
+    private static readonly SyntaxToken doubleHyphenToken = SyntaxFactory.Token(
+        SyntaxKind.DoubleHyphen,
+        "--"
+    );
 
     public static IEnumerable<object[]> NonDashTokens
     {
@@ -121,7 +124,9 @@ public class HtmlMarkupParserTests
     public void IsHtmlCommentAhead_ReturnsTrueForValidCommentTagWithExtraInfoAfter()
     {
         // Arrange
-        var sut = CreateTestParserForContent("<!-- comment --> the first part is a valid comment without the Open angle and bang tokens");
+        var sut = CreateTestParserForContent(
+            "<!-- comment --> the first part is a valid comment without the Open angle and bang tokens"
+        );
 
         // Act & Assert
         Assert.True(sut.IsHtmlCommentAhead());
@@ -162,7 +167,9 @@ public class HtmlMarkupParserTests
     {
         // Arrange
         var expectedToken1 = SyntaxFactory.Token(SyntaxKind.Text, "a");
-        var sequence = Enumerable.Range((int)'a', 26).Select(item => SyntaxFactory.Token(SyntaxKind.Text, ((char)item).ToString()));
+        var sequence = Enumerable
+            .Range((int)'a', 26)
+            .Select(item => SyntaxFactory.Token(SyntaxKind.Text, ((char)item).ToString()));
 
         // Act & Assert
         Assert.False(HtmlMarkupParser.IsCommentContentEndingInvalid(sequence));
@@ -175,10 +182,10 @@ public class HtmlMarkupParserTests
         var expectedToken1 = SyntaxFactory.Token(SyntaxKind.Text, "a");
         var sequence = new[]
         {
-                SyntaxFactory.Token(SyntaxKind.OpenAngle, "<"),
-                SyntaxFactory.Token(SyntaxKind.Bang, "!"),
-                SyntaxFactory.Token(SyntaxKind.Text, "-")
-            };
+            SyntaxFactory.Token(SyntaxKind.OpenAngle, "<"),
+            SyntaxFactory.Token(SyntaxKind.Bang, "!"),
+            SyntaxFactory.Token(SyntaxKind.Text, "-")
+        };
 
         // Act & Assert
         Assert.True(HtmlMarkupParser.IsCommentContentEndingInvalid(sequence));

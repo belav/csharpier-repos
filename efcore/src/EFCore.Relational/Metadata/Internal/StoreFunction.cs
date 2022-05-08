@@ -26,14 +26,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public StoreFunction(IRuntimeDbFunction dbFunction, RelationalModel model)
             : base(dbFunction.Name, dbFunction.Schema, model)
         {
-            DbFunctions = new SortedDictionary<string, IDbFunction>(StringComparer.Ordinal) { { dbFunction.ModelName, dbFunction } };
+            DbFunctions = new SortedDictionary<string, IDbFunction>(StringComparer.Ordinal)
+            {
+                { dbFunction.ModelName, dbFunction }
+            };
             IsBuiltIn = dbFunction.IsBuiltIn;
             ReturnType = dbFunction.StoreType;
 
             Parameters = new StoreFunctionParameter[dbFunction.Parameters.Count];
             for (var i = 0; i < dbFunction.Parameters.Count; i++)
             {
-                Parameters[i] = new StoreFunctionParameter(this, (IRuntimeDbFunctionParameter)dbFunction.Parameters[i]);
+                Parameters[i] = new StoreFunctionParameter(
+                    this,
+                    (IRuntimeDbFunctionParameter)dbFunction.Parameters[i]
+                );
             }
 
             dbFunction.StoreFunction = this;
@@ -62,8 +68,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual StoreFunctionParameter[] Parameters { get; }
 
         /// <inheritdoc />
-        public override IColumnBase? FindColumn(IProperty property)
-            => property.GetFunctionColumnMappings()
+        public override IColumnBase? FindColumn(IProperty property) =>
+            property
+                .GetFunctionColumnMappings()
                 .FirstOrDefault(cm => cm.TableMapping.Table == this)
                 ?.Column;
 
@@ -73,8 +80,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((IStoreFunction)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IStoreFunction)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <inheritdoc />
         IEnumerable<IFunctionMapping> IStoreFunction.EntityTypeMappings
@@ -106,12 +113,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IFunctionColumn? IStoreFunction.FindColumn(string name)
-            => (IFunctionColumn?)base.FindColumn(name);
+        IFunctionColumn? IStoreFunction.FindColumn(string name) =>
+            (IFunctionColumn?)base.FindColumn(name);
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IFunctionColumn? IStoreFunction.FindColumn(IProperty property)
-            => (IFunctionColumn?)FindColumn(property);
+        IFunctionColumn? IStoreFunction.FindColumn(IProperty property) =>
+            (IFunctionColumn?)FindColumn(property);
     }
 }

@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
             public WorkspaceChangedEventSource(
                 ITextBuffer subjectBuffer,
-                IAsynchronousOperationListener asyncListener)
-                : base(subjectBuffer)
+                IAsynchronousOperationListener asyncListener
+            ) : base(subjectBuffer)
             {
                 // That will ensure that even if we get a flurry of workspace events that we
                 // only process a tag change once.
@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                         return ValueTaskFactory.CompletedTask;
                     },
                     asyncListener,
-                    CancellationToken.None);
+                    CancellationToken.None
+                );
             }
 
             protected override void ConnectToWorkspace(Workspace workspace)
@@ -47,8 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
                 this.RaiseChanged();
             }
 
-            private void OnWorkspaceChanged(object? sender, WorkspaceChangeEventArgs eventArgs)
-                => _asyncDelay.AddWork();
+            private void OnWorkspaceChanged(object? sender, WorkspaceChangeEventArgs eventArgs) =>
+                _asyncDelay.AddWork();
         }
     }
 }

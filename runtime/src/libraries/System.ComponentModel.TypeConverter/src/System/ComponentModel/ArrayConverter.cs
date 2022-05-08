@@ -15,7 +15,12 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value object to the specified destination type.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string) && value is Array)
             {
@@ -28,9 +33,16 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets a collection of properties for the type of array specified by the value parameter.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
         [return: NotNullIfNotNull("value")]
-        public override PropertyDescriptorCollection? GetProperties(ITypeDescriptorContext? context, object? value, Attribute[]? attributes)
+        public override PropertyDescriptorCollection? GetProperties(
+            ITypeDescriptorContext? context,
+            object? value,
+            Attribute[]? attributes
+        )
         {
             if (value == null)
             {

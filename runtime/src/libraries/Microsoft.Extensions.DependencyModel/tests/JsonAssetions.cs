@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         }
     }
 
-    public class JsonAssetions: ReferenceTypeAssertions<JToken, JsonAssetions>
+    public class JsonAssetions : ReferenceTypeAssertions<JToken, JsonAssetions>
     {
         public JsonAssetions(JToken token)
         {

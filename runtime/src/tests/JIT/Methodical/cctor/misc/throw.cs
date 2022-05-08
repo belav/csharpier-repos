@@ -2,10 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class measure
 {
     public static int a = 0xCC;
 }
+
 internal class test
 {
     static test()

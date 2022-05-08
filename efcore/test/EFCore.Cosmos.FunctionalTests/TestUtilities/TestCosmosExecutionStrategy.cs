@@ -21,14 +21,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         .UseCosmos(
                             TestEnvironment.DefaultConnection,
                             TestEnvironment.AuthToken,
-                            "NonExistent").Options),
-                DefaultMaxRetryCount, DefaultMaxDelay)
-        {
-        }
+                            "NonExistent"
+                        )
+                        .Options
+                ),
+                DefaultMaxRetryCount,
+                DefaultMaxDelay
+            ) { }
 
         public TestCosmosExecutionStrategy(ExecutionStrategyDependencies dependencies)
-            : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay)
-        {
-        }
+            : base(dependencies, DefaultMaxRetryCount, DefaultMaxDelay) { }
     }
 }

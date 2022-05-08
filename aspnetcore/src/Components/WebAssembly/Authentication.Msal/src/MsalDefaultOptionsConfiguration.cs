@@ -9,7 +9,8 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.Authentication.WebAssembly.Msal;
 
-internal class MsalDefaultOptionsConfiguration : IPostConfigureOptions<RemoteAuthenticationOptions<MsalProviderOptions>>
+internal class MsalDefaultOptionsConfiguration
+    : IPostConfigureOptions<RemoteAuthenticationOptions<MsalProviderOptions>>
 {
     private readonly NavigationManager _navigationManager;
 
@@ -28,7 +29,8 @@ internal class MsalDefaultOptionsConfiguration : IPostConfigureOptions<RemoteAut
         {
             redirectUri ??= "authentication/login-callback";
             options.ProviderOptions.Authentication.RedirectUri = _navigationManager
-                .ToAbsoluteUri(redirectUri).AbsoluteUri;
+                .ToAbsoluteUri(redirectUri)
+                .AbsoluteUri;
         }
 
         var logoutUri = options.ProviderOptions.Authentication.PostLogoutRedirectUri;
@@ -36,7 +38,8 @@ internal class MsalDefaultOptionsConfiguration : IPostConfigureOptions<RemoteAut
         {
             logoutUri ??= "authentication/logout-callback";
             options.ProviderOptions.Authentication.PostLogoutRedirectUri = _navigationManager
-                .ToAbsoluteUri(logoutUri).AbsoluteUri;
+                .ToAbsoluteUri(logoutUri)
+                .AbsoluteUri;
         }
 
         options.ProviderOptions.Authentication.NavigateToLoginRequestUrl = false;

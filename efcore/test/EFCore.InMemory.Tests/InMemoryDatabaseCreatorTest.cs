@@ -47,12 +47,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.False(await creator.EnsureCreatedAsync());
         }
 
-        private static InMemoryDatabaseCreator CreateDatabaseCreator(IServiceProvider serviceProvider)
+        private static InMemoryDatabaseCreator CreateDatabaseCreator(
+            IServiceProvider serviceProvider
+        )
         {
             var optionsBuilder = new DbContextOptionsBuilder();
             optionsBuilder.UseInMemoryDatabase(nameof(InMemoryDatabaseCreatorTest));
 
-            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(serviceProvider, optionsBuilder.Options);
+            var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
+                serviceProvider,
+                optionsBuilder.Options
+            );
             return new InMemoryDatabaseCreator(contextServices.GetRequiredService<IDatabase>());
         }
 
@@ -73,9 +78,13 @@ namespace Microsoft.EntityFrameworkCore
             using (var context = new FraggleContext())
             {
                 context.Fraggles.AddRange(
-                    new Fraggle { Id = 1, Name = "Gobo" }, new Fraggle { Id = 2, Name = "Monkey" }, new Fraggle { Id = 3, Name = "Red" },
-                    new Fraggle { Id = 4, Name = "Wembley" }, new Fraggle { Id = 5, Name = "Boober" },
-                    new Fraggle { Id = 6, Name = "Uncle Traveling Matt" });
+                    new Fraggle { Id = 1, Name = "Gobo" },
+                    new Fraggle { Id = 2, Name = "Monkey" },
+                    new Fraggle { Id = 3, Name = "Red" },
+                    new Fraggle { Id = 4, Name = "Wembley" },
+                    new Fraggle { Id = 5, Name = "Boober" },
+                    new Fraggle { Id = 6, Name = "Uncle Traveling Matt" }
+                );
 
                 await context.SaveChangesAsync();
             }
@@ -115,8 +124,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             public DbSet<Fraggle> Fraggles { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(nameof(FraggleContext));
         }

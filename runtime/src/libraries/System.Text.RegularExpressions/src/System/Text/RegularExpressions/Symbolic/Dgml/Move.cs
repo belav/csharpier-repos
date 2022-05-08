@@ -18,10 +18,12 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         /// Source state of the move
         /// </summary>
         public readonly int SourceState;
+
         /// <summary>
         /// Target state of the move
         /// </summary>
         public readonly int TargetState;
+
         /// <summary>
         /// Label of the move
         /// </summary>
@@ -43,12 +45,14 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         /// <summary>
         /// Creates a move. Creates an epsilon move if label is default(L).
         /// </summary>
-        public static Move<TLabel> Create(int sourceState, int targetState, TLabel condition) => new Move<TLabel>(sourceState, targetState, condition);
+        public static Move<TLabel> Create(int sourceState, int targetState, TLabel condition) =>
+            new Move<TLabel>(sourceState, targetState, condition);
 
         /// <summary>
         /// Creates an epsilon move. Same as Create(sourceState, targetState, default(L)).
         /// </summary>
-        public static Move<TLabel> Epsilon(int sourceState, int targetState) => new Move<TLabel>(sourceState, targetState, default);
+        public static Move<TLabel> Epsilon(int sourceState, int targetState) =>
+            new Move<TLabel>(sourceState, targetState, default);
 
         /// <summary>
         /// Returns true if label equals default(S).
@@ -64,14 +68,15 @@ namespace System.Text.RegularExpressions.Symbolic.DGML
         /// Returns true if obj is a move with the same source state, target state, and label.
         /// </summary>
         public override bool Equals([NotNullWhen(false)] object? obj) =>
-            obj is Move<TLabel> t &&
-            t.SourceState == SourceState &&
-            t.TargetState == TargetState &&
-            (t.Label is null ? Label is null : t.Label.Equals(Label));
+            obj is Move<TLabel> t
+            && t.SourceState == SourceState
+            && t.TargetState == TargetState
+            && (t.Label is null ? Label is null : t.Label.Equals(Label));
 
         public override int GetHashCode() => (SourceState, Label, TargetState).GetHashCode();
 
-        public override string ToString() => $"({SourceState},{(Equals(Label, default(TLabel)) ? "" : Label + ",")}{TargetState})";
+        public override string ToString() =>
+            $"({SourceState},{(Equals(Label, default(TLabel)) ? "" : Label + ",")}{TargetState})";
     }
 }
 #endif

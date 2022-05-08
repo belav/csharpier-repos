@@ -21,7 +21,13 @@ namespace Microsoft.CodeAnalysis.Host
         void Stop();
     }
 
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceEventListenerService), layer: ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IWorkspaceEventListenerService),
+            layer: ServiceLayer.Default
+        ),
+        Shared
+    ]
     internal class DefaultWorkspaceEventListenerServiceFactory : IWorkspaceServiceFactory
     {
         private readonly IEnumerable<Lazy<IEventListener, EventListenerMetadata>> _eventListeners;
@@ -29,19 +35,23 @@ namespace Microsoft.CodeAnalysis.Host
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public DefaultWorkspaceEventListenerServiceFactory(
-            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners)
+            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
+        )
         {
-            // we use this indirect abstraction to deliver IEventLister to workspace. 
+            // we use this indirect abstraction to deliver IEventLister to workspace.
             // otherwise, each Workspace implementation need to explicitly tell base event listeners either through
-            // constructor or through virtual property. 
-            // taking indirect approach since i dont believe all workspaces need to know about this. 
+            // constructor or through virtual property.
+            // taking indirect approach since i dont believe all workspaces need to know about this.
             _eventListeners = eventListeners;
         }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
             var workspace = workspaceServices.Workspace;
-            return new Service(workspace, EventListenerTracker<object>.GetListeners(workspace, _eventListeners));
+            return new Service(
+                workspace,
+                EventListenerTracker<object>.GetListeners(workspace, _eventListeners)
+            );
         }
 
         private class Service : IWorkspaceEventListenerService

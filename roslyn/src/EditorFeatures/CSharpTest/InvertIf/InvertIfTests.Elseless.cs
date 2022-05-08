@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         public async Task IfWithoutElse_MoveIfBodyToElseClause1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -55,14 +55,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                 return 2;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveIfBodyToElseClause2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -79,7 +80,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -98,14 +99,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveIfBodyToElseClause3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -117,7 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         g();
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -131,14 +133,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         g();
         g();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveIfBodyToElseClause4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     bool M()
     {
@@ -153,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         return false;
     }
 }",
-@"class C
+                @"class C
 {
     bool M()
     {
@@ -170,14 +173,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         }
         return false;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveIfBodyToElseClause5()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -190,7 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         g();
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -205,14 +209,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         g();
         g();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveIfBodyToElseClause6()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -233,7 +238,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -256,14 +261,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                 return 2;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveIfBodyToElseClause7()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -284,7 +290,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -307,7 +313,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                 return 2;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
@@ -315,7 +322,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         public async Task IfWithoutElse_MoveIfBodyToElseClause8()
         {
             await TestInRegularAndScriptAsync(
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 class C
 {
     private static bool IsFalse(bool val)
@@ -330,7 +337,7 @@ class C
         return false;
     }
 }",
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 class C
 {
     private static bool IsFalse(bool val)
@@ -347,14 +354,15 @@ class C
         }
         return false;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveSubsequentStatementsToIfBody1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -369,7 +377,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -382,14 +390,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveSubsequentStatementsToIfBody2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -407,7 +416,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -423,14 +432,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_MoveSubsequentStatementsToIfBody3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -447,7 +457,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -462,14 +472,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_SwapIfBodyWithSubsequentStatements1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -481,7 +492,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -492,14 +503,15 @@ class C
             break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_SwapIfBodyWithSubsequentStatements2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -513,7 +525,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -526,14 +538,15 @@ class C
             return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithElseClause1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -545,7 +558,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -557,34 +570,36 @@ class C
                 return;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithNegatedCondition1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         [||]if (c) { }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
         if (!c) { }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithNearmostJumpStatement1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -597,7 +612,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -610,14 +625,15 @@ class C
             f();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithNearmostJumpStatement2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -632,7 +648,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -647,14 +663,15 @@ class C
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithNearmostJumpStatement3()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -664,7 +681,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -674,14 +691,15 @@ class C
         }
         f();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithNearmostJumpStatement4()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -694,7 +712,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -707,14 +725,15 @@ class C
             break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithSubsequentExitPointStatement1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -730,7 +749,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -746,14 +765,15 @@ class C
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
         public async Task IfWithoutElse_WithSubsequentExitPointStatement2()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -772,7 +792,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M()
     {
@@ -791,7 +811,8 @@ class C
                 return 2;
         }
     }
-}");
+}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsInvertIf)]
@@ -801,7 +822,7 @@ class C
         public async Task IfWithoutElse_InPropertyAccessors(string accessor)
         {
             await TestInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     private bool _b;
 
@@ -818,7 +839,7 @@ $@"class C
         }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     private bool _b;
 
@@ -835,7 +856,8 @@ $@"class C
             Console.WriteLine();
         }}
     }}
-}}");
+}}"
+            );
         }
     }
 }

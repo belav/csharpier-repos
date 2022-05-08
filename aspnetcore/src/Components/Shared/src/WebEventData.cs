@@ -15,7 +15,12 @@ namespace Microsoft.AspNetCore.Components.Web
     {
         // This class represents the second half of parsing incoming event data,
         // once the event ID (and possibly the type of the eventArgs) becomes known.
-        public static WebEventData Parse(Renderer renderer, JsonSerializerOptions jsonSerializerOptions, string eventDescriptorJson, string eventArgsJson)
+        public static WebEventData Parse(
+            Renderer renderer,
+            JsonSerializerOptions jsonSerializerOptions,
+            string eventDescriptorJson,
+            string eventArgsJson
+        )
         {
             WebEventDescriptor eventDescriptor;
             try
@@ -27,24 +32,37 @@ namespace Microsoft.AspNetCore.Components.Web
                 throw new InvalidOperationException("Error parsing the event descriptor", e);
             }
 
-            return Parse(
-                renderer,
-                jsonSerializerOptions,
-                eventDescriptor,
-                eventArgsJson);
+            return Parse(renderer, jsonSerializerOptions, eventDescriptor, eventArgsJson);
         }
 
-        public static WebEventData Parse(Renderer renderer, JsonSerializerOptions jsonSerializerOptions, WebEventDescriptor eventDescriptor, string eventArgsJson)
+        public static WebEventData Parse(
+            Renderer renderer,
+            JsonSerializerOptions jsonSerializerOptions,
+            WebEventDescriptor eventDescriptor,
+            string eventArgsJson
+        )
         {
-            var parsedEventArgs = ParseEventArgsJson(renderer, jsonSerializerOptions, eventDescriptor.EventHandlerId, eventDescriptor.EventName, eventArgsJson);
+            var parsedEventArgs = ParseEventArgsJson(
+                renderer,
+                jsonSerializerOptions,
+                eventDescriptor.EventHandlerId,
+                eventDescriptor.EventName,
+                eventArgsJson
+            );
             return new WebEventData(
                 eventDescriptor.BrowserRendererId,
                 eventDescriptor.EventHandlerId,
                 InterpretEventFieldInfo(eventDescriptor.EventFieldInfo),
-                parsedEventArgs);
+                parsedEventArgs
+            );
         }
 
-        private WebEventData(int browserRendererId, ulong eventHandlerId, EventFieldInfo? eventFieldInfo, EventArgs eventArgs)
+        private WebEventData(
+            int browserRendererId,
+            ulong eventHandlerId,
+            EventFieldInfo? eventFieldInfo,
+            EventArgs eventArgs
+        )
         {
             BrowserRendererId = browserRendererId;
             EventHandlerId = eventHandlerId;
@@ -60,7 +78,13 @@ namespace Microsoft.AspNetCore.Components.Web
 
         public EventArgs EventArgs { get; }
 
-        private static EventArgs ParseEventArgsJson(Renderer renderer, JsonSerializerOptions jsonSerializerOptions, ulong eventHandlerId, string eventName, string eventArgsJson)
+        private static EventArgs ParseEventArgsJson(
+            Renderer renderer,
+            JsonSerializerOptions jsonSerializerOptions,
+            ulong eventHandlerId,
+            string eventName,
+            string eventArgsJson
+        )
         {
             try
             {
@@ -71,15 +95,27 @@ namespace Microsoft.AspNetCore.Components.Web
 
                 // For custom events, the args type is determined from the associated delegate
                 var eventArgsType = renderer.GetEventArgsType(eventHandlerId);
-                return (EventArgs)JsonSerializer.Deserialize(eventArgsJson, eventArgsType, jsonSerializerOptions)!;
+                return (EventArgs)
+                    JsonSerializer.Deserialize(
+                        eventArgsJson,
+                        eventArgsType,
+                        jsonSerializerOptions
+                    )!;
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException($"There was an error parsing the event arguments. EventId: '{eventHandlerId}'.", e);
+                throw new InvalidOperationException(
+                    $"There was an error parsing the event arguments. EventId: '{eventHandlerId}'.",
+                    e
+                );
             }
         }
 
-        private static bool TryDeserializeStandardWebEventArgs(string eventName, string eventArgsJson, [NotNullWhen(true)] out EventArgs? eventArgs)
+        private static bool TryDeserializeStandardWebEventArgs(
+            string eventName,
+            string eventArgsJson,
+            [NotNullWhen(true)] out EventArgs? eventArgs
+        )
         {
             // For back-compatibility, we recognize the built-in list of web event names and hard-code
             // rules about the deserialization type for their eventargs. This makes it possible to declare
@@ -216,7 +252,8 @@ namespace Microsoft.AspNetCore.Components.Web
             return null;
         }
 
-        static T Deserialize<[DynamicallyAccessedMembers(JsonSerialized)] T>(string json) => JsonSerializer.Deserialize<T>(json, JsonSerializerOptionsProvider.Options)!;
+        static T Deserialize<[DynamicallyAccessedMembers(JsonSerialized)] T>(string json) =>
+            JsonSerializer.Deserialize<T>(json, JsonSerializerOptionsProvider.Options)!;
 
         private static ChangeEventArgs DeserializeChangeEventArgs(string eventArgsJson)
         {
@@ -235,7 +272,9 @@ namespace Microsoft.AspNetCore.Components.Web
                     changeArgs.Value = jsonElement.GetBoolean();
                     break;
                 default:
-                    throw new ArgumentException($"Unsupported {nameof(ChangeEventArgs)} value {jsonElement}.");
+                    throw new ArgumentException(
+                        $"Unsupported {nameof(ChangeEventArgs)} value {jsonElement}."
+                    );
             }
             return changeArgs;
         }

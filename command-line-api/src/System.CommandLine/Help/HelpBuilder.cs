@@ -20,8 +20,11 @@ namespace System.CommandLine.Help
         /// <param name="maxWidth">The maximum width in characters after which help output is wrapped.</param>
         public HelpBuilder(LocalizationResources localizationResources, int maxWidth = int.MaxValue)
         {
-            LocalizationResources = localizationResources ?? throw new ArgumentNullException(nameof(localizationResources));
-            if (maxWidth <= 0) maxWidth = int.MaxValue;
+            LocalizationResources =
+                localizationResources
+                ?? throw new ArgumentNullException(nameof(localizationResources));
+            if (maxWidth <= 0)
+                maxWidth = int.MaxValue;
             MaxWidth = maxWidth;
         }
 
@@ -72,10 +75,12 @@ namespace System.CommandLine.Help
         /// <param name="firstColumnText">A delegate to display the first help column (typically name and usage information).</param>
         /// <param name="secondColumnText">A delegate to display second help column (typically the description).</param>
         /// <param name="defaultValue">A delegate to display the default value for the symbol.</param>
-        protected internal void Customize(ISymbol symbol,
+        protected internal void Customize(
+            ISymbol symbol,
             Func<ParseResult?, string?>? firstColumnText = null,
             Func<ParseResult?, string?>? secondColumnText = null,
-            Func<ParseResult?, string?>? defaultValue = null)
+            Func<ParseResult?, string?>? defaultValue = null
+        )
         {
             if (symbol is null)
             {
@@ -84,7 +89,11 @@ namespace System.CommandLine.Help
 
             _customizationsBySymbol ??= new();
 
-            _customizationsBySymbol[symbol] = new Customization(firstColumnText, secondColumnText, defaultValue);
+            _customizationsBySymbol[symbol] = new Customization(
+                firstColumnText,
+                secondColumnText,
+                defaultValue
+            );
         }
 
         /// <summary>
@@ -120,12 +129,9 @@ namespace System.CommandLine.Help
 
             IEnumerable<string> GetUsageParts()
             {
-
-                IEnumerable<ICommand> parentCommands =
-                    command
-                        .RecurseWhileNotNull(c => c.Parents.FirstOrDefaultOfType<ICommand>())
-                        .Reverse();
-
+                IEnumerable<ICommand> parentCommands = command
+                    .RecurseWhileNotNull(c => c.Parents.FirstOrDefaultOfType<ICommand>())
+                    .Reverse();
 
                 foreach (ICommand parentCommand in parentCommands)
                 {
@@ -134,9 +140,7 @@ namespace System.CommandLine.Help
                     yield return FormatArgumentUsage(parentCommand.Arguments);
                 }
 
-                var hasCommandWithHelp = command.Children
-                    .OfType<ICommand>()
-                    .Any(x => !x.IsHidden);
+                var hasCommandWithHelp = command.Children.OfType<ICommand>().Any(x => !x.IsHidden);
 
                 if (hasCommandWithHelp)
                 {
@@ -144,7 +148,7 @@ namespace System.CommandLine.Help
                 }
 
                 var displayOptionTitle = command.Options.Any(x => !x.IsHidden);
-                
+
                 if (displayOptionTitle)
                 {
                     yield return LocalizationResources.HelpUsageOptionsTitle();
@@ -164,9 +168,14 @@ namespace System.CommandLine.Help
         /// <param name="command">The command to write out argument help for.</param>
         /// <param name="writer">The writer to write help output to.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
-        protected virtual void WriteCommandArguments(ICommand command, TextWriter writer, ParseResult parseResult)
+        protected virtual void WriteCommandArguments(
+            ICommand command,
+            TextWriter writer,
+            ParseResult parseResult
+        )
         {
-            TwoColumnHelpRow[] commandArguments = GetCommandArgumentRows(command, parseResult).ToArray();
+            TwoColumnHelpRow[] commandArguments = GetCommandArgumentRows(command, parseResult)
+                .ToArray();
 
             if (commandArguments.Length > 0)
             {
@@ -182,12 +191,16 @@ namespace System.CommandLine.Help
         /// <param name="command">The command to get argument help items for.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
         /// <returns>Help items for the specified command's arguments.</returns>
-        protected IEnumerable<TwoColumnHelpRow> GetCommandArgumentRows(ICommand command, ParseResult parseResult)
+        protected IEnumerable<TwoColumnHelpRow> GetCommandArgumentRows(
+            ICommand command,
+            ParseResult parseResult
+        )
         {
-            return command.RecurseWhileNotNull(c => c.Parents.FirstOrDefaultOfType<ICommand>())
-                    .Reverse()
-                    .SelectMany(cmd => GetArguments(cmd, parseResult))
-                    .Distinct();
+            return command
+                .RecurseWhileNotNull(c => c.Parents.FirstOrDefaultOfType<ICommand>())
+                .Reverse()
+                .SelectMany(cmd => GetArguments(cmd, parseResult))
+                .Distinct();
 
             IEnumerable<TwoColumnHelpRow> GetArguments(ICommand command, ParseResult parseResult)
             {
@@ -197,11 +210,17 @@ namespace System.CommandLine.Help
                 {
                     string argumentFirstColumn = GetArgumentFirstColumnText(argument, parseResult);
 
-                    yield return new TwoColumnHelpRow(argumentFirstColumn, string.Join(" ", GetArgumentSecondColumnText(command, argument)));
+                    yield return new TwoColumnHelpRow(
+                        argumentFirstColumn,
+                        string.Join(" ", GetArgumentSecondColumnText(command, argument))
+                    );
                 }
             }
 
-            IEnumerable<string> GetArgumentSecondColumnText(IIdentifierSymbol parent, IArgument argument)
+            IEnumerable<string> GetArgumentSecondColumnText(
+                IIdentifierSymbol parent,
+                IArgument argument
+            )
             {
                 string? description = argument.Description;
                 if (!string.IsNullOrWhiteSpace(description))
@@ -222,7 +241,11 @@ namespace System.CommandLine.Help
         /// <param name="command">The command to get argument help items for.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
         /// <param name="writer">The writer to write help output to.</param>
-        protected virtual void WriteOptions(ICommand command, TextWriter writer, ParseResult parseResult)
+        protected virtual void WriteOptions(
+            ICommand command,
+            TextWriter writer,
+            ParseResult parseResult
+        )
         {
             var options = GetOptionRows(command, parseResult).ToArray();
 
@@ -239,16 +262,22 @@ namespace System.CommandLine.Help
         /// </summary>
         /// <param name="command">The command to get argument help items for.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
-        protected IEnumerable<TwoColumnHelpRow> GetOptionRows(ICommand command, ParseResult parseResult)
-            => command.Options.Where(x => !x.IsHidden).Select(x => GetTwoColumnRow(x, parseResult));
+        protected IEnumerable<TwoColumnHelpRow> GetOptionRows(
+            ICommand command,
+            ParseResult parseResult
+        ) => command.Options.Where(x => !x.IsHidden).Select(x => GetTwoColumnRow(x, parseResult));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="command">The command to get argument help items for.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
         /// <param name="writer">The writer to write help output to.</param>
-        protected virtual void WriteSubcommands(ICommand command, TextWriter writer, ParseResult parseResult)
+        protected virtual void WriteSubcommands(
+            ICommand command,
+            TextWriter writer,
+            ParseResult parseResult
+        )
         {
             var subcommands = GetSubcommandRows(command, parseResult).ToArray();
 
@@ -265,8 +294,14 @@ namespace System.CommandLine.Help
         /// </summary>
         /// <param name="command">The command to get argument help items for.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
-        protected IEnumerable<TwoColumnHelpRow> GetSubcommandRows(ICommand command, ParseResult parseResult)
-            => command.Children.OfType<ICommand>().Where(x => !x.IsHidden).Select(x => GetTwoColumnRow(x, parseResult));
+        protected IEnumerable<TwoColumnHelpRow> GetSubcommandRows(
+            ICommand command,
+            ParseResult parseResult
+        ) =>
+            command.Children
+                .OfType<ICommand>()
+                .Where(x => !x.IsHidden)
+                .Select(x => GetTwoColumnRow(x, parseResult));
 
         /// <summary>
         /// Writes help output for additional arguments.
@@ -278,8 +313,11 @@ namespace System.CommandLine.Help
                 return;
             }
 
-            WriteHeading(LocalizationResources.HelpAdditionalArgumentsTitle(),
-                LocalizationResources.HelpAdditionalArgumentsDescription(), writer);
+            WriteHeading(
+                LocalizationResources.HelpAdditionalArgumentsTitle(),
+                LocalizationResources.HelpAdditionalArgumentsDescription(),
+                writer
+            );
         }
 
         /// <summary>
@@ -288,7 +326,11 @@ namespace System.CommandLine.Help
         /// <param name="firstColumnText">The first column content (typically the name and invocation details).</param>
         /// <param name="secondColumnText">The second column content (typically the description of the symbol).</param>
         /// <param name="writer">The writer to write help output to.</param>
-        protected void WriteHeading(string? firstColumnText, string? secondColumnText, TextWriter writer)
+        protected void WriteHeading(
+            string? firstColumnText,
+            string? secondColumnText,
+            TextWriter writer
+        )
         {
             if (!string.IsNullOrWhiteSpace(firstColumnText))
             {
@@ -321,10 +363,7 @@ namespace System.CommandLine.Help
                         continue;
                     }
 
-                    var arityIndicator =
-                        argument.Arity.MaximumNumberOfValues > 1
-                            ? "..."
-                            : "";
+                    var arityIndicator = argument.Arity.MaximumNumberOfValues > 1 ? "..." : "";
 
                     var isOptional = IsOptional(argument);
 
@@ -362,12 +401,10 @@ namespace System.CommandLine.Help
             }
 
             bool IsMultiParented(IArgument argument) =>
-                argument is Argument a &&
-                a.Parents.Count > 1;
+                argument is Argument a && a.Parents.Count > 1;
 
             bool IsOptional(IArgument argument) =>
-                IsMultiParented(argument) ||
-                argument.Arity.MinimumNumberOfValues == 0;
+                IsMultiParented(argument) || argument.Arity.MinimumNumberOfValues == 0;
         }
 
         /// <summary>
@@ -392,15 +429,27 @@ namespace System.CommandLine.Help
                 int firstColumnMaxWidth = windowWidth / 2 - Indent.Length;
                 if (firstColumnWidth > firstColumnMaxWidth)
                 {
-                    firstColumnWidth = items.SelectMany(x => WrapText(x.FirstColumnText, firstColumnMaxWidth).Select(x => x.Length)).Max();
+                    firstColumnWidth = items
+                        .SelectMany(
+                            x =>
+                                WrapText(x.FirstColumnText, firstColumnMaxWidth)
+                                    .Select(x => x.Length)
+                        )
+                        .Max();
                 }
                 secondColumnWidth = windowWidth - firstColumnWidth - Indent.Length - Indent.Length;
             }
 
             foreach (var helpItem in items)
             {
-                IEnumerable<string> firstColumnParts = WrapText(helpItem.FirstColumnText, firstColumnWidth);
-                IEnumerable<string> secondColumnParts = WrapText(helpItem.SecondColumnText, secondColumnWidth);
+                IEnumerable<string> firstColumnParts = WrapText(
+                    helpItem.FirstColumnText,
+                    firstColumnWidth
+                );
+                IEnumerable<string> secondColumnParts = WrapText(
+                    helpItem.SecondColumnText,
+                    secondColumnWidth
+                );
 
                 foreach (var (first, second) in ZipWithEmpty(firstColumnParts, secondColumnParts))
                 {
@@ -419,11 +468,15 @@ namespace System.CommandLine.Help
                 }
             }
 
-            static IEnumerable<(string, string)> ZipWithEmpty(IEnumerable<string> first, IEnumerable<string> second)
+            static IEnumerable<(string, string)> ZipWithEmpty(
+                IEnumerable<string> first,
+                IEnumerable<string> second
+            )
             {
                 using var enum1 = first.GetEnumerator();
                 using var enum2 = second.GetEnumerator();
-                bool hasFirst = false, hasSecond = false;
+                bool hasFirst = false,
+                    hasSecond = false;
                 while ((hasFirst = enum1.MoveNext()) | (hasSecond = enum2.MoveNext()))
                 {
                     yield return (hasFirst ? enum1.Current : "", hasSecond ? enum2.Current : "");
@@ -450,7 +503,7 @@ namespace System.CommandLine.Help
                 else
                 {
                     //Long item, wrap it based on the width
-                    for (int i = 0; i < part.Length;)
+                    for (int i = 0; i < part.Length; )
                     {
                         if (part.Length - i < maxWidth)
                         {
@@ -485,24 +538,29 @@ namespace System.CommandLine.Help
         /// </summary>
         /// <param name="symbol">The symbol to get a help item for.</param>
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
-        protected TwoColumnHelpRow GetTwoColumnRow(IIdentifierSymbol symbol, ParseResult parseResult)
+        protected TwoColumnHelpRow GetTwoColumnRow(
+            IIdentifierSymbol symbol,
+            ParseResult parseResult
+        )
         {
             string firstColumnText;
-            if (_customizationsBySymbol is { } &&
-                _customizationsBySymbol.TryGetValue(symbol, out Customization customization) &&
-                customization.GetFirstColumn?.Invoke(parseResult) is { } firstColumn)
+            if (
+                _customizationsBySymbol is { }
+                && _customizationsBySymbol.TryGetValue(symbol, out Customization customization)
+                && customization.GetFirstColumn?.Invoke(parseResult) is { } firstColumn
+            )
             {
                 firstColumnText = firstColumn;
             }
             else
             {
                 var rawAliases = symbol.Aliases
-                                 .Select(r => r.SplitPrefix())
-                                 .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
-                                 .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
-                                 .GroupBy(t => t.Alias)
-                                 .Select(t => t.First())
-                                 .Select(t => $"{t.Prefix}{t.Alias}");
+                    .Select(r => r.SplitPrefix())
+                    .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
+                    .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
+                    .GroupBy(t => t.Alias)
+                    .Select(t => t.First())
+                    .Select(t => $"{t.Prefix}{t.Alias}");
 
                 firstColumnText = string.Join(", ", rawAliases);
 
@@ -544,9 +602,10 @@ namespace System.CommandLine.Help
                     yield return description!;
                 }
                 else if (
-                    _customizationsBySymbol is { } &&
-                    _customizationsBySymbol.TryGetValue(symbol, out var customization) &&
-                    customization.GetSecondColumn?.Invoke(parseResult) is { } descriptionValue)
+                    _customizationsBySymbol is { }
+                    && _customizationsBySymbol.TryGetValue(symbol, out var customization)
+                    && customization.GetSecondColumn?.Invoke(parseResult) is { } descriptionValue
+                )
                 {
                     yield return descriptionValue;
                 }
@@ -560,35 +619,53 @@ namespace System.CommandLine.Help
             string GetArgumentDescription()
             {
                 IEnumerable<IArgument> arguments = symbol.Arguments();
-                var defaultArguments = arguments.Where(x => !x.IsHidden && x.HasDefaultValue).ToArray();
+                var defaultArguments = arguments
+                    .Where(x => !x.IsHidden && x.HasDefaultValue)
+                    .ToArray();
 
-                if (defaultArguments.Length == 0) return "";
+                if (defaultArguments.Length == 0)
+                    return "";
 
                 var isSingleArgument = defaultArguments.Length == 1;
-                var argumentDefaultValues = defaultArguments
-                    .Select(argument => GetArgumentDefaultValueText(symbol, argument, isSingleArgument, parseResult));
+                var argumentDefaultValues = defaultArguments.Select(
+                    argument =>
+                        GetArgumentDefaultValueText(symbol, argument, isSingleArgument, parseResult)
+                );
                 return $"[{string.Join(", ", argumentDefaultValues)}]";
             }
         }
 
-        private string GetArgumentDefaultValueText(IIdentifierSymbol parent, IArgument argument, bool displayArgumentName, ParseResult parseResult)
+        private string GetArgumentDefaultValueText(
+            IIdentifierSymbol parent,
+            IArgument argument,
+            bool displayArgumentName,
+            ParseResult parseResult
+        )
         {
             string? defaultValue;
-            if (_customizationsBySymbol is { } &&
-                _customizationsBySymbol.TryGetValue(parent, out Customization customization) &&
-                customization.GetDefaultValue?.Invoke(parseResult) is { } parentSetDefaultValue)
+            if (
+                _customizationsBySymbol is { }
+                && _customizationsBySymbol.TryGetValue(parent, out Customization customization)
+                && customization.GetDefaultValue?.Invoke(parseResult) is { } parentSetDefaultValue
+            )
             {
                 defaultValue = parentSetDefaultValue;
             }
-            else if (_customizationsBySymbol is { } && _customizationsBySymbol.TryGetValue(argument, out customization) &&
-                     customization.GetDefaultValue?.Invoke(parseResult) is { } setDefaultValue)
+            else if (
+                _customizationsBySymbol is { }
+                && _customizationsBySymbol.TryGetValue(argument, out customization)
+                && customization.GetDefaultValue?.Invoke(parseResult) is { } setDefaultValue
+            )
             {
                 defaultValue = setDefaultValue;
             }
             else
             {
                 object? argumentDefaultValue = argument.GetDefaultValue();
-                if (argumentDefaultValue is IEnumerable enumerable && !(argumentDefaultValue is string))
+                if (
+                    argumentDefaultValue is IEnumerable enumerable
+                    && !(argumentDefaultValue is string)
+                )
                 {
                     defaultValue = string.Join("|", enumerable.OfType<object>().ToArray());
                 }
@@ -598,9 +675,9 @@ namespace System.CommandLine.Help
                 }
             }
 
-            string name = displayArgumentName ?
-                LocalizationResources.HelpArgumentDefaultValueTitle() :
-                argument.Name;
+            string name = displayArgumentName
+                ? LocalizationResources.HelpArgumentDefaultValueTitle()
+                : argument.Name;
 
             return $"{name}: {defaultValue}";
         }
@@ -612,15 +689,16 @@ namespace System.CommandLine.Help
         /// <param name="parseResult">A parse result providing context for help formatting.</param>
         protected string GetArgumentFirstColumnText(IArgument argument, ParseResult parseResult)
         {
-            if (_customizationsBySymbol is { } &&
-                _customizationsBySymbol.TryGetValue(argument, out Customization customization) &&
-                customization.GetFirstColumn?.Invoke(parseResult) is { } firstColumnText)
+            if (
+                _customizationsBySymbol is { }
+                && _customizationsBySymbol.TryGetValue(argument, out Customization customization)
+                && customization.GetFirstColumn?.Invoke(parseResult) is { } firstColumnText
+            )
             {
                 return firstColumnText;
             }
 
-            if (argument.ValueType == typeof(bool) ||
-                argument.ValueType == typeof(bool?))
+            if (argument.ValueType == typeof(bool) || argument.ValueType == typeof(bool?))
             {
                 if (argument.Parents.FirstOrDefault() is ICommand)
                 {
@@ -666,7 +744,8 @@ namespace System.CommandLine.Help
             public Customization(
                 Func<ParseResult?, string?>? getFirstColumn,
                 Func<ParseResult?, string?>? getSecondColumn,
-                Func<ParseResult?, string?>? getDefaultValue)
+                Func<ParseResult?, string?>? getDefaultValue
+            )
             {
                 GetFirstColumn = getFirstColumn;
                 GetSecondColumn = getSecondColumn;

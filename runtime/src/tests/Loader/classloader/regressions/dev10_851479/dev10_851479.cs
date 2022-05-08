@@ -45,6 +45,4 @@ class A<T, U>
     where T : U
     where U : A<T, U> { }
 
-class B : A<B, B>
-{
-}
+class B : A<B, B> { }

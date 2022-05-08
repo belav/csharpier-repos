@@ -56,7 +56,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             byte[] manifestAssemblyMvidTable = _manifestNode.GetManifestAssemblyMvidTableData();
-            return new ObjectData(manifestAssemblyMvidTable, Array.Empty<Relocation>(), alignment: 0, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                manifestAssemblyMvidTable,
+                Array.Empty<Relocation>(),
+                alignment: 0,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
     }
 }

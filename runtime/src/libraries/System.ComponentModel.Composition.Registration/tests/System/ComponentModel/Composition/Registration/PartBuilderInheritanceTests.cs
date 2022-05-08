@@ -147,9 +147,12 @@ namespace System.ComponentModel.Composition.Registration.Tests
             Assert.Null(exportAttribute.ContractType);
         }
 
-        private static void GetConfiguredMembers(PartBuilder builder,
-            out List<Tuple<object, List<Attribute>>> configuredMembers, out IEnumerable<Attribute> typeAtts,
-            Type targetType)
+        private static void GetConfiguredMembers(
+            PartBuilder builder,
+            out List<Tuple<object, List<Attribute>>> configuredMembers,
+            out IEnumerable<Attribute> typeAtts,
+            Type targetType
+        )
         {
             configuredMembers = new List<Tuple<object, List<Attribute>>>();
             typeAtts = builder.BuildTypeAttributes(targetType);

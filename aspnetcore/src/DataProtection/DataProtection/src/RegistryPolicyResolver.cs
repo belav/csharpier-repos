@@ -26,7 +26,10 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
 
     public RegistryPolicyResolver(IActivator activator)
     {
-        _getPolicyRegKey = () => Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection");
+        _getPolicyRegKey = () =>
+            Registry.LocalMachine.OpenSubKey(
+                @"SOFTWARE\Microsoft\DotNetPackages\Microsoft.AspNetCore.DataProtection"
+            );
         _activator = activator;
     }
 
@@ -48,15 +51,27 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
                 {
                     if (propInfo.PropertyType == typeof(string))
                     {
-                        propInfo.SetValue(options, Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture));
+                        propInfo.SetValue(
+                            options,
+                            Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)
+                        );
                     }
                     else if (propInfo.PropertyType == typeof(int))
                     {
-                        propInfo.SetValue(options, Convert.ToInt32(valueFromRegistry, CultureInfo.InvariantCulture));
+                        propInfo.SetValue(
+                            options,
+                            Convert.ToInt32(valueFromRegistry, CultureInfo.InvariantCulture)
+                        );
                     }
                     else if (propInfo.PropertyType == typeof(Type))
                     {
-                        propInfo.SetValue(options, Type.GetType(Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!, throwOnError: true));
+                        propInfo.SetValue(
+                            options,
+                            Type.GetType(
+                                Convert.ToString(valueFromRegistry, CultureInfo.InvariantCulture)!,
+                                throwOnError: true
+                            )
+                        );
                     }
                     else
                     {
@@ -81,7 +96,9 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
                 var candidate = sinkFromRegistry.Trim();
                 if (!String.IsNullOrEmpty(candidate))
                 {
-                    typeof(IKeyEscrowSink).AssertIsAssignableFrom(Type.GetType(candidate, throwOnError: true)!);
+                    typeof(IKeyEscrowSink).AssertIsAssignableFrom(
+                        Type.GetType(candidate, throwOnError: true)!
+                    );
                     sinks.Add(candidate);
                 }
             }
@@ -134,7 +151,8 @@ internal sealed class RegistryPolicyResolver : IRegistryPolicyResolver
 
         var defaultKeyLifetime = (int?)policyRegKey.GetValue("DefaultKeyLifetime");
 
-        var keyEscrowSinks = ReadKeyEscrowSinks(policyRegKey).Select(item => _activator.CreateInstance<IKeyEscrowSink>(item));
+        var keyEscrowSinks = ReadKeyEscrowSinks(policyRegKey)
+            .Select(item => _activator.CreateInstance<IKeyEscrowSink>(item));
 
         return new RegistryPolicy(configuration, keyEscrowSinks, defaultKeyLifetime);
     }

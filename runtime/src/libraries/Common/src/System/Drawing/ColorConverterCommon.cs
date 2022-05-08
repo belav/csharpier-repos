@@ -39,18 +39,28 @@ namespace System.Drawing
             if (!text.Contains(sep))
             {
                 // text can be '' (empty quoted string)
-                if (text.Length >= 2 && (text[0] == '\'' || text[0] == '"') && text[0] == text[text.Length - 1])
+                if (
+                    text.Length >= 2
+                    && (text[0] == '\'' || text[0] == '"')
+                    && text[0] == text[text.Length - 1]
+                )
                 {
                     // In quotes means a named value
                     string colorName = text.Substring(1, text.Length - 2);
                     return Color.FromName(colorName);
                 }
-                else if ((text.Length == 7 && text[0] == '#') ||
-                         (text.Length == 8 && (text.StartsWith("0x") || text.StartsWith("0X"))) ||
-                         (text.Length == 8 && (text.StartsWith("&h") || text.StartsWith("&H"))))
+                else if (
+                    (text.Length == 7 && text[0] == '#')
+                    || (text.Length == 8 && (text.StartsWith("0x") || text.StartsWith("0X")))
+                    || (text.Length == 8 && (text.StartsWith("&h") || text.StartsWith("&H")))
+                )
                 {
                     // Note: int.Parse will raise exception if value cannot be converted.
-                    return PossibleKnownColor(Color.FromArgb(unchecked((int)(0xFF000000 | (uint)IntFromString(text, culture)))));
+                    return PossibleKnownColor(
+                        Color.FromArgb(
+                            unchecked((int)(0xFF000000 | (uint)IntFromString(text, culture)))
+                        )
+                    );
                 }
             }
 
@@ -107,8 +117,10 @@ namespace System.Drawing
                 {
                     return IntFromString(text.Substring(1), 16);
                 }
-                else if (text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)
-                         || text.StartsWith("&h", StringComparison.OrdinalIgnoreCase))
+                else if (
+                    text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)
+                    || text.StartsWith("&h", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return IntFromString(text.Substring(2), 16);
                 }
@@ -121,7 +133,10 @@ namespace System.Drawing
             }
             catch (Exception e)
             {
-                throw new ArgumentException(SR.Format(SR.ConvertInvalidPrimitive, text, nameof(Int32)), e);
+                throw new ArgumentException(
+                    SR.Format(SR.ConvertInvalidPrimitive, text, nameof(Int32)),
+                    e
+                );
             }
         }
 

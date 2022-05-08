@@ -33,19 +33,19 @@ namespace Roslyn.Test.Utilities
     /// </summary>
     /// <remarks>
     /// Specifically, consider this common pattern:
-    /// 
+    ///
     /// <code>
     /// var weakReference = new WeakReference(strongReference);
     /// strongReference = null;
     /// GC.Collect(); // often a few times...
     /// Assert.Null(weakReference.Target);
     /// </code>
-    /// 
+    ///
     /// This code has a bug: it presumes that when strongReference = null is assigned, there are no other references anywhere.
     /// But that line only tells the JIT to null out the place that's holding the active value. The JIT could have spilled a copy
     /// at some point to the stack, which it now considers unused and isn't worth cleaning up. Or another register might still be
     /// holding it, etc.
-    /// 
+    ///
     /// What this class does is it holds the only active reference in the heap, and any use of that reference is put in a method
     /// that is marked NoInline; this ensures that when the uses are done, any temporaries still floating around are understood
     /// by the JIT/GC to actually be unused.
@@ -80,7 +80,10 @@ namespace Roslyn.Test.Utilities
         {
             ReleaseAndGarbageCollect(expectReleased: true);
 
-            Assert.False(_weakReference.IsAlive, "Reference should have been released but was not.");
+            Assert.False(
+                _weakReference.IsAlive,
+                "Reference should have been released but was not."
+            );
         }
 
         /// <summary>
@@ -111,7 +114,9 @@ namespace Roslyn.Test.Utilities
         {
             if (_strongReferenceRetrievedOutsideScopedCall)
             {
-                throw new InvalidOperationException($"The strong reference being held by the {nameof(ObjectReference<T>)} was retrieved via a call to {nameof(GetReference)}. Since the CLR might have cached a temporary somewhere in your stack, assertions can no longer be made about the correctness of lifetime.");
+                throw new InvalidOperationException(
+                    $"The strong reference being held by the {nameof(ObjectReference<T>)} was retrieved via a call to {nameof(GetReference)}. Since the CLR might have cached a temporary somewhere in your stack, assertions can no longer be made about the correctness of lifetime."
+                );
             }
 
             _strongReference = null;
@@ -128,7 +133,12 @@ namespace Roslyn.Test.Utilities
             // times; but if it goes away then we are definitely done.
             for (var i = 0; i < loopCount && _weakReference.IsAlive; i++)
             {
-                GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
+                GC.Collect(
+                    GC.MaxGeneration,
+                    GCCollectionMode.Forced,
+                    blocking: true,
+                    compacting: true
+                );
                 GC.WaitForPendingFinalizers();
             }
         }
@@ -161,7 +171,8 @@ namespace Roslyn.Test.Utilities
         /// caller must not "leak" the object out of the given action for any lifetime assertions to be safe.
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public ObjectReference<TResult> GetObjectReference<TResult>(Func<T, TResult> function) where TResult : class
+        public ObjectReference<TResult> GetObjectReference<TResult>(Func<T, TResult> function)
+            where TResult : class
         {
             var newValue = function(GetReferenceWithChecks());
             return ObjectReference.Create(newValue);
@@ -173,7 +184,10 @@ namespace Roslyn.Test.Utilities
         /// caller must not "leak" the object out of the given action for any lifetime assertions to be safe.
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public ObjectReference<TResult> GetObjectReference<TResult, TArg>(Func<T, TArg, TResult> function, TArg argument) where TResult : class
+        public ObjectReference<TResult> GetObjectReference<TResult, TArg>(
+            Func<T, TArg, TResult> function,
+            TArg argument
+        ) where TResult : class
         {
             var newValue = function(GetReferenceWithChecks(), argument);
             return ObjectReference.Create(newValue);
@@ -195,7 +209,9 @@ namespace Roslyn.Test.Utilities
         {
             if (_strongReference == null)
             {
-                throw new InvalidOperationException($"The type has already been released due to a call to {nameof(AssertReleased)}.");
+                throw new InvalidOperationException(
+                    $"The type has already been released due to a call to {nameof(AssertReleased)}."
+                );
             }
 
             return _strongReference;

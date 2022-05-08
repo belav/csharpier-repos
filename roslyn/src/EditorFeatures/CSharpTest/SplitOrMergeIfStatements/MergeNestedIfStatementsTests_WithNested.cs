@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         public async Task MergedOnOuterIf()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -44,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SplitOrMergeIfStatement
         public async Task MergedOnOuterIf_TopLevelStatements()
         {
             await TestInRegularAndScriptAsync(
-@"var a = true;
+                @"var a = true;
 var b = true;
 
 [||]if (a)
@@ -54,13 +55,14 @@ var b = true;
     }
 }
 ",
-@"var a = true;
+                @"var a = true;
 var b = true;
 
 if (a && b)
 {
 }
-");
+"
+            );
         }
 
         [Theory]
@@ -78,14 +80,16 @@ if (a && b)
         public async Task MergedOnOuterElseIfSpans(string elseIfLine)
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (true)
         {
         }
-        " + elseIfLine + @"
+        "
+                    + elseIfLine
+                    + @"
         {
             if (b)
             {
@@ -93,7 +97,7 @@ if (a && b)
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -104,14 +108,15 @@ if (a && b)
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedOnOuterElseIfExtendedHeaderSelection()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -126,7 +131,7 @@ if (a && b)
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -137,14 +142,15 @@ if (a && b)
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedOnOuterElseIfFullSelection()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -159,7 +165,7 @@ if (a && b)
         }
 |]    }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -170,14 +176,15 @@ if (a && b)
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedOnOuterElseIfFullSelectionWithElseClause()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -198,7 +205,7 @@ if (a && b)
         }|]
     }
 }",
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -212,14 +219,15 @@ if (a && b)
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnOuterElseIfFullSelectionWithoutElseClause()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -239,14 +247,15 @@ if (a && b)
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnOuterElseIfFullSelectionWithParentIf()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -266,7 +275,8 @@ if (a && b)
         {
         }|]
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -283,28 +293,31 @@ if (a && b)
         public async Task NotMergedOnOuterElseIfSpans(string elseIfLine)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
         if (true)
         {
         }
-        " + elseIfLine + @"
+        "
+                    + elseIfLine
+                    + @"
         {
             if (b)
             {
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnOuterElseIfOverreachingSelection1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -318,14 +331,15 @@ if (a && b)
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnOuterElseIfOverreachingSelection2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -339,14 +353,15 @@ if (a && b)
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnOuterElseIfBodySelection()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -360,14 +375,15 @@ if (a && b)
             }
         }|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnOuterElseIfBodyCaret1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -381,14 +397,15 @@ if (a && b)
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task NotMergedOnOuterElseIfBodyCaret2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(bool a, bool b)
     {
@@ -402,14 +419,15 @@ if (a && b)
             }
         }[||]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task MergedOnMiddleIfMergableWithNestedOnly()
         {
             const string Initial =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -428,7 +446,7 @@ if (a && b)
     }
 }";
             const string Expected =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -452,7 +470,7 @@ if (a && b)
         public async Task MergedOnMiddleIfMergableWithOuterOnly()
         {
             const string Initial =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -471,7 +489,7 @@ if (a && b)
     }
 }";
             const string Expected =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -495,7 +513,7 @@ if (a && b)
         public async Task MergedOnMiddleIfMergableWithBoth()
         {
             const string Initial =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -512,7 +530,7 @@ if (a && b)
     }
 }";
             const string Expected1 =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {
@@ -526,7 +544,7 @@ if (a && b)
     }
 }";
             const string Expected2 =
-@"class C
+                @"class C
 {
     void M(bool a, bool b, bool c)
     {

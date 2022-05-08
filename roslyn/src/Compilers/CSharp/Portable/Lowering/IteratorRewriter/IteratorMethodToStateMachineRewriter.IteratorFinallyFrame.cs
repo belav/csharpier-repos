@@ -33,10 +33,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // labels within this frame (branching to these labels does not go through finally).
             public readonly HashSet<LabelSymbol> labels;
 
-            // proxy labels for branches leaving the frame. 
+            // proxy labels for branches leaving the frame.
             // we build this on demand once we encounter leaving branches.
             // subsequent leaves to an already proxied label redirected to the proxy.
-            // At the proxy label we will execute finally and forward the control flow 
+            // At the proxy label we will execute finally and forward the control flow
             // to the actual destination. (which could be proxied again in the parent)
             public Dictionary<LabelSymbol, LabelSymbol> proxyLabels;
 
@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 IteratorFinallyFrame parent,
                 int finalizeState,
                 IteratorFinallyMethodSymbol handler,
-                HashSet<LabelSymbol> labels)
+                HashSet<LabelSymbol> labels
+            )
             {
                 Debug.Assert(parent != null, "non root frame must have a parent");
                 Debug.Assert((object)handler != null, "non root frame must have a handler");
@@ -73,8 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // Notifies all parents about the state recursively. 
-            // All parents need to know states they recursively contain and what 
+            // Notifies all parents about the state recursively.
+            // All parents need to know states they recursively contain and what
             // immediate child can handle every particular state.
             private void AddState(int state, IteratorFinallyFrame innerHandler)
             {

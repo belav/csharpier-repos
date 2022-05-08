@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public virtual SelectExpression Process(
             SelectExpression selectExpression,
             IReadOnlyDictionary<string, object?> parametersValues,
-            out bool canCache)
+            out bool canCache
+        )
         {
             _parameterValues = parametersValues;
             _canCache = true;
@@ -64,26 +65,29 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         {
             if (extensionExpression is SelectExpression selectExpression)
             {
-                if (IsZero(selectExpression.Limit)
-                    && IsZero(selectExpression.Offset))
+                if (IsZero(selectExpression.Limit) && IsZero(selectExpression.Offset))
                 {
                     return selectExpression.Update(
                         selectExpression.Projection,
                         selectExpression.Tables,
-                        selectExpression.GroupBy.Count > 0 ? selectExpression.Predicate : _sqlExpressionFactory.Constant(false),
+                        selectExpression.GroupBy.Count > 0
+                          ? selectExpression.Predicate
+                          : _sqlExpressionFactory.Constant(false),
                         selectExpression.GroupBy,
-                        selectExpression.GroupBy.Count > 0 ? _sqlExpressionFactory.Constant(false) : null,
+                        selectExpression.GroupBy.Count > 0
+                          ? _sqlExpressionFactory.Constant(false)
+                          : null,
                         new List<OrderingExpression>(0),
                         limit: null,
-                        offset: null);
+                        offset: null
+                    );
                 }
 
                 bool IsZero(SqlExpression? sqlExpression)
                 {
                     switch (sqlExpression)
                     {
-                        case SqlConstantExpression constant
-                            when constant.Value is int intValue:
+                        case SqlConstantExpression constant when constant.Value is int intValue:
                             return intValue == 0;
                         case SqlParameterExpression parameter:
                             _canCache = false;

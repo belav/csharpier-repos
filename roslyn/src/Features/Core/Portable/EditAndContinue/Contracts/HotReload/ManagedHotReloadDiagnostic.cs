@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
             string message,
             ManagedHotReloadDiagnosticSeverity severity,
             string filePath,
-            SourceSpan span)
+            SourceSpan span
+        )
         {
             Id = id;
             Message = message;

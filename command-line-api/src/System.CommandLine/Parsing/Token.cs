@@ -19,7 +19,7 @@ namespace System.CommandLine.Parsing
             Type = type;
             Position = -1;
         }
-       
+
         internal Token(string? value, TokenType type, int position)
         {
             Value = value ?? "";
@@ -57,9 +57,7 @@ namespace System.CommandLine.Parsing
 
         /// <inheritdoc />
         public override bool Equals(object obj) =>
-            obj is Token token &&
-            Value == token.Value &&
-            Type == token.Type;
+            obj is Token token && Value == token.Value && Type == token.Type;
 
         /// <inheritdoc />
         public override int GetHashCode() => (Value, Type).GetHashCode();

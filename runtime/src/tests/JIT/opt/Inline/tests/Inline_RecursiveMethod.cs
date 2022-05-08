@@ -20,6 +20,7 @@ public class ReturnStruct
         }
         return teststruct;
     }
+
     public static int Main()
     {
         int iret = 100;
@@ -46,5 +47,3 @@ public class ReturnStruct
         return iret;
     }
 }
-
-

@@ -51,7 +51,9 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
                 return false;
             }
 
-            return ReferenceEquals(this, obj) ? true : obj.GetType() == GetType() && Equals((CompositeTwo)obj);
+            return ReferenceEquals(this, obj)
+              ? true
+              : obj.GetType() == GetType() && Equals((CompositeTwo)obj);
         }
 
         private bool Equals(CompositeTwo other)
@@ -66,7 +68,16 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel
                 && Level1_Optional_Id2 == other.Level1_Optional_Id2;
         }
 
-        public override int GetHashCode()
-            => HashCode.Combine(Id1, Id2, Name, Date, Level1_Required_Id1, Level1_Required_Id2, Level1_Optional_Id1, Level1_Optional_Id2);
+        public override int GetHashCode() =>
+            HashCode.Combine(
+                Id1,
+                Id2,
+                Name,
+                Date,
+                Level1_Required_Id1,
+                Level1_Required_Id2,
+                Level1_Optional_Id1,
+                Level1_Optional_Id2
+            );
     }
 }

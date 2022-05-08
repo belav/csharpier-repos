@@ -235,7 +235,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12Bytes_Single(X509KeyStorageFlags keyStorageFlags)
         {
-            using (ImportedCollection ic = Cert.Import(TestData.PfxData, TestData.PfxDataPassword, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
@@ -245,9 +251,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [Theory]
         [MemberData(nameof(StorageFlags))]
-        public static void ImportPkcs12Bytes_Single_VerifyContents_ArrayString(X509KeyStorageFlags keyStorageFlags)
+        public static void ImportPkcs12Bytes_Single_VerifyContents_ArrayString(
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            using (ImportedCollection ic = Cert.Import(TestData.PfxData, TestData.PfxDataPassword, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 ImportPkcs12Bytes_Single_VerifyContents(ic);
             }
@@ -255,7 +269,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [Theory]
         [MemberData(nameof(StorageFlags))]
-        public static void ImportPkcs12Bytes_Single_VerifyContents_SpanSpan(X509KeyStorageFlags keyStorageFlags)
+        public static void ImportPkcs12Bytes_Single_VerifyContents_SpanSpan(
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             ReadOnlySpan<byte> rawData = TestData.PfxData.AsSpan();
             ReadOnlySpan<char> password = TestData.PfxDataPassword.AsSpan();
@@ -268,7 +284,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static void ImportPkcs12Bytes_Single_VerifyContents(ImportedCollection ic)
         {
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
@@ -289,7 +311,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12File_Single(X509KeyStorageFlags keyStorageFlags)
         {
-            using (ImportedCollection ic = Cert.Import(TestFiles.PfxFile, TestData.PfxDataPassword, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestFiles.PfxFile,
+                    TestData.PfxDataPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
@@ -306,7 +334,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             TestData.PfxDataPassword.AsSpan().CopyTo(password.Slice(1));
             password = password.Slice(1, TestData.PfxDataPassword.Length);
 
-            using (ImportedCollection ic = Cert.Import(TestFiles.PfxFile, password, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(TestFiles.PfxFile, password, keyStorageFlags)
+            )
             {
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
@@ -318,7 +348,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12Bytes_Chain(X509KeyStorageFlags keyStorageFlags)
         {
-            using (ImportedCollection ic = Cert.Import(TestData.ChainPfxBytes, TestData.ChainPfxPassword, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestData.ChainPfxBytes,
+                    TestData.ChainPfxPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
@@ -330,7 +366,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12ByteSpan_Chain(X509KeyStorageFlags keyStorageFlags)
         {
-            using (ImportedCollection ic = Cert.Import(TestData.ChainPfxBytes.AsSpan(), TestData.ChainPfxPassword, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestData.ChainPfxBytes.AsSpan(),
+                    TestData.ChainPfxPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
@@ -340,7 +382,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [Theory]
         [MemberData(nameof(StorageFlags))]
-        public static void ImportPkcs12ByteSpan_Chain_SpanPassword(X509KeyStorageFlags keyStorageFlags)
+        public static void ImportPkcs12ByteSpan_Chain_SpanPassword(
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             ReadOnlySpan<byte> data = TestData.ChainPfxBytes.AsSpan();
             ReadOnlySpan<char> password = TestData.ChainPfxPassword.AsSpan();
@@ -357,7 +401,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ImportPkcs12File_Chain(X509KeyStorageFlags keyStorageFlags)
         {
-            using (ImportedCollection ic = Cert.Import(TestFiles.ChainPfxFile, TestData.ChainPfxPassword, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestFiles.ChainPfxFile,
+                    TestData.ChainPfxPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
@@ -367,9 +417,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [Theory]
         [MemberData(nameof(StorageFlags))]
-        public static void ImportPkcs12File_Chain_VerifyContents(X509KeyStorageFlags keyStorageFlags)
+        public static void ImportPkcs12File_Chain_VerifyContents(
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            using (ImportedCollection ic = Cert.Import(TestFiles.ChainPfxFile, TestData.ChainPfxPassword, keyStorageFlags))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestFiles.ChainPfxFile,
+                    TestData.ChainPfxPassword,
+                    keyStorageFlags
+                )
+            )
             {
                 X509Certificate2Collection certs = ic.Collection;
                 int count = certs.Count;
@@ -383,23 +441,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     "test.local",
                 };
 
-                string[] actualSubjects = certs.
-                    Select(cert => cert.GetNameInfo(X509NameType.SimpleName, false)).
-                    ToArray();
+                string[] actualSubjects = certs
+                    .Select(cert => cert.GetNameInfo(X509NameType.SimpleName, false))
+                    .ToArray();
 
                 Assert.Equal(expectedSubjects, actualSubjects);
 
                 // And verify that we have private keys when we expect them
-                bool[] expectedHasPrivateKeys =
-                {
-                    false,
-                    false,
-                    true,
-                };
+                bool[] expectedHasPrivateKeys = { false, false, true, };
 
-                bool[] actualHasPrivateKeys = certs.
-                    Select(cert => cert.HasPrivateKey).
-                    ToArray();
+                bool[] actualHasPrivateKeys = certs.Select(cert => cert.HasPrivateKey).ToArray();
 
                 Assert.Equal(expectedHasPrivateKeys, actualHasPrivateKeys);
             }
@@ -414,11 +465,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => coll.Import(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF));
+                () => coll.Import(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => coll.Import(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF));
+                () => coll.Import(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
+            );
 
             // No test is performed here for the ephemeral flag failing downlevel, because the live
             // binary is always used by default, meaning it doesn't know EphemeralKeySet doesn't exist.
@@ -435,11 +488,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => coll.Import(nonEmptyBytes, string.Empty, PersistedEphemeral));
+                () => coll.Import(nonEmptyBytes, string.Empty, PersistedEphemeral)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "keyStorageFlags",
-                () => coll.Import(string.Empty, string.Empty, PersistedEphemeral));
+                () => coll.Import(string.Empty, string.Empty, PersistedEphemeral)
+            );
         }
 #endif
 

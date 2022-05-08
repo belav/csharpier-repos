@@ -54,9 +54,15 @@ namespace Internal.JitInterface
             return this;
         }
 
-        public override MethodDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override MethodDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
-            MethodDesc realInstantiateSignature = _wrappedMethod.InstantiateSignature(typeInstantiation, methodInstantiation);
+            MethodDesc realInstantiateSignature = _wrappedMethod.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             if (realInstantiateSignature != _wrappedMethod)
                 return _factory.GetUnboxingMethod(realInstantiateSignature);
 

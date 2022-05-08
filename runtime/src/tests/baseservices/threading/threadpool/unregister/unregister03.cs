@@ -3,7 +3,7 @@
 
 #region Using directives
 
- 
+
 
 using System;
 
@@ -13,11 +13,9 @@ using System.Text;
 
 using System.Threading;
 
- 
-
 #endregion
 
- 
+
 
 namespace UnregisterWaitNativeBug
 {
@@ -44,7 +42,13 @@ namespace UnregisterWaitNativeBug
             for (int i = 0; i < size; i++)
             {
                 are[i] = new AutoResetEvent(false);
-                regWait[i] = ThreadPool.RegisterWaitForSingleObject((WaitHandle)are[i], new WaitOrTimerCallback(TheCallBack), are[i], -1, false);
+                regWait[i] = ThreadPool.RegisterWaitForSingleObject(
+                    (WaitHandle)are[i],
+                    new WaitOrTimerCallback(TheCallBack),
+                    are[i],
+                    -1,
+                    false
+                );
             }
 
             for (int i = 0; i < size; i++)
@@ -65,7 +69,7 @@ namespace UnregisterWaitNativeBug
             }
         }
 
-        public void TheCallBack(object foo, bool state) 
+        public void TheCallBack(object foo, bool state)
         {
             if (Interlocked.Increment(ref ret) == 100)
             {
@@ -74,4 +78,3 @@ namespace UnregisterWaitNativeBug
         }
     }
 }
-

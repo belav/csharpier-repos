@@ -42,7 +42,17 @@ namespace Microsoft.CodeAnalysis.TodoComments
         [DataMember(Order = 8)]
         public readonly int OriginalColumn;
 
-        public TodoCommentData(int priority, string message, DocumentId documentId, string? mappedFilePath, string? originalFilePath, int mappedLine, int mappedColumn, int originalLine, int originalColumn)
+        public TodoCommentData(
+            int priority,
+            string message,
+            DocumentId documentId,
+            string? mappedFilePath,
+            string? originalFilePath,
+            int mappedLine,
+            int mappedColumn,
+            int originalLine,
+            int originalColumn
+        )
         {
             Priority = priority;
             Message = message;
@@ -55,28 +65,31 @@ namespace Microsoft.CodeAnalysis.TodoComments
             OriginalColumn = originalColumn;
         }
 
-        public override bool Equals(object? obj)
-            => obj is TodoCommentData other && Equals(other);
+        public override bool Equals(object? obj) => obj is TodoCommentData other && Equals(other);
 
-        public override int GetHashCode()
-            => GetHashCode(this);
+        public override int GetHashCode() => GetHashCode(this);
 
-        public override string ToString()
-            => $"{Priority} {Message} {MappedFilePath ?? ""} ({MappedLine}, {MappedColumn}) [original: {OriginalFilePath ?? ""} ({OriginalLine}, {OriginalColumn})";
+        public override string ToString() =>
+            $"{Priority} {Message} {MappedFilePath ?? ""} ({MappedLine}, {MappedColumn}) [original: {OriginalFilePath ?? ""} ({OriginalLine}, {OriginalColumn})";
 
-        public bool Equals(TodoCommentData right)
-            => DocumentId == right.DocumentId &&
-               Priority == right.Priority &&
-               Message == right.Message &&
-               OriginalLine == right.OriginalLine &&
-               OriginalColumn == right.OriginalColumn;
+        public bool Equals(TodoCommentData right) =>
+            DocumentId == right.DocumentId
+            && Priority == right.Priority
+            && Message == right.Message
+            && OriginalLine == right.OriginalLine
+            && OriginalColumn == right.OriginalColumn;
 
-        public static int GetHashCode(TodoCommentData item)
-            => Hash.Combine(item.DocumentId,
-               Hash.Combine(item.Priority,
-               Hash.Combine(item.Message,
-               Hash.Combine(item.OriginalLine,
-               Hash.Combine(item.OriginalColumn, 0)))));
+        public static int GetHashCode(TodoCommentData item) =>
+            Hash.Combine(
+                item.DocumentId,
+                Hash.Combine(
+                    item.Priority,
+                    Hash.Combine(
+                        item.Message,
+                        Hash.Combine(item.OriginalLine, Hash.Combine(item.OriginalColumn, 0))
+                    )
+                )
+            );
 
         internal void WriteTo(ObjectWriter writer)
         {
@@ -91,15 +104,17 @@ namespace Microsoft.CodeAnalysis.TodoComments
             writer.WriteInt32(OriginalColumn);
         }
 
-        internal static TodoCommentData ReadFrom(ObjectReader reader)
-            => new(priority: reader.ReadInt32(),
-                   message: reader.ReadString(),
-                   documentId: DocumentId.ReadFrom(reader),
-                   mappedFilePath: reader.ReadString(),
-                   originalFilePath: reader.ReadString(),
-                   mappedLine: reader.ReadInt32(),
-                   mappedColumn: reader.ReadInt32(),
-                   originalLine: reader.ReadInt32(),
-                   originalColumn: reader.ReadInt32());
+        internal static TodoCommentData ReadFrom(ObjectReader reader) =>
+            new(
+                priority: reader.ReadInt32(),
+                message: reader.ReadString(),
+                documentId: DocumentId.ReadFrom(reader),
+                mappedFilePath: reader.ReadString(),
+                originalFilePath: reader.ReadString(),
+                mappedLine: reader.ReadInt32(),
+                mappedColumn: reader.ReadInt32(),
+                originalLine: reader.ReadInt32(),
+                originalColumn: reader.ReadInt32()
+            );
     }
 }

@@ -24,23 +24,28 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(SIGQUIT)]
         public async Task EnsureSignalContinuesMainMethod(int signal)
         {
-            using var remoteHandle = RemoteExecutor.Invoke(async () =>
-            {
-                await Host.CreateDefaultBuilder()
-                    .ConfigureServices((hostContext, services) =>
-                    {
-                        services.AddHostedService<EnsureSignalContinuesMainMethodWorker>();
-                    })
-                    .RunConsoleAsync();
+            using var remoteHandle = RemoteExecutor.Invoke(
+                async () =>
+                {
+                    await Host.CreateDefaultBuilder()
+                        .ConfigureServices(
+                            (hostContext, services) =>
+                            {
+                                services.AddHostedService<EnsureSignalContinuesMainMethodWorker>();
+                            }
+                        )
+                        .RunConsoleAsync();
 
-                // adding this delay ensures the "main" method loses in a race with the normal process exit
-                // and can cause the below message not to be written when the normal process exit isn't canceled by the
-                // SIGTERM handler
-                await Task.Delay(100);
+                    // adding this delay ensures the "main" method loses in a race with the normal process exit
+                    // and can cause the below message not to be written when the normal process exit isn't canceled by the
+                    // SIGTERM handler
+                    await Task.Delay(100);
 
-                Console.WriteLine("Run has completed");
-                return 123;
-            }, new RemoteInvokeOptions() { Start = false, ExpectedExitCode = 123 });
+                    Console.WriteLine("Run has completed");
+                    return 123;
+                },
+                new RemoteInvokeOptions() { Start = false, ExpectedExitCode = 123 }
+            );
 
             remoteHandle.Process.StartInfo.RedirectStandardOutput = true;
             remoteHandle.Process.Start();
@@ -94,18 +99,27 @@ namespace Microsoft.Extensions.Hosting.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         // SIGTERM is only handled on net6.0+, so the workaround to "clobber" the exit code is still in place on NetFramework
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void EnsureEnvironmentExitCode()
         {
-            using var remoteHandle = RemoteExecutor.Invoke(async () =>
-            {
-                await Host.CreateDefaultBuilder()
-                    .ConfigureServices((hostContext, services) =>
-                    {
-                        services.AddHostedService<EnsureEnvironmentExitCodeWorker>();
-                    })
-                    .RunConsoleAsync();
-            });
+            using var remoteHandle = RemoteExecutor.Invoke(
+                async () =>
+                {
+                    await Host.CreateDefaultBuilder()
+                        .ConfigureServices(
+                            (hostContext, services) =>
+                            {
+                                services.AddHostedService<EnsureEnvironmentExitCodeWorker>();
+                            }
+                        )
+                        .RunConsoleAsync();
+                }
+            );
 
             remoteHandle.Process.WaitForExit();
 
@@ -116,10 +130,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             protected override async Task ExecuteAsync(CancellationToken stoppingToken)
             {
-                await Task.Run(() =>
-                {
-                    Environment.Exit(124);
-                });
+                await Task.Run(
+                    () =>
+                    {
+                        Environment.Exit(124);
+                    }
+                );
             }
         }
 
@@ -127,21 +143,36 @@ namespace Microsoft.Extensions.Hosting.Tests
         /// Tests that calling Environment.Exit from the "main" thread doesn't hang the process forever.
         /// </summary>
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void EnsureEnvironmentExitDoesntHang()
         {
-            using var remoteHandle = RemoteExecutor.Invoke(async () =>
-            {
-                await Host.CreateDefaultBuilder()
-                    .ConfigureHostOptions(o => o.ShutdownTimeout = TimeSpan.FromMilliseconds(100))
-                    .ConfigureServices((hostContext, services) =>
-                    {
-                        services.AddHostedService<EnsureEnvironmentExitDoesntHangWorker>();
-                    })
-                    .RunConsoleAsync();
-            }, new RemoteInvokeOptions() { TimeOut = 30_000 }); // give a 30 second time out, so if this does hang, it doesn't hang for the full timeout
+            using var remoteHandle = RemoteExecutor.Invoke(
+                async () =>
+                {
+                    await Host.CreateDefaultBuilder()
+                        .ConfigureHostOptions(
+                            o => o.ShutdownTimeout = TimeSpan.FromMilliseconds(100)
+                        )
+                        .ConfigureServices(
+                            (hostContext, services) =>
+                            {
+                                services.AddHostedService<EnsureEnvironmentExitDoesntHangWorker>();
+                            }
+                        )
+                        .RunConsoleAsync();
+                },
+                new RemoteInvokeOptions() { TimeOut = 30_000 }
+            ); // give a 30 second time out, so if this does hang, it doesn't hang for the full timeout
 
-            Assert.True(remoteHandle.Process.WaitForExit(30_000), "The hosted process should have exited within 30 seconds");
+            Assert.True(
+                remoteHandle.Process.WaitForExit(30_000),
+                "The hosted process should have exited within 30 seconds"
+            );
 
             // SIGTERM is only handled on net6.0+, so the workaround to "clobber" the exit code is still in place on NetFramework
             int expectedExitCode = PlatformDetection.IsNetFramework ? 0 : 125;

@@ -38,10 +38,7 @@ public class SecretsStore
 
     public string this[string key]
     {
-        get
-        {
-            return _secrets[key];
-        }
+        get { return _secrets[key]; }
     }
 
     public int Count => _secrets.Count;

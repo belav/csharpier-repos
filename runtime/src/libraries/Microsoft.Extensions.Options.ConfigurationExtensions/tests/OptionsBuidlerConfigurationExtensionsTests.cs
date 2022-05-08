@@ -16,10 +16,13 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
         {
             OptionsBuilder<FakeOptions> optionsBuilder = null!;
 
-            Assert.Throws<ArgumentNullException>("optionsBuilder", () =>
-            {
-                optionsBuilder.BindConfiguration("test");
-            });
+            Assert.Throws<ArgumentNullException>(
+                "optionsBuilder",
+                () =>
+                {
+                    optionsBuilder.BindConfiguration("test");
+                }
+            );
         }
 
         [Fact]
@@ -29,10 +32,13 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             OptionsBuilder<FakeOptions> optionsBuilder = new(services, Options.DefaultName);
             string configSectionPath = null!;
 
-            Assert.Throws<ArgumentNullException>("configSectionPath", () =>
-            {
-                optionsBuilder.BindConfiguration(configSectionPath);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "configSectionPath",
+                () =>
+                {
+                    optionsBuilder.BindConfiguration(configSectionPath);
+                }
+            );
         }
 
         [Fact]
@@ -55,10 +61,12 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             _ = optionsBuilder.BindConfiguration("Test");
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
 
-            Assert.ThrowsAny<InvalidOperationException>(() =>
-            {
-                _ = serviceProvider.GetRequiredService<IOptions<FakeOptions>>();
-            });
+            Assert.ThrowsAny<InvalidOperationException>(
+                () =>
+                {
+                    _ = serviceProvider.GetRequiredService<IOptions<FakeOptions>>();
+                }
+            );
         }
 
         [Fact]
@@ -68,12 +76,13 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             const string messageValue = "This is a test";
             var configEntries = new Dictionary<string, string?>
             {
-                [ConfigurationPath.Combine(configSectionName, nameof(FakeOptions.Message))] = messageValue
+                [ConfigurationPath.Combine(configSectionName, nameof(FakeOptions.Message))] =
+                    messageValue
             };
             var services = new ServiceCollection();
-            services.AddSingleton<IConfiguration>(new ConfigurationBuilder()
-                .AddInMemoryCollection(configEntries)
-                .Build());
+            services.AddSingleton<IConfiguration>(
+                new ConfigurationBuilder().AddInMemoryCollection(configEntries).Build()
+            );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
 
             _ = optionsBuilder.BindConfiguration(configSectionName);
@@ -93,9 +102,9 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
                 [nameof(FakeOptions.Message)] = messageValue
             };
             var services = new ServiceCollection();
-            services.AddSingleton<IConfiguration>(new ConfigurationBuilder()
-                .AddInMemoryCollection(configEntries)
-                .Build());
+            services.AddSingleton<IConfiguration>(
+                new ConfigurationBuilder().AddInMemoryCollection(configEntries).Build()
+            );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
 
             _ = optionsBuilder.BindConfiguration(configSectionPath: "");
@@ -112,27 +121,30 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             const string messageValue1 = "This is a test";
             const string messageValue2 = "This is the message after update";
 
-            FakeConfigurationSource configSource = new()
-            {
-                InitialData = new Dictionary<string, string?>
+            FakeConfigurationSource configSource =
+                new()
                 {
-                    [nameof(FakeOptions.Message)] = messageValue1,
-                }
-            };
+                    InitialData = new Dictionary<string, string?>
+                    {
+                        [nameof(FakeOptions.Message)] = messageValue1,
+                    }
+                };
 
             var services = new ServiceCollection();
-            services.AddSingleton<IConfiguration>(new ConfigurationBuilder()
-                    .Add(configSource)
-                    .Build());
+            services.AddSingleton<IConfiguration>(
+                new ConfigurationBuilder().Add(configSource).Build()
+            );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
             _ = optionsBuilder.BindConfiguration(configSectionPath: "");
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
             var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<FakeOptions>>();
             bool updateHasRun = false;
-            optionsMonitor.OnChange((opts, name) =>
-            {
-                updateHasRun = true;
-            });
+            optionsMonitor.OnChange(
+                (opts, name) =>
+                {
+                    updateHasRun = true;
+                }
+            );
             FakeOptions optionsValue1 = optionsMonitor.CurrentValue;
             Assert.Equal(messageValue1, optionsValue1.Message);
             configSource.Provider.Set(nameof(FakeOptions.Message), messageValue2);
@@ -145,31 +157,37 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
         public static void BindConfiguration_UpdatesOptionOnConfigurationUpdate()
         {
             const string configSectionName = "Test";
-            string messageConfigKey = ConfigurationPath.Combine(configSectionName, nameof(FakeOptions.Message));
+            string messageConfigKey = ConfigurationPath.Combine(
+                configSectionName,
+                nameof(FakeOptions.Message)
+            );
             const string messageValue1 = "This is a test";
             const string messageValue2 = "This is the message after update";
 
-            FakeConfigurationSource configSource = new()
-            {
-                InitialData = new Dictionary<string, string?>
+            FakeConfigurationSource configSource =
+                new()
                 {
-                    [messageConfigKey] = messageValue1
-                }
-            };
+                    InitialData = new Dictionary<string, string?>
+                    {
+                        [messageConfigKey] = messageValue1
+                    }
+                };
 
             var services = new ServiceCollection();
-            services.AddSingleton<IConfiguration>(new ConfigurationBuilder()
-                    .Add(configSource)
-                    .Build());
+            services.AddSingleton<IConfiguration>(
+                new ConfigurationBuilder().Add(configSource).Build()
+            );
             OptionsBuilder<FakeOptions> optionsBuilder = services.AddOptions<FakeOptions>();
             _ = optionsBuilder.BindConfiguration(configSectionName);
             using ServiceProvider serviceProvider = services.BuildServiceProvider();
             var optionsMonitor = serviceProvider.GetRequiredService<IOptionsMonitor<FakeOptions>>();
             bool updateHasRun = false;
-            optionsMonitor.OnChange((opts, name) =>
-            {
-                updateHasRun = true;
-            });
+            optionsMonitor.OnChange(
+                (opts, name) =>
+                {
+                    updateHasRun = true;
+                }
+            );
             FakeOptions optionsValue1 = optionsMonitor.CurrentValue;
             Assert.Equal(messageValue1, optionsValue1.Message);
             configSource.Provider.Set(messageConfigKey, messageValue2);

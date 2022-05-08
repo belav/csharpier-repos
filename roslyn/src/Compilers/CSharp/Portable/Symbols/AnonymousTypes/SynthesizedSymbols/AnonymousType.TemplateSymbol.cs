@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Represents an anonymous type 'template' which is a generic type to be used for all 
+        /// Represents an anonymous type 'template' which is a generic type to be used for all
         /// anonymous type having the same structure, i.e. the same number of fields and field names.
         /// </summary>
         internal sealed class AnonymousTypeTemplateSymbol : NamedTypeSymbol
@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private readonly ImmutableArray<TypeParameterSymbol> _typeParameters;
             private readonly ImmutableArray<Symbol> _members;
 
-            /// <summary> This list consists of synthesized method symbols for ToString, 
+            /// <summary> This list consists of synthesized method symbols for ToString,
             /// Equals and GetHashCode which are not part of symbol table </summary>
             internal readonly ImmutableArray<MethodSymbol> SpecialMembers;
 
@@ -51,25 +51,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal readonly ImmutableArray<AnonymousTypePropertySymbol> Properties;
 
             /// <summary> Maps member names to symbol(s) </summary>
-            private readonly MultiDictionary<string, Symbol> _nameToSymbols = new MultiDictionary<string, Symbol>();
+            private readonly MultiDictionary<string, Symbol> _nameToSymbols =
+                new MultiDictionary<string, Symbol>();
 
             /// <summary> Anonymous type manager owning this template </summary>
             internal readonly AnonymousTypeManager Manager;
 
-            /// <summary> Smallest location of the template, actually contains the smallest location 
+            /// <summary> Smallest location of the template, actually contains the smallest location
             /// of all the anonymous type instances created using this template during EMIT </summary>
             private Location _smallestLocation;
 
             /// <summary> Key pf the anonymous type descriptor </summary>
             internal readonly string TypeDescriptorKey;
 
-            internal AnonymousTypeTemplateSymbol(AnonymousTypeManager manager, AnonymousTypeDescriptor typeDescr)
+            internal AnonymousTypeTemplateSymbol(
+                AnonymousTypeManager manager,
+                AnonymousTypeDescriptor typeDescr
+            )
             {
                 this.Manager = manager;
                 this.TypeDescriptorKey = typeDescr.Key;
                 _smallestLocation = typeDescr.Location;
 
-                // Will be set when the type's metadata is ready to be emitted, 
+                // Will be set when the type's metadata is ready to be emitted,
                 // <anonymous-type>.Name will throw exception if requested
                 // before that moment.
                 _nameAndIndex = null;
@@ -79,8 +83,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 // members
                 var membersBuilder = ArrayBuilder<Symbol>.GetInstance(membersCount);
-                var propertiesBuilder = ArrayBuilder<AnonymousTypePropertySymbol>.GetInstance(fieldsCount);
-                var typeParametersBuilder = ArrayBuilder<TypeParameterSymbol>.GetInstance(fieldsCount);
+                var propertiesBuilder = ArrayBuilder<AnonymousTypePropertySymbol>.GetInstance(
+                    fieldsCount
+                );
+                var typeParametersBuilder = ArrayBuilder<TypeParameterSymbol>.GetInstance(
+                    fieldsCount
+                );
 
                 // Process fields
                 for (int fieldIndex = 0; fieldIndex < fieldsCount; fieldIndex++)
@@ -88,12 +96,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     AnonymousTypeField field = typeDescr.Fields[fieldIndex];
 
                     // Add a type parameter
-                    AnonymousTypeParameterSymbol typeParameter =
-                        new AnonymousTypeParameterSymbol(this, fieldIndex, GeneratedNames.MakeAnonymousTypeParameterName(field.Name));
+                    AnonymousTypeParameterSymbol typeParameter = new AnonymousTypeParameterSymbol(
+                        this,
+                        fieldIndex,
+                        GeneratedNames.MakeAnonymousTypeParameterName(field.Name)
+                    );
                     typeParametersBuilder.Add(typeParameter);
 
                     // Add a property
-                    AnonymousTypePropertySymbol property = new AnonymousTypePropertySymbol(this, field, TypeWithAnnotations.Create(typeParameter), fieldIndex);
+                    AnonymousTypePropertySymbol property = new AnonymousTypePropertySymbol(
+                        this,
+                        field,
+                        TypeWithAnnotations.Create(typeParameter),
+                        fieldIndex
+                    );
                     propertiesBuilder.Add(property);
 
                     // Property related symbols
@@ -120,22 +136,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.SpecialMembers = ImmutableArray.Create<MethodSymbol>(
                     new AnonymousTypeEqualsMethodSymbol(this),
                     new AnonymousTypeGetHashCodeMethodSymbol(this),
-                    new AnonymousTypeToStringMethodSymbol(this));
+                    new AnonymousTypeToStringMethodSymbol(this)
+                );
             }
 
-            protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-                => throw ExceptionUtilities.Unreachable;
+            protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+                throw ExceptionUtilities.Unreachable;
 
             internal AnonymousTypeKey GetAnonymousTypeKey()
             {
-                var properties = Properties.SelectAsArray(p => new AnonymousTypeKeyField(p.Name, isKey: false, ignoreCase: false));
+                var properties = Properties.SelectAsArray(
+                    p => new AnonymousTypeKeyField(p.Name, isKey: false, ignoreCase: false)
+                );
                 return new AnonymousTypeKey(properties);
             }
 
             /// <summary>
-            /// Smallest location of the template, actually contains the smallest location 
+            /// Smallest location of the template, actually contains the smallest location
             /// of all the anonymous type instances created using this template during EMIT;
-            /// 
+            ///
             /// NOTE: if this property is queried, smallest location must not be null.
             /// </summary>
             internal Location SmallestLocation
@@ -149,20 +168,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal NameAndIndex NameAndIndex
             {
-                get
-                {
-                    return _nameAndIndex;
-                }
+                get { return _nameAndIndex; }
                 set
                 {
                     var oldValue = Interlocked.CompareExchange(ref _nameAndIndex, value, null);
-                    Debug.Assert(oldValue == null ||
-                        ((oldValue.Name == value.Name) && (oldValue.Index == value.Index)));
+                    Debug.Assert(
+                        oldValue == null
+                            || ((oldValue.Name == value.Name) && (oldValue.Index == value.Index))
+                    );
                 }
             }
 
             /// <summary>
-            /// In emit phase every time a created anonymous type is referenced we try to store the lowest 
+            /// In emit phase every time a created anonymous type is referenced we try to store the lowest
             /// location of the template. It will be used for ordering templates and assigning emitted type names.
             /// </summary>
             internal void AdjustLocation(Location location)
@@ -171,17 +189,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 while (true)
                 {
-                    // Loop until we managed to set location OR we detected that we don't need to set it 
+                    // Loop until we managed to set location OR we detected that we don't need to set it
                     // in case 'location' in type descriptor is bigger that the one in smallestLocation
 
                     Location currentSmallestLocation = _smallestLocation;
-                    if (currentSmallestLocation != null && this.Manager.Compilation.CompareSourceLocations(currentSmallestLocation, location) < 0)
+                    if (
+                        currentSmallestLocation != null
+                        && this.Manager.Compilation.CompareSourceLocations(
+                            currentSmallestLocation,
+                            location
+                        ) < 0
+                    )
                     {
                         // The template's smallest location do not need to be changed
                         return;
                     }
 
-                    if (ReferenceEquals(Interlocked.CompareExchange(ref _smallestLocation, location, currentSmallestLocation), currentSmallestLocation))
+                    if (
+                        ReferenceEquals(
+                            Interlocked.CompareExchange(
+                                ref _smallestLocation,
+                                location,
+                                currentSmallestLocation
+                            ),
+                            currentSmallestLocation
+                        )
+                    )
                     {
                         // Changed successfully, proceed to updating the fields
                         return;
@@ -328,7 +361,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return Accessibility.Internal; }
             }
 
-            internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+            internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
@@ -338,7 +373,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
-            internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics => this.Manager.System_Object;
+            internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+                this.Manager.System_Object;
 
             public override TypeKind TypeKind
             {
@@ -357,10 +393,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
             {
-                get
-                {
-                    return ImmutableArray<SyntaxReference>.Empty;
-                }
+                get { return ImmutableArray<SyntaxReference>.Empty; }
             }
 
             public override bool IsStatic
@@ -373,12 +406,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return this; }
             }
 
-            internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+            internal override NamedTypeSymbol GetDeclaredBaseType(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return this.Manager.System_Object;
             }
 
-            internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+            internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+                ConsList<TypeSymbol> basesBeingResolved
+            )
             {
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
@@ -438,7 +475,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return AttributeUsageInfo.Null;
             }
 
-            internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable;
+            internal sealed override NamedTypeSymbol AsNativeInteger() =>
+                throw ExceptionUtilities.Unreachable;
 
             internal sealed override NamedTypeSymbol NativeIntegerUnderlyingType => null;
 
@@ -446,16 +484,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             internal override bool IsRecordStruct => false;
 
-            internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+            internal override void AddSynthesizedAttributes(
+                PEModuleBuilder moduleBuilder,
+                ref ArrayBuilder<SynthesizedAttributeData> attributes
+            )
             {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
-                AddSynthesizedAttribute(ref attributes, Manager.Compilation.TrySynthesizeAttribute(
-                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    Manager.Compilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                    )
+                );
 
                 if (Manager.Compilation.Options.OptimizationLevel == OptimizationLevel.Debug)
                 {
-                    AddSynthesizedAttribute(ref attributes, TrySynthesizeDebuggerDisplayAttribute());
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        TrySynthesizeDebuggerDisplayAttribute()
+                    );
                 }
             }
 
@@ -506,10 +554,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 return Manager.Compilation.TrySynthesizeAttribute(
                     WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__ctor,
-                    arguments: ImmutableArray.Create(new TypedConstant(Manager.System_String, TypedConstantKind.Primitive, displayString)),
-                    namedArguments: ImmutableArray.Create(new KeyValuePair<WellKnownMember, TypedConstant>(
-                                        WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__Type,
-                                        new TypedConstant(Manager.System_String, TypedConstantKind.Primitive, "<Anonymous Type>"))));
+                    arguments: ImmutableArray.Create(
+                        new TypedConstant(
+                            Manager.System_String,
+                            TypedConstantKind.Primitive,
+                            displayString
+                        )
+                    ),
+                    namedArguments: ImmutableArray.Create(
+                        new KeyValuePair<WellKnownMember, TypedConstant>(
+                            WellKnownMember.System_Diagnostics_DebuggerDisplayAttribute__Type,
+                            new TypedConstant(
+                                Manager.System_String,
+                                TypedConstantKind.Primitive,
+                                "<Anonymous Type>"
+                            )
+                        )
+                    )
+                );
             }
 
             internal override bool HasPossibleWellKnownCloneMethod() => false;

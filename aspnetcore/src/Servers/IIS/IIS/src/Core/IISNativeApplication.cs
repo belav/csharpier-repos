@@ -38,13 +38,21 @@ internal class IISNativeApplication
     }
 
     public unsafe void RegisterCallbacks(
-        delegate* unmanaged<IntPtr, IntPtr, NativeMethods.REQUEST_NOTIFICATION_STATUS> requestCallback,
+        delegate* unmanaged<
+            IntPtr,
+            IntPtr,
+            NativeMethods.REQUEST_NOTIFICATION_STATUS> requestCallback,
         delegate* unmanaged<IntPtr, int> shutdownCallback,
         delegate* unmanaged<IntPtr, void> disconnectCallback,
-        delegate* unmanaged<IntPtr, int, int, NativeMethods.REQUEST_NOTIFICATION_STATUS> asyncCallback,
+        delegate* unmanaged<
+            IntPtr,
+            int,
+            int,
+            NativeMethods.REQUEST_NOTIFICATION_STATUS> asyncCallback,
         delegate* unmanaged<IntPtr, void> requestsDrainedHandler,
         IntPtr pvRequestContext,
-        IntPtr pvShutdownContext)
+        IntPtr pvShutdownContext
+    )
     {
         NativeMethods.HttpRegisterCallbacks(
             _nativeApplication,
@@ -54,7 +62,8 @@ internal class IISNativeApplication
             asyncCallback,
             requestsDrainedHandler,
             pvRequestContext,
-            pvShutdownContext);
+            pvShutdownContext
+        );
     }
 
     public void Dispose()

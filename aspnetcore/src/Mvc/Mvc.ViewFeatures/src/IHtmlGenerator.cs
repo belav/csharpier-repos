@@ -71,7 +71,8 @@ public interface IHtmlGenerator
         string hostname,
         string fragment,
         object routeValues,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;a&gt; element for a link to an action.
@@ -105,7 +106,8 @@ public interface IHtmlGenerator
         string hostname,
         string fragment,
         object routeValues,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate an &lt;input type="hidden".../&gt; element containing an antiforgery token.
@@ -136,7 +138,8 @@ public interface IHtmlGenerator
         ModelExplorer modelExplorer,
         string expression,
         bool? isChecked,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate an additional &lt;input type="hidden".../&gt; for checkboxes. This addresses scenarios where
@@ -146,7 +149,8 @@ public interface IHtmlGenerator
     TagBuilder GenerateHiddenForCheckbox(
         ViewContext viewContext,
         ModelExplorer modelExplorer,
-        string expression);
+        string expression
+    );
 
     /// <summary>
     /// Generate a &lt;form&gt; element. When the user submits the form, the action with name
@@ -175,7 +179,8 @@ public interface IHtmlGenerator
         string controllerName,
         object routeValues,
         string method,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;form&gt; element. When the user submits the form, the page with name
@@ -206,7 +211,8 @@ public interface IHtmlGenerator
         object routeValues,
         string fragment,
         string method,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;form&gt; element. The route with name <paramref name="routeName"/> generates the
@@ -233,7 +239,8 @@ public interface IHtmlGenerator
         string routeName,
         object routeValues,
         string method,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;input type="hidden"&gt; element
@@ -256,7 +263,8 @@ public interface IHtmlGenerator
         string expression,
         object value,
         bool useViewData,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;label&gt; element
@@ -277,7 +285,8 @@ public interface IHtmlGenerator
         ModelExplorer modelExplorer,
         string expression,
         string labelText,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;input type="password"&gt; element
@@ -298,7 +307,8 @@ public interface IHtmlGenerator
         ModelExplorer modelExplorer,
         string expression,
         object value,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;input type="radio"&gt; element
@@ -321,7 +331,8 @@ public interface IHtmlGenerator
         string expression,
         object value,
         bool? isChecked,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;a&gt; element for a link to an action.
@@ -353,7 +364,8 @@ public interface IHtmlGenerator
         string hostName,
         string fragment,
         object routeValues,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;select&gt; element for the <paramref name="expression"/>.
@@ -396,7 +408,8 @@ public interface IHtmlGenerator
         string expression,
         IEnumerable<SelectListItem> selectList,
         bool allowMultiple,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a &lt;select&gt; element for the <paramref name="expression"/>.
@@ -446,7 +459,8 @@ public interface IHtmlGenerator
         IEnumerable<SelectListItem> selectList,
         ICollection<string> currentValues,
         bool allowMultiple,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generates &lt;optgroup&gt; and &lt;option&gt; elements.
@@ -459,7 +473,10 @@ public interface IHtmlGenerator
     /// <returns>
     /// An <see cref="IHtmlContent"/> instance for &lt;optgroup&gt; and &lt;option&gt; elements.
     /// </returns>
-    IHtmlContent GenerateGroupsAndOptions(string optionLabel, IEnumerable<SelectListItem> selectList);
+    IHtmlContent GenerateGroupsAndOptions(
+        string optionLabel,
+        IEnumerable<SelectListItem> selectList
+    );
 
     /// <summary>
     /// Generates a &lt;textarea&gt; element
@@ -482,7 +499,8 @@ public interface IHtmlGenerator
         string expression,
         int rows,
         int columns,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generates a &lt;input type="text"&gt; element
@@ -505,7 +523,8 @@ public interface IHtmlGenerator
         string expression,
         object value,
         string format,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generate a <paramref name="tag"/> element if the <paramref name="viewContext"/>'s
@@ -535,7 +554,8 @@ public interface IHtmlGenerator
         string expression,
         string message,
         string tag,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Generates a &lt;div&gt; element which contains a list of validation errors.
@@ -556,7 +576,8 @@ public interface IHtmlGenerator
         bool excludePropertyErrors,
         string message,
         string headerTag,
-        object htmlAttributes);
+        object htmlAttributes
+    );
 
     /// <summary>
     /// Gets the collection of current values for the given <paramref name="expression"/>.
@@ -596,5 +617,6 @@ public interface IHtmlGenerator
         ViewContext viewContext,
         ModelExplorer modelExplorer,
         string expression,
-        bool allowMultiple);
+        bool allowMultiple
+    );
 }

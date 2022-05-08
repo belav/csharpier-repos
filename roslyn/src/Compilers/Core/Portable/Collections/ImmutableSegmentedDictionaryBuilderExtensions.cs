@@ -11,8 +11,8 @@ namespace Microsoft.CodeAnalysis.Collections
     {
         public static bool TryAdd<T>(
             this ImmutableSegmentedDictionary<T, VoidResult>.Builder dictionary,
-            T value)
-            where T : notnull
+            T value
+        ) where T : notnull
         {
 #if NETCOREAPP
             return dictionary.TryAdd(value, default);

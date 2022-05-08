@@ -15,7 +15,10 @@ namespace System
     {
         internal static uint GetExceptionCount()
         {
-            return (uint)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT);
+            return (uint)
+                EventPipeInternal.GetRuntimeCounterValue(
+                    EventPipeInternal.RuntimeCounters.EXCEPTION_COUNT
+                );
         }
 
         internal readonly struct DispatchState
@@ -74,9 +77,23 @@ namespace System
 
                 if (foreignExceptionsFrames != null)
                 {
-                    var combinedStackFrames = new MonoStackFrame[stackFrames.Length + foreignExceptionsFrames.Length];
-                    Array.Copy(foreignExceptionsFrames, 0, combinedStackFrames, 0, foreignExceptionsFrames.Length);
-                    Array.Copy(stackFrames, 0, combinedStackFrames, foreignExceptionsFrames.Length, stackFrames.Length);
+                    var combinedStackFrames = new MonoStackFrame[
+                        stackFrames.Length + foreignExceptionsFrames.Length
+                    ];
+                    Array.Copy(
+                        foreignExceptionsFrames,
+                        0,
+                        combinedStackFrames,
+                        0,
+                        foreignExceptionsFrames.Length
+                    );
+                    Array.Copy(
+                        stackFrames,
+                        0,
+                        combinedStackFrames,
+                        foreignExceptionsFrames.Length,
+                        stackFrames.Length
+                    );
 
                     stackFrames = combinedStackFrames;
                 }
@@ -109,8 +126,11 @@ namespace System
             return true; // mono runtime doesn't have immutable agile exceptions, always return true
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The API will return null if the metadata for current method cannot be established.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The API will return null if the metadata for current method cannot be established."
+        )]
         private string? CreateSourceName()
         {
             var st = new StackTrace(this, fNeedFileInfo: false);

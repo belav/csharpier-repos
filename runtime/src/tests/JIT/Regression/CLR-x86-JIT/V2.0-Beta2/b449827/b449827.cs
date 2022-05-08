@@ -7,7 +7,8 @@ internal class MainApp
 {
     public static int Main(string[] args)
     {
-        int a, prev;
+        int a,
+            prev;
 
         Console.WriteLine("\n========== Case 1 (wrong result) ==========");
 
@@ -16,7 +17,8 @@ internal class MainApp
 
         a += 0x12345678;
 
-        if (a < 0) a = -a;
+        if (a < 0)
+            a = -a;
         Console.WriteLine("a2={0}", a);
 
         prev = a;
@@ -30,7 +32,8 @@ internal class MainApp
         a += 0x12345678;
         a.ToString();
 
-        if (a < 0) a = -a;
+        if (a < 0)
+            a = -a;
         Console.WriteLine("a2={0}", a);
 
         Console.WriteLine("prev={0}, a3={1}", prev, a);
@@ -48,4 +51,3 @@ internal class MainApp
         }
     }
 }
-

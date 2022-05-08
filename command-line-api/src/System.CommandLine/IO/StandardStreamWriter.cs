@@ -82,7 +82,7 @@ namespace System.CommandLine.IO
             {
                 _writer.Write(value.ToString());
             }
-            
+
             public override void Write(string value)
             {
                 _writer.Write(value);

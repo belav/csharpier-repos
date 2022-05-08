@@ -8,8 +8,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal sealed class CompilationUnitCompletedEvent : CompilationEvent
     {
-        public CompilationUnitCompletedEvent(Compilation compilation, SyntaxTree compilationUnit, TextSpan? filterSpan = null)
-            : base(compilation)
+        public CompilationUnitCompletedEvent(
+            Compilation compilation,
+            SyntaxTree compilationUnit,
+            TextSpan? filterSpan = null
+        ) : base(compilation)
         {
             this.CompilationUnit = compilationUnit;
             this.FilterSpan = filterSpan;
@@ -29,7 +32,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         public TextSpan? FilterSpan { get; }
 
-        public override string ToString()
-            => $"CompilationUnitCompletedEvent({CompilationUnit.FilePath}){FilterSpan}";
+        public override string ToString() =>
+            $"CompilationUnitCompletedEvent({CompilationUnit.FilePath}){FilterSpan}";
     }
 }

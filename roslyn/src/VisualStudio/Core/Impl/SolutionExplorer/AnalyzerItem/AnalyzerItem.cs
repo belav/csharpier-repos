@@ -17,8 +17,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private readonly AnalyzerReference _analyzerReference;
         private readonly IContextMenuController _contextMenuController;
 
-        public AnalyzerItem(AnalyzersFolderItem analyzersFolder, AnalyzerReference analyzerReference, IContextMenuController contextMenuController)
-            : base(GetNameText(analyzerReference))
+        public AnalyzerItem(
+            AnalyzersFolderItem analyzersFolder,
+            AnalyzerReference analyzerReference,
+            IContextMenuController contextMenuController
+        ) : base(GetNameText(analyzerReference))
         {
             _analyzersFolder = analyzersFolder;
             _analyzerReference = analyzerReference;
@@ -27,10 +30,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public override ImageMoniker IconMoniker
         {
-            get
-            {
-                return KnownMonikers.CodeInformation;
-            }
+            get { return KnownMonikers.CodeInformation; }
         }
 
         public override ImageMoniker OverlayIconMoniker

@@ -13,7 +13,8 @@ public class FormValueProviderTest : EnumerableValueProviderTest
     protected override IEnumerableValueProvider GetEnumerableValueProvider(
         BindingSource bindingSource,
         Dictionary<string, StringValues> values,
-        CultureInfo culture)
+        CultureInfo culture
+    )
     {
         var backingStore = new FormCollection(values);
         return new FormValueProvider(bindingSource, backingStore, culture);

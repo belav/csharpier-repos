@@ -12,10 +12,17 @@ public class BoundAttributeDescriptorTest
     {
         var expectedPropertyName = "PropertyName";
 
-        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+        var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+            TagHelperConventions.DefaultKind,
+            "TestTagHelper",
+            "Test"
+        );
         _ = tagHelperBuilder.TypeName("TestTagHelper");
 
-        var intBuilder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+        var intBuilder = new DefaultBoundAttributeDescriptorBuilder(
+            tagHelperBuilder,
+            TagHelperConventions.DefaultKind
+        );
         _ = intBuilder
             .Name("test")
             .PropertyName(expectedPropertyName)
@@ -23,7 +30,10 @@ public class BoundAttributeDescriptorTest
 
         var intDescriptor = intBuilder.Build();
 
-        var stringBuilder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+        var stringBuilder = new DefaultBoundAttributeDescriptorBuilder(
+            tagHelperBuilder,
+            TagHelperConventions.DefaultKind
+        );
         _ = stringBuilder
             .Name("test")
             .PropertyName(expectedPropertyName)

@@ -23,11 +23,18 @@ public class CollectDumpAttribute : Attribute, ITestMethodLifecycle
         return Task.CompletedTask;
     }
 
-    public Task OnTestEndAsync(TestContext context, Exception exception, CancellationToken cancellationToken)
+    public Task OnTestEndAsync(
+        TestContext context,
+        Exception exception,
+        CancellationToken cancellationToken
+    )
     {
         if (exception != null)
         {
-            var path = Path.Combine(context.FileOutput.TestClassOutputDirectory, context.FileOutput.GetUniqueFileName(context.FileOutput.TestName, ".dmp"));
+            var path = Path.Combine(
+                context.FileOutput.TestClassOutputDirectory,
+                context.FileOutput.GetUniqueFileName(context.FileOutput.TestName, ".dmp")
+            );
             var process = Process.GetCurrentProcess();
             DumpCollector.Collect(process, path);
         }

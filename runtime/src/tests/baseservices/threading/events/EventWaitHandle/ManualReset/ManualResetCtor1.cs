@@ -28,8 +28,8 @@ class ManualResetCtor
         ewh.Reset();
 
         // when doing another wait, it should not return until set.
-        bool b = ewh.WaitOne(5000);//, false);
-        if(b)
+        bool b = ewh.WaitOne(5000); //, false);
+        if (b)
             Console.WriteLine("Event didn't reset!");
         else
             iRet = 100;
@@ -37,7 +37,7 @@ class ManualResetCtor
         Console.WriteLine(100 == iRet ? "Test Passed" : "Test Failed");
         return iRet;
     }
-    
+
     private void ThreadWorker()
     {
         // This should return immediately

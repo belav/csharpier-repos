@@ -27,7 +27,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("NoTracking " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)));
+                ActualMessage(
+                    s =>
+                        CreateOptionsBuilder(s)
+                            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                )
+            );
         }
 
         [ConditionalFact]
@@ -35,45 +40,55 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("SensitiveDataLoggingEnabled " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s).EnableSensitiveDataLogging()));
+                ActualMessage(s => CreateOptionsBuilder(s).EnableSensitiveDataLogging())
+            );
         }
 
-        protected virtual string ExpectedMessage(string optionsFragment)
-            => CoreResources.LogContextInitialized(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                ProductInfo.GetVersion(),
-                nameof(LoggingContext),
-                ProviderName,
-                ProviderVersion,
-                optionsFragment ?? "None").Trim();
+        protected virtual string ExpectedMessage(string optionsFragment) =>
+            CoreResources
+                .LogContextInitialized(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(
+                    ProductInfo.GetVersion(),
+                    nameof(LoggingContext),
+                    ProviderName,
+                    ProviderVersion,
+                    optionsFragment ?? "None"
+                )
+                .Trim();
 
-        protected abstract DbContextOptionsBuilder CreateOptionsBuilder(IServiceCollection services);
+        protected abstract DbContextOptionsBuilder CreateOptionsBuilder(
+            IServiceCollection services
+        );
 
         protected abstract string ProviderName { get; }
 
         protected abstract string ProviderVersion { get; }
 
-        protected virtual string DefaultOptions
-            => null;
+        protected virtual string DefaultOptions => null;
 
-        protected virtual string ActualMessage(Func<IServiceCollection, DbContextOptionsBuilder> optionsActions)
+        protected virtual string ActualMessage(
+            Func<IServiceCollection, DbContextOptionsBuilder> optionsActions
+        )
         {
             var loggerFactory = new ListLoggerFactory();
-            var optionsBuilder = optionsActions(new ServiceCollection().AddSingleton<ILoggerFactory>(loggerFactory));
+            var optionsBuilder = optionsActions(
+                new ServiceCollection().AddSingleton<ILoggerFactory>(loggerFactory)
+            );
 
             using (var context = new LoggingContext(optionsBuilder))
             {
                 var _ = context.Model;
             }
 
-            return loggerFactory.Log.Single(t => t.Id.Id == CoreEventId.ContextInitialized.Id).Message;
+            return loggerFactory.Log
+                .Single(t => t.Id.Id == CoreEventId.ContextInitialized.Id)
+                .Message;
         }
 
         protected class LoggingContext : DbContext
         {
             public LoggingContext(DbContextOptionsBuilder optionsBuilder)
-                : base(optionsBuilder.Options)
-            {
-            }
+                : base(optionsBuilder.Options) { }
         }
     }
 }

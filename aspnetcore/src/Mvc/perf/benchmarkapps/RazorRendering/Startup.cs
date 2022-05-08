@@ -23,11 +23,13 @@ public class Startup
     {
         app.UseRouting();
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-            endpoints.MapRazorPages();
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+            }
+        );
     }
 
     private static List<DataA> DataA = GenerateDataA();
@@ -38,7 +40,17 @@ public class Startup
 
         foreach (var i in Enumerable.Range(0, 100))
         {
-            dataA.Add(new DataA(i, new HtmlString(i.ToString()), new HtmlString(i.ToString()), i.ToString(), i, i, 60f / i));
+            dataA.Add(
+                new DataA(
+                    i,
+                    new HtmlString(i.ToString()),
+                    new HtmlString(i.ToString()),
+                    i.ToString(),
+                    i,
+                    i,
+                    60f / i
+                )
+            );
         }
 
         return dataA;
@@ -60,8 +72,7 @@ public class Startup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }

@@ -19,11 +19,11 @@ public class HeaderModelBinderProviderTest
         get
         {
             return new TheoryData<BindingSource>()
-                {
-                    BindingSource.Body,
-                    BindingSource.Form,
-                    null,
-                };
+            {
+                BindingSource.Body,
+                BindingSource.Form,
+                null,
+            };
         }
     }
 
@@ -75,7 +75,9 @@ public class HeaderModelBinderProviderTest
     [InlineData(typeof(DateTime?))]
     [InlineData(typeof(double?))]
     [InlineData(typeof(CarEnumType?))]
-    public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForNullableSimpleTypes(Type modelType)
+    public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForNullableSimpleTypes(
+        Type modelType
+    )
     {
         // Arrange
         var provider = new HeaderModelBinderProvider();
@@ -101,7 +103,9 @@ public class HeaderModelBinderProviderTest
     [InlineData(typeof(IEnumerable<decimal>))]
     [InlineData(typeof(List<double>))]
     [InlineData(typeof(ICollection<CarEnumType>))]
-    public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForCollectionOfSimpleTypes(Type modelType)
+    public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForCollectionOfSimpleTypes(
+        Type modelType
+    )
     {
         // Arrange
         var provider = new HeaderModelBinderProvider();
@@ -123,7 +127,9 @@ public class HeaderModelBinderProviderTest
     [InlineData(typeof(IEnumerable<CustomerStruct>))]
     [InlineData(typeof(Person))]
     [InlineData(typeof(IEnumerable<Person>))]
-    public void Create_WhenBindingSourceIsFromHeader_ReturnsNull_ForNonSimpleModelType(Type modelType)
+    public void Create_WhenBindingSourceIsFromHeader_ReturnsNull_ForNonSimpleModelType(
+        Type modelType
+    )
     {
         // Arrange
         var provider = new HeaderModelBinderProvider();
@@ -145,7 +151,8 @@ public class HeaderModelBinderProviderTest
     [InlineData(typeof(CustomerStructWithTypeConverter))]
     [InlineData(typeof(IEnumerable<CustomerStructWithTypeConverter>))]
     public void Create_WhenBindingSourceIsFromHeader_ReturnsBinder_ForNonSimpleModelType_HavingTypeConverter(
-        Type modelType)
+        Type modelType
+    )
     {
         // Arrange
         var provider = new HeaderModelBinderProvider();

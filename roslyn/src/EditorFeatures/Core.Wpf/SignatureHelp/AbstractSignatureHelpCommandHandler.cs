@@ -15,8 +15,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
 {
-    internal abstract class AbstractSignatureHelpCommandHandler :
-        ForegroundThreadAffinitizedObject
+    internal abstract class AbstractSignatureHelpCommandHandler : ForegroundThreadAffinitizedObject
     {
         private readonly SignatureHelpControllerProvider _controllerProvider;
         private readonly IGlobalOptionService _globalOptions;
@@ -24,8 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         public AbstractSignatureHelpCommandHandler(
             IThreadingContext threadingContext,
             SignatureHelpControllerProvider controllerProvider,
-            IGlobalOptionService globalOptions)
-            : base(threadingContext)
+            IGlobalOptionService globalOptions
+        ) : base(threadingContext)
         {
             _controllerProvider = controllerProvider;
             _globalOptions = globalOptions;
@@ -38,9 +37,14 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             // If args is `InvokeSignatureHelpCommandArgs` then sig help was explicitly invoked by the user and should
             // be shown whether or not the option is set.
             var languageName = args.SubjectBuffer.GetLanguageName();
-            if (args is not InvokeSignatureHelpCommandArgs &&
-                languageName != null &&
-                !_globalOptions.GetOption(SignatureHelpViewOptions.ShowSignatureHelp, languageName))
+            if (
+                args is not InvokeSignatureHelpCommandArgs
+                && languageName != null
+                && !_globalOptions.GetOption(
+                    SignatureHelpViewOptions.ShowSignatureHelp,
+                    languageName
+                )
+            )
             {
                 controller = null;
                 return false;

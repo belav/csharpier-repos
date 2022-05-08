@@ -21,6 +21,7 @@
             {
                 BP2 = new HashSet<A>();
             }
+
             public int BP1 { get; set; }
             public ICollection<A> BP2 { get; set; }
         }
@@ -37,6 +38,7 @@
             {
                 BP2 = new HashSet<AEntity>();
             }
+
             public int BP1 { get; set; }
             public ICollection<AEntity> BP2 { get; set; }
         }
@@ -46,11 +48,13 @@
             [Fact]
             public void Should_not_throw_exception()
             {
-                var config = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateMap<BEntity, B>();
-                    cfg.CreateMap<AEntity, A>();
-                });
+                var config = new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateMap<BEntity, B>();
+                        cfg.CreateMap<AEntity, A>();
+                    }
+                );
                 //config.AssertConfigurationIsValid();
 
                 var be = new BEntity();

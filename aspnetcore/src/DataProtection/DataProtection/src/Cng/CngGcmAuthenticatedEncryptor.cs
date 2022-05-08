@@ -37,14 +37,26 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
     private readonly BCryptAlgorithmHandle _symmetricAlgorithmHandle;
     private readonly uint _symmetricAlgorithmSubkeyLengthInBytes;
 
-    public CngGcmAuthenticatedEncryptor(Secret keyDerivationKey, BCryptAlgorithmHandle symmetricAlgorithmHandle, uint symmetricAlgorithmKeySizeInBytes, IBCryptGenRandom? genRandom = null)
+    public CngGcmAuthenticatedEncryptor(
+        Secret keyDerivationKey,
+        BCryptAlgorithmHandle symmetricAlgorithmHandle,
+        uint symmetricAlgorithmKeySizeInBytes,
+        IBCryptGenRandom? genRandom = null
+    )
     {
         // Is the key size appropriate?
-        AlgorithmAssert.IsAllowableSymmetricAlgorithmKeySize(checked(symmetricAlgorithmKeySizeInBytes * 8));
-        CryptoUtil.Assert(symmetricAlgorithmHandle.GetCipherBlockLength() == 128 / 8, "GCM requires a block cipher algorithm with a 128-bit block size.");
+        AlgorithmAssert.IsAllowableSymmetricAlgorithmKeySize(
+            checked(symmetricAlgorithmKeySizeInBytes * 8)
+        );
+        CryptoUtil.Assert(
+            symmetricAlgorithmHandle.GetCipherBlockLength() == 128 / 8,
+            "GCM requires a block cipher algorithm with a 128-bit block size."
+        );
 
         _genRandom = genRandom ?? BCryptGenRandomImpl.Instance;
-        _sp800_108_ctr_hmac_provider = SP800_108_CTR_HMACSHA512Util.CreateProvider(keyDerivationKey);
+        _sp800_108_ctr_hmac_provider = SP800_108_CTR_HMACSHA512Util.CreateProvider(
+            keyDerivationKey
+        );
         _symmetricAlgorithmHandle = symmetricAlgorithmHandle;
         _symmetricAlgorithmSubkeyLengthInBytes = symmetricAlgorithmKeySizeInBytes;
         _contextHeader = CreateContextHeader();
@@ -52,14 +64,17 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
 
     private byte[] CreateContextHeader()
     {
-        var retVal = new byte[checked(
-            1 /* KDF alg */
-            + 1 /* chaining mode */
-            + sizeof(uint) /* sym alg key size */
-            + sizeof(uint) /* GCM nonce size */
-            + sizeof(uint) /* sym alg block size */
-            + sizeof(uint) /* GCM tag size */
-            + TAG_SIZE_IN_BYTES /* tag of GCM-encrypted empty string */)];
+        var retVal = new byte[
+            checked(
+                1 /* KDF alg */
+                + 1 /* chaining mode */
+                + sizeof(uint) /* sym alg key size */
+                + sizeof(uint) /* GCM nonce size */
+                + sizeof(uint) /* sym alg block size */
+                + sizeof(uint) /* GCM tag size */
+                + TAG_SIZE_IN_BYTES /* tag of GCM-encrypted empty string */
+            )
+        ];
 
         fixed (byte* pbRetVal = retVal)
         {
@@ -90,7 +105,8 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
                         pbContext: &dummy,
                         cbContext: 0,
                         pbDerivedKey: pbTempKeys,
-                        cbDerivedKey: (uint)tempKeys.Length);
+                        cbDerivedKey: (uint)tempKeys.Length
+                    );
                 }
 
                 // Encrypt a zero-length input string with an all-zero nonce and copy the tag to the return buffer.
@@ -103,7 +119,8 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
                     pbPlaintextData: &dummy,
                     cbPlaintextData: 0,
                     pbEncryptedData: &dummy,
-                    pbTag: ptr);
+                    pbTag: ptr
+                );
             }
 
             ptr += TAG_SIZE_IN_BYTES;
@@ -114,7 +131,12 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
         return retVal;
     }
 
-    protected override byte[] DecryptImpl(byte* pbCiphertext, uint cbCiphertext, byte* pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData)
+    protected override byte[] DecryptImpl(
+        byte* pbCiphertext,
+        uint cbCiphertext,
+        byte* pbAdditionalAuthenticatedData,
+        uint cbAdditionalAuthenticatedData
+    )
     {
         // Argument checking: input must at the absolute minimum contain a key modifier, nonce, and tag
         if (cbCiphertext < KEY_MODIFIER_SIZE_IN_BYTES + NONCE_SIZE_IN_BYTES + TAG_SIZE_IN_BYTES)
@@ -124,7 +146,9 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
 
         // Assumption: pbCipherText := { keyModifier || nonce || encryptedData || authenticationTag }
 
-        var cbPlaintext = checked(cbCiphertext - (KEY_MODIFIER_SIZE_IN_BYTES + NONCE_SIZE_IN_BYTES + TAG_SIZE_IN_BYTES));
+        var cbPlaintext = checked(
+            cbCiphertext - (KEY_MODIFIER_SIZE_IN_BYTES + NONCE_SIZE_IN_BYTES + TAG_SIZE_IN_BYTES)
+        );
 
         var retVal = new byte[cbPlaintext];
         fixed (byte* pbRetVal = retVal)
@@ -137,7 +161,8 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
 
             // Use the KDF to recreate the symmetric block cipher key
             // We'll need a temporary buffer to hold the symmetric encryption subkey
-            byte* pbSymmetricDecryptionSubkey = stackalloc byte[checked((int)_symmetricAlgorithmSubkeyLengthInBytes)];
+            byte* pbSymmetricDecryptionSubkey =
+                stackalloc byte[checked((int)_symmetricAlgorithmSubkeyLengthInBytes)];
             try
             {
                 _sp800_108_ctr_hmac_provider.DeriveKeyWithContextHeader(
@@ -147,10 +172,16 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
                     pbContext: pbKeyModifier,
                     cbContext: KEY_MODIFIER_SIZE_IN_BYTES,
                     pbDerivedKey: pbSymmetricDecryptionSubkey,
-                    cbDerivedKey: _symmetricAlgorithmSubkeyLengthInBytes);
+                    cbDerivedKey: _symmetricAlgorithmSubkeyLengthInBytes
+                );
 
                 // Perform the decryption operation
-                using (var decryptionSubkeyHandle = _symmetricAlgorithmHandle.GenerateSymmetricKey(pbSymmetricDecryptionSubkey, _symmetricAlgorithmSubkeyLengthInBytes))
+                using (
+                    var decryptionSubkeyHandle = _symmetricAlgorithmHandle.GenerateSymmetricKey(
+                        pbSymmetricDecryptionSubkey,
+                        _symmetricAlgorithmSubkeyLengthInBytes
+                    )
+                )
                 {
                     byte dummy;
                     byte* pbPlaintext = (pbRetVal != null) ? pbRetVal : &dummy; // CLR doesn't like pinning empty buffers
@@ -174,9 +205,13 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
                         pbOutput: pbPlaintext,
                         cbOutput: cbPlaintext,
                         pcbResult: out cbDecryptedBytesWritten,
-                        dwFlags: 0);
+                        dwFlags: 0
+                    );
                     UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
-                    CryptoUtil.Assert(cbDecryptedBytesWritten == cbPlaintext, "cbDecryptedBytesWritten == cbPlaintext");
+                    CryptoUtil.Assert(
+                        cbDecryptedBytesWritten == cbPlaintext,
+                        "cbDecryptedBytesWritten == cbPlaintext"
+                    );
 
                     // At this point, retVal := { decryptedPayload }
                     // And we're done!
@@ -186,7 +221,10 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
             finally
             {
                 // The buffer contains key material, so delete it.
-                UnsafeBufferUtil.SecureZeroMemory(pbSymmetricDecryptionSubkey, _symmetricAlgorithmSubkeyLengthInBytes);
+                UnsafeBufferUtil.SecureZeroMemory(
+                    pbSymmetricDecryptionSubkey,
+                    _symmetricAlgorithmSubkeyLengthInBytes
+                );
             }
         }
     }
@@ -202,7 +240,15 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
     // 'pbNonce' must point to a 96-bit buffer.
     // 'pbTag' must point to a 128-bit buffer.
     // 'pbEncryptedData' must point to a buffer the same length as 'pbPlaintextData'.
-    private void DoGcmEncrypt(byte* pbKey, uint cbKey, byte* pbNonce, byte* pbPlaintextData, uint cbPlaintextData, byte* pbEncryptedData, byte* pbTag)
+    private void DoGcmEncrypt(
+        byte* pbKey,
+        uint cbKey,
+        byte* pbNonce,
+        byte* pbPlaintextData,
+        uint cbPlaintextData,
+        byte* pbEncryptedData,
+        byte* pbTag
+    )
     {
         BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO authCipherInfo;
         BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO.Init(out authCipherInfo);
@@ -224,17 +270,34 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
                 pbOutput: pbEncryptedData,
                 cbOutput: cbPlaintextData,
                 pcbResult: out cbResult,
-                dwFlags: 0);
+                dwFlags: 0
+            );
             UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
             CryptoUtil.Assert(cbResult == cbPlaintextData, "cbResult == cbPlaintextData");
         }
     }
 
-    protected override byte[] EncryptImpl(byte* pbPlaintext, uint cbPlaintext, byte* pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData, uint cbPreBuffer, uint cbPostBuffer)
+    protected override byte[] EncryptImpl(
+        byte* pbPlaintext,
+        uint cbPlaintext,
+        byte* pbAdditionalAuthenticatedData,
+        uint cbAdditionalAuthenticatedData,
+        uint cbPreBuffer,
+        uint cbPostBuffer
+    )
     {
         // Allocate a buffer to hold the key modifier, nonce, encrypted data, and tag.
         // In GCM, the encrypted output will be the same length as the plaintext input.
-        var retVal = new byte[checked(cbPreBuffer + KEY_MODIFIER_SIZE_IN_BYTES + NONCE_SIZE_IN_BYTES + cbPlaintext + TAG_SIZE_IN_BYTES + cbPostBuffer)];
+        var retVal = new byte[
+            checked(
+                cbPreBuffer
+                + KEY_MODIFIER_SIZE_IN_BYTES
+                + NONCE_SIZE_IN_BYTES
+                + cbPlaintext
+                + TAG_SIZE_IN_BYTES
+                + cbPostBuffer
+            )
+        ];
         fixed (byte* pbRetVal = retVal)
         {
             // Calculate offsets
@@ -250,7 +313,8 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
 
             // Use the KDF to generate a new symmetric block cipher key
             // We'll need a temporary buffer to hold the symmetric encryption subkey
-            byte* pbSymmetricEncryptionSubkey = stackalloc byte[checked((int)_symmetricAlgorithmSubkeyLengthInBytes)];
+            byte* pbSymmetricEncryptionSubkey =
+                stackalloc byte[checked((int)_symmetricAlgorithmSubkeyLengthInBytes)];
             try
             {
                 _sp800_108_ctr_hmac_provider.DeriveKeyWithContextHeader(
@@ -260,7 +324,8 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
                     pbContext: pbKeyModifier,
                     cbContext: KEY_MODIFIER_SIZE_IN_BYTES,
                     pbDerivedKey: pbSymmetricEncryptionSubkey,
-                    cbDerivedKey: _symmetricAlgorithmSubkeyLengthInBytes);
+                    cbDerivedKey: _symmetricAlgorithmSubkeyLengthInBytes
+                );
 
                 // Perform the encryption operation
                 DoGcmEncrypt(
@@ -270,7 +335,8 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
                     pbPlaintextData: pbPlaintext,
                     cbPlaintextData: cbPlaintext,
                     pbEncryptedData: pbEncryptedData,
-                    pbTag: pbAuthTag);
+                    pbTag: pbAuthTag
+                );
 
                 // At this point, retVal := { preBuffer | keyModifier | nonce | encryptedData | authenticationTag | postBuffer }
                 // And we're done!
@@ -279,7 +345,10 @@ internal sealed unsafe class CngGcmAuthenticatedEncryptor : CngAuthenticatedEncr
             finally
             {
                 // The buffer contains key material, so delete it.
-                UnsafeBufferUtil.SecureZeroMemory(pbSymmetricEncryptionSubkey, _symmetricAlgorithmSubkeyLengthInBytes);
+                UnsafeBufferUtil.SecureZeroMemory(
+                    pbSymmetricEncryptionSubkey,
+                    _symmetricAlgorithmSubkeyLengthInBytes
+                );
             }
         }
     }

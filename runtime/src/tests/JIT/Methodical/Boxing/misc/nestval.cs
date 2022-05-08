@@ -5,8 +5,15 @@ using System;
 
 namespace BoxTest
 {
-    internal struct MyBool { public bool val; }
-    internal struct MyInt { public int val; }
+    internal struct MyBool
+    {
+        public bool val;
+    }
+
+    internal struct MyInt
+    {
+        public int val;
+    }
 
     internal struct ArgInfo
     {

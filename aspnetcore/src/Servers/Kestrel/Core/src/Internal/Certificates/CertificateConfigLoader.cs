@@ -34,19 +34,28 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
 
         if (certInfo.IsFileCert && certInfo.IsStoreCert)
         {
-            throw new InvalidOperationException(CoreStrings.FormatMultipleCertificateSources(endpointName));
+            throw new InvalidOperationException(
+                CoreStrings.FormatMultipleCertificateSources(endpointName)
+            );
         }
         else if (certInfo.IsFileCert)
         {
             var certificatePath = Path.Combine(HostEnvironment.ContentRootPath, certInfo.Path!);
             if (certInfo.KeyPath != null)
             {
-                var certificateKeyPath = Path.Combine(HostEnvironment.ContentRootPath, certInfo.KeyPath);
+                var certificateKeyPath = Path.Combine(
+                    HostEnvironment.ContentRootPath,
+                    certInfo.KeyPath
+                );
                 var certificate = GetCertificate(certificatePath);
 
                 if (certificate != null)
                 {
-                    certificate = LoadCertificateKey(certificate, certificateKeyPath, certInfo.Password);
+                    certificate = LoadCertificateKey(
+                        certificate,
+                        certificateKeyPath,
+                        certInfo.Password
+                    );
                 }
                 else
                 {
@@ -70,7 +79,10 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
                 throw new InvalidOperationException(CoreStrings.InvalidPemKey);
             }
 
-            return new X509Certificate2(Path.Combine(HostEnvironment.ContentRootPath, certInfo.Path!), certInfo.Password);
+            return new X509Certificate2(
+                Path.Combine(HostEnvironment.ContentRootPath, certInfo.Path!),
+                certInfo.Password
+            );
         }
         else if (certInfo.IsStoreCert)
         {
@@ -88,7 +100,11 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
         return new X509Certificate2(certificateBytes, "", X509KeyStorageFlags.DefaultKeySet);
     }
 
-    private static X509Certificate2 LoadCertificateKey(X509Certificate2 certificate, string keyPath, string? password)
+    private static X509Certificate2 LoadCertificateKey(
+        X509Certificate2 certificate,
+        string keyPath,
+        string? password
+    )
     {
         // OIDs for the certificate key types.
         const string RSAOid = "1.2.840.113549.1.1.1";
@@ -100,53 +116,62 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
         switch (certificate.PublicKey.Oid.Value)
         {
             case RSAOid:
-                {
-                    using var rsa = RSA.Create();
-                    ImportKeyFromFile(rsa, keyText, password);
+            {
+                using var rsa = RSA.Create();
+                ImportKeyFromFile(rsa, keyText, password);
 
-                    try
-                    {
-                        return certificate.CopyWithPrivateKey(rsa);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw CreateErrorGettingPrivateKeyException(keyPath, ex);
-                    }
+                try
+                {
+                    return certificate.CopyWithPrivateKey(rsa);
                 }
+                catch (Exception ex)
+                {
+                    throw CreateErrorGettingPrivateKeyException(keyPath, ex);
+                }
+            }
             case ECDsaOid:
-                {
-                    using var ecdsa = ECDsa.Create();
-                    ImportKeyFromFile(ecdsa, keyText, password);
+            {
+                using var ecdsa = ECDsa.Create();
+                ImportKeyFromFile(ecdsa, keyText, password);
 
-                    try
-                    {
-                        return certificate.CopyWithPrivateKey(ecdsa);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw CreateErrorGettingPrivateKeyException(keyPath, ex);
-                    }
+                try
+                {
+                    return certificate.CopyWithPrivateKey(ecdsa);
                 }
+                catch (Exception ex)
+                {
+                    throw CreateErrorGettingPrivateKeyException(keyPath, ex);
+                }
+            }
             case DSAOid:
-                {
-                    using var dsa = DSA.Create();
-                    ImportKeyFromFile(dsa, keyText, password);
+            {
+                using var dsa = DSA.Create();
+                ImportKeyFromFile(dsa, keyText, password);
 
-                    try
-                    {
-                        return certificate.CopyWithPrivateKey(dsa);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw CreateErrorGettingPrivateKeyException(keyPath, ex);
-                    }
+                try
+                {
+                    return certificate.CopyWithPrivateKey(dsa);
                 }
+                catch (Exception ex)
+                {
+                    throw CreateErrorGettingPrivateKeyException(keyPath, ex);
+                }
+            }
             default:
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, CoreStrings.UnrecognizedCertificateKeyOid, certificate.PublicKey.Oid.Value));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        CoreStrings.UnrecognizedCertificateKeyOid,
+                        certificate.PublicKey.Oid.Value
+                    )
+                );
         }
     }
 
-    private static InvalidOperationException CreateErrorGettingPrivateKeyException(string keyPath, Exception ex)
+    private static InvalidOperationException CreateErrorGettingPrivateKeyException(
+        string keyPath,
+        Exception ex
+    )
     {
         return new InvalidOperationException($"Error getting private key from '{keyPath}'.", ex);
     }
@@ -161,7 +186,11 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
         return null;
     }
 
-    private static void ImportKeyFromFile(AsymmetricAlgorithm asymmetricAlgorithm, string keyText, string? password)
+    private static void ImportKeyFromFile(
+        AsymmetricAlgorithm asymmetricAlgorithm,
+        string keyText,
+        string? password
+    )
     {
         if (password == null)
         {
@@ -176,12 +205,15 @@ internal class CertificateConfigLoader : ICertificateConfigLoader
     private static X509Certificate2 LoadFromStoreCert(CertificateConfig certInfo)
     {
         var subject = certInfo.Subject!;
-        var storeName = string.IsNullOrEmpty(certInfo.Store) ? StoreName.My.ToString() : certInfo.Store;
+        var storeName = string.IsNullOrEmpty(certInfo.Store)
+          ? StoreName.My.ToString()
+          : certInfo.Store;
         var location = certInfo.Location;
         var storeLocation = StoreLocation.CurrentUser;
         if (!string.IsNullOrEmpty(location))
         {
-            storeLocation = (StoreLocation)Enum.Parse(typeof(StoreLocation), location, ignoreCase: true);
+            storeLocation = (StoreLocation)
+                Enum.Parse(typeof(StoreLocation), location, ignoreCase: true);
         }
         var allowInvalid = certInfo.AllowInvalid ?? false;
 

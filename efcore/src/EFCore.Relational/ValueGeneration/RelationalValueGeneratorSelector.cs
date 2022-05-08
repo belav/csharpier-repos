@@ -31,17 +31,14 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
     /// </remarks>
     public class RelationalValueGeneratorSelector : ValueGeneratorSelector
     {
-        private readonly TemporaryNumberValueGeneratorFactory _numberFactory
-            = new();
+        private readonly TemporaryNumberValueGeneratorFactory _numberFactory = new();
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RelationalValueGeneratorSelector" /> class.
         /// </summary>
         /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
         public RelationalValueGeneratorSelector(ValueGeneratorSelectorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     Creates a new value generator for the given property.
@@ -58,10 +55,12 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
             {
                 var propertyType = property.ClrType.UnwrapNullableType().UnwrapEnumType();
 
-                if (propertyType.IsInteger()
+                if (
+                    propertyType.IsInteger()
                     || propertyType == typeof(decimal)
                     || propertyType == typeof(float)
-                    || propertyType == typeof(double))
+                    || propertyType == typeof(double)
+                )
                 {
                     return _numberFactory.Create(property, entityType);
                 }

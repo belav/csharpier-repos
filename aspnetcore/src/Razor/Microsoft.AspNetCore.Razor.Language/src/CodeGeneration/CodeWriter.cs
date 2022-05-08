@@ -19,9 +19,7 @@ public sealed class CodeWriter
     private int _currentLineIndex;
     private int _currentLineCharacterIndex;
 
-    public CodeWriter() : this(Environment.NewLine, RazorCodeGenerationOptions.CreateDefault())
-    {
-    }
+    public CodeWriter() : this(Environment.NewLine, RazorCodeGenerationOptions.CreateDefault()) { }
 
     public CodeWriter(string newLine, RazorCodeGenerationOptions options)
     {
@@ -47,7 +45,10 @@ public sealed class CodeWriter
 
             if (value != "\r\n" && value != "\n")
             {
-                throw new ArgumentException(Resources.FormatCodeWriter_InvalidNewLine(value), nameof(value));
+                throw new ArgumentException(
+                    Resources.FormatCodeWriter_InvalidNewLine(value),
+                    nameof(value)
+                );
             }
 
             _newLine = value;
@@ -58,7 +59,8 @@ public sealed class CodeWriter
 
     public int TabSize { get; }
 
-    public SourceLocation Location => new SourceLocation(_absoluteIndex, _currentLineIndex, _currentLineCharacterIndex);
+    public SourceLocation Location =>
+        new SourceLocation(_absoluteIndex, _currentLineIndex, _currentLineCharacterIndex);
 
     public char this[int index]
     {
@@ -166,11 +168,15 @@ public sealed class CodeWriter
 
         if (
             // Check the last character of the previous write operation.
-            _builder.Length - count - 1 >= 0 &&
-            _builder[_builder.Length - count - 1] == '\r' &&
-
+            _builder.Length
+                - count
+                - 1
+                >= 0
+            && _builder[_builder.Length - count - 1] == '\r'
+            &&
             // Check the first character of the current write operation.
-            _builder[_builder.Length - count] == '\n')
+            _builder[_builder.Length - count] == '\n'
+        )
         {
             // This is newline that's spread across two writes. Skip the first character of the
             // current write operation.
@@ -193,9 +199,7 @@ public sealed class CodeWriter
 
             // We might have stopped at a \r, so check if it's followed by \n and then advance the index to
             // start the next search after it.
-            if (count > i &&
-                value[i - 1] == '\r' &&
-                value[i] == '\n')
+            if (count > i && value[i - 1] == '\r' && value[i] == '\n')
             {
                 i++;
             }

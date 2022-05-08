@@ -17,7 +17,12 @@ namespace Microsoft.Extensions.Internal;
 
 internal class PropertyHelper
 {
-    private const BindingFlags DeclaredOnlyLookup = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+    private const BindingFlags DeclaredOnlyLookup =
+        BindingFlags.Public
+        | BindingFlags.NonPublic
+        | BindingFlags.Instance
+        | BindingFlags.Static
+        | BindingFlags.DeclaredOnly;
 
     // Delegate type for a by-ref property getter
     private delegate TValue ByRefFunc<TDeclaringType, TValue>(ref TDeclaringType arg);
@@ -26,13 +31,19 @@ internal class PropertyHelper
         typeof(PropertyHelper).GetMethod(nameof(CallPropertyGetter), DeclaredOnlyLookup)!;
 
     private static readonly MethodInfo CallPropertyGetterByReferenceOpenGenericMethod =
-        typeof(PropertyHelper).GetMethod(nameof(CallPropertyGetterByReference), DeclaredOnlyLookup)!;
+        typeof(PropertyHelper).GetMethod(
+            nameof(CallPropertyGetterByReference),
+            DeclaredOnlyLookup
+        )!;
 
     private static readonly MethodInfo CallNullSafePropertyGetterOpenGenericMethod =
         typeof(PropertyHelper).GetMethod(nameof(CallNullSafePropertyGetter), DeclaredOnlyLookup)!;
 
     private static readonly MethodInfo CallNullSafePropertyGetterByReferenceOpenGenericMethod =
-        typeof(PropertyHelper).GetMethod(nameof(CallNullSafePropertyGetterByReference), DeclaredOnlyLookup)!;
+        typeof(PropertyHelper).GetMethod(
+            nameof(CallNullSafePropertyGetterByReference),
+            DeclaredOnlyLookup
+        )!;
 
     private static readonly MethodInfo CallPropertySetterOpenGenericMethod =
         typeof(PropertyHelper).GetMethod(nameof(CallPropertySetter), DeclaredOnlyLookup)!;
@@ -40,13 +51,17 @@ internal class PropertyHelper
     // Using an array rather than IEnumerable, as target will be called on the hot path numerous times.
     private static readonly ConcurrentDictionary<Type, PropertyHelper[]> PropertiesCache = new();
 
-    private static readonly ConcurrentDictionary<Type, PropertyHelper[]> VisiblePropertiesCache = new();
+    private static readonly ConcurrentDictionary<Type, PropertyHelper[]> VisiblePropertiesCache =
+        new();
 
     // We need to be able to check if a type is a 'ref struct' - but we need to be able to compile
     // for platforms where the attribute is not defined, like net46. So we can fetch the attribute
     // by late binding. If the attribute isn't defined, then we assume we won't encounter any
     // 'ref struct' types.
-    private static readonly Type? IsByRefLikeAttribute = Type.GetType("System.Runtime.CompilerServices.IsByRefLikeAttribute", throwOnError: false);
+    private static readonly Type? IsByRefLikeAttribute = Type.GetType(
+        "System.Runtime.CompilerServices.IsByRefLikeAttribute",
+        throwOnError: false
+    );
 
     private Action<object, object?>? _valueSetter;
     private Func<object, object?>? _valueGetter;
@@ -169,7 +184,12 @@ internal class PropertyHelper
     /// </returns>
     public static PropertyHelper[] GetVisibleProperties(TypeInfo typeInfo)
     {
-        return GetVisibleProperties(typeInfo.AsType(), p => CreateInstance(p), PropertiesCache, VisiblePropertiesCache);
+        return GetVisibleProperties(
+            typeInfo.AsType(),
+            p => CreateInstance(p),
+            PropertiesCache,
+            VisiblePropertiesCache
+        );
     }
 
     /// <summary>
@@ -188,7 +208,12 @@ internal class PropertyHelper
     /// </returns>
     public static PropertyHelper[] GetVisibleProperties(Type type)
     {
-        return GetVisibleProperties(type, p => CreateInstance(p), PropertiesCache, VisiblePropertiesCache);
+        return GetVisibleProperties(
+            type,
+            p => CreateInstance(p),
+            PropertiesCache,
+            VisiblePropertiesCache
+        );
     }
 
     /// <summary>
@@ -207,7 +232,8 @@ internal class PropertyHelper
         return MakeFastPropertyGetter(
             propertyInfo,
             CallPropertyGetterOpenGenericMethod,
-            CallPropertyGetterByReferenceOpenGenericMethod);
+            CallPropertyGetterByReferenceOpenGenericMethod
+        );
     }
 
     /// <summary>
@@ -226,13 +252,15 @@ internal class PropertyHelper
         return MakeFastPropertyGetter(
             propertyInfo,
             CallNullSafePropertyGetterOpenGenericMethod,
-            CallNullSafePropertyGetterByReferenceOpenGenericMethod);
+            CallNullSafePropertyGetterByReferenceOpenGenericMethod
+        );
     }
 
     private static Func<object, object?> MakeFastPropertyGetter(
         PropertyInfo propertyInfo,
         MethodInfo propertyGetterWrapperMethod,
-        MethodInfo propertyGetterByRefWrapperMethod)
+        MethodInfo propertyGetterByRefWrapperMethod
+    )
     {
         Debug.Assert(propertyInfo != null);
 
@@ -260,22 +288,21 @@ internal class PropertyHelper
             return MakeFastPropertyGetter(
                 typeof(ByRefFunc<,>),
                 getMethod,
-                propertyGetterByRefWrapperMethod);
+                propertyGetterByRefWrapperMethod
+            );
         }
         else
         {
             // Create a delegate TDeclaringType -> TValue
-            return MakeFastPropertyGetter(
-                typeof(Func<,>),
-                getMethod,
-                propertyGetterWrapperMethod);
+            return MakeFastPropertyGetter(typeof(Func<,>), getMethod, propertyGetterWrapperMethod);
         }
     }
 
     private static Func<object, object?> MakeFastPropertyGetter(
         Type openGenericDelegateType,
         MethodInfo propertyGetMethod,
-        MethodInfo openGenericWrapperMethod)
+        MethodInfo openGenericWrapperMethod
+    )
     {
         var typeInput = propertyGetMethod.DeclaringType!;
         var typeOutput = propertyGetMethod.ReturnType;
@@ -283,10 +310,14 @@ internal class PropertyHelper
         var delegateType = openGenericDelegateType.MakeGenericType(typeInput, typeOutput);
         var propertyGetterDelegate = propertyGetMethod.CreateDelegate(delegateType);
 
-        var wrapperDelegateMethod = openGenericWrapperMethod.MakeGenericMethod(typeInput, typeOutput);
+        var wrapperDelegateMethod = openGenericWrapperMethod.MakeGenericMethod(
+            typeInput,
+            typeOutput
+        );
         var accessorDelegate = wrapperDelegateMethod.CreateDelegate(
             typeof(Func<object, object?>),
-            propertyGetterDelegate);
+            propertyGetterDelegate
+        );
 
         return (Func<object, object?>)accessorDelegate;
     }
@@ -319,13 +350,15 @@ internal class PropertyHelper
         var parameterType = parameters[0].ParameterType;
 
         // Create a delegate TDeclaringType -> { TDeclaringType.Property = TValue; }
-        var propertySetterAsAction =
-            setMethod.CreateDelegate(typeof(Action<,>).MakeGenericType(typeInput, parameterType));
+        var propertySetterAsAction = setMethod.CreateDelegate(
+            typeof(Action<,>).MakeGenericType(typeInput, parameterType)
+        );
         var callPropertySetterClosedGenericMethod =
             CallPropertySetterOpenGenericMethod.MakeGenericMethod(typeInput, parameterType);
-        var callPropertySetterDelegate =
-            callPropertySetterClosedGenericMethod.CreateDelegate(
-                typeof(Action<object, object?>), propertySetterAsAction);
+        var callPropertySetterDelegate = callPropertySetterClosedGenericMethod.CreateDelegate(
+            typeof(Action<object, object?>),
+            propertySetterAsAction
+        );
 
         return (Action<object, object?>)callPropertySetterDelegate;
     }
@@ -369,7 +402,8 @@ internal class PropertyHelper
     // Called via reflection
     private static object? CallPropertyGetter<TDeclaringType, TValue>(
         Func<TDeclaringType, TValue> getter,
-        object target)
+        object target
+    )
     {
         return getter((TDeclaringType)target);
     }
@@ -377,7 +411,8 @@ internal class PropertyHelper
     // Called via reflection
     private static object? CallPropertyGetterByReference<TDeclaringType, TValue>(
         ByRefFunc<TDeclaringType, TValue> getter,
-        object target)
+        object target
+    )
     {
         var unboxed = (TDeclaringType)target;
         return getter(ref unboxed);
@@ -386,7 +421,8 @@ internal class PropertyHelper
     // Called via reflection
     private static object? CallNullSafePropertyGetter<TDeclaringType, TValue>(
         Func<TDeclaringType, TValue> getter,
-        object target)
+        object target
+    )
     {
         if (target == null)
         {
@@ -399,7 +435,8 @@ internal class PropertyHelper
     // Called via reflection
     private static object? CallNullSafePropertyGetterByReference<TDeclaringType, TValue>(
         ByRefFunc<TDeclaringType, TValue> getter,
-        object target)
+        object target
+    )
     {
         if (target == null)
         {
@@ -413,7 +450,8 @@ internal class PropertyHelper
     private static void CallPropertySetter<TDeclaringType, TValue>(
         Action<TDeclaringType, TValue> setter,
         object target,
-        object value)
+        object value
+    )
     {
         setter((TDeclaringType)target, (TValue)value);
     }
@@ -422,7 +460,8 @@ internal class PropertyHelper
         Type type,
         Func<PropertyInfo, PropertyHelper> createPropertyHelper,
         ConcurrentDictionary<Type, PropertyHelper[]> allPropertiesCache,
-        ConcurrentDictionary<Type, PropertyHelper[]> visiblePropertiesCache)
+        ConcurrentDictionary<Type, PropertyHelper[]> visiblePropertiesCache
+    )
     {
         if (visiblePropertiesCache.TryGetValue(type, out var result))
         {
@@ -469,7 +508,10 @@ internal class PropertyHelper
             while (currentType != null && currentType != declaringType)
             {
                 // We've found a 'more proximal' public definition
-                var declaredProperty = currentType.GetProperty(propertyHelper.Name, DeclaredOnlyLookup);
+                var declaredProperty = currentType.GetProperty(
+                    propertyHelper.Name,
+                    DeclaredOnlyLookup
+                );
                 if (declaredProperty != null)
                 {
                     ignoreProperty = true;
@@ -493,7 +535,8 @@ internal class PropertyHelper
     protected static PropertyHelper[] GetProperties(
         Type type,
         Func<PropertyInfo, PropertyHelper> createPropertyHelper,
-        ConcurrentDictionary<Type, PropertyHelper[]> cache)
+        ConcurrentDictionary<Type, PropertyHelper[]> cache
+    )
     {
         // Unwrap nullable types. This means Nullable<T>.Value and Nullable<T>.HasValue will not be
         // part of the sequence of properties returned by this method.
@@ -507,8 +550,15 @@ internal class PropertyHelper
             if (type.IsInterface)
             {
                 // Reflection does not return information about inherited properties on the interface itself.
-                properties = properties.Concat(type.GetInterfaces().SelectMany(
-                    interfaceType => interfaceType.GetRuntimeProperties().Where(p => IsInterestingProperty(p))));
+                properties = properties.Concat(
+                    type.GetInterfaces()
+                        .SelectMany(
+                            interfaceType =>
+                                interfaceType
+                                    .GetRuntimeProperties()
+                                    .Where(p => IsInterestingProperty(p))
+                        )
+                );
             }
 
             helpers = properties.Select(p => createPropertyHelper(p)).ToArray();
@@ -523,14 +573,13 @@ internal class PropertyHelper
         // For improving application startup time, do not use GetIndexParameters() api early in this check as it
         // creates a copy of parameter array and also we would like to check for the presence of a get method
         // and short circuit asap.
-        return
-            property.GetMethod != null &&
-            property.GetMethod.IsPublic &&
-            !property.GetMethod.IsStatic &&
-
+        return property.GetMethod != null
+            && property.GetMethod.IsPublic
+            && !property.GetMethod.IsStatic
+            &&
             // PropertyHelper can't work with ref structs.
-            !IsRefStructProperty(property) &&
-
+            !IsRefStructProperty(property)
+            &&
             // Indexed properties are not useful (or valid) for grabbing properties off an object.
             property.GetMethod.GetParameters().Length == 0;
     }
@@ -541,9 +590,8 @@ internal class PropertyHelper
     // see: https://github.com/aspnet/Mvc/issues/8545
     private static bool IsRefStructProperty(PropertyInfo property)
     {
-        return
-            IsByRefLikeAttribute != null &&
-            property.PropertyType.IsValueType &&
-            property.PropertyType.IsDefined(IsByRefLikeAttribute);
+        return IsByRefLikeAttribute != null
+            && property.PropertyType.IsValueType
+            && property.PropertyType.IsDefined(IsByRefLikeAttribute);
     }
 }

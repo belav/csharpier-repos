@@ -38,7 +38,8 @@ internal class ActionSelector : IActionSelector
     public ActionSelector(
         IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
         ActionConstraintCache actionConstraintCache,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
         _logger = loggerFactory.CreateLogger<ActionSelector>();
@@ -82,7 +83,10 @@ internal class ActionSelector : IActionSelector
         return matches;
     }
 
-    public ActionDescriptor? SelectBestCandidate(RouteContext context, IReadOnlyList<ActionDescriptor> candidates)
+    public ActionDescriptor? SelectBestCandidate(
+        RouteContext context,
+        IReadOnlyList<ActionDescriptor> candidates
+    )
     {
         if (context == null)
         {
@@ -110,13 +114,15 @@ internal class ActionSelector : IActionSelector
         {
             var actionNames = string.Join(
                 Environment.NewLine,
-                finalMatches.Select(a => a.DisplayName));
+                finalMatches.Select(a => a.DisplayName)
+            );
 
             _logger.AmbiguousActions(actionNames);
 
             var message = Resources.FormatDefaultActionSelector_AmbiguousActions(
                 Environment.NewLine,
-                actionNames);
+                actionNames
+            );
 
             throw new AmbiguousActionException(message);
         }
@@ -124,7 +130,8 @@ internal class ActionSelector : IActionSelector
 
     private IReadOnlyList<ActionDescriptor>? EvaluateActionConstraints(
         RouteContext context,
-        IReadOnlyList<ActionDescriptor> actions)
+        IReadOnlyList<ActionDescriptor> actions
+    )
     {
         var actionsCount = actions.Count;
         var candidates = new List<ActionSelectorCandidate>(actionsCount);
@@ -133,7 +140,10 @@ internal class ActionSelector : IActionSelector
         for (var i = 0; i < actionsCount; i++)
         {
             var action = actions[i];
-            var constraints = _actionConstraintCache.GetActionConstraints(context.HttpContext, action);
+            var constraints = _actionConstraintCache.GetActionConstraints(
+                context.HttpContext,
+                action
+            );
             candidates.Add(new ActionSelectorCandidate(action, constraints));
         }
 
@@ -158,7 +168,8 @@ internal class ActionSelector : IActionSelector
     private IReadOnlyList<ActionSelectorCandidate>? EvaluateActionConstraintsCore(
         RouteContext context,
         IReadOnlyList<ActionSelectorCandidate> candidates,
-        int? startingOrder)
+        int? startingOrder
+    )
     {
         // Find the next group of constraints to process. This will be the lowest value of
         // order that is higher than startingOrder.
@@ -173,8 +184,10 @@ internal class ActionSelector : IActionSelector
                 for (var j = 0; j < candidate.Constraints.Count; j++)
                 {
                     var constraint = candidate.Constraints[j];
-                    if ((startingOrder == null || constraint.Order > startingOrder) &&
-                        (order == null || constraint.Order < order))
+                    if (
+                        (startingOrder == null || constraint.Order > startingOrder)
+                        && (order == null || constraint.Order < order)
+                    )
                     {
                         order = constraint.Order;
                     }
@@ -222,7 +235,8 @@ internal class ActionSelector : IActionSelector
                             _logger.ConstraintMismatch(
                                 candidate.Action.DisplayName,
                                 candidate.Action.Id,
-                                constraint);
+                                constraint
+                            );
                             break;
                         }
                     }

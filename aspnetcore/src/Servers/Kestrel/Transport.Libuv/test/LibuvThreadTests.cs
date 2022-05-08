@@ -24,11 +24,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 
             await thread.StartAsync();
 
-            await thread.PostAsync<object>(_ =>
-            {
-                ranOne = true;
-            },
-            null);
+            await thread.PostAsync<object>(
+                _ =>
+                {
+                    ranOne = true;
+                },
+                null
+            );
 
             Assert.Equal(1, mockLibuv.PostCount);
 
@@ -37,27 +39,33 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
 
             Assert.Equal(2, mockLibuv.PostCount);
 
-            var task = thread.PostAsync<object>(_ =>
-            {
-                ranTwo = true;
-            },
-            null);
+            var task = thread.PostAsync<object>(
+                _ =>
+                {
+                    ranTwo = true;
+                },
+                null
+            );
 
             Assert.Equal(2, mockLibuv.PostCount);
 
-            thread.Post<object>(_ =>
-            {
-                ranThree = true;
-            },
-            null);
+            thread.Post<object>(
+                _ =>
+                {
+                    ranThree = true;
+                },
+                null
+            );
 
             Assert.Equal(2, mockLibuv.PostCount);
 
-            thread.Schedule(_ =>
-            {
-                ranFour = true;
-            },
-            (object)null);
+            thread.Schedule(
+                _ =>
+                {
+                    ranFour = true;
+                },
+                (object)null
+            );
 
             Assert.Equal(2, mockLibuv.PostCount);
 

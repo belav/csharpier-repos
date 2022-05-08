@@ -41,11 +41,26 @@ public class DeploymentResult
     /// </summary>
     public HttpClient HttpClient { get; }
 
-    public DeploymentResult(ILoggerFactory loggerFactory, DeploymentParameters deploymentParameters, string applicationBaseUri)
-        : this(loggerFactory, deploymentParameters: deploymentParameters, applicationBaseUri: applicationBaseUri, contentRoot: string.Empty, hostShutdownToken: CancellationToken.None)
-    { }
+    public DeploymentResult(
+        ILoggerFactory loggerFactory,
+        DeploymentParameters deploymentParameters,
+        string applicationBaseUri
+    )
+        : this(
+            loggerFactory,
+            deploymentParameters: deploymentParameters,
+            applicationBaseUri: applicationBaseUri,
+            contentRoot: string.Empty,
+            hostShutdownToken: CancellationToken.None
+        ) { }
 
-    public DeploymentResult(ILoggerFactory loggerFactory, DeploymentParameters deploymentParameters, string applicationBaseUri, string contentRoot, CancellationToken hostShutdownToken)
+    public DeploymentResult(
+        ILoggerFactory loggerFactory,
+        DeploymentParameters deploymentParameters,
+        string applicationBaseUri,
+        string contentRoot,
+        CancellationToken hostShutdownToken
+    )
     {
         _loggerFactory = loggerFactory;
 
@@ -64,5 +79,8 @@ public class DeploymentResult
     /// <param name="baseHandler"></param>
     /// <returns></returns>
     public HttpClient CreateHttpClient(HttpMessageHandler baseHandler) =>
-        new HttpClient(new LoggingHandler(_loggerFactory, baseHandler)) { BaseAddress = new Uri(ApplicationBaseUri) };
+        new HttpClient(new LoggingHandler(_loggerFactory, baseHandler))
+        {
+            BaseAddress = new Uri(ApplicationBaseUri)
+        };
 }

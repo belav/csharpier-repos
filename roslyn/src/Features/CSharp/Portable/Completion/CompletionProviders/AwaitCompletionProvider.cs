@@ -26,13 +26,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AwaitCompletionProvider()
-            : base(CSharpSyntaxFacts.Instance)
-        {
-        }
+        public AwaitCompletionProvider() : base(CSharpSyntaxFacts.Instance) { }
 
         internal override string Language => LanguageNames.CSharp;
-        public override ImmutableHashSet<char> TriggerCharacters => CompletionUtilities.CommonTriggerCharactersWithArgumentList;
+        public override ImmutableHashSet<char> TriggerCharacters =>
+            CompletionUtilities.CommonTriggerCharactersWithArgumentList;
 
         /// <summary>
         /// Gets the span start where async keyword should go.
@@ -47,7 +45,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // If we have an explicit lambda return type, async should go just before it. Otherwise, it should go before parameter list.
                 // static [|async|] (a) => ....
                 // static [|async|] ExplicitReturnType (a) => ....
-                ParenthesizedLambdaExpressionSyntax parenthesizedLambda => (parenthesizedLambda.ReturnType as SyntaxNode ?? parenthesizedLambda.ParameterList).SpanStart,
+                ParenthesizedLambdaExpressionSyntax parenthesizedLambda
+                  => (
+                      parenthesizedLambda.ReturnType as SyntaxNode
+                      ?? parenthesizedLambda.ParameterList
+                  ).SpanStart,
                 SimpleLambdaExpressionSyntax simpleLambda => simpleLambda.Parameter.SpanStart,
                 _ => throw ExceptionUtilities.UnexpectedValue(declaration.Kind())
             };
@@ -64,23 +66,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (parent == null)
                 return null;
 
-            if (parent is QualifiedNameSyntax { Parent: LocalFunctionStatementSyntax localFunction } qualifiedName &&
-                localFunction.ReturnType == qualifiedName)
+            if (
+                parent
+                    is QualifiedNameSyntax
+                    {
+                        Parent: LocalFunctionStatementSyntax localFunction
+                    } qualifiedName
+                && localFunction.ReturnType == qualifiedName
+            )
             {
                 parent = localFunction;
             }
 
-            return parent.Ancestors().FirstOrDefault(node => node.IsAsyncSupportingFunctionSyntax());
+            return parent
+                .Ancestors()
+                .FirstOrDefault(node => node.IsAsyncSupportingFunctionSyntax());
         }
 
-        protected override SyntaxNode? GetExpressionToPlaceAwaitInFrontOf(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+        protected override SyntaxNode? GetExpressionToPlaceAwaitInFrontOf(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var dotToken = GetDotTokenLeftOfPosition(syntaxTree, position, cancellationToken);
             return dotToken?.Parent switch
             {
                 // Don't support conditional access someTask?.$$ or c?.TaskReturning().$$ because there is no good completion until
                 // await? is supported by the language https://github.com/dotnet/csharplang/issues/35
-                MemberAccessExpressionSyntax memberAccess => memberAccess.GetParentConditionalAccessExpression() is null ? memberAccess : null,
+                MemberAccessExpressionSyntax memberAccess
+                  => memberAccess.GetParentConditionalAccessExpression() is null
+                      ? memberAccess
+                      : null,
                 // someTask.$$.
                 RangeExpressionSyntax range => range.LeftOperand,
                 // special cases, where parsing is misleading. Such cases are handled in GetTypeSymbolOfExpression.
@@ -89,10 +106,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             };
         }
 
-        protected override SyntaxToken? GetDotTokenLeftOfPosition(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
-            => CompletionUtilities.GetDotTokenLeftOfPosition(syntaxTree, position, cancellationToken);
+        protected override SyntaxToken? GetDotTokenLeftOfPosition(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        ) => CompletionUtilities.GetDotTokenLeftOfPosition(syntaxTree, position, cancellationToken);
 
-        protected override ITypeSymbol? GetTypeSymbolOfExpression(SemanticModel semanticModel, SyntaxNode potentialAwaitableExpression, CancellationToken cancellationToken)
+        protected override ITypeSymbol? GetTypeSymbolOfExpression(
+            SemanticModel semanticModel,
+            SyntaxNode potentialAwaitableExpression,
+            CancellationToken cancellationToken
+        )
         {
             if (potentialAwaitableExpression is MemberAccessExpressionSyntax memberAccess)
             {
@@ -100,17 +124,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // In cases like Task.$$ semanticModel.GetTypeInfo returns Task, but
                 // we don't want to suggest await here. We look up the symbol of the "Task" part
                 // and return null if it is a NamedType.
-                var symbol = semanticModel.GetSymbolInfo(memberAccessExpression, cancellationToken).Symbol;
-                return symbol is ITypeSymbol ? null : semanticModel.GetTypeInfo(memberAccessExpression, cancellationToken).Type;
+                var symbol = semanticModel
+                    .GetSymbolInfo(memberAccessExpression, cancellationToken)
+                    .Symbol;
+                return symbol is ITypeSymbol
+                  ? null
+                  : semanticModel.GetTypeInfo(memberAccessExpression, cancellationToken).Type;
             }
-            else if (potentialAwaitableExpression is ExpressionSyntax expression &&
-                     expression.ShouldNameExpressionBeTreatedAsExpressionInsteadOfType(semanticModel, out _, out var container))
+            else if (
+                potentialAwaitableExpression is ExpressionSyntax expression
+                && expression.ShouldNameExpressionBeTreatedAsExpressionInsteadOfType(
+                    semanticModel,
+                    out _,
+                    out var container
+                )
+            )
             {
                 return container;
             }
             else
             {
-                return semanticModel.GetTypeInfo(potentialAwaitableExpression, cancellationToken).Type;
+                return semanticModel
+                    .GetTypeInfo(potentialAwaitableExpression, cancellationToken)
+                    .Type;
             }
         }
     }

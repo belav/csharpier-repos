@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
 
         private int? TryGetStringId(SqlConnection connection, string? value, bool allowWrite)
         {
-            // Null strings are not supported at all.  Just ignore these. Any read/writes 
+            // Null strings are not supported at all.  Just ignore these. Any read/writes
             // to null values will fail and will return 'false/null' to indicate failure
             // (which is part of the documented contract of the persistence layer API).
             if (value == null)
@@ -43,12 +43,17 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             return id;
         }
 
-        private int? TryGetStringIdFromDatabase(SqlConnection connection, string value, bool allowWrite)
+        private int? TryGetStringIdFromDatabase(
+            SqlConnection connection,
+            string value,
+            bool allowWrite
+        )
         {
             // We're reading or writing.  This can be under either of our schedulers.
             Contract.ThrowIfFalse(
-                TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler ||
-                TaskScheduler.Current == _connectionPoolService.Scheduler.ConcurrentScheduler);
+                TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler
+                    || TaskScheduler.Current == _connectionPoolService.Scheduler.ConcurrentScheduler
+            );
 
             // First, check if we can find that string in the string table.
             var stringId = TryGetStringIdFromDatabaseWorker(connection, value, canReturnNull: true);
@@ -65,7 +70,9 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 return null;
 
             // We're writing.  This better always be under the exclusive scheduler.
-            Contract.ThrowIfFalse(TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler);
+            Contract.ThrowIfFalse(
+                TaskScheduler.Current == _connectionPoolService.Scheduler.ExclusiveScheduler
+            );
 
             // The string wasn't in the db string table.  Add it.  Note: this may fail if some
             // other thread/process beats us there as this table has a 'unique' constraint on the
@@ -73,8 +80,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             try
             {
                 stringId = connection.RunInTransaction(
-                    static t => t.self.InsertStringIntoDatabase_MustRunInTransaction(t.connection, t.value),
-                    (self: this, connection, value));
+                    static t =>
+                        t.self.InsertStringIntoDatabase_MustRunInTransaction(t.connection, t.value),
+                    (self: this, connection, value)
+                );
 
                 Contract.ThrowIfTrue(stringId == null);
                 return stringId;
@@ -83,7 +92,11 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             {
                 // We got a constraint violation.  This means someone else beat us to adding this
                 // string to the string-table.  We should always be able to find the string now.
-                stringId = TryGetStringIdFromDatabaseWorker(connection, value, canReturnNull: false);
+                stringId = TryGetStringIdFromDatabaseWorker(
+                    connection,
+                    value,
+                    canReturnNull: false
+                );
                 return stringId;
             }
             catch (Exception ex)
@@ -95,16 +108,25 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             return null;
         }
 
-        private int InsertStringIntoDatabase_MustRunInTransaction(SqlConnection connection, string value)
+        private int InsertStringIntoDatabase_MustRunInTransaction(
+            SqlConnection connection,
+            string value
+        )
         {
             if (!connection.IsInTransaction)
             {
-                throw new InvalidOperationException("Must call this while connection has transaction open");
+                throw new InvalidOperationException(
+                    "Must call this while connection has transaction open"
+                );
             }
 
             var id = -1;
 
-            using (var resettableStatement = connection.GetResettableStatement(_insert_into_string_table_values_0))
+            using (
+                var resettableStatement = connection.GetResettableStatement(
+                    _insert_into_string_table_values_0
+                )
+            )
             {
                 var statement = resettableStatement.Statement;
 
@@ -126,14 +148,19 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         }
 
         private int? TryGetStringIdFromDatabaseWorker(
-            SqlConnection connection, string value, bool canReturnNull)
+            SqlConnection connection,
+            string value,
+            bool canReturnNull
+        )
         {
             try
             {
-                using var resettableStatement = connection.GetResettableStatement(_select_star_from_string_table_where_0_limit_one);
+                using var resettableStatement = connection.GetResettableStatement(
+                    _select_star_from_string_table_where_0_limit_one
+                );
                 var statement = resettableStatement.Statement;
 
-                // SQLite's binding indices are 1-based. 
+                // SQLite's binding indices are 1-based.
                 statement.BindStringParameter(parameterIndex: 1, value: value);
 
                 var stepResult = statement.Step();

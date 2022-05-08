@@ -50,7 +50,13 @@ namespace System
 
             public ushort ExponentBits { get; }
 
-            public FloatingPointInfo(ushort denormalMantissaBits, ushort exponentBits, int maxBinaryExponent, int exponentBias, ulong infinityBits)
+            public FloatingPointInfo(
+                ushort denormalMantissaBits,
+                ushort exponentBits,
+                int maxBinaryExponent,
+                int exponentBias,
+                ulong infinityBits
+            )
             {
                 ExponentBits = exponentBits;
 
@@ -73,47 +79,52 @@ namespace System
 
         private static readonly float[] s_Pow10SingleTable = new float[]
         {
-            1e0f,   // 10^0
-            1e1f,   // 10^1
-            1e2f,   // 10^2
-            1e3f,   // 10^3
-            1e4f,   // 10^4
-            1e5f,   // 10^5
-            1e6f,   // 10^6
-            1e7f,   // 10^7
-            1e8f,   // 10^8
-            1e9f,   // 10^9
-            1e10f,  // 10^10
+            1e0f, // 10^0
+            1e1f, // 10^1
+            1e2f, // 10^2
+            1e3f, // 10^3
+            1e4f, // 10^4
+            1e5f, // 10^5
+            1e6f, // 10^6
+            1e7f, // 10^7
+            1e8f, // 10^8
+            1e9f, // 10^9
+            1e10f, // 10^10
         };
 
         private static readonly double[] s_Pow10DoubleTable = new double[]
         {
-            1e0,    // 10^0
-            1e1,    // 10^1
-            1e2,    // 10^2
-            1e3,    // 10^3
-            1e4,    // 10^4
-            1e5,    // 10^5
-            1e6,    // 10^6
-            1e7,    // 10^7
-            1e8,    // 10^8
-            1e9,    // 10^9
-            1e10,   // 10^10
-            1e11,   // 10^11
-            1e12,   // 10^12
-            1e13,   // 10^13
-            1e14,   // 10^14
-            1e15,   // 10^15
-            1e16,   // 10^16
-            1e17,   // 10^17
-            1e18,   // 10^18
-            1e19,   // 10^19
-            1e20,   // 10^20
-            1e21,   // 10^21
-            1e22,   // 10^22
+            1e0, // 10^0
+            1e1, // 10^1
+            1e2, // 10^2
+            1e3, // 10^3
+            1e4, // 10^4
+            1e5, // 10^5
+            1e6, // 10^6
+            1e7, // 10^7
+            1e8, // 10^8
+            1e9, // 10^9
+            1e10, // 10^10
+            1e11, // 10^11
+            1e12, // 10^12
+            1e13, // 10^13
+            1e14, // 10^14
+            1e15, // 10^15
+            1e16, // 10^16
+            1e17, // 10^17
+            1e18, // 10^18
+            1e19, // 10^19
+            1e20, // 10^20
+            1e21, // 10^21
+            1e22, // 10^22
         };
 
-        private static void AccumulateDecimalDigitsIntoBigInteger(ref NumberBuffer number, uint firstIndex, uint lastIndex, out BigInteger result)
+        private static void AccumulateDecimalDigitsIntoBigInteger(
+            ref NumberBuffer number,
+            uint firstIndex,
+            uint lastIndex,
+            out BigInteger result
+        )
         {
             BigInteger.SetZero(out result);
 
@@ -133,7 +144,12 @@ namespace System
             }
         }
 
-        private static ulong AssembleFloatingPointBits(in FloatingPointInfo info, ulong initialMantissa, int initialExponent, bool hasZeroTail)
+        private static ulong AssembleFloatingPointBits(
+            in FloatingPointInfo info,
+            ulong initialMantissa,
+            int initialExponent,
+            bool hasZeroTail
+        )
         {
             // number of bits by which we must adjust the mantissa to shift it into the
             // correct position, and compute the resulting base two exponent for the
@@ -159,7 +175,8 @@ namespace System
                 // mantissa in order to form a denormal number.  (The subtraction of
                 // an extra 1 is to account for the hidden bit of the mantissa that
                 // is not available for use when representing a denormal.)
-                int denormalMantissaShift = normalMantissaShift + normalExponent + info.ExponentBias - 1;
+                int denormalMantissaShift =
+                    normalMantissaShift + normalExponent + info.ExponentBias - 1;
 
                 // Denormal values have an exponent of zero, so the debiased exponent is
                 // the negation of the exponent bias:
@@ -170,7 +187,11 @@ namespace System
                     // Use two steps for right shifts:  for a shift of N bits, we first
                     // shift by N-1 bits, then shift the last bit and use its value to
                     // round the mantissa.
-                    mantissa = RightShiftWithRounding(mantissa, -denormalMantissaShift, hasZeroTail);
+                    mantissa = RightShiftWithRounding(
+                        mantissa,
+                        -denormalMantissaShift,
+                        hasZeroTail
+                    );
 
                     // If the mantissa is now zero, we have underflowed:
                     if (mantissa == 0)
@@ -199,7 +220,8 @@ namespace System
                         // We add one to the denormal_mantissa_shift to account for the
                         // hidden mantissa bit (we subtracted one to account for this bit
                         // when we computed the denormal_mantissa_shift above).
-                        exponent = initialExponent - (denormalMantissaShift + 1) - normalMantissaShift;
+                        exponent =
+                            initialExponent - (denormalMantissaShift + 1) - normalMantissaShift;
                     }
                 }
                 else
@@ -243,22 +265,36 @@ namespace System
             mantissa &= info.DenormalMantissaMask;
 
             Debug.Assert((info.DenormalMantissaMask & (1UL << info.DenormalMantissaBits)) == 0);
-            ulong shiftedExponent = ((ulong)(exponent + info.ExponentBias)) << info.DenormalMantissaBits;
+            ulong shiftedExponent =
+                ((ulong)(exponent + info.ExponentBias)) << info.DenormalMantissaBits;
             Debug.Assert((shiftedExponent & info.DenormalMantissaMask) == 0);
             Debug.Assert((mantissa & ~info.DenormalMantissaMask) == 0);
-            Debug.Assert((shiftedExponent & ~(((1UL << info.ExponentBits) - 1) << info.DenormalMantissaBits)) == 0); // exponent fits in its place
+            Debug.Assert(
+                (shiftedExponent & ~(((1UL << info.ExponentBits) - 1) << info.DenormalMantissaBits))
+                    == 0
+            ); // exponent fits in its place
 
             return shiftedExponent | mantissa;
         }
 
-        private static ulong ConvertBigIntegerToFloatingPointBits(ref BigInteger value, in FloatingPointInfo info, uint integerBitsOfPrecision, bool hasNonZeroFractionalPart)
+        private static ulong ConvertBigIntegerToFloatingPointBits(
+            ref BigInteger value,
+            in FloatingPointInfo info,
+            uint integerBitsOfPrecision,
+            bool hasNonZeroFractionalPart
+        )
         {
             int baseExponent = info.DenormalMantissaBits;
 
             // When we have 64-bits or less of precision, we can just get the mantissa directly
             if (integerBitsOfPrecision <= 64)
             {
-                return AssembleFloatingPointBits(in info, value.ToUInt64(), baseExponent, !hasNonZeroFractionalPart);
+                return AssembleFloatingPointBits(
+                    in info,
+                    value.ToUInt64(),
+                    baseExponent,
+                    !hasNonZeroFractionalPart
+                );
             }
 
             (uint topBlockIndex, uint topBlockBits) = Math.DivRem(integerBitsOfPrecision, 32);
@@ -272,7 +308,9 @@ namespace System
             // When the top 64-bits perfectly span two blocks, we can get those blocks directly
             if (topBlockBits == 0)
             {
-                mantissa = ((ulong)(value.GetBlock(middleBlockIndex)) << 32) + value.GetBlock(bottomBlockIndex);
+                mantissa =
+                    ((ulong)(value.GetBlock(middleBlockIndex)) << 32)
+                    + value.GetBlock(bottomBlockIndex);
             }
             else
             {
@@ -336,7 +374,10 @@ namespace System
             return res;
         }
 
-        private static ulong NumberToDoubleFloatingPointBits(ref NumberBuffer number, in FloatingPointInfo info)
+        private static ulong NumberToDoubleFloatingPointBits(
+            ref NumberBuffer number,
+            in FloatingPointInfo info
+        )
         {
             Debug.Assert(info.DenormalMantissaBits == 52);
 
@@ -361,7 +402,9 @@ namespace System
             uint integerDigitsPresent = Math.Min(positiveExponent, totalDigits);
             uint fractionalDigitsPresent = totalDigits - integerDigitsPresent;
 
-            uint fastExponent = (uint)(Math.Abs(number.Scale - integerDigitsPresent - fractionalDigitsPresent));
+            uint fastExponent = (uint)(
+                Math.Abs(number.Scale - integerDigitsPresent - fractionalDigitsPresent)
+            );
 
             // When the number of significant digits is less than or equal to 15 and the
             // scale is less than or equal to 22, we can take some shortcuts and just rely
@@ -391,10 +434,19 @@ namespace System
                 return BitConverter.DoubleToUInt64Bits(result);
             }
 
-            return NumberToFloatingPointBitsSlow(ref number, in info, positiveExponent, integerDigitsPresent, fractionalDigitsPresent);
+            return NumberToFloatingPointBitsSlow(
+                ref number,
+                in info,
+                positiveExponent,
+                integerDigitsPresent,
+                fractionalDigitsPresent
+            );
         }
 
-        private static ushort NumberToHalfFloatingPointBits(ref NumberBuffer number, in FloatingPointInfo info)
+        private static ushort NumberToHalfFloatingPointBits(
+            ref NumberBuffer number,
+            in FloatingPointInfo info
+        )
         {
             Debug.Assert(info.DenormalMantissaBits == 10);
 
@@ -419,7 +471,9 @@ namespace System
             uint integerDigitsPresent = Math.Min(positiveExponent, totalDigits);
             uint fractionalDigitsPresent = totalDigits - integerDigitsPresent;
 
-            uint fastExponent = (uint)(Math.Abs(number.Scale - integerDigitsPresent - fractionalDigitsPresent));
+            uint fastExponent = (uint)(
+                Math.Abs(number.Scale - integerDigitsPresent - fractionalDigitsPresent)
+            );
 
             // When the number of significant digits is less than or equal to 15 and the
             // scale is less than or equal to 22, we can take some shortcuts and just rely
@@ -470,10 +524,19 @@ namespace System
                 return BitConverter.HalfToUInt16Bits((Half)(result));
             }
 
-            return (ushort)NumberToFloatingPointBitsSlow(ref number, in info, positiveExponent, integerDigitsPresent, fractionalDigitsPresent);
+            return (ushort)NumberToFloatingPointBitsSlow(
+                ref number,
+                in info,
+                positiveExponent,
+                integerDigitsPresent,
+                fractionalDigitsPresent
+            );
         }
 
-        private static uint NumberToSingleFloatingPointBits(ref NumberBuffer number, in FloatingPointInfo info)
+        private static uint NumberToSingleFloatingPointBits(
+            ref NumberBuffer number,
+            in FloatingPointInfo info
+        )
         {
             Debug.Assert(info.DenormalMantissaBits == 23);
 
@@ -498,7 +561,9 @@ namespace System
             uint integerDigitsPresent = Math.Min(positiveExponent, totalDigits);
             uint fractionalDigitsPresent = totalDigits - integerDigitsPresent;
 
-            uint fastExponent = (uint)(Math.Abs(number.Scale - integerDigitsPresent - fractionalDigitsPresent));
+            uint fastExponent = (uint)(
+                Math.Abs(number.Scale - integerDigitsPresent - fractionalDigitsPresent)
+            );
 
             // When the number of significant digits is less than or equal to 15 and the
             // scale is less than or equal to 22, we can take some shortcuts and just rely
@@ -549,10 +614,22 @@ namespace System
                 return BitConverter.SingleToUInt32Bits((float)(result));
             }
 
-            return (uint)NumberToFloatingPointBitsSlow(ref number, in info, positiveExponent, integerDigitsPresent, fractionalDigitsPresent);
+            return (uint)NumberToFloatingPointBitsSlow(
+                ref number,
+                in info,
+                positiveExponent,
+                integerDigitsPresent,
+                fractionalDigitsPresent
+            );
         }
 
-        private static ulong NumberToFloatingPointBitsSlow(ref NumberBuffer number, in FloatingPointInfo info, uint positiveExponent, uint integerDigitsPresent, uint fractionalDigitsPresent)
+        private static ulong NumberToFloatingPointBitsSlow(
+            ref NumberBuffer number,
+            in FloatingPointInfo info,
+            uint positiveExponent,
+            uint integerDigitsPresent,
+            uint fractionalDigitsPresent
+        )
         {
             // To generate an N bit mantissa we require N + 1 bits of precision.  The
             // extra bit is used to correctly round the mantissa (if there are fewer bits
@@ -570,7 +647,12 @@ namespace System
             uint fractionalLastIndex = totalDigits;
 
             // First, we accumulate the integer part of the mantissa into a big_integer:
-            AccumulateDecimalDigitsIntoBigInteger(ref number, IntegerFirstIndex, integerLastIndex, out BigInteger integerValue);
+            AccumulateDecimalDigitsIntoBigInteger(
+                ref number,
+                IntegerFirstIndex,
+                integerLastIndex,
+                out BigInteger integerValue
+            );
 
             if (integerDigitsMissing > 0)
             {
@@ -588,7 +670,10 @@ namespace System
             // then we can assemble the result immediately:
             uint integerBitsOfPrecision = BigInteger.CountSignificantBits(ref integerValue);
 
-            if ((integerBitsOfPrecision >= requiredBitsOfPrecision) || (fractionalDigitsPresent == 0))
+            if (
+                (integerBitsOfPrecision >= requiredBitsOfPrecision)
+                || (fractionalDigitsPresent == 0)
+            )
             {
                 return ConvertBigIntegerToFloatingPointBits(
                     ref integerValue,
@@ -613,7 +698,11 @@ namespace System
                 fractionalDenominatorExponent += (uint)(-number.Scale);
             }
 
-            if ((integerBitsOfPrecision == 0) && (fractionalDenominatorExponent - (int)(totalDigits)) > info.OverflowDecimalExponent)
+            if (
+                (integerBitsOfPrecision == 0)
+                && (fractionalDenominatorExponent - (int)(totalDigits))
+                    > info.OverflowDecimalExponent
+            )
             {
                 // If there were any digits in the integer part, it is impossible to
                 // underflow (because the exponent cannot possibly be small enough),
@@ -621,7 +710,12 @@ namespace System
                 return info.ZeroBits;
             }
 
-            AccumulateDecimalDigitsIntoBigInteger(ref number, fractionalFirstIndex, fractionalLastIndex, out BigInteger fractionalNumerator);
+            AccumulateDecimalDigitsIntoBigInteger(
+                ref number,
+                fractionalFirstIndex,
+                fractionalLastIndex,
+                out BigInteger fractionalNumerator
+            );
 
             if (fractionalNumerator.IsZero())
             {
@@ -642,7 +736,9 @@ namespace System
             // ensures that when we later shift the numerator N bits to the left, we
             // will produce N bits of precision.
             uint fractionalNumeratorBits = BigInteger.CountSignificantBits(ref fractionalNumerator);
-            uint fractionalDenominatorBits = BigInteger.CountSignificantBits(ref fractionalDenominator);
+            uint fractionalDenominatorBits = BigInteger.CountSignificantBits(
+                ref fractionalDenominator
+            );
 
             uint fractionalShift = 0;
 
@@ -656,7 +752,8 @@ namespace System
                 fractionalNumerator.ShiftLeft(fractionalShift);
             }
 
-            uint requiredFractionalBitsOfPrecision = requiredBitsOfPrecision - integerBitsOfPrecision;
+            uint requiredFractionalBitsOfPrecision =
+                requiredBitsOfPrecision - integerBitsOfPrecision;
             uint remainingBitsOfPrecisionRequired = requiredFractionalBitsOfPrecision;
 
             if (integerBitsOfPrecision > 0)
@@ -700,7 +797,12 @@ namespace System
 
             fractionalNumerator.ShiftLeft(remainingBitsOfPrecisionRequired);
 
-            BigInteger.DivRem(ref fractionalNumerator, ref fractionalDenominator, out BigInteger bigFractionalMantissa, out BigInteger fractionalRemainder);
+            BigInteger.DivRem(
+                ref fractionalNumerator,
+                ref fractionalDenominator,
+                out BigInteger bigFractionalMantissa,
+                out BigInteger fractionalRemainder
+            );
             ulong fractionalMantissa = bigFractionalMantissa.ToUInt64();
             bool hasZeroTail = !number.HasNonZeroTail && fractionalRemainder.IsZero();
 
@@ -717,7 +819,8 @@ namespace System
 
             // Compose the mantissa from the integer and fractional parts:
             ulong integerMantissa = integerValue.ToUInt64();
-            ulong completeMantissa = (integerMantissa << (int)(requiredFractionalBitsOfPrecision)) + fractionalMantissa;
+            ulong completeMantissa =
+                (integerMantissa << (int)(requiredFractionalBitsOfPrecision)) + fractionalMantissa;
 
             // Compute the final exponent:
             // * If the mantissa had an integer part, then the exponent is one less than
@@ -729,7 +832,10 @@ namespace System
             // Then, in both cases, we subtract an additional one from the exponent, to
             // account for the fact that we've generated an extra bit of precision, for
             // use in rounding.
-            int finalExponent = (integerBitsOfPrecision > 0) ? (int)(integerBitsOfPrecision) - 2 : -(int)(fractionalExponent) - 1;
+            int finalExponent =
+                (integerBitsOfPrecision > 0)
+                    ? (int)(integerBitsOfPrecision) - 2
+                    : -(int)(fractionalExponent) - 1;
 
             return AssembleFloatingPointBits(in info, completeMantissa, finalExponent, hasZeroTail);
         }

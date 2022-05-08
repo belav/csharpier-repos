@@ -28,7 +28,8 @@ namespace System.Buffers.Binary
         /// </summary>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short ReverseEndianness(short value) => (short)ReverseEndianness((ushort)value);
+        public static short ReverseEndianness(short value) =>
+            (short)ReverseEndianness((ushort)value);
 
         /// <summary>
         /// Reverses a primitive value - performs an endianness swap

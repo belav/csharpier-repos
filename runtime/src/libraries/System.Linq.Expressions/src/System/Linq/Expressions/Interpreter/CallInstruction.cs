@@ -21,7 +21,10 @@ namespace System.Linq.Expressions.Interpreter
         public override string InstructionName => "Call";
 
 #if FEATURE_DLG_INVOKE
-        private static readonly CacheDict<MethodInfo, CallInstruction> s_cache = new CacheDict<MethodInfo, CallInstruction>(256);
+        private static readonly CacheDict<MethodInfo, CallInstruction> s_cache = new CacheDict<
+            MethodInfo,
+            CallInstruction
+        >(256);
 #endif
 
         public static CallInstruction Create(MethodInfo info)
@@ -42,7 +45,11 @@ namespace System.Linq.Expressions.Interpreter
 
             // A workaround for CLR behavior (Unable to create delegates for Array.Get/Set):
             // T[]::Address - not supported by ETs due to T& return value
-            if (info.DeclaringType != null && info.DeclaringType.IsArray && (info.Name == "Get" || info.Name == "Set"))
+            if (
+                info.DeclaringType != null
+                && info.DeclaringType.IsArray
+                && (info.Name == "Get" || info.Name == "Set")
+            )
             {
                 return GetArrayAccessor(info, argumentCount);
             }
@@ -131,21 +138,24 @@ namespace System.Linq.Expressions.Interpreter
             switch (arrayType.GetArrayRank())
             {
                 case 1:
-                    alternativeMethod = isGetter ?
-                        typeof(Array).GetMethod("GetValue", new[] { typeof(int) }) :
-                        typeof(CallInstruction).GetMethod(nameof(ArrayItemSetter1));
+                    alternativeMethod = isGetter
+                        ? typeof(Array).GetMethod("GetValue", new[] { typeof(int) })
+                        : typeof(CallInstruction).GetMethod(nameof(ArrayItemSetter1));
                     break;
 
                 case 2:
-                    alternativeMethod = isGetter ?
-                        typeof(Array).GetMethod("GetValue", new[] { typeof(int), typeof(int) }) :
-                        typeof(CallInstruction).GetMethod(nameof(ArrayItemSetter2));
+                    alternativeMethod = isGetter
+                        ? typeof(Array).GetMethod("GetValue", new[] { typeof(int), typeof(int) })
+                        : typeof(CallInstruction).GetMethod(nameof(ArrayItemSetter2));
                     break;
 
                 case 3:
-                    alternativeMethod = isGetter ?
-                        typeof(Array).GetMethod("GetValue", new[] { typeof(int), typeof(int), typeof(int) }) :
-                        typeof(CallInstruction).GetMethod(nameof(ArrayItemSetter3));
+                    alternativeMethod = isGetter
+                        ? typeof(Array).GetMethod(
+                              "GetValue",
+                              new[] { typeof(int), typeof(int), typeof(int) }
+                          )
+                        : typeof(CallInstruction).GetMethod(nameof(ArrayItemSetter3));
                     break;
             }
 
@@ -167,7 +177,13 @@ namespace System.Linq.Expressions.Interpreter
             array.SetValue(value, index0, index1);
         }
 
-        public static void ArrayItemSetter3(Array array, int index0, int index1, int index2, object value)
+        public static void ArrayItemSetter3(
+            Array array,
+            int index0,
+            int index1,
+            int index2,
+            object value
+        )
         {
             array.SetValue(value, index0, index1, index2);
         }
@@ -182,7 +198,11 @@ namespace System.Linq.Expressions.Interpreter
         /// <summary>
         /// Gets the next type or null if no more types are available.
         /// </summary>
-        private static Type? TryGetParameterOrReturnType(MethodInfo target, ParameterInfo[] pi, int index)
+        private static Type? TryGetParameterOrReturnType(
+            MethodInfo target,
+            ParameterInfo[] pi,
+            int index
+        )
         {
             if (!target.IsStatic)
             {
@@ -222,7 +242,8 @@ namespace System.Linq.Expressions.Interpreter
         private static CallInstruction SlowCreate(MethodInfo info, ParameterInfo[] pis)
         {
             List<Type> types = new List<Type>();
-            if (!info.IsStatic) types.Add(info.DeclaringType!);
+            if (!info.IsStatic)
+                types.Add(info.DeclaringType!);
             foreach (ParameterInfo pi in pis)
             {
                 types.Add(pi.ParameterType);
@@ -235,7 +256,8 @@ namespace System.Linq.Expressions.Interpreter
 
             try
             {
-                return (CallInstruction)Activator.CreateInstance(GetHelperType(info, arrTypes), info)!;
+                return (CallInstruction)
+                    Activator.CreateInstance(GetHelperType(info, arrTypes), info)!;
             }
             catch (TargetInvocationException e)
             {
@@ -258,7 +280,10 @@ namespace System.Linq.Expressions.Interpreter
         /// over enclosed instance lightLambda, return that instance.
         /// We can interpret LightLambdas directly.
         /// </summary>
-        protected static bool TryGetLightLambdaTarget(object? instance, [NotNullWhen(true)] out LightLambda? lightLambda)
+        protected static bool TryGetLightLambdaTarget(
+            object? instance,
+            [NotNullWhen(true)] out LightLambda? lightLambda
+        )
         {
             var del = instance as Delegate;
             if (del is not null)
@@ -391,8 +416,11 @@ namespace System.Linq.Expressions.Interpreter
     {
         private readonly ByRefUpdater[] _byrefArgs;
 
-        internal ByRefMethodInfoCallInstruction(MethodInfo target, int argumentCount, ByRefUpdater[] byrefArgs)
-            : base(target, argumentCount)
+        internal ByRefMethodInfoCallInstruction(
+            MethodInfo target,
+            int argumentCount,
+            ByRefUpdater[] byrefArgs
+        ) : base(target, argumentCount)
         {
             _byrefArgs = byrefArgs;
         }
@@ -465,7 +493,10 @@ namespace System.Linq.Expressions.Interpreter
                     {
                         // -1: instance param, just copy back the exact instance invoked with, which
                         // gets passed by reference from reflection for value types.
-                        arg.Update(frame, arg.ArgumentIndex == -1 ? instance : args[arg.ArgumentIndex]);
+                        arg.Update(
+                            frame,
+                            arg.ArgumentIndex == -1 ? instance : args[arg.ArgumentIndex]
+                        );
                     }
                 }
             }

@@ -43,7 +43,9 @@ namespace Exchange
         private double newValueA = 0.0D;
         private double newValueB = Double.MinValue;
         private bool success;
-        public ThreadSafe(): this(10000) { }
+
+        public ThreadSafe() : this(10000) { }
+
         public ThreadSafe(int loops)
         {
             success = true;
@@ -79,8 +81,7 @@ namespace Exchange
                 tmpVal = Volatile.Read(ref totalValue);
                 if (tmpVal != newValueB && tmpVal != newValueA)
                 {
-                    Console.WriteLine(tmpVal + "," +
-                        newValueB + "," + newValueA);
+                    Console.WriteLine(tmpVal + "," + newValueB + "," + newValueA);
                     success = false;
                 }
                 Thread.Sleep(0);
@@ -89,10 +90,7 @@ namespace Exchange
 
         public bool Pass
         {
-            get
-            {
-                return (success);
-            }
+            get { return (success); }
         }
     }
 }

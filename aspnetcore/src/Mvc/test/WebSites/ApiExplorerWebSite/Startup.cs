@@ -22,21 +22,32 @@ public class Startup
         services.AddTransient<ILoggerFactory, LoggerFactory>();
 
         var wellKnownChangeToken = new WellKnownChangeToken();
-        services.AddControllers(options =>
-        {
-            options.Filters.AddService(typeof(ApiExplorerDataFilter));
+        services
+            .AddControllers(
+                options =>
+                {
+                    options.Filters.AddService(typeof(ApiExplorerDataFilter));
 
-            options.Conventions.Add(new ApiExplorerVisibilityEnabledConvention());
-            options.Conventions.Add(new ApiExplorerVisibilityDisabledConvention(
-                typeof(ApiExplorerVisibilityDisabledByConventionController)));
-            options.Conventions.Add(new ApiExplorerInboundOutboundConvention(
-                typeof(ApiExplorerInboundOutBoundController)));
-            options.Conventions.Add(new ApiExplorerRouteChangeConvention(wellKnownChangeToken));
+                    options.Conventions.Add(new ApiExplorerVisibilityEnabledConvention());
+                    options.Conventions.Add(
+                        new ApiExplorerVisibilityDisabledConvention(
+                            typeof(ApiExplorerVisibilityDisabledByConventionController)
+                        )
+                    );
+                    options.Conventions.Add(
+                        new ApiExplorerInboundOutboundConvention(
+                            typeof(ApiExplorerInboundOutBoundController)
+                        )
+                    );
+                    options.Conventions.Add(
+                        new ApiExplorerRouteChangeConvention(wellKnownChangeToken)
+                    );
 
-            options.OutputFormatters.Clear();
-            options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
-        })
-        .AddNewtonsoftJson();
+                    options.OutputFormatters.Clear();
+                    options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+                }
+            )
+            .AddNewtonsoftJson();
 
         services.AddSingleton<ApiExplorerDataFilter>();
         services.AddSingleton<IActionDescriptorChangeProvider, ActionDescriptorChangeProvider>();
@@ -46,16 +57,17 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-        });
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            }
+        );
     }
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
@@ -67,4 +79,3 @@ public class Startup
             .UseIISIntegration()
             .UseStartup<Startup>();
 }
-

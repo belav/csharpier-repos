@@ -13,7 +13,9 @@ public class Program
     public static void Main(string[] args)
     {
         var webHost = CreateWebHostBuilder(args).Build();
-        var applicationName = webHost.Services.GetRequiredService<IHostEnvironment>().ApplicationName;
+        var applicationName = webHost.Services
+            .GetRequiredService<IHostEnvironment>()
+            .ApplicationName;
         Console.WriteLine(applicationName);
         Console.ReadKey();
     }
@@ -21,6 +23,6 @@ public class Program
     // Do not change the signature of this method. It's used for tests.
     private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         new WebHostBuilder()
-        .SuppressStatusMessages(true)
-        .ConfigureServices(services => services.AddSingleton<IStartup, Startup>());
+            .SuppressStatusMessages(true)
+            .ConfigureServices(services => services.AddSingleton<IStartup, Startup>());
 }

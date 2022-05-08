@@ -14,9 +14,7 @@ namespace System.CommandLine.Parsing
         private LocalizationResources? _resources;
         private readonly Dictionary<IArgument, ArgumentResult> _defaultArgumentValues = new();
 
-        private protected SymbolResult(
-            ISymbol symbol, 
-            SymbolResult? parent)
+        private protected SymbolResult(ISymbol symbol, SymbolResult? parent)
         {
             Symbol = symbol ?? throw new ArgumentNullException(nameof(symbol));
 
@@ -120,13 +118,10 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="option">The option for which to find a result.</param>
         /// <returns>An option result if the option was matched by the parser or has a default value; otherwise, <c>null</c>.</returns>
-        public virtual OptionResult? FindResultFor(IOption option) =>
-            Root?.FindResultFor(option);
+        public virtual OptionResult? FindResultFor(IOption option) => Root?.FindResultFor(option);
 
         internal ArgumentResult GetOrCreateDefaultArgumentResult(Argument argument) =>
-            _defaultArgumentValues.GetOrAdd(
-                argument,
-                arg => new ArgumentResult(arg, this));
+            _defaultArgumentValues.GetOrAdd(argument, arg => new ArgumentResult(arg, this));
 
         internal virtual bool UseDefaultValueFor(IArgument argument) => false;
 
@@ -135,8 +130,7 @@ namespace System.CommandLine.Parsing
 
         internal ParseError? UnrecognizedArgumentError(Argument argument)
         {
-            if (argument.AllowedValues?.Count > 0 &&
-                Tokens.Count > 0)
+            if (argument.AllowedValues?.Count > 0 && Tokens.Count > 0)
             {
                 for (var i = 0; i < Tokens.Count; i++)
                 {
@@ -144,9 +138,12 @@ namespace System.CommandLine.Parsing
                     if (!argument.AllowedValues.Contains(token.Value))
                     {
                         return new ParseError(
-                            LocalizationResources
-                                .UnrecognizedArgument(token.Value, argument.AllowedValues),
-                            this);
+                            LocalizationResources.UnrecognizedArgument(
+                                token.Value,
+                                argument.AllowedValues
+                            ),
+                            this
+                        );
                     }
                 }
             }

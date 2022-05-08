@@ -10,7 +10,10 @@ namespace System.Data.Common
         [Fact]
         public void Ctor_InvalidStatementType_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(StatementType), () => new RowUpdatedEventArgs(null, null, (StatementType)100, null));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(StatementType),
+                () => new RowUpdatedEventArgs(null, null, (StatementType)100, null)
+            );
         }
 
         [Fact]
@@ -25,7 +28,12 @@ namespace System.Data.Common
             Assert.Equal(0, argsEmpty.RecordsAffected);
 
             var table = new DataTable();
-            var args = new RowUpdatedEventArgs(table.NewRow(), null, StatementType.Update, new DataTableMapping());
+            var args = new RowUpdatedEventArgs(
+                table.NewRow(),
+                null,
+                StatementType.Update,
+                new DataTableMapping()
+            );
             Assert.NotNull(args.Row);
             Assert.Same(table, args.Row.Table);
             Assert.Equal(1, args.RowCount);
@@ -38,7 +46,10 @@ namespace System.Data.Common
         public void Status_SetInvalidUpdateStatus_ThrowsArgumentOutOfRangeException()
         {
             var args = new RowUpdatedEventArgs(null, null, 0, null);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(UpdateStatus), () => args.Status = (UpdateStatus)100);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(UpdateStatus),
+                () => args.Status = (UpdateStatus)100
+            );
         }
 
         [Fact]

@@ -109,7 +109,8 @@ namespace System.Net.Http
 
         public HttpResponseHeaders Headers => _headers ??= new HttpResponseHeaders();
 
-        public HttpResponseHeaders TrailingHeaders => _trailingHeaders ??= new HttpResponseHeaders(containsTrailingHeaders: true);
+        public HttpResponseHeaders TrailingHeaders =>
+            _trailingHeaders ??= new HttpResponseHeaders(containsTrailingHeaders: true);
 
         /// <summary>Stores the supplied trailing headers into this instance.</summary>
         /// <remarks>
@@ -149,10 +150,7 @@ namespace System.Net.Http
             get { return ((int)_statusCode >= 200) && ((int)_statusCode <= 299); }
         }
 
-        public HttpResponseMessage()
-            : this(DefaultStatusCode)
-        {
-        }
+        public HttpResponseMessage() : this(DefaultStatusCode) { }
 
         public HttpResponseMessage(HttpStatusCode statusCode)
         {
@@ -174,9 +172,11 @@ namespace System.Net.Http
                         System.Globalization.CultureInfo.InvariantCulture,
                         SR.net_http_message_not_success_statuscode,
                         (int)_statusCode,
-                        ReasonPhrase),
+                        ReasonPhrase
+                    ),
                     inner: null,
-                    _statusCode);
+                    _statusCode
+                );
             }
 
             return this;

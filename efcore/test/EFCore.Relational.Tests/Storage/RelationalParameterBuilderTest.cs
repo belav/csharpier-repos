@@ -18,15 +18,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var typeMapper = new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
             var parameterBuilder = new RelationalCommandBuilder(
-                new RelationalCommandBuilderDependencies(
-                    typeMapper));
+                new RelationalCommandBuilderDependencies(typeMapper)
+            );
 
-            parameterBuilder.AddParameter(
-                "InvariantName",
-                "Name");
+            parameterBuilder.AddParameter("InvariantName", "Name");
 
             Assert.Equal(1, parameterBuilder.Parameters.Count);
 
@@ -42,20 +41,18 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [InlineData(false)]
         public void Can_add_type_mapped_parameter_by_type(bool nullable)
         {
-            var typeMapper = (IRelationalTypeMappingSource)new TestRelationalTypeMappingSource(
-                TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            var typeMapper = (IRelationalTypeMappingSource)
+                new TestRelationalTypeMappingSource(
+                    TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
+                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                );
             var typeMapping = typeMapper.FindMapping(nullable ? typeof(int?) : typeof(int));
 
             var parameterBuilder = new RelationalCommandBuilder(
-                new RelationalCommandBuilderDependencies(
-                    typeMapper));
+                new RelationalCommandBuilderDependencies(typeMapper)
+            );
 
-            parameterBuilder.AddParameter(
-                "InvariantName",
-                "Name",
-                typeMapping,
-                nullable);
+            parameterBuilder.AddParameter("InvariantName", "Name", typeMapping, nullable);
 
             Assert.Equal(1, parameterBuilder.Parameters.Count);
 
@@ -75,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var typeMapper = new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
 
@@ -86,13 +84,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var property = model.GetEntityTypes().Single().FindProperty("MyProp");
 
             var parameterBuilder = new RelationalCommandBuilder(
-                new RelationalCommandBuilderDependencies(typeMapper));
+                new RelationalCommandBuilderDependencies(typeMapper)
+            );
 
             parameterBuilder.AddParameter(
                 "InvariantName",
                 "Name",
                 property.GetRelationalTypeMapping(),
-                property.IsNullable);
+                property.IsNullable
+            );
 
             Assert.Equal(1, parameterBuilder.Parameters.Count);
 
@@ -110,11 +110,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var typeMapper = new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
             var parameterBuilder = new RelationalCommandBuilder(
-                new RelationalCommandBuilderDependencies(
-                    typeMapper));
+                new RelationalCommandBuilderDependencies(typeMapper)
+            );
 
             parameterBuilder.AddCompositeParameter(
                 "CompositeInvariant",
@@ -124,13 +125,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         "FirstInvariant",
                         "FirstName",
                         new IntTypeMapping("int", DbType.Int32),
-                        nullable: false),
+                        nullable: false
+                    ),
                     new TypeMappedRelationalParameter(
                         "SecondInvariant",
                         "SecondName",
                         new StringTypeMapping("nvarchar(max)", DbType.String),
-                        nullable: true)
-                });
+                        nullable: true
+                    )
+                }
+            );
 
             Assert.Equal(1, parameterBuilder.Parameters.Count);
 
@@ -146,22 +150,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
         {
             var typeMapper = new TestRelationalTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
             var parameterBuilder = new RelationalCommandBuilder(
-                new RelationalCommandBuilderDependencies(
-                    typeMapper));
+                new RelationalCommandBuilderDependencies(typeMapper)
+            );
 
             parameterBuilder.AddCompositeParameter(
                 "CompositeInvariant",
-                new List<IRelationalParameter>());
+                new List<IRelationalParameter>()
+            );
 
             Assert.Equal(0, parameterBuilder.Parameters.Count);
         }
 
         public static RelationalTypeMapping GetMapping(
             IRelationalTypeMappingSource typeMappingSource,
-            IProperty property)
-            => typeMappingSource.FindMapping(property);
+            IProperty property
+        ) => typeMappingSource.FindMapping(property);
     }
 }

@@ -295,7 +295,9 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Throws<FormatException>(() => SqlByte.Parse("not-a-number"));
 
-            Assert.Throws<OverflowException>(() => SqlByte.Parse(((int)SqlByte.MaxValue + 1).ToString()));
+            Assert.Throws<OverflowException>(
+                () => SqlByte.Parse(((int)SqlByte.MaxValue + 1).ToString())
+            );
 
             Assert.Equal((byte)150, SqlByte.Parse("150").Value);
         }
@@ -681,6 +683,7 @@ namespace System.Data.Tests.SqlTypes
             byte testByte = 14;
             Assert.Equal((byte)14, ((SqlByte)testByte).Value);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

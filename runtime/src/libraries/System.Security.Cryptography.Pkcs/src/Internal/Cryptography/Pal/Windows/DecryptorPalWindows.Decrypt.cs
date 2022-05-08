@@ -22,7 +22,8 @@ namespace Internal.Cryptography.Pal.Windows
             AsymmetricAlgorithm? privateKey,
             X509Certificate2Collection originatorCerts,
             X509Certificate2Collection extraStore,
-            out Exception? exception)
+            out Exception? exception
+        )
         {
             Debug.Assert((cert != null) ^ (privateKey != null));
 
@@ -43,7 +44,8 @@ namespace Internal.Cryptography.Pal.Windows
                     recipientInfo.EncryptedKey,
                     recipientInfo.KeyEncryptionAlgorithm.Oid.Value,
                     recipientInfo.KeyEncryptionAlgorithm.Parameters,
-                    out exception);
+                    out exception
+                );
 
                 // Pin CEK to prevent it from getting copied during heap compaction.
                 fixed (byte* pinnedCek = cek)
@@ -60,7 +62,8 @@ namespace Internal.Cryptography.Pal.Windows
                             contentInfo.ContentType.Value!,
                             contentInfo.Content,
                             _contentEncryptionAlgorithm,
-                            out exception);
+                            out exception
+                        );
                     }
                     finally
                     {
@@ -88,7 +91,15 @@ namespace Internal.Cryptography.Pal.Windows
             // because wrapping an NCrypt wrapper over CAPI keys unconditionally causes some legacy features
             // (such as RC4 support) to break.
             const bool PreferNCrypt = false;
-            using (SafeProvOrNCryptKeyHandle? hKey = PkcsPalWindows.GetCertificatePrivateKey(cert, Silent, PreferNCrypt, out _, out exception))
+            using (
+                SafeProvOrNCryptKeyHandle? hKey = PkcsPalWindows.GetCertificatePrivateKey(
+                    cert,
+                    Silent,
+                    PreferNCrypt,
+                    out _,
+                    out exception
+                )
+            )
             {
                 if (hKey == null)
                     return null;
@@ -97,11 +108,21 @@ namespace Internal.Cryptography.Pal.Windows
                 switch (type)
                 {
                     case RecipientInfoType.KeyTransport:
-                        exception = TryDecryptTrans((KeyTransRecipientInfo)recipientInfo, hKey, keySpec);
+                        exception = TryDecryptTrans(
+                            (KeyTransRecipientInfo)recipientInfo,
+                            hKey,
+                            keySpec
+                        );
                         break;
 
                     case RecipientInfoType.KeyAgreement:
-                        exception = TryDecryptAgree((KeyAgreeRecipientInfo)recipientInfo, hKey, keySpec, originatorCerts, extraStore);
+                        exception = TryDecryptAgree(
+                            (KeyAgreeRecipientInfo)recipientInfo,
+                            hKey,
+                            keySpec,
+                            originatorCerts,
+                            extraStore
+                        );
                         break;
 
                     default:
@@ -119,23 +140,36 @@ namespace Internal.Cryptography.Pal.Windows
             }
         }
 
-        private static Exception? TryGetKeySpecForCertificate(X509Certificate2 cert, out CryptKeySpec keySpec)
+        private static Exception? TryGetKeySpecForCertificate(
+            X509Certificate2 cert,
+            out CryptKeySpec keySpec
+        )
         {
             using (SafeCertContextHandle hCertContext = cert.CreateCertContextHandle())
             {
                 int cbSize = 0;
 
-                if (Interop.Crypt32.CertGetCertificateContextProperty(
-                    hCertContext,
-                    CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
-                    null,
-                    ref cbSize))
+                if (
+                    Interop.Crypt32.CertGetCertificateContextProperty(
+                        hCertContext,
+                        CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
+                        null,
+                        ref cbSize
+                    )
+                )
                 {
                     keySpec = CryptKeySpec.CERT_NCRYPT_KEY_SPEC;
                     return null;
                 }
 
-                if (!Interop.Crypt32.CertGetCertificateContextProperty(hCertContext, CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID, null, ref cbSize))
+                if (
+                    !Interop.Crypt32.CertGetCertificateContextProperty(
+                        hCertContext,
+                        CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                        null,
+                        ref cbSize
+                    )
+                )
                 {
                     ErrorCode errorCode = (ErrorCode)(Marshal.GetLastWin32Error());
                     keySpec = default(CryptKeySpec);
@@ -147,7 +181,14 @@ namespace Internal.Cryptography.Pal.Windows
                 {
                     fixed (byte* pvData = pData)
                     {
-                        if (!Interop.Crypt32.CertGetCertificateContextProperty(hCertContext, CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID, pData, ref cbSize))
+                        if (
+                            !Interop.Crypt32.CertGetCertificateContextProperty(
+                                hCertContext,
+                                CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                                pData,
+                                ref cbSize
+                            )
+                        )
                         {
                             ErrorCode errorCode = (ErrorCode)(Marshal.GetLastWin32Error());
                             keySpec = default(CryptKeySpec);
@@ -162,9 +203,15 @@ namespace Internal.Cryptography.Pal.Windows
             }
         }
 
-        private Exception? TryDecryptTrans(KeyTransRecipientInfo recipientInfo, SafeProvOrNCryptKeyHandle hKey, CryptKeySpec keySpec)
+        private Exception? TryDecryptTrans(
+            KeyTransRecipientInfo recipientInfo,
+            SafeProvOrNCryptKeyHandle hKey,
+            CryptKeySpec keySpec
+        )
         {
-            KeyTransRecipientInfoPalWindows pal = (KeyTransRecipientInfoPalWindows)(recipientInfo.Pal);
+            KeyTransRecipientInfoPalWindows pal = (KeyTransRecipientInfoPalWindows)(
+                recipientInfo.Pal
+            );
 
             CMSG_CTRL_DECRYPT_PARA decryptPara;
             decryptPara.cbSize = Marshal.SizeOf<CMSG_CTRL_DECRYPT_PARA>();
@@ -172,69 +219,121 @@ namespace Internal.Cryptography.Pal.Windows
             decryptPara.dwKeySpec = keySpec;
             decryptPara.dwRecipientIndex = pal.Index;
 
-            bool success = Interop.Crypt32.CryptMsgControl(_hCryptMsg, 0, MsgControlType.CMSG_CTRL_DECRYPT, ref decryptPara);
+            bool success = Interop.Crypt32.CryptMsgControl(
+                _hCryptMsg,
+                0,
+                MsgControlType.CMSG_CTRL_DECRYPT,
+                ref decryptPara
+            );
             if (!success)
                 return Marshal.GetHRForLastWin32Error().ToCryptographicException();
 
             return null;
         }
 
-        private Exception? TryDecryptAgree(KeyAgreeRecipientInfo keyAgreeRecipientInfo, SafeProvOrNCryptKeyHandle hKey, CryptKeySpec keySpec, X509Certificate2Collection originatorCerts, X509Certificate2Collection extraStore)
+        private Exception? TryDecryptAgree(
+            KeyAgreeRecipientInfo keyAgreeRecipientInfo,
+            SafeProvOrNCryptKeyHandle hKey,
+            CryptKeySpec keySpec,
+            X509Certificate2Collection originatorCerts,
+            X509Certificate2Collection extraStore
+        )
         {
             unsafe
             {
-                KeyAgreeRecipientInfoPalWindows pal = (KeyAgreeRecipientInfoPalWindows)(keyAgreeRecipientInfo.Pal);
+                KeyAgreeRecipientInfoPalWindows pal = (KeyAgreeRecipientInfoPalWindows)(
+                    keyAgreeRecipientInfo.Pal
+                );
                 return pal.WithCmsgCmsRecipientInfo<Exception?>(
-                    delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* pKeyAgreeRecipientInfo)
+                    delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* pKeyAgreeRecipientInfo)
                     {
-                        CMSG_CTRL_KEY_AGREE_DECRYPT_PARA decryptPara = default(CMSG_CTRL_KEY_AGREE_DECRYPT_PARA);
+                        CMSG_CTRL_KEY_AGREE_DECRYPT_PARA decryptPara =
+                            default(CMSG_CTRL_KEY_AGREE_DECRYPT_PARA);
                         decryptPara.cbSize = Marshal.SizeOf<CMSG_CTRL_KEY_AGREE_DECRYPT_PARA>();
                         decryptPara.hProv = hKey;
                         decryptPara.dwKeySpec = keySpec;
                         decryptPara.pKeyAgree = pKeyAgreeRecipientInfo;
                         decryptPara.dwRecipientIndex = pal.Index;
                         decryptPara.dwRecipientEncryptedKeyIndex = pal.SubIndex;
-                        CMsgKeyAgreeOriginatorChoice originatorChoice = pKeyAgreeRecipientInfo->dwOriginatorChoice;
+                        CMsgKeyAgreeOriginatorChoice originatorChoice =
+                            pKeyAgreeRecipientInfo->dwOriginatorChoice;
                         switch (originatorChoice)
                         {
                             case CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_CERT:
+                            {
+                                X509Certificate2Collection candidateCerts =
+                                    new X509Certificate2Collection();
+                                candidateCerts.AddRange(
+                                    PkcsHelpers.GetStoreCertificates(
+                                        StoreName.AddressBook,
+                                        StoreLocation.CurrentUser,
+                                        openExistingOnly: true
+                                    )
+                                );
+                                candidateCerts.AddRange(
+                                    PkcsHelpers.GetStoreCertificates(
+                                        StoreName.AddressBook,
+                                        StoreLocation.LocalMachine,
+                                        openExistingOnly: true
+                                    )
+                                );
+                                candidateCerts.AddRange(originatorCerts);
+                                candidateCerts.AddRange(extraStore);
+                                SubjectIdentifier originatorId =
+                                    pKeyAgreeRecipientInfo->OriginatorCertId.ToSubjectIdentifier();
+                                X509Certificate2? originatorCert =
+                                    candidateCerts.TryFindMatchingCertificate(originatorId);
+                                if (originatorCert == null)
+                                    return ErrorCode.CRYPT_E_NOT_FOUND.ToCryptographicException();
+                                using (
+                                    SafeCertContextHandle hCertContext =
+                                        originatorCert.CreateCertContextHandle()
+                                )
                                 {
-                                    X509Certificate2Collection candidateCerts = new X509Certificate2Collection();
-                                    candidateCerts.AddRange(PkcsHelpers.GetStoreCertificates(StoreName.AddressBook, StoreLocation.CurrentUser, openExistingOnly: true));
-                                    candidateCerts.AddRange(PkcsHelpers.GetStoreCertificates(StoreName.AddressBook, StoreLocation.LocalMachine, openExistingOnly: true));
-                                    candidateCerts.AddRange(originatorCerts);
-                                    candidateCerts.AddRange(extraStore);
-                                    SubjectIdentifier originatorId = pKeyAgreeRecipientInfo->OriginatorCertId.ToSubjectIdentifier();
-                                    X509Certificate2? originatorCert = candidateCerts.TryFindMatchingCertificate(originatorId);
-                                    if (originatorCert == null)
-                                        return ErrorCode.CRYPT_E_NOT_FOUND.ToCryptographicException();
-                                    using (SafeCertContextHandle hCertContext = originatorCert.CreateCertContextHandle())
-                                    {
-                                        CERT_CONTEXT* pOriginatorCertContext = hCertContext.DangerousGetCertContext();
-                                        decryptPara.OriginatorPublicKey = pOriginatorCertContext->pCertInfo->SubjectPublicKeyInfo.PublicKey;
+                                    CERT_CONTEXT* pOriginatorCertContext =
+                                        hCertContext.DangerousGetCertContext();
+                                    decryptPara.OriginatorPublicKey = pOriginatorCertContext
+                                        ->pCertInfo
+                                        ->SubjectPublicKeyInfo
+                                        .PublicKey;
 
-                                        // Do not factor this call out of the switch statement as leaving this "using" block will free up
-                                        // native memory that decryptPara points to.
-                                        return TryExecuteDecryptAgree(ref decryptPara);
-                                    }
-                                }
-
-                            case CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY:
-                                {
-                                    decryptPara.OriginatorPublicKey = pKeyAgreeRecipientInfo->OriginatorPublicKeyInfo.PublicKey;
+                                    // Do not factor this call out of the switch statement as leaving this "using" block will free up
+                                    // native memory that decryptPara points to.
                                     return TryExecuteDecryptAgree(ref decryptPara);
                                 }
+                            }
+
+                            case CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY:
+                            {
+                                decryptPara.OriginatorPublicKey = pKeyAgreeRecipientInfo
+                                    ->OriginatorPublicKeyInfo
+                                    .PublicKey;
+                                return TryExecuteDecryptAgree(ref decryptPara);
+                            }
 
                             default:
-                                return new CryptographicException(SR.Format(SR.Cryptography_Cms_Invalid_Originator_Identifier_Choice, originatorChoice));
+                                return new CryptographicException(
+                                    SR.Format(
+                                        SR.Cryptography_Cms_Invalid_Originator_Identifier_Choice,
+                                        originatorChoice
+                                    )
+                                );
                         }
-                    });
+                    }
+                );
             }
         }
 
         private Exception? TryExecuteDecryptAgree(ref CMSG_CTRL_KEY_AGREE_DECRYPT_PARA decryptPara)
         {
-            if (!Interop.Crypt32.CryptMsgControl(_hCryptMsg, 0, MsgControlType.CMSG_CTRL_KEY_AGREE_DECRYPT, ref decryptPara))
+            if (
+                !Interop.Crypt32.CryptMsgControl(
+                    _hCryptMsg,
+                    0,
+                    MsgControlType.CMSG_CTRL_KEY_AGREE_DECRYPT,
+                    ref decryptPara
+                )
+            )
             {
                 ErrorCode errorCode = (ErrorCode)(Marshal.GetHRForLastWin32Error());
                 return errorCode.ToCryptographicException();

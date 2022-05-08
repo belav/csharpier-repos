@@ -17,6 +17,7 @@ namespace Microsoft.Win32.SafeHandles
         /// (e.g. deleting the file for DeleteOnClose) happens at the appropriate time.
         /// </summary>
         private readonly FileStream? _fileStream;
+
         /// <summary>The FileStream's handle, cached to avoid repeated accesses to FileStream.SafeFileHandle that could, in theory, change.</summary>
         internal SafeFileHandle? _fileStreamHandle;
 
@@ -43,12 +44,18 @@ namespace Microsoft.Win32.SafeHandles
         /// <param name="options">The options for the memory-mapped file.</param>
         /// <param name="capacity">The capacity of the memory-mapped file.</param>
         internal SafeMemoryMappedFileHandle(
-            FileStream? fileStream, bool ownsFileStream, HandleInheritability inheritability,
-            MemoryMappedFileAccess access, MemoryMappedFileOptions options,
-            long capacity)
-            : base(ownsHandle: true)
+            FileStream? fileStream,
+            bool ownsFileStream,
+            HandleInheritability inheritability,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            long capacity
+        ) : base(ownsHandle: true)
         {
-            Debug.Assert(!ownsFileStream || fileStream != null, "We can only own a FileStream we're actually given.");
+            Debug.Assert(
+                !ownsFileStream || fileStream != null,
+                "We can only own a FileStream we're actually given."
+            );
 
             // Store the arguments.  We'll actually open the map when the view is created.
             _fileStream = fileStream;
@@ -90,7 +97,7 @@ namespace Microsoft.Win32.SafeHandles
         {
             if (_fileStreamHandle != null)
             {
-                SetHandle((IntPtr) (-1));
+                SetHandle((IntPtr)(-1));
                 _fileStreamHandle.DangerousRelease();
                 _fileStreamHandle = null;
             }

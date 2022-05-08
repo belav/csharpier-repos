@@ -37,18 +37,23 @@ public class ArrayModelBinderProviderTest
         // Arrange
         var provider = new ArrayModelBinderProvider();
         var context = new TestModelBinderProviderContext(modelType);
-        context.OnCreatingBinder((m) =>
-        {
+        context.OnCreatingBinder(
+            (m) =>
+            {
                 // Expect to be called with the element type to create a binder for elements.
                 Assert.Equal(modelType.GetElementType(), m.ModelType);
-            return Mock.Of<IModelBinder>();
-        });
+                return Mock.Of<IModelBinder>();
+            }
+        );
 
         // Act
         var result = provider.GetBinder(context);
 
         // Assert
-        Assert.IsType(typeof(ArrayModelBinder<>).MakeGenericType(modelType.GetElementType()), result);
+        Assert.IsType(
+            typeof(ArrayModelBinder<>).MakeGenericType(modelType.GetElementType()),
+            result
+        );
     }
 
     [Fact]
@@ -58,11 +63,13 @@ public class ArrayModelBinderProviderTest
         var provider = new ArrayModelBinderProvider();
 
         var context = new TestModelBinderProviderContext(typeof(int[]));
-        context.OnCreatingBinder(m =>
-        {
-            Assert.Equal(typeof(int), m.ModelType);
-            return Mock.Of<IModelBinder>();
-        });
+        context.OnCreatingBinder(
+            m =>
+            {
+                Assert.Equal(typeof(int), m.ModelType);
+                return Mock.Of<IModelBinder>();
+            }
+        );
 
         // Act
         var result = provider.GetBinder(context);
@@ -77,22 +84,28 @@ public class ArrayModelBinderProviderTest
     {
         // Arrange
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForProperty(
-            typeof(ModelWithIntArrayProperty),
-            nameof(ModelWithIntArrayProperty.ArrayProperty)).BindingDetails(bd => bd.IsReadOnly = true);
+        metadataProvider
+            .ForProperty(
+                typeof(ModelWithIntArrayProperty),
+                nameof(ModelWithIntArrayProperty.ArrayProperty)
+            )
+            .BindingDetails(bd => bd.IsReadOnly = true);
 
         var modelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithIntArrayProperty),
-            nameof(ModelWithIntArrayProperty.ArrayProperty));
+            nameof(ModelWithIntArrayProperty.ArrayProperty)
+        );
 
         var provider = new ArrayModelBinderProvider();
         var context = new TestModelBinderProviderContext(typeof(int[]));
-        context.OnCreatingBinder((m) =>
-        {
+        context.OnCreatingBinder(
+            (m) =>
+            {
                 // Expect to be called with the element type to create a binder for elements.
                 Assert.Equal(typeof(int), m.ModelType);
-            return Mock.Of<IModelBinder>();
-        });
+                return Mock.Of<IModelBinder>();
+            }
+        );
 
         // Act
         var result = provider.GetBinder(context);
@@ -101,9 +114,7 @@ public class ArrayModelBinderProviderTest
         Assert.IsType<ArrayModelBinder<int>>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 
     private class ModelWithIntArrayProperty
     {

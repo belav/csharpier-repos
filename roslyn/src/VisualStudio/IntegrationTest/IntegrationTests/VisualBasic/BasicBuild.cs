@@ -18,23 +18,25 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     [Collection(nameof(SharedIntegrationHostFixture))]
     public class BasicBuild : AbstractIntegrationTest
     {
-        public BasicBuild(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+        public BasicBuild(VisualStudioInstanceFactory instanceFactory) : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(true);
             VisualStudio.SolutionExplorer.CreateSolution(nameof(BasicBuild));
             var testProj = new ProjectUtils.Project("TestProj");
-            VisualStudio.SolutionExplorer.AddProject(testProj, WellKnownProjectTemplates.ConsoleApplication, LanguageNames.VisualBasic);
+            VisualStudio.SolutionExplorer.AddProject(
+                testProj,
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.VisualBasic
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Build)]
         public void BuildProject()
         {
-            var editorText = @"Module Program
+            var editorText =
+                @"Module Program
 
     Sub Main()
         Console.WriteLine(""Hello, World!"")

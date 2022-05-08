@@ -15,6 +15,7 @@ namespace JitTest
         WinCE = 3,
         Xbox = 5,
     }
+
     internal enum Mood
     {
         good,
@@ -118,7 +119,10 @@ namespace JitTest
                                 throw new Exception();
                             if (__reftype(_ref) != typeof(String))
                                 throw new Exception();
-                            result += __refvalue(_ref, String) != null ? __refvalue(_ref, String) : "(null)";
+                            result +=
+                                __refvalue(_ref, String) != null
+                                    ? __refvalue(_ref, String)
+                                    : "(null)";
                             break;
 
                         case 't':
@@ -224,9 +228,17 @@ namespace JitTest
             Test("{%e}", __makeref(_m_mood), "{good}");
         }
 
-        private static void DoTestArgSlots(ref int d, ref uint u, ref long l,
-            ref ulong ul, ref float f, ref double dbl, ref bool b,
-            ref DateTime t, ref PlatformID pid)
+        private static void DoTestArgSlots(
+            ref int d,
+            ref uint u,
+            ref long l,
+            ref ulong ul,
+            ref float f,
+            ref double dbl,
+            ref bool b,
+            ref DateTime t,
+            ref PlatformID pid
+        )
         {
             Test("{%d}", __makeref(d), "{20}");
             Test("{%u}", __makeref(u), "{21}");

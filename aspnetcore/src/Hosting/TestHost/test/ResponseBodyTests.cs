@@ -18,13 +18,15 @@ public class ResponseBodyTests
     public async Task BodyWriter_GetMemoryAdvance_AutoCompleted()
     {
         var length = -1;
-        using var host = await CreateHost(httpContext =>
-        {
-            var writer = httpContext.Response.BodyWriter;
-            length = writer.GetMemory().Length;
-            writer.Advance(length);
-            return Task.CompletedTask;
-        });
+        using var host = await CreateHost(
+            httpContext =>
+            {
+                var writer = httpContext.Response.BodyWriter;
+                length = writer.GetMemory().Length;
+                writer.Advance(length);
+                return Task.CompletedTask;
+            }
+        );
 
         var response = await host.GetTestServer().CreateClient().GetAsync("/");
         var bytes = await response.Content.ReadAsByteArrayAsync();
@@ -35,13 +37,15 @@ public class ResponseBodyTests
     public async Task BodyWriter_StartAsyncGetMemoryAdvance_AutoCompleted()
     {
         var length = -1;
-        using var host = await CreateHost(async httpContext =>
-        {
-            await httpContext.Response.StartAsync();
-            var writer = httpContext.Response.BodyWriter;
-            length = writer.GetMemory().Length;
-            writer.Advance(length);
-        });
+        using var host = await CreateHost(
+            async httpContext =>
+            {
+                await httpContext.Response.StartAsync();
+                var writer = httpContext.Response.BodyWriter;
+                length = writer.GetMemory().Length;
+                writer.Advance(length);
+            }
+        );
 
         var response = await host.GetTestServer().CreateClient().GetAsync("/");
         var bytes = await response.Content.ReadAsByteArrayAsync();
@@ -52,12 +56,14 @@ public class ResponseBodyTests
     public async Task BodyStream_SyncDisabled_WriteThrows()
     {
         var contentBytes = new byte[] { 32 };
-        using var host = await CreateHost(async httpContext =>
-        {
-            await httpContext.Response.StartAsync();
-            httpContext.Response.Body.Write(contentBytes, 0, contentBytes.Length);
-            await httpContext.Response.CompleteAsync();
-        });
+        using var host = await CreateHost(
+            async httpContext =>
+            {
+                await httpContext.Response.StartAsync();
+                httpContext.Response.Body.Write(contentBytes, 0, contentBytes.Length);
+                await httpContext.Response.CompleteAsync();
+            }
+        );
 
         var client = host.GetTestServer().CreateClient();
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => client.GetAsync("/"));
@@ -68,12 +74,14 @@ public class ResponseBodyTests
     public async Task BodyStream_SyncEnabled_WriteSucceeds()
     {
         var contentBytes = new byte[] { 32 };
-        using var host = await CreateHost(async httpContext =>
-        {
-            await httpContext.Response.StartAsync();
-            httpContext.Response.Body.Write(contentBytes, 0, contentBytes.Length);
-            await httpContext.Response.CompleteAsync();
-        });
+        using var host = await CreateHost(
+            async httpContext =>
+            {
+                await httpContext.Response.StartAsync();
+                httpContext.Response.Body.Write(contentBytes, 0, contentBytes.Length);
+                await httpContext.Response.CompleteAsync();
+            }
+        );
 
         host.GetTestServer().AllowSynchronousIO = true;
 
@@ -87,16 +95,20 @@ public class ResponseBodyTests
     public async Task BodyStream_SyncDisabled_FlushThrows()
     {
         var contentBytes = new byte[] { 32 };
-        using var host = await CreateHost(async httpContext =>
-        {
-            await httpContext.Response.StartAsync();
-            await httpContext.Response.Body.WriteAsync(contentBytes, 0, contentBytes.Length);
-            httpContext.Response.Body.Flush();
-            await httpContext.Response.CompleteAsync();
-        });
+        using var host = await CreateHost(
+            async httpContext =>
+            {
+                await httpContext.Response.StartAsync();
+                await httpContext.Response.Body.WriteAsync(contentBytes, 0, contentBytes.Length);
+                httpContext.Response.Body.Flush();
+                await httpContext.Response.CompleteAsync();
+            }
+        );
 
         var client = host.GetTestServer().CreateClient();
-        var requestException = await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync("/"));
+        var requestException = await Assert.ThrowsAsync<HttpRequestException>(
+            () => client.GetAsync("/")
+        );
         var ex = (InvalidOperationException)requestException?.InnerException?.InnerException;
         Assert.NotNull(ex);
         Assert.Contains("Synchronous operations are disallowed.", ex.Message);
@@ -106,13 +118,15 @@ public class ResponseBodyTests
     public async Task BodyStream_SyncEnabled_FlushSucceeds()
     {
         var contentBytes = new byte[] { 32 };
-        using var host = await CreateHost(async httpContext =>
-        {
-            await httpContext.Response.StartAsync();
-            await httpContext.Response.Body.WriteAsync(contentBytes, 0, contentBytes.Length);
-            httpContext.Response.Body.Flush();
-            await httpContext.Response.CompleteAsync();
-        });
+        using var host = await CreateHost(
+            async httpContext =>
+            {
+                await httpContext.Response.StartAsync();
+                await httpContext.Response.Body.WriteAsync(contentBytes, 0, contentBytes.Length);
+                httpContext.Response.Body.Flush();
+                await httpContext.Response.CompleteAsync();
+            }
+        );
 
         host.GetTestServer().AllowSynchronousIO = true;
 
@@ -125,15 +139,19 @@ public class ResponseBodyTests
     private Task<IHost> CreateHost(RequestDelegate appDelegate)
     {
         return new HostBuilder()
-            .ConfigureWebHost(webBuilder =>
-            {
-                webBuilder
-                    .UseTestServer()
-                    .Configure(app =>
-                    {
-                        app.Run(appDelegate);
-                    });
-            })
+            .ConfigureWebHost(
+                webBuilder =>
+                {
+                    webBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                            {
+                                app.Run(appDelegate);
+                            }
+                        );
+                }
+            )
             .StartAsync();
     }
 }

@@ -24,9 +24,12 @@ public class DynamicObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        if (!TrySetDynamicObjectProperty(target, contractResolver, segment, value, out errorMessage))
+        if (
+            !TrySetDynamicObjectProperty(target, contractResolver, segment, value, out errorMessage)
+        )
         {
             return false;
         }
@@ -40,9 +43,18 @@ public class DynamicObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        if (!TryGetDynamicObjectProperty(target, contractResolver, segment, out value, out errorMessage))
+        if (
+            !TryGetDynamicObjectProperty(
+                target,
+                contractResolver,
+                segment,
+                out value,
+                out errorMessage
+            )
+        )
         {
             value = null;
             return false;
@@ -56,9 +68,18 @@ public class DynamicObjectAdapter : IAdapter
         object target,
         string segment,
         IContractResolver contractResolver,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        if (!TryGetDynamicObjectProperty(target, contractResolver, segment, out var property, out errorMessage))
+        if (
+            !TryGetDynamicObjectProperty(
+                target,
+                contractResolver,
+                segment,
+                out var property,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
@@ -66,20 +87,22 @@ public class DynamicObjectAdapter : IAdapter
         // Setting the value to "null" will use the default value in case of value types, and
         // null in case of reference types
         object value = null;
-        if (property.GetType().IsValueType
-            && Nullable.GetUnderlyingType(property.GetType()) == null)
+        if (
+            property.GetType().IsValueType && Nullable.GetUnderlyingType(property.GetType()) == null
+        )
         {
             value = Activator.CreateInstance(property.GetType());
         }
 
-        if (!TrySetDynamicObjectProperty(target, contractResolver, segment, value, out errorMessage))
+        if (
+            !TrySetDynamicObjectProperty(target, contractResolver, segment, value, out errorMessage)
+        )
         {
             return false;
         }
 
         errorMessage = null;
         return true;
-
     }
 
     public virtual bool TryReplace(
@@ -87,9 +110,18 @@ public class DynamicObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        if (!TryGetDynamicObjectProperty(target, contractResolver, segment, out var property, out errorMessage))
+        if (
+            !TryGetDynamicObjectProperty(
+                target,
+                contractResolver,
+                segment,
+                out var property,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
@@ -105,7 +137,15 @@ public class DynamicObjectAdapter : IAdapter
             return false;
         }
 
-        if (!TrySetDynamicObjectProperty(target, contractResolver, segment, convertedValue, out errorMessage))
+        if (
+            !TrySetDynamicObjectProperty(
+                target,
+                contractResolver,
+                segment,
+                convertedValue,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
@@ -119,9 +159,18 @@ public class DynamicObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        if (!TryGetDynamicObjectProperty(target, contractResolver, segment, out var property, out errorMessage))
+        if (
+            !TryGetDynamicObjectProperty(
+                target,
+                contractResolver,
+                segment,
+                out var property,
+                out errorMessage
+            )
+        )
         {
             return false;
         }
@@ -132,7 +181,12 @@ public class DynamicObjectAdapter : IAdapter
             return false;
         }
 
-        if (!JToken.DeepEquals(JsonConvert.SerializeObject(property), JsonConvert.SerializeObject(convertedValue)))
+        if (
+            !JToken.DeepEquals(
+                JsonConvert.SerializeObject(property),
+                JsonConvert.SerializeObject(convertedValue)
+            )
+        )
         {
             errorMessage = Resources.FormatValueNotEqualToTestValue(property, value, segment);
             return false;
@@ -149,9 +203,18 @@ public class DynamicObjectAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object nextTarget,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        if (!TryGetDynamicObjectProperty(target, contractResolver, segment, out var property, out errorMessage))
+        if (
+            !TryGetDynamicObjectProperty(
+                target,
+                contractResolver,
+                segment,
+                out var property,
+                out errorMessage
+            )
+        )
         {
             nextTarget = null;
             return false;
@@ -169,9 +232,11 @@ public class DynamicObjectAdapter : IAdapter
         IContractResolver contractResolver,
         string segment,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        var jsonDynamicContract = (JsonDynamicContract)contractResolver.ResolveContract(target.GetType());
+        var jsonDynamicContract = (JsonDynamicContract)
+            contractResolver.ResolveContract(target.GetType());
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 
@@ -181,8 +246,9 @@ public class DynamicObjectAdapter : IAdapter
             target.GetType(),
             new List<CSharpArgumentInfo>
             {
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-            });
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+            }
+        );
 
         var callsite = CallSite<Func<CallSite, object, object>>.Create(binder);
 
@@ -205,9 +271,11 @@ public class DynamicObjectAdapter : IAdapter
         IContractResolver contractResolver,
         string segment,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
-        var jsonDynamicContract = (JsonDynamicContract)contractResolver.ResolveContract(target.GetType());
+        var jsonDynamicContract = (JsonDynamicContract)
+            contractResolver.ResolveContract(target.GetType());
 
         var propertyName = jsonDynamicContract.PropertyNameResolver(segment);
 
@@ -217,9 +285,10 @@ public class DynamicObjectAdapter : IAdapter
             target.GetType(),
             new List<CSharpArgumentInfo>
             {
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-            });
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+            }
+        );
 
         var callsite = CallSite<Func<CallSite, object, object, object>>.Create(binder);
 
@@ -236,7 +305,11 @@ public class DynamicObjectAdapter : IAdapter
         }
     }
 
-    protected virtual bool TryConvertValue(object value, Type propertyType, out object convertedValue)
+    protected virtual bool TryConvertValue(
+        object value,
+        Type propertyType,
+        out object convertedValue
+    )
     {
         var conversionResult = ConversionResultProvider.ConvertTo(value, propertyType);
         if (!conversionResult.CanBeConverted)

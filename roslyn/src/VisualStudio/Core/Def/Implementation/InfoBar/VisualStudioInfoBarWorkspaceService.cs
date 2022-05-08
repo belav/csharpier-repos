@@ -18,10 +18,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioInfoBarWorkspaceService(VisualStudioInfoBarService service)
-            => _service = service;
+        public VisualStudioInfoBarWorkspaceService(VisualStudioInfoBarService service) =>
+            _service = service;
 
-        public void ShowInfoBar(string message, params InfoBarUI[] items)
-            => _service.ShowInfoBar(message, items);
+        public void ShowInfoBar(string message, params InfoBarUI[] items) =>
+            _service.ShowInfoBar(message, items);
     }
 }

@@ -47,19 +47,37 @@ internal class IpcReceiver
             // For any other message, you have to have a page attached already
             if (pageContext == null)
             {
-                throw new InvalidOperationException("Cannot receive IPC messages when no page is attached");
+                throw new InvalidOperationException(
+                    "Cannot receive IPC messages when no page is attached"
+                );
             }
 
             switch (messageType)
             {
                 case IpcCommon.IncomingMessageType.BeginInvokeDotNet:
-                    BeginInvokeDotNet(pageContext, args[0].GetString(), args[1].GetString(), args[2].GetString(), args[3].GetInt64(), args[4].GetString());
+                    BeginInvokeDotNet(
+                        pageContext,
+                        args[0].GetString(),
+                        args[1].GetString(),
+                        args[2].GetString(),
+                        args[3].GetInt64(),
+                        args[4].GetString()
+                    );
                     break;
                 case IpcCommon.IncomingMessageType.EndInvokeJS:
-                    EndInvokeJS(pageContext, args[0].GetInt64(), args[1].GetBoolean(), args[2].GetString());
+                    EndInvokeJS(
+                        pageContext,
+                        args[0].GetInt64(),
+                        args[1].GetBoolean(),
+                        args[2].GetString()
+                    );
                     break;
                 case IpcCommon.IncomingMessageType.ReceiveByteArrayFromJS:
-                    ReceiveByteArrayFromJS(pageContext, args[0].GetInt32(), args[1].GetBytesFromBase64());
+                    ReceiveByteArrayFromJS(
+                        pageContext,
+                        args[0].GetInt32(),
+                        args[1].GetBytesFromBase64()
+                    );
                     break;
                 case IpcCommon.IncomingMessageType.OnRenderCompleted:
                     OnRenderCompleted(pageContext, args[0].GetInt64(), args[1].GetString());
@@ -73,15 +91,28 @@ internal class IpcReceiver
         }
     }
 
-    private void BeginInvokeDotNet(PageContext pageContext, string callId, string assemblyName, string methodIdentifier, long dotNetObjectId, string argsJson)
+    private void BeginInvokeDotNet(
+        PageContext pageContext,
+        string callId,
+        string assemblyName,
+        string methodIdentifier,
+        long dotNetObjectId,
+        string argsJson
+    )
     {
         DotNetDispatcher.BeginInvokeDotNet(
             pageContext.JSRuntime,
             new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId, callId),
-            argsJson);
+            argsJson
+        );
     }
 
-    private void EndInvokeJS(PageContext pageContext, long asyncHandle, bool succeeded, string argumentsOrError)
+    private void EndInvokeJS(
+        PageContext pageContext,
+        long asyncHandle,
+        bool succeeded,
+        string argumentsOrError
+    )
     {
         DotNetDispatcher.EndInvokeJS(pageContext.JSRuntime, argumentsOrError);
     }

@@ -20,7 +20,8 @@ namespace System.Reflection.Tests
             t.TestTypeInvariants();
         }
 
-        public static IEnumerable<object[]> InvariantTheoryData => InvariantTestData.Select(t => new object[] { t }).Wrap();
+        public static IEnumerable<object[]> InvariantTheoryData =>
+            InvariantTestData.Select(t => new object[] { t }).Wrap();
 
         private static IEnumerable<Type> InvariantTestData
         {
@@ -45,7 +46,8 @@ namespace System.Reflection.Tests
         public static void TestIsAssignableFrom()
         {
             bool b;
-            Type src, dst;
+            Type src,
+                dst;
 
             // Compat: ok to pass null to IsAssignableFrom()
             dst = typeof(object).Project();
@@ -127,12 +129,20 @@ namespace System.Reflection.Tests
                 yield return new object[] { typeof(Span<int>).Project(), true };
                 yield return new object[] { typeof(SampleByRefLikeStruct1).Project(), true };
                 yield return new object[] { typeof(SampleByRefLikeStruct2<>).Project(), true };
-                yield return new object[] { typeof(SampleByRefLikeStruct2<string>).Project(), true };
+                yield return new object[]
+                {
+                    typeof(SampleByRefLikeStruct2<string>).Project(),
+                    true
+                };
                 yield return new object[] { typeof(SampleByRefLikeStruct3).Project(), true };
                 yield return new object[] { typeof(int).Project(), false };
                 yield return new object[] { typeof(int).Project().MakeArrayType(), false };
                 yield return new object[] { typeof(IList<int>).Project(), false };
-                yield return new object[] { typeof(IList<>).Project().GetGenericTypeParameters()[0], false };
+                yield return new object[]
+                {
+                    typeof(IList<>).Project().GetGenericTypeParameters()[0],
+                    false
+                };
                 yield return new object[] { typeof(AttributeHolder1.N1).Project(), false };
             }
         }
@@ -155,7 +165,10 @@ namespace System.Reflection.Tests
             TypeInfo ti = t.GetTypeInfo();
             MethodInfo m = ti.GetDeclaredMethod("Get");
             Assert.Equal(MethodAttributes.Public | MethodAttributes.PrivateScope, m.Attributes);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, m.CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                m.CallingConvention
+            );
             Assert.Equal(t, m.DeclaringType);
             Assert.Equal(et, m.ReturnType);
             ParameterInfo[] p = m.GetParameters();
@@ -182,7 +195,10 @@ namespace System.Reflection.Tests
             TypeInfo ti = t.GetTypeInfo();
             MethodInfo m = ti.GetDeclaredMethod("Set");
             Assert.Equal(MethodAttributes.Public | MethodAttributes.PrivateScope, m.Attributes);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, m.CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                m.CallingConvention
+            );
 
             Assert.Equal(t, m.DeclaringType);
             Assert.Equal(typeof(void).Project(), m.ReturnType);
@@ -194,7 +210,7 @@ namespace System.Reflection.Tests
             Assert.Null(p[0].Name);
             Assert.Equal(m, p[0].Member);
             Assert.Equal(0, p[0].Position);
-            Assert.Equal(expectedDefaultValue, p[0].HasDefaultValue);  //Legacy: This makes no sense
+            Assert.Equal(expectedDefaultValue, p[0].HasDefaultValue); //Legacy: This makes no sense
             Assert.Null(p[0].RawDefaultValue); //Legacy: This makes no sense
 
             Assert.Equal(ParameterAttributes.None, p[1].Attributes);
@@ -202,7 +218,7 @@ namespace System.Reflection.Tests
             Assert.Null(p[1].Name);
             Assert.Equal(m, p[1].Member);
             Assert.Equal(1, p[1].Position);
-            Assert.Equal(expectedDefaultValue, p[1].HasDefaultValue);  //Legacy: This makes no sense
+            Assert.Equal(expectedDefaultValue, p[1].HasDefaultValue); //Legacy: This makes no sense
             Assert.Null(p[1].RawDefaultValue); //Legacy: This makes no sense
 
             return;
@@ -211,7 +227,7 @@ namespace System.Reflection.Tests
         [Fact]
         static void TestArrayMethodsGetSetAddressAreNotEquals()
         {
-           void test(Type type)
+            void test(Type type)
             {
                 MethodInfo v1 = type.GetMethod("Get");
                 MethodInfo v2 = type.GetMethod("Set");
@@ -258,11 +274,20 @@ namespace System.Reflection.Tests
 
             Assert.Equal(type.GetMethod("Get"), type.GetMethods().First(m => m.Name == "Get"));
             Assert.Equal(type.GetMethod("Set"), type.GetMethods().First(m => m.Name == "Set"));
-            Assert.Equal(type.GetMethod("Address"), type.GetMethods().First(m => m.Name == "Address"));
+            Assert.Equal(
+                type.GetMethod("Address"),
+                type.GetMethods().First(m => m.Name == "Address")
+            );
 
             Assert.NotEqual(type.GetMethod("Get"), type.GetMethods().First(m => m.Name == "Set"));
-            Assert.NotEqual(type.GetMethod("Set"), type.GetMethods().First(m => m.Name == "Address"));
-            Assert.NotEqual(type.GetMethod("Address"), type.GetMethods().First(m => m.Name == "Get"));
+            Assert.NotEqual(
+                type.GetMethod("Set"),
+                type.GetMethods().First(m => m.Name == "Address")
+            );
+            Assert.NotEqual(
+                type.GetMethod("Address"),
+                type.GetMethods().First(m => m.Name == "Get")
+            );
         }
 
         [Fact]
@@ -275,7 +300,10 @@ namespace System.Reflection.Tests
             TypeInfo ti = t.GetTypeInfo();
             MethodInfo m = ti.GetDeclaredMethod("Address");
             Assert.Equal(MethodAttributes.Public | MethodAttributes.PrivateScope, m.Attributes);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, m.CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                m.CallingConvention
+            );
             Assert.Equal(t, m.DeclaringType);
             Assert.Equal(et.MakeByRefType(), m.ReturnType);
             ParameterInfo[] p = m.GetParameters();
@@ -303,8 +331,16 @@ namespace System.Reflection.Tests
             ConstructorInfo[] ctors = ti.DeclaredConstructors.ToArray();
             Assert.Equal(1, ctors.Length);
             ConstructorInfo m = ctors[0];
-            Assert.Equal(MethodAttributes.Public | MethodAttributes.PrivateScope | MethodAttributes.RTSpecialName, m.Attributes);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, m.CallingConvention);
+            Assert.Equal(
+                MethodAttributes.Public
+                    | MethodAttributes.PrivateScope
+                    | MethodAttributes.RTSpecialName,
+                m.Attributes
+            );
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                m.CallingConvention
+            );
             Assert.Equal(t, m.DeclaringType);
             ParameterInfo[] p = m.GetParameters();
             Assert.Equal(1, p.Length);
@@ -322,7 +358,10 @@ namespace System.Reflection.Tests
 
         [Theory]
         [MemberData(nameof(GetEnumUnderlyingTypeTheoryData))]
-        public static void GetEnumUnderlyingType(TypeWrapper enumTypeW, TypeWrapper expectedUnderlyingTypeW)
+        public static void GetEnumUnderlyingType(
+            TypeWrapper enumTypeW,
+            TypeWrapper expectedUnderlyingTypeW
+        )
         {
             Type enumType = enumTypeW?.Type;
             Type expectedUnderlyingType = expectedUnderlyingTypeW?.Type;
@@ -338,7 +377,8 @@ namespace System.Reflection.Tests
             }
         }
 
-        public static IEnumerable<object[]> GetEnumUnderlyingTypeTheoryData => GetEnumUnderlyingTypeData.Wrap();
+        public static IEnumerable<object[]> GetEnumUnderlyingTypeTheoryData =>
+            GetEnumUnderlyingTypeData.Wrap();
         public static IEnumerable<object[]> GetEnumUnderlyingTypeData
         {
             get
@@ -351,8 +391,16 @@ namespace System.Reflection.Tests
                 yield return new object[] { typeof(EI4).Project(), typeof(int).Project() };
                 yield return new object[] { typeof(EU8).Project(), typeof(ulong).Project() };
                 yield return new object[] { typeof(EI8).Project(), typeof(long).Project() };
-                yield return new object[] { typeof(GenericEnumContainer<>.GenericEnum).Project(), typeof(short).Project() };
-                yield return new object[] { typeof(GenericEnumContainer<int>.GenericEnum).Project(), typeof(short).Project() };
+                yield return new object[]
+                {
+                    typeof(GenericEnumContainer<>.GenericEnum).Project(),
+                    typeof(short).Project()
+                };
+                yield return new object[]
+                {
+                    typeof(GenericEnumContainer<int>.GenericEnum).Project(),
+                    typeof(short).Project()
+                };
                 yield return new object[] { typeof(object).Project(), null };
                 yield return new object[] { typeof(ValueType).Project(), null };
                 yield return new object[] { typeof(Enum).Project(), null };
@@ -361,7 +409,11 @@ namespace System.Reflection.Tests
                 yield return new object[] { typeof(EU1).MakeArrayType(3).Project(), null };
                 yield return new object[] { typeof(EU1).MakeByRefType().Project(), null };
                 yield return new object[] { typeof(EU1).MakePointerType().Project(), null };
-                yield return new object[] { typeof(GenericEnumContainer<>).Project().GetGenericTypeParameters()[0], null };
+                yield return new object[]
+                {
+                    typeof(GenericEnumContainer<>).Project().GetGenericTypeParameters()[0],
+                    null
+                };
             }
         }
 
@@ -408,12 +460,36 @@ namespace System.Reflection.Tests
                 yield return new object[] { typeof(EU4).Project(), TypeCode.UInt32 };
                 yield return new object[] { typeof(EI8).Project(), TypeCode.Int64 };
                 yield return new object[] { typeof(EU8).Project(), TypeCode.UInt64 };
-                yield return new object[] { typeof(int).Project().MakeArrayType(), TypeCode.Object };
-                yield return new object[] { typeof(int).Project().MakeArrayType(1), TypeCode.Object };
-                yield return new object[] { typeof(int).Project().MakeArrayType(3), TypeCode.Object };
-                yield return new object[] { typeof(int).Project().MakeByRefType(), TypeCode.Object };
-                yield return new object[] { typeof(int).Project().MakePointerType(), TypeCode.Object };
-                yield return new object[] { typeof(List<>).Project().GetGenericTypeParameters()[0], TypeCode.Object };
+                yield return new object[]
+                {
+                    typeof(int).Project().MakeArrayType(),
+                    TypeCode.Object
+                };
+                yield return new object[]
+                {
+                    typeof(int).Project().MakeArrayType(1),
+                    TypeCode.Object
+                };
+                yield return new object[]
+                {
+                    typeof(int).Project().MakeArrayType(3),
+                    TypeCode.Object
+                };
+                yield return new object[]
+                {
+                    typeof(int).Project().MakeByRefType(),
+                    TypeCode.Object
+                };
+                yield return new object[]
+                {
+                    typeof(int).Project().MakePointerType(),
+                    TypeCode.Object
+                };
+                yield return new object[]
+                {
+                    typeof(List<>).Project().GetGenericTypeParameters()[0],
+                    TypeCode.Object
+                };
             }
         }
 
@@ -443,7 +519,6 @@ namespace System.Reflection.Tests
             return;
         }
 
-
         [Fact]
         public static void TestIsValueType()
         {
@@ -468,7 +543,11 @@ namespace System.Reflection.Tests
         public static void TestMethodSelection1()
         {
             Binder binder = null;
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static;
             Type t = typeof(MethodHolderDerived<>).Project();
             {
                 Type[] types = { typeof(int).Project(), typeof(int).Project() };
@@ -485,7 +564,9 @@ namespace System.Reflection.Tests
             {
                 Type[] types = { typeof(int).Project(), typeof(short).Project() };
                 Type gi = t.MakeGenericType(typeof(int).Project()).BaseType;
-                Assert.Throws<AmbiguousMatchException>(() => gi.GetMethod("Hoo", bf, binder, types, null));
+                Assert.Throws<AmbiguousMatchException>(
+                    () => gi.GetMethod("Hoo", bf, binder, types, null)
+                );
             }
 
             {
@@ -539,13 +620,17 @@ namespace System.Reflection.Tests
 
             {
                 Type[] types = { typeof(int).Project(), typeof(short).Project() };
-                MethodInfo m = typeof(MethodHolderDerived<>).Project().GetMethod("Foo", bf, binder, types, null);
+                MethodInfo m = typeof(MethodHolderDerived<>)
+                    .Project()
+                    .GetMethod("Foo", bf, binder, types, null);
                 Assert.Equal(10070, m.GetMark());
             }
 
             {
                 Type[] types = { typeof(int).Project(), typeof(int).Project() };
-                MethodInfo m = typeof(MethodHolderDerived<>).Project().GetMethod("Foo", bf, binder, types, null);
+                MethodInfo m = typeof(MethodHolderDerived<>)
+                    .Project()
+                    .GetMethod("Foo", bf, binder, types, null);
                 Assert.Equal(10070, m.GetMark());
             }
         }
@@ -554,7 +639,9 @@ namespace System.Reflection.Tests
         public static void TestComImportPseudoCustomAttribute()
         {
             Type t = typeof(ClassWithComImport).Project();
-            CustomAttributeData cad = t.CustomAttributes.Single(c => c.AttributeType == typeof(ComImportAttribute).Project());
+            CustomAttributeData cad = t.CustomAttributes.Single(
+                c => c.AttributeType == typeof(ComImportAttribute).Project()
+            );
             Assert.Equal(0, cad.ConstructorArguments.Count);
             Assert.Equal(0, cad.NamedArguments.Count);
         }
@@ -567,14 +654,18 @@ namespace System.Reflection.Tests
 
             {
                 FieldInfo f = t.GetField("X");
-                CustomAttributeData cad = f.CustomAttributes.Single(c => c.AttributeType == typeof(FieldOffsetAttribute).Project());
+                CustomAttributeData cad = f.CustomAttributes.Single(
+                    c => c.AttributeType == typeof(FieldOffsetAttribute).Project()
+                );
                 FieldOffsetAttribute foa = cad.UnprojectAndInstantiate<FieldOffsetAttribute>();
                 Assert.Equal(42, foa.Value);
             }
 
             {
                 FieldInfo f = t.GetField("Y");
-                CustomAttributeData cad = f.CustomAttributes.Single(c => c.AttributeType == typeof(FieldOffsetAttribute).Project());
+                CustomAttributeData cad = f.CustomAttributes.Single(
+                    c => c.AttributeType == typeof(FieldOffsetAttribute).Project()
+                );
                 FieldOffsetAttribute foa = cad.UnprojectAndInstantiate<FieldOffsetAttribute>();
                 Assert.Equal(65, foa.Value);
             }
@@ -583,7 +674,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void CoreGetTypeCacheCoverage1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage);
                 // Create big hash collisions in GetTypeCoreCache.
@@ -601,9 +696,17 @@ namespace System.Reflection.Tests
         [Fact]
         public static void CoreGetTypeCacheCoverage2()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
-                Assembly a = lc.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(typeof(SampleMetadata.NS0.SameNamedType).Assembly));
+                Assembly a = lc.LoadFromAssemblyPath(
+                    AssemblyPathHelper.GetAssemblyLocation(
+                        typeof(SampleMetadata.NS0.SameNamedType).Assembly
+                    )
+                );
                 // Create big hash collisions in GetTypeCoreCache.
                 for (int i = 0; i < 16; i++)
                 {
@@ -619,10 +722,16 @@ namespace System.Reflection.Tests
         [Fact]
         public static void CoreGetTypeCacheCoverage3()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
                 // Make sure the tricky corner case of a null/empty namespace is covered.
-                Assembly a = lc.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(typeof(TopLevelType).Assembly));
+                Assembly a = lc.LoadFromAssemblyPath(
+                    AssemblyPathHelper.GetAssemblyLocation(typeof(TopLevelType).Assembly)
+                );
                 Type t = a.GetType("TopLevelType", throwOnError: true, ignoreCase: false);
                 Assert.Null(t.Namespace);
                 Assert.Equal("TopLevelType", t.Name);
@@ -632,14 +741,19 @@ namespace System.Reflection.Tests
         [Fact]
         public static void GetDefaultMemberTest1()
         {
-            Type t = typeof(ClassWithDefaultMember1<>).Project().GetTypeInfo().GenericTypeParameters[0];
+            Type t = typeof(ClassWithDefaultMember1<>)
+                .Project()
+                .GetTypeInfo()
+                .GenericTypeParameters[0];
             MemberInfo[] mems = t.GetDefaultMembers().OrderBy(m => m.Name).ToArray();
             Assert.Equal(1, mems.Length);
             MemberInfo mem = mems[0];
             Assert.Equal("Yes", mem.Name);
-            Assert.Equal(typeof(ClassWithDefaultMember1<>).Project().MakeGenericType(t), mem.DeclaringType);
+            Assert.Equal(
+                typeof(ClassWithDefaultMember1<>).Project().MakeGenericType(t),
+                mem.DeclaringType
+            );
         }
-
 
         [Fact]
         public static void GetDefaultMemberTest2()
@@ -653,7 +767,11 @@ namespace System.Reflection.Tests
         public static void TypesWithStrangeCharacters()
         {
             // Make sure types with strange characters are escaped.
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_TypeWithStrangeCharacters);
                 Type[] types = a.GetTypes();

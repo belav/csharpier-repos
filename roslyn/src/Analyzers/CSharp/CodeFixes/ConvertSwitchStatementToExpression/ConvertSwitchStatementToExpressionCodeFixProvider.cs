@@ -28,24 +28,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 {
     using Constants = ConvertSwitchStatementToExpressionConstants;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertSwitchStatementToExpression), Shared]
-    internal sealed partial class ConvertSwitchStatementToExpressionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertSwitchStatementToExpression
+        ),
+        Shared
+    ]
+    internal sealed partial class ConvertSwitchStatementToExpressionCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertSwitchStatementToExpressionCodeFixProvider()
-        {
-        }
+        public ConvertSwitchStatementToExpressionCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.ConvertSwitchStatementToExpressionDiagnosticId);
 
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.CodeStyle;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var switchLocation = context.Diagnostics.First().AdditionalLocations[0];
-            var switchStatement = (SwitchStatementSyntax)switchLocation.FindNode(getInnermostNodeForTie: true, context.CancellationToken);
+            var switchStatement = (SwitchStatementSyntax)
+                switchLocation.FindNode(getInnermostNodeForTie: true, context.CancellationToken);
             if (switchStatement.ContainsDirectives)
             {
                 // Avoid providing code fixes for switch statements containing directives
@@ -54,15 +60,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
             context.RegisterCodeFix(
                 new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics.First(), c)),
-                context.Diagnostics);
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
-            using var spansDisposer = ArrayBuilder<TextSpan>.GetInstance(diagnostics.Length, out var spans);
+            using var spansDisposer = ArrayBuilder<TextSpan>.GetInstance(
+                diagnostics.Length,
+                out var spans
+            );
             foreach (var diagnostic in diagnostics)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -78,28 +91,45 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 var properties = diagnostic.Properties;
                 var nodeToGenerate = (SyntaxKind)int.Parse(properties[Constants.NodeToGenerateKey]);
-                var shouldRemoveNextStatement = bool.Parse(properties[Constants.ShouldRemoveNextStatementKey]);
+                var shouldRemoveNextStatement = bool.Parse(
+                    properties[Constants.ShouldRemoveNextStatementKey]
+                );
 
-                var declaratorToRemoveLocationOpt = diagnostic.AdditionalLocations.ElementAtOrDefault(1);
-                var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var declaratorToRemoveLocationOpt =
+                    diagnostic.AdditionalLocations.ElementAtOrDefault(1);
+                var semanticModel = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 SyntaxNode declaratorToRemoveNodeOpt = null;
                 ITypeSymbol declaratorToRemoveTypeOpt = null;
 
                 if (declaratorToRemoveLocationOpt != null)
                 {
-                    declaratorToRemoveNodeOpt = declaratorToRemoveLocationOpt.FindNode(cancellationToken);
-                    declaratorToRemoveTypeOpt = semanticModel.GetDeclaredSymbol(declaratorToRemoveNodeOpt, cancellationToken).GetSymbolType();
+                    declaratorToRemoveNodeOpt = declaratorToRemoveLocationOpt.FindNode(
+                        cancellationToken
+                    );
+                    declaratorToRemoveTypeOpt = semanticModel
+                        .GetDeclaredSymbol(declaratorToRemoveNodeOpt, cancellationToken)
+                        .GetSymbolType();
                 }
 
-                var switchStatement = (SwitchStatementSyntax)switchLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var switchStatement = (SwitchStatementSyntax)
+                    switchLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
 
                 var switchExpression = Rewriter.Rewrite(
-                   switchStatement, semanticModel, declaratorToRemoveTypeOpt, nodeToGenerate,
-                   shouldMoveNextStatementToSwitchExpression: shouldRemoveNextStatement,
-                   generateDeclaration: declaratorToRemoveLocationOpt is object);
+                    switchStatement,
+                    semanticModel,
+                    declaratorToRemoveTypeOpt,
+                    nodeToGenerate,
+                    shouldMoveNextStatementToSwitchExpression: shouldRemoveNextStatement,
+                    generateDeclaration: declaratorToRemoveLocationOpt is object
+                );
 
-                editor.ReplaceNode(switchStatement, switchExpression.WithAdditionalAnnotations(Formatter.Annotation));
+                editor.ReplaceNode(
+                    switchStatement,
+                    switchExpression.WithAdditionalAnnotations(Formatter.Annotation)
+                );
 
                 if (declaratorToRemoveLocationOpt is object)
                 {
@@ -110,8 +140,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 {
                     // Already morphed into the top-level switch expression.
                     SyntaxNode nextStatement = switchStatement.GetNextStatement();
-                    Debug.Assert(nextStatement.IsKind(SyntaxKind.ThrowStatement, SyntaxKind.ReturnStatement));
-                    editor.RemoveNode(nextStatement.IsParentKind(SyntaxKind.GlobalStatement) ? nextStatement.Parent : nextStatement);
+                    Debug.Assert(
+                        nextStatement.IsKind(SyntaxKind.ThrowStatement, SyntaxKind.ReturnStatement)
+                    );
+                    editor.RemoveNode(
+                        nextStatement.IsParentKind(SyntaxKind.GlobalStatement)
+                          ? nextStatement.Parent
+                          : nextStatement
+                    );
                 }
             }
         }
@@ -119,9 +155,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
         private sealed class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpAnalyzersResources.Convert_switch_statement_to_expression, createChangedDocument, nameof(CSharpAnalyzersResources.Convert_switch_statement_to_expression))
-            {
-            }
+                : base(
+                    CSharpAnalyzersResources.Convert_switch_statement_to_expression,
+                    createChangedDocument,
+                    nameof(CSharpAnalyzersResources.Convert_switch_statement_to_expression)
+                ) { }
         }
     }
 }

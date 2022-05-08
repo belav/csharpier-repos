@@ -19,7 +19,9 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
     public class PerfMarginPanel : UserControl
     {
         private static readonly DataModel s_model = new DataModel();
-        private static readonly PerfEventActivityLogger s_logger = new PerfEventActivityLogger(s_model);
+        private static readonly PerfEventActivityLogger s_logger = new PerfEventActivityLogger(
+            s_model
+        );
 
         private readonly ListView _mainListView;
         private readonly Grid _mainGrid;
@@ -32,7 +34,13 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 
         public PerfMarginPanel()
         {
-            Logger.SetLogger(AggregateLogger.AddOrReplace(s_logger, Logger.GetLogger(), l => l is PerfEventActivityLogger));
+            Logger.SetLogger(
+                AggregateLogger.AddOrReplace(
+                    s_logger,
+                    Logger.GetLogger(),
+                    l => l is PerfEventActivityLogger
+                )
+            );
 
             // grid
             _mainGrid = new Grid();
@@ -41,7 +49,10 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
             _mainGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
 
             // set diagnostic list
-            _mainListView = CreateContent(new ActivityLevel[] { s_model.RootNode }.Concat(s_model.RootNode.Children), useWrapPanel: true);
+            _mainListView = CreateContent(
+                new ActivityLevel[] { s_model.RootNode }.Concat(s_model.RootNode.Children),
+                useWrapPanel: true
+            );
             _mainListView.SelectionChanged += OnPerfItemsListSelectionChanged;
             Grid.SetRow(_mainListView, 0);
 
@@ -49,7 +60,12 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
 
             this.Content = _mainGrid;
 
-            _timer = new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, UpdateUI, this.Dispatcher);
+            _timer = new DispatcherTimer(
+                TimeSpan.FromMilliseconds(500),
+                DispatcherPriority.Background,
+                UpdateUI,
+                this.Dispatcher
+            );
             StartTimer();
 
             s_model.RootNode.IsActiveChanged += (s, e) =>
@@ -115,7 +131,10 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
             if (useWrapPanel)
             {
                 listView.SelectionMode = SelectionMode.Single;
-                listView.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
+                listView.SetValue(
+                    ScrollViewer.HorizontalScrollBarVisibilityProperty,
+                    ScrollBarVisibility.Disabled
+                );
 
                 var wrapPanelFactory = new FrameworkElementFactory(typeof(WrapPanel));
                 wrapPanelFactory.SetValue(WrapPanel.ItemWidthProperty, 120d);
@@ -147,7 +166,11 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
                 return;
             }
 
-            if (selectedItem.Tag is ActivityLevel context && context.Children != null && context.Children.Any())
+            if (
+                selectedItem.Tag is ActivityLevel context
+                && context.Children != null
+                && context.Children.Any()
+            )
             {
                 _detailsListView = CreateContent(context.Children, useWrapPanel: false);
                 _mainGrid.Children.Add(_detailsListView);

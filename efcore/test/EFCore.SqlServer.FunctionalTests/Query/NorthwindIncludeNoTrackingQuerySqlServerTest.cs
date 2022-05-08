@@ -10,12 +10,15 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindIncludeNoTrackingQuerySqlServerTest : NorthwindIncludeNoTrackingQueryTestBase<
-        NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+    public class NorthwindIncludeNoTrackingQuerySqlServerTest
+        : NorthwindIncludeNoTrackingQueryTestBase<
+              NorthwindQuerySqlServerFixture<NoopModelCustomizer>
+          >
     {
         // ReSharper disable once UnusedParameter.Local
-        public NorthwindIncludeNoTrackingQuerySqlServerTest(NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture)
-            : base(fixture)
+        public NorthwindIncludeNoTrackingQuerySqlServerTest(
+            NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
         }
@@ -24,8 +27,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Equal(
                 RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Include_collection_with_last_no_orderby(async))).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Include_collection_with_last_no_orderby(async)
+                    )
+                ).Message
+            );
         }
     }
 }

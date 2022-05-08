@@ -10,13 +10,164 @@
 
 using System;
 
-public class Test_GenTypeItself {
-   public static int Main() {
-      MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<int>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> obj = new MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<MyClass<int>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>();
+public class Test_GenTypeItself
+{
+    public static int Main()
+    {
+        MyClass<
+            MyClass<
+                MyClass<
+                    MyClass<
+                        MyClass<
+                            MyClass<
+                                MyClass<
+                                    MyClass<
+                                        MyClass<
+                                            MyClass<
+                                                MyClass<
+                                                    MyClass<
+                                                        MyClass<
+                                                            MyClass<
+                                                                MyClass<
+                                                                    MyClass<
+                                                                        MyClass<
+                                                                            MyClass<
+                                                                                MyClass<
+                                                                                    MyClass<
+                                                                                        MyClass<
+                                                                                            MyClass<
+                                                                                                MyClass<
+                                                                                                    MyClass<
+                                                                                                        MyClass<
+                                                                                                            MyClass<
+                                                                                                                MyClass<
+                                                                                                                    MyClass<
+                                                                                                                        MyClass<
+                                                                                                                            MyClass<
+                                                                                                                                MyClass<
+                                                                                                                                    MyClass<
+                                                                                                                                        MyClass<
+                                                                                                                                            MyClass<
+                                                                                                                                                MyClass<
+                                                                                                                                                    MyClass<
+                                                                                                                                                        MyClass<
+                                                                                                                                                            MyClass<int>
+                                                                                                                                                        >
+                                                                                                                                                    >
+                                                                                                                                                >
+                                                                                                                                            >
+                                                                                                                                        >
+                                                                                                                                    >
+                                                                                                                                >
+                                                                                                                            >
+                                                                                                                        >
+                                                                                                                    >
+                                                                                                                >
+                                                                                                            >
+                                                                                                        >
+                                                                                                    >
+                                                                                                >
+                                                                                            >
+                                                                                        >
+                                                                                    >
+                                                                                >
+                                                                            >
+                                                                        >
+                                                                    >
+                                                                >
+                                                            >
+                                                        >
+                                                    >
+                                                >
+                                            >
+                                        >
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >
+        > obj =
+            new MyClass<
+                MyClass<
+                    MyClass<
+                        MyClass<
+                            MyClass<
+                                MyClass<
+                                    MyClass<
+                                        MyClass<
+                                            MyClass<
+                                                MyClass<
+                                                    MyClass<
+                                                        MyClass<
+                                                            MyClass<
+                                                                MyClass<
+                                                                    MyClass<
+                                                                        MyClass<
+                                                                            MyClass<
+                                                                                MyClass<
+                                                                                    MyClass<
+                                                                                        MyClass<
+                                                                                            MyClass<
+                                                                                                MyClass<
+                                                                                                    MyClass<
+                                                                                                        MyClass<
+                                                                                                            MyClass<
+                                                                                                                MyClass<
+                                                                                                                    MyClass<
+                                                                                                                        MyClass<
+                                                                                                                            MyClass<
+                                                                                                                                MyClass<
+                                                                                                                                    MyClass<
+                                                                                                                                        MyClass<
+                                                                                                                                            MyClass<
+                                                                                                                                                MyClass<
+                                                                                                                                                    MyClass<
+                                                                                                                                                        MyClass<
+                                                                                                                                                            MyClass<
+                                                                                                                                                                MyClass<int>
+                                                                                                                                                            >
+                                                                                                                                                        >
+                                                                                                                                                    >
+                                                                                                                                                >
+                                                                                                                                            >
+                                                                                                                                        >
+                                                                                                                                    >
+                                                                                                                                >
+                                                                                                                            >
+                                                                                                                        >
+                                                                                                                    >
+                                                                                                                >
+                                                                                                            >
+                                                                                                        >
+                                                                                                    >
+                                                                                                >
+                                                                                            >
+                                                                                        >
+                                                                                    >
+                                                                                >
+                                                                            >
+                                                                        >
+                                                                    >
+                                                                >
+                                                            >
+                                                        >
+                                                    >
+                                                >
+                                            >
+                                        >
+                                    >
+                                >
+                            >
+                        >
+                    >
+                >
+            >();
 
-      Console.WriteLine("PASS");
-      return 100;
-   }
+        Console.WriteLine("PASS");
+        return 100;
+    }
 }
 
-public class MyClass<T> {}
+public class MyClass<T> { }

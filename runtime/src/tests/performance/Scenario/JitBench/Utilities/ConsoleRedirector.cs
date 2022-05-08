@@ -26,7 +26,7 @@ namespace JitBench
         public void Dispose()
         {
             Console.SetOut(_originalConsoleOut);
-            if(_output != null)
+            if (_output != null)
             {
                 _bufferedConsoleWriter.Flush();
                 StreamReader reader = new StreamReader(_bufferedConsoleStream);

@@ -14,14 +14,12 @@ public class ElementalValueProviderTest
     [InlineData("MyProperty[0]", "MyProperty")]
     public void ContainsPrefix_ReturnsTrue_IfElementNameStartsWithPrefix(
         string elementName,
-        string prefix)
+        string prefix
+    )
     {
         // Arrange
         var culture = new CultureInfo("en-US");
-        var elementalValueProvider = new ElementalValueProvider(
-            elementName,
-            "hi",
-            culture);
+        var elementalValueProvider = new ElementalValueProvider(elementName, "hi", culture);
 
         // Act
         var containsPrefix = elementalValueProvider.ContainsPrefix(prefix);
@@ -36,14 +34,12 @@ public class ElementalValueProviderTest
     [InlineData("Random", "MyProperty")]
     public void ContainsPrefix_ReturnsFalse_IfElementCannotSpecifyValuesForPrefix(
         string elementName,
-        string prefix)
+        string prefix
+    )
     {
         // Arrange
         var culture = new CultureInfo("en-US");
-        var elementalValueProvider = new ElementalValueProvider(
-            elementName,
-            "hi",
-            culture);
+        var elementalValueProvider = new ElementalValueProvider(elementName, "hi", culture);
 
         // Act
         var containsPrefix = elementalValueProvider.ContainsPrefix(prefix);

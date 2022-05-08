@@ -12,20 +12,17 @@ using System.Runtime.InteropServices;
 
 class Program
 {
-    private class MockEndPoint : EndPoint
-    {
-    }
+    private class MockEndPoint : EndPoint { }
 
     private sealed class ExtendedSocketException : SocketException
     {
         private readonly EndPoint? _endPoint;
 
-        public ExtendedSocketException(EndPoint? endPoint)
-            : base(0)
+        public ExtendedSocketException(EndPoint? endPoint) : base(0)
         {
             _endPoint = endPoint;
         }
-        
+
         public bool EndPointEquals(EndPoint? endPoint)
         {
             return _endPoint == endPoint;

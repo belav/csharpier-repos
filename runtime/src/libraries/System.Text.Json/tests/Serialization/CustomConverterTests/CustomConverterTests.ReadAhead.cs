@@ -9,7 +9,10 @@ namespace System.Text.Json.Serialization.Tests
 {
     public static partial class CustomConverterTests
     {
-        private static void VerifyClassWithStringProperties(ClassWithStringProperties obj, int stringSize)
+        private static void VerifyClassWithStringProperties(
+            ClassWithStringProperties obj,
+            int stringSize
+        )
         {
             // The 10 properties will cause buffer boundary cases where the converter requires read-ahead.
             Assert.Equal(new string('0', stringSize), obj.MyString0);
@@ -24,19 +27,52 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(new string('9', stringSize), obj.MyString9);
         }
 
-        private static void VerifyExtensionDataStringProperties(ClassWithExtensionData obj, int stringSize)
+        private static void VerifyExtensionDataStringProperties(
+            ClassWithExtensionData obj,
+            int stringSize
+        )
         {
             // The 10 properties will cause buffer boundary cases where the converter requires read-ahead.
-            Assert.Equal(new string('0', stringSize), ((JsonElement)obj.MyOverflow["MyString0"]).ToString());
-            Assert.Equal(new string('1', stringSize), ((JsonElement)obj.MyOverflow["MyString1"]).ToString());
-            Assert.Equal(new string('2', stringSize), ((JsonElement)obj.MyOverflow["MyString2"]).ToString());
-            Assert.Equal(new string('3', stringSize), ((JsonElement)obj.MyOverflow["MyString3"]).ToString());
-            Assert.Equal(new string('4', stringSize), ((JsonElement)obj.MyOverflow["MyString4"]).ToString());
-            Assert.Equal(new string('5', stringSize), ((JsonElement)obj.MyOverflow["MyString5"]).ToString());
-            Assert.Equal(new string('6', stringSize), ((JsonElement)obj.MyOverflow["MyString6"]).ToString());
-            Assert.Equal(new string('7', stringSize), ((JsonElement)obj.MyOverflow["MyString7"]).ToString());
-            Assert.Equal(new string('8', stringSize), ((JsonElement)obj.MyOverflow["MyString8"]).ToString());
-            Assert.Equal(new string('9', stringSize), ((JsonElement)obj.MyOverflow["MyString9"]).ToString());
+            Assert.Equal(
+                new string('0', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString0"]).ToString()
+            );
+            Assert.Equal(
+                new string('1', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString1"]).ToString()
+            );
+            Assert.Equal(
+                new string('2', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString2"]).ToString()
+            );
+            Assert.Equal(
+                new string('3', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString3"]).ToString()
+            );
+            Assert.Equal(
+                new string('4', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString4"]).ToString()
+            );
+            Assert.Equal(
+                new string('5', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString5"]).ToString()
+            );
+            Assert.Equal(
+                new string('6', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString6"]).ToString()
+            );
+            Assert.Equal(
+                new string('7', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString7"]).ToString()
+            );
+            Assert.Equal(
+                new string('8', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString8"]).ToString()
+            );
+            Assert.Equal(
+                new string('9', stringSize),
+                ((JsonElement)obj.MyOverflow["MyString9"]).ToString()
+            );
         }
 
         private static string CreateTestStringProperty(int stringSize)
@@ -70,13 +106,15 @@ namespace System.Text.Json.Serialization.Tests
             builder.Append(@"""");
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(1),
             InlineData(10),
             InlineData(100),
             InlineData(1000),
             InlineData(10000),
-            InlineData(25000)]
+            InlineData(25000)
+        ]
         public static void ReadAheadFromRoot(int stringSize)
         {
             string json = CreateTestStringProperty(stringSize);
@@ -91,7 +129,9 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithStringProperties obj = JsonSerializer.DeserializeAsync<ClassWithStringProperties>(stream, options).Result;
+                ClassWithStringProperties obj = JsonSerializer
+                    .DeserializeAsync<ClassWithStringProperties>(stream, options)
+                    .Result;
 
                 VerifyClassWithStringProperties(obj, stringSize);
 
@@ -102,7 +142,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Verify extension data works with read-ahead. Extension data stored on JsonElement which has a custom converter.
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithExtensionData obj = JsonSerializer.DeserializeAsync<ClassWithExtensionData>(stream, options).Result;
+                ClassWithExtensionData obj = JsonSerializer
+                    .DeserializeAsync<ClassWithExtensionData>(stream, options)
+                    .Result;
 
                 VerifyExtensionDataStringProperties(obj, stringSize);
 
@@ -111,12 +153,14 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(1),
             InlineData(10),
             InlineData(100),
             InlineData(1000),
-            InlineData(10000)]
+            InlineData(10000)
+        ]
         public static void ReadAheadFromProperties(int stringSize)
         {
             string jsonProperties = CreateTestStringProperty(stringSize);
@@ -143,7 +187,9 @@ namespace System.Text.Json.Serialization.Tests
 
             {
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithNoConverter obj = JsonSerializer.DeserializeAsync<ClassWithNoConverter>(stream, options).Result;
+                ClassWithNoConverter obj = JsonSerializer
+                    .DeserializeAsync<ClassWithNoConverter>(stream, options)
+                    .Result;
 
                 VerifyClassWithStringProperties(obj.Property1, stringSize);
                 VerifyClassWithStringProperties(obj.Property2, stringSize);
@@ -156,7 +202,9 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Verify extension data works with read-ahead. Extension data stored on JsonElement which has a custom converter.
                 MemoryStream stream = new MemoryStream(data);
-                ClassWithExtensionData obj = JsonSerializer.DeserializeAsync<ClassWithExtensionData>(stream, options).Result;
+                ClassWithExtensionData obj = JsonSerializer
+                    .DeserializeAsync<ClassWithExtensionData>(stream, options)
+                    .Result;
                 Assert.NotNull(obj.MyOverflow["Property1"]);
                 Assert.NotNull(obj.MyOverflow["Property2"]);
                 Assert.NotNull(obj.MyOverflow["Property3"]);
@@ -166,12 +214,14 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(1),
             InlineData(10),
             InlineData(100),
             InlineData(1000),
-            InlineData(10000)]
+            InlineData(10000)
+        ]
         public static void ReadAheadFromArray(int stringSize)
         {
             StringBuilder builder = new StringBuilder("[");
@@ -243,7 +293,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class ClassWithStringPropertyConverter : JsonConverter<ClassWithStringProperties>
         {
-            public override ClassWithStringProperties Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override ClassWithStringProperties Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
@@ -310,7 +364,11 @@ namespace System.Text.Json.Serialization.Tests
                 return obj;
             }
 
-            public override void Write(Utf8JsonWriter writer, ClassWithStringProperties value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                ClassWithStringProperties value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartObject();
 

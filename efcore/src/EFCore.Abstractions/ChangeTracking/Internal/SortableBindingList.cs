@@ -27,10 +27,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SortableBindingList(List<T> list)
-            : base(list)
-        {
-        }
+        public SortableBindingList(List<T> list) : base(list) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -68,8 +65,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override bool IsSortedCore
-            => _isSorted;
+        protected override bool IsSortedCore => _isSorted;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,8 +73,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override ListSortDirection SortDirectionCore
-            => _sortDirection;
+        protected override ListSortDirection SortDirectionCore => _sortDirection;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override PropertyDescriptor? SortPropertyCore
-            => _sortProperty;
+        protected override PropertyDescriptor? SortPropertyCore => _sortProperty;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,8 +89,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override bool SupportsSortingCore
-            => true;
+        protected override bool SupportsSortingCore => true;
 
         private sealed class PropertyComparer : Comparer<T>
         {
@@ -114,7 +107,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 _prop = prop;
                 _direction = direction;
 
-                var property = typeof(Comparer<>).MakeGenericType(prop.PropertyType).GetTypeInfo().GetDeclaredProperty("Default")!;
+                var property = typeof(Comparer<>)
+                    .MakeGenericType(prop.PropertyType)
+                    .GetTypeInfo()
+                    .GetDeclaredProperty("Default")!;
                 _comparer = (IComparer)property.GetValue(null, null)!;
             }
 
@@ -134,13 +130,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 var rightValue = _prop.GetValue(right);
 
                 return _direction == ListSortDirection.Ascending
-                    ? _comparer.Compare(leftValue, rightValue)
-                    : _comparer.Compare(rightValue, leftValue);
+                  ? _comparer.Compare(leftValue, rightValue)
+                  : _comparer.Compare(rightValue, leftValue);
             }
 
-            public static bool CanSort(Type type)
-                => type.GetInterface("IComparable") != null
-                    || (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+            public static bool CanSort(Type type) =>
+                type.GetInterface("IComparable") != null
+                || (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
         }
     }
 }

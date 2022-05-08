@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 
         private readonly ImmutableArray<SyntaxKind> _syntaxKinds;
 
-        private static readonly ImmutableArray<UseExpressionBodyHelper> _helpers = UseExpressionBodyHelper.Helpers;
+        private static readonly ImmutableArray<UseExpressionBodyHelper> _helpers =
+            UseExpressionBodyHelper.Helpers;
 
         public UseExpressionBodyDiagnosticAnalyzer()
             : base(GetSupportedDescriptorsWithOptions(), LanguageNames.CSharp)
@@ -30,23 +31,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             _syntaxKinds = _helpers.SelectMany(h => h.SyntaxKinds).ToImmutableArray();
         }
 
-        private static ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption> GetSupportedDescriptorsWithOptions()
+        private static ImmutableDictionary<
+            DiagnosticDescriptor,
+            ILanguageSpecificOption
+        > GetSupportedDescriptorsWithOptions()
         {
-            var builder = ImmutableDictionary.CreateBuilder<DiagnosticDescriptor, ILanguageSpecificOption>();
+            var builder = ImmutableDictionary.CreateBuilder<
+                DiagnosticDescriptor,
+                ILanguageSpecificOption
+            >();
             foreach (var helper in _helpers)
             {
-                var descriptor = CreateDescriptorWithId(helper.DiagnosticId, helper.EnforceOnBuild, helper.UseExpressionBodyTitle, helper.UseExpressionBodyTitle);
+                var descriptor = CreateDescriptorWithId(
+                    helper.DiagnosticId,
+                    helper.EnforceOnBuild,
+                    helper.UseExpressionBodyTitle,
+                    helper.UseExpressionBodyTitle
+                );
                 builder.Add(descriptor, helper.Option);
             }
 
             return builder.ToImmutable();
         }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, _syntaxKinds);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeSyntax, _syntaxKinds);
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
@@ -62,14 +74,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             {
                 var grandparent = context.Node.GetRequiredParent().GetRequiredParent();
 
-                if (grandparent.Kind() == SyntaxKind.PropertyDeclaration &&
-                    AnalyzeSyntax(optionSet, grandparent, UseExpressionBodyForPropertiesHelper.Instance) != null)
+                if (
+                    grandparent.Kind() == SyntaxKind.PropertyDeclaration
+                    && AnalyzeSyntax(
+                        optionSet,
+                        grandparent,
+                        UseExpressionBodyForPropertiesHelper.Instance
+                    ) != null
+                )
                 {
                     return;
                 }
 
-                if (grandparent.Kind() == SyntaxKind.IndexerDeclaration &&
-                    AnalyzeSyntax(optionSet, grandparent, UseExpressionBodyForIndexersHelper.Instance) != null)
+                if (
+                    grandparent.Kind() == SyntaxKind.IndexerDeclaration
+                    && AnalyzeSyntax(
+                        optionSet,
+                        grandparent,
+                        UseExpressionBodyForIndexersHelper.Instance
+                    ) != null
+                )
                 {
                     return;
                 }
@@ -90,32 +114,55 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         }
 
         private static Diagnostic? AnalyzeSyntax(
-            OptionSet optionSet, SyntaxNode declaration, UseExpressionBodyHelper helper)
+            OptionSet optionSet,
+            SyntaxNode declaration,
+            UseExpressionBodyHelper helper
+        )
         {
             var preferExpressionBodiedOption = optionSet.GetOption(helper.Option);
             var severity = preferExpressionBodiedOption.Notification.Severity;
 
             if (helper.CanOfferUseExpressionBody(optionSet, declaration, forAnalyzer: true))
             {
-                var location = severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) == ReportDiagnostic.Hidden
-                    ? declaration.GetLocation()
-                    : helper.GetDiagnosticLocation(declaration);
+                var location =
+                    severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
+                    == ReportDiagnostic.Hidden
+                        ? declaration.GetLocation()
+                        : helper.GetDiagnosticLocation(declaration);
 
                 var additionalLocations = ImmutableArray.Create(declaration.GetLocation());
-                var properties = ImmutableDictionary<string, string?>.Empty.Add(nameof(UseExpressionBody), "");
+                var properties = ImmutableDictionary<string, string?>.Empty.Add(
+                    nameof(UseExpressionBody),
+                    ""
+                );
                 return DiagnosticHelper.Create(
-                    CreateDescriptorWithId(helper.DiagnosticId, helper.EnforceOnBuild, helper.UseExpressionBodyTitle, helper.UseExpressionBodyTitle),
-                    location, severity, additionalLocations: additionalLocations, properties: properties);
+                    CreateDescriptorWithId(
+                        helper.DiagnosticId,
+                        helper.EnforceOnBuild,
+                        helper.UseExpressionBodyTitle,
+                        helper.UseExpressionBodyTitle
+                    ),
+                    location,
+                    severity,
+                    additionalLocations: additionalLocations,
+                    properties: properties
+                );
             }
 
-            var (canOffer, fixesError) = helper.CanOfferUseBlockBody(optionSet, declaration, forAnalyzer: true);
+            var (canOffer, fixesError) = helper.CanOfferUseBlockBody(
+                optionSet,
+                declaration,
+                forAnalyzer: true
+            );
             if (canOffer)
             {
                 // They have an expression body.  Create a diagnostic to convert it to a block
-                // if they don't want expression bodies for this member.  
-                var location = severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) == ReportDiagnostic.Hidden
-                    ? declaration.GetLocation()
-                    : helper.GetExpressionBody(declaration).GetLocation();
+                // if they don't want expression bodies for this member.
+                var location =
+                    severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
+                    == ReportDiagnostic.Hidden
+                        ? declaration.GetLocation()
+                        : helper.GetExpressionBody(declaration).GetLocation();
 
                 var properties = ImmutableDictionary<string, string?>.Empty;
                 if (fixesError)
@@ -123,8 +170,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 
                 var additionalLocations = ImmutableArray.Create(declaration.GetLocation());
                 return DiagnosticHelper.Create(
-                    CreateDescriptorWithId(helper.DiagnosticId, helper.EnforceOnBuild, helper.UseBlockBodyTitle, helper.UseBlockBodyTitle),
-                    location, severity, additionalLocations: additionalLocations, properties: properties);
+                    CreateDescriptorWithId(
+                        helper.DiagnosticId,
+                        helper.EnforceOnBuild,
+                        helper.UseBlockBodyTitle,
+                        helper.UseBlockBodyTitle
+                    ),
+                    location,
+                    severity,
+                    additionalLocations: additionalLocations,
+                    properties: properties
+                );
             }
 
             return null;

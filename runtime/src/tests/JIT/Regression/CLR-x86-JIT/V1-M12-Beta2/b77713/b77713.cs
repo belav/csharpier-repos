@@ -21,6 +21,7 @@ namespace Test
                 throw new Exception();
             }
         }
+
         public static int Main()
         {
             try

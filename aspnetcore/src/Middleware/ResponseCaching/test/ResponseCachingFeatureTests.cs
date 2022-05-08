@@ -13,12 +13,12 @@ public class ResponseCachingFeatureTests
         get
         {
             return new TheoryData<string[]>
-                {
-                    null,
-                    new string[0],
-                    new string[] { null },
-                    new string[] { string.Empty }
-                };
+            {
+                null,
+                new string[0],
+                new string[] { null },
+                new string[] { string.Empty }
+            };
         }
     }
 
@@ -35,24 +35,25 @@ public class ResponseCachingFeatureTests
         get
         {
             return new TheoryData<string[]>
-                {
-                    new string[] { null, null },
-                    new string[] { null, string.Empty },
-                    new string[] { string.Empty, null },
-                    new string[] { string.Empty, "Valid" },
-                    new string[] { "Valid", string.Empty },
-                    new string[] { null, "Valid" },
-                    new string[] { "Valid", null }
-                };
+            {
+                new string[] { null, null },
+                new string[] { null, string.Empty },
+                new string[] { string.Empty, null },
+                new string[] { string.Empty, "Valid" },
+                new string[] { "Valid", string.Empty },
+                new string[] { null, "Valid" },
+                new string[] { "Valid", null }
+            };
         }
     }
-
 
     [Theory]
     [MemberData(nameof(InvalidVaryRules))]
     public void VaryByQueryKeys_Set_InValidEmptyValues_Throws(string[] value)
     {
         // Throws
-        Assert.Throws<ArgumentException>(() => new ResponseCachingFeature().VaryByQueryKeys = value);
+        Assert.Throws<ArgumentException>(
+            () => new ResponseCachingFeature().VaryByQueryKeys = value
+        );
     }
 }

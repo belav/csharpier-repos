@@ -72,7 +72,10 @@ public class IISServerOptions
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.NonNegativeNumberOrNullRequired);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    CoreStrings.NonNegativeNumberOrNullRequired
+                );
             }
             _maxRequestBodySize = value;
         }

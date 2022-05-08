@@ -16,14 +16,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioNavigationOptions()
-        {
-        }
+        public VisualStudioNavigationOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            NavigateToObjectBrowser);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(NavigateToObjectBrowser);
 
-        public static readonly PerLanguageOption2<bool> NavigateToObjectBrowser = new(nameof(VisualStudioNavigationOptions), nameof(NavigateToObjectBrowser), defaultValue: false,
-            storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.NavigateToObjectBrowser"));
+        public static readonly PerLanguageOption2<bool> NavigateToObjectBrowser =
+            new(
+                nameof(VisualStudioNavigationOptions),
+                nameof(NavigateToObjectBrowser),
+                defaultValue: false,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.NavigateToObjectBrowser"
+                )
+            );
     }
 }

@@ -4,7 +4,6 @@
 using System.Xml;
 using System.Globalization;
 
-
 namespace System.Runtime.Serialization
 {
     internal class XmlWriterDelegator
@@ -57,7 +56,6 @@ namespace System.Runtime.Serialization
             writer.WriteRaw(data);
         }
 
-
         internal void WriteXmlnsAttribute(XmlDictionaryString ns)
         {
             if (dictionaryWriter != null)
@@ -84,7 +82,10 @@ namespace System.Runtime.Serialization
                         string? prefix = writer.LookupPrefix(ns);
                         if (prefix == null)
                         {
-                            prefix = string.Create(CultureInfo.InvariantCulture, $"d{depth}p{_prefixes}");
+                            prefix = string.Create(
+                                CultureInfo.InvariantCulture,
+                                $"d{depth}p{_prefixes}"
+                            );
                             _prefixes++;
                             writer.WriteAttributeString("xmlns", prefix, null, ns);
                         }
@@ -110,24 +111,40 @@ namespace System.Runtime.Serialization
             writer.WriteStartAttribute(prefix, localName, ns);
         }
 
-        private void WriteStartAttribute(string prefix, XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        private void WriteStartAttribute(
+            string prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             if (dictionaryWriter != null)
                 dictionaryWriter.WriteStartAttribute(prefix, localName, namespaceUri);
             else
-                writer.WriteStartAttribute(prefix,
+                writer.WriteStartAttribute(
+                    prefix,
                     (localName == null ? null : localName.Value)!,
-                    (namespaceUri == null ? null : namespaceUri.Value));
+                    (namespaceUri == null ? null : namespaceUri.Value)
+                );
         }
 
-        internal void WriteAttributeString(string? prefix, string localName, string? ns, string value)
+        internal void WriteAttributeString(
+            string? prefix,
+            string localName,
+            string? ns,
+            string value
+        )
         {
             WriteStartAttribute(prefix, localName, ns);
             WriteAttributeStringValue(value);
             WriteEndAttribute();
         }
 
-        internal void WriteAttributeString(string prefix, XmlDictionaryString attrName, XmlDictionaryString attrNs, string value)
+        internal void WriteAttributeString(
+            string prefix,
+            XmlDictionaryString attrName,
+            XmlDictionaryString attrNs,
+            string value
+        )
         {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeStringValue(value);
@@ -139,7 +156,12 @@ namespace System.Runtime.Serialization
             writer.WriteValue(value);
         }
 
-        internal void WriteAttributeString(string prefix, XmlDictionaryString attrName, XmlDictionaryString attrNs, XmlDictionaryString value)
+        internal void WriteAttributeString(
+            string prefix,
+            XmlDictionaryString attrName,
+            XmlDictionaryString attrNs,
+            XmlDictionaryString value
+        )
         {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeStringValue(value);
@@ -154,7 +176,12 @@ namespace System.Runtime.Serialization
                 dictionaryWriter.WriteString(value);
         }
 
-        internal void WriteAttributeInt(string prefix, XmlDictionaryString attrName, XmlDictionaryString attrNs, int value)
+        internal void WriteAttributeInt(
+            string prefix,
+            XmlDictionaryString attrName,
+            XmlDictionaryString attrNs,
+            int value
+        )
         {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeIntValue(value);
@@ -166,7 +193,12 @@ namespace System.Runtime.Serialization
             writer.WriteValue(value);
         }
 
-        internal void WriteAttributeBool(string prefix, XmlDictionaryString attrName, XmlDictionaryString attrNs, bool value)
+        internal void WriteAttributeBool(
+            string prefix,
+            XmlDictionaryString attrName,
+            XmlDictionaryString attrNs,
+            bool value
+        )
         {
             WriteStartAttribute(prefix, attrName, attrNs);
             WriteAttributeBoolValue(value);
@@ -178,7 +210,13 @@ namespace System.Runtime.Serialization
             writer.WriteValue(value);
         }
 
-        internal void WriteAttributeQualifiedName(string attrPrefix, XmlDictionaryString attrName, XmlDictionaryString attrNs, string name, string? ns)
+        internal void WriteAttributeQualifiedName(
+            string attrPrefix,
+            XmlDictionaryString attrName,
+            XmlDictionaryString attrNs,
+            string name,
+            string? ns
+        )
         {
             WriteXmlnsAttribute(ns);
             WriteStartAttribute(attrPrefix, attrName, attrNs);
@@ -191,7 +229,13 @@ namespace System.Runtime.Serialization
             writer.WriteQualifiedName(name, ns);
         }
 
-        internal void WriteAttributeQualifiedName(string attrPrefix, XmlDictionaryString attrName, XmlDictionaryString attrNs, XmlDictionaryString name, XmlDictionaryString ns)
+        internal void WriteAttributeQualifiedName(
+            string attrPrefix,
+            XmlDictionaryString attrName,
+            XmlDictionaryString attrNs,
+            XmlDictionaryString name,
+            XmlDictionaryString ns
+        )
         {
             WriteXmlnsAttribute(ns);
             WriteStartAttribute(attrPrefix, attrName, attrNs);
@@ -199,7 +243,10 @@ namespace System.Runtime.Serialization
             WriteEndAttribute();
         }
 
-        private void WriteAttributeQualifiedNameValue(XmlDictionaryString name, XmlDictionaryString ns)
+        private void WriteAttributeQualifiedNameValue(
+            XmlDictionaryString name,
+            XmlDictionaryString ns
+        )
         {
             if (dictionaryWriter == null)
                 writer.WriteQualifiedName(name.Value, ns.Value);
@@ -219,27 +266,45 @@ namespace System.Runtime.Serialization
             _prefixes = 1;
         }
 
-        internal void WriteStartElement(XmlDictionaryString localName, XmlDictionaryString? namespaceUri)
+        internal void WriteStartElement(
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri
+        )
         {
             WriteStartElement(null, localName, namespaceUri);
         }
 
-        internal void WriteStartElement(string? prefix, XmlDictionaryString localName, XmlDictionaryString? namespaceUri)
+        internal void WriteStartElement(
+            string? prefix,
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri
+        )
         {
             if (dictionaryWriter != null)
                 dictionaryWriter.WriteStartElement(prefix, localName, namespaceUri);
             else
-                writer.WriteStartElement(prefix, (localName == null ? null : localName.Value)!, (namespaceUri == null ? null : namespaceUri.Value));
+                writer.WriteStartElement(
+                    prefix,
+                    (localName == null ? null : localName.Value)!,
+                    (namespaceUri == null ? null : namespaceUri.Value)
+                );
             depth++;
             _prefixes = 1;
         }
 
-        internal void WriteStartElementPrimitive(XmlDictionaryString localName, XmlDictionaryString? namespaceUri)
+        internal void WriteStartElementPrimitive(
+            XmlDictionaryString localName,
+            XmlDictionaryString? namespaceUri
+        )
         {
             if (dictionaryWriter != null)
                 dictionaryWriter.WriteStartElement(null, localName, namespaceUri);
             else
-                writer.WriteStartElement(null, (localName == null ? null : localName.Value)!, (namespaceUri == null ? null : namespaceUri.Value));
+                writer.WriteStartElement(
+                    null,
+                    (localName == null ? null : localName.Value)!,
+                    (namespaceUri == null ? null : namespaceUri.Value)
+                );
         }
 
         internal void WriteEndElementPrimitive()
@@ -269,7 +334,12 @@ namespace System.Runtime.Serialization
 
         private Exception CreateInvalidPrimitiveTypeException(Type type)
         {
-            return new InvalidDataContractException(SR.Format(SR.InvalidPrimitiveType_Serialization, DataContract.GetClrTypeFullName(type)));
+            return new InvalidDataContractException(
+                SR.Format(
+                    SR.InvalidPrimitiveType_Serialization,
+                    DataContract.GetClrTypeFullName(type)
+                )
+            );
         }
 
         internal void WriteAnyType(object value)
@@ -349,7 +419,9 @@ namespace System.Runtime.Serialization
                     break;
             }
             if (!handled)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidPrimitiveTypeException(valueType));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidPrimitiveTypeException(valueType)
+                );
         }
 
         internal void WriteExtensionData(IDataNode dataNode)
@@ -430,7 +502,9 @@ namespace System.Runtime.Serialization
 
             if (!handled)
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidPrimitiveTypeException(valueType));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreateInvalidPrimitiveTypeException(valueType)
+                );
             }
         }
 
@@ -443,6 +517,7 @@ namespace System.Runtime.Serialization
         {
             writer.WriteValue(value);
         }
+
         internal void WriteBoolean(bool value, XmlDictionaryString name, XmlDictionaryString? ns)
         {
             WriteStartElementPrimitive(name, ns);
@@ -455,7 +530,11 @@ namespace System.Runtime.Serialization
             WriteString(XmlConvert.ToString(value, XmlDateTimeSerializationMode.RoundtripKind));
         }
 
-        internal void WriteDateTime(DateTime value, XmlDictionaryString name, XmlDictionaryString? ns)
+        internal void WriteDateTime(
+            DateTime value,
+            XmlDictionaryString name,
+            XmlDictionaryString? ns
+        )
         {
             WriteStartElementPrimitive(name, ns);
             WriteDateTime(value);
@@ -466,6 +545,7 @@ namespace System.Runtime.Serialization
         {
             writer.WriteValue(value);
         }
+
         internal void WriteDecimal(decimal value, XmlDictionaryString name, XmlDictionaryString? ns)
         {
             WriteStartElementPrimitive(name, ns);
@@ -546,7 +626,11 @@ namespace System.Runtime.Serialization
             writer.WriteValue(value);
         }
 
-        internal void WriteUnsignedByte(byte value, XmlDictionaryString name, XmlDictionaryString? ns)
+        internal void WriteUnsignedByte(
+            byte value,
+            XmlDictionaryString name,
+            XmlDictionaryString? ns
+        )
         {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedByte(value);
@@ -558,7 +642,11 @@ namespace System.Runtime.Serialization
             writer.WriteValue(value);
         }
 
-        internal void WriteSignedByte(sbyte value, XmlDictionaryString name, XmlDictionaryString? ns)
+        internal void WriteSignedByte(
+            sbyte value,
+            XmlDictionaryString name,
+            XmlDictionaryString? ns
+        )
         {
             WriteStartElementPrimitive(name, ns);
             WriteSignedByte(value);
@@ -570,7 +658,11 @@ namespace System.Runtime.Serialization
             writer.WriteValue(value);
         }
 
-        internal void WriteUnsignedInt(uint value, XmlDictionaryString name, XmlDictionaryString? ns)
+        internal void WriteUnsignedInt(
+            uint value,
+            XmlDictionaryString name,
+            XmlDictionaryString? ns
+        )
         {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedInt(value);
@@ -581,7 +673,12 @@ namespace System.Runtime.Serialization
         {
             writer.WriteRaw(XmlConvert.ToString(value));
         }
-        internal void WriteUnsignedLong(ulong value, XmlDictionaryString name, XmlDictionaryString? ns)
+
+        internal void WriteUnsignedLong(
+            ulong value,
+            XmlDictionaryString name,
+            XmlDictionaryString? ns
+        )
         {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedLong(value);
@@ -593,7 +690,11 @@ namespace System.Runtime.Serialization
             writer.WriteValue(value);
         }
 
-        internal void WriteUnsignedShort(ushort value, XmlDictionaryString name, XmlDictionaryString? ns)
+        internal void WriteUnsignedShort(
+            ushort value,
+            XmlDictionaryString name,
+            XmlDictionaryString? ns
+        )
         {
             WriteStartElementPrimitive(name, ns);
             WriteUnsignedShort(value);
@@ -624,7 +725,11 @@ namespace System.Runtime.Serialization
             WriteEndElementPrimitive();
         }
 
-        internal void WriteTimeSpan(TimeSpan value, XmlDictionaryString name, XmlDictionaryString? ns)
+        internal void WriteTimeSpan(
+            TimeSpan value,
+            XmlDictionaryString name,
+            XmlDictionaryString? ns
+        )
         {
             WriteStartElementPrimitive(name, ns);
             WriteTimeSpan(value);
@@ -645,7 +750,9 @@ namespace System.Runtime.Serialization
 
         internal void WriteUri(Uri? value)
         {
-            writer.WriteString(value?.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped));
+            writer.WriteString(
+                value?.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped)
+            );
         }
 
         internal void WriteUri(Uri? value, XmlDictionaryString name, XmlDictionaryString? ns)
@@ -677,7 +784,11 @@ namespace System.Runtime.Serialization
                 dictionaryWriter.WriteQualifiedName(localName, ns);
         }
 
-        internal void WriteBooleanArray(bool[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteBooleanArray(
+            bool[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (dictionaryWriter == null)
             {
@@ -692,7 +803,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal void WriteDateTimeArray(DateTime[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteDateTimeArray(
+            DateTime[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (dictionaryWriter == null)
             {
@@ -707,7 +822,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal void WriteDecimalArray(decimal[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteDecimalArray(
+            decimal[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (dictionaryWriter == null)
             {
@@ -722,7 +841,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal void WriteInt32Array(int[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteInt32Array(
+            int[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (dictionaryWriter == null)
             {
@@ -737,7 +860,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal void WriteInt64Array(long[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteInt64Array(
+            long[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (dictionaryWriter == null)
             {
@@ -752,7 +879,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal void WriteSingleArray(float[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteSingleArray(
+            float[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (dictionaryWriter == null)
             {
@@ -767,7 +898,11 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal void WriteDoubleArray(double[] value, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        internal void WriteDoubleArray(
+            double[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (dictionaryWriter == null)
             {

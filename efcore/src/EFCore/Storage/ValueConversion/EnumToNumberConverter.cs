@@ -25,10 +25,11 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         {
             var underlyingModelType = typeof(TEnum).UnwrapEnumType();
 
-            return (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
+            return
+                (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
                 && typeof(TNumber) == typeof(decimal)
-                    ? new ConverterMappingHints(precision: 20, scale: 0)
-                    : default;
+              ? new ConverterMappingHints(precision: 20, scale: 0)
+              : default;
         }
 
         /// <summary>
@@ -37,10 +38,7 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         /// <remarks>
         ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information.
         /// </remarks>
-        public EnumToNumberConverter()
-            : this(null)
-        {
-        }
+        public EnumToNumberConverter() : this(null) { }
 
         /// <summary>
         ///     Creates a new instance of this converter. This converter preserves order.
@@ -53,18 +51,18 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public EnumToNumberConverter(ConverterMappingHints? mappingHints)
-            : base(
-                ToNumber(),
-                ToEnum(),
-                _defaultHints?.With(mappingHints) ?? mappingHints)
-        {
-        }
+            : base(ToNumber(), ToEnum(), _defaultHints?.With(mappingHints) ?? mappingHints) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(TEnum), typeof(TNumber), i => new EnumToNumberConverter<TEnum, TNumber>(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(TEnum),
+                typeof(TNumber),
+                i => new EnumToNumberConverter<TEnum, TNumber>(i.MappingHints),
+                _defaultHints
+            );
 
         private static Expression<Func<TEnum, TNumber>> ToNumber()
         {
@@ -74,24 +72,38 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
                     CoreStrings.ConverterBadType(
                         typeof(EnumToNumberConverter<TEnum, TNumber>).ShortDisplayName(),
                         typeof(TEnum).ShortDisplayName(),
-                        "enum types"));
+                        "enum types"
+                    )
+                );
             }
 
             CheckTypeSupported(
                 typeof(TNumber).UnwrapNullableType(),
                 typeof(EnumToNumberConverter<TEnum, TNumber>),
-                typeof(int), typeof(long), typeof(short), typeof(byte),
-                typeof(uint), typeof(ulong), typeof(ushort), typeof(sbyte),
-                typeof(double), typeof(float), typeof(decimal));
+                typeof(int),
+                typeof(long),
+                typeof(short),
+                typeof(byte),
+                typeof(uint),
+                typeof(ulong),
+                typeof(ushort),
+                typeof(sbyte),
+                typeof(double),
+                typeof(float),
+                typeof(decimal)
+            );
 
             var param = Expression.Parameter(typeof(TEnum), "value");
 
             return Expression.Lambda<Func<TEnum, TNumber>>(
                 Expression.Convert(
                     typeof(TNumber) == typeof(decimal)
-                        ? Expression.Convert(param, typeof(long))
-                        : (Expression)param,
-                    typeof(TNumber)), param);
+                      ? Expression.Convert(param, typeof(long))
+                      : (Expression)param,
+                    typeof(TNumber)
+                ),
+                param
+            );
         }
 
         private static Expression<Func<TNumber, TEnum>> ToEnum()
@@ -100,9 +112,12 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
             return Expression.Lambda<Func<TNumber, TEnum>>(
                 Expression.Convert(
                     typeof(TNumber) == typeof(decimal)
-                        ? Expression.Convert(param, typeof(long))
-                        : (Expression)param,
-                    typeof(TEnum)), param);
+                      ? Expression.Convert(param, typeof(long))
+                      : (Expression)param,
+                    typeof(TEnum)
+                ),
+                param
+            );
         }
     }
 }
