@@ -26,7 +26,6 @@ namespace System.Net.Http
         private IntPtr s_dbg_requestHandle;
 #endif
 
-
         // A GCHandle for this operation object.
         // This is owned by the callback and will be deallocated when the sessionHandle has been closed.
         private GCHandle _operationHandle;

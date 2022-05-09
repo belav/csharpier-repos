@@ -45,7 +45,6 @@ namespace System.Runtime.Caching
         private static bool _configSupported => true;
 #endif
 
-
         // private
 
         private MemoryCacheStatistics()

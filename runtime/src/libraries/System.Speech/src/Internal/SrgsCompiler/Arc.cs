@@ -876,7 +876,6 @@ namespace System.Speech.Internal.SrgsCompiler
         }
 #endif
 
-
         // Sort arcs in a state based on type, and then on index.
         // Arcs loaded from a file have their index preserved where possible. New dynamic states have index == INFINITE,
         private int SortRank()

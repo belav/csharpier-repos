@@ -1263,7 +1263,6 @@ namespace System.DirectoryServices.AccountManagement
         }
 #endif // TESTHOOK
 
-
         //
         // Public Methods
         //

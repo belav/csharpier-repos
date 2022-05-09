@@ -251,7 +251,6 @@ namespace System.Diagnostics
             }
 #endif
 
-
             // Win32 RegQueryValueEx for perf data could deadlock (for a Mutex) up to 2mins in some
             // scenarios before they detect it and exit gracefully. In the mean time, ERROR_BUSY,
             // ERROR_NOT_READY etc can be seen by other concurrent calls (which is the reason for the

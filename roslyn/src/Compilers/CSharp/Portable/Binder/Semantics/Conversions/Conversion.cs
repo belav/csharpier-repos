@@ -50,7 +50,6 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal bool _nestedConversionsChecked;
 #endif
 
-
             //no effect on Equals/GetHashCode
             internal readonly UserDefinedConversionResult _conversionResult;
 

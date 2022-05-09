@@ -33,7 +33,6 @@ namespace System.Runtime.InteropServices
         }
 #endif
 
-
         // Most of the data types in the Variant are carried in _typeUnion
         [FieldOffset(0)]
         private TypeUnion _typeUnion;

@@ -12,7 +12,6 @@ namespace System.Drawing.Drawing2D
         private string allocationSite = Graphics.GetAllocationStack();
 #endif
 
-
         // Handle to native line cap object
         internal SafeCustomLineCapHandle nativeCap = null!;
 

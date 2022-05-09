@@ -795,7 +795,6 @@ namespace System.Linq.Expressions.Tests
         // FEATURE_COMPILE
 #endif
 
-
         [Fact]
         public void CallWithoutIndices()
         {

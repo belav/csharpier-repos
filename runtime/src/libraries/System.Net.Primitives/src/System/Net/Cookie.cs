@@ -95,7 +95,6 @@ namespace System.Net
         }
 #endif
 
-
         // These DynamicDependency attributes are a workaround for https://github.com/dotnet/runtime/issues/19348.
         // HttpListener uses the non-public ToServerString, which isn't used by anything else in this assembly,
         // and which accesses other internals and can't be moved to HttpListener (at least not without incurring

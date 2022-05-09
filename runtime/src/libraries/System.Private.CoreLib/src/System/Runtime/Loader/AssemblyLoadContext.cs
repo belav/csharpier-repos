@@ -324,7 +324,6 @@ namespace System.Runtime.Loader
         }
 #endif
 
-
         // These methods load assemblies into the current AssemblyLoadContext
         // They may be used in the implementation of an AssemblyLoadContext derivation
         [RequiresUnreferencedCode(

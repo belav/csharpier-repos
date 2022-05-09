@@ -82,7 +82,6 @@ namespace Microsoft.CodeAnalysis
         internal const int fAttrValue = 128;
 #endif
 
-
         // bitmap for public ID characters - 1 bit per character 0x0 - 0x80; no character > 0x80 is a PUBLIC ID char
         private const string s_PublicIdBitmap = "\u2400\u0000\uffbb\uafff\uffff\u87ff\ufffe\u07ff";
 
