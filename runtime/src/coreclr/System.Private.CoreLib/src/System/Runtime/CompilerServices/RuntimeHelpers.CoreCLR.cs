@@ -147,7 +147,6 @@ namespace System.Runtime.CompilerServices
 #else // 32
                 8;
 #endif // TARGET_64BIT
-
         }
 
         // This method ensures that there is sufficient stack to execute the average Framework function.

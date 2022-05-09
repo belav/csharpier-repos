@@ -44,6 +44,7 @@ namespace System.Security.Cryptography
             return ecdsa;
         }
 #endif
+
         internal static partial class ECDsaImplementation
         {
             public sealed partial class ECDsaSecurityTransforms : ECDsa

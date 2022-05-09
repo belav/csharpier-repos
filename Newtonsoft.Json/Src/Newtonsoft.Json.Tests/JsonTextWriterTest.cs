@@ -927,7 +927,6 @@ namespace Newtonsoft.Json.Tests
                 sb.ToString()
             );
 #endif
-
         }
 
         [Test]

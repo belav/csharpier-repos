@@ -26,6 +26,7 @@ namespace System.Net.Http.Functional.Tests
         private static readonly DecompressionMethods _all =
             DecompressionMethods.Deflate | DecompressionMethods.GZip;
 #endif
+
         public HttpClientHandler_Decompression_Test(ITestOutputHelper output) : base(output) { }
 
         public static IEnumerable<object[]> DecompressedResponse_MethodSpecified_DecompressedContentReturned_MemberData() =>

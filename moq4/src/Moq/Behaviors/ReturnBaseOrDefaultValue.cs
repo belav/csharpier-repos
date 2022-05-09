@@ -97,7 +97,6 @@ namespace Moq.Behaviors
                     return;
                 }
 #endif
-
             }
 
             if (method.ReturnType != typeof(void))

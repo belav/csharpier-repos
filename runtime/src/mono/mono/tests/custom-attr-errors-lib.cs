@@ -11,7 +11,6 @@ public enum DisappearingEnum
 }
 #endif
 
-
 public sealed class MissingCtorAttribute : Attribute
 {
 #if WITH_MEMBERS
@@ -35,5 +34,4 @@ public sealed class BadAttrAttribute : Attribute
         get { return 0; }
     }
 #endif
-
 }

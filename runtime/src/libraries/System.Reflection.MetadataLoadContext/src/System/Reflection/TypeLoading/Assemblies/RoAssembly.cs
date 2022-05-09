@@ -52,6 +52,7 @@ namespace System.Reflection.TypeLoading
 
         // Location and codebase
         public abstract override string Location { get; }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeBaseMessage,
@@ -62,6 +63,7 @@ namespace System.Reflection.TypeLoading
 #endif
         public sealed override string CodeBase =>
             throw new NotSupportedException(SR.NotSupported_AssemblyCodeBase);
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeBaseMessage,
@@ -201,6 +203,7 @@ namespace System.Reflection.TypeLoading
 
         // Miscellaneous properties
         public sealed override bool ReflectionOnly => true;
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             "The Global Assembly Cache is not supported.",

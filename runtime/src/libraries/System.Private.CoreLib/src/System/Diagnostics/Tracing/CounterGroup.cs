@@ -343,6 +343,5 @@ namespace System.Diagnostics.Tracing
         }
 
 #endregion // Timer Processing
-
     }
 }

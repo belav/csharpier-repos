@@ -436,6 +436,7 @@ WriteLine(5);
             Assert.Equal("C { }", output.Trim());
             Assert.True(result);
         }
+
 #if TODO
         /// <summary>
         /// Tests that a dependency is correctly resolved and loaded at runtime.
@@ -490,6 +491,7 @@ WriteLine(5);
         /// <summary>
         /// When two files of the same version are in the same directory, prefer .dll over .exe.
         /// </summary>
+
         [Fact]
         public async Task AddReference_Dependencies_DllExe()
         {

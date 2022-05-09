@@ -11,7 +11,6 @@ namespace DefaultNamespace
     internal struct ValueCls1
     {
         //internal ValueCls1() {}
-
     }
 
     internal class Class1

@@ -179,7 +179,6 @@ namespace CseTest
                     ret = ret + 1;
                 }
 #if LOOP
-
             }
 #endif
 #if TRY

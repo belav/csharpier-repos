@@ -2214,6 +2214,7 @@ namespace System.Xml.Schema
             return isMatched;
         }
 #endif
+
         private bool IsElementFromGroupBase(
             XmlSchemaElement derivedElement,
             XmlSchemaGroupBase baseGroupBase

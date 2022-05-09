@@ -315,6 +315,7 @@ namespace System.Linq.Expressions.Interpreter
             );
         }
 #endif
+
         public InstructionArray ToArray()
         {
 #if STATS

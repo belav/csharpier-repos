@@ -500,7 +500,6 @@ namespace CseTest
             } while (ret == 1000);
 #endif
 
-
             Console.WriteLine(ret);
             return ret;
         }

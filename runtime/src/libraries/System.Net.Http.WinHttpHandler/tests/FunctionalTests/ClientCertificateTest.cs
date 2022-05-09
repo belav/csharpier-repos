@@ -126,6 +126,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             );
         }
 #endif
+
         [OuterLoop]
         [ConditionalFact(
             typeof(PlatformDetection),

@@ -229,6 +229,7 @@ namespace System.Security.Cryptography.Pkcs
     public sealed partial class CmsSigner
     {
         public CmsSigner() { }
+
 #if NET6_0_OR_GREATER
         [System.ObsoleteAttribute(
             "CmsSigner(CspParameters) is obsolete and is not supported. Use an alternative constructor instead.",
@@ -748,6 +749,7 @@ namespace System.Security.Cryptography.Pkcs
             System.Security.Cryptography.X509Certificates.X509Certificate2Collection extraStore,
             bool verifySignatureOnly
         ) { }
+
 #if NET6_0_OR_GREATER
         [System.ObsoleteAttribute(
             "ComputeCounterSignature without specifying a CmsSigner is obsolete and is not supported. Use the overload that accepts a CmsSigner.",

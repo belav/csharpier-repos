@@ -459,7 +459,6 @@ namespace PartialCompactionTest
         {
             AvgObjectSize = (double)EstimatedHeapSize / (double)EstimatedObjectCount;
             //Console.WriteLine("Avg object size " + AvgObjectSize);
-
         }
 
         public static void AddRef(Object from, Object to)

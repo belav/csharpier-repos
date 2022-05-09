@@ -1115,7 +1115,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
             _fLoadedFromBinary = true;
             // Save Last ArcIndex
-
         }
 
         private Arc CreateTransition(string sWord, float flWeight, int requiredConfidence)

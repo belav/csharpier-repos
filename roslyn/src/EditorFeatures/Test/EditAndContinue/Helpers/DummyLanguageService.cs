@@ -27,6 +27,5 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         public DummyLanguageService() { }
 
         // do nothing
-
     }
 }

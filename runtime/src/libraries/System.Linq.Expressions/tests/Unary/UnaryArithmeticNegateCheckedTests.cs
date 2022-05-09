@@ -268,6 +268,5 @@ namespace System.Linq.Expressions.Tests
             );
         }
 #endif
-
     }
 }

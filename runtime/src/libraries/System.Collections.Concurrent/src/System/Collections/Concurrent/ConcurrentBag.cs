@@ -750,6 +750,7 @@ namespace System.Collections.Concurrent
                 0;
 #endif
             /// <summary>Head index from which to steal.  This and'd with the <see cref="_mask"/> is the index into <see cref="_array"/>.</summary>
+
             private volatile int _headIndex = StartIndex;
 
             /// <summary>Tail index at which local pushes/pops happen. This and'd with the <see cref="_mask"/> is the index into <see cref="_array"/>.</summary>

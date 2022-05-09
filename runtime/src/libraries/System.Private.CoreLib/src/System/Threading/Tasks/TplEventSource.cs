@@ -27,6 +27,7 @@ namespace System.Threading.Tasks
             "Parameters to this method are primitive and are trimmer safe";
 #endif
         /// Used to determine if tasks should generate Activity IDs for themselves
+
         internal bool TasksSetActivityIds; // This keyword is set
         internal bool Debug;
         private bool DebugActivityId;

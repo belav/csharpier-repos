@@ -705,7 +705,6 @@ namespace System.Threading
             public bool IsHeld => _spinLock.IsHeld;
         }
         #endregion
-
     }
 }
 #pragma warning restore 0420

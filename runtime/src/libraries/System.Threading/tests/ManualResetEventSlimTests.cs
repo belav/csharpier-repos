@@ -129,7 +129,6 @@ namespace System.Threading.Tests
 
             Assert.Throws<ObjectDisposedException>(() => mre.WaitOne(0));
             // Failure Case: The underlying event object has been disposed, should throw ObjectDisposedException.
-
         }
 
         [Fact]

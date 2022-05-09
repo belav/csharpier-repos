@@ -442,6 +442,7 @@ namespace System.Net.Http.Functional.Tests
             : base(output) { }
     }
 #endif
+
     public sealed class PlatformHandler_ResponseStream_Http2_Test : ResponseStreamTest
     {
         protected override Version UseVersion => HttpVersion20.Value;

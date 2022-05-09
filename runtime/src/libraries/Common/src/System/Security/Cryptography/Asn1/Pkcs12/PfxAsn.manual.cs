@@ -57,7 +57,6 @@ namespace System.Security.Cryptography.Asn1.Pkcs12
             byte[] derived = new byte[expectedOutputSize];
 #endif
 
-
             int iterationCount = PasswordBasedEncryption.NormalizeIterationCount(
                 MacData.Value.IterationCount
             );

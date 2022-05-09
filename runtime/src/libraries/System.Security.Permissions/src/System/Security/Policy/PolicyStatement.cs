@@ -13,6 +13,7 @@ namespace System.Security.Policy
         )]
 #endif
         public PolicyStatement(PermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,

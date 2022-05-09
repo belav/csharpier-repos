@@ -10,6 +10,7 @@ namespace System.Security.Policy
         public ApplicationTrust() { }
 
         public ApplicationTrust(ApplicationIdentity identity) { }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -25,6 +26,7 @@ namespace System.Security.Policy
         public ApplicationIdentity ApplicationIdentity { get; set; }
         public PolicyStatement DefaultGrantSet { get; set; }
         public object ExtraInfo { get; set; }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,

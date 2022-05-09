@@ -171,7 +171,6 @@ namespace System.Linq.Expressions
         }
 #endif
 
-
 #if FEATURE_COMPILE
         internal abstract LambdaExpression Accept(Compiler.StackSpiller spiller);
 #endif

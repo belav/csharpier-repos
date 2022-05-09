@@ -145,6 +145,5 @@ namespace System.Speech.Internal.Synthesis
         private TimeSpan _phonemeDuration;
         private SynthesizerEmphasis _phonemeEmphasis;
         #endregion
-
     }
 }

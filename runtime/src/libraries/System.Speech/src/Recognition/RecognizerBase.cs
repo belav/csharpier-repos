@@ -2690,7 +2690,6 @@ namespace System.Speech.Recognition
                     }
                 }
                 // else Grammar has already been unloaded or disabled - so don't fire result
-
             }
             finally // Even if event handler throws we should call this
             {

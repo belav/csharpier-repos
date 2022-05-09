@@ -26,7 +26,6 @@ class test
             return -1;
         return 100;
 #pragma warning restore 0252
-
     }
 
     public static S foo(S s)

@@ -119,5 +119,4 @@ public class TypeGetHashCode
 
     public class Base : Object { }
     #endregion
-
 }

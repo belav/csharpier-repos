@@ -1942,6 +1942,5 @@ namespace System.Collections.Concurrent
             return chunkSize;
         }
         #endregion
-
     }
 }

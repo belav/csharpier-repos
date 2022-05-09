@@ -223,6 +223,5 @@ namespace System.Linq.Parallel
             WriteEvent(PARALLELQUERYJOIN_EVENTID, taskSchedulerId, taskId, queryId);
         }
         #endregion
-
     }
 }

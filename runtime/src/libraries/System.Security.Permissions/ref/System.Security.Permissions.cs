@@ -78,6 +78,7 @@ namespace System.Configuration
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -181,6 +182,7 @@ namespace System.Data.Common
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -273,6 +275,7 @@ namespace System.Data.Odbc
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -337,6 +340,7 @@ namespace System.Data.OleDb
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -435,6 +439,7 @@ namespace System.Data.OracleClient
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -532,6 +537,7 @@ namespace System.Data.SqlClient
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -602,6 +608,7 @@ namespace System.Diagnostics
         Write = 16,
         Administer = 48,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -702,6 +709,7 @@ namespace System.Diagnostics
 
         public void Remove(System.Diagnostics.EventLogPermissionEntry value) { }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -742,6 +750,7 @@ namespace System.Diagnostics
         Instrument = 3,
         Administer = 7,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -919,6 +928,7 @@ namespace System.Drawing.Printing
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1001,6 +1011,7 @@ namespace System.Net
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1063,6 +1074,7 @@ namespace System.Net
         Connect = 64,
         Accept = 128,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1133,6 +1145,7 @@ namespace System.Net
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1190,6 +1203,7 @@ namespace System.Net
         Tcp = 2,
         All = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1260,6 +1274,7 @@ namespace System.Net
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1318,6 +1333,7 @@ namespace System.Net.Mail
         Connect = 1,
         ConnectToUnrestrictedPort = 2,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1374,6 +1390,7 @@ namespace System.Net.Mail
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1418,6 +1435,7 @@ namespace System.Net.NetworkInformation
         Read = 1,
         Ping = 4,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1474,6 +1492,7 @@ namespace System.Net.NetworkInformation
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1557,6 +1576,7 @@ namespace System.Net.PeerToPeer
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1641,6 +1661,7 @@ namespace System.Net.PeerToPeer.Collaboration
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1734,6 +1755,7 @@ namespace System.Security
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -1870,6 +1892,7 @@ namespace System.Security
         void FromXml(System.Security.SecurityElement e, System.Security.Policy.PolicyLevel level);
         System.Security.SecurityElement ToXml(System.Security.Policy.PolicyLevel level);
     }
+
 #if !NETCOREAPP
     public partial interface IStackWalk
     {
@@ -1938,6 +1961,7 @@ namespace System.Security
             throw null;
         }
     }
+
 #if !NETCOREAPP
     public partial class PermissionSet
         : System.Collections.ICollection,
@@ -2102,6 +2126,7 @@ namespace System.Security
         }
     }
 #endif
+
     public enum PolicyLevelType
     {
         User = 0,
@@ -2109,6 +2134,7 @@ namespace System.Security
         Enterprise = 2,
         AppDomain = 3,
     }
+
 #if NET6_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2166,6 +2192,7 @@ namespace System.Security
         CurrentAppDomain = 0,
         CurrentAssembly = 1,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2383,6 +2410,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2436,6 +2464,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2453,6 +2482,7 @@ namespace System.Security.Permissions
         UnprotectMemory = 8,
         AllFlags = 15,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2518,6 +2548,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2533,6 +2564,7 @@ namespace System.Security.Permissions
         Write = 2,
         AllAccess = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2576,6 +2608,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2630,6 +2663,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2645,6 +2679,7 @@ namespace System.Security.Permissions
         Save = 2,
         OpenSave = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2683,6 +2718,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2796,6 +2832,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2813,6 +2850,7 @@ namespace System.Security.Permissions
         PathDiscovery = 8,
         AllAccess = 15,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2892,6 +2930,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2932,6 +2971,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -2959,6 +2999,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3041,6 +3082,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3063,6 +3105,7 @@ namespace System.Security.Permissions
         MayLeakOnAbort = 256,
         All = 511,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3085,6 +3128,7 @@ namespace System.Security.Permissions
         AdministerIsolatedStorageByUser = 112,
         UnrestrictedIsolatedStorage = 240,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3123,6 +3167,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3151,6 +3196,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3187,6 +3233,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3212,6 +3259,7 @@ namespace System.Security.Permissions
             set { }
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3223,6 +3271,7 @@ namespace System.Security.Permissions
     {
         bool IsUnrestricted();
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3285,6 +3334,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3354,6 +3404,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3419,6 +3470,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3447,6 +3499,7 @@ namespace System.Security.Permissions
 
         public void Reset() { }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3505,6 +3558,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3526,6 +3580,7 @@ namespace System.Security.Permissions
         ChangeAcl = 8192,
         AllFlags = 13111,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3598,6 +3653,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3641,6 +3697,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3655,6 +3712,7 @@ namespace System.Security.Permissions
         SafeAudio = 2,
         AllAudio = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3669,6 +3727,7 @@ namespace System.Security.Permissions
         SafeImage = 2,
         AllImage = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3683,6 +3742,7 @@ namespace System.Security.Permissions
         SafeVideo = 2,
         AllVideo = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3741,6 +3801,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if !NETCOREAPP
     public enum PermissionState
     {
@@ -3815,6 +3876,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3862,6 +3924,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3910,6 +3973,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -3954,6 +4018,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4007,6 +4072,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4064,6 +4130,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4087,6 +4154,7 @@ namespace System.Security.Permissions
         AllFlags = 7,
         RestrictedMemberAccess = 8,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4164,6 +4232,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4180,6 +4249,7 @@ namespace System.Security.Permissions
         Create = 4,
         AllAccess = 7,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4244,6 +4314,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4320,6 +4391,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4342,6 +4414,7 @@ namespace System.Security.Permissions
             get { throw null; }
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4395,6 +4468,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4441,6 +4515,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4474,6 +4549,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4527,6 +4603,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4595,6 +4672,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4615,6 +4693,7 @@ namespace System.Security.Permissions
         EnumerateCertificates = 128,
         AllFlags = 247,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4675,6 +4754,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4719,6 +4799,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4745,6 +4826,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4800,6 +4882,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4838,6 +4921,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4851,6 +4935,7 @@ namespace System.Security.Permissions
         NoFlags = 0,
         RestrictedRegistrationAccess = 1,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4916,6 +5001,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4954,6 +5040,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4967,6 +5054,7 @@ namespace System.Security.Permissions
         OwnClipboard = 1,
         AllClipboard = 2,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -4981,6 +5069,7 @@ namespace System.Security.Permissions
         SafeTopLevelWindows = 2,
         AllWindows = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5027,6 +5116,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5060,6 +5150,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5117,6 +5208,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5150,6 +5242,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5163,6 +5256,7 @@ namespace System.Security.Permissions
         Safe = 1,
         Unrestricted = 2,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5209,6 +5303,7 @@ namespace System.Security.Permissions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5383,6 +5478,7 @@ namespace System.Security.Policy
         public ApplicationTrust() { }
 
         public ApplicationTrust(System.ApplicationIdentity identity) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5410,6 +5506,7 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -5677,6 +5774,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -5786,6 +5884,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6001,6 +6100,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6188,6 +6288,7 @@ namespace System.Security.Policy
         public void AddFullTrustAssembly(
             System.Security.Policy.StrongNameMembershipCondition snMC
         ) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6196,6 +6297,7 @@ namespace System.Security.Policy
         )]
 #endif
         public void AddNamedPermissionSet(System.Security.NamedPermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6220,6 +6322,7 @@ namespace System.Security.Policy
         }
 
         public void FromXml(System.Security.SecurityElement e) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6241,6 +6344,7 @@ namespace System.Security.Policy
         public void RemoveFullTrustAssembly(
             System.Security.Policy.StrongNameMembershipCondition snMC
         ) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6254,6 +6358,7 @@ namespace System.Security.Policy
         {
             throw null;
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6300,6 +6405,7 @@ namespace System.Security.Policy
         )]
 #endif
         public PolicyStatement(System.Security.PermissionSet permSet) { }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6321,6 +6427,7 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6375,6 +6482,7 @@ namespace System.Security.Policy
         LevelFinal = 2,
         All = 3,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6478,6 +6586,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6584,6 +6693,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6641,6 +6751,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6801,6 +6912,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -6902,6 +7014,7 @@ namespace System.Security.Policy
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -7049,6 +7162,7 @@ namespace System.ServiceProcess
         Browse = 2,
         Control = 6,
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -7221,6 +7335,7 @@ namespace System.Transactions
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",
@@ -7304,6 +7419,7 @@ namespace System.Web
             throw null;
         }
     }
+
 #if NET5_0_OR_GREATER
     [System.ObsoleteAttribute(
         "Code Access Security is not supported or honored by the runtime.",

@@ -212,6 +212,5 @@ namespace BasicEventSourceTests
         private string _dataFileName;
         private volatile TraceEventSession _session;
     #endregion
-
     }
 }

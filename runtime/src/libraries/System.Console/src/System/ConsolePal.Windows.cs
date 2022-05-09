@@ -376,7 +376,6 @@ namespace System
                     }
                     // We will return one key from this method, so we decrement the
                     // repeatCount here, leaving the cachedInputRecord in the "queue".
-
                 }
                 else
                 { // We did NOT have a previous keystroke with repeated characters:

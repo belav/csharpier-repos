@@ -227,6 +227,5 @@ namespace Microsoft.CodeAnalysis
 #else
 #error Unsupported configuration
 #endif
-
     }
 }

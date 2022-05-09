@@ -499,6 +499,5 @@ namespace Newtonsoft.Json.Tests
             }
         }
 #endif
-
     }
 }

@@ -83,7 +83,6 @@
             public virtual TrainingCourse Course { get; set; }
 
             //  public int CourseId { get; set; }
-
         }
 
         public class TrainingCourseDto

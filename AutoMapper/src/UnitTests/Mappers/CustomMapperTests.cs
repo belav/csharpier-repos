@@ -15,6 +15,7 @@ namespace AutoMapper.UnitTests.Mappers
     {
         protected override MapperConfiguration Configuration { get; } =
             new MapperConfiguration(cfg => cfg.Internal().Mappers.Add(new TypeConverterMapper()));
+
 #if NET461
         public When_specifying_mapping_with_the_BCL_type_converter_class()
         {
@@ -27,6 +28,7 @@ namespace AutoMapper.UnitTests.Mappers
             };
         }
 #endif
+
         [TypeConverter(typeof(CustomTypeConverter))]
         public class Source
         {

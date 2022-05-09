@@ -412,6 +412,5 @@ public class Test_Struct_ImplementMscorlibGenInterface
         }
 
 #pragma warning restore 219
-
     }
 }

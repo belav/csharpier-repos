@@ -54,8 +54,6 @@ internal enum InternalEnum
 }
 #endif
 
-
-
 //
 // Class
 //
@@ -70,12 +68,14 @@ public class PublicClass
     // Ctors
     //
     public PublicClass() { }
+
 #if ALL_PUB
     public
 #endif
     PublicClass(int i1) { }
 
     public PublicClass(int i1, int i2) { }
+
 #if ALL_PUB
     public PublicClass(int i1, int i2, int i3) { }
 
@@ -93,7 +93,6 @@ public class PublicClass
 
     private PublicClass(int i1, int i2, int i3, int i4, int i5, int i6) { }
 #endif
-
 
     //
     // static fields
@@ -115,7 +114,6 @@ public class PublicClass
     protected internal static int protectedInternalStaticField = 0;
     private static int privateStaticField;
 #endif
-
 
     //
     // instance fields
@@ -258,7 +256,6 @@ public class PublicClass
     }
 #endif
 
-
     //
     // static Methods
     //
@@ -274,6 +271,7 @@ public class PublicClass
     {
         return 1;
     }
+
 #if ALL_PUB
     public static int ProtectedStaticMethod()
     {
@@ -316,7 +314,6 @@ public class PublicClass
     }
 #endif
 
-
     //
     // instance Methods
     //
@@ -332,6 +329,7 @@ public class PublicClass
     {
         return 1;
     }
+
 #if ALL_PUB
     public int ProtectedMethod()
     {
@@ -457,6 +455,7 @@ public struct PublicStruct
     {
         defaultField = publicField = internalField = privateField = 0;
     }
+
 #if ALL_PUB
     public PublicStruct(int i1, int i2, int i3)
     {
@@ -495,7 +494,6 @@ public struct PublicStruct
     internal static int internalStaticField = 0;
     private static int privateStaticField = 0;
 #endif
-
 
     //
     // instance fields
@@ -594,7 +592,6 @@ public struct PublicStruct
     }
 #endif
 
-
     //
     // static Methods
     //
@@ -610,6 +607,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
 #if ALL_PUB
     public static int InternalStaticMethod()
     {
@@ -632,7 +630,6 @@ public struct PublicStruct
     }
 #endif
 
-
     //
     // instance Methods
     //
@@ -648,6 +645,7 @@ public struct PublicStruct
     {
         return 1;
     }
+
 #if ALL_PUB
     public int InternalMethod()
     {

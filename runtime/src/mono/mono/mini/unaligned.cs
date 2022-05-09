@@ -29,7 +29,6 @@ namespace UnalignedTests
 {
 #endif
 
-
     class Tests
     {
 #if !__MOBILE__
@@ -38,7 +37,6 @@ namespace UnalignedTests
         return TestDriver.RunTests(typeof(Tests), args);
     }
 #endif
-
 
         public static unsafe int test_0_ldobj_r4()
         {

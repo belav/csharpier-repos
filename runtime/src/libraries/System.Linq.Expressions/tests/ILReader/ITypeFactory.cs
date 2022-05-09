@@ -52,6 +52,7 @@ namespace System.Linq.Expressions.Tests
             return definition.MakeGenericType(arguments);
         }
 #endif
+
         public Type MakeArrayType(Type type) => type.MakeArrayType();
 
         public Type MakeArrayType(Type type, int rank) => type.MakeArrayType(rank);

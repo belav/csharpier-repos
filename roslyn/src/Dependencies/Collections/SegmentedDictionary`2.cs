@@ -48,6 +48,7 @@ namespace Microsoft.CodeAnalysis.Collections
         private int _freeList;
         private int _freeCount;
         private int _version;
+
 #if NETCOREAPP
         private readonly IEqualityComparer<TKey>? _comparer;
 #else

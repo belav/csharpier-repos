@@ -71,6 +71,5 @@ internal class Program
 #pragma warning disable 0414
         public static S<T> Foo = new S<T>();
 #pragma warning restore 0414
-
     }
 }

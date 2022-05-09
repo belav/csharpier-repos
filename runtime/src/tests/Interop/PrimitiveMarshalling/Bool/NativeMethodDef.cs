@@ -72,5 +72,4 @@ public class BoolNative
     public static extern bool Marshal_Ref_Struct_Variant(ref ContainsVariantBool value);
 
 #pragma warning restore CS0612, CS0618
-
 }

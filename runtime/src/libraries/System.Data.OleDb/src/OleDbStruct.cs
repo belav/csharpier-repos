@@ -32,7 +32,6 @@ namespace System.Data.OleDb
     }
 #endif
 
-
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal struct tagDBPARAMBINDINFO_x86
     {
@@ -431,6 +430,7 @@ namespace System.Data.OleDb
         internal tagDBIDX columnid;
 
         internal tagDBCOLUMNINFO() { }
+
 #if DEBUG
         public override string ToString()
         {

@@ -180,5 +180,4 @@ public class TokenExtensionTests
     //    Assert.Equal("2", await context.GetTokenAsync("Two"));
     //    Assert.Equal("3", await context.GetTokenAsync("Three"));
     //}
-
 }

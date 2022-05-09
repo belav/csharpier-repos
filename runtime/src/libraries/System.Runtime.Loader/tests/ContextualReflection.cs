@@ -1393,6 +1393,5 @@ namespace System.Runtime.Loader.Tests
             );
         }
 #endregion
-
     }
 }

@@ -177,7 +177,6 @@ public class MyClass : IMyInterface
         return "ChangedToVirtual";
     }
 #endif
-
 }
 
 public class MyChildClass : MyClass
@@ -359,6 +358,7 @@ public struct MyChangingHFAStruct
     int x;
     int y;
 #endif
+
     static public MyChangingHFAStruct Construct()
     {
         return new MyChangingHFAStruct() { x = 12, y = 23 };

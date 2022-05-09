@@ -108,7 +108,6 @@ namespace Newtonsoft.Json.Tests.Issues
             }
 
             #endregion
-
         }
 
         [Test]

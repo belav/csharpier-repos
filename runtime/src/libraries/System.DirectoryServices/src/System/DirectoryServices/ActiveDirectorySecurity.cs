@@ -393,7 +393,6 @@ namespace System.DirectoryServices
         public override Type AuditRuleType => typeof(ActiveDirectoryAuditRule);
 
         #endregion
-
     }
 
     internal sealed class ActiveDirectoryRightsTranslator

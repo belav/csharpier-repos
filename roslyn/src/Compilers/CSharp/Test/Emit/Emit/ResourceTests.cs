@@ -983,6 +983,7 @@ class C
             }
         }
 #endif
+
         [Fact]
         public void AddManagedLinkedResourceFail()
         {

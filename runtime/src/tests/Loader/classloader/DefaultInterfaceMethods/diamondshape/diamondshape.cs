@@ -125,7 +125,6 @@ interface GI1<T>
 interface GI2<T> : GI1<T>
 {
     // int GI1<T>.Func<S>(out Type[] types) { Console.WriteLine(typeof(T) + ", "typeof(S) + ", GI1Class"); types = new Type[] { typeof(T), typeof(S) }; return 2; }
-
 }
 
 interface GI3<T> : GI1<T>

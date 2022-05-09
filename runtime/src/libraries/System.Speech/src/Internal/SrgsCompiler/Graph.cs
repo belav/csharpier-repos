@@ -377,6 +377,7 @@ namespace System.Speech.Internal.SrgsCompiler
         /// Notes:
         /// - For best optimization, we need to move semantic properties referencing the transitions.
         /// </summary>
+
         private void MergeDuplicateTransitions()
         {
             List<Arc> tempList = new();

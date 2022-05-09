@@ -1833,7 +1833,6 @@ namespace System
         }
 #endif
 
-
 #if NINT_JIT_OPTIMIZED
         public static nint operator +(nint l, nint r)
         {

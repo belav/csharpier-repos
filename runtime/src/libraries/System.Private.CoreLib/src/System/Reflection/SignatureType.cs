@@ -76,6 +76,7 @@ namespace System.Reflection
 
         public sealed override int GetHashCode() => base.GetHashCode();
 #endif
+
         public sealed override Type UnderlyingSystemType => this; // Equals(Type) depends on this.
 
         // Naming and diagnostics

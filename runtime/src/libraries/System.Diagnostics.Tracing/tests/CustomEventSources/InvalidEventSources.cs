@@ -173,6 +173,7 @@ namespace SdtEventSources
             WriteEvent(1, msg);
         }
     }
+
 #if FEATURE_ADVANCED_MANAGED_ETW_CHANNELS
     public sealed class TooManyChannelsEventSource : EventSource
     {

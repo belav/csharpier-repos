@@ -38,6 +38,5 @@ namespace System.Speech.Recognition
 #pragma warning restore 6524
 
         #endregion
-
     }
 }

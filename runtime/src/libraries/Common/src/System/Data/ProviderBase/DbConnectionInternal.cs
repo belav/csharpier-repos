@@ -212,7 +212,6 @@ namespace System.Data.ProviderBase
             Interlocked.Decrement(ref _activateCount);
 #endif // DEBUG
 
-
             if (!_connectionIsDoomed && Pool.UseLoadBalancing)
             {
                 // If we're not already doomed, check the connection's lifetime and

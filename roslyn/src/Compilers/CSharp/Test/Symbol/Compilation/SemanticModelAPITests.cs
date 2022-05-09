@@ -5275,6 +5275,5 @@ public partial class C
                     GetExpressionSyntax(child.AsNode(), exprSynList);
         }
         #endregion
-
     }
 }
