@@ -31,8 +31,8 @@ namespace AutoMapper.UnitTests.Mappers
         [TypeConverter(typeof(CustomTypeConverter))]
         public class Source
         {
-            public int
-            Value { get; set; }
+
+            public int Value { get; set; }
         }
 
         public class Destination

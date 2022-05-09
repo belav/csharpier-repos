@@ -948,6 +948,7 @@ namespace System.Xml.Xsl.IlGen
         private TextWriter? _writerDump;
 #endif
 
+
         /// <summary>
         /// Cache metadata used during code-generation phase.
         /// </summary>

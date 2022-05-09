@@ -52,6 +52,7 @@ namespace System.Transactions
         internal int _currentStateHist;
 #endif
 
+
         // Finalized object see class definition for the use of this object
         internal FinalizedObject? _finalizedObject;
 

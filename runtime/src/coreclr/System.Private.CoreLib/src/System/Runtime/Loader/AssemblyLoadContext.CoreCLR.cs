@@ -203,6 +203,7 @@ namespace System.Runtime.Loader
         }
 #endif
 
+
         // This method is invoked by the VM to resolve a satellite assembly reference
         // after trying assembly resolution via Load override without success.
         private static Assembly? ResolveSatelliteAssembly(

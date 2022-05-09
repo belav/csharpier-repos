@@ -53,6 +53,7 @@ namespace System.Net.Http.Formatting.Internal
         private HttpValueCollection() : base(StringComparer.OrdinalIgnoreCase) // case-insensitive keys
         { }
 #endif
+
         // Use a builder function instead of a ctor to avoid virtual calls from the ctor.
         // The above condition is only important in the Full .NET fx implementation.
         internal static HttpValueCollection Create()

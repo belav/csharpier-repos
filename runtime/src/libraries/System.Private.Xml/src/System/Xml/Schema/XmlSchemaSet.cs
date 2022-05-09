@@ -909,6 +909,7 @@ namespace System.Xml.Schema
         }
 #endif
 
+
         //For use by the validator when loading schemaLocations in the instance
         internal void Add(string? targetNamespace, XmlReader reader, Hashtable validatedNamespaces)
         {

@@ -30,6 +30,7 @@ namespace System.IO.Pipes
         private bool _cancellationHasBeenRegistered;
 #endif
 
+
         // Using RunContinuationsAsynchronously for compat reasons (old API used ThreadPool.QueueUserWorkItem for continuations)
         protected PipeCompletionSource(
             ThreadPoolBoundHandle handle,

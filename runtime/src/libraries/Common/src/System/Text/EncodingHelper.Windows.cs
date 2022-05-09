@@ -15,6 +15,7 @@ namespace System.Text
         static EncodingHelper() => Debug.Assert(Utf8CodePage == Encoding.UTF8.CodePage);
 #endif
 
+
         // Since only a minimum set of encodings are available by default,
         // Console encoding might not be available and require provider registering.
         // To avoid encoding exception in Console APIs we fallback to OSEncoding.

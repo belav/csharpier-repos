@@ -26,6 +26,7 @@ namespace System.Security.Policy
         public ApplicationIdentity ApplicationIdentity { get; set; }
         public PolicyStatement DefaultGrantSet { get; set; }
         public object ExtraInfo { get; set; }
+
 #if NET5_0_OR_GREATER
         [Obsolete(
             Obsoletions.CodeAccessSecurityMessage,
@@ -33,8 +34,7 @@ namespace System.Security.Policy
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
 #endif
-        public IList<StrongName>
-        FullTrustAssemblies
+        public IList<StrongName> FullTrustAssemblies
         {
             get { return default(IList<StrongName>); }
         }

@@ -2183,6 +2183,7 @@ namespace System.Data.SqlTypes
         }
 #endif
 
+
         //    AddULong()
         //
         //    Add ulAdd to this numeric.  The result will be returned in *this.

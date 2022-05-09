@@ -31,6 +31,7 @@ namespace System.Linq.Parallel
         private bool _done;
 #endif
 
+
         //-----------------------------------------------------------------------------------
         // Instantiates a new queue.
         //

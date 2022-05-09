@@ -5932,11 +5932,12 @@ namespace System.Diagnostics.Tracing
 
         /// <summary>Event's task: allows logical grouping of events</summary>
         public EventTask Task { get; set; }
+
 #if FEATURE_MANAGED_ETW_CHANNELS
         /// <summary>Event's channel: defines an event log as an additional destination for the event</summary>
-        public EventChannel
-        Channel { get; set; }
+        public EventChannel Channel { get; set; }
 #endif
+
         /// <summary>Event's version</summary>
         public byte Version { get; set; }
 

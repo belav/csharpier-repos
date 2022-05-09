@@ -96,6 +96,7 @@ namespace System.Diagnostics.Tracing
         //
         internal enum RuntimeCounters
         {
+
             ASSEMBLY_COUNT,
             EXCEPTION_COUNT,
             GC_NURSERY_SIZE_BYTES,

@@ -865,6 +865,7 @@ namespace System.Net
             }
 #endif
 
+
             // The list is from http://www.w3.org/TR/REC-html40/sgml/entities.html, except for &apos;, which
             // is defined in http://www.w3.org/TR/2008/REC-xml-20081126/#sec-predefined-ent.
             private static Dictionary<ulong, char> InitializeLookupTable()

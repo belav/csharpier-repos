@@ -408,6 +408,7 @@ namespace System.Xml.Xsl
             }
 #endif
 
+
             // Test to see if the num is zero. This works even if we're not normalized.
             private bool IsZero
             {

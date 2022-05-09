@@ -29,6 +29,7 @@ namespace System.Linq.Parallel
 #if DEBUG
         private bool _received;
 #endif
+
         // Returns the merge executor which merges the received partitioned stream.
         internal MergeExecutor<TOutput>? MergeExecutor
         {

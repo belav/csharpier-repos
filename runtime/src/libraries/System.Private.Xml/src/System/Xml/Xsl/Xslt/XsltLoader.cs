@@ -181,6 +181,7 @@ namespace System.Xml.Xsl.Xslt
         }
 #endif
 
+
         // Import/Include XsltInput management
 
         private readonly HybridDictionary _documentUriInUse = new HybridDictionary();
@@ -3216,6 +3217,7 @@ namespace System.Xml.Xsl.Xslt
             return null;
         }
 #endif
+
 
         // http://www.w3.org/TR/xslt#literal-result-element
         private XslNode LoadLiteralResultElement(bool asStylesheet)

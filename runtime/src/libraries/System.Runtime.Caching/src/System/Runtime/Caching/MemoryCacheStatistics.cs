@@ -37,13 +37,14 @@ namespace System.Runtime.Caching
         private CacheMemoryMonitor _cacheMemoryMonitor;
         private readonly MemoryCache _memoryCache;
         private readonly PhysicalMemoryMonitor _physicalMemoryMonitor;
+
 #if NET5_0_OR_GREATER
         [UnsupportedOSPlatformGuard("browser")]
-        private static bool
-        _configSupported => !OperatingSystem.IsBrowser();
+        private static bool _configSupported => !OperatingSystem.IsBrowser();
 #else
         private static bool _configSupported => true;
 #endif
+
 
         // private
 

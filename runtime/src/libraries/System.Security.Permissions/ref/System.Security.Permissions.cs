@@ -5413,6 +5413,7 @@ namespace System.Security.Policy
             get { throw null; }
             set { }
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
@@ -6330,6 +6331,7 @@ namespace System.Security.Policy
         {
             get { throw null; }
         }
+
 #if NET5_0_OR_GREATER
         [System.ObsoleteAttribute(
             "Code Access Security is not supported or honored by the runtime.",
