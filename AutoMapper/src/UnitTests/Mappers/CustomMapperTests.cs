@@ -28,10 +28,10 @@ namespace AutoMapper.UnitTests.Mappers
             };
         }
 #endif
+
         [TypeConverter(typeof(CustomTypeConverter))]
         public class Source
         {
-
             public int Value { get; set; }
         }
 
